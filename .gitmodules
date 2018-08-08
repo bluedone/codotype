@@ -1,9 +1,0 @@
-[submodule "blazeplate_web_client"]
-	path = blazeplate_web_client
-	url = https://github.com/blazeplate/blazeplate_web_client
-[submodule "blazeplate_generator"]
-	path = blazeplate_generator
-	url = https://github.com/blazeplate/blazeplate_generator
-[submodule "blazeplate_generator_api"]
-	path = blazeplate_generator_api
-	url = https://github.com/blazeplate/blazeplate_generator_api
