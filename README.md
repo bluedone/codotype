@@ -1,3 +1,3 @@
-<img src="./img/logo.png" alt="blazeplate.io"/>
+# Codotype
 
-Issues &amp; Documentation for [github.com/blazeplate](https://github.com/blazeplate)
+Issues &amp; Documentation for [github.com/codotype](https://github.com/codotype)
