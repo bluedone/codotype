@@ -1,6 +1,10 @@
 {
   "name": "root",
   "private": true,
+  "scripts": {
+    "setup": "sh setup.sh",
+    "bootstrap": "lerna bootstrap"
+  },
   "workspaces": [
     "packages/*"
   ],
