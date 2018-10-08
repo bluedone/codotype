@@ -1,50 +1,34 @@
 # Codotype
 
-Issues &amp; Documentation for [github.com/codotype](https://github.com/codotype)
+Upstream development repository for [github.com/codotype](https://github.com/codotype)
 
-### Backends
-- Node.js + ExpressJs + MongoDB
-- Python + Flask + MongoDB
+## Setup
 
-### Frontends
-- Vuejs + Vuex + Bootstrap 4
-- React + Bootstrap 4
+1. Run the following command to set up your local environment for development:
 
-### Mobile
-- Vuejs + Vuex + OnsenUI
+```
+npm run setup YOUR_GITHUB_USERNAME
+```
 
-### Fullstack
-- Express.js + VueJs + Docker
-- Express.js + ReactJs + Docker
+**NOTE** - at the moment the `setup.sh` script depends on having a fork of each of the following repositories:
 
-### Other
-- Hugo static site
-- Native desktop w/ QT
+- [codotype-api](https://github.com/codotype/codotype-api)
+- [codotype-blueprints](https://github.com/codotype/codotype-blueprints)
+- [codotype-cli](https://github.com/codotype/codotype-cli)
+- [codotype-flask-postgresql-generator](https://github.com/codotype/codotype-flask-postgresql-generator)
+- [codotype-generator](https://github.com/codotype/codotype-generator)
+- [codotype-nodejs-express-mongodb-generator](https://github.com/codotype/codotype-nodejs-express-mongodb-generator)
+- [codotype-react-generator](https://github.com/codotype/codotype-react-generator)
+- [codotype-runtime](https://github.com/codotype/codotype-runtime)
+- [codotype-util](https://github.com/codotype/codotype-util)
+- [codotype-vuejs-vuex-bootstrap-generator](https://github.com/codotype/codotype-vuejs-vuex-bootstrap-generator)
+- [codotype-web](https://github.com/codotype/codotype-web)
 
 
-# # # # #
+2. Run the following command to automatically resolve local dependencies with [LernaJs](https://lernajs.io):
 
-These can be combined into a monorepo
-- codotype-generator - runtime, blueprints, util
-- codotype-runtime - blueprints, util
-- codotype-util - blueprints
-- codotype-cli - runtime, blueprints
-- codotype-api - runtime, util, blueprints
-- codotype-web - ui, util, bluprints
-- codotype-branding
+```
+npm run bootstrap
+```
 
-// // // //
-
-ALL depend on generator, runtime, util, blueprints
-Generators should be distinct repositories, no question
-
-Perhaps all of these can be scoped under codotype-community
-
-codotype-generator-starter-kit - generator, runtime, util, blueprints, branding(?)
-
-codotype-generator-nuxt
-codotype-nodejs-express-mongodb-generator
-codotype-react-generator
-codotype-vuejs-vuex-bootstrap-generator
-codotype-vuejs-vuex-onsenui-generator
-codotype-flask-postgresql-generator
+3. Your environment should be ready for development - please consult the documentation in each repository for more detailed development instructions.
