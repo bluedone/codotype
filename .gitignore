@@ -19,3 +19,6 @@ build/**/*
 *.ntvs*
 *.njsproj
 *.sln
+
+packages/**/*
+!packages/.gitkeep
