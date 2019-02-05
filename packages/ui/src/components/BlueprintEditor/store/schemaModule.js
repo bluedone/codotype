@@ -16,23 +16,12 @@ export default {
       commit('relation/collection/items', model.relations)
     },
     setLabel ({ getters, commit }, label) {
-      const newModel = getters['collection/newModel']
+      let newModel = getters['collection/newModel']
 
-      const {
-        label_plural,
-        identifier,
-        identifier_plural,
-        class_name,
-        class_name_plural
-      } = inflateMeta(label)
+      const metadata = inflateMeta(label)
+      metadata.label = label // TODO - titleize label attribute
 
-      newModel.label = label // TODO - titleize
-      newModel.label_plural = label_plural
-      newModel.identifier = identifier
-      newModel.identifier_plural = identifier_plural
-      newModel.class_name = class_name
-      newModel.class_name_plural = class_name_plural
-
+      newModel = Object.assign(newModel, metadata)
       commit('collection/newModel', newModel)
     },
     updateAttributes ({ state, getters, dispatch }) {
