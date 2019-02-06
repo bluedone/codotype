@@ -19,8 +19,18 @@
 
         </div>
 
-        <b-list-group flush>
+        <b-list-group flush v-if="collection[0]">
           <AttributeListItem v-for="item in collection" :key="item.id" :item="item" />
+        </b-list-group>
+
+        <b-list-group flush v-else>
+          <b-list-group-item class="text-center text-primary">
+            <i class="fa fa-lg fa-info-circle"></i>
+            <p class="mb-0 mt-1">
+              <!-- TODO - Click to add your first Attribute -->
+              Attributes define properties that can be assigned to a single model
+            </p>
+          </b-list-group-item>
         </b-list-group>
 
       </div>
