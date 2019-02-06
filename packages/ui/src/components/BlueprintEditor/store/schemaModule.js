@@ -15,6 +15,10 @@ export default {
       commit('attribute/collection/items', model.attributes)
       commit('relation/collection/items', model.relations)
     },
+    destroyModel ({ getters, dispatch }, model) {
+      dispatch('selectModel', getters['collection/first'])
+      dispatch('collection/destroy', model.id)
+    },
     setLabel ({ getters, commit }, label) {
       let newModel = getters['collection/newModel']
 
