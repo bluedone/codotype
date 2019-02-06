@@ -57,11 +57,10 @@ export default {
     },
     attributeLabel: {
       get () {
-        // console.log('getter: ', this.schema.label)
         return this.model.label
       },
       set (label) {
-        this.$store.dispatch('attribute/setLabel', { model: this.model, label: label })
+        this.$store.dispatch('editor/schema/attribute/setLabel', label)
       }
     }
   }

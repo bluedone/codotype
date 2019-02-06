@@ -6,7 +6,7 @@ import { DEFAULT_ATTRIBUTE } from '@codotype/types/lib/default_attribute'
 export default {
   namespaced: true,
   actions: {
-    setLabel ({ commit, }, label) {
+    setLabel ({ getters, commit }, label) {
       const newModel = getters['collection/newModel']
       const { identifier } = inflateMeta(label)
 
