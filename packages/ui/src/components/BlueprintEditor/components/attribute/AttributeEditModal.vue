@@ -1,6 +1,7 @@
 <template>
   <b-modal
     lazy
+    size="lg"
     :visible="showingModal"
     :title="'Edit Attribute'"
     ok-title='Submit'
