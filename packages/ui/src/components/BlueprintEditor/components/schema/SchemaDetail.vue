@@ -26,18 +26,11 @@
 
         <b-col lg=5 class="d-flex align-items-center justify-content-end">
 
-          <b-button
-            v-if="!isUserModel"
-            title='Remove Model'
-            size="sm"
-            variant="outline-danger"
-            v-b-tooltip.hover.left
-          >
-            <i class="fa fa-fw fa-trash"></i>
-          </b-button>
+          <SchemaDestroyButton v-if="!isUserModel" />
+          <SchemaDestroyModal :label="model.label" />
 
           <!-- Edit Schema Modal GOES HERE -->
-          <!-- Destroy Schema Modal GOES HERE -->
+
         </b-col>
 
         <b-col lg=12 class="pb-1">
@@ -78,6 +71,8 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import SchemaDestroyButton from './SchemaDestroyButton'
+import SchemaDestroyModal from './SchemaDestroyModal'
 import AttributeNewModal from '../attribute/AttributeNewModal'
 import AttributeEditModal from '../attribute/AttributeEditModal'
 import AttributeList from '../attribute/AttributeList'
@@ -87,6 +82,8 @@ import RelationList from '../relation/RelationList'
 export default {
   name: 'SchemaDetail',
   components: {
+    SchemaDestroyButton,
+    SchemaDestroyModal,
     AttributeNewModal,
     AttributeEditModal,
     AttributeList,
