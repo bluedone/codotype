@@ -14,6 +14,7 @@
         </div>
 
         <!-- RELATION TYPE -->
+        <!-- TODO - abstract RELATION_TYPE_SELECTOR into independent component? -->
         <div class="col-lg-4">
 
           <div class="row">
@@ -68,11 +69,9 @@
           </div>
         </div>
 
-        <!-- <div class="col-lg-12"> -->
-          <!-- <hr> -->
-        <!-- </div> -->
-
-        <RelationFormAlias :model="model" />
+        <div class="col-lg-12">
+          <RelationFormAlias :model="model" />
+        </div>
 
         <div class="col-lg-12">
           <hr>
