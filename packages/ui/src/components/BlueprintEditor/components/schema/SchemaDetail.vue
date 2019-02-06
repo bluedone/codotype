@@ -10,16 +10,7 @@
           <h4 class="mb-0 d-flex">
 
             {{ model.label + ' Model' }}
-
-            <b-button
-              v-if="!isUserModel"
-              title='Edit Model Name'
-              variant="link"
-              class="py-0"
-              v-b-tooltip.hover.right
-            >
-              <i class="fas fa-pencil-alt"></i>
-            </b-button>
+            <SchemaEditButton v-if="!isUserModel" />
 
           </h4>
         </b-col>
@@ -72,6 +63,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import SchemaEditButton from './SchemaEditButton'
 import SchemaDestroyButton from './SchemaDestroyButton'
 import SchemaDestroyModal from './SchemaDestroyModal'
 import AttributeNewModal from '../attribute/AttributeNewModal'
@@ -83,6 +75,7 @@ import RelationList from '../relation/RelationList'
 export default {
   name: 'SchemaDetail',
   components: {
+    SchemaEditButton,
     SchemaDestroyButton,
     SchemaDestroyModal,
     AttributeNewModal,
