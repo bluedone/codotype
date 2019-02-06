@@ -11,7 +11,7 @@
           <b-tab title="Properties" active>
             <AttributePropertiesForm :model="model" />
           </b-tab>
-          <b-tab title="Validations" >
+          <b-tab title="Validations">
             <AttributeValidationsForm :model="model" />
           </b-tab>
         </b-tabs>

@@ -1,11 +1,11 @@
 <template>
-  <div class="row mt-2">
+  <b-row class="mt-2">
 
-    <div class="col-lg-12">
+    <b-col lg="12">
       <p class="lead mb-0">Attribute Properties</p>
-    </div>
+    </b-col>
 
-    <div class="col-lg-6 col-sm-12">
+    <b-col lg="6" sm="12">
       <FormInput
         label="Label"
         :focus="true"
@@ -15,9 +15,9 @@
         example="Example: 'Last Name'"
         help="The human-readable name for this attribute."
       />
-    </div>
+    </b-col>
 
-    <div class="col-lg-6 col-sm-12">
+    <b-col lg="6" sm="12">
       <FormInput
         label="Field Name"
         :required="true"
@@ -26,9 +26,9 @@
         example="Example: 'last_name'"
         help="Lowercase, no spaces."
       />
-    </div>
+    </b-col>
 
-    <div class="col-sm-12">
+    <b-col sm="12">
       <FormInput
         label="Description"
         placeholder="Description"
@@ -36,16 +36,9 @@
         example="Example: 'The Last Name of the individual'"
         help="A description of this attribute."
       />
-    </div>
+    </b-col>
 
-    <!-- TODO - keep this? -->
-    <!-- <div class="form-group"> -->
-      <!-- <label>Preferred Display Attribute</label> -->
-      <!-- <small class="form-text text-muted">This attribute will be the user-facing label when entities belonging to this schema are referenced in a relation.</small> -->
-      <!-- <input type="checkbox" class="form-control" v-model="model.preferred" > -->
-    <!-- </div> -->
-
-  </div>
+  </b-row>
 </template>
 
 <script>
