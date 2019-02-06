@@ -62,7 +62,8 @@
       <hr>
 
       <RelationList />
-      <RelationForm />
+      <RelationNewModal />
+
     </b-col>
 
   </b-row>
@@ -76,7 +77,7 @@ import SchemaDestroyModal from './SchemaDestroyModal'
 import AttributeNewModal from '../attribute/AttributeNewModal'
 import AttributeEditModal from '../attribute/AttributeEditModal'
 import AttributeList from '../attribute/AttributeList'
-import RelationForm from '../relation/RelationForm'
+import RelationNewModal from '../relation/RelationNewModal'
 import RelationList from '../relation/RelationList'
 
 export default {
@@ -87,7 +88,7 @@ export default {
     AttributeNewModal,
     AttributeEditModal,
     AttributeList,
-    RelationForm,
+    RelationNewModal,
     RelationList
   },
   computed: {

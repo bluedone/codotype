@@ -13,7 +13,7 @@
 
     <b-form>
       <p class="mb-2 form-text text-muted">Define the core metadata that's used to create a valid model.</p>
-      <input type="" v-model="schemaLabel" name="">
+      <b-form-input v-model="schemaLabel" placeholder="Model Label" />
     </b-form>
 
     <div class="col-lg-12">
