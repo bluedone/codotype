@@ -11,9 +11,7 @@
     @ok="submit(newModel)"
     @hide="showModal(false)"
   >
-
     <RelationForm :model="newModel" />
-
   </b-modal>
 </template>
 
@@ -32,16 +30,16 @@ export default {
   }),
   methods: {
     ...mapActions({
-      createPersonModel: 'editor/schema/relation/collection/create',
+      createModel: 'editor/schema/relation/collection/create',
       updateParentSchemaRelations: 'editor/schema/updateRelations'
     }),
     ...mapMutations({
       showModal: 'editor/schema/relation/modals/form/showing',
-      setNewPersonModel: 'editor/schema/relation/collection/newModel'
+      setNewModel: 'editor/schema/relation/collection/newModel'
     }),
     submit (newModel) {
-      this.setNewPersonModel(newModel)
-      this.createPersonModel(),
+      this.setNewModel(newModel)
+      this.createModel(),
       this.updateParentSchemaRelations()
     }
   }

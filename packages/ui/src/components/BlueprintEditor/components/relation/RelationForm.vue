@@ -49,7 +49,7 @@
           <div class="form-group text-center">
             <label class='mb-0'>Related Model</label>
             <small class="form-text text-muted">The related Model definition.</small>
-            <select class="form-control" v-model="model.related_schema_id" >
+            <select class="form-control" v-model="model.related_schema_id" @change="updateNewModel()">
 
               <!-- <option v-if="model.type === 'HAS_ONE'" v-for="s in allSchemas" :key="s.id" :value="s.id">{{s.label}}</option> -->
               <template v-if="model.type === 'HAS_MANY'">
@@ -90,10 +90,9 @@
 <!-- // // // //  -->
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import RelationFormAlias from './RelationFormAlias'
 import RelationFormPreview from './RelationFormPreview'
-// import { inflateMeta } from '@codotype/util/lib/inflateMeta'
 
 export default {
   props: {
@@ -106,25 +105,34 @@ export default {
     RelationFormPreview
   },
   created () {
-    this.model.type = 'BELONGS_TO' // TODO - constantize
+    // TODO - this should be moved into the Vuex store
+    // TODO - resetNewModel should be invoked in the Vuex store BEFORE this component is created
+    // this.resetNewModel()
     const relatedSchema = this.allSchemas.find(m => m.id !== this.selectedSchema.id)
     this.model.related_schema_id = relatedSchema ? relatedSchema.id : this.selectedSchema.id
+    this.updateNewModel()
   },
   methods: {
+    ...mapMutations({
+      resetNewModel: 'editor/schema/relation/collection/resetNewModel'
+    }),
+    // TODO - this should be moved into the Vuex store
     setRelationType (relationId) {
       this.model.type = relationId
       if (relationId !== 'BELONGS_TO') { this.model.reverse_as = '' }
+      this.updateNewModel()
+    },
+    // TODO - this should be abstracted into a mixin
+    updateNewModel () {
+      this.$store.commit('editor/schema/relation/collection/newModel', this.model)
     }
   },
   computed: {
     ...mapGetters({
+      allSchemas: 'editor/schema/collection/items',
       relationTypes: 'schema/relationTypes',
       selectedSchema: 'editor/schema/selectedModel'
     }),
-    allSchemas () {
-      // return this.$store.getters['schema/collection'].filter(s => s.id !== this.schema.id)
-      return this.$store.getters['editor/schema/collection/items']
-    },
     selectedRelatedSchema () {
       return this.allSchemas.find(m => m.id === this.model.related_schema_id)
     },
@@ -136,7 +144,6 @@ export default {
 </script>
 
 <style scoped>
-
   img.relation-thumbnail {
     width: 50%;
   }

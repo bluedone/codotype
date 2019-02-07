@@ -6,15 +6,15 @@
     <div class="col-lg-6 text-center" v-if="selectedRelatedSchema">
 
       <small v-if="model.type === 'HAS_ONE'">
-        <!-- Each <span class='text-info'>{{ schema.label }}</span> references one <span class='text-warning'>{{ selectedRelatedSchema.label }}</span> -->
+        Each <span class='text-info'>{{ selectedSchema.label }}</span> references one <span class='text-warning'>{{ selectedRelatedSchema.label }}</span>
       </small>
 
       <small v-if="model.type === 'BELONGS_TO'">
-        <!-- Each <span class='text-info'>{{ schema.label }}</span> references one <span class='text-warning'>{{ selectedRelatedSchema.label }}</span> -->
+        Each <span class='text-info'>{{ selectedSchema.label }}</span> references one <span class='text-warning'>{{ selectedRelatedSchema.label }}</span>
       </small>
 
       <small v-if="model.type === 'HAS_MANY'">
-        <!-- Each <span class='text-info'>{{ schema.label }}</span> references many <span class='text-warning'>{{ selectedRelatedSchema.label_plural }}</span> -->
+        Each <span class='text-info'>{{ selectedSchema.label }}</span> references many <span class='text-warning'>{{ selectedRelatedSchema.label_plural }}</span>
       </small>
 
     </div>
@@ -22,15 +22,15 @@
     <div class="col-lg-6 text-center" v-if="selectedRelatedSchema">
 
       <small v-if="model.type === 'HAS_MANY'">
-        <!-- Many <span class='text-warning'>{{ selectedRelatedSchema.label_plural }}</span> are referenced by one <span class='text-info'>{{ schema.label }}</span> -->
+        Many <span class='text-warning'>{{ selectedRelatedSchema.label_plural }}</span> are referenced by one <span class='text-info'>{{ selectedSchema.label }}</span>
       </small>
 
       <small v-if="model.type === 'HAS_ONE'">
-        <!-- One <span class='text-warning'>{{ selectedRelatedSchema.label }}</span> is referenced by one <span class='text-info'>{{ schema.label }}</span> -->
+        One <span class='text-warning'>{{ selectedRelatedSchema.label }}</span> is referenced by one <span class='text-info'>{{ selectedSchema.label }}</span>
       </small>
 
       <small v-if="model.type === 'BELONGS_TO'">
-        <!-- One <span class='text-warning'>{{ selectedRelatedSchema.label }}</span> is referenced by many <span class='text-info'>{{ schema.label_plural }}</span> -->
+        One <span class='text-warning'>{{ selectedRelatedSchema.label }}</span> is referenced by many <span class='text-info'>{{ selectedSchema.label_plural }}</span>
       </small>
 
     </div>
@@ -64,15 +64,14 @@ export default {
   },
   computed: {
     ...mapGetters({
+      allSchemas: 'editor/schema/collection/items',
       relationTypes: 'schema/relationTypes',
       selectedSchema: 'editor/schema/selectedModel'
     }),
-    allSchemas () {
-      return this.$store.getters['editor/schema/collection/items']
-    },
     selectedRelatedSchema () {
       return this.allSchemas.find(m => m.id === this.model.related_schema_id)
     },
+    // TODO - abstract into codotype/util (?)
     schemaPrototype () {
       let proto = {}
       let className = this.selectedSchema.class_name
@@ -100,6 +99,7 @@ export default {
 
       return className + ' = ' + JSON.stringify(proto, null, 2)
     },
+    // TODO - abstract into codotype/util (?)
     selectedRelatedSchemaPrototype () {
       if (!this.selectedRelatedSchema) return ''
       let proto = {}
