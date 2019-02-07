@@ -18,7 +18,7 @@
           <i class="fa fa-link mr-2" v-b-tooltip.hover.left title='Relation'></i>
           <!-- {{inflated.alias.label}} -->
           <span class="badge badge-light ml-2">Belongs To</span>
-          <!-- <span class="badge badge-light ml-2">many {{ schema.label_plural }} to one {{ inflated.schema.label }}</span> -->
+          <span class="badge badge-light ml-2">many {{ selectedSchema.label_plural }} to one {{ inflated.schema.label }}</span>
         </span>
 
         <!-- HAS_ONE -->
@@ -26,7 +26,7 @@
           <i class="fa fa-link mr-2" v-b-tooltip.hover.left title='Relation'></i>
           <!-- {{inflated.alias.label}} -->
           <span class="badge badge-light ml-2">Has One</span>
-          <!-- <span class="badge badge-light ml-2">one {{ schema.label }} to many {{ inflated.schema.label_plural }}</span> -->
+          <span class="badge badge-light ml-2">one {{ selectedSchema.label }} to many {{ inflated.schema.label_plural }}</span>
         </span>
 
         <!-- HAS_MANY -->
@@ -34,7 +34,7 @@
           <i class="fa fa-link mr-2" v-b-tooltip.hover.left title='Relation'></i>
           <!-- {{inflated.alias.label}} -->
           <span class="badge badge-light ml-2">Has Many</span>
-          <!-- <span class="badge badge-light ml-2">one {{ schema.label }} to many {{ inflated.schema.label_plural }}</span> -->
+          <span class="badge badge-light ml-2">one {{ selectedSchema.label }} to many {{ inflated.schema.label_plural }}</span>
         </span>
 
         <!-- OWNS_MANY -->
@@ -42,7 +42,7 @@
           <i class="fa fa-link mr-2" v-b-tooltip.hover.left title='Relation'></i>
           <!-- {{inflated.alias.label_plural}} -->
           <span class="badge badge-light ml-2">Referenced By Many</span>
-          <!-- <span class="badge badge-light ml-2">one {{ schema.label }} to many {{ inflated.schema.label_plural }}</span> -->
+          <span class="badge badge-light ml-2">one {{ selectedSchema.label }} to many {{ inflated.schema.label_plural }}</span>
         </span>
 
       </div>
@@ -112,8 +112,8 @@
 
 <!-- // // // //  -->
 <script>
-import { mapActions } from 'vuex'
-// import { inflateRelation } from '@codotype/util/lib/inflate'
+import { mapGetters, mapActions } from 'vuex'
+import { inflateRelation } from '@codotype/util/lib/inflate'
 
 export default {
   props: {
@@ -132,13 +132,18 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      selectedSchema: 'editor/schema/selectedModel'
+    }),
     // TODO - abstract this into the Vuex store
-    // inflated () {
-    //   this.item.schema_id = this.schema._id
-    //   let inflated = inflateRelation({ relation: this.item, schemas: this.$store.getters['schema/collection'] })
-    //   // console.log(inflated)
-    //   return inflated
-    // }
+    inflated () {
+      this.item.schema_id = this.selectedSchema.id
+      return inflateRelation({
+        relation: this.item,
+        schemas: this.$store.getters['editor/schema/collection/items']
+      })
+      // console.log(inflated)
+    }
   }
 }
 </script>
