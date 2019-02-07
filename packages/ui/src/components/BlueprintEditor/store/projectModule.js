@@ -7,14 +7,19 @@ export default {
     label: '',
     identifier: ''
   },
+  actions: {
+    setLabel ({ commit }, label) {
+      const sanitizedLabel = sanitizeLabel(label)
+      const { identifier } = inflateMeta(sanitizedLabel)
+      commit('label', sanitizedLabel)
+      commit('identifier', identifier)
+    }
+  },
   mutations: {
     label (state, label) {
       state.label = label
     },
-    identifier (state, label) {
-      const sanitizedLabel = sanitizeLabel(label)
-      const { identifier } = inflateMeta(sanitizedLabel)
-      state.label = sanitizedLabel
+    identifier (state, identifier) {
       state.identifier = identifier
     }
   },
