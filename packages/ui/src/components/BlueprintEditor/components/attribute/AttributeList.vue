@@ -5,17 +5,19 @@
       <div class="card" id='attribute-detail'>
 
         <!-- Attribute card header -->
-        <div class="card-header d-flex justify-content-between align-items-center">
-
-          <span>
-            <i class="fa fa-tags mr-1"></i>
-            Attributes
-          </span>
+        <!-- <div class="card-header d-flex justify-content-between align-items-center"> -->
+        <div class="card-header d-flex align-items-center">
 
           <NewModalButton
             id="add-attribute-button"
             vuexAction="editor/schema/attribute/newAttribute"
           />
+
+          <span class='ml-2'>
+            <!-- <i class="fa fa-tags mr-1"></i> -->
+            Attributes
+          </span>
+
 
         </div>
 
