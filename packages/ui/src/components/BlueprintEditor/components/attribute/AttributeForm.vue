@@ -3,7 +3,7 @@
     <b-col lg=12>
 
       <!-- Step 1 - Select Datatype -->
-      <AttributeDatatypeForm v-model="model.datatype" v-if="formStep" />
+      <AttributeDatatypeForm :model="model" v-if="formStep" />
 
       <!-- Step 2 - Define Properties & Validations -->
       <template v-else>
