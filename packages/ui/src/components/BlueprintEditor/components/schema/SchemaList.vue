@@ -1,20 +1,26 @@
 <template>
-  <ul class='list-group'>
-    <SchemaListItem
-      v-for="item in collection"
-      :key="item.id"
-      :model="item"
-    />
-    <!-- QUESTION - do we want an "EmptyView" for models? -->
-    <template v-if="collection.length === 1">
-      <hr>
-      <b-card class='text-center text-primary'>
-        <i class="fa fa-info-circle"></i>
-        <br>
-        Add more models, yo
-      </b-card>
-    </template>
-  </ul>
+  <div class="card">
+    <div class="card-header">
+      <strong>Models</strong>
+    </div>
+
+    <ul class='list-group list-group-flush'>
+      <SchemaListItem
+        v-for="item in collection"
+        :key="item.id"
+        :model="item"
+      />
+
+      <!-- QUESTION - do we want an "EmptyView" for models? -->
+      <!-- <template v-if="collection.length === 1"> -->
+        <!-- <b-list-group-item class='text-center text-primary'> -->
+          <!-- <i class="fa fa-info-circle"></i> -->
+          <!-- <br> -->
+          <!-- Add more models, yo -->
+        <!-- </b-list-group-item> -->
+      <!-- </template> -->
+    </ul>
+  </div>
 </template>
 
 <script>

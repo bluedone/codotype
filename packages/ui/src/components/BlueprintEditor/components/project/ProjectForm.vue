@@ -7,12 +7,23 @@
     </b-col>
     <b-col lg=6>
       <b-form-input size="lg" v-model="projectLabel" placeholder="Project Name" />
+
+      <br>
+
+      <b-button
+        size="lg"
+        block
+        variant="primary"
+        @click="incrementStep()"
+      >
+        Let's Go!
+      </b-button>
     </b-col>
   </b-row>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'ProjectForm',
@@ -29,6 +40,9 @@ export default {
         this.$store.dispatch('editor/project/setLabel', label)
       }
     }
-  }
+  },
+  methods: mapActions({
+    incrementStep: 'build/steps/increment'
+  })
 }
 </script>
