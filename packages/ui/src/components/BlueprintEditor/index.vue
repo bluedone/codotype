@@ -3,12 +3,12 @@
 
     <div class="col-lg-4 border-right">
       <SchemaForm />
-      <SchemaNewButton/>
+      <SchemaNewButton />
       <SchemaList />
     </div>
 
     <div class="col-lg-8">
-      <SchemaDetail />
+      <SchemaDetail id="model-detail" />
     </div>
 
   </div>
