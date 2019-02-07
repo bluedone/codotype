@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import DATATYPE_META from '@codotype/types/lib/meta'
 import AttributeDatatypeChild from './AttributeDatatypeChild'
 
 export default {
@@ -25,12 +25,14 @@ export default {
       required: true
     }
   },
+  data () {
+    return {
+      datatypes: Object.keys(DATATYPE_META).map(dt => DATATYPE_META[dt])
+    }
+  },
   components: {
     AttributeDatatypeChild
   },
-  computed: mapGetters({
-    datatypes: 'schema/datatypes' // TODO - pull this from @codotype/types instead
-  }),
   methods: {
     setDatatype (datatype) {
       this.model.datatype = datatype

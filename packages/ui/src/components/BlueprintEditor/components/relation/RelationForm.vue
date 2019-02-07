@@ -21,7 +21,7 @@
             <div class="col-lg-12">
               <div class="form-group mb-2 text-center">
                 <label class='mb-0'>{{ selectedRelationType.label }}</label>
-                <small class="form-text text-muted mb-0">{{ selectedRelationType.description }}</small>
+                <!-- <small class="form-text text-muted mb-0">{{ selectedRelationType.description }}</small> -->
               </div>
             </div>
           </div>
@@ -93,6 +93,7 @@
 import { mapGetters, mapMutations } from 'vuex'
 import RelationFormAlias from './RelationFormAlias'
 import RelationFormPreview from './RelationFormPreview'
+import { RELATION_TYPES } from '@codotype/types/lib/relation-types'
 
 export default {
   props: {
@@ -103,6 +104,11 @@ export default {
   components: {
     RelationFormAlias,
     RelationFormPreview
+  },
+  data () {
+    return {
+      relationTypes: Object.keys(RELATION_TYPES).map(rt => RELATION_TYPES[rt])
+    }
   },
   created () {
     // TODO - this should be moved into the Vuex store
@@ -130,14 +136,13 @@ export default {
   computed: {
     ...mapGetters({
       allSchemas: 'editor/schema/collection/items',
-      relationTypes: 'schema/relationTypes',
       selectedSchema: 'editor/schema/selectedModel'
     }),
     selectedRelatedSchema () {
       return this.allSchemas.find(m => m.id === this.model.related_schema_id)
     },
     selectedRelationType () {
-      return this.relationTypes.find(r => r.id === this.model.type)
+      return RELATION_TYPES[this.model.type]
     }
   }
 }

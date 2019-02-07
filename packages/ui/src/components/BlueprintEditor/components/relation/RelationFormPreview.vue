@@ -55,6 +55,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { inflateMeta } from '@codotype/util/lib/inflateMeta'
+import { RELATION_TYPES } from '@codotype/types/lib/relation-types'
 
 export default {
   props: {
@@ -62,10 +63,14 @@ export default {
       required: true
     }
   },
+  data () {
+    return {
+      relationTypes: Object.keys(RELATION_TYPES).map(rt => RELATION_TYPES[rt])
+    }
+  },
   computed: {
     ...mapGetters({
       allSchemas: 'editor/schema/collection/items',
-      relationTypes: 'schema/relationTypes',
       selectedSchema: 'editor/schema/selectedModel'
     }),
     selectedRelatedSchema () {

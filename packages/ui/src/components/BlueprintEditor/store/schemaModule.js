@@ -25,6 +25,21 @@ export default {
       dispatch('collection/create')
       dispatch('selectModel', getters['collection/last'])
     },
+    // TODO - implement top-level update method
+    // update ({ state, commit }, schema) {
+    //   let collection = state.collection.map((s) => {
+    //     if (s._id === schema._id) {
+    //       s.label = schema.label // TODO - titleize
+    //       s.label_plural = schema.label_plural
+    //       s.identifier = schema.identifier
+    //       s.identifier_plural = schema.identifier_plural
+    //       s.class_name = schema.class_name
+    //       s.class_name_plural = schema.class_name_plural
+    //     }
+    //     return s
+    //   })
+    //   return commit('collection', collection)
+    // },
     destroyModel ({ getters, dispatch }, model) {
       dispatch('selectModel', getters['collection/first'])
       dispatch('collection/destroy', model.id)
