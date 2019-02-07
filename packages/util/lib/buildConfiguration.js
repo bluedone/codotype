@@ -1,6 +1,6 @@
 const cloneDeep = require('lodash/cloneDeep')
 
-function buildConfiguration ({ blueprint, generator }) {
+function buildConfiguration ({ schemas, generator }) {
   const configuration = {
     options: {},
     model_options: {}
@@ -19,7 +19,7 @@ function buildConfiguration ({ blueprint, generator }) {
 
   // Creates an instance of defaultModelOptions in
   // configuration.model_options for each model in the blueprint
-  blueprint.schemas.forEach((model) => {
+  schemas.forEach((model) => {
     configuration.model_options[model._id] = cloneDeep(defaultModelOptions)
   })
 
@@ -35,7 +35,7 @@ function buildConfiguration ({ blueprint, generator }) {
 
       // Iterates over each blueprint schema and creates an array
       // to store the addon instances associated with that schema
-      blueprint.schemas.forEach((schema) => { instanceData[schema.identifier] = [] })
+      schemas.forEach((schema) => { instanceData[schema.identifier] = [] })
 
       // Assigns the instanceData object to the root configuration object
       configuration[group.identifier_plural] = instanceData
@@ -45,7 +45,7 @@ function buildConfiguration ({ blueprint, generator }) {
 
       // Iterates over each blueprint schema and creates an array
       // to store the addon instances associated with that schema
-      blueprint.schemas.forEach((schema) => {
+      schemas.forEach((schema) => {
         const schemaOptions = {}
         group.attributes.forEach(attr => schemaOptions[attr.identifier] = attr.default_value)
         instanceData[schema.identifier] = schemaOptions
