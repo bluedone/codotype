@@ -1,53 +1,42 @@
-
 <template>
   <div class="form-group">
     <label>DataType</label>
     <small class="form-text text-muted">The type of data represented by this attribute.</small>
 
-    <!-- Working <select> element - keep for testing? -->
-    <!-- <select class="form-control" ref="select" placeholder="Datatype" @change="updateModel()" > -->
-      <!-- <option value=''></option> -->
-      <!-- <option v-for="opt in datatypes" :value='opt.value'>{{opt.text}}</option> -->
-    <!-- </select> -->
-
-    <!-- Hidden input (instead of select element above) -->
-    <input class="form-control" type='hidden' ref="select" @change="updateModel()" />
-
-    <!-- Basic Datatypes -->
-    <div class="row">
+    <b-row>
       <AttributeDatatypeChild
         v-for="opt in datatypes"
         :key="opt.value"
         :opt="opt"
-        :val="value"
         :click="setDatatype"
       />
-    </div>
+    </b-row>
 
   </div>
 </template>
 
-<!-- // // // //  -->
-
 <script>
-import { mapGetters } from 'vuex'
+import DATATYPE_META from '@codotype/types/lib/meta'
 import AttributeDatatypeChild from './AttributeDatatypeChild'
 
 export default {
-  props: ['value'],
+  props: {
+    model: {
+      required: true
+    }
+  },
+  data () {
+    return {
+      datatypes: Object.keys(DATATYPE_META).map(dt => DATATYPE_META[dt])
+    }
+  },
   components: {
     AttributeDatatypeChild
   },
-  computed: mapGetters({
-    datatypes: 'schema/datatypes' // TODO - pull this from @codotype/types instead
-  }),
   methods: {
     setDatatype (datatype) {
-      this.$refs.select.value = datatype
-      this.updateModel()
-    },
-    updateModel () {
-      this.$emit('input', this.$refs.select.value)
+      this.model.datatype = datatype
+      this.$store.commit('editor/schema/attribute/collection/newModel', this.model)
     }
   }
 }

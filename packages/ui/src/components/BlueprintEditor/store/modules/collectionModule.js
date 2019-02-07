@@ -33,6 +33,9 @@ export default function ({ NEW_MODEL }) {
       first (state) {
         return state.items[0]
       },
+      last (state) {
+        return state.items[state.items.length - 1]
+      },
       newModel (state) {
         return Object.assign({}, state.newModel)
       },

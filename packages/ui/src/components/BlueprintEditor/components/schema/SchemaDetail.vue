@@ -10,50 +10,33 @@
           <h4 class="mb-0 d-flex">
 
             {{ model.label + ' Model' }}
-
-            <b-button
-              v-if="!isUserModel"
-              title='Edit Model Name'
-              variant="link"
-              class="py-0"
-              v-b-tooltip.hover.right
-            >
-              <i class="fas fa-pencil-alt"></i>
-            </b-button>
+            <SchemaEditButton v-if="!isUserModel" />
 
           </h4>
         </b-col>
 
         <b-col lg=5 class="d-flex align-items-center justify-content-end">
 
-          <b-button
-            v-if="!isUserModel"
-            title='Remove Model'
-            size="sm"
-            variant="outline-danger"
-            v-b-tooltip.hover.left
-          >
-            <i class="fa fa-fw fa-trash"></i>
-          </b-button>
+          <SchemaDestroyButton v-if="!isUserModel" />
+          <SchemaDestroyModal :label="model.label" />
 
           <!-- Edit Schema Modal GOES HERE -->
-          <!-- Destroy Schema Modal GOES HERE -->
+
         </b-col>
 
         <b-col lg=12 class="pb-1">
           <small class="text-muted">
-            {{ 'Define attributes and relations that describe a single ' + model.label + ' model'}}
+            {{ 'Define attributes and relations that describe a single ' + model.label + ' model' }}
           </small>
         </b-col>
 
         <!-- USER MODEL NOTICE -->
+        <!-- TODO - break out into a separate component? -->
         <b-col class="pb-1" v-if="isUserModel">
           <b-alert show>
             <i class="fa fa-info-circle mr-2"></i>The <strong>User Model</strong> is included by default
             <br>
-            <small>
-              It comes pre-loaded with <strong>Email</strong> &amp; <strong>Username</strong> attributes that cannot be removed
-            </small>
+            <small>It comes pre-loaded with an <strong>Email</strong> attribute that cannot be removed</small>
           </b-alert>
         </b-col>
 
@@ -69,7 +52,8 @@
       <hr>
 
       <RelationList />
-      <RelationForm />
+      <RelationNewModal />
+
     </b-col>
 
   </b-row>
@@ -78,19 +62,25 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import SchemaEditButton from './SchemaEditButton'
+import SchemaDestroyButton from './SchemaDestroyButton'
+import SchemaDestroyModal from './SchemaDestroyModal'
 import AttributeNewModal from '../attribute/AttributeNewModal'
 import AttributeEditModal from '../attribute/AttributeEditModal'
 import AttributeList from '../attribute/AttributeList'
-import RelationForm from '../relation/RelationForm'
+import RelationNewModal from '../relation/RelationNewModal'
 import RelationList from '../relation/RelationList'
 
 export default {
   name: 'SchemaDetail',
   components: {
+    SchemaEditButton,
+    SchemaDestroyButton,
+    SchemaDestroyModal,
     AttributeNewModal,
     AttributeEditModal,
     AttributeList,
-    RelationForm,
+    RelationNewModal,
     RelationList
   },
   computed: {

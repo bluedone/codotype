@@ -42,6 +42,7 @@
 </template>
 
 <script>
+import DATATYPE_META from '@codotype/types/lib/meta'
 import FormInput from '../../../FormInput'
 
 export default {
@@ -51,17 +52,15 @@ export default {
   },
   computed: {
     datatypeLabel () {
-      let datatypes = this.$store.getters['schema/datatypes'] // TODO - pull this from @codotype/types
-      let datatype = datatypes.find(d => d.value === this.model.datatype)
+      let datatype = DATATYPE_META[this.model.datatype]
       return datatype.text
     },
     attributeLabel: {
       get () {
-        // console.log('getter: ', this.schema.label)
         return this.model.label
       },
       set (label) {
-        this.$store.dispatch('attribute/setLabel', { model: this.model, label: label })
+        this.$store.dispatch('editor/schema/attribute/setLabel', label)
       }
     }
   }

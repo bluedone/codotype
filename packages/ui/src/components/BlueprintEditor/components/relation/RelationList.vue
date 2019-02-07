@@ -13,13 +13,13 @@
 
           <NewModalButton
             id="add-relation-button"
-            vuexModule="editor/schema/relation/modals/form/showing"
+            vuexAction="editor/schema/relation/newRelation"
           />
 
         </div>
 
         <b-list-group flush v-if="collection[0]">
-          <RelationListItem v-for="item in collection" :key="item.id" :model="item" />
+          <RelationListItem v-for="item in collection" :key="item.id" :item="item" />
         </b-list-group>
 
         <!-- NOTES FROM OLD VERSION -->

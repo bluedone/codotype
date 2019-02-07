@@ -7,13 +7,13 @@
     ok-variant='success'
     cancel-title='Cancel'
     cancel-variant='light'
-    @ok="submit(newModel)"
+    @ok="createModel(newModel)"
     @hide="showModal(false)"
   >
 
     <b-form>
       <p class="mb-2 form-text text-muted">Define the core metadata that's used to create a valid model.</p>
-      <input type="" v-model="schemaLabel" name="">
+      <b-form-input v-model="schemaLabel" placeholder="Model Label" />
     </b-form>
 
     <div class="col-lg-12">
@@ -82,16 +82,11 @@ export default {
   },
   methods: {
     ...mapActions({
-      createPersonModel: 'editor/schema/collection/create',
+      createModel: 'editor/schema/createModel',
     }),
     ...mapMutations({
       showModal: 'editor/schema/modals/form/showing',
-      setNewPersonModel: 'editor/schema/collection/newModel',
-    }),
-    submit (newModel) {
-      this.setNewPersonModel(newModel)
-      this.createPersonModel()
-    }
+    })
   }
 }
 </script>

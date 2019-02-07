@@ -69,6 +69,7 @@
           title="Remove"
           variant="outline-danger"
           v-b-tooltip.hover.top
+          @click="destroyModel()"
         >
           <i class="fa fa-fw fa-trash"></i>
         </b-button>
@@ -100,9 +101,17 @@ export default {
       setEditModel: 'editor/schema/attribute/collection/editModel',
       showEditModal: 'editor/schema/attribute/modals/edit/showing',
     }),
+    ...mapActions({
+      removeModel: 'editor/schema/attribute/collection/destroy',
+      updateAttributes: 'editor/schema/updateAttributes'
+    }),
     editModel () {
       this.setEditModel(this.item)
       this.showEditModal(true)
+    },
+    destroyModel () {
+      this.removeModel(this.item.id)
+      this.updateAttributes()
     }
   }
 }
