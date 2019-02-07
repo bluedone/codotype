@@ -13,8 +13,8 @@ function inflateRelation({ schemas, relation }) {
   // console.log(inflated)
 
   // defines inflated.alias && inflate.schema
-  const ownedSchema = schemas.find((s) => { return s._id === inflated.schema_id })
-  const relatedSchema = schemas.find((s) => { return s._id === inflated.related_schema_id })
+  const ownedSchema = schemas.find((s) => { return s.id === inflated.schema_id })
+  const relatedSchema = schemas.find((s) => { return s.id === inflated.related_schema_id })
 
   inflated.schema = inflateMeta(relatedSchema.label)
   inflated.alias = inflateMeta(inflated.as || relatedSchema.label)
@@ -28,7 +28,7 @@ function inflateRelation({ schemas, relation }) {
 function inflateSchema({ schema, schemas }) {
   let inflated = cloneDeep(schema)
   inflated.relations = schema.relations.map((relation) => {
-    relation.schema_id = schema._id
+    relation.schema_id = schema.id
     inflateRelation({ schemas, relation })
   })
   inflated.attributes = schema.attributes.map(attribute => attribute)
@@ -56,15 +56,15 @@ function inflate({ blueprint }) {
         schema.relations = schema.relations.map((relation) => {
 
             // Assigns relation.schema_id
-            relation.schema_id = schema._id
+            relation.schema_id = schema.id
 
             let rel = inflateRelation({
                 relation: relation,
                 schemas: inflated.schemas
             })
 
-            let relatedSchema = inflated.schemas.find(s => s._id === rel.related_schema_id)
-            // let reverse_relation = relatedSchema.relations.find(r => r._id === rel.reverse_relation_id)
+            let relatedSchema = inflated.schemas.find(s => s.id === rel.related_schema_id)
+            // let reverse_relation = relatedSchema.relations.find(r => r.id === rel.reverse_relation_id)
             // rel.reverse_relation = cloneDeep(reverse_relation)
 
             // Handles REF_BELONGS_TO
@@ -75,8 +75,8 @@ function inflate({ blueprint }) {
                 order: relatedSchema.relations.length,
                 type: 'REF_BELONGS_TO',
                 required: false,
-                schema_id: relatedSchema._id,
-                related_schema_id: schema._id,
+                schema_id: relatedSchema.id,
+                related_schema_id: schema.id,
                 as: rel.reverse_as,
                 reverse_as: rel.as
               }
@@ -106,7 +106,7 @@ module.exports = {
 // Defines the data to split up blueprint.seeds by the records' respective schemas
 // blueprint.seed_data = {}
 // _.each(blueprint.schemas, (s) => {
-//     blueprint.seed_data[s._id] = {
+//     blueprint.seed_data[s.id] = {
 //         identifier: s.identifier_plural,
 //         records: []
 //     }
@@ -115,7 +115,7 @@ module.exports = {
 // Iterates over each piece of seed data
 // _.each(blueprint.seeds, (seed) => {
 //     let seedObject = {}
-//     seedObject._id = { '$oid': seed._id }
+//     seedObject.id = { '$oid': seed.id }
 //     seedObject = {
 //         ...seedObject,
 //         ...seed.attributes
