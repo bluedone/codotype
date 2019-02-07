@@ -14,7 +14,7 @@
 
           <NewModalButton
             id="add-attribute-button"
-            vuexModule="editor/schema/attribute/modals/new/showing"
+            vuexAction="editor/schema/attribute/newAttribute"
           />
 
         </div>

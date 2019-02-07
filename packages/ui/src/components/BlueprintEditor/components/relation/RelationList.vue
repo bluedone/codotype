@@ -13,7 +13,7 @@
 
           <NewModalButton
             id="add-relation-button"
-            vuexModule="editor/schema/relation/modals/form/showing"
+            vuexAction="editor/schema/relation/newRelation"
           />
 
         </div>

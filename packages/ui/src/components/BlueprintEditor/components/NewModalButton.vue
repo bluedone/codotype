@@ -2,7 +2,7 @@
   <b-button
     variant="primary"
     size="sm"
-    @click="$store.commit(vuexModule, true)"
+    @click="$store.dispatch(vuexAction, true)"
   >
     <i class="fa fa-fw fa-plus"></i>
   </b-button>
@@ -12,11 +12,10 @@
 export default {
   name: 'NewModalButton',
   props: {
-    'vuexModule': {
+    'vuexAction': {
       type: String,
       required: true
     },
   }
 }
 </script>
-<NewModalButton />
