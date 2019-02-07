@@ -45,13 +45,24 @@
     </b-col>
 
     <b-col lg=12>
-      <AttributeList />
+
+      <SortableList
+        scope="attribute"
+        label="Attributes"
+        info="Attributes define properties that can be assigned to a single model"
+      />
+
       <AttributeNewModal />
       <AttributeEditModal />
 
       <hr>
 
-      <RelationList />
+      <SortableList
+        scope="relation"
+        label="Relations"
+        info="Relations define associations between different models"
+      />
+
       <RelationNewModal />
 
     </b-col>
@@ -62,26 +73,24 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import SortableList from '../SortableList'
 import SchemaEditButton from './SchemaEditButton'
 import SchemaDestroyButton from './SchemaDestroyButton'
 import SchemaDestroyModal from './SchemaDestroyModal'
 import AttributeNewModal from '../attribute/AttributeNewModal'
 import AttributeEditModal from '../attribute/AttributeEditModal'
-import AttributeList from '../attribute/AttributeList'
 import RelationNewModal from '../relation/RelationNewModal'
-import RelationList from '../relation/RelationList'
 
 export default {
   name: 'SchemaDetail',
   components: {
+    SortableList,
     SchemaEditButton,
     SchemaDestroyButton,
     SchemaDestroyModal,
     AttributeNewModal,
     AttributeEditModal,
-    AttributeList,
-    RelationNewModal,
-    RelationList
+    RelationNewModal
   },
   computed: {
     ...mapGetters({
