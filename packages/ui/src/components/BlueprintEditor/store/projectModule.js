@@ -1,3 +1,4 @@
+import { sanitizeLabel } from '@codotype/util/lib/sanitizeLabel'
 import { inflateMeta } from '@codotype/util/lib/inflateMeta'
 
 export default {
@@ -11,7 +12,9 @@ export default {
       state.label = label
     },
     identifier (state, label) {
-      const { identifier } = inflateMeta(label)
+      const sanitizedLabel = sanitizeLabel(label)
+      const { identifier } = inflateMeta(sanitizedLabel)
+      state.label = sanitizedLabel
       state.identifier = identifier
     }
   },
