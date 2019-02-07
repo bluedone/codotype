@@ -26,18 +26,17 @@
 
         <b-col lg=12 class="pb-1">
           <small class="text-muted">
-            {{ 'Define attributes and relations that describe a single ' + model.label + ' model'}}
+            {{ 'Define attributes and relations that describe a single ' + model.label + ' model' }}
           </small>
         </b-col>
 
         <!-- USER MODEL NOTICE -->
+        <!-- TODO - break out into a separate component? -->
         <b-col class="pb-1" v-if="isUserModel">
           <b-alert show>
             <i class="fa fa-info-circle mr-2"></i>The <strong>User Model</strong> is included by default
             <br>
-            <small>
-              It comes pre-loaded with <strong>Email</strong> &amp; <strong>Username</strong> attributes that cannot be removed
-            </small>
+            <small>It comes pre-loaded with an <strong>Email</strong> attribute that cannot be removed</small>
           </b-alert>
         </b-col>
 

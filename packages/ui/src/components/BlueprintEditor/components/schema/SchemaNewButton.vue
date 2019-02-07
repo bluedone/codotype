@@ -5,7 +5,7 @@
     variant="primary"
     size="lg"
     class="mb-3"
-    @click="$store.commit('editor/schema/modals/form/showing', true)"
+    @click="$store.dispatch('editor/schema/newModel')"
   >
     <i class="fa fa-fw fa-plus"></i>
     Add Model

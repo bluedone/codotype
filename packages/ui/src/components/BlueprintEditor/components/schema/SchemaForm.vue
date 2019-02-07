@@ -7,7 +7,7 @@
     ok-variant='success'
     cancel-title='Cancel'
     cancel-variant='light'
-    @ok="submit(newModel)"
+    @ok="createModel(newModel)"
     @hide="showModal(false)"
   >
 
@@ -82,16 +82,11 @@ export default {
   },
   methods: {
     ...mapActions({
-      createPersonModel: 'editor/schema/collection/create',
+      createModel: 'editor/schema/createModel',
     }),
     ...mapMutations({
       showModal: 'editor/schema/modals/form/showing',
-      setNewPersonModel: 'editor/schema/collection/newModel',
-    }),
-    submit (newModel) {
-      this.setNewPersonModel(newModel)
-      this.createPersonModel()
-    }
+    })
   }
 }
 </script>
