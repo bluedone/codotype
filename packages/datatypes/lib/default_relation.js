@@ -1,9 +1,11 @@
+const { RELATION_TYPE_BELONGS_TO } = require('./relation-types')
+
 // Relation constants
 // QUESTION - add schema_id to this type?
 const DEFAULT_RELATION = {
   id: null,
   order: 0,
-  type: 'BELONGS_TO', // Moved from datatypeOptions.relationType
+  type: RELATION_TYPE_BELONGS_TO,
   required: false,
   related_schema_id: '',
   reverse_relation_id: '',
