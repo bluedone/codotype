@@ -19,9 +19,16 @@
 
         </div>
 
-        <b-list-group flush v-if="collection[0]">
+        <!-- <b-list-group flush v-if="collection[0]"> -->
+        <!-- </b-list-group> -->
+
+        <draggable class='list-group list-group-flush'
+          v-model='collection'
+          :options="sortableOptions"
+          v-if="collection.length"
+        >
           <AttributeListItem v-for="item in collection" :key="item.id" :item="item" />
-        </b-list-group>
+        </draggable>
 
         <b-list-group flush v-else>
           <b-list-group-item class="text-center text-primary">
@@ -40,18 +47,43 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import orderBy from 'lodash/orderBy'
+import draggable from 'vuedraggable'
+import smoothReflow from 'vue-smooth-reflow'
 import NewModalButton from '../NewModalButton'
 import AttributeListItem from './AttributeListItem'
 
 export default {
   name: 'AttributeList',
+  mixins: [smoothReflow],
   components: {
+    draggable,
     NewModalButton,
     AttributeListItem
   },
-  computed: mapGetters({
-    collection: 'editor/schema/attribute/collection/items'
-  })
+  mounted () {
+    this.$smoothReflow()
+  },
+  computed: {
+    // ...mapGetters({
+    //   collection: 'editor/schema/attribute/collection/items'
+    // }),
+    sortableOptions () {
+      return {
+        animation: 150,
+        fallbackTolerance: 100
+      }
+    },
+    // TODO - this should be moved into Vuex store, but how?
+    collection: {
+      get () {
+        return orderBy(this.$store.getters['editor/schema/attribute/collection/items'], ['order'], ['asc'])
+      },
+      set (value) {
+        value.forEach((s, i) => { s.order = i })
+        this.$store.commit('editor/schema/attribute/collection/items', value)
+      }
+    }
+  }
 }
 </script>
