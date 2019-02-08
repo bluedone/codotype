@@ -7,7 +7,7 @@ import { DEFAULT_ATTRIBUTE } from '@codotype/types/lib/default_attribute'
 export default {
   namespaced: true,
   actions: {
-    newAttribute ({ commit }) {
+    newModel ({ commit }) {
       commit('collection/resetNewModel')
       commit('modals/new/showing', true)
     },

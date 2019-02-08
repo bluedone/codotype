@@ -5,7 +5,7 @@ import { DEFAULT_RELATION } from '@codotype/types/lib/default_relation'
 export default {
   namespaced: true,
   actions: {
-    newRelation ({ commit }) {
+    newModel ({ commit }) {
       commit('collection/resetNewModel')
       commit('modals/form/showing', true)
     }
