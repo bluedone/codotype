@@ -1,17 +1,17 @@
 <template>
-  <div class="row">
+  <b-row>
 
-    <div class="col-lg-4 border-right">
+    <b-col lg=4 sm=12 class="border-right">
       <SchemaForm />
       <SchemaNewButton />
       <SchemaList />
-    </div>
+    </b-col>
 
-    <div class="col-lg-8">
+    <b-col lg=8 sm=12>
       <SchemaDetail id="model-detail" />
-    </div>
+    </b-col>
 
-  </div>
+  </b-row>
 </template>
 
 <script>
