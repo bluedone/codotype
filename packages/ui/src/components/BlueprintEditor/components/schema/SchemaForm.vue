@@ -2,7 +2,7 @@
   <b-modal
     lazy
     :visible="showingModal"
-    :title="'New Schema'"
+    :title="'New Model'"
     ok-title='Submit'
     ok-variant='success'
     cancel-title='Cancel'
@@ -13,7 +13,10 @@
 
     <b-form>
       <p class="mb-2 form-text text-muted">Define the core metadata that's used to create a valid model.</p>
-      <b-form-input v-model="schemaLabel" placeholder="Model Label" />
+      <b-form-input
+        v-model="schemaLabel"
+        placeholder="Model Label"
+      />
     </b-form>
 
     <div class="col-lg-12">
