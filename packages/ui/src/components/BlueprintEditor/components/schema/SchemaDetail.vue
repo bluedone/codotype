@@ -20,13 +20,23 @@
           <SchemaDestroyButton v-if="!isUserModel" />
           <SchemaDestroyModal :label="model.label" />
 
+          <!-- TODO - replace with a single component -->
+          <!-- TODO - replace with a single component -->
+          <b-popover
+            v-if="!isUserModel"
+            target="schema-destroy-button"
+            placement="left"
+            :show="$store.getters['editor/help/showing']"
+            content="Remove Model">
+          </b-popover>
+
           <!-- Edit Schema Modal GOES HERE -->
 
         </b-col>
 
         <b-col lg=12 class="pb-1">
           <small class="text-muted">
-            {{ 'Define attributes and relations that describe a single ' + model.label + ' model' }}
+            Define <strong>Attributes</strong> and <strong>Relations</strong> that describe a single {{ model.label }} model
           </small>
         </b-col>
 

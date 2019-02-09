@@ -16,6 +16,7 @@
       <b-form-input
         v-model="schemaLabel"
         placeholder="Model Label"
+        ref="input_el"
       />
     </b-form>
 
@@ -69,6 +70,10 @@ import { mapGetters, mapActions, mapMutations } from 'vuex'
 
 export default {
   name: 'SchemaForm',
+  mounted () {
+    // TODO - re-implement
+    // setTimeout(() => { this.$refs.input_el.focus() }, 500) // Minor delay for input element focus
+  },
   computed: {
     ...mapGetters({
       showingModal: 'editor/schema/modals/form/showing',

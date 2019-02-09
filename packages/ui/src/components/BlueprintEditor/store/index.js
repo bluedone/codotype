@@ -1,5 +1,7 @@
 import schemaModule from './schemaModule'
 import projectModule from './projectModule'
+import helpModule from './helpModule'
+import aboutModule from './aboutModule'
 import { DEFAULT_USER_SCHEMA } from '@codotype/types/lib/default_user'
 
 export default {
@@ -18,6 +20,8 @@ export default {
   },
   modules: {
     schema: schemaModule,
-    project: projectModule
+    project: projectModule,
+    help: helpModule,
+    about: aboutModule
   }
 }
