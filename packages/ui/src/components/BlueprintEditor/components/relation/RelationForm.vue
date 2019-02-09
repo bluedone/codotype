@@ -35,7 +35,7 @@
                   @click="setRelationType(relation.id)"
                   size="sm"
                   variant="outline-primary"
-                  :active="relation.id === model.type"
+                  :class="relation.id === model.type ? 'active' : ''"
                 >
                   <img class='relation-thumbnail' :src=" relation.id === model.type ? '/static/' + relation.id.toLowerCase() + '_active' + '.png' : '/static/' + relation.id.toLowerCase() + '.png'"/>
                 </b-button>

@@ -16,6 +16,7 @@
           <b-popover
             :target="'add-' + scope + '-button'"
             placement="bottom"
+            :triggers="[]"
             :show="$store.getters['editor/help/showing']"
             :content="'Add ' + label">
           </b-popover>
