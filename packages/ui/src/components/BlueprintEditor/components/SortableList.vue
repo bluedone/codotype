@@ -4,18 +4,25 @@
 
       <div class="card" id='attribute-detail'>
 
-        <!-- Attribute card header -->
-        <!-- <div class="card-header d-flex justify-content-between align-items-center"> -->
-        <div class="card-header d-flex align-items-center">
+        <!-- Card header -->
+        <div class="card-header d-flex align-items-center p-2">
 
           <NewModalButton
             :id="'add-' + scope + '-button'"
             :vuexAction="'editor/schema/' + scope + '/newModel'"
           />
 
+          <!-- TODO - replace with a single component -->
+          <b-popover
+            :target="'add-' + scope + '-button'"
+            placement="bottom"
+            :show="$store.getters['editor/help/showing']"
+            :content="'Add ' + label">
+          </b-popover>
+
           <span class='ml-2'>
             <!-- <i class="fa fa-tags mr-1"></i> -->
-            {{ label }}
+            <strong>{{ label }}</strong>
           </span>
 
         </div>

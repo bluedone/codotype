@@ -4,6 +4,13 @@
     <b-col lg=4 sm=12 class="border-right">
       <SchemaForm />
       <SchemaNewButton />
+      <b-popover
+        target='new-model-button'
+        placement="bottom"
+        triggers="hover focus"
+        :show="$store.getters['editor/help/showing']"
+        content="Create New Model">
+      </b-popover>
       <SchemaList />
     </b-col>
 

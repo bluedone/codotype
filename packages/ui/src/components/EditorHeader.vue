@@ -4,8 +4,8 @@
       <span class='d-flex align-items-center'>
         <p class="lead mb-0 mr-3">{{ title }}</p>
         <MoreInfoLink :url="url"/>
+        <small class="ml-2 text-muted">{{ help }}</small>
       </span>
-      <small class="text-muted">{{ help }}</small>
     </b-col>
   </b-row>
 </template>
