@@ -12,6 +12,7 @@ function buildConfiguration ({ schemas, generator }) {
   })
 
   // Defines model options
+  // TODO - deprecate?
   const defaultModelOptions = {}
   generator.model_options.forEach((opt) => {
     defaultModelOptions[opt.identifier] = opt.default_value
@@ -28,11 +29,11 @@ function buildConfiguration ({ schemas, generator }) {
   generator.option_groups.forEach((group) => {
     console.log(group)
 
+    // Defines an object on to store the instance data for each option group
+    const instanceData = {}
+
     // Handles OPTION_GROUP_TYPE_MODEL_ADDON
     if (group.type === 'OPTION_GROUP_TYPE_MODEL_ADDON') {
-      // Defines an object on to store the addon instance data
-      const instanceData = {}
-
       // Iterates over each blueprint schema and creates an array
       // to store the addon instances associated with that schema
       schemas.forEach((schema) => { instanceData[schema.identifier] = [] })
@@ -40,9 +41,6 @@ function buildConfiguration ({ schemas, generator }) {
       // Assigns the instanceData object to the root configuration object
       configuration[group.identifier_plural] = instanceData
     } else if (group.type === 'OPTION_GROUP_TYPE_MODEL_OPTION') {
-      // Defines an object on to store the addon instance data
-      const instanceData = {}
-
       // Iterates over each blueprint schema and creates an array
       // to store the addon instances associated with that schema
       schemas.forEach((schema) => {
@@ -53,6 +51,16 @@ function buildConfiguration ({ schemas, generator }) {
 
       // Assigns the instanceData object to the root configuration object
       configuration[group.identifier_plural] = instanceData
+    } else if (group.type === 'OPTION_GROUP_TYPE_GLOBAL_OPTION') {
+      // Iterates over each attribute in the GLOBAL_OPTION type,
+      // sets instanceData to the default value
+      group.attributes.forEach(attr => instanceData[attr.identifier] = attr.default_value)
+      configuration[group.identifier] = instanceData
+    } else if (group.type === 'OPTION_GROUP_TYPE_GLOBAL_BOOLEAN_GROUP') {
+      // Iterates over each attribute in the GLOBAL_OPTION type,
+      // sets instanceData to the default value
+      group.attributes.forEach(attr => instanceData[attr.identifier] = attr.default_value)
+      configuration[group.identifier] = instanceData
     }
     // TODO - define and handle other OPTION_GROUP_TYPE_* definitions
   })
