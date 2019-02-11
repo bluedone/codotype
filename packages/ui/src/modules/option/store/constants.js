@@ -26,6 +26,7 @@ export const TIME = 'TIME'
 export const DATETIME = 'DATETIME'
 export const COLOR = 'COLOR'
 
+// TODO - move into @codotype/types
 export const OPTION_TYPES = [
   { value: TEXT, text: 'Text', icon: 'fa-quote-left' },
   { value: NUMBER, text: 'Number', icon: 'fa-hashtag' },
