@@ -143,7 +143,6 @@
             <!-- GlobalAddons -->
             <b-tab title="Addons" v-if="selectedGenerator.addons[0]" >
               <br>
-              <!-- <GeneratorAddonForm/> -->
             </b-tab>
 
           </b-tabs>
@@ -160,7 +159,6 @@
 <script>
 import LoadingBuild from '@/modules/build/components/LoadingBuild'
 import MoreInfoLink from '@codotype/ui/src/components/MoreInfoLink'
-// import GeneratorAddonForm from '@/modules/build/components/GeneratorAddonForm'
 import { mapGetters, mapMutations, mapActions } from 'vuex'
 import marked from 'marked'
 
