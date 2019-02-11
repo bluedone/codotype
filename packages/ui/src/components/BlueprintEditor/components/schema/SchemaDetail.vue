@@ -77,6 +77,10 @@
 
     </b-col>
 
+    <b-col lg=12>
+      <SchemaGraph />
+    </b-col>
+
   </b-row>
 
 </template>
@@ -90,10 +94,13 @@ import SchemaDestroyModal from './SchemaDestroyModal'
 import AttributeNewModal from '../attribute/AttributeNewModal'
 import AttributeEditModal from '../attribute/AttributeEditModal'
 import RelationNewModal from '../relation/RelationNewModal'
+// import SchemaGraph from './SchemaGraph'
+import SchemaGraph from './SchemaGraph'
 
 export default {
   name: 'SchemaDetail',
   components: {
+    SchemaGraph,
     SortableList,
     SchemaEditButton,
     SchemaDestroyButton,
