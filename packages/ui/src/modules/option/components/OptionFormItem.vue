@@ -18,8 +18,7 @@
         />
       </span>
 
-
-      <small class='mt-2'>{{model.help}}</small>
+      <small class='mt-2' v-html="model.help"></small>
 
     </div>
 
