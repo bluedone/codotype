@@ -1,5 +1,5 @@
-import GeneratorList from '@/modules/generator/pages/list'
-import GeneratorShow from '@/modules/generator/pages/show'
+import GeneratorList from './pages/list'
+import GeneratorShow from './pages/show'
 
 export default [
   {

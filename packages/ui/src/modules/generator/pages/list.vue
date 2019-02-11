@@ -73,8 +73,8 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import GeneratorListItem from '@/modules/generator/components/GeneratorListItem'
-import TourButton from '@codotype/ui/src/components/TourButton'
+import GeneratorListItem from '../components/GeneratorListItem'
+import TourButton from '../../../components/TourButton'
 
 export default {
   components: {

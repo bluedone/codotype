@@ -32,7 +32,7 @@
 
 <script>
 // import AddonEditor from '@/modules/addon/components/AddonEditor'
-// import GeneratorMetaEditor from '@/modules/generator/components/GeneratorMetaEditor'
+// import GeneratorMetaEditor from '..//components/GeneratorMetaEditor'
 import OptionEditorLayout from '@codotype/ui/src/modules/option/components/OptionEditorLayout'
 import ModelOptionEditorLayout from '@codotype/ui/src/modules/option/components/ModelOptionEditorLayout'
 

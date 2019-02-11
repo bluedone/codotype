@@ -28,7 +28,7 @@
 
       <button
         id="add-build-stage"
-        :disabled="choosingGenerator"
+        :disabled="true"
         class="btn btn-primary btn-lg btn-block mb-3"
       >
         <i class="fa fa-plus"></i>
@@ -71,9 +71,6 @@
 
     <!-- <div :class="showSidebar ? 'col-lg-9' : 'col-lg-12'"> -->
     <b-col lg=8>
-
-      <!-- Select a generator -->
-      <!-- <GeneratorSelector v-if="(newBuildModel.app_id && !newBuildModel.stages[0]) || choosingGenerator"/> -->
 
       <!-- TODO - abstract ALL of this into a separate component -->
       <!-- GeneratorConfigure component -->
@@ -194,7 +191,6 @@ export default {
       generatorCollection: 'generator/collection',
       selectedGenerator: 'generator/selectedModel',
       showSidebar: 'build/showSidebar',
-      choosingGenerator: 'build/choosingGenerator',
       buildLoading: 'build/fetching',
       buildFinished: 'build/buildFinished'
     }),

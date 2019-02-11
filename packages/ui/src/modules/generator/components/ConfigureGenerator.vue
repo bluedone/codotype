@@ -292,11 +292,8 @@
 import marked from 'marked'
 import { mapGetters, mapActions } from 'vuex'
 import buildConfiguration from '@codotype/util/lib/buildConfiguration'
-import GeneratorStart from '@/modules/generator/components/GeneratorStart'
-import OptionFormItem from '@codotype/ui/src/modules/option/components/OptionFormItem'
-import ProjectForm from '@codotype/ui/src/components/BlueprintEditor/components/project/ProjectForm'
-import BlueprintEditor from '@codotype/ui/src/components/BlueprintEditor'
-import OptionTemplateRenderer from '@codotype/ui/src/modules/option/components/OptionTemplateRenderer'
+import OptionFormItem from '../../option/components/OptionFormItem'
+import OptionTemplateRenderer from '../../option/components/OptionTemplateRenderer'
 
 export default {
   name: 'GeneratorShow',
@@ -321,10 +318,7 @@ export default {
   },
   components: {
     OptionTemplateRenderer,
-    ProjectForm,
-    OptionFormItem,
-    GeneratorStart,
-    BlueprintEditor
+    OptionFormItem
   },
   created () {
     this.selectModel(this.id)
