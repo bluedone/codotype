@@ -78,6 +78,7 @@
     </b-col>
 
     <b-col lg=12>
+      <hr>
       <SchemaGraph />
     </b-col>
 

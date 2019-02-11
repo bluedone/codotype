@@ -1,32 +1,29 @@
 <template>
-  <div>
-    <div class="tree-wrapper" v-for="(data, index1) in dataList" >
-      <div class="branch-attr" v-if="data.subData[0]">
-        <div v-for="(subData, index) in data.subData" :class="['entry', (index+1)===data.subData.length?'lv-last':'', index===0?'lv1':'', data.subData.length===1?'onyOne':'']">
-          <div class="desc" @click="goToItem(subData.url)">{{subData.subName}}</div>
+  <div class="card card-body">
+    <p class="lead mb-0">Model Preview</p>
+    <div class="tree-wrapper" >
+      <div class="branch-attr" v-if="model.attributes[0]">
+        <div v-for="(subData, index) in model.attributes" :class="['entry', (index+1)===model.attributes.length?'lv-last':'', index===0?'lv1':'', model.attributes.length===1?'onyOne':'']">
+          <div class="desc">{{subData.label}}</div>
         </div>
       </div>
       <div class="title-wraper">
-        <div class="title">{{data.name}}</div>
+        <div class="title">{{model.label}}</div>
       </div>
-      <div class="branch" v-if="data.relations">
-        <div v-for="(subData, index) in data.relations" :class="['entry', (index+1)===data.relations.length?'lv-last':'', index===0?'lv1':'', data.relations.length===1?'onyOne':'']">
-          <div class="desc" @click="goToItem(subData.url)">{{subData.subName}}</div>
+      <div class="branch" v-if="model.relations">
+        <div v-for="(subData, index) in dataList.relations" :class="['entry', (index+1)===model.relations.length?'lv-last':'', index===0?'lv1':'', model.relations.length===1?'onyOne':'']">
+          <div class="desc">{{subData.alias.label}}</div>
         </div>
       </div>
     </div>
   </div>
 </template>
+
 <script>
 import { mapGetters } from 'vuex'
 import { inflateRelation } from '@codotype/util/lib/inflate'
 
 export default {
-  methods: {
-    goToItem(url){
-      this.$emit('itemEvent:url', url)
-    }
-  },
   computed: {
     ...mapGetters({
       model: 'editor/schema/selectedModel'
@@ -39,39 +36,17 @@ export default {
       const schemas = this.$store.getters['editor/schema/collection/items']
 
       let schemaNode = {
-        name: this.model.label + ' Model',
-        subData: [],
+        label: this.model.label + ' Model',
+        attributes: [],
         relations: []
       }
 
-      const attributeNodes = this.model.attributes.map((attr) => {
-        return {
-          subName: attr.label,
-          url: attr.id
-        }
-      })
-
-      const relatedNodes = this.model.relations.map((rel) => {
-        let inflated = inflateRelation({
-          relation: rel,
-          schemas: this.$store.getters['editor/schema/collection/items']
-        })
-
-        // TODO - THIS CHANGES BASED ON rel.type & rel.alias
-        return {
-          subName: inflated.schema.label + ` (as ${inflated.alias.label})`,
-          // subName: inflated.alias.label + ` (${inflated.schema.label})`,
-          subData: []
-        }
-      })
-
       // Adds nodes
-      // attributeNodes.forEach(n => addNode(n))
-      attributeNodes.forEach(n => schemaNode.subData.push(n))
-      relatedNodes.forEach(n => schemaNode.relations.push(n))
+      this.model.attributes.forEach(n => schemaNode.attributes.push(n))
+      this.model.relations.forEach(rel => schemaNode.relations.push(inflateRelation({ relation: rel, schemas: this.$store.getters['editor/schema/collection/items'] })))
 
       // Returns the nodes and links
-      return [schemaNode]
+      return schemaNode
     }
   }
 }
@@ -90,13 +65,10 @@ export default {
       .title
         display: inline-block
         width: 10rem
-        height: 2.66666rem
         line-height: 2.66666rem
-        padding-left: 1rem
-        font-size: 1.41666rem
+        font-size: 1rem
+        text-align: center
         color: #FFFFFF
-        // background-image: url("./bg.png")
-        background-size: 3.58333rem 2.66666rem
         background-repeat: no-repeat
         background-color: #2481FC
         border-radius: 4px
@@ -128,7 +100,7 @@ export default {
           width: 10.33333rem
           border-radius: 4px
           padding: 0 0.5rem
-          font-size: 1.08333rem
+          font-size: 0.8rem
           color: orange
           border: 1px solid orange
         &::before
@@ -177,7 +149,7 @@ export default {
           width: 10.33333rem
           border-radius: 4px
           padding: 0 0.5rem
-          font-size: 1rem
+          font-size: 0.8rem
           color: #1C6ADD
           border: 1px solid #2481FC
         &::before
