@@ -30,7 +30,6 @@
         id="add-build-stage"
         :disabled="choosingGenerator"
         class="btn btn-primary btn-lg btn-block mb-3"
-        @click="showChoosingGenerator(true)"
       >
         <i class="fa fa-plus"></i>
         Add Generator
@@ -144,7 +143,7 @@
             <!-- GlobalAddons -->
             <b-tab title="Addons" v-if="selectedGenerator.addons[0]" >
               <br>
-              <GeneratorAddonForm/>
+              <!-- <GeneratorAddonForm/> -->
             </b-tab>
 
           </b-tabs>
@@ -161,7 +160,7 @@
 <script>
 import LoadingBuild from '@/modules/build/components/LoadingBuild'
 import MoreInfoLink from '@codotype/ui/src/components/MoreInfoLink'
-import GeneratorAddonForm from '@/modules/build/components/GeneratorAddonForm'
+// import GeneratorAddonForm from '@/modules/build/components/GeneratorAddonForm'
 import { mapGetters, mapMutations, mapActions } from 'vuex'
 import marked from 'marked'
 
@@ -171,8 +170,7 @@ export default {
   },
   components: {
     LoadingBuild,
-    MoreInfoLink,
-    GeneratorAddonForm
+    MoreInfoLink
   },
   data () {
     return { // TODO - move this into build vuex state
@@ -217,7 +215,6 @@ export default {
       clearSelectedGenerator: 'generator/clearSelected'
     }),
     ...mapMutations({
-      showChoosingGenerator: 'build/choosingGenerator',
       setBuildFinished: 'build/buildFinished',
       setBuildDownloadUrl: 'build/downloadUrl'
     }),
