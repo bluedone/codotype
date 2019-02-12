@@ -30,10 +30,10 @@
 
           <!-- TODO - break out into a distinct component -->
           <span class="d-flex">
-            <span class='badge badge-primary mr-1' v-for="tag in model.type_tags" :key="tag">{{ tag }}</span>
+            <GeneratorTypeTag v-for="tag in model.type_tags" :key="tag" :tag="tag" />
+            <GeneratorTechTag v-for="tag in model.tech_tags" :key="tag" :tag="tag" />
+            <GeneratorVersionTag :model="model" />
             <span class='badge badge-info' v-if="model.self_configuring">Self-Configuring</span>
-            <span class='badge badge-light mr-1' v-for="tag in model.tech_tags" :key="tag">{{ tag }}</span>
-            <span class='badge badge-dark mr-1'>Version {{ model.version }}</span>
           </span>
 
         </div>
@@ -53,9 +53,21 @@
 
 <script>
 import marked from 'marked'
+import GeneratorTypeTag from './GeneratorTypeTag'
+import GeneratorTechTag from './GeneratorTechTag'
+import GeneratorVersionTag from './GeneratorVersionTag'
 
 export default {
-  props: ['model'],
+  props: {
+    model: {
+      required: true
+    }
+  },
+  components: {
+    GeneratorTypeTag,
+    GeneratorTechTag,
+    GeneratorVersionTag
+  },
   computed: {
     compiledMarkdown () {
       return marked(this.model.readme, { sanitize: true })
