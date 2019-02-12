@@ -33,6 +33,7 @@
             <span class='badge badge-primary mr-1' v-for="tag in model.type_tags" :key="tag">{{ tag }}</span>
             <span class='badge badge-info' v-if="model.self_configuring">Self-Configuring</span>
             <span class='badge badge-light mr-1' v-for="tag in model.tech_tags" :key="tag">{{ tag }}</span>
+            <span class='badge badge-dark mr-1'>Version {{ model.version }}</span>
           </span>
 
         </div>
@@ -40,7 +41,7 @@
 
       <div class="row mt-4 mb-4 justify-content-center">
         <div class="col-lg-12">
-          <div class='card-header bg-primary text-light'>README.md</div>
+          <div class='card-header bg-dark text-light'>README.md</div>
           <div class="card-body bg-white" v-html="compiledMarkdown"></div>
           <!-- <pre class="bg-dark text-light">{{model}}</pre> -->
         </div>
