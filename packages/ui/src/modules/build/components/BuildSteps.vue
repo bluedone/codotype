@@ -104,6 +104,9 @@ export default {
     padding-top: 1.25rem
     background: #f5f6f9
 
+  .step-indicator
+    cursor: pointer
+
   .step-badge
     font-size: 1rem
     width: 1.5rem

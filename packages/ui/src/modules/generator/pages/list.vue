@@ -81,6 +81,9 @@ export default {
     GeneratorListItem,
     TourButton
   },
+  metaInfo: {
+    title: 'Generators'
+  },
   data () {
     return {
       filter: ''

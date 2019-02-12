@@ -38,10 +38,13 @@
             />
             <hr>
           </b-col>
-          <b-col lg=6>
+          <b-col lg=9>
             <div class="mt-2">
               <ul class="list-group">
-                <li class="list-group-item" v-for="attr in group.attributes" :key="attr.identifier">
+                <li
+                  class="list-group-item list-group-item-action"
+                  v-for="attr in group.attributes"
+                  :key="attr.identifier">
                   <OptionFormItem :model="attr" v-model="configurationObject[group.identifier][attr.identifier]"/>
                 </li>
               </ul class="list-group">
