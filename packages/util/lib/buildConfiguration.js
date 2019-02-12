@@ -1,31 +1,29 @@
 const cloneDeep = require('lodash/cloneDeep')
 
 function buildConfiguration ({ schemas, generator }) {
-  const configuration = {
-    options: {},
-    model_options: {}
-  }
+  const configuration = {}
 
   // Defines global options
-  generator.global_options.forEach((opt) => {
-    configuration.options[opt.identifier] = opt.default_value
-  })
+  // generator.global_options.forEach((opt) => {
+  //   configuration.options[opt.identifier] = opt.default_value
+  // })
 
   // Defines model options
   // TODO - deprecate?
-  const defaultModelOptions = {}
-  generator.model_options.forEach((opt) => {
-    defaultModelOptions[opt.identifier] = opt.default_value
-  })
+  // const defaultModelOptions = {}
+  // generator.model_options.forEach((opt) => {
+  //   defaultModelOptions[opt.identifier] = opt.default_value
+  // })
 
   // Creates an instance of defaultModelOptions in
   // configuration.model_options for each model in the blueprint
-  schemas.forEach((model) => {
-    configuration.model_options[model._id] = cloneDeep(defaultModelOptions)
-  })
+  // schemas.forEach((model) => {
+  //   configuration.model_options[model._id] = cloneDeep(defaultModelOptions)
+  // })
 
   // // // //
   // OPTION_GROUPS Implementation
+
   generator.option_groups.forEach((group) => {
     console.log(group)
 
