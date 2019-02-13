@@ -2,7 +2,6 @@
 // import buildConfiguration from '@codotype/util/lib/buildConfiguration'
 import collectionModule from '../../../store/lib/collectionModule'
 import objectModule from './objectModule'
-import addonModule from './addonModule'
 
 // const setValue = (state, { group, attr, val }) => { state.config[group][attr] = val }
 
@@ -65,10 +64,11 @@ export default {
       } else if (option_group.type === 'OPTION_GROUP_TYPE_GLOBAL_ADDON') {
         console.log('HANDLE ADDON HERE')
         const scope = option_group.identifier_plural
-        this.registerModule(['build', 'editor', scope], collectionModule({ NEW_MODEL: {} })) // TODO - pass in newModel from @codotype/ui
+        // TODO - pass in newModel from @codotype/ui
+        this.registerModule(['build', 'editor', scope], collectionModule({ NEW_MODEL: {} }))
       } else if (option_group.type === 'OPTION_GROUP_TYPE_MODEL_ADDON') {
         // New empty module to wrap an ObjectModule for each schema
-        const newModule = { modules: {} }
+        const newModule = { state: {} }
 
         // Defines the default state
         // TODO - this must be moved into @codotype/util
@@ -81,13 +81,13 @@ export default {
         // NOTE - a full-blown collectionModule might not be ideal here
         // Would be best to issue a stripped-down module, and be able to select
         schemas.forEach((s) => {
-          newModule.modules[s.identifier] = addonModule()
+          newModule.state[s.identifier] = []
           console.log('Added object module for ', s.identifier)
         })
 
         // Defines the scope of the module
         console.log(option_group)
-        const scope = option_group.identifier
+        const scope = option_group.identifier_plural
         this.registerModule(['build', 'editor', scope], newModule)
       }
 

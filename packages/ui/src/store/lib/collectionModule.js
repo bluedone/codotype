@@ -30,6 +30,9 @@ export default function ({ NEW_MODEL }) {
       items (state) {
         return state.items
       },
+      byId: state => id => {
+        return state.items.find(m => m.id === id)
+      },
       first (state) {
         return state.items[0]
       },
