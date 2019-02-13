@@ -49,6 +49,10 @@ export default {
 
     // TODO - check if option group has already been defined here
     registerOptionGroup ({ state }, { option_group }) {
+
+      let scope
+      let newModule
+
       // TODO - constantize GLOBAL_OPTION type
       if (option_group.type === 'OPTION_GROUP_TYPE_GLOBAL_OPTION') {
 
@@ -61,16 +65,15 @@ export default {
 
         // TODO - this should accept the attributes of the option group, yeah?
         // All validations can be managed in there?
-        const newModule = objectModule({ defaultState: defaultState })
+        newModule = objectModule({ defaultState: defaultState })
 
         // Defines the scope of the module
-        const scope = option_group.identifier
-        this.registerModule(['build', 'editor', 'data', scope], newModule)
+        scope = ['build', 'editor', 'data', option_group.identifier]
 
       // TODO - constantize global option here
       } else if (option_group.type === 'OPTION_GROUP_TYPE_MODEL_OPTION') {
         // New empty module to wrap an ObjectModule for each schema
-        const newModule = { modules: {}, namespaced: true }
+        newModule = { modules: {}, namespaced: true }
 
         // Defines the default state
         // TODO - this must be moved into @codotype/util
@@ -86,21 +89,19 @@ export default {
 
         // Defines the scope of the module
         console.log('ADDED ', option_group.identifier)
-        const scope = option_group.identifier
-        this.registerModule(['build', 'editor', 'data', scope], newModule)
+        scope = ['build', 'editor', 'data', option_group.identifier]
 
       // HANDLES OPTION_GROUP_TYPE_GLOBAL_ADDON
       } else if (option_group.type === 'OPTION_GROUP_TYPE_GLOBAL_ADDON') {
         console.log('HANDLE ADDON HERE')
-        const scope = option_group.identifier_plural
-
         // TODO - pass in newModel from @codotype/ui
-        this.registerModule(['build', 'editor', 'data', scope], collectionModule({ NEW_MODEL: {} }))
+        scope = ['build', 'editor', 'data', option_group.identifier_plural]
+        newModule = collectionModule({ NEW_MODEL: {} })
 
       // HANDLES OPTION_GROUP_TYPE_MODEL_ADDON
       } else if (option_group.type === 'OPTION_GROUP_TYPE_MODEL_ADDON') {
         // New empty module to wrap an ObjectModule for each schema
-        const newModule = { state: {}, namespaced: true }
+        newModule = { state: {}, namespaced: true }
 
         // Defines the default state
         // TODO - this must be moved into @codotype/util
@@ -119,12 +120,18 @@ export default {
 
         // Defines the scope of the module
         console.log(option_group)
-        const scope = option_group.identifier_plural
-        this.registerModule(['build', 'editor', 'data', scope], newModule)
+        scope = ['build', 'editor', 'data', option_group.identifier_plural]
       }
 
+      try {
+        this.unregisterModule(scope.join('/'))
+      } catch (e) {
+        // console.log('NO MODULE ERR', e)
+      }
+      this.registerModule(scope, newModule)
+
       // QUESTION - do we want { preserveState: true } ?
-      // const newModule = Object.assign({}, collectionModule({ NEW_MODEL: {} }))
+      // newModule = Object.assign({}, collectionModule({ NEW_MODEL: {} }))
 
       // Registers the new Vuex module
       // QUESTION - do we need to de-register it as well?

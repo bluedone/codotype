@@ -13,6 +13,9 @@ export default function ({ NEW_MODEL }) {
       items (state, items) {
         state.items = items
       },
+      newModelAttr (state, {attr, value}) {
+        state.newModel[attr] = value
+      },
       resetNewModel (state) {
         state.newModel = state.defaultNewModel
       },
@@ -40,7 +43,10 @@ export default function ({ NEW_MODEL }) {
         return state.items[state.items.length - 1]
       },
       newModel (state) {
-        return Object.assign({}, state.newModel)
+        return state.newModel
+      },
+      newModelAttr: state => attr => {
+        return state.newModel[attr]
       },
       editModel (state) {
         return Object.assign({}, state.editModel)

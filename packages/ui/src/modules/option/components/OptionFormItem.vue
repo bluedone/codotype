@@ -56,7 +56,7 @@
             :value="getValue(model.identifier)"
             :color="'#4582EC'"
             class='mb-0 mr-3'
-            @change="setValue()"
+            @change="updateModel()"
           />
 
           <label class='mb-0 mr-2'>{{opt.label}}</label>
@@ -68,7 +68,7 @@
 
       <OptionPreview
         v-if="model.previewTemplate"
-        :model="{ value: value }"
+        :model="{ value: getValue(model.identifier) }"
         :schema="schema"
         :template="model.previewTemplate"
       >
@@ -108,28 +108,55 @@ export default {
     let model = this.$options.propsData.model
     let schema = this.$options.propsData.schema
 
+    function updateModel () { // NOTE - DOES NOT WORK WITH ADDONS!
+      if (this.model.type === DATATYPE_BOOLEAN) {
+        this.setValue({ attr: this.model.identifier, value: this.$refs.input.toggled })
+      } else if ([DATATYPE_NUMBER_INTEGER, DATATYPE_NUMBER_FLOAT, DATATYPE_NUMBER_DOUBLE].includes(this.model.type)) {
+        this.setValue({ attr: this.model.identifier, value: Number(this.$refs.input.value) })
+      } else {
+        this.setValue({ attr: this.model.identifier, value: this.$refs.input.value })
+      }
+    }
+
     // OPTION_GROUP_TYPE_MODEL_OPTION
     if (group.type === 'OPTION_GROUP_TYPE_GLOBAL_OPTION') {
       // Defines Vue.component.computed
       this.$options.computed = mapGetters({
         getValue: `build/editor/data/${group.identifier}/valueOf`
       })
-      console.log(this.$options.computed)
 
       // Defines Vue.component.methods
       this.$options.methods = {
+        updateModel,
         ...mapMutations({
           setValue: `build/editor/data/${group.identifier}/value`
-        }),
-        updateModel () {
-          if (this.model.type === DATATYPE_BOOLEAN) {
-            this.setValue({ attr: this.model.identifier, value: this.$refs.input.toggled })
-          } else if ([DATATYPE_NUMBER_INTEGER, DATATYPE_NUMBER_FLOAT, DATATYPE_NUMBER_DOUBLE].includes(this.model.type)) {
-            this.setValue({ attr: this.model.identifier, value: Number(this.$refs.input.value) })
-          } else {
-            this.setValue({ attr: this.model.identifier, value: this.$refs.input.value })
-          }
-        }
+        })
+      }
+    } else if (group.type === 'OPTION_GROUP_TYPE_MODEL_OPTION') {
+      // Defines Vue.component.computed
+      this.$options.computed = mapGetters({
+        getValue: `build/editor/data/${group.identifier}/${schema.identifier}/valueOf`
+      })
+
+      // Defines Vue.component.methods
+      this.$options.methods = {
+        updateModel,
+        ...mapMutations({
+          setValue: `build/editor/data/${group.identifier}/${schema.identifier}/value`
+        })
+      }
+    } else if (group.type === 'OPTION_GROUP_TYPE_MODEL_ADDON') {
+      // Defines Vue.component.computed
+      this.$options.computed = mapGetters({
+        getValue: `build/editor/addon/newModelAttr`
+      })
+
+      // Defines Vue.component.methods
+      this.$options.methods = {
+        updateModel,
+        ...mapMutations({
+          setValue: `build/editor/addon/newModelAttr`
+        })
       }
     }
   },
