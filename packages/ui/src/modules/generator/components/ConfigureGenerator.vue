@@ -12,6 +12,8 @@
     >
       <br>
 
+      <!-- TODO - ABSTRACT INTO SEPARATE COMPONENT -->
+      <!-- TODO - ABSTRACT INTO SEPARATE COMPONENT -->
       <template v-if="group.type === 'OPTION_GROUP_TYPE_GLOBAL_OPTION'">
         <b-row class='justify-content-center'>
           <b-col lg=9>
@@ -26,6 +28,7 @@
       </template>
 
       <!-- OPTION_GROUP_TYPE_GLOBAL_BOOLEAN_GROUP -->
+      <!-- TODO - ABSTRACT INTO SEPARATE COMPONENT -->
       <template v-else-if="group.type === 'OPTION_GROUP_TYPE_GLOBAL_BOOLEAN_GROUP'">
 
         <b-row class='justify-content-center'>
@@ -67,6 +70,8 @@
         <hr>
       </template>
 
+      <!-- TODO - ABSTRACT INTO SEPARATE COMPONENT -->
+      <!-- TODO - ABSTRACT INTO SEPARATE COMPONENT -->
       <template v-if="group.type === 'OPTION_GROUP_TYPE_MODEL_ADDON'">
         <b-row>
           <b-col lg=3 class='border-right'>
@@ -188,6 +193,7 @@
       </template>
 
       <!-- TODO - ABSTRACT INTO SEPARATE COMPONENT -->
+      <!-- TODO - ABSTRACT INTO SEPARATE COMPONENT -->
       <template v-if="group.type === 'OPTION_GROUP_TYPE_MODEL_OPTION'">
         <b-row>
           <b-col lg=3 class='border-right'>
@@ -235,6 +241,7 @@
       </template>
 
       <!-- TODO - ABSTRACT INTO SEPARATE COMPONENT -->
+      <!-- TODO - ABSTRACT INTO SEPARATE COMPONENT -->
       <template v-if="group.type === 'OPTION_GROUP_TYPE_GLOBAL_OPTION'">
         <b-row class='justify-content-center'>
           <b-col lg=9>
@@ -261,34 +268,6 @@
     </b-tab>
 
   </b-tabs>
-
-        <!-- GLOBAL OPTIONS -->
-        <!-- <b-tab
-          lazy
-          title="Global Options"
-          v-if="model.global_options[0]"
-          button-id="build-global-options-nav"
-          class='card-body bg-white border border-top-0'
-        > -->
-          <!-- <br> -->
-
-          <!-- <EditorHeader
-            title="Global Options"
-            help="Configure global options for this generator"
-            url="https://codotype.github.io"
-          /> -->
-
-          <!-- <div class="card card-body mt-2" v-for="attr in model.global_options"> -->
-            <!-- <OptionFormItem :model="attr" v-model="configurationObject[attr.identifier]"/> -->
-          <!-- </div> -->
-
-          <!-- <div class="card card-body text-center bg-transparent border-warning text-warning" v-if="!model.global_options[0]"> -->
-            <!-- <p class="lead mb-0">No global options exposed by this generator</p> -->
-          <!-- </div> -->
-
-        <!-- </b-tab> -->
-        <!-- GLOBAL OPTIONS -->
-
 </template>
 
 <script>
@@ -302,21 +281,10 @@ export default {
   name: 'GeneratorShow',
   props: ['id'],
   data () {
-    // Pulls the schemas to define the build configuration
-    const schemas = this.$store.getters['editor/schema/collection/items']
-    const generator = this.$store.getters['generator/collection'].find(g => g.id === this.id)
-
-    // Produces the generator configurationObject
-    // TODO - must be moved into Vuex store!
-    const configurationObject = buildConfiguration({ schemas, generator })
-    const selectedSchemaId = schemas[0].identifier
-
     return {
-      configurationObject: configurationObject,
       currentStep: 0,
-      schemas,
       newAddon: {}, // TODO - this should be produced somewhere & maintained in state
-      selectedSchemaId: selectedSchemaId
+      selectedSchemaId: this.$store.getters['editor/schema/collection/items'][0].identifier // TODO - retire this
     }
   },
   components: {
@@ -329,6 +297,9 @@ export default {
   methods: {
     ...mapActions({
       selectModel: 'generator/selectModel'
+    }),
+    ...mapGetters({
+      getModel: 'generator/getModel'
     }),
     decrementStep () {
       this.currentStep = Math.max(this.currentStep - 1, 0)
@@ -347,11 +318,20 @@ export default {
     }
   },
   computed: {
+    configurationObject () {
+      // Pulls the schemas to define the build configuration
+      const schemas = this.schemas
+      // const generator = this.$store.getters['generator/collection'].find(g => g.id === this.id)
+      const generator = this.$store.getters['generator/getModel'](this.id)
+      return buildConfiguration({ schemas, generator })
+    },
     compiledMarkdown () {
       return marked(this.model.readme, { sanitize: true })
     },
     ...mapGetters({
-      model: 'generator/selectedModel'
+      model: 'generator/selectedModel',
+      modelGetter: 'generator/getModel',
+      schemas: 'editor/schema/collection/items'
     }),
     selectedSchema () {
       return this.schemas.find(s => s.identifier === this.selectedSchemaId)

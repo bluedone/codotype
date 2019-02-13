@@ -3,12 +3,17 @@ import axios from 'axios'
 import { API_ROOT } from './constants'
 const namespaced = true
 
+const setValue = (state, { group, attr, val }) => { state.config[group][attr] = val }
+
 export default {
   namespaced,
   state: {
     collection: [],
     fetching: false,
-    selectedModel: {}
+    selectedModel: {},
+    config: {
+      authorizations: {} // NOTE - this will be auto-populated
+    }
   },
   mutations: {
     fetching (state, bool) {
@@ -19,7 +24,8 @@ export default {
     },
     selectedModel (state, model) {
       state.selectedModel = model
-    }
+    },
+    setValue: setValue
   },
   actions: {
     selectModel: ({ commit, state }, model_id) => {
@@ -43,6 +49,9 @@ export default {
   getters: {
     collection: state => {
       return state.collection
+    },
+    getModel: state => id => { // Nice higher-order getter
+      return state.collection.find(m => m.id === id)
     },
     fetching: state => {
       return state.fetching
