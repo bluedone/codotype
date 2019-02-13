@@ -1,4 +1,6 @@
 // import axios from 'axios'
+// const DownloadFile = require('downloadjs')
+// const GENERATE_ROUTE = '/api/generate'
 
 export default {
   namespaced: true,
