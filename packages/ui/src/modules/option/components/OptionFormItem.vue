@@ -11,7 +11,7 @@
         <toggle-button
           v-if="model.type === DATATYPE_BOOLEAN"
           ref="input"
-          :value="value"
+          :value="getValue(model.identifier)"
           :color="'#4582EC'"
           class='mr-3 mb-0'
           @change="updateModel()"
@@ -26,21 +26,21 @@
 
       <input
         v-if="model.type === DATATYPE_STRING"
-        class='form-control'
-        :value="value"
+        :value="getValue(model.identifier)"
         :placeholder="model.label"
+        class='form-control'
         type="text"
         ref="input"
-        @input="updateModel()"
-      >
+        @input="setValue({ attr: model.identifier, value: $event.target.value })"
+      />
 
       <select
         v-if="model.type === DATATYPE_STRING_SELECT"
         class='form-control'
-        :value="value"
+        :value="getValue(model.identifier)"
         type="text"
         ref="input"
-        @input="updateModel()"
+        @change="setValue({ attr: model.identifier, value: $event.target.value })"
       >
         <option :value="opt.value" v-for="opt in model.options" :key="opt.id">{{opt.label}}</option>
       </select>
@@ -53,10 +53,10 @@
 
           <toggle-button
             ref="input"
-            :value="value"
+            :value="getValue(model.identifier)"
             :color="'#4582EC'"
             class='mb-0 mr-3'
-            @change="updateModel()"
+            @change="setValue()"
           />
 
           <label class='mb-0 mr-2'>{{opt.label}}</label>
@@ -92,14 +92,46 @@ import {
 import OptionPreview from './OptionTemplateRenderer'
 import MoreInfoLink from '../../../components/MoreInfoLink'
 import OptionFormItemIcon from './OptionFormItemIcon'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: 'OptionFormitem',
-  props: ['model', 'schema', 'value'],
+  props: ['group', 'model', 'schema'],
   components: {
     OptionPreview,
     OptionFormItemIcon,
     MoreInfoLink
+  },
+  beforeCreate () {
+    // Isolates the 'module' prop
+    let group = this.$options.propsData.group
+    let model = this.$options.propsData.model
+    let schema = this.$options.propsData.schema
+
+    // OPTION_GROUP_TYPE_MODEL_OPTION
+    if (group.type === 'OPTION_GROUP_TYPE_GLOBAL_OPTION') {
+      // Defines Vue.component.computed
+      this.$options.computed = mapGetters({
+        getValue: `build/editor/data/${group.identifier}/valueOf`
+      })
+      console.log(this.$options.computed)
+
+      // Defines Vue.component.methods
+      this.$options.methods = {
+        ...mapMutations({
+          setValue: `build/editor/data/${group.identifier}/value`
+        }),
+        updateModel () {
+          if (this.model.type === DATATYPE_BOOLEAN) {
+            this.setValue({ attr: this.model.identifier, value: this.$refs.input.toggled })
+          } else if ([DATATYPE_NUMBER_INTEGER, DATATYPE_NUMBER_FLOAT, DATATYPE_NUMBER_DOUBLE].includes(this.model.type)) {
+            this.setValue({ attr: this.model.identifier, value: Number(this.$refs.input.value) })
+          } else {
+            this.setValue({ attr: this.model.identifier, value: this.$refs.input.value })
+          }
+        }
+      }
+    }
   },
   data () {
     return {
@@ -117,17 +149,6 @@ export default {
     if (!this.$refs.input) { return }
     if (!this.$refs.input.value && this.model.default_value) {
       this.$refs.input.value = this.model.default_value
-    }
-  },
-  methods: {
-    updateModel () {
-      if (this.model.type === DATATYPE_BOOLEAN) {
-        this.$emit('input', this.$refs.input.toggled)
-      } else if ([DATATYPE_NUMBER_INTEGER, DATATYPE_NUMBER_FLOAT, DATATYPE_NUMBER_DOUBLE].includes(this.model.type)) {
-        this.$emit('input', Number(this.$refs.input.value))
-      } else {
-        this.$emit('input', this.$refs.input.value)
-      }
     }
   }
 }

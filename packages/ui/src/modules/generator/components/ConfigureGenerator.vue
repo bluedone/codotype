@@ -48,7 +48,11 @@
                   class="list-group-item list-group-item-action"
                   v-for="attr in group.attributes"
                   :key="attr.identifier">
-                  <OptionFormItem :model="attr" v-model="configurationObject[group.identifier][attr.identifier]"/>
+                  <OptionFormItem
+                    :model="attr"
+                    :group="group"
+                    v-model="configurationObject[group.identifier][attr.identifier]"
+                  />
                 </li>
               </ul class="list-group">
             </div>
@@ -120,6 +124,7 @@
                   <div class="col-lg-6" v-for="attr in group.attributes">
                     <OptionFormItem
                       :model="attr"
+                      :group="group"
                       :schema="selectedSchema"
                       v-model="newAddon[attr.identifier]"
                     />
@@ -227,6 +232,7 @@
             <div class="card card-body mt-2" v-for="attr in group.attributes">
               <OptionFormItem
                 :schema="selectedSchema"
+                :group="group"
                 :model="attr"
                 v-model="configurationObject[group.identifier_plural][selectedSchemaId][attr.identifier]"
               />
@@ -252,8 +258,8 @@
             <!-- Define new instance -->
             <div class="card card-body mt-2" v-for="attr in group.attributes">
               <OptionFormItem
+                :group="group"
                 :model="attr"
-                v-model="configurationObject[group.identifier][attr.identifier]"
               />
             </div>
 
