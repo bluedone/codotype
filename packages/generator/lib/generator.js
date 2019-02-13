@@ -3,6 +3,8 @@ const path = require('path');
 const fsExtra = require('fs-extra')
 const trailingComma = require('@codotype/util/lib/trailingComma')
 
+// TODO - import ALL datatypes from @codotype/types and inject them into the template renderer variable scope
+
 // // // //
 
 // CodotypeGenerator class definition

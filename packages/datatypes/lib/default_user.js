@@ -12,7 +12,7 @@ const DEFAULT_USER_EMAIL_ATTRIBUTE = {
 }
 
 const DEFAULT_USER_SCHEMA = {
-  id: null,
+  id: 'USER_SCHEMA_ID', // TODO - this should be given a random ID
   order: 0,
   label: 'User',
   label_plural: 'Users',

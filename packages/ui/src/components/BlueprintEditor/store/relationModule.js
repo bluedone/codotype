@@ -1,5 +1,5 @@
 import modalModule from './modules/modalModule'
-import collectionModule from './modules/collectionModule'
+import collectionModule from '../../../store/lib/collectionModule'
 import { DEFAULT_RELATION } from '@codotype/types/lib/default_relation'
 
 export default {

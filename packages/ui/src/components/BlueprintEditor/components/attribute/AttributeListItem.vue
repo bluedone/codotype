@@ -8,17 +8,12 @@
 
       <!-- Handle for re-ordering attributes -->
       <div class="col-lg-1 col-sm-4 text-left d-flex align-items-center">
-        <!-- <i class="fa fa-lg fa-fw fa-bars mr-3" v-if="!item.locked"></i> -->
-        <i class="fa fa-lg fa-fw fa-bars mr-3" style='cursor: grab;' v-if="!item.locked"></i>
+        <i class="fa fa-lg fa-fw fa-bars mr-3" style='cursor: grab;'></i>
         <i class="fa fa-fw text-primary fa-eye mr-3" v-if="item.order === 0"  v-b-tooltip.hover.left title='Leading attribute'></i>
       </div>
 
-      <!-- TODO - re-integrate AttributeLabel component -->
       <div class="col-lg-5 col-sm-4">
-
-        <!-- <AttributeLabel :item="item"/> -->
-        {{ item.label }}
-
+        <AttributeListItemLabel :item="item"/>
       </div>
 
       <div class="col-lg-3 col-sm-4">
@@ -88,6 +83,7 @@
 
 <script>
 import { mapMutations, mapActions } from 'vuex'
+import AttributeListItemLabel from './AttributeListItemLabel'
 
 export default {
   name: 'AttributeListItem',
@@ -95,6 +91,9 @@ export default {
     item: {
       required: true
     }
+  },
+  components: {
+    AttributeListItemLabel
   },
   methods: {
     ...mapMutations({

@@ -7,22 +7,21 @@
 </template>
 
 <script>
-// TODO - icon and tooltip should be encapsulated in the attribute data
-// TODO - attribute data should be abstracted into codotype-util
-// TODO - perhaps distribute a @codotype/meta package?
-// import { DATATYPES } from '@/modules/schema/store/constants'
+import DATATYPE_META from '@codotype/types/lib/meta.js'
 
 export default {
-  props: ['item'],
-  name: 'AttributeLabel',
+  name: 'AttributeListItemLabel',
+  props: {
+    item: {
+      required: true
+    }
+  },
   computed: {
     icon () {
-      return 'PLACEHOLDR'
-      // return DATATYPES.find((v) => v.value === this.item.datatype).icon
+      return DATATYPE_META[this.item.datatype].icon
     },
     tooltip () {
-      return 'PLACEHOLDR'
-      // return DATATYPES.find((v) => v.value === this.item.datatype).text
+      return DATATYPE_META[this.item.datatype].text
     }
   }
 }
