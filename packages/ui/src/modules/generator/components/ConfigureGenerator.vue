@@ -48,7 +48,10 @@
                   class="list-group-item list-group-item-action"
                   v-for="attr in group.attributes"
                   :key="attr.identifier">
-                  <OptionFormItem :model="attr" v-model="configurationObject[group.identifier][attr.identifier]"/>
+                  <OptionFormItem
+                    :model="attr"
+                    :group="group"
+                  />
                 </li>
               </ul class="list-group">
             </div>
@@ -70,200 +73,26 @@
         <hr>
       </template>
 
-      <!-- TODO - ABSTRACT INTO SEPARATE COMPONENT -->
-      <!-- TODO - ABSTRACT INTO SEPARATE COMPONENT -->
-      <template v-if="group.type === 'OPTION_GROUP_TYPE_MODEL_ADDON'">
-        <b-row>
-          <b-col lg=3 class='border-right'>
-            <div class="card">
-              <div class="card-header">
-                <strong>Models</strong>
-              </div>
-              <ul class="list-group list-group-flush">
-                <li
-                  v-for="schema in schemas"
-                  :class='selectedSchemaId === schema.identifier ? "list-group-item active" : "list-group-item" '
-                  @click="selectedSchemaId = schema.identifier"
-                >
-                  {{ schema.label }}
-                </li>
-              </ul>
-            </div>
-          </b-col>
-          <b-col lg=9>
-            <b-card>
+      <!-- <div class="card card-body text-center bg-transparent border-warning text-warning" v-if="!group.attributes[0]"> -->
+        <!-- <p class="lead mb-0">No options exposed by this generator</p> -->
+      <!-- </div> -->
 
-              <!-- Header - "User API Actions" -->
-              <p class="lead mb-0">
-                {{ selectedSchema.label }} {{ group.label_plural }}
-              </p>
+      <ModelAddonEditor
+        v-if="group.type === 'OPTION_GROUP_TYPE_MODEL_ADDON'"
+        :group="group"
+        :schemas="schemas">
+      </ModelAddonEditor>
 
-              <!-- Header - Description -->
-              <small class="text-muted">{{group.description}}</small>
+      <ModelOptionEditor
+        v-if="group.type === 'OPTION_GROUP_TYPE_MODEL_OPTION'"
+        :group="group"
+        :schemas="schemas">
+      </ModelOptionEditor>
 
-
-              <!-- Define new instance -->
-              <hr>
-
-              <!-- Bootstrap Modal Component -->
-              <b-modal
-                :id="'modal_' + group.id"
-                :title="'New ' + group.label"
-                ok-variant='success'
-                ok-title='Create'
-                cancel-title='Cancel'
-                @ok="createAddonInstance(group)"
-              >
-                <small class="text-muted">New {{group.label}}</small>
-
-                <div class="row">
-                  <div class="col-lg-6" v-for="attr in group.attributes">
-                    <OptionFormItem
-                      :model="attr"
-                      :schema="selectedSchema"
-                      v-model="newAddon[attr.identifier]"
-                    />
-                  </div>
-                </div>
-
-                <div class="row" v-if="group.previewTemplate">
-                  Preview
-                  <div class="col-lg-12">
-                    <OptionTemplateRenderer
-                      :model="newAddon"
-                      :schema="selectedSchema"
-                      :template="group.previewTemplate"
-                    >
-                    </OptionTemplateRenderer>
-                  </div>
-                </div>
-
-              </b-modal>
-
-              <b-button v-b-modal="'modal_' + group.id">Create {{ group.label }}</b-button>
-              <!-- <b-button @click="createAddonInstance(group)">Create {{ group.label }}</b-button> -->
-
-              <!-- View existing instance data -->
-              <hr>
-
-              <ul class='list-group'>
-                <li
-                  class="list-group-item d-flex justify-content-between align-items-center"
-                  v-for="instance in configurationObject[group.identifier_plural][selectedSchemaId]"
-                  :key="instance.id"
-                >
-
-                  <OptionTemplateRenderer
-                    v-if="group.previewTemplate"
-                    :model="instance"
-                    :schema="selectedSchema"
-                    :template="group.previewTemplate"
-                  >
-                  </OptionTemplateRenderer>
-
-                  <template v-else>
-                    {{ group.attributes[0].label }}:{{ instance[group.attributes[0].identifier] }}
-                  </template>
-
-                  <span>
-                    <b-button @click="editInstance(group, instance)" size="sm" variant="outline-warning">
-                      <i class="fa fa-edit"></i>
-                    </b-button>
-                    <b-button @click="destroyInstance(group, instance)" size="sm" variant="outline-danger">
-                      <i class="fa fa-trash"></i>
-                    </b-button>
-                  </span>
-
-                </li>
-                <li
-                  class="list-group-item list-group-item-warning"
-                  v-if="!configurationObject[group.identifier_plural][selectedSchemaId][0]"
-                >
-                  No addons available
-                </li>
-              </ul>
-
-            </b-card>
-          </b-col>
-        </b-row>
-
-        <div class="card card-body text-center bg-transparent border-warning text-warning" v-if="!group.attributes[0]">
-          <p class="lead mb-0">No options exposed by this generator</p>
-        </div>
-      </template>
-
-      <!-- TODO - ABSTRACT INTO SEPARATE COMPONENT -->
-      <!-- TODO - ABSTRACT INTO SEPARATE COMPONENT -->
-      <template v-if="group.type === 'OPTION_GROUP_TYPE_MODEL_OPTION'">
-        <b-row>
-          <b-col lg=3 class='border-right'>
-            <div class="card">
-              <div class="card-header">
-                <strong>Models</strong>
-              </div>
-              <ul class="list-group list-group-flush">
-                <li
-                  v-for="schema in schemas"
-                  :class='selectedSchemaId === schema.identifier ? "list-group-item active" : "list-group-item" '
-                  @click="selectedSchemaId = schema.identifier"
-                >
-                  {{ schema.label }}
-                </li>
-              </ul>
-            </div>
-          </b-col>
-          <b-col lg=9>
-
-            <!-- Header - "User MODEL OPTIONS" -->
-            <p class="lead mb-0">
-              {{ selectedSchema.label }} {{ group.label_plural }}
-            </p>
-
-            <!-- Header - Description -->
-            <small class="text-muted">{{group.description}}</small>
-
-
-            <!-- Define new instance -->
-            <div class="card card-body mt-2" v-for="attr in group.attributes">
-              <OptionFormItem
-                :schema="selectedSchema"
-                :model="attr"
-                v-model="configurationObject[group.identifier_plural][selectedSchemaId][attr.identifier]"
-              />
-            </div>
-
-          </b-col>
-        </b-row>
-
-        <div class="card card-body text-center bg-transparent border-warning text-warning" v-if="!group.attributes[0]">
-          <p class="lead mb-0">No options exposed by this generator</p>
-        </div>
-      </template>
-
-      <!-- TODO - ABSTRACT INTO SEPARATE COMPONENT -->
-      <!-- TODO - ABSTRACT INTO SEPARATE COMPONENT -->
-      <template v-if="group.type === 'OPTION_GROUP_TYPE_GLOBAL_OPTION'">
-        <b-row class='justify-content-center'>
-          <b-col lg=9>
-
-            <!-- Header - Description -->
-            <!-- <small class="text-muted">{{group.description}}</small> -->
-
-            <!-- Define new instance -->
-            <div class="card card-body mt-2" v-for="attr in group.attributes">
-              <OptionFormItem
-                :model="attr"
-                v-model="configurationObject[group.identifier][attr.identifier]"
-              />
-            </div>
-
-          </b-col>
-        </b-row>
-
-        <div class="card card-body text-center bg-transparent border-warning text-warning" v-if="!group.attributes[0]">
-          <p class="lead mb-0">No options exposed by this generator</p>
-        </div>
-      </template>
+      <GlobalOptionEditor
+        v-if="group.type === 'OPTION_GROUP_TYPE_GLOBAL_OPTION'"
+        :group="group">
+      </GlobalOptionEditor>
 
     </b-tab>
 
@@ -276,6 +105,9 @@ import { mapGetters, mapActions } from 'vuex'
 import buildConfiguration from '@codotype/util/lib/buildConfiguration'
 import OptionFormItem from '../../option/components/OptionFormItem'
 import OptionTemplateRenderer from '../../option/components/OptionTemplateRenderer'
+import GlobalOptionEditor from './GlobalOptionEditor'
+import ModelOptionEditor from './ModelOptionEditor'
+import ModelAddonEditor from './ModelAddonEditor'
 
 export default {
   name: 'GeneratorShow',
@@ -288,6 +120,9 @@ export default {
     }
   },
   components: {
+    GlobalOptionEditor,
+    ModelOptionEditor,
+    ModelAddonEditor,
     OptionTemplateRenderer,
     OptionFormItem
   },

@@ -23,9 +23,10 @@ function buildConfiguration ({ schemas, generator }) {
 
   // // // //
   // OPTION_GROUPS Implementation
+  // TODO - this needs to handle ALL kinds of defaults & requirements
 
   generator.option_groups.forEach((group) => {
-    console.log(group)
+    // console.log(group)
 
     // Defines an object on to store the instance data for each option group
     const instanceData = {}

@@ -53,6 +53,7 @@ export default {
   created () {
     // this.$store.dispatch('editor/reset')
     this.selectModel(this.id)
+    this.$store.dispatch('build/selectBuild', this.id)
     this.$store.dispatch('build/steps/reset')
     this.$store.commit('editor/about/showing', false)
   },
