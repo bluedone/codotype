@@ -1,17 +1,15 @@
+import { DEFAULT_BUILD } from './constants'
 import stepModule from './stepModule'
 import runtimeModule from './runtimeModule'
-
-// import { DEFAULT_BUILD } from './constants'
-
-// export default {
-//   newModel: DEFAULT_BUILD,
-//   defaultNewModel: DEFAULT_BUILD,
-// }
+import editorModule from './editorModule'
+import collectionModule from '../../../store/lib/collectionModule'
 
 export default {
   namespaced: true,
   modules: {
+    collection: Object.assign({}, collectionModule({ NEW_MODEL: DEFAULT_BUILD })),
     steps: stepModule,
-    runtime: runtimeModule
+    runtime: runtimeModule,
+    editor: editorModule
   }
 }

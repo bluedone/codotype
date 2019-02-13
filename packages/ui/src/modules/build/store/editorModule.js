@@ -1,14 +1,15 @@
 // import cloneDeep from 'lodash/cloneDeep'
-// import { DEFAULT_BUILD_STAGE } from './constants'
 // import buildConfiguration from '@codotype/util/lib/buildConfiguration'
+import collectionModule from '../../../store/lib/collectionModule'
 
+// NOTE - the editor module is ONLY responsible for editing the build.configuration property
 export default {
   namespaced: true,
   state: {
     exists: true
   },
   actions: {
-    addNewStage ({ state, rootGetters, commit, dispatch }, generator_id) {
+    selectBuild ({ state, rootGetters, commit, dispatch }, generator_id) {
       // Checks to ensure this generator isn't already in the build
       // if (state.newModel.stages.map(stage => stage.generator_id).includes(generator_id)) return
 
@@ -34,5 +35,7 @@ export default {
   },
   mutations: {},
   getters: {},
-  modules: {}
+  modules: {
+    addon: Object.assign({}, collectionModule({ NEW_MODEL: {} }))
+  }
 }

@@ -43,7 +43,13 @@ export default {
 
       // Adds nodes
       this.model.attributes.forEach(n => schemaNode.attributes.push(n))
-      this.model.relations.forEach(rel => schemaNode.relations.push(inflateRelation({ relation: rel, schemas: this.$store.getters['editor/schema/collection/items'] })))
+      this.model.relations.forEach(rel => {
+        const inflated = inflateRelation({
+          relation: rel,
+          schemas: this.$store.getters['editor/schema/collection/items']
+        })
+        schemaNode.relations.push(inflated)
+      })
 
       // Returns the nodes and links
       return schemaNode
