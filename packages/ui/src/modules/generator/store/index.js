@@ -1,3 +1,4 @@
+import collectionModule from '../../../store/lib/collectionModule'
 import uniq from 'lodash/uniq'
 import axios from 'axios'
 import { API_ROOT } from './constants'
@@ -28,6 +29,11 @@ export default {
     setValue: setValue
   },
   actions: {
+    registerDynamicModule ({ state }, scope) {
+      // QUESTION - do we want { preserveState: true } ?
+      const newModule = Object.assign({}, collectionModule({ NEW_MODEL: {} }))
+      this.registerModule(['generator', scope], newModule)
+    },
     selectModel: ({ commit, state }, model_id) => {
       let model = state.collection.find(m => m._id === model_id)
       commit('selectedModel', model)

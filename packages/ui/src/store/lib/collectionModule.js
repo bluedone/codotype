@@ -1,4 +1,4 @@
-// Exports a collection build around a basic model prototype
+// Exports a items build around a basic model prototype
 export default function ({ NEW_MODEL }) {
 
   return {
@@ -7,11 +7,11 @@ export default function ({ NEW_MODEL }) {
       defaultNewModel: Object.assign({}, NEW_MODEL),
       newModel: Object.assign({}, NEW_MODEL),
       editModel: Object.assign({}, NEW_MODEL),
-      collection: []
+      items: []
     },
     mutations: {
-      collection (state, collection) {
-        state.collection = collection
+      items (state, items) {
+        state.items = items
       },
       resetNewModel (state) {
         state.newModel = state.defaultNewModel
@@ -27,8 +27,14 @@ export default function ({ NEW_MODEL }) {
       }
     },
     getters: {
-      collection (state) {
-        return state.collection
+      items (state) {
+        return state.items
+      },
+      first (state) {
+        return state.items[0]
+      },
+      last (state) {
+        return state.items[state.items.length - 1]
       },
       newModel (state) {
         return Object.assign({}, state.newModel)
@@ -46,23 +52,30 @@ export default function ({ NEW_MODEL }) {
         // Resets state.newModel()
         commit('resetNewModel')
 
-        // Updates state.collection
-        commit('collection', [...state.collection, createdModel])
+        // Updates state.items
+        commit('items', [...state.items, createdModel])
       },
       update ({ state, commit }) {
-        // Updates collection
-        const collection = state.collection.map((model) => {
+        // Updates items
+        const items = state.items.map((model) => {
           if (model.id !== state.editModel.id) return model
           return state.editModel
         })
-        commit('collection', collection)
+        commit('items', items)
 
         // Resets state.editModel
         commit('resetEditModel')
       },
+      insert ({ state, commit }, model) { // Invoked from one module level above in a Vuex store
+        const collection = state.items.map((m) => {
+          if (model.id !== m.id) return m
+          return model
+        })
+        commit('items', collection)
+      },
       destroy ({ state, commit }, modelId) {
-        const collection = state.collection.filter(m => m.id !== modelId)
-        commit('collection', collection)
+        const items = state.items.filter(m => m.id !== modelId)
+        commit('items', items)
       }
     }
 
