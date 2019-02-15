@@ -1,9 +1,5 @@
 <template>
-  <span>
-    <span class="text-muted">Preview:</span>
-    <br>
-    <v-runtime-template :template="template"></v-runtime-template>
-  </span>
+  <v-runtime-template :template="template"></v-runtime-template>
 </template>
 
 <script>

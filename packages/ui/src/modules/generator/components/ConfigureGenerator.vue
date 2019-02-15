@@ -104,7 +104,6 @@ import marked from 'marked'
 import { mapGetters, mapActions } from 'vuex'
 import buildConfiguration from '@codotype/util/lib/buildConfiguration'
 import OptionFormItem from '../../option/components/OptionFormItem'
-import OptionTemplateRenderer from '../../option/components/OptionTemplateRenderer'
 import GlobalOptionEditor from './GlobalOptionEditor'
 import ModelOptionEditor from './ModelOptionEditor'
 import ModelAddonEditor from './ModelAddonEditor'
@@ -123,7 +122,6 @@ export default {
     GlobalOptionEditor,
     ModelOptionEditor,
     ModelAddonEditor,
-    OptionTemplateRenderer,
     OptionFormItem
   },
   created () {

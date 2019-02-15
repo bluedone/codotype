@@ -26,7 +26,6 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import OptionFormItem from '../../option/components/OptionFormItem'
-import OptionTemplateRenderer from '../../option/components/OptionTemplateRenderer'
 
 export default {
   name: 'GlobalOptionEditor',
@@ -34,7 +33,6 @@ export default {
     group: { required: true }
   },
   components: {
-    OptionTemplateRenderer,
     OptionFormItem
   }
 }

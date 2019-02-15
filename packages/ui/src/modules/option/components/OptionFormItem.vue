@@ -66,13 +66,14 @@
 
       </ul>
 
-      <OptionPreview
+      <OptionTemplateWrapper
+        class='mt-2'
         v-if="model.previewTemplate"
         :model="{ value: getValue(model.identifier) }"
         :schema="schema"
         :template="model.previewTemplate"
       >
-      </OptionPreview>
+      </OptionTemplateWrapper>
 
     </div>
   </div>
@@ -89,7 +90,7 @@ import {
   DATATYPE_NUMBER_DOUBLE
 } from '@codotype/types/lib/datatypes'
 
-import OptionPreview from './OptionTemplateRenderer'
+import OptionTemplateWrapper from './OptionTemplateWrapper'
 import MoreInfoLink from '../../../components/MoreInfoLink'
 import OptionFormItemIcon from './OptionFormItemIcon'
 import { mapGetters, mapMutations } from 'vuex'
@@ -98,7 +99,7 @@ export default {
   name: 'OptionFormitem',
   props: ['group', 'model', 'schema'],
   components: {
-    OptionPreview,
+    OptionTemplateWrapper,
     OptionFormItemIcon,
     MoreInfoLink
   },
