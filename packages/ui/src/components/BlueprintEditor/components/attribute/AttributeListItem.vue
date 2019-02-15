@@ -64,11 +64,6 @@
       </div>
 
     </div>
-    <!--  -->
-    <!--  -->
-    <!--  -->
-
-
 
   </b-list-group-item>
 </template>
@@ -110,6 +105,9 @@ export default {
 }
 </script>
 
+<!-- TODO - move some of this into AttributeLabel component -->
+<!-- TODO - move some of this into AttributeLabel component -->
+<!-- TODO - move some of this into AttributeLabel component -->
 <!-- TODO - move some of this into AttributeLabel component -->
 <style lang='sass' scoped>
   .list-group-item

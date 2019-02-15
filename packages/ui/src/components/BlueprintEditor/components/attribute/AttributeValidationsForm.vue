@@ -8,7 +8,7 @@
     <div class="col-lg-6 col-sm-12">
       <FormInput
         label="Required"
-        v-if="!['BOOL'].includes(model.datatype)"
+        v-if="![DATATYPE_BOOLEAN].includes(model.datatype)"
         v-model="model.required"
         help="Whether or not this attribute is required."
         type='BOOL'
@@ -18,14 +18,14 @@
     <div class="col-lg-6 col-sm-12">
       <FormInput
         label="Unique"
-        v-if="!['JSON', 'BOOL'].includes(model.datatype)"
+        v-if="!['JSON', DATATYPE_BOOLEAN].includes(model.datatype)"
         v-model="model.unique"
         help="Whether or not to enforce unique values for this attribute."
         type='BOOL'
       />
     </div>
 
-    <div class="col-sm-12" v-if="model.datatype === 'NUMBER'">
+    <div class="col-sm-12" v-if="model.datatype === DATATYPE_NUMBER_INTEGER">
       <FormInput
         label="Default Value"
         placeholder="Default Value"
@@ -35,7 +35,7 @@
       />
     </div>
 
-      <div class="col-sm-12" v-if="model.datatype === 'BOOL'">
+      <div class="col-sm-12" v-if="model.datatype === DATATYPE_BOOLEAN">
       <FormInput
         label="Default Value"
         placeholder="Default Value"
@@ -45,7 +45,7 @@
       />
     </div>
 
-    <div class="col-sm-12" v-if="model.datatype === 'TEXT'">
+    <div class="col-sm-12" v-if="model.datatype === DATATYPE_STRING">
       <FormInput
         label="Default Value"
         placeholder="Default Value"
@@ -58,12 +58,29 @@
 </template>
 
 <script>
+import {
+  DATATYPE_STRING,
+  DATATYPE_NUMBER_INTEGER,
+  DATATYPE_BOOLEAN
+} from '@codotype/types/lib/datatypes'
+
 import FormInput from '../../../FormInput'
 
 export default {
-  props: ['model'],
+  props: {
+    model: {
+      required: true
+    }
+  },
   components: {
     FormInput
+  },
+  data () {
+    return {
+      DATATYPE_STRING,
+      DATATYPE_BOOLEAN,
+      DATATYPE_NUMBER_INTEGER
+    }
   }
 }
 </script>
