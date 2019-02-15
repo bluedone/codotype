@@ -36,7 +36,11 @@ import ConfigureGenerator from '../components/ConfigureGenerator'
 
 export default {
   name: 'GeneratorShow',
-  props: ['id'],
+  props: {
+    id: {
+      required: true
+    }
+  },
   components: {
     LoadingBuild,
     BuildSteps,
@@ -50,8 +54,10 @@ export default {
       title: this.model.label
     }
   },
-  created () {
-    // this.$store.dispatch('editor/reset')
+  async created () {
+    // TODO - this is only needed IF the generator has NOT been fetched yet
+    // Should display a loading animation as needed
+    await this.$store.dispatch('generator/fetchCollection')
     this.selectModel(this.id)
     this.$store.dispatch('build/selectBuild', this.id)
     this.$store.dispatch('build/steps/reset')
