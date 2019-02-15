@@ -59,15 +59,7 @@
           <i class="fas fa-fw fa-pencil-alt"></i>
         </b-button>
 
-        <b-button
-          size="sm"
-          title="Remove"
-          variant="outline-danger"
-          v-b-tooltip.hover.top
-          @click="destroyModel()"
-        >
-          <i class="fa fa-fw fa-trash"></i>
-        </b-button>
+        <DestroyButton scope="attribute" :modelId="item.id" />
 
       </div>
 
@@ -84,6 +76,7 @@
 <script>
 import { mapMutations, mapActions } from 'vuex'
 import AttributeListItemLabel from './AttributeListItemLabel'
+import DestroyButton from '../DestroyButton'
 
 export default {
   name: 'AttributeListItem',
@@ -93,7 +86,8 @@ export default {
     }
   },
   components: {
-    AttributeListItemLabel
+    AttributeListItemLabel,
+    DestroyButton
   },
   methods: {
     ...mapMutations({

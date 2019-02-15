@@ -65,6 +65,9 @@
       <AttributeNewModal />
       <AttributeEditModal />
 
+      <DestroyModal scope="relation" label="Relation" />
+      <DestroyModal scope="attribute" label="Attribute" />
+
       <hr>
 
       <SortableList
@@ -89,6 +92,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import SortableList from '../SortableList'
+import DestroyModal from '../DestroyModal'
 import SchemaEditButton from './SchemaEditButton'
 import SchemaDestroyButton from './SchemaDestroyButton'
 import SchemaDestroyModal from './SchemaDestroyModal'
@@ -103,6 +107,7 @@ export default {
   components: {
     SchemaGraph,
     SortableList,
+    DestroyModal,
     SchemaEditButton,
     SchemaDestroyButton,
     SchemaDestroyModal,
