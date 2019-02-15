@@ -56,7 +56,7 @@ export default function ({ NEW_MODEL }) {
       create ({ state, commit }) {
         // Sets up createdModel
         const createdModel = Object.assign({}, state.newModel);
-        createdModel.id = Math.random()
+        createdModel.id = Math.random().toString()
 
         // Resets state.newModel()
         commit('resetNewModel')
