@@ -100,7 +100,6 @@
 </template>
 
 <script>
-import marked from 'marked'
 import { mapGetters, mapActions } from 'vuex'
 import buildConfiguration from '@codotype/util/lib/buildConfiguration'
 import OptionFormItem from '../../option/components/OptionFormItem'
@@ -157,9 +156,6 @@ export default {
       // const generator = this.$store.getters['generator/collection'].find(g => g.id === this.id)
       const generator = this.$store.getters['generator/getModel'](this.id)
       return buildConfiguration({ schemas, generator })
-    },
-    compiledMarkdown () {
-      return marked(this.model.readme, { sanitize: true })
     },
     ...mapGetters({
       model: 'generator/selectedModel',
