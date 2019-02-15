@@ -7,7 +7,7 @@
     ok-variant='danger'
     cancel-title='Cancel'
     cancel-variant='light'
-    @ok="destroySchema(selectedModel)"
+    @ok="destroyModel(selectedModel)"
     @hide="showModal(false)"
   >
 
@@ -29,7 +29,7 @@ export default {
   }),
   methods: {
     ...mapActions({
-      destroySchema: 'editor/schema/destroyModel'
+      destroyModel: 'editor/schema/destroyModel'
     }),
     ...mapMutations({
       showModal: 'editor/schema/modals/destroy/showing',

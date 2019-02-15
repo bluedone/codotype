@@ -1,6 +1,7 @@
 import { sanitizeLabel } from '@codotype/util/lib/sanitizeLabel'
 import { inflateMeta } from '@codotype/util/lib/inflateMeta'
 import modalModule from './modules/modalModule'
+import selectModelModule from './modules/selectModelModule'
 import collectionModule from '../../../store/lib/collectionModule'
 import { DEFAULT_ATTRIBUTE } from '@codotype/types/lib/default_attribute'
 
@@ -24,6 +25,7 @@ export default {
   },
   modules: {
     collection: Object.assign({}, collectionModule({ NEW_MODEL: DEFAULT_ATTRIBUTE })),
+    selectedModel: Object.assign({}, selectModelModule),
     modals: {
       namespaced: true,
       modules: {
