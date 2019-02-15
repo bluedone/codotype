@@ -1,7 +1,7 @@
 <!-- TODO - this should really be an entire separate Editor component -->
 <!-- Should not even be SCOPED to the generator module -->
 <template>
-  <b-tabs lazy class='w-100' v-model="currentStep">
+  <b-tabs lazy class='w-100'>
     <!-- Generator Option Groups -->
     <b-tab
       lazy
@@ -14,7 +14,7 @@
 
       <!-- TODO - ABSTRACT INTO SEPARATE COMPONENT -->
       <!-- TODO - ABSTRACT INTO SEPARATE COMPONENT -->
-      <template v-if="group.type === 'OPTION_GROUP_TYPE_GLOBAL_OPTION'">
+      <template v-if="group.type === OPTION_GROUP_TYPE_GLOBAL_OPTION">
         <b-row class='justify-content-center'>
           <b-col lg=9>
             <EditorHeader
@@ -29,7 +29,7 @@
 
       <!-- OPTION_GROUP_TYPE_GLOBAL_BOOLEAN_GROUP -->
       <!-- TODO - ABSTRACT INTO SEPARATE COMPONENT -->
-      <template v-else-if="group.type === 'OPTION_GROUP_TYPE_GLOBAL_BOOLEAN_GROUP'">
+      <template v-else-if="group.type === OPTION_GROUP_TYPE_GLOBAL_BOOLEAN_GROUP">
 
         <b-row class='justify-content-center'>
           <b-col lg=9 class='border-right'>
@@ -78,19 +78,19 @@
       <!-- </div> -->
 
       <ModelAddonEditor
-        v-if="group.type === 'OPTION_GROUP_TYPE_MODEL_ADDON'"
+        v-if="group.type === OPTION_GROUP_TYPE_MODEL_ADDON"
         :group="group"
         :schemas="schemas">
       </ModelAddonEditor>
 
       <ModelOptionEditor
-        v-if="group.type === 'OPTION_GROUP_TYPE_MODEL_OPTION'"
+        v-if="group.type === OPTION_GROUP_TYPE_MODEL_OPTION"
         :group="group"
         :schemas="schemas">
       </ModelOptionEditor>
 
       <GlobalOptionEditor
-        v-if="group.type === 'OPTION_GROUP_TYPE_GLOBAL_OPTION'"
+        v-if="group.type === OPTION_GROUP_TYPE_GLOBAL_OPTION"
         :group="group">
       </GlobalOptionEditor>
 
@@ -106,15 +106,28 @@ import OptionFormItem from '../../option/components/OptionFormItem'
 import GlobalOptionEditor from './GlobalOptionEditor'
 import ModelOptionEditor from './ModelOptionEditor'
 import ModelAddonEditor from './ModelAddonEditor'
+import {
+  OPTION_GROUP_TYPE_GLOBAL_OPTION,
+  OPTION_GROUP_TYPE_GLOBAL_ADDON,
+  OPTION_GROUP_TYPE_MODEL_OPTION,
+  OPTION_GROUP_TYPE_MODEL_ADDON,
+  OPTION_GROUP_TYPE_GLOBAL_BOOLEAN_GROUP
+} from '@codotype/types/lib/option-group-types'
 
 export default {
   name: 'GeneratorShow',
-  props: ['id'],
+  props: {
+    id: {
+      required: true
+    }
+  },
   data () {
     return {
-      currentStep: 0,
-      newAddon: {}, // TODO - this should be produced somewhere & maintained in state
-      selectedSchemaId: this.$store.getters['editor/schema/collection/items'][0].identifier // TODO - retire this
+      OPTION_GROUP_TYPE_GLOBAL_OPTION,
+      OPTION_GROUP_TYPE_GLOBAL_ADDON,
+      OPTION_GROUP_TYPE_MODEL_OPTION,
+      OPTION_GROUP_TYPE_MODEL_ADDON,
+      OPTION_GROUP_TYPE_GLOBAL_BOOLEAN_GROUP
     }
   },
   components: {
@@ -124,47 +137,20 @@ export default {
     OptionFormItem
   },
   created () {
+    console.log('CREATED!')
+    console.log(this.id)
     this.selectModel(this.id)
   },
   methods: {
     ...mapActions({
       selectModel: 'generator/selectModel'
-    }),
-    ...mapGetters({
-      getModel: 'generator/getModel'
-    }),
-    decrementStep () {
-      this.currentStep = Math.max(this.currentStep - 1, 0)
-    },
-    incrementStep () {
-      this.currentStep = Math.min(this.currentStep + 1, 2 + this.model.option_groups.length)
-    },
-    createAddonInstance (group) {
-      this.newAddon.id = Math.random().toString()
-      this.configurationObject[group.identifier_plural][this.selectedSchemaId].push(this.newAddon)
-      this.newAddon = {}
-    },
-    destroyInstance (group, instance) {
-      const filtered = this.configurationObject[group.identifier_plural][this.selectedSchemaId].filter(e => e.id !== instance.id)
-      this.configurationObject[group.identifier_plural][this.selectedSchemaId] = filtered
-    }
+    })
   },
   computed: {
-    configurationObject () {
-      // Pulls the schemas to define the build configuration
-      const schemas = this.schemas
-      // const generator = this.$store.getters['generator/collection'].find(g => g.id === this.id)
-      const generator = this.$store.getters['generator/getModel'](this.id)
-      return buildConfiguration({ schemas, generator })
-    },
     ...mapGetters({
       model: 'generator/selectedModel',
-      modelGetter: 'generator/getModel',
       schemas: 'editor/schema/collection/items'
-    }),
-    selectedSchema () {
-      return this.schemas.find(s => s.identifier === this.selectedSchemaId)
-    }
+    })
   }
 }
 </script>
