@@ -4,17 +4,17 @@
       <strong>Codotype</strong>
     </b-navbar-brand>
 
-    <a @click="$store.commit('editor/about/showing', false)" class="navbar-text">
+    <router-link :to="'/generators/' + model.id + '/build'" class="navbar-text">
       <!-- <img src="/docs/4.2/assets/brand/bootstrap-solid.svg" width="30" height="30" alt=""> -->
       <img class='generator-icon' style="width: 1rem;" :src="model.icon"/>
       {{ model.label }}
-    </a>
+    </router-link>
 
     <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
     <b-collapse is-nav id="nav_collapse">
 
       <b-navbar-nav>
-        <b-nav-item class='ml-3' @click="$store.commit('editor/about/showing', true)">About</b-nav-item>
+        <b-nav-item class='ml-3' :to="'/generators/' + model.id">About</b-nav-item>
       </b-navbar-nav>
 
       <!-- TODO - this should be a separate component -->

@@ -1,5 +1,4 @@
 const {
-  DATATYPE_TEXT,
   DATATYPE_STRING,
   DATATYPE_STRING_SELECT,
   DATATYPE_STRING_ARRAY,
@@ -17,7 +16,6 @@ const {
 
 // Defines datatype metadata
 const DATATYPE_META = {}
-DATATYPE_META[DATATYPE_TEXT] = { value: DATATYPE_TEXT, text: 'TEXT', icon: 'fa fa-quote-left' },
 DATATYPE_META[DATATYPE_NUMBER] = { value: DATATYPE_NUMBER, text: 'Number', icon: 'fa fa-hashtag' },
 DATATYPE_META[DATATYPE_INTEGER] = { value: DATATYPE_INTEGER, text: 'Integer', icon: 'fa fa-hashtag' },
 DATATYPE_META[DATATYPE_FLOAT] = { value: DATATYPE_FLOAT, text: 'Float', icon: 'fa fa-hashtag' },

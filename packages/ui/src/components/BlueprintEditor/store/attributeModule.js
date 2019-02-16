@@ -29,9 +29,9 @@ export default {
     modals: {
       namespaced: true,
       modules: {
-        new: Object.assign({}, modalModule),
-        edit: Object.assign({}, modalModule),
-        destroy: Object.assign({}, modalModule)
+        new: modalModule(),
+        edit: modalModule(),
+        destroy: modalModule()
       }
     }
   }

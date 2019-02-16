@@ -94,15 +94,7 @@
           <i class="fas fa-fw fa-pencil-alt"></i>
         </b-button>
 
-        <b-button
-          size="sm"
-          variant="outline-danger"
-          v-b-tooltip.hover.top
-          title="Remove"
-          @click="destroyModel()"
-        >
-          <i class="fa fa-fw fa-trash"></i>
-        </b-button>
+        <DestroyButton scope="relation" :modelId="item.id" />
 
       </div>
 
@@ -114,12 +106,16 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import { inflateRelation } from '@codotype/util/lib/inflate'
+import DestroyButton from '../DestroyButton'
 
 export default {
   props: {
     item: {
       required: true
     }
+  },
+  components: {
+    DestroyButton
   },
   methods: {
     ...mapActions({

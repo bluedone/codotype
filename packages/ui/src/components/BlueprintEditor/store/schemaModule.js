@@ -83,8 +83,8 @@ export default {
     modals: {
       namespaced: true,
       modules: {
-        form: Object.assign({}, modalModule),
-        destroy: Object.assign({}, modalModule)
+        form: modalModule(),
+        destroy: modalModule()
       }
     }
   }

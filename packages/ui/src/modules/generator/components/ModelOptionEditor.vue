@@ -26,7 +26,7 @@
         <OptionFormItem
           :group="group"
           :schema="selectedSchema"
-          :model="attr"
+          :attribute="attr"
         />
       </div>
 
@@ -37,7 +37,6 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import OptionFormItem from '../../option/components/OptionFormItem'
-import OptionTemplateRenderer from '../../option/components/OptionTemplateRenderer'
 import SchemaSelector from './SchemaSelector'
 
 export default {
@@ -48,7 +47,6 @@ export default {
   },
   components: {
     SchemaSelector,
-    OptionTemplateRenderer,
     OptionFormItem
   },
   computed: mapGetters({

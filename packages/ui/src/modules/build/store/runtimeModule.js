@@ -12,6 +12,10 @@ export default {
   },
   actions: {
     generate: ({ rootGetters, state, commit }) => {
+      // TODO - this should just be responsible for interfacing with the runtime API
+      // All data gathering & validation should take place OUTSIDE the runtime module
+      console.log('GENERATE IN RUNTIME MODULE')
+
       // Pulls requisite data from state
       // const { stages } = state.newModel
       // const blueprint = rootGetters['blueprint/selectedModel']

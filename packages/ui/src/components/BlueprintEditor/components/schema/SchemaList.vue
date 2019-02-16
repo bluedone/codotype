@@ -3,7 +3,6 @@
     <div class="card-header">
       <strong>Models</strong>
     </div>
-
     <ul class='list-group list-group-flush'>
       <SchemaListItem
         v-for="item in collection"

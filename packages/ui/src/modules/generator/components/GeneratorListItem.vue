@@ -4,7 +4,7 @@
       <div class="col-lg-12 d-flex justify-content-between align-items-center">
         <p class="lead mb-0 w-100 d-flex justify-content-between align-items-center">
 
-          <router-link :to="'/generators/' + model.id">
+          <router-link :to="'/generators/' + model.id + '/build'">
             <img class='generator-icon' :src="model.icon"/>
             {{ model.label }}
           </router-link>

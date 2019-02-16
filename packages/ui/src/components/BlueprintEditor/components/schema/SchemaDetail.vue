@@ -65,6 +65,9 @@
       <AttributeNewModal />
       <AttributeEditModal />
 
+      <DestroyModal scope="relation" label="Relation" />
+      <DestroyModal scope="attribute" label="Attribute" />
+
       <hr>
 
       <SortableList
@@ -74,12 +77,8 @@
       />
 
       <RelationNewModal />
+      <!-- TODO - add RelationEdit modal here -->
 
-    </b-col>
-
-    <b-col lg=12>
-      <hr>
-      <SchemaGraph />
     </b-col>
 
   </b-row>
@@ -89,20 +88,19 @@
 <script>
 import { mapGetters } from 'vuex'
 import SortableList from '../SortableList'
+import DestroyModal from '../DestroyModal'
 import SchemaEditButton from './SchemaEditButton'
 import SchemaDestroyButton from './SchemaDestroyButton'
 import SchemaDestroyModal from './SchemaDestroyModal'
 import AttributeNewModal from '../attribute/AttributeNewModal'
 import AttributeEditModal from '../attribute/AttributeEditModal'
 import RelationNewModal from '../relation/RelationNewModal'
-// import SchemaGraph from './SchemaGraph'
-import SchemaGraph from './SchemaGraph'
 
 export default {
   name: 'SchemaDetail',
   components: {
-    SchemaGraph,
     SortableList,
+    DestroyModal,
     SchemaEditButton,
     SchemaDestroyButton,
     SchemaDestroyModal,

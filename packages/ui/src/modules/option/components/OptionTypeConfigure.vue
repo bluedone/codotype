@@ -14,7 +14,7 @@
         help="Define options values for this number dropdown"
         v-model="model.datatypeOptions.dropdownOptions"
         :type="model.type"
-        v-if="model.type === 'NUMBER_SELECT' || model.type === 'TEXT_SELECT'"
+        v-if="model.type === 'NUMBER_SELECT' || model.type === 'STRING_SELECT'"
       />
 
       <!-- MULTIPLE -->
@@ -24,7 +24,7 @@
         v-model="model.datatypeOptions.multiple"
         help="Whether or not a user can select multiple options"
         type="BOOL"
-        v-if="model.type === 'NUMBER_SELECT' || model.type === 'TEXT_SELECT'"
+        v-if="model.type === 'NUMBER_SELECT' || model.type === 'STRING_SELECT'"
       />
 
       <!-- TODO - add form elements for the rest of these options -->

@@ -1,7 +1,6 @@
-// import cloneDeep from 'lodash/cloneDeep'
-// import buildConfiguration from '@codotype/util/lib/buildConfiguration'
 import collectionModule from '../../../store/lib/collectionModule'
 import objectModule from './objectModule'
+import buildDefault from '@codotype/util/lib/buildDefault'
 
 // const setValue = (state, { group, attr, val }) => { state.config[group][attr] = val }
 
@@ -11,30 +10,62 @@ export default {
   state: {
     schemas: [],
     option_groups: [],
+    configuration: {}
   },
   // This is used to edit the CURRENT addon, is it needed?
   modules: {
     addon: Object.assign({}, collectionModule({ NEW_MODEL: {} })),
-    data: { namespaced: true, modules: {} }
+    // data: { namespaced: true, modules: {} }
   },
   getters: {
     // TODO - this will pull out ONLY what's needed from the modules
     // NOTE - this will NEED to reference option_groups and schemas
+    // toObj: state => {
+    //   return state.data
+    // }
+    // valueOf: state => attr_id => {
+    //   return state[attr_id]
+    // },
     toObj: state => {
-      return state.data
+      return state.configuration
+    },
+    optionValue: state => ({ group, attribute }) => {
+      return state.configuration[group.identifier][attribute.identifier]
+    },
+    modelOptionValue: state => ({ group, schema, attribute }) => {
+      console.log(group)
+      console.log(schema)
+      console.log(attribute)
+      console.log(state.configuration)
+      if (!group || !schema || !attribute) return
+
+      if (!state.configuration[group.identifier][schema.identifier]) {
+        state.configuration[group.identifier][schema.identifier] = {}
+      }
+      return state.configuration[group.identifier][schema.identifier][attribute.identifier]
     }
   },
   mutations: {
     schemas (state, schemas) { state.schemas = schemas },
-    option_groups (state, option_groups) { state.option_groups = option_groups }
+    option_groups (state, option_groups) { state.option_groups = option_groups },
+    configuration (state, configuration) { state.configuration = configuration },
+    optionValue (state, { group, attribute, value }) {
+      state.configuration[group.identifier][attribute.identifier] = value
+    },
+    modelOptionValue (state, { group, schema, attribute, value }) {
+      console.log(group)
+      console.log(schema)
+      console.log(attribute)
+      console.log(value)
+      state.configuration[group.identifier][schema.identifier][attribute.identifier] = value
+    }
   },
   actions: {
     // LOAD a build configuration into the editor
-    // The editor is NOT responsible for creating the configuration object...?
-    load ({ commit, dispatch }, { generator_option_groups, schemas }) {
+    load ({ commit, dispatch }, { generator_option_groups, schemas, configuration }) {
+      commit('configuration', configuration)
       commit('schemas', schemas)
       commit('option_groups', generator_option_groups)
-      dispatch('registerAllOptionGroups')
     },
 
     // CLEARS the editor module state
@@ -42,100 +73,13 @@ export default {
     clear ({}) {
       console.log('CLEAR EDITOR MODULE HERE')
     },
-
-    registerAllOptionGroups ({ state, dispatch }) {
-      state.option_groups.forEach((og) => dispatch('registerOptionGroup', { option_group: og }))
-    },
-
-    // TODO - check if option group has already been defined here
-    registerOptionGroup ({ state }, { option_group }) {
-
-      let scope
-      let newModule
-
-      // TODO - constantize GLOBAL_OPTION type
-      if (option_group.type === 'OPTION_GROUP_TYPE_GLOBAL_OPTION') {
-
-        // Defines the default state
-        // TODO - this must be moved into @codotype/util
-        const defaultState = {}
-        option_group.attributes.forEach((attr) => {
-          defaultState[attr.identifier] = attr.default_value
-        })
-
-        // TODO - this should accept the attributes of the option group, yeah?
-        // All validations can be managed in there?
-        newModule = objectModule({ defaultState: defaultState })
-
-        // Defines the scope of the module
-        scope = ['build', 'editor', 'data', option_group.identifier]
-
-      // TODO - constantize global option here
-      } else if (option_group.type === 'OPTION_GROUP_TYPE_MODEL_OPTION') {
-        // New empty module to wrap an ObjectModule for each schema
-        newModule = { modules: {}, namespaced: true }
-
-        // Defines the default state
-        // TODO - this must be moved into @codotype/util
-        const defaultState = {}
-        option_group.attributes.forEach((attr) => {
-          defaultState[attr.identifier] = attr.default_value
-        })
-
-        // Defines schema-level modules
-        state.schemas.forEach((s) => {
-          newModule.modules[s.identifier] = objectModule({ defaultState: defaultState })
-        })
-
-        // Defines the scope of the module
-        console.log('ADDED ', option_group.identifier)
-        scope = ['build', 'editor', 'data', option_group.identifier]
-
-      // HANDLES OPTION_GROUP_TYPE_GLOBAL_ADDON
-      } else if (option_group.type === 'OPTION_GROUP_TYPE_GLOBAL_ADDON') {
-        console.log('HANDLE ADDON HERE')
-        // TODO - pass in newModel from @codotype/ui
-        scope = ['build', 'editor', 'data', option_group.identifier_plural]
-        newModule = collectionModule({ NEW_MODEL: {} })
-
-      // HANDLES OPTION_GROUP_TYPE_MODEL_ADDON
-      } else if (option_group.type === 'OPTION_GROUP_TYPE_MODEL_ADDON') {
-        // New empty module to wrap an ObjectModule for each schema
-        newModule = { state: {}, namespaced: true }
-
-        // Defines the default state
-        // TODO - this must be moved into @codotype/util
-        const defaultState = {}
-        option_group.attributes.forEach((attr) => {
-          defaultState[attr.identifier] = attr.default_value
-        })
-
-        // Defines schema-level modules
-        // NOTE - a full-blown collectionModule might not be ideal here
-        // Would be best to issue a stripped-down module, and be able to select
-        state.schemas.forEach((s) => {
-          newModule.state[s.identifier] = []
-          console.log('Added ADDON ARRAY for ', s.identifier)
-        })
-
-        // Defines the scope of the module
-        console.log(option_group)
-        scope = ['build', 'editor', 'data', option_group.identifier_plural]
-      }
-
-      try {
-        this.unregisterModule(scope.join('/'))
-      } catch (e) {
-        // console.log('NO MODULE ERR', e)
-      }
-      this.registerModule(scope, newModule)
-
-      // QUESTION - do we want { preserveState: true } ?
-      // newModule = Object.assign({}, collectionModule({ NEW_MODEL: {} }))
-
-      // Registers the new Vuex module
-      // QUESTION - do we need to de-register it as well?
-      // this.registerModule(['build', 'editor', scope], newModule)
+    selectAddon ({ state, commit, dispatch }, { option_group_id }) {
+      const optionGroup = state.option_groups.find(og => og.id === option_group_id)
+      // console.log('GOT OPTION GROUP')
+      // console.log(optionGroup)
+      // console.log(optionGroup.attributes)
+      // console.log(buildDefault({ attributes: optionGroup.attributes }))
+      commit('addon/defaultNewModel', buildDefault({ attributes: optionGroup.attributes }))
     }
   }
 }

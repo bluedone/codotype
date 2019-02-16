@@ -13,8 +13,13 @@ export default function ({ NEW_MODEL }) {
       items (state, items) {
         state.items = items
       },
-      newModelAttr (state, {attr, value}) {
-        state.newModel[attr] = value
+      newModelAttr (state, { attribute, value }) {
+        state.newModel[attribute.identifier] = value
+      },
+      defaultNewModel (state, overriddenDefault) {
+        state.defaultNewModel = Object.assign({}, overriddenDefault)
+        state.newModel = Object.assign({}, overriddenDefault)
+        state.editModel = Object.assign({}, overriddenDefault)
       },
       resetNewModel (state) {
         state.newModel = state.defaultNewModel
@@ -45,8 +50,8 @@ export default function ({ NEW_MODEL }) {
       newModel (state) {
         return state.newModel
       },
-      newModelAttr: state => attr => {
-        return state.newModel[attr]
+      newModelAttr: state => ({ attribute }) => {
+        return state.newModel[attribute.identifier]
       },
       editModel (state) {
         return Object.assign({}, state.editModel)
@@ -56,7 +61,7 @@ export default function ({ NEW_MODEL }) {
       create ({ state, commit }) {
         // Sets up createdModel
         const createdModel = Object.assign({}, state.newModel);
-        createdModel.id = Math.random()
+        createdModel.id = Math.random().toString()
 
         // Resets state.newModel()
         commit('resetNewModel')

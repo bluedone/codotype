@@ -1,3 +1,5 @@
+const { DATATYPE_STRING } = require('./datatypes')
+
 const DEFAULT_USER_EMAIL_ATTRIBUTE = {
   id: 'USER_EMAIL_ATTRIBUTE', // TODO - this should be given a random ID
   order: 0,
@@ -6,7 +8,7 @@ const DEFAULT_USER_EMAIL_ATTRIBUTE = {
   help: 'The E-Mail address associated with this User',
   required: true,
   unique: true,
-  datatype: 'TEXT', // TODO - import DATATYPE_STRING from @codotype/types
+  datatype: DATATYPE_STRING,
   datatypeOptions: {},
   locked: true
 }
