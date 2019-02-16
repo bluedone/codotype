@@ -1,5 +1,6 @@
 import collectionModule from '../../../store/lib/collectionModule'
 import objectModule from './objectModule'
+import buildDefault from '@codotype/util/lib/buildDefault'
 
 // const setValue = (state, { group, attr, val }) => { state.config[group][attr] = val }
 
@@ -13,7 +14,7 @@ export default {
   },
   // This is used to edit the CURRENT addon, is it needed?
   modules: {
-    // addon: Object.assign({}, collectionModule({ NEW_MODEL: {} })),
+    addon: Object.assign({}, collectionModule({ NEW_MODEL: {} })),
     // data: { namespaced: true, modules: {} }
   },
   getters: {
@@ -71,6 +72,14 @@ export default {
     // De-registers all dynamic modules
     clear ({}) {
       console.log('CLEAR EDITOR MODULE HERE')
+    },
+    selectAddon ({ state, commit, dispatch }, { option_group_id }) {
+      const optionGroup = state.option_groups.find(og => og.id === option_group_id)
+      // console.log('GOT OPTION GROUP')
+      // console.log(optionGroup)
+      // console.log(optionGroup.attributes)
+      // console.log(buildDefault({ attributes: optionGroup.attributes }))
+      commit('addon/defaultNewModel', buildDefault({ attributes: optionGroup.attributes }))
     }
   }
 }

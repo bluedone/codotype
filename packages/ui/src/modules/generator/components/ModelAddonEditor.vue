@@ -116,6 +116,10 @@ export default {
   props: {
     group: { required: true }
   },
+  created () {
+    console.log('CREATED MODEL ADDON EDITOR')
+    this.$store.dispatch('build/editor/selectAddon', { option_group_id: this.group.id })
+  },
   components: {
     SchemaSelector,
     OptionTemplateRenderer,
@@ -127,9 +131,6 @@ export default {
     collection: 'build/editor/addon/items'
   }),
   methods: {
-    ...mapMutations({
-      setNewAddonAttr: 'build/editor/addon/newModelAttr'
-    }),
     ...mapActions({
       saveAddon: 'build/editor/addon/create'
     }),

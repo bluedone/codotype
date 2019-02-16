@@ -37,11 +37,11 @@
         <hr>
       </template>
 
-<!--       <ModelAddonEditor
+      <ModelAddonEditor
         v-if="group.type === OPTION_GROUP_TYPE_MODEL_ADDON"
         :group="group"
         :schemas="schemas">
-      </ModelAddonEditor> -->
+      </ModelAddonEditor>
 
       <ModelOptionEditor
         v-if="group.type === OPTION_GROUP_TYPE_MODEL_OPTION"

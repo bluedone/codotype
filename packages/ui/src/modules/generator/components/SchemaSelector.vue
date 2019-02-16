@@ -6,7 +6,7 @@
     <ul class="list-group list-group-flush">
       <li
         v-for="schema in schemas"
-        :class='selectedSchema.id === schema.id ? "list-group-item active" : "list-group-item" '
+        :class='selectedSchema.id === schema.id ? "list-group-item list-group-item-primary" : "list-group-item" '
         @click="selectSchema(schema)"
       >
         {{ schema.label }}
