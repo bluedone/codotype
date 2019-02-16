@@ -1,7 +1,6 @@
 // Blueprint Containers
 import BlueprintList from './pages/list'
-import BlueprintShow from './pages/show-new'
-import BlueprintBuild from '@/modules/build/pages/new'
+import BlueprintShow from './pages/show'
 
 export default [
   {
@@ -13,12 +12,6 @@ export default [
     path: '/blueprints/:blueprint_id',
     name: 'BlueprintShow',
     component: BlueprintShow,
-    props: true
-  },
-  {
-    path: '/blueprints/:blueprint_id/generate',
-    name: 'BlueprintGenerate',
-    component: BlueprintBuild,
     props: true
   }
 ]
