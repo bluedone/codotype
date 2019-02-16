@@ -15,7 +15,7 @@
       >
         <OptionFormItem
           :group="group"
-          :model="attr"
+          :attribute="attr"
         />
       </div>
 

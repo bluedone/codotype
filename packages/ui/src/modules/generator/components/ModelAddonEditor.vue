@@ -35,9 +35,9 @@
           <div class="row">
             <div class="col-lg-6" v-for="attr in group.attributes" :key="attr.identifier">
               <OptionFormItem
-                :model="attr"
                 :group="group"
                 :schema="selectedSchema"
+                :attribute="attr"
               />
             </div>
           </div>

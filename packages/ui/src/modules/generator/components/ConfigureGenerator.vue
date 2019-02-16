@@ -28,44 +28,6 @@
         </b-row>
       </template>
 
-      <!-- TODO - ABSTRACT INTO SEPARATE COMPONENT -->
-      <!-- TODO - ABSTRACT INTO SEPARATE COMPONENT -->
-      <!-- TODO - ABSTRACT INTO SEPARATE COMPONENT -->
-      <template v-else-if="group.type === OPTION_GROUP_TYPE_GLOBAL_BOOLEAN_GROUP">
-
-        <b-row class='justify-content-center'>
-          <b-col lg=9 class='border-right'>
-            <EditorHeader
-              :brs="true"
-              :title="group.label"
-              :help="group.description"
-              url="https://codotype.github.io"
-            />
-            <hr>
-          </b-col>
-          <b-col lg=9>
-            <div class="mt-2">
-              <ul class="list-group">
-                <li
-                  class="list-group-item list-group-item-action"
-                  v-for="attr in group.attributes"
-                  :key="attr.identifier">
-                  <OptionFormItem
-                    :model="attr"
-                    :group="group"
-                  />
-                </li>
-              </ul class="list-group">
-            </div>
-
-            <div class="card card-body text-center bg-transparent border-warning text-warning" v-if="!group.attributes[0]">
-              <p class="lead mb-0">No options exposed by this generator</p>
-            </div>
-          </b-col>
-        </b-row>
-
-      </template>
-
       <template v-else>
         <EditorHeader
           :title="group.label_plural || group.label"
@@ -75,11 +37,11 @@
         <hr>
       </template>
 
-      <ModelAddonEditor
+<!--       <ModelAddonEditor
         v-if="group.type === OPTION_GROUP_TYPE_MODEL_ADDON"
         :group="group"
         :schemas="schemas">
-      </ModelAddonEditor>
+      </ModelAddonEditor> -->
 
       <ModelOptionEditor
         v-if="group.type === OPTION_GROUP_TYPE_MODEL_OPTION"
@@ -100,7 +62,6 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import buildConfiguration from '@codotype/util/lib/buildConfiguration'
-import OptionFormItem from '../../option/components/OptionFormItem'
 import GlobalOptionEditor from './GlobalOptionEditor'
 import ModelOptionEditor from './ModelOptionEditor'
 import ModelAddonEditor from './ModelAddonEditor'
@@ -131,8 +92,7 @@ export default {
   components: {
     GlobalOptionEditor,
     ModelOptionEditor,
-    ModelAddonEditor,
-    OptionFormItem
+    ModelAddonEditor
   },
   created () {
     this.selectModel(this.id)
