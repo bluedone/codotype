@@ -1,30 +1,32 @@
 const cloneDeep = require('lodash/cloneDeep')
 
+// Defines the default state
+// TODO - this must be moved into @codotype/util
+const buildDefault = ({ attributes }) => {
+  const defaultState = {}
+  attributes.forEach((attr) => {
+    defaultState[attr.identifier] = attr.default_value
+  })
+  console.log(defaultState)
+  return defaultState
+}
+
+// // Validates the state
+// // TODO - this must be moved into @codotype/util
+// const validateAttribute = ({ attribute, value }) => {
+//   attribute.forEach((attr) => {
+//     defaultState[attr.identifier] = attr.default_value
+//   })
+//   return true
+// }
+
 function buildConfiguration ({ schemas, generator }) {
   const configuration = {}
-
-  // Defines global options
-  // generator.global_options.forEach((opt) => {
-  //   configuration.options[opt.identifier] = opt.default_value
-  // })
-
-  // Defines model options
-  // TODO - deprecate?
-  // const defaultModelOptions = {}
-  // generator.model_options.forEach((opt) => {
-  //   defaultModelOptions[opt.identifier] = opt.default_value
-  // })
-
-  // Creates an instance of defaultModelOptions in
-  // configuration.model_options for each model in the blueprint
-  // schemas.forEach((model) => {
-  //   configuration.model_options[model._id] = cloneDeep(defaultModelOptions)
-  // })
 
   // // // //
   // OPTION_GROUPS Implementation
   // TODO - this needs to handle ALL kinds of defaults & requirements
-
+  // TODO - handle default instances for *_ADDON types
   generator.option_groups.forEach((group) => {
     // console.log(group)
 
@@ -43,9 +45,7 @@ function buildConfiguration ({ schemas, generator }) {
       // Iterates over each blueprint schema and creates an array
       // to store the addon instances associated with that schema
       schemas.forEach((schema) => {
-        const schemaOptions = {}
-        group.attributes.forEach(attr => schemaOptions[attr.identifier] = attr.default_value)
-        instanceData[schema.identifier] = schemaOptions
+        instanceData[schema.identifier] = buildDefault({ attributes: group.attributes })
       })
 
       // Assigns the instanceData object to the root configuration object
@@ -53,15 +53,12 @@ function buildConfiguration ({ schemas, generator }) {
     } else if (group.type === 'OPTION_GROUP_TYPE_GLOBAL_OPTION') {
       // Iterates over each attribute in the GLOBAL_OPTION type,
       // sets instanceData to the default value
-      group.attributes.forEach(attr => instanceData[attr.identifier] = attr.default_value)
-      configuration[group.identifier] = instanceData
-    } else if (group.type === 'OPTION_GROUP_TYPE_GLOBAL_BOOLEAN_GROUP') {
+      configuration[group.identifier] = buildDefault({ attributes: group.attributes })
+    } else if (group.type === 'OPTION_GROUP_TYPE_GLOBAL_ADDON') {
       // Iterates over each attribute in the GLOBAL_OPTION type,
       // sets instanceData to the default value
-      group.attributes.forEach(attr => instanceData[attr.identifier] = attr.default_value)
-      configuration[group.identifier] = instanceData
+      configuration[group.identifier_plural] = []
     }
-    // TODO - define and handle other OPTION_GROUP_TYPE_* definitions
   })
 
   // // // //
