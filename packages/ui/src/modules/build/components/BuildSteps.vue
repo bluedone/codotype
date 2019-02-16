@@ -5,6 +5,7 @@
       <template
         v-for="step, index in steps"
       >
+        <!-- TODO - BREAK OUT INTO BuildStepChild component -->
         <div
           :key="step.id"
           class="step-indicator d-flex flex-column justify-content-center align-items-center"
@@ -46,10 +47,9 @@
 
     <!-- <b-col lg="12" class='h-100 align-items-center d-flex' style="min-height: 20rem;"> -->
     <b-col lg="12" :class='colClassName' style="padding-bottom: 5rem;">
-      <slot name="step-1" v-if="currentStep === 0" />
-      <slot name="step-2" v-if="currentStep === 1" />
-      <slot name="step-3" v-if="currentStep === 2" />
-      <slot name="step-4" v-if="currentStep === 3" />
+      <slot name="step-1" v-if="selectedStep.id === 'getting_started'" />
+      <slot name="step-2" v-if="selectedStep.id === 'blueprint_step'" />
+      <slot name="step-3" v-if="selectedStep.id === 'configure_generator'" />
     </b-col>
 
   </b-row>
@@ -66,7 +66,8 @@ export default {
   computed: {
     ...mapGetters({
       steps: 'build/steps/collection/items',
-      currentStep: 'build/steps/current'
+      currentStep: 'build/steps/current',
+      selectedStep: 'build/steps/selectedStep'
     }),
     colClassName () {
       let css = 'h-100 align-items-center d-flex'

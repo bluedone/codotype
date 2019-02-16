@@ -27,7 +27,7 @@
         variant="outline-primary"
         size="lg"
         @click="incrementStep()"
-        v-if="currentStep !== 2 && steps.length > 2"
+        v-if="currentStep !== 2 && currentStep !== steps.length - 1"
       >
         Next
         <i class="ml-1 fa fa-chevron-right"></i>

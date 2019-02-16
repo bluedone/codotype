@@ -15,10 +15,6 @@
         <template slot="step-3">
           <ConfigureGenerator :id="id" />
         </template>
-
-        <template slot="step-4">
-          <LoadingBuild />
-        </template>
       </BuildSteps>
 
     </b-col>
@@ -27,7 +23,6 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import LoadingBuild from '../../build/components/LoadingBuild'
 import BuildSteps from '../../build/components/BuildSteps'
 import ProjectForm from '../../../components/BlueprintEditor/components/project/ProjectForm'
 import BlueprintEditor from '../../../components/BlueprintEditor'
@@ -41,11 +36,10 @@ export default {
     }
   },
   components: {
-    LoadingBuild,
     BuildSteps,
     ProjectForm,
-    ConfigureGenerator,
-    BlueprintEditor
+    BlueprintEditor,
+    ConfigureGenerator
   },
   metaInfo () {
     return {

@@ -29,6 +29,9 @@ export default {
   getters: {
     current (state) {
       return state.current
+    },
+    selectedStep (state) {
+      return state.collection.items[state.current]
     }
   },
   actions: {
