@@ -3,7 +3,20 @@
 
     <!-- TODO - this schema selector should be a different component -->
     <b-col lg=3 class='border-right'>
-      <SchemaSelector />
+      <div class="card">
+        <div class="card-header">
+          <strong>Models</strong>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li
+            v-for="schema in schemas"
+            :class='selectedSchema.id === schema.id ? "list-group-item list-group-item-primary" : "list-group-item" '
+            @click="$store.dispatch('build/editor/selectModelAddon', { group: group, schema: schema })"
+          >
+            {{ schema.label }}
+          </li>
+        </ul>
+      </div>
     </b-col>
 
     <b-col lg=9>
@@ -57,7 +70,13 @@
 
         </b-modal>
 
-        <b-button v-b-modal="'modal_' + group.id">Create {{ group.label }}</b-button>
+        <b-button
+          variant="primary"
+          v-b-modal="'modal_' + group.id"
+        >
+          <i class="fa fa-plus"></i>
+          Add {{ group.label }}
+        </b-button>
         <!-- <b-button @click="createAddonInstance(group)">Create {{ group.label }}</b-button> -->
 
         <!-- View existing instance data -->
@@ -116,17 +135,17 @@ export default {
   props: {
     group: { required: true }
   },
-  created () {
-    console.log('CREATED MODEL ADDON EDITOR')
-    this.$store.dispatch('build/editor/selectAddon', { option_group_id: this.group.id })
-  },
   components: {
     SchemaSelector,
     OptionTemplateRenderer,
     OptionFormItem
   },
+  mounted () {
+    this.$store.dispatch('build/editor/selectModelAddon', { group: this.group, schema: this.selectedSchema })
+  },
   computed: mapGetters({
-    selectedSchema: 'editor/schema/selectedModel',
+    schemas: 'editor/schema/collection/items',
+    selectedSchema: 'build/editor/selectedSchema',
     newAddon: 'build/editor/addon/newModel',
     collection: 'build/editor/addon/items'
   }),
@@ -138,8 +157,7 @@ export default {
       this.saveAddon()
     },
     destroyInstance (group, instance) {
-      const filtered = this.configurationObject[group.identifier_plural][this.selectedSchema.id].filter(e => e.id !== instance.id)
-      this.configurationObject[group.identifier_plural][this.selectedSchema.id] = filtered
+      // TODO - reimplement
     }
   }
 }
