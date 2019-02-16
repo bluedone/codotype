@@ -61,7 +61,6 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import buildConfiguration from '@codotype/util/lib/buildConfiguration'
 import GlobalOptionEditor from './GlobalOptionEditor'
 import ModelOptionEditor from './ModelOptionEditor'
 import ModelAddonEditor from './ModelAddonEditor'
@@ -95,6 +94,7 @@ export default {
     ModelAddonEditor
   },
   created () {
+    this.$store.dispatch('build/selectBuild', this.id)
     this.selectModel(this.id)
   },
   methods: {

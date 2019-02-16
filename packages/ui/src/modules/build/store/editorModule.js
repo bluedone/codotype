@@ -1,5 +1,3 @@
-// import cloneDeep from 'lodash/cloneDeep'
-// import buildConfiguration from '@codotype/util/lib/buildConfiguration'
 import collectionModule from '../../../store/lib/collectionModule'
 import objectModule from './objectModule'
 
@@ -30,13 +28,20 @@ export default {
     toObj: state => {
       return state.configuration
     },
-    valueOf: state => ({ group, attribute, value }) => {
-      console.log(state.configuration)
-      // console.log(group.identifier)
+    optionValue: state => ({ group, attribute }) => {
       return state.configuration[group.identifier][attribute.identifier]
     },
-    modelOptionValue (state, { group, schema, attribute, value }) {
-      // state.configuration[group.identifier][schema.identifier][attribute.identifier] = value // TODO - validate
+    modelOptionValue: state => ({ group, schema, attribute }) => {
+      console.log(group)
+      console.log(schema)
+      console.log(attribute)
+      console.log(state.configuration)
+      if (!group || !schema || !attribute) return
+
+      if (!state.configuration[group.identifier][schema.identifier]) {
+        state.configuration[group.identifier][schema.identifier] = {}
+      }
+      return state.configuration[group.identifier][schema.identifier][attribute.identifier]
     }
   },
   mutations: {
@@ -47,6 +52,10 @@ export default {
       state.configuration[group.identifier][attribute.identifier] = value
     },
     modelOptionValue (state, { group, schema, attribute, value }) {
+      console.log(group)
+      console.log(schema)
+      console.log(attribute)
+      console.log(value)
       state.configuration[group.identifier][schema.identifier][attribute.identifier] = value
     }
   },

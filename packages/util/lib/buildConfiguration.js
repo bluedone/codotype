@@ -1,24 +1,22 @@
 const cloneDeep = require('lodash/cloneDeep')
 
 // Defines the default state
-// TODO - this must be moved into @codotype/util
+// TODO - this must be moved elsewhere in @codotype/util
 const buildDefault = ({ attributes }) => {
   const defaultState = {}
   attributes.forEach((attr) => {
     defaultState[attr.identifier] = attr.default_value
   })
-  console.log(defaultState)
   return defaultState
 }
 
-// // Validates the state
-// // TODO - this must be moved into @codotype/util
-// const validateAttribute = ({ attribute, value }) => {
-//   attribute.forEach((attr) => {
-//     defaultState[attr.identifier] = attr.default_value
-//   })
-//   return true
-// }
+// Validates the state
+// TODO - this must be moved elsewhere in @codotype/util
+const validateAttribute = ({ attribute, value }) => {
+  if (!attribute.required) return true
+  if (attribute.required && value) return true
+  return false
+}
 
 function buildConfiguration ({ schemas, generator }) {
   const configuration = {}
@@ -28,8 +26,6 @@ function buildConfiguration ({ schemas, generator }) {
   // TODO - this needs to handle ALL kinds of defaults & requirements
   // TODO - handle default instances for *_ADDON types
   generator.option_groups.forEach((group) => {
-    // console.log(group)
-
     // Defines an object on to store the instance data for each option group
     const instanceData = {}
 
@@ -49,7 +45,10 @@ function buildConfiguration ({ schemas, generator }) {
       })
 
       // Assigns the instanceData object to the root configuration object
-      configuration[group.identifier_plural] = instanceData
+      console.log(schemas)
+      console.log(group.identifier)
+      console.log(instanceData)
+      configuration[group.identifier] = instanceData
     } else if (group.type === 'OPTION_GROUP_TYPE_GLOBAL_OPTION') {
       // Iterates over each attribute in the GLOBAL_OPTION type,
       // sets instanceData to the default value
@@ -64,7 +63,7 @@ function buildConfiguration ({ schemas, generator }) {
   // // // //
 
   // Returns configuration object
-  // console.log(configuration)
+  console.log(configuration)
   return configuration
 }
 

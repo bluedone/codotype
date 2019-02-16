@@ -31,7 +31,7 @@
         class='form-control'
         type="text"
         ref="input"
-        @input="setValue({ group: group, schema: schema, attribute: attribute.identifier, value: $event.target.value })"
+        @input="setValue({ group: group, schema: schema, attribute: attribute, value: $event.target.value })"
       />
 
       <select
@@ -40,7 +40,7 @@
         :value="getValue({ group: group, schema: schema, attribute: attribute })"
         type="text"
         ref="input"
-        @change="setValue({ group: group, schema: schema, attribute: attribute.identifier, value: $event.target.value })"
+        @change="setValue({ group: group, schema: schema, attribute: attribute, value: $event.target.value })"
       >
         <option :value="opt.value" v-for="opt in attribute.options" :key="opt.id">{{opt.label}}</option>
       </select>
@@ -69,7 +69,7 @@
       <OptionTemplateWrapper
         class='mt-2'
         v-if="attribute.previewTemplate"
-        :model="{ value: getValue(attribute.identifier) }"
+        :model="{ value: getValue({ group: group, schema: schema, attribute: attribute }) }"
         :schema="schema"
         :template="attribute.previewTemplate"
       >
@@ -99,8 +99,8 @@ export default {
   name: 'OptionFormitem',
   props: {
     group: { required: true },
-    attribute: { required: true },
-    schema: { required: false }
+    schema: { required: false },
+    attribute: { required: true }
   },
   components: {
     OptionTemplateWrapper,
@@ -110,8 +110,8 @@ export default {
   beforeCreate () {
     // Isolates the 'module' prop
     let group = this.$options.propsData.group
-    let attribute = this.$options.propsData.attribute
     let schema = this.$options.propsData.schema
+    let attribute = this.$options.propsData.attribute
 
     function updateModel () { // NOTE - DOES NOT WORK WITH ADDONS!
       if (this.attribute.type === DATATYPE_BOOLEAN) {
@@ -142,7 +142,7 @@ export default {
     if (group.type === 'OPTION_GROUP_TYPE_GLOBAL_OPTION') {
       // Defines Vue.component.computed
       this.$options.computed = mapGetters({
-        getValue: `build/editor/valueOf`
+        getValue: `build/editor/optionValue`
       })
 
       // Defines Vue.component.methods
@@ -155,14 +155,14 @@ export default {
     } else if (group.type === 'OPTION_GROUP_TYPE_MODEL_OPTION') {
       // Defines Vue.component.computed
       this.$options.computed = mapGetters({
-        getValue: `build/editor/${schema.identifier}/modelOptionValue`
+        getValue: `build/editor/modelOptionValue`
       })
 
       // Defines Vue.component.methods
       this.$options.methods = {
         updateModel,
         ...mapMutations({
-          setValue: `build/editor/${schema.identifier}/value`
+          setValue: `build/editor/modelOptionValue`
         })
       }
     }

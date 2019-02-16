@@ -26,7 +26,7 @@
         <OptionFormItem
           :group="group"
           :schema="selectedSchema"
-          :model="attr"
+          :attribute="attr"
         />
       </div>
 

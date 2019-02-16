@@ -9,23 +9,26 @@ export default {
   namespaced: true,
   actions: {
     // NOTE - a lot of the process here may need to be replicated elsewhere - something to think about moving forward...
+    loadSteps ({ rootGetters, dispatch }, generator_id) {
+      // Finds the generator by id
+      const generatorMeta = rootGetters['generator/collection'].find(g => g.id === generator_id)
+
+      // Loads the generator into the step module
+      dispatch('steps/load', generatorMeta)
+    },
     selectBuild ({ state, getters, rootGetters, commit, dispatch }, generator_id) {
       // Finds the generator by id
       const generatorMeta = rootGetters['generator/collection'].find(g => g.id === generator_id)
+      // TODO - throw an error here if no generator has been found
+
+      // Pulls in schemas
+      const schemas = rootGetters['editor/schema/collection/items']
 
       // FIND OR CREATES BUILD MODEL
       let selectedBuild = getters['collection/items'].find(s => s.generator_id === generator_id)
 
       // Defines a new build if one does not exist for the selected generator (generator_id)
       if (!selectedBuild) {
-        console.log('MISSING BUILD - CREATE AND RE-RUN')
-        // Pulls in generatorMeta
-        const generatorMeta = rootGetters['generator/collection'].find(g => g.id === generator_id)
-        // TODO - throw an error here if no generator has been found
-
-        // Pulls in schemas from editor/schema
-        const schemas = rootGetters['editor/schema/collection/items']
-        // console.log(schemas)
 
         // Defines a new Build model
         const newModel = Object.assign({}, DEFAULT_BUILD)
@@ -40,16 +43,19 @@ export default {
         return dispatch('selectBuild', generator_id)
       }
 
+      // Update selectedBuild's configuration object
+      // TODO - merge selectedBuild.configuration with a new buildConfiguration object
       // QUESTION - how to handle the case where a build is being reloaded, but the schemas have changed?
       // If selectedBuild is found, there should be a merge function that can runs buildConfiguration for a new
       // configuration for the editor, and merges that with the previous one.
       // *Should exist in @codotype/util
+      selectedBuild.configuration = buildConfiguration({
+        schemas: rootGetters['editor/schema/collection/items'],
+        generator: generatorMeta
+      })
 
       // Clears the current editor (TODO - it might be )
       dispatch('editor/clear')
-
-      // Loads the generator into the step module
-      dispatch('steps/load', generatorMeta)
 
       // Loads the generator into the build editor module
       return dispatch('editor/load', {

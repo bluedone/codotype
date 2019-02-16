@@ -51,7 +51,7 @@ export default {
     // Should display a loading animation as needed
     await this.$store.dispatch('generator/fetchCollection')
     this.selectModel(this.id)
-    this.$store.dispatch('build/selectBuild', this.id)
+    this.$store.dispatch('build/loadSteps', this.id)
     this.$store.dispatch('build/steps/reset')
     this.$store.commit('editor/about/showing', false)
   },
