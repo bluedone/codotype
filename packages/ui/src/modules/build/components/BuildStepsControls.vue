@@ -71,7 +71,6 @@ export default {
       generateCodebase: 'build/generate'
     }),
     generate () {
-      this.increment()
       this.generateCodebase()
     }
   }
