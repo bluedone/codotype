@@ -47,6 +47,11 @@ export default {
 
       // Loads the selectedBuild into the editor
       const generatorMeta = rootGetters['generator/collection'].find(g => g.id === generator_id)
+
+      // Loads the generator into the step module
+      return dispatch('steps/load', generatorMeta)
+
+      // Loads the generator into the build editor module
       return dispatch('editor/load', {
         schemas: rootGetters['editor/schema/collection/items'],
         generator_option_groups: generatorMeta.option_groups

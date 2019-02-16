@@ -60,29 +60,12 @@ import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'BuildSteps',
-  data () {
-    return {
-      steps: [
-        {
-          id: 'getting_started',
-          label: 'Getting Started'
-        },
-        {
-          id: 'define_models',
-          label: 'Define Models'
-        },
-        {
-          id: 'configure_generator',
-          label: 'Configure Generator'
-        }
-      ]
-    }
-  },
   created () {
     // this.resetSteps()
   },
   computed: {
     ...mapGetters({
+      steps: 'build/steps/collection/items',
       currentStep: 'build/steps/current'
     }),
     colClassName () {
