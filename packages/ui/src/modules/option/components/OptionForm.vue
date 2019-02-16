@@ -10,15 +10,39 @@
       <!-- Step 1 - Define Option label / identifier -->
       <b-row>
         <b-col lg="6">
-          <FormInput label="Label" placeholder="Label" v-model="model.label" required="true" help="Example: 'Odd Job'" />
+          <FormInput
+            label="Label"
+            placeholder="Label"
+            v-model="model.label"
+            required="true"
+            help="Example: 'Odd Job'"
+          />
         </b-col>
 
         <b-col lg="6">
-          <FormInput label="Identifier" placeholder="Identifier" v-model="model.identifier" required="true" help="Example: 'odd_job'" />
+          <FormInput
+            label="Identifier"
+            placeholder="Identifier"
+            v-model="model.identifier"
+            required="true"
+            help="Example: 'odd_job'"
+          />
         </b-col>
         <b-col lg="12">
-          <FormInput label="Help" placeholder="Help" v-model="model.help" required="true" help="Example: 'odd_job'" />
-          <FormInput label="More Info URL" placeholder="More Info URL" v-model="model.more_info_url" help="A link to more information about this option" />
+          <FormInput
+            label="Help"
+            placeholder="Help"
+            v-model="model.help"
+            required="true"
+            help="Example: 'odd_job'"
+          />
+
+          <FormInput
+            label="More Info URL"
+            placeholder="More Info URL"
+            v-model="model.more_info_url"
+            help="A link to more information about this option"
+          />
         </b-col>
       </b-row>
 

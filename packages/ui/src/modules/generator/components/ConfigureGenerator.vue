@@ -14,6 +14,7 @@
 
       <!-- TODO - ABSTRACT INTO SEPARATE COMPONENT -->
       <!-- TODO - ABSTRACT INTO SEPARATE COMPONENT -->
+      <!-- TODO - ABSTRACT INTO SEPARATE COMPONENT -->
       <template v-if="group.type === OPTION_GROUP_TYPE_GLOBAL_OPTION">
         <b-row class='justify-content-center'>
           <b-col lg=9>
@@ -27,7 +28,8 @@
         </b-row>
       </template>
 
-      <!-- OPTION_GROUP_TYPE_GLOBAL_BOOLEAN_GROUP -->
+      <!-- TODO - ABSTRACT INTO SEPARATE COMPONENT -->
+      <!-- TODO - ABSTRACT INTO SEPARATE COMPONENT -->
       <!-- TODO - ABSTRACT INTO SEPARATE COMPONENT -->
       <template v-else-if="group.type === OPTION_GROUP_TYPE_GLOBAL_BOOLEAN_GROUP">
 
@@ -73,10 +75,6 @@
         <hr>
       </template>
 
-      <!-- <div class="card card-body text-center bg-transparent border-warning text-warning" v-if="!group.attributes[0]"> -->
-        <!-- <p class="lead mb-0">No options exposed by this generator</p> -->
-      <!-- </div> -->
-
       <ModelAddonEditor
         v-if="group.type === OPTION_GROUP_TYPE_MODEL_ADDON"
         :group="group"
@@ -115,7 +113,7 @@ import {
 } from '@codotype/types/lib/option-group-types'
 
 export default {
-  name: 'GeneratorShow',
+  name: 'ConfigureGenerator',
   props: {
     id: {
       required: true
@@ -137,8 +135,6 @@ export default {
     OptionFormItem
   },
   created () {
-    console.log('CREATED!')
-    console.log(this.id)
     this.selectModel(this.id)
   },
   methods: {
