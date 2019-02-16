@@ -1,14 +1,5 @@
 const cloneDeep = require('lodash/cloneDeep')
-
-// Defines the default state
-// TODO - this must be moved elsewhere in @codotype/util
-const buildDefault = ({ attributes }) => {
-  const defaultState = {}
-  attributes.forEach((attr) => {
-    defaultState[attr.identifier] = attr.default_value
-  })
-  return defaultState
-}
+const buildDefault = require('./buildDefault')
 
 // Validates the state
 // TODO - this must be moved elsewhere in @codotype/util
