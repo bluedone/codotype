@@ -27,9 +27,6 @@ export default {
     }
   },
   getters: {
-    collection (state) {
-      return state.collection
-    },
     current (state) {
       return state.current
     }
@@ -64,7 +61,6 @@ export default {
     }
   },
   modules: {
-    // TODO - complete implementation of step/collection module
     collection: Object.assign({}, collectionModule({ NEW_MODEL: {} }))
   }
 }

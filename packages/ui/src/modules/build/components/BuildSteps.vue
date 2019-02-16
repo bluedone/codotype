@@ -35,7 +35,7 @@
         </div>
         <!-- Lines between steps -->
         <span class="divider done w-50 bg-success d-flex" v-if="currentStep > index && index < 2"></span>
-        <span class="divider w-50 bg-transparent d-flex" v-else-if="index < 2"></span>
+        <span class="divider w-50 bg-transparent d-flex" v-else-if="index < 2 && steps.length > 2"></span>
       </template>
 
     </b-col>

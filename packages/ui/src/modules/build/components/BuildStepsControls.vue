@@ -27,7 +27,7 @@
         variant="outline-primary"
         size="lg"
         @click="incrementStep()"
-        v-if="currentStep !== 2"
+        v-if="currentStep !== 2 && steps.length > 2"
       >
         Next
         <i class="ml-1 fa fa-chevron-right"></i>
@@ -39,7 +39,7 @@
         variant="warning"
         size="lg"
         @click="generate()"
-        v-if="currentStep === 2"
+        v-if="currentStep === steps.length - 1"
       >
         <i class="fa fa-spin fa-cog"></i>
         Generate Code
@@ -61,7 +61,8 @@ export default {
     HelpButton
   },
   computed: mapGetters({
-    currentStep: 'build/steps/current'
+    currentStep: 'build/steps/current',
+    steps: 'build/steps/collection/items'
   }),
   methods: {
     ...mapActions({

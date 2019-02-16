@@ -49,7 +49,7 @@ export default {
       const generatorMeta = rootGetters['generator/collection'].find(g => g.id === generator_id)
 
       // Loads the generator into the step module
-      return dispatch('steps/load', generatorMeta)
+      dispatch('steps/load', generatorMeta)
 
       // Loads the generator into the build editor module
       return dispatch('editor/load', {
