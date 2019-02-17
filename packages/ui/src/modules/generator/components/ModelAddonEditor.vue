@@ -22,14 +22,31 @@
     <b-col lg=9>
       <b-card>
 
-        <!-- Header - "User API Actions" -->
-        <p class="lead mb-0">
-          {{ selectedSchema.label }} {{ group.label_plural }}
-        </p>
+        <b-row>
+          <b-col lg=12 class='d-flex justify-content-between align-items-center'>
 
-        <!-- Header - Description -->
-        <small class="text-muted">{{group.description}}</small>
+            <!-- Header - "User API Actions" -->
+            <span class='d-flex flex-column'>
+              <p class="lead mb-0">
+                {{ selectedSchema.label }} {{ group.label_plural }}
+              </p>
 
+              <!-- Header - Description -->
+              <small class="text-muted">{{group.description}}</small>
+            </span>
+
+            <span class='d-flex'>
+              <b-button
+                variant="primary"
+                v-b-modal="'modal_' + group.id"
+              >
+                <i class="fa fa-plus"></i>
+                Add {{ group.label }}
+              </b-button>
+            </span>
+
+          </b-col>
+        </b-row>
 
         <!-- Define new instance -->
         <hr>
@@ -38,6 +55,7 @@
         <b-modal
           :id="'modal_' + group.id"
           :title="'New ' + group.label"
+          size="lg"
           ok-variant='success'
           ok-title='Create'
           cancel-title='Cancel'
@@ -55,33 +73,20 @@
             </div>
           </div>
 
-          <div class="row" v-if="group.previewTemplate">
-            Preview
+          <div class="row mt-4" v-if="group.previewTemplate">
             <div class="col-lg-12">
-              {{newAddon}}
-              <OptionTemplateRenderer
+              <OptionTemplateWrapper
                 :model="newAddon"
                 :schema="selectedSchema"
                 :template="group.previewTemplate"
               >
-              </OptionTemplateRenderer>
+              </OptionTemplateWrapper>
             </div>
           </div>
 
         </b-modal>
 
-        <b-button
-          variant="primary"
-          v-b-modal="'modal_' + group.id"
-        >
-          <i class="fa fa-plus"></i>
-          Add {{ group.label }}
-        </b-button>
-        <!-- <b-button @click="createAddonInstance(group)">Create {{ group.label }}</b-button> -->
-
         <!-- View existing instance data -->
-        <hr>
-
         <ul class='list-group'>
           <li
             class="list-group-item d-flex justify-content-between align-items-center"
@@ -128,6 +133,7 @@
 import { mapGetters, mapActions, mapMutations } from 'vuex'
 import OptionFormItem from '../../option/components/OptionFormItem'
 import OptionTemplateRenderer from '../../option/components/OptionTemplateRenderer'
+import OptionTemplateWrapper from '../../option/components/OptionTemplateWrapper'
 import SchemaSelector from './SchemaSelector'
 
 export default {
@@ -138,6 +144,7 @@ export default {
   components: {
     SchemaSelector,
     OptionTemplateRenderer,
+    OptionTemplateWrapper,
     OptionFormItem
   },
   mounted () {

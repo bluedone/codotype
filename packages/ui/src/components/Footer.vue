@@ -29,8 +29,8 @@ export default {
     width: 100%
     bottom: 0
     z-index: 100
-    background: #f3f3f3
-    border-top: 1px solid #999999
+    background: #f5f6f9
+    border-top: 1px solid #cccccc
 
   nav.navbar
     padding-top: .25rem
