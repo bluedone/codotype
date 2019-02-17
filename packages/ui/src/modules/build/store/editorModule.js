@@ -13,6 +13,7 @@ export default {
   },
   modules: {
     addon: Object.assign({}, collectionModule({ NEW_MODEL: {} })),
+    global_addon: Object.assign({}, collectionModule({ NEW_MODEL: {} }))
   },
   getters: {
     toObj: state => {
@@ -61,19 +62,29 @@ export default {
     selectModelAddon ({ state, getters, commit, dispatch }, { group, schema }) {
       const configuration = state.configuration
 
-      // Sets configuration from values currently in the addon module
-      if (state.selectedOptionGroupId && state.selectedSchemaId) {
-        const selectedOptionGroup = state.option_groups.find(og => og.id === state.selectedOptionGroupId)
-        const selectedSchema = state.schemas.find(s => s.id === state.selectedSchemaId)
-        configuration[selectedOptionGroup.identifier_plural][selectedSchema.identifier] = getters['addon/items']
-        commit('configuration', configuration)
-      }
-
       // Loads new option group into addon module
       commit('selectedOptionGroupId', group.id)
       commit('selectedSchemaId', schema.id)
       commit('addon/defaultNewModel', buildDefault({ attributes: group.attributes }))
       commit('addon/items', configuration[group.identifier_plural][schema.identifier])
+    },
+    selectGlobalAddon ({ state, getters, commit, dispatch }, { group }) {
+      const configuration = state.configuration
+
+      // Loads new option group into addon module
+      commit('selectedOptionGroupId', group.id) // TODO - might not need this anymore (use syncGlobalAddon instead)
+      commit('global_addon/defaultNewModel', buildDefault({ attributes: group.attributes }))
+      commit('global_addon/items', configuration[group.identifier_plural])
+    },
+    syncModelAddon ({ state, getters, commit }, { group, schema }) {
+      const configuration = state.configuration
+      configuration[group.identifier_plural][schema.identifier] = getters['addon/items']
+      commit('configuration', configuration)
+    },
+    syncGlobalAddon ({ state, getters, commit }, { group }) {
+      const configuration = state.configuration
+      configuration[group.identifier_plural] = getters['global_addon/items']
+      commit('configuration', configuration)
     }
   }
 }

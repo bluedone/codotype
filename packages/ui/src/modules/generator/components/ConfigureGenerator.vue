@@ -1,7 +1,7 @@
 <!-- TODO - this should really be an entire separate Editor component -->
 <!-- Should not even be SCOPED to the generator module -->
 <template>
-  <b-tabs lazy class='w-100'>
+  <b-tabs no-fade lazy class='w-100'>
     <!-- Generator Option Groups -->
     <b-tab
       lazy
@@ -43,6 +43,11 @@
         :schemas="schemas">
       </ModelAddonEditor>
 
+      <GlobalAddonEditor
+        v-if="group.type === OPTION_GROUP_TYPE_GLOBAL_ADDON"
+        :group="group">
+      </GlobalAddonEditor>
+
       <ModelOptionEditor
         v-if="group.type === OPTION_GROUP_TYPE_MODEL_OPTION"
         :group="group"
@@ -64,6 +69,8 @@ import { mapGetters, mapActions } from 'vuex'
 import GlobalOptionEditor from './GlobalOptionEditor'
 import ModelOptionEditor from './ModelOptionEditor'
 import ModelAddonEditor from './ModelAddonEditor'
+import GlobalAddonEditor from './GlobalAddonEditor'
+
 import {
   OPTION_GROUP_TYPE_GLOBAL_OPTION,
   OPTION_GROUP_TYPE_GLOBAL_ADDON,
@@ -91,7 +98,8 @@ export default {
   components: {
     GlobalOptionEditor,
     ModelOptionEditor,
-    ModelAddonEditor
+    ModelAddonEditor,
+    GlobalAddonEditor
   },
   created () {
     this.$store.dispatch('build/selectBuild', this.id)
