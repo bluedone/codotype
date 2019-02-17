@@ -25,7 +25,7 @@ export default {
     RelationForm
   },
   computed: mapGetters({
-    showingModal: 'editor/schema/relation/modals/form/showing',
+    showingModal: 'editor/schema/relation/modals/new/showing',
     newModel: 'editor/schema/relation/collection/newModel'
   }),
   methods: {
@@ -34,7 +34,7 @@ export default {
       updateParentSchemaRelations: 'editor/schema/updateRelations'
     }),
     ...mapMutations({
-      showModal: 'editor/schema/relation/modals/form/showing',
+      showModal: 'editor/schema/relation/modals/new/showing',
       setNewModel: 'editor/schema/relation/collection/newModel'
     }),
     submit (newModel) {

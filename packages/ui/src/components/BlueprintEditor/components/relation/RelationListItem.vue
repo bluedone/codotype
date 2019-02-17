@@ -90,6 +90,7 @@
           variant="outline-secondary"
           title="Edit"
           v-b-tooltip.hover.top
+          @click="editModel"
         >
           <i class="fas fa-fw fa-pencil-alt"></i>
         </b-button>
@@ -104,7 +105,7 @@
 
 <!-- // // // //  -->
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 import { inflateRelation } from '@codotype/util/lib/inflate'
 import DestroyButton from '../DestroyButton'
 
@@ -118,10 +119,18 @@ export default {
     DestroyButton
   },
   methods: {
+    ...mapMutations({
+      setEditModel: 'editor/schema/relation/collection/editModel',
+      showEditModal: 'editor/schema/relation/modals/edit/showing',
+    }),
     ...mapActions({
       removeModel: 'editor/schema/relation/collection/destroy',
       updateRelations: 'editor/schema/updateRelations'
     }),
+    editModel () {
+      this.setEditModel(this.item)
+      this.showEditModal(true)
+    },
     destroyModel () {
       this.removeModel(this.item.id)
       this.updateRelations()
