@@ -21,6 +21,9 @@
             </HelpPopover>
 
           </h4>
+
+          <SchemaEditModal v-if="!isUserModel" />
+
         </b-col>
 
         <b-col lg=5 class="d-flex align-items-center justify-content-end">
@@ -96,6 +99,7 @@ import { mapGetters } from 'vuex'
 import SortableList from '../SortableList'
 import DestroyModal from '../DestroyModal'
 import SchemaEditButton from './SchemaEditButton'
+import SchemaEditModal from './SchemaEditModal'
 import SchemaDestroyButton from './SchemaDestroyButton'
 import SchemaDestroyModal from './SchemaDestroyModal'
 import AttributeNewModal from '../attribute/AttributeNewModal'
@@ -111,6 +115,7 @@ export default {
     HelpPopover,
     DestroyModal,
     SchemaEditButton,
+    SchemaEditModal,
     SchemaDestroyButton,
     SchemaDestroyModal,
     AttributeNewModal,

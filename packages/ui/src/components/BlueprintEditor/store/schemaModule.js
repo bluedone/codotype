@@ -16,9 +16,13 @@ export default {
       commit('attribute/collection/items', model.attributes)
       commit('relation/collection/items', model.relations)
     },
-    newModel ({ commit }, model) {
+    newModel ({ commit }) {
       commit('collection/resetNewModel')
       commit('modals/new/showing', true)
+    },
+    editModel ({ commit, getters }) {
+      commit('collection/editModel', getters['selectedModel'])
+      commit('modals/edit/showing', true)
     },
     createModel ({ getters, commit, dispatch }, model) {
       commit('collection/newModel', model)
@@ -84,6 +88,7 @@ export default {
       namespaced: true,
       modules: {
         new: modalModule(),
+        edit: modalModule(),
         destroy: modalModule()
       }
     }
