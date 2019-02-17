@@ -2,7 +2,7 @@
   <b-row>
 
     <b-col lg=4 sm=12 class="border-right">
-      <SchemaForm />
+      <SchemaNewModal />
       <SchemaNewButton />
 
       <HelpPopover
@@ -23,7 +23,7 @@
 
 <script>
 import SchemaNewButton from './components/schema/SchemaNewButton'
-import SchemaForm from './components/schema/SchemaForm'
+import SchemaNewModal from './components/schema/SchemaNewModal'
 import SchemaList from './components/schema/SchemaList'
 import SchemaDetail from './components/schema/SchemaDetail'
 import HelpPopover from '../HelpPopover'
@@ -32,8 +32,8 @@ export default {
   name: 'BlueprintEditor',
   components: {
     SchemaNewButton,
+    SchemaNewModal,
     HelpPopover,
-    SchemaForm,
     SchemaList,
     SchemaDetail
   },

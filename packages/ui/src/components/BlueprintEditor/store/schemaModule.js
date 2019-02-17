@@ -18,7 +18,7 @@ export default {
     },
     newModel ({ commit }, model) {
       commit('collection/resetNewModel')
-      commit('modals/form/showing', true)
+      commit('modals/new/showing', true)
     },
     createModel ({ getters, commit, dispatch }, model) {
       commit('collection/newModel', model)
@@ -83,7 +83,7 @@ export default {
     modals: {
       namespaced: true,
       modules: {
-        form: modalModule(),
+        new: modalModule(),
         destroy: modalModule()
       }
     }
