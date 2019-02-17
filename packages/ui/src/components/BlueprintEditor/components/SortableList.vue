@@ -12,14 +12,11 @@
             :vuexAction="'editor/schema/' + scope + '/newModel'"
           />
 
-          <!-- TODO - replace with a single component -->
-          <b-popover
+          <HelpPopover
             :target="'add-' + scope + '-button'"
-            placement="bottom"
-            :triggers="[]"
-            :show="$store.getters['editor/help/showing']"
+            placement="right"
             :content="'Add ' + label">
-          </b-popover>
+          </HelpPopover>
 
           <span class='ml-2'>
             <!-- <i class="fa fa-tags mr-1"></i> -->
@@ -59,6 +56,7 @@ import smoothReflow from 'vue-smooth-reflow'
 import NewModalButton from './NewModalButton'
 import AttributeListItem from './attribute/AttributeListItem'
 import RelationListItem from './relation/RelationListItem'
+import HelpPopover from '../../HelpPopover'
 
 export default {
   name: 'SortableList',
@@ -79,6 +77,7 @@ export default {
   mixins: [smoothReflow],
   components: {
     draggable,
+    HelpPopover,
     NewModalButton,
     AttributeListItem,
     RelationListItem

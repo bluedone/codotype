@@ -12,6 +12,13 @@
             {{ model.label + ' Model' }}
             <SchemaEditButton v-if="!isUserModel" />
 
+            <HelpPopover
+              v-if="!isUserModel"
+              target="schemaEditPopover"
+              placement="right"
+              content='Edit Model Name'>
+            </HelpPopover>
+
           </h4>
         </b-col>
 
@@ -20,15 +27,12 @@
           <SchemaDestroyButton v-if="!isUserModel" />
           <SchemaDestroyModal :label="model.label" />
 
-          <!-- TODO - replace with a single component -->
-          <!-- TODO - replace with a single component -->
-          <b-popover
+          <HelpPopover
             v-if="!isUserModel"
             target="schema-destroy-button"
             placement="left"
-            :show="$store.getters['editor/help/showing']"
             content="Remove Model">
-          </b-popover>
+          </HelpPopover>
 
           <!-- Edit Schema Modal GOES HERE -->
 
@@ -95,11 +99,13 @@ import SchemaDestroyModal from './SchemaDestroyModal'
 import AttributeNewModal from '../attribute/AttributeNewModal'
 import AttributeEditModal from '../attribute/AttributeEditModal'
 import RelationNewModal from '../relation/RelationNewModal'
+import HelpPopover from '../../../HelpPopover'
 
 export default {
   name: 'SchemaDetail',
   components: {
     SortableList,
+    HelpPopover,
     DestroyModal,
     SchemaEditButton,
     SchemaDestroyButton,
