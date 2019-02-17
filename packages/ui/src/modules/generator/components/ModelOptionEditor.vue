@@ -3,7 +3,7 @@
 <template>
   <b-row>
     <b-col lg=3 class='border-right'>
-      <SchemaSelector />
+      <SchemaSelector :group="group" />
     </b-col>
 
     <b-col lg=9>

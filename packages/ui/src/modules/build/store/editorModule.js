@@ -2,43 +2,30 @@ import collectionModule from '../../../store/lib/collectionModule'
 import objectModule from './objectModule'
 import buildDefault from '@codotype/util/lib/buildDefault'
 
-// const setValue = (state, { group, attr, val }) => { state.config[group][attr] = val }
-
-// NOTE - the editor module is ONLY responsible for editing the build.configuration property
 export default {
   namespaced: true,
   state: {
+    selectedOptionGroupId: '',
+    selectedSchemaId: '',
     schemas: [],
     option_groups: [],
     configuration: {}
   },
-  // This is used to edit the CURRENT addon, is it needed?
   modules: {
     addon: Object.assign({}, collectionModule({ NEW_MODEL: {} })),
-    // data: { namespaced: true, modules: {} }
   },
   getters: {
-    // TODO - this will pull out ONLY what's needed from the modules
-    // NOTE - this will NEED to reference option_groups and schemas
-    // toObj: state => {
-    //   return state.data
-    // }
-    // valueOf: state => attr_id => {
-    //   return state[attr_id]
-    // },
     toObj: state => {
       return state.configuration
     },
     optionValue: state => ({ group, attribute }) => {
       return state.configuration[group.identifier][attribute.identifier]
     },
+    selectedSchema: state => { return state.schemas.find(s => s.id === state.selectedSchemaId) || state.schemas[0] },
     modelOptionValue: state => ({ group, schema, attribute }) => {
-      console.log(group)
-      console.log(schema)
-      console.log(attribute)
-      console.log(state.configuration)
       if (!group || !schema || !attribute) return
 
+      // TODO - this should be removed, handled by a higher-level configuration merge sub-routine
       if (!state.configuration[group.identifier][schema.identifier]) {
         state.configuration[group.identifier][schema.identifier] = {}
       }
@@ -49,14 +36,12 @@ export default {
     schemas (state, schemas) { state.schemas = schemas },
     option_groups (state, option_groups) { state.option_groups = option_groups },
     configuration (state, configuration) { state.configuration = configuration },
+    selectedOptionGroupId (state, selectedOptionGroupId) { state.selectedOptionGroupId = selectedOptionGroupId },
+    selectedSchemaId (state, selectedSchemaId) { state.selectedSchemaId = selectedSchemaId },
     optionValue (state, { group, attribute, value }) {
       state.configuration[group.identifier][attribute.identifier] = value
     },
     modelOptionValue (state, { group, schema, attribute, value }) {
-      console.log(group)
-      console.log(schema)
-      console.log(attribute)
-      console.log(value)
       state.configuration[group.identifier][schema.identifier][attribute.identifier] = value
     }
   },
@@ -73,13 +58,22 @@ export default {
     clear ({}) {
       console.log('CLEAR EDITOR MODULE HERE')
     },
-    selectAddon ({ state, commit, dispatch }, { option_group_id }) {
-      const optionGroup = state.option_groups.find(og => og.id === option_group_id)
-      // console.log('GOT OPTION GROUP')
-      // console.log(optionGroup)
-      // console.log(optionGroup.attributes)
-      // console.log(buildDefault({ attributes: optionGroup.attributes }))
-      commit('addon/defaultNewModel', buildDefault({ attributes: optionGroup.attributes }))
+    selectModelAddon ({ state, getters, commit, dispatch }, { group, schema }) {
+      const configuration = state.configuration
+
+      // Sets configuration from values currently in the addon module
+      if (state.selectedOptionGroupId && state.selectedSchemaId) {
+        const selectedOptionGroup = state.option_groups.find(og => og.id === state.selectedOptionGroupId)
+        const selectedSchema = state.schemas.find(s => s.id === state.selectedSchemaId)
+        configuration[selectedOptionGroup.identifier_plural][selectedSchema.identifier] = getters['addon/items']
+        commit('configuration', configuration)
+      }
+
+      // Loads new option group into addon module
+      commit('selectedOptionGroupId', group.id)
+      commit('selectedSchemaId', schema.id)
+      commit('addon/defaultNewModel', buildDefault({ attributes: group.attributes }))
+      commit('addon/items', configuration[group.identifier_plural][schema.identifier])
     }
   }
 }
