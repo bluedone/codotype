@@ -77,7 +77,7 @@ export default {
   },
   modules: {
     collection: Object.assign({}, collectionModule({ NEW_MODEL: NEW_SCHEMA_MODEL })),
-    selectedModel: Object.assign({}, selectModelModule),
+    selectedModel: selectModelModule(),
     attribute: attributeModule,
     relation: relationModule,
     modals: {

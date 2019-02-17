@@ -8,16 +8,17 @@ export default {
   actions: {
     newModel ({ commit }) {
       commit('collection/resetNewModel')
-      commit('modals/form/showing', true)
+      commit('modals/new/showing', true)
     }
   },
   modules: {
     collection: Object.assign({}, collectionModule({ NEW_MODEL: DEFAULT_RELATION })),
-    selectedModel: Object.assign({}, selectModelModule),
+    selectedModel: selectModelModule(),
     modals: {
       namespaced: true,
       modules: {
-        form: modalModule(),
+        new: modalModule(),
+        edit: modalModule(),
         destroy: modalModule()
       }
     }

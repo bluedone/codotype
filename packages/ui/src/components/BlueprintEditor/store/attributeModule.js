@@ -25,7 +25,7 @@ export default {
   },
   modules: {
     collection: Object.assign({}, collectionModule({ NEW_MODEL: DEFAULT_ATTRIBUTE })),
-    selectedModel: Object.assign({}, selectModelModule),
+    selectedModel: selectModelModule(),
     modals: {
       namespaced: true,
       modules: {
