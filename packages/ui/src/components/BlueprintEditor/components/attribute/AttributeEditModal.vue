@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import AttributeForm from '../attribute/AttributeForm'
 import { mapGetters, mapActions, mapMutations } from 'vuex'
+import AttributeForm from '../attribute/AttributeForm'
 
 export default {
   name: 'AttributeNewModal',

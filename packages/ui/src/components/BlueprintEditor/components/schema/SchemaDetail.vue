@@ -10,6 +10,7 @@
           <h4 class="mb-0 d-flex">
 
             {{ model.label + ' Model' }}
+
             <SchemaEditButton v-if="!isUserModel" />
 
             <HelpPopover
@@ -34,7 +35,7 @@
             content="Remove Model">
           </HelpPopover>
 
-          <!-- Edit Schema Modal GOES HERE -->
+          <!-- TODO - Edit Schema Modal GOES HERE -->
 
         </b-col>
 
@@ -81,6 +82,7 @@
       />
 
       <RelationNewModal />
+      <RelationEditModal />
       <!-- TODO - add RelationEdit modal here -->
 
     </b-col>
@@ -99,6 +101,7 @@ import SchemaDestroyModal from './SchemaDestroyModal'
 import AttributeNewModal from '../attribute/AttributeNewModal'
 import AttributeEditModal from '../attribute/AttributeEditModal'
 import RelationNewModal from '../relation/RelationNewModal'
+import RelationEditModal from '../relation/RelationEditModal'
 import HelpPopover from '../../../HelpPopover'
 
 export default {
@@ -112,7 +115,8 @@ export default {
     SchemaDestroyModal,
     AttributeNewModal,
     AttributeEditModal,
-    RelationNewModal
+    RelationNewModal,
+    RelationEditModal
   },
   computed: {
     ...mapGetters({

@@ -4,7 +4,6 @@
 
       <div class="card" id='attribute-detail'>
 
-        <!-- Card header -->
         <div class="card-header d-flex align-items-center p-2">
 
           <NewModalButton
@@ -19,7 +18,6 @@
           </HelpPopover>
 
           <span class='ml-2'>
-            <!-- <i class="fa fa-tags mr-1"></i> -->
             <strong>{{ label }}</strong>
           </span>
 
@@ -31,8 +29,21 @@
           v-model='collection'
           :options="sortableOptions"
         >
-          <AttributeListItem v-if="scope === 'attribute'" v-for="item in collection" :key="item.id" :item="item" />
-          <RelationListItem v-else-if="scope === 'relation'" v-for="item in collection" :key="item.id" :item="item" />
+
+          <AttributeListItem
+            v-if="scope === 'attribute'"
+            v-for="item in collection"
+            :key="item.id"
+            :item="item">
+          </AttributeListItem>
+
+          <RelationListItem
+            v-else-if="scope === 'relation'"
+            v-for="item in collection"
+            :key="item.id"
+            :item="item">
+          </RelationListItem>
+
         </draggable>
 
         <b-list-group flush v-else>
