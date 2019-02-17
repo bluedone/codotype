@@ -110,7 +110,7 @@
               <b-button @click="editInstance(group, instance)" size="sm" variant="outline-warning">
                 <i class="fa fa-edit"></i>
               </b-button>
-              <b-button @click="destroyInstance(group, instance)" size="sm" variant="outline-danger">
+              <b-button @click="destroyInstance({ group, instance })" size="sm" variant="outline-danger">
                 <i class="fa fa-trash"></i>
               </b-button>
             </span>
@@ -153,20 +153,22 @@ export default {
   computed: mapGetters({
     schemas: 'editor/schema/collection/items',
     selectedSchema: 'build/editor/selectedSchema',
-    newAddon: 'build/editor/addon/newModel',
-    collection: 'build/editor/addon/items'
+    newAddon: 'build/editor/model_addon/newModel',
+    collection: 'build/editor/model_addon/items'
   }),
   methods: {
     ...mapActions({
-      saveAddon: 'build/editor/addon/create',
+      saveAddon: 'build/editor/model_addon/create',
       syncModelAddon: 'build/editor/syncModelAddon'
     }),
     createAddon () {
       this.saveAddon()
       this.syncModelAddon({ group: this.group, schema: this.selectedSchema })
     },
-    destroyInstance (group, instance) {
+    destroyInstance ({ group, instance }) {
       // TODO - reimplement
+      console.log(group)
+      console.log(instance)
     }
   }
 }

@@ -168,14 +168,14 @@ export default {
     } else if (group.type === 'OPTION_GROUP_TYPE_MODEL_ADDON') {
       // Defines Vue.component.computed
       this.$options.computed = mapGetters({
-        getValue: 'build/editor/addon/newModelAttr'
+        getValue: 'build/editor/model_addon/newModelAttr'
       })
 
       // Defines Vue.component.methods
       this.$options.methods = {
         updateModel,
         ...mapMutations({
-          setValue: 'build/editor/addon/newModelAttr'
+          setValue: 'build/editor/model_addon/newModelAttr'
         })
       }
     } else if (group.type === 'OPTION_GROUP_TYPE_GLOBAL_ADDON') {

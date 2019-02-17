@@ -5,15 +5,14 @@ import buildDefault from '@codotype/util/lib/buildDefault'
 export default {
   namespaced: true,
   state: {
-    selectedOptionGroupId: '',
     selectedSchemaId: '',
     schemas: [],
     option_groups: [],
     configuration: {}
   },
   modules: {
-    addon: Object.assign({}, collectionModule({ NEW_MODEL: {} })),
-    global_addon: Object.assign({}, collectionModule({ NEW_MODEL: {} }))
+    global_addon: Object.assign({}, collectionModule({ NEW_MODEL: {} })),
+    model_addon: Object.assign({}, collectionModule({ NEW_MODEL: {} }))
   },
   getters: {
     toObj: state => {
@@ -37,7 +36,6 @@ export default {
     schemas (state, schemas) { state.schemas = schemas },
     option_groups (state, option_groups) { state.option_groups = option_groups },
     configuration (state, configuration) { state.configuration = configuration },
-    selectedOptionGroupId (state, selectedOptionGroupId) { state.selectedOptionGroupId = selectedOptionGroupId },
     selectedSchemaId (state, selectedSchemaId) { state.selectedSchemaId = selectedSchemaId },
     optionValue (state, { group, attribute, value }) {
       state.configuration[group.identifier][attribute.identifier] = value
@@ -62,23 +60,21 @@ export default {
     selectModelAddon ({ state, getters, commit, dispatch }, { group, schema }) {
       const configuration = state.configuration
 
-      // Loads new option group into addon module
-      commit('selectedOptionGroupId', group.id)
+      // Loads new option group into model_addon module
       commit('selectedSchemaId', schema.id)
-      commit('addon/defaultNewModel', buildDefault({ attributes: group.attributes }))
-      commit('addon/items', configuration[group.identifier_plural][schema.identifier])
+      commit('model_addon/defaultNewModel', buildDefault({ attributes: group.attributes }))
+      commit('model_addon/items', configuration[group.identifier_plural][schema.identifier])
     },
     selectGlobalAddon ({ state, getters, commit, dispatch }, { group }) {
       const configuration = state.configuration
 
-      // Loads new option group into addon module
-      commit('selectedOptionGroupId', group.id) // TODO - might not need this anymore (use syncGlobalAddon instead)
+      // Loads new option group into global_addon module
       commit('global_addon/defaultNewModel', buildDefault({ attributes: group.attributes }))
       commit('global_addon/items', configuration[group.identifier_plural])
     },
     syncModelAddon ({ state, getters, commit }, { group, schema }) {
       const configuration = state.configuration
-      configuration[group.identifier_plural][schema.identifier] = getters['addon/items']
+      configuration[group.identifier_plural][schema.identifier] = getters['model_addon/items']
       commit('configuration', configuration)
     },
     syncGlobalAddon ({ state, getters, commit }, { group }) {
