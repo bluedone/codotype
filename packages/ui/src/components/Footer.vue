@@ -1,9 +1,7 @@
 <template>
   <div class='footer-bottom py-2' v-if="['GeneratorBuild'].includes($route.name)">
-    <div class="row justify-content-center">
-      <div class="col-lg-10">
-        <BuildStepsControls />
-      </div>
+    <div class="container">
+      <BuildStepsControls />
     </div>
   </div>
   <HomeFooter v-else />

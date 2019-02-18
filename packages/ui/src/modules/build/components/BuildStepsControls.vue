@@ -1,7 +1,7 @@
 <template>
-  <b-row>
+  <b-row class='w-100 justify-content-center'>
 
-    <b-col lg="12" class="d-flex flex-row w-100 justify-content-between">
+    <b-col xl=9 lg=12 class="d-flex flex-row w-100 justify-content-between">
 
       <b-button
         v-if="currentStep !== 0"

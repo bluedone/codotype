@@ -1,6 +1,7 @@
 <!-- TODO - this should really be an entire separate Editor component -->
 <!-- Should not even be SCOPED to the generator module -->
 <template>
+  <!-- <b-tabs no-fade pills vertical lazy nav-wrapper-class="w-25 h-100 pr-3 border-right" class='w-100'> -->
   <b-tabs no-fade lazy class='w-100'>
     <!-- Generator Option Groups -->
     <b-tab
@@ -10,54 +11,39 @@
       v-for="group in model.option_groups"
       :key="group.identifier"
     >
-      <br>
+      <b-row class='justify-content-center mt-3'>
+        <b-col lg=12>
+          <EditorHeader
+            :title="group.label"
+            :help="group.description"
+            url="https://codotype.github.io"
+          />
+          <hr>
 
-      <!-- TODO - ABSTRACT INTO SEPARATE COMPONENT -->
-      <!-- TODO - ABSTRACT INTO SEPARATE COMPONENT -->
-      <!-- TODO - ABSTRACT INTO SEPARATE COMPONENT -->
-      <template v-if="group.type === OPTION_GROUP_TYPE_GLOBAL_OPTION">
-        <b-row class='justify-content-center'>
-          <b-col lg=9>
-            <EditorHeader
-              :title="group.label"
-              :help="group.description"
-              url="https://codotype.github.io"
-            />
-            <hr>
-          </b-col>
-        </b-row>
-      </template>
+          <ModelAddonEditor
+            v-if="group.type === OPTION_GROUP_TYPE_MODEL_ADDON"
+            :group="group"
+            :schemas="schemas">
+          </ModelAddonEditor>
 
-      <template v-else>
-        <EditorHeader
-          :title="group.label_plural || group.label"
-          :help="group.description"
-          url="https://codotype.github.io"
-        />
-        <hr>
-      </template>
+          <GlobalAddonEditor
+            v-if="group.type === OPTION_GROUP_TYPE_GLOBAL_ADDON"
+            :group="group">
+          </GlobalAddonEditor>
 
-      <ModelAddonEditor
-        v-if="group.type === OPTION_GROUP_TYPE_MODEL_ADDON"
-        :group="group"
-        :schemas="schemas">
-      </ModelAddonEditor>
+          <ModelOptionEditor
+            v-if="group.type === OPTION_GROUP_TYPE_MODEL_OPTION"
+            :group="group"
+            :schemas="schemas">
+          </ModelOptionEditor>
 
-      <GlobalAddonEditor
-        v-if="group.type === OPTION_GROUP_TYPE_GLOBAL_ADDON"
-        :group="group">
-      </GlobalAddonEditor>
+          <GlobalOptionEditor
+            v-if="group.type === OPTION_GROUP_TYPE_GLOBAL_OPTION"
+            :group="group">
+          </GlobalOptionEditor>
 
-      <ModelOptionEditor
-        v-if="group.type === OPTION_GROUP_TYPE_MODEL_OPTION"
-        :group="group"
-        :schemas="schemas">
-      </ModelOptionEditor>
-
-      <GlobalOptionEditor
-        v-if="group.type === OPTION_GROUP_TYPE_GLOBAL_OPTION"
-        :group="group">
-      </GlobalOptionEditor>
+        </b-col>
+      </b-row>
 
     </b-tab>
 

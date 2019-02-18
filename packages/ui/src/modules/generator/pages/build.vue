@@ -1,6 +1,6 @@
 <template>
-  <b-row>
-    <b-col lg=12>
+  <b-row class='justify-content-center'>
+    <b-col xl=9 lg=12>
 
       <!-- TODO - remove v-if="model.id" -->
       <BuildSteps v-if="model.id">
@@ -13,7 +13,11 @@
         </template>
 
         <template slot="step-3">
-          <ConfigureGenerator :id="id" />
+          <b-row class='w-100 justify-content-center'>
+            <b-col sm=12>
+              <ConfigureGenerator :id="id" />
+            </b-col>
+          </b-row>
         </template>
       </BuildSteps>
 

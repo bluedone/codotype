@@ -12,7 +12,7 @@ const BLUEPRINT_STEP = {
 
 const CONFIGURATION_STEP = {
   id: 'configure_generator',
-  label: 'Configure Generator'
+  label: 'Configure'
 }
 
 // TODO - clean up the rest of this vuex module

@@ -7,16 +7,19 @@
     <div class="row d-flex align-items-center">
 
       <!-- Handle for re-ordering attributes -->
-      <div class="col-lg-1 col-sm-4 text-left d-flex align-items-center">
+      <div class="col-lg-1 text-left d-flex align-items-center">
         <i class="fa fa-lg fa-fw fa-bars mr-3" style='cursor: grab;'></i>
+        <!-- <i class="fa fa-fw text-primary fa-eye mr-3" v-if="item.order === 0"  v-b-tooltip.hover.left title='Leading attribute'></i> -->
+      </div>
+      <div class="col-lg-1 text-left d-flex align-items-center">
         <i class="fa fa-fw text-primary fa-eye mr-3" v-if="item.order === 0"  v-b-tooltip.hover.left title='Leading attribute'></i>
       </div>
 
-      <div class="col-lg-5 col-sm-4">
+      <div class="col-lg-4">
         <AttributeListItemLabel :item="item"/>
       </div>
 
-      <div class="col-lg-3 col-sm-4">
+      <div class="col-lg-2">
         <!-- REQUIRED -->
         <!-- <span class="badge" v-if="item.required" v-b-tooltip.hover.top title="Required"> -->
           <!-- <i class="fa fa-asterisk text-danger"></i> -->
@@ -35,7 +38,7 @@
 
       </div>
 
-      <div class="col-lg-3 col-sm-4 text-right controls" v-if="item.locked">
+      <div class="col-lg-4 text-right controls" v-if="item.locked">
         <b-badge
           variant="secondary"
           size="sm"
@@ -47,7 +50,7 @@
         </b-badge>
       </div>
 
-      <div class="col-lg-3 col-sm-8 text-right controls" v-else>
+      <div class="col-lg-4 text-right controls" v-else>
 
         <b-button
           size="sm"
