@@ -6,7 +6,7 @@ export default {
   namespaced: true,
   state: {
     selectedSchemaId: '',
-    schemas: [],
+    schemas: [], // TODO - this should implement a collectionModule and copy the schemas over from the blueprint
     option_groups: [],
     configuration: {}
   },
@@ -46,9 +46,13 @@ export default {
   },
   actions: {
     // LOAD a build configuration into the editor
+    // TODO - this should merge the configuration that's passed in if
+    // - A schema has been created
+    // - A schema has been `updated`
+    // - A schema has been destroyed
     load ({ commit, dispatch }, { generator_option_groups, schemas, configuration }) {
       commit('configuration', configuration)
-      commit('schemas', schemas)
+      commit('schemas', schemas)  // TODO - should interface with collectionModule
       commit('option_groups', generator_option_groups)
     },
 
