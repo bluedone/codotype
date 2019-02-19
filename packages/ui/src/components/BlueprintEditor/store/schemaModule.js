@@ -16,9 +16,13 @@ export default {
       commit('attribute/collection/items', model.attributes)
       commit('relation/collection/items', model.relations)
     },
-    newModel ({ commit }, model) {
+    newModel ({ commit }) {
       commit('collection/resetNewModel')
-      commit('modals/form/showing', true)
+      commit('modals/new/showing', true)
+    },
+    editModel ({ commit, getters }) {
+      commit('collection/editModel', getters['selectedModel'])
+      commit('modals/edit/showing', true)
     },
     createModel ({ getters, commit, dispatch }, model) {
       commit('collection/newModel', model)
@@ -77,13 +81,14 @@ export default {
   },
   modules: {
     collection: Object.assign({}, collectionModule({ NEW_MODEL: NEW_SCHEMA_MODEL })),
-    selectedModel: Object.assign({}, selectModelModule),
+    selectedModel: selectModelModule(),
     attribute: attributeModule,
     relation: relationModule,
     modals: {
       namespaced: true,
       modules: {
-        form: modalModule(),
+        new: modalModule(),
+        edit: modalModule(),
         destroy: modalModule()
       }
     }

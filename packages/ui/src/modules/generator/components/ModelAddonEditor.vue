@@ -2,7 +2,7 @@
   <b-row>
 
     <!-- TODO - this schema selector should be a different component -->
-    <b-col lg=3 class='border-right'>
+    <b-col lg=4 class='border-right'>
       <div class="card">
         <div class="card-header">
           <strong>Models</strong>
@@ -19,7 +19,7 @@
       </div>
     </b-col>
 
-    <b-col lg=9>
+    <b-col lg=8>
       <b-card>
 
         <b-row>
@@ -38,7 +38,7 @@
             <span class='d-flex'>
               <b-button
                 variant="primary"
-                v-b-modal="'modal_' + group.id"
+                @click="newInstance()"
               >
                 <i class="fa fa-plus"></i>
                 Add {{ group.label }}
@@ -51,15 +51,15 @@
         <!-- Define new instance -->
         <hr>
 
-        <!-- Bootstrap Modal Component -->
+        <!-- New Addon Modal -->
         <b-modal
-          :id="'modal_' + group.id"
+          ref="newModal"
           :title="'New ' + group.label"
           size="lg"
           ok-variant='success'
           ok-title='Create'
           cancel-title='Cancel'
-          @ok="createAddon(group)"
+          @ok="createInstance()"
         >
           <small class="text-muted">New {{group.label}}</small>
 
@@ -86,6 +86,64 @@
 
         </b-modal>
 
+        <!-- EDIT MODAL -->
+        <!-- EDIT MODAL -->
+
+        <!-- Edit Addon Modal -->
+        <b-modal
+          ref="editModal"
+          :title="'Edit ' + group.label"
+          size="lg"
+          ok-variant='success'
+          ok-title='Create'
+          cancel-title='Cancel'
+          @ok="updateInstance()"
+        >
+          <small class="text-muted">New {{group.label}}</small>
+
+          <div class="row">
+            <div class="col-lg-6" v-for="attr in group.attributes" :key="attr.identifier">
+              <OptionFormItem
+                :group="group"
+                :schema="selectedSchema"
+                :attribute="attr"
+              />
+            </div>
+          </div>
+
+          <div class="row mt-4" v-if="group.previewTemplate">
+            <div class="col-lg-12">
+              <OptionTemplateWrapper
+                :model="newAddon"
+                :schema="selectedSchema"
+                :template="group.previewTemplate"
+              >
+              </OptionTemplateWrapper>
+            </div>
+          </div>
+
+        </b-modal>
+
+        <!-- EDIT MODAL -->
+        <!-- EDIT MODAL -->
+
+        <!-- Remove Addon Modal -->
+        <b-modal
+          ref="confirmRemoval"
+          :title="'Destroy ' + group.label"
+          ok-variant='danger'
+          ok-title='DESTROY'
+          cancel-title='Cancel'
+          @ok="removeInstance()"
+        >
+          <div class="row">
+            <div class="col-lg-12">
+              Are you sure you want to destroy this {{ group.label }}?
+            </div>
+          </div>
+
+        </b-modal>
+
         <!-- View existing instance data -->
         <ul class='list-group'>
           <li
@@ -107,21 +165,35 @@
             </template>
 
             <span>
-              <b-button @click="editInstance(group, instance)" size="sm" variant="outline-warning">
+
+              <b-button
+                @click="editInstance({ instance })"
+                size="sm"
+                variant="outline-warning"
+              >
                 <i class="fa fa-edit"></i>
               </b-button>
-              <b-button @click="destroyInstance(group, instance)" size="sm" variant="outline-danger">
+
+              <b-button
+                v-b-modal="'destroy-model-addon'"
+                @click="confirmRemoveInstance({ instance })"
+                size="sm"
+                variant="outline-danger"
+              >
                 <i class="fa fa-trash"></i>
               </b-button>
+
             </span>
 
           </li>
+
           <li
             class="list-group-item list-group-item-warning"
             v-if="!collection[0]"
           >
             No {{ group.label_plural }} defined
           </li>
+
         </ul>
 
       </b-card>
@@ -147,24 +219,56 @@ export default {
     OptionTemplateWrapper,
     OptionFormItem
   },
+  data () {
+    return {
+      removeInstanceId: ''
+    }
+  },
   mounted () {
     this.$store.dispatch('build/editor/selectModelAddon', { group: this.group, schema: this.selectedSchema })
   },
   computed: mapGetters({
     schemas: 'editor/schema/collection/items',
     selectedSchema: 'build/editor/selectedSchema',
-    newAddon: 'build/editor/addon/newModel',
-    collection: 'build/editor/addon/items'
+    newAddon: 'build/editor/model_addon/newModel',
+    collection: 'build/editor/model_addon/items'
   }),
   methods: {
     ...mapActions({
-      saveAddon: 'build/editor/addon/create'
+      createModel: 'build/editor/model_addon/create',
+      updateModel: 'build/editor/model_addon/update',
+      removeModel: 'build/editor/model_addon/destroy',
+      syncModelAddon: 'build/editor/syncModelAddon'
     }),
-    createAddon () {
-      this.saveAddon()
+    ...mapMutations({
+      resetNewModel: 'build/editor/model_addon/resetNewModel',
+      setEditModel: 'build/editor/model_addon/editModel'
+    }),
+    newInstance () {
+      this.resetNewModel()
+      this.$refs.newModal.show()
     },
-    destroyInstance (group, instance) {
-      // TODO - reimplement
+    createInstance () {
+      this.createModel()
+      this.syncModelAddon({ group: this.group, schema: this.selectedSchema })
+    },
+    editInstance ({ instance }) {
+      this.$store.commit('build/editor/model_addon/newModel', instance)
+      this.$refs.editModal.show()
+    },
+    updateInstance () {
+      this.setEditModel(this.newAddon)
+      this.resetNewModel()
+      this.updateModel()
+    },
+    confirmRemoveInstance ({ instance }) {
+      this.removeInstanceId = instance.id
+      this.$refs.confirmRemoval.show()
+    },
+    removeInstance () {
+      this.removeModel(this.removeInstanceId)
+      this.syncModelAddon({ group: this.group, schema: this.selectedSchema })
+      this.removeInstanceId = ''
     }
   }
 }

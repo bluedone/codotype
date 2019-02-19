@@ -2,12 +2,8 @@
 <!-- Should not even be SCOPED to the generator module -->
 <template>
   <b-row class='justify-content-center'>
-    <b-col lg=9>
+    <b-col lg=12>
 
-      <!-- Header - Description -->
-      <!-- <small class="text-muted">{{group.description}}</small> -->
-
-      <!-- Define new instance -->
       <div
         class="card card-body mt-2"
         v-for="attr in group.attributes"

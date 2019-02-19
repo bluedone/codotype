@@ -3,7 +3,7 @@
     lazy
     size="lg"
     :visible="showingModal"
-    :title="'Edit Attribute'"
+    :title="'Edit Relation'"
     ok-title='Submit'
     ok-variant='success'
     cancel-title='Cancel'
@@ -11,31 +11,31 @@
     @ok="submit(editModel)"
     @hide="showModal(false)"
   >
-    <AttributeForm :model="editModel" />
+    <RelationForm :model="editModel" />
   </b-modal>
 </template>
 
 <script>
 import { mapGetters, mapActions, mapMutations } from 'vuex'
-import AttributeForm from '../attribute/AttributeForm'
+import RelationForm from './RelationForm'
 
 export default {
-  name: 'AttributeNewModal',
+  name: 'RelationNewModal',
   components: {
-    AttributeForm
+    RelationForm
   },
   computed: mapGetters({
-    showingModal: 'editor/schema/attribute/modals/edit/showing',
-    editModel: 'editor/schema/attribute/collection/editModel'
+    showingModal: 'editor/schema/relation/modals/edit/showing',
+    editModel: 'editor/schema/relation/collection/editModel'
   }),
   methods: {
     ...mapActions({
-      updateModel: 'editor/schema/attribute/collection/update',
-      updateParentSchema: 'editor/schema/updateAttributes'
+      updateModel: 'editor/schema/relation/collection/update',
+      updateParentSchema: 'editor/schema/updateRelations'
     }),
     ...mapMutations({
-      showModal: 'editor/schema/attribute/modals/edit/showing',
-      setEditModel: 'editor/schema/attribute/collection/editModel'
+      showModal: 'editor/schema/relation/modals/edit/showing',
+      setEditModel: 'editor/schema/relation/collection/editModel'
     }),
     submit (editModel) {
       this.setEditModel(editModel)

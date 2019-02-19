@@ -1,15 +1,9 @@
 <template>
   <b-row>
     <b-col lg='12'>
-      <template v-if="brs">
-        <span class='d-flex align-items-center'>
-          <p class="lead mb-0 mr-3">{{ title }}</p>
-          <MoreInfoLink :url="url"/>
-        </span>
-        <small class="text-muted">{{ help }}</small>
-      </template>
-      <span class='d-flex align-items-center' v-else>
+      <span class='d-flex align-items-center'>
         <p class="lead mb-0 mr-3">{{ title }}</p>
+        <br class='d-none d-sm-block d-md-none'>
         <MoreInfoLink :url="url"/>
         <small class="ml-2 text-muted">{{ help }}</small>
       </span>
@@ -23,7 +17,7 @@
 import MoreInfoLink from './MoreInfoLink'
 
 export default {
-  props: ['title', 'help', 'url', 'brs'],
+  props: ['title', 'help', 'url'],
   components: {
     MoreInfoLink
   }

@@ -1,24 +1,16 @@
 <template>
-  <b-modal
-    lazy
-    :visible="showingModal"
-    :title="'New Model'"
-    ok-title='Submit'
-    ok-variant='success'
-    cancel-title='Cancel'
-    cancel-variant='light'
-    @ok="createModel(newModel)"
-    @hide="showModal(false)"
-  >
+  <b-row>
 
-    <b-form>
-      <p class="mb-2 form-text text-muted">Define the core metadata that's used to create a valid model.</p>
-      <b-form-input
-        v-model="schemaLabel"
-        placeholder="Model Label"
-        ref="input_el"
-      />
-    </b-form>
+    <div class="col-lg-12">
+      <b-form>
+        <p class="mb-2 form-text text-muted">Define the core metadata that's used to create a valid model.</p>
+        <b-form-input
+          v-model="schemaLabel"
+          placeholder="Model Label"
+          ref="input_el"
+        />
+      </b-form>
+    </div>
 
     <div class="col-lg-12">
       <p class="mb-2 form-text text-muted">Validate the results below before submission</p>
@@ -30,71 +22,62 @@
               Label
               <i class="fa text-secondary fa-question-circle" v-b-tooltip.hover.right title='"Label" is the human readable token for this model'></i>
             </td>
-            <td>{{ newModel.label || '...' }}</td>
+            <td>{{ model.label || '...' }}</td>
           </tr>
           <tr>
             <td>Label Plural</td>
-            <td>{{ newModel.label_plural || '...' }}</td>
+            <td>{{ model.label_plural || '...' }}</td>
           </tr>
           <tr>
             <td>
               Identifier
               <i class="fa text-secondary fa-question-circle" v-b-tooltip.hover.right title='"Identifier" is the lowecase, underscored token for this model'></i>
             </td>
-            <td>{{ newModel.identifier || '...' }}</td>
+            <td>{{ model.identifier || '...' }}</td>
           </tr>
           <tr>
             <td>Identifier Plural</td>
-            <td>{{ newModel.identifier_plural || '...' }}</td>
+            <td>{{ model.identifier_plural || '...' }}</td>
           </tr>
           <tr>
             <td>
               Class Name
               <i class="fa text-secondary fa-question-circle" v-b-tooltip.hover.right title='"Class Name" is title-cased whitespace-free token for this model'></i>
             </td>
-            <td>{{ newModel.class_name || '...' }}</td>
+            <td>{{ model.class_name || '...' }}</td>
           </tr>
           <tr>
             <td>Class Name Plural</td>
-            <td>{{ newModel.class_name_plural || '...' }}</td>
+            <td>{{ model.class_name_plural || '...' }}</td>
           </tr>
         </tbody>
       </table>
     </div>
 
-  </b-modal>
+  </b-row>
 </template>
 
 <script>
-import { mapGetters, mapActions, mapMutations } from 'vuex'
-
 export default {
   name: 'SchemaForm',
+  props: {
+    model: {
+      required: true
+    }
+  },
   mounted () {
     // TODO - re-implement
     // setTimeout(() => { this.$refs.input_el.focus() }, 500) // Minor delay for input element focus
   },
   computed: {
-    ...mapGetters({
-      showingModal: 'editor/schema/modals/form/showing',
-      newModel: 'editor/schema/collection/newModel'
-    }),
     schemaLabel: {
       get () {
-        return this.newModel.label
+        return this.model.label
       },
       set (label) {
         this.$store.dispatch('editor/schema/setLabel', label)
       }
     }
-  },
-  methods: {
-    ...mapActions({
-      createModel: 'editor/schema/createModel',
-    }),
-    ...mapMutations({
-      showModal: 'editor/schema/modals/form/showing',
-    })
   }
 }
 </script>

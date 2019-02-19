@@ -2,15 +2,15 @@
   <b-row>
 
     <b-col lg=4 sm=12 class="border-right">
-      <SchemaForm />
+      <SchemaNewModal />
       <SchemaNewButton />
-      <b-popover
-        target='new-model-button'
+
+      <HelpPopover
+        target="new-model-button"
         placement="bottom"
-        triggers="hover focus"
-        :show="$store.getters['editor/help/showing']"
-        content="Create New Model">
-      </b-popover>
+        content='Create New Model'>
+      </HelpPopover>
+
       <SchemaList />
     </b-col>
 
@@ -23,15 +23,17 @@
 
 <script>
 import SchemaNewButton from './components/schema/SchemaNewButton'
-import SchemaForm from './components/schema/SchemaForm'
+import SchemaNewModal from './components/schema/SchemaNewModal'
 import SchemaList from './components/schema/SchemaList'
 import SchemaDetail from './components/schema/SchemaDetail'
+import HelpPopover from '../HelpPopover'
 
 export default {
   name: 'BlueprintEditor',
   components: {
     SchemaNewButton,
-    SchemaForm,
+    SchemaNewModal,
+    HelpPopover,
     SchemaList,
     SchemaDetail
   },

@@ -4,7 +4,6 @@
 
       <div class="card" id='attribute-detail'>
 
-        <!-- Card header -->
         <div class="card-header d-flex align-items-center p-2">
 
           <NewModalButton
@@ -12,17 +11,13 @@
             :vuexAction="'editor/schema/' + scope + '/newModel'"
           />
 
-          <!-- TODO - replace with a single component -->
-          <b-popover
+          <HelpPopover
             :target="'add-' + scope + '-button'"
-            placement="bottom"
-            :triggers="[]"
-            :show="$store.getters['editor/help/showing']"
+            placement="right"
             :content="'Add ' + label">
-          </b-popover>
+          </HelpPopover>
 
           <span class='ml-2'>
-            <!-- <i class="fa fa-tags mr-1"></i> -->
             <strong>{{ label }}</strong>
           </span>
 
@@ -34,8 +29,21 @@
           v-model='collection'
           :options="sortableOptions"
         >
-          <AttributeListItem v-if="scope === 'attribute'" v-for="item in collection" :key="item.id" :item="item" />
-          <RelationListItem v-else-if="scope === 'relation'" v-for="item in collection" :key="item.id" :item="item" />
+
+          <AttributeListItem
+            v-if="scope === 'attribute'"
+            v-for="item in collection"
+            :key="item.id"
+            :item="item">
+          </AttributeListItem>
+
+          <RelationListItem
+            v-else-if="scope === 'relation'"
+            v-for="item in collection"
+            :key="item.id"
+            :item="item">
+          </RelationListItem>
+
         </draggable>
 
         <b-list-group flush v-else>
@@ -59,6 +67,7 @@ import smoothReflow from 'vue-smooth-reflow'
 import NewModalButton from './NewModalButton'
 import AttributeListItem from './attribute/AttributeListItem'
 import RelationListItem from './relation/RelationListItem'
+import HelpPopover from '../../HelpPopover'
 
 export default {
   name: 'SortableList',
@@ -79,6 +88,7 @@ export default {
   mixins: [smoothReflow],
   components: {
     draggable,
+    HelpPopover,
     NewModalButton,
     AttributeListItem,
     RelationListItem

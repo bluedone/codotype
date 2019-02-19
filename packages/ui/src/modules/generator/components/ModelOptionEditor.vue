@@ -2,11 +2,11 @@
 <!-- Should not even be SCOPED to the generator module -->
 <template>
   <b-row>
-    <b-col lg=3 class='border-right'>
+    <b-col lg=4 class='border-right'>
       <SchemaSelector :group="group" />
     </b-col>
 
-    <b-col lg=9>
+    <b-col lg=8>
 
       <!-- Header - "User MODEL OPTIONS" -->
       <p class="lead mb-0">

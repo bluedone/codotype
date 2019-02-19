@@ -20,7 +20,7 @@ import OptionTemplateRenderer from './OptionTemplateRenderer'
 export default {
   props: {
     model: { required: true },
-    schema: { required: true },
+    schema: { required: false },
     template: { required: true }
   },
   components: {

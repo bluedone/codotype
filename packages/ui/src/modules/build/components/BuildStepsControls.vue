@@ -1,7 +1,7 @@
 <template>
-  <b-row>
+  <b-row class='w-100 justify-content-center'>
 
-    <b-col lg="12" class="d-flex flex-row w-100 justify-content-between">
+    <b-col xl=9 lg=12 class="d-flex flex-row w-100 justify-content-between">
 
       <b-button
         v-if="currentStep !== 0"
@@ -33,17 +33,7 @@
         <i class="ml-1 fa fa-chevron-right"></i>
       </b-button>
 
-      <!-- TODO - this button should be styled differently -->
-      <!-- TODO - this button should likely be its own component -->
-      <b-button
-        variant="warning"
-        size="lg"
-        @click="generate()"
-        v-if="currentStep === steps.length - 1"
-      >
-        <i class="fa fa-spin fa-cog"></i>
-        Generate Code
-      </b-button>
+      <GenerateCodeButton />
 
     </b-col>
   </b-row>
@@ -53,26 +43,22 @@
 import { mapGetters, mapActions } from 'vuex'
 import TourButton from '../../../components/TourButton'
 import HelpButton from '../../../components/HelpButton'
+import GenerateCodeButton from './GenerateCodeButton'
 
 export default {
   name: 'BuildStepsControls',
   components: {
     TourButton,
-    HelpButton
+    HelpButton,
+    GenerateCodeButton
   },
   computed: mapGetters({
     currentStep: 'build/steps/current',
     steps: 'build/steps/collection/items'
   }),
-  methods: {
-    ...mapActions({
-      incrementStep: 'build/steps/increment',
-      decrementStep: 'build/steps/decrement',
-      generateCodebase: 'build/generate'
-    }),
-    generate () {
-      this.generateCodebase()
-    }
-  }
+  methods: mapActions({
+    incrementStep: 'build/steps/increment',
+    decrementStep: 'build/steps/decrement'
+  })
 }
 </script>
