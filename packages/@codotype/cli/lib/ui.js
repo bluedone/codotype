@@ -9,7 +9,8 @@ async function runUi (options) {
   console.log(options)
 
   // TODO - generate path from here to packages/@codotype/cli-ui
-  const uiPath = path.resolve(__dirname, '../packages/@codotype/cli-ui')
+  // TODO - this should reference an installed package, rather than a direct path
+  const uiPath = path.resolve(__dirname, '../../cli-ui')
 
   // TODO - add cleaner output message here
   console.log('Starting UI...')
