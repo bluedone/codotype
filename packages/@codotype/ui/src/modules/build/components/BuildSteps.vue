@@ -1,0 +1,73 @@
+<template>
+  <b-row>
+    <b-col lg="12" class="step-wrapper d-flex flex-row w-100 align-items-center justify-content-between">
+
+      <template v-for="step, index in steps">
+
+        <BuildStepChild
+          :key="step.id"
+          :step="step"
+          :index="index"
+          style="width: 33.3%;"
+        />
+
+        <!-- Conditionally inserts dividing lines between each BuildStepChild component -->
+        <span class="divider done w-50 bg-success d-flex" v-if="currentStep > index && index < 2"></span>
+        <span class="divider w-50 bg-transparent d-flex" v-else-if="index < 2 && steps.length > 2"></span>
+      </template>
+
+    </b-col>
+
+    <b-col lg="12">
+      <hr>
+    </b-col>
+
+    <!-- <b-col lg="12" class='h-100 align-items-center d-flex' style="min-height: 20rem;"> -->
+    <b-col lg="12" :class='colClassName' style="padding-bottom: 5rem;">
+      <slot name="step-1" v-if="selectedStep.id === 'getting_started'" />
+      <slot name="step-2" v-if="selectedStep.id === 'blueprint_step'" />
+      <slot name="step-3" v-if="selectedStep.id === 'configure_generator'" />
+    </b-col>
+
+  </b-row>
+</template>
+
+<script>
+import { mapGetters } from 'vuex'
+import BuildStepChild from './BuildStepChild'
+
+export default {
+  name: 'BuildSteps',
+  components: {
+    BuildStepChild
+  },
+  computed: {
+    ...mapGetters({
+      steps: 'build/steps/collection/items',
+      currentStep: 'build/steps/current',
+      selectedStep: 'build/steps/selectedStep'
+    }),
+    colClassName () {
+      let css = 'h-100 align-items-center d-flex'
+      if (this.currentStep === 0) css += ' min-height-20'
+      return css
+    }
+  }
+}
+</script>
+
+<style lang="sass">
+
+  div.step-wrapper
+    padding-top: 1.25rem
+    background: #f5f6f9
+
+  span.divider
+    transition: all 0.3s
+    min-height: 4px
+    max-height: 4px
+
+  div.min-height-20
+    min-height: 20rem
+
+</style>
