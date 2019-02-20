@@ -1,6 +1,7 @@
 const fs = require('fs-extra')
 const path = require('path')
 const chalk = require('chalk')
+const server = require('@codotype/api/server')
 const { spawn } = require('child_process')
 const CodotypeRuntime = require('@codotype/runtime')
 
@@ -29,10 +30,16 @@ async function serve (options) {
   //
   // // // //
 
+  console.log('Starting API server...')
+
+  // Starts server
+  server({ runtime })
+
 
   // // // //
   //
   // TODO - import the @codotype/api server and run it here
+
   // TODO - update the @codotype/api server to accept parameters
   // for different host environments & configurations
   //
@@ -44,10 +51,10 @@ async function serve (options) {
   // This process should be abstracted as much as possible
 
   // Generates path from here to packages/@codotype/cli-ui
-  const uiPath = path.resolve(__dirname, '../packages/@codotype/cli-ui')
+  const uiPath = path.resolve(__dirname, '../../cli-ui')
 
   // TODO - add cleaner output message here
-  console.log('Starting UI...')
+  console.log('Starting UI Webpack server...')
 
   // Assembles arguments to start the UI server
   let args = ['--cwd', uiPath, 'run', 'serve']
@@ -62,7 +69,8 @@ async function serve (options) {
   });
 
   uiProc.on('close', (code) => {
-    return resolve(); // TODO - resolve is NOT a thing, remove it
+    console.log('CLOSED')
+    // return resolve(); // TODO - resolve is NOT a thing, remove it
   });
 
   //
