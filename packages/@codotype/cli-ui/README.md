@@ -1,4 +1,4 @@
-# cli-ui
+# @codotype/cli-ui
 
 ## Project setup
 ```

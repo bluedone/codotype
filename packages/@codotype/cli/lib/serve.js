@@ -51,8 +51,8 @@ async function serve (options) {
   // TODO - running a user interface service will necessary in an number of places
   // This process should be abstracted as much as possible
 
-  // Generates path from here to packages/@codotype/cli-ui
-  const uiPath = path.resolve(__dirname, '../../cli-ui')
+  // Generates path from here to node_modules/@codotype/cli-ui
+  const uiPath = path.resolve(__dirname, '../node_modules/@codotype/cli-ui')
 
   // TODO - add cleaner output message here
   console.log('Starting UI Webpack server...')
