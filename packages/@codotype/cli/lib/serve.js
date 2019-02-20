@@ -7,9 +7,6 @@ const CodotypeRuntime = require('@codotype/runtime')
 
 async function serve (options) {
 
-  // Pulls in requisite paths for codotype runtime
-  // console.log(options)
-
   // Logs start message
   console.log(`\nStarting ${chalk.blue(`codotype serve`)}...`)
 
@@ -39,22 +36,16 @@ async function serve (options) {
 
   // Starts server
   const port = process.env.PORT || 9090
-  const app = server({ port, runtime })
+
+  const app = server({
+    port,
+    runtime
+  })
+
   app.listen(port, () => {
     console.log('Started API server...')
     // console.log(`Express is running on port ${port}`)
   })
-
-
-  // // // //
-  //
-  // TODO - import the @codotype/api server and run it here
-
-  // TODO - update the @codotype/api server to accept parameters
-  // for different host environments & configurations
-  //
-  // // // //
-
 
   // // // //
   // TODO - running a user interface service will necessary in an number of places

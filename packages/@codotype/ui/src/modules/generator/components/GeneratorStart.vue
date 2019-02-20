@@ -21,7 +21,16 @@
 
       <div class="row justify-content-center">
         <div class="col-lg-6 text-center">
-          <hr class='mt-2'>
+          <hr class='mt-2 mb-4'>
+          <b-btn
+            class='mb-4'
+            block
+            to="/build"
+            size="lg"
+            variant="primary"
+          >
+            Start
+          </b-btn>
         </div>
       </div>
 
