@@ -17,6 +17,9 @@ export default {
   components: {
     Navbar,
     AppFooter
+  },
+  created () {
+    this.$store.dispatch('generator/fetchCollection')
   }
 }
 </script>
