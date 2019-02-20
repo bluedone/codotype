@@ -33,7 +33,12 @@ async function serve (options) {
   console.log('Starting API server...')
 
   // Starts server
-  server({ runtime })
+  const port = process.env.PORT || 9090
+  const app = server({ port, runtime })
+  app.listen(port, () => {
+    console.log('Started API server...')
+    // console.log(`Express is running on port ${port}`)
+  })
 
 
   // // // //
@@ -60,13 +65,11 @@ async function serve (options) {
   let args = ['--cwd', uiPath, 'run', 'serve']
   const uiProc = spawn('yarn', args);
 
-  uiProc.stdout.on('data', (data) => {
-    console.log(`stdout: ${data}`);
-  });
+  uiProc.stdout.on('data', (data) => console.log(data.toString()))
 
-  uiProc.stderr.on('data', (data) => {
-    console.log(`stderr: ${data}`);
-  });
+  // uiProc.stderr.on('data', (data) => {
+  //   console.log(`stderr: ${data}`);
+  // });
 
   uiProc.on('close', (code) => {
     console.log('CLOSED')
