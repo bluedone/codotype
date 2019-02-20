@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node ./server.js",
-    "dev": "nodemon -L ./server.js",
+    "start": "node ./www.js",
+    "dev": "nodemon -L ./www.js",
     "test": "mocha --exit"
   },
   "author": "",

@@ -6,11 +6,11 @@ const archiver = require('archiver');
 const ObjectId = require('bson-objectid');
 const bodyParser = require('body-parser');
 const omit = require('lodash/omit');
-// const runtime = require('./runtime')
 
 // // // //
 
-module.exports = (({ runtime }) => {
+// TODO - clean up this mess, soon
+module.exports = ({ port, runtime }) => {
 
   // Executes build
   async function generateApplication({ build }) {
@@ -91,7 +91,7 @@ module.exports = (({ runtime }) => {
   const app = express();
 
   // Print the request log on console
-  app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
+  // app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
 
   // parse JSON and url-encoded query
   app.use(bodyParser.urlencoded({ extended: false }));
@@ -156,18 +156,18 @@ module.exports = (({ runtime }) => {
 
   // // // //
 
-  // Port configuration (move to bottom, not needed with serverless)
-  const port = process.env.PORT || 9090;
 
   // Starts Express app
   // TODO - can we run this app as a serverless function?
   // TODO - add a postman collection & environment to this repo
   // TODO - create GitHub issues for these TODOs
   // TODO - add a controller and some more structure to this app
-  app.listen(port, () => {
-    console.log(`Express is running on port ${port}`)
-  })
+
+  // Port configuration & server start
+  // app.listen(port || 9090, () => {
+  //   console.log(`Express is running on port ${port}`)
+  // })
 
   // Returns the app instance
   return app
-})
+}

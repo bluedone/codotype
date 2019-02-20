@@ -1,6 +1,13 @@
-
 // TODO - add .env & .env.example files, dotenv librargsy
 const port = process.env.PORT || 3000
+
+const runtime = require('./runtime')
+const server = require('./server')
+
+const app = server({
+  port,
+  runtime
+})
 
 // Starts Express app
 // TODO - can we run this app as a serverless function?
@@ -8,5 +15,5 @@ const port = process.env.PORT || 3000
 // TODO - create GitHub issues for these TODOs
 // TODO - add a controller and some more structure to this app
 app.listen(port, () => {
-    console.log(`Express is running on port ${port}`)
+  console.log(`Express is running on port ${port}`)
 })
