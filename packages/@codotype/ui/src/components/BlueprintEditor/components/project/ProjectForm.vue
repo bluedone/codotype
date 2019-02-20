@@ -11,7 +11,12 @@
       <small class="text-muted">The Project Name will appear in the header of the app we're building - you can change it later.</small>
     </b-col>
     <b-col lg=6>
-      <b-form-input size="lg" v-model="projectLabel" placeholder="Project Name" />
+      <input
+        ref="input_el"
+        class="form-control form-control-lg"
+        v-model="projectLabel"
+        placeholder="Project Name"
+      />
 
       <br>
 
@@ -32,6 +37,9 @@ import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'ProjectForm',
+  mounted () {
+    setTimeout(() => { this.$refs.input_el.focus() }, 200) // Minor delay for input element focus
+  },
   computed: {
     ...mapGetters({
       label: 'editor/project/label',

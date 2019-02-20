@@ -1,5 +1,5 @@
 <template>
-  <b-row>
+  <b-row v-if="steps[0]">
     <b-col lg="12" class="step-wrapper d-flex flex-row w-100 align-items-center justify-content-between">
 
       <template v-for="step, index in steps">
@@ -13,7 +13,7 @@
 
         <!-- Conditionally inserts dividing lines between each BuildStepChild component -->
         <span class="divider done w-50 bg-success d-flex" v-if="currentStep > index && index < 2"></span>
-        <span class="divider w-50 bg-transparent d-flex" v-else-if="index < 2 && steps.length > 2"></span>
+        <span class="divider w-50 bg-secondary d-flex" v-else-if="index < 2 && steps.length > 2"></span>
       </template>
 
     </b-col>
@@ -63,7 +63,7 @@ export default {
     background: #f5f6f9
 
   span.divider
-    transition: all 0.3s
+    transition: all 0.25s
     min-height: 4px
     max-height: 4px
 

@@ -1,5 +1,5 @@
 <template>
-  <GeneratorBuild :id="generatorId" v-if="!fetching && generatorId"/>
+  <GeneratorBuild :id="selectedModel.id" v-if="selectedModel"/>
 </template>
 
 <script>

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Navbar/>
+    <Navbar v-if="$store.getters['generator/selectedModel']" />
     <div class="container router-container">
       <router-view/>
     </div>
@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import Navbar from '@codotype/ui/src/components/Navbar'
+import Navbar from './components/Navbar'
 import AppFooter from '@codotype/ui/src/components/Footer'
 
 export default {
@@ -19,7 +19,7 @@ export default {
     AppFooter
   },
   created () {
-    this.$store.dispatch('generator/fetchCollection')
+    this.$store.dispatch('generator/selectFromServer')
   }
 }
 </script>

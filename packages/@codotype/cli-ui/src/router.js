@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+import About from './components/About'
 import GeneratorAbout from './components/GeneratorAbout'
 import GeneratorBuild from './components/GeneratorBuild'
 
@@ -13,6 +14,10 @@ export default new Router({
     {
       path: '/',
       component: GeneratorAbout
+    },
+    {
+      path: '/about',
+      component: About
     },
     {
       path: '/build',

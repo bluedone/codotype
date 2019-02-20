@@ -29,11 +29,6 @@ export default {
     setValue: setValue
   },
   actions: {
-    registerDynamicModule ({ state }, scope) {
-      // QUESTION - do we want { preserveState: true } ?
-      const newModule = Object.assign({}, collectionModule({ NEW_MODEL: {} }))
-      this.registerModule(['generator', scope], newModule)
-    },
     selectModel: ({ commit, state }, model_id) => {
       let model = state.collection.find(m => m._id === model_id)
       commit('selectedModel', model)
@@ -50,6 +45,11 @@ export default {
       let model = state.collection.find(m => m.id === model_id) // NOTE - this is only here b.c. generators use `id` instead of `_id`
       commit('selectedModel', model)
       // commit('addon/collection', model.addons, { root: true }) // TODO - move into mediator pattern
+    },
+    selectFromServer: async ({ commit }) => {
+      const { data } = await axios.get(API_ROOT)
+      commit('collection', data)
+      commit('selectedModel', data[0])
     }
   },
   getters: {
