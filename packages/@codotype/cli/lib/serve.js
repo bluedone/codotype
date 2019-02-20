@@ -11,7 +11,7 @@ async function serve (options) {
   // console.log(options)
 
   // Logs start message
-  console.log(`\nStarting ${chalk.blue(`codotype serve`)}...\n`)
+  console.log(`\nStarting ${chalk.blue(`codotype serve`)}...`)
 
   // // // //
   // TODO - wrap this in a try/catch
@@ -19,13 +19,18 @@ async function serve (options) {
   // This logic should be abstracted & generalized as much as possible
   // Pulls in requisite paths for codotype runtime
   const generatorMetaPath = path.resolve(process.cwd(), './meta.json') // TODO - constantize MAGIC STRING
-  console.log(`the doctor says ${chalk.green(`this generator's metadata loaded correctly`)}`)
+  // console.log(`the doctor says ${chalk.green(`this generator's metadata loaded correctly`)}`)
 
   // Invoke runtime directly with parameters
   const runtime = new CodotypeRuntime()
 
   // Registers this generator via relative path
-  runtime.registerGenerator({ absolute_path: process.cwd() })
+  try {
+    runtime.registerGenerator({ absolute_path: process.cwd() })
+  } catch (err) {
+    throw err
+    return
+  }
 
   //
   // // // //
@@ -83,9 +88,9 @@ async function serve (options) {
 
 module.exports = (...args) => {
   return serve(...args).catch(err => {
-    // TODO - implement better error handling
-    console.log('CODOTYPE CLI ERROR!!')
-    console.log(err)
+    console.log(chalk.red('codotype cli error'))
+    console.log(chalk.yellow('generator not found in local directory'))
+    // console.log(err)
     if (!process.env.CODOTYPE_CLI_TEST) {
       process.exit(1)
     }
