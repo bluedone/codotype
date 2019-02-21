@@ -64,8 +64,6 @@ function inflate({ blueprint }) {
             })
 
             let relatedSchema = inflated.schemas.find(s => s.id === rel.related_schema_id)
-            // let reverse_relation = relatedSchema.relations.find(r => r.id === rel.reverse_relation_id)
-            // rel.reverse_relation = cloneDeep(reverse_relation)
 
             // Handles REF_BELONGS_TO
             if (rel.type === 'BELONGS_TO') {
@@ -75,8 +73,8 @@ function inflate({ blueprint }) {
                 order: relatedSchema.relations.length,
                 type: 'REF_BELONGS_TO',
                 required: false,
-                schema_id: relatedSchema.id,
-                related_schema_id: schema.id,
+                schema_id: relatedSchema.id, // TODO - should these be flipped???
+                related_schema_id: schema.id, // TODO - should these be flipped???
                 as: rel.reverse_as,
                 reverse_as: rel.as
               }
