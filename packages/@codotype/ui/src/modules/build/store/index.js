@@ -60,7 +60,7 @@ export default {
       // Loads the generator into the build editor module
       return dispatch('editor/load', {
         schemas: rootGetters['editor/schema/collection/items'],
-        generator_option_groups: generatorMeta.option_groups,
+        generator: generatorMeta,
         configuration: selectedBuild.configuration
       })
     }

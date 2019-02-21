@@ -21,6 +21,15 @@ export default {
       dispatch('schema/selectModel', getters['schema/collection/first'])
     }
   },
+  getters: {
+    blueprint: state => {
+      return {
+        label: state.project.label,
+        identifier: state.project.identifier,
+        schemas: state.schema.collection.items
+      }
+    }
+  },
   modules: {
     schema: schemaModule,
     project: projectModule,

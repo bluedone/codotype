@@ -6,6 +6,7 @@ export default {
   namespaced: true,
   state: {
     selectedSchemaId: '',
+    generatorId: '',
     schemas: [], // TODO - this should implement a collectionModule and copy the schemas over from the blueprint
     option_groups: [],
     configuration: {}
@@ -15,13 +16,15 @@ export default {
     model_addon: Object.assign({}, collectionModule({ NEW_MODEL: {} }))
   },
   getters: {
-    toObj: state => {
-      return state.configuration
+    toBuildStage: state => {
+      return {
+        generator_id: state.generatorId,
+        configuration: state.configuration
+      }
     },
     optionValue: state => ({ group, attribute }) => {
       return state.configuration[group.identifier][attribute.identifier]
     },
-    selectedSchema: state => { return state.schemas.find(s => s.id === state.selectedSchemaId) || state.schemas[0] },
     modelOptionValue: state => ({ group, schema, attribute }) => {
       if (!group || !schema || !attribute) return
 
@@ -36,6 +39,7 @@ export default {
     schemas (state, schemas) { state.schemas = schemas },
     option_groups (state, option_groups) { state.option_groups = option_groups },
     configuration (state, configuration) { state.configuration = configuration },
+    generatorId (state, generatorId) { state.generatorId = generatorId },
     selectedSchemaId (state, selectedSchemaId) { state.selectedSchemaId = selectedSchemaId },
     optionValue (state, { group, attribute, value }) {
       state.configuration[group.identifier][attribute.identifier] = value
@@ -50,10 +54,11 @@ export default {
     // - A schema has been created
     // - A schema has been `updated`
     // - A schema has been destroyed
-    load ({ commit, dispatch }, { generator_option_groups, schemas, configuration }) {
+    load ({ commit, dispatch }, { generator, schemas, configuration }) {
       commit('configuration', configuration)
       commit('schemas', schemas)  // TODO - should interface with collectionModule
-      commit('option_groups', generator_option_groups)
+      commit('option_groups', generator.option_groups)
+      commit('generatorId', generator.id)
     },
 
     // CLEARS the editor module state

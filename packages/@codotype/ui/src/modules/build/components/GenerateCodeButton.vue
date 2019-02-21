@@ -20,7 +20,7 @@ export default {
     steps: 'build/steps/collection/items'
   }),
   methods: mapActions({
-    generateCodebase: 'build/generate'
+    generate: 'build/runtime/generate'
   })
 }
 </script>
