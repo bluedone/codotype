@@ -7,7 +7,7 @@
     ok-variant='danger'
     cancel-title='Cancel'
     cancel-variant='light'
-    @ok="$store.dispatch(`editor/schema/${scope}/collection/destroy`, selectedModel.id)"
+    @ok="$store.dispatch(`editor/schema/${scope}/destroyModel`, selectedModel.id)"
     @hide="$store.commit(`editor/schema/${scope}/modals/destroy/showing`, false)"
   >
 
