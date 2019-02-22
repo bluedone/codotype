@@ -1,16 +1,39 @@
 // TODO - annotate the purpose and usage of this Vuex module
-export default {
-  namespaced: true,
-  state: {
-    showingModal: false
-  },
-  getters: {
-    showingModal: state => state.showingModal
-  },
-  mutations: {
-    showingModal (state, bool) {
-      state.showingModal = bool
+export default function ({ NEW_MODEL }) {
+
+  return {
+    namespaced: true,
+    state: {
+      defaultModel: Object.assign({}, NEW_MODEL),
+      model: Object.assign({}, NEW_MODEL),
+      errors: []
+    },
+    mutations: {
+      defaultModel (state, defaultModel) {
+        state.defaultModel = Object.assign({}, defaultModel)
+      },
+      reset (state) {
+        state.model = Object.assign({}, state.defaultModel)
+        state.errors = []
+      },
+      modelAttr (state, { attribute, value }) {
+        state.model[attribute.identifier] = value
+      },
+      model (state, model) {
+        state.model = Object.assign({}, model)
+      }
+    },
+    getters: {
+      model (state) {
+        return state.model
+      },
+      modelAttr: state => ({ attribute }) => {
+        return state.model[attribute.identifier]
+      }
+    },
+    actions: {
+      validate () {}
     }
-  },
-  actions: {}
+  }
+
 }
