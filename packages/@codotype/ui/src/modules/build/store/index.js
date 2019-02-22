@@ -38,8 +38,7 @@ export default {
         newModel.configuration = buildConfiguration({ schemas: schemas, generator: generatorMeta })
 
         // Saves the new model and re-dispatches this action
-        commit('collection/newModel', newModel)
-        dispatch('collection/create')
+        dispatch('collection/insert', newModel)
         return dispatch('selectBuild', generator_id)
       }
 
@@ -66,7 +65,7 @@ export default {
     }
   },
   modules: {
-    collection: Object.assign({}, collectionModule({ NEW_MODEL: DEFAULT_BUILD })),
+    collection: collectionModule({ NEW_MODEL: DEFAULT_BUILD }), // TODO - update collectionModule
     steps: stepModule,
     runtime: runtimeModule,
     editor: editorModule

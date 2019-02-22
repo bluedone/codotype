@@ -12,8 +12,8 @@ export default {
     configuration: {}
   },
   modules: {
-    global_addon: Object.assign({}, collectionModule({ NEW_MODEL: {} })),
-    model_addon: Object.assign({}, collectionModule({ NEW_MODEL: {} }))
+    global_addon: collectionModule({ NEW_MODEL: {} }),
+    model_addon: collectionModule({ NEW_MODEL: {} })
   },
   getters: {
     toBuildStage: state => {

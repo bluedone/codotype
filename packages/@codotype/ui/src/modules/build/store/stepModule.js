@@ -64,6 +64,6 @@ export default {
     }
   },
   modules: {
-    collection: Object.assign({}, collectionModule({ NEW_MODEL: {} }))
+    collection: collectionModule({ NEW_MODEL: {} }) // TODO - update collectionModule
   }
 }
