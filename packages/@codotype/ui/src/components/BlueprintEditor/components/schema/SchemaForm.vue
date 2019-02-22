@@ -58,18 +58,17 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'SchemaForm',
-  props: {
-    model: {
-      required: true
-    }
-  },
   mounted () {
-    // TODO - re-implement
-    // setTimeout(() => { this.$refs.input_el.focus() }, 500) // Minor delay for input element focus
+    setTimeout(() => { this.$refs.input_el.focus() }, 500)
   },
   computed: {
+    ...mapGetters({
+      model: 'editor/schema/form/model'
+    }),
     schemaLabel: {
       get () {
         return this.model.label

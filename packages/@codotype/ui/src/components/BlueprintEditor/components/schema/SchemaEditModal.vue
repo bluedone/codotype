@@ -7,10 +7,10 @@
     ok-variant='success'
     cancel-title='Cancel'
     cancel-variant='light'
-    @ok="createModel(editModel)"
+    @ok="updateModel()"
     @hide="showModal(false)"
   >
-    <SchemaForm :model="editModel" />
+    <SchemaForm />
   </b-modal>
 </template>
 
@@ -24,12 +24,11 @@ export default {
     SchemaForm
   },
   computed: mapGetters({
-    showingModal: 'editor/schema/modals/edit/showing',
-    editModel: 'editor/schema/collection/editModel'
+    showingModal: 'editor/schema/modals/edit/showing'
   }),
   methods: {
     ...mapActions({
-      createModel: 'editor/schema/createModel',
+      updateModel: 'editor/schema/updateModel',
     }),
     ...mapMutations({
       showModal: 'editor/schema/modals/edit/showing',

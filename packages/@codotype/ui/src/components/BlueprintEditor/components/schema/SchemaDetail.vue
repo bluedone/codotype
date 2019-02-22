@@ -72,9 +72,8 @@
 
       <AttributeNewModal />
       <AttributeEditModal />
-
-      <DestroyModal scope="relation" label="Relation" />
       <DestroyModal scope="attribute" label="Attribute" />
+
 
       <hr>
 
@@ -86,7 +85,7 @@
 
       <RelationNewModal />
       <RelationEditModal />
-      <!-- TODO - add RelationEdit modal here -->
+      <DestroyModal scope="relation" label="Relation" />
 
     </b-col>
 
