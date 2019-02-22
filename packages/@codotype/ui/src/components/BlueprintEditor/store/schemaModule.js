@@ -1,7 +1,7 @@
 import { inflateMeta } from '@codotype/util/lib/inflateMeta'
 import { sanitizeLabel } from '@codotype/util/lib/sanitizeLabel'
 import { NEW_SCHEMA_MODEL } from '@codotype/types/lib/default_schema'
-import formModule from './modules/formModule'
+import formModule from '../../../store/lib/formModule'
 import modalModule from '../../../store/lib/modalModule'
 import collectionModule from '../../../store/lib/collectionModule'
 import selectModelModule from './modules/selectModelModule'
