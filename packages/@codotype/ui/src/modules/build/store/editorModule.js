@@ -22,6 +22,9 @@ export default {
         configuration: state.configuration
       }
     },
+    selectedSchema: state => {
+      return state.schemas.find(s => s.id === state.selectedSchemaId) || state.schemas[0]
+    },
     optionValue: state => ({ group, attribute }) => {
       return state.configuration[group.identifier][attribute.identifier]
     },
