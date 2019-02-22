@@ -1,4 +1,4 @@
-import modalModule from './modules/modalModule'
+import modalModule from '../../../store/lib/modalModule'
 import formModule from './modules/formModule'
 import selectModelModule from './modules/selectModelModule'
 import collectionModule from '../../../store/lib/collectionModule'

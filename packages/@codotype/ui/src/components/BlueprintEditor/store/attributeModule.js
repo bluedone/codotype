@@ -1,6 +1,6 @@
 import { sanitizeLabel } from '@codotype/util/lib/sanitizeLabel'
 import { inflateMeta } from '@codotype/util/lib/inflateMeta'
-import modalModule from './modules/modalModule'
+import modalModule from '../../../store/lib/modalModule'
 import selectModelModule from './modules/selectModelModule'
 import formModule from './modules/formModule'
 import collectionModule from '../../../store/lib/collectionModule'
