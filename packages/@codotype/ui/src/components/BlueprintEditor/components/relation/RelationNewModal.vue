@@ -8,10 +8,10 @@
     ok-variant='success'
     cancel-title='Cancel'
     cancel-variant='light'
-    @ok="submit(newModel)"
+    @ok="createModel()"
     @hide="showModal(false)"
   >
-    <RelationForm :model="newModel" />
+    <RelationForm />
   </b-modal>
 </template>
 
@@ -25,23 +25,15 @@ export default {
     RelationForm
   },
   computed: mapGetters({
-    showingModal: 'editor/schema/relation/modals/new/showing',
-    newModel: 'editor/schema/relation/collection/newModel'
+    showingModal: 'editor/schema/relation/modals/new/showing'
   }),
   methods: {
     ...mapActions({
-      createModel: 'editor/schema/relation/collection/create',
-      updateParentSchemaRelations: 'editor/schema/updateRelations'
+      createModel: 'editor/schema/relation/createModel'
     }),
     ...mapMutations({
-      showModal: 'editor/schema/relation/modals/new/showing',
-      setNewModel: 'editor/schema/relation/collection/newModel'
-    }),
-    submit (newModel) {
-      this.setNewModel(newModel)
-      this.createModel(),
-      this.updateParentSchemaRelations()
-    }
+      showModal: 'editor/schema/relation/modals/new/showing'
+    })
   }
 }
 </script>

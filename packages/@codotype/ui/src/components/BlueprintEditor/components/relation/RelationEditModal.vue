@@ -8,10 +8,10 @@
     ok-variant='success'
     cancel-title='Cancel'
     cancel-variant='light'
-    @ok="submit(editModel)"
+    @ok="updateModel()"
     @hide="showModal(false)"
   >
-    <RelationForm :model="editModel" />
+    <RelationForm />
   </b-modal>
 </template>
 
@@ -25,23 +25,15 @@ export default {
     RelationForm
   },
   computed: mapGetters({
-    showingModal: 'editor/schema/relation/modals/edit/showing',
-    editModel: 'editor/schema/relation/collection/editModel'
+    showingModal: 'editor/schema/relation/modals/edit/showing'
   }),
   methods: {
     ...mapActions({
-      updateModel: 'editor/schema/relation/collection/update',
-      updateParentSchema: 'editor/schema/updateRelations'
+      updateModel: 'editor/schema/relation/updateModel'
     }),
     ...mapMutations({
-      showModal: 'editor/schema/relation/modals/edit/showing',
-      setEditModel: 'editor/schema/relation/collection/editModel'
-    }),
-    submit (editModel) {
-      this.setEditModel(editModel)
-      this.updateModel()
-      this.updateParentSchema()
-    }
+      showModal: 'editor/schema/relation/modals/edit/showing'
+    })
   }
 }
 </script>

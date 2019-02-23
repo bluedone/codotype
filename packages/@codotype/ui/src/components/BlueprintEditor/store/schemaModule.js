@@ -1,8 +1,8 @@
 import { inflateMeta } from '@codotype/util/lib/inflateMeta'
 import { sanitizeLabel } from '@codotype/util/lib/sanitizeLabel'
 import { NEW_SCHEMA_MODEL } from '@codotype/types/lib/default_schema'
-import formModule from './modules/formModule'
-import modalModule from './modules/modalModule'
+import formModule from '../../../store/lib/formModule'
+import modalModule from '../../../store/lib/modalModule'
 import collectionModule from '../../../store/lib/collectionModule'
 import selectModelModule from './modules/selectModelModule'
 import attributeModule from './attributeModule'
@@ -17,51 +17,25 @@ export default {
       commit('relation/collection/items', model.relations)
     },
     newModel ({ commit }) {
-      commit('collection/resetNewModel')
+      commit('form/reset')
       commit('modals/new/showing', true)
     },
     editModel ({ commit, getters }) {
-      commit('collection/editModel', getters['selectedModel'])
+      commit('form/model', getters['selectedModel'])
       commit('modals/edit/showing', true)
     },
-    createModel ({ getters, commit, dispatch }, model) {
-      commit('collection/newModel', model)
-      dispatch('collection/create')
+    createModel ({ getters, commit, dispatch }) {
+      const model = getters['form/model']
+      dispatch('collection/insert', model)
       dispatch('selectModel', getters['collection/last'])
     },
-    // TODO - implement top-level update method
-    // update ({ state, commit }, schema) {
-    //   let collection = state.collection.map((s) => {
-    //     if (s._id === schema._id) {
-    //       s.label = schema.label // TODO - titleize
-    //       s.label_plural = schema.label_plural
-    //       s.identifier = schema.identifier
-    //       s.identifier_plural = schema.identifier_plural
-    //       s.class_name = schema.class_name
-    //       s.class_name_plural = schema.class_name_plural
-    //     }
-    //     return s
-    //   })
-    //   return commit('collection', collection)
-    // },
+    updateModel ({ getters, commit, dispatch }) {
+      const model = getters['form/model']
+      dispatch('collection/insert', model)
+    },
     destroyModel ({ getters, dispatch }, model) {
       dispatch('selectModel', getters['collection/first'])
       dispatch('collection/destroy', model.id)
-    },
-    setLabel ({ getters, commit }, label) {
-      let newModel = getters['collection/newModel']
-
-      // Replaces all non letter & whitespace characters
-      // Replaces all chains of whitespace to a single space each
-      const sanitizedLabel = sanitizeLabel(label)
-
-      // Gets metadata from the trimmed sanitizedLabel
-      const metadata = inflateMeta(sanitizedLabel.trim())
-
-      // Assigns metadata to newModel
-      metadata.label = sanitizedLabel
-      newModel = Object.assign(newModel, metadata)
-      commit('collection/newModel', newModel)
     },
     updateAttributes ({ state, getters, dispatch }) {
       const model = getters['selectedModel']
@@ -72,6 +46,21 @@ export default {
       const model = getters['selectedModel']
       model.relations = state.relation.collection.items
       dispatch('collection/insert', model)
+    },
+    setLabel ({ getters, commit }, label) {
+      let model = getters['form/model']
+
+      // Replaces all non letter & whitespace characters
+      // Replaces all chains of whitespace to a single space each
+      const sanitizedLabel = sanitizeLabel(label)
+
+      // Gets metadata from the trimmed sanitizedLabel
+      const metadata = inflateMeta(sanitizedLabel.trim())
+
+      // Assigns metadata to model
+      metadata.label = sanitizedLabel
+      model = Object.assign(model, metadata)
+      commit('form/model', model)
     }
   },
   getters: {
@@ -80,7 +69,8 @@ export default {
     }
   },
   modules: {
-    collection: Object.assign({}, collectionModule({ NEW_MODEL: NEW_SCHEMA_MODEL })),
+    form: formModule({ NEW_MODEL: NEW_SCHEMA_MODEL }),
+    collection: collectionModule({ NEW_MODEL: NEW_SCHEMA_MODEL }), // TODO - refactor collectionModule
     selectedModel: selectModelModule(),
     attribute: attributeModule,
     relation: relationModule,

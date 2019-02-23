@@ -57,7 +57,7 @@
           title="Edit"
           variant="outline-warning"
           v-b-tooltip.hover.top
-          @click="editModel"
+          @click="editModel(item)"
         >
           <i class="fas fa-fw fa-pencil-alt"></i>
         </b-button>
@@ -87,24 +87,9 @@ export default {
     AttributeListItemLabel,
     DestroyButton
   },
-  methods: {
-    ...mapMutations({
-      setEditModel: 'editor/schema/attribute/collection/editModel',
-      showEditModal: 'editor/schema/attribute/modals/edit/showing',
-    }),
-    ...mapActions({
-      removeModel: 'editor/schema/attribute/collection/destroy',
-      updateAttributes: 'editor/schema/updateAttributes'
-    }),
-    editModel () {
-      this.setEditModel(this.item)
-      this.showEditModal(true)
-    },
-    destroyModel () {
-      this.removeModel(this.item.id)
-      this.updateAttributes()
-    }
-  }
+  methods: mapActions({
+    editModel: 'editor/schema/attribute/editModel'
+  })
 }
 </script>
 

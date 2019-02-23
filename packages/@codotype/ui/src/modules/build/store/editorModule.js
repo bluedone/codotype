@@ -12,8 +12,8 @@ export default {
     configuration: {}
   },
   modules: {
-    global_addon: Object.assign({}, collectionModule({ NEW_MODEL: {} })),
-    model_addon: Object.assign({}, collectionModule({ NEW_MODEL: {} }))
+    global_addon: collectionModule({ NEW_MODEL: {} }),
+    model_addon: collectionModule({ NEW_MODEL: {} })
   },
   getters: {
     toBuildStage: state => {
@@ -21,6 +21,9 @@ export default {
         generator_id: state.generatorId,
         configuration: state.configuration
       }
+    },
+    selectedSchema: state => {
+      return state.schemas.find(s => s.id === state.selectedSchemaId) || state.schemas[0]
     },
     optionValue: state => ({ group, attribute }) => {
       return state.configuration[group.identifier][attribute.identifier]

@@ -8,16 +8,16 @@
     ok-variant='success'
     cancel-title='Cancel'
     cancel-variant='light'
-    @ok="submit(newModel)"
+    @ok="createModel()"
     @hide="showModal(false)"
   >
-    <AttributeForm :model="newModel" />
+    <AttributeForm />
   </b-modal>
 </template>
 
 <script>
-import AttributeForm from '../attribute/AttributeForm'
 import { mapGetters, mapActions, mapMutations } from 'vuex'
+import AttributeForm from '../attribute/AttributeForm'
 
 export default {
   name: 'AttributeNewModal',
@@ -25,21 +25,15 @@ export default {
     AttributeForm
   },
   computed: mapGetters({
-    showingModal: 'editor/schema/attribute/modals/new/showing',
-    newModel: 'editor/schema/attribute/collection/newModel'
+    showingModal: 'editor/schema/attribute/modals/new/showing'
   }),
   methods: {
     ...mapActions({
-      createModel: 'editor/schema/attribute/collection/create',
-      updateParentSchema: 'editor/schema/updateAttributes'
+      createModel: 'editor/schema/attribute/createModel'
     }),
     ...mapMutations({
       showModal: 'editor/schema/attribute/modals/new/showing'
-    }),
-    submit (newModel) {
-      this.createModel()
-      this.updateParentSchema()
-    }
+    })
   }
 }
 </script>

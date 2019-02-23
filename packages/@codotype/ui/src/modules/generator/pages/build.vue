@@ -57,7 +57,6 @@ export default {
     this.selectModel(this.id)
     this.$store.dispatch('build/loadSteps', this.id)
     this.$store.dispatch('build/steps/reset')
-    this.$store.commit('editor/about/showing', false)
   },
   methods: mapActions({
     selectModel: 'generator/selectModel'

@@ -38,7 +38,7 @@
           </AttributeListItem>
 
           <RelationListItem
-            v-else-if="scope === 'relation'"
+            v-if="scope === 'relation'"
             v-for="item in collection"
             :key="item.id"
             :item="item">
@@ -103,7 +103,6 @@ export default {
         fallbackTolerance: 100
       }
     },
-    // TODO - this should be moved into Vuex store, but how?
     collection: {
       get () {
         return orderBy(this.$store.getters[`editor/schema/${this.scope}/collection/items`], ['order'], ['asc'])
@@ -111,6 +110,11 @@ export default {
       set (value) {
         value.forEach((s, i) => { s.order = i })
         this.$store.commit(`editor/schema/${this.scope}/collection/items`, value)
+        if (this.scope === 'attribute') {
+          this.$store.dispatch('editor/schema/updateAttributes')
+        } else {
+          this.$store.dispatch('editor/schema/updateRelations')
+        }
       }
     }
   }

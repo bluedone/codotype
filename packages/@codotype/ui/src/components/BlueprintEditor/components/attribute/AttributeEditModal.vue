@@ -8,10 +8,10 @@
     ok-variant='success'
     cancel-title='Cancel'
     cancel-variant='light'
-    @ok="submit(editModel)"
+    @ok="updateModel()"
     @hide="showModal(false)"
   >
-    <AttributeForm :model="editModel" />
+    <AttributeForm />
   </b-modal>
 </template>
 
@@ -25,23 +25,15 @@ export default {
     AttributeForm
   },
   computed: mapGetters({
-    showingModal: 'editor/schema/attribute/modals/edit/showing',
-    editModel: 'editor/schema/attribute/collection/editModel'
+    showingModal: 'editor/schema/attribute/modals/edit/showing'
   }),
   methods: {
     ...mapActions({
-      updateModel: 'editor/schema/attribute/collection/update',
-      updateParentSchema: 'editor/schema/updateAttributes'
+      updateModel: 'editor/schema/attribute/updateModel'
     }),
     ...mapMutations({
-      showModal: 'editor/schema/attribute/modals/edit/showing',
-      setEditModel: 'editor/schema/attribute/collection/editModel'
-    }),
-    submit (editModel) {
-      this.setEditModel(editModel)
-      this.updateModel()
-      this.updateParentSchema()
-    }
+      showModal: 'editor/schema/attribute/modals/edit/showing'
+    })
   }
 }
 </script>

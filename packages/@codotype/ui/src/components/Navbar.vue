@@ -21,8 +21,6 @@ export default {
       return this.$route.name === 'BlueprintShow'
     },
     showGeneratorMenu () {
-      // return this.$route.name === 'GeneratorShow'
-      console.log(this.$route.name)
       return ['GeneratorShow', 'GeneratorBuild'].includes(this.$route.name)
     }
   }

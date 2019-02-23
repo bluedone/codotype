@@ -1,4 +1,3 @@
-import collectionModule from '../../../store/lib/collectionModule'
 import uniq from 'lodash/uniq'
 import axios from 'axios'
 import { API_ROOT } from './constants'

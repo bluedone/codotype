@@ -28,7 +28,7 @@ export default {
       // Debugging
       // console.log(blueprint)
       // console.log(configuration)
-      console.log(build)
+      // console.log(build)
 
       // Sets `state.loading` to `true`
       // Sets `state.finished` to `false`

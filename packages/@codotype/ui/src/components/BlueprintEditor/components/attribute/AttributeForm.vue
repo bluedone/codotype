@@ -22,23 +22,22 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
 import AttributeDatatypeForm from './AttributeDatatypeForm'
 import AttributePropertiesForm from './AttributePropertiesForm'
 import AttributeValidationsForm from './AttributeValidationsForm'
 
 export default {
   name: 'AttributeForm',
-  props: {
-    model: {
-      required: true
-    }
-  },
   components: {
     AttributeDatatypeForm,
     AttributePropertiesForm,
     AttributeValidationsForm
   },
   computed: {
+    ...mapGetters({
+      model: 'editor/schema/attribute/form/model'
+    }),
     formStep () {
       return !this.model.datatype
     }
