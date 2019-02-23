@@ -59,18 +59,18 @@ export default {
 <style lang="sass">
   // TODO - replace with a global SASS import
   // https://vueschool.io/articles/vuejs-tutorials/globally-load-sass-into-your-vue-js-applications/
-  @import '../../../sass/vendor'
+  // @import '../../../sass/vendor'
 
   div.step-wrapper
     padding-top: 1.25rem
     background: #f5f6f9
 
   span.divider
-    transition: all 0.3s
+    transition: all 0.3s ease
     min-height: 4px
     max-height: 4px
     border-radius: 4px
-    background: linear-gradient(to right, $success 50%, $secondary 50%)
+    background: linear-gradient(to right, #02B875 50%, #ced4da 50%)
     background-size: 200% 100%
     background-position: right bottom
 
