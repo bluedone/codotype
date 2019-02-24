@@ -18,12 +18,15 @@
         placeholder="Project Name"
       />
 
+      <small class="text-muted">Identifier: {{identifier}}</small>
+
       <br>
 
       <b-button
         size="lg"
         block
         variant="primary"
+        :disabled="!enableSubmit"
         @click="incrementStep()"
       >
         Let's Go!
@@ -43,7 +46,8 @@ export default {
   computed: {
     ...mapGetters({
       label: 'editor/project/label',
-      identifier: 'editor/project/identifier'
+      identifier: 'editor/project/identifier',
+      enableSubmit: 'editor/project/enableSubmit'
     }),
     projectLabel: {
       get () {
