@@ -30,7 +30,7 @@ import { mapGetters, mapActions } from 'vuex'
 import BuildSteps from '../../build/components/BuildSteps'
 import ProjectForm from '../../../components/BlueprintEditor/components/project/ProjectForm'
 import BlueprintEditor from '../../../components/BlueprintEditor'
-import ConfigureGenerator from '../components/ConfigureGenerator'
+import ConfigureGenerator from '../../build/components/ConfigurationEditor'
 
 export default {
   name: 'GeneratorBuild',

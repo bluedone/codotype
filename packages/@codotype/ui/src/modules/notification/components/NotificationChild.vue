@@ -1,4 +1,3 @@
-
 <template>
   <div class="col-lg-12 text-center">
     <div role="alert" class="alert alert-dismissible fade show" :class="'alert-' + item.context">
@@ -15,8 +14,6 @@
     </div>
   </div>
 </template>
-
-<!-- // // // //  -->
 
 <script>
 export default {

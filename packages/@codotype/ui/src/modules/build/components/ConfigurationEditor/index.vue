@@ -52,11 +52,11 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import EditorHeader from '../../../components/EditorHeader'
-import GlobalOptionEditor from './GlobalOptionEditor'
-import ModelOptionEditor from './ModelOptionEditor'
-import ModelAddonEditor from './ModelAddonEditor'
-import GlobalAddonEditor from './GlobalAddonEditor'
+import EditorHeader from '../../../../components/EditorHeader'
+import GlobalOptionEditor from './components/GlobalOptionEditor'
+import ModelOptionEditor from './components/ModelOptionEditor'
+import ModelAddonEditor from './components/ModelAddonEditor'
+import GlobalAddonEditor from './components/GlobalAddonEditor'
 
 import {
   OPTION_GROUP_TYPE_GLOBAL_OPTION,

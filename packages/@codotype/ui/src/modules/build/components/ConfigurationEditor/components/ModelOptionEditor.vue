@@ -36,7 +36,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import OptionFormItem from '../../option/components/OptionFormItem'
+import OptionFormItem from './OptionFormItem'
 import SchemaSelector from './SchemaSelector'
 
 export default {

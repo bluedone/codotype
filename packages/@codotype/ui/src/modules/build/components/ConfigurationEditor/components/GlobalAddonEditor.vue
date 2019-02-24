@@ -110,9 +110,9 @@
 
 <script>
 import { mapGetters, mapActions, mapMutations } from 'vuex'
-import OptionFormItem from '../../option/components/OptionFormItem'
-import OptionTemplateRenderer from '../../option/components/OptionTemplateRenderer'
-import OptionTemplateWrapper from '../../option/components/OptionTemplateWrapper'
+import OptionFormItem from './OptionFormItem'
+import OptionTemplateRenderer from './OptionTemplateRenderer'
+import OptionTemplateWrapper from './OptionTemplateWrapper'
 
 export default {
   name: 'GlobalAddonEditor',
