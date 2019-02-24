@@ -115,7 +115,7 @@ import OptionTemplateRenderer from '../../option/components/OptionTemplateRender
 import OptionTemplateWrapper from '../../option/components/OptionTemplateWrapper'
 
 export default {
-  name: 'ModelAddonEditor',
+  name: 'GlobalAddonEditor',
   props: {
     group: { required: true }
   },
