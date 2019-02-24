@@ -72,6 +72,7 @@ export default {
     height: 1.5rem
     border-radius: 25px
     font-weight: 700
+    transition: all 0.3s
 
   .step-text
     font-weight: 700
