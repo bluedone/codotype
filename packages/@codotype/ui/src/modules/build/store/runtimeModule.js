@@ -55,6 +55,12 @@ export default {
     }
   },
   mutations: {
+    reset (state) {
+      state.loading = false
+      state.finished = false
+      state.downloadUrl = ''
+      state.error = ''
+    },
     loading (state, loading) { state.loading = loading },
     finished (state, finished) { state.finished = finished },
     downloadUrl (state, downloadUrl) { state.downloadUrl = downloadUrl },
