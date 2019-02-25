@@ -11,6 +11,12 @@ export default {
     error: '' // TODO - implement some basic error handling
   },
   actions: {
+    reset: ({ commit }) => {
+      commit('loading', false)
+      commit('finished', false)
+      commit('downloadUrl', '')
+      commit('error', '')
+    },
     generate: ({ rootGetters, state, commit }) => {
       // TODO - this should just be responsible for interfacing with the runtime API
       // All data gathering & validation should take place OUTSIDE the runtime module
@@ -55,12 +61,6 @@ export default {
     }
   },
   mutations: {
-    reset (state) {
-      state.loading = false
-      state.finished = false
-      state.downloadUrl = ''
-      state.error = ''
-    },
     loading (state, loading) { state.loading = loading },
     finished (state, finished) { state.finished = finished },
     downloadUrl (state, downloadUrl) { state.downloadUrl = downloadUrl },
