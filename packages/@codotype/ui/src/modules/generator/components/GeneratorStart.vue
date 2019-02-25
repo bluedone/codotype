@@ -37,7 +37,6 @@
       <div class="row justify-content-center">
         <div class="col-lg-6 d-flex justify-content-between align-items-center">
 
-          <!-- TODO - break out into a distinct component -->
           <span class="d-flex">
             <GeneratorTypeTag v-for="tag in model.type_tags" :key="tag" :tag="tag" />
             <GeneratorTechTag v-for="tag in model.tech_tags" :key="tag" :tag="tag" />

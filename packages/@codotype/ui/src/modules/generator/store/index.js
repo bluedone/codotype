@@ -3,17 +3,12 @@ import axios from 'axios'
 import { API_ROOT } from './constants'
 const namespaced = true
 
-const setValue = (state, { group, attr, val }) => { state.config[group][attr] = val }
-
 export default {
   namespaced,
   state: {
     collection: [],
     fetching: false,
-    selectedModel: {},
-    config: {
-      authorizations: {} // NOTE - this will be auto-populated
-    }
+    selectedModel: {}
   },
   mutations: {
     fetching (state, bool) {
@@ -24,8 +19,7 @@ export default {
     },
     selectedModel (state, model) {
       state.selectedModel = model
-    },
-    setValue: setValue
+    }
   },
   actions: {
     selectModel: ({ commit, state }, model_id) => {
@@ -36,14 +30,14 @@ export default {
       commit('selectedModel', {})
     },
     fetchCollection: async ({ commit, state }, model_id) => {
+      commit('fetching', true)
       const { data } = await axios.get(API_ROOT)
       commit('collection', data)
-      return true
+      commit('fetching', false)
     },
     selectModel: ({ commit, state }, model_id) => {
-      let model = state.collection.find(m => m.id === model_id) // NOTE - this is only here b.c. generators use `id` instead of `_id`
+      let model = state.collection.find(m => m.id === model_id)
       commit('selectedModel', model)
-      // commit('addon/collection', model.addons, { root: true }) // TODO - move into mediator pattern
     },
     selectFromServer: async ({ commit }) => {
       const { data } = await axios.get(API_ROOT)
