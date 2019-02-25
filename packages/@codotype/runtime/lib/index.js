@@ -8,7 +8,7 @@ const Generator = require('@codotype/generator')
 // // // //
 // Constants
 
-const OUTPUT_DIRECTORY = 'build'
+const OUTPUT_DIRECTORY = 'codotype-build'
 const MODULES_ROOT = 'node_modules'
 const GENERATOR_META_FILENAME = 'meta.json'
 const GENERATOR_CLASS_PATH = 'generator'
@@ -25,6 +25,9 @@ module.exports = class CodotypeRuntime {
 
     // Assigns this.options
     this.options = options;
+
+    // TODO - add option for LOG_LEVEL
+    // TODO - add option for FORCE (overwrite existing files, or prompt user to overwrite if changes are detected)
 
     // Assigns this.generators
     this.generators = [];

@@ -1,4 +1,4 @@
 {
   "verbose": true,
-  "ignore": ["build/**/*", "zip/**/*"]
+  "ignore": ["codotype-build/**/*", "zip/**/*"]
 }
