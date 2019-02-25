@@ -1,9 +1,7 @@
-<!-- TODO - this should really be an entire separate Editor component -->
-<!-- Should not even be SCOPED to the generator module -->
 <template>
-  <!-- <b-tabs no-fade pills vertical lazy nav-wrapper-class="w-25 h-100 pr-3 border-right" class='w-100'> -->
+
   <b-tabs no-fade lazy class='w-100'>
-    <!-- Generator Option Groups -->
+
     <b-tab
       lazy
       class='pt-0'
@@ -52,11 +50,11 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import EditorHeader from '../../../components/EditorHeader'
-import GlobalOptionEditor from './GlobalOptionEditor'
-import ModelOptionEditor from './ModelOptionEditor'
-import ModelAddonEditor from './ModelAddonEditor'
-import GlobalAddonEditor from './GlobalAddonEditor'
+import EditorHeader from '../../../../components/EditorHeader'
+import GlobalOptionEditor from './components/GlobalOptionEditor'
+import ModelOptionEditor from './components/ModelOptionEditor'
+import ModelAddonEditor from './components/ModelAddonEditor'
+import GlobalAddonEditor from './components/GlobalAddonEditor'
 
 import {
   OPTION_GROUP_TYPE_GLOBAL_OPTION,

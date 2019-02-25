@@ -91,7 +91,7 @@ import {
 } from '@codotype/types/lib/datatypes'
 
 import OptionTemplateWrapper from './OptionTemplateWrapper'
-import MoreInfoLink from '../../../components/MoreInfoLink'
+import MoreInfoLink from '../../../../../components/MoreInfoLink'
 import OptionFormItemIcon from './OptionFormItemIcon'
 import { mapGetters, mapMutations } from 'vuex'
 

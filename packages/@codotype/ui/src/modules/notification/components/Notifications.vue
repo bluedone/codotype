@@ -6,8 +6,6 @@
   </transition-group>
 </template>
 
-<!-- // // // //  -->
-
 <script>
 import NotificationChild from './NotificationChild'
 import { mapGetters } from 'vuex'

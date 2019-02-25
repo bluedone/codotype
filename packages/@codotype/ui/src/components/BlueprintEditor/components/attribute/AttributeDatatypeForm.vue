@@ -1,6 +1,6 @@
 <template>
   <div class="form-group">
-    <label>DataType</label>
+    <label>Datatype</label>
     <small class="form-text text-muted">The type of data represented by this attribute.</small>
 
     <b-row>

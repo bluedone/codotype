@@ -1,5 +1,3 @@
-<!-- TODO - this should really be an entire separate Editor component -->
-<!-- Should not even be SCOPED to the generator module -->
 <template>
   <b-row class='justify-content-center'>
     <b-col lg=12>
@@ -21,7 +19,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import OptionFormItem from '../../option/components/OptionFormItem'
+import OptionFormItem from './OptionFormItem'
 
 export default {
   name: 'GlobalOptionEditor',

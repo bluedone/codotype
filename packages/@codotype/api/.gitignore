@@ -7,7 +7,7 @@ yarn-error.log*
 
 # Generated Apps & Zips
 zip/**/*
-build/**/*
+codotype-build/**/*
 !zip/.gitkeep
 !build/.gitkeep
 

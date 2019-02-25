@@ -1,8 +1,10 @@
 <template>
-  <b-row class='justify-content-center'>
+  <Loading v-if="loading" />
+  <BuildFinished v-else-if="finished" />
+  <b-row v-else class='justify-content-center'>
     <b-col xl=9 lg=12>
 
-      <!-- TODO - remove v-if="model.id" -->
+
       <BuildSteps v-if="model.id">
         <template slot="step-1">
           <ProjectForm />
@@ -27,10 +29,12 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import Loading from '../../../components/Loading'
 import BuildSteps from '../../build/components/BuildSteps'
+import BuildFinished from '../../build/components/BuildFinished'
 import ProjectForm from '../../../components/BlueprintEditor/components/project/ProjectForm'
 import BlueprintEditor from '../../../components/BlueprintEditor'
-import ConfigureGenerator from '../components/ConfigureGenerator'
+import ConfigureGenerator from '../../build/components/ConfigurationEditor'
 
 export default {
   name: 'GeneratorBuild',
@@ -39,8 +43,15 @@ export default {
       required: true
     }
   },
+  data () {
+    return {
+      loading: true
+    }
+  },
   components: {
+    Loading,
     BuildSteps,
+    BuildFinished,
     ProjectForm,
     BlueprintEditor,
     ConfigureGenerator
@@ -51,18 +62,20 @@ export default {
     }
   },
   async created () {
-    // TODO - this is only needed IF the generator has NOT been fetched yet
-    // Should display a loading animation as needed
     await this.$store.dispatch('generator/fetchCollection')
     this.selectModel(this.id)
     this.$store.dispatch('build/loadSteps', this.id)
     this.$store.dispatch('build/steps/reset')
+    setTimeout(() => {
+      this.loading = false
+    }, 500)
   },
   methods: mapActions({
     selectModel: 'generator/selectModel'
   }),
   computed: mapGetters({
-    model: 'generator/selectedModel'
+    model: 'generator/selectedModel',
+    finished: 'build/runtime/finished'
   })
 }
 </script>

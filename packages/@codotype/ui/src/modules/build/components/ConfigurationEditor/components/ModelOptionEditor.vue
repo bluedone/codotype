@@ -1,5 +1,3 @@
-<!-- TODO - this should really be an entire separate Editor component -->
-<!-- Should not even be SCOPED to the generator module -->
 <template>
   <b-row>
     <b-col lg=4 class='border-right'>
@@ -36,7 +34,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import OptionFormItem from '../../option/components/OptionFormItem'
+import OptionFormItem from './OptionFormItem'
 import SchemaSelector from './SchemaSelector'
 
 export default {

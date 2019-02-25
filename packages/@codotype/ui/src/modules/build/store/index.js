@@ -15,6 +15,7 @@ export default {
 
       // Loads the generator into the step module
       dispatch('steps/load', generatorMeta)
+      dispatch('runtime/reset')
     },
     selectBuild ({ state, getters, rootGetters, commit, dispatch }, generator_id) {
       // Finds the generator by id
@@ -53,7 +54,7 @@ export default {
         generator: generatorMeta
       })
 
-      // Clears the current editor (TODO - it might be )
+      // Clears the current editor & runtime store
       dispatch('editor/clear')
 
       // Loads the generator into the build editor module
