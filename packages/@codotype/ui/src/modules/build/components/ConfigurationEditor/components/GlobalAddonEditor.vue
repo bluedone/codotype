@@ -134,6 +134,7 @@ export default {
   methods: {
     ...mapActions({
       saveAddon: 'build/editor/global_addon/create',
+      removeAddon: 'build/editor/global_addon/destroy',
       syncGlobalAddon: 'build/editor/syncGlobalAddon',
     }),
     createAddon () {
@@ -141,7 +142,9 @@ export default {
       this.syncGlobalAddon({ group: this.group })
     },
     destroyInstance (group, instance) {
-      // TODO - reimplement
+      // TODO - TEST THIS IMPLEMENTATION
+      removeAddon(instance.id)
+      this.syncGlobalAddon({ group: this.group })
     }
   }
 }

@@ -16,7 +16,6 @@
 <script>
 import OptionTemplateRenderer from './OptionTemplateRenderer'
 
-// TODO - this component should ONLY render the template
 export default {
   props: {
     model: { required: true },

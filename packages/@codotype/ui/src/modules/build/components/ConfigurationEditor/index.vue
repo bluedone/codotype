@@ -1,9 +1,7 @@
-<!-- TODO - this should really be an entire separate Editor component -->
-<!-- Should not even be SCOPED to the generator module -->
 <template>
-  <!-- <b-tabs no-fade pills vertical lazy nav-wrapper-class="w-25 h-100 pr-3 border-right" class='w-100'> -->
+
   <b-tabs no-fade lazy class='w-100'>
-    <!-- Generator Option Groups -->
+
     <b-tab
       lazy
       class='pt-0'
