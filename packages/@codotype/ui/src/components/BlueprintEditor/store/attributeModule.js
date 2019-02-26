@@ -42,6 +42,11 @@ export default {
       commit('form/model', model)
     }
   },
+  getters: {
+    enableSubmit: state => {
+      return state.form.model.label && state.form.model.identifier && state.form.model.datatype
+    }
+  },
   modules: {
     form: formModule({ NEW_MODEL: DEFAULT_ATTRIBUTE }),
     collection: collectionModule({ NEW_MODEL: DEFAULT_ATTRIBUTE }), // TODO - update collection module
