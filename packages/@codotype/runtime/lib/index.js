@@ -9,6 +9,7 @@ const Generator = require('@codotype/generator')
 // Constants
 
 const OUTPUT_DIRECTORY = 'codotype-build'
+const CODOTYPE_MANIFEST_DIRECTORY = '.codotype'
 const MODULES_ROOT = 'node_modules'
 const GENERATOR_META_FILENAME = 'meta.json'
 const GENERATOR_CLASS_PATH = 'generator'
@@ -109,13 +110,16 @@ module.exports = class CodotypeRuntime {
   // Writes the build and the blueprint data to the destination directory
   async writeBuildManifest ({ build }) {
     let output_directory = build.id || ''
-    const dest = path.join(this.options.cwd, OUTPUT_DIRECTORY, output_directory, build.blueprint.identifier);
-    await this.ensureDir(dest)
+    const destRoot = path.join(this.options.cwd, OUTPUT_DIRECTORY, output_directory, build.blueprint.identifier);
+    await this.ensureDir(destRoot)
 
-    // TODO - write these two files into a `.codotype` directory
+    const manifestDest = path.join(destRoot, CODOTYPE_MANIFEST_DIRECTORY);
+    await this.ensureDir(manifestDest)
+
+    // Writes two source files into the `.codotype` directory
     return new Promise((resolve, reject) => {
-      fs.writeFileSync(path.join(dest + '/codotype-build.json'), JSON.stringify(build, null, 2))
-      fs.writeFileSync(path.join(dest + `/${build.blueprint.identifier}-codotype-blueprint.json`), JSON.stringify(build.blueprint, null, 2))
+      fs.writeFileSync(path.join(manifestDest + '/codotype-build.json'), JSON.stringify(build, null, 2))
+      fs.writeFileSync(path.join(manifestDest + `/${build.blueprint.identifier}-codotype-blueprint.json`), JSON.stringify(build.blueprint, null, 2))
       return resolve()
     });
   }

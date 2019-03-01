@@ -8,6 +8,7 @@
     ok-variant='success'
     cancel-title='Cancel'
     cancel-variant='light'
+    :ok-disabled="!enableSubmit"
     @ok="createModel()"
     @hide="showModal(false)"
   >
@@ -25,7 +26,8 @@ export default {
     AttributeForm
   },
   computed: mapGetters({
-    showingModal: 'editor/schema/attribute/modals/new/showing'
+    showingModal: 'editor/schema/attribute/modals/new/showing',
+    enableSubmit: 'editor/schema/attribute/enableSubmit'
   }),
   methods: {
     ...mapActions({

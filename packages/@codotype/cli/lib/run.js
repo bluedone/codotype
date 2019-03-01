@@ -37,10 +37,10 @@ async function runGenerator (blueprint, options) {
     } catch (e) {
       console.log('Error loading configuration - using default')
       // console.log(e)
-      configurationJSON = buildConfiguration({ blueprint: blueprintJSON, generator: require(generatorMetaPath) })
+      configurationJSON = buildConfiguration({ schemas: blueprintJSON.schemas, generator: require(generatorMetaPath) })
     }
   } else {
-    configurationJSON = buildConfiguration({ blueprint: blueprintJSON, generator: require(generatorMetaPath) })
+    configurationJSON = buildConfiguration({ schemas: blueprintJSON.schemas, generator: require(generatorMetaPath) })
   }
 
   // Assembles build object for codotype runtime

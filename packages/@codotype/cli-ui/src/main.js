@@ -1,10 +1,23 @@
+import config from '@codotype/ui/src/config'
 import Vue from 'vue'
 import App from './App.vue'
-import BootstrapVue from 'bootstrap-vue'
 import router from './router'
 import store from './store'
 
-Vue.use(BootstrapVue)
+// bootstrap-vue
+// Bootstrap components and directives
+Vue.use(config.BootstrapVue)
+
+// vue-meta
+// supports `meta` object returned with `module.defaults`
+Vue.use(config.Meta)
+
+// vue-toggle-button
+// http://vue-js-toggle-button.yev.io/
+Vue.use(config.ToggleButton)
+
+// vue-github-buttons
+Vue.use(config.VueGitHubButtons)
 
 Vue.config.productionTip = false
 

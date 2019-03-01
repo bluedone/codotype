@@ -1,10 +1,5 @@
 <template>
-  <b-row>
-    <b-col lg=12>
-      <!-- TODO - remove the v-if="model.id", janky -->
-      <GeneratorStart :model="model" v-if="model.id" />
-    </b-col>
-  </b-row>
+  <GeneratorStart :model="model" v-if="model.id" />
 </template>
 
 <script>

@@ -4,7 +4,7 @@
       <BuildStepsControls />
     </div>
   </div>
-  <HomeFooter v-else />
+  <!-- <HomeFooter v-else /> -->
 </template>
 
 <script>

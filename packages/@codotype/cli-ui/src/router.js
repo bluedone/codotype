@@ -21,7 +21,8 @@ export default new Router({
     },
     {
       path: '/build',
-      component: GeneratorBuild
+      component: GeneratorBuild,
+      name: 'GeneratorBuild'
     }
   ],
   scrollBehavior () {
