@@ -16,6 +16,7 @@
         class="form-control form-control-lg"
         v-model="projectLabel"
         placeholder="Project Name"
+        @keyup.enter="onKeyEnter()"
       />
 
       <small class="text-muted">Identifier: {{identifier || 'project_name'}}</small>
@@ -58,8 +59,15 @@ export default {
       }
     }
   },
-  methods: mapActions({
-    incrementStep: 'build/steps/increment'
-  })
+  methods: {
+    ...mapActions({
+      incrementStep: 'build/steps/increment'
+    }),
+    onKeyEnter () {
+      if (this.enableSubmit) {
+        this.incrementStep()
+      }
+    }
+  }
 }
 </script>
