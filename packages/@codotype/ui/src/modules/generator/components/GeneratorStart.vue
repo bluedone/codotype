@@ -1,40 +1,43 @@
 <template>
-  <div class="row mt-5">
+  <div class="row h-100 align-items-center">
+
     <div class="col-lg-12">
       <div class="row">
         <div class="col-lg-12 text-center">
-          <img class='generator-icon' :src="model.icon"/>
-          <h2>{{model.label}}</h2>
+          <img style="max-width: 4rem !important;" :src="model.icon"/>
+          <h3 class='display-4'>{{model.label}}</h3>
+          <p class="lead text-muted">powered by <a target="_blank" href="https://codotype.org">Codotype</a></p>
         </div>
       </div>
 
-      <div class="row py-2">
+      <div class="row">
 
         <div class="col-lg-12 text-center">
+
           <p class="lead">{{model.description}}</p>
+          <!-- <gh-btns-star slug="codotype/codotype" show-count></gh-btns-star> -->
+          <!-- <gh-btns-follow class='mt-3' user="aeksco" show-count></gh-btns-follow> -->
         </div>
 
-        <div class="col-lg-12 text-center d-flex align-items-center justify-content-center">
-          <gh-btns-star slug="codotype/codotype" show-count></gh-btns-star>
-        </div>
       </div>
-
+      <!-- <gh-btns-star slug="codotype/codotype" show-count></gh-btns-star> -->
       <div class="row justify-content-center">
-        <div class="col-lg-6 text-center">
-          <hr class='mt-2 mb-4'>
+        <div class="col-lg-4 text-center">
           <b-btn
-            class='mb-4'
             block
             to="/build"
             size="lg"
             variant="primary"
           >
-            Start
+            <i class="fa fa-cog fa-spin"></i>
+            Let's build something
           </b-btn>
         </div>
       </div>
 
-      <div class="row justify-content-center">
+    </div>
+
+      <!-- <div class="row justify-content-center" v-if="false">
         <div class="col-lg-6 d-flex justify-content-between align-items-center">
 
           <span class="d-flex">
@@ -45,17 +48,17 @@
           </span>
 
         </div>
-      </div>
+      </div> -->
 
-      <div class="row mt-4 mb-4 justify-content-center">
+      <!-- <div class="row mt-4 mb-4 justify-content-center" v-if="false">
         <div class="col-lg-12">
           <div class='card-header bg-dark text-light'>README.md</div>
           <div class="card-body bg-white" v-html="compiledMarkdown"></div>
-          <!-- <pre class="bg-dark text-light">{{model}}</pre> -->
         </div>
-      </div>
+      </div> -->
 
-    </div>
+      <!-- <pre class="bg-dark text-light">{{model}}</pre> -->
+
   </div>
 </template>
 
