@@ -22,6 +22,8 @@
 
           </h4>
 
+          <!-- <UserSchemaInfo v-if="isUserModel" /> -->
+
           <SchemaEditModal v-if="!isUserModel" />
 
         </b-col>
@@ -46,16 +48,6 @@
           <small class="text-muted">
             Define <strong>Attributes</strong> and <strong>Relations</strong> that describe a single {{ model.label }} model
           </small>
-        </b-col>
-
-        <!-- USER MODEL NOTICE -->
-        <!-- TODO - break out into a separate component? -->
-        <b-col class="pb-1" v-if="isUserModel">
-          <b-alert show>
-            <i class="fa fa-info-circle mr-2"></i>The <strong>User Model</strong> is included by default
-            <br>
-            <small>It comes pre-loaded with an <strong>Email</strong> attribute that cannot be removed</small>
-          </b-alert>
         </b-col>
 
       </b-row>
@@ -97,6 +89,7 @@
 import { mapGetters } from 'vuex'
 import SortableList from '../SortableList'
 import DestroyModal from '../DestroyModal'
+import UserSchemaInfo from './UserSchemaInfo'
 import SchemaEditButton from './SchemaEditButton'
 import SchemaEditModal from './SchemaEditModal'
 import SchemaDestroyButton from './SchemaDestroyButton'
@@ -113,6 +106,7 @@ export default {
     SortableList,
     HelpPopover,
     DestroyModal,
+    UserSchemaInfo,
     SchemaEditButton,
     SchemaEditModal,
     SchemaDestroyButton,
