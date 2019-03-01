@@ -18,7 +18,7 @@
         placeholder="Project Name"
       />
 
-      <small class="text-muted">Identifier: {{identifier}}</small>
+      <small class="text-muted">Identifier: {{identifier || 'project_name'}}</small>
 
       <br>
 
