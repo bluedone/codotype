@@ -101,7 +101,7 @@ module.exports = ({ port, runtime }) => {
 
   async function handleRequest(req, res) {
     // Generates unique build ID
-    const build_id = 'app_' + ObjectId()
+    // const build_id = 'app_' + ObjectId()
 
     // TODO - verify build.app && build.stages
     // TODO - write build manifest to file
@@ -110,7 +110,7 @@ module.exports = ({ port, runtime }) => {
 
     // Pulls build from req.body
     const { build } = req.body
-    build.id = build_id
+    // build.id = build_id
 
     // Generates the application
     // TODO - wrap this in an error hander?
@@ -118,10 +118,10 @@ module.exports = ({ port, runtime }) => {
     await compressBuild({ build })
 
     // Pulls filename for zipped build
-    const filename = zipFilename(build.id)
+    // const filename = zipFilename(build.id)
 
     // Defines key for storage in S3
-    const key = filename.split('/').pop();
+    // const key = filename.split('/').pop();
 
     // Uploads the renamed filing download to S3
     // await uploadFileToS3(filename, key);

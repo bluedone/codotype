@@ -14,6 +14,8 @@ export default function ({ NEW_MODEL }) {
       },
       reset (state) {
         state.model = Object.assign({}, state.defaultModel)
+        state.model.attributes = [] // TODO - THIS SHOULD BE MOVED ELSEWHERE, SCHEMA-SPECIFIC
+        state.model.relations = [] // TODO - THIS SHOULD BE MOVED ELSEWHERE, SCHEMA-SPECIFIC
         state.errors = []
       },
       modelAttr (state, { attribute, value }) {
