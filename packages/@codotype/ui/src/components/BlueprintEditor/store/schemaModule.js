@@ -24,7 +24,7 @@ export default {
       commit('form/model', getters['selectedModel'])
       commit('modals/edit/showing', true)
     },
-    createModel ({ getters, commit, dispatch }) {
+    createModel ({ getters, dispatch }) {
       const model = getters['form/model']
       dispatch('collection/insert', model)
       dispatch('selectModel', getters['collection/last'])
