@@ -24,8 +24,9 @@ async function runGenerator (blueprint, options) {
   const generatorMetaPath = path.resolve(process.cwd(), './meta.json') // TODO - constantize MAGIC STRING
   const blueprintJSON = require(blueprintPath)
 
-  console.log(blueprint)
-  console.log(options)
+  // Console debugging statements
+  // console.log(blueprint)
+  // console.log(options)
 
   // Handles configuration for build
   let configurationJSON

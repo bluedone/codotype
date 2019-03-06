@@ -35,10 +35,11 @@ function buildConfiguration ({ schemas, generator }) {
         instanceData[schema.identifier] = buildDefault({ attributes: group.attributes })
       })
 
+      // console.log(schemas)
+      // console.log(group.identifier)
+      // console.log(instanceData)
+
       // Assigns the instanceData object to the root configuration object
-      console.log(schemas)
-      console.log(group.identifier)
-      console.log(instanceData)
       configuration[group.identifier] = instanceData
     } else if (group.type === 'OPTION_GROUP_TYPE_GLOBAL_OPTION') {
       // Iterates over each attribute in the GLOBAL_OPTION type,
@@ -53,8 +54,10 @@ function buildConfiguration ({ schemas, generator }) {
 
   // // // //
 
+  // Debugging
+  // console.log(configuration)
+
   // Returns configuration object
-  console.log(configuration)
   return configuration
 }
 
