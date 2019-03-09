@@ -2,6 +2,7 @@
   <b-row>
 
     <b-col lg=4 sm=12 class="border-right">
+      <ImportModal />
       <SchemaNewModal />
       <SchemaNewButton />
 
@@ -22,6 +23,7 @@
 </template>
 
 <script>
+import ImportModal from './components/ImportModal'
 import SchemaNewButton from './components/schema/SchemaNewButton'
 import SchemaNewModal from './components/schema/SchemaNewModal'
 import SchemaList from './components/schema/SchemaList'
@@ -31,6 +33,7 @@ import HelpPopover from '../HelpPopover'
 export default {
   name: 'BlueprintEditor',
   components: {
+    ImportModal,
     SchemaNewButton,
     SchemaNewModal,
     HelpPopover,

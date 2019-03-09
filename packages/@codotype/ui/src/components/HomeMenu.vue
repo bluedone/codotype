@@ -18,34 +18,6 @@
 
       </b-navbar-nav>
 
-      <b-navbar-nav class="mr-0">
-
-        <b-nav-form v-if="$route.name === 'BlueprintList'">
-
-          <!-- <ImportBlueprint/> -->
-
-          <b-dropdown
-            right
-            no-caret
-            variant="light"
-            class='mr-2'
-            toggle-class='rounded'
-            size="lg"
-          >
-            <template slot="button-content">
-              <i class="fa fa-fw fa-ellipsis-h"></i>
-            </template>
-            <b-dropdown-item-button v-b-modal="'import-blueprint'">
-              <i class="fa fa-fw fa-upload"></i>
-              Import Blueprint JSON
-            </b-dropdown-item-button>
-          </b-dropdown>
-
-          <TourButton tour='appListSteps' size="lg"/>
-        </b-nav-form>
-
-      </b-navbar-nav>
-
     </b-collapse>
 
   </b-navbar>
@@ -53,14 +25,7 @@
 </template>
 
 <script>
-import TourButton from './TourButton'
-// import ImportBlueprint from '@/modules/blueprint/components/ImportBlueprint'
-
 export default {
-  name: 'HomeMenu',
-  components: {
-    TourButton
-    // ImportBlueprint
-  }
+  name: 'HomeMenu'
 }
 </script>
