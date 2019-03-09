@@ -68,7 +68,8 @@ export default {
       return state.collection.items.find(i => i.id === state.selectedModel.id)
     },
     enableSubmit: state => {
-      return state.form.model.label && state.form.model.label.length > 1
+      const label = state.form.model.label
+      return label && label.length > 1 && !state.collection.items.map(i => i.label).includes(label)
     }
   },
   modules: {
