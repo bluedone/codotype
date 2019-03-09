@@ -11,11 +11,9 @@
     <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
     <b-collapse is-nav id="nav_collapse">
 
-      <!-- TODO - this should be a separate component -->
       <b-navbar-nav class="ml-auto">
 
         <b-nav-item to="/about">
-          <!-- <i class="far fa-copyright"></i> -->
           <i class="fa fa-lg fa-fw fa-question-circle mr-1"></i>
           About
         </b-nav-item>
@@ -29,11 +27,6 @@
           <i class="fab fa-lg fa-fw fa-github text-dark mr-1"></i>
           GitHub
         </b-nav-item>
-
-<!--         <b-nav-item href="mailto:codotype.io@gmail.com">
-          <i class="far fa-lg fa-fw fa-envelope text-success mr-1"></i>
-          Email
-        </b-nav-item> -->
 
       </b-navbar-nav>
 

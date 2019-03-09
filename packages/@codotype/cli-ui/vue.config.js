@@ -4,6 +4,16 @@ module.exports = {
   devServer: {
     proxy: {
       '/api/': { target: `http://localhost:${process.env.PORT || '9090'}` },
-    },
+    }
+  },
+  configureWebpack: {
+    module: {
+      rules: [
+        {
+          test: /\.html$/i,
+          use: 'raw-loader',
+        },
+      ],
+    }
   }
 }

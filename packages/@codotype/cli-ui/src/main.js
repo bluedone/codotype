@@ -1,4 +1,5 @@
 import config from '@codotype/ui/src/config'
+import initTourMediator from '@codotype/ui/src/modules/build/store/tourMediator'
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
@@ -22,6 +23,9 @@ Vue.use(config.VueGitHubButtons)
 // VRuntimeTemplate
 Vue.component('v-runtime-template', config.VRuntimeTemplate)
 
+// Configures top-level vuex mediator
+initTourMediator(store, router)
+
 Vue.config.productionTip = false
 
 new Vue({
@@ -29,3 +33,4 @@ new Vue({
   router: router,
   render: h => h(App),
 }).$mount('#app')
+
