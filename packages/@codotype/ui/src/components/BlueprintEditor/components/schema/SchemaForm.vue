@@ -5,6 +5,7 @@
       <b-form>
         <p class="mb-2 form-text text-muted">Define the core metadata that's used to create a valid model.</p>
         <b-form-input
+          size="lg"
           v-model="schemaLabel"
           placeholder="Model Label"
           ref="input_el"
