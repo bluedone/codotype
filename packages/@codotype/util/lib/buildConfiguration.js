@@ -10,41 +10,36 @@ const validateAttribute = ({ attribute, value }) => {
 }
 
 function buildConfiguration ({ schemas, generator, configuration = {} }) {
-  // configuration = configuration || {}
-
-  // // // //
-  // OPTION_GROUPS Implementation
+  // Iterates over each option group in a single generator
   // TODO - this needs to handle ALL kinds of defaults & requirements
-  // TODO - handle default instances for *_ADDON types
+  // TODO - this needs to be updated to REMOVE MODEL_ADDON and MODEL_OPTION data if a schema is removed
   generator.option_groups.forEach((group) => {
 
     // Handles OPTION_GROUP_TYPE_MODEL_ADDON
     if (group.type === 'OPTION_GROUP_TYPE_MODEL_ADDON') {
       // Defines an object on to store the instance data for each option group
       let instanceData = configuration[group.identifier_plural] || {}
+      let newInstanceData = {}
 
       // Iterates over each blueprint schema and creates an array
       // to store the addon instances associated with that schema
-      schemas.forEach((schema) => { instanceData[schema.identifier] = instanceData[schema.identifier] || [] })
+      schemas.forEach((schema) => { newInstanceData[schema.identifier] = instanceData[schema.identifier] || [] })
 
       // Assigns the instanceData object to the root configuration object
-      configuration[group.identifier_plural] = instanceData
+      configuration[group.identifier_plural] = newInstanceData
     } else if (group.type === 'OPTION_GROUP_TYPE_MODEL_OPTION') {
       // Defines an object on to store the instance data for each option group
       let instanceData = configuration[group.identifier] || {}
+      let newInstanceData = {}
 
       // Iterates over each blueprint schema and creates an array
       // to store the addon instances associated with that schema
       schemas.forEach((schema) => {
-        instanceData[schema.identifier] = instanceData[schema.identifier] || buildDefault({ attributes: group.attributes })
+        newInstanceData[schema.identifier] = instanceData[schema.identifier] || buildDefault({ attributes: group.attributes })
       })
 
-      // console.log(schemas)
-      // console.log(group.identifier)
-      // console.log(instanceData)
-
       // Assigns the instanceData object to the root configuration object
-      configuration[group.identifier] = instanceData
+      configuration[group.identifier] = newInstanceData
     } else if (group.type === 'OPTION_GROUP_TYPE_GLOBAL_OPTION') {
       // Iterates over each attribute in the GLOBAL_OPTION type,
       // sets instanceData to the default value
