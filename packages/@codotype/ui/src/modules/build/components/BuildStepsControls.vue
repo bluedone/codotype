@@ -35,7 +35,7 @@
             Export Blueprint
           </b-dropdown-item-button>
 
-          <b-dropdown-item-button>
+          <b-dropdown-item-button @click="$store.commit('editor/modals/import/showing', true)">
             <i class="fa fa-fw fa-upload"></i>
             Import Blueprint
           </b-dropdown-item-button>

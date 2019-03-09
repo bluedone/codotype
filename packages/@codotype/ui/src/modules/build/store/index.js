@@ -15,6 +15,7 @@ export default {
 
       // Loads the generator into the step module
       dispatch('editor/created', {}, { root: true })
+      dispatch('tour/created', {}, { root: true })
       dispatch('steps/load', generatorMeta)
       dispatch('runtime/reset')
     },
