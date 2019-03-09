@@ -14,7 +14,7 @@
         </div>
 
         <!-- RELATION TYPE -->
-        <!-- TODO - abstract RELATION_TYPE_SELECTOR into independent component? -->
+        <!-- CLEANUP - abstract RELATION_TYPE_SELECTOR into independent component? -->
         <div class="col-lg-4">
 
           <div class="row">
@@ -111,13 +111,12 @@ export default {
     this.updateModel()
   },
   methods: {
-    // TODO - this should be moved into the Vuex store
+    // CLEANUP - this should be moved into the Vuex store
     setRelationType (relationId) {
       this.model.type = relationId
       if (relationId !== 'BELONGS_TO') { this.model.reverse_as = '' }
       this.updateModel()
     },
-    // TODO - this should be abstracted into a mixin
     updateModel () {
       this.$store.commit('editor/schema/relation/form/model', this.model)
     }

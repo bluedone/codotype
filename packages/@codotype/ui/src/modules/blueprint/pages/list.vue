@@ -13,7 +13,7 @@
       <BlueprintForm :submit="submitBlueprintForm" />
     </b-modal>
 
-    <!-- TODO - abstract into PageHeader component -->
+    <!-- CLEANUP - abstract into PageHeader component -->
     <b-col lg=12>
       <div class="row">
 

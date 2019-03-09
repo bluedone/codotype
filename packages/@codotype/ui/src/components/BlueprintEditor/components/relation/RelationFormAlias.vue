@@ -52,7 +52,7 @@ export default {
     }
   },
   methods: {
-    updateNewModel () { // TODO - abstract this into a Vue mixin?
+    updateNewModel () { // CLEANUP - abstract this into a Vue mixin?
       this.$store.commit('editor/schema/relation/collection/newModel', this.model)
     }
   }

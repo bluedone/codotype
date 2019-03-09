@@ -48,23 +48,22 @@
 
         <b-list-group flush v-else>
           <b-list-group-item class="text-center">
-            <!-- <i class="fa fa-lg fa-info-circle"></i> -->
-            <!-- TODO - Click to add your first MODEL -->
-            <!-- <p class="mb-0 mt-1 text-muted">{{ title }}</p> -->
+
             <img style="width: 2rem;" :src="icon">
             <br>
             <strong class="mb-0 mt-1 text-muted">{{ title }}</strong>
             <br>
             <small class="text-muted">{{ info }}</small>
-<!--             <br>
+            <br>
             <b-btn
               size="sm"
-              class='btn-rounded'
+              class='btn-rounded mt-2'
               variant="outline-primary"
               @click="$store.dispatch('editor/schema/' + scope + '/newModel')"
             >
               <i class="fa fa-plus"></i>
-            </b-btn> -->
+              Add {{ label }}
+            </b-btn>
           </b-list-group-item>
         </b-list-group>
 

@@ -2,7 +2,7 @@
   <b-row class='align-items-center w-100 justify-content-center'>
     <b-col lg=6>
       <h4>Let's give your project a name</h4>
-      <p class="lead form-text text-muted">Try something simple, like <code>ToDo List</code>, or <code>Inventory Manager</code>
+      <p class="lead form-text text-muted">Try something simple, like <code>Todo List</code>, or <code>Inventory Manager</code>
 
       </p>
 

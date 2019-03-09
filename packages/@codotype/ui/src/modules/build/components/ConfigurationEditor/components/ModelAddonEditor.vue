@@ -1,7 +1,7 @@
 <template>
   <b-row>
 
-    <!-- TODO - this schema selector should be a different component -->
+    <!-- CLEANUP - this schema selector should be a different component -->
     <b-col lg=4 class='border-right'>
       <div class="card">
         <div class="card-header">

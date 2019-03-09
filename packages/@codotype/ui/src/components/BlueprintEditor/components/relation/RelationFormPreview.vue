@@ -76,7 +76,7 @@ export default {
     selectedRelatedSchema () {
       return this.allSchemas.find(m => m.id === this.model.related_schema_id)
     },
-    // TODO - abstract into codotype/util (?)
+    // CLEANUP - abstract into codotype/util (?)
     schemaPrototype () {
       let proto = {}
       let className = this.selectedSchema.class_name
@@ -104,7 +104,7 @@ export default {
 
       return className + ' = ' + JSON.stringify(proto, null, 2)
     },
-    // TODO - abstract into codotype/util (?)
+    // CLEANUP - abstract into codotype/util (?)
     selectedRelatedSchemaPrototype () {
       if (!this.selectedRelatedSchema) return ''
       let proto = {}

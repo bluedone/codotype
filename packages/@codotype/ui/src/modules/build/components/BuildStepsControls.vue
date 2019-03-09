@@ -15,9 +15,32 @@
       </b-button>
       <span v-else></span>
 
-      <span>
-        <HelpButton class='mr-2' v-if="currentStep === 1" />
-        <TourButton tour="appEditorSteps" v-if="currentStep === 1" />
+      <span v-if="currentStep === 1">
+        <HelpButton class='mr-2' />
+        <TourButton tour="appEditorSteps" />
+
+        <b-dropdown
+          right
+          no-caret
+          variant="light"
+          class='mr-2'
+          toggle-class='rounded'
+        >
+          <template slot="button-content">
+            <i class="fa fa-fw fa-ellipsis-h"></i>
+          </template>
+
+          <b-dropdown-item-button @click="$store.dispatch('editor/export')">
+            <i class="fa fa-fw fa-download"></i>
+            Export Blueprint
+          </b-dropdown-item-button>
+
+          <b-dropdown-item-button>
+            <i class="fa fa-fw fa-upload"></i>
+            Import Blueprint
+          </b-dropdown-item-button>
+        </b-dropdown>
+
         <!-- <span class='text-muted' v-if="currentStep === 1">
           <router-link to="/auth/signup" >Sign Up</router-link> or <router-link to="/auth/login">Log In</router-link> to Save Models<i class="ml-1 fa fa-info-circle" title="Codotype automatically saves your Blueprint in localstorage. Signing up is a great idea if you want to continue making changes on another device." v-b-tooltip.hover.top></i>
         </span> -->

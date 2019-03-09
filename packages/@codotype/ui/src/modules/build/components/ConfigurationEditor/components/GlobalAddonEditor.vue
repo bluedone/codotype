@@ -142,7 +142,7 @@ export default {
       this.syncGlobalAddon({ group: this.group })
     },
     destroyInstance (group, instance) {
-      // TODO - TEST THIS IMPLEMENTATION
+      // TODO - FINISH THIS IMPLEMENTATION
       removeAddon(instance.id)
       this.syncGlobalAddon({ group: this.group })
     }
