@@ -3,8 +3,7 @@ const path = require('path');
 const fsExtra = require('fs-extra')
 const trailingComma = require('@codotype/util/lib/trailingComma')
 const buildDefault = require('@codotype/util/lib/buildDefault')
-
-// TODO - import ALL datatypes from @codotype/types and inject them into the template renderer variable scope
+const datatypes = require('@codotype/types/lib/datatypes')
 
 // // // //
 
@@ -111,10 +110,12 @@ module.exports = class CodotypeGenerator {
 
       const data = {
         blueprint: this.options.blueprint,
+        meta: this.options.meta,
         configuration: this.options.configuration,
         helpers: {
           trailingComma
         },
+        ...datatypes,
         ...options
       }
 

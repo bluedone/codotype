@@ -11,6 +11,7 @@
     "url": "git+https://github.com/codotype/codotype-generator.git"
   },
   "dependencies": {
+    "@codotype/types": "^0.1.0",
     "@codotype/util": "^0.3.0",
     "bluebird": "^3.5.1",
     "ejs": "^2.6.1",
