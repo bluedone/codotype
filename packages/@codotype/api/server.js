@@ -46,7 +46,7 @@ module.exports = ({ port, runtime }) => {
       output.on('close', function() {
         // bplog(archive.pointer() + ' total bytes');
         // bplog('archiver has been finalized and the output file descriptor has closed.');
-        console.log('ZIP COMPLETE')
+        // console.log('ZIP COMPLETE')
         return resolve();
       });
 
@@ -115,7 +115,7 @@ module.exports = ({ port, runtime }) => {
     // Generates the application
     // TODO - wrap this in an error hander?
     await generateApplication({ build })
-    await compressBuild({ build })
+    // await compressBuild({ build })
 
     // Pulls filename for zipped build
     // const filename = zipFilename(build.id)

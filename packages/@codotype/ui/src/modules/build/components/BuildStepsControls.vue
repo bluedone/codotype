@@ -47,9 +47,10 @@
       </span>
 
       <b-button
-        variant="outline-primary"
         size="lg"
+        variant="outline-primary"
         @click="incrementStep()"
+        :disabled="disableNext"
         v-if="currentStep !== 2 && currentStep !== steps.length - 1"
       >
         Next
@@ -75,10 +76,17 @@ export default {
     HelpButton,
     GenerateCodeButton
   },
-  computed: mapGetters({
-    currentStep: 'build/steps/current',
-    steps: 'build/steps/collection/items'
-  }),
+  computed: {
+    ...mapGetters({
+      currentStep: 'build/steps/current',
+      steps: 'build/steps/collection/items',
+      enableSubmit: 'editor/project/enableSubmit'
+    }),
+    disableNext () {
+      if (this.currentStep === 0 && !this.enableSubmit) return true
+      return false
+    }
+  },
   methods: mapActions({
     incrementStep: 'build/steps/increment',
     decrementStep: 'build/steps/decrement'
