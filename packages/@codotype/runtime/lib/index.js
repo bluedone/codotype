@@ -188,6 +188,7 @@ module.exports = class CodotypeRuntime {
           blueprint,
           dest,
           resolved,
+          meta: generator,
           configuration
         }
 
