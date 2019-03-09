@@ -93,13 +93,7 @@ export default {
 }
 </script>
 
-<!-- TODO - move some of this into AttributeLabel component -->
-<!-- TODO - move some of this into AttributeLabel component -->
-<!-- TODO - move some of this into AttributeLabel component -->
-<!-- TODO - move some of this into AttributeLabel component -->
 <style lang='sass' scoped>
-  .list-group-item
-    // border-left: .25rem solid #666666
 
   .list-group-item:hover i.fa-bars
     opacity: 1
@@ -110,13 +104,6 @@ export default {
   i.fa-bars
     transition: opacity .25s ease-in
     opacity: 0
-
-  .badge
-    font-weight: 300
-    padding: .3rem .3rem
-
-    &.bordered
-      border: 1px solid
 
   .controls
     transition: opacity .25s ease-in

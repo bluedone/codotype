@@ -21,7 +21,7 @@
             <div class="col-lg-12">
               <div class="form-group mb-2 text-center">
                 <label class='mb-0'>{{ selectedRelationType.label }}</label>
-                <!-- <small class="form-text text-muted mb-0">{{ selectedRelationType.description }}</small> -->
+                <small class="form-text text-muted mb-0">{{ selectedRelationType.description }}</small>
               </div>
             </div>
           </div>
