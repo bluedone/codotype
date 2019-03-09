@@ -100,24 +100,3 @@ module.exports = {
   inflateRelation,
   inflate
 }
-
-// Defines the data to split up blueprint.seeds by the records' respective schemas
-// blueprint.seed_data = {}
-// _.each(blueprint.schemas, (s) => {
-//     blueprint.seed_data[s.id] = {
-//         identifier: s.identifier_plural,
-//         records: []
-//     }
-// })
-
-// Iterates over each piece of seed data
-// _.each(blueprint.seeds, (seed) => {
-//     let seedObject = {}
-//     seedObject.id = { '$oid': seed.id }
-//     seedObject = {
-//         ...seedObject,
-//         ...seed.attributes
-//     }
-//     // Adds to blueprint.seed_data object
-//     blueprint.seed_data[seed.schema_id].records.push(seedObject)
-// })

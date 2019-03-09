@@ -11,8 +11,6 @@ const validateAttribute = ({ attribute, value }) => {
 
 function buildConfiguration ({ schemas, generator, configuration = {} }) {
   // Iterates over each option group in a single generator
-  // TODO - this needs to handle ALL kinds of defaults & requirements
-  // TODO - this needs to be updated to REMOVE MODEL_ADDON and MODEL_OPTION data if a schema is removed
   generator.option_groups.forEach((group) => {
 
     // Handles OPTION_GROUP_TYPE_MODEL_ADDON
