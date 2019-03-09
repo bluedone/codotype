@@ -17,7 +17,6 @@
         <b-nav-item class='ml-3' :to="'/generators/' + model.id">About</b-nav-item>
       </b-navbar-nav>
 
-      <!-- TODO - this should be a separate component -->
       <b-navbar-nav class="ml-auto">
 
         <b-nav-item target="_blank" href="https://twitter.com/codotype">
