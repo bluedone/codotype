@@ -19,6 +19,9 @@ Vue.use(config.ToggleButton)
 // vue-github-buttons
 Vue.use(config.VueGitHubButtons)
 
+// VRuntimeTemplate
+Vue.component('v-runtime-template', config.VRuntimeTemplate)
+
 Vue.config.productionTip = false
 
 new Vue({
