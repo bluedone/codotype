@@ -1,7 +1,7 @@
 <template>
   <b-row class='w-100 justify-content-center'>
 
-    <b-col xl=9 lg=12 class="d-flex flex-row w-100 justify-content-between">
+    <b-col xl=10 lg=12 class="d-flex flex-row w-100 justify-content-between">
 
       <b-button
         v-if="currentStep !== 0"
@@ -17,11 +17,12 @@
 
       <span v-if="currentStep === 1">
         <HelpButton class='mr-2' />
-        <TourButton tour="appEditorSteps" />
+        <TourButton class='mr-2' size="lg" tour="appEditorSteps" />
 
         <b-dropdown
           right
           no-caret
+          size="lg"
           variant="light"
           class='mr-2'
           toggle-class='rounded'

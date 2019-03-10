@@ -7,7 +7,9 @@ export default {
   state: {
     loading: false,
     finished: false,
-    downloadUrl: '',
+    downloadUrl: '', // TODO - implement mutation
+    filepath: '', // TODO - implement mutation
+    responseType: '', // TODO - implement mutation
     error: '' // TODO - implement some basic error handling
   },
   actions: {
@@ -44,12 +46,21 @@ export default {
       // Generates the code and downloads the response
       return axios.post(GENERATE_ROUTE, { build })
       .then(({ data }) => {
+        // Debugging
         console.log(data)
-        // commit('downloadUrl', data.download_url)
-        commit('loading', false)
-        commit('finished', true)
-        // console.log(data.download_url)
-        // window.open(data.download_url)
+
+        // Builing antici...pation
+        setTimeout(() => {
+          // commit('downloadUrl', data.download_url)
+          commit('finished', true)
+          commit('loading', false)
+
+          // Handle response type (data.type)
+          // TODO - update store state & mutations accordingly
+
+          // console.log(data.download_url)
+          // window.open(data.download_url)
+        }, 500)
       })
       .catch((error) => {
         commit('loading', false)
