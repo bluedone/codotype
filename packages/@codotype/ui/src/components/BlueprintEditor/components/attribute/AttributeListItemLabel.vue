@@ -3,6 +3,15 @@
     <i :class="'mr-2 ' + icon" v-b-tooltip.hover.left :title='tooltip'></i>
     {{item.label}}
     <span class='text-danger' v-if="item.required">*</span>
+    <b-badge
+      v-if="item.unique"
+      class='ml-2'
+      variant="light"
+      title="Unique"
+      v-b-tooltip.hover.right
+    >
+      <i class="fas fa-snowflake"></i>
+    </b-badge>
   </span>
 </template>
 

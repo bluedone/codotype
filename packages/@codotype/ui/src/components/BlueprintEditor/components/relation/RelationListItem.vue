@@ -7,8 +7,8 @@
         <i class="fa fa-lg fa-fw fa-bars mr-3" style='cursor: grab;'></i>
       </div>
 
-      <!-- TODO - get rid of hardcoded icons -->
-      <div class="col-lg-5">
+      <!-- CLEANUP - get rid of hardcoded icons & labels -->
+      <div class="col-lg-6">
 
         <!-- DEBUGGING INFLATED -->
         <!-- <pre>{{ inflated }}</pre> -->
@@ -17,8 +17,6 @@
         <span class="badge" v-if="item.type === 'BELONGS_TO'">
           <i class="fa fa-link mr-2" v-b-tooltip.hover.left title='Many To One'></i>
           <!-- {{inflated.alias.label}} -->
-          <!-- <span class="badge badge-light ml-2">Many To One</span> -->
-          <!-- <span class="badge badge-light ml-2"> -->
           <span class='text-warning'>Many </span><span class='text-info'>{{ selectedSchema.label_plural }}</span> <span class='text-warning'> To One </span><span class="text-info">{{ inflated.schema.label }}</span>
         </span>
 
@@ -26,9 +24,6 @@
         <span class="badge" v-if="item.type === 'HAS_ONE'">
           <i class="fa fa-link mr-2" v-b-tooltip.hover.left title='One To One'></i>
           <!-- {{inflated.alias.label}} -->
-          <!-- <span class="badge badge-light ml-2">One To One</span> -->
-          <!-- <span class="badge badge-light ml-2">one {{ selectedSchema.label }} to many {{ inflated.schema.label_plural }}</span> -->
-
           <span class='text-warning'>One </span><span class='text-info'>{{ selectedSchema.label }}</span> <span class='text-warning'> To One </span><span class="text-info">{{ inflated.schema.label }}</span>
         </span>
 
@@ -36,18 +31,16 @@
         <span class="badge" v-if="item.type === 'HAS_MANY'">
           <i class="fa fa-link mr-2" v-b-tooltip.hover.left title='One To Many'></i>
           <!-- {{inflated.alias.label}} -->
-          <!-- <span class="badge badge-light ml-2">One To Many</span> -->
-          <!-- <span class="badge badge-light ml-2">one {{ selectedSchema.label }} to many {{ inflated.schema.label_plural }}</span> -->
           <span class='text-warning'>One </span><span class='text-info'>{{ selectedSchema.label }}</span> <span class='text-warning'> To Many </span><span class="text-info">{{ inflated.schema.label_plural }}</span>
         </span>
 
         <!-- OWNS_MANY -->
-        <span class="badge" v-if="item.type === 'OWNS_MANY'">
-          <i class="fa fa-link mr-2" v-b-tooltip.hover.left title='Relation'></i>
+        <!-- <span class="badge" v-if="item.type === 'OWNS_MANY'"> -->
+          <!-- <i class="fa fa-link mr-2" v-b-tooltip.hover.left title='Relation'></i> -->
           <!-- {{inflated.alias.label_plural}} -->
-          <span class="badge badge-light ml-2">Referenced By Many</span>
-          <span class="badge badge-light ml-2">one {{ selectedSchema.label }} to many {{ inflated.schema.label_plural }}</span>
-        </span>
+          <!-- <span class="badge badge-light ml-2">Referenced By Many</span> -->
+          <!-- <span class="badge badge-light ml-2">one {{ selectedSchema.label }} to many {{ inflated.schema.label_plural }}</span> -->
+        <!-- </span> -->
 
       </div>
 
@@ -63,45 +56,27 @@
 
       </div>
 
-<!--       <div class="col-lg-3 text-right controls" v-if="item.locked && item.datatype !== 'RELATION'">
-
-        <b-button
+      <div class="col-sm-2 text-right d-flex controls justify-content-end">
+        <b-dropdown
+          right
+          no-caret
           size="sm"
-          variant="outline-secondary"
-          :disabled="true"
+          variant="light"
+          toggle-class='rounded px-0 py-0 d-flex'
         >
-          <i class="fa fa-fw fa-lock mr-2"></i>
-          Locked
-        </b-button>
+          <template slot="button-content">
+            <i class="fa fa-fw fa-ellipsis-h"></i>
+          </template>
 
+          <b-dropdown-item-button @click="editModel(item)">
+            <i class="fas fa-fw fa-pencil-alt"></i>
+            Edit
+          </b-dropdown-item-button>
+
+          <DestroyButton scope="relation" :modelId="item.id" />
+
+        </b-dropdown>
       </div>
- z-->
-<!--       <div class="col-lg-3 text-right controls" v-else>
-
-        <b-button
-          v-if="item.locked"
-          size="sm"
-          variant="outline-secondary"
-          :disabled="item.locked"
-        >
-          <i class="fa fa-fw fa-lock"></i>
-          Locked
-        </b-button>
-
-        <b-button
-          v-else
-          size="sm"
-          variant="outline-secondary"
-          title="Edit"
-          v-b-tooltip.hover.top
-          @click="editModel"
-        >
-          <i class="fas fa-fw fa-pencil-alt"></i>
-        </b-button>
-
-        <DestroyButton scope="relation" :modelId="item.id" />
-
-      </div> -->
 
     </div>
   </li>
@@ -151,7 +126,6 @@ export default {
         relation: this.item,
         schemas: this.$store.getters['editor/schema/collection/items']
       })
-      // console.log(inflated)
     }
   }
 }
@@ -161,7 +135,7 @@ export default {
 <style lang='sass' scoped>
 
   .list-group-item
-    padding: 0.25rem 1rem
+    padding: 0.25rem 0.5rem
 
   .list-group-item:hover i.fa-bars
     opacity: 1

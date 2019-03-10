@@ -9,7 +9,7 @@
         <b-col lg=7>
           <h4 class="mb-0 d-flex">
 
-            {{ model.label + ' Model' }}
+            {{ model.label + ' Schema' }}
 
             <SchemaEditButton v-if="!isUserModel" />
 
@@ -17,7 +17,8 @@
               v-if="!isUserModel"
               target="schemaEditPopover"
               placement="right"
-              content='Edit Model Name'>
+              :triggers="['hover']"
+              content='Edit Schema'>
             </HelpPopover>
 
           </h4>
@@ -38,7 +39,7 @@
             target="schema-destroy-button"
             placement="left"
             :triggers="['hover']"
-            content="Remove Model">
+            content="Remove Schema">
           </HelpPopover>
 
           <!-- TODO - Edit Schema Modal GOES HERE -->
@@ -71,14 +72,14 @@
 
     </b-col>
     <!-- <hr> -->
-    <b-col sm=12 md=6 lg=6>
+    <b-col sm=12 md=6 lg=6 class="pl-md-0">
 
       <SortableList
         scope="relation"
         label="Relations"
         title="No Relations added yet"
         icon="https://res.cloudinary.com/codotype/image/upload/v1552157160/codotype-icons/complexity.png"
-        info="Relations define associations between different models"
+        info="Relations define references to other Schemas"
       />
 
       <RelationNewModal />

@@ -1,39 +1,25 @@
 <template>
   <b-list-group-item>
 
-    <!--  -->
-    <!--  -->
-    <!--  -->
     <div class="row d-flex align-items-center">
 
       <!-- Handle for re-ordering attributes -->
       <div class="col-sm-2 text-left d-flex align-items-center">
         <i class="fa fa-lg fa-fw fa-bars mr-3" style='cursor: grab;'></i>
-        <i class="fa fa-fw text-primary fa-eye mr-3" v-if="item.order === 0"  v-b-tooltip.hover.left title='Leading attribute'></i>
+        <i class="fa fa-fw text-primary fa-eye" v-if="item.order === 0"  v-b-tooltip.hover.left title='Leading attribute'></i>
       </div>
 
       <div class="col-sm-8">
         <AttributeListItemLabel :item="item"/>
-        <!-- <span
-          v-if="item.unique"
-          title="Unique"
-          class="badge badge-light"
-          v-b-tooltip.hover.top
-        >
-          <i class="fas fa-snowflake text-dark"></i>
-          Unique
-        </span> -->
       </div>
 
       <div class="col-sm-2 text-right controls justify-content-end" v-if="item.locked">
         <b-badge
           variant="secondary"
-          size="sm"
           v-b-tooltip.hover.right
           title="Email attribute may not be edited or removed"
         >
           <i class="fa fa-fw fa-lock"></i>
-          <!-- Locked -->
         </b-badge>
       </div>
 
@@ -90,7 +76,7 @@ export default {
 <style lang='sass' scoped>
 
   .list-group-item
-    padding: 0.25rem 1rem
+    padding: 0.25rem 0.5rem
 
   .list-group-item:hover i.fa-bars
     opacity: 1
