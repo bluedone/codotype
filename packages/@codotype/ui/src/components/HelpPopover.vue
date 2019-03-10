@@ -2,7 +2,7 @@
   <b-popover
     :target="target"
     :placement="placement"
-    :triggers="[]"
+    :triggers="triggers"
     :show="$store.getters['editor/help/showing']"
     :content="content">
   </b-popover>
@@ -14,7 +14,8 @@ export default {
   props: {
     target: { required: true },
     content: { required: true },
-    placement: { required: false }
+    placement: { required: false },
+    triggers: { default: [] }
   }
 }
 </script>
