@@ -1,3 +1,4 @@
+// TODO - augment this to handle relations as well as attributes
 const buildDefault = ({ attributes }) => {
   const defaultState = {}
   attributes.forEach((attr) => {
