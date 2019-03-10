@@ -1,13 +1,9 @@
 <template>
-  <b-button
-    size="sm"
-    variant="outline-danger"
-    v-b-tooltip.hover.top
-    title="Remove"
-    @click="onClick()"
-  >
+  <b-dropdown-item-button @click="onClick()">
     <i class="fa fa-fw fa-trash"></i>
-  </b-button>
+    Remove
+  </b-dropdown-item-button>
+
 </template>
 
 <script>

@@ -37,6 +37,7 @@
             v-if="!isUserModel"
             target="schema-destroy-button"
             placement="left"
+            :triggers="['hover']"
             content="Remove Model">
           </HelpPopover>
 
@@ -54,7 +55,7 @@
 
     </b-col>
 
-    <b-col lg=12>
+    <b-col sm=12 md=6 lg=6>
 
       <SortableList
         scope="attribute"
@@ -68,8 +69,9 @@
       <AttributeEditModal />
       <DestroyModal scope="attribute" label="Attribute" />
 
-
-      <hr>
+    </b-col>
+    <!-- <hr> -->
+    <b-col sm=12 md=6 lg=6>
 
       <SortableList
         scope="relation"

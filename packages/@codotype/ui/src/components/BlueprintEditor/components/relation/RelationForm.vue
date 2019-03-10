@@ -47,8 +47,8 @@
         <!-- RELATED SCHEMA -->
         <div class="col-lg-4">
           <div class="form-group text-center">
-            <label class='mb-0'>Related Model</label>
-            <small class="form-text text-muted">The related Model definition.</small>
+            <label class='mb-0'>Related Schema</label>
+            <small class="form-text text-muted">Schema referenced by this relation</small>
             <select class="form-control" v-model="model.related_schema_id" @change="updateModel()">
 
               <!-- <option v-if="model.type === 'HAS_ONE'" v-for="s in allSchemas" :key="s.id" :value="s.id">{{s.label}}</option> -->

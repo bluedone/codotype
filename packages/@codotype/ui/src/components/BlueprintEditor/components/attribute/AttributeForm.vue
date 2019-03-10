@@ -3,19 +3,21 @@
     <b-col lg=12>
 
       <!-- Step 1 - Select Datatype -->
-      <AttributeDatatypeForm :model="model" v-if="formStep" />
 
       <!-- Step 2 - Define Properties & Validations -->
-      <template v-else>
-        <b-tabs lazy pills>
-          <b-tab title="Properties" active>
-            <AttributePropertiesForm :model="model" />
-          </b-tab>
-          <b-tab title="Validations">
-            <AttributeValidationsForm :model="model" />
-          </b-tab>
-        </b-tabs>
-      </template>
+      <!-- <template v-else> -->
+      <b-tabs lazy pills v-model="formStep">
+        <b-tab title="Datatype">
+          <AttributeDatatypeForm :model="model" />
+        </b-tab>
+        <b-tab title="Properties">
+          <AttributePropertiesForm :model="model" />
+        </b-tab>
+        <b-tab title="Validations">
+          <AttributeValidationsForm :model="model" />
+        </b-tab>
+      </b-tabs>
+      <!-- </template> -->
 
     </b-col>
   </b-row>
@@ -39,7 +41,7 @@ export default {
       model: 'editor/schema/attribute/form/model'
     }),
     formStep () {
-      return !this.model.datatype
+      return !this.model.datatype ? 0 : 1
     }
   }
 }

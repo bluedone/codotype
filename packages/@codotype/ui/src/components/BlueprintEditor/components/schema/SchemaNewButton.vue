@@ -8,7 +8,7 @@
     @click="$store.dispatch('editor/schema/newModel')"
   >
     <i class="fa fa-fw fa-plus"></i>
-    Add Model
+    New Schema
   </b-button>
 </template>
 

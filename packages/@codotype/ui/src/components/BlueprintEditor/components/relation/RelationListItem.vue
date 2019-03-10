@@ -15,26 +15,30 @@
 
         <!-- BELONGS_TO -->
         <span class="badge" v-if="item.type === 'BELONGS_TO'">
-          <i class="fa fa-link mr-2" v-b-tooltip.hover.left title='Relation'></i>
+          <i class="fa fa-link mr-2" v-b-tooltip.hover.left title='Many To One'></i>
           <!-- {{inflated.alias.label}} -->
-          <span class="badge badge-light ml-2">Belongs To</span>
-          <span class="badge badge-light ml-2">many {{ selectedSchema.label_plural }} to one {{ inflated.schema.label }}</span>
+          <!-- <span class="badge badge-light ml-2">Many To One</span> -->
+          <!-- <span class="badge badge-light ml-2"> -->
+          <span class='text-warning'>Many </span><span class='text-info'>{{ selectedSchema.label_plural }}</span> <span class='text-warning'> To One </span><span class="text-info">{{ inflated.schema.label }}</span>
         </span>
 
         <!-- HAS_ONE -->
         <span class="badge" v-if="item.type === 'HAS_ONE'">
-          <i class="fa fa-link mr-2" v-b-tooltip.hover.left title='Relation'></i>
+          <i class="fa fa-link mr-2" v-b-tooltip.hover.left title='One To One'></i>
           <!-- {{inflated.alias.label}} -->
-          <span class="badge badge-light ml-2">Has One</span>
-          <span class="badge badge-light ml-2">one {{ selectedSchema.label }} to many {{ inflated.schema.label_plural }}</span>
+          <!-- <span class="badge badge-light ml-2">One To One</span> -->
+          <!-- <span class="badge badge-light ml-2">one {{ selectedSchema.label }} to many {{ inflated.schema.label_plural }}</span> -->
+
+          <span class='text-warning'>One </span><span class='text-info'>{{ selectedSchema.label }}</span> <span class='text-warning'> To One </span><span class="text-info">{{ inflated.schema.label }}</span>
         </span>
 
         <!-- HAS_MANY -->
         <span class="badge" v-if="item.type === 'HAS_MANY'">
-          <i class="fa fa-link mr-2" v-b-tooltip.hover.left title='Relation'></i>
+          <i class="fa fa-link mr-2" v-b-tooltip.hover.left title='One To Many'></i>
           <!-- {{inflated.alias.label}} -->
-          <span class="badge badge-light ml-2">Has Many</span>
-          <span class="badge badge-light ml-2">one {{ selectedSchema.label }} to many {{ inflated.schema.label_plural }}</span>
+          <!-- <span class="badge badge-light ml-2">One To Many</span> -->
+          <!-- <span class="badge badge-light ml-2">one {{ selectedSchema.label }} to many {{ inflated.schema.label_plural }}</span> -->
+          <span class='text-warning'>One </span><span class='text-info'>{{ selectedSchema.label }}</span> <span class='text-warning'> To Many </span><span class="text-info">{{ inflated.schema.label_plural }}</span>
         </span>
 
         <!-- OWNS_MANY -->
@@ -59,7 +63,7 @@
 
       </div>
 
-      <div class="col-lg-3 text-right controls" v-if="item.locked && item.datatype !== 'RELATION'">
+<!--       <div class="col-lg-3 text-right controls" v-if="item.locked && item.datatype !== 'RELATION'">
 
         <b-button
           size="sm"
@@ -71,8 +75,8 @@
         </b-button>
 
       </div>
-
-      <div class="col-lg-3 text-right controls" v-else>
+ z-->
+<!--       <div class="col-lg-3 text-right controls" v-else>
 
         <b-button
           v-if="item.locked"
@@ -97,7 +101,7 @@
 
         <DestroyButton scope="relation" :modelId="item.id" />
 
-      </div>
+      </div> -->
 
     </div>
   </li>
@@ -153,10 +157,11 @@ export default {
 }
 </script>
 
-<!-- TODO - move some of this into AttributeLabel component -->
+<!-- CLEANUP - the following CSS is almost identical to what's in AttributeListItem -->
 <style lang='sass' scoped>
+
   .list-group-item
-    // border-left: .25rem solid #666666
+    padding: 0.25rem 1rem
 
   .list-group-item:hover i.fa-bars
     opacity: 1

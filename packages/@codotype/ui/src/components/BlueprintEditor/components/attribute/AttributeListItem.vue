@@ -7,26 +7,14 @@
     <div class="row d-flex align-items-center">
 
       <!-- Handle for re-ordering attributes -->
-      <div class="col-lg-1 text-left d-flex align-items-center">
+      <div class="col-sm-2 text-left d-flex align-items-center">
         <i class="fa fa-lg fa-fw fa-bars mr-3" style='cursor: grab;'></i>
-        <!-- <i class="fa fa-fw text-primary fa-eye mr-3" v-if="item.order === 0"  v-b-tooltip.hover.left title='Leading attribute'></i> -->
-      </div>
-      <div class="col-lg-1 text-left d-flex align-items-center">
         <i class="fa fa-fw text-primary fa-eye mr-3" v-if="item.order === 0"  v-b-tooltip.hover.left title='Leading attribute'></i>
       </div>
 
-      <div class="col-lg-4">
+      <div class="col-sm-8">
         <AttributeListItemLabel :item="item"/>
-      </div>
-
-      <div class="col-lg-2">
-        <!-- REQUIRED -->
-        <!-- <span class="badge" v-if="item.required" v-b-tooltip.hover.top title="Required"> -->
-          <!-- <i class="fa fa-asterisk text-danger"></i> -->
-        <!-- </span> -->
-
-        <!-- UNIQUE Badge -->
-        <span
+        <!-- <span
           v-if="item.unique"
           title="Unique"
           class="badge badge-light"
@@ -34,37 +22,43 @@
         >
           <i class="fas fa-snowflake text-dark"></i>
           Unique
-        </span>
-
+        </span> -->
       </div>
 
-      <div class="col-lg-4 text-right controls" v-if="item.locked">
+      <div class="col-sm-2 text-right controls justify-content-end" v-if="item.locked">
         <b-badge
           variant="secondary"
           size="sm"
-          v-b-tooltip.hover.left
-          title="Locked attributes may not be edited or removed - they are required for correct baseline functionality."
+          v-b-tooltip.hover.right
+          title="Email attribute may not be edited or removed"
         >
           <i class="fa fa-fw fa-lock"></i>
-          Locked
+          <!-- Locked -->
         </b-badge>
       </div>
 
-      <div class="col-lg-4 text-right controls" v-else>
-
-        <b-button
+      <div class="col-sm-2 text-right d-flex controls justify-content-end" v-else>
+        <b-dropdown
+          right
+          no-caret
           size="sm"
-          title="Edit"
-          variant="outline-warning"
-          v-b-tooltip.hover.top
-          @click="editModel(item)"
+          variant="light"
+          toggle-class='rounded px-0 py-0 d-flex'
         >
-          <i class="fas fa-fw fa-pencil-alt"></i>
-        </b-button>
+          <template slot="button-content">
+            <i class="fa fa-fw fa-ellipsis-h"></i>
+          </template>
 
-        <DestroyButton scope="attribute" :modelId="item.id" />
+          <b-dropdown-item-button @click="editModel(item)">
+            <i class="fas fa-fw fa-pencil-alt"></i>
+            Edit
+          </b-dropdown-item-button>
 
+          <DestroyButton scope="attribute" :modelId="item.id" />
+
+        </b-dropdown>
       </div>
+
 
     </div>
 
@@ -94,6 +88,9 @@ export default {
 </script>
 
 <style lang='sass' scoped>
+
+  .list-group-item
+    padding: 0.25rem 1rem
 
   .list-group-item:hover i.fa-bars
     opacity: 1
