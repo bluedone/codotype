@@ -12,6 +12,11 @@
             </p>
             <!-- <small class="text-muted">Your code has been downloaded as a .zip file.</small> -->
             <small class="text-muted">Your download will start automatically - click <a :href="downloadUrl" target="_blank">here</a> to download it manually</small>
+
+            {{ responseType }}
+            {{ downloadUrl }}
+            {{ filepath }}
+
           </div>
         </div>
 
@@ -69,7 +74,9 @@ export default {
   },
   computed: mapGetters({
     finished: 'build/runtime/finished',
-    downloadUrl: 'build/runtime/downloadUrl'
+    responseType: 'build/runtime/responseType',
+    downloadUrl: 'build/runtime/downloadUrl',
+    filepath: 'build/runtime/filepath'
   })
 }
 </script>

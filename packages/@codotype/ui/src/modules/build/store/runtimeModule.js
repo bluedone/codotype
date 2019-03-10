@@ -17,6 +17,8 @@ export default {
       commit('loading', false)
       commit('finished', false)
       commit('downloadUrl', '')
+      commit('filepath', '')
+      commit('responseType', '')
       commit('error', '')
     },
     generate: ({ rootGetters, state, commit }) => {
@@ -75,12 +77,16 @@ export default {
     loading (state, loading) { state.loading = loading },
     finished (state, finished) { state.finished = finished },
     downloadUrl (state, downloadUrl) { state.downloadUrl = downloadUrl },
+    responseType (state, responseType) { state.responseType = responseType },
+    filepath (state, filepath) { state.filepath = filepath },
     error (state, error) { state.error = error }
   },
   getters: {
     loading (state) { return state.loading },
     finished (state) { return state.finished },
     downloadUrl (state) { return state.downloadUrl },
+    responseType (state) { return state.responseType },
+    filepath (state) { return state.filepath },
     error (state) { return state.error }
   }
 }

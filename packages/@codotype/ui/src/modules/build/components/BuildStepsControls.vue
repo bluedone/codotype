@@ -31,15 +31,16 @@
             <i class="fa fa-fw fa-ellipsis-h"></i>
           </template>
 
+          <b-dropdown-item-button @click="$store.commit('editor/modals/import/showing', true)">
+            <i class="fa fa-fw fa-upload"></i>
+            Import Blueprint
+          </b-dropdown-item-button>
+
           <b-dropdown-item-button @click="$store.dispatch('editor/export')">
             <i class="fa fa-fw fa-download"></i>
             Export Blueprint
           </b-dropdown-item-button>
 
-          <b-dropdown-item-button @click="$store.commit('editor/modals/import/showing', true)">
-            <i class="fa fa-fw fa-upload"></i>
-            Import Blueprint
-          </b-dropdown-item-button>
         </b-dropdown>
 
         <!-- <span class='text-muted' v-if="currentStep === 1">
