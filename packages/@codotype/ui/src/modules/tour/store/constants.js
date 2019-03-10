@@ -1,5 +1,6 @@
 import SchemaDetail from './SchemaDetail.html'
 
+// CLEANUP - split this into separate files, one for each tour
 export const APP_EDITOR_TOUR = [
   // {
   //   element: '#project-header',

@@ -1,22 +1,29 @@
 <template>
-  <Loading v-if="loading" />
+  <Loading v-if="starting || loading" />
   <BuildFinished v-else-if="finished" />
   <b-row v-else class='justify-content-center'>
-    <b-col xl=9 lg=12>
-
+    <b-col xl=12 lg=12>
 
       <BuildSteps v-if="model.id">
         <template slot="step-1">
-          <ProjectForm />
+          <b-row class='w-100 justify-content-center'>
+            <b-col sm=9>
+              <ProjectForm />
+            </b-col>
+          </b-row>
         </template>
 
         <template slot="step-2">
-          <BlueprintEditor />
+          <b-row class='w-100 justify-content-center'>
+            <b-col sm=12>
+              <BlueprintEditor />
+            </b-col>
+          </b-row>
         </template>
 
         <template slot="step-3">
           <b-row class='w-100 justify-content-center'>
-            <b-col sm=12>
+            <b-col sm=9>
               <ConfigureGenerator :id="id" />
             </b-col>
           </b-row>
@@ -45,7 +52,7 @@ export default {
   },
   data () {
     return {
-      loading: true
+      starting: true
     }
   },
   components: {
@@ -67,7 +74,7 @@ export default {
     this.$store.dispatch('build/loadSteps', this.id)
     this.$store.dispatch('build/steps/reset')
     setTimeout(() => {
-      this.loading = false
+      this.starting = false
     }, 500)
   },
   methods: mapActions({
@@ -75,6 +82,7 @@ export default {
   }),
   computed: mapGetters({
     model: 'generator/selectedModel',
+    loading: 'build/runtime/loading',
     finished: 'build/runtime/finished'
   })
 }
