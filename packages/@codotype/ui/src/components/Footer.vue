@@ -1,5 +1,5 @@
 <template>
-  <div class='footer-bottom py-2' v-if="['GeneratorBuild'].includes($route.name)">
+  <div class='footer-bottom py-2' v-if="['GeneratorBuild'].includes($route.name) && !fetchError">
     <div class="container">
       <BuildStepsControls />
     </div>
@@ -8,6 +8,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import HomeFooter from './HomeFooter'
 import BuildStepsControls from '../modules/build/components/BuildStepsControls'
 
@@ -16,7 +17,10 @@ export default {
   components: {
     HomeFooter,
     BuildStepsControls
-  }
+  },
+  computed: mapGetters({
+    fetchError: 'generator/error'
+  })
 }
 </script>
 
