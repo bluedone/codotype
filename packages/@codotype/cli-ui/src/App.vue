@@ -21,8 +21,12 @@ export default {
     Overlay,
     AppFooter
   },
-  created () {
-    this.$store.dispatch('generator/selectFromServer')
+  metaInfo: {
+    title: 'Loading...',
+    titleTemplate: 'Codotype - %s',
+    htmlAttrs: {
+      lang: 'en'
+    }
   }
 }
 </script>
