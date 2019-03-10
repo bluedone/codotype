@@ -17,21 +17,21 @@
         <span class="badge" v-if="item.type === 'BELONGS_TO'">
           <i class="fa fa-link mr-2" v-b-tooltip.hover.left title='Many To One'></i>
           <!-- {{inflated.alias.label}} -->
-          <span class='text-warning'>Many </span><span class='text-info'>{{ selectedSchema.label_plural }}</span> <span class='text-warning'> To One </span><span class="text-info">{{ inflated.schema.label }}</span>
+          <span class='text-warning'>Many </span><span class='text-info'>{{ selectedSchema.label_plural }}</span> <span class='text-warning'> To One </span><span class="text-info">{{ inflated.alias.label }}</span><span v-if="inflated.alias.label !== inflated.schema.label"> ({{inflated.schema.label}})</span>
         </span>
 
         <!-- HAS_ONE -->
         <span class="badge" v-if="item.type === 'HAS_ONE'">
           <i class="fa fa-link mr-2" v-b-tooltip.hover.left title='One To One'></i>
           <!-- {{inflated.alias.label}} -->
-          <span class='text-warning'>One </span><span class='text-info'>{{ selectedSchema.label }}</span> <span class='text-warning'> To One </span><span class="text-info">{{ inflated.schema.label }}</span>
+          <span class='text-warning'>One </span><span class='text-info'>{{ selectedSchema.label }}</span> <span class='text-warning'> To One </span><span class="text-info">{{ inflated.alias.label }}</span><span v-if="inflated.alias.label !== inflated.schema.label"> ({{inflated.schema.label}})</span>
         </span>
 
         <!-- HAS_MANY -->
         <span class="badge" v-if="item.type === 'HAS_MANY'">
           <i class="fa fa-link mr-2" v-b-tooltip.hover.left title='One To Many'></i>
           <!-- {{inflated.alias.label}} -->
-          <span class='text-warning'>One </span><span class='text-info'>{{ selectedSchema.label }}</span> <span class='text-warning'> To Many </span><span class="text-info">{{ inflated.schema.label_plural }}</span>
+          <span class='text-warning'>One </span><span class='text-info'>{{ selectedSchema.label }}</span> <span class='text-warning'> To Many </span><span class="text-info">{{ inflated.alias.label_plural }}</span><span v-if="inflated.alias.label !== inflated.schema.label"> ({{inflated.schema.label_plural}})</span>
         </span>
 
         <!-- OWNS_MANY -->
