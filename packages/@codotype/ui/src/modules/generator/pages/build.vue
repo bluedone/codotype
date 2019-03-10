@@ -1,5 +1,6 @@
 <template>
   <Loading v-if="starting || loading" />
+  <BuildError v-else-if="fetchError" />
   <BuildFinished v-else-if="finished" />
   <b-row v-else class='justify-content-center'>
     <b-col xl=12 lg=12>
@@ -38,6 +39,7 @@
 import { mapGetters, mapActions } from 'vuex'
 import Loading from '../../../components/Loading'
 import BuildSteps from '../../build/components/BuildSteps'
+import BuildError from '../../build/components/BuildError'
 import BuildFinished from '../../build/components/BuildFinished'
 import ProjectForm from '../../../components/BlueprintEditor/components/project/ProjectForm'
 import BlueprintEditor from '../../../components/BlueprintEditor'
@@ -58,29 +60,30 @@ export default {
   components: {
     Loading,
     BuildSteps,
+    BuildError,
     BuildFinished,
     ProjectForm,
     BlueprintEditor,
     ConfigureGenerator
   },
-  metaInfo () {
-    return {
-      title: this.model.label
-    }
-  },
   async created () {
-    await this.$store.dispatch('generator/fetchCollection')
-    this.selectModel(this.id)
-    this.$store.dispatch('build/loadSteps', this.id)
-    this.$store.dispatch('build/steps/reset')
-    setTimeout(() => {
+    try {
+      await this.$store.dispatch('generator/fetchCollection')
+      this.selectModel(this.id)
+      this.$store.dispatch('build/loadSteps', this.id)
+      this.$store.dispatch('build/steps/reset')
+      setTimeout(() => {
+        this.starting = false
+      }, 500)
+    } catch {
       this.starting = false
-    }, 500)
+    }
   },
   methods: mapActions({
     selectModel: 'generator/selectModel'
   }),
   computed: mapGetters({
+    fetchError: 'generator/error',
     model: 'generator/selectedModel',
     loading: 'build/runtime/loading',
     finished: 'build/runtime/finished'
