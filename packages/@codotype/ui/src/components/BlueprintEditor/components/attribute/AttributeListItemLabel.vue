@@ -26,3 +26,11 @@ export default {
   }
 }
 </script>
+
+<style lang='sass'>
+
+  .badge
+    font-weight: 300
+    padding: .3rem .3rem
+
+</style>

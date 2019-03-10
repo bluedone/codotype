@@ -2,8 +2,8 @@ const ejs = require('ejs')
 const path = require('path');
 const fsExtra = require('fs-extra')
 const trailingComma = require('@codotype/util/lib/trailingComma')
-
-// TODO - import ALL datatypes from @codotype/types and inject them into the template renderer variable scope
+const buildDefault = require('@codotype/util/lib/buildDefault')
+const datatypes = require('@codotype/types/lib/datatypes')
 
 // // // //
 
@@ -24,6 +24,9 @@ module.exports = class CodotypeGenerator {
 
     // Assigns helper libraries to class variables
     this.fs = fsExtra
+
+    // Assigns builddefault helper from @codotype/util
+    this.buildDefault = buildDefault;
 
     // PASS this.options.resolved in from codotype/codotype
     this.resolved = this.options.resolved;
@@ -107,10 +110,12 @@ module.exports = class CodotypeGenerator {
 
       const data = {
         blueprint: this.options.blueprint,
+        meta: this.options.meta,
         configuration: this.options.configuration,
         helpers: {
           trailingComma
         },
+        ...datatypes,
         ...options
       }
 
@@ -137,6 +142,21 @@ module.exports = class CodotypeGenerator {
       // console.log('Rendering:' + dest)
       const compiledTemplate = await this.renderTemplate(src, options)
       // console.log('Rendered:' + dest)
+
+      // Does the destination already exist?
+      const exists = fsExtra.existsSync(dest)
+
+      // If it doesn't exist, OKAY TO WRITE
+      if (exists) {
+        const existing = fsExtra.readFileSync(dest, 'utf8')
+        // If exists, and it's the same, SKIP
+        if (compiledTemplate === existing) {
+          return resolve()
+        } else {
+          // TODO - this needs a GitHub issue
+          // If exists, and it's different, WRITE (add PROMPT option later, for safety)
+        }
+      }
 
       // Writes the compiled template to the dest location
       // console.log('Writing: ' + dest)

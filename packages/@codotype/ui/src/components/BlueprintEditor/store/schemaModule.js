@@ -66,6 +66,10 @@ export default {
   getters: {
     selectedModel: state => {
       return state.collection.items.find(i => i.id === state.selectedModel.id)
+    },
+    enableSubmit: state => {
+      const label = state.form.model.label
+      return label && label.length > 1 && !state.collection.items.map(i => i.label).includes(label)
     }
   },
   modules: {

@@ -37,6 +37,7 @@
             v-if="!isUserModel"
             target="schema-destroy-button"
             placement="left"
+            :triggers="['hover']"
             content="Remove Model">
           </HelpPopover>
 
@@ -54,11 +55,13 @@
 
     </b-col>
 
-    <b-col lg=12>
+    <b-col sm=12 md=6 lg=6>
 
       <SortableList
         scope="attribute"
         label="Attributes"
+        title="No Attributes added yet"
+        icon="https://res.cloudinary.com/codotype/image/upload/v1552157187/codotype-icons/frequency-table.png"
         info="Attributes define properties that can be assigned to a single model"
       />
 
@@ -66,12 +69,15 @@
       <AttributeEditModal />
       <DestroyModal scope="attribute" label="Attribute" />
 
-
-      <hr>
+    </b-col>
+    <!-- <hr> -->
+    <b-col sm=12 md=6 lg=6>
 
       <SortableList
         scope="relation"
         label="Relations"
+        title="No Relations added yet"
+        icon="https://res.cloudinary.com/codotype/image/upload/v1552157160/codotype-icons/complexity.png"
         info="Relations define associations between different models"
       />
 

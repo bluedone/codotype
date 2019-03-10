@@ -7,6 +7,7 @@
     ok-variant='success'
     cancel-title='Cancel'
     cancel-variant='light'
+    :ok-disabled="!enableSubmit"
     @ok="createModel()"
     @hide="showModal(false)"
   >
@@ -24,6 +25,7 @@ export default {
     SchemaForm
   },
   computed: mapGetters({
+    enableSubmit: 'editor/schema/enableSubmit',
     showingModal: 'editor/schema/modals/new/showing'
   }),
   methods: {

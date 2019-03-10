@@ -1,7 +1,7 @@
 const fs = require('fs-extra')
 const path = require('path')
 const chalk = require('chalk')
-const server = require('@codotype/api/server')
+const server = require('@codotype/api/lib/server')
 const { spawn } = require('child_process')
 const CodotypeRuntime = require('@codotype/runtime')
 
@@ -81,7 +81,7 @@ module.exports = (...args) => {
   return serve(...args).catch(err => {
     console.log(chalk.red('codotype cli error'))
     console.log(chalk.yellow('generator not found in local directory'))
-    // console.log(err)
+    console.log(err)
     if (!process.env.CODOTYPE_CLI_TEST) {
       process.exit(1)
     }

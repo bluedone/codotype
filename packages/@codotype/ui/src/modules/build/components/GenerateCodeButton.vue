@@ -1,6 +1,6 @@
 <template>
   <b-button
-    variant="success"
+    class="btn-yellow"
     size="lg"
     @click="generate()"
     v-if="currentStep === steps.length - 1"

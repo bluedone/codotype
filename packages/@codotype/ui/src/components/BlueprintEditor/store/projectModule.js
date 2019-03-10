@@ -15,6 +15,10 @@ export default {
       const { identifier } = inflateMeta(sanitizedLabel)
       commit('label', sanitizedLabel)
       commit('identifier', identifier)
+    },
+    reset ({ commit }) {
+      commit('label', '')
+      commit('identifier', '')
     }
   },
   mutations: {

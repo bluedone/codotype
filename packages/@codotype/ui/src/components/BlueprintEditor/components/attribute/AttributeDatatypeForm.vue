@@ -8,6 +8,7 @@
         v-for="opt in datatypes"
         :key="opt.value"
         :opt="opt"
+        :val="model.datatype"
         :click="setDatatype"
       />
     </b-row>

@@ -8,6 +8,11 @@
         </div>
       </div>
 
+      <!-- <b-nav-item href="mailto:codotype.io@gmail.com"> -->
+        <!-- <i class="far fa-lg fa-fw fa-envelope text-success mr-1"></i> -->
+        <!-- Email -->
+      <!-- </b-nav-item> -->
+
       <div class="row">
 
         <div class="col-lg-12 text-center">

@@ -1,13 +1,13 @@
 <template>
   <b-modal
     lazy
-    id="import-blueprint"
-    ref="importBlueprint"
-    :title="'Import Blueprint'"
-    @ok="$store.dispatch('blueprint/import', blueprintJson)"
+    :visible="$store.getters[`editor/modals/import/showing`]"
+    title="Import Blueprint"
     ok-title='Import'
     cancel-title='Cancel'
     :ok-disabled="okDisabled"
+    @ok="$store.dispatch('editor/import', blueprintJson)"
+    @hide="$store.commit(`editor/modals/import/showing`, false)"
   >
     <p class="form-text text-muted mb-2">Import a Codotype Blueprint stored in a .JSON file</p>
 
@@ -52,11 +52,12 @@ export default {
       const file = event.target.files[0]
       const reader = new FileReader()
       this.okDisabled = true
+      // TODO - add a try/catch statement here
+      // TODO - validate parsed blueprint in Vuex store
       reader.onload = (e) => {
         this.uploaded = true
         this.blueprintJson = JSON.parse(e.target.result)
-        this.blueprintJson._id = null
-        // TODO - validate parsed blueprint in Vuex store
+        this.blueprintJson.id = null
         if (this.blueprintJson.schemas && this.blueprintJson.label) {
           this.okDisabled = false
           this.blueprintValid = true

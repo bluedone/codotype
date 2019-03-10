@@ -22,7 +22,7 @@ export default {
     }
   },
   async created () {
-    // TODO - this is only needed IF the generator has NOT been fetched yet
+    // CLEANUP - this is only needed IF the generator has NOT been fetched yet
     // Should display a loading animation as needed
     await this.$store.dispatch('generator/fetchCollection')
     this.selectModel(this.id)

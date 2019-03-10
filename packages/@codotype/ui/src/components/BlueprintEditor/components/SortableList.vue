@@ -47,10 +47,23 @@
         </draggable>
 
         <b-list-group flush v-else>
-          <b-list-group-item class="text-center text-primary">
-            <i class="fa fa-lg fa-info-circle"></i>
-            <!-- TODO - Click to add your first MODEL -->
-            <p class="mb-0 mt-1">{{ info }}</p>
+          <b-list-group-item class="text-center">
+
+            <img style="width: 2rem;" :src="icon">
+            <br>
+            <strong class="mb-0 mt-1 text-muted">{{ title }}</strong>
+            <br>
+            <small class="text-muted">{{ info }}</small>
+            <br>
+            <b-btn
+              size="sm"
+              class='btn-rounded mt-2'
+              variant="outline-primary"
+              @click="$store.dispatch('editor/schema/' + scope + '/newModel')"
+            >
+              <i class="fa fa-plus"></i>
+              Add {{ label }}
+            </b-btn>
           </b-list-group-item>
         </b-list-group>
 
@@ -77,6 +90,14 @@ export default {
       required: true
     },
     label: {
+      type: String,
+      required: true
+    },
+    title: {
+      type: String,
+      required: true
+    },
+    icon: {
       type: String,
       required: true
     },

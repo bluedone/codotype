@@ -27,3 +27,7 @@ packages/@codotype/web
 
 # Ignore Lerna artifacts
 lerna-debug.log
+
+# Ignore package-lock.json since it's break lerna bootstrap
+# TODO - find out why package-lock is breaking lerna bootstrap
+package-lock.json

@@ -14,14 +14,14 @@
         </div>
 
         <!-- RELATION TYPE -->
-        <!-- TODO - abstract RELATION_TYPE_SELECTOR into independent component? -->
+        <!-- CLEANUP - abstract RELATION_TYPE_SELECTOR into independent component? -->
         <div class="col-lg-4">
 
           <div class="row">
             <div class="col-lg-12">
               <div class="form-group mb-2 text-center">
                 <label class='mb-0'>{{ selectedRelationType.label }}</label>
-                <!-- <small class="form-text text-muted mb-0">{{ selectedRelationType.description }}</small> -->
+                <small class="form-text text-muted mb-0">{{ selectedRelationType.description }}</small>
               </div>
             </div>
           </div>
@@ -47,8 +47,8 @@
         <!-- RELATED SCHEMA -->
         <div class="col-lg-4">
           <div class="form-group text-center">
-            <label class='mb-0'>Related Model</label>
-            <small class="form-text text-muted">The related Model definition.</small>
+            <label class='mb-0'>Related Schema</label>
+            <small class="form-text text-muted">Schema referenced by this relation</small>
             <select class="form-control" v-model="model.related_schema_id" @change="updateModel()">
 
               <!-- <option v-if="model.type === 'HAS_ONE'" v-for="s in allSchemas" :key="s.id" :value="s.id">{{s.label}}</option> -->
@@ -111,13 +111,12 @@ export default {
     this.updateModel()
   },
   methods: {
-    // TODO - this should be moved into the Vuex store
+    // CLEANUP - this should be moved into the Vuex store
     setRelationType (relationId) {
       this.model.type = relationId
       if (relationId !== 'BELONGS_TO') { this.model.reverse_as = '' }
       this.updateModel()
     },
-    // TODO - this should be abstracted into a mixin
     updateModel () {
       this.$store.commit('editor/schema/relation/form/model', this.model)
     }

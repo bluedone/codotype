@@ -1,3 +1,6 @@
+import SchemaDetail from './SchemaDetail.html'
+
+// CLEANUP - split this into separate files, one for each tour
 export const APP_EDITOR_TOUR = [
   // {
   //   element: '#project-header',
@@ -18,8 +21,8 @@ export const APP_EDITOR_TOUR = [
   {
     element: '#model-detail',
     popover: {
-      title: 'Here\'s where it gets interesting',
-      description: 'Models encapsulate Attributes & Relations\nYou can create models to describe the data your application will manage - think of each model as a single table in SQL-land (or a collection in No-SQL-land).\nThe application includes a <strong>User Model</strong> by default',
+      title: 'Schemas',
+      description: SchemaDetail,
       position: 'left'
     }
   },

@@ -14,6 +14,8 @@ export default {
       const generatorMeta = rootGetters['generator/collection'].find(g => g.id === generator_id)
 
       // Loads the generator into the step module
+      dispatch('editor/created', {}, { root: true })
+      dispatch('tour/created', {}, { root: true })
       dispatch('steps/load', generatorMeta)
       dispatch('runtime/reset')
     },
@@ -43,15 +45,12 @@ export default {
         return dispatch('selectBuild', generator_id)
       }
 
-      // Update selectedBuild's configuration object
-      // TODO - merge selectedBuild.configuration with a new buildConfiguration object
-      // QUESTION - how to handle the case where a build is being reloaded, but the schemas have changed?
-      // If selectedBuild is found, there should be a merge function that can runs buildConfiguration for a new
-      // configuration for the editor, and merges that with the previous one.
-      // *Should exist in @codotype/util
+      // Sets the selectedBuild.configuration property
+      // Merges the existing configuration to handle the addition / removal of schemas
       selectedBuild.configuration = buildConfiguration({
         schemas: rootGetters['editor/schema/collection/items'],
-        generator: generatorMeta
+        generator: generatorMeta,
+        configuration: selectedBuild.configuration
       })
 
       // Clears the current editor & runtime store

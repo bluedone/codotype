@@ -57,7 +57,7 @@ export default {
 </script>
 
 <style lang="sass">
-  // TODO - replace with a global SASS import
+  // CLEANUP - replace with a global SASS import
   // https://vueschool.io/articles/vuejs-tutorials/globally-load-sass-into-your-vue-js-applications/
   // @import '../../../sass/vendor'
 
