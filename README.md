@@ -13,16 +13,25 @@ lerna bootstrap
 2. Your environment should be ready for development - please consult the documentation in each repository for more detailed development instructions.
 
 
-## TODOs
-- Manage the following as packages:
-  - @codotype/util
-  - @codotype/generator
-  - @codotype/runtime
-  - @codotype/ui
-  - @codotype/blueprints (?)
+Environment Setup
+```
+npm install -g @vue/cli
+npm install -g lerna
+```
 
-Manage the following in separate repositories
-  - @codotype/cli (?)
-  - @codotype/api (?)
-  - @codotype/web
-  - All generators (express-vue, nuxt, hackathon-starter, mongodb-dataworker, node-express, postman, react, vue+bootstrap, vue+onsen)
+Codotype Environment Setup
+```
+git clone https://github.com/codotype/codotype.git
+cd ./codotype
+git checkout -b dev
+git reset --hard origin/dev
+lerna bootstrap
+```
+
+Codotype Generator Setup
+```
+cd ./packages/@codotype
+git clone https://github.com/codotype/codotype-mevn-generator.git
+cd ./codotype-mevn-generator
+../cli/bin/codotype.js serve
+```
