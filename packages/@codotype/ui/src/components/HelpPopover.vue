@@ -15,7 +15,7 @@ export default {
     target: { required: true },
     content: { required: true },
     placement: { required: false },
-    triggers: { default: [] }
+    triggers: { default: () => [] }
   }
 }
 </script>

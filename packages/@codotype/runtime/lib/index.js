@@ -134,6 +134,7 @@ module.exports = class CodotypeRuntime {
       })
     })
   }
+
   // getGenerators
   // Returns an array of generators registered to this runtime instance
   getGenerators () {
@@ -207,6 +208,7 @@ module.exports = class CodotypeRuntime {
           // Invokes generator.compileTemplatesInPlace()
           await generatorInstance.compileTemplatesInPlace()
 
+          // Resolves generator promise
           return resolve()
         })
 
@@ -221,7 +223,8 @@ module.exports = class CodotypeRuntime {
         return reject(err)
       }
 
-    }).then(() => {
+    })
+    .then(() => {
       // Thank you message
       console.log('\nBuild complete\nThank you for using Codotype :)\nFollow us on github.com/codotype\n')
     })

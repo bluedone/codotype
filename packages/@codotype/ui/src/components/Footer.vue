@@ -1,27 +1,35 @@
 <template>
-  <div class='footer-bottom py-2' v-if="['GeneratorBuild'].includes($route.name)">
+  <div class='footer-bottom py-2' v-if="showFooter">
     <div class="container">
       <BuildStepsControls />
     </div>
   </div>
-  <!-- <HomeFooter v-else /> -->
 </template>
 
 <script>
-import HomeFooter from './HomeFooter'
+import { mapGetters } from 'vuex'
 import BuildStepsControls from '../modules/build/components/BuildStepsControls'
 
 export default {
   name: 'Footer',
   components: {
-    HomeFooter,
     BuildStepsControls
+  },
+  computed: {
+    ...mapGetters({
+      fetchError: 'generator/error',
+      buildFinished: 'build/runtime/finished',
+      buildLoading: 'build/runtime/loading',
+      runtimeError: 'build/runtime/error'
+    }),
+    showFooter () {
+      return ['GeneratorBuild'].includes(this.$route.name) && !this.fetchError && !this.buildFinished && !this.buildLoading && !this.runtimeError
+    }
   }
 }
 </script>
 
 <style lang="sass" scoped>
-
   .footer-bottom
     position: fixed
     width: 100%
@@ -29,30 +37,4 @@ export default {
     z-index: 100
     background: #f5f6f9
     border-top: 1px solid #cccccc
-
-  nav.navbar
-    padding-top: .25rem
-    padding-bottom: .25rem
-    border-top: 1px solid #d3d3d3
-    font-size: .8rem
-
-    .navbar-brand
-      letter-spacing: .25rem !important
-      font-family: sans-serif
-      font-weight: 100
-      letter-spacing: 0.1rem
-      // text-transform: uppercase
-      // font-size: 1.5rem
-
-      strong
-        font-weight: 400
-
-      img.logo
-        float: left
-        margin-right: 0.4rem
-        height: 2rem
-        display: flex
-
-    // .nav-item
-      // font-size: 1.1rem
 </style>

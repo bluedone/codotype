@@ -29,7 +29,7 @@ function inflateSchema({ schema, schemas }) {
   let inflated = cloneDeep(schema)
   inflated.relations = schema.relations.map((relation) => {
     relation.schema_id = schema.id
-    inflateRelation({ schemas, relation })
+    return inflateRelation({ schemas, relation })
   })
   inflated.attributes = schema.attributes.map(attribute => attribute)
   return inflated

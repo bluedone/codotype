@@ -3,8 +3,8 @@
     <b-navbar-brand to="/">
       <strong>Codotype</strong>
 
-      <img class='generator-icon ml-3 mr-1' style="width: 1rem;" :src="model.icon"/>
-      <small>{{ model.label }}</small>
+      <img class='generator-icon ml-3 mr-1' style="width: 1rem;" :src="selectedModel.icon"/>
+      <small>{{ selectedModel.label }}</small>
 
     </b-navbar-brand>
 
@@ -34,21 +34,18 @@
   </b-navbar>
 </template>
 
+
 <script>
-import { mapGetters } from 'vuex'
+import GeneratorFetchMixin from './GeneratorFetchMixin'
 
 export default {
-  name: 'BlueprintMenu',
-  computed: mapGetters({
-    model: 'generator/selectedModel'
-  })
+  name: 'Navbar',
+  mixins: [GeneratorFetchMixin]
 }
 </script>
 
 
 <style lang="sass">
-
   nav.navbar
     border-bottom: 1px solid #d3d3d3
-
 </style>

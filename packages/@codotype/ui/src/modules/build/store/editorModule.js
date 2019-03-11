@@ -1,13 +1,13 @@
 import collectionModule from '../../../store/lib/collectionModule'
 import objectModule from './objectModule'
-import buildDefault from '@codotype/util/lib/buildDefault'
+import { buildConfigurationDefault } from '@codotype/util/lib/buildDefault'
 
 export default {
   namespaced: true,
   state: {
     selectedSchemaId: '',
     generatorId: '',
-    schemas: [], // TODO - this should implement a collectionModule and copy the schemas over from the blueprint
+    schemas: [], // CLEANUP - this should implement a collectionModule and copy the schemas over from the blueprint
     option_groups: [],
     configuration: {}
   },
@@ -31,7 +31,7 @@ export default {
     modelOptionValue: state => ({ group, schema, attribute }) => {
       if (!group || !schema || !attribute) return
 
-      // TODO - this should be removed, handled by a higher-level configuration merge sub-routine
+      // CLEANUP - this should be removed, handled by a higher-level configuration merge sub-routine
       if (!state.configuration[group.identifier][schema.identifier]) {
         state.configuration[group.identifier][schema.identifier] = {}
       }
@@ -53,17 +53,12 @@ export default {
   },
   actions: {
     // LOAD a build configuration into the editor
-    // TODO - this should merge the configuration that's passed in if
-    // - A schema has been created
-    // - A schema has been `updated`
-    // - A schema has been destroyed
     load ({ commit, dispatch }, { generator, schemas, configuration }) {
       commit('configuration', configuration)
-      commit('schemas', schemas)  // TODO - should interface with collectionModule
+      commit('schemas', schemas)  // CLEANUP - should interface with collectionModule
       commit('option_groups', generator.option_groups)
       commit('generatorId', generator.id)
     },
-
     // CLEARS the editor module state
     // De-registers all dynamic modules
     clear ({}) {
@@ -74,14 +69,14 @@ export default {
 
       // Loads new option group into model_addon module
       commit('selectedSchemaId', schema.id)
-      commit('model_addon/defaultNewModel', buildDefault({ attributes: group.attributes }))
+      commit('model_addon/defaultNewModel', buildConfigurationDefault({ attributes: group.attributes }))
       commit('model_addon/items', configuration[group.identifier_plural][schema.identifier])
     },
     selectGlobalAddon ({ state, getters, commit, dispatch }, { group }) {
       const configuration = state.configuration
 
       // Loads new option group into global_addon module
-      commit('global_addon/defaultNewModel', buildDefault({ attributes: group.attributes }))
+      commit('global_addon/defaultNewModel', buildConfigurationDefault({ attributes: group.attributes }))
       commit('global_addon/items', configuration[group.identifier_plural])
     },
     syncModelAddon ({ state, getters, commit }, { group, schema }) {

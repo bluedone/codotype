@@ -7,7 +7,7 @@ const PROJECT_STEP = {
 
 const BLUEPRINT_STEP = {
   id: 'blueprint_step',
-  label: 'Define Models'
+  label: 'Define Schemas'
 }
 
 const CONFIGURATION_STEP = {

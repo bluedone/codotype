@@ -1,9 +1,10 @@
 <template>
   <b-modal
     lazy
+    size="lg"
     :visible="showingModal"
-    :title="'Edit Model'"
-    ok-title='Update'
+    :title="'Edit Schema'"
+    ok-title='Update Schema'
     ok-variant='success'
     cancel-title='Cancel'
     cancel-variant='light'

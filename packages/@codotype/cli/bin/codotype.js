@@ -60,6 +60,14 @@ program
     require('../lib/serve')(options)
   })
 
+program
+  .command('build')
+  .description('builds a distributable client app for a single Codotype generator')
+  .action((cmd) => {
+    const options = cleanArgs(cmd)
+    require('../lib/build')(options)
+  })
+
 // output help information on unknown commands
 program
   .arguments('<command>')

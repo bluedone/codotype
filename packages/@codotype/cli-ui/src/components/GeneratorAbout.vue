@@ -1,16 +1,21 @@
 <template>
-  <GeneratorShow :id="selectedModel.id" v-if="selectedModel"/>
+  <GeneratorStart :model="selectedModel" v-if="selectedModel"/>
 </template>
 
 <script>
-import GeneratorShow from '@codotype/ui/src/modules/generator/pages/show'
+import GeneratorStart from '@codotype/ui/src/modules/generator/components/GeneratorStart'
 import GeneratorFetchMixin from './GeneratorFetchMixin'
 
 export default {
   name: 'GeneratorAbout',
   mixins: [GeneratorFetchMixin],
   components: {
-    GeneratorShow
+    GeneratorStart
+  },
+  metaInfo () {
+    return {
+      title: this.selectedModel.label
+    }
   }
 }
 </script>

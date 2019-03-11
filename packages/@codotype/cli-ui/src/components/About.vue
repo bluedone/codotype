@@ -1,5 +1,5 @@
 <template>
-  <div class="row">
+  <div class="row h-100 align-items-center">
     <div class="col-lg-12">
 
       <div class="row mt-2">
@@ -8,29 +8,26 @@
         </div>
       </div>
 
-      <!-- <b-nav-item href="mailto:codotype.io@gmail.com"> -->
-        <!-- <i class="far fa-lg fa-fw fa-envelope text-success mr-1"></i> -->
-        <!-- Email -->
-      <!-- </b-nav-item> -->
-
       <div class="row">
 
         <div class="col-lg-12 text-center">
-          <p class="lead">visual code scaffolding for the modern web</p>
+          <p class="lead">visual code scaffolding framework for the modern web</p>
           <p>Prototype new web applications amazingly fast</p>
-          <p>Define your models, attributes, and relations - Codotype does the rest</p>
+          <p>Define your Schemas, Attributes, and Relations - Codotype does the rest</p>
         </div>
 
-        <div class="col-lg-12 text-center">
-          <!-- <gh-btns-star slug="codotype/codotype" show-count></gh-btns-star> -->
+        <div class="col-lg-12 d-flex justify-content-center">
+          <gh-btns-star slug="codotype/codotype" show-count></gh-btns-star>
+        </div>
 
-          <br>
-
-          <p class="lead mb-0 mt-2">
+        <div class="col-lg-12 d-flex justify-content-center">
+          <p class="lead mb-0 mt-4">
             <span>Built with </span><i class="fa fa-heart text-danger"></i><span class='px-1'>by</span><a href="https://github.com/aeksco" target='_blank'>@aeksco</a>
           </p>
+        </div>
 
-          <!-- <gh-btns-follow class='mt-3' user="aeksco" show-count></gh-btns-follow> -->
+        <div class="col-lg-12 d-flex justify-content-center">
+          <gh-btns-follow class='mt-3' user="aeksco" show-count></gh-btns-follow>
         </div>
       </div>
 
@@ -46,10 +43,3 @@ export default {
   }
 }
 </script>
-
-<style lang="sass" scoped="true">
-
-  img.logo
-    height: 4rem
-
-</style>

@@ -11,6 +11,11 @@ export default {
   mixins: [GeneratorFetchMixin],
   components: {
     GeneratorBuild
+  },
+  metaInfo () {
+    return {
+      title: this.selectedModel.label
+    }
   }
 }
 </script>

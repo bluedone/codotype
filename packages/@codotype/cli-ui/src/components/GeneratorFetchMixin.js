@@ -1,7 +1,7 @@
 export default {
   computed: {
     selectedModel () {
-      return this.$store.getters['generator/selectedModel']
+      return JSON.parse(process.env.VUE_APP_GENERATOR_META)
     }
   }
 }

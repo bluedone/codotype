@@ -8,18 +8,14 @@ export default {
   state: {
     collection: [],
     fetching: false,
-    selectedModel: {}
+    selectedModel: {},
+    error: false
   },
   mutations: {
-    fetching (state, bool) {
-      state.fetching = bool
-    },
-    collection (state, data) {
-      state.collection = data
-    },
-    selectedModel (state, model) {
-      state.selectedModel = model
-    }
+    fetching (state, bool) { state.fetching = bool },
+    collection (state, data) { state.collection = data },
+    selectedModel (state, model) { state.selectedModel = model },
+    error (state, err) { state.error = err }
   },
   actions: {
     selectModel: ({ commit, state }, model_id) => {
@@ -31,18 +27,20 @@ export default {
     },
     fetchCollection: async ({ commit, state }, model_id) => {
       commit('fetching', true)
-      const { data } = await axios.get(API_ROOT)
-      commit('collection', data)
-      commit('fetching', false)
+      commit('error', false)
+      try {
+        const { data } = await axios.get(API_ROOT)
+        commit('collection', data)
+        commit('fetching', false)
+      } catch (err) {
+        commit('error', true)
+        commit('fetching', false)
+        throw err
+      }
     },
     selectModel: ({ commit, state }, model_id) => {
       let model = state.collection.find(m => m.id === model_id)
       commit('selectedModel', model)
-    },
-    selectFromServer: async ({ commit }) => {
-      const { data } = await axios.get(API_ROOT)
-      commit('collection', data)
-      commit('selectedModel', data[0])
     }
   },
   getters: {
@@ -57,6 +55,9 @@ export default {
     },
     selectedModel: state => {
       return state.selectedModel
+    },
+    error: state => {
+      return state.error
     },
     techTags: state => {
       return uniq(state.collection.reduce((techTags, g) => { return techTags.concat(g.tech_tags) }, [])).map((t) => { return { selected: false, label: t } })

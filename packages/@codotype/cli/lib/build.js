@@ -1,14 +1,13 @@
 const fs = require('fs-extra')
 const path = require('path')
 const chalk = require('chalk')
-const server = require('@codotype/api/lib/server')
 const { spawn } = require('child_process')
 const CodotypeRuntime = require('@codotype/runtime')
 
 async function serve (options) {
 
   // Logs start message
-  console.log(`\nStarting ${chalk.blue(`codotype serve`)}...`)
+  console.log(`\nStarting ${chalk.blue(`codotype build`)}...`)
 
   // // // //
   // CLEANUP - wrap this in a try/catch
@@ -16,7 +15,6 @@ async function serve (options) {
   // This logic should be abstracted & generalized as much as possible
   // Pulls in requisite paths for codotype runtime
   const generatorMetaPath = path.resolve(process.cwd(), './meta.json') // CLEANUP - constantize MAGIC STRING
-  // console.log(`the doctor says ${chalk.green(`this generator's metadata loaded correctly`)}`)
 
   // Invoke runtime directly with parameters
   const runtime = new CodotypeRuntime()
@@ -32,21 +30,6 @@ async function serve (options) {
   //
   // // // //
 
-  console.log('Starting API server...')
-
-  // Starts server
-  const port = process.env.PORT || 9090
-
-  const app = server({
-    port,
-    runtime
-  })
-
-  app.listen(port, () => {
-    console.log('Started API server...')
-    // console.log(`Express is running on port ${port}`)
-  })
-
   // // // //
   // CLEANUP - running a user interface service will necessary in an number of places
   // This process should be abstracted as much as possible
@@ -54,22 +37,17 @@ async function serve (options) {
   // Generates path from here to node_modules/@codotype/cli-ui
   const uiPath = path.resolve(__dirname, '../node_modules/@codotype/cli-ui')
 
-  // CLEANUP - add cleaner output message here
-  console.log('Starting UI Webpack server...')
-
   // Assembles arguments to start the UI server
-  let args = ['--cwd', uiPath, 'run', 'serve', '--generator_path', process.cwd()]
+  let args = ['--cwd', uiPath, 'run', 'build', '--generator_path', process.cwd()]
   const uiProc = spawn('yarn', args);
 
+  // Logging
   uiProc.stdout.on('data', (data) => console.log(data.toString()))
 
-  // uiProc.stderr.on('data', (data) => {
-  //   console.log(`stderr: ${data}`);
-  // });
-
+  // Closes after build is complete
   uiProc.on('close', (code) => {
-    // console.log('CLOSED')
-    // process.exit(1)
+    console.log(`\nFinished ${chalk.blue(`codotype build`)}...`)
+    process.exit(1)
   });
 
   //

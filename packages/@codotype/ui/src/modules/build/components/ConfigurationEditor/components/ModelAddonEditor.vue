@@ -164,26 +164,28 @@
               {{ group.attributes[0].label }}:{{ instance[group.attributes[0].identifier] }}
             </template>
 
-            <span>
+            <b-dropdown
+              right
+              no-caret
+              size="sm"
+              variant="light"
+              toggle-class='rounded px-0 py-0 d-flex'
+            >
+              <template slot="button-content">
+                <i class="fa fa-fw fa-ellipsis-h"></i>
+              </template>
 
-              <b-button
-                @click="editInstance({ instance })"
-                size="sm"
-                variant="outline-warning"
-              >
-                <i class="fa fa-edit"></i>
-              </b-button>
+              <b-dropdown-item-button @click="editInstance({ instance })">
+                <i class="fas fa-fw fa-pencil-alt"></i>
+                Edit
+              </b-dropdown-item-button>
 
-              <b-button
-                v-b-modal="'destroy-model-addon'"
-                @click="confirmRemoveInstance({ instance })"
-                size="sm"
-                variant="outline-danger"
-              >
-                <i class="fa fa-trash"></i>
-              </b-button>
+              <b-dropdown-item-button @click="confirmRemoveInstance({ instance })">
+                <i class="fa fa-fw fa-trash"></i>
+                Remove
+              </b-dropdown-item-button>
 
-            </span>
+            </b-dropdown>
 
           </li>
 

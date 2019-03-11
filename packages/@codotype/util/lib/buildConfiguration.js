@@ -1,5 +1,5 @@
 const cloneDeep = require('lodash/cloneDeep')
-const buildDefault = require('./buildDefault')
+const { buildConfigurationDefault } = require('./buildDefault')
 
 // Validates the state
 // TODO - this must be moved elsewhere in @codotype/util
@@ -33,7 +33,7 @@ function buildConfiguration ({ schemas, generator, configuration = {} }) {
       // Iterates over each blueprint schema and creates an array
       // to store the addon instances associated with that schema
       schemas.forEach((schema) => {
-        newInstanceData[schema.identifier] = instanceData[schema.identifier] || buildDefault({ attributes: group.attributes })
+        newInstanceData[schema.identifier] = instanceData[schema.identifier] || buildConfigurationDefault({ attributes: group.attributes })
       })
 
       // Assigns the instanceData object to the root configuration object
@@ -41,7 +41,7 @@ function buildConfiguration ({ schemas, generator, configuration = {} }) {
     } else if (group.type === 'OPTION_GROUP_TYPE_GLOBAL_OPTION') {
       // Iterates over each attribute in the GLOBAL_OPTION type,
       // sets instanceData to the default value
-      configuration[group.identifier] = configuration[group.identifier] || buildDefault({ attributes: group.attributes })
+      configuration[group.identifier] = configuration[group.identifier] || buildConfigurationDefault({ attributes: group.attributes })
     } else if (group.type === 'OPTION_GROUP_TYPE_GLOBAL_ADDON') {
       // Iterates over each attribute in the GLOBAL_OPTION type,
       // sets instanceData to the default value

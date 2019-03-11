@@ -27,5 +27,6 @@ export default new Router({
   ],
   scrollBehavior () {
     return { x: 0, y: 0 } // Top of page on change
-  }
+  },
+  mode: 'history'
 })
