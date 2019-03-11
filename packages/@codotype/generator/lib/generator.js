@@ -2,7 +2,7 @@ const ejs = require('ejs')
 const path = require('path');
 const fsExtra = require('fs-extra')
 const trailingComma = require('@codotype/util/lib/trailingComma')
-const buildDefault = require('@codotype/util/lib/buildDefault')
+const { buildDefault } = require('@codotype/util/lib/buildDefault')
 const datatypes = require('@codotype/types/lib/datatypes')
 
 // // // //
