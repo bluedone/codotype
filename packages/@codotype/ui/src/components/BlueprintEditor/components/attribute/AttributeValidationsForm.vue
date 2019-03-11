@@ -2,7 +2,7 @@
   <div class="row mt-2">
 
     <div class="col-lg-12">
-      <p class="lead mb-0">Validations</p>
+      <p class="lead mb-0">Attribute Validations</p>
     </div>
 
     <div class="col-lg-6 col-sm-12">
