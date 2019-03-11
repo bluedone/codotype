@@ -11,7 +11,7 @@
             <p class="lead mb-2">
               <i class="fas fa-lg fa-heart-broken text-danger"></i>
             </p>
-            <small class="text-muted">And it just breaks my little heart</small>
+            <small class="text-muted">And it breaks my little heart</small>
           </div>
         </div>
 

@@ -9,21 +9,19 @@ export default {
     downloadUrl: '',
     filepath: '',
     responseType: '',
-    error: '' // TODO - implement some basic error handling
+    error: false
   },
   actions: {
     reset: ({ commit }) => {
       commit('loading', false)
       commit('finished', false)
+      commit('error', false)
       commit('downloadUrl', '')
       commit('filepath', '')
       commit('responseType', '')
-      commit('error', '')
     },
-    generate: ({ rootGetters, state, commit }) => {
-      // TODO - this should just be responsible for interfacing with the runtime API
-      // All data gathering & validation should take place OUTSIDE the runtime module
-      // console.log('GENERATE IN RUNTIME MODULE')
+    generate: ({ rootGetters, state, commit, dispatch }) => {
+      // CLEANUP - All data gathering & validation should take place OUTSIDE the runtime module
 
       // Pulls requisite data from state
       const blueprint = rootGetters['editor/blueprint']
@@ -39,10 +37,9 @@ export default {
       // console.log(configuration)
       // console.log(build)
 
-      // Sets `state.loading` to `true`
-      // Sets `state.finished` to `false`
+      // Flushes state before fetch
+      dispatch('reset')
       commit('loading', true)
-      commit('finished', false)
 
       // Generates the code and downloads the response
       return axios.post(GENERATE_ROUTE, { build })
@@ -54,7 +51,7 @@ export default {
         commit('responseType', data.type)
 
         // Sets filepath and/or download_url
-        if (data.filepath) commit('filepath', data.filepath + '/' + blueprint.identifier)
+        if (data.filepath) commit('filepath', data.filepath)
         if (data.downloadUrl) commit('downloadUrl', data.downloadUrl)
 
         // Builing antici...pation
@@ -64,10 +61,13 @@ export default {
         }, 500)
       })
       .catch((error) => {
-        commit('loading', false)
-        commit('finished', false)
-        // console.log(error)
-        // TODO - handle error here
+        // Builing antici...pation
+        setTimeout(() => {
+          commit('finished', true)
+          commit('loading', false)
+          commit('error', true)
+          throw error
+        }, 500)
       })
     }
   },
@@ -77,7 +77,7 @@ export default {
     downloadUrl (state, downloadUrl) { state.downloadUrl = downloadUrl },
     responseType (state, responseType) { state.responseType = responseType },
     filepath (state, filepath) { state.filepath = filepath },
-    error (state, error) { state.error = error }
+    error (state, err) { state.error = err }
   },
   getters: {
     loading (state) { return state.loading },

@@ -1,6 +1,6 @@
 <template>
   <Loading v-if="starting || loading" />
-  <BuildError v-else-if="fetchError" />
+  <BuildError v-else-if="fetchError || runtimeError" />
   <BuildFinished v-else-if="finished" />
   <b-row v-else class='justify-content-center'>
     <b-col xl=12 lg=12>
@@ -8,14 +8,14 @@
       <BuildSteps v-if="model.id">
         <template slot="step-1">
           <b-row class='w-100 justify-content-center'>
-            <b-col sm=9>
+            <b-col sm=12 xl=9>
               <ProjectForm />
             </b-col>
           </b-row>
         </template>
 
         <template slot="step-2">
-          <b-row class='w-100 justify-content-center'>
+          <b-row>
             <b-col sm=12>
               <BlueprintEditor />
             </b-col>
@@ -24,7 +24,7 @@
 
         <template slot="step-3">
           <b-row class='w-100 justify-content-center'>
-            <b-col sm=9>
+            <b-col sm=12 xl=9>
               <ConfigureGenerator :id="id" />
             </b-col>
           </b-row>
@@ -84,6 +84,7 @@ export default {
   }),
   computed: mapGetters({
     fetchError: 'generator/error',
+    runtimeError: 'build/runtime/error',
     model: 'generator/selectedModel',
     loading: 'build/runtime/loading',
     finished: 'build/runtime/finished'

@@ -1,6 +1,6 @@
 <template>
   <b-row class="d-flex justify-content-center" v-if="steps[0]">
-    <b-col sm="9" class="step-wrapper d-flex flex-row w-100 align-items-center justify-content-between">
+    <b-col sm=12 lg=12 xl=9 class="step-wrapper d-flex flex-row w-100 align-items-center justify-content-between">
 
       <template v-for="step, index in steps">
 

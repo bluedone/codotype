@@ -51,14 +51,6 @@ export const APP_EDITOR_TOUR = [
     }
   },
   {
-    element: '#model-detail',
-    popover: {
-      title: 'Model Detiail',
-      description: 'Models encapsulate Attributes & Relations',
-      position: 'left'
-    }
-  },
-  {
     element: '#attribute-detail',
     popover: {
       title: 'Attributes',
