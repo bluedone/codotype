@@ -55,11 +55,10 @@ module.exports = ({ runtime, zipBuild, generateBuildId }) => {
     // Send the location of the directory in the local environment
     } else {
 
-      // Pull the filepath from the runtime
-
       // Sends the local directory path to the client
+      // CLEANUP - pull the destination directory from the runtime?
       return res.json({
-        filepath: process.cwd(),
+        filepath: process.cwd() + '/codotype-build/' + build.blueprint.identifier,
         type: 'LOCAL_PATH'
       })
 
