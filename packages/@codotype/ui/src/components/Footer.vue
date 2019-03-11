@@ -1,5 +1,5 @@
 <template>
-  <div class='footer-bottom py-2' v-if="['GeneratorBuild'].includes($route.name) && !fetchError">
+  <div class='footer-bottom py-2' v-if="['GeneratorBuild'].includes($route.name) && !fetchError && !buildFinished && !buildLoading">
     <div class="container">
       <BuildStepsControls />
     </div>
@@ -19,7 +19,9 @@ export default {
     BuildStepsControls
   },
   computed: mapGetters({
-    fetchError: 'generator/error'
+    fetchError: 'generator/error',
+    buildFinished: 'build/runtime/finished',
+    buildLoading: 'build/runtime/loading'
   })
 }
 </script>

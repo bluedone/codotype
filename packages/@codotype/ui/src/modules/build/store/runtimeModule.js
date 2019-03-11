@@ -1,15 +1,14 @@
 import axios from 'axios'
 const GENERATE_ROUTE = '/api/generate'
-// const DownloadFile = require('downloadjs')
 
 export default {
   namespaced: true,
   state: {
     loading: false,
     finished: false,
-    downloadUrl: '', // TODO - implement mutation
-    filepath: '', // TODO - implement mutation
-    responseType: '', // TODO - implement mutation
+    downloadUrl: '',
+    filepath: '',
+    responseType: '',
     error: '' // TODO - implement some basic error handling
   },
   actions: {
@@ -51,26 +50,25 @@ export default {
         // Debugging
         console.log(data)
 
+        // Sets state.responseType
+        commit('responseType', data.type)
+
+        // Sets filepath and/or download_url
+        if (data.filepath) commit('filepath', data.filepath + '/' + blueprint.identifier)
+        if (data.downloadUrl) commit('downloadUrl', data.downloadUrl)
+
         // Builing antici...pation
         setTimeout(() => {
-          // commit('downloadUrl', data.download_url)
           commit('finished', true)
           commit('loading', false)
-
-          // Handle response type (data.type)
-          // TODO - update store state & mutations accordingly
-
-          // console.log(data.download_url)
-          // window.open(data.download_url)
         }, 500)
       })
       .catch((error) => {
         commit('loading', false)
         commit('finished', false)
-        console.log(error)
+        // console.log(error)
         // TODO - handle error here
       })
-      // DownloadFile(blob, `${blueprint.identifier}_codotype.zip`, 'application/zip')
     }
   },
   mutations: {

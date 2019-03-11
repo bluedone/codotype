@@ -42,7 +42,7 @@ module.exports = ({ runtime, zipBuild, generateBuildId }) => {
 
       // Sends the S3 download URL to the client
       res.json({
-        download_url,
+        downloadUrl: download_url,
         type: 'S3_DOWNLOAD'
       });
 
@@ -50,16 +50,16 @@ module.exports = ({ runtime, zipBuild, generateBuildId }) => {
       await uploadBuildToS3(build);
 
       // CLEANUP - purge old builds && zips
-
       return;
 
     // Send the location of the directory in the local environment
     } else {
 
+      // Pull the filepath from the runtime
+
       // Sends the local directory path to the client
       return res.json({
-        success: true,
-        filepath: 'FILEPATH GOES HERE',
+        filepath: process.cwd(),
         type: 'LOCAL_PATH'
       })
 
