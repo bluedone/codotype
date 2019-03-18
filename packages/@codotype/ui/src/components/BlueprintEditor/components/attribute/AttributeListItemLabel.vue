@@ -30,7 +30,7 @@ export default {
       return DATATYPE_META[this.item.datatype].icon
     },
     tooltip () {
-      return DATATYPE_META[this.item.datatype].text
+      return DATATYPE_META[this.item.datatype].label
     }
   }
 }

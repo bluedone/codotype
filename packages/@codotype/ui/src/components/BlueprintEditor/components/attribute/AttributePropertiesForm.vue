@@ -53,7 +53,7 @@ export default {
   computed: {
     datatypeLabel () {
       let datatype = DATATYPE_META[this.model.datatype]
-      return datatype.text
+      return datatype.label
     },
     attributeLabel: {
       get () {
