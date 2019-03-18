@@ -45,27 +45,6 @@
         <option :value="opt.value" v-for="opt in attribute.options" :key="opt.id">{{opt.label}}</option>
       </select>
 
-      <ul class='list-group' v-if="attribute.type === DATATYPE_BOOLEAN_GROUP">
-
-        <li class='list-group-item d-flex align-items-center'
-          v-for="opt in attribute.options"
-          :key="opt.identifier">
-
-          <toggle-button
-            ref="input"
-            :value="getValue({ group: group, schema: schema, attribute: attribute })"
-            :color="'#4582EC'"
-            class='mb-0 mr-3'
-            @change="updateModel()"
-          />
-
-          <label class='mb-0 mr-2'>{{opt.label}}</label>
-          <i class="fa fa-question-circle text-muted" v-b-tooltip.hover.right :title="opt.help"></i>
-          <!-- <MoreInfoLink class='ml-3 mb-2' :url="opt.more_info_url" /> -->
-        </li>
-
-      </ul>
-
       <OptionTemplateWrapper
         class='mt-2'
         v-if="attribute.previewTemplate"
@@ -84,10 +63,9 @@ import {
   DATATYPE_STRING,
   DATATYPE_STRING_SELECT,
   DATATYPE_BOOLEAN,
-  DATATYPE_BOOLEAN_GROUP,
-  DATATYPE_NUMBER_INTEGER,
-  DATATYPE_NUMBER_FLOAT,
-  DATATYPE_NUMBER_DOUBLE
+  DATATYPE_INTEGER,
+  DATATYPE_FLOAT,
+  DATATYPE_DOUBLE
 } from '@codotype/types/lib/datatypes'
 
 import OptionTemplateWrapper from './OptionTemplateWrapper'
@@ -121,7 +99,7 @@ export default {
           attribute: this.attribute,
           value: this.$refs.input.toggled
         })
-      } else if ([DATATYPE_NUMBER_INTEGER, DATATYPE_NUMBER_FLOAT, DATATYPE_NUMBER_DOUBLE].includes(this.attribute.type)) {
+      } else if ([DATATYPE_INTEGER, DATATYPE_FLOAT, DATATYPE_DOUBLE].includes(this.attribute.type)) {
         this.setValue({
           group: this.group,
           schema: this.schema,
@@ -198,10 +176,9 @@ export default {
       DATATYPE_STRING,
       DATATYPE_STRING_SELECT,
       DATATYPE_BOOLEAN,
-      DATATYPE_BOOLEAN_GROUP,
-      DATATYPE_NUMBER_INTEGER,
-      DATATYPE_NUMBER_FLOAT,
-      DATATYPE_NUMBER_DOUBLE
+      DATATYPE_INTEGER,
+      DATATYPE_FLOAT,
+      DATATYPE_DOUBLE
     }
   }
 }
