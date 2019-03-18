@@ -18,7 +18,8 @@ const getDefaultAttributeValue = ({ type }) => {
     case datatypes.DATATYPE_BOOLEAN:
       return false
     case datatypes.DATATYPE_DATE:
-      return ''
+      // return new Date()
+      return '2019-03-11'
     case datatypes.DATATYPE_STRING_ARRAY:
       return []
     default:
@@ -54,7 +55,7 @@ const buildDefault = ({ schema, schemas }) => {
 
   // Iterate over each attribute
   schema.attributes.forEach((attr) => {
-    defaultState[attr.identifier] = attr.default_value || getDefaultAttributeValue({ type: attr.datatype })
+    defaultState[attr.identifier] = attr.datatypeOptions.default || getDefaultAttributeValue({ type: attr.datatype })
   })
 
   // Iterate over each relation
@@ -71,7 +72,7 @@ const buildConfigurationDefault = ({ attributes }) => {
 
   // Iterate over each attribute
   attributes.forEach((attr) => {
-    defaultState[attr.identifier] = attr.default_value || getDefaultAttributeValue({ type: attr.datatype })
+    defaultState[attr.identifier] = attr.datatypeOptions.default || getDefaultAttributeValue({ type: attr.datatype })
   })
 
   return defaultState
