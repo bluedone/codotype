@@ -13,9 +13,10 @@ const app = server({
 })
 
 // Starts Express app
-// TODO - add a postman collection & environment to this repo
-// TODO - can we run this app as a serverless function?
-// TODO - create GitHub issues for these TODOs
+// CLEANUP - add a postman collection & environment to this repo
+// CLEANUP - can we run this app as a serverless function?
+// CLEANUP - create GitHub issues for these TODOs
+// CLEANUP - split this out into a separate library
 app.listen(port, () => {
   console.log(`Codotype Express.js app is running on port ${port}`)
 })
