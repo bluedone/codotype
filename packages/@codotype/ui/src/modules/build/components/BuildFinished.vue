@@ -26,7 +26,7 @@
               Your codebase is in the following local directory:
             </small>
             <p class="lead mb-0">
-              <b-badge variant="primary">{{ filepath }}</b-badge>
+              <b-badge variant="secondary">{{ filepath }}</b-badge>
             </p>
           </div>
         </div>
