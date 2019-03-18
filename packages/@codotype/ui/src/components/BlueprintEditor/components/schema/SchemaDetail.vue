@@ -21,6 +21,17 @@
               content='Edit Schema'>
             </HelpPopover>
 
+            <!-- TODO - abstract the following into a single component -->
+            <!-- TODO - abstract the following into a single component -->
+            <small><i id="schema-preview" class="fa fa-eye text-muted"></i></small>
+            <b-popover
+              title="Data Preview"
+              target="schema-preview"
+              placement="right"
+              :triggers="['hover']">
+              <pre class="bg-dark text-light px-3 py-2">{{JSON.stringify(defaultObject, null, 2)}}</pre>
+            </b-popover>
+
           </h4>
 
           <!-- <UserSchemaInfo v-if="isUserModel" /> -->
@@ -125,7 +136,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      model: 'editor/schema/selectedModel'
+      model: 'editor/schema/selectedModel',
+      defaultObject: 'editor/schema/defaultObject'
     }),
     isUserModel () {
       return this.model.identifier === 'user'

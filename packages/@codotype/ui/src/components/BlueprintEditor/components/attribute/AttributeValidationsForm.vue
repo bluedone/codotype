@@ -25,7 +25,7 @@
       />
     </div>
 
-    <div class="col-sm-12" v-if="model.datatype === DATATYPE_NUMBER_INTEGER">
+    <div class="col-sm-12" v-if="[DATATYPE_NUMBER_INTEGER, DATATYPE_NUMBER].includes(model.datatype)">
       <FormInput
         label="Default Value"
         placeholder="Default Value"
@@ -60,6 +60,7 @@
 <script>
 import {
   DATATYPE_STRING,
+  DATATYPE_NUMBER,
   DATATYPE_NUMBER_INTEGER,
   DATATYPE_BOOLEAN
 } from '@codotype/types/lib/datatypes'
@@ -79,6 +80,7 @@ export default {
     return {
       DATATYPE_STRING,
       DATATYPE_BOOLEAN,
+      DATATYPE_NUMBER,
       DATATYPE_NUMBER_INTEGER
     }
   }
