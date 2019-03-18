@@ -67,7 +67,7 @@ const buildDefault = ({ schema, schemas }) => {
 
   // Iterate over each attribute
   schema.attributes.forEach((attr) => {
-    defaultState[attr.identifier] = attr.datatypeOptions.default || getDefaultAttributeValue({ type: attr.datatype })
+    defaultState[attr.identifier] = attr.default_value || getDefaultAttributeValue({ type: attr.datatype })
   })
 
   // Iterate over each relation
@@ -85,7 +85,7 @@ const buildConfigurationDefault = ({ attributes }) => {
 
   // Iterate over each attribute
   attributes.forEach((attr) => {
-    defaultState[attr.identifier] = attr.datatypeOptions.default || getDefaultAttributeValue({ type: attr.datatype })
+    defaultState[attr.identifier] = attr.default_value || getDefaultAttributeValue({ type: attr.datatype })
   })
 
   return defaultState

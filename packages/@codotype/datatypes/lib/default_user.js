@@ -9,6 +9,7 @@ const DEFAULT_USER_EMAIL_ATTRIBUTE = {
   required: true,
   unique: true,
   datatype: DATATYPE_STRING,
+  default_value: '',
   datatypeOptions: {},
   locked: true
 }
