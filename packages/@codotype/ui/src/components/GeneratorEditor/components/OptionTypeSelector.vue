@@ -31,7 +31,9 @@ export default {
     option_types: 'option/option_types'
   }),
   methods: {
-    // TODO - this should hit the vuex store
+    // TODO - this is important!
+    // TODO - this is important!
+    // TODO - this should hit the vuex store to update attr.datatypeOptions when the attribute type changes
     // The Vuex store should update the model.datatypeOptions object to reflect the
     // options associated with the selected datatype
     setOptionType (optionType) {

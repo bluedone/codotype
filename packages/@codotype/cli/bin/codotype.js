@@ -27,7 +27,7 @@ program
   .usage('<command> [options]')
 
 program
-  .command('run <blueprint>')
+  .command('generator-run <blueprint>')
   .option('-c --config <configuration>', 'Path to generator configuration file to pass into Codotype runtime')
   // .parse(process.argv)
   .description('run the generator in the current working directory against the blueprint argument (optional configuration argument)')
@@ -37,7 +37,7 @@ program
   })
 
 program
-  .command('doctor')
+  .command('generator-doctor')
   .description('validates the generator in the current working directory')
   .action((cmd) => {
     const options = cleanArgs(cmd)
@@ -45,7 +45,7 @@ program
   })
 
 program
-  .command('ui')
+.command('ui')
   .description('runs the Codotype ui')
   .action((cmd) => {
     const options = cleanArgs(cmd)
@@ -53,7 +53,7 @@ program
   })
 
 program
-  .command('serve')
+  .command('generator-serve')
   .description('serves the UI for a single Codotype generator')
   .action((cmd) => {
     const options = cleanArgs(cmd)
@@ -61,7 +61,7 @@ program
   })
 
 program
-  .command('build')
+  .command('generator-build')
   .description('builds a distributable client app for a single Codotype generator')
   .action((cmd) => {
     const options = cleanArgs(cmd)

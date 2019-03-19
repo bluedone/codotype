@@ -1,5 +1,6 @@
 import { inflateMeta } from '@codotype/util/lib/inflateMeta'
 import { sanitizeLabel } from '@codotype/util/lib/sanitizeLabel'
+import { buildDefault } from '@codotype/util/lib/buildDefault'
 import { NEW_SCHEMA_MODEL } from '@codotype/types/lib/default_schema'
 import formModule from '../../../store/lib/formModule'
 import modalModule from '../../../store/lib/modalModule'
@@ -66,6 +67,12 @@ export default {
   getters: {
     selectedModel: state => {
       return state.collection.items.find(i => i.id === state.selectedModel.id)
+    },
+    defaultObject: state => {
+      const schema = state.collection.items.find(i => i.id === state.selectedModel.id)
+      const schemas = state.collection.items
+      if (schema) { return buildDefault({ schema, schemas }) }
+      else { return {} }
     },
     enableSubmit: state => {
       const label = state.form.model.label

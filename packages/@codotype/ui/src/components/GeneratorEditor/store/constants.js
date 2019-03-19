@@ -31,6 +31,7 @@ export const DEFAULT_ADDON = {
       required: true,
       unique: true,
       datatype: 'TEXT',
+      default_value: '',
       datatypeOptions: {}
     }
   ]

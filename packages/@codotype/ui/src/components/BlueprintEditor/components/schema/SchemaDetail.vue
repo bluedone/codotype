@@ -21,6 +21,17 @@
               content='Edit Schema'>
             </HelpPopover>
 
+            <!-- CLEANUP - abstract the following into a single Preview component -->
+            <small><i id="schema-preview" class="fa fa-eye text-muted"></i></small>
+            <b-popover
+              title="Data Preview"
+              target="schema-preview"
+              placement="right"
+              :triggers="['hover']">
+              <small class="mb-0 text-muted">The following data structure represents how a single {{ model.label }} schema will be represented programatically</small>
+              <pre class="bg-dark text-light px-3 py-2">{{ `${model.identifier} = new ${model.class_name}(` + JSON.stringify(defaultObject, null, 2) + ')'}}</pre>
+            </b-popover>
+
           </h4>
 
           <!-- <UserSchemaInfo v-if="isUserModel" /> -->
@@ -71,7 +82,8 @@
       <DestroyModal scope="attribute" label="Attribute" />
 
     </b-col>
-    <!-- <hr> -->
+      <!-- <hr> -->
+
     <b-col sm=12 md=6 lg=6 class="pl-md-0">
 
       <SortableList
@@ -87,6 +99,17 @@
       <DestroyModal scope="relation" label="Relation" />
 
     </b-col>
+
+    <!-- <b-col sm=12 md=6 lg=6>
+      <div class="card">
+        <div class='card-header'>Preview</div>
+        <div class='card-body'>
+          <small class="mb-0 text-muted">The following data structure represents how a single {{ model.label }} schema will be represented programatically
+          <pre class="bg-dark text-light px-3 py-2">{{ `${model.identifier} = new ${model.class_name}(` + JSON.stringify(defaultObject, null, 2) + ')'}}</pre>
+          </small>
+        </div>
+      </div>
+    </b-col> -->
 
   </b-row>
 
@@ -125,7 +148,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      model: 'editor/schema/selectedModel'
+      model: 'editor/schema/selectedModel',
+      defaultObject: 'editor/schema/defaultObject'
     }),
     isUserModel () {
       return this.model.identifier === 'user'
