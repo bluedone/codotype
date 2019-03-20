@@ -8,7 +8,7 @@ const pluralize = require('pluralize')
 // inflateMeta
 // Accepts a singlar, titleized, human-readable label
 // and produces all requisite metadata for sensible code generation
-module.exports.inflateMeta = function (label) {
+module.exports = function (label) {
   return {
     label: titleize(label),
     label_plural: pluralize(titleize(label)),

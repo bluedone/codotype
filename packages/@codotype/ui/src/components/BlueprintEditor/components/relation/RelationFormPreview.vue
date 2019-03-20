@@ -54,7 +54,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { inflateMeta } from '@codotype/util/lib/inflateMeta'
+import inflateMeta from '@codotype/util/lib/inflateMeta'
 import { RELATION_TYPES } from '@codotype/types/lib/relation-types'
 
 export default {

@@ -1,4 +1,4 @@
-const { inflateMeta } = require('./inflateMeta')
+const inflateMeta = require('./inflateMeta')
 const clone = require('lodash/clone')
 const uniqueId = require('lodash/uniqueId')
 const cloneDeep = require('lodash/cloneDeep')

@@ -1,4 +1,4 @@
-import { inflateMeta } from '@codotype/util/lib/inflateMeta'
+import inflateMeta from '@codotype/util/lib/inflateMeta'
 import sanitizeLabel from '@codotype/util/lib/sanitizeLabel'
 import { buildDefault } from '@codotype/util/lib/buildDefault'
 import { DEFAULT_SCHEMA } from '@codotype/types/lib/default_schema'
