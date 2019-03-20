@@ -16,6 +16,7 @@ function inflateRelation({ schemas, relation }) {
   const ownedSchema = schemas.find((s) => { return s.id === inflated.schema_id })
   const relatedSchema = schemas.find((s) => { return s.id === inflated.related_schema_id })
 
+  // TODO - document this
   inflated.schema = inflateMeta(relatedSchema.label)
   inflated.alias = inflateMeta(inflated.as || relatedSchema.label)
   inflated.reverse_alias = inflateMeta(inflated.reverse_as || ownedSchema.label)
@@ -25,13 +26,30 @@ function inflateRelation({ schemas, relation }) {
   return inflated;
 }
 
+// TODO - document inflateSchema function
+// Purpose and requirements
 function inflateSchema({ schema, schemas }) {
+  // Clones original schema
   let inflated = cloneDeep(schema)
+
+  // Inflates relations
   inflated.relations = schema.relations.map((relation) => {
     relation.schema_id = schema.id
     return inflateRelation({ schemas, relation })
   })
+
+  // Inflates attributes
+  // QUESTION - is this needed?
   inflated.attributes = schema.attributes.map(attribute => attribute)
+
+  // TODO - add inlineDeconstruction here?
+  // TODO - add defaultObject here?
+  // TODO - add inflated.keys here?
+  // Assigns inflated.keys
+  // let defaultObject = buildDefault({ schema, schemas })
+  // inflated.keys = Object.keys(defaultObject)
+
+  // Returns the inflated schema
   return inflated
 }
 
