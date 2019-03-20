@@ -3,7 +3,7 @@ const path = require('path');
 const fsExtra = require('fs-extra')
 const indent = require('@codotype/util/lib/indent')
 const trailingComma = require('@codotype/util/lib/trailingComma')
-const { buildDefault, buildMock } = require('@codotype/util/lib/buildDefault')
+const { buildDefault } = require('@codotype/util/lib/buildDefault')
 const datatypes = require('@codotype/types/lib/datatypes')
 const relationTypes = require('@codotype/types/lib/relation-types')
 
@@ -27,9 +27,8 @@ module.exports = class CodotypeGenerator {
     // Assigns helper libraries to class variables
     this.fs = fsExtra
 
-    // Assigns buildDefault & buildMock helpers from @codotype/util
+    // Assigns buildDefault helpers from @codotype/util
     this.buildDefault = buildDefault;
-    this.buildMock = buildMock;
 
     // PASS this.options.resolved in from codotype/codotype
     this.resolved = this.options.resolved;
