@@ -3,6 +3,6 @@
 // while iterating over an array in a generator template
 // Auto-injected into the EJS runtime
 module.exports = (arr, index) => {
-  if ((arr.length - 1) === index) return ''
+  if (!arr.length || ((arr.length - 1) === index)) return ''
   return ','
 }
