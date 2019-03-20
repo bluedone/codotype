@@ -27,13 +27,11 @@ program
   .usage('<command> [options]')
 
 program
-  .command('generator-run <blueprint>')
-  .option('-c --config <configuration>', 'Path to generator configuration file to pass into Codotype runtime')
-  // .parse(process.argv)
-  .description('run the generator in the current working directory against the blueprint argument (optional configuration argument)')
-  .action((blueprint, cmd) => {
+.command('ui')
+  .description('runs the Codotype ui')
+  .action((cmd) => {
     const options = cleanArgs(cmd)
-    require('../lib/run')(blueprint, options)
+    require('../lib/ui')(options)
   })
 
 program
@@ -45,11 +43,21 @@ program
   })
 
 program
-.command('ui')
-  .description('runs the Codotype ui')
+  .command('generator-build')
+  .description('builds a distributable client app for a single Codotype generator')
   .action((cmd) => {
     const options = cleanArgs(cmd)
-    require('../lib/ui')(options)
+    require('../lib/build')(options)
+  })
+
+program
+  .command('generator-run <blueprint>')
+  .option('-c --config <configuration>', 'Path to generator configuration file to pass into Codotype runtime')
+  // .parse(process.argv)
+  .description('run the generator in the current working directory against the blueprint argument')
+  .action((blueprint, cmd) => {
+    const options = cleanArgs(cmd)
+    require('../lib/run')(blueprint, options)
   })
 
 program
@@ -58,14 +66,6 @@ program
   .action((cmd) => {
     const options = cleanArgs(cmd)
     require('../lib/serve')(options)
-  })
-
-program
-  .command('generator-build')
-  .description('builds a distributable client app for a single Codotype generator')
-  .action((cmd) => {
-    const options = cleanArgs(cmd)
-    require('../lib/build')(options)
   })
 
 // output help information on unknown commands
