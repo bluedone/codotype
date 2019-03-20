@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import DATATYPE_META from '@codotype/types/lib/meta'
+import DATATYPE_META from '@codotype/types/lib/datatype-meta'
 import FormInput from '../../../FormInput'
 
 export default {

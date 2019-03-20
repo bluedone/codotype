@@ -21,7 +21,7 @@ async function runGenerator (blueprint, options) {
 
   // Pulls in requisite paths for codotype runtime
   const blueprintPath = path.resolve(process.cwd(), blueprint)
-  const generatorMetaPath = path.resolve(process.cwd(), './meta.json') // TODO - constantize MAGIC STRING
+  const generatorMetaPath = path.resolve(process.cwd(), './codotype-generator.json') // TODO - constantize MAGIC STRING
   const blueprintJSON = require(blueprintPath)
 
   // Console debugging statements

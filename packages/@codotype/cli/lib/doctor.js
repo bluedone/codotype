@@ -9,7 +9,8 @@ async function doctor (options) {
   console.log(`\nPaging ${chalk.blue(`codotype doctor`)}...\n`)
 
   // Pulls in requisite paths for codotype runtime
-  const generatorMetaPath = path.resolve(process.cwd(), './meta.json') // TODO - constantize MAGIC STRING
+  // TODO - constantize `codotype-generator.json` magic string
+  const generatorMetaPath = path.resolve(process.cwd(), './codotype-generator.json')
   console.log(`the doctor says ${chalk.green(`this generator's metadata loaded correctly`)}`)
 
   // Invoke runtime directly with parameters

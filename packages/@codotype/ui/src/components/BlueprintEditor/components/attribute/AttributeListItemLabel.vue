@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import DATATYPE_META from '@codotype/types/lib/meta.js'
+import DATATYPE_META from '@codotype/types/lib/datatype-meta'
 
 export default {
   name: 'AttributeListItemLabel',

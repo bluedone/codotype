@@ -1,10 +1,10 @@
-const blueprint = require('@codotype/blueprints/lib/team-lists.json')
-const fs = require('fs')
+// Chai configuration
+const chai = require("chai");
+chai.should();
 
-const { inflateSchema, inflateRelation, inflate } = require('../lib/inflate')
-
-// console.log(blueprint);
-
-const inflatedBlueprint = inflate({ blueprint })
-
-fs.writeFile('inflated.json', JSON.stringify(inflatedBlueprint, null, 2))
+// Import all library tests here
+require('../lib/buildDefault.spec');
+require('../lib/indent.spec');
+require('../lib/inflateMeta.spec');
+require('../lib/sanitizeLabel.spec');
+require('../lib/trailingComma.spec');

@@ -14,7 +14,7 @@ async function serve (options) {
   // CLEANUP - this type of checking will be necessary in a number of places
   // This logic should be abstracted & generalized as much as possible
   // Pulls in requisite paths for codotype runtime
-  const generatorMetaPath = path.resolve(process.cwd(), './meta.json') // CLEANUP - constantize MAGIC STRING
+  const generatorMetaPath = path.resolve(process.cwd(), './codotype-generator.json') // CLEANUP - constantize MAGIC STRING
 
   // Invoke runtime directly with parameters
   const runtime = new CodotypeRuntime()
