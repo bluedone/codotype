@@ -83,7 +83,7 @@
 </template>
 
 <script>
-import DATATYPE_META from '@codotype/types/lib/meta'
+import DATATYPE_META from '@codotype/types/lib/datatype-meta'
 import datatypes from '@codotype/types/lib/datatypes'
 import AttributeDatatypeChild from './AttributeDatatypeChild'
 
