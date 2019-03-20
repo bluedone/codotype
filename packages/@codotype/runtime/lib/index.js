@@ -11,7 +11,7 @@ const Generator = require('@codotype/generator')
 const OUTPUT_DIRECTORY = 'codotype-build'
 const CODOTYPE_MANIFEST_DIRECTORY = '.codotype'
 const MODULES_ROOT = 'node_modules'
-const GENERATOR_META_FILENAME = 'meta.json'
+const GENERATOR_META_FILENAME = 'codotype-generator.json'
 const GENERATOR_CLASS_PATH = 'generator'
 const GENERATOR_README_FILENAME = 'README.md'
 
@@ -126,6 +126,7 @@ module.exports = class CodotypeRuntime {
 
   // ensureDir
   // Ensures presence of directory for template compilation
+  // TODO - this is repeated in @codotype/generator - should be abstracted, or only encapsulated in the runtime
   async ensureDir (dir) {
     return new Promise((resolve, reject) => {
       return fsExtra.ensureDir(dir, (err) => {
