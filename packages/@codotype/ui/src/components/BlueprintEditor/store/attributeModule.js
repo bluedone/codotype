@@ -1,4 +1,4 @@
-import { sanitizeLabel } from '@codotype/util/lib/sanitizeLabel'
+import sanitizeLabel from '@codotype/util/lib/sanitizeLabel'
 import { inflateMeta } from '@codotype/util/lib/inflateMeta'
 import modalModule from '../../../store/lib/modalModule'
 import selectModelModule from './modules/selectModelModule'

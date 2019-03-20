@@ -4,6 +4,7 @@ chai.should();
 
 // Import all library tests here
 require('../lib/buildDefault.spec');
+require('../lib/sanitizeLabel.spec');
 
 // // // //
 
