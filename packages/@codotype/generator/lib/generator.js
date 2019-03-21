@@ -207,12 +207,20 @@ module.exports = class CodotypeGenerator {
     // Defines module path
     let modulePath
 
-    console.log('Compose with')
-    console.log(generatorModule)
-    console.log(options)
-    console.log(this.resolved)
-    // console.log(this)
-    console.log('\n')
+    // // // //
+    // // // //
+    // TODO - love into verbose logging function
+
+    // console.log('Compose with')
+    // console.log(generatorModule)
+    // console.log(options)
+    // console.log(this.resolved)
+    // // console.log(this)
+    // console.log('\n')
+
+    // // // //
+    // // // //
+
 
     // // // //
     // // // //
@@ -257,7 +265,6 @@ module.exports = class CodotypeGenerator {
       // TODO - document
       // TODO - document
       const generatorPrototype = require(modulePath); // eslint-disable-line import/no-dynamic-require
-      console.log(generatorPrototype)
       generatorPrototype.resolved = require.resolve(modulePath);
 
       // TODO - document
@@ -282,12 +289,12 @@ module.exports = class CodotypeGenerator {
       // // // //
       // TODO - add verbose logging function call here
 
-      console.log('\n')
-      console.log('this.options.dest')
-      console.log(this.options.dest)
-      console.log('\n')
-      console.log('RESOLVEDDESTINATION')
-      console.log(resolvedDestination)
+      // console.log('\n')
+      // console.log('this.options.dest')
+      // console.log(this.options.dest)
+      // console.log('\n')
+      // console.log('RESOLVEDDESTINATION')
+      // console.log(resolvedDestination)
 
       // // // //
       // // // //
