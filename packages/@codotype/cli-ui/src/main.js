@@ -21,6 +21,9 @@ Vue.use(config.ToggleButton)
 // vue-github-buttons
 Vue.use(config.VueGitHubButtons)
 
+// vue-clipboard2
+Vue.use(config.VueClipboard)
+
 // VRuntimeTemplate
 Vue.component('v-runtime-template', config.VRuntimeTemplate)
 

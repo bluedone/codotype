@@ -4,6 +4,7 @@ import BootstrapVue from 'bootstrap-vue'
 import ToggleButton from 'vue-js-toggle-button'
 import VueGitHubButtons from 'vue-github-buttons'
 import VRuntimeTemplate from 'v-runtime-template'
+import VueClipboard from 'vue-clipboard2'
 import 'vue-github-buttons/dist/vue-github-buttons.css'
 import 'driver.js/dist/driver.min.css'
 
@@ -12,5 +13,6 @@ export default {
   BootstrapVue,
   ToggleButton,
   Meta,
-  VRuntimeTemplate
+  VRuntimeTemplate,
+  VueClipboard
 }
