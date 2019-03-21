@@ -80,6 +80,7 @@ module.exports = class CodotypeRuntime {
       if (GeneratorClass && GeneratorMeta && foundReadme) {
 
         // Adds generator_path (VERY IMPORTANT) to GeneratorMeta
+        GeneratorMeta.engine_path = engine_path
         GeneratorMeta.generator_path = generator_path
 
         // Adds readme_markown to GeneratorMeta
