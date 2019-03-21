@@ -145,90 +145,82 @@ module.exports = class CodotypeRuntime {
 
   // write
   // Method for write files to the filesystem
+  // TODO - accept OUTPUT_DIRECTORY override
   async execute ({ build }) {
 
     // Pulls attributes out of build object
-    // TODO - accept OUTPUT_DIRECTORY override
     let {
       id,
       blueprint,
-      stages
+      configuration,
+      generator_id
     } = build
 
     // Inflates blueprint metadata
     // TODO - handle missing blueprint object
     blueprint = inflate({ blueprint });
 
+    // TODO - annotate this
     await this.writeBuildManifest({ build })
 
-    // Runs stage of the build array
+    // Pulls generator from registry runtime registry
     // TODO - conflate each stage to its respective generator,
     // skipping / throwing errors on those whos generator is missing
-    return Promise.each(stages, async ({ generator_id, configuration }) => {
-      // stages.forEach(async ({ generator_id, configuration }) => {
+    const generator = this.generators.find(g => g.id === generator_id)
+    if (!generator) return
+    const { generator_path } = generator
 
-      // Pulls generator from registry
-      const generator = this.generators.find(g => g.id === generator_id)
-      if (!generator) return
-      const { generator_path, project_path } = generator
+    // Sets output_directory default to build ID by default
+    const output_directory = id || '';
 
-      // Sets output_directory default to build ID by default
-      const output_directory = id || '';
+    // Assigns `dest` option for generator
+    // TODO - handle condition of missing blueprint.identifier
+    const dest = path.join(this.options.cwd, OUTPUT_DIRECTORY, output_directory, blueprint.identifier);
 
-      // Assigns `dest` option for generator
-      // TODO - handle condition of missing blueprint.identifier
-      const dest = path.join(this.options.cwd, OUTPUT_DIRECTORY, output_directory, blueprint.identifier, project_path);
+    // Try to load up the generator from generator_path, catch error
+    // TODO - this final check should be abstracted into a separate function
+    try {
+      // const GeneratorClass = require(generator_path); // eslint-disable-line import/no-dynamic-require
+      const generatorPrototype = require(generator_path); // eslint-disable-line import/no-dynamic-require
+      const resolved = require.resolve(generator_path);
 
-      // Try to load up the generator from generator_path, catch error
-      // TODO - this final check should be abstracted into a separate function
-      try {
-        // const GeneratorClass = require(generator_path); // eslint-disable-line import/no-dynamic-require
-        const generatorPrototype = require(generator_path); // eslint-disable-line import/no-dynamic-require
-        const resolved = require.resolve(generator_path);
-
-        // Defines options for
-        const generator_options = {
-          blueprint,
-          dest,
-          resolved,
-          meta: generator,
-          configuration
-        }
-
-        // Logging
-        // console.info(`Executing ${GeneratorClass.name} generators:`)
-        console.info(`Executing generators:`)
-        return new Promise(async (resolve, rejcet) => {
-          const generatorInstance = new Generator(generatorPrototype, generator_options)
-
-          // Invokes `generator.forEachSchema` once for each in blueprint.schemas
-          await Promise.all(blueprint.schemas.map((schema) => generatorInstance.forEachSchema({ schema: schema, ...this.options })))
-
-          // Invokes `generator.write()` once
-          await generatorInstance.write(this.options)
-
-          // Invokes generator.compileTemplatesInPlace()
-          await generatorInstance.compileTemplatesInPlace()
-
-          // Resolves generator promise
-          return resolve()
-        })
-
-        // Logs which generator is being run
-      } catch (err) {
-        if (err.code === 'MODULE_NOT_FOUND') {
-          console.log('RUNTIME ERROR - GENERATOR NOT FOUND')
-        } else {
-          console.log('RUNTIME ERROR - OTHER')
-          throw err;
-        }
-        return reject(err)
+      // Defines options for generator instance
+      const generatorOptions = {
+        blueprint,
+        dest,
+        resolved,
+        meta: generator,
+        configuration
       }
 
-    })
-    .then(() => {
-      // Thank you message
-      console.log('\nBuild complete\nThank you for using Codotype :)\nFollow us on github.com/codotype\n')
-    })
+      // Logging
+      // console.info(`Executing ${GeneratorClass.name} generators:`)
+      console.info(`Executing generators:`)
+
+      // Creates Generator instance
+      const generatorInstance = new Generator(generatorPrototype, generatorOptions)
+
+      // Invokes `generator.forEachSchema` once for each in blueprint.schemas
+      await Promise.all(blueprint.schemas.map((schema) => generatorInstance.forEachSchema({ schema: schema, ...this.options })))
+
+      // Invokes `generator.write()` once
+      await generatorInstance.write(this.options)
+
+      // Invokes generator.compileTemplatesInPlace()
+      await generatorInstance.compileTemplatesInPlace()
+
+      // Logs which generator is being run
+    } catch (err) {
+      if (err.code === 'MODULE_NOT_FOUND') {
+        console.log('RUNTIME ERROR - GENERATOR NOT FOUND')
+      } else {
+        console.log('RUNTIME ERROR - OTHER')
+        throw err;
+      }
+      // return reject(err)
+    }
+
+    // Thank you message
+    console.log('\nBuild complete\nThank you for using Codotype :)\nFollow us on github.com/codotype\n')
   }
 }

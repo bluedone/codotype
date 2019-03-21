@@ -47,10 +47,8 @@ async function runGenerator (blueprint, options) {
   // Assembles build object for codotype runtime
   const build = {
     blueprint: blueprintJSON,
-    stages: [{
-      generator_id: require(generatorMetaPath).id,
-      configuration: configurationJSON
-    }]
+    configuration: configurationJSON,
+    generator_id: require(generatorMetaPath).id
   }
 
   // Invoke runtime directly with parameters

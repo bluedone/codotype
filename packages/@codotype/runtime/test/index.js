@@ -12,10 +12,8 @@ runtime.registerGenerator({ module_path: 'codotype-generator-nuxt' })
 // Test runtime.execute({ build })
 const build = {
   app: LibraryExampleApp,
-  stages: [{
-    generator_id: 'codotype-generator-nuxt',
-    configuration: {}
-  }]
+  generator_id: 'codotype-generator-nuxt',
+  configuration: {}
 }
 
 runtime.execute({ build })
