@@ -32,7 +32,8 @@ export default {
       // Defines build object to send to the server
       let build = {
         blueprint,
-        ...buildParameters
+        generator_id: buildParameters.generator_id,
+        configuration: buildParameters.configuration
       }
 
       // Debugging

@@ -1,14 +1,14 @@
 <template>
-  <div class="card col-lg-3 shadow-hover border-light">
+  <div class="card col-lg-12 shadow-hover border-light">
     <div class="card-body">
       <div class="row d-flex align-items-end flex-column">
 
         <div class="col-lg-12 d-flex justify-content-center">
           <p class="lead mb-0">
-            <button @click.prevent="selectGenerator(model.id)" class="btn btn-link d-flex align-items-center flex-column" style='text-decoration: none'>
+            <b-btn variant="link" :to="`/generators/${model.id}`" class="d-flex align-items-center flex-column" style='text-decoration: none'>
               <img class='generator-icon' :src="model.icon"/>
               {{ model.label }}
-            </button>
+            </b-btn>
           </p>
         </div>
 
@@ -55,15 +55,11 @@
 </template>
 
 <script>
-import MoreInfoLink from '@codotype/ui/src/components/MoreInfoLink'
 import { mapActions } from 'vuex'
 
 export default {
   name: 'GeneratorCard',
   props: ['model'],
-  components: {
-    MoreInfoLink
-  },
   methods: mapActions({
     selectGenerator: 'build/addNewStage'
   })
