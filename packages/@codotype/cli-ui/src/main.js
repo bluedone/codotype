@@ -31,6 +31,10 @@ Vue.component('v-runtime-template', config.VRuntimeTemplate)
 initTourMediator(store, router)
 localStorageMediator(store, router)
 
+// Enable performance tracing
+// https://medium.com/@brockreece/unlock-performance-tracing-in-vue-3b2c8f619cdc
+// Vue.config.performance = true
+
 Vue.config.productionTip = false
 
 new Vue({

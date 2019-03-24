@@ -62,9 +62,14 @@ module.exports = class CodotypeRuntime {
     const generator_meta_path = path.join(engine_path, GENERATOR_META_FILENAME)
     const generator_readme_path = path.join(engine_path, GENERATOR_README_FILENAME)
 
+    // // // //
+    // // // //
+    // TODO - implement logging function
     // console.log(generator_path)
     // console.log(generator_meta_path)
     // console.log(generator_readme_path)
+    // // // //
+    // // // //
 
     // Try to load up the generator & associated metadata, catch error
     try {
