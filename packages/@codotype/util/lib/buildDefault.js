@@ -8,13 +8,11 @@ const {
 } = require('@codotype/types/lib/relation-types')
 
 // CLEANUP - document this function, write better tests
-const getDefaultAttributeValue = ({ type, generate_default = false }) => {
+const getDefaultAttributeValue = ({ type }) => {
   switch (type) {
     case datatypes.DATATYPE_STRING:
-      if (generate_default) return 'STRING-' + Math.random().toString() // TODO - rethink this approach...
       return ''
     case datatypes.DATATYPE_TEXT:
-      if (generate_default) return 'TEXT-' + Math.random().toString() // TODO - rethink this approach...
       return ''
     case datatypes.DATATYPE_STRING_ARRAY:
       return []
@@ -76,30 +74,9 @@ const buildDefault = ({ schema, schemas }) => {
   schema.relations.forEach((relation) => {
     const rel = inflateRelation({ schemas, relation })
     // QUESTION - this creates a problem after after the schema has been inflated - what's the solution?
+    // Best option is probably splitting reverse relations into their own schema property
     const relationKey = getRelationKey({ relation: rel })
     if (relationKey) defaultState[getRelationKey({ relation: rel })] = getDefaultRelationValue({ type: relation.type })
-  })
-
-  return defaultState
-}
-
-// CLEANUP - document this function, write better tests
-const buildMock = ({ schema, schemas }) => {
-  const defaultState = {}
-
-  // Iterate over each attribute
-  schema.attributes.forEach((attr) => {
-    defaultState[attr.identifier] = attr.default_value || getDefaultAttributeValue({ type: attr.datatype, generate_default: true })
-  })
-
-  // Iterate over each relation
-  schema.relations.forEach((relation) => {
-    const rel = inflateRelation({ schemas, relation })
-    // defaultState[getRelationKey({ relation: rel })] = getDefaultRelationValue({ type: relation.type })
-    // QUESTION - should a default relation be null??
-    // QUESTION - this creates a problem after after the schema has been inflated - what's the solution?
-    const relationKey = getRelationKey({ relation: rel })
-    if (relationKey) defaultState[getRelationKey({ relation: rel })] = null
   })
 
   return defaultState
@@ -119,6 +96,5 @@ const buildConfigurationDefault = ({ attributes }) => {
 
 module.exports = {
   buildDefault,
-  buildMock,
   buildConfigurationDefault
 }

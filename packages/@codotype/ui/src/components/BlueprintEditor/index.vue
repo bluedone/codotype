@@ -3,6 +3,8 @@
 
     <b-col xl=4 lg=4 sm=12 class="border-right">
       <ImportModal />
+      <ExportModal />
+
       <SchemaNewModal />
       <SchemaNewButton />
 
@@ -24,6 +26,7 @@
 
 <script>
 import ImportModal from './components/ImportModal'
+import ExportModal from './components/ExportModal'
 import SchemaNewButton from './components/schema/SchemaNewButton'
 import SchemaNewModal from './components/schema/SchemaNewModal'
 import SchemaList from './components/schema/SchemaList'
@@ -34,6 +37,7 @@ export default {
   name: 'BlueprintEditor',
   components: {
     ImportModal,
+    ExportModal,
     SchemaNewButton,
     SchemaNewModal,
     HelpPopover,

@@ -10,7 +10,7 @@ module.exports = ({ runtime, zipBuild, generateBuildId }) => {
   return async function handleRequest(req, res) {
 
     // Pulls build from req.body
-    // CLEANUP - verify build.app && build.stages
+    // CLEANUP - verify build
     const { build } = req.body
 
     // Generates unique build ID

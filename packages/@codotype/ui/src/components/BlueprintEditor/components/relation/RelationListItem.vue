@@ -17,21 +17,21 @@
         <span class="badge" v-if="item.type === 'BELONGS_TO'">
           <i class="fa fa-link mr-2" v-b-tooltip.hover.left title='Many To One'></i>
           <!-- {{inflated.alias.label}} -->
-          <span class='text-warning'>Many </span><span class='text-info'>{{ selectedSchema.label_plural }}</span> <span class='text-warning'> To One </span><span class="text-info">{{ inflated.alias.label }}</span><span v-if="inflated.alias.label !== inflated.schema.label"> ({{inflated.schema.label}})</span>
+          <span class='text-primary'>Many <strong>{{ selectedSchema.label_plural }}</strong><i class="fa fa-arrow-right text-primary mx-1"></i></span><span class="text-info">One <strong>{{ inflated.alias.label }}</strong></span><span v-if="inflated.alias.label !== inflated.schema.label"> ({{inflated.schema.label}})</span>
         </span>
 
         <!-- HAS_ONE -->
         <span class="badge" v-if="item.type === 'HAS_ONE'">
           <i class="fa fa-link mr-2" v-b-tooltip.hover.left title='One To One'></i>
           <!-- {{inflated.alias.label}} -->
-          <span class='text-warning'>One </span><span class='text-info'>{{ selectedSchema.label }}</span> <span class='text-warning'> To One </span><span class="text-info">{{ inflated.alias.label }}</span><span v-if="inflated.alias.label !== inflated.schema.label"> ({{inflated.schema.label}})</span>
+          <span class='text-primary'>One <strong>{{ selectedSchema.label }}</strong></span><i class="fa fa-arrow-right mx-1"></i><span class="text-info"><strong>{{ inflated.alias.label }}</strong></span><span v-if="inflated.alias.label !== inflated.schema.label"> ({{inflated.schema.label}})</span>
         </span>
 
         <!-- HAS_MANY -->
         <span class="badge" v-if="item.type === 'HAS_MANY'">
           <i class="fa fa-link mr-2" v-b-tooltip.hover.left title='One To Many'></i>
           <!-- {{inflated.alias.label}} -->
-          <span class='text-warning'>One </span><span class='text-info'>{{ selectedSchema.label }}</span> <span class='text-warning'> To Many </span><span class="text-info">{{ inflated.alias.label_plural }}</span><span v-if="inflated.alias.label !== inflated.schema.label"> ({{inflated.schema.label_plural}})</span>
+          <span class='text-primary'>One <strong>{{ selectedSchema.label }}</strong><i class="fa fa-arrow-right mx-1"></i></span> <span class='text-info'>Many <strong>{{ inflated.alias.label_plural }}</strong></span><span v-if="inflated.alias.label !== inflated.schema.label"> ({{inflated.schema.label_plural}})</span>
         </span>
 
         <!-- OWNS_MANY -->
@@ -149,7 +149,10 @@ export default {
 
   .badge
     font-weight: 300
+    font-size: 70%
     padding: .3rem .3rem
+    strong
+      font-weight: 700
 
     &.bordered
       border: 1px solid

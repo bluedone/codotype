@@ -55,17 +55,11 @@
 <script>
 import { mapGetters } from 'vuex'
 import inflateMeta from '@codotype/util/lib/inflateMeta'
-import { RELATION_TYPES } from '@codotype/types/lib/relation-types'
 
 export default {
   props: {
     model: {
       required: true
-    }
-  },
-  data () {
-    return {
-      relationTypes: Object.keys(RELATION_TYPES).map(rt => RELATION_TYPES[rt])
     }
   },
   computed: {

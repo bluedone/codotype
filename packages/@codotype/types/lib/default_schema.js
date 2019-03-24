@@ -7,8 +7,9 @@ const DEFAULT_SCHEMA = {
   identifier_plural: '',
   class_name: '',
   class_name_plural: '',
+  attributes: [],
   relations: [],
-  attributes: []
+  reverse_relations: []
 }
 
 module.exports = {

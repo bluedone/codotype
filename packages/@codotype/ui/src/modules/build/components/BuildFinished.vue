@@ -14,7 +14,7 @@
               <i class="fa fa-lg fa-heart text-danger"></i>
             </p>
 
-            <small class="text-muted">Your code has successfully been generated.</small>
+            <small class="text-muted">Your code has successfully been generated</small>
 
           </div>
         </div>
@@ -26,7 +26,14 @@
               Your codebase is in the following local directory:
             </small>
             <p class="lead mb-0">
-              <b-badge variant="secondary">{{ filepath }}</b-badge>
+              <b-button
+                size="sm"
+                variant="dark"
+                v-b-tooltip.hover.bottom="'Copy to clipboard'"
+                v-clipboard:copy="filepath"
+              >
+                {{ filepath }}
+              </b-button>
             </p>
           </div>
         </div>

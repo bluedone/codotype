@@ -16,7 +16,7 @@ export default {
     model_addon: collectionModule({ NEW_MODEL: {} })
   },
   getters: {
-    toBuildStage: state => {
+    buildParameters: state => {
       return {
         generator_id: state.generatorId,
         configuration: state.configuration

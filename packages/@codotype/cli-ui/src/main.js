@@ -21,12 +21,19 @@ Vue.use(config.ToggleButton)
 // vue-github-buttons
 Vue.use(config.VueGitHubButtons)
 
+// vue-clipboard2
+Vue.use(config.VueClipboard)
+
 // VRuntimeTemplate
 Vue.component('v-runtime-template', config.VRuntimeTemplate)
 
 // Configures top-level vuex mediators
 initTourMediator(store, router)
 localStorageMediator(store, router)
+
+// Enable performance tracing
+// https://medium.com/@brockreece/unlock-performance-tracing-in-vue-3b2c8f619cdc
+// Vue.config.performance = true
 
 Vue.config.productionTip = false
 

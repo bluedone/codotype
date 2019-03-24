@@ -2,7 +2,7 @@
   <b-row>
     <b-col lg=12>
 
-      <div class="card" id='attribute-detail'>
+      <div class="card" :id='`${scope}-detail`'>
 
         <div class="card-header d-flex align-items-center justify-content-between p-2">
 

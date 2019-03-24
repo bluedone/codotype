@@ -46,7 +46,8 @@ export default {
     modals: {
       namespaced: true,
       modules: {
-        import: modalModule()
+        import: modalModule(),
+        export: modalModule()
       }
     }
 

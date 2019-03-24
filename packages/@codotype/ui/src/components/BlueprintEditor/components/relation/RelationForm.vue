@@ -93,7 +93,7 @@
 import { mapGetters, mapMutations } from 'vuex'
 import RelationFormAlias from './RelationFormAlias'
 import RelationFormPreview from './RelationFormPreview'
-import { RELATION_TYPES } from '@codotype/types/lib/relation-types'
+import RELATION_TYPES from '@codotype/types/lib/relation-meta'
 
 export default {
   components: {
@@ -106,8 +106,12 @@ export default {
     }
   },
   created () {
+    // TODO - this should be moved into the relationModule vuex store
+    // Selects the schema_id related_schema_id property
     const relatedSchema = this.allSchemas.find(m => m.id !== this.selectedSchema.id)
+    this.model.schema_id = this.selectedSchema.id
     this.model.related_schema_id = relatedSchema ? relatedSchema.id : this.selectedSchema.id
+    console.log(JSON.stringify(this.model, null, 2))
     this.updateModel()
   },
   methods: {

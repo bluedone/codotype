@@ -18,7 +18,11 @@ export default {
       commit('relation/collection/items', model.relations)
     },
     newModel ({ commit }) {
-      commit('form/reset')
+      // Overrides commit('form/reset')
+      const newModel = Object.assign({}, DEFAULT_SCHEMA)
+      newModel.attributes = []
+      newModel.relations = []
+      commit('form/model', newModel)
       commit('modals/new/showing', true)
     },
     editModel ({ commit, getters }) {

@@ -40,7 +40,7 @@
       <b-row>
 
         <b-col lg=12>
-
+          <div class="card-columns">
           <transition-group name="generator-list" tag='div'>
             <GeneratorListItem
               v-for="m in generators"
@@ -49,6 +49,19 @@
               v-if="m.id"
             />
           </transition-group>
+          </div>
+        </b-col>
+
+        <b-col lg=12>
+
+          <!-- <transition-group name="generator-list" tag='div'> -->
+            <!-- <GeneratorListItem
+              v-for="m in generators"
+              :model="m"
+              :key="m.id"
+              v-if="m.id"
+            /> -->
+          <!-- </transition-group> -->
 
           <div class="card py-4 my-4 border-dark bg-transparent">
             <ul class="list-group list-group-flush">
@@ -73,7 +86,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import GeneratorListItem from '../components/GeneratorListItem'
+import GeneratorListItem from '../components/GeneratorCard'
 import TourButton from '../../../components/TourButton'
 
 export default {

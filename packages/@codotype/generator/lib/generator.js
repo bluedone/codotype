@@ -3,7 +3,7 @@ const path = require('path');
 const fsExtra = require('fs-extra')
 const indent = require('@codotype/util/lib/indent')
 const trailingComma = require('@codotype/util/lib/trailingComma')
-const { buildDefault, buildMock } = require('@codotype/util/lib/buildDefault')
+const { buildDefault } = require('@codotype/util/lib/buildDefault')
 const datatypes = require('@codotype/types/lib/datatypes')
 const relationTypes = require('@codotype/types/lib/relation-types')
 
@@ -27,11 +27,10 @@ module.exports = class CodotypeGenerator {
     // Assigns helper libraries to class variables
     this.fs = fsExtra
 
-    // Assigns buildDefault & buildMock helpers from @codotype/util
+    // Assigns buildDefault helpers from @codotype/util
     this.buildDefault = buildDefault;
-    this.buildMock = buildMock;
 
-    // PASS this.options.resolved in from codotype/codotype
+    // PASS this.options.resolved in from @codotype/runtime
     this.resolved = this.options.resolved;
 
     // Returns the instance
@@ -45,6 +44,7 @@ module.exports = class CodotypeGenerator {
   }
 
   // forEachSchema
+  // TODO - rename this to `writeSchema`, maybe?
   // Method to write files to the filesystem for each schema in blueprints.schemas
   forEachSchema({ schema, blueprint, configuration }) {
     // console.log('NOTHING TO WRITE - this should be overwritten by a subclassed generator.')
@@ -109,8 +109,14 @@ module.exports = class CodotypeGenerator {
   renderTemplate (src, options = {}) {
     return new Promise((resolve, reject) => {
 
+      // default options padded into the renderFile
       let renderOptions = {}
 
+      // // // //
+      // // // //
+      // TODO - document this structure
+      // The `data` object is passed into each file that gets rendered
+      // TODO - this should be abstracted into a separate function
       const data = {
         blueprint: this.options.blueprint,
         meta: this.options.meta,
@@ -123,6 +129,8 @@ module.exports = class CodotypeGenerator {
         ...relationTypes,
         ...options
       }
+      // // // //
+      // // // //
 
       // Compiles EJS template
       return ejs.renderFile(src, data, renderOptions, (err, str) => {
@@ -177,11 +185,13 @@ module.exports = class CodotypeGenerator {
 
   // templatePath
   // TODO - document
+  // TODO - document
   templatePath (template_path = './') {
     return path.join(this.resolved, 'templates', template_path)
   }
 
   // destinationPath
+  // TODO - document
   // TODO - document
   destinationPath (destination_path = './') {
     return path.join(this.options.dest, destination_path)
@@ -190,18 +200,42 @@ module.exports = class CodotypeGenerator {
   // composeWith
   // Enables one generator to fire off several child generators
   // TODO - clean up + document this function
+  // TODO - clean up + document this function
+  // TODO - clean up + document this function
   async composeWith (generatorModule, options={}) {
 
     // Defines module path
     let modulePath
 
+    // // // //
+    // // // //
+    // TODO - love into verbose logging function
+
+    // console.log('Compose with')
+    // console.log(generatorModule)
+    // console.log(options)
+    // console.log(this.resolved)
+    // // console.log(this)
+    // console.log('\n')
+
+    // // // //
+    // // // //
+
+
+    // // // //
+    // // // //
+    // // // //
+    // TODO - move this into a function ( `getModulePath`, perhaps )
     // Handle relative paths
     if (generatorModule.startsWith('./') || generatorModule.startsWith('../')) {
 
       // TODO - document
       let base = ''
+
+      // TODO - abstract into helper function?
       const stats = fsExtra.statSync(this.resolved)
 
+      // TODO - document
       // TODO - document
       if (stats.isDirectory()) {
         base = this.resolved
@@ -219,34 +253,54 @@ module.exports = class CodotypeGenerator {
       modulePath = path.join(generatorModule)
 
     // Handle module path
-    } else if (generatorModule.module_path) {
-
-      modulePath = generatorModule + '/generator'
+    } else {
+      modulePath = path.join(this.options.meta.engine_path, 'node_modules', generatorModule)
     }
+    // // // //
+    // // // //
 
     try {
       // console.log(modulePath)
+
+      // TODO - document
+      // TODO - document
       const generatorPrototype = require(modulePath); // eslint-disable-line import/no-dynamic-require
       generatorPrototype.resolved = require.resolve(modulePath);
 
-      console.log(`Running ${generatorPrototype.name}...`)
-
+      // TODO - document
+      // TODO - document
+      // TODO - move into independent function, `getResolvedGeneratorPath`, perhaps
       let resolvedGeneratorPath = generatorPrototype.resolved.split('/')
       resolvedGeneratorPath.pop()
       resolvedGeneratorPath = resolvedGeneratorPath.join('/')
 
+      // // // //
+      // // // //
+      // TODO - move into independent function, `resolveDestination`, perhaps
+      // TODO - document
+      // TODO - document
+      // TODO - document
       let resolvedDestination = this.options.dest
-
-      if (options.dest) {
-
-        resolvedDestination = this.options.dest.split('/')
-        resolvedDestination.pop()
-        resolvedDestination.push(options.dest)
-        resolvedDestination = resolvedDestination.join('/')
-
+      if (options.scope) {
+        resolvedDestination = path.resolve(this.options.dest, options.scope)
       }
 
+      // // // //
+      // // // //
+      // TODO - add verbose logging function call here
+
+      // console.log('\n')
+      // console.log('this.options.dest')
+      // console.log(this.options.dest)
+      // console.log('\n')
+      // console.log('RESOLVEDDESTINATION')
+      // console.log(resolvedDestination)
+
+      // // // //
+      // // // //
+
       // Creates new instance of generatorPrototype
+      // TODO - document this a bit more
       const generator = new CodotypeGenerator(generatorPrototype, {
         ...this.options,
         dest: resolvedDestination,

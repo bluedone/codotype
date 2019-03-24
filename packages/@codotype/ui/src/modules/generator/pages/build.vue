@@ -75,7 +75,7 @@ export default {
       setTimeout(() => {
         this.starting = false
       }, 500)
-    } catch {
+    } catch (err) {
       this.starting = false
     }
   },
