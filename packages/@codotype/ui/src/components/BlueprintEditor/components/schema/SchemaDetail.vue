@@ -21,17 +21,6 @@
               content='Edit Schema'>
             </HelpPopover>
 
-            <!-- CLEANUP - abstract the following into a single Preview component -->
-            <small><i id="schema-preview" class="fa fa-eye text-muted"></i></small>
-            <b-popover
-              title="Data Preview"
-              target="schema-preview"
-              placement="right"
-              :triggers="['hover']">
-              <small class="mb-0 text-muted">The following data structure represents how a single {{ model.label }} schema will be represented programatically</small>
-              <pre class="bg-dark text-light px-3 py-2">{{ `${model.identifier} = new ${model.class_name}(` + JSON.stringify(defaultObject, null, 2) + ')'}}</pre>
-            </b-popover>
-
           </h4>
 
           <!-- <UserSchemaInfo v-if="isUserModel" /> -->
@@ -53,13 +42,11 @@
             content="Remove Schema">
           </HelpPopover>
 
-          <!-- TODO - Edit Schema Modal GOES HERE -->
-
         </b-col>
 
         <b-col lg=12 class="pb-1">
           <small class="text-muted">
-            Define <strong>Attributes</strong> and <strong>Relations</strong> that describe a single {{ model.label }} model
+            Describe the <strong class="text-primary">{{ model.label }} Schema</strong> with <strong>Attributes</strong> and <strong>Relations</strong>
           </small>
         </b-col>
 
@@ -77,12 +64,15 @@
         info="Attributes define properties on this Schema"
       />
 
+      <hr>
+
+      <SchemaPreview />
+
       <AttributeNewModal />
       <AttributeEditModal />
       <DestroyModal scope="attribute" label="Attribute" />
 
     </b-col>
-      <!-- <hr> -->
 
     <b-col sm=12 md=6 lg=6 class="pl-md-0">
 
@@ -94,22 +84,16 @@
         info="Relations define references to other Schemas"
       />
 
+      <hr>
+
+      <SchemaIncomingRelations/>
+
+
       <RelationNewModal />
       <RelationEditModal />
       <DestroyModal scope="relation" label="Relation" />
 
     </b-col>
-
-    <!-- <b-col sm=12 md=6 lg=6>
-      <div class="card">
-        <div class='card-header'>Preview</div>
-        <div class='card-body'>
-          <small class="mb-0 text-muted">The following data structure represents how a single {{ model.label }} schema will be represented programatically
-          <pre class="bg-dark text-light px-3 py-2">{{ `${model.identifier} = new ${model.class_name}(` + JSON.stringify(defaultObject, null, 2) + ')'}}</pre>
-          </small>
-        </div>
-      </div>
-    </b-col> -->
 
   </b-row>
 
@@ -124,6 +108,8 @@ import SchemaEditButton from './SchemaEditButton'
 import SchemaEditModal from './SchemaEditModal'
 import SchemaDestroyButton from './SchemaDestroyButton'
 import SchemaDestroyModal from './SchemaDestroyModal'
+import SchemaIncomingRelations from './SchemaIncomingRelations'
+import SchemaPreview from './SchemaPreview'
 import AttributeNewModal from '../attribute/AttributeNewModal'
 import AttributeEditModal from '../attribute/AttributeEditModal'
 import RelationNewModal from '../relation/RelationNewModal'
@@ -144,12 +130,14 @@ export default {
     AttributeNewModal,
     AttributeEditModal,
     RelationNewModal,
-    RelationEditModal
+    RelationEditModal,
+    SchemaIncomingRelations,
+    SchemaPreview
   },
   computed: {
     ...mapGetters({
       model: 'editor/schema/selectedModel',
-      defaultObject: 'editor/schema/defaultObject'
+      schemas: 'editor/schema/collection/items'
     }),
     isUserModel () {
       return this.model.identifier === 'user'
@@ -157,3 +145,9 @@ export default {
   }
 }
 </script>
+
+<style lang='sass' scoped>
+  // TODO - remove, testing for reverse relations
+  li.list-group-item
+    padding: 0.25rem 0.5rem
+</style>
