@@ -17,7 +17,7 @@
     "underscore.string": "^3.3.4"
   },
   "devDependencies": {
-    "@codotype/blueprints": "^0.2.0",
+    "@codotype/blueprints": "^0.3.0",
     "chai": "^4.1.2",
     "mocha": "^5.2.0",
     "nyc": "^13.0.1"

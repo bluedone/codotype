@@ -34,7 +34,7 @@ describe('/lib/buildDefault.js', () => {
   describe('task schema', () => {
     it('has "title" and "completed" attributes and "assignee_id" field', () => {
       assert.equal(defaultTask.title, '')
-      assert.equal(defaultTask.completed, false)
+      assert.equal(defaultTask.done, false)
       assert.equal(defaultTask.assignee_id, '')
     });
   });

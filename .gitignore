@@ -22,8 +22,8 @@ build/**/*
 
 # Associated packages maintained in separate repositories
 !packages/.gitkeep
-packages/@codotype/blueprints
 packages/@codotype/web
+packages/@codotype/codotype-*-generator
 
 # Ignore Lerna artifacts
 lerna-debug.log
