@@ -1,6 +1,6 @@
 {
   "name": "@codotype/blueprints",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Example Blueprints for generating apps with Codotype",
   "main": "index.js",
   "scripts": {
