@@ -2,4 +2,3 @@
 
 #### Features
 * Added `@codotype/types` module
-* Bumped `@codotype/blueprints` dependency
