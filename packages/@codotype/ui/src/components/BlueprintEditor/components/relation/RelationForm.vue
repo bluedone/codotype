@@ -73,13 +73,13 @@
           <RelationFormAlias :model="model" />
         </div>
 
-        <div class="col-lg-12">
-          <hr>
-        </div>
+        <!-- <div class="col-lg-12"> -->
+          <!-- <hr> -->
+        <!-- </div> -->
 
-        <div class="col-lg-12">
-          <RelationFormPreview :model="model" />
-        </div>
+        <!-- <div class="col-lg-12"> -->
+          <!-- <RelationFormPreview :model="model" /> -->
+        <!-- </div> -->
 
       </div>
 
@@ -93,7 +93,7 @@
 import { mapGetters, mapMutations } from 'vuex'
 import RelationFormAlias from './RelationFormAlias'
 import RelationFormPreview from './RelationFormPreview'
-import RELATION_TYPES from '@codotype/types/lib/relation-meta'
+import RELATION_META from '@codotype/types/lib/relation-meta'
 
 export default {
   components: {
@@ -102,7 +102,7 @@ export default {
   },
   data () {
     return {
-      relationTypes: Object.keys(RELATION_TYPES).map(rt => RELATION_TYPES[rt])
+      relationTypes: Object.keys(RELATION_META).map(rt => RELATION_META[rt])
     }
   },
   created () {
@@ -111,7 +111,6 @@ export default {
     const relatedSchema = this.allSchemas.find(m => m.id !== this.selectedSchema.id)
     this.model.schema_id = this.selectedSchema.id
     this.model.related_schema_id = relatedSchema ? relatedSchema.id : this.selectedSchema.id
-    console.log(JSON.stringify(this.model, null, 2))
     this.updateModel()
   },
   methods: {
@@ -135,7 +134,7 @@ export default {
       return this.allSchemas.find(m => m.id === this.model.related_schema_id)
     },
     selectedRelationType () {
-      return RELATION_TYPES[this.model.type]
+      return RELATION_META[this.model.type]
     }
   }
 }
