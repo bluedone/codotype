@@ -1,7 +1,7 @@
 <template>
   <b-row>
     <b-col sm=12>
-      <p class="mb-0 mt-2 text-muted">
+      <p class="mb-0 text-muted">
         <i class="fa fa-question-circle mr-1" v-b-tooltip.left.hover="`Where the ${model.label} Schema is a relation on other Schemas`"></i>
         <strong>Preview</strong>
       </p>
