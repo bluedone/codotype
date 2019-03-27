@@ -10,7 +10,8 @@
   },
   "scripts": {
     "test": "run-p test:*",
-    "test:util": "yarn --cwd ./packages/@codotype/util test",
-    "test:ui": "yarn --cwd ./packages/@codotype/ui test"
+    "test:types": "yarn --cwd ./packages/@codotype/types test",
+    "test:ui": "yarn --cwd ./packages/@codotype/ui test",
+    "test:util": "yarn --cwd ./packages/@codotype/util test"
   }
 }
