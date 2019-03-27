@@ -5,9 +5,12 @@
     "packages/*"
   ],
   "devDependencies": {
-    "lerna": "^3.4.1"
+    "lerna": "^3.4.1",
+    "npm-run-all": "4.1.x"
   },
   "scripts": {
-    "test": "yarn --cwd ./packages/@codotype/util test"
+    "test": "run-p test:*",
+    "test:util": "yarn --cwd ./packages/@codotype/util test",
+    "test:ui": "yarn --cwd ./packages/@codotype/ui test"
   }
 }
