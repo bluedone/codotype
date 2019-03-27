@@ -4,5 +4,5 @@ node_js:
 before_install:
 - npm install -g nyc
 - npm install -g mocha
-- yarn --cwd ./packages/@codotype/util install
 - yarn --cwd ./packages/@codotype/ui install
+- yarn --cwd ./packages/@codotype/util install
