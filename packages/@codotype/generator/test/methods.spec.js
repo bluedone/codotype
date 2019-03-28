@@ -5,15 +5,10 @@ const CodotypeGenerator = require('../lib/generator.js')
 
 // // // //
 
-// return this.runtime.ensureDir(this.destinationPath(dir))
-// return this.runtime.copyDir(src, dest)
-// const compiledTemplate = await this.runtime.renderTemplate(this, src, options)
-// const exists = this.runtime.existsSync(dest)
-// this.runtime.compareFile(dest, compiledTemplate)
-// this.runtime.writeFile(dest, compiledTemplate)
-// this.runtime.templatePath(this.resolved, template_path)
-// this.runtime.destinationPath(this.options.dest, destination_path)
-// this.runtime.composeWith(this, generatorModule, options)
+// compileTemplatesInPlace
+// renderComponent
+// copyTemplate
+// composeWith
 
 // // // //
 
@@ -68,6 +63,26 @@ describe('@codotype/generator', () => {
       generatorInstance.ensureDir(dirName)
       .then(() => {
         assert.equal(runtime._mocks_.ensuredDir, `${dest}/${dirName}`)
+      })
+
+    });
+  });
+
+  describe('copyDir method', () => {
+    it('should properly define copiedDirSrc and copiedDirDest on mockRuntime._mocks_', () => {
+
+      const src = 'mySrc'
+      const dest = 'myDest'
+      const runtime = new MockRuntime()
+
+      const generatorPrototype = { write () {} }
+      const generatorOptions = { runtime, dest, resolved: __dirname }
+      const generatorInstance = new CodotypeGenerator(generatorPrototype, generatorOptions)
+
+      generatorInstance.copyDir(src, dest)
+      .then(() => {
+        assert.equal(runtime._mocks_.copiedDirSrc, src)
+        assert.equal(runtime._mocks_.copiedDirDest, dest)
       })
 
     });

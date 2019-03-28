@@ -66,14 +66,14 @@ module.exports = class CodotypeGenerator {
 
   // ensureDir
   // Ensures presence of directory for template compilation
-  async ensureDir (dir) {
+  ensureDir (dir) {
     return this.runtime.ensureDir(this.destinationPath(dir))
   }
 
   // copyDir
   // copy a directory from src to dest'
   // TODO - abstract FS-level operations into @codotype/runtime
-  async copyDir (src, dest) {
+  copyDir (src, dest) {
     return this.runtime.copyDir(src, dest)
   }
 
@@ -158,7 +158,7 @@ module.exports = class CodotypeGenerator {
 
   // composeWith
   // Enables one generator to fire off several child generators
-  async composeWith (generatorModule, options) {
+  composeWith (generatorModule, options) {
     return this.runtime.composeWith(this, generatorModule, options)
   }
 }

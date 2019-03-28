@@ -18,9 +18,6 @@ module.exports = class CodotypeRuntime {
     // Assigns this.options.cwd
     this.options.cwd = process.cwd();
 
-    // Attaches fsExtra as this.fs
-    // this.fs = fsExtra
-
     // Returns the runtime instance
     return this
   }
@@ -99,7 +96,12 @@ module.exports = class CodotypeRuntime {
   }
 
   // copyDir
-  async copyDir (src, dest) {
+  copyDir (src, dest) {
+    this._mocks_.copiedDirSrc = src
+    this._mocks_.copiedDirDest = dest
+    return new Promise((resolve, reject) => {
+      return resolve()
+    })
   }
 
   // composeWith
