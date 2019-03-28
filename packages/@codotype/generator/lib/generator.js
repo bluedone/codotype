@@ -134,7 +134,8 @@ module.exports = class CodotypeGenerator {
       }
 
       // Writes the compiled template to the dest location
-      this.runtime.writeFile(dest, compiledTemplate).then(() => {
+      this.runtime.writeFile(dest, compiledTemplate)
+      .then(() => {
         return resolve()
       })
 
