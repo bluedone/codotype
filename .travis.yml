@@ -6,5 +6,6 @@ before_install:
 - npm install -g mocha
 - yarn --cwd ./packages/@codotype/generator install
 - yarn --cwd ./packages/@codotype/types install
+- yarn --cwd ./packages/@codotype/runtime install
 - yarn --cwd ./packages/@codotype/ui install
 - yarn --cwd ./packages/@codotype/util install
