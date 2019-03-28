@@ -1,10 +1,4 @@
-const ejs = require('ejs') // TODO - abstract into @codotype/runtime
-const path = require('path'); // TODO - abstract into @codotype/runtime
-const indent = require('@codotype/util/lib/indent')
-const trailingComma = require('@codotype/util/lib/trailingComma')
 const { buildDefault } = require('@codotype/util/lib/buildDefault')
-const datatypes = require('@codotype/types/lib/datatypes')
-const relationTypes = require('@codotype/types/lib/relation-types')
 
 // // // //
 
