@@ -12,30 +12,43 @@ module.exports = class CodotypeGenerator {
 
     // TODO - document this!
     if (!options.runtime) {
-      throw Error('Generator must receive a runtime option')
+      throw Error('CodotypeGenerator options requires options.runtime');
+      return;
+    }
+
+    // TODO - document this!
+    if (!options.resolved) {
+      throw Error('CodotypeGenerator options requires options.resolved');
+      return;
+    }
+
+    // TODO - document this!
+    if (!constructorOptions.write && !constructorOptions.forEachSchema && !constructorOptions.compileInPlace) {
+      throw Error('CodotypeGenerator constructorOptions requires either write, forEachSchema, or compileInPlace properties');
+      return;
     }
 
     // Assigns this.runtime
     // this.runtime must be a compliant CodotypeRuntime class instance
-    this.runtime = options.runtime
+    this.runtime = options.runtime;
 
     // Assigns constructorOptions
-    this.write = constructorOptions.write || this.write
-    this.forEachSchema = constructorOptions.forEachSchema || this.forEachSchema
-    this.compileInPlace = constructorOptions.compileInPlace || []
+    this.write = constructorOptions.write || this.write;
+    this.forEachSchema = constructorOptions.forEachSchema || this.forEachSchema;
+    this.compileInPlace = constructorOptions.compileInPlace || [];
 
     // Assigns this.options
     this.options = options;
 
     // Assigns buildDefault helpers from @codotype/util
-    // QUESTION - scope under helpers?
     this.buildDefault = buildDefault;
 
     // PASS this.options.resolved in from @codotype/runtime
+    // TODO - throw error if this.options.resolved is undefined
     this.resolved = this.options.resolved;
 
     // Returns the instance
-    return this
+    return this;
   }
 
   // write
@@ -47,7 +60,7 @@ module.exports = class CodotypeGenerator {
   // forEachSchema
   // TODO - rename this to `writeSchema`, maybe?
   // Method to write files to the filesystem for each schema in blueprints.schemas
-  forEachSchema({ schema, blueprint, configuration }) {
+  async forEachSchema({ schema, blueprint, configuration }) {
     // console.log('NOTHING TO WRITE - this should be overwritten by a subclassed generator.')
   }
 
@@ -116,6 +129,7 @@ module.exports = class CodotypeGenerator {
         } else {
           // TODO - this needs a GitHub issue
           // If exists, and it's different, WRITE (add PROMPT option later, for safety)
+          // TODO - this should happen inside the runtime, as input checking will vary depending on environment
         }
       }
 
