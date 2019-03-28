@@ -4,8 +4,10 @@ node_js:
 before_install:
 - npm install -g nyc
 - npm install -g mocha
-- yarn --cwd ./packages/@codotype/generator install
-- yarn --cwd ./packages/@codotype/types install
-- yarn --cwd ./packages/@codotype/runtime install
-- yarn --cwd ./packages/@codotype/ui install
-- yarn --cwd ./packages/@codotype/util install
+- npm install -g lerna
+- lerna bootstrap
+# - yarn --cwd ./packages/@codotype/generator install
+# - yarn --cwd ./packages/@codotype/types install
+# - yarn --cwd ./packages/@codotype/runtime install
+# - yarn --cwd ./packages/@codotype/ui install
+# - yarn --cwd ./packages/@codotype/util install
