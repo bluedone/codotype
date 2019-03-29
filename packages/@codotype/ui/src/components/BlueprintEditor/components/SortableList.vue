@@ -2,9 +2,9 @@
   <b-row>
     <b-col lg=12>
 
-      <div :id='`${scope}-detail`' class='py-2'>
+      <div :id='`${scope}-detail`' class='card'>
 
-        <div class="d-flex align-items-center pb-2">
+        <div class="d-flex align-items-center justify-content-between card-header p-2">
 
           <span>
             <NewModalButton
@@ -12,19 +12,19 @@
               :vuexAction="'editor/schema/' + scope + '/newModel'"
             />
 
+            <span class='ml-2'>
+              <strong class='text-muted'>{{ label }}</strong>
+            </span>
+
             <HelpPopover
               :target="'add-' + scope + '-button'"
               placement="right"
               :content="'Add ' + label">
             </HelpPopover>
 
-            <span class='ml-2'>
-              <strong class='text-muted'>{{ label }}</strong>
-            </span>
-
           </span>
 
-          <span class='ml-2 text-muted' v-if="collection.length > 1">
+          <span class='mr-2 text-muted' v-if="collection.length > 1">
             <i v-if="collapsed" class="fa fa-chevron-down" @click="collapsed = !collapsed"></i>
             <i v-else class="fa fa-chevron-up" @click="collapsed = !collapsed"></i>
           </span>
@@ -33,7 +33,7 @@
 
         <draggable
           v-if="(collection.length && !collapsed) || collection.length == 1"
-          class='list-group'
+          class='list-group list-group-flush'
           v-model='collection'
           :options="sortableOptions"
         >
@@ -54,10 +54,11 @@
 
         </draggable>
 
-        <b-list-group v-else-if="!collection.length">
+        <b-list-group flush v-else-if="!collection.length">
           <b-list-group-item class="text-center">
 
-            <img style="width: 2rem;" :src="icon">
+            <!-- <img style="width: 2rem;" :src="icon"> -->
+            <span class='text-muted'>¯\_(ツ)_/¯</span>
             <br>
             <strong class="mb-0 mt-1 text-muted">{{ title }}</strong>
             <br>
@@ -75,12 +76,12 @@
           </b-list-group-item>
         </b-list-group>
 
-        <b-list-group v-else>
-          <b-list-group-item class="text-muted text-center py-1 px-1" @click="collapsed = !collapsed">
-            Expand {{ label }}
-            <i class="fa fa-chevron-down"></i>
-          </b-list-group-item>
-        </b-list-group>
+        <!-- <b-list-group flush v-else> -->
+          <!-- <b-list-group-item class="text-muted text-center py-1 px-1" @click="collapsed = !collapsed"> -->
+            <!-- Expand {{ label }} -->
+            <!-- <i class="fa fa-chevron-down"></i> -->
+          <!-- </b-list-group-item> -->
+        <!-- </b-list-group> -->
 
       </div>
 

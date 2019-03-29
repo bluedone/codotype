@@ -2,9 +2,9 @@
   <b-row>
     <b-col lg=12>
 
-      <p class="mb-1 text-muted d-flex justify-content-between">
+      <p class="mb-1 mx-1 text-muted d-flex justify-content-between">
         <span>
-          <i class="fa fa-arrow-left mr-2"></i>
+          <i class="fa fa-link mr-2"></i>
           <strong>Incoming Relations</strong>
         </span>
         <i class="fa fa-info-circle" v-b-tooltip.left.hover="`Relations which reference the ${model.label} Schema`"></i>

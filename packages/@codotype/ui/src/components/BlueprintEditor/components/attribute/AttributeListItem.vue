@@ -4,9 +4,9 @@
     <div class="row d-flex align-items-center">
 
       <!-- Handle for re-ordering attributes -->
-      <div class="col-sm-2 text-left d-flex align-items-center">
-        <i class="fa fa-lg fa-fw fa-sort mr-3"></i>
-        <i class="fa fa-fw text-primary fa-eye" v-if="item.order === 0"  v-b-tooltip.hover.left title='Leading attribute'></i>
+      <div class="col-sm-1 text-left d-flex align-items-center">
+        <i class="fa fa-lg fa-fw fa-equals mr-3"></i>
+        <!-- <i class="fa fa-fw text-primary fa-eye" v-if="item.order === 0"  v-b-tooltip.hover.left title='Leading attribute'></i> -->
       </div>
 
       <div class="col-sm-8">
@@ -79,17 +79,18 @@ export default {
   .list-group-item
     padding: 0.25rem 0.5rem
 
-  .list-group-item:hover i.fa-sort
+  .list-group-item:hover i.fa-equals
     opacity: 1
 
   .list-group-item:hover .controls
     opacity: 1
 
-  i.fa-sort
+  i.fa-equals
     cursor: grab
     transition: opacity .25s ease-in
     transition: color .15s ease-in
     opacity: 0
+    font-size: 90%
     color: $gray-500
     &:hover
       color: $gray-800

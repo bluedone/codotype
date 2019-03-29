@@ -2,7 +2,7 @@
   <b-row>
     <b-col sm=12>
       <p class="mb-0 text-muted" id="schema-preview">
-        <span class="d-flex align-items-center justify-content-between mb-1">
+        <span class="d-flex align-items-center justify-content-between mb-1 mx-1">
           <span>
             <i class="fa fa-eye mr-2"></i>
             <strong class="m-0">Preview</strong>

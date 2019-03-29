@@ -5,32 +5,32 @@
 
       <!-- Handle for re-ordering attributes -->
       <div class="col-lg-1 text-left d-flex align-items-center">
-        <i class="fa fa-lg fa-fw fa-sort mr-3" style='cursor: grab;'></i>
+        <i class="fa fa-lg fa-fw fa-equals mr-3" style='cursor: grab;'></i>
       </div>
 
       <!-- CLEANUP - get rid of hardcoded icons & labels -->
-      <div class="col-lg-6">
+      <div class="col-lg-5">
 
         <!-- DEBUGGING INFLATED -->
         <!-- <pre>{{ inflated }}</pre> -->
 
         <!-- BELONGS_TO -->
         <span class="badge" v-if="item.type === 'BELONGS_TO'">
-          <i class="fa fa-link mr-2" v-b-tooltip.hover.left title='Many To One'></i>
+          <!-- <i class="fa fa-link mr-2" v-b-tooltip.hover.left title='Many To One'></i> -->
           <!-- {{inflated.alias.label}} -->
           <span class='text-primary'>Many <strong>{{ selectedSchema.label_plural }}</strong><i class="fa fa-arrow-right text-primary mx-1"></i></span><span class="text-info">One <strong>{{ inflated.alias.label }}</strong></span><span v-if="inflated.alias.label !== inflated.schema.label"> ({{inflated.schema.label}})</span>
         </span>
 
         <!-- HAS_ONE -->
         <span class="badge" v-if="item.type === 'HAS_ONE'">
-          <i class="fa fa-link mr-2" v-b-tooltip.hover.left title='One To One'></i>
+          <!-- <i class="fa fa-link mr-2" v-b-tooltip.hover.left title='One To One'></i> -->
           <!-- {{inflated.alias.label}} -->
           <span class='text-primary'>One <strong>{{ selectedSchema.label }}</strong></span><i class="fa fa-arrow-right mx-1"></i><span class="text-info"><strong>{{ inflated.alias.label }}</strong></span><span v-if="inflated.alias.label !== inflated.schema.label"> ({{inflated.schema.label}})</span>
         </span>
 
         <!-- HAS_MANY -->
         <span class="badge" v-if="item.type === 'HAS_MANY'">
-          <i class="fa fa-link mr-2" v-b-tooltip.hover.left title='One To Many'></i>
+          <!-- <i class="fa fa-link mr-2" v-b-tooltip.hover.left title='One To Many'></i> -->
           <!-- {{inflated.alias.label}} -->
           <span class='text-primary'>One <strong>{{ selectedSchema.label }}</strong><i class="fa fa-arrow-right mx-1"></i></span> <span class='text-info'>Many <strong>{{ inflated.alias.label_plural }}</strong></span><span v-if="inflated.alias.label !== inflated.schema.label"> ({{inflated.schema.label_plural}})</span>
         </span>
@@ -139,17 +139,18 @@ export default {
   .list-group-item
     padding: 0.25rem 0.5rem
 
-  .list-group-item:hover i.fa-sort
+  .list-group-item:hover i.fa-equals
     opacity: 1
 
   .list-group-item:hover .controls
     opacity: 1
 
-  i.fa-sort
+  i.fa-equals
     cursor: grab
     transition: opacity .25s ease-in
     transition: color .15s ease-in
     opacity: 0
+    font-size: 90%
     color: $gray-500
     &:hover
       color: $gray-800

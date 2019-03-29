@@ -19,7 +19,7 @@ export default {
 }
 </script>
 
-<style type="text/css" scoped>
+<style type="text/css">
   button.btn.btn-rounded {
     border-radius: 1rem;
   }
