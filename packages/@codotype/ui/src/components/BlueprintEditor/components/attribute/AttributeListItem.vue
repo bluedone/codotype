@@ -4,12 +4,12 @@
     <div class="row d-flex align-items-center">
 
       <!-- Handle for re-ordering attributes -->
-      <div class="col-sm-1 text-left d-flex align-items-center">
-        <i class="fa fa-lg fa-fw fa-equals mr-3"></i>
+      <!-- <div class="col-sm-1 text-left d-flex align-items-center"> -->
         <!-- <i class="fa fa-fw text-primary fa-eye" v-if="item.order === 0"  v-b-tooltip.hover.left title='Leading attribute'></i> -->
-      </div>
+      <!-- </div> -->
 
-      <div class="col-sm-8">
+      <div class="col-sm-10">
+        <i class="fa fa-lg fa-fw fa-equals"></i>
         <AttributeListItemLabel :item="item"/>
       </div>
 

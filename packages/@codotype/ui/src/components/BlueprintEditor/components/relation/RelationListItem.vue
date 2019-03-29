@@ -1,15 +1,11 @@
 <template>
   <li class="list-group-item">
-      <div class="row d-flex align-items-c@import '../../../../sass/vendor.sass'
-      enter">
-
-      <!-- Handle for re-ordering attributes -->
-      <div class="col-lg-1 text-left d-flex align-items-center">
-        <i class="fa fa-lg fa-fw fa-equals mr-3" style='cursor: grab;'></i>
-      </div>
+      <div class="row d-flex align-items-center">
 
       <!-- CLEANUP - get rid of hardcoded icons & labels -->
-      <div class="col-lg-5">
+      <div class="col-lg-10">
+
+        <i class="fa fa-lg fa-fw fa-equals" style='cursor: grab;'></i>
 
         <!-- DEBUGGING INFLATED -->
         <!-- <pre>{{ inflated }}</pre> -->
@@ -42,18 +38,6 @@
           <!-- <span class="badge badge-light ml-2">Referenced By Many</span> -->
           <!-- <span class="badge badge-light ml-2">one {{ selectedSchema.label }} to many {{ inflated.schema.label_plural }}</span> -->
         <!-- </span> -->
-
-      </div>
-
-      <div class="col-lg-3">
-        <!-- REQUIRED -->
-        <!-- <span class="badge" v-if="item.required" v-b-tooltip.hover.top title="Required"> -->
-          <!-- <i class="fa fa-asterisk text-danger"></i> -->
-        <!-- </span> -->
-        <span class="badge badge-light" v-if="item.unique" v-b-tooltip.hover.top title="Unique">
-          <i class="fa fa-snowflake-o text-dark"></i>
-          Unique
-        </span>
 
       </div>
 

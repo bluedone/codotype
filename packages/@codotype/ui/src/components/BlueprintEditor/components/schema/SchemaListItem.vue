@@ -5,11 +5,11 @@
   >
 
     <div class="row align-items-center">
-      <div class="col-md-8">
+      <div class="col-md-12">
         {{ model.label }}
       </div>
 
-      <div class="col-md-4 text-right">
+      <!-- <div class="col-md-4 text-right">
 
         <span
           v-if="!model.attributes.length && !model.relations.length"
@@ -35,7 +35,7 @@
           </small>
         </span>
 
-      </div>
+      </div> -->
 
     </div>
 

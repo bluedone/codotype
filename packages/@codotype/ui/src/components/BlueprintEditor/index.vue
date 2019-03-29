@@ -1,7 +1,7 @@
 <template>
   <b-row>
 
-    <b-col xl=4 lg=4 sm=12>
+    <b-col xl=3 lg=3 sm=12>
       <ImportModal />
       <ExportModal />
 
@@ -17,7 +17,7 @@
       <SchemaList />
     </b-col>
 
-    <b-col xl=8 lg=8 sm=12>
+    <b-col xl=9 lg=9 sm=12>
       <SchemaDetail id="schema-detail" />
     </b-col>
 
