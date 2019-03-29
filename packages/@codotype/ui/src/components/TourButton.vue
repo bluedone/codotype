@@ -1,6 +1,6 @@
 <template>
   <b-button
-    variant='outline-dark'
+    variant='link'
     :size="size"
     @click.stop="startTour()"
     @mouseover="$store.commit('editor/help/showing', true)"
@@ -9,7 +9,6 @@
     :placement="tooltipPlacement || 'left' "
     :title='"Click here to start tour"'
   >
-    <i class="fa fa-question-circle"></i>
     Tutorial
   </b-button>
 </template>
