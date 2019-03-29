@@ -27,25 +27,7 @@ program
   .usage('<command> [options]')
 
 program
-  .command('run <blueprint>')
-  .option('-c --config <configuration>', 'Path to generator configuration file to pass into Codotype runtime')
-  // .parse(process.argv)
-  .description('run the generator in the current working directory against the blueprint argument (optional configuration argument)')
-  .action((blueprint, cmd) => {
-    const options = cleanArgs(cmd)
-    require('../lib/run')(blueprint, options)
-  })
-
-program
-  .command('doctor')
-  .description('validates the generator in the current working directory')
-  .action((cmd) => {
-    const options = cleanArgs(cmd)
-    require('../lib/doctor')(options)
-  })
-
-program
-  .command('ui')
+.command('ui')
   .description('runs the Codotype ui')
   .action((cmd) => {
     const options = cleanArgs(cmd)
@@ -53,19 +35,37 @@ program
   })
 
 program
-  .command('serve')
-  .description('serves the UI for a single Codotype generator')
+  .command('generator-doctor')
+  .description('validates the generator in the current working directory')
   .action((cmd) => {
     const options = cleanArgs(cmd)
-    require('../lib/serve')(options)
+    require('../lib/doctor')(options)
   })
 
 program
-  .command('build')
+  .command('generator-build')
   .description('builds a distributable client app for a single Codotype generator')
   .action((cmd) => {
     const options = cleanArgs(cmd)
     require('../lib/build')(options)
+  })
+
+program
+  .command('generator-run <blueprint>')
+  .option('-c --config <configuration>', 'Path to generator configuration file to pass into Codotype runtime')
+  // .parse(process.argv)
+  .description('run the generator in the current working directory against the blueprint argument')
+  .action((blueprint, cmd) => {
+    const options = cleanArgs(cmd)
+    require('../lib/run')(blueprint, options)
+  })
+
+program
+  .command('generator-serve')
+  .description('serves the UI for a single Codotype generator')
+  .action((cmd) => {
+    const options = cleanArgs(cmd)
+    require('../lib/serve')(options)
   })
 
 // output help information on unknown commands

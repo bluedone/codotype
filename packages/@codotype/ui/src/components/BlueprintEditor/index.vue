@@ -3,20 +3,22 @@
 
     <b-col xl=4 lg=4 sm=12 class="border-right">
       <ImportModal />
+      <ExportModal />
+
       <SchemaNewModal />
       <SchemaNewButton />
 
       <HelpPopover
-        target="new-model-button"
+        target="new-schema-button"
         placement="bottom"
-        content='Create New Model'>
+        content='Create New Schema'>
       </HelpPopover>
 
       <SchemaList />
     </b-col>
 
     <b-col xl=8 lg=8 sm=12>
-      <SchemaDetail id="model-detail" />
+      <SchemaDetail id="schema-detail" />
     </b-col>
 
   </b-row>
@@ -24,6 +26,7 @@
 
 <script>
 import ImportModal from './components/ImportModal'
+import ExportModal from './components/ExportModal'
 import SchemaNewButton from './components/schema/SchemaNewButton'
 import SchemaNewModal from './components/schema/SchemaNewModal'
 import SchemaList from './components/schema/SchemaList'
@@ -34,6 +37,7 @@ export default {
   name: 'BlueprintEditor',
   components: {
     ImportModal,
+    ExportModal,
     SchemaNewButton,
     SchemaNewModal,
     HelpPopover,

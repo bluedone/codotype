@@ -1,4 +1,4 @@
-const NEW_SCHEMA_MODEL = {
+const DEFAULT_SCHEMA = {
   id: null,
   order: 0,
   label: '',
@@ -7,10 +7,11 @@ const NEW_SCHEMA_MODEL = {
   identifier_plural: '',
   class_name: '',
   class_name_plural: '',
+  attributes: [],
   relations: [],
-  attributes: []
+  reverse_relations: []
 }
 
 module.exports = {
-  NEW_SCHEMA_MODEL
+  DEFAULT_SCHEMA
 }

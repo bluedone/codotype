@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import DATATYPE_META from '@codotype/types/lib/meta'
+import DATATYPE_META from '@codotype/types/lib/datatype-meta'
 import FormInput from '../../../FormInput'
 
 export default {
@@ -53,7 +53,7 @@ export default {
   computed: {
     datatypeLabel () {
       let datatype = DATATYPE_META[this.model.datatype]
-      return datatype.text
+      return datatype.label
     },
     attributeLabel: {
       get () {

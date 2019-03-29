@@ -13,6 +13,9 @@ selenium-debug.log
 build/**/*
 !build/.gitkeep
 
+# nyc test coverage
+.nyc_output
+
 # Editor directories and files
 .idea
 .vscode

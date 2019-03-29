@@ -1,9 +1,9 @@
 const path = require('path');
 const PrerenderSPAPlugin = require('prerender-spa-plugin');
 
-// Injects the generator meta.json data structure for optimal pre-rendering conditions
+// Injects the generator codotype-generator.json data structure for optimal pre-rendering conditions
 let outputDir = path.resolve(process.argv[4], 'dist')
-let generatorMetaPath = path.resolve(process.argv[4], 'meta.json')
+let generatorMetaPath = path.resolve(process.argv[4], 'codotype-generator.json')
 let generatorMeta = require(generatorMetaPath)
 process.env.VUE_APP_GENERATOR_META = JSON.stringify(generatorMeta)
 

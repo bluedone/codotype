@@ -6,9 +6,9 @@
 
       </p>
 
-      <p>No need to be picky, you can change it later.</p>
+      <p class="text-muted">No need to be picky, you can change it later.</p>
 
-      <small class="text-muted">The Project Name will appear in the header of the app we're building - you can change it later.</small>
+      <!-- <small class="text-muted">The Project Name will appear in the header of the app we're building - you can change it later.</small> -->
     </b-col>
     <b-col lg=6>
       <input

@@ -1,5 +1,5 @@
-import { sanitizeLabel } from '@codotype/util/lib/sanitizeLabel'
-import { inflateMeta } from '@codotype/util/lib/inflateMeta'
+import sanitizeLabel from '@codotype/util/lib/sanitizeLabel'
+import inflateMeta from '@codotype/util/lib/inflateMeta'
 
 // TODO - this module should implement some basic validation & error handling
 // TODO - module-specific errors should be handled in a dedicated sub-module

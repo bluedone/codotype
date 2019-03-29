@@ -10,20 +10,31 @@
       </div>
 
       <div class="col-md-4 text-right">
-        <span class="badge badge-dark" v-if="!model.attributes.length" v-b-tooltip.hover.left :title="model.attributes.length + (model.attributes.length === 1 ? ' Attribute' : ' Attributes')">
-          <i class="fa fa-times mr-1"></i>
-          0
+
+        <span
+          v-if="!model.attributes.length && !model.relations.length"
+          class="badge badge-danger px-3"
+          v-b-tooltip.hover.right
+          :title="`The ${model.label} Schema requires at least one attribute or relation`"
+        >
+          <i class="fa fa-exclamation"></i>
         </span>
 
-        <span class="badge badge-dark" v-else v-b-tooltip.hover.left :title="model.attributes.length + (model.attributes.length === 1 ? ' Attribute' : ' Attributes')">
-          <i class="fa fa-tags mr-1"></i>
-          {{ model.attributes.length }}
+        <span
+          v-else
+          class="badge badge-dark px-2"
+          v-b-tooltip.hover.right
+          :title="tooltipTitle"
+        >
+          <small>
+            <i class="fa fa-tags mr-1"></i>
+            {{ model.attributes.length }}
+            <span class="mx-2">|</span>
+            <i class="fa fa-link mr-1"></i>
+            {{ model.relations.length }}
+          </small>
         </span>
 
-        <!-- <span class="badge badge-dark" v-b-tooltip.hover.right :title="model.relations.length + (model.relations.length === 1 ? ' Relation' : ' Relations')"> -->
-          <!-- <i class="fa fa-link mr-1"></i> -->
-          <!-- {{ model.relations.length }} -->
-        <!-- </span> -->
       </div>
 
     </div>
@@ -44,6 +55,15 @@ export default {
   computed: {
     isSelected () {
       return this.model.id === this.$store.getters['editor/schema/selectedModel/id']
+    },
+    tooltipTitle () {
+      let attrLen = this.model.attributes.length
+      let relLen = this.model.relations.length
+
+      let attrPluralization = attrLen === 1 ? ' Attribute' : ' Attributes'
+      let relPluralization = relLen === 1 ? ' Relation' : ' Relations'
+
+      return `${attrLen} ${attrPluralization} and ${relLen} ${relPluralization}`
     },
     className () {
       let css = ['list-group-item', 'list-group-item-action']

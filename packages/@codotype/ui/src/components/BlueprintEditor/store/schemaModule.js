@@ -1,6 +1,7 @@
-import { inflateMeta } from '@codotype/util/lib/inflateMeta'
-import { sanitizeLabel } from '@codotype/util/lib/sanitizeLabel'
-import { NEW_SCHEMA_MODEL } from '@codotype/types/lib/default_schema'
+import inflateMeta from '@codotype/util/lib/inflateMeta'
+import sanitizeLabel from '@codotype/util/lib/sanitizeLabel'
+import { buildDefault } from '@codotype/util/lib/buildDefault'
+import { DEFAULT_SCHEMA } from '@codotype/types/lib/default_schema'
 import formModule from '../../../store/lib/formModule'
 import modalModule from '../../../store/lib/modalModule'
 import collectionModule from '../../../store/lib/collectionModule'
@@ -17,7 +18,11 @@ export default {
       commit('relation/collection/items', model.relations)
     },
     newModel ({ commit }) {
-      commit('form/reset')
+      // Overrides commit('form/reset')
+      const newModel = Object.assign({}, DEFAULT_SCHEMA)
+      newModel.attributes = []
+      newModel.relations = []
+      commit('form/model', newModel)
       commit('modals/new/showing', true)
     },
     editModel ({ commit, getters }) {
@@ -67,14 +72,20 @@ export default {
     selectedModel: state => {
       return state.collection.items.find(i => i.id === state.selectedModel.id)
     },
+    defaultObject: state => {
+      const schema = state.collection.items.find(i => i.id === state.selectedModel.id)
+      const schemas = state.collection.items
+      if (schema) { return buildDefault({ schema, schemas }) }
+      else { return {} }
+    },
     enableSubmit: state => {
       const label = state.form.model.label
       return label && label.length > 1 && !state.collection.items.map(i => i.label).includes(label)
     }
   },
   modules: {
-    form: formModule({ NEW_MODEL: NEW_SCHEMA_MODEL }),
-    collection: collectionModule({ NEW_MODEL: NEW_SCHEMA_MODEL }), // TODO - refactor collectionModule
+    form: formModule({ NEW_MODEL: DEFAULT_SCHEMA }),
+    collection: collectionModule({ NEW_MODEL: DEFAULT_SCHEMA }), // TODO - refactor collectionModule
     selectedModel: selectModelModule(),
     attribute: attributeModule,
     relation: relationModule,

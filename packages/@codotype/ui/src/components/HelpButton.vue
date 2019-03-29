@@ -1,9 +1,12 @@
 <template>
-  <i
+  <span
+    class="text-muted"
     @mouseover="$store.commit('editor/help/showing', true)"
     @mouseout="$store.commit('editor/help/showing', false)"
-    class="fa fa-lg fa-question-circle text-primary">
-  </i>
+  >
+    <i class="fa fa-lg fa-question-circle"></i>
+    Help
+  </span>
 </template>
 
 <script>

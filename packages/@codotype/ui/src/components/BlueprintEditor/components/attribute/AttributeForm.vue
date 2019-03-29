@@ -2,10 +2,7 @@
   <b-row>
     <b-col lg=12>
 
-      <!-- Step 1 - Select Datatype -->
-
-      <!-- Step 2 - Define Properties & Validations -->
-      <!-- <template v-else> -->
+      <!-- Select Datatype, Define Properties, Validations -->
       <b-tabs lazy pills v-model="formStep">
         <b-tab title="Datatype">
           <AttributeDatatypeForm :model="model" />
@@ -17,7 +14,6 @@
           <AttributeValidationsForm :model="model" />
         </b-tab>
       </b-tabs>
-      <!-- </template> -->
 
     </b-col>
   </b-row>
@@ -36,12 +32,26 @@ export default {
     AttributePropertiesForm,
     AttributeValidationsForm
   },
+  data () {
+    return {
+      step: -1
+    }
+  },
   computed: {
     ...mapGetters({
       model: 'editor/schema/attribute/form/model'
     }),
-    formStep () {
-      return !this.model.datatype ? 0 : 1
+    formStep: {
+      get () {
+        if (this.step === -1) {
+          return !this.model.datatype ? 0 : 1
+        } else {
+          return this.step
+        }
+      },
+      set (val) {
+        this.step = val
+      }
     }
   }
 }

@@ -2,29 +2,37 @@
   <b-row>
     <b-col lg=12>
 
-      <div class="card" id='attribute-detail'>
+      <div class="card" :id='`${scope}-detail`'>
 
-        <div class="card-header d-flex align-items-center p-2">
+        <div class="card-header d-flex align-items-center justify-content-between p-2">
 
-          <NewModalButton
-            :id="'add-' + scope + '-button'"
-            :vuexAction="'editor/schema/' + scope + '/newModel'"
-          />
+          <span>
+            <NewModalButton
+              :id="'add-' + scope + '-button'"
+              :vuexAction="'editor/schema/' + scope + '/newModel'"
+            />
 
-          <HelpPopover
-            :target="'add-' + scope + '-button'"
-            placement="right"
-            :content="'Add ' + label">
-          </HelpPopover>
+            <HelpPopover
+              :target="'add-' + scope + '-button'"
+              placement="right"
+              :content="'Add ' + label">
+            </HelpPopover>
 
-          <span class='ml-2'>
-            <strong>{{ label }}</strong>
+            <span class='ml-2'>
+              <strong>{{ label }}</strong>
+            </span>
+
+          </span>
+
+          <span class='mr-2' v-if="collection.length">
+            <i v-if="collapsed" class="fa fa-chevron-down" @click="collapsed = !collapsed"></i>
+            <i v-else class="fa fa-chevron-up" @click="collapsed = !collapsed"></i>
           </span>
 
         </div>
 
         <draggable
-          v-if="collection.length"
+          v-if="collection.length && !collapsed"
           class='list-group list-group-flush'
           v-model='collection'
           :options="sortableOptions"
@@ -46,7 +54,7 @@
 
         </draggable>
 
-        <b-list-group flush v-else>
+        <b-list-group flush v-else-if="!collection.length">
           <b-list-group-item class="text-center">
 
             <img style="width: 2rem;" :src="icon">
@@ -116,6 +124,11 @@ export default {
   },
   mounted () {
     this.$smoothReflow()
+  },
+  data () {
+    return {
+      collapsed: false
+    }
   },
   computed: {
     sortableOptions () {

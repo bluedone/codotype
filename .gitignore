@@ -22,8 +22,8 @@ build/**/*
 
 # Associated packages maintained in separate repositories
 !packages/.gitkeep
-packages/@codotype/blueprints
 packages/@codotype/web
+packages/@codotype/codotype-*-generator
 
 # Ignore Lerna artifacts
 lerna-debug.log
@@ -31,3 +31,6 @@ lerna-debug.log
 # Ignore package-lock.json since it's break lerna bootstrap
 # TODO - find out why package-lock is breaking lerna bootstrap
 package-lock.json
+
+# nyc test coverage
+.nyc_output

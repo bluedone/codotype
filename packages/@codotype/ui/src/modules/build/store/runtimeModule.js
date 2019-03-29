@@ -26,11 +26,15 @@ export default {
       // Pulls requisite data from state
       const blueprint = rootGetters['editor/blueprint']
 
-      // Pulls in configuration object
-      const stage = rootGetters['build/editor/toBuildStage']
+      // Pulls in configuration object & generator_id
+      const buildParameters = rootGetters['build/editor/buildParameters']
 
       // Defines build object to send to the server
-      let build = { blueprint, stages: [stage] }
+      let build = {
+        blueprint,
+        generator_id: buildParameters.generator_id,
+        configuration: buildParameters.configuration
+      }
 
       // Debugging
       // console.log(blueprint)

@@ -7,6 +7,7 @@ const DEFAULT_ATTRIBUTE = {
   required: false,
   unique: false,
   datatype: '',
+  default_value: null,
   datatypeOptions: {}
 }
 

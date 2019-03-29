@@ -1,17 +1,17 @@
 {
   "name": "@codotype/api",
   "version": "0.1.0",
-  "description": "",
+  "description": "API utilities and helpers used throughout the Codotype ecosystem",
   "main": "index.js",
   "scripts": {
     "start": "node ./www.js",
     "dev": "nodemon -L ./www.js",
-    "test": "mocha --exit"
+    "test": "nyc mocha --exit"
   },
-  "author": "",
+  "author": "Alexander Schwartzberg",
   "license": "MIT",
   "dependencies": {
-    "@codotype/runtime": "^0.5.0",
+    "@codotype/runtime": "^0.6.0",
     "archiver": "^2.1.1",
     "aws-sdk": "^2.322.0",
     "body-parser": "^1.18.2",
@@ -21,5 +21,10 @@
     "lodash": "^4.17.10",
     "morgan": "^1.9.0",
     "npm": "^5.6.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0",
+    "nyc": "^13.0.1"
   }
 }

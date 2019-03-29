@@ -5,8 +5,7 @@ export default function ({ NEW_MODEL }) {
     namespaced: true,
     state: {
       defaultModel: Object.assign({}, NEW_MODEL),
-      model: Object.assign({}, NEW_MODEL),
-      errors: []
+      model: Object.assign({}, NEW_MODEL)
     },
     mutations: {
       defaultModel (state, defaultModel) {
@@ -14,9 +13,6 @@ export default function ({ NEW_MODEL }) {
       },
       reset (state) {
         state.model = Object.assign({}, state.defaultModel)
-        state.model.attributes = [] // TODO - THIS SHOULD BE MOVED ELSEWHERE, SCHEMA-SPECIFIC
-        state.model.relations = [] // TODO - THIS SHOULD BE MOVED ELSEWHERE, SCHEMA-SPECIFIC
-        state.errors = []
       },
       modelAttr (state, { attribute, value }) {
         state.model[attribute.identifier] = value

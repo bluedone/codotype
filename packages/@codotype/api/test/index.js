@@ -1,11 +1,20 @@
-// TODO - remove this example after testing
-// const LibraryExampleApp = require('@codotype/generator/examples/library.json')
+// Chai configuration
+const chai = require("chai");
+chai.should();
 
-// const build = {
-//   id: build_id,
-//   app: LibraryExampleApp,
-//   stages: [{
-//     generator_id: 'codotype-generator-nuxt',
-//     configuration: {}
-//   }]
-// }
+// Import all library tests here
+
+// // // //
+
+const assert = chai.assert;
+
+describe('@codotype/api', () => {
+
+  describe('tests should load', () => {
+    it('should not throw an error', () => {
+      const input = 'foo'
+      assert.equal(input, 'foo')
+    });
+  });
+
+});
