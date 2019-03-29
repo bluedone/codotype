@@ -1,8 +1,8 @@
 <template>
   <b-button
     variant="primary"
-    class='btn-rounded'
     size="sm"
+    class="btn-rounded"
     @click="$store.dispatch(vuexAction, true)"
   >
     <i class="fa fa-plus"></i>
