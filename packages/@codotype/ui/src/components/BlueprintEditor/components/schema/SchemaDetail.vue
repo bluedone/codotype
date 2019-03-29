@@ -1,5 +1,4 @@
 <template>
-
   <b-row>
 
     <b-col lg=12>
