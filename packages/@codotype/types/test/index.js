@@ -11,7 +11,7 @@ const assert = chai.assert;
 describe('@codotype/types', () => {
 
   describe('tests should load', () => {
-    it('should not through an error', () => {
+    it('should not throw an error', () => {
       const input = 'foo'
       assert.equal(input, 'foo')
     });

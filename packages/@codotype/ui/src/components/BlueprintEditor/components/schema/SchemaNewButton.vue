@@ -1,6 +1,6 @@
 <template>
   <b-button
-    id="new-model-button"
+    id="new-schema-button"
     block
     variant="primary"
     size="lg"

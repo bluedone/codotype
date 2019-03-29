@@ -16,7 +16,7 @@
       <span v-else></span>
 
       <span v-if="currentStep === 1">
-        <HelpButton class='mr-2' />
+        <!-- <HelpButton class='mr-2' /> -->
         <TourButton class='mr-2' size="lg" tour="appEditorSteps" />
 
         <b-dropdown

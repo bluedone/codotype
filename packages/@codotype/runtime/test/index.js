@@ -1,22 +1,20 @@
-const CodotypeRuntime = require('../index.js');
-const LibraryExampleApp = require('@codotype/blueprints/lib/library.json')
+// Chai configuration
+const chai = require("chai");
+chai.should();
+
+// Import all library tests here
 
 // // // //
 
-// Test runtime.registerGenerator('...')
-// TODO - this test file should implement a local dummy generator to test registration
-const runtime = new CodotypeRuntime()
-runtime.registerGenerator({ module_path: 'codotype-generator-nuxt' })
-// console.log(runtime.getGenerators())
+const assert = chai.assert;
 
-// Test runtime.execute({ build })
-const build = {
-  app: LibraryExampleApp,
-  generator_id: 'codotype-generator-nuxt',
-  configuration: {}
-}
+describe('@codotype/ui', () => {
 
-runtime.execute({ build })
-.then(() => {
-  console.log('FINISHED BUILD')
-})
+  describe('tests should load', () => {
+    it('should not throw an error', () => {
+      const input = 'foo'
+      assert.equal(input, 'foo')
+    });
+  });
+
+});

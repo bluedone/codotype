@@ -2,8 +2,13 @@ const Promise = require('bluebird');
 const fs = require('fs');
 const fsExtra = require('fs-extra');
 const path = require('path');
+const ejs = require('ejs')
+const indent = require('@codotype/util/lib/indent')
+const trailingComma = require('@codotype/util/lib/trailingComma')
+const datatypes = require('@codotype/types/lib/datatypes')
+const relationTypes = require('@codotype/types/lib/relation-types')
 const { inflate } = require('@codotype/util/lib/inflate')
-const Generator = require('@codotype/generator')
+const CodotypeGenerator = require('@codotype/generator')
 
 // // // //
 // Constants
@@ -35,6 +40,9 @@ module.exports = class CodotypeRuntime {
 
     // Assigns this.options.cwd
     this.options.cwd = process.cwd();
+
+    // Attaches fsExtra as this.fs
+    this.fs = fsExtra
 
     // Returns the runtime instance
     return this
@@ -133,9 +141,9 @@ module.exports = class CodotypeRuntime {
   // ensureDir
   // Ensures presence of directory for template compilation
   // TODO - this is repeated in @codotype/generator - should be abstracted, or only encapsulated in the runtime
-  async ensureDir (dir) {
+  ensureDir (dir) {
     return new Promise((resolve, reject) => {
-      return fsExtra.ensureDir(dir, (err) => {
+      return this.fs.ensureDir(dir, (err) => {
         if (err) return reject(err)
         return resolve()
       })
@@ -195,15 +203,17 @@ module.exports = class CodotypeRuntime {
         dest,
         resolved,
         meta: generator,
-        configuration
+        configuration,
+        runtime: this
       }
 
       // Logging
       // console.info(`Executing ${GeneratorClass.name} generators:`)
       console.info(`Executing generators:`)
 
-      // Creates Generator instance
-      const generatorInstance = new Generator(generatorPrototype, generatorOptions)
+      // Creates CodotypeGenerator instance
+      // TODO - pass runtime into this constructor (in generatorOptions)
+      const generatorInstance = new CodotypeGenerator(generatorPrototype, generatorOptions)
 
       // Invokes `generator.forEachSchema` once for each in blueprint.schemas
       await Promise.all(blueprint.schemas.map((schema) => generatorInstance.forEachSchema({ schema: schema, ...this.options })))
@@ -228,4 +238,261 @@ module.exports = class CodotypeRuntime {
     // Thank you message
     console.log('\nBuild complete\nThank you for using Codotype :)\nFollow us on github.com/codotype\n')
   }
+
+
+  // // // //
+  // // // //
+
+  // templatePath
+  // TODO - document
+  templatePath (generatorResolved, template_path = './') {
+    return path.join(generatorResolved, 'templates', template_path)
+  }
+
+  // destinationPath
+  // TODO - document
+  destinationPath (destPath, dest = './') {
+    return path.join(destPath, dest)
+  }
+
+  // // // //
+  // // // //
+
+  // renderTemplate
+  // Compiles an EJS template and returns the result
+  renderTemplate (generatorInstance, src, options = {}) {
+    return new Promise((resolve, reject) => {
+
+      // default options padded into the renderFile
+      let renderOptions = {}
+
+      // // // //
+      // // // //
+      // TODO - document this structure
+      // The `data` object is passed into each file that gets rendered
+      // TODO - this should be abstracted into a separate function
+      const data = {
+        blueprint: generatorInstance.options.blueprint,
+        meta: generatorInstance.options.meta,
+        configuration: generatorInstance.options.configuration,
+        helpers: {
+          indent,
+          trailingComma
+        },
+        ...datatypes,
+        ...relationTypes,
+        ...options // QUESTION - are options ever used here?
+      }
+      // // // //
+      // // // //
+
+      // Compiles EJS template
+      return ejs.renderFile(src, data, renderOptions, (err, str) => {
+
+        // Handles template compilation error
+        if (err) return reject(err)
+
+        // Resolves with compiled template
+        return resolve(str);
+
+      })
+
+    })
+  }
+
+  // // // //
+  // // // //
+
+  // TODO - document
+  existsSync (dest) {
+    return this.fs.existsSync(dest)
+  }
+
+  // TODO - document
+  compareFile (dest, compiledTemplate) {
+    // TODO - document
+    const existing = this.fs.readFileSync(dest, 'utf8')
+
+    // If exists, and it's the same, SKIP
+    if (compiledTemplate === existing) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  // TODO - document
+  writeFile (dest, compiledTemplate) {
+    return new Promise((resolve, reject) => {
+      this.fs.writeFile(dest, compiledTemplate, (err) => {
+        if (err) return reject(err)
+        // console.log('Wrote: ' + dest)
+        // console.log('\n')
+        return resolve();
+      });
+    })
+  }
+
+  // // // //
+  // // // //
+
+  // copyDir
+  // copy a directory from src to dest'
+  // TODO - abstract FS-level operations into @codotype/runtime
+  async copyDir (src, dest) {
+    return new Promise((resolve, reject) => {
+      return this.fs.copy(src, dest, (err) => {
+        if (err) return reject(err)
+        return resolve()
+      })
+    })
+  }
+
+  // // // //
+  // // // //
+
+  // TODO - document
+  // TODO - Add `verbose` option to runtime to conditionally output log statements
+  // TODO - add `chalk` dependency for pretty logging
+  log (...args) {
+    console.log(...args)
+  }
+
+  // // // //
+  // // // //
+
+  // composeWith
+  // Enables one generator to fire off several child generators
+  // TODO - clean up + document this function
+  // TODO - clean up + document this function
+  // TODO - clean up + document this function
+  // TODO - abstract most of this into @codotype/runtime
+  async composeWith (parentGeneratorInstance, generatorModule, options={}) {
+
+    // Defines module path
+    let modulePath
+
+    // // // //
+    // // // //
+    // // // //
+    // TODO - move this into a function ( `getModulePath`, perhaps )
+    // Handle relative paths
+    if (generatorModule.startsWith('./') || generatorModule.startsWith('../')) {
+
+      // TODO - document
+      let base = ''
+
+      // TODO - abstract into helper function?
+      const stats = this.fs.statSync(parentGeneratorInstance.resolved)
+
+      // TODO - document
+      // TODO - document
+      if (stats.isDirectory()) {
+        base = parentGeneratorInstance.resolved
+      } else {
+        base = path.dirname(parentGeneratorInstance.resolved)
+      }
+
+      // TODO - document
+      modulePath = path.join(base, generatorModule)
+
+    // Handle absolute path
+    // } else if (generatorModule.absolute_path) {
+    } else if (generatorModule.startsWith('/')) {
+
+      modulePath = path.join(generatorModule)
+
+    // Handle module path
+    } else {
+      modulePath = path.join(parentGeneratorInstance.options.meta.engine_path, 'node_modules', generatorModule)
+    }
+    // // // //
+    // // // //
+
+    try {
+      // console.log(modulePath)
+
+      // TODO - document
+      // TODO - document
+      // TODO - abstract into @codotype/runtime
+      const generatorPrototype = require(modulePath); // eslint-disable-line import/no-dynamic-require
+      generatorPrototype.resolved = require.resolve(modulePath);
+
+      // TODO - document
+      // TODO - document
+      // TODO - move into independent function, `getResolvedGeneratorPath`, perhaps
+      // TODO - abstract into @codotype/runtime HELPER function
+      let resolvedGeneratorPath = generatorPrototype.resolved.split('/')
+      resolvedGeneratorPath.pop()
+      resolvedGeneratorPath = resolvedGeneratorPath.join('/')
+
+      // // // //
+      // // // //
+      // TODO - move into independent function, `resolveDestination`, perhaps
+      // TODO - document
+      // TODO - document
+      // TODO - document
+      // TODO - abstract into @codotype/runtime
+      let resolvedDestination = parentGeneratorInstance.options.dest
+      if (options.scope) {
+        resolvedDestination = path.resolve(parentGeneratorInstance.options.dest, options.scope)
+      }
+
+      // // // //
+      // // // //
+      // TODO - add verbose logging function call here
+
+      // console.log('\n')
+      // console.log('this.options.dest')
+      // console.log(this.options.dest)
+      // console.log('\n')
+      // console.log('RESOLVEDDESTINATION')
+      // console.log(resolvedDestination)
+
+      // // // //
+      // // // //
+
+      // Creates new instance of generatorPrototype
+      // TODO - document this a bit more
+      // TODO - abstract into @codotype/runtime
+      // TODO - pass in @codotype/runtime instance here
+      const generator = new CodotypeGenerator(generatorPrototype, {
+        ...parentGeneratorInstance.options,
+        dest: resolvedDestination,
+        resolved: resolvedGeneratorPath
+      })
+
+      // Invokes `generator.forEachSchema` once for each in blueprint.schemas
+      // TODO - abstract into @codotype/runtime
+      await Promise.all(parentGeneratorInstance.options.blueprint.schemas.map((schema) => generator.forEachSchema({ schema: schema, ...parentGeneratorInstance.options })))
+
+      // Invokes `generator.write()` once
+      // TODO - abstract into @codotype/runtime
+      await generator.write(parentGeneratorInstance.options)
+
+      // Invokes generator.compileTemplatesInPlace()
+      // TODO - abstract into @codotype/runtime
+      await generator.compileTemplatesInPlace()
+
+      // Logs output
+      // TODO - add --verbose flag to conditionally print this output
+      // TODO - all logging should take place in @codotype/runtime
+      console.log(`Generated ${generatorPrototype.name}.\n`)
+
+      // Logs which generator is being run
+    } catch (err) {
+      if (err.code === 'MODULE_NOT_FOUND') {
+        console.log('MODULE NOT FOUND')
+      } else {
+        console.log('OTHER ERROR')
+        console.log(err)
+        throw err;
+      }
+    }
+
+  }
+
+  // // // //
+  // // // //
+
 }
