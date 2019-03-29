@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import About from './components/About'
 import GeneratorAbout from './components/GeneratorAbout'
 import GeneratorBuild from './components/GeneratorBuild'
+import PageNotFound from '@codotype/ui/src/components/PageNotFound'
 
 // Vue Router setup
 Vue.use(Router)
@@ -23,6 +24,10 @@ export default new Router({
       path: '/build',
       component: GeneratorBuild,
       name: 'GeneratorBuild'
+    },
+    {
+      path: "*",
+      component: PageNotFound
     }
   ],
   scrollBehavior () {
