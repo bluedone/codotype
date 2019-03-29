@@ -1,8 +1,8 @@
 <template>
   <div class="card">
-    <div class="card-header">
-      <strong>Schemas</strong>
-    </div>
+    <!-- <div class="card-header"> -->
+      <!-- <strong>Schemas</strong> -->
+    <!-- </div> -->
     <ul class='list-group list-group-flush'>
       <SchemaListItem
         v-for="item in collection"
