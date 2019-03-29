@@ -2,9 +2,9 @@
   <b-row>
     <b-col lg=12>
 
-      <div class="card" :id='`${scope}-detail`'>
+      <div :id='`${scope}-detail`' class='py-2'>
 
-        <div class="card-header d-flex align-items-center justify-content-between p-2">
+        <div class="d-flex align-items-center pb-2">
 
           <span>
             <NewModalButton
@@ -19,12 +19,12 @@
             </HelpPopover>
 
             <span class='ml-2'>
-              <strong>{{ label }}</strong>
+              <strong class='text-muted'>{{ label }}</strong>
             </span>
 
           </span>
 
-          <span class='mr-2' v-if="collection.length">
+          <span class='ml-2 text-muted' v-if="collection.length > 1">
             <i v-if="collapsed" class="fa fa-chevron-down" @click="collapsed = !collapsed"></i>
             <i v-else class="fa fa-chevron-up" @click="collapsed = !collapsed"></i>
           </span>
@@ -32,8 +32,8 @@
         </div>
 
         <draggable
-          v-if="collection.length && !collapsed"
-          class='list-group list-group-flush'
+          v-if="(collection.length && !collapsed) || collection.length == 1"
+          class='list-group'
           v-model='collection'
           :options="sortableOptions"
         >
@@ -54,7 +54,7 @@
 
         </draggable>
 
-        <b-list-group flush v-else-if="!collection.length">
+        <b-list-group v-else-if="!collection.length">
           <b-list-group-item class="text-center">
 
             <img style="width: 2rem;" :src="icon">
@@ -72,6 +72,13 @@
               <i class="fa fa-plus"></i>
               Add {{ label }}
             </b-btn>
+          </b-list-group-item>
+        </b-list-group>
+
+        <b-list-group v-else>
+          <b-list-group-item class="text-muted text-center py-1 px-1" @click="collapsed = !collapsed">
+            Expand {{ label }}
+            <i class="fa fa-chevron-down"></i>
           </b-list-group-item>
         </b-list-group>
 
