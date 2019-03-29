@@ -5,12 +5,12 @@
 
       <b-button
         v-if="currentStep !== 0"
-        variant="outline-primary"
+        variant="link"
         size="lg"
         @click="decrementStep()"
         :disabled="currentStep === 0"
       >
-        <i class="fa fa-chevron-left mx-2"></i>
+        <i class="fa fa-lg fa-chevron-circle-left"></i>
       </b-button>
       <span v-else></span>
 
@@ -48,12 +48,12 @@
 
       <b-button
         size="lg"
-        variant="outline-primary"
+        variant="link"
         @click="incrementStep()"
         :disabled="disableNext"
         v-if="currentStep !== 2 && currentStep !== steps.length - 1"
       >
-        <i class="fa fa-chevron-right mx-2"></i>
+        <i class="fa fa-lg fa-chevron-circle-right"></i>
       </b-button>
 
       <GenerateCodeButton />
