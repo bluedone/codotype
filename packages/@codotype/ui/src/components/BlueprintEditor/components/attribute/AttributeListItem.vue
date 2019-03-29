@@ -5,7 +5,7 @@
 
       <!-- Handle for re-ordering attributes -->
       <div class="col-sm-2 text-left d-flex align-items-center">
-        <i class="fa fa-lg fa-fw fa-bars mr-3" style='cursor: grab;'></i>
+        <i class="fa fa-lg fa-fw fa-sort mr-3"></i>
         <i class="fa fa-fw text-primary fa-eye" v-if="item.order === 0"  v-b-tooltip.hover.left title='Leading attribute'></i>
       </div>
 
@@ -74,19 +74,25 @@ export default {
 </script>
 
 <style lang='sass' scoped>
+  @import '../../../../sass/vendor.sass'
 
   .list-group-item
     padding: 0.25rem 0.5rem
 
-  .list-group-item:hover i.fa-bars
+  .list-group-item:hover i.fa-sort
     opacity: 1
 
   .list-group-item:hover .controls
     opacity: 1
 
-  i.fa-bars
+  i.fa-sort
+    cursor: grab
     transition: opacity .25s ease-in
+    transition: color .15s ease-in
     opacity: 0
+    color: $gray-500
+    &:hover
+      color: $gray-800
 
   .controls
     transition: opacity .25s ease-in

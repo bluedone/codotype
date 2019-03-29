@@ -1,10 +1,11 @@
 <template>
   <li class="list-group-item">
-    <div class="row d-flex align-items-center">
+      <div class="row d-flex align-items-c@import '../../../../sass/vendor.sass'
+      enter">
 
       <!-- Handle for re-ordering attributes -->
       <div class="col-lg-1 text-left d-flex align-items-center">
-        <i class="fa fa-lg fa-fw fa-bars mr-3" style='cursor: grab;'></i>
+        <i class="fa fa-lg fa-fw fa-sort mr-3" style='cursor: grab;'></i>
       </div>
 
       <!-- CLEANUP - get rid of hardcoded icons & labels -->
@@ -133,19 +134,25 @@ export default {
 
 <!-- CLEANUP - the following CSS is almost identical to what's in AttributeListItem -->
 <style lang='sass' scoped>
+  @import '../../../../sass/vendor.sass'
 
   .list-group-item
     padding: 0.25rem 0.5rem
 
-  .list-group-item:hover i.fa-bars
+  .list-group-item:hover i.fa-sort
     opacity: 1
 
   .list-group-item:hover .controls
     opacity: 1
 
-  i.fa-bars
+  i.fa-sort
+    cursor: grab
     transition: opacity .25s ease-in
+    transition: color .15s ease-in
     opacity: 0
+    color: $gray-500
+    &:hover
+      color: $gray-800
 
   .badge
     font-weight: 300
