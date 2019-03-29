@@ -2,9 +2,12 @@
   <b-row>
     <b-col lg=12>
 
-      <p class="mb-0 text-muted">
-        <i class="fa fa-question-circle mr-1" v-b-tooltip.left.hover="`Relations which reference the ${model.label} Schema`"></i>
-        <strong>Incoming Relations</strong>
+      <p class="mb-1 text-muted d-flex justify-content-between">
+        <span>
+          <i class="fa fa-arrow-left mr-2"></i>
+          <strong>Incoming Relations</strong>
+        </span>
+        <i class="fa fa-info-circle" v-b-tooltip.left.hover="`Relations which reference the ${model.label} Schema`"></i>
       </p>
 
       <ul class="list-group">
