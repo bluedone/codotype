@@ -11,7 +11,7 @@
   "author": "Alexander Schwartzberg",
   "license": "MIT",
   "dependencies": {
-    "@codotype/runtime": "^0.5.0",
+    "@codotype/runtime": "^0.6.0",
     "archiver": "^2.1.1",
     "aws-sdk": "^2.322.0",
     "body-parser": "^1.18.2",
