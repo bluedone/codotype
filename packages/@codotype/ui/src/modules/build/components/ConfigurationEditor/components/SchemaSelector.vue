@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="card-header">
-      <strong>Schemas</strong>
+      <strong class="text-muted">Schemas</strong>
     </div>
     <ul class="list-group list-group-flush">
       <li
