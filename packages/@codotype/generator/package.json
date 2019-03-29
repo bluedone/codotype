@@ -1,6 +1,6 @@
 {
   "name": "@codotype/generator",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Generator system that produces code scaffolding from metadata",
   "main": "index.js",
   "scripts": {
@@ -8,10 +8,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/codotype/codotype-generator.git"
+    "url": "git+https://github.com/codotype/codotype.git"
   },
   "dependencies": {
-    "@codotype/util": "^0.3.0"
+    "@codotype/util": "^0.4.0"
   },
   "devDependencies": {
     "chai": "^4.1.2",
@@ -19,9 +19,9 @@
     "nyc": "^13.0.1"
   },
   "bugs": {
-    "url": "https://github.com/codotype/codotype-generator/issues"
+    "url": "https://github.com/codotype/codotype/issues"
   },
-  "homepage": "https://github.com/codotype/codotype-generator#readme",
+  "homepage": "https://github.com/codotype/codotype#readme",
   "directories": {
     "lib": "lib"
   },
