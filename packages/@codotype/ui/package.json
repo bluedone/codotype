@@ -1,7 +1,7 @@
 {
   "name": "@codotype/ui",
   "version": "0.1.0",
-  "description": "UI components for building apps Codotype",
+  "description": "UI components used throughout the Codotype ecosystem",
   "author": "Alexander Schwartzberg <aeksco@gmail.com>",
   "scripts": {
     "serve": "vue-cli-service serve",
