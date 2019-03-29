@@ -4,8 +4,7 @@
       <strong>Codotype</strong>
     </b-navbar-brand>
 
-    <router-link :to="'/generators/' + model.id + '/build'" class="navbar-text">
-      <!-- <img src="/docs/4.2/assets/brand/bootstrap-solid.svg" width="30" height="30" alt=""> -->
+    <router-link :to="'/generators/' + model.id" class="navbar-text">
       <img class='generator-icon' style="width: 1rem;" :src="model.icon"/>
       {{ model.label }}
     </router-link>
@@ -13,11 +12,12 @@
     <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
     <b-collapse is-nav id="nav_collapse">
 
-      <b-navbar-nav>
-        <b-nav-item class='ml-3' :to="'/generators/' + model.id">About</b-nav-item>
-      </b-navbar-nav>
 
       <b-navbar-nav class="ml-auto">
+
+        <b-navbar-nav>
+          <b-nav-item class='ml-3' to="/about/">About</b-nav-item>
+        </b-navbar-nav>
 
         <b-nav-item target="_blank" href="https://twitter.com/codotype">
           <i class="fab fa-lg fa-fw fa-twitter text-primary mr-1"></i>

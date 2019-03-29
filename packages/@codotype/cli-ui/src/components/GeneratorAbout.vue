@@ -1,5 +1,5 @@
 <template>
-  <GeneratorStart :model="selectedModel" v-if="selectedModel"/>
+  <GeneratorStart :model="selectedModel" v-if="selectedModel" buildLink="/build" />
 </template>
 
 <script>
