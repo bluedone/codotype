@@ -1,7 +1,7 @@
 <template>
   <b-row>
 
-    <b-col xl=4 lg=4 sm=12 class="border-right">
+    <b-col xl=4 lg=4 sm=12>
       <ImportModal />
       <ExportModal />
 
