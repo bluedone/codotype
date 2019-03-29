@@ -1,11 +1,9 @@
 {
   "name": "@codotype/api",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "API utilities and helpers used throughout the Codotype ecosystem",
   "main": "index.js",
   "scripts": {
-    "start": "node ./www.js",
-    "dev": "nodemon -L ./www.js",
     "test": "nyc mocha --exit"
   },
   "author": "Alexander Schwartzberg",
