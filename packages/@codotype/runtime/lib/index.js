@@ -2,11 +2,11 @@ const Promise = require('bluebird');
 const fs = require('fs');
 const fsExtra = require('fs-extra');
 const path = require('path');
-const ejs = require('ejs') // TODO - abstract into @codotype/runtime
-const indent = require('@codotype/util/lib/indent') // TODO - abstract into @codotype/runtime
-const trailingComma = require('@codotype/util/lib/trailingComma') // TODO - abstract into @codotype/runtime
-const datatypes = require('@codotype/types/lib/datatypes') // TODO - abstract into @codotype/runtime
-const relationTypes = require('@codotype/types/lib/relation-types') // TODO - abstract into @codotype/runtime
+const ejs = require('ejs')
+const indent = require('@codotype/util/lib/indent')
+const trailingComma = require('@codotype/util/lib/trailingComma')
+const datatypes = require('@codotype/types/lib/datatypes')
+const relationTypes = require('@codotype/types/lib/relation-types')
 const { inflate } = require('@codotype/util/lib/inflate')
 const CodotypeGenerator = require('@codotype/generator')
 
