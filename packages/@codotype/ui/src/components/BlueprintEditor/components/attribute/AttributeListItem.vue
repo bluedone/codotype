@@ -9,7 +9,7 @@
       <!-- </div> -->
 
       <div class="col-sm-10">
-        <i class="fa fa-lg fa-fw fa-equals"></i>
+        <i class="fa fa-lg fa-fw fa-equals mr-2"></i>
         <AttributeListItemLabel :item="item"/>
       </div>
 
@@ -30,7 +30,7 @@
           size="sm"
           variant="light"
           toggle-class='rounded px-0 py-0 d-flex'
-          boundary="viewport"
+          boundary="window"
         >
           <template slot="button-content">
             <i class="fa fa-fw fa-ellipsis-h"></i>

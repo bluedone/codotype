@@ -5,28 +5,22 @@
       <!-- CLEANUP - get rid of hardcoded icons & labels -->
       <div class="col-lg-10">
 
-        <i class="fa fa-lg fa-fw fa-equals" style='cursor: grab;'></i>
-
-        <!-- DEBUGGING INFLATED -->
-        <!-- <pre>{{ inflated }}</pre> -->
+        <i class="fa fa-lg fa-fw fa-equals mr-2" style='cursor: grab;'></i>
 
         <!-- BELONGS_TO -->
-        <span class="badge" v-if="item.type === 'BELONGS_TO'">
-          <!-- <i class="fa fa-link mr-2" v-b-tooltip.hover.left title='Many To One'></i> -->
+        <small v-if="item.type === 'BELONGS_TO'">
           <span class='text-primary'>Many <strong>{{ selectedSchema.label_plural }}</strong><i class="fa fa-arrow-right text-primary mx-1"></i></span><span class="text-info">One <strong>{{ inflated.alias.label }}</strong></span><span v-if="inflated.alias.label !== inflated.schema.label"> ({{inflated.schema.label}})</span>
-        </span>
+        </small>
 
         <!-- HAS_ONE -->
-        <span class="badge" v-if="item.type === 'HAS_ONE'">
-          <!-- <i class="fa fa-link mr-2" v-b-tooltip.hover.left title='One To One'></i> -->
+        <small v-if="item.type === 'HAS_ONE'">
           <span class='text-primary'>One <strong>{{ selectedSchema.label }}</strong></span><i class="fa fa-arrow-right mx-1"></i><span class="text-info"><strong>{{ inflated.alias.label }}</strong></span><span v-if="inflated.alias.label !== inflated.schema.label"> ({{inflated.schema.label}})</span>
-        </span>
+        </small>
 
         <!-- HAS_MANY -->
-        <span class="badge" v-if="item.type === 'HAS_MANY'">
-          <!-- <i class="fa fa-link mr-2" v-b-tooltip.hover.left title='One To Many'></i> -->
+        <small v-if="item.type === 'HAS_MANY'">
           <span class='text-primary'>One <strong>{{ selectedSchema.label }}</strong><i class="fa fa-arrow-right mx-1"></i></span> <span class='text-info'>Many <strong>{{ inflated.alias.label_plural }}</strong></span><span v-if="inflated.alias.label !== inflated.schema.label"> ({{inflated.schema.label_plural}})</span>
-        </span>
+        </small>
 
       </div>
 
@@ -37,7 +31,7 @@
           size="sm"
           variant="light"
           toggle-class='rounded px-0 py-0 d-flex'
-          boundary="viewport"
+          boundary="window"
         >
           <template slot="button-content">
             <i class="fa fa-fw fa-ellipsis-h"></i>

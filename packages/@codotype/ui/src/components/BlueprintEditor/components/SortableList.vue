@@ -33,7 +33,7 @@
 
         <draggable
           v-if="scope === 'attribute' && ((collection.length && !collapsed) || collection.length == 1)"
-          class='list-group list-group-flush'
+          class='list-group list-group-flush reflow-target'
           v-model='collection'
           :animation="150"
           :fallbackTolerance="100"
@@ -124,7 +124,7 @@ export default {
     RelationListItem
   },
   mounted () {
-    this.$smoothReflow()
+    this.$smoothReflow({ el: '.reflow-target' })
   },
   data () {
     return {

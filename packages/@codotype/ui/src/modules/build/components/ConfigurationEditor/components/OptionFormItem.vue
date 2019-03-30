@@ -64,8 +64,7 @@ import {
   DATATYPE_STRING_SELECT,
   DATATYPE_BOOLEAN,
   DATATYPE_INTEGER,
-  DATATYPE_FLOAT,
-  DATATYPE_DOUBLE
+  DATATYPE_FLOAT
 } from '@codotype/types/lib/datatypes'
 
 import OptionTemplateWrapper from './OptionTemplateWrapper'
@@ -99,7 +98,7 @@ export default {
           attribute: this.attribute,
           value: this.$refs.input.toggled
         })
-      } else if ([DATATYPE_INTEGER, DATATYPE_FLOAT, DATATYPE_DOUBLE].includes(this.attribute.type)) {
+      } else if ([DATATYPE_INTEGER, DATATYPE_FLOAT].includes(this.attribute.type)) {
         this.setValue({
           group: this.group,
           schema: this.schema,
@@ -177,8 +176,7 @@ export default {
       DATATYPE_STRING_SELECT,
       DATATYPE_BOOLEAN,
       DATATYPE_INTEGER,
-      DATATYPE_FLOAT,
-      DATATYPE_DOUBLE
+      DATATYPE_FLOAT
     }
   }
 }
