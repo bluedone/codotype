@@ -5,22 +5,22 @@
   >
 
     <div class="row align-items-center">
-      <div class="col-md-12">
+      <div class="col-md-10">
         {{ model.label }}
       </div>
 
-      <!-- <div class="col-md-4 text-right">
+      <div class="col-md-2 text-right">
 
         <span
           v-if="!model.attributes.length && !model.relations.length"
-          class="badge badge-danger px-3"
+          class="badge badge-danger px-2"
           v-b-tooltip.hover.right
           :title="`The ${model.label} Schema requires at least one attribute or relation`"
         >
           <i class="fa fa-exclamation"></i>
         </span>
 
-        <span
+        <!-- <span
           v-else
           class="badge badge-dark px-2"
           v-b-tooltip.hover.right
@@ -33,9 +33,9 @@
             <i class="fa fa-link mr-1"></i>
             {{ model.relations.length }}
           </small>
-        </span>
+        </span> -->
 
-      </div> -->
+      </div>
 
     </div>
 

@@ -32,26 +32,31 @@
         </div>
 
         <draggable
-          v-if="(collection.length && !collapsed) || collection.length == 1"
+          v-if="scope === 'attribute' && ((collection.length && !collapsed) || collection.length == 1)"
           class='list-group list-group-flush'
           v-model='collection'
-          :options="sortableOptions"
+          :animation="150"
+          :fallbackTolerance="100"
         >
-
           <AttributeListItem
-            v-if="scope === 'attribute'"
             v-for="item in collection"
             :key="item.id"
             :item="item">
           </AttributeListItem>
+        </draggable>
 
+        <draggable
+          v-if="scope === 'relation' && ((collection.length && !collapsed) || collection.length == 1)"
+          class='list-group list-group-flush'
+          v-model='collection'
+          :animation="150"
+          :fallbackTolerance="100"
+        >
           <RelationListItem
-            v-if="scope === 'relation'"
             v-for="item in collection"
             :key="item.id"
             :item="item">
           </RelationListItem>
-
         </draggable>
 
         <b-list-group flush v-else-if="!collection.length">
@@ -75,13 +80,6 @@
             </b-btn>
           </b-list-group-item>
         </b-list-group>
-
-        <!-- <b-list-group flush v-else> -->
-          <!-- <b-list-group-item class="text-muted text-center py-1 px-1" @click="collapsed = !collapsed"> -->
-            <!-- Expand {{ label }} -->
-            <!-- <i class="fa fa-chevron-down"></i> -->
-          <!-- </b-list-group-item> -->
-        <!-- </b-list-group> -->
 
       </div>
 
@@ -131,6 +129,7 @@ export default {
     RelationListItem
   },
   mounted () {
+    // TODO - this is breaking with dropdowns, should be re-enabled after fixing
     this.$smoothReflow()
   },
   data () {
@@ -139,19 +138,25 @@ export default {
     }
   },
   computed: {
-    sortableOptions () {
-      return {
-        animation: 150,
-        fallbackTolerance: 100
-      }
-    },
     collection: {
       get () {
-        return orderBy(this.$store.getters[`editor/schema/${this.scope}/collection/items`], ['order'], ['asc'])
+        return this.$store.getters[`editor/schema/${this.scope}/collection/items`]
       },
       set (value) {
+
+        // Ensures only truthy values
+        value = value.filter(s => !!s)
+
+        // Sets `order` attribute on each item
         value.forEach((s, i) => { s.order = i })
+
+        // Sorts the values by `order` attribute before commiting to the Vuex store
+        value = orderBy(value, ['order'], ['asc'])
+
+        // Commits the sorted list to the store
         this.$store.commit(`editor/schema/${this.scope}/collection/items`, value)
+
+        // Updates the selectedSchema's attributes or relations
         if (this.scope === 'attribute') {
           this.$store.dispatch('editor/schema/updateAttributes')
         } else {

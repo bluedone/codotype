@@ -55,14 +55,14 @@ export default {
     // LOAD a build configuration into the editor
     load ({ commit, dispatch }, { generator, schemas, configuration }) {
       commit('configuration', configuration)
-      commit('schemas', schemas)  // CLEANUP - should interface with collectionModule
+      commit('schemas', schemas)  // CLEANUP - should interface with collectionModule (should it though?)
       commit('option_groups', generator.option_groups)
       commit('generatorId', generator.id)
     },
     // CLEARS the editor module state
     // De-registers all dynamic modules
     clear ({}) {
-      console.log('CLEAR EDITOR MODULE HERE')
+      // console.log('CLEAR EDITOR MODULE HERE')
     },
     selectModelAddon ({ state, getters, commit, dispatch }, { group, schema }) {
       const configuration = state.configuration

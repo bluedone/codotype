@@ -21,6 +21,10 @@
 
 <script>
 export default {
-  props: ['opt', 'val', 'click'] // CLEANUP - props should be an object with constraints
+  props: {
+    opt: { required: true },
+    val: { required: true },
+    click: { required: true }
+  }
 }
 </script>
