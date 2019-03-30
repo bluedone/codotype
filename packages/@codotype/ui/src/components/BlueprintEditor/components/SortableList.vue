@@ -110,10 +110,6 @@ export default {
       type: String,
       required: true
     },
-    icon: {
-      type: String,
-      required: true
-    },
     info: {
       type: String,
       required: true

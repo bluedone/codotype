@@ -30,6 +30,7 @@
           size="sm"
           variant="light"
           toggle-class='rounded px-0 py-0 d-flex'
+          boundary="viewport"
         >
           <template slot="button-content">
             <i class="fa fa-fw fa-ellipsis-h"></i>
