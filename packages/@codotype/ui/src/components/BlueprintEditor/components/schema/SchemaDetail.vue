@@ -56,7 +56,6 @@
                 scope="attribute"
                 label="Attributes"
                 title="No Attributes added yet"
-                icon="https://res.cloudinary.com/codotype/image/upload/v1552157187/codotype-icons/frequency-table.png"
                 info="Attributes define properties on this Schema"
               />
 
@@ -77,7 +76,6 @@
                 scope="relation"
                 label="Relations"
                 title="No Relations added yet"
-                icon="https://res.cloudinary.com/codotype/image/upload/v1552157160/codotype-icons/complexity.png"
                 info="Relations define references to other Schemas"
               />
 

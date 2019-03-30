@@ -62,7 +62,6 @@
         <b-list-group flush v-else-if="!collection.length">
           <b-list-group-item class="text-center">
 
-            <!-- <img style="width: 2rem;" :src="icon"> -->
             <span class='text-muted'>¯\_(ツ)_/¯</span>
             <br>
             <strong class="mb-0 mt-1 text-muted">{{ title }}</strong>
@@ -129,7 +128,6 @@ export default {
     RelationListItem
   },
   mounted () {
-    // TODO - this is breaking with dropdowns, should be re-enabled after fixing
     this.$smoothReflow()
   },
   data () {
