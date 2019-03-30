@@ -23,7 +23,7 @@
         </template>
 
         <template slot="step-3">
-          <b-row class='w-100 justify-content-center'>
+          <b-row class='justify-content-center'>
             <b-col sm=12 xl=9>
               <ConfigureGenerator :id="id" />
             </b-col>

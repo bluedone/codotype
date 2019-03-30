@@ -1,10 +1,11 @@
 const { uploadFileToS3, uploadBuildToS3, getSignedDownloadUrl } = require('./s3')
 const { zipFilename, compressBuild } = require('./compress')
+const ObjectId = require('bson-objectid')
 
 // // // //
 
 // TODO - clean up this mess, soon
-module.exports = ({ runtime, zipBuild, generateBuildId }) => {
+module.exports = ({ runtime, generateBuildId, zipBuild, uploadZipToS3 }) => {
 
   // TODO - this should be exported as a separate function (broadens deployment context)
   return async function handleRequest(req, res) {

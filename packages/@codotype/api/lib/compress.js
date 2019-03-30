@@ -1,8 +1,9 @@
 const fs = require('fs');
 const archiver = require('archiver');
 
+// TODO - clean this up so process.cwd() can be passed in when the server is configured
 function zipFilename(id) {
-  return __dirname + `/zip/${id}.zip`;
+  return process.cwd() + `/zip/${id}.zip`;
 }
 
 // compressBuild
@@ -59,7 +60,7 @@ function compressBuild ({ build }) {
     // append files from a sub-directory, putting its contents at the root of archive
     // TODO - clean this up so process.cwd can be passed in as
     // configuration, and codotype-build is treated as a constant
-    archive.directory(process.cwd + `/codotype-build/${id}/`, false);
+    archive.directory(process.cwd() + `/codotype-build/${id}/`, false);
 
     // finalize the archive (ie we are done appending files but streams have to finish yet)
     // 'close', 'end' or 'finish' may be fired right after calling this method so register to them beforehand

@@ -8,18 +8,27 @@
           :key="step.id"
           :step="step"
           :index="index"
-          style="width: 33.3%;"
         />
 
         <!-- Conditionally inserts dividing lines between each BuildStepChild component -->
         <span class="divider done w-50 success d-flex" v-if="currentStep > index && index < 2"></span>
         <span class="divider w-50 d-flex" v-else-if="index < 2 && steps.length > 2"></span>
       </template>
-
     </b-col>
 
-    <b-col lg="12">
-      <hr>
+    <b-col sm=12 lg=12 xl=9 class="label-wrapper pt-2 d-flex flex-row w-100 align-items-center justify-content-between mb-3">
+      <template v-for="step, index in steps">
+
+        <BuildStepLabel
+          :key="step.id"
+          :step="step"
+          :index="index"
+        />
+
+        <!-- Conditionally inserts empty dividing lines between each BuildStepLabel component -->
+        <span class="divider hideme w-50 d-flex" v-if="index < 2"></span>
+      </template>
+
     </b-col>
 
     <!-- <b-col lg="12" class='h-100 align-items-center d-flex' style="min-height: 20rem;"> -->
@@ -35,11 +44,13 @@
 <script>
 import { mapGetters } from 'vuex'
 import BuildStepChild from './BuildStepChild'
+import BuildStepLabel from './BuildStepLabel'
 
 export default {
   name: 'BuildSteps',
   components: {
-    BuildStepChild
+    BuildStepChild,
+    BuildStepLabel
   },
   computed: {
     ...mapGetters({
@@ -48,7 +59,8 @@ export default {
       selectedStep: 'build/steps/selectedStep'
     }),
     colClassName () {
-      let css = 'h-100 align-items-center d-flex'
+      // let css = 'h-100 align-items-center d-flex w-100'
+      let css = ''
       if (this.currentStep === 0) css += ' min-height-20'
       return css
     }
@@ -65,6 +77,10 @@ export default {
     padding-top: 1.25rem
     background: #f5f6f9
 
+  div.label-wrapper
+    // padding-top: 1.25rem
+    background: #f5f6f9
+
   span.divider
     transition: all 0.3s ease
     min-height: 4px
@@ -73,9 +89,14 @@ export default {
     background: linear-gradient(to right, #02B875 50%, #ced4da 50%)
     background-size: 200% 100%
     background-position: right bottom
+    margin-left: -2.5rem
+    margin-right: -2.5rem
 
     &.success
       background-position: left bottom
+
+    &.hideme
+      opacity: 0
 
   div.min-height-20
     min-height: 20rem

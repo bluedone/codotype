@@ -1,17 +1,16 @@
-const fs = require('fs');
 const morgan = require('morgan');
 const express = require('express');
 const bodyParser = require('body-parser');
 const omit = require('lodash/omit');
-const handleRequest = require('./handleRequest')
+const handleRequest = require('./handleRequest');
 
 // // // //
 
 // Exports a basic Express.js app
-module.exports = ({ port, runtime, zipBuild, generateBuildId }) => {
+module.exports = ({ port, runtime, zipBuild, generateBuildId, uploadZipToS3 }) => {
 
   // Generates requestHandler
-  const requestHandler = handleRequest({ runtime, zipBuild, generateBuildId })
+  const requestHandler = handleRequest({ runtime, zipBuild, generateBuildId, uploadZipToS3 });
 
   // Express.js App & Configuration
   const app = express();
@@ -25,12 +24,12 @@ module.exports = ({ port, runtime, zipBuild, generateBuildId }) => {
 
   // List available generators
   app.get('/api/generators', (req, res) => {
-    return res.send(runtime.getGenerators().map(g => omit(g, 'generator_path')))
+    return res.send(runtime.getGenerators().map(g => omit(g, 'generator_path')));
   })
 
   // Run generator
-  app.post('/api/generate', requestHandler)
+  app.post('/api/generate', requestHandler);
 
   // Returns the app instance
-  return app
+  return app;
 }

@@ -2,9 +2,9 @@
   <b-row>
     <b-col lg=12>
 
-      <div class="card" :id='`${scope}-detail`'>
+      <div :id='`${scope}-detail`' class='card'>
 
-        <div class="card-header d-flex align-items-center justify-content-between p-2">
+        <div class="d-flex align-items-center justify-content-between card-header p-2">
 
           <span>
             <NewModalButton
@@ -12,19 +12,19 @@
               :vuexAction="'editor/schema/' + scope + '/newModel'"
             />
 
+            <span class='ml-2'>
+              <strong class='text-muted'>{{ label }}</strong>
+            </span>
+
             <HelpPopover
               :target="'add-' + scope + '-button'"
               placement="right"
               :content="'Add ' + label">
             </HelpPopover>
 
-            <span class='ml-2'>
-              <strong>{{ label }}</strong>
-            </span>
-
           </span>
 
-          <span class='mr-2' v-if="collection.length">
+          <span class='mr-2 text-muted' v-if="collection.length > 1">
             <i v-if="collapsed" class="fa fa-chevron-down" @click="collapsed = !collapsed"></i>
             <i v-else class="fa fa-chevron-up" @click="collapsed = !collapsed"></i>
           </span>
@@ -32,32 +32,37 @@
         </div>
 
         <draggable
-          v-if="collection.length && !collapsed"
-          class='list-group list-group-flush'
+          v-if="scope === 'attribute' && ((collection.length && !collapsed) || collection.length == 1)"
+          class='list-group list-group-flush reflow-target'
           v-model='collection'
-          :options="sortableOptions"
+          :animation="150"
+          :fallbackTolerance="100"
         >
-
           <AttributeListItem
-            v-if="scope === 'attribute'"
             v-for="item in collection"
             :key="item.id"
             :item="item">
           </AttributeListItem>
+        </draggable>
 
+        <draggable
+          v-if="scope === 'relation' && ((collection.length && !collapsed) || collection.length == 1)"
+          class='list-group list-group-flush'
+          v-model='collection'
+          :animation="150"
+          :fallbackTolerance="100"
+        >
           <RelationListItem
-            v-if="scope === 'relation'"
             v-for="item in collection"
             :key="item.id"
             :item="item">
           </RelationListItem>
-
         </draggable>
 
         <b-list-group flush v-else-if="!collection.length">
           <b-list-group-item class="text-center">
 
-            <img style="width: 2rem;" :src="icon">
+            <span class='text-muted'>¯\_(ツ)_/¯</span>
             <br>
             <strong class="mb-0 mt-1 text-muted">{{ title }}</strong>
             <br>
@@ -105,10 +110,6 @@ export default {
       type: String,
       required: true
     },
-    icon: {
-      type: String,
-      required: true
-    },
     info: {
       type: String,
       required: true
@@ -123,7 +124,7 @@ export default {
     RelationListItem
   },
   mounted () {
-    this.$smoothReflow()
+    this.$smoothReflow({ el: '.reflow-target' })
   },
   data () {
     return {
@@ -131,19 +132,25 @@ export default {
     }
   },
   computed: {
-    sortableOptions () {
-      return {
-        animation: 150,
-        fallbackTolerance: 100
-      }
-    },
     collection: {
       get () {
-        return orderBy(this.$store.getters[`editor/schema/${this.scope}/collection/items`], ['order'], ['asc'])
+        return this.$store.getters[`editor/schema/${this.scope}/collection/items`]
       },
       set (value) {
+
+        // Ensures only truthy values
+        value = value.filter(s => !!s)
+
+        // Sets `order` attribute on each item
         value.forEach((s, i) => { s.order = i })
+
+        // Sorts the values by `order` attribute before commiting to the Vuex store
+        value = orderBy(value, ['order'], ['asc'])
+
+        // Commits the sorted list to the store
         this.$store.commit(`editor/schema/${this.scope}/collection/items`, value)
+
+        // Updates the selectedSchema's attributes or relations
         if (this.scope === 'attribute') {
           this.$store.dispatch('editor/schema/updateAttributes')
         } else {

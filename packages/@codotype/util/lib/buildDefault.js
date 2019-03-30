@@ -22,8 +22,6 @@ const getDefaultAttributeValue = ({ type }) => {
       return 0
     case datatypes.DATATYPE_FLOAT:
       return 0.0
-    case datatypes.DATATYPE_DOUBLE:
-      return 0.00
     case datatypes.DATATYPE_BOOLEAN:
       return false
     case datatypes.DATATYPE_JSON:

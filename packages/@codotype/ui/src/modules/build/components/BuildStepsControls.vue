@@ -5,18 +5,16 @@
 
       <b-button
         v-if="currentStep !== 0"
-        variant="outline-primary"
+        variant="link"
         size="lg"
         @click="decrementStep()"
         :disabled="currentStep === 0"
       >
-        <i class="fa fa-chevron-left mr-1"></i>
-        Back
+        <i class="fa fa-lg fa-chevron-circle-left"></i>
       </b-button>
       <span v-else></span>
 
       <span v-if="currentStep === 1">
-        <!-- <HelpButton class='mr-2' /> -->
         <TourButton class='mr-2' size="lg" tour="appEditorSteps" />
 
         <b-dropdown
@@ -50,13 +48,12 @@
 
       <b-button
         size="lg"
-        variant="outline-primary"
+        variant="link"
         @click="incrementStep()"
         :disabled="disableNext"
         v-if="currentStep !== 2 && currentStep !== steps.length - 1"
       >
-        Next
-        <i class="ml-1 fa fa-chevron-right"></i>
+        <i class="fa fa-lg fa-chevron-circle-right"></i>
       </b-button>
 
       <GenerateCodeButton />
@@ -68,14 +65,12 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import TourButton from '../../../components/TourButton'
-import HelpButton from '../../../components/HelpButton'
 import GenerateCodeButton from './GenerateCodeButton'
 
 export default {
   name: 'BuildStepsControls',
   components: {
     TourButton,
-    HelpButton,
     GenerateCodeButton
   },
   computed: {

@@ -1,6 +1,6 @@
 <template>
   <b-dropdown-item-button @click="onClick()">
-    <i class="fa fa-fw fa-trash"></i>
+    <i class="fa fa-fw fa-trash-alt"></i>
     Remove
   </b-dropdown-item-button>
 

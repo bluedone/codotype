@@ -70,6 +70,10 @@
         </div>
 
         <div class="col-lg-12">
+          <hr>
+        </div>
+
+        <div class="col-lg-12">
           <RelationFormAlias :model="model" />
         </div>
 

@@ -27,7 +27,7 @@
         <div class="col-lg-4 text-center">
           <b-btn
             block
-            to="/build"
+            :to="buildLink"
             size="lg"
             variant="primary"
           >
@@ -63,6 +63,10 @@ export default {
   props: {
     model: {
       required: true
+    },
+    buildLink: {
+      required: true,
+      type: String
     }
   },
   components: {

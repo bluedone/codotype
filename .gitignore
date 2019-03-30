@@ -23,6 +23,9 @@ build/**/*
 # Associated packages maintained in separate repositories
 !packages/.gitkeep
 packages/@codotype/web
+packages/@codotype/codotype-api
+packages/@codotype/codotype-hackathon-starter
+packages/@codotype/codotype-mongodb-dataworker
 packages/@codotype/codotype-*-generator
 
 # Ignore Lerna artifacts

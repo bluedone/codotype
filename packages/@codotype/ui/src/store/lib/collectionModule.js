@@ -11,7 +11,8 @@ export default function ({ NEW_MODEL }) {
     },
     mutations: {
       items (state, items) {
-        state.items = items
+        // Ensures truthy values (no false, undefined, or null)
+        state.items = items.filter(i => !!i)
       },
       newModelAttr (state, { attribute, value }) { // TODO - remove
         state.newModel[attribute.identifier] = value

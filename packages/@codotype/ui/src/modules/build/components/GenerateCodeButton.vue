@@ -1,13 +1,12 @@
 <template>
-  <b-button
-    class="btn-yellow"
-    size="lg"
+  <button
+    class="btn btn-lg btn-yellow"
     @click="generate()"
     v-if="currentStep === steps.length - 1"
   >
     <i class="fa fa-spin fa-cog"></i>
     Generate Code
-  </b-button>
+  </button>
 </template>
 
 <script>
@@ -24,3 +23,11 @@ export default {
   })
 }
 </script>
+
+<style lang='sass'>
+  @import '../../../sass/vendor.sass'
+
+  button.btn-yellow
+    @include button-variant(#ffd700, #ffd700)
+
+</style>

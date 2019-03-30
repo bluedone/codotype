@@ -25,7 +25,7 @@
       />
     </div>
 
-    <div class="col-sm-12" v-if="[DATATYPE_INTEGER, DATATYPE_FLOAT, DATATYPE_DOUBLE].includes(model.datatype)">
+    <div class="col-sm-12" v-if="[DATATYPE_INTEGER, DATATYPE_FLOAT].includes(model.datatype)">
       <FormInput
         label="Default Value"
         placeholder="Default Value"
@@ -75,7 +75,6 @@ import {
   DATATYPE_TEXT,
   DATATYPE_INTEGER,
   DATATYPE_FLOAT,
-  DATATYPE_DOUBLE,
   DATATYPE_BOOLEAN,
   DATATYPE_JSON,
   DATATYPE_DATE,
@@ -101,7 +100,6 @@ export default {
       DATATYPE_TEXT,
       DATATYPE_INTEGER,
       DATATYPE_FLOAT,
-      DATATYPE_DOUBLE,
       DATATYPE_BOOLEAN,
       DATATYPE_JSON,
       DATATYPE_DATE,

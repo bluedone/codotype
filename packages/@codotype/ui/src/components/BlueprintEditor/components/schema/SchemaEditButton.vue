@@ -1,12 +1,10 @@
 <template>
-  <b-button
+  <a
     id="schemaEditPopover"
-    variant="link"
-    class="py-0"
     @click="$store.dispatch('editor/schema/editModel')"
   >
     <i class="fas fa-pencil-alt"></i>
-  </b-button>
+  </a>
 </template>
 
 <script>
@@ -14,3 +12,14 @@ export default {
   name: 'SchemaEditButton'
 }
 </script>
+
+<style lang="sass" scoped>
+  @import '../../../../sass/vendor.sass'
+
+  #schemaEditPopover
+    transition: color 0.25s ease-in-out
+    cursor: pointer
+    color: $gray-500
+    &:hover
+      color: $blue
+</style>

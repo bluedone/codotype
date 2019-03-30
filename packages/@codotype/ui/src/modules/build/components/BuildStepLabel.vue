@@ -4,17 +4,15 @@
     @click="jumpToStep(index)"
   >
     <template v-if="currentStep === index">
-      <span :class="badgeClassName + 'bg-transparent text-success border-success'">{{index + 1}}</span>
+      <span :class="textClassName + 'text-success'">{{ step.label }}</span>
     </template>
 
     <template v-else-if="index < currentStep">
-      <span :class="badgeClassName + 'bg-success border-success'">
-        <i class="fa fa-check"></i>
-      </span>
+      <span :class="textClassName + 'text-success'">{{ step.label }}</span>
     </template>
 
     <template v-else>
-      <span :class="badgeClassName + 'bg-secondary border-secondary'">{{index + 1}}</span>
+      <span :class="textClassName + 'text-secondary'">{{ step.label }}</span>
     </template>
 
   </div>
@@ -39,8 +37,9 @@ export default {
       currentStep: 'build/steps/current',
       selectedStep: 'build/steps/selectedStep'
     }),
-    badgeClassName () {
-      return 'd-flex flex-row text-white justify-content-center align-items-center step-badge '
+    textClassName () {
+      let css = 'd-flex flex-row step-text '
+      return css
     }
   },
   methods: mapActions({
@@ -54,13 +53,7 @@ export default {
   .step-indicator
     cursor: pointer
 
-  .step-badge
-    font-size: 1rem
-    width: 2rem
-    height: 2rem
-    border-radius: 25px
-    font-weight: 700
-    transition: all 0.3s
-    border: 2px solid
+  .step-text
+    font-weight: 200
 
 </style>

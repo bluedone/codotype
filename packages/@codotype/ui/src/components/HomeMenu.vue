@@ -12,7 +12,7 @@
       <b-navbar-nav class="mr-auto">
 
         <!-- Public links -->
-        <!-- <b-nav-item to="/generators">Generators</b-nav-item> -->
+        <b-nav-item to="/generators">Generators</b-nav-item>
 
         <!-- <b-nav-item to="/blueprints">Blueprints</b-nav-item> -->
 
