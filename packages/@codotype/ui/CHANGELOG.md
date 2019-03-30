@@ -1,3 +1,15 @@
+### v0.1.2
+
+#### Changes
+* Bumped `@codotype/types` dependency to `0.2.0`
+* Bumped `@codotype/util` dependency to `0.4.1`
+* UI refinements in `AttributeForm` component
+
+#### Fixes
+* More bug fixes in `SortableList` component with `vue-smooth-reflow` library
+
+---
+
 ### v0.1.1
 
 #### Changes
