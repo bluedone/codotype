@@ -1,3 +1,10 @@
+### v0.1.3
+
+#### Fixes
+* More bug fixes in `SortableList` component with `b-dropdown` component from BootstrapVue
+
+---
+
 ### v0.1.2
 
 #### Changes

@@ -23,14 +23,14 @@
         </b-badge>
       </div>
 
-      <div class="col-sm-2 text-right d-flex controls justify-content-end" v-else>
+      <div class="col-sm-2 text-right controls" v-else>
         <b-dropdown
           right
           no-caret
           size="sm"
           variant="light"
           toggle-class='rounded px-0 py-0 d-flex'
-          boundary="window"
+          boundary="viewport"
         >
           <template slot="button-content">
             <i class="fa fa-fw fa-ellipsis-h"></i>

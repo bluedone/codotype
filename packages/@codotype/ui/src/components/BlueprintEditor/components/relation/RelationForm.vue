@@ -8,7 +8,7 @@
         <div class="col-lg-4">
           <div class="form-group text-center">
             <label class='mb-0'>{{ selectedSchema.label }}</label>
-            <small class="form-text text-muted">This Model</small>
+            <small class="form-text text-muted">Where the relational data is stored</small>
             <input type="text" class='form-control' disabled :value="selectedSchema.label">
           </div>
         </div>
