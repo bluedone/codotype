@@ -14,7 +14,7 @@
     </template>
 
     <template v-else>
-      <span :class="badgeClassName + 'bg-secondary border-secondary'">{{index + 1}}</span>
+      <span :class="badgeClassName + 'bg-transparent text-secondary border-secondary'">{{index + 1}}</span>
     </template>
 
   </div>
