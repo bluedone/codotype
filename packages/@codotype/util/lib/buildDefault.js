@@ -36,7 +36,9 @@ const getDefaultAttributeValue = ({ type }) => {
 }
 
 // CLEANUP - document this function, write better tests
+// TODO - abstract this function into a separate helper that can be invoked in multiple places
 const getRelationKey = ({ relation }) => {
+  // return relation.alias.attribute
   switch (relation.type) {
     case RELATION_TYPE_BELONGS_TO:
       return relation.alias.identifier + '_id'
