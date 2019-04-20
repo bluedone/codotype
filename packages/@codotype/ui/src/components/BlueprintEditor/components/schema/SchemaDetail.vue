@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="col-lg-12">
-      <div class="card bg-transparent">
+      <div class="card bg-transparent" id="schema-detail">
 
         <div class="card-header">
           <b-row class="d-flex align-items-center">
