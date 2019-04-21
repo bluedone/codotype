@@ -24,7 +24,7 @@ module.exports = ({ port, runtime, zipBuild, generateBuildId, uploadZipToS3 }) =
 
   // List available generators
   app.get('/api/generators', (req, res) => {
-    return res.send(runtime.getGenerators().map(g => omit(g, 'generator_path')));
+    return res.send(runtime.getGenerators().map(g => omit(g, ['generator_path', 'engine_path'])));
   })
 
   // Run generator

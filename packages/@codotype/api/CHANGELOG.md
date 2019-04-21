@@ -1,3 +1,10 @@
+### v0.1.2
+
+#### Fixes
+* GET `/api/generators` handler omits `engine_path` property
+
+---
+
 ### v0.1.1
 
 #### Fixes
