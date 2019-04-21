@@ -1,7 +1,14 @@
 ### v0.1.3
 
+#### Changes
+* Simplified `Navbar` component
+* Updated `GeneratorCard` and `GeneratorListItem` to be compatible with the Nuxt.js app
+* Refined `RelationForm` & associated components - still needs a lot more work
+* Misc. Driver.js tour refinements
+
 #### Fixes
 * More bug fixes in `SortableList` component with `b-dropdown` component from BootstrapVue
+* UI icon bug fix in `RelationListItem` component
 
 ---
 

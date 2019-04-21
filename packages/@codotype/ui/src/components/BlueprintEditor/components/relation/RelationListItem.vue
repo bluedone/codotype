@@ -14,7 +14,7 @@
 
         <!-- HAS_ONE -->
         <small v-if="item.type === 'HAS_ONE'">
-          <span class='text-primary'>One <strong>{{ selectedSchema.label }}</strong></span><i class="fa fa-arrow-right mx-1"></i><span class="text-info"><strong>{{ inflated.alias.label }}</strong></span><span v-if="inflated.alias.label !== inflated.schema.label"> ({{inflated.schema.label}})</span>
+          <span class='text-primary'>One <strong>{{ selectedSchema.label }}</strong></span><i class="fa fa-arrow-right text-primary mx-1"></i><span class="text-info">One <strong>{{ inflated.alias.label }}</strong></span><span v-if="inflated.alias.label !== inflated.schema.label"> ({{inflated.schema.label}})</span>
         </small>
 
         <!-- HAS_MANY -->

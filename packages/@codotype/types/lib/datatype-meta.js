@@ -81,7 +81,7 @@ DATATYPE_META[DATATYPE_DATETIME] = {
 DATATYPE_META[DATATYPE_JSON] = {
   value: DATATYPE_JSON,
   label: 'JSON',
-  desc: 'Data jn JSON format',
+  desc: 'Data in JSON format',
   icon: 'fa fa-code'
 }
 

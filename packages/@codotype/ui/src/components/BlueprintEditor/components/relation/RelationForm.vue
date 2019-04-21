@@ -74,16 +74,16 @@
         </div>
 
         <div class="col-lg-12">
-          <RelationFormAlias :model="model" />
+          <RelationFormPreview :model="model" />
         </div>
 
-        <!-- <div class="col-lg-12"> -->
-          <!-- <hr> -->
-        <!-- </div> -->
+        <div class="col-lg-12">
+          <hr>
+        </div>
 
-        <!-- <div class="col-lg-12"> -->
-          <!-- <RelationFormPreview :model="model" /> -->
-        <!-- </div> -->
+        <div class="col-lg-12">
+          <RelationFormAlias :model="model" />
+        </div>
 
       </div>
 

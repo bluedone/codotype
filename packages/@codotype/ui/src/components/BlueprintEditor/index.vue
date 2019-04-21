@@ -18,7 +18,7 @@
     </b-col>
 
     <b-col xl=9 lg=9 sm=12>
-      <SchemaDetail id="schema-detail" />
+      <SchemaDetail />
     </b-col>
 
   </b-row>
