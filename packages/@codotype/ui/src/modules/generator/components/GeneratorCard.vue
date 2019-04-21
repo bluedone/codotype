@@ -55,13 +55,8 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
-
 export default {
   name: 'GeneratorCard',
-  props: ['model'],
-  methods: mapActions({
-    selectGenerator: 'build/addNewStage'
-  })
+  props: ['model']
 }
 </script>

@@ -26,8 +26,20 @@
       <div class="row justify-content-center">
         <div class="col-lg-4 text-center">
           <b-btn
+            v-if="buildLink"
             block
             :to="buildLink"
+            size="lg"
+            variant="primary"
+          >
+            <i class="fa fa-cog fa-spin"></i>
+            Let's build something
+          </b-btn>
+
+          <b-btn
+            v-if="externalLink"
+            block
+            :href="externalLink"
             size="lg"
             variant="primary"
           >
@@ -65,7 +77,9 @@ export default {
       required: true
     },
     buildLink: {
-      required: true,
+      type: String
+    },
+    externalLink: {
       type: String
     }
   },
