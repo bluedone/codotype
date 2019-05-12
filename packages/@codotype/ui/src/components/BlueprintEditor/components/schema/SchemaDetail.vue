@@ -1,9 +1,10 @@
 <template>
   <div class="row">
     <div class="col-lg-12">
-      <div class="card bg-transparent" id="schema-detail">
+      <div class="card shadow-sm" id="schema-detail">
 
-        <div class="card-header">
+        <div class="card-body">
+
           <b-row class="d-flex align-items-center">
 
             <b-col lg=12 class="d-flex justify-content-between">
@@ -42,14 +43,15 @@
           <b-row class='mb-0'>
             <b-col lg=12>
               <small class="text-muted">
-                Describe the <strong class="text-primary">{{ model.label }} Schema</strong> with <strong>Attributes</strong> and <strong>Relations</strong>
+                Describe the <strong>{{ model.label }} Schema</strong> with <strong>Attributes</strong> and <strong>Relations</strong>
               </small>
             </b-col>
           </b-row>
-        </div>
 
-        <div class="card-body">
-          <b-row>
+          <!-- <hr> -->
+
+          <b-row class="mt-2">
+          <!-- <b-row> -->
             <b-col sm=12 md=6 lg=6>
 
               <SortableList
