@@ -21,7 +21,7 @@
         </div>
 
         <div class="col-lg-12 text-center">
-          <p class="lead"><router-link to="/">Click here to return home</router-link></p>
+          <p class="lead"><a :href="homeUrl">Click here to return home</a></p>
         </div>
 
       </div>
@@ -34,7 +34,13 @@
 export default {
   name: 'PageNotFound',
   metaInfo: {
-    title: '404'
+    title: 'Page Not Found'
+  },
+  props: {
+    homeUrl: {
+      type: String,
+      required: true
+    }
   }
 }
 </script>
