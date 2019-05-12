@@ -1,7 +1,10 @@
 <template>
-  <div class="card">
+  <div class="card shadow-sm">
     <div class="card-header">
-      <strong class="text-muted">Schemas</strong>
+      <strong class="text-muted">
+        <i class="fa fa-database"></i>
+        Schemas
+      </strong>
     </div>
     <ul class='list-group list-group-flush'>
       <SchemaListItem
