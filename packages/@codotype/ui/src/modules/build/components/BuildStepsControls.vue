@@ -15,8 +15,6 @@
       </span>
 
       <span>
-        <TourButton class='mr-2' size="lg" tour="appEditorSteps" v-if="currentStep !== 0"/>
-
         <b-dropdown
           right
           :disabled="currentStep === 0"
@@ -41,6 +39,8 @@
           </b-dropdown-item-button>
 
         </b-dropdown>
+
+        <TourButton class='mr-2' size="lg" tour="appEditorSteps" :disabled="currentStep === 0"/>
 
         <GenerateCodeButton :disabled="currentStep === 0" />
 

@@ -1,6 +1,6 @@
 <template>
-  <button
-    class="btn btn-link"
+  <b-button
+    variant="outline-dark"
     :disabled="disabled"
     :size="size"
     @click.stop="startTour()"
@@ -10,8 +10,9 @@
     :placement="tooltipPlacement || 'left' "
     :title='"Click here to start tour"'
   >
+    <i class="fa fa-directions mr-1"></i>
     Tutorial
-  </button>
+  </b-button>
 </template>
 
 <script>
