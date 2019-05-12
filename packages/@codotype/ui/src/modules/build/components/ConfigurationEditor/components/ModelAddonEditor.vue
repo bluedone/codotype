@@ -2,15 +2,18 @@
   <b-row>
 
     <!-- CLEANUP - this schema selector should be a different component -->
-    <b-col lg=4 class='border-right'>
+    <b-col lg=3>
+      <div class="text-muted mb-2">
+        <strong>
+          <i class="fa fa-database mr-1"></i>
+          Schemas
+        </strong>
+      </div>
       <div class="card">
-        <div class="card-header">
-          <strong class="text-muted">Schemas</strong>
-        </div>
         <ul class="list-group list-group-flush">
           <li
             v-for="schema in schemas"
-            :class='selectedSchema.id === schema.id ? "list-group-item list-group-item-primary" : "list-group-item" '
+            :class='selectedSchema.id === schema.id ? "list-group-item list-group-item-action list-group-item-primary" : "list-group-item list-group-item-action" '
             @click="$store.dispatch('build/editor/selectModelAddon', { group: group, schema: schema })"
           >
             {{ schema.label }}
@@ -19,7 +22,7 @@
       </div>
     </b-col>
 
-    <b-col lg=8>
+    <b-col lg=9 class='pl-0'>
       <b-card>
 
         <b-row>
