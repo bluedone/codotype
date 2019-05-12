@@ -9,7 +9,7 @@
       <!-- </div> -->
 
       <div class="col-sm-10">
-        <i class="fa fa-lg fa-fw fa-equals mr-2"></i>
+        <!-- <i class="fa fa-lg fa-fw fa-equals mr-2"></i> -->
         <AttributeListItemLabel :item="item"/>
       </div>
 
@@ -79,6 +79,7 @@ export default {
 
   .list-group-item
     padding: 0.25rem 0.5rem
+    cursor: grab
 
   .list-group-item:hover i.fa-equals
     opacity: 1
