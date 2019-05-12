@@ -1,6 +1,7 @@
 <template>
-  <b-button
-    variant='link'
+  <button
+    class="btn btn-link"
+    :disabled="disabled"
     :size="size"
     @click.stop="startTour()"
     @mouseover="$store.commit('editor/help/showing', true)"
@@ -10,7 +11,7 @@
     :title='"Click here to start tour"'
   >
     Tutorial
-  </b-button>
+  </button>
 </template>
 
 <script>
@@ -18,7 +19,7 @@ import Driver from 'driver.js'
 
 export default {
   name: 'TourButton',
-  props: ['tour', 'size', 'tooltipPlacement'],
+  props: ['tour', 'size', 'tooltipPlacement', 'disabled'],
   created () {
     this.driver = new Driver()
   },

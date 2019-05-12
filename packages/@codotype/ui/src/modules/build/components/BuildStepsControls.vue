@@ -3,22 +3,23 @@
 
     <b-col xl=10 lg=12 class="d-flex flex-row w-100 justify-content-between">
 
-      <b-button
-        v-if="currentStep !== 0"
-        variant="link"
-        size="lg"
-        @click="decrementStep()"
-        :disabled="currentStep === 0"
-      >
-        <i class="fa fa-lg fa-chevron-circle-left"></i>
-      </b-button>
-      <span v-else></span>
+      <span class="py-1">
+        <button
+          class="btn btn-link"
+          size="lg"
+          @click="decrementStep()"
+          :disabled="currentStep === 0"
+        >
+          <i class="fa fa-lg fa-chevron-circle-left"></i>
+        </button>
+      </span>
 
-      <span v-if="currentStep === 1">
-        <TourButton class='mr-2' size="lg" tour="appEditorSteps" />
+      <span>
+        <TourButton class='mr-2' size="lg" tour="appEditorSteps" v-if="currentStep !== 0"/>
 
         <b-dropdown
           right
+          :disabled="currentStep === 0"
           no-caret
           size="lg"
           variant="light"
@@ -41,22 +42,23 @@
 
         </b-dropdown>
 
+        <GenerateCodeButton :disabled="currentStep === 0" />
+
         <!-- <span class='text-muted' v-if="currentStep === 1">
           <router-link to="/auth/signup" >Sign Up</router-link> or <router-link to="/auth/login">Log In</router-link> to Save Schemas<i class="ml-1 fa fa-info-circle" title="Codotype automatically saves your Blueprint in localstorage. Signing up is a great idea if you want to continue making changes on another device." v-b-tooltip.hover.top></i>
         </span> -->
       </span>
 
-      <b-button
-        size="lg"
-        variant="link"
-        @click="incrementStep()"
-        :disabled="disableNext"
-        v-if="currentStep !== 2 && currentStep !== steps.length - 1"
-      >
-        <i class="fa fa-lg fa-chevron-circle-right"></i>
-      </b-button>
-
-      <GenerateCodeButton />
+      <span class="py-1">
+        <button
+          size="lg"
+          class="btn btn-link"
+          @click="incrementStep()"
+          :disabled="disableNext"
+        >
+          <i class="fa fa-lg fa-chevron-circle-right"></i>
+        </button>
+      </span>
 
     </b-col>
   </b-row>
@@ -81,6 +83,7 @@ export default {
     }),
     disableNext () {
       if (this.currentStep === 0 && !this.enableSubmit) return true
+      if (this.currentStep === 2) return true
       return false
     }
   },
