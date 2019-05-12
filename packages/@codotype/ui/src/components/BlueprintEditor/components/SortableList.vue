@@ -2,84 +2,82 @@
   <b-row>
     <b-col lg=12>
 
-      <div :id='`${scope}-detail`' class='card'>
+      <div :id='`${scope}-detail`' class="card">
 
-        <div class="d-flex align-items-center justify-content-between card-header p-2">
+        <div class="card-header p-2 d-flex align-items-center justify-content-between">
 
           <span>
             <NewModalButton
               :id="'add-' + scope + '-button'"
               :vuexAction="'editor/schema/' + scope + '/newModel'"
             />
-
-            <span class='ml-2'>
-              <strong class='text-muted'>{{ label }}</strong>
-            </span>
+            <strong class='text-muted ml-2'>{{ label }}</strong>
 
             <HelpPopover
               :target="'add-' + scope + '-button'"
               placement="right"
               :content="'Add ' + label">
             </HelpPopover>
-
           </span>
 
-          <span class='mr-2 text-muted' v-if="collection.length > 1">
-            <i v-if="collapsed" class="fa fa-chevron-down" @click="collapsed = !collapsed"></i>
-            <i v-else class="fa fa-chevron-up" @click="collapsed = !collapsed"></i>
+
+          <span class='text-muted pr-2' v-if="collection.length > 1">
+            <i v-if="collapsed" class="fa collapse-icon fa-chevron-down" @click="collapsed = !collapsed"></i>
+            <i v-else class="fa collapse-icon fa-chevron-down fa-rotate-180" @click="collapsed = !collapsed"></i>
           </span>
 
         </div>
 
-        <draggable
-          v-if="scope === 'attribute' && ((collection.length && !collapsed) || collection.length == 1)"
-          class='list-group list-group-flush reflow-target'
-          v-model='collection'
-          :animation="150"
-          :fallbackTolerance="100"
-        >
-          <AttributeListItem
-            v-for="item in collection"
-            :key="item.id"
-            :item="item">
-          </AttributeListItem>
-        </draggable>
+        <div :id='`${scope}-detail`'>
+          <draggable
+            v-if="scope === 'attribute' && ((collection.length && !collapsed) || collection.length == 1)"
+            class='list-group list-group-flush reflow-target'
+            v-model='collection'
+            :animation="150"
+            :fallbackTolerance="100"
+          >
+            <AttributeListItem
+              v-for="item in collection"
+              :key="item.id"
+              :item="item">
+            </AttributeListItem>
+          </draggable>
 
-        <draggable
-          v-if="scope === 'relation' && ((collection.length && !collapsed) || collection.length == 1)"
-          class='list-group list-group-flush'
-          v-model='collection'
-          :animation="150"
-          :fallbackTolerance="100"
-        >
-          <RelationListItem
-            v-for="item in collection"
-            :key="item.id"
-            :item="item">
-          </RelationListItem>
-        </draggable>
+          <draggable
+            v-if="scope === 'relation' && ((collection.length && !collapsed) || collection.length == 1)"
+            class='list-group list-group-flush'
+            v-model='collection'
+            :animation="150"
+            :fallbackTolerance="100"
+          >
+            <RelationListItem
+              v-for="item in collection"
+              :key="item.id"
+              :item="item">
+            </RelationListItem>
+          </draggable>
 
-        <b-list-group flush v-else-if="!collection.length">
-          <b-list-group-item class="text-center">
+          <b-list-group flush v-else-if="!collection.length">
+            <b-list-group-item class="text-center">
 
-            <span class='text-muted'>¯\_(ツ)_/¯</span>
-            <br>
-            <strong class="mb-0 mt-1 text-muted">{{ title }}</strong>
-            <br>
-            <small class="text-muted">{{ info }}</small>
-            <br>
-            <b-btn
-              size="sm"
-              class='btn-rounded mt-2'
-              variant="outline-primary"
-              @click="$store.dispatch('editor/schema/' + scope + '/newModel')"
-            >
-              <i class="fa fa-plus"></i>
-              Add {{ label }}
-            </b-btn>
-          </b-list-group-item>
-        </b-list-group>
-
+              <span class='text-muted'>¯\_(ツ)_/¯</span>
+              <br>
+              <strong class="mb-0 mt-1 text-muted">{{ title }}</strong>
+              <br>
+              <small class="text-muted">{{ info }}</small>
+              <br>
+              <b-btn
+                size="sm"
+                class='btn-rounded mt-2'
+                variant="outline-primary"
+                @click="$store.dispatch('editor/schema/' + scope + '/newModel')"
+              >
+                <i class="fa fa-plus"></i>
+                Add {{ label }}
+              </b-btn>
+            </b-list-group-item>
+          </b-list-group>
+        </div>
       </div>
 
     </b-col>
@@ -161,3 +159,11 @@ export default {
   }
 }
 </script>
+
+<style lang="sass">
+  i.fa.collapse-icon
+    cursor: pointer
+    transition: all 0.2s ease-in-out
+    &:hover
+      color: black
+</style>
