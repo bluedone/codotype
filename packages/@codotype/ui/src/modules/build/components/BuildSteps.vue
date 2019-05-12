@@ -16,7 +16,7 @@
       </template>
     </b-col>
 
-    <b-col sm=12 lg=12 xl=9 class="label-wrapper pt-2 d-flex flex-row w-100 align-items-center justify-content-between mb-3">
+    <b-col sm=12 lg=12 xl=9 class="label-wrapper py-2 d-flex flex-row w-100 align-items-center justify-content-between">
       <template v-for="step, index in steps">
 
         <BuildStepLabel
@@ -26,9 +26,12 @@
         />
 
         <!-- Conditionally inserts empty dividing lines between each BuildStepLabel component -->
-        <span class="divider hideme w-50 d-flex" v-if="index < 2"></span>
+        <span class="divider hideme w-50 d-flex" v-if="index < 2 && steps.length > 2"></span>
       </template>
+    </b-col>
 
+    <b-col lg="12">
+      <hr class="mt-0">
     </b-col>
 
     <!-- <b-col lg="12" class='h-100 align-items-center d-flex' style="min-height: 20rem;"> -->

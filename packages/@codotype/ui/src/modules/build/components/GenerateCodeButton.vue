@@ -1,10 +1,11 @@
 <template>
   <button
     class="btn btn-lg btn-yellow"
+    :disabled="disabled"
     @click="generate()"
-    v-if="currentStep === steps.length - 1"
   >
-    <i class="fa fa-spin fa-cog"></i>
+    <i class="fa fa-cog" v-if="disabled"></i>
+    <i class="fa fa-spin fa-cog" v-else></i>
     Generate Code
   </button>
 </template>
@@ -14,6 +15,11 @@ import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'GenerateCodeButton',
+  props: {
+    disabled: {
+      type: Boolean
+    }
+  },
   computed: mapGetters({
     currentStep: 'build/steps/current',
     steps: 'build/steps/collection/items'

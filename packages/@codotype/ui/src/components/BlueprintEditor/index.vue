@@ -17,7 +17,7 @@
       <SchemaList />
     </b-col>
 
-    <b-col xl=9 lg=9 sm=12>
+    <b-col xl=9 lg=9 sm=12 class="pl-0">
       <SchemaDetail />
     </b-col>
 

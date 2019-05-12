@@ -5,11 +5,11 @@
       <!-- CLEANUP - get rid of hardcoded icons & labels -->
       <div class="col-lg-10">
 
-        <i class="fa fa-lg fa-fw fa-equals mr-2" style='cursor: grab;'></i>
+        <!-- <i class="fa fa-lg fa-fw fa-equals mr-2" style='cursor: grab;'></i> -->
 
         <!-- BELONGS_TO -->
         <small v-if="item.type === 'BELONGS_TO'">
-          <span class='text-primary'>Many <strong>{{ selectedSchema.label_plural }}</strong><i class="fa fa-arrow-right text-primary mx-1"></i></span><span class="text-info">One <strong>{{ inflated.alias.label }}</strong></span><span v-if="inflated.alias.label !== inflated.schema.label"> ({{inflated.schema.label}})</span>
+          <span class='text-primary'>Many <strong>{{ inflated.reverse_alias.label_plural }}</strong><span v-if="inflated.reverse_alias.label_plural !== selectedSchema.label_plural"> ({{selectedSchema.label_plural}})</span><i class="fa fa-arrow-right text-primary mx-1"></i></span><span class="text-info">One <strong>{{ inflated.alias.label }}</strong></span><span v-if="inflated.alias.label !== inflated.schema.label"> ({{inflated.schema.label}})</span>
         </small>
 
         <!-- HAS_ONE -->
@@ -106,6 +106,7 @@ export default {
 
   .list-group-item
     padding: 0.25rem 0.5rem
+    cursor: grab
 
   .list-group-item:hover i.fa-equals
     opacity: 1

@@ -1,51 +1,51 @@
 <template>
+  <div class="card card-body shadow-sm">
+    <b-tabs no-fade lazy pills class='w-100'>
 
-  <b-tabs no-fade lazy class='w-100'>
+      <b-tab
+        lazy
+        class='pt-0'
+        :title="group.label_plural || group.label"
+        v-for="group in model.option_groups"
+        :key="group.identifier"
+      >
+        <b-row class='justify-content-center mt-3'>
+          <b-col lg=12>
+            <EditorHeader
+              :title="group.label"
+              :help="group.description"
+              url="https://codotype.github.io"
+            />
+            <hr>
 
-    <b-tab
-      lazy
-      class='pt-0'
-      :title="group.label_plural || group.label"
-      v-for="group in model.option_groups"
-      :key="group.identifier"
-    >
-      <b-row class='justify-content-center mt-3'>
-        <b-col lg=12>
-          <EditorHeader
-            :title="group.label"
-            :help="group.description"
-            url="https://codotype.github.io"
-          />
-          <hr>
+            <ModelAddonEditor
+              v-if="group.type === OPTION_GROUP_TYPE_MODEL_ADDON"
+              :group="group"
+              :schemas="schemas">
+            </ModelAddonEditor>
 
-          <ModelAddonEditor
-            v-if="group.type === OPTION_GROUP_TYPE_MODEL_ADDON"
-            :group="group"
-            :schemas="schemas">
-          </ModelAddonEditor>
+            <GlobalAddonEditor
+              v-if="group.type === OPTION_GROUP_TYPE_GLOBAL_ADDON"
+              :group="group">
+            </GlobalAddonEditor>
 
-          <GlobalAddonEditor
-            v-if="group.type === OPTION_GROUP_TYPE_GLOBAL_ADDON"
-            :group="group">
-          </GlobalAddonEditor>
+            <ModelOptionEditor
+              v-if="group.type === OPTION_GROUP_TYPE_MODEL_OPTION"
+              :group="group"
+              :schemas="schemas">
+            </ModelOptionEditor>
 
-          <ModelOptionEditor
-            v-if="group.type === OPTION_GROUP_TYPE_MODEL_OPTION"
-            :group="group"
-            :schemas="schemas">
-          </ModelOptionEditor>
+            <GlobalOptionEditor
+              v-if="group.type === OPTION_GROUP_TYPE_GLOBAL_OPTION"
+              :group="group">
+            </GlobalOptionEditor>
 
-          <GlobalOptionEditor
-            v-if="group.type === OPTION_GROUP_TYPE_GLOBAL_OPTION"
-            :group="group">
-          </GlobalOptionEditor>
+          </b-col>
+        </b-row>
+      </b-tab>
 
-        </b-col>
-      </b-row>
-
-    </b-tab>
-
-  </b-tabs>
+    </b-tabs>
+  </div>
 </template>
 
 <script>

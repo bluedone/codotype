@@ -4,7 +4,9 @@
     @click="jumpToStep(index)"
   >
     <template v-if="currentStep === index">
-      <span :class="badgeClassName + 'bg-transparent text-success border-success'">{{index + 1}}</span>
+      <span :class="badgeClassName + 'bg-transparent text-success border-success'">
+        <span class="fa-fw">{{index + 1}}</span>
+      </span>
     </template>
 
     <template v-else-if="index < currentStep">
@@ -55,7 +57,6 @@ export default {
     cursor: pointer
 
   .step-badge
-    font-size: 1rem
     width: 2rem
     height: 2rem
     border-radius: 25px
