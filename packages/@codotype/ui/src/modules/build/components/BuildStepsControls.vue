@@ -44,8 +44,8 @@
 
         <GenerateCodeButton :disabled="currentStep === 0" />
 
-        <!-- <span class='text-muted' v-if="currentStep === 1">
-          <router-link to="/auth/signup" >Sign Up</router-link> or <router-link to="/auth/login">Log In</router-link> to Save Schemas<i class="ml-1 fa fa-info-circle" title="Codotype automatically saves your Blueprint in localstorage. Signing up is a great idea if you want to continue making changes on another device." v-b-tooltip.hover.top></i>
+        <!-- <span class='text-muted ml-2'>
+          <router-link to="/auth/signup" >Sign Up</router-link> or <router-link to="/auth/login">Log In</router-link> to Save Projects<i class="ml-1 fa fa-info-circle" title="Codotype automatically saves your Blueprint in localstorage. Signing up is a great idea if you want to continue making changes on another device." v-b-tooltip.hover.top></i>
         </span> -->
       </span>
 

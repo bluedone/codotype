@@ -34,8 +34,7 @@
       <hr class="mt-0">
     </b-col>
 
-    <!-- <b-col lg="12" class='h-100 align-items-center d-flex' style="min-height: 20rem;"> -->
-    <b-col lg="12" :class='colClassName' style="padding-bottom: 5rem;">
+    <b-col lg="12" class="step-content">
       <slot name="step-1" v-if="selectedStep.id === 'getting_started'" />
       <slot name="step-2" v-if="selectedStep.id === 'blueprint_step'" />
       <slot name="step-3" v-if="selectedStep.id === 'configure_generator'" />
@@ -55,19 +54,11 @@ export default {
     BuildStepChild,
     BuildStepLabel
   },
-  computed: {
-    ...mapGetters({
-      steps: 'build/steps/collection/items',
-      currentStep: 'build/steps/current',
-      selectedStep: 'build/steps/selectedStep'
-    }),
-    colClassName () {
-      // let css = 'h-100 align-items-center d-flex w-100'
-      let css = ''
-      if (this.currentStep === 0) css += ' min-height-20'
-      return css
-    }
-  }
+  computed: mapGetters({
+    steps: 'build/steps/collection/items',
+    currentStep: 'build/steps/current',
+    selectedStep: 'build/steps/selectedStep'
+  })
 }
 </script>
 
@@ -101,7 +92,7 @@ export default {
     &.hideme
       opacity: 0
 
-  div.min-height-20
-    min-height: 20rem
+  div.step-content
+    padding-bottom: 5rem
 
 </style>

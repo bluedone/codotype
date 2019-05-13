@@ -9,7 +9,7 @@
         <BuildSteps v-if="model.id">
           <template slot="step-1">
             <b-row class="justify-content-center">
-              <b-col sm=12 xl=9>
+              <b-col sm=12 lg="8" xl=6>
                 <ProjectForm />
               </b-col>
             </b-row>

@@ -27,7 +27,7 @@
           <div
             v-for="attr in group.attributes"
             :key="selectedSchema.identifier + '_' + attr.identifier"
-            class="card card-body shadow-sm mb-3"
+            class="mb-3"
           >
 
             <OptionFormItem
