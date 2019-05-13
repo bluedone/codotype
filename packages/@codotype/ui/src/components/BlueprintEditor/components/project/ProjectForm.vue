@@ -24,17 +24,8 @@
         <small class="text-muted">Identifier: {{identifier || 'project_name'}}</small>
 
         <p class="small mt-2 text-muted">
-          <strong>Codotype</strong> uses the <span class='text-success'>Project Name</span> for naming things like <strong>files</strong>, <strong>folders</strong>, <strong>namespaces</strong>, and <strong>databases</strong>. You can rename your Project whenever you like <i class="far fa-laugh"></i>
+          <strong>Codotype</strong> uses the <span class='text-success'>Project Name</span> for naming things like <strong>files</strong>, <strong>folders</strong>, <strong>namespaces</strong>, and <strong>databases</strong>. No need to be picky, you can rename your Project whenever you like <i class="far fa-laugh"></i>
         </p>
-
-        <!-- <h4>Let's give your project a name</h4> -->
-        <!-- <p class="lead form-text text-muted">Try something simple, like <code>Todo List</code>, or <code>Inventory Manager</code> -->
-
-        <!-- </p> -->
-
-        <!-- <p class="text-muted">No need to be picky, you can change it later.</p> -->
-
-        <!-- <small class="text-muted">The Project Name will appear in the header of the app we're building - you can change it later.</small> -->
 
         <HelpPopover
           target="project-label"
