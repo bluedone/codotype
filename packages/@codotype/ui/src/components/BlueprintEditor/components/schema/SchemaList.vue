@@ -1,10 +1,10 @@
 <template>
   <div class="card">
-    <div class="card-header p-2">
-      <b-button variant="primary" size="sm" @click="$store.dispatch('editor/schema/newModel')">
-        <i class="fa fa-plus"></i>
-      </b-button>
-      <strong class="text-muted ml-1">
+    <div class="card-header">
+      <!-- <b-button variant="primary" size="sm" @click="$store.dispatch('editor/schema/newModel')"> -->
+        <!-- <i class="fa fa-plus"></i> -->
+      <!-- </b-button> -->
+      <strong class="text-muted">
         Schemas
       </strong>
     </div>
