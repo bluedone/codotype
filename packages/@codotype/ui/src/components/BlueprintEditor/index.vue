@@ -7,7 +7,7 @@
         <ExportModal />
 
         <SchemaNewModal />
-        <SchemaNewButton />
+        <!-- <SchemaNewButton /> -->
 
         <HelpPopover
           target="new-schema-button"
