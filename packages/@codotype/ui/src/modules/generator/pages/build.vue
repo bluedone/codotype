@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div class="container-fluid h-100">
     <Loading v-if="starting || loading" />
     <BuildError v-else-if="fetchError || runtimeError" />
     <BuildFinished v-else-if="finished" />
