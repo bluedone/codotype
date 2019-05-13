@@ -1,102 +1,90 @@
 <template>
-  <div class="row">
+  <div class="row" id="schema-detail">
     <div class="col-lg-12">
-      <div class="card shadow-sm" id="schema-detail">
 
-        <div class="card-body">
+      <b-row class="d-flex align-items-center">
+        <b-col lg=12 class="d-flex justify-content-between">
 
-          <b-row class="d-flex align-items-center">
+          <span class='d-flex align-items-center'>
 
-            <b-col lg=12 class="d-flex justify-content-between">
+            <h5 class="mb-0 mr-2 d-flex">{{ model.label + ' Schema' }}</h5>
 
-              <span class='d-flex align-items-center'>
+            <SchemaEditButton v-if="!isUserModel" />
+            <HelpPopover
+              v-if="!isUserModel"
+              target="schemaEditPopover"
+              placement="right"
+              :triggers="['hover']"
+              content='Edit Schema'>
+            </HelpPopover>
 
-                <h5 class="mb-0 mr-2 d-flex">{{ model.label + ' Schema' }}</h5>
+          </span>
 
-                <SchemaEditButton v-if="!isUserModel" />
-                <HelpPopover
-                  v-if="!isUserModel"
-                  target="schemaEditPopover"
-                  placement="right"
-                  :triggers="['hover']"
-                  content='Edit Schema'>
-                </HelpPopover>
+          <SchemaDestroyButton v-if="!isUserModel" />
+          <HelpPopover
+            v-if="!isUserModel"
+            target="schema-destroy-button"
+            placement="left"
+            :triggers="['hover']"
+            content="Remove Schema">
+          </HelpPopover>
 
-              </span>
+        </b-col>
 
-              <SchemaDestroyButton v-if="!isUserModel" />
-              <HelpPopover
-                v-if="!isUserModel"
-                target="schema-destroy-button"
-                placement="left"
-                :triggers="['hover']"
-                content="Remove Schema">
-              </HelpPopover>
+        <SchemaEditModal v-if="!isUserModel" />
+        <SchemaDestroyModal :label="model.label" />
+      </b-row>
 
-            </b-col>
+      <b-row class='mb-0'>
+        <b-col lg=12>
+          <small class="text-muted">
+            Describe the <strong>{{ model.label }} Schema</strong> with <strong>Attributes</strong> and <strong>Relations</strong>
+          </small>
+        </b-col>
+      </b-row>
 
-            <SchemaEditModal v-if="!isUserModel" />
-            <SchemaDestroyModal :label="model.label" />
+      <b-row class="mt-2">
+        <b-col sm=12 md=6 lg=6>
 
-          </b-row>
+          <SortableList
+            scope="attribute"
+            label="Attributes"
+            title="No Attributes added yet"
+            info="Attributes define properties on this Schema"
+          />
 
-          <b-row class='mb-0'>
-            <b-col lg=12>
-              <small class="text-muted">
-                Describe the <strong>{{ model.label }} Schema</strong> with <strong>Attributes</strong> and <strong>Relations</strong>
-              </small>
-            </b-col>
-          </b-row>
+          <br>
 
-          <!-- <hr> -->
+          <SchemaPreview />
 
-          <b-row class="mt-2">
-          <!-- <b-row> -->
-            <b-col sm=12 md=6 lg=6>
+          <AttributeNewModal />
+          <AttributeEditModal />
+          <DestroyModal scope="attribute" label="Attribute" />
 
-              <SortableList
-                scope="attribute"
-                label="Attributes"
-                title="No Attributes added yet"
-                info="Attributes define properties on this Schema"
-              />
+        </b-col>
 
-              <!-- <hr> -->
-              <br>
+        <b-col sm=12 md=6 lg=6 class="pl-md-0">
 
-              <SchemaPreview />
+          <SortableList
+            scope="relation"
+            label="Relations"
+            title="No Relations added yet"
+            info="Relations define references to other Schemas"
+          />
 
-              <AttributeNewModal />
-              <AttributeEditModal />
-              <DestroyModal scope="attribute" label="Attribute" />
+          <br>
 
-            </b-col>
-
-            <b-col sm=12 md=6 lg=6 class="pl-md-0">
-
-              <SortableList
-                scope="relation"
-                label="Relations"
-                title="No Relations added yet"
-                info="Relations define references to other Schemas"
-              />
-
-              <!-- <hr> -->
-              <br>
-
-              <SchemaIncomingRelations/>
+          <SchemaIncomingRelations/>
 
 
-              <RelationNewModal />
-              <RelationEditModal />
-              <DestroyModal scope="relation" label="Relation" />
+          <RelationNewModal />
+          <RelationEditModal />
+          <DestroyModal scope="relation" label="Relation" />
 
-            </b-col>
-          </b-row>
-        </div>
-
-      </div>
+        </b-col>
+      </b-row>
     </div>
+
   </div>
 </template>
 

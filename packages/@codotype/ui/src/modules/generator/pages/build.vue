@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div class="container-fluid h-100">
     <Loading v-if="starting || loading" />
     <BuildError v-else-if="fetchError || runtimeError" />
     <BuildFinished v-else-if="finished" />
@@ -9,7 +9,7 @@
         <BuildSteps v-if="model.id">
           <template slot="step-1">
             <b-row class="justify-content-center">
-              <b-col sm=12 xl=9>
+              <b-col sm=12 lg="8" xl=6>
                 <ProjectForm />
               </b-col>
             </b-row>
