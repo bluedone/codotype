@@ -1,3 +1,11 @@
+### v0.2.1
+
+#### Fixes
+* Typo fixed in `datatype-meta.js`
+* Cleaned up formatting in `relation-meta.js`
+
+---
+
 ### v0.2.0
 
 #### Features
