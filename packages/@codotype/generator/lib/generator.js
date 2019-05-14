@@ -23,8 +23,13 @@ module.exports = class CodotypeGenerator {
     }
 
     // TODO - document this!
-    if (!constructorOptions.write && !constructorOptions.forEachSchema && !constructorOptions.compileInPlace) {
-      throw Error('CodotypeGenerator constructorOptions requires either write, forEachSchema, or compileInPlace properties');
+    if (!constructorOptions.write
+      && !constructorOptions.compileInPlace
+      && !constructorOptions.forEachSchema
+      && !constructorOptions.forEachRelation
+      && !constructorOptions.forEachReverseRelation
+    ) {
+      throw Error('CodotypeGenerator constructorOptions requires either write, forEachSchema, forEachRelation, forEachReverseRelation, or compileInPlace properties');
       return;
     }
 
@@ -35,6 +40,8 @@ module.exports = class CodotypeGenerator {
     // Assigns constructorOptions
     this.write = constructorOptions.write || this.write;
     this.forEachSchema = constructorOptions.forEachSchema || this.forEachSchema;
+    this.forEachRelation = constructorOptions.forEachRelation || this.forEachRelation;
+    this.forEachReverseRelation = constructorOptions.forEachReverseRelation || this.forEachReverseRelation;
     this.compileInPlace = constructorOptions.compileInPlace || [];
 
     // Assigns this.options
@@ -64,6 +71,16 @@ module.exports = class CodotypeGenerator {
     // console.log('NOTHING TO WRITE - this should be overwritten by a subclassed generator.')
   }
 
+  // forEachRelation
+  async forEachRelation({ schema, relation, blueprint, configuration }) {
+    // console.log('NOTHING TO WRITE - this should be overwritten by a subclassed generator.')
+  }
+
+  // forEachReverseRelation
+  async forEachReverseRelation({ schema, relation, blueprint, configuration }) {
+    // console.log('NOTHING TO WRITE - this should be overwritten by a subclassed generator.')
+  }
+
   // ensureDir
   // Ensures presence of directory for template compilation
   ensureDir (dir) {
@@ -73,8 +90,11 @@ module.exports = class CodotypeGenerator {
   // copyDir
   // copy a directory from src to dest'
   // TODO - abstract FS-level operations into @codotype/runtime
-  copyDir (src, dest) {
-    return this.runtime.copyDir(src, dest)
+  copyDir ({ src, dest }) {
+    return this.runtime.copyDir(
+      this.templatePath(src),
+      this.destinationPath(dest)
+    )
   }
 
   // compileTemplatesInPlace
@@ -91,13 +111,11 @@ module.exports = class CodotypeGenerator {
 
   // renderComponent
   // Compiles and writes each template defined in the `compileInPlace` property
-  // TODO - this should be updated to proxy `data` into the `copyTemplate` method
-  renderComponent ({ src, dest, options = {} }) {
-    // For each inPlaceTemplate, compile and write
+  renderComponent ({ src, dest, data = {} }) {
     return this.copyTemplate(
       this.templatePath(src),
       this.destinationPath(dest),
-      options
+      data
     )
   }
 
