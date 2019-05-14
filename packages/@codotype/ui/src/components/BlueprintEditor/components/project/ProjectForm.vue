@@ -1,5 +1,5 @@
 <template>
-  <div class="card card-body">
+  <div class="card card-body shadow-sm">
     <b-row class='align-items-center justify-content-center'>
       <b-col lg=12>
 

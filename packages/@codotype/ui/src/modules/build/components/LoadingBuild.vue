@@ -1,18 +1,14 @@
 <template>
-  <div class="app" v-if="buildLoading">
-    <div class="row d-flex justify-content-center">
-      <div class="col-lg-8">
-
-        <div class="card card-body text-center" v-if="buildLoading">
-          <p class="lead">Thousands of monkeys are generating your app</p>
-          <small class="text-muted">please be nice to them its their first day on the job</small>
-          <div class="row mt-4">
-            <div class="col-lg-12 text-center d-flex justify-content-center">
-              <Circle8 size="80px" class='d-flex my-2'/>
-            </div>
+  <div class="h-100 d-flex flex-row align-items-center">
+    <div class="col-lg-8">
+      <div class="card card-body text-center" v-if="buildLoading">
+        <p class="lead">Thousands of monkeys are generating your app</p>
+        <small class="text-muted">please be nice to them its their first day on the job</small>
+        <div class="row mt-4">
+          <div class="col-lg-12 text-center d-flex justify-content-center">
+            <Circle8 size="80px" class='d-flex my-2'/>
           </div>
         </div>
-
       </div>
     </div>
   </div>
@@ -29,7 +25,7 @@ export default {
     Circle8
   },
   computed: mapGetters({
-    buildLoading: 'build/fetching',
+    buildLoading: 'build/runtime/loading',
   })
 }
 </script>

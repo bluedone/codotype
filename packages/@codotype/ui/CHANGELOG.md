@@ -1,3 +1,14 @@
+### v0.1.4
+
+#### Changes
+* Improved `ProjectForm` component UI
+* Consistent UI between `BlueprintEditor` and `ConfigurationEditor` components
+
+#### Fixes
+* Added `metaInfo` to Generator `build.vue` component
+
+---
+
 ### v0.1.3
 
 #### Changes
