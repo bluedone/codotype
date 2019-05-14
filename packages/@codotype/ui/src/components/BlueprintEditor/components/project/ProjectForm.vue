@@ -1,46 +1,72 @@
 <template>
-  <b-row class='align-items-center w-100 justify-content-center'>
-    <b-col lg=6>
-      <h4>Let's give your project a name</h4>
-      <p class="lead form-text text-muted">Try something simple, like <code>Todo List</code>, or <code>Inventory Manager</code>
+  <div class="card card-body shadow-sm">
+    <b-row class='align-items-center justify-content-center'>
+      <b-col lg=12>
 
-      </p>
+        <h4>Project Name</h4>
 
-      <p class="text-muted">No need to be picky, you can change it later.</p>
+        <p class="small mt-2 mb-3 text-muted"><span class="text-success">Project Name</span> must be <strong>alphabetic</strong> - no numbers or symbols, but whitespace is allowed. The input field will enforce proper capitalization and spacing.</p>
 
-      <!-- <small class="text-muted">The Project Name will appear in the header of the app we're building - you can change it later.</small> -->
-    </b-col>
-    <b-col lg=6>
-      <input
-        ref="input_el"
-        class="form-control form-control-lg"
-        v-model="projectLabel"
-        placeholder="Project Name"
-        @keyup.enter="onKeyEnter()"
-      />
+        <small class="mb-2 text-muted">
+          <i class="far fa-lightbulb"></i>
+          Try something simple like <code>Todo List</code>, or <code>Inventory Manager</code>
+        </small>
 
-      <small class="text-muted">Identifier: {{identifier || 'project_name'}}</small>
+        <input
+          ref="input_el"
+          id="project-label"
+          class="form-control form-control-lg"
+          v-model="projectLabel"
+          placeholder="Project Name"
+          @keyup.enter="onKeyEnter()"
+        />
 
-      <br>
+        <small class="text-muted">Identifier: {{identifier || 'project_name'}}</small>
 
-      <b-button
-        size="lg"
-        block
-        variant="primary"
-        :disabled="!enableSubmit"
-        @click="incrementStep()"
-      >
-        Let's Go!
-      </b-button>
-    </b-col>
-  </b-row>
+        <p class="small mt-2 text-muted">
+          <strong>Codotype</strong> uses the <span class='text-success'>Project Name</span> for naming things like <strong>files</strong>, <strong>folders</strong>, <strong>namespaces</strong>, and <strong>databases</strong>. No need to be picky, you can rename your Project whenever you like <i class="far fa-laugh"></i>
+        </p>
+
+        <HelpPopover
+          target="project-label"
+          placement="top"
+          content='Give your project a name'>
+        </HelpPopover>
+
+        <HelpPopover
+          target="submit-project-form"
+          placement="bottom"
+          content='Click here to continue'>
+        </HelpPopover>
+
+        <b-button
+          size="lg"
+          id="submit-project-form"
+          block
+          variant="success"
+          :disabled="!enableSubmit"
+          @click="incrementStep()"
+        >
+          Define Schemas
+          <i class="fa fa-chevron-right ml-2"></i>
+          <i class="fa fa-chevron-right"></i>
+          <i class="fa fa-chevron-right"></i>
+        </b-button>
+
+      </b-col>
+    </b-row>
+  </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import HelpPopover from '../../../HelpPopover'
 
 export default {
   name: 'ProjectForm',
+  components: {
+    HelpPopover
+  },
   mounted () {
     setTimeout(() => { this.$refs.input_el.focus() }, 200) // Minor delay for input element focus
   },

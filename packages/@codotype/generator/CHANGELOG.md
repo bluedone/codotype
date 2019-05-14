@@ -1,3 +1,18 @@
+### 0.6.0
+
+#### Features
+* Added `forEachRelation` and `forEachReverseRelation` Generator methods
+* Changed `renderComponent` parameter names
+
+---
+
+### v0.5.0
+
+#### Features
+* ???
+
+---
+
 ### v0.4.0
 
 #### Features
@@ -5,6 +20,8 @@
 * Refactored `compileInPlace` handler
 * Refactored `composeWith` method - parent now instantiates new Generator instances
 * Bumped `@codotype/blueprints` dependency
+
+---
 
 ### v0.3.0
 

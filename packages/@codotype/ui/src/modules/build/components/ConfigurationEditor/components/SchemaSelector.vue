@@ -1,12 +1,9 @@
 <template>
   <div class="card">
-    <div class="card-header">
-      <strong>Models</strong>
-    </div>
     <ul class="list-group list-group-flush">
       <li
         v-for="schema in schemas"
-        :class='selectedSchema.id === schema.id ? "list-group-item list-group-item-primary" : "list-group-item" '
+        :class='selectedSchema.id === schema.id ? "list-group-item list-group-item-action list-group-item-primary" : "list-group-item list-group-item-action" '
         @click="selectSchema(schema)"
       >
         {{ schema.label }}

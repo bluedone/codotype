@@ -1,27 +1,29 @@
 <template>
-  <b-row>
+  <div class="card card-body shadow-sm">
+    <b-row>
 
-    <b-col xl=4 lg=4 sm=12 class="border-right">
-      <ImportModal />
-      <ExportModal />
+      <b-col xl=3 lg=3 sm=12 class='border-right'>
+        <ImportModal />
+        <ExportModal />
 
-      <SchemaNewModal />
-      <SchemaNewButton />
+        <SchemaNewModal />
+        <SchemaNewButton />
 
-      <HelpPopover
-        target="new-schema-button"
-        placement="bottom"
-        content='Create New Schema'>
-      </HelpPopover>
+        <HelpPopover
+          target="new-schema-button"
+          placement="bottom"
+          content='Create New Schema'>
+        </HelpPopover>
 
-      <SchemaList />
-    </b-col>
+        <SchemaList />
+      </b-col>
 
-    <b-col xl=8 lg=8 sm=12>
-      <SchemaDetail id="schema-detail" />
-    </b-col>
+      <b-col xl=9 lg=9 sm=12>
+        <SchemaDetail />
+      </b-col>
 
-  </b-row>
+    </b-row>
+  </div>
 </template>
 
 <script>

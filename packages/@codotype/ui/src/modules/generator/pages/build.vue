@@ -1,38 +1,41 @@
 <template>
-  <Loading v-if="starting || loading" />
-  <BuildError v-else-if="fetchError || runtimeError" />
-  <BuildFinished v-else-if="finished" />
-  <b-row v-else class='justify-content-center'>
-    <b-col xl=12 lg=12>
+  <div class="container-fluid h-100">
+    <Loading v-if="starting" />
+    <LoadingBuild v-else-if="loading" />
+    <BuildError v-else-if="fetchError || runtimeError" />
+    <BuildFinished v-else-if="finished" />
+    <b-row v-else class='justify-content-center'>
+      <b-col xl=12 lg=12>
 
-      <BuildSteps v-if="model.id">
-        <template slot="step-1">
-          <b-row class='w-100 justify-content-center'>
-            <b-col sm=12 xl=9>
-              <ProjectForm />
-            </b-col>
-          </b-row>
-        </template>
+        <BuildSteps v-if="model.id">
+          <template slot="step-1">
+            <b-row class="justify-content-center">
+              <b-col sm=12 lg="8" xl=6>
+                <ProjectForm />
+              </b-col>
+            </b-row>
+          </template>
 
-        <template slot="step-2">
-          <b-row>
-            <b-col sm=12>
-              <BlueprintEditor />
-            </b-col>
-          </b-row>
-        </template>
+          <template slot="step-2">
+            <b-row class="justify-content-center">
+              <b-col sm=12 xl=10>
+                <BlueprintEditor />
+              </b-col>
+            </b-row>
+          </template>
 
-        <template slot="step-3">
-          <b-row class='w-100 justify-content-center'>
-            <b-col sm=12 xl=9>
-              <ConfigureGenerator :id="id" />
-            </b-col>
-          </b-row>
-        </template>
-      </BuildSteps>
+          <template slot="step-3">
+            <b-row class='justify-content-center'>
+              <b-col sm=12 xl=10>
+                <ConfigureGenerator :id="id" />
+              </b-col>
+            </b-row>
+          </template>
+        </BuildSteps>
 
-    </b-col>
-  </b-row>
+      </b-col>
+    </b-row>
+  </div>
 </template>
 
 <script>
@@ -40,6 +43,7 @@ import { mapGetters, mapActions } from 'vuex'
 import Loading from '../../../components/Loading'
 import BuildSteps from '../../build/components/BuildSteps'
 import BuildError from '../../build/components/BuildError'
+import LoadingBuild from '../../build/components/LoadingBuild'
 import BuildFinished from '../../build/components/BuildFinished'
 import ProjectForm from '../../../components/BlueprintEditor/components/project/ProjectForm'
 import BlueprintEditor from '../../../components/BlueprintEditor'
@@ -57,8 +61,12 @@ export default {
       starting: true
     }
   },
+  metaInfo () {
+    return { title: this.model.label }
+  },
   components: {
     Loading,
+    LoadingBuild,
     BuildSteps,
     BuildError,
     BuildFinished,

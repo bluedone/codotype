@@ -4,7 +4,7 @@
     block
     variant="primary"
     size="lg"
-    class="mb-3"
+    class="mb-2"
     @click="$store.dispatch('editor/schema/newModel')"
   >
     <i class="fa fa-fw fa-plus"></i>

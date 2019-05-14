@@ -5,7 +5,6 @@ const {
   DATATYPE_STRING_ARRAY,
   DATATYPE_INTEGER,
   DATATYPE_FLOAT,
-  DATATYPE_DOUBLE,
   DATATYPE_BOOLEAN,
   DATATYPE_DATE,
   DATATYPE_TIME,
@@ -19,51 +18,44 @@ const DATATYPE_META = {}
 DATATYPE_META[DATATYPE_STRING] = {
   value: DATATYPE_STRING,
   label: 'String',
-  desc: 'Short string of text with minimal formatting',
+  desc: 'Titles, names, and labels',
   icon: 'fa fa-quote-left'
 }
 
 DATATYPE_META[DATATYPE_TEXT] = {
   value: DATATYPE_TEXT,
   label: 'Text',
-  desc: 'A body of text with formatting intact',
-  icon: 'fa fa-quote-left'
+  desc: 'Descriptions, paragraphs, and articles',
+  icon: 'fa fa-align-left'
 }
 
 DATATYPE_META[DATATYPE_STRING_ARRAY] = {
   value: DATATYPE_STRING_ARRAY,
-  label: 'String Array',
-  desc: 'DATATYPE_STRING_ARRAY Description Goes Here!',
-  icon: 'fa fa-quote-left'
+  label: 'Tags',
+  desc: 'An array of text tags',
+  icon: 'fa fa-tags'
 }
 
 DATATYPE_META[DATATYPE_BOOLEAN] = {
   value: DATATYPE_BOOLEAN,
   label: 'Boolean',
-  desc: 'A single true or false statement',
-  icon: 'far fa-check-square'
+  desc: 'Yes or no, true or false',
+  icon: 'fa fa-toggle-on'
 }
 
 DATATYPE_META[DATATYPE_INTEGER] = {
   value: DATATYPE_INTEGER,
   label: 'Integer',
-  desc: 'A numeric datatype for whole numbers',
+  desc: 'Whole numbers',
   icon: 'fa fa-hashtag'
 }
 
 DATATYPE_META[DATATYPE_FLOAT] = {
   value: DATATYPE_FLOAT,
   label: 'Float',
-  desc: 'A numeric datatype with n points of precision',
-  icon: 'fa fa-hashtag'
+  desc: 'Numbers with decimals',
+  icon: 'fa fa-divide'
 }
-
-// DATATYPE_META[DATATYPE_DOUBLE] = {
-//   value: DATATYPE_DOUBLE,
-//   label: 'Double',
-//   desc: 'A numeric datatype with n points of precision',
-//   icon: 'fa fa-hashtag'
-// }
 
 // DATATYPE_META[DATATYPE_DATE] = {
 //   value: DATATYPE_DATE,
@@ -81,16 +73,16 @@ DATATYPE_META[DATATYPE_FLOAT] = {
 
 DATATYPE_META[DATATYPE_DATETIME] = {
   value: DATATYPE_DATETIME,
-  label: 'DateTime',
-  desc: 'Represent dates and times',
+  label: 'Datetime',
+  desc: 'Event dates, deadlines, opening hours',
   icon: 'far fa-calendar-alt'
 }
 
-// DATATYPE_META[DATATYPE_JSON] = {
-//   value: DATATYPE_JSON,
-//   label: 'JSON',
-//   desc: 'DATATYPE_JSON Description Goes Here!',
-//   icon: 'fa fa-code'
-// }
+DATATYPE_META[DATATYPE_JSON] = {
+  value: DATATYPE_JSON,
+  label: 'JSON',
+  desc: 'Data in JSON format',
+  icon: 'fa fa-code'
+}
 
 module.exports = DATATYPE_META

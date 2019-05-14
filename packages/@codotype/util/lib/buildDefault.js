@@ -22,8 +22,6 @@ const getDefaultAttributeValue = ({ type }) => {
       return 0
     case datatypes.DATATYPE_FLOAT:
       return 0.0
-    case datatypes.DATATYPE_DOUBLE:
-      return 0.00
     case datatypes.DATATYPE_BOOLEAN:
       return false
     case datatypes.DATATYPE_JSON:
@@ -38,7 +36,9 @@ const getDefaultAttributeValue = ({ type }) => {
 }
 
 // CLEANUP - document this function, write better tests
+// TODO - abstract this function into a separate helper that can be invoked in multiple places
 const getRelationKey = ({ relation }) => {
+  // return relation.alias.attribute
   switch (relation.type) {
     case RELATION_TYPE_BELONGS_TO:
       return relation.alias.identifier + '_id'

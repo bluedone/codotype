@@ -1,9 +1,21 @@
+### 0.7.0
+* Runtime supports `forEachRelation` and `forEachReverseRelation` Generator methods
+
+---
+
+### v0.6.0
+* ???
+
+---
+
 ### v0.5.0
 
 * Runtime now creates `*-blueprint.json` and `*-build.json` files
 
 #### Breaking Changes
 * Refactored `registerGenerator` method to handle `@codotype/generator` `0.4.0` patterns. Each generator now is defined as an Object, rather than a class prototype.
+
+---
 
 ### v0.3.0
 

@@ -1,12 +1,10 @@
 <template>
-  <b-button
-    variant="primary"
-    class='btn-rounded'
-    size="sm"
+  <button
+    class="btn btn-primary btn-sm"
     @click="$store.dispatch(vuexAction, true)"
   >
     <i class="fa fa-plus"></i>
-  </b-button>
+  </button>
 </template>
 
 <script>
@@ -20,9 +18,3 @@ export default {
   }
 }
 </script>
-
-<style type="text/css">
-  .btn-rounded {
-    border-radius: 1rem;
-  }
-</style>

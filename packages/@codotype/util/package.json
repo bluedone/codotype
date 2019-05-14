@@ -1,6 +1,6 @@
 {
   "name": "@codotype/util",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Utility functions used throughout the Codotype ecosystem",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,7 @@
     "url": "git+https://github.com/codotype/codotype-util.git"
   },
   "dependencies": {
-    "@codotype/types": "^0.1.0",
+    "@codotype/types": "^0.2.0",
     "lodash": "^4.17.10",
     "pluralize": "^7.0.0",
     "underscore.string": "^3.3.4"

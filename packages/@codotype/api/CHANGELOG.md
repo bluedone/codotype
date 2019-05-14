@@ -1,3 +1,17 @@
+### v0.1.2
+
+#### Fixes
+* GET `/api/generators` handler omits `engine_path` property
+
+---
+
+### v0.1.1
+
+#### Fixes
+* Zip build fixes in `server.js`, `handleRequest.js`
+
+---
+
 ### v0.1.0
 
 #### Changes

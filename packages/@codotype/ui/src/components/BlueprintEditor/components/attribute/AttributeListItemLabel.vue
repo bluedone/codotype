@@ -1,6 +1,6 @@
 <template>
-  <span class="badge" v-if="item.datatype !== 'RELATION'">
-    <i :class="'mr-2 ' + icon" v-b-tooltip.hover.left :title='tooltip'></i>
+  <small>
+    <i :class="'mr-1 fa-fw ' + icon" v-b-tooltip.hover.left :title='tooltip'></i>
     {{item.label}}
     <span class='text-danger' v-if="item.required">*</span>
     <b-badge
@@ -12,7 +12,7 @@
     >
       <i class="fas fa-snowflake"></i>
     </b-badge>
-  </span>
+  </small>
 </template>
 
 <script>

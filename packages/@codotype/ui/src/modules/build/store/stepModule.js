@@ -2,7 +2,7 @@ import collectionModule from '../../../store/lib/collectionModule'
 
 const PROJECT_STEP = {
   id: 'getting_started',
-  label: 'Getting Started'
+  label: 'New Project'
 }
 
 const BLUEPRINT_STEP = {
@@ -12,7 +12,7 @@ const BLUEPRINT_STEP = {
 
 const CONFIGURATION_STEP = {
   id: 'configure_generator',
-  label: 'Configure'
+  label: 'Configure Generator'
 }
 
 // TODO - clean up the rest of this vuex module

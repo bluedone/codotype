@@ -1,17 +1,15 @@
 <template>
-  <b-row>
-
-    <b-col lg=12>
+  <div class="row" id="schema-detail">
+    <div class="col-lg-12">
 
       <b-row class="d-flex align-items-center">
+        <b-col lg=12 class="d-flex justify-content-between">
 
-        <b-col lg=7>
-          <h4 class="mb-0 d-flex">
+          <span class='d-flex align-items-center'>
 
-            {{ model.label + ' Schema' }}
+            <h5 class="mb-0 mr-2 d-flex">{{ model.label + ' Schema' }}</h5>
 
             <SchemaEditButton v-if="!isUserModel" />
-
             <HelpPopover
               v-if="!isUserModel"
               target="schemaEditPopover"
@@ -20,19 +18,9 @@
               content='Edit Schema'>
             </HelpPopover>
 
-          </h4>
-
-          <!-- <UserSchemaInfo v-if="isUserModel" /> -->
-
-          <SchemaEditModal v-if="!isUserModel" />
-
-        </b-col>
-
-        <b-col lg=5 class="d-flex align-items-center justify-content-end">
+          </span>
 
           <SchemaDestroyButton v-if="!isUserModel" />
-          <SchemaDestroyModal :label="model.label" />
-
           <HelpPopover
             v-if="!isUserModel"
             target="schema-destroy-button"
@@ -43,66 +31,67 @@
 
         </b-col>
 
-        <b-col lg=12 class="pb-1">
-          <small class="text-muted">
-            Describe the <strong class="text-primary">{{ model.label }} Schema</strong> with <strong>Attributes</strong> and <strong>Relations</strong>
-          </small>
-        </b-col>
-
+        <SchemaEditModal v-if="!isUserModel" />
+        <SchemaDestroyModal :label="model.label" />
       </b-row>
 
-    </b-col>
+      <b-row class='mb-0'>
+        <b-col lg=12>
+          <small class="text-muted">
+            Describe the <strong>{{ model.label }} Schema</strong> with <strong>Attributes</strong> and <strong>Relations</strong>
+          </small>
+        </b-col>
+      </b-row>
 
-    <b-col sm=12 md=6 lg=6>
+      <b-row class="mt-2">
+        <b-col sm=12 md=6 lg=6>
 
-      <SortableList
-        scope="attribute"
-        label="Attributes"
-        title="No Attributes added yet"
-        icon="https://res.cloudinary.com/codotype/image/upload/v1552157187/codotype-icons/frequency-table.png"
-        info="Attributes define properties on this Schema"
-      />
+          <SortableList
+            scope="attribute"
+            label="Attributes"
+            title="No Attributes added yet"
+            info="Attributes define properties on this Schema"
+          />
 
-      <hr>
+          <br>
 
-      <SchemaPreview />
+          <SchemaPreview />
 
-      <AttributeNewModal />
-      <AttributeEditModal />
-      <DestroyModal scope="attribute" label="Attribute" />
+          <AttributeNewModal />
+          <AttributeEditModal />
+          <DestroyModal scope="attribute" label="Attribute" />
 
-    </b-col>
+        </b-col>
 
-    <b-col sm=12 md=6 lg=6 class="pl-md-0">
+        <b-col sm=12 md=6 lg=6 class="pl-md-0">
 
-      <SortableList
-        scope="relation"
-        label="Relations"
-        title="No Relations added yet"
-        icon="https://res.cloudinary.com/codotype/image/upload/v1552157160/codotype-icons/complexity.png"
-        info="Relations define references to other Schemas"
-      />
+          <SortableList
+            scope="relation"
+            label="Relations"
+            title="No Relations added yet"
+            info="Relations define references to other Schemas"
+          />
 
-      <hr>
+          <br>
 
-      <SchemaIncomingRelations/>
+          <SchemaIncomingRelations/>
 
 
-      <RelationNewModal />
-      <RelationEditModal />
-      <DestroyModal scope="relation" label="Relation" />
+          <RelationNewModal />
+          <RelationEditModal />
+          <DestroyModal scope="relation" label="Relation" />
 
-    </b-col>
+        </b-col>
+      </b-row>
+    </div>
 
-  </b-row>
-
+  </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 import SortableList from '../SortableList'
 import DestroyModal from '../DestroyModal'
-import UserSchemaInfo from './UserSchemaInfo'
 import SchemaEditButton from './SchemaEditButton'
 import SchemaEditModal from './SchemaEditModal'
 import SchemaDestroyButton from './SchemaDestroyButton'
@@ -121,7 +110,6 @@ export default {
     SortableList,
     HelpPopover,
     DestroyModal,
-    UserSchemaInfo,
     SchemaEditButton,
     SchemaEditModal,
     SchemaDestroyButton,

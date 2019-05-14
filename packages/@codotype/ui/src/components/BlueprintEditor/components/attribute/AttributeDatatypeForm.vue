@@ -8,13 +8,6 @@
 
     <b-col lg="12">
       <b-row>
-        <!-- <AttributeDatatypeChild
-          v-for="opt in datatypeObj"
-          :key="opt.value"
-          :opt="opt"
-          :val="model.datatype"
-          :click="setDatatype"
-        /> -->
 
         <AttributeDatatypeChild
           :opt="DATATYPE_META[datatypes.DATATYPE_STRING]"
@@ -35,43 +28,43 @@
         />
 
         <AttributeDatatypeChild
-          :opt="DATATYPE_META[datatypes.DATATYPE_FLOAT]"
-          :val="model.datatype"
-          :click="setDatatype"
-        />
-
-        <AttributeDatatypeChild
-          :opt="DATATYPE_META[datatypes.DATATYPE_DOUBLE]"
-          :val="model.datatype"
-          :click="setDatatype"
-        />
-
-        <AttributeDatatypeChild
-          :opt="DATATYPE_META[datatypes.DATATYPE_JSON]"
-          :val="model.datatype"
-          :click="setDatatype"
-        />
-
-        <AttributeDatatypeChild
           :opt="DATATYPE_META[datatypes.DATATYPE_BOOLEAN]"
           :val="model.datatype"
           :click="setDatatype"
         />
 
         <AttributeDatatypeChild
+          :opt="DATATYPE_META[datatypes.DATATYPE_STRING_ARRAY]"
+          :val="model.datatype"
+          :click="setDatatype"
+        />
+
+        <AttributeDatatypeChild
+          :opt="DATATYPE_META[datatypes.DATATYPE_FLOAT]"
+          :val="model.datatype"
+          :click="setDatatype"
+        />
+
+        <!-- <AttributeDatatypeChild
           :opt="DATATYPE_META[datatypes.DATATYPE_TIME]"
           :val="model.datatype"
           :click="setDatatype"
-        />
+        /> -->
+
+        <!-- <AttributeDatatypeChild
+          :opt="DATATYPE_META[datatypes.DATATYPE_DATE]"
+          :val="model.datatype"
+          :click="setDatatype"
+        /> -->
 
         <AttributeDatatypeChild
-          :opt="DATATYPE_META[datatypes.DATATYPE_DATE]"
+          :opt="DATATYPE_META[datatypes.DATATYPE_DATETIME]"
           :val="model.datatype"
           :click="setDatatype"
         />
 
         <AttributeDatatypeChild
-          :opt="DATATYPE_META[datatypes.DATATYPE_DATETIME]"
+          :opt="DATATYPE_META[datatypes.DATATYPE_JSON]"
           :val="model.datatype"
           :click="setDatatype"
         />

@@ -3,24 +3,21 @@
 
     <b-col xl=10 lg=12 class="d-flex flex-row w-100 justify-content-between">
 
-      <b-button
-        v-if="currentStep !== 0"
-        variant="outline-primary"
-        size="lg"
-        @click="decrementStep()"
-        :disabled="currentStep === 0"
-      >
-        <i class="fa fa-chevron-left mr-1"></i>
-        Back
-      </b-button>
-      <span v-else></span>
+      <span class="py-1">
+        <button
+          class="btn btn-link"
+          size="lg"
+          @click="decrementStep()"
+          :disabled="currentStep === 0"
+        >
+          <i class="fa fa-lg fa-chevron-circle-left"></i>
+        </button>
+      </span>
 
-      <span v-if="currentStep === 1">
-        <!-- <HelpButton class='mr-2' /> -->
-        <TourButton class='mr-2' size="lg" tour="appEditorSteps" />
-
+      <span>
         <b-dropdown
           right
+          :disabled="currentStep === 0"
           no-caret
           size="lg"
           variant="light"
@@ -43,23 +40,25 @@
 
         </b-dropdown>
 
-        <!-- <span class='text-muted' v-if="currentStep === 1">
-          <router-link to="/auth/signup" >Sign Up</router-link> or <router-link to="/auth/login">Log In</router-link> to Save Schemas<i class="ml-1 fa fa-info-circle" title="Codotype automatically saves your Blueprint in localstorage. Signing up is a great idea if you want to continue making changes on another device." v-b-tooltip.hover.top></i>
+        <TourButton class='mr-2' size="lg" tour="appEditorSteps" :disabled="currentStep === 0"/>
+
+        <GenerateCodeButton :disabled="currentStep === 0" />
+
+        <!-- <span class='text-muted ml-2'>
+          <router-link to="/auth/signup" >Sign Up</router-link> or <router-link to="/auth/login">Log In</router-link> to Save Projects<i class="ml-1 fa fa-info-circle" title="Codotype automatically saves your Blueprint in localstorage. Signing up is a great idea if you want to continue making changes on another device." v-b-tooltip.hover.top></i>
         </span> -->
       </span>
 
-      <b-button
-        size="lg"
-        variant="outline-primary"
-        @click="incrementStep()"
-        :disabled="disableNext"
-        v-if="currentStep !== 2 && currentStep !== steps.length - 1"
-      >
-        Next
-        <i class="ml-1 fa fa-chevron-right"></i>
-      </b-button>
-
-      <GenerateCodeButton />
+      <span class="py-1">
+        <button
+          size="lg"
+          class="btn btn-link"
+          @click="incrementStep()"
+          :disabled="disableNext"
+        >
+          <i class="fa fa-lg fa-chevron-circle-right"></i>
+        </button>
+      </span>
 
     </b-col>
   </b-row>
@@ -68,14 +67,12 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import TourButton from '../../../components/TourButton'
-import HelpButton from '../../../components/HelpButton'
 import GenerateCodeButton from './GenerateCodeButton'
 
 export default {
   name: 'BuildStepsControls',
   components: {
     TourButton,
-    HelpButton,
     GenerateCodeButton
   },
   computed: {
@@ -86,6 +83,7 @@ export default {
     }),
     disableNext () {
       if (this.currentStep === 0 && !this.enableSubmit) return true
+      if (this.currentStep === 2) return true
       return false
     }
   },

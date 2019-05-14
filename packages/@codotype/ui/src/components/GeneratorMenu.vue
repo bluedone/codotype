@@ -1,30 +1,37 @@
 <template>
-  <b-navbar toggleable="md" type="light" variant="light" fixed="top">
-    <b-navbar-brand to="/generators">
+  <b-navbar toggleable="md" type="light" variant="white" fixed="top">
+    <b-navbar-brand href="http://localhost:3000">
       <strong>Codotype</strong>
     </b-navbar-brand>
 
-    <router-link :to="'/generators/' + model.id + '/build'" class="navbar-text">
-      <!-- <img src="/docs/4.2/assets/brand/bootstrap-solid.svg" width="30" height="30" alt=""> -->
+    <a :href="'http://localhost:3000/generators/' + model.id" class="navbar-text">
       <img class='generator-icon' style="width: 1rem;" :src="model.icon"/>
       {{ model.label }}
-    </router-link>
+    </a>
 
     <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
     <b-collapse is-nav id="nav_collapse">
 
-      <b-navbar-nav>
-        <b-nav-item class='ml-3' :to="'/generators/' + model.id">About</b-nav-item>
-      </b-navbar-nav>
-
       <b-navbar-nav class="ml-auto">
 
+        <b-nav-item target="_blank" href="http://localhost:3000/about">
+          <i class="fa fa-question-circle"></i>
+          About
+        </b-nav-item>
+
+        <b-nav-item target="_blank" href="https://codotype.org">
+          <i class="fa fa-book text-info"></i>
+          Docs
+        </b-nav-item>
+
         <b-nav-item target="_blank" href="https://twitter.com/codotype">
-          <i class="fab fa-lg fa-fw fa-twitter text-primary mr-1"></i>
+          <i class="fab fa-twitter text-primary"></i>
+          Twitter
         </b-nav-item>
 
         <b-nav-item target="_blank" href="https://github.com/codotype">
-          <i class="fab fa-lg fa-fw fa-github text-dark mr-1"></i>
+          <i class="fab fa-github"></i>
+          GitHub
         </b-nav-item>
 
       </b-navbar-nav>
@@ -38,15 +45,19 @@ import { mapGetters, mapActions } from 'vuex'
 import TourButton from './TourButton'
 
 export default {
-  name: 'BlueprintMenu',
+  name: 'GeneratorMenu',
   components: {
     TourButton
   },
   computed: mapGetters({
     model: 'generator/selectedModel'
-  }),
-  methods: mapActions({
-    generateCodebase: 'build/generate'
   })
 }
 </script>
+
+<style lang="sass">
+
+  nav.navbar
+    border-bottom: 1px solid #d3d3d3
+
+</style>

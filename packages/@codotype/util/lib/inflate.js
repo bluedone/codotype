@@ -22,10 +22,18 @@ function inflateRelation({ schemas, relation }) {
   // console.log(ownedSchema)
   const relatedSchema = schemas.find((s) => { return s.id === inflated.related_schema_id })
 
-  // TODO - document this
-  // TODO - document this
+  // Handle inflated.schema
+  // TODO - define a nicer name for `attribute` (idAttribute?)
+  // TODO - abstract `attribute` ternary into a separate function
   inflated.schema = inflateMeta(relatedSchema.label)
+  inflated.schema.attribute = inflated.type === 'HAS_MANY' ? inflated.schema.identifier + '_ids' : inflated.schema.identifier + '_id'
+
+  // Handle inflated.alias
+  // TODO - define a nicer name for `attribute` (idAttribute?)
+  // TODO - abstract `attribute` ternary into a separate function
   inflated.alias = inflateMeta(inflated.as || relatedSchema.label)
+  inflated.alias.attribute = inflated.type === 'HAS_MANY' ? inflated.alias.identifier + '_ids' : inflated.alias.identifier + '_id'
+
   inflated.reverse_alias = inflateMeta(inflated.reverse_as || ownedSchema.label)
   inflated.related_lead_attribute = !!relatedSchema.attributes[0] ? relatedSchema.attributes[0].identifier : '_id' // TODO - use `slug` instead of
 
@@ -108,6 +116,7 @@ function inflate({ blueprint }) {
             let relatedSchema = inflated.schemas.find(s => s.id === rel.related_schema_id)
 
             // Handles REF_BELONGS_TO
+            // TODO - clean this up!
             if (rel.type) {
 
               const ref_relation = {

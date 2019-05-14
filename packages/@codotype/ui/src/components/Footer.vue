@@ -35,6 +35,7 @@ export default {
     width: 100%
     bottom: 0
     z-index: 100
-    background: #f5f6f9
+    // background: #f5f6f9
+    background: #ffffff
     border-top: 1px solid #cccccc
 </style>
