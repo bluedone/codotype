@@ -1,6 +1,7 @@
 <template>
   <div class="container-fluid h-100">
-    <Loading v-if="starting || loading" />
+    <Loading v-if="starting" />
+    <LoadingBuild v-else-if="loading" />
     <BuildError v-else-if="fetchError || runtimeError" />
     <BuildFinished v-else-if="finished" />
     <b-row v-else class='justify-content-center'>
@@ -42,6 +43,7 @@ import { mapGetters, mapActions } from 'vuex'
 import Loading from '../../../components/Loading'
 import BuildSteps from '../../build/components/BuildSteps'
 import BuildError from '../../build/components/BuildError'
+import LoadingBuild from '../../build/components/LoadingBuild'
 import BuildFinished from '../../build/components/BuildFinished'
 import ProjectForm from '../../../components/BlueprintEditor/components/project/ProjectForm'
 import BlueprintEditor from '../../../components/BlueprintEditor'
@@ -59,8 +61,12 @@ export default {
       starting: true
     }
   },
+  metaInfo () {
+    return { title: this.model.label }
+  },
   components: {
     Loading,
+    LoadingBuild,
     BuildSteps,
     BuildError,
     BuildFinished,

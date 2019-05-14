@@ -1,9 +1,6 @@
 <template>
   <div class="card">
     <div class="card-header">
-      <!-- <b-button variant="primary" size="sm" @click="$store.dispatch('editor/schema/newModel')"> -->
-        <!-- <i class="fa fa-plus"></i> -->
-      <!-- </b-button> -->
       <strong class="text-muted">
         Schemas
       </strong>
