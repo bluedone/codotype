@@ -1,3 +1,10 @@
+### v0.1.5
+
+#### Changes
+* Bumped `@codotype/types` dependency to `0.2.1`
+
+---
+
 ### v0.1.4
 
 #### Changes

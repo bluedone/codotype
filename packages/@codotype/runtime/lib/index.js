@@ -218,6 +218,20 @@ module.exports = class CodotypeRuntime {
       // Invokes `generator.forEachSchema` once for each in blueprint.schemas
       await Promise.all(blueprint.schemas.map((schema) => generatorInstance.forEachSchema({ schema: schema, ...this.options })))
 
+      // Invokes `generator.forEachRelation` once for each in blueprint.schemas
+      await Promise.all(blueprint.schemas.map((schema) => {
+        return Promise.all(schema.relations.map((relation) => {
+          return generatorInstance.forEachRelation({ schema: schema, relation, ...this.options })
+        }))
+      }))
+
+      // Invokes `generator.forEachReverseRelation` once for each in blueprint.schemas
+      await Promise.all(blueprint.schemas.map((schema) => {
+        return Promise.all(schema.reverse_relations.map((relation) => {
+          return generatorInstance.forEachReverseRelation({ schema: schema, relation, ...this.options })
+        }))
+      }))
+
       // Invokes `generator.write()` once
       await generatorInstance.write(this.options)
 
@@ -465,6 +479,20 @@ module.exports = class CodotypeRuntime {
       // Invokes `generator.forEachSchema` once for each in blueprint.schemas
       // TODO - abstract into @codotype/runtime
       await Promise.all(parentGeneratorInstance.options.blueprint.schemas.map((schema) => generator.forEachSchema({ schema: schema, ...parentGeneratorInstance.options })))
+
+      // Invokes `generator.forEachRelation` once for each in blueprint.schemas
+      await Promise.all(parentGeneratorInstance.options.blueprint.schemas.map((schema) => {
+        return Promise.all(schema.relations.map((relation) => {
+          return generator.forEachRelation({ relation, schema: schema, ...parentGeneratorInstance.options })
+        }))
+      }))
+
+      // Invokes `generator.forEachReverseRelation` once for each in blueprint.schemas
+      await Promise.all(parentGeneratorInstance.options.blueprint.schemas.map((schema) => {
+        return Promise.all(schema.reverse_relations.map((relation) => {
+          return generator.forEachReverseRelation({ relation, schema: schema, ...parentGeneratorInstance.options })
+        }))
+      }))
 
       // Invokes `generator.write()` once
       // TODO - abstract into @codotype/runtime
