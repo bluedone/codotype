@@ -1,3 +1,11 @@
+### v0.1.6
+
+#### Changes
+* `SchemaList` component implements `<draggable>`
+* Added `localStorageMediator` to `BlueprintEditor`
+
+---
+
 ### v0.1.5
 
 #### Changes
