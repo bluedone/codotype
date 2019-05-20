@@ -18,12 +18,16 @@
         />
       </span>
 
-      <small class='mt-2' v-html="attribute.help"></small>
+      <p class='mt-2 mb-0'>
+        <small v-html="attribute.help" v-if="attribute.help"></small>
+      </p>
 
     </div>
 
-    <div class="col-lg-12 mt-2" v-if="attribute.type !== DATATYPE_BOOLEAN">
-
+    <div
+      :class="group.icon ? 'col-lg-12 mt-2' : 'col-lg-12'"
+      v-if="attribute.type !== DATATYPE_BOOLEAN"
+    >
       <input
         v-if="attribute.type === DATATYPE_STRING"
         :value="getValue({ group: group, schema: schema, attribute: attribute })"
