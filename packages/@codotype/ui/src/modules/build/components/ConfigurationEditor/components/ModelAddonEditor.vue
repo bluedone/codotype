@@ -82,6 +82,7 @@
                 :model="newAddon"
                 :schema="selectedSchema"
                 :template="group.previewTemplate"
+                :tooltip="group.previewTooltip"
               >
               </OptionTemplateWrapper>
             </div>

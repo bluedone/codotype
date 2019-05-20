@@ -51,6 +51,7 @@
         :model="{ value: getValue({ group: group, schema: schema, attribute: attribute }) }"
         :schema="schema"
         :template="attribute.previewTemplate"
+        :tooltip="attribute.previewTooltip"
       >
       </OptionTemplateWrapper>
 
