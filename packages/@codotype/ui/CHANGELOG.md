@@ -1,3 +1,16 @@
+### v0.1.7 (UNPUBLISHED)
+
+#### Changes
+* `OptionTemplateWrapper` component implements `tooltip` prop from pulled from `previewTooltip` variables
+* Cleaned up `OptionFormItem` component spacing in `ModelAddonEditor`
+* `ModelAddonEditor` component implements `<draggable>`
+* Scaffolded out Relation validation function, prevents form submission
+* Fixed UI bug where `<BuildLoading />` component wasn't centered on the page
+* Refined `<BuildLoading />` component UX
+* Refined `<BuildError />` component UX
+
+---
+
 ### v0.1.6
 
 #### Changes
