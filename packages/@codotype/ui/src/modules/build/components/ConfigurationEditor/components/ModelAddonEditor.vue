@@ -10,7 +10,7 @@
         </strong>
       </div>
       <div class="card">
-        <ul class="list-group list-group-flush">
+        <ul class='list-group list-group-flush'>
           <li
             v-for="schema in schemas"
             :class='selectedSchema.id === schema.id ? "list-group-item list-group-item-action list-group-item-primary" : "list-group-item list-group-item-action" '
@@ -151,7 +151,12 @@
         </b-modal>
 
         <!-- View existing instance data -->
-        <ul class='list-group'>
+        <draggable
+          class='list-group'
+          v-model='collection'
+          :animation="150"
+          :fallbackTolerance="100"
+        >
           <li
             class="list-group-item d-flex justify-content-between align-items-center"
             v-for="instance in collection"
@@ -202,7 +207,7 @@
             No {{ group.label_plural }} defined
           </li>
 
-        </ul>
+        </draggable >
 
       </b-card>
     </b-col>
@@ -211,6 +216,7 @@
 
 <script>
 import { mapGetters, mapActions, mapMutations } from 'vuex'
+import draggable from 'vuedraggable'
 import OptionFormItem from './OptionFormItem'
 import OptionTemplateRenderer from './OptionTemplateRenderer'
 import OptionTemplateWrapper from './OptionTemplateWrapper'
@@ -222,6 +228,7 @@ export default {
     group: { required: true }
   },
   components: {
+    draggable,
     SchemaSelector,
     OptionTemplateRenderer,
     OptionTemplateWrapper,
@@ -235,12 +242,33 @@ export default {
   mounted () {
     this.$store.dispatch('build/editor/selectModelAddon', { group: this.group, schema: this.selectedSchema })
   },
-  computed: mapGetters({
-    schemas: 'editor/schema/collection/items',
-    selectedSchema: 'build/editor/selectedSchema',
-    newAddon: 'build/editor/model_addon/newModel',
-    collection: 'build/editor/model_addon/items'
-  }),
+  computed: {
+    collection: {
+      get () {
+        return this.$store.getters['build/editor/model_addon/items']
+      },
+      set (value) {
+
+        // Ensures only truthy values
+        value = value.filter(s => !!s)
+
+        // Sets `order` attribute on each item
+        value.forEach((s, i) => { s.order = i })
+
+        // Sorts the values by `order` attribute before commiting to the Vuex store
+        // value = orderBy(value, ['order'], ['asc'])
+
+        // Commits the sorted list to the store
+        this.$store.commit('build/editor/model_addon/items', value)
+        this.syncModelAddon({ group: this.group, schema: this.selectedSchema })
+      }
+    },
+    ...mapGetters({
+      schemas: 'editor/schema/collection/items',
+      selectedSchema: 'build/editor/selectedSchema',
+      newAddon: 'build/editor/model_addon/newModel',
+    })
+  },
   methods: {
     ...mapActions({
       createModel: 'build/editor/model_addon/create',
