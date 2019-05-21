@@ -1,8 +1,8 @@
 <template>
-  <div class="h-100 d-flex flex-row align-items-center">
+  <div class="h-100 d-flex flex-row justify-content-center align-items-center">
     <div class="col-lg-8">
-      <div class="card card-body text-center" v-if="buildLoading">
-        <p class="lead">Thousands of monkeys are generating your app</p>
+      <div class="card card-body text-center">
+        <p class="lead">Thousands of monkeys are generating your code</p>
         <small class="text-muted">please be nice to them its their first day on the job</small>
         <div class="row mt-4">
           <div class="col-lg-12 text-center d-flex justify-content-center">
