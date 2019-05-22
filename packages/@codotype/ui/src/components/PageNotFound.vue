@@ -11,17 +11,21 @@
       <div class="row">
 
         <div class="col-lg-12 text-center">
-          <p class="lead text-muted">
+          <p class="lead">
             <i class="far fa-3x fa-frown"></i>
           </p>
         </div>
 
         <div class="col-lg-12 text-center">
-          <p class="lead text-muted">It was probably our fault - we're sorry about that.</p>
+          <p class="lead">It was probably our fault - we're sorry about that.</p>
         </div>
 
-        <div class="col-lg-12 text-center">
+        <div class="col-lg-12 text-center" v-if="homeUrl">
           <p class="lead"><a :href="homeUrl">Click here to return home</a></p>
+        </div>
+
+        <div class="col-lg-12 text-center" v-if="redirectUrl">
+          <p class="lead">We'll be redirecting you momentarily</p>
         </div>
 
       </div>
