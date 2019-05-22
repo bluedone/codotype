@@ -8,6 +8,9 @@
 * Fixed UI bug where `<BuildLoading />` component wasn't centered on the page
 * Refined `<BuildLoading />` component UX
 * Refined `<BuildError />` component UX
+* Added `<Redirect redirectUrl="..." />` component
+* Simplified output in `<SchemaPreview />` component
+* Removed emoji from `<SortableList />` component
 
 ---
 

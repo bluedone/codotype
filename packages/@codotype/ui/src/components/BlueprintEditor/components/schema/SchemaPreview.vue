@@ -30,7 +30,7 @@ export default {
       defaultObject: 'editor/schema/defaultObject'
     }),
     previewBody () {
-      return `${this.model.identifier} = new ${this.model.class_name}(` + JSON.stringify(this.defaultObject, null, 2) + ')'
+      return JSON.stringify(this.defaultObject, null, 2)
     }
   }
 }
