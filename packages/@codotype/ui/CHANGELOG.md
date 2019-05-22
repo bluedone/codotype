@@ -5,12 +5,15 @@
 * Cleaned up `OptionFormItem` component spacing in `ModelAddonEditor`
 * `ModelAddonEditor` component implements `<draggable>`
 * Scaffolded out Relation validation function, prevents form submission
-* Fixed UI bug where `<BuildLoading />` component wasn't centered on the page
 * Refined `<BuildLoading />` component UX
 * Refined `<BuildError />` component UX
 * Added `<Redirect redirectUrl="..." />` component
 * Simplified output in `<SchemaPreview />` component
 * Removed emoji from `<SortableList />` component
+
+#### Fixes
+* Fixed bug in `BuildStepsControls` component for 2-step generators
+* Fixed UI bug where `<BuildLoading />` component wasn't centered on the page
 
 ---
 

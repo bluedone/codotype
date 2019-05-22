@@ -83,6 +83,7 @@ export default {
     }),
     disableNext () {
       if (this.currentStep === 0 && !this.enableSubmit) return true
+      if (this.currentStep === 1 && this.steps.length === 2) return true
       if (this.currentStep === 2) return true
       return false
     }
