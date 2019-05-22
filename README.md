@@ -2,7 +2,17 @@
 
 Upstream development repository for [github.com/codotype](https://github.com/codotype)
 
-## Setup
+### Stay on the bleeding edge — [join our Gitter room!](https://gitter.im/codotype/Lobby) 🎉
+
+[![Twitter](https://img.shields.io/twitter/follow/codotype.svg?style=social&label=Follow)](https://twitter.com/codotype)
+
+# Generators
+
+**Codotype**<br/> ![Star](https://img.shields.io/github/stars/codotype/codotype.svg?style=social&label=Star)
+
+---
+
+# Setup
 
 1. Run the following command to set up your local environment for development:
 
