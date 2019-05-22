@@ -10,10 +10,12 @@
 * Added `<Redirect redirectUrl="..." />` component
 * Simplified output in `<SchemaPreview />` component
 * Removed emoji from `<SortableList />` component
+* Switched dropdown alignment in `<BuildStepsControls />` component import/export
 
 #### Fixes
-* Fixed bug in `BuildStepsControls` component for 2-step generators
-* Fixed UI bug where `<BuildLoading />` component wasn't centered on the page
+* Bug in `BuildStepsControls` component for 2-step generators
+* Bug where `build/selectBuild` wasn't being invoked for 2-step generators
+* UI bug where `<BuildLoading />` component wasn't centered on the page
 
 ---
 

@@ -16,7 +16,6 @@
 
       <span>
         <b-dropdown
-          right
           :disabled="currentStep === 0"
           no-caret
           size="lg"
