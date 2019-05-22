@@ -22,11 +22,12 @@ build/**/*
 
 # Associated packages maintained in separate repositories
 !packages/.gitkeep
-packages/@codotype/web
-packages/@codotype/codotype-api
-packages/@codotype/codotype-hackathon-starter
-packages/@codotype/codotype-mongodb-dataworker
-packages/@codotype/codotype-*-generator
+packages/workspace/*
+
+# Generator Packages
+!packages/generators/.gitkeep
+!packages/generators/README.md
+packages/generators
 
 # Ignore Lerna artifacts
 lerna-debug.log
