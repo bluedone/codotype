@@ -1,3 +1,10 @@
+### v0.1.3
+
+#### Fixes
+* Updated `@codotype/runtime` to `0.0.7`
+
+---
+
 ### v0.1.2
 
 #### Fixes
