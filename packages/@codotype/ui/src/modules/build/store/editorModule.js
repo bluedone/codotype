@@ -69,7 +69,9 @@ export default {
 
       // Loads new option group into model_addon module
       commit('selectedSchemaId', schema.id)
-      commit('model_addon/defaultNewModel', buildConfigurationDefault({ attributes: group.attributes }))
+      let newModelAddon = buildConfigurationDefault({ attributes: group.attributes })
+      newModelAddon.order = state.model_addon.items.length
+      commit('model_addon/defaultNewModel', newModelAddon)
       commit('model_addon/items', configuration[group.identifier_plural][schema.identifier])
     },
     selectGlobalAddon ({ state, getters, commit, dispatch }, { group }) {

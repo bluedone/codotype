@@ -3,19 +3,16 @@
     <div class="row">
       <div class="col-lg-12 d-flex justify-content-between align-items-center">
         <p class="lead mb-0 w-100 d-flex justify-content-between align-items-center">
-
           <router-link :to="'/generators/' + model.id">
-            <img class='generator-icon' :src="model.icon"/>
+            <img class='generator-icon mr-2' :src="model.icon"/>
             {{ model.label }}
           </router-link>
 
           <GeneratorGitHubLink class='ml-2' :model="model" />
-          <!-- <span class='badge badge-light text-muted'>{{ model.version }}</span> -->
-          <!-- <span class='badge badge-warning' v-if="model.official">Official</span> -->
         </p>
 
       </div>
-      <div class="col-lg-12">
+      <div class="col-lg-12 mt-2">
         <p class="card-text mb-2">
           {{ model.description }}
         </p>

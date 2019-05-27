@@ -1,6 +1,8 @@
 {
   "packages": [
-    "packages/@codotype/*"
+    "packages/@codotype/*",
+    "packages/generators/*",
+    "packages/workspace/*"
   ],
   "version": "0.0.0"
 }

@@ -80,6 +80,7 @@ export default {
       this.selectModel(this.id)
       this.$store.dispatch('build/loadSteps', this.id)
       this.$store.dispatch('build/steps/reset')
+      this.$store.dispatch('build/selectBuild', this.id) // TODO - this is invoked in `build.editorModule` as well
       setTimeout(() => {
         this.starting = false
       }, 500)

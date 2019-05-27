@@ -29,13 +29,13 @@
 
         <HelpPopover
           target="project-label"
-          placement="top"
+          placement="left"
           content='Give your project a name'>
         </HelpPopover>
 
         <HelpPopover
           target="submit-project-form"
-          placement="bottom"
+          placement="left"
           content='Click here to continue'>
         </HelpPopover>
 

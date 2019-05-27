@@ -60,8 +60,8 @@
           <b-list-group flush v-else-if="!collection.length">
             <b-list-group-item class="text-center">
 
-              <span class='text-muted'>¯\_(ツ)_/¯</span>
-              <br>
+              <!-- <span class='text-muted'>¯\_(ツ)_/¯</span> -->
+              <!-- <br> -->
               <strong class="mb-0 mt-1 text-muted">{{ title }}</strong>
               <br>
               <small class="text-muted">{{ info }}</small>
