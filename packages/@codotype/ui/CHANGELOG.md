@@ -1,4 +1,4 @@
-### v0.1.7 (UNPUBLISHED)
+### v0.1.7
 
 #### Changes
 * `OptionTemplateWrapper` component implements `tooltip` prop from pulled from `previewTooltip` variables
@@ -11,6 +11,7 @@
 * Simplified output in `<SchemaPreview />` component
 * Removed emoji from `<SortableList />` component
 * Switched dropdown alignment in `<BuildStepsControls />` component import/export
+* Cleaned up spacing in `GeneratorCard` and `GeneratorListItem` components
 
 #### Fixes
 * Bug in `BuildStepsControls` component for 2-step generators

@@ -1,6 +1,6 @@
 {
   "name": "@codotype/ui",
-  "version": "0.1.7.unpublished",
+  "version": "0.1.7",
   "description": "UI components used throughout the Codotype ecosystem",
   "author": "Alexander Schwartzberg <aeksco@gmail.com>",
   "scripts": {
