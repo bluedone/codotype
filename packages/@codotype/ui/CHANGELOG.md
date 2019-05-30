@@ -1,7 +1,8 @@
 ### v0.1.8 (UNPUBLISHED)
 
 #### Changes
-* XYZ
+* Added tour to Build Configuration page via the `ConfigurationHelp.html` template
+* TourMediator handles configuration tour "seen" state
 
 #### Fixes
 * `BuildError` component directs users to `codotype.io` instead of `splash.codotype.io`

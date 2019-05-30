@@ -37,7 +37,7 @@
     <b-col lg="12" class="step-content">
       <slot name="step-1" v-if="selectedStep.id === 'getting_started'" />
       <slot name="step-2" v-if="selectedStep.id === 'blueprint_step'" />
-      <slot name="step-3" v-if="selectedStep.id === 'configure_generator'" />
+      <slot name="step-3" v-if="selectedStep.id === 'configure_step'" />
     </b-col>
 
   </b-row>

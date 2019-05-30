@@ -11,7 +11,7 @@ const BLUEPRINT_STEP = {
 }
 
 const CONFIGURATION_STEP = {
-  id: 'configure_generator',
+  id: 'configure_step',
   label: 'Configure Generator'
 }
 
