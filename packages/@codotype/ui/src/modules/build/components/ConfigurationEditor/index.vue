@@ -1,6 +1,6 @@
 <template>
   <div class="card card-body shadow-sm">
-    <b-tabs no-fade lazy pills class='w-100'>
+    <b-tabs no-fade lazy pills class="w-100">
 
       <b-tab
         lazy
@@ -9,8 +9,8 @@
         v-for="group in model.option_groups"
         :key="group.identifier"
       >
-        <b-row class='justify-content-center mt-3'>
-          <b-col lg=12>
+        <b-row class="justify-content-center mt-3">
+          <b-col lg=12 id="configuration">
             <EditorHeader
               :title="group.label"
               :help="group.description"
