@@ -1,3 +1,13 @@
+### v0.1.8 (UNPUBLISHED)
+
+#### Changes
+* XYZ
+
+#### Fixes
+* `BuildError` component directs users to `codotype.io` instead of `splash.codotype.io`
+
+---
+
 ### v0.1.7
 
 #### Changes
