@@ -5,7 +5,7 @@
       <!-- Select Datatype, Define Properties, Validations -->
       <b-tabs lazy pills v-model="formStep">
         <b-tab title="Datatype">
-          <AttributeDatatypeForm :model="model" />
+          <AttributeDatatypeForm :generator="generator" :model="model" />
         </b-tab>
         <b-tab title="Properties">
           <AttributePropertiesForm :model="model" />
@@ -39,6 +39,7 @@ export default {
   },
   computed: {
     ...mapGetters({
+      generator: 'generator/selectedModel',
       model: 'editor/schema/attribute/form/model'
     }),
     formStep: {
