@@ -1,5 +1,5 @@
 <template>
-  <b-row>
+  <b-row class="row d-flex flex-row align-items-center">
     <div class="col-lg-12">
       <div class="row d-flex justify-content-between">
         <!-- Alias inputs -->
