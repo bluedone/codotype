@@ -2,10 +2,10 @@
   <div class="row mt-2">
 
     <div class="col-lg-12">
-      <p class="lead mb-0">Attribute Validations</p>
+      <p class="lead mb-0">Default & Description</p>
     </div>
 
-    <div class="col-lg-6 col-sm-12">
+    <!-- <div class="col-lg-6 col-sm-12">
       <FormInput
         label="Required"
         v-if="![DATATYPE_BOOLEAN].includes(model.datatype)"
@@ -22,6 +22,16 @@
         v-model="model.unique"
         help="Whether or not to enforce unique values for this attribute."
         type='BOOL'
+      />
+    </div> -->
+
+    <div class="col-sm-12">
+      <FormInput
+        label="Description"
+        placeholder="Description"
+        v-model="model.help"
+        example="Example: 'The Last Name of the individual'"
+        help="A description of this attribute."
       />
     </div>
 
