@@ -70,7 +70,7 @@ export default {
 
       if (this.isSelected) {
         // css.push('active')
-        css.push('list-group-item-primary')
+        css.push('selected')
       }
 
       return css.join(' ')
@@ -83,9 +83,13 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-  li.list-group-item
-    cursor: pointer
 
-  a.row.align-items-center
-    text-decoration: none
+li.list-group-item
+  cursor: pointer
+  &.selected
+    border-left: 3px solid #4582EC
+    font-weight: bold
+
+a.row.align-items-center
+  text-decoration: none
 </style>
