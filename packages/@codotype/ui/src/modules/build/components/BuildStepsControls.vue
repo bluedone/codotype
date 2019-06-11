@@ -16,7 +16,6 @@
 
       <span>
         <b-dropdown
-          :disabled="currentStep === 0"
           no-caret
           size="lg"
           variant="light"
@@ -29,19 +28,19 @@
 
           <b-dropdown-item-button @click="$store.commit('editor/modals/import/showing', true)">
             <i class="fa fa-fw fa-upload"></i>
-            Import Blueprint
+            Import Project
           </b-dropdown-item-button>
 
           <b-dropdown-item-button @click="$store.commit('editor/modals/export/showing', true)">
             <i class="fa fa-fw fa-download"></i>
-            Export Blueprint
+            Export Project
           </b-dropdown-item-button>
 
         </b-dropdown>
 
-        <TourButton class='mr-2' size="lg" tour="appEditorSteps" :disabled="currentStep === 0"/>
+        <!-- <TourButton class='mr-2' size="lg" tour="appEditorSteps" :disabled="currentStep === 0"/> -->
 
-        <GenerateCodeButton :disabled="currentStep === 0" />
+        <GenerateCodeButton :disabled="currentStep !== 2" />
 
         <!-- <span class='text-muted ml-2'>
           <router-link to="/auth/signup" >Sign Up</router-link> or <router-link to="/auth/login">Log In</router-link> to Save Projects<i class="ml-1 fa fa-info-circle" title="Codotype automatically saves your Blueprint in localstorage. Signing up is a great idea if you want to continue making changes on another device." v-b-tooltip.hover.top></i>
