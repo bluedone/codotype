@@ -1,0 +1,42 @@
+<template>
+  <div class="card card-body shadow-sm">
+    <b-row class='align-items-center justify-content-center'>
+      <b-col lg=12>
+        <SchemaForm />
+      </b-col>
+      <b-col lg=12 class="text-right">
+        <b-button
+          variant="success"
+          @click="createModel()"
+          :disabled="!enableSubmit"
+        >
+          Create
+        </b-button>
+      </b-col>
+    </b-row>
+  </div>
+</template>
+
+<script>
+import SchemaNewButton from './SchemaNewButton'
+import SchemaForm from './SchemaForm'
+import { mapGetters, mapActions } from 'vuex'
+
+export default {
+  name: 'SchemaEmptyState',
+  components: {
+    SchemaNewButton,
+    SchemaForm
+  },
+  mounted () {
+    this.resetForm()
+  },
+  computed: mapGetters({
+    enableSubmit: 'editor/schema/enableSubmit'
+  }),
+  methods: mapActions({
+    resetForm: 'editor/schema/resetNewModel',
+    createModel: 'editor/schema/createModel',
+  })
+}
+</script>
