@@ -9,9 +9,9 @@
 
             <h5 class="mb-0 mr-2 d-flex">{{ model.label + ' Schema' }}</h5>
 
-            <SchemaEditButton v-if="!isUserModel" />
+            <SchemaEditButton v-if="!isLocked" />
             <HelpPopover
-              v-if="!isUserModel"
+              v-if="!isLocked"
               target="schemaEditPopover"
               placement="right"
               :triggers="['hover']"
@@ -20,9 +20,9 @@
 
           </span>
 
-          <SchemaDestroyButton v-if="!isUserModel" />
+          <SchemaDestroyButton v-if="!isLocked && !isRemovable" />
           <HelpPopover
-            v-if="!isUserModel"
+            v-if="!isLocked"
             target="schema-destroy-button"
             placement="left"
             :triggers="['hover']"
@@ -31,8 +31,8 @@
 
         </b-col>
 
-        <SchemaEditModal v-if="!isUserModel" />
-        <SchemaDestroyModal :label="model.label" />
+        <SchemaEditModal v-if="!isLocked" />
+        <SchemaDestroyModal :label="model.label" v-if="!locked && !isRemovable" />
       </b-row>
 
       <b-row class='mb-0'>
@@ -47,6 +47,7 @@
         <b-col sm=12 md=6 lg=6>
 
           <SortableList
+            :locked="isLocked"
             scope="attribute"
             label="Attributes"
             title="No Attributes added yet"
@@ -66,6 +67,7 @@
         <b-col sm=12 md=6 lg=6 class="pl-md-0">
 
           <SortableList
+            :locked="isLocked"
             scope="relation"
             label="Relations"
             title="No Relations added yet"
@@ -126,7 +128,10 @@ export default {
       model: 'editor/schema/selectedModel',
       schemas: 'editor/schema/collection/items'
     }),
-    isUserModel () {
+    isLocked () {
+      return this.model.locked
+    },
+    isRemovable () {
       return this.model.identifier === 'user'
     }
   }
