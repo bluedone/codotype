@@ -69,7 +69,6 @@ export default {
       let css = ['list-group-item', 'list-group-item-action']
 
       if (this.isSelected) {
-        // css.push('active')
         css.push('selected')
       }
 
@@ -83,11 +82,13 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+@import '../../../../sass/vendor.sass'
 
 li.list-group-item
   cursor: pointer
+  border-left: 3px solid $gray-500 !important
   &.selected
-    border-left: 3px solid #4582EC
+    border-left: 3px solid #4582EC !important
     font-weight: bold
 
 a.row.align-items-center
