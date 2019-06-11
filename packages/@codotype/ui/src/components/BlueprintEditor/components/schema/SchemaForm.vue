@@ -6,7 +6,7 @@
 
         <div class="col-sm-12">
 
-          <h4>Schema Label</h4>
+          <h4>New Schema</h4>
 
           <p class="small mt-2 mb-3 text-muted"><span class="text-success">Label</span> should be a <strong>singular noun</strong> - whitespace is allowed. The input field will enforce proper capitalization and spacing.</p>
 
