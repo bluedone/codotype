@@ -106,6 +106,7 @@ export default {
 
   .list-group-item
     padding: 0.25rem 0.5rem
+    border-left: 3px solid $gray-500 !important
     cursor: grab
 
   .list-group-item:hover i.fa-equals
