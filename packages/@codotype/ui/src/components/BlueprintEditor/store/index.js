@@ -9,10 +9,10 @@ export default {
   namespaced: true,
   actions: {
     created ({ getters, commit, dispatch }) {
-      if (!getters['schema/collection/first']) {
-        commit('schema/collection/items', [Object.assign({}, DEFAULT_USER_SCHEMA)])
-      }
-      dispatch('schema/selectModel', getters['schema/collection/first'])
+      // if (!getters['schema/collection/first']) {
+      //   commit('schema/collection/items', [Object.assign({}, DEFAULT_USER_SCHEMA)])
+      // }
+      // dispatch('schema/selectModel', getters['schema/collection/first'])
     },
     reset ({ getters, commit, dispatch }) {
       dispatch('project/reset')
