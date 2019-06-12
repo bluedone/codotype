@@ -32,7 +32,7 @@
         </b-col>
 
         <SchemaEditModal v-if="!isLocked" />
-        <SchemaDestroyModal :label="model.label" v-if="!locked && !isRemovable" />
+        <SchemaDestroyModal :label="model.label" v-if="!isLocked && !isRemovable" />
       </b-row>
 
       <b-row class='mb-0'>

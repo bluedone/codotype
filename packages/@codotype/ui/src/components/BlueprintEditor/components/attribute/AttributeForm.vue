@@ -1,8 +1,6 @@
 <template>
   <b-row>
     <b-col lg=12>
-
-      <!-- Select Datatype, Define Properties, Validations -->
       <b-tabs lazy pills v-model="formStep">
         <b-tab title="Datatype">
           <AttributeDatatypeForm :generator="generator" :model="model" />
@@ -14,7 +12,6 @@
           <AttributeValidationsForm :model="model" />
         </b-tab>
       </b-tabs>
-
     </b-col>
   </b-row>
 </template>
