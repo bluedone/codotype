@@ -14,10 +14,10 @@
           <!-- SOURCE MODEL -->
           <div class="row">
             <div class="col-lg-4">
-              <div class="form-group text-center">
+              <div class="form-group text-primary text-center">
                 <label class='mb-0'>{{ selectedSchema.label }}</label>
-                <small class="form-text text-muted">Where the relational data is stored</small>
-                <input type="text" class='form-control' disabled :value="selectedSchema.label">
+                <small class="form-text text-primary">Where the relational data is stored</small>
+                <input type="text" class='form-control border-primary text-white bg-primary' disabled :value="selectedSchema.label">
               </div>
             </div>
 
@@ -55,9 +55,9 @@
             <!-- RELATED SCHEMA -->
             <div class="col-lg-4">
               <div class="form-group text-center">
-                <label class='mb-0'>Related Schema</label>
-                <small class="form-text text-muted">Schema referenced by this relation</small>
-                <select class="form-control" v-model="model.related_schema_id" @change="updateModel()">
+                <label class='mb-0 text-info'>Related Schema</label>
+                <small class="form-text text-info">Schema referenced by this relation</small>
+                <select class="form-control border-info text-info" v-model="model.related_schema_id" @change="updateModel()">
 
                   <!-- <option v-if="model.type === 'HAS_ONE'" v-for="s in allSchemas" :key="s.id" :value="s.id">{{s.label}}</option> -->
                   <template v-if="model.type === 'HAS_MANY'">
@@ -83,7 +83,7 @@
           <div class="row mt-2">
             <div class="col-sm-12">
               <h4>Alias</h4>
-              <p class="small mt-2 mb-3 text-muted"><span class="text-success">Cardinality</span> describes the structure of the <strong>Relation</strong></p>
+              <p class="small mt-2 mb-3 text-muted"><span class="text-success">Cardinality</span> describes the structure of the <strong>Relation</strong>Alias this relation under a different singlar, title-cased noun.</p>
             </div>
           </div>
           <div class="row">
@@ -98,7 +98,8 @@
             <hr>
           </div>
           <div class="col-lg-12">
-            <RelationFormPreview :model="model" />
+            <!-- <RelationFormPreview :model="model" /> -->
+            <RelationBadge :model="model" />
           </div>
         </div>
       </b-tabs>
@@ -113,10 +114,12 @@
 import { mapGetters, mapMutations } from 'vuex'
 import RelationFormAlias from './RelationFormAlias'
 import RelationFormPreview from './RelationFormPreview'
+import RelationBadge from './RelationBadge'
 import RELATION_META from '@codotype/types/lib/relation-meta'
 
 export default {
   components: {
+    RelationBadge,
     RelationFormAlias,
     RelationFormPreview
   },
