@@ -4,7 +4,7 @@
     size="lg"
     :visible="showingModal"
     :title="'Edit Attribute'"
-    ok-title='Submit'
+    ok-title='Update Attribute'
     ok-variant='success'
     cancel-title='Cancel'
     cancel-variant='light'
