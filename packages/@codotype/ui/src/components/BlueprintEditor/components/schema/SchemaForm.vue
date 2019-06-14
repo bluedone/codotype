@@ -20,11 +20,12 @@
             Try something simple like <code>Movie</code>, or <code>Movie Rating</code>
           </small>
 
-          <b-form-input
-            size="lg"
+          <input
+            class="form-control form-control-lg"
             v-model="schemaLabel"
             placeholder="Label"
             ref="input_el"
+            @keyup.enter="onKeyEnter()"
           />
 
           <p class="small mt-4 text-muted">
@@ -109,8 +110,22 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'SchemaForm',
+  props: {
+    onKeypressEnter: {
+      required: false
+    },
+    enableSubmit: {
+      type: Boolean
+    }
+  },
   mounted () {
     setTimeout(() => { this.$refs.input_el.focus() }, 500)
+  },
+  methods: {
+    onKeyEnter() {
+      console.log('ON KEY ENTER')
+      if (this.onKeypressEnter && this.enableSubmit) this.onKeypressEnter()
+    }
   },
   computed: {
     ...mapGetters({

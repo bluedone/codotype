@@ -12,7 +12,7 @@
     @ok="updateModel()"
     @hide="showModal(false)"
   >
-    <SchemaForm />
+    <SchemaForm :enableSubmit="enableSubmit" :onKeypressEnter="onKeypressEnter" />
   </b-modal>
 </template>
 
@@ -30,6 +30,10 @@ export default {
     showingModal: 'editor/schema/modals/edit/showing'
   }),
   methods: {
+    onKeypressEnter() {
+      this.updateModel()
+      this.showModal(false)
+    },
     ...mapActions({
       updateModel: 'editor/schema/updateModel',
     }),

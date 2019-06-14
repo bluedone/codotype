@@ -2,7 +2,7 @@
   <div class="card card-body shadow-sm">
     <b-row class='align-items-center justify-content-center'>
       <b-col lg=12>
-        <SchemaForm />
+        <SchemaForm :onKeypressEnter="createModel" :enableSubmit="enableSubmit" />
       </b-col>
       <b-col lg=12 class="text-right">
         <b-button
