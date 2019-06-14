@@ -1,5 +1,4 @@
 import collectionModule from '../../../store/lib/collectionModule'
-import objectModule from './objectModule'
 import { buildConfigurationDefault } from '@codotype/util/lib/buildDefault'
 
 export default {
