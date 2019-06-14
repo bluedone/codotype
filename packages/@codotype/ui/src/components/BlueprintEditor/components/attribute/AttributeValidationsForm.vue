@@ -3,6 +3,8 @@
 
     <div class="col-lg-12">
       <p class="lead mb-0">Default & Description</p>
+      <small class="form-text text-muted">Define a <span class="text-success">Default Value</span> or provide a <span class="text-success">Description</span> to annotate this <strong>Attribute</strong>. Note that <i>not all </i> <strong>Attributes</strong> support <span class="text-success">Default Values</span>.</small>
+      <hr />
     </div>
 
     <!-- <div class="col-lg-6 col-sm-12">
@@ -30,8 +32,7 @@
         label="Description"
         placeholder="Description"
         v-model="model.help"
-        example="Example: 'The Last Name of the individual'"
-        help="A description of this attribute."
+        help="Describe the purpose or document the constraints of this Attribute"
       />
     </div>
 

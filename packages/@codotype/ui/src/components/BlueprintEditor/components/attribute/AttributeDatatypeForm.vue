@@ -1,8 +1,10 @@
 <template>
   <b-row class="mt-2">
+
     <b-col lg="12">
-      <p class="lead mb-0">Attribute Datatype</p>
-      <small class="form-text text-muted">The type of data represented by this attribute.</small>
+      <p class="lead mb-0">Datatype</p>
+      <small class="form-text text-muted">The <span class="text-success">Datatype</span> describes the data represented by this <strong>Attribute</strong> - this <strong>Codotype Generator</strong> supports <strong>{{filteredDatatypes.length}} </strong><span class="text-success">Datatypes</span>.</small>
+      <hr />
     </b-col>
 
     <b-col lg="12">
