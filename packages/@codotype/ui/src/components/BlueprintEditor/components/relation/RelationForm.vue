@@ -17,7 +17,7 @@
               <div class="form-group text-primary text-center">
                 <label class='mb-0'>{{ selectedSchema.label }}</label>
                 <small class="form-text text-primary">Where the relational data is stored</small>
-                <input type="text" class='form-control border-primary text-white bg-primary' disabled :value="selectedSchema.label">
+                <input type="text" class='form-control border-primary text-primary' disabled :value="selectedSchema.label">
               </div>
             </div>
 
