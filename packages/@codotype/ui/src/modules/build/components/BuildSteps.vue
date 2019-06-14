@@ -80,7 +80,7 @@ export default {
     min-height: 4px
     max-height: 4px
     border-radius: 4px
-    background: linear-gradient(to right, #02B875 50%, #ced4da 50%)
+    background: linear-gradient(to right, #4582EC 50%, #ced4da 50%)
     background-size: 200% 100%
     background-position: right bottom
     margin-left: -2.5rem

@@ -2,7 +2,9 @@
   <div class="card card-body shadow-sm">
     <h4 class="mb-0">Configure Generator</h4>
 
-    <p class="small mt-2 mb-2 text-muted">Configure the <span class="text-success">Generator</span> to tune the way your code will be generated.</p>
+    <p class="small mt-2 mb-0 text-muted">Configure the <span class="text-success">Generator</span> to tune the way your code will be generated.</p>
+
+    <hr />
 
     <b-tabs no-fade lazy pills class="w-100">
       <b-tab
