@@ -4,39 +4,17 @@
     :class="className"
   >
 
-    <div class="row align-items-center">
-      <div class="col-md-10">
+    <div class="row align-items-center d-flex flex-row justify-content-between">
+      <span class="d-flex ml-2">
         {{ model.label }}
-      </div>
+      </span>
 
-      <div class="col-md-2 text-right">
-
-        <span
-          v-if="!model.attributes.length && !model.relations.length"
-          class="badge badge-danger px-2"
-          v-b-tooltip.hover.right
-          :title="`The ${model.label} Schema requires at least one attribute or relation`"
-        >
-          <i class="fa fa-exclamation"></i>
-        </span>
-
-        <!-- <span
-          v-else
-          class="badge badge-dark px-2"
-          v-b-tooltip.hover.right
-          :title="tooltipTitle"
-        >
-          <small>
-            <i class="fa fa-tags mr-1"></i>
-            {{ model.attributes.length }}
-            <span class="mx-2">|</span>
-            <i class="fa fa-link mr-1"></i>
-            {{ model.relations.length }}
-          </small>
-        </span> -->
-
-      </div>
-
+      <i
+        v-if="!model.attributes.length && !model.relations.length"
+        v-b-tooltip.hover.right
+        class="fa fa-exclamation-circle text-warning mr-1"
+        :title="`Schema requires at least one attribute or relation - empty schemas will be ignored`"
+      />
     </div>
 
   </li>
@@ -86,9 +64,9 @@ export default {
 
 li.list-group-item
   cursor: pointer
-  border-left: 3px solid $gray-500 !important
+  border-left: 6px solid $gray-500 !important
   &.selected
-    border-left: 3px solid #4582EC !important
+    border-left: 6px solid #4582EC !important
     font-weight: bold
 
 a.row.align-items-center
