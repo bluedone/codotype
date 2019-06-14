@@ -123,7 +123,6 @@ export default {
   },
   methods: {
     onKeyEnter() {
-      console.log('ON KEY ENTER')
       if (this.onKeypressEnter && this.enableSubmit) this.onKeypressEnter()
     }
   },

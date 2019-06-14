@@ -27,7 +27,8 @@ export default {
   },
   computed: mapGetters({
     showingModal: 'editor/schema/attribute/modals/new/showing',
-    enableSubmit: 'editor/schema/attribute/enableSubmit'
+    enableSubmit: 'editor/schema/attribute/enableSubmit',
+    // formErrors: 'editor/schema/attribute/formErrors // TODO - this should be wired up
   }),
   methods: {
     ...mapActions({
