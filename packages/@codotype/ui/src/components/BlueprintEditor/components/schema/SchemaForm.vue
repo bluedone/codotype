@@ -8,7 +8,7 @@
 
           <h4>New Schema</h4>
 
-          <p class="small mt-2 mb-3 text-muted"><span class="text-success">Label</span> should be a <strong>singular noun</strong> - whitespace is allowed. The input field will enforce proper capitalization and spacing.</p>
+          <p class="small mt-2 mb-3 text-muted"><span class='text-success'>Label</span> should be a <strong>singular noun</strong> - whitespace is allowed. The input field will enforce proper capitalization and spacing.</p>
 
           <small class="mb-2 text-muted">
             <i class="far fa-lightbulb"></i>
@@ -107,5 +107,9 @@ export default {
 
   p.small {
     font-size: 85%;
+  }
+
+  .text-purple {
+    color: purple !important;
   }
 </style>

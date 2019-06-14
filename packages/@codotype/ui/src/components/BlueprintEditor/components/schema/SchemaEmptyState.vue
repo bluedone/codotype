@@ -6,11 +6,11 @@
       </b-col>
       <b-col lg=12 class="text-right">
         <b-button
-          variant="success"
+          variant="primary"
           @click="createModel()"
           :disabled="!enableSubmit"
         >
-          Create
+          Create Schema
         </b-button>
       </b-col>
     </b-row>

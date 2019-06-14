@@ -5,7 +5,7 @@
     :visible="showingModal"
     :title="'New Schema'"
     ok-title='Create Schema'
-    ok-variant='success'
+    ok-variant='primary'
     cancel-title='Cancel'
     cancel-variant='light'
     :ok-disabled="!enableSubmit"
