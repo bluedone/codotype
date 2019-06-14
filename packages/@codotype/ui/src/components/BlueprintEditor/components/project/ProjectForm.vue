@@ -43,7 +43,7 @@
           size="lg"
           id="submit-project-form"
           block
-          variant="success"
+          variant="primary"
           :disabled="!enableSubmit"
           @click="incrementStep()"
         >
