@@ -5,7 +5,7 @@
     :visible="showingModal"
     :title="'Edit Attribute'"
     ok-title='Update Attribute'
-    ok-variant='success'
+    ok-variant='primary'
     cancel-title='Cancel'
     cancel-variant='light'
     @ok="updateModel()"
