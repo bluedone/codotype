@@ -1,7 +1,8 @@
 <template>
   <b-navbar toggleable="md" type="light" variant="white" fixed="top">
     <b-navbar-brand href="http://localhost:3000">
-      <strong>Codotype</strong>
+      <img src="https://res.cloudinary.com/codotype/image/upload/v1560045005/tech-logos/codotype.png" alt="Codotype Logo" style="margin-right: 0.5rem; margin-top: 0.25rem; height: 1.5rem; width: 1.5rem; float: left;">
+      <strong>codotype</strong>
     </b-navbar-brand>
 
     <a :href="'http://localhost:3000/generators/' + model.id" class="navbar-text">
