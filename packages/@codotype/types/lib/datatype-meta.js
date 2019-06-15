@@ -57,19 +57,19 @@ DATATYPE_META[DATATYPE_FLOAT] = {
   icon: 'fa fa-divide'
 }
 
-// DATATYPE_META[DATATYPE_DATE] = {
-//   value: DATATYPE_DATE,
-//   label: 'Date',
-//   desc: 'DATATYPE_DATE Description Goes Here!',
-//   icon: 'far fa-calendar'
-// }
+DATATYPE_META[DATATYPE_DATE] = {
+  value: DATATYPE_DATE,
+  label: 'Date',
+  desc: 'Calendar date, no time of day',
+  icon: 'far fa-calendar'
+}
 
-// DATATYPE_META[DATATYPE_TIME] = {
-//   value: DATATYPE_TIME,
-//   label: 'Time',
-//   desc: 'DATATYPE_TIME Description Goes Here!',
-//   icon: 'far fa-clock'
-// }
+DATATYPE_META[DATATYPE_TIME] = {
+  value: DATATYPE_TIME,
+  label: 'Time',
+  desc: 'Time of day, no date',
+  icon: 'far fa-clock'
+}
 
 DATATYPE_META[DATATYPE_DATETIME] = {
   value: DATATYPE_DATETIME,
