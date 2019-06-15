@@ -23,7 +23,7 @@
         label="Default Value"
         placeholder="Default Value"
         v-model="model.default"
-        help="The default value for this attribute when none is available."
+        :help="helpText"
         type="INTEGER"
       />
     </div>
@@ -33,7 +33,7 @@
         label="Default Value"
         placeholder="Default Value"
         v-model="model.default"
-        help="The default value for this attribute when none is available."
+        :help="helpText"
         type="FLOAT"
       />
     </div>
@@ -53,7 +53,7 @@
         label="Default Value"
         placeholder="Default Value"
         v-model="model.default"
-        help="The default value for this attribute when none is available."
+        :help="helpText"
       />
     </div>
 
@@ -63,7 +63,7 @@
         label="Default Value"
         placeholder="Default Value"
         v-model="model.default"
-        help="The default value for this attribute when none is available."
+        :help="helpText"
       />
     </div>
 
@@ -72,7 +72,7 @@
         label="Default Value"
         placeholder="Default Value"
         v-model="model.default"
-        help="The default value for this attribute when none is available."
+        :help="helpText"
         type="DATE"
       />
     </div>
@@ -82,7 +82,7 @@
         label="Default Value"
         placeholder="Default Value"
         v-model="model.default"
-        help="The default value for this attribute when none is available."
+        :help="helpText"
         type="TIME"
       />
     </div>
@@ -92,7 +92,7 @@
         label="Default Value"
         placeholder="Default Value"
         v-model="model.default"
-        help="The default value for this attribute when none is available."
+        :help="helpText"
         type="DATETIME"
       />
     </div>
@@ -128,6 +128,7 @@ export default {
   },
   data () {
     return {
+      helpText: "The default value for this attribute when none is available.",
       DATATYPE_STRING,
       DATATYPE_TEXT,
       DATATYPE_INTEGER,
