@@ -17,8 +17,15 @@ export default {
       const defaultSchemas = generatorMeta.defaultSchemas || []
 
       // Updates the schema collection and selected schema
-      commit('editor/schema/collection/items', defaultSchemas, { root: true })
-      if (defaultSchemas[0]) dispatch('editor/schema/selectModel', defaultSchemas[0], { root: true })
+      // TODO - uncomment this at some juncture
+      // commit('editor/schema/collection/items', defaultSchemas, { root: true })
+      // if (defaultSchemas[0]) dispatch('editor/schema/selectModel', defaultSchemas[0], { root: true })
+
+      // // // //
+      // TODO - remove this after cleaning up this module
+      const schemas = rootGetters['editor/schema/collection/items']
+      if (schemas[0]) dispatch('editor/schema/selectModel', schemas[0], { root: true })
+      // // // //
 
       // Loads the generator into the step module
       dispatch('editor/created', {}, { root: true }) // Could maybe ditch editor/created

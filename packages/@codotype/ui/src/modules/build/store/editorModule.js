@@ -7,7 +7,7 @@ export default {
     selectedSchemaId: '',
     generatorId: '',
     schemas: [], // CLEANUP - this should implement a collectionModule and copy the schemas over from the blueprint
-    option_groups: [],
+    configuration_groups: [],
     configuration: {}
   },
   modules: {
@@ -39,7 +39,7 @@ export default {
   },
   mutations: {
     schemas (state, schemas) { state.schemas = schemas },
-    option_groups (state, option_groups) { state.option_groups = option_groups },
+    configuration_groups (state, configuration_groups) { state.configuration_groups = configuration_groups },
     configuration (state, configuration) { state.configuration = configuration },
     generatorId (state, generatorId) { state.generatorId = generatorId },
     selectedSchemaId (state, selectedSchemaId) { state.selectedSchemaId = selectedSchemaId },
@@ -55,7 +55,7 @@ export default {
     load ({ commit, dispatch }, { generator, schemas, configuration }) {
       commit('configuration', configuration)
       commit('schemas', schemas)  // CLEANUP - should interface with collectionModule (should it though?)
-      commit('option_groups', generator.option_groups)
+      commit('configuration_groups', generator.configuration_groups)
       commit('generatorId', generator.id)
     },
     // CLEARS the editor module state

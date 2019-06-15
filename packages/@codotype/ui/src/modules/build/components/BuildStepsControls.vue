@@ -39,6 +39,7 @@
         </b-dropdown>
 
         <!-- <TourButton class='mr-2' size="lg" tour="appEditorSteps" :disabled="currentStep === 0"/> -->
+        <HelpButton class='mr-2' />
 
         <GenerateCodeButton :disabled="currentStep !== 2" />
 
@@ -65,12 +66,14 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import TourButton from '../../../components/TourButton'
+import HelpButton from '../../../components/HelpButton'
 import GenerateCodeButton from './GenerateCodeButton'
 
 export default {
   name: 'BuildStepsControls',
   components: {
     TourButton,
+    HelpButton,
     GenerateCodeButton
   },
   computed: {

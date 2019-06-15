@@ -11,7 +11,7 @@
         lazy
         class='pt-0'
         :title="group.label_plural || group.label"
-        v-for="group in model.option_groups"
+        v-for="group in model.configuration_groups"
         :key="group.identifier"
       >
         <b-row class="justify-content-center mt-3">
