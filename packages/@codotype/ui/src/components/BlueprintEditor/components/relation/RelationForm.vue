@@ -47,17 +47,14 @@
 <script>
 import { mapGetters, mapMutations } from 'vuex'
 import RelationFormAlias from './RelationFormAlias'
-import RelationFormPreview from './RelationFormPreview'
 import RelationTypeForm from './RelationTypeForm'
 import RelationBadge from './RelationBadge'
-import RELATION_META from '@codotype/types/lib/relation-meta'
 
 export default {
   components: {
     RelationBadge,
     RelationTypeForm,
     RelationFormAlias,
-    RelationFormPreview
   },
   created () {
     // TODO - this should be moved into the relationModule vuex store

@@ -22,7 +22,7 @@
         <div class="col-lg-12">
           <div class="btn-group w-100">
             <b-button
-              v-for="relation in relationTypes"
+              v-for="relation in filteredRelationTypes"
               :key="relation.id"
               @click="setRelationType(relation.id)"
               size="sm"
@@ -89,12 +89,16 @@ export default {
   },
   computed: {
     ...mapGetters({
+      generator: 'generator/selectedModel',
       model: 'editor/schema/relation/form/model',
       allSchemas: 'editor/schema/collection/items',
       selectedSchema: 'editor/schema/selectedModel'
     }),
-    selectedRelationType () {
+    selectedRelationType() {
       return RELATION_META[this.model.type]
+    },
+    filteredRelationTypes() {
+      return this.generator.supportedRelations.map(id => RELATION_META[id])
     }
   }
 }
