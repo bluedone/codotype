@@ -10,18 +10,7 @@
 </template>
 
 <script>
-import Driver from 'driver.js'
-
 export default {
-  name: 'TourButton',
-  created () {
-    this.driver = new Driver()
-  },
-  methods: {
-    startTour () {
-      this.driver.defineSteps(this.$store.getters[`tour/${this.tour}`])
-      return this.driver.start()
-    }
-  }
+  name: 'HelpButton'
 }
 </script>
