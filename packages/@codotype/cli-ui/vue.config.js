@@ -1,5 +1,4 @@
 const path = require('path');
-const PrerenderSPAPlugin = require('prerender-spa-plugin');
 
 // Injects the generator codotype-generator.json data structure for optimal pre-rendering conditions
 let outputDir = path.resolve(process.argv[4], 'dist')
@@ -17,17 +16,6 @@ module.exports = {
     }
   },
   configureWebpack: {
-    plugins: [
-      new PrerenderSPAPlugin({
-        // staticDir: path.join(__dirname, 'dist'),
-        staticDir: outputDir,
-        routes: [
-          '/',
-          '/about',
-          '/build'
-        ],
-      }),
-    ],
     module: {
       rules: [
         {
