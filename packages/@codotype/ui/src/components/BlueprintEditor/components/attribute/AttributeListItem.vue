@@ -3,13 +3,12 @@
 
     <div class="row d-flex align-items-center">
 
-      <!-- Handle for re-ordering attributes -->
+      <!-- TODO - re-introduce "Leading Attribute", maybe rename? -->
       <!-- <div class="col-sm-1 text-left d-flex align-items-center"> -->
         <!-- <i class="fa fa-fw text-primary fa-eye" v-if="item.order === 0"  v-b-tooltip.hover.left title='Leading attribute'></i> -->
       <!-- </div> -->
 
       <div class="col-sm-10">
-        <!-- <i class="fa fa-lg fa-fw fa-equals mr-2"></i> -->
         <AttributeListItemLabel :item="item"/>
       </div>
 
@@ -33,7 +32,8 @@
           boundary="viewport"
         >
           <template slot="button-content">
-            <i class="fa fa-fw fa-ellipsis-h"></i>
+            <!-- <i class="fa fa-fw fa-ellipsis-h"></i> -->
+            GO
           </template>
 
           <b-dropdown-item-button @click="editModel(item)">

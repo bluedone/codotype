@@ -7,26 +7,6 @@
       <hr />
     </div>
 
-    <!-- <div class="col-lg-6 col-sm-12">
-      <FormInput
-        label="Required"
-        v-if="![DATATYPE_BOOLEAN].includes(model.datatype)"
-        v-model="model.required"
-        help="Whether or not this attribute is required."
-        type='BOOL'
-      />
-    </div>
-
-    <div class="col-lg-6 col-sm-12">
-      <FormInput
-        label="Unique"
-        v-if="![DATATYPE_JSON, DATATYPE_BOOLEAN].includes(model.datatype)"
-        v-model="model.unique"
-        help="Whether or not to enforce unique values for this attribute."
-        type='BOOL'
-      />
-    </div> -->
-
     <div class="col-sm-12">
       <FormInput
         label="Description"
@@ -36,13 +16,25 @@
       />
     </div>
 
-    <div class="col-sm-12" v-if="[DATATYPE_INTEGER, DATATYPE_FLOAT].includes(model.datatype)">
+    <!-- DEFAULT INPUTS -->
+
+    <div class="col-sm-12" v-if="model.datatype === DATATYPE_INTEGER">
       <FormInput
         label="Default Value"
         placeholder="Default Value"
         v-model="model.default"
         help="The default value for this attribute when none is available."
-        type="NUMBER"
+        type="INTEGER"
+      />
+    </div>
+
+    <div class="col-sm-12" v-if="model.datatype === DATATYPE_FLOAT">
+      <FormInput
+        label="Default Value"
+        placeholder="Default Value"
+        v-model="model.default"
+        help="The default value for this attribute when none is available."
+        type="FLOAT"
       />
     </div>
 
@@ -75,6 +67,35 @@
       />
     </div>
 
+    <div class="col-sm-12" v-if="model.datatype === DATATYPE_DATE">
+      <FormInput
+        label="Default Value"
+        placeholder="Default Value"
+        v-model="model.default"
+        help="The default value for this attribute when none is available."
+        type="DATE"
+      />
+    </div>
+
+    <div class="col-sm-12" v-if="model.datatype === DATATYPE_TIME">
+      <FormInput
+        label="Default Value"
+        placeholder="Default Value"
+        v-model="model.default"
+        help="The default value for this attribute when none is available."
+        type="TIME"
+      />
+    </div>
+
+    <div class="col-sm-12" v-if="model.datatype === DATATYPE_DATETIME">
+      <FormInput
+        label="Default Value"
+        placeholder="Default Value"
+        v-model="model.default"
+        help="The default value for this attribute when none is available."
+        type="DATETIME"
+      />
+    </div>
   </div>
 </template>
 
