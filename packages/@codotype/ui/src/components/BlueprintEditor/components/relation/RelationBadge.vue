@@ -2,11 +2,14 @@
   <div class="row d-flex flex-row align-items-center">
     <div class="col-lg-12 text-center" v-if="selectedRelatedSchema">
 
+      <!-- TODO - clean up this template -->
+
+      <!-- BELONGS_TO -->
       <p class='large mb-0' v-if="model.type === RELATION_TYPE_BELONGS_TO">
         <span v-if="inflated.reverse_alias.label !== selectedSchema.label">({{selectedSchema.label}}) </span><span class='text-primary'>Many <strong>{{ inflated.reverse_alias.label_plural }}</strong><i class="fa mx-3 fa-arrow-right text-primary mx-1"></i></span><span class="text-info">One <strong>{{ inflated.alias.label }}</strong></span><span v-if="inflated.alias.label !== inflated.schema.label"> ({{inflated.schema.label}})</span>
       </p class='lead mb-0'>
 
-      <!-- RELATION_TYPE_HAS_ONE -->
+      <!-- HAS_ONE -->
       <p class='large mb-0' v-if="model.type === RELATION_TYPE_HAS_ONE">
         <span v-if="inflated.reverse_alias.label !== selectedSchema.label">({{selectedSchema.label}}) </span><span class='text-primary'>One <strong>{{ inflated.reverse_alias.label }}</strong></span><i class="fa mx-3 fa-arrow-right text-primary mx-1"></i><span class="text-info">One <strong>{{ inflated.alias.label }}</strong></span><span v-if="inflated.alias.label !== inflated.schema.label"> ({{inflated.schema.label}})</span>
       </p class='lead mb-0'>
