@@ -4,8 +4,8 @@
     size="lg"
     :visible="showingModal"
     :title="'New Relation'"
-    ok-title='Submit'
-    ok-variant='success'
+    ok-title='Create Relation'
+    ok-variant='primary'
     cancel-title='Cancel'
     cancel-variant='light'
     :ok-disabled="!disableSubmit"

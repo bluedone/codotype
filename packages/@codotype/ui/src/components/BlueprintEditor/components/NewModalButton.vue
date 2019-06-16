@@ -1,5 +1,6 @@
 <template>
   <button
+    :disabled="disabled"
     class="btn btn-primary btn-sm"
     @click="$store.dispatch(vuexAction, true)"
   >
@@ -14,6 +15,9 @@ export default {
     'vuexAction': {
       type: String,
       required: true
+    },
+    disabled: {
+      type: Boolean
     },
   }
 }

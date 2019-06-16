@@ -1,15 +1,14 @@
 <template>
-  <b-list-group-item>
+  <li class="list-group-item">
 
     <div class="row d-flex align-items-center">
 
-      <!-- Handle for re-ordering attributes -->
+      <!-- TODO - re-introduce "Leading Attribute", maybe rename? -->
       <!-- <div class="col-sm-1 text-left d-flex align-items-center"> -->
         <!-- <i class="fa fa-fw text-primary fa-eye" v-if="item.order === 0"  v-b-tooltip.hover.left title='Leading attribute'></i> -->
       <!-- </div> -->
 
       <div class="col-sm-10">
-        <!-- <i class="fa fa-lg fa-fw fa-equals mr-2"></i> -->
         <AttributeListItemLabel :item="item"/>
       </div>
 
@@ -33,7 +32,8 @@
           boundary="viewport"
         >
           <template slot="button-content">
-            <i class="fa fa-fw fa-ellipsis-h"></i>
+            <!-- <i class="fa fa-fw fa-ellipsis-h"></i> -->
+            GO
           </template>
 
           <b-dropdown-item-button @click="editModel(item)">
@@ -49,7 +49,7 @@
 
     </div>
 
-  </b-list-group-item>
+  </li>
 </template>
 
 <script>
@@ -75,30 +75,20 @@ export default {
 </script>
 
 <style lang='sass' scoped>
-  @import '../../../../sass/vendor.sass'
+@import '../../../../sass/vendor.sass'
 
-  .list-group-item
-    padding: 0.25rem 0.5rem
-    cursor: grab
+.list-group-item
+  padding: 0.25rem 0.5rem
+  border-left: 3px solid $gray-500 !important
+  cursor: grab
 
-  .list-group-item:hover i.fa-equals
-    opacity: 1
+.list-group-item:hover i.fa-equals
+  opacity: 1
 
-  .list-group-item:hover .controls
-    opacity: 1
+.list-group-item:hover .controls
+  opacity: 1
 
-  i.fa-equals
-    cursor: grab
-    transition: opacity .25s ease-in
-    transition: color .15s ease-in
-    opacity: 0
-    font-size: 90%
-    color: $gray-500
-    &:hover
-      color: $gray-800
-
-  .controls
-    transition: opacity .25s ease-in
-    opacity: 0
-
+.controls
+  transition: opacity .25s ease-in
+  opacity: 0
 </style>

@@ -24,7 +24,7 @@
         <div class="row d-flex justify-content-center mt-3">
           <div class="col-lg-6 text-center">
             <router-link
-              class="w-100" to="https://splash.codotype.io">
+              class="w-100" to="https://codotype.io">
               <!-- <i class="fa fa-fw fa-reply"></i> -->
               Take me home
             </router-link>

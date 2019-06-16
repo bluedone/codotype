@@ -3,6 +3,7 @@ import NewSchemaButtonHelp from './partials/NewSchemaButtonHelp.html'
 import AttributeListHelp from './partials/AttributeListHelp.html'
 import RelationListHelp from './partials/RelationListHelp.html'
 import SchemaPreviewHelp from './partials/SchemaPreviewHelp.html'
+import ConfigurationHelp from './partials/ConfigurationHelp.html'
 
 export const APP_EDITOR_TOUR = [
   {
@@ -43,6 +44,14 @@ export const APP_EDITOR_TOUR = [
       title: 'Add Schema',
       description: NewSchemaButtonHelp,
       position: 'right'
+    }
+  },
+  {
+    element: '#configuration',
+    popover: {
+      title: 'Configuration',
+      description: ConfigurationHelp,
+      position: 'top'
     }
   }
 ]

@@ -4,8 +4,8 @@
     size="lg"
     :visible="showingModal"
     :title="'Edit Relation'"
-    ok-title='Submit'
-    ok-variant='success'
+    ok-title='Update Relation'
+    ok-variant='primary'
     cancel-title='Cancel'
     cancel-variant='light'
     @ok="updateModel()"

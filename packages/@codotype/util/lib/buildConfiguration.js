@@ -11,7 +11,7 @@ const validateAttribute = ({ attribute, value }) => {
 
 function buildConfiguration ({ schemas, generator, configuration = {} }) {
   // Iterates over each option group in a single generator
-  generator.option_groups.forEach((group) => {
+  generator.configuration_groups.forEach((group) => {
 
     // Handles OPTION_GROUP_TYPE_MODEL_ADDON
     if (group.type === 'OPTION_GROUP_TYPE_MODEL_ADDON') {

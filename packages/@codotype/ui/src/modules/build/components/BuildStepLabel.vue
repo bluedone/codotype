@@ -4,11 +4,11 @@
     @click="jumpToStep(index)"
   >
     <template v-if="currentStep === index">
-      <span :class="textClassName + 'text-success'">{{ step.label }}</span>
+      <span :class="textClassName + 'text-primary'">{{ step.label }}</span>
     </template>
 
     <template v-else-if="index < currentStep">
-      <span :class="textClassName + 'text-success'">{{ step.label }}</span>
+      <span :class="textClassName + 'text-primary'">{{ step.label }}</span>
     </template>
 
     <template v-else>

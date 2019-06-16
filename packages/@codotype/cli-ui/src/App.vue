@@ -2,7 +2,7 @@
   <div id="app">
     <Navbar v-if="$store.getters['generator/selectedModel']" />
     <Overlay/>
-    <div class="container router-container">
+    <div class="container-fluid router-container">
       <router-view/>
     </div>
     <AppFooter />
@@ -40,7 +40,7 @@ export default {
   body
     height: 100%
 
-  .container.router-container
+  .container-fluid.router-container
     padding-top: 3.5rem
     padding-bottom: 4rem
     height: 100%

@@ -1,16 +1,21 @@
 <template>
   <div class="card card-body shadow-sm">
-    <b-tabs no-fade lazy pills class='w-100'>
+    <h4 class="mb-0">Configure Generator</h4>
 
+    <p class="small mt-2 mb-0 text-muted">Configure the <span class="text-success">Generator</span> to tune the way your code will be generated.</p>
+
+    <hr />
+
+    <b-tabs no-fade lazy pills class="w-100">
       <b-tab
         lazy
         class='pt-0'
         :title="group.label_plural || group.label"
-        v-for="group in model.option_groups"
+        v-for="group in model.configuration_groups"
         :key="group.identifier"
       >
-        <b-row class='justify-content-center mt-3'>
-          <b-col lg=12>
+        <b-row class="justify-content-center mt-3">
+          <b-col lg=12 id="configuration">
             <EditorHeader
               :title="group.label"
               :help="group.description"

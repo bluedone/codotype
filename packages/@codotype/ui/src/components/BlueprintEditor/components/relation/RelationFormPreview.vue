@@ -1,35 +1,5 @@
 <template>
-  <div class="row">
-
-    <!-- Description / Relation Preview-->
-    <div class="col-lg-12 text-center" v-if="selectedRelatedSchema">
-
-      <p class='large mb-0' v-if="model.type === RELATION_TYPE_BELONGS_TO">
-        <span v-if="inflated.reverse_alias.label !== selectedSchema.label">({{selectedSchema.label}}) </span><span class='text-primary'>Many <strong>{{ inflated.reverse_alias.label_plural }}</strong><i class="fa mx-3 fa-arrow-right text-primary mx-1"></i></span><span class="text-info">One <strong>{{ inflated.alias.label }}</strong></span><span v-if="inflated.alias.label !== inflated.schema.label"> ({{inflated.schema.label}})</span>
-      </p class='lead mb-0'>
-
-      <!-- RELATION_TYPE_HAS_ONE -->
-      <p class='large mb-0' v-if="model.type === RELATION_TYPE_HAS_ONE">
-        <span v-if="inflated.reverse_alias.label !== selectedSchema.label">({{selectedSchema.label}}) </span><span class='text-primary'>One <strong>{{ inflated.reverse_alias.label }}</strong></span><i class="fa mx-3 fa-arrow-right text-primary mx-1"></i><span class="text-info">One <strong>{{ inflated.alias.label }}</strong></span><span v-if="inflated.alias.label !== inflated.schema.label"> ({{inflated.schema.label}})</span>
-      </p class='lead mb-0'>
-
-      <!-- HAS_MANY -->
-      <p class='large mb-0' v-if="model.type === RELATION_TYPE_HAS_MANY">
-        <span v-if="inflated.reverse_alias.label !== selectedSchema.label">({{selectedSchema.label}}) </span><span class='text-primary'>One <strong>{{ inflated.reverse_alias.label }}</strong><i class="fa mx-3 fa-arrow-right mx-1"></i></span> <span class='text-info'>Many <strong>{{ inflated.alias.label_plural }}</strong></span><span v-if="inflated.alias.label !== inflated.schema.label"> ({{inflated.schema.label_plural}})</span>
-      </p class='lead mb-0'>
-
-    </div>
-
-    <!-- Description / Relation Preview-->
-    <!-- <div class="col-lg-12"> -->
-      <!-- <div class="card-deck"> -->
-        <!-- <div class="card card-code"> -->
-          <!-- <pre class="bg-dark p-4 text-light h-100 mb-0">{{schemaPrototype}}</pre> -->
-        <!-- </div> -->
-      <!-- </div> -->
-    <!-- </div> -->
-
-  </div>
+  <pre class="rounded bg-dark text-light mb-0 px-3 py-2">{{ schemaPrototype }}</pre>
 </template>
 
 <!-- // // // //  -->
@@ -62,42 +32,30 @@ export default {
     selectedRelatedSchema () {
       return this.allSchemas.find(m => m.id === this.model.related_schema_id)
     },
-    inflated () {
-      this.model.schema_id = this.selectedSchema.id
-      return inflateRelation({
-        relation: this.model,
-        schemas: this.$store.getters['editor/schema/collection/items']
-      })
-    },
     schemaPrototype () {
-      let proto = { ...this.defaultObject }
       let className = this.selectedSchema.class_name
       let identifier = this.selectedSchema.identifier
-      proto.id = identifier + '_001'
+
+      const proto = {
+        // id: identifier + '_001',
+        // ...this.defaultObject
+      }
 
       // if (!this.selectedRelatedSchema) return className + ' = ' + JSON.stringify(proto, null, 2)
 
-      // let relatedMeta = inflateMeta(this.model.as || this.selectedRelatedSchema.label)
+      let relatedMeta = inflateMeta(this.model.as || this.selectedRelatedSchema.label)
 
-      // if (this.model.type === RELATION_TYPES.RELATION_TYPE_HAS_ONE) {
-      //   proto[relatedMeta.identifier + '_id'] = ''
-      // } else if (this.model.type === RELATION_TYPES.RELATION_TYPE_BELONGS_TO) {
-      //   proto[relatedMeta.identifier + '_id'] = ''
-      // } else if (this.model.type === RELATION_TYPES.RELATION_TYPE_HAS_MANY) {
-      //   proto[relatedMeta.identifier + '_ids'] = []
-      // }
+      if (this.model.type === RELATION_TYPES.RELATION_TYPE_HAS_ONE) {
+        proto[relatedMeta.identifier + '_id'] = ''
+      } else if (this.model.type === RELATION_TYPES.RELATION_TYPE_BELONGS_TO) {
+        proto[relatedMeta.identifier + '_id'] = ''
+      } else if (this.model.type === RELATION_TYPES.RELATION_TYPE_HAS_MANY) {
+        proto[relatedMeta.identifier + '_ids'] = []
+      }
 
-      return className + ' = ' + JSON.stringify(proto, null, 2)
+      // return className + ' = ' + JSON.stringify(proto, null, 2)
+      return JSON.stringify(proto, null, 2)
     }
   }
 }
 </script>
-
-<style scoped>
-  .card-code {
-    font-size: 65%;
-  }
-  p.large {
-    font-size: 1.5rem;
-  }
-</style>

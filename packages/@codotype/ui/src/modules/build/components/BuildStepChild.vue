@@ -4,13 +4,13 @@
     @click="jumpToStep(index)"
   >
     <template v-if="currentStep === index">
-      <span :class="badgeClassName + 'bg-transparent text-success border-success'">
+      <span :class="badgeClassName + 'bg-transparent text-primary border-primary'">
         <span class="fa-fw">{{index + 1}}</span>
       </span>
     </template>
 
     <template v-else-if="index < currentStep">
-      <span :class="badgeClassName + 'bg-success border-success'">
+      <span :class="badgeClassName + 'bg-primary border-primary'">
         <i class="fa fa-check"></i>
       </span>
     </template>

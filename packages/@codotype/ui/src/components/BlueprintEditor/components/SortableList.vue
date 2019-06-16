@@ -8,6 +8,7 @@
 
           <span>
             <NewModalButton
+              :disabled="locked"
               :id="'add-' + scope + '-button'"
               :vuexAction="'editor/schema/' + scope + '/newModel'"
             />
@@ -60,13 +61,14 @@
           <b-list-group flush v-else-if="!collection.length">
             <b-list-group-item class="text-center">
 
-              <span class='text-muted'>¯\_(ツ)_/¯</span>
-              <br>
+              <!-- <span class='text-muted'>¯\_(ツ)_/¯</span> -->
+              <!-- <br> -->
               <strong class="mb-0 mt-1 text-muted">{{ title }}</strong>
               <br>
               <small class="text-muted">{{ info }}</small>
               <br>
               <b-btn
+                :disabled="locked"
                 size="sm"
                 class='btn-rounded mt-2'
                 variant="outline-primary"
@@ -96,6 +98,9 @@ import HelpPopover from '../../HelpPopover'
 export default {
   name: 'SortableList',
   props: {
+    locked: {
+      type: Boolean
+    },
     scope: {
       type: String,
       required: true

@@ -11,7 +11,7 @@ const BLUEPRINT_STEP = {
 }
 
 const CONFIGURATION_STEP = {
-  id: 'configure_generator',
+  id: 'configure_step',
   label: 'Configure Generator'
 }
 
@@ -43,9 +43,9 @@ export default {
       if (!generator.self_configuring) { steps.push(BLUEPRINT_STEP) }
 
       // Include CONFIGURATION_STEP iff generator has any defined option groups
-      if (generator.option_groups[0]) { steps.push(CONFIGURATION_STEP) }
+      if (generator.configuration_groups[0]) { steps.push(CONFIGURATION_STEP) }
 
-      // QUESTION - what happens if there's a generator that's self-configuring, with no option_groups?
+      // QUESTION - what happens if there's a generator that's self-configuring, with no configuration_groups?
 
       // Updates the nested collection module
       return commit('collection/items', steps)
