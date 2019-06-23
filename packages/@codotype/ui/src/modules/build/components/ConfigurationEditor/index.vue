@@ -21,27 +21,27 @@
               :help="group.description"
               url="https://codotype.github.io"
             />
-            <hr>
+            <hr />
 
             <ModelAddonEditor
-              v-if="group.type === OPTION_GROUP_TYPE_MODEL_ADDON"
+              v-if="group.type === CONFIGURATION_GROUP_TYPE_ADDON && group.scope === CONFIGURATION_GROUP_SCOPE_SCHEMA"
               :group="group"
               :schemas="schemas">
             </ModelAddonEditor>
 
             <GlobalAddonEditor
-              v-if="group.type === OPTION_GROUP_TYPE_GLOBAL_ADDON"
+              v-if="group.type === CONFIGURATION_GROUP_TYPE_ADDON && group.scope === CONFIGURATION_GROUP_SCOPE_GLOBAL"
               :group="group">
             </GlobalAddonEditor>
 
             <ModelOptionEditor
-              v-if="group.type === OPTION_GROUP_TYPE_MODEL_OPTION"
+              v-if="group.type === CONFIGURATION_GROUP_TYPE_OPTION && group.scope === CONFIGURATION_GROUP_SCOPE_SCHEMA"
               :group="group"
               :schemas="schemas">
             </ModelOptionEditor>
 
             <GlobalOptionEditor
-              v-if="group.type === OPTION_GROUP_TYPE_GLOBAL_OPTION"
+              v-if="group.type === CONFIGURATION_GROUP_TYPE_OPTION && group.scope === CONFIGURATION_GROUP_SCOPE_GLOBAL"
               :group="group">
             </GlobalOptionEditor>
 
@@ -62,11 +62,11 @@ import ModelAddonEditor from './components/ModelAddonEditor'
 import GlobalAddonEditor from './components/GlobalAddonEditor'
 
 import {
-  OPTION_GROUP_TYPE_GLOBAL_OPTION,
-  OPTION_GROUP_TYPE_GLOBAL_ADDON,
-  OPTION_GROUP_TYPE_MODEL_OPTION,
-  OPTION_GROUP_TYPE_MODEL_ADDON
-} from '@codotype/types/lib/option-group-types'
+  CONFIGURATION_GROUP_TYPE_OPTION,
+  CONFIGURATION_GROUP_TYPE_ADDON,
+  CONFIGURATION_GROUP_SCOPE_GLOBAL,
+  CONFIGURATION_GROUP_SCOPE_SCHEMA
+} from '@codotype/types/lib/configuration-group-types'
 
 export default {
   name: 'ConfigureGenerator',
@@ -77,10 +77,10 @@ export default {
   },
   data () {
     return {
-      OPTION_GROUP_TYPE_GLOBAL_OPTION,
-      OPTION_GROUP_TYPE_GLOBAL_ADDON,
-      OPTION_GROUP_TYPE_MODEL_OPTION,
-      OPTION_GROUP_TYPE_MODEL_ADDON
+      CONFIGURATION_GROUP_TYPE_OPTION,
+      CONFIGURATION_GROUP_TYPE_ADDON,
+      CONFIGURATION_GROUP_SCOPE_GLOBAL,
+      CONFIGURATION_GROUP_SCOPE_SCHEMA
     }
   },
   components: {

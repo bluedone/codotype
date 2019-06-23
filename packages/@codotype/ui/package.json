@@ -10,7 +10,7 @@
     "test": "nyc mocha --exit"
   },
   "dependencies": {
-    "@codotype/types": "^0.2.1",
+    "@codotype/types": "^0.2.2",
     "@codotype/util": "^0.4.1",
     "axios": "^0.17.0",
     "bootstrap": "^4.3.1",

@@ -36,6 +36,7 @@
 * Added `ChevronAnimation` component
 * Removed deprecated Navbar components
 * Updated `GeneratorStart` component to render nicely in Vue.js SPA and Nuxt.js
+* Updated `ConfigurationEditor/index.vue` and `OptionFormItem` components to support `ConfigurationGroup` refactor
 
 #### Fixes
 * `BuildError` component directs users to `codotype.io` instead of `splash.codotype.io`
