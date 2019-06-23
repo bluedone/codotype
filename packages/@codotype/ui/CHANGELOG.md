@@ -37,6 +37,7 @@
 * Removed deprecated Navbar components
 * Updated `GeneratorStart` component to render nicely in Vue.js SPA and Nuxt.js
 * Updated `ConfigurationEditor/index.vue` and `OptionFormItem` components to support `ConfigurationGroup` refactor
+* Removed `vue-loading-spinner` package due to license issues (Thanks [Fossa!](https://fossa.com/))
 
 #### Fixes
 * `BuildError` component directs users to `codotype.io` instead of `splash.codotype.io`
