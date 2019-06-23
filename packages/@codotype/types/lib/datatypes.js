@@ -43,7 +43,7 @@ const DATATYPE_STRING_SELECT = 'STRING_SELECT';
 // These are datatypes that require more nuanced,
 // customized implementation inside a generator.
 const DATATYPE_SINGLE_FILE  = "SINGLE_FILE";
-const DATATYPE_SINGLE_PHOTO = "SINGLE_PHOTO";
+const DATATYPE_SINGLE_IMAGE = "SINGLE_IMAGE";
 
 // // // //
 
