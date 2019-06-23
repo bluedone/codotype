@@ -27,6 +27,8 @@ const {
   DATATYPE_TIME_ARRAY,
   DATATYPE_DATETIME_ARRAY,
   DATATYPE_TIMESTAMP_ARRAY,
+  DATATYPE_SINGLE_FILE,
+  DATATYPE_SINGLE_IMAGE,
 } = require('./datatypes')
 
 // Defines datatype metadata
