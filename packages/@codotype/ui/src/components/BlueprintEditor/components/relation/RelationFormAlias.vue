@@ -11,12 +11,12 @@
         <div class="col-lg-4">
           <div class="form-group">
             <label class='mb-0'>
+              Reverse Alias
               <i
-                class="fa fa-question-circle"
-                v-b-tooltip.hover.left
+                class="fa fa-question-circle text-muted"
+                v-b-tooltip.hover.right
                 title="NOTE - only available with 'Belongs To' relations"
               />
-              Reverse Alias
             </label>
             <!-- help="The singlar, title-cased noun that describes your model" -->
             <!-- example="Example: 'User Role' or 'Blog Post'" -->

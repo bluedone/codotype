@@ -69,11 +69,9 @@ export default {
 
   div.step-wrapper
     padding-top: 1.25rem
-    // background: #f5f6f9
 
   div.label-wrapper
     // padding-top: 1.25rem
-    // background: #f5f6f9
 
   span.divider
     transition: all 0.3s ease
