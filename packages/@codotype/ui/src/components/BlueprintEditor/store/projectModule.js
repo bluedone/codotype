@@ -37,7 +37,7 @@ export default {
       return state.identifier
     },
     enableSubmit: state => {
-      return state.label && state.identifier && state.label.length > 2
+      return state.identifier !== "" && state.identifier !== "" && state.label.length > 2
     }
   }
 }
