@@ -11,7 +11,7 @@
     "url": "git+https://github.com/codotype/codotype-util.git"
   },
   "dependencies": {
-    "@codotype/types": "^0.2.0",
+    "@codotype/types": "^0.2.2",
     "lodash": "^4.17.10",
     "pluralize": "^7.0.0",
     "underscore.string": "^3.3.4"

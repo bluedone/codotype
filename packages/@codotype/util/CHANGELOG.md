@@ -2,6 +2,9 @@
 
 #### Changes
 * Renamed `option_groups` to `configuration_groups`
+* Added additional datatypes to `getDefaultAttributeValue`
+* Refactored `buildConfiguration` to support  `configuration_group.scope`
+* Added spec for `buildConfiguration`
 
 #### Fixes
 * Added test to `sanitizeLabel.spec` where trailing whitespace wasn't being trimmed
