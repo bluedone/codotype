@@ -9,6 +9,7 @@
 * Deprecated old `OPTION_GROUP_TYPE_*` variables in favor of maintaining `type` and `scope` properties
 * Added `CONFIGURATION_GROUP_TYPE_OPTION` and `CONFIGURATION_GROUP_TYPE_ADDON`
 * Added `CONFIGURATION_GROUP_SCOPE_GLOBAL` and `CONFIGURATION_GROUP_SCOPE_SCHEMA`
+* Added `configuration-option-types.js` to store types of attributes assigned to `ConfigurationGroups`
 * Added the following datatypes and datatype meta:
   - `DATATYPE_BIGINT`
   - `DATATYPE_DECIMAL`

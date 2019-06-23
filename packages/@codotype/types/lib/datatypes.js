@@ -34,11 +34,6 @@ const DATATYPE_TIMESTAMP_ARRAY  = "TIMESTAMP_ARRAY";  // MongoDB
 
 // // // //
 
-// TODO - deprecate, move to OPTION_DATATYPES
-const DATATYPE_STRING_SELECT = 'STRING_SELECT';
-
-// // // //
-
 // Special Datatypes
 // These are datatypes that require more nuanced,
 // customized implementation inside a generator.
@@ -83,7 +78,4 @@ module.exports = {
   // Special Datatypes
   DATATYPE_SINGLE_FILE,
   DATATYPE_SINGLE_IMAGE,
-
-  // TODO - remove this, move into option_types
-  DATATYPE_STRING_SELECT
 }
