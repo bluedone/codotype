@@ -6,7 +6,7 @@
       alt="Codotype Logo"
     />
     <b-navbar-brand :to="url">
-      <h3 class="gradient-mask mb-0">codotype</h3>
+      <h3 class="mb-0">codotype</h3>
     </b-navbar-brand>
   </div>
 </template>
@@ -24,15 +24,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import '@/assets/scss/style.scss';
-.gradient-mask {
-  // -webkit-text-fill-color: transparent;
-  // -webkit-background-clip: text;
-  // background-clip: text;
-  // background-image: -webkit-gradient(linear, left top, right top, from($brand-primary), to($brand-secondary));
-  color: #555555;
-}
-
 .navbar-logo {
   margin-right: .5rem;
   margin-top: 0.25rem;

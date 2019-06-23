@@ -1,8 +1,8 @@
 <template>
   <b-navbar-nav class="ml-auto">
-    <b-nav-item to="/about">
+    <b-nav-item href="https://codotype.io/about">
       <font-awesome-icon v-if="svgs" icon="question-circle" class="mr-1" />
-      <i v-else class="fa fa-fw question-circle mt-1" />
+      <i v-else class="fa fa-fw fa-question-circle mt-1" />
       About
     </b-nav-item>
 
@@ -12,10 +12,11 @@
       Docs
     </b-nav-item>
 
-    <!-- <b-nav-item to="https://codotype.org" target="_blank">
-      <font-awesome-icon icon="dollar-sign" class="text-success" />
-      Donate
-    </b-nav-item>-->
+     <!-- <b-nav-item to="https://codotype.org" target="_blank"> -->
+      <!-- <font-awesome-icon v-if="svgs" icon="dollar-sign" class="text-success" /> -->
+      <!-- <i v-else class="fa fa-fw fa-dollar-sign mt-1 text-success" /> -->
+      <!-- Donate -->
+    <!-- </b-nav-item> -->
 
     <b-nav-item target="_blank" href="https://twitter.com/codotype">
       <font-awesome-icon
