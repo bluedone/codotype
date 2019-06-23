@@ -1,4 +1,5 @@
 const datatypes = require('@codotype/types/lib/datatypes')
+const optiontypes = require('@codotype/types/lib/configuration-option-types')
 const { inflateRelation } = require('./inflate')
 
 const {
@@ -62,7 +63,7 @@ const getDefaultAttributeValue = ({ type }) => {
       return []
     case datatypes.DATATYPE_TIMESTAMP_ARRAY:
       return []
-    case datatypes.DATATYPE_STRING_SELECT: // TODO - MOVE THIS TO A SEPARATE FUNCTIOn
+    case optiontypes.OPTION_TYPE_STRING_SELECT:
       return []
   }
 }
