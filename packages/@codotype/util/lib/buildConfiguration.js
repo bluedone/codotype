@@ -22,7 +22,7 @@ function buildConfiguration ({ schemas, generator, configuration = {} }) {
     // Handles CONFIGURATION_GROUP_TYPE_ADDON with CONFIGURATION_GROUP_SCOPE_SCHEMA
     if (group.type === CONFIGURATION_GROUP_TYPE_ADDON && group.scope === CONFIGURATION_GROUP_SCOPE_SCHEMA) {
       // Defines an object on to store the instance data for each option group
-      let instanceData = configuration[group.identifier_plural] || {}
+      let instanceData = configuration[group.identifier] || {}
       let newInstanceData = {}
 
       // Iterates over each blueprint schema and creates an array
@@ -30,7 +30,7 @@ function buildConfiguration ({ schemas, generator, configuration = {} }) {
       schemas.forEach((schema) => { newInstanceData[schema.identifier] = instanceData[schema.identifier] || [] })
 
       // Assigns the instanceData object to the root configuration object
-      configuration[group.identifier_plural] = newInstanceData
+      configuration[group.identifier] = newInstanceData
 
     // Handles CONFIGURATION_GROUP_TYPE_OPTION with CONFIGURATION_GROUP_SCOPE_SCHEMA
     } else if (group.type === CONFIGURATION_GROUP_TYPE_OPTION && group.scope === CONFIGURATION_GROUP_SCOPE_SCHEMA) {
@@ -51,7 +51,7 @@ function buildConfiguration ({ schemas, generator, configuration = {} }) {
     } else if (group.type === CONFIGURATION_GROUP_TYPE_ADDON && group.scope === CONFIGURATION_GROUP_SCOPE_GLOBAL) {
       // Iterates over each attribute in the GLOBAL_OPTION type,
       // sets instanceData to the default value
-      configuration[group.identifier_plural] = configuration[group.identifier_plural] || []
+      configuration[group.identifier] = configuration[group.identifier] || []
 
     // Handles CONFIGURATION_GROUP_TYPE_OPTION with CONFIGURATION_GROUP_SCOPE_GLOBAL
     } else if (group.type === CONFIGURATION_GROUP_TYPE_OPTION && group.scope === CONFIGURATION_GROUP_SCOPE_GLOBAL) {

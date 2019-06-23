@@ -22,30 +22,16 @@ function buildConfigurationGroup({ type, scope }) {
     icon: {}
   }]
 
-  if (type === CONFIGURATION_GROUP_TYPE_OPTION) {
-    return Object.assign({}, {
-      id: "TEST_CONFIGURATION_GROUP",
-      label: "Deployment",
-      identifier: "deployment",
-      description: "Test the deployment configurationoptions for your app",
-      type: type,
-      scope: scope,
-      more_info_url: null,
-      attributes: configurationGroupAttributes
-    })
-  } else {
-    return Object.assign({}, {
-      id: "TEST_CONFIGURATION_GROUP",
-      label: "Deployment",
-      identifier: "deployment",
-      "identifier_plural": "deployment_options", // TODO - this pattern is ugly, should be updated for consistency between types
-      description: "Test the deployment configurationoptions for your app",
-      type: type,
-      scope: scope,
-      more_info_url: null,
-      attributes: configurationGroupAttributes
-    })
-  }
+  return Object.assign({}, {
+    id: "TEST_CONFIGURATION_GROUP",
+    label: "Deployment",
+    identifier: "deployment",
+    description: "Test the deployment configurationoptions for your app",
+    type: type,
+    scope: scope,
+    more_info_url: null,
+    attributes: configurationGroupAttributes
+  })
 }
 
 // // // //
@@ -93,7 +79,7 @@ describe('/lib/buildDefault.js', () => {
       }
 
       const testConfiguration = buildConfiguration({ schemas, generator, configuration: {} });
-      assert.equal(testConfiguration.deployment_options.length, 0);
+      assert.equal(testConfiguration.deployment.length, 0);
     });
   });
 
@@ -128,8 +114,8 @@ describe('/lib/buildDefault.js', () => {
       }
 
       const testConfiguration = buildConfiguration({ schemas, generator, configuration: {} });
-      assert.equal(testConfiguration.deployment_options.user.length, 0);
-      assert.equal(testConfiguration.deployment_options.task.length, 0);
+      assert.equal(testConfiguration.deployment.user.length, 0);
+      assert.equal(testConfiguration.deployment.task.length, 0);
     });
   });
 
