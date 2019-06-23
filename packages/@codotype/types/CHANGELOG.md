@@ -4,6 +4,11 @@
 * Cleaned up `datatype-meta.js`
 * Added `locked`, and `source` properties to `DEFAULT_SCHEMA`
 * Added `SCHEMA_SOURCE_GENERATOR` and `SCHEMA_SOURCE_GENERATOR` to `DEFAULT_SCHEMA`
+* Renamed `option-group-types.js` to `configuration-group-types.js`
+* Renamed `OPTION_GROUP_*` to `CONFIGURATION_GROUP_*`
+* Deprecated old `OPTION_GROUP_TYPE_*` variables in favor of maintaining `type` and `scope` properties
+* Added `CONFIGURATION_GROUP_TYPE_OPTION` and `CONFIGURATION_GROUP_TYPE_ADDON`
+* Added `CONFIGURATION_GROUP_SCOPE_GLOBAL` and `CONFIGURATION_GROUP_SCOPE_SCHEMA`
 * Added the following datatypes and datatype meta:
   - `DATATYPE_BIGINT`
   - `DATATYPE_DECIMAL`
@@ -24,7 +29,7 @@
   - `DATATYPE_DATETIME_ARRAY`
   - `DATATYPE_TIMESTAMP_ARRAY`
   - `DATATYPE_SINGLE_FILE`
-  - `DATATYPE_SINGLE_PHOTO`
+  - `DATATYPE_SINGLE_IMAGE`
 
 ---
 
