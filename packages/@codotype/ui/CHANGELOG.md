@@ -37,7 +37,6 @@
 * Removed deprecated Navbar components
 * Updated `GeneratorStart` component to render nicely in Vue.js SPA and Nuxt.js
 
-
 #### Fixes
 * `BuildError` component directs users to `codotype.io` instead of `splash.codotype.io`
 * Fixed erroneous behavior of `enableSubmit` Vuex getter in `projectModule`

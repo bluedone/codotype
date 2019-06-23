@@ -1,7 +1,7 @@
 import inflateMeta from '@codotype/util/lib/inflateMeta'
 import sanitizeLabel from '@codotype/util/lib/sanitizeLabel'
 import { buildDefault } from '@codotype/util/lib/buildDefault'
-import { DEFAULT_SCHEMA } from '@codotype/types/lib/default_schema'
+import { DEFAULT_SCHEMA, SCHEMA_SOURCE_USER } from '@codotype/types/lib/default_schema'
 import formModule from '../../../store/lib/formModule'
 import modalModule from '../../../store/lib/modalModule'
 import collectionModule from '../../../store/lib/collectionModule'
@@ -20,6 +20,7 @@ export default {
     resetNewModel ({ commit }) {
       // Overrides commit('form/reset')
       const newModel = Object.assign({}, DEFAULT_SCHEMA)
+      newModel.source = SCHEMA_SOURCE_USER;
       newModel.attributes = []
       newModel.relations = []
       commit('form/model', newModel)
