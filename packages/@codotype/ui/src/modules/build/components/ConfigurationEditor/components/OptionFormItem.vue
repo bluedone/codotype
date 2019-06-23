@@ -39,7 +39,7 @@
       />
 
       <select
-        v-if="attribute.type === DATATYPE_STRING_SELECT"
+        v-if="attribute.type === OPTION_TYPE_STRING_SELECT"
         class='form-control'
         :value="getValue({ group: group, schema: schema, attribute: attribute })"
         type="text"
@@ -66,11 +66,14 @@
 <script>
 import {
   DATATYPE_STRING,
-  DATATYPE_STRING_SELECT,
   DATATYPE_BOOLEAN,
   DATATYPE_INTEGER,
   DATATYPE_FLOAT
 } from '@codotype/types/lib/datatypes'
+
+import {
+  OPTION_TYPE_STRING_SELECT,
+} from '@codotype/types/lib/configuration-option-types'
 // TODO - update to point at option-types.js
 
 import {
@@ -187,7 +190,7 @@ export default {
   data () {
     return {
       DATATYPE_STRING,
-      DATATYPE_STRING_SELECT,
+      OPTION_TYPE_STRING_SELECT,
       DATATYPE_BOOLEAN,
       DATATYPE_INTEGER,
       DATATYPE_FLOAT
