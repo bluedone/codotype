@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <Navbar v-if="$store.getters['generator/selectedModel']" />
+    <Notifications/>
     <Overlay/>
     <div class="container-fluid router-container">
       <router-view/>
@@ -13,13 +14,14 @@
 import Navbar from './components/Navbar'
 import Overlay from '@codotype/ui/src/components/Overlay'
 import AppFooter from '@codotype/ui/src/components/Footer'
+import Notifications from '@codotype/ui/src/modules/notification/components/Notifications'
 
 export default {
-  name: 'app',
   components: {
     Navbar,
     Overlay,
-    AppFooter
+    AppFooter,
+    Notifications
   },
   metaInfo: {
     title: 'Loading...',
