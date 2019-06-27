@@ -9,3 +9,4 @@ require('../lib/indent.spec');
 require('../lib/inflateMeta.spec');
 require('../lib/sanitizeLabel.spec');
 require('../lib/trailingComma.spec');
+require('../lib/validateGenerator.spec');
