@@ -70,7 +70,7 @@
               <b-btn
                 :disabled="locked"
                 size="sm"
-                class='btn-rounded mt-2'
+                class='mt-2'
                 variant="outline-primary"
                 @click="$store.dispatch('editor/schema/' + scope + '/newModel')"
               >

@@ -30,12 +30,12 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-  .footer-bottom
-    position: fixed
-    width: 100%
-    bottom: 0
-    z-index: 100
-    // background: #f5f6f9
-    background: #ffffff
-    border-top: 1px solid #cccccc
+.footer-bottom
+  position: fixed
+  width: 100%
+  max-width: 100%
+  bottom: 0
+  z-index: 100
+  background: white
+  border-top: 1px solid #cccccc
 </style>

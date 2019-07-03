@@ -10,7 +10,7 @@
           @click="decrementStep()"
           :disabled="currentStep === 0"
         >
-          <i class="fa fa-lg fa-chevron-circle-left"></i>
+          <i class="fa fa-lg fa-chevron-circle-left" />
         </button>
       </span>
 
@@ -55,7 +55,7 @@
           @click="incrementStep()"
           :disabled="disableNext"
         >
-          <i class="fa fa-lg fa-chevron-circle-right"></i>
+          <i class="fa fa-lg fa-chevron-circle-right" />
         </button>
       </span>
 
@@ -74,7 +74,7 @@ export default {
   components: {
     TourButton,
     HelpButton,
-    GenerateCodeButton
+    GenerateCodeButton,
   },
   computed: {
     ...mapGetters({

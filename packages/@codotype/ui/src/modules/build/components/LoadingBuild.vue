@@ -9,7 +9,7 @@
         </small>
         <div class="row my-4">
           <div class="col-lg-12 text-center d-flex justify-content-center">
-            <Circle8 size="80px" class='d-flex my-2'/>
+            <i class="fa fa-fw fa-spinner fa-3x fa-spin my-3" />
           </div>
         </div>
         <small class="text-muted">
@@ -23,18 +23,8 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import Circle8 from 'vue-loading-spinner/src/components/Circle8'
-
 export default {
-  name: 'LoadingBuild',
-  props: ['model'],
-  components: {
-    Circle8
-  },
-  computed: mapGetters({
-    buildLoading: 'build/runtime/loading',
-  })
+  name: 'LoadingBuild'
 }
 </script>
 

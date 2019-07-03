@@ -1,6 +1,6 @@
 
 // Required defaults - copied and pasted from Bootstrap variables
-// $white: #f3f3f3 !default
+$white:    #FFFFFF !default
 $gray-100: #f8f9fa !default
 $gray-200: #e9ecef !default
 $gray-300: #dee2e6 !default
@@ -10,7 +10,7 @@ $gray-600: #868e96 !default
 $gray-700: #495057 !default
 $gray-800: #333333 !default
 $gray-900: #212529 !default
-// $black:    #000 !default
+$black:    #000000 !default
 
 .generator-icon
   max-width: 2rem
@@ -25,7 +25,7 @@ $red:     #d9534f !default
 $orange:  #fd7e14 !default
 $yellow:  #f0ad4e !default
 $green:   #02B875 !default
-$teal:    #20c997 !default
+$teal:    #1FD3F2 !default
 $cyan:    #17a2b8 !default
 
 // // // //
@@ -42,12 +42,15 @@ h6
   line-height: 1.5
 
 [class^='display']
-  font-family: $heading-font;
+  font-family: $heading-font
   font-weight: 700 !important
 
 // // // //
+// #868e96 !important
+// #ced4da!important
 
 // Bootstrap Variable Overrides
+// $body-bg: $white !default
 // $body-bg: #f3f3f3 !default
 $body-bg: #f5f6f9 !default
 // $font-weight-normal: 300 !default
@@ -90,7 +93,7 @@ $hr-border-width:             $border-width !default
 // /////////////
 
 // $primary:       $blue !default
-// $secondary:     $gray-700
+$secondary:     $gray-400
 // $success:       $green !default
 // $info:          $cyan !default
 // $warning:       $yellow !default
@@ -221,3 +224,87 @@ $card-cap-bg:                       $gray-200
 
 // $close-color:                       $white
 // $close-text-shadow:                 none
+
+// // // //
+// Variables from www repo
+
+// $white: #fff
+// $black: #000
+// $red: #d9534f
+// $orange: #f0ad4e
+// $yellow: #ffd500
+// $green: #5cb85c
+// $blue: #4259ff
+// $blue: #4582ec
+// $teal: #5bc0de
+
+// $pink: #ff5b77
+// $purple: #7642FF
+// $body: #3e396b
+// //
+// Create grayscale
+// $gray-dark: #292b2c
+// $gray: #464a4c
+// $gray-light: #636c72
+// $gray-lighter: #eceeef
+// $gray-lightest: #f8faff
+// $blue-gray-light: #f0f3f7
+//
+// Reassign color vars to semantic color scheme
+// $brand-primary: $blue
+// $brand-secondary: $teal
+// $brand-success: $green
+// $brand-info: $teal
+// $brand-warning: $orange
+// $brand-danger: $red
+// $brand-inverse: $gray-dark
+
+// // // //
+// Buttons
+
+// .btn-primary, .btn-primary:focus
+//     transition: all 0.3s ease-in-out
+//     background-color: $blue !important
+//     background-image: linear-gradient(90deg, $blue, $teal) !important
+//     background-size: 200% auto
+//     border-color: lighten($blue, 10%) !important
+//     color: $white !important
+//     &:hover, &:active
+//         // color: $white !important
+//         background-image: linear-gradient(90deg, $teal, $blue) !important
+//         background-color: darken($blue, 5%) !important
+//         // background-position: right center !important
+//     &.btn-xl
+//       font-size: 14px
+//       padding: 12px 35px
+
+// .btn-outline-primary
+//     color: $blue !important
+//     background-image: none !important
+//     background-color: transparent !important
+//     border-color: $blue !important
+//     transition: all 0.3s ease-in-out
+//     &:hover, &:active
+//         color: $white !important
+//         background-color: $blue !important
+//         border-color: $blue !important
+//         background-image: linear-gradient(90deg, $blue, $teal) !important
+
+// // // //
+// Fonts
+$heading-font: 'Product Sans', Helvetica, Arial, serif
+$sans-serif-font: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif
+
+// Section
+.section
+    padding-top: 3em
+    padding-bottom: 3em
+
+.section-title
+    margin: 2em auto
+
+// .text-primary
+//   -webkit-text-fill-color: transparent
+//   -webkit-background-clip: text
+//   background-clip: text
+//   background-image: -webkit-gradient(linear, left top, right top, from($blue), to($teal))

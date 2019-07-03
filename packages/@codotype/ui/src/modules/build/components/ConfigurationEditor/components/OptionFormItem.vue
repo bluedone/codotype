@@ -39,7 +39,7 @@
       />
 
       <select
-        v-if="attribute.type === DATATYPE_STRING_SELECT"
+        v-if="attribute.type === OPTION_TYPE_STRING_SELECT"
         class='form-control'
         :value="getValue({ group: group, schema: schema, attribute: attribute })"
         type="text"
@@ -66,11 +66,22 @@
 <script>
 import {
   DATATYPE_STRING,
-  DATATYPE_STRING_SELECT,
   DATATYPE_BOOLEAN,
   DATATYPE_INTEGER,
   DATATYPE_FLOAT
 } from '@codotype/types/lib/datatypes'
+
+import {
+  OPTION_TYPE_STRING_SELECT,
+} from '@codotype/types/lib/configuration-option-types'
+// TODO - update to point at option-types.js
+
+import {
+  CONFIGURATION_GROUP_TYPE_OPTION,
+  CONFIGURATION_GROUP_TYPE_ADDON,
+  CONFIGURATION_GROUP_SCOPE_GLOBAL,
+  CONFIGURATION_GROUP_SCOPE_SCHEMA
+} from '@codotype/types/lib/configuration-group-types'
 
 import OptionTemplateWrapper from './OptionTemplateWrapper'
 import MoreInfoLink from '../../../../../components/MoreInfoLink'
@@ -120,8 +131,8 @@ export default {
       }
     }
 
-    // OPTION_GROUP_TYPE_MODEL_OPTION
-    if (group.type === 'OPTION_GROUP_TYPE_GLOBAL_OPTION') {
+    // GLOBAL + CONFIGURATION_GROUP_TYPE_OPTION
+    if (group.type === CONFIGURATION_GROUP_TYPE_OPTION && group.scope === CONFIGURATION_GROUP_SCOPE_GLOBAL) {
       // Defines Vue.component.computed
       this.$options.computed = mapGetters({
         getValue: 'build/editor/optionValue'
@@ -134,7 +145,8 @@ export default {
           setValue: 'build/editor/optionValue'
         })
       }
-    } else if (group.type === 'OPTION_GROUP_TYPE_MODEL_OPTION') {
+    } else if (group.type === CONFIGURATION_GROUP_TYPE_OPTION && group.scope === CONFIGURATION_GROUP_SCOPE_SCHEMA) {
+
       // Defines Vue.component.computed
       this.$options.computed = mapGetters({
         getValue: 'build/editor/modelOptionValue'
@@ -147,7 +159,7 @@ export default {
           setValue: 'build/editor/modelOptionValue'
         })
       }
-    } else if (group.type === 'OPTION_GROUP_TYPE_MODEL_ADDON') {
+    } else if (group.type === CONFIGURATION_GROUP_TYPE_ADDON && group.scope === CONFIGURATION_GROUP_SCOPE_SCHEMA) {
       // Defines Vue.component.computed
       this.$options.computed = mapGetters({
         getValue: 'build/editor/model_addon/newModelAttr'
@@ -160,7 +172,7 @@ export default {
           setValue: 'build/editor/model_addon/newModelAttr'
         })
       }
-    } else if (group.type === 'OPTION_GROUP_TYPE_GLOBAL_ADDON') {
+    } else if (group.type === CONFIGURATION_GROUP_TYPE_ADDON && group.scope === CONFIGURATION_GROUP_SCOPE_GLOBAL) {
       // Defines Vue.component.computed
       this.$options.computed = mapGetters({
         getValue: 'build/editor/global_addon/newModelAttr'
@@ -178,7 +190,7 @@ export default {
   data () {
     return {
       DATATYPE_STRING,
-      DATATYPE_STRING_SELECT,
+      OPTION_TYPE_STRING_SELECT,
       DATATYPE_BOOLEAN,
       DATATYPE_INTEGER,
       DATATYPE_FLOAT

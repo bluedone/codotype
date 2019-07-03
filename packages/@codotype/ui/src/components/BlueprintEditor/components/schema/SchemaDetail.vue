@@ -22,7 +22,7 @@
 
           <SchemaDestroyButton v-if="!isLocked && !isRemovable" />
           <HelpPopover
-            v-if="!isLocked"
+            v-if="!isRemovable"
             target="schema-destroy-button"
             placement="left"
             :triggers="['hover']"

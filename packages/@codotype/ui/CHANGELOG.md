@@ -3,9 +3,45 @@
 #### Changes
 * Added tour to Build Configuration page via the `ConfigurationHelp.html` template
 * TourMediator handles configuration tour "seen" state
+* Updated `SchemaForm` header copy
+* Added `SchemaEmptyState` component
+* Updated `SchemaListItem` component selected state styles
+* `SchemaDetail` component drops `isUserModel` method, replaced with `isLocked` and `isRemovable`
+* Updated `SortableList` and `NewModelButton` components to accept locked/disabled attributes
+* `AttributeDatatypeForm` only displays datatypes that are supported by the generator
+* `schemaModule.is` splits the Vuex action used to show the new/edit modal
+* Build store loads default schemas pulled from `generatorMeta`
+* Added header to `ConfigurationEditor` component
+* Refactoring RelationForm UI
+* Refined BuildStepControls behavior
+* Added `border-left` to `AttributeListItem`, `RelationListItem`, and `SchemaListItem` components - consistent visual languages for re-orderable elements
+* Restructured `AttributeForm` and associated components
+* Added `locked` and `source` attributes to `DEFAULT_SCHEMA`
+* Added color-coding the `RelationForm`
+* Updated warning badge, selection indicator on `SchemaListItem`
+* `BuildSteps` component color changed from green to blue
+* Attribute, Relation, Schema, and Project Forms changed submit buttons from green to blue
+* Added `@keyup.enter` to `SchemaForm`, accepts `enableSubmit` and `onKeypressEnter` props
+* Prevent `AttributeForm` submission if `label` or `identifier` properties are not unique
+* Abstracted `RelationTypeForm` from `RelationForm` component
+* Cleaned up `HelpButton` component, re-integrated into `BuildStepsControls`
+* Deleted unused `ArrayInput` component
+* Deleted unused `HomeFooter` component
+* Moved `GeneratorEditor` components into separate `@codotype/generator-editor` package
+* Added additional datatypes to `FormInput` and `AttributeValidationsForm` components
+* `RelationTypeForm` only displays relation types that are supported by the generator
+* Renamed `option_groups` to `configuration_groups`
+* Added `NavbarBrand`, `NavbarLinks`, `NavbarWrapper` components
+* Added `AboutJumbotron`, `AboutBody`, `AboutAttribution` components
+* Added `ChevronAnimation` component
+* Removed deprecated Navbar components
+* Updated `GeneratorStart` component to render nicely in Vue.js SPA and Nuxt.js
+* Updated `ConfigurationEditor/index.vue` and `OptionFormItem` components to support `ConfigurationGroup` refactor
+* Removed `vue-loading-spinner` package due to license issues (Thanks [Fossa!](https://fossa.com/))
 
 #### Fixes
 * `BuildError` component directs users to `codotype.io` instead of `splash.codotype.io`
+* Fixed erroneous behavior of `enableSubmit` Vuex getter in `projectModule`
 
 ---
 
