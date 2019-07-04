@@ -22,6 +22,7 @@ export default {
     import ({ getters, commit, dispatch }, blueprint) {
       commit('project/label', blueprint.label)
       commit('project/identifier', blueprint.identifier)
+      commit('project/class_name', blueprint.class_name)
       commit('schema/collection/items', blueprint.schemas)
       dispatch('schema/selectModel', getters['schema/collection/first'])
     },
