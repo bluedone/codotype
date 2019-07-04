@@ -25,7 +25,7 @@
               type="text"
               class='form-control border-primary text-primary'
               :placeholder="selectedSchema.label"
-              :disabled="model.type !== 'BELONGS_TO'"
+              :disabled="['BELONGS_TO', 'HAS_ANY_BELONGS_TO_MANY'].includes(model.type)"
               v-model="model.reverse_as"
               @input="updateNewModel()"
             />

@@ -20,7 +20,7 @@
 
         <li class="list-group-item" v-for="rel in reverse_relations" v-else>
           <small>
-            <RelationBadge slim direction="out" :model="rel" />
+            <RelationBadge slim direction="in" :model="rel" />
           </small>
         </li>
       </ul>

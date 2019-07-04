@@ -32,8 +32,8 @@
           <div class="col-lg-12">
             <hr>
           </div>
-          <div class="col-lg-12">
-            <RelationBadge :model="model" />
+          <div class="col-lg-12 text-center">
+            <RelationBadge :model="model" direction="out" />
           </div>
         </div>
       </b-tabs>
