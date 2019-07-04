@@ -1,25 +1,39 @@
 <template>
-  <div class="row d-flex flex-row align-items-center">
-    <div class="col-lg-12 text-center" v-if="selectedRelatedSchema">
+    <RelationDiagram
+      v-if="model.type === RELATION_TYPE_BELONGS_TO"
+      :direction="direction"
+      :sourcePlural="true"
+      :sourceLabel="selectedSchema.label_plural"
+      :sourceAlias="inflated.reverse_alias.label_plural"
+      :destPlural="false"
+      :destLabel="inflated.schema.label"
+      :destAlias="inflated.alias.label"
+      :slim="slim"
+    />
 
-      <!-- TODO - clean up this template -->
+    <RelationDiagram
+      v-else-if="model.type === RELATION_TYPE_HAS_ONE"
+      :direction="direction"
+      :sourcePlural="false"
+      :sourceLabel="selectedSchema.label"
+      :sourceAlias="inflated.reverse_alias.label"
+      :destPlural="false"
+      :destLabel="inflated.schema.label"
+      :destAlias="inflated.alias.label"
+      :slim="slim"
+    />
 
-      <!-- BELONGS_TO -->
-      <p class='large mb-0' v-if="model.type === RELATION_TYPE_BELONGS_TO">
-        <span v-if="inflated.reverse_alias.label !== selectedSchema.label">({{selectedSchema.label}}) </span><span class='text-primary'>Many <strong>{{ inflated.reverse_alias.label_plural }}</strong><i class="fa mx-3 fa-arrow-right text-primary mx-1"></i></span><span class="text-info">One <strong>{{ inflated.alias.label }}</strong></span><span v-if="inflated.alias.label !== inflated.schema.label"> ({{inflated.schema.label}})</span>
-      </p class='lead mb-0'>
-
-      <!-- HAS_ONE -->
-      <p class='large mb-0' v-if="model.type === RELATION_TYPE_HAS_ONE">
-        <span v-if="inflated.reverse_alias.label !== selectedSchema.label">({{selectedSchema.label}}) </span><span class='text-primary'>One <strong>{{ inflated.reverse_alias.label }}</strong></span><i class="fa mx-3 fa-arrow-right text-primary mx-1"></i><span class="text-info">One <strong>{{ inflated.alias.label }}</strong></span><span v-if="inflated.alias.label !== inflated.schema.label"> ({{inflated.schema.label}})</span>
-      </p class='lead mb-0'>
-
-      <!-- HAS_MANY -->
-      <p class='large mb-0' v-if="model.type === RELATION_TYPE_HAS_MANY">
-        <span v-if="inflated.reverse_alias.label !== selectedSchema.label">({{selectedSchema.label}}) </span><span class='text-primary'>One <strong>{{ inflated.reverse_alias.label }}</strong><i class="fa mx-3 fa-arrow-right mx-1"></i></span> <span class='text-info'>Many <strong>{{ inflated.alias.label_plural }}</strong></span><span v-if="inflated.alias.label !== inflated.schema.label"> ({{inflated.schema.label_plural}})</span>
-      </p class='lead mb-0'>
-    </div>
-  </div>
+    <RelationDiagram
+      v-else-if="model.type === RELATION_TYPE_HAS_MANY"
+      :direction="direction"
+      :sourcePlural="false"
+      :sourceLabel="selectedSchema.label"
+      :sourceAlias="inflated.reverse_alias.label"
+      :destPlural="true"
+      :destLabel="inflated.schema.label_plural"
+      :destAlias="inflated.alias.label_plural"
+      :slim="slim"
+    />
 </template>
 
 <!-- // // // //  -->
@@ -29,12 +43,25 @@ import { mapGetters } from 'vuex'
 import inflateMeta from '@codotype/util/lib/inflateMeta'
 import { inflateRelation } from '@codotype/util/lib/inflate'
 import RELATION_TYPES from '@codotype/types/lib/relation-types'
+import RelationDiagram from './RelationDiagram'
 
 export default {
   props: {
     model: {
       required: true
+    },
+    direction: {
+      required: false,
+      type: String,
+    },
+    slim: {
+      required: false,
+      type: Boolean,
+      default: false
     }
+  },
+  components: {
+    RelationDiagram
   },
   data () {
     return {
@@ -61,9 +88,9 @@ export default {
   }
 }
 </script>
-
+<!--
 <style scoped>
   p.large {
     font-size: 1.5rem;
   }
-</style>
+</style> -->

@@ -2,26 +2,10 @@
   <li class="list-group-item">
       <div class="row d-flex align-items-center">
 
-      <!-- CLEANUP - get rid of hardcoded icons & labels -->
       <div class="col-lg-10">
-
-        <!-- <i class="fa fa-lg fa-fw fa-equals mr-2" style='cursor: grab;'></i> -->
-
-        <!-- BELONGS_TO -->
-        <small v-if="item.type === 'BELONGS_TO'">
-          <span class='text-primary'>Many <strong>{{ inflated.reverse_alias.label_plural }}</strong><span v-if="inflated.reverse_alias.label_plural !== selectedSchema.label_plural"> ({{selectedSchema.label_plural}})</span><i class="fa fa-arrow-right text-primary mx-1"></i></span><span class="text-info">One <strong>{{ inflated.alias.label }}</strong></span><span v-if="inflated.alias.label !== inflated.schema.label"> ({{inflated.schema.label}})</span>
+        <small>
+          <RelationBadge slim direction="out" :model="inflated" />
         </small>
-
-        <!-- HAS_ONE -->
-        <small v-if="item.type === 'HAS_ONE'">
-          <span class='text-primary'>One <strong>{{ selectedSchema.label }}</strong></span><i class="fa fa-arrow-right text-primary mx-1"></i><span class="text-info">One <strong>{{ inflated.alias.label }}</strong></span><span v-if="inflated.alias.label !== inflated.schema.label"> ({{inflated.schema.label}})</span>
-        </small>
-
-        <!-- HAS_MANY -->
-        <small v-if="item.type === 'HAS_MANY'">
-          <span class='text-primary'>One <strong>{{ selectedSchema.label }}</strong><i class="fa fa-arrow-right mx-1"></i></span> <span class='text-info'>Many <strong>{{ inflated.alias.label_plural }}</strong></span><span v-if="inflated.alias.label !== inflated.schema.label"> ({{inflated.schema.label_plural}})</span>
-        </small>
-
       </div>
 
       <div class="col-sm-2 text-right d-flex controls justify-content-end">
@@ -56,6 +40,7 @@
 import { mapGetters, mapMutations, mapActions } from 'vuex'
 import { inflateRelation } from '@codotype/util/lib/inflate'
 import DestroyButton from '../DestroyButton'
+import RelationBadge from './RelationBadge'
 
 export default {
   props: {
@@ -64,7 +49,8 @@ export default {
     }
   },
   components: {
-    DestroyButton
+    DestroyButton,
+    RelationBadge
   },
   methods: {
     ...mapMutations({
