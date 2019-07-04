@@ -3,22 +3,17 @@
 
     <div class="row d-flex align-items-center">
 
-      <!-- TODO - re-introduce "Leading Attribute", maybe rename? -->
-      <!-- <div class="col-sm-1 text-left d-flex align-items-center"> -->
-        <!-- <i class="fa fa-fw text-primary fa-eye" v-if="item.order === 0"  v-b-tooltip.hover.left title='Leading attribute'></i> -->
-      <!-- </div> -->
-
       <div class="col-sm-10">
-        <AttributeListItemLabel :item="item"/>
+        <AttributeListItemLabel :item="item" :index="index"/>
       </div>
 
       <div class="col-sm-2 text-right controls justify-content-end" v-if="item.locked">
         <b-badge
           variant="secondary"
           v-b-tooltip.hover.right
-          title="Email attribute may not be edited or removed"
+          title="Attribute may not be edited or removed"
         >
-          <i class="fa fa-fw fa-lock"></i>
+          <i class="fa fa-fw fa-lock" />
         </b-badge>
       </div>
 
@@ -32,12 +27,11 @@
           boundary="viewport"
         >
           <template slot="button-content">
-            <!-- <i class="fa fa-fw fa-ellipsis-h"></i> -->
-            GO
+            <i class="fa fa-fw fa-ellipsis-h" />
           </template>
 
           <b-dropdown-item-button @click="editModel(item)">
-            <i class="fas fa-fw fa-pencil-alt"></i>
+            <i class="fas fa-fw fa-pencil-alt" />
             Edit
           </b-dropdown-item-button>
 
@@ -61,6 +55,9 @@ export default {
   name: 'AttributeListItem',
   props: {
     item: {
+      required: true
+    },
+    index: {
       required: true
     }
   },
