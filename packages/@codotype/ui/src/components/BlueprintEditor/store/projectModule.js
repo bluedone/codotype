@@ -29,7 +29,7 @@ export default {
     identifier (state, identifier) {
       state.identifier = identifier
     },
-    identifier (state, class_name) {
+    class_name (state, class_name) {
       state.class_name = class_name
     }
   },
