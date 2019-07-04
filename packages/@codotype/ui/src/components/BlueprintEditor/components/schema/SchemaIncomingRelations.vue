@@ -20,25 +20,7 @@
 
         <li class="list-group-item" v-for="rel in reverse_relations" v-else>
           <small>
-
-            <template v-if="rel.type === 'BELONGS_TO'">
-              <span>
-                <span class="text-primary">One <strong>{{ model.label }}</strong></span><span class="text-info"><i class="fa fa-arrow-left text-info mx-1"></i>Many <strong>{{ rel.alias.label_plural }}</strong></span>
-              </span>
-            </template>
-
-            <template v-if="rel.type === 'HAS_ONE'">
-              <span>
-                <span class="text-primary">One <strong>{{ model.label }}</strong></span><span class="text-info"><i class="fa fa-arrow-left text-info mx-1"></i> One <strong>{{ rel.alias.label }}</strong></span>
-              </span>
-            </template>
-
-            <template v-if="rel.type === 'HAS_MANY'">
-              <span>
-                <span class="text-primary">Many <strong>{{ model.label_plural }}</strong></span><span class="text-info"><i class="fa fa-arrow-left text-info mx-1"></i>One <strong>{{ rel.alias.label }}</strong></span>
-              </span>
-            </template>
-
+            <RelationBadge slim direction="out" :model="rel" />
           </small>
         </li>
       </ul>
@@ -51,9 +33,13 @@
 <script>
 import { mapGetters } from 'vuex'
 import { inflate } from '@codotype/util/lib/inflate'
+import RelationBadge from '../relation/RelationBadge'
 
 export default {
   name: 'SchemaIncomingRelations',
+  components: {
+    RelationBadge
+  },
   computed: {
     ...mapGetters({
       model: 'editor/schema/selectedModel',
