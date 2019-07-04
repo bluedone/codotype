@@ -4,7 +4,6 @@
       <div class="row d-flex flex-row align-items-center justify-content-between">
         <!-- Alias inputs -->
         <div class="col-lg-4">
-          <p>{{model.type}}</p>
           <RelationFormPreview :model="model" />
         </div>
 
