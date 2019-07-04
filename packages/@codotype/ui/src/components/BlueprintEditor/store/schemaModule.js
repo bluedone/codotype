@@ -35,6 +35,7 @@ export default {
     },
     createModel ({ getters, dispatch }) {
       const model = getters['form/model']
+      model.label = model.label.trim() // Does a final trim before persisting
       dispatch('collection/insert', model)
       dispatch('selectModel', getters['collection/last'])
     },
