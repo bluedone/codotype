@@ -1,4 +1,4 @@
-### v0.2.2 (UNPUBLISHED)
+### v0.2.2
 
 #### Fixes
 * Cleaned up `datatype-meta.js`
