@@ -38,6 +38,8 @@
 * Updated `GeneratorStart` component to render nicely in Vue.js SPA and Nuxt.js
 * Updated `ConfigurationEditor/index.vue` and `OptionFormItem` components to support `ConfigurationGroup` refactor
 * Removed `vue-loading-spinner` package due to license issues (Thanks [Fossa!](https://fossa.com/))
+* `localStorageMediator.js` stores Project label
+* `SchemaDestroyButton` component prevents removal of schema with incoming relations
 
 #### Fixes
 * `BuildError` component directs users to `codotype.io` instead of `splash.codotype.io`

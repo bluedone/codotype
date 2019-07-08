@@ -1,17 +1,36 @@
 <template>
   <div class="row d-flex flex-row align-items-center">
     <div class="col-lg-12">
-      <span v-if="slim && sourceLabel !== sourceAlias" v-b-tooltip.hover.left :title='`as "${sourceAlias}"`'>
-        <i class="fa fa-mask text-primary mr-1" />
-      </span>
-      <span v-else-if="sourceLabel !== sourceAlias" class="text-primary">(as <i>{{ sourceAlias }}) </i></span>
 
-      <span class='text-primary'>{{ sourceManyOrOne }} <strong>{{ sourceLabel }}</strong><i :class="iconCss"></i></span><span class="text-info">{{ destManyOrOne }} <strong>{{ destLabel }}</strong></span>
+      <span class='text-primary'>
+        {{ sourceManyOrOne }}
+        <strong>{{ sourceLabel }}</strong>
+
+          <span
+            v-if="slim && sourceLabel !== sourceAlias"
+            v-b-tooltip.hover.left
+            :title='`as "${sourceAlias}"`'
+          >
+            <i class="fa fa-mask text-primary ml-1" />
+          </span>
+
+          <span
+            v-else-if="sourceLabel !== sourceAlias"
+            class="text-primary"
+          >
+            (as <i>{{ sourceAlias }}) </i>
+          </span>
+
+          <i :class="iconCss" />
+      </span>
+
+      <span class="text-info">{{ destManyOrOne }} <strong>{{ destLabel }}</strong></span>
 
       <span v-if="slim && destLabel !== destAlias" v-b-tooltip.hover.right :title='`as "${destAlias}"`'>
         <i class="fa fa-mask text-info ml-1" />
       </span>
       <span v-else-if="destLabel !== destAlias" class="text-info"> (as <i>{{ destAlias }})</i></span>
+
     </div>
   </div>
 </template>

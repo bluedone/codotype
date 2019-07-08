@@ -32,7 +32,6 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { inflate } from '@codotype/util/lib/inflate'
 import RelationBadge from '../relation/RelationBadge'
 
 export default {
@@ -43,13 +42,11 @@ export default {
   computed: {
     ...mapGetters({
       model: 'editor/schema/selectedModel',
+      inflatedSelectedModel: 'editor/schema/inflatedSelectedModel',
       schemas: 'editor/schema/collection/items'
     }),
     reverse_relations () {
-      // CLEANUP - this is a little inefficient
-      // CLEANUP - this should be abstracted to the Vuex store
-      return inflate({ blueprint: { schemas: this.schemas, schema: this.model } })
-      .schemas.find(s => s.id === this.model.id).reverse_relations
+      return this.inflatedSelectedModel.reverse_relations
     }
   }
 }
