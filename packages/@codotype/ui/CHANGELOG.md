@@ -1,3 +1,10 @@
+### v0.1.9
+
+#### Changes
+* `Generate Code` button enabled in schema editor
+
+---
+
 ### v0.1.8
 
 #### Changes
