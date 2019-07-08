@@ -1,4 +1,4 @@
-### v0.1.8 (UNPUBLISHED)
+### v0.1.8
 
 #### Changes
 * Added tour to Build Configuration page via the `ConfigurationHelp.html` template
