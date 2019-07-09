@@ -1,3 +1,10 @@
+### v0.1.10
+
+#### Changes
+* Loading components use new brand-centric `LoadingSpinner.vue` component
+
+---
+
 ### v0.1.9
 
 #### Changes
