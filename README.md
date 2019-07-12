@@ -1,4 +1,6 @@
 # Codotype
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcodotype%2Fcodotype.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcodotype%2Fcodotype?ref=badge_shield)
+
 
 Upstream development repository for [github.com/codotype](https://github.com/codotype)
 
@@ -46,7 +48,7 @@ cd ./codotype-mevn-generator
 ../cli/bin/codotype.js serve
 ```
 
----
-# License
+## License
 
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fcodotype%2Fcodotype.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fcodotype%2Fcodotype?ref=badge_large)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcodotype%2Fcodotype.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcodotype%2Fcodotype?ref=badge_large)
+
