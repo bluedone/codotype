@@ -4,7 +4,17 @@
 
 Upstream development repository for [github.com/codotype](https://github.com/codotype)
 
-## Setup
+### Stay on the bleeding edge — [join our Gitter room!](https://gitter.im/codotype/Lobby) 🎉
+
+[![Twitter](https://img.shields.io/twitter/follow/codotype.svg?style=social&label=Follow)](https://twitter.com/codotype)
+
+# Generators
+
+**Codotype**<br/> ![Star](https://img.shields.io/github/stars/codotype/codotype.svg?style=social&label=Star)
+
+---
+
+# Setup
 
 1. Run the following command to set up your local environment for development:
 
@@ -39,4 +49,6 @@ cd ./codotype-mevn-generator
 ```
 
 ## License
+
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcodotype%2Fcodotype.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcodotype%2Fcodotype?ref=badge_large)
+

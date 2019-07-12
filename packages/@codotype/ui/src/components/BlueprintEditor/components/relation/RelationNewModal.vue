@@ -8,6 +8,7 @@
     ok-variant='success'
     cancel-title='Cancel'
     cancel-variant='light'
+    :ok-disabled="!disableSubmit"
     @ok="createModel()"
     @hide="showModal(false)"
   >
@@ -25,7 +26,8 @@ export default {
     RelationForm
   },
   computed: mapGetters({
-    showingModal: 'editor/schema/relation/modals/new/showing'
+    showingModal: 'editor/schema/relation/modals/new/showing',
+    disableSubmit: 'editor/schema/relation/disableSubmit'
   }),
   methods: {
     ...mapActions({

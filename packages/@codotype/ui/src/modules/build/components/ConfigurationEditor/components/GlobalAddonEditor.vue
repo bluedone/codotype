@@ -59,6 +59,7 @@
               <OptionTemplateWrapper
                 :model="newAddon"
                 :template="group.previewTemplate"
+                :tooltip="group.previewTooltip"
               >
               </OptionTemplateWrapper>
             </div>

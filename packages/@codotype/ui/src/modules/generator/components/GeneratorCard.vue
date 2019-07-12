@@ -6,7 +6,7 @@
         <div class="col-lg-12 d-flex justify-content-center">
           <p class="lead mb-0">
             <b-btn variant="link" :to="`/generators/${model.id}`" class="d-flex align-items-center flex-column" style='text-decoration: none'>
-              <img class='generator-icon' :src="model.icon"/>
+              <img class='generator-icon mb-2' :src="model.icon"/>
               {{ model.label }}
             </b-btn>
           </p>
@@ -57,6 +57,11 @@
 <script>
 export default {
   name: 'GeneratorCard',
-  props: ['model']
+  props: {
+    model: {
+      type: Object,
+      required: true
+    }
+  }
 }
 </script>

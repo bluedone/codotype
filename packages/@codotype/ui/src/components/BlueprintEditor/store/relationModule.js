@@ -30,6 +30,37 @@ export default {
       dispatch('editor/schema/updateRelations', {}, { root:true })
     },
   },
+  getters: {
+    disableSubmit: state => {
+      // TODO - abstract into a util or types
+      function validateRelation({ relation, relationCollection }) {
+        let errors = []
+
+        // TODO - inflate these relations first
+        // relationCollection.forEach((rel) => {
+        //   if (
+        //     rel.schema_id === relation.schema_id &&
+        //     (
+        //       (rel.as === relation.as && !!rel.as) ||
+        //       (rel.related_schema_id === relation.related_schema_id && rel.type === relation.type)
+        //     )
+        //   ) {
+        //     errors.push('Already exists a conflicting relation between these two Schemas')
+        //   }
+        // })
+
+        return errors
+      }
+
+      const errors = validateRelation({
+        relation: state.form.model,
+        relationCollection: state.collection.items
+      })
+
+      // console.log(errors)
+      return !errors[0]
+    }
+  },
   modules: {
     form: formModule({ NEW_MODEL: DEFAULT_RELATION }),
     collection: collectionModule({ NEW_MODEL: DEFAULT_RELATION }),

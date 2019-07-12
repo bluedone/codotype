@@ -1,3 +1,33 @@
+### v0.1.7
+
+#### Changes
+* `OptionTemplateWrapper` component implements `tooltip` prop from pulled from `previewTooltip` variables
+* Cleaned up `OptionFormItem` component spacing in `ModelAddonEditor`
+* `ModelAddonEditor` component implements `<draggable>`
+* Scaffolded out Relation validation function, prevents form submission
+* Refined `<BuildLoading />` component UX
+* Refined `<BuildError />` component UX
+* Added `<Redirect redirectUrl="..." />` component
+* Simplified output in `<SchemaPreview />` component
+* Removed emoji from `<SortableList />` component
+* Switched dropdown alignment in `<BuildStepsControls />` component import/export
+* Cleaned up spacing in `GeneratorCard` and `GeneratorListItem` components
+
+#### Fixes
+* Bug in `BuildStepsControls` component for 2-step generators
+* Bug where `build/selectBuild` wasn't being invoked for 2-step generators
+* UI bug where `<BuildLoading />` component wasn't centered on the page
+
+---
+
+### v0.1.6
+
+#### Changes
+* `SchemaList` component implements `<draggable>`
+* Added `localStorageMediator` to `BlueprintEditor`
+
+---
+
 ### v0.1.5
 
 #### Changes
