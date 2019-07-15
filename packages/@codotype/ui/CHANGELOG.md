@@ -1,3 +1,11 @@
+### v0.1.12
+
+#### Changes
+* Fixed bug in ConfigurationEditor preventing Generators with `defaultSchemas` from not full loading on initialization
+* Fixed bug with `SchemaDestroyButton` tooltip behavior
+
+---
+
 ### v0.1.11
 
 #### Changes

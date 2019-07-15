@@ -24,13 +24,9 @@ export default {
         const allschemas = [...defaultSchemas]
         commit('editor/schema/collection/items', allschemas, { root: true })
         dispatch('editor/schema/selectModel', allschemas[0], { root: true })
-        return
+      } else if (schemas[0]) {
+        dispatch('editor/schema/selectModel', schemas[0], { root: true })
       }
-
-      // // // //
-      // TODO - remove this after cleaning up this module
-      if (schemas[0]) dispatch('editor/schema/selectModel', schemas[0], { root: true })
-      // // // //
 
       // Loads the generator into the step module
       dispatch('editor/created', {}, { root: true }) // Could maybe ditch editor/created

@@ -21,14 +21,6 @@
           </span>
 
           <SchemaDestroyButton v-if="isRemovable" />
-          <HelpPopover
-            v-if="isRemovable"
-            target="schema-destroy-button"
-            placement="left"
-            :triggers="['hover']"
-            content="Remove Schema">
-          </HelpPopover>
-
         </b-col>
 
         <SchemaEditModal v-if="!isLocked" />

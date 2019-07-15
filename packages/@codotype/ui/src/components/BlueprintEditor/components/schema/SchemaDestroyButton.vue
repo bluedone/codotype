@@ -1,29 +1,42 @@
 <template>
-  <b-button
-    v-if="hasReverseRelations"
-    class="destroy-button hasReverse"
-    variant="link"
-    v-b-tooltip.hover.right
-    title='Cannot delete Schema with incoming relations'
-  >
-    <i class="far fa-fw fa-trash-alt"></i>
-  </b-button>
-  <b-button
-    v-else
-    id="schema-destroy-button"
-    class="destroy-button"
-    variant="link"
-    @click="$store.commit('editor/schema/modals/destroy/showing', true)"
-  >
-    <i class="far fa-fw fa-trash-alt"></i>
-  </b-button>
+  <span>
+    <HelpPopover
+      v-if="!hasReverseRelations"
+      target="schema-destroy-button"
+      placement="left"
+      :triggers="['hover']"
+      content="Remove Schema"
+    />
+    <b-button
+      v-if="hasReverseRelations"
+      class="destroy-button hasReverse"
+      variant="link"
+      v-b-tooltip.hover.right
+      title='Cannot delete Schema with incoming relations'
+    >
+      <i class="far fa-fw fa-trash-alt"></i>
+    </b-button>
+    <b-button
+      v-else
+      id="schema-destroy-button"
+      class="destroy-button"
+      variant="link"
+      @click="$store.commit('editor/schema/modals/destroy/showing', true)"
+    >
+      <i class="far fa-fw fa-trash-alt"></i>
+    </b-button>
+  </span>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import HelpPopover from '../../../HelpPopover'
 
 export default {
   name: 'SchemaDestroyButton',
+  components: {
+    HelpPopover
+  },
   computed: {
     ...mapGetters({
       inflatedSelectedModel: 'editor/schema/inflatedSelectedModel'
