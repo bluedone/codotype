@@ -20,9 +20,9 @@
 
           </span>
 
-          <SchemaDestroyButton v-if="!isLocked && !isRemovable" />
+          <SchemaDestroyButton v-if="isRemovable" />
           <HelpPopover
-            v-if="!isRemovable"
+            v-if="isRemovable"
             target="schema-destroy-button"
             placement="left"
             :triggers="['hover']"
@@ -32,7 +32,7 @@
         </b-col>
 
         <SchemaEditModal v-if="!isLocked" />
-        <SchemaDestroyModal :label="model.label" v-if="!isLocked && !isRemovable" />
+        <SchemaDestroyModal :label="model.label" v-if="isRemovable" />
       </b-row>
 
       <b-row class='mb-0'>
@@ -132,7 +132,7 @@ export default {
       return this.model.locked
     },
     isRemovable () {
-      return this.model.identifier === 'user'
+      return !(this.model.locked && this.model.source === 'GENERATOR') // TOOD - use SCHEMA_SOURCE_GENERATOR
     }
   }
 }

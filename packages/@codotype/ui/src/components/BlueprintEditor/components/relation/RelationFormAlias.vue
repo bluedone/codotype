@@ -24,9 +24,8 @@
               type="text"
               class='form-control border-primary text-primary'
               :placeholder="selectedSchema.label"
-              :disabled="['BELONGS_TO', 'HAS_ANY_BELONGS_TO_MANY'].includes(model.type)"
+              :disabled="!['BELONGS_TO', 'HAS_ANY_BELONGS_TO_MANY'].includes(model.type)"
               v-model="model.reverse_as"
-              @input="updateNewModel()"
             />
           </div>
         </div>
@@ -43,7 +42,6 @@
                   class='form-control border-info text-info'
                   v-model="model.as"
                   :placeholder="selectedRelatedSchema.label"
-                  @input="updateNewModel()"
                 />
               </div>
             </div>
@@ -68,8 +66,8 @@ export default {
     RelationFormPreview
   },
   methods: {
-    updateNewModel () { // CLEANUP - abstract this into a Vue mixin?
-      this.$store.commit('editor/schema/relation/collection/newModel', this.model)
+    updateModel () {
+      this.$store.commit('editor/schema/relation/form/newModel', this.model)
     }
   },
   computed: {

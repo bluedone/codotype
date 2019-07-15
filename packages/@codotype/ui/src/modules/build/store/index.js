@@ -16,14 +16,19 @@ export default {
       // Loads in any default schemas
       const defaultSchemas = generatorMeta.defaultSchemas || []
 
+      // Loads in any saved schemas
+      const schemas = rootGetters['editor/schema/collection/items'] || []
+
       // Updates the schema collection and selected schema
-      // TODO - uncomment this at some juncture
-      // commit('editor/schema/collection/items', defaultSchemas, { root: true })
-      // if (defaultSchemas[0]) dispatch('editor/schema/selectModel', defaultSchemas[0], { root: true })
+      if (defaultSchemas[0] && !schemas[0]) {
+        const allschemas = [...defaultSchemas]
+        commit('editor/schema/collection/items', allschemas, { root: true })
+        dispatch('editor/schema/selectModel', allschemas[0], { root: true })
+        return
+      }
 
       // // // //
       // TODO - remove this after cleaning up this module
-      const schemas = rootGetters['editor/schema/collection/items']
       if (schemas[0]) dispatch('editor/schema/selectModel', schemas[0], { root: true })
       // // // //
 

@@ -54,10 +54,10 @@ export default {
   },
   methods: {
     ...mapMutations({
-      setEditModel: 'editor/schema/relation/collection/editModel',
       showEditModal: 'editor/schema/relation/modals/edit/showing',
     }),
     ...mapActions({
+      setEditModel: 'editor/schema/relation/editModel',
       removeModel: 'editor/schema/relation/collection/destroy',
       updateRelations: 'editor/schema/updateRelations'
     }),

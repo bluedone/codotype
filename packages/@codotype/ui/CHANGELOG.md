@@ -1,3 +1,12 @@
+### v0.1.11
+
+#### Changes
+* Refined `SchemaDetail` schema removal behavior
+* ConfigurationEditor supports `defaultSchemas`
+* Fixed bug in Relation form where edit changes weren't propagating
+
+---
+
 ### v0.1.10
 
 #### Changes
