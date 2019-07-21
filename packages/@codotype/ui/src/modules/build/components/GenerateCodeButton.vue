@@ -1,6 +1,6 @@
 <template>
   <button
-    class="btn btn-lg btn-yellow"
+    class="btn btn-sm btn-yellow"
     :disabled="disabled"
     @click="generate()"
   >
