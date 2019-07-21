@@ -1,29 +1,31 @@
 <template>
   <span>
-    <HelpPopover
+    <!-- <HelpPopover
       v-if="!hasReverseRelations"
       target="schema-destroy-button"
       placement="left"
-      :triggers="['hover']"
+      :triggers="[]"
       content="Remove Schema"
-    />
+    /> -->
     <b-button
       v-if="hasReverseRelations"
       class="destroy-button hasReverse"
       variant="link"
-      v-b-tooltip.hover.right
+      v-b-tooltip.hover.left
       title='Cannot delete Schema with incoming relations'
     >
-      <i class="far fa-fw fa-trash-alt"></i>
+      <i class="far fa-fw fa-trash-alt" />
     </b-button>
     <b-button
       v-else
       id="schema-destroy-button"
       class="destroy-button"
       variant="link"
+      v-b-tooltip.hover.left
+      title='Remove Schema'
       @click="$store.commit('editor/schema/modals/destroy/showing', true)"
     >
-      <i class="far fa-fw fa-trash-alt"></i>
+      <i class="far fa-fw fa-trash-alt" />
     </b-button>
   </span>
 </template>
