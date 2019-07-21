@@ -42,7 +42,12 @@
       <b-col sm=12>
         <b-tabs>
           <b-tab title="Schemas" lazy active>
-            <b-row class='mt-3'>
+            <b-row class='mt-4 d-flex justify-content-center' v-if="!schemas[0]">
+              <b-col sm=10>
+                <SchemaEmptyState />
+              </b-col>
+            </b-row>
+            <b-row class='mt-3' v-else>
               <b-col xl=3 lg=3 sm=12 class='border-right'>
                 <ImportModal />
                 <ExportModal />
@@ -121,6 +126,7 @@ import SchemaNewButton from './components/schema/SchemaNewButton'
 import SchemaNewModal from './components/schema/SchemaNewModal'
 import SchemaList from './components/schema/SchemaList'
 import SchemaDetail from './components/schema/SchemaDetail'
+import SchemaEmptyState from './components/schema/SchemaEmptyState'
 import HelpPopover from '../HelpPopover'
 import GenerateCodeButton from '../../modules/build/components/GenerateCodeButton'
 import EditorHeader from '../EditorHeader'
@@ -152,6 +158,7 @@ export default {
     HelpPopover,
     SchemaList,
     SchemaDetail,
+    SchemaEmptyState,
     GenerateCodeButton,
     EditorHeader,
     GlobalOptionEditor,

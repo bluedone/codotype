@@ -5,11 +5,11 @@ import modalModule from '../../../store/lib/modalModule'
 export default {
   namespaced: true,
   state: {
-    label: '',
     editLabel: '',
     editIdentifier: '',
-    identifier: '',
-    class_name: ''
+    label: 'Project Name',
+    identifier: 'project_name',
+    class_name: 'ProjectName'
   },
   actions: {
     edit ({ state, commit, dispatch }) {

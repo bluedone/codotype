@@ -4,11 +4,9 @@
     <LoadingBuild v-else-if="loading" />
     <BuildError v-else-if="fetchError || runtimeError" />
     <BuildFinished v-else-if="finished" />
-    <b-row class="mt-4 justify-content-center">
+    <b-row v-else class="mt-4 justify-content-center">
       <b-col sm=12 xl=10 v-if="model && model.id">
         <BlueprintEditor :id="model.id" />
-        <!-- <ProjectForm /> -->
-        <!-- <SchemaEmptyState /> -->
       </b-col>
     </b-row>
   </div>
@@ -17,14 +15,10 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import Loading from '../../../components/Loading'
-import BuildSteps from '../../build/components/BuildSteps'
 import BuildError from '../../build/components/BuildError'
 import LoadingBuild from '../../build/components/LoadingBuild'
 import BuildFinished from '../../build/components/BuildFinished'
-import ProjectForm from '../../../components/BlueprintEditor/components/project/ProjectForm'
 import BlueprintEditor from '../../../components/BlueprintEditor'
-import SchemaEmptyState from '../../../components/BlueprintEditor/components/schema/SchemaEmptyState'
-import ConfigureGenerator from '../../build/components/ConfigurationEditor'
 
 export default {
   name: 'GeneratorBuild',
@@ -44,13 +38,9 @@ export default {
   components: {
     Loading,
     LoadingBuild,
-    BuildSteps,
     BuildError,
     BuildFinished,
-    ProjectForm,
-    BlueprintEditor,
-    SchemaEmptyState,
-    ConfigureGenerator
+    BlueprintEditor
   },
   async created () {
     try {

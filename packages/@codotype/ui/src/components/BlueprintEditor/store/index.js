@@ -17,7 +17,8 @@ export default {
     reset ({ getters, commit, dispatch }) {
       dispatch('project/reset')
       // TODO - pull default schemas here from generator
-      commit('schema/collection/items', [Object.assign({}, DEFAULT_USER_SCHEMA)])
+      // commit('schema/collection/items', [Object.assign({}, DEFAULT_USER_SCHEMA)])
+      commit('schema/collection/items', [])
       dispatch('schema/selectModel', getters['schema/collection/first'])
     },
     import ({ getters, commit, dispatch }, blueprint) {

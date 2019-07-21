@@ -1,3 +1,15 @@
+### v0.1.13 (UNPUBLISHED)
+
+#### Changes
+* Fixed another issue with `SchemaDestroyButton` tooltip behavior
+* Updated `runtimeModule` to filter out schemas without any attributes or relations
+* `SchemaDetail` supports new `schema.removable` property
+* Refactored `EditProjectModal` component, wraps `ProjectForm` component
+* Sized down `GenerateCodeButton`
+* Merged `ConfigurationEditor` component into `BlueprintEditor` component
+
+---
+
 ### v0.1.12
 
 #### Changes
