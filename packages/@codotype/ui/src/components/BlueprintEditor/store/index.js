@@ -16,6 +16,7 @@ export default {
     },
     reset ({ getters, commit, dispatch }) {
       dispatch('project/reset')
+      // TODO - pull default schemas here from generator
       commit('schema/collection/items', [Object.assign({}, DEFAULT_USER_SCHEMA)])
       dispatch('schema/selectModel', getters['schema/collection/first'])
     },
@@ -36,7 +37,7 @@ export default {
       return {
         label: state.project.label || 'Project Name',
         identifier: state.project.identifier || 'project_name',
-        schemas: state.schema.collection.items
+        schemas: state.schema.collection.items.filter(s => s.attributes.length > 0 || s.relations.length > 0)
       }
     }
   },
@@ -48,9 +49,8 @@ export default {
       namespaced: true,
       modules: {
         import: modalModule(),
-        export: modalModule()
+        export: modalModule(),
       }
     }
-
   }
 }
