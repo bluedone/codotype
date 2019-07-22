@@ -43,14 +43,12 @@
         <small class="form-text text-info">Schema referenced by this relation</small>
         <select class="form-control border-info text-info" v-model="model.related_schema_id" @change="updateModel()">
 
-          <!-- <option v-if="model.type === 'HAS_ONE'" v-for="s in allSchemas" :key="s.id" :value="s.id">{{s.label}}</option> -->
-          <template v-if="model.type === 'HAS_MANY'">
+          <template v-if="[relationTypes.RELATION_TYPE_HAS_MANY, relationTypes.RELATION_TYPE_HAS_AND_BELONGS_TO_MANY].includes(model.type)">
             <option v-for="s in allSchemas" :key="s.id" :value="s.id">
               {{s.label_plural}}
             </option>
           </template>
 
-          <!-- <option v-if="model.type === 'BELONGS_TO'" v-for="s in allSchemas" :key="s.id" :value="s.id">{{s.label}}</option> -->
           <template v-else>
             <option v-for="s in allSchemas" :key="s.id" :value="s.id">
               {{s.label}}

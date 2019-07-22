@@ -6,7 +6,8 @@
           <div class="row mt-2">
             <div class="col-sm-12">
               <p class="lead mb-0">Cardinality</p>
-              <p class="small text-muted"><span class="text-success">Cardinality</span> describes the nature of a <strong>Relation</strong> between two <strong>Schemas</strong></p>
+              <!-- <p class="small text-muted"><span class="text-success">Cardinality</span> -->
+              <p class="small text-muted">Describe the way this <strong>Relation</strong> <span class="text-primary"> stores data in one </span><strong>Schema</strong> that <span class="text-info"> relates to another</span>.</p>
               <hr />
             </div>
           </div>
@@ -32,8 +33,8 @@
           <div class="col-lg-12">
             <hr>
           </div>
-          <div class="col-lg-12">
-            <RelationBadge :model="model" />
+          <div class="col-lg-12 text-center">
+            <RelationBadge :model="model" direction="out" />
           </div>
         </div>
       </b-tabs>

@@ -38,6 +38,16 @@
       />
     </div>
 
+    <div class="col-sm-12" v-if="[DATATYPE_NUMERIC, DATATYPE_DECIMAL].includes(model.datatype)">
+      <FormInput
+        label="Default Value"
+        placeholder="Default Value"
+        v-model="model.default"
+        :help="helpText"
+        type="DECIMAL"
+      />
+    </div>
+
     <div class="col-sm-12" v-if="model.datatype === DATATYPE_BOOLEAN">
       <FormInput
         label="Default Value"
@@ -87,7 +97,7 @@
       />
     </div>
 
-    <div class="col-sm-12" v-if="model.datatype === DATATYPE_DATETIME">
+    <div class="col-sm-12" v-if="[DATATYPE_DATETIME, DATATYPE_TIMESTAMP].includes(model.datatype)">
       <FormInput
         label="Default Value"
         placeholder="Default Value"
@@ -107,11 +117,13 @@ import {
   DATATYPE_TEXT,
   DATATYPE_INTEGER,
   DATATYPE_FLOAT,
+  DATATYPE_DECIMAL,
+  DATATYPE_NUMERIC,
   DATATYPE_BOOLEAN,
-  DATATYPE_JSON,
   DATATYPE_DATE,
   DATATYPE_TIME,
-  DATATYPE_DATETIME
+  DATATYPE_DATETIME,
+  DATATYPE_TIMESTAMP
 
 } from '@codotype/types/lib/datatypes'
 
@@ -133,11 +145,13 @@ export default {
       DATATYPE_TEXT,
       DATATYPE_INTEGER,
       DATATYPE_FLOAT,
+      DATATYPE_DECIMAL,
+      DATATYPE_NUMERIC,
       DATATYPE_BOOLEAN,
-      DATATYPE_JSON,
       DATATYPE_DATE,
       DATATYPE_TIME,
-      DATATYPE_DATETIME
+      DATATYPE_DATETIME,
+      DATATYPE_TIMESTAMP
     }
   }
 }

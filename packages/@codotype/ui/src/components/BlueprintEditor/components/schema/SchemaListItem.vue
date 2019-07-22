@@ -10,7 +10,7 @@
       </span>
 
       <i
-        v-if="!model.attributes.length && !model.relations.length"
+        v-if="model.attributes && !model.attributes.length && model.relations && !model.relations.length"
         v-b-tooltip.hover.right
         class="fa fa-exclamation-circle text-warning mr-1"
         :title="`Schema requires at least one attribute or relation - empty schemas will be ignored`"

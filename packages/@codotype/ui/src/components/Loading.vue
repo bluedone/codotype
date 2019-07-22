@@ -3,7 +3,7 @@
     <b-container>
       <b-row>
         <div class="col-sm-12 text-center">
-          <i class="fa fa-3x fa-spin fa-spinner"></i>
+          <LoadingSpinner />
         </div>
       </b-row>
     </b-container>
@@ -11,7 +11,11 @@
 </template>
 
 <script>
+  import LoadingSpinner from './LoadingSpinner'
 export default {
-  name: 'Loading'
+  name: 'Loading',
+  components: {
+    LoadingSpinner
+  }
 }
 </script>

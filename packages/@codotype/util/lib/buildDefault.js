@@ -5,7 +5,8 @@ const { inflateRelation } = require('./inflate')
 const {
   RELATION_TYPE_BELONGS_TO,
   RELATION_TYPE_HAS_ONE,
-  RELATION_TYPE_HAS_MANY
+  RELATION_TYPE_HAS_MANY,
+  RELATION_TYPE_HAS_AND_BELONGS_TO_MANY,
 } = require('@codotype/types/lib/relation-types')
 
 // CLEANUP - document this function, write better tests
@@ -79,6 +80,8 @@ const getRelationKey = ({ relation }) => {
       return relation.alias.identifier + '_id'
     case RELATION_TYPE_HAS_MANY:
       return relation.alias.identifier + '_ids'
+    case RELATION_TYPE_HAS_AND_BELONGS_TO_MANY:
+      return relation.alias.identifier + '_ids'
   }
 }
 
@@ -90,6 +93,8 @@ const getDefaultRelationValue = ({ type }) => {
     case RELATION_TYPE_HAS_ONE:
       return ''
     case RELATION_TYPE_HAS_MANY:
+      return []
+    case RELATION_TYPE_HAS_AND_BELONGS_TO_MANY:
       return []
   }
 }

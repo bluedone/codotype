@@ -16,21 +16,22 @@ export default {
       // Loads in any default schemas
       const defaultSchemas = generatorMeta.defaultSchemas || []
 
-      // Updates the schema collection and selected schema
-      // TODO - uncomment this at some juncture
-      // commit('editor/schema/collection/items', defaultSchemas, { root: true })
-      // if (defaultSchemas[0]) dispatch('editor/schema/selectModel', defaultSchemas[0], { root: true })
+      // Loads in any saved schemas
+      const schemas = rootGetters['editor/schema/collection/items'] || []
 
-      // // // //
-      // TODO - remove this after cleaning up this module
-      const schemas = rootGetters['editor/schema/collection/items']
-      if (schemas[0]) dispatch('editor/schema/selectModel', schemas[0], { root: true })
-      // // // //
+      // Updates the schema collection and selected schema
+      if (defaultSchemas[0] && !schemas[0]) {
+        const allschemas = [...defaultSchemas]
+        commit('editor/schema/collection/items', allschemas, { root: true })
+        dispatch('editor/schema/selectModel', allschemas[0], { root: true })
+      } else if (schemas[0]) {
+        dispatch('editor/schema/selectModel', schemas[0], { root: true })
+      }
 
       // Loads the generator into the step module
       dispatch('editor/created', {}, { root: true }) // Could maybe ditch editor/created
       dispatch('tour/created', {}, { root: true })
-      dispatch('steps/load', generatorMeta)
+      // dispatch('steps/load', generatorMeta)
       dispatch('runtime/reset')
     },
     selectBuild ({ state, getters, rootGetters, commit, dispatch }, generator_id) {

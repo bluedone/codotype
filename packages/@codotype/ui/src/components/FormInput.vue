@@ -37,6 +37,17 @@
     />
 
     <input
+      v-else-if="type === 'DECIMAL'"
+      type="number"
+      step="0.01"
+      ref="input_el"
+      class="form-control"
+      :placeholder="placeholder"
+      :value="value"
+      @input="updateModel()"
+    />
+
+    <input
       v-else-if="type === 'DATE'"
       type="date"
       ref="input_el"
@@ -81,7 +92,7 @@
 
 <script>
 // TODO - update this to leverage Codotype DATATYPES
-
+// TODO - clean up these props, damn
 export default {
   props: ['required', 'focus', 'label', 'type', 'example', 'help', 'ex', 'help', 'placeholder', 'value'],
   mounted () {
@@ -93,7 +104,7 @@ export default {
     updateModel () {
       if (this.type === 'BOOL') {
         this.$emit('input', this.$refs.input_el.toggled)
-      } else if (this.type === 'NUMBER') {
+      } else if (['INTEGER', 'FLOAT', 'DECIMAL'].includes(this.type)) {
         this.$emit('input', Number(this.$refs.input_el.value))
       } else {
         this.$emit('input', this.$refs.input_el.value)

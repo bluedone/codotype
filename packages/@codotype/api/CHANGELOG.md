@@ -1,3 +1,10 @@
+### v0.1.4
+
+#### Changes
+* Added support for local compressed builds for download from docker container
+
+---
+
 ### v0.1.3
 
 #### Fixes

@@ -38,10 +38,11 @@
             :fallbackTolerance="100"
           >
             <AttributeListItem
-              v-for="item in collection"
+              v-for="item, index in collection"
               :key="item.id"
-              :item="item">
-            </AttributeListItem>
+              :item="item"
+              :index="index"
+            />
           </draggable>
 
           <draggable
@@ -54,8 +55,8 @@
             <RelationListItem
               v-for="item in collection"
               :key="item.id"
-              :item="item">
-            </RelationListItem>
+              :item="item"
+            />
           </draggable>
 
           <b-list-group flush v-else-if="!collection.length">

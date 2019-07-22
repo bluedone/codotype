@@ -4,38 +4,9 @@
     <LoadingBuild v-else-if="loading" />
     <BuildError v-else-if="fetchError || runtimeError" />
     <BuildFinished v-else-if="finished" />
-    <b-row v-else class='justify-content-center'>
-      <b-col xl=12 lg=12>
-
-        <BuildSteps v-if="model.id">
-          <template slot="step-1">
-            <b-row class="justify-content-center">
-              <b-col sm=12 lg="8" xl=6>
-                <ProjectForm />
-              </b-col>
-            </b-row>
-          </template>
-
-          <template slot="step-2">
-            <b-row class="justify-content-center">
-              <b-col sm=12 xl=10 v-if="schemas.length">
-                <BlueprintEditor />
-              </b-col>
-              <b-col sm=12 lg=10 xl=8 v-else>
-                <SchemaEmptyState />
-              </b-col>
-            </b-row>
-          </template>
-
-          <template slot="step-3">
-            <b-row class='justify-content-center'>
-              <b-col sm=12 xl=10>
-                <ConfigureGenerator :id="id" />
-              </b-col>
-            </b-row>
-          </template>
-        </BuildSteps>
-
+    <b-row v-else class="mt-4 justify-content-center">
+      <b-col sm=12 xl=10 v-if="model && model.id">
+        <BlueprintEditor :id="model.id" />
       </b-col>
     </b-row>
   </div>
@@ -44,14 +15,10 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import Loading from '../../../components/Loading'
-import BuildSteps from '../../build/components/BuildSteps'
 import BuildError from '../../build/components/BuildError'
 import LoadingBuild from '../../build/components/LoadingBuild'
 import BuildFinished from '../../build/components/BuildFinished'
-import ProjectForm from '../../../components/BlueprintEditor/components/project/ProjectForm'
 import BlueprintEditor from '../../../components/BlueprintEditor'
-import SchemaEmptyState from '../../../components/BlueprintEditor/components/schema/SchemaEmptyState'
-import ConfigureGenerator from '../../build/components/ConfigurationEditor'
 
 export default {
   name: 'GeneratorBuild',
@@ -71,20 +38,16 @@ export default {
   components: {
     Loading,
     LoadingBuild,
-    BuildSteps,
     BuildError,
     BuildFinished,
-    ProjectForm,
-    BlueprintEditor,
-    SchemaEmptyState,
-    ConfigureGenerator
+    BlueprintEditor
   },
   async created () {
     try {
       await this.$store.dispatch('generator/fetchCollection')
       this.selectModel(this.id)
       this.$store.dispatch('build/loadSteps', this.id)
-      this.$store.dispatch('build/steps/reset')
+      // this.$store.dispatch('build/steps/reset')
       this.$store.dispatch('build/selectBuild', this.id) // TODO - this is invoked in `build.editorModule` as well
       setTimeout(() => {
         this.starting = false

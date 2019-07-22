@@ -44,6 +44,35 @@
 </template>
 
 <script>
+// USAGE
+// <BuildSteps v-if="model.id">
+//   <template slot="step-1">
+//     <b-row class="justify-content-center">
+//       <b-col sm=12 lg="8" xl=6>
+//         <ProjectForm />
+//       </b-col>
+//     </b-row>
+//   </template>
+
+//   <template slot="step-2">
+//     <b-row class="justify-content-center">
+//       <b-col sm=12 xl=10 v-if="schemas.length">
+//         <BlueprintEditor />
+//       </b-col>
+//       <b-col sm=12 lg=10 xl=8 v-else>
+//         <SchemaEmptyState />
+//       </b-col>
+//     </b-row>
+//   </template>
+
+//   <template slot="step-3">
+//     <b-row class='justify-content-center'>
+//       <b-col sm=12 xl=10>
+//         <ConfigureGenerator :id="id" />
+//       </b-col>
+//     </b-row>
+//   </template>
+// </BuildSteps>
 import { mapGetters } from 'vuex'
 import BuildStepChild from './BuildStepChild'
 import BuildStepLabel from './BuildStepLabel'

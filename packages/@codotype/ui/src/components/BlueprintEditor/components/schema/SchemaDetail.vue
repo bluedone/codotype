@@ -9,9 +9,9 @@
 
             <h5 class="mb-0 mr-2 d-flex">{{ model.label + ' Schema' }}</h5>
 
-            <SchemaEditButton v-if="!isLocked" />
+            <SchemaEditButton v-if="isEditable" />
             <HelpPopover
-              v-if="!isLocked"
+              v-if="isEditable"
               target="schemaEditPopover"
               placement="right"
               :triggers="['hover']"
@@ -20,19 +20,11 @@
 
           </span>
 
-          <SchemaDestroyButton v-if="!isLocked && !isRemovable" />
-          <HelpPopover
-            v-if="!isRemovable"
-            target="schema-destroy-button"
-            placement="left"
-            :triggers="['hover']"
-            content="Remove Schema">
-          </HelpPopover>
-
+          <SchemaDestroyButton v-if="isRemovable" />
         </b-col>
 
-        <SchemaEditModal v-if="!isLocked" />
-        <SchemaDestroyModal :label="model.label" v-if="!isLocked && !isRemovable" />
+        <SchemaEditModal v-if="isEditable" />
+        <SchemaDestroyModal :label="model.label" v-if="isRemovable" />
       </b-row>
 
       <b-row class='mb-0'>
@@ -47,7 +39,7 @@
         <b-col sm=12 md=6 lg=6>
 
           <SortableList
-            :locked="isLocked"
+            :locked="model.locked"
             scope="attribute"
             label="Attributes"
             title="No Attributes added yet"
@@ -67,7 +59,7 @@
         <b-col sm=12 md=6 lg=6 class="pl-md-0">
 
           <SortableList
-            :locked="isLocked"
+            :locked="model.locked"
             scope="relation"
             label="Relations"
             title="No Relations added yet"
@@ -128,11 +120,12 @@ export default {
       model: 'editor/schema/selectedModel',
       schemas: 'editor/schema/collection/items'
     }),
-    isLocked () {
-      return this.model.locked
+    isEditable () {
+      // TOOD - use SCHEMA_SOURCE_GENERATOR
+      return this.model.source !== 'GENERATOR'
     },
     isRemovable () {
-      return this.model.identifier === 'user'
+      return this.model.removable
     }
   }
 }
