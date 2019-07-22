@@ -18,8 +18,11 @@
 
           <template slot="step-2">
             <b-row class="justify-content-center">
-              <b-col sm=12 xl=10>
+              <b-col sm=12 xl=10 v-if="schemas.length">
                 <BlueprintEditor />
+              </b-col>
+              <b-col sm=12 lg=10 xl=8 v-else>
+                <SchemaEmptyState />
               </b-col>
             </b-row>
           </template>
@@ -47,6 +50,7 @@ import LoadingBuild from '../../build/components/LoadingBuild'
 import BuildFinished from '../../build/components/BuildFinished'
 import ProjectForm from '../../../components/BlueprintEditor/components/project/ProjectForm'
 import BlueprintEditor from '../../../components/BlueprintEditor'
+import SchemaEmptyState from '../../../components/BlueprintEditor/components/schema/SchemaEmptyState'
 import ConfigureGenerator from '../../build/components/ConfigurationEditor'
 
 export default {
@@ -72,6 +76,7 @@ export default {
     BuildFinished,
     ProjectForm,
     BlueprintEditor,
+    SchemaEmptyState,
     ConfigureGenerator
   },
   async created () {
@@ -92,6 +97,7 @@ export default {
     selectModel: 'generator/selectModel'
   }),
   computed: mapGetters({
+    schemas: 'editor/schema/collection/items',
     fetchError: 'generator/error',
     runtimeError: 'build/runtime/error',
     model: 'generator/selectedModel',

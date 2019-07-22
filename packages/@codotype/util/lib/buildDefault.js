@@ -1,4 +1,5 @@
 const datatypes = require('@codotype/types/lib/datatypes')
+const optiontypes = require('@codotype/types/lib/configuration-option-types')
 const { inflateRelation } = require('./inflate')
 
 const {
@@ -14,17 +15,21 @@ const getDefaultAttributeValue = ({ type }) => {
       return ''
     case datatypes.DATATYPE_TEXT:
       return ''
-    case datatypes.DATATYPE_STRING_ARRAY:
-      return []
-    case datatypes.DATATYPE_STRING_SELECT:
-      return []
     case datatypes.DATATYPE_INTEGER:
       return 0
+    case datatypes.DATATYPE_BIGINT:
+      return 0
     case datatypes.DATATYPE_FLOAT:
+      return 0.0
+    case datatypes.DATATYPE_DECIMAL:
+      return 0.0
+    case datatypes.DATATYPE_NUMERIC:
       return 0.0
     case datatypes.DATATYPE_BOOLEAN:
       return false
     case datatypes.DATATYPE_JSON:
+      return {}
+    case datatypes.DATATYPE_JSONB:
       return {}
     case datatypes.DATATYPE_DATE:
       return '2019-03-11' // QUESTION - what's the best way to handle this?
@@ -32,6 +37,34 @@ const getDefaultAttributeValue = ({ type }) => {
       return '17:04:14 GMT-0400' // QUESTION - what's the best way to handle this?
     case datatypes.DATATYPE_DATETIME:
       return '3/18/2019, 5:04:51 PM' // QUESTION - what's the best way to handle this?
+    case datatypes.DATATYPE_TIMESTAMP:
+      return '3/18/2019, 5:04:51 PM' // QUESTION - what's the best way to handle this?
+    case datatypes.DATATYPE_STRING_ARRAY:
+      return []
+    case datatypes.DATATYPE_TEXT_ARRAY:
+      return []
+    case datatypes.DATATYPE_INTEGER_ARRAY:
+      return []
+    case datatypes.DATATYPE_BIGINT_ARRAY:
+      return []
+    case datatypes.DATATYPE_FLOAT_ARRAY:
+      return []
+    case datatypes.DATATYPE_DECIMAL_ARRAY:
+      return []
+    case datatypes.DATATYPE_NUMERIC_ARRAY:
+      return []
+    case datatypes.DATATYPE_BOOLEAN_ARRAY:
+      return []
+    case datatypes.DATATYPE_DATE_ARRAY:
+      return []
+    case datatypes.DATATYPE_TIME_ARRAY:
+      return []
+    case datatypes.DATATYPE_DATETIME_ARRAY:
+      return []
+    case datatypes.DATATYPE_TIMESTAMP_ARRAY:
+      return []
+    case optiontypes.OPTION_TYPE_STRING_SELECT:
+      return []
   }
 }
 
@@ -88,7 +121,7 @@ const buildConfigurationDefault = ({ attributes }) => {
 
   // Iterate over each attribute
   attributes.forEach((attr) => {
-    defaultState[attr.identifier] = attr.default_value || getDefaultAttributeValue({ type: attr.datatype })
+    defaultState[attr.identifier] = attr.default_value === undefined ? getDefaultAttributeValue({ type: attr.datatype }) : attr.default_value;
   })
 
   return defaultState

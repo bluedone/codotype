@@ -43,14 +43,12 @@
           size="lg"
           id="submit-project-form"
           block
-          variant="success"
+          variant="primary"
           :disabled="!enableSubmit"
           @click="incrementStep()"
         >
           Define Schemas
-          <i class="fa fa-chevron-right ml-2"></i>
-          <i class="fa fa-chevron-right"></i>
-          <i class="fa fa-chevron-right"></i>
+          <ChevronAnimation :active="enableSubmit" />
         </b-button>
 
       </b-col>
@@ -61,11 +59,13 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import HelpPopover from '../../../HelpPopover'
+import ChevronAnimation from '../../../ChevronAnimation'
 
 export default {
   name: 'ProjectForm',
   components: {
-    HelpPopover
+    HelpPopover,
+    ChevronAnimation
   },
   mounted () {
     setTimeout(() => { this.$refs.input_el.focus() }, 200) // Minor delay for input element focus

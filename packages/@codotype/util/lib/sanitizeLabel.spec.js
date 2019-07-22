@@ -29,4 +29,10 @@ describe('/lib/sanitizeLabel.js', () => {
     });
   });
 
+  describe('lowercase with whitespace between numbers/characters', () => {
+    it('trailing whitespace should be removed', () => {
+      assert.equal(sanitizeLabel('todo 123'), 'Todo')
+    });
+  });
+
 });

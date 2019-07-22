@@ -43,8 +43,31 @@ export default {
     }
   },
   getters: {
+    formErrors: state => {
+      const errors = []
+      if (!state.form.model.label) {
+        errors.push('Label property is not defined')
+      }
+      if (!state.form.model.identifier) {
+        errors.push('Identifier property is not defined')
+      }
+      if (!state.form.model.datatype) {
+        errors.push('Datatype is not defined')
+      }
+      if (!state.collection.items.filter(a => a.id !== state.form.model.id).map(a => a.label).includes(state.form.model.label)) {
+        errors.push('Label property is not unique')
+      }
+      if (!state.collection.items.filter(a => a.id !== state.form.model.id).map(a => a.identifier).includes(state.form.model.identifier)) {
+        errors.push('Identifier property is not unique')
+      }
+      return errors;
+    },
     enableSubmit: state => {
-      return state.form.model.label && state.form.model.identifier && state.form.model.datatype
+      return state.form.model.label
+        && state.form.model.identifier
+        && state.form.model.datatype
+        && !state.collection.items.filter(a => a.id !== state.form.model.id).map(a => a.label).includes(state.form.model.label)
+        && !state.collection.items.filter(a => a.id !== state.form.model.id).map(a => a.identifier).includes(state.form.model.identifier)
     }
   },
   modules: {

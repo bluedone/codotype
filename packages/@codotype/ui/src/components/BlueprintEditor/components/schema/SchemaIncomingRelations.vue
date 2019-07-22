@@ -62,7 +62,8 @@ export default {
     reverse_relations () {
       // CLEANUP - this is a little inefficient
       // CLEANUP - this should be abstracted to the Vuex store
-      return inflate({ blueprint: { schemas: this.schemas, schema: this.model } }).schemas.find(s => s.id === this.model.id).reverse_relations
+      return inflate({ blueprint: { schemas: this.schemas, schema: this.model } })
+      .schemas.find(s => s.id === this.model.id).reverse_relations
     }
   }
 }

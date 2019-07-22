@@ -4,13 +4,13 @@
     <button class='btn btn-outline-dark btn-block text-left active' v-if="opt.value === val" @click="click(opt.value)">
       <i :class="'fa-fw mr-2 ' + opt.icon"></i>
       <strong>{{opt.label}}</strong>
-      <small class='ml-2 text-muted'>{{opt.desc}}</small>
+      <small class='ml-2'>{{opt.desc}}</small>
     </button>
 
     <button class='btn btn-outline-dark btn-block text-left' v-else @click="click(opt.value)">
       <i :class="'fa-fw mr-2 ' + opt.icon"></i>
       <strong>{{opt.label}}</strong>
-      <small class='ml-2 text-muted'>{{opt.desc}}</small>
+      <small class='ml-2'>{{opt.desc}}</small>
     </button>
   </div>
 </template>

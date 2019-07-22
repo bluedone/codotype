@@ -37,7 +37,7 @@
     <b-col lg="12" class="step-content">
       <slot name="step-1" v-if="selectedStep.id === 'getting_started'" />
       <slot name="step-2" v-if="selectedStep.id === 'blueprint_step'" />
-      <slot name="step-3" v-if="selectedStep.id === 'configure_generator'" />
+      <slot name="step-3" v-if="selectedStep.id === 'configure_step'" />
     </b-col>
 
   </b-row>
@@ -69,18 +69,16 @@ export default {
 
   div.step-wrapper
     padding-top: 1.25rem
-    // background: #f5f6f9
 
   div.label-wrapper
     // padding-top: 1.25rem
-    // background: #f5f6f9
 
   span.divider
     transition: all 0.3s ease
     min-height: 4px
     max-height: 4px
     border-radius: 4px
-    background: linear-gradient(to right, #02B875 50%, #ced4da 50%)
+    background: linear-gradient(to right, #4582EC 50%, #ced4da 50%)
     background-size: 200% 100%
     background-position: right bottom
     margin-left: -2.5rem

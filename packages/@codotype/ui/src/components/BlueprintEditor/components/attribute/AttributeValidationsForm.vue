@@ -2,36 +2,39 @@
   <div class="row mt-2">
 
     <div class="col-lg-12">
-      <p class="lead mb-0">Attribute Validations</p>
+      <p class="lead mb-0">Default & Description</p>
+      <small class="form-text text-muted">Define a <span class="text-success">Default Value</span> or provide a <span class="text-success">Description</span> to annotate this <strong>Attribute</strong>. Note that <i>not all </i> <strong>Attributes</strong> support <span class="text-success">Default Values</span>.</small>
+      <hr />
     </div>
 
-    <div class="col-lg-6 col-sm-12">
+    <div class="col-sm-12">
       <FormInput
-        label="Required"
-        v-if="![DATATYPE_BOOLEAN].includes(model.datatype)"
-        v-model="model.required"
-        help="Whether or not this attribute is required."
-        type='BOOL'
+        label="Description"
+        placeholder="Description"
+        v-model="model.help"
+        help="Describe the purpose or document the constraints of this Attribute"
       />
     </div>
 
-    <div class="col-lg-6 col-sm-12">
-      <FormInput
-        label="Unique"
-        v-if="![DATATYPE_JSON, DATATYPE_BOOLEAN].includes(model.datatype)"
-        v-model="model.unique"
-        help="Whether or not to enforce unique values for this attribute."
-        type='BOOL'
-      />
-    </div>
+    <!-- DEFAULT INPUTS -->
 
-    <div class="col-sm-12" v-if="[DATATYPE_INTEGER, DATATYPE_FLOAT].includes(model.datatype)">
+    <div class="col-sm-12" v-if="model.datatype === DATATYPE_INTEGER">
       <FormInput
         label="Default Value"
         placeholder="Default Value"
         v-model="model.default"
-        help="The default value for this attribute when none is available."
-        type="NUMBER"
+        :help="helpText"
+        type="INTEGER"
+      />
+    </div>
+
+    <div class="col-sm-12" v-if="model.datatype === DATATYPE_FLOAT">
+      <FormInput
+        label="Default Value"
+        placeholder="Default Value"
+        v-model="model.default"
+        :help="helpText"
+        type="FLOAT"
       />
     </div>
 
@@ -50,7 +53,7 @@
         label="Default Value"
         placeholder="Default Value"
         v-model="model.default"
-        help="The default value for this attribute when none is available."
+        :help="helpText"
       />
     </div>
 
@@ -60,10 +63,39 @@
         label="Default Value"
         placeholder="Default Value"
         v-model="model.default"
-        help="The default value for this attribute when none is available."
+        :help="helpText"
       />
     </div>
 
+    <div class="col-sm-12" v-if="model.datatype === DATATYPE_DATE">
+      <FormInput
+        label="Default Value"
+        placeholder="Default Value"
+        v-model="model.default"
+        :help="helpText"
+        type="DATE"
+      />
+    </div>
+
+    <div class="col-sm-12" v-if="model.datatype === DATATYPE_TIME">
+      <FormInput
+        label="Default Value"
+        placeholder="Default Value"
+        v-model="model.default"
+        :help="helpText"
+        type="TIME"
+      />
+    </div>
+
+    <div class="col-sm-12" v-if="model.datatype === DATATYPE_DATETIME">
+      <FormInput
+        label="Default Value"
+        placeholder="Default Value"
+        v-model="model.default"
+        :help="helpText"
+        type="DATETIME"
+      />
+    </div>
   </div>
 </template>
 
@@ -96,6 +128,7 @@ export default {
   },
   data () {
     return {
+      helpText: "The default value for this attribute when none is available.",
       DATATYPE_STRING,
       DATATYPE_TEXT,
       DATATYPE_INTEGER,

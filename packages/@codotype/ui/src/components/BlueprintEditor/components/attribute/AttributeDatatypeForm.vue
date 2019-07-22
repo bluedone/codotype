@@ -2,76 +2,22 @@
   <b-row class="mt-2">
 
     <b-col lg="12">
-      <p class="lead mb-0">Attribute Datatype</p>
-      <small class="form-text text-muted">The type of data represented by this attribute.</small>
+      <p class="lead mb-0">Datatype</p>
+      <small class="form-text text-muted">The <span class="text-success">Datatype</span> describes the data represented by this <strong>Attribute</strong> - this <strong>Codotype Generator</strong> supports <strong>{{filteredDatatypes.length}} </strong><span class="text-success">Datatypes</span>.</small>
+      <hr />
     </b-col>
 
     <b-col lg="12">
       <b-row>
-
         <AttributeDatatypeChild
-          :opt="DATATYPE_META[datatypes.DATATYPE_STRING]"
+          v-for="dt in filteredDatatypes"
+          :key="dt.value"
+          :opt="dt"
           :val="model.datatype"
           :click="setDatatype"
         />
-
-        <AttributeDatatypeChild
-          :opt="DATATYPE_META[datatypes.DATATYPE_TEXT]"
-          :val="model.datatype"
-          :click="setDatatype"
-        />
-
-        <AttributeDatatypeChild
-          :opt="DATATYPE_META[datatypes.DATATYPE_INTEGER]"
-          :val="model.datatype"
-          :click="setDatatype"
-        />
-
-        <AttributeDatatypeChild
-          :opt="DATATYPE_META[datatypes.DATATYPE_BOOLEAN]"
-          :val="model.datatype"
-          :click="setDatatype"
-        />
-
-        <AttributeDatatypeChild
-          :opt="DATATYPE_META[datatypes.DATATYPE_STRING_ARRAY]"
-          :val="model.datatype"
-          :click="setDatatype"
-        />
-
-        <AttributeDatatypeChild
-          :opt="DATATYPE_META[datatypes.DATATYPE_FLOAT]"
-          :val="model.datatype"
-          :click="setDatatype"
-        />
-
-        <!-- <AttributeDatatypeChild
-          :opt="DATATYPE_META[datatypes.DATATYPE_TIME]"
-          :val="model.datatype"
-          :click="setDatatype"
-        /> -->
-
-        <!-- <AttributeDatatypeChild
-          :opt="DATATYPE_META[datatypes.DATATYPE_DATE]"
-          :val="model.datatype"
-          :click="setDatatype"
-        /> -->
-
-        <AttributeDatatypeChild
-          :opt="DATATYPE_META[datatypes.DATATYPE_DATETIME]"
-          :val="model.datatype"
-          :click="setDatatype"
-        />
-
-        <AttributeDatatypeChild
-          :opt="DATATYPE_META[datatypes.DATATYPE_JSON]"
-          :val="model.datatype"
-          :click="setDatatype"
-        />
-
       </b-row>
     </b-col>
-
   </b-row>
 </template>
 
@@ -82,6 +28,9 @@ import AttributeDatatypeChild from './AttributeDatatypeChild'
 
 export default {
   props: {
+    generator: {
+      required: true
+    },
     model: {
       required: true
     }
@@ -90,7 +39,8 @@ export default {
     return {
       DATATYPE_META,
       datatypes,
-      datatypeObj: Object.keys(DATATYPE_META).map(dt => DATATYPE_META[dt])
+      datatypeObj: Object.keys(DATATYPE_META).map(dt => DATATYPE_META[dt]),
+      filteredDatatypes: this.generator.supportedDatatypes.map(dt => DATATYPE_META[dt])
     }
   },
   components: {

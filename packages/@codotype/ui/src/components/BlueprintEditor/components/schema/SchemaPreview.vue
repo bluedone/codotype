@@ -24,13 +24,18 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'SchemaPreview',
+  props: {
+    override: {
+      type: Object
+    }
+  },
   computed: {
     ...mapGetters({
       model: 'editor/schema/selectedModel',
       defaultObject: 'editor/schema/defaultObject'
     }),
     previewBody () {
-      return JSON.stringify(this.defaultObject, null, 2)
+      return JSON.stringify((this.override || this.defaultObject), null, 2)
     }
   }
 }

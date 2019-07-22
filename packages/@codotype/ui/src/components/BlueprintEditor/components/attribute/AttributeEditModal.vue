@@ -4,10 +4,11 @@
     size="lg"
     :visible="showingModal"
     :title="'Edit Attribute'"
-    ok-title='Submit'
-    ok-variant='success'
+    ok-title='Update Attribute'
+    ok-variant='primary'
     cancel-title='Cancel'
     cancel-variant='light'
+    :ok-disabled="!enableSubmit"
     @ok="updateModel()"
     @hide="showModal(false)"
   >
@@ -25,7 +26,9 @@ export default {
     AttributeForm
   },
   computed: mapGetters({
-    showingModal: 'editor/schema/attribute/modals/edit/showing'
+    showingModal: 'editor/schema/attribute/modals/edit/showing',
+    enableSubmit: 'editor/schema/attribute/enableSubmit',
+    // formErrors: 'editor/schema/attribute/formErrors // TODO - this should be wired up
   }),
   methods: {
     ...mapActions({

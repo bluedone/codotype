@@ -5,14 +5,14 @@
     :visible="showingModal"
     :title="'Edit Schema'"
     ok-title='Update Schema'
-    ok-variant='success'
+    ok-variant='primary'
     cancel-title='Cancel'
     cancel-variant='light'
     :ok-disabled="!enableSubmit"
     @ok="updateModel()"
     @hide="showModal(false)"
   >
-    <SchemaForm />
+    <SchemaForm :enableSubmit="enableSubmit" :onKeypressEnter="onKeypressEnter" />
   </b-modal>
 </template>
 
@@ -30,6 +30,10 @@ export default {
     showingModal: 'editor/schema/modals/edit/showing'
   }),
   methods: {
+    onKeypressEnter() {
+      this.updateModel()
+      this.showModal(false)
+    },
     ...mapActions({
       updateModel: 'editor/schema/updateModel',
     }),

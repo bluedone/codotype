@@ -8,6 +8,7 @@
 
           <span>
             <NewModalButton
+              :disabled="locked"
               :id="'add-' + scope + '-button'"
               :vuexAction="'editor/schema/' + scope + '/newModel'"
             />
@@ -67,8 +68,9 @@
               <small class="text-muted">{{ info }}</small>
               <br>
               <b-btn
+                :disabled="locked"
                 size="sm"
-                class='btn-rounded mt-2'
+                class='mt-2'
                 variant="outline-primary"
                 @click="$store.dispatch('editor/schema/' + scope + '/newModel')"
               >
@@ -96,6 +98,9 @@ import HelpPopover from '../../HelpPopover'
 export default {
   name: 'SortableList',
   props: {
+    locked: {
+      type: Boolean
+    },
     scope: {
       type: String,
       required: true

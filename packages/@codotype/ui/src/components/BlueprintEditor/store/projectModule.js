@@ -1,24 +1,25 @@
 import sanitizeLabel from '@codotype/util/lib/sanitizeLabel'
 import inflateMeta from '@codotype/util/lib/inflateMeta'
 
-// TODO - this module should implement some basic validation & error handling
-// TODO - module-specific errors should be handled in a dedicated sub-module
 export default {
   namespaced: true,
   state: {
     label: '',
-    identifier: ''
+    identifier: '',
+    class_name: ''
   },
   actions: {
     setLabel ({ commit }, label) {
       const sanitizedLabel = sanitizeLabel(label)
-      const { identifier } = inflateMeta(sanitizedLabel)
+      const { identifier, class_name } = inflateMeta(sanitizedLabel)
       commit('label', sanitizedLabel)
       commit('identifier', identifier)
+      commit('class_name', class_name)
     },
     reset ({ commit }) {
       commit('label', '')
       commit('identifier', '')
+      commit('class_name', '')
     }
   },
   mutations: {
@@ -27,6 +28,9 @@ export default {
     },
     identifier (state, identifier) {
       state.identifier = identifier
+    },
+    identifier (state, class_name) {
+      state.class_name = class_name
     }
   },
   getters: {
@@ -36,8 +40,11 @@ export default {
     identifier: state => {
       return state.identifier
     },
+    class_name: state => {
+      return state.class_name
+    },
     enableSubmit: state => {
-      return state.label && state.identifier && state.label.length > 2
+      return state.identifier !== "" && state.identifier !== "" && state.label.length > 2
     }
   }
 }

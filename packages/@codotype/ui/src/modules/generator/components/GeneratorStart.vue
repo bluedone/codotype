@@ -30,10 +30,11 @@
             block
             :to="buildLink"
             size="lg"
+            class="rounded-pill"
             variant="primary"
           >
-            <i class="fa fa-cog fa-spin"></i>
             Let's build something
+            <ChevronAnimation active :svg="svg" />
           </b-btn>
 
           <b-btn
@@ -41,10 +42,11 @@
             block
             :href="externalLink"
             size="lg"
+            class="rounded-pill"
             variant="primary"
           >
-            <i class="fa fa-cog fa-spin"></i>
             Let's build something
+            <ChevronAnimation active :svg="svg" />
           </b-btn>
         </div>
       </div>
@@ -70,6 +72,7 @@
 import GeneratorTypeTag from './GeneratorTypeTag'
 import GeneratorTechTag from './GeneratorTechTag'
 import GeneratorVersionTag from './GeneratorVersionTag'
+import ChevronAnimation from '../../../components/ChevronAnimation'
 
 export default {
   props: {
@@ -81,12 +84,16 @@ export default {
     },
     externalLink: {
       type: String
+    },
+    svg: {
+      type: Boolean
     }
   },
   components: {
     GeneratorTypeTag,
     GeneratorTechTag,
-    GeneratorVersionTag
+    GeneratorVersionTag,
+    ChevronAnimation
   }
 }
 </script>

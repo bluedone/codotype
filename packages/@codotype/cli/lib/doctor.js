@@ -2,6 +2,7 @@ const fs = require('fs-extra')
 const path = require('path')
 const chalk = require('chalk')
 const CodotypeRuntime = require('@codotype/runtime')
+const validateGenerator = require('@codotype/util/lib/validateGenerator')
 
 async function doctor (options) {
 
@@ -19,6 +20,27 @@ async function doctor (options) {
   // Registers this generator via relative path
   runtime.registerGenerator({ absolute_path: process.cwd() })
   console.log(`the doctor says ${chalk.green(`this generator can register with the `) + chalk.green(`codotype runtime`)}`)
+
+  // Runs the generator through validateGenerator
+  const generatorMeta = require(generatorMetaPath);
+  const validations = validateGenerator({ generator: generatorMeta });
+
+  // Logs validation of properties in `codotype-generator.json`
+  console.log(`the doctor is ${chalk.blue(`validating the generator:`)}`)
+  validations.forEach((v) => {
+    if (v.valid) {
+      console.log(`\t${chalk.blue(`${v.property}`) + ' is ' + chalk.green(`is present`)}`)
+    } else {
+      console.log(`\t${chalk.blue(`${v.property}`) + ' is ' + chalk.red(`is missing`)}`)
+    }
+  })
+
+  // Logs validation success and error messages
+  if (validations.map(v => v.valid).includes(false)) {
+    console.log(`the doctor says ${chalk.red(`this generator is missing some critical properties `)}`)
+  } else {
+    console.log(`the doctor says ${chalk.green(`this generator has all required properties`)}`)
+  }
 
   // Logs success message if nothing blows up
   console.log(`\n${chalk.blue(`codotype doctor`) + ' says ' + chalk.yellow(`everything is splendid`)}\n`)

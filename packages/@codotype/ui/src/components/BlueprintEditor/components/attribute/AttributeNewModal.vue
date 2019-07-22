@@ -4,8 +4,8 @@
     size="lg"
     :visible="showingModal"
     :title="'New Attribute'"
-    ok-title='Submit'
-    ok-variant='success'
+    ok-title='Create Attribute'
+    ok-variant='primary'
     cancel-title='Cancel'
     cancel-variant='light'
     :ok-disabled="!enableSubmit"
@@ -27,7 +27,8 @@ export default {
   },
   computed: mapGetters({
     showingModal: 'editor/schema/attribute/modals/new/showing',
-    enableSubmit: 'editor/schema/attribute/enableSubmit'
+    enableSubmit: 'editor/schema/attribute/enableSubmit',
+    // formErrors: 'editor/schema/attribute/formErrors // TODO - this should be wired up
   }),
   methods: {
     ...mapActions({

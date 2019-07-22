@@ -16,6 +16,27 @@
     />
 
     <input
+      v-else-if="type === 'INTEGER'"
+      type="number"
+      step="1"
+      ref="input_el"
+      class="form-control"
+      :placeholder="placeholder"
+      :value="value"
+      @input="updateModel()"
+    />
+
+    <input
+      v-else-if="type === 'FLOAT'"
+      type="number"
+      ref="input_el"
+      class="form-control"
+      :placeholder="placeholder"
+      :value="value"
+      @input="updateModel()"
+    />
+
+    <input
       v-else-if="type === 'DATE'"
       type="date"
       ref="input_el"
@@ -23,7 +44,7 @@
       :placeholder="placeholder"
       :value="value"
       @input="updateModel()"
-    >
+    />
 
     <input
       v-else-if="type === 'TIME'"
@@ -33,7 +54,17 @@
       :placeholder="placeholder"
       :value="value"
       @input="updateModel()"
-    >
+    />
+
+    <input
+      v-else-if="type === 'DATETIME'"
+      type="datetime-local"
+      ref="input_el"
+      class="form-control"
+      :placeholder="placeholder"
+      :value="value"
+      @input="updateModel()"
+    />
 
     <input
       v-else
@@ -43,12 +74,13 @@
       :placeholder="placeholder"
       :value="value"
       @input="updateModel()"
-    >
+    />
 
   </div>
 </template>
 
 <script>
+// TODO - update this to leverage Codotype DATATYPES
 
 export default {
   props: ['required', 'focus', 'label', 'type', 'example', 'help', 'ex', 'help', 'placeholder', 'value'],

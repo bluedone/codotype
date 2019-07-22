@@ -1,6 +1,8 @@
 const DEFAULT_SCHEMA = {
   id: null,
   order: 0,
+  locked: false,
+  source: "", // STRING - 'generator' | 'user'
   label: '',
   label_plural: '',
   identifier: '',
@@ -12,6 +14,12 @@ const DEFAULT_SCHEMA = {
   reverse_relations: []
 }
 
+// Allowed values for SCHEMA.source property
+const SCHEMA_SOURCE_USER = 'USER';
+const SCHEMA_SOURCE_GENERATOR = 'GENERATOR';
+
 module.exports = {
-  DEFAULT_SCHEMA
+  DEFAULT_SCHEMA,
+  SCHEMA_SOURCE_USER,
+  SCHEMA_SOURCE_GENERATOR
 }
