@@ -6,7 +6,7 @@
 * `SchemaDetail` supports new `schema.removable` property
 * Refactored `EditProjectModal` component, wraps `ProjectForm` component
 * Sized down `GenerateCodeButton`
-* Merged `ConfigurationEditor` component into `BlueprintEditor` component
+* Merged `ConfigurationEditor` component template and logic into `BlueprintEditor` component
 
 ---
 
