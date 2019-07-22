@@ -7,6 +7,7 @@
 * Refactored `EditProjectModal` component, wraps `ProjectForm` component
 * Sized down `GenerateCodeButton`
 * Merged `ConfigurationEditor` component template and logic into `BlueprintEditor` component
+* Added `ProjectEditButton` component
 
 ---
 

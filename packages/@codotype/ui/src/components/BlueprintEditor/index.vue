@@ -4,7 +4,7 @@
       <b-col sm=6>
         <span class='d-flex align-items-center'>
           <h4 class="mb-0 mr-2 d-flex">{{projectName}}</h4>
-          <i class='fa fa-fw fa-pencil-alt text-muted' @click="$store.dispatch('editor/project/edit')" />
+          <ProjectEditButton />
           <EditProjectModal />
         </span>
       </b-col>
@@ -135,6 +135,7 @@ import ModelOptionEditor from '../../modules/build/components/ConfigurationEdito
 import ModelAddonEditor from '../../modules/build/components/ConfigurationEditor/components/ModelAddonEditor'
 import GlobalAddonEditor from '../../modules/build/components/ConfigurationEditor/components/GlobalAddonEditor'
 import EditProjectModal from './components/project/EditProjectModal'
+import ProjectEditButton from './components/project/ProjectEditButton'
 
 import {
   CONFIGURATION_GROUP_TYPE_OPTION,
@@ -165,7 +166,8 @@ export default {
     ModelOptionEditor,
     ModelAddonEditor,
     GlobalAddonEditor,
-    EditProjectModal
+    EditProjectModal,
+    ProjectEditButton
   },
   created () {
     this.$store.dispatch('editor/created')
