@@ -1,59 +1,59 @@
 <template>
-  <div class="card card-body shadow-sm">
-    <b-row class='align-items-center justify-content-center'>
-      <b-col lg=12>
+  <!-- <div class="card card-body shadow-sm"> -->
+  <b-row class='align-items-center justify-content-center'>
+    <b-col lg=12>
 
-        <h4>Project Name</h4>
+      <!-- <h4>Project Name</h4> -->
 
-        <p class="small mt-2 mb-3 text-muted"><span class="text-success">Project Name</span> must be <strong>alphabetic</strong> - no numbers or symbols, but whitespace is allowed. The input field will enforce proper capitalization and spacing.</p>
+      <p class="small mt-2 mb-3 text-muted"><span class="text-success">Project Name</span> must be <strong>alphabetic</strong> - no numbers or symbols, but whitespace is allowed. The input field will enforce proper capitalization and spacing.</p>
 
-        <small class="mb-2 text-muted">
-          <i class="far fa-lightbulb"></i>
-          Try something simple like <code>Todo List</code>, or <code>Inventory Manager</code>
-        </small>
+      <small class="mb-2 text-muted">
+        <i class="far fa-lightbulb"></i>
+        Try something simple like <code>Todo List</code>, or <code>Inventory Manager</code>
+      </small>
 
-        <input
-          ref="input_el"
-          id="project-label"
-          class="form-control form-control-lg"
-          v-model="projectLabel"
-          placeholder="Project Name"
-          @keyup.enter="onKeyEnter()"
-        />
+      <input
+        ref="input_el"
+        id="project-label"
+        class="form-control form-control-lg"
+        v-model="projectLabel"
+        placeholder="Project Name"
+        @keyup.enter="onKeyEnter()"
+      />
 
-        <small class="text-muted">Identifier: {{identifier || 'project_name'}}</small>
+      <small class="text-muted">Identifier: {{identifier || 'project_name'}}</small>
 
-        <p class="small mt-2 text-muted">
-          <strong>Codotype</strong> uses the <span class='text-success'>Project Name</span> for naming things like <strong>files</strong>, <strong>folders</strong>, <strong>namespaces</strong>, and <strong>databases</strong>. No need to be picky, you can rename your Project whenever you like <i class="far fa-laugh"></i>
-        </p>
+      <p class="small mt-2 text-muted">
+        <strong>Codotype</strong> uses the <span class='text-success'>Project Name</span> for naming things like <strong>files</strong>, <strong>folders</strong>, <strong>namespaces</strong>, and <strong>databases</strong>. No need to be picky, you can rename your Project whenever you like <i class="far fa-laugh"></i>
+      </p>
 
-        <HelpPopover
-          target="project-label"
-          placement="left"
-          content='Give your project a name'>
-        </HelpPopover>
+      <HelpPopover
+        target="project-label"
+        placement="left"
+        content='Give your project a name'>
+      </HelpPopover>
 
-        <HelpPopover
-          target="submit-project-form"
-          placement="left"
-          content='Click here to continue'>
-        </HelpPopover>
+      <HelpPopover
+        target="submit-project-form"
+        placement="left"
+        content='Click here to continue'>
+      </HelpPopover>
 
-        <b-button
-          size="lg"
-          id="submit-project-form"
-          block
-          variant="primary"
-          :disabled="!enableSubmit"
-          @click="incrementStep()"
-        >
-          Define Schemas
-          <ChevronAnimation :active="enableSubmit" />
-        </b-button>
+      <!-- <b-button
+        size="lg"
+        id="submit-project-form"
+        block
+        variant="primary"
+        :disabled="!enableSubmit"
+        @click="incrementStep()"
+      > -->
+        <!-- Define Schemas -->
+        <!-- <ChevronAnimation :active="enableSubmit" /> -->
+      <!-- </b-button> -->
 
-      </b-col>
-    </b-row>
-  </div>
+    </b-col>
+  </b-row>
+  <!-- </div> -->
 </template>
 
 <script>
@@ -72,27 +72,26 @@ export default {
   },
   computed: {
     ...mapGetters({
-      label: 'editor/project/label',
-      identifier: 'editor/project/identifier',
-      enableSubmit: 'editor/project/enableSubmit'
+      label: 'editor/project/editLabel',
+      identifier: 'editor/project/editIdentifier',
+      disableSubmit: 'editor/project/disableSubmit'
     }),
     projectLabel: {
       get () {
         return this.label
       },
       set (label) {
-        this.$store.dispatch('editor/project/setLabel', label)
+        this.$store.dispatch('editor/project/setEditLabel', label)
       }
     }
   },
   methods: {
     ...mapActions({
-      incrementStep: 'build/steps/increment'
+      submitForm: 'editor/project/submitForm'
     }),
     onKeyEnter () {
-      if (this.enableSubmit) {
-        this.incrementStep()
-      }
+      if (this.disableSubmit) return
+      this.submitForm()
     }
   }
 }

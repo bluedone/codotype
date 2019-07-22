@@ -3,6 +3,17 @@
     <i :class="'mr-1 fa-fw ' + icon" v-b-tooltip.hover.left :title='tooltip'></i>
     {{item.label}}
     <span class='text-danger' v-if="item.required">*</span>
+
+    <b-badge
+      v-if="index === 0"
+      class='ml-2'
+      variant="light"
+      title="Title Attribute"
+      v-b-tooltip.hover.right
+    >
+      <i class="fa text-primary fa-tag" />
+    </b-badge>
+
     <b-badge
       v-if="item.unique"
       class='ml-2'
@@ -10,7 +21,7 @@
       title="Unique"
       v-b-tooltip.hover.right
     >
-      <i class="fas fa-snowflake"></i>
+      <i class="fas fa-snowflake" />
     </b-badge>
   </small>
 </template>
@@ -22,6 +33,9 @@ export default {
   name: 'AttributeListItemLabel',
   props: {
     item: {
+      required: true
+    },
+    index: {
       required: true
     }
   },

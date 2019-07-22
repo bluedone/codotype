@@ -1,4 +1,47 @@
-### v0.1.8 (UNPUBLISHED)
+### v0.1.13 (UNPUBLISHED)
+
+#### Changes
+* Fixed another issue with `SchemaDestroyButton` tooltip behavior
+* Updated `runtimeModule` to filter out schemas without any attributes or relations
+* `SchemaDetail` supports new `schema.removable` property
+* Refactored `EditProjectModal` component, wraps `ProjectForm` component
+* Sized down `GenerateCodeButton`
+* Merged `ConfigurationEditor` component template and logic into `BlueprintEditor` component
+
+---
+
+### v0.1.12
+
+#### Changes
+* Fixed bug in ConfigurationEditor preventing Generators with `defaultSchemas` from not full loading on initialization
+* Fixed bug with `SchemaDestroyButton` tooltip behavior
+
+---
+
+### v0.1.11
+
+#### Changes
+* Refined `SchemaDetail` schema removal behavior
+* ConfigurationEditor supports `defaultSchemas`
+* Fixed bug in Relation form where edit changes weren't propagating
+
+---
+
+### v0.1.10
+
+#### Changes
+* Loading components use new brand-centric `LoadingSpinner.vue` component
+
+---
+
+### v0.1.9
+
+#### Changes
+* `Generate Code` button enabled in schema editor
+
+---
+
+### v0.1.8
 
 #### Changes
 * Added tour to Build Configuration page via the `ConfigurationHelp.html` template
@@ -38,6 +81,8 @@
 * Updated `GeneratorStart` component to render nicely in Vue.js SPA and Nuxt.js
 * Updated `ConfigurationEditor/index.vue` and `OptionFormItem` components to support `ConfigurationGroup` refactor
 * Removed `vue-loading-spinner` package due to license issues (Thanks [Fossa!](https://fossa.com/))
+* `localStorageMediator.js` stores Project label
+* `SchemaDestroyButton` component prevents removal of schema with incoming relations
 
 #### Fixes
 * `BuildError` component directs users to `codotype.io` instead of `splash.codotype.io`

@@ -80,32 +80,36 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@codotype/generator@^0.5.0":
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/@codotype/generator/-/generator-0.5.0.tgz#a0d0617c496ac5ed616ccdbe9253b47fac2401f3"
-  dependencies:
-    "@codotype/util" "^0.4.0"
-
-"@codotype/runtime@^0.6.0":
+"@codotype/generator@^0.6.0":
   version "0.6.0"
-  resolved "https://registry.yarnpkg.com/@codotype/runtime/-/runtime-0.6.0.tgz#a37871490e6a6529807ce864c49b0d4cee03e4c7"
+  resolved "https://registry.yarnpkg.com/@codotype/generator/-/generator-0.6.0.tgz#5e533763b74960b567fe9096c3baad417f5ceab1"
+  integrity sha512-/ODEfOkV+TMfsUnhEEw7/O+kp0p+NxtjrDkVHc5jzT9/bIo1yAJo1OJvrO2PIzGBmM88ZDICkxkpeFGdQDlRLw==
   dependencies:
-    "@codotype/generator" "^0.5.0"
-    "@codotype/types" "^0.1.0"
-    "@codotype/util" "^0.4.0"
+    "@codotype/util" "^0.4.1"
+
+"@codotype/runtime@^0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@codotype/runtime/-/runtime-0.7.0.tgz#030ffc12d6735ef362fb7c9a3cd08f9123680ebe"
+  integrity sha512-eKamnQzA6ATY8DXAvCVIIzyNU6P+j9VgkU0islB+jVEfN95Ird5uidoJDjTNKwls8xAoiFj3Ys4Pe33jx/x4dg==
+  dependencies:
+    "@codotype/generator" "^0.6.0"
+    "@codotype/types" "^0.2.1"
+    "@codotype/util" "^0.4.1"
     bluebird "^3.5.1"
     ejs "^2.6.1"
     fs-extra "^7.0.1"
 
-"@codotype/types@^0.1.0":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@codotype/types/-/types-0.1.1.tgz#5ee69c0ff591653e25e2bd53d77de7ab3375282d"
+"@codotype/types@^0.2.1", "@codotype/types@^0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@codotype/types/-/types-0.2.2.tgz#2886760ede18518ff88db67a8d56d9ce49e12628"
+  integrity sha512-wJHNHAWb/ptg/bRky+e+Jsb5GviaUDnPZJRdKc85m+VgLVhJItYtH7bP6GU6YUbbHfzyk0nHoZrh3ePItm4Ejg==
 
-"@codotype/util@^0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@codotype/util/-/util-0.4.0.tgz#7363bf4485e9e7e00e6ae5dd82113a1eb574e32b"
+"@codotype/util@^0.4.1":
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/@codotype/util/-/util-0.4.2.tgz#d2ce2f7e87f460c5a40d5b8d139a64723abe319e"
+  integrity sha512-rp42new1kZJPuNPuQhQe1KEL5nKjY3eDk1MZ+2f19cbXFvUkWX7yRBzK9nC17ylZgZUUIdWUR9uv2QB932z/zQ==
   dependencies:
-    "@codotype/types" "^0.1.0"
+    "@codotype/types" "^0.2.2"
     lodash "^4.17.10"
     pluralize "^7.0.0"
     underscore.string "^3.3.4"

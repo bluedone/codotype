@@ -4,7 +4,6 @@
       <div class="row d-flex flex-row align-items-center justify-content-between">
         <!-- Alias inputs -->
         <div class="col-lg-4">
-          <p>{{model.type}}</p>
           <RelationFormPreview :model="model" />
         </div>
 
@@ -25,9 +24,8 @@
               type="text"
               class='form-control border-primary text-primary'
               :placeholder="selectedSchema.label"
-              :disabled="model.type !== 'BELONGS_TO'"
+              :disabled="!['BELONGS_TO', 'HAS_ANY_BELONGS_TO_MANY'].includes(model.type)"
               v-model="model.reverse_as"
-              @input="updateNewModel()"
             />
           </div>
         </div>
@@ -44,7 +42,6 @@
                   class='form-control border-info text-info'
                   v-model="model.as"
                   :placeholder="selectedRelatedSchema.label"
-                  @input="updateNewModel()"
                 />
               </div>
             </div>
@@ -69,8 +66,8 @@ export default {
     RelationFormPreview
   },
   methods: {
-    updateNewModel () { // CLEANUP - abstract this into a Vue mixin?
-      this.$store.commit('editor/schema/relation/collection/newModel', this.model)
+    updateModel () {
+      this.$store.commit('editor/schema/relation/form/newModel', this.model)
     }
   },
   computed: {

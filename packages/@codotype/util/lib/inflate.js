@@ -22,17 +22,27 @@ function inflateRelation({ schemas, relation }) {
   // console.log(ownedSchema)
   const relatedSchema = schemas.find((s) => { return s.id === inflated.related_schema_id })
 
+  // Clean this up...
+  function getAttr(type, source) {
+    if (['HAS_MANY', 'HAS_AND_BELONGS_TO_MANY'].includes(type)) {
+      return inflated[source].identifier + '_ids'
+    }
+    return inflated[source].identifier + '_id'
+  }
+
   // Handle inflated.schema
   // TODO - define a nicer name for `attribute` (idAttribute?)
   // TODO - abstract `attribute` ternary into a separate function
   inflated.schema = inflateMeta(relatedSchema.label)
-  inflated.schema.attribute = inflated.type === 'HAS_MANY' ? inflated.schema.identifier + '_ids' : inflated.schema.identifier + '_id'
+  // inflated.schema.attribute = inflated.type === 'HAS_MANY' ? inflated.schema.identifier + '_ids' : inflated.schema.identifier + '_id'
+  inflated.schema.attribute = getAttr(inflated.type, 'schema')
 
   // Handle inflated.alias
   // TODO - define a nicer name for `attribute` (idAttribute?)
   // TODO - abstract `attribute` ternary into a separate function
   inflated.alias = inflateMeta(inflated.as || relatedSchema.label)
-  inflated.alias.attribute = inflated.type === 'HAS_MANY' ? inflated.alias.identifier + '_ids' : inflated.alias.identifier + '_id'
+  // inflated.alias.attribute = inflated.type === 'HAS_MANY' ? inflated.alias.identifier + '_ids' : inflated.alias.identifier + '_id'
+  inflated.alias.attribute = getAttr(inflated.type, 'alias')
 
   inflated.reverse_alias = inflateMeta(inflated.reverse_as || ownedSchema.label)
   inflated.related_lead_attribute = !!relatedSchema.attributes[0] ? relatedSchema.attributes[0].identifier : '_id' // TODO - use `slug` instead of

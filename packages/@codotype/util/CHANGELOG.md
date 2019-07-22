@@ -1,4 +1,4 @@
-### v0.4.2 (UNPUBLISHED)
+### v0.4.2
 
 #### Changes
 * Renamed `option_groups` to `configuration_groups`

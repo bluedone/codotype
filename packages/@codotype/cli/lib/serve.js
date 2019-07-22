@@ -36,10 +36,12 @@ async function serve (options) {
 
   // Starts server
   const port = process.env.PORT || 9090
+  const generateBuildId = false
 
   const app = server({
     port,
-    runtime
+    runtime,
+    generateBuildId
   })
 
   app.listen(port, () => {

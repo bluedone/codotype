@@ -8,7 +8,7 @@
             {{ model.label }}
           </router-link>
 
-          <GeneratorGitHubLink class='ml-2' :model="model" />
+          <GeneratorGitHubLink class='ml-2' :model="model" :svg="svg" />
         </p>
 
       </div>
@@ -47,6 +47,9 @@ export default {
   props: {
     model: {
       required: true
+    },
+    svg: {
+      required: false
     }
   },
   components: {

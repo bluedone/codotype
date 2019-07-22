@@ -1,5 +1,5 @@
 <template>
-  <div class="card card-body shadow-sm">
+  <div class="card card-body">
     <b-row class='align-items-center justify-content-center'>
       <b-col lg=12>
         <SchemaForm :onKeypressEnter="createModel" :enableSubmit="enableSubmit" />

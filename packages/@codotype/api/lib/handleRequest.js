@@ -19,6 +19,8 @@ module.exports = ({ runtime, generateBuildId, zipBuild, uploadZipToS3 }) => {
     if (generateBuildId) {
       const build_id = 'app_' + ObjectId()
       build.id = build_id
+    } else {
+      build.id = build.blueprint.identifier
     }
 
     // Generates the application
@@ -49,6 +51,24 @@ module.exports = ({ runtime, generateBuildId, zipBuild, uploadZipToS3 }) => {
 
       // Writes the build manifest and sends the result to S3
       await uploadBuildToS3(build);
+
+      // CLEANUP - purge old builds && zips
+      return;
+
+    // Compress and send to client as a local download URL
+    } else if (zipBuild) {
+      // Compresses the build
+      await compressBuild({ build })
+      const filename = zipFilename(build.id)
+
+      // Send the client to download zipped build
+      const download_url = `/api/download?filename=${build.id}.zip`
+
+      // Sends the local download URL to the client
+      return res.json({
+        downloadUrl: download_url,
+        type: 'S3_DOWNLOAD'
+      });
 
       // CLEANUP - purge old builds && zips
       return;

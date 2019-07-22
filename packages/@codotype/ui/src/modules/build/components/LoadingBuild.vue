@@ -1,15 +1,15 @@
 <template>
   <div class="h-100 d-flex flex-row justify-content-center align-items-center">
-    <div class="col-lg-8">
+    <div class="col-sm-12 col-md-8 col-lg-6">
       <div class="card card-body text-center shadow-sm">
-        <p class="title"><strong>Codotype</strong> is generating your codebase</p>
+        <h3>codotype <span class='light'>is generating your codebase</span></h3>
         <small class="text-muted">
           This should only take a few moments
           <i class="far fa-laugh" />
         </small>
         <div class="row my-4">
           <div class="col-lg-12 text-center d-flex justify-content-center">
-            <i class="fa fa-fw fa-spinner fa-3x fa-spin my-3" />
+            <LoadingSpinner class="my-2" />
           </div>
         </div>
         <small class="text-muted">
@@ -23,13 +23,17 @@
 </template>
 
 <script>
+import LoadingSpinner from '../../../components/LoadingSpinner'
 export default {
-  name: 'LoadingBuild'
+  name: 'LoadingBuild',
+  components: {
+    LoadingSpinner
+  }
 }
 </script>
 
 <style scoped>
-  p.title {
-    font-size: 1.25rem;
+  span.light {
+    font-weight: 100;
   }
 </style>

@@ -20,7 +20,8 @@ export default {
     return {
       RELATION_TYPE_HAS_ONE: RELATION_TYPES.RELATION_TYPE_HAS_ONE,
       RELATION_TYPE_BELONGS_TO: RELATION_TYPES.RELATION_TYPE_BELONGS_TO,
-      RELATION_TYPE_HAS_MANY: RELATION_TYPES.RELATION_TYPE_HAS_MANY
+      RELATION_TYPE_HAS_MANY: RELATION_TYPES.RELATION_TYPE_HAS_MANY,
+      RELATION_TYPE_HAS_AND_BELONGS_TO_MANY: RELATION_TYPES.RELATION_TYPE_HAS_AND_BELONGS_TO_MANY,
     }
   },
   computed: {
@@ -50,6 +51,8 @@ export default {
       } else if (this.model.type === RELATION_TYPES.RELATION_TYPE_BELONGS_TO) {
         proto[relatedMeta.identifier + '_id'] = ''
       } else if (this.model.type === RELATION_TYPES.RELATION_TYPE_HAS_MANY) {
+        proto[relatedMeta.identifier + '_ids'] = []
+      } else if (this.model.type === RELATION_TYPES.RELATION_TYPE_HAS_AND_BELONGS_TO_MANY) {
         proto[relatedMeta.identifier + '_ids'] = []
       }
 

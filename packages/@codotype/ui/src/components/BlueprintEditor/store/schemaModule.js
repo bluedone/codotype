@@ -1,5 +1,6 @@
 import inflateMeta from '@codotype/util/lib/inflateMeta'
 import sanitizeLabel from '@codotype/util/lib/sanitizeLabel'
+import { inflate } from '@codotype/util/lib/inflate'
 import { buildDefault } from '@codotype/util/lib/buildDefault'
 import { DEFAULT_SCHEMA, SCHEMA_SOURCE_USER } from '@codotype/types/lib/default_schema'
 import formModule from '../../../store/lib/formModule'
@@ -35,6 +36,7 @@ export default {
     },
     createModel ({ getters, dispatch }) {
       const model = getters['form/model']
+      model.label = model.label.trim() // Does a final trim before persisting
       dispatch('collection/insert', model)
       dispatch('selectModel', getters['collection/last'])
     },
@@ -75,6 +77,11 @@ export default {
   getters: {
     selectedModel: state => {
       return state.collection.items.find(i => i.id === state.selectedModel.id)
+    },
+    inflatedSelectedModel: state => {
+      // NOTE - we inflate the entire project here - not efficient, should be cleaned up
+      return inflate({ blueprint: { schemas: state.collection.items }})
+      .schemas.find(s => s.id === state.selectedModel.id)
     },
     defaultObject: state => {
       const schema = state.collection.items.find(i => i.id === state.selectedModel.id)
