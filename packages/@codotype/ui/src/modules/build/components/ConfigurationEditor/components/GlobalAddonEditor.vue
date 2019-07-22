@@ -22,7 +22,7 @@
                 variant="primary"
                 v-b-modal="'modal_' + group.id"
               >
-                <i class="fa fa-plus"></i>
+                <i class="fa fa-plus" />
                 Add {{ group.label }}
               </b-button>
             </span>
@@ -88,10 +88,10 @@
 
             <span>
               <b-button @click="editInstance(group, instance)" size="sm" variant="outline-warning">
-                <i class="fa fa-edit"></i>
+                <i class="fa fa-edit" />
               </b-button>
               <b-button @click="destroyInstance(group, instance)" size="sm" variant="outline-danger">
-                <i class="fa fa-trash"></i>
+                <i class="fa fa-trash" />
               </b-button>
             </span>
 

@@ -11,7 +11,7 @@
 
     <template v-else-if="index < currentStep">
       <span :class="badgeClassName + 'bg-primary border-primary'">
-        <i class="fa fa-check"></i>
+        <i class="fa fa-check" />
       </span>
     </template>
 

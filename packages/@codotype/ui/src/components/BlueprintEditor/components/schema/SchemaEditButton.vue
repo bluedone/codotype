@@ -3,7 +3,7 @@
     id="schemaEditPopover"
     @click="$store.dispatch('editor/schema/editModel')"
   >
-    <i class="fas fa-pencil-alt"></i>
+    <i class="fas fa-pencil-alt" />
   </a>
 </template>
 

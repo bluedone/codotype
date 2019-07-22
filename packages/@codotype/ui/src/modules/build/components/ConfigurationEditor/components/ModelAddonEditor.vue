@@ -5,7 +5,7 @@
     <b-col lg=3>
       <div class="text-muted mb-2">
         <strong>
-          <i class="fa fa-database mr-1"></i>
+          <i class="fa fa-database mr-1" />
           Schemas
         </strong>
       </div>
@@ -43,7 +43,7 @@
                 variant="primary"
                 @click="newInstance()"
               >
-                <i class="fa fa-plus"></i>
+                <i class="fa fa-plus" />
                 Add {{ group.label }}
               </b-button>
             </span>
@@ -183,16 +183,16 @@
               toggle-class='rounded px-0 py-0 d-flex'
             >
               <template slot="button-content">
-                <i class="fa fa-fw fa-ellipsis-h"></i>
+                <i class="fa fa-fw fa-ellipsis-h" />
               </template>
 
               <b-dropdown-item-button @click="editInstance({ instance })">
-                <i class="fas fa-fw fa-pencil-alt"></i>
+                <i class="fas fa-fw fa-pencil-alt" />
                 Edit
               </b-dropdown-item-button>
 
               <b-dropdown-item-button @click="confirmRemoveInstance({ instance })">
-                <i class="fa fa-fw fa-trash"></i>
+                <i class="fa fa-fw fa-trash" />
                 Remove
               </b-dropdown-item-button>
 

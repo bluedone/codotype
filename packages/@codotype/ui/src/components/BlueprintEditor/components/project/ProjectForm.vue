@@ -8,7 +8,7 @@
       <p class="small mt-2 mb-3 text-muted"><span class="text-success">Project Name</span> must be <strong>alphabetic</strong> - no numbers or symbols, but whitespace is allowed. The input field will enforce proper capitalization and spacing.</p>
 
       <small class="mb-2 text-muted">
-        <i class="far fa-lightbulb"></i>
+        <i class="far fa-lightbulb" />
         Try something simple like <code>Todo List</code>, or <code>Inventory Manager</code>
       </small>
 
@@ -24,7 +24,7 @@
       <small class="text-muted">Identifier: {{identifier || 'project_name'}}</small>
 
       <p class="small mt-2 text-muted">
-        <strong>Codotype</strong> uses the <span class='text-success'>Project Name</span> for naming things like <strong>files</strong>, <strong>folders</strong>, <strong>namespaces</strong>, and <strong>databases</strong>. No need to be picky, you can rename your Project whenever you like <i class="far fa-laugh"></i>
+        <strong>Codotype</strong> uses the <span class='text-success'>Project Name</span> for naming things like <strong>files</strong>, <strong>folders</strong>, <strong>namespaces</strong>, and <strong>databases</strong>. No need to be picky, you can rename your Project whenever you like <i class="far fa-laugh" />
       </p>
 
       <HelpPopover

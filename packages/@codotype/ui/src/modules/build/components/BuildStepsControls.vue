@@ -23,16 +23,16 @@
           toggle-class='rounded'
         >
           <template slot="button-content">
-            <i class="fa fa-fw fa-ellipsis-h"></i>
+            <i class="fa fa-fw fa-ellipsis-h" />
           </template>
 
           <b-dropdown-item-button @click="$store.commit('editor/modals/import/showing', true)">
-            <i class="fa fa-fw fa-upload"></i>
+            <i class="fa fa-fw fa-upload" />
             Import Project
           </b-dropdown-item-button>
 
           <b-dropdown-item-button @click="$store.commit('editor/modals/export/showing', true)">
-            <i class="fa fa-fw fa-download"></i>
+            <i class="fa fa-fw fa-download" />
             Export Project
           </b-dropdown-item-button>
 
@@ -44,7 +44,7 @@
         <GenerateCodeButton :disabled="currentStep === 0" />
 
         <!-- <span class='text-muted ml-2'>
-          <router-link to="/auth/signup" >Sign Up</router-link> or <router-link to="/auth/login">Log In</router-link> to Save Projects<i class="ml-1 fa fa-info-circle" title="Codotype automatically saves your Blueprint in localstorage. Signing up is a great idea if you want to continue making changes on another device." v-b-tooltip.hover.top></i>
+          <router-link to="/auth/signup" >Sign Up</router-link> or <router-link to="/auth/login">Log In</router-link> to Save Projects<i class="ml-1 fa fa-info-circle" title="Codotype automatically saves your Blueprint in localstorage. Signing up is a great idea if you want to continue making changes on another device." v-b-tooltip.hover.top />
         </span> -->
       </span>
 

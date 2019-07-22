@@ -3,7 +3,7 @@
     id="projectEditPopover"
     @click="$store.dispatch('editor/project/edit')"
   >
-    <i class="fas fa-pencil-alt"></i>
+    <i class="fas fa-pencil-alt" />
   </a>
 </template>
 

@@ -18,11 +18,11 @@
           boundary="viewport"
         >
           <template slot="button-content">
-            <i class="fa fa-fw fa-ellipsis-h"></i>
+            <i class="fa fa-fw fa-ellipsis-h" />
           </template>
 
           <b-dropdown-item-button @click="editModel(item)">
-            <i class="fas fa-fw fa-pencil-alt"></i>
+            <i class="fas fa-fw fa-pencil-alt" />
             Edit
           </b-dropdown-item-button>
 

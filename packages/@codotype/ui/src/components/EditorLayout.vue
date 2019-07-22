@@ -13,7 +13,7 @@
 
       <div class="card mt-3">
         <div class="card-header d-flex align-items-center">
-          <i :class="'mr-2 fa ' + icon"></i>
+          <i :class="'mr-2 fa ' + icon" />
           {{ title }}
         </div>
         <slot name="list" />

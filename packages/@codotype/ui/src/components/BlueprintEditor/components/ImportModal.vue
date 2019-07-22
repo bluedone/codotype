@@ -24,12 +24,12 @@
     </div>
 
     <small class="text-success" v-if="uploaded && blueprintValid">
-      <i class="fa fa-check-circle"></i>
+      <i class="fa fa-check-circle" />
       Imports the {{blueprintJson.label}} Blueprint with {{blueprintJson.schemas.length}} models
     </small>
 
     <small class="text-danger" v-if="uploaded && !blueprintValid">
-      <i class="fa fa-times-circle"></i>
+      <i class="fa fa-times-circle" />
       Invalid blueprint format
     </small>
 

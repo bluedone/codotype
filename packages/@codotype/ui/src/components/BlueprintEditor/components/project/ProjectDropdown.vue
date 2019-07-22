@@ -11,12 +11,12 @@
     </template>
 
     <b-dropdown-item-button @click="$store.commit('editor/modals/import/showing', true)">
-      <i class="fa fa-fw fa-upload"></i>
+      <i class="fa fa-fw fa-upload" />
       Import Project
     </b-dropdown-item-button>
 
     <b-dropdown-item-button @click="$store.commit('editor/modals/export/showing', true)">
-      <i class="fa fa-fw fa-download"></i>
+      <i class="fa fa-fw fa-download" />
       Export Project
     </b-dropdown-item-button>
   </b-dropdown>

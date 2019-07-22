@@ -26,19 +26,19 @@
             title='Generate'
             @click="goToBuild(project)"
           >
-            <i class="fa fa-code project-action project-action-primary fa-fw"></i>
+            <i class="fa fa-code project-action project-action-primary fa-fw" />
           </router-link>
 
           <span class="mx-1" v-b-tooltip.hover.left title='Export' @click="exportApp(project)">
-            <i class="fa fa-download project-action project-action-primary fa-fw"></i>
+            <i class="fa fa-download project-action project-action-primary fa-fw" />
           </span>
 
           <span class="mx-1" v-b-tooltip.hover.left title='Duplicate' v-b-modal="'clone_modal_' + project._id">
-            <i class="fa fa-copy project-action project-action-success fa-fw"></i>
+            <i class="fa fa-copy project-action project-action-success fa-fw" />
           </span>
 
           <span class="mx-1 text-hover-danger" v-b-tooltip.hover.left title='Delete' v-b-modal="'destroy_modal_' + project._id">
-            <i class="fa fa-trash project-action project-action-danger fa-fw"></i>
+            <i class="fa fa-trash project-action project-action-danger fa-fw" />
           </span>
 
           <!-- Destroy Modal -->
