@@ -9,6 +9,7 @@
         </span>
       </b-col>
       <b-col sm=6 class='d-flex justify-content-end'>
+        <HelpButton />
         <ProjectDropdown />
         <GenerateCodeButton />
         <ImportModal />
@@ -80,6 +81,7 @@ import ImportModal from './components/ImportModal'
 import ExportModal from './components/ExportModal'
 import SchemaEditor from './components/schema/SchemaEditor'
 import GenerateCodeButton from '../../modules/build/components/GenerateCodeButton'
+import HelpButton from '..//HelpButton'
 import EditorHeader from '../EditorHeader'
 import GlobalOptionEditor from '../../modules/build/components/ConfigurationEditor/components/GlobalOptionEditor'
 import ModelOptionEditor from '../../modules/build/components/ConfigurationEditor/components/ModelOptionEditor'
@@ -104,6 +106,7 @@ export default {
     }
   },
   components: {
+    HelpButton,
     ImportModal,
     ExportModal,
     SchemaEditor,

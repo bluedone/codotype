@@ -8,12 +8,14 @@
       </b-row>
       <b-row class='mt-3' v-else>
         <b-col xl=3 lg=3 sm=12 class='border-right'>
+          <SchemaNewButton />
+          <SchemaNewModal />
+
           <HelpPopover
             target="new-schema-button"
             placement="bottom"
             content='Create New Schema'>
           </HelpPopover>
-
           <SchemaList />
         </b-col>
 
