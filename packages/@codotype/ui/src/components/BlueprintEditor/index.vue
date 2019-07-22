@@ -1,15 +1,22 @@
 <template>
-  <div class="card card-body shadow-sm">
+  <div class="card card-body shadow-sm mb-4">
     <b-row class='d-flex align-items-center'>
       <b-col sm=6>
         <span class='d-flex align-items-center'>
           <h4 class="mb-0 mr-2 d-flex">{{projectName}}</h4>
           <ProjectEditButton />
           <EditProjectModal />
+          <HelpPopover
+            target="projectEditPopover"
+            placement="right"
+            :triggers="['hover']"
+            content='Edit Project Name'>
+          </HelpPopover>
         </span>
       </b-col>
       <b-col sm=6 class='d-flex justify-content-end'>
         <HelpButton />
+        <TourButton />
         <ProjectDropdown />
         <GenerateCodeButton />
         <ImportModal />
@@ -23,15 +30,20 @@
     <b-row>
       <b-col sm=12>
         <b-tabs>
-          <b-tab title="Schemas" lazy active>
+          <b-tab
+            title="Schemas"
+            lazy
+            active
+            v-if="!model.self_configuring"
+          >
             <SchemaEditor />
           </b-tab>
 
           <b-tab
             lazy
             class='pt-0'
+            v-for="group, index in model.configuration_groups"
             :title="group.label_plural || group.label"
-            v-for="group in model.configuration_groups"
             :key="group.identifier"
           >
             <b-row class="justify-content-center mt-3">
@@ -81,7 +93,9 @@ import ImportModal from './components/ImportModal'
 import ExportModal from './components/ExportModal'
 import SchemaEditor from './components/schema/SchemaEditor'
 import GenerateCodeButton from '../../modules/build/components/GenerateCodeButton'
-import HelpButton from '..//HelpButton'
+import HelpButton from '../HelpButton'
+import TourButton from '../TourButton'
+import HelpPopover from '../HelpPopover'
 import EditorHeader from '../EditorHeader'
 import GlobalOptionEditor from '../../modules/build/components/ConfigurationEditor/components/GlobalOptionEditor'
 import ModelOptionEditor from '../../modules/build/components/ConfigurationEditor/components/ModelOptionEditor'
@@ -106,7 +120,9 @@ export default {
     }
   },
   components: {
+    HelpPopover,
     HelpButton,
+    TourButton,
     ImportModal,
     ExportModal,
     SchemaEditor,

@@ -1,14 +1,11 @@
 <template>
-  <b-button
-    variant="light"
-    class="mr-2"
+  <span
+    class="badge text-muted bg-transparent mr-2"
     @mouseover="$store.commit('editor/help/showing', true)"
     @mouseout="$store.commit('editor/help/showing', false)"
   >
-    <!-- <i class="fa fa-fw fa-question-circle" /> -->
-    <i class="fas fa-fw fa-book-open" />
-    Tutorial
-  </b-button>
+    <i class="fa fa-fw fa-2x fa-question-circle" />
+  </span>
 </template>
 
 <script>

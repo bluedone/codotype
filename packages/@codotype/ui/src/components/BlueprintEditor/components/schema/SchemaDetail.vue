@@ -31,6 +31,9 @@
         <b-col lg=12>
           <small class="text-muted">
             Describe the <strong>{{ model.label }} Schema</strong> with <strong>Attributes</strong> and <strong>Relations</strong>
+            <template v-if="model.source === 'GENERATOR'">
+              DEFINED BY GENERATOR
+            </template>
           </small>
         </b-col>
       </b-row>

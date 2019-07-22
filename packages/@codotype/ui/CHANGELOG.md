@@ -9,6 +9,7 @@
 * Merged `ConfigurationEditor` component template and logic into `BlueprintEditor` component
 * Added `ProjectEditButton` component
 * Split `SchemaEditor` out of `BlueprintEditor` as a standalone component
+* Re-enabled `<TourButton />` component
 
 ---
 
