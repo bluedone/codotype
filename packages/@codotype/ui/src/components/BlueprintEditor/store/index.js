@@ -2,22 +2,20 @@ import schemaModule from './schemaModule'
 import projectModule from './projectModule'
 import helpModule from './helpModule'
 import modalModule from '../../../store/lib/modalModule'
-import { DEFAULT_USER_SCHEMA } from '@codotype/types/lib/default_user'
 const DownloadFile = require('downloadjs')
 
 export default {
   namespaced: true,
   actions: {
     created ({ getters, commit, dispatch }) {
-      // if (!getters['schema/collection/first']) {
-      //   commit('schema/collection/items', [Object.assign({}, DEFAULT_USER_SCHEMA)])
-      // }
-      // dispatch('schema/selectModel', getters['schema/collection/first'])
+      // TODO - this should be combined with the logic in the ConfigurationEditor store
+      // These two modules should be combined into the (upcoming) ProjectEditor store
     },
     reset ({ getters, commit, dispatch }) {
       dispatch('project/reset')
       // TODO - pull default schemas here from generator
-      // commit('schema/collection/items', [Object.assign({}, DEFAULT_USER_SCHEMA)])
+      // TODO - pull default schemas here from generator
+      // TODO - pull default schemas here from generator
       commit('schema/collection/items', [])
       dispatch('schema/selectModel', getters['schema/collection/first'])
     },
