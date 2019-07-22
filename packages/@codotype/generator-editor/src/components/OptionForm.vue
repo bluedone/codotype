@@ -3,7 +3,7 @@
     <div class="col-lg-12">
 
       <p class="mb-3 form-text text-muted">
-        <i class="fa fa-info-circle"></i>
+        <i class="fa fa-info-circle" />
         Define the core metadata that's used to create a valid option.
       </p>
 

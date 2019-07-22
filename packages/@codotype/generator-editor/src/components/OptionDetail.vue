@@ -19,7 +19,7 @@
           <h4 class="mb-0">
             {{ model.label }}
             <button class="btn btn-link py-0" v-b-tooltip.hover.right title='Edit Option'  v-b-modal="'edit-option'">
-              <i class="fas fa-pencil-alt"></i>
+              <i class="fas fa-pencil-alt" />
             </button>
           </h4>
         </div>
@@ -27,7 +27,7 @@
         <div class="col-lg-5 d-flex align-items-center justify-content-end">
 
           <button class='btn btn-sm btn-outline-danger' v-b-modal="'destroy-schema'" v-b-tooltip.hover.left title='Destroy Option'>
-            <i class="fa fa-fw fa-trash"></i>
+            <i class="fa fa-fw fa-trash" />
           </button>
 
           <!-- Destroy Schema Confirmation -->
