@@ -9,29 +9,10 @@
         </span>
       </b-col>
       <b-col sm=6 class='d-flex justify-content-end'>
-        <b-dropdown
-          no-caret
-          size="sm"
-          variant="light"
-          class='mr-2'
-          toggle-class='rounded'
-        >
-          <template slot="button-content">
-            <i class="fa fa-fw fa-ellipsis-h" />
-          </template>
-
-          <b-dropdown-item-button @click="$store.commit('editor/modals/import/showing', true)">
-            <i class="fa fa-fw fa-upload"></i>
-            Import Project
-          </b-dropdown-item-button>
-
-          <b-dropdown-item-button @click="$store.commit('editor/modals/export/showing', true)">
-            <i class="fa fa-fw fa-download"></i>
-            Export Project
-          </b-dropdown-item-button>
-
-        </b-dropdown>
+        <ProjectDropdown />
         <GenerateCodeButton />
+        <ImportModal />
+        <ExportModal />
       </b-col>
       <b-col sm=12>
         <hr />
@@ -42,32 +23,7 @@
       <b-col sm=12>
         <b-tabs>
           <b-tab title="Schemas" lazy active>
-            <b-row class='mt-4 d-flex justify-content-center' v-if="!schemas[0]">
-              <b-col sm=10>
-                <SchemaEmptyState />
-              </b-col>
-            </b-row>
-            <b-row class='mt-3' v-else>
-              <b-col xl=3 lg=3 sm=12 class='border-right'>
-                <ImportModal />
-                <ExportModal />
-
-                <SchemaNewModal />
-                <SchemaNewButton />
-
-                <HelpPopover
-                  target="new-schema-button"
-                  placement="bottom"
-                  content='Create New Schema'>
-                </HelpPopover>
-
-                <SchemaList />
-              </b-col>
-
-              <b-col xl=9 lg=9 sm=12>
-                <SchemaDetail />
-              </b-col>
-            </b-row>
+            <SchemaEditor />
           </b-tab>
 
           <b-tab
@@ -122,12 +78,7 @@ import { mapGetters, mapActions } from 'vuex'
 
 import ImportModal from './components/ImportModal'
 import ExportModal from './components/ExportModal'
-import SchemaNewButton from './components/schema/SchemaNewButton'
-import SchemaNewModal from './components/schema/SchemaNewModal'
-import SchemaList from './components/schema/SchemaList'
-import SchemaDetail from './components/schema/SchemaDetail'
-import SchemaEmptyState from './components/schema/SchemaEmptyState'
-import HelpPopover from '../HelpPopover'
+import SchemaEditor from './components/schema/SchemaEditor'
 import GenerateCodeButton from '../../modules/build/components/GenerateCodeButton'
 import EditorHeader from '../EditorHeader'
 import GlobalOptionEditor from '../../modules/build/components/ConfigurationEditor/components/GlobalOptionEditor'
@@ -136,6 +87,7 @@ import ModelAddonEditor from '../../modules/build/components/ConfigurationEditor
 import GlobalAddonEditor from '../../modules/build/components/ConfigurationEditor/components/GlobalAddonEditor'
 import EditProjectModal from './components/project/EditProjectModal'
 import ProjectEditButton from './components/project/ProjectEditButton'
+import ProjectDropdown from './components/project/ProjectDropdown'
 
 import {
   CONFIGURATION_GROUP_TYPE_OPTION,
@@ -154,12 +106,7 @@ export default {
   components: {
     ImportModal,
     ExportModal,
-    SchemaNewButton,
-    SchemaNewModal,
-    HelpPopover,
-    SchemaList,
-    SchemaDetail,
-    SchemaEmptyState,
+    SchemaEditor,
     GenerateCodeButton,
     EditorHeader,
     GlobalOptionEditor,
@@ -167,7 +114,8 @@ export default {
     ModelAddonEditor,
     GlobalAddonEditor,
     EditProjectModal,
-    ProjectEditButton
+    ProjectEditButton,
+    ProjectDropdown
   },
   created () {
     this.$store.dispatch('editor/created')
