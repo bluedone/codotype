@@ -1,5 +1,5 @@
 <template>
-  <b-row class='mt-4 d-flex justify-content-center'>
+  <b-row class='d-flex justify-content-center'>
     <b-col sm=12>
       <b-row v-if="!schemas[0]">
         <b-col sm=10>
