@@ -11,7 +11,7 @@
               <div class="row">
                 <div class="col-lg-12 text-center">
                   <p class='lead'>
-                    <i class="fas fa-plus mr-2"></i>
+                    <i class="fas fa-plus mr-2" />
                     New Blueprint
                   </p>
                   <p class='mb-0'>Generate apps from your Blueprints</p>
@@ -31,7 +31,7 @@
               <div class="row">
                 <div class="col-lg-12">
                   <p class="lead card-text">
-                    <i class="fa fa-fw fa-drafting-compass"></i>
+                    <i class="fa fa-fw fa-drafting-compass" />
                     <br>
                     Your Blueprints go here
                   </p>
@@ -52,7 +52,7 @@
       <hr>
       <h4 class="text-muted">
         <span id="example-blueprint-header">
-          <i class="fas fa-map-signs"></i>
+          <i class="fas fa-map-signs" />
           Example Blueprints
         </span>
       </h4>

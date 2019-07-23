@@ -20,7 +20,7 @@
         <div class="col-lg-12">
           <h4 class='text-muted'>
             <span id="blueprint-header">
-              <i class="fas fa-drafting-compass"></i>
+              <i class="fas fa-drafting-compass" />
               Blueprints
             </span>
           </h4>

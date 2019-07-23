@@ -4,8 +4,8 @@
     :disabled="disabled"
     @click="generate()"
   >
-    <i class="fa fa-cog" v-if="disabled"></i>
-    <i class="fa fa-spin fa-cog" v-else></i>
+    <i class="fa fa-cog" v-if="disabled" />
+    <i class="fa fa-spin fa-cog" v-else />
     Generate Code
   </button>
 </template>

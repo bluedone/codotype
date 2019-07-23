@@ -4,11 +4,11 @@
       <p class="mb-0 text-muted" id="schema-preview">
         <span class="d-flex align-items-center justify-content-between mb-1 mx-1">
           <span>
-            <i class="fa fa-eye mr-2"></i>
+            <i class="fa fa-eye mr-2" />
             <strong class="m-0">Preview</strong>
           </span>
 
-          <i class="fa fa-info-circle" v-b-tooltip.left.hover="`The data structure of a single ${model.label} Schema`"></i>
+          <i class="fa fa-info-circle" v-b-tooltip.left.hover="`The data structure of a single ${model.label} Schema`" />
         </span>
 
         <small class="mb-0 text-muted">

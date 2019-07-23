@@ -16,7 +16,7 @@
           <p class="small mt-2 mb-3 text-muted">Its <span class='text-success'>Label</span> should be a <strong>singular noun</strong> - whitespace is allowed. The input field will enforce proper capitalization and spacing.</p>
 
           <small class="mb-2 text-muted">
-            <i class="far fa-lightbulb"></i>
+            <i class="far fa-lightbulb" />
             Try something simple like <code>Movie</code>, or <code>Movie Rating</code>
           </small>
 
@@ -43,7 +43,7 @@
         <tbody>
           <tr>
             <td class="infoCol">
-              <i class="fa fa-fw text-secondary fa-question-circle" v-b-tooltip.hover.left title='"Label" is the user-facing token for this model - title-casing and spaces.'></i>
+              <i class="fa fa-fw text-secondary fa-question-circle" v-b-tooltip.hover.left title='"Label" is the user-facing token for this model - title-casing and spaces.' />
             </td>
             <td>
               Label
@@ -57,7 +57,7 @@
           </tr>
           <tr>
             <td class="infoCol">
-              <i class="fa fa-fw text-secondary fa-question-circle" v-b-tooltip.hover.left title='"Identifier" is the lowecase, underscored token for this model'></i>
+              <i class="fa fa-fw text-secondary fa-question-circle" v-b-tooltip.hover.left title='"Identifier" is the lowecase, underscored token for this model' />
             </td>
             <td>
               Identifier
@@ -71,7 +71,7 @@
           </tr>
           <tr>
             <td class="infoCol">
-              <i class="fa fa-fw text-secondary fa-question-circle" v-b-tooltip.hover.left title='"Camel Case" is the mixed-case whitespace-free token for this model'></i>
+              <i class="fa fa-fw text-secondary fa-question-circle" v-b-tooltip.hover.left title='"Camel Case" is the mixed-case whitespace-free token for this model' />
             </td>
             <td>
               Camel Case
@@ -85,7 +85,7 @@
           </tr>
           <tr>
             <td class="infoCol">
-              <i class="fa fa-fw text-secondary fa-question-circle" v-b-tooltip.hover.left title='"Class Name" is title-cased whitespace-free token for this model'></i>
+              <i class="fa fa-fw text-secondary fa-question-circle" v-b-tooltip.hover.left title='"Class Name" is title-cased whitespace-free token for this model' />
             </td>
             <td>
               Class Name

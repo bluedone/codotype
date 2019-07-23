@@ -26,7 +26,7 @@
     <div class="card-footer bg-white">
       <small>
         <a class='text-muted' :href="model.github_url">
-          <i class="fab fa-github"></i>
+          <i class="fab fa-github" />
           codotype
         </a>
         <span class='badge badge-light text-muted'>{{ model.version }}</span>
@@ -42,7 +42,7 @@
       <!-- <div class="row"> -->
         <!-- <b-col> -->
           <!-- <button class="btn btn-outline-primary btn-block"> -->
-            <!-- <i class="fa fa-check"></i> -->
+            <!-- <i class="fa fa-check" /> -->
           <!-- </button> -->
           <!-- <span class='badge badge-primary mr-1' v-for="tag in model.type_tags.slice(0,3)" :key="tag">{{ tag }}</span> -->
           <!-- <br> -->

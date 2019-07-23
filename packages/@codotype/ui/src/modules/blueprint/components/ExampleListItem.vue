@@ -36,12 +36,12 @@
         <div class="col-lg-12 text-center">
 
           <span class="mx-1" v-b-tooltip.hover.left title='Export' @click="exportApp(project)">
-            <i class="fa fa-download text-primary fa-fw"></i>
+            <i class="fa fa-download text-primary fa-fw" />
           </span>
 
           <!-- <span class="mx-1" v-b-tooltip.hover.left title='Duplicate' v-b-modal="'modal_' + project._id"> -->
           <span class="mx-1" v-b-tooltip.hover.left title='Duplicate' @click="cloneExample(project)">
-            <i class="fa fa-copy text-primary fa-fw"></i>
+            <i class="fa fa-copy text-primary fa-fw" />
           </span>
 
 
