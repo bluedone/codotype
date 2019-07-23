@@ -32,7 +32,7 @@
           <small class="text-muted">
             Describe the <strong>{{ model.label }} Schema</strong> with <strong>Attributes</strong> and <strong>Relations</strong>
             <template v-if="model.source === 'GENERATOR'">
-              DEFINED BY GENERATOR
+              <span class="text-success"> (Supplied by <strong>{{ generator.label }} generator)</strong></span>
             </template>
           </small>
         </b-col>
@@ -121,6 +121,7 @@ export default {
   computed: {
     ...mapGetters({
       model: 'editor/schema/selectedModel',
+      generator: 'generator/selectedModel',
       schemas: 'editor/schema/collection/items'
     }),
     isEditable () {
