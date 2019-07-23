@@ -1,7 +1,7 @@
 <template>
   <b-button
     variant="light"
-    class="mr-2"
+    class="mr-2 d-none d-md-block"
     size="sm"
     @click.stop="startTour()"
   >
