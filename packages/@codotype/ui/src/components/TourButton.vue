@@ -5,7 +5,6 @@
     size="sm"
     @click.stop="startTour()"
   >
-    <!-- <i class="fa fa-directions" /> -->
     <i class="fa fa-fw fa-book-open" />
     Tutorial
   </b-button>

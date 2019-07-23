@@ -20,7 +20,7 @@
 
           </span>
 
-          <SchemaDestroyButton v-if="isRemovable" />
+          <SchemaDestroyButton :hidden="!isRemovable" />
         </b-col>
 
         <SchemaEditModal v-if="isEditable" />
