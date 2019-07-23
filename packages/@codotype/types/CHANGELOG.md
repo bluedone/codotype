@@ -1,4 +1,4 @@
-### v0.2.3 (UNPUBLISHED)
+### v0.2.3
 
 #### Changes
 * Added `removable` property to `DEFAULT_SCHEMA`
