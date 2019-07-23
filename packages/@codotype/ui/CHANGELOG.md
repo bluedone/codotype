@@ -1,4 +1,4 @@
-### v0.1.13 (UNPUBLISHED)
+### v0.1.13
 
 #### Changes
 * Fixed another issue with `SchemaDestroyButton` tooltip behavior
@@ -9,7 +9,7 @@
 * Merged `ConfigurationEditor` component template and logic into `BlueprintEditor` component
 * Added `ProjectEditButton` component
 * Split `SchemaEditor` out of `BlueprintEditor` as a standalone component
-* Re-enabled `<TourButton />` component
+* Cleaned up `<TourButton />` component
 
 ---
 

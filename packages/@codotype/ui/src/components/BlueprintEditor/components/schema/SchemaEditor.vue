@@ -1,7 +1,7 @@
 <template>
   <b-row class='d-flex justify-content-center'>
     <b-col sm=12>
-      <b-row v-if="!schemas[0]">
+      <b-row class='d-flex justify-content-center mt-3' v-if="!schemas[0]">
         <b-col sm=10>
           <SchemaEmptyState />
         </b-col>

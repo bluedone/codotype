@@ -16,7 +16,7 @@
       </b-col>
       <b-col sm=6 class='d-flex justify-content-end'>
         <HelpButton />
-        <TourButton />
+        <!-- <TourButton /> -->
         <ProjectDropdown />
         <GenerateCodeButton />
         <ImportModal />
