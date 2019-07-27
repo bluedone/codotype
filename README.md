@@ -1,14 +1,15 @@
 # Codotype
 
-Upstream development repository for [github.com/codotype](https://github.com/codotype)
+<div style="text-align: center;">
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcodotype%2Fcodotype.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcodotype%2Fcodotype?ref=badge_shield)
+
+[![Twitter](https://img.shields.io/twitter/follow/codotype.svg?style=social&label=Follow)](https://twitter.com/codotype)
+![Star](https://img.shields.io/github/stars/codotype/codotype.svg?style=social&label=Star)
+</div>
 
 ### Stay on the bleeding edge — [join our Gitter room!](https://gitter.im/codotype/Lobby) 🎉
 
-[![Twitter](https://img.shields.io/twitter/follow/codotype.svg?style=social&label=Follow)](https://twitter.com/codotype)
-
-# Generators
-
-**Codotype**<br/> ![Star](https://img.shields.io/github/stars/codotype/codotype.svg?style=social&label=Star)
+### [Documentation](https://codotype.org)
 
 ---
 
@@ -46,7 +47,7 @@ cd ./codotype-mevn-generator
 ../cli/bin/codotype.js serve
 ```
 
----
-# License
+## License
 
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fcodotype%2Fcodotype.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fcodotype%2Fcodotype?ref=badge_large)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcodotype%2Fcodotype.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcodotype%2Fcodotype?ref=badge_large)
+
