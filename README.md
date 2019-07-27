@@ -1,11 +1,9 @@
 # Codotype
 
-<div style="text-align: center;">
-<!-- [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcodotype%2Fcodotype.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcodotype%2Fcodotype?ref=badge_shield) -->
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcodotype%2Fcodotype.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcodotype%2Fcodotype?ref=badge_shield)
 
 [![Twitter](https://img.shields.io/twitter/follow/codotype.svg?style=social&label=Follow)](https://twitter.com/codotype)
 ![Star](https://img.shields.io/github/stars/codotype/codotype.svg?style=social&label=Star)
-</div>
 
 ### Stay on the bleeding edge — [join our Gitter room!](https://gitter.im/codotype/Lobby) 🎉
 
