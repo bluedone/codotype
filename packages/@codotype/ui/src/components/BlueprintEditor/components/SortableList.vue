@@ -23,8 +23,8 @@
 
 
           <span class='text-muted pr-2' v-if="collection.length > 1">
-            <i v-if="collapsed" class="fa collapse-icon fa-chevron-down" @click="collapsed = !collapsed"></i>
-            <i v-else class="fa collapse-icon fa-chevron-down fa-rotate-180" @click="collapsed = !collapsed"></i>
+            <i v-if="collapsed" class="fa collapse-icon fa-chevron-down" @click="collapsed = !collapsed" />
+            <i v-else class="fa collapse-icon fa-chevron-down fa-rotate-180" @click="collapsed = !collapsed" />
           </span>
 
         </div>
@@ -75,7 +75,7 @@
                 variant="outline-primary"
                 @click="$store.dispatch('editor/schema/' + scope + '/newModel')"
               >
-                <i class="fa fa-plus"></i>
+                <i class="fa fa-plus" />
                 Add {{ label }}
               </b-btn>
             </b-list-group-item>

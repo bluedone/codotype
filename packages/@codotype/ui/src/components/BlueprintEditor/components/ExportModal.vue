@@ -11,7 +11,7 @@
     <p class="form-text text-muted mb-2">Export a Codotype Blueprint stored as a .JSON file</p>
 
     <small class="text-muted">
-      <i class="fa fa-info-circle"></i>
+      <i class="fa fa-info-circle" />
       The exported JSON file can be re-imported into the Codotype web UI, or used directly with the
       <a href="https://github.com/codotype/codotype-cli" target="_blank">Codotype CLI</a>
     </small>

@@ -14,7 +14,7 @@
       </b-modal>
 
       <button class="btn btn-lg btn-primary btn-block" v-b-modal="'new-option'">
-        <i class="fa fa-plus"></i>
+        <i class="fa fa-plus" />
         Model Option
       </button>
     </template>

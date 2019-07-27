@@ -27,7 +27,7 @@
         :disabled="!newModel.label"
         @click="submit()"
       >
-        <i class="fa fa-fw fa-plus"></i>
+        <i class="fa fa-fw fa-plus" />
         Create Blueprint
       </b-button>
     </div>

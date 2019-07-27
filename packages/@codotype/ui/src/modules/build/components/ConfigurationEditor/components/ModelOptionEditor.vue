@@ -3,7 +3,7 @@
     <b-col lg=3>
       <div class="text-muted mb-2">
         <strong>
-          <i class="fa fa-database mr-1"></i>
+          <i class="fa fa-database mr-1" />
           Schemas
         </strong>
       </div>

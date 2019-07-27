@@ -7,11 +7,11 @@ import ConfigurationHelp from './partials/ConfigurationHelp.html'
 
 export const APP_EDITOR_TOUR = [
   {
-    element: '#schema-detail',
+    element: '#new-schema-button',
     popover: {
       title: 'Schemas',
       description: SchemaDetailHelp,
-      position: 'left'
+      position: 'right'
     }
   },
   {
@@ -36,14 +36,6 @@ export const APP_EDITOR_TOUR = [
       title: 'Preview',
       description: SchemaPreviewHelp,
       position: 'left'
-    }
-  },
-  {
-    element: '#new-schema-button',
-    popover: {
-      title: 'Add Schema',
-      description: NewSchemaButtonHelp,
-      position: 'right'
     }
   },
   {

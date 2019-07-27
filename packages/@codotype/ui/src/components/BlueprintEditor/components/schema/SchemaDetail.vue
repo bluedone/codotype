@@ -20,7 +20,7 @@
 
           </span>
 
-          <SchemaDestroyButton v-if="isRemovable" />
+          <SchemaDestroyButton :hidden="!isRemovable" />
         </b-col>
 
         <SchemaEditModal v-if="isEditable" />
@@ -31,6 +31,9 @@
         <b-col lg=12>
           <small class="text-muted">
             Describe the <strong>{{ model.label }} Schema</strong> with <strong>Attributes</strong> and <strong>Relations</strong>
+            <template v-if="model.source === 'GENERATOR'">
+              <span class="text-success"> (Supplied by <strong>{{ generator.label }} generator)</strong></span>
+            </template>
           </small>
         </b-col>
       </b-row>
@@ -118,6 +121,7 @@ export default {
   computed: {
     ...mapGetters({
       model: 'editor/schema/selectedModel',
+      generator: 'generator/selectedModel',
       schemas: 'editor/schema/collection/items'
     }),
     isEditable () {

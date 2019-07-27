@@ -1,8 +1,14 @@
+
+// Allowed values for SCHEMA.source property
+const SCHEMA_SOURCE_USER = 'USER';
+const SCHEMA_SOURCE_GENERATOR = 'GENERATOR';
+
 const DEFAULT_SCHEMA = {
   id: null,
   order: 0,
   locked: false,
-  source: "", // STRING - 'generator' | 'user'
+  source: SCHEMA_SOURCE_USER, // STRING - 'generator' | 'user'
+  removable: true,
   label: '',
   label_plural: '',
   identifier: '',
@@ -13,10 +19,6 @@ const DEFAULT_SCHEMA = {
   relations: [],
   reverse_relations: []
 }
-
-// Allowed values for SCHEMA.source property
-const SCHEMA_SOURCE_USER = 'USER';
-const SCHEMA_SOURCE_GENERATOR = 'GENERATOR';
 
 module.exports = {
   DEFAULT_SCHEMA,

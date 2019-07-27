@@ -14,7 +14,7 @@
       </b-modal>
 
       <button class="btn btn-lg btn-primary btn-block" v-b-modal="'new-addon'">
-        <i class="fa fa-plus"></i>
+        <i class="fa fa-plus" />
         New Addon
       </button>
     </template>

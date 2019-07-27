@@ -11,7 +11,7 @@
               Thank you for using <strong style="font-weight:700;">Codotype</strong>
             </p>
             <p class="lead mb-1">
-              <i class="fa fa-lg fa-heart text-danger"></i>
+              <i class="fa fa-lg fa-heart text-danger" />
             </p>
 
             <small class="text-muted">Your <span class="text-success">Project</span> has successfully been generated</small>
@@ -49,7 +49,7 @@
               :href="downloadUrl"
               target="_blank"
             >
-              <i class="fa fa-fw fa-download"></i>
+              <i class="fa fa-fw fa-download" />
               Download ZIP
             </b-btn>
           </div>
@@ -59,12 +59,12 @@
           <div class="col-sm-12 text-center">
 
             <p class="mb-1">
-              <i class="far fa-lightbulb"></i>
+              <i class="far fa-lightbulb" />
               Remember, iteration is key
             </p>
 
             <small class="text-muted">
-              Make changes and <strong>re-generate</strong> your Project as many times as you like <i class="far fa-laugh"></i>
+              Make changes and <strong>re-generate</strong> your Project as many times as you like <i class="far fa-laugh" />
             </small>
           </div>
 
@@ -74,7 +74,7 @@
               variant="outline-primary"
               @click="$store.dispatch('build/runtime/reset')"
             >
-              <i class="fa fa-fw fa-reply"></i>
+              <i class="fa fa-fw fa-reply" />
               Back to Editor
             </b-btn>
 
@@ -88,7 +88,7 @@
 
             <p class='mb-0'>Support Codotype</p>
             <small class="text-muted">
-              Give us a <i class="fa fa-fw text-warning fa-star"></i> on <a href="https://github.com/codotype/codotype" target='_blank'>GitHub</a> or follow us on <a href="https://twitter.com/codotype" target='_blank'><i class="fab fa-fw fa-twitter"></i>Twitter</a>
+              Give us a <i class="fa fa-fw text-warning fa-star" /> on <a href="https://github.com/codotype/codotype" target='_blank'>GitHub</a> or follow us on <a href="https://twitter.com/codotype" target='_blank'><i class="fab fa-fw fa-twitter" />Twitter</a>
             </small>
           </div>
         </div>

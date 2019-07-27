@@ -6,7 +6,7 @@
       <span>
         <TourButton tour="generatorListSteps" />
         <!-- <a class="btn btn-outline-primary btn-lg" id='new-generator-button' href="#/generators/new"> -->
-          <!-- <i class="fa fa-fw fa-plus"></i> -->
+          <!-- <i class="fa fa-fw fa-plus" /> -->
           <!-- Add Generator -->
         <!-- </a> -->
       </span>
@@ -30,7 +30,7 @@
             variant="outline-warning"
             @click="clearFilter()"
           >
-            <i class="fa fa-times"></i>
+            <i class="fa fa-times" />
             Clear Filter
           </b-button>
         </b-col>
@@ -66,7 +66,7 @@
           <div class="card py-4 my-4 border-dark bg-transparent">
             <ul class="list-group list-group-flush">
               <li class="list-group-item text-center bg-transparent border-dark text-dark">
-                <i class="fa fa-lg fa-info-circle"></i>
+                <i class="fa fa-lg fa-info-circle" />
                 <p class="mb-0 mt-2">
                   Looking for something we don't support?
                   <br>

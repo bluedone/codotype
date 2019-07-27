@@ -1,7 +1,7 @@
 <template>
   <a
-    id="schemaEditPopover"
-    @click="$store.dispatch('editor/schema/editModel')"
+    id="projectEditPopover"
+    @click="$store.dispatch('editor/project/edit')"
   >
     <i class="fas fa-pencil-alt" />
   </a>
@@ -9,14 +9,14 @@
 
 <script>
 export default {
-  name: 'SchemaEditButton'
+  name: 'ProjectEditButton'
 }
 </script>
 
 <style lang="sass" scoped>
   @import '../../../../sass/vendor.sass'
 
-  #schemaEditPopover
+  #projectEditPopover
     transition: color 0.25s ease-in-out
     cursor: pointer
     color: $gray-500

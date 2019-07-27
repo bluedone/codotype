@@ -4,10 +4,10 @@
 
       <p class="mb-1 mx-1 text-muted d-flex justify-content-between">
         <span>
-          <i class="fa fa-link mr-2"></i>
+          <i class="fa fa-link mr-2" />
           <strong>Incoming Relations</strong>
         </span>
-        <i class="fa fa-info-circle" v-b-tooltip.left.hover="`Relations which reference the ${model.label} Schema`"></i>
+        <i class="fa fa-info-circle" v-b-tooltip.left.hover="`Relations which reference the ${model.label} Schema`" />
       </p>
 
       <ul class="list-group">

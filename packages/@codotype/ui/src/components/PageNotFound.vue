@@ -12,7 +12,7 @@
 
         <div class="col-lg-12 text-center">
           <p class="lead">
-            <i class="far fa-3x fa-frown"></i>
+            <i class="far fa-3x fa-frown" />
           </p>
         </div>
 

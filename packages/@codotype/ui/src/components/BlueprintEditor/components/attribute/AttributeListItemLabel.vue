@@ -1,6 +1,6 @@
 <template>
   <small>
-    <i :class="'mr-1 fa-fw ' + icon" v-b-tooltip.hover.left :title='tooltip'></i>
+    <i :class="'mr-1 fa-fw ' + icon" v-b-tooltip.hover.left :title='tooltip' />
     {{item.label}}
     <span class='text-danger' v-if="item.required">*</span>
 

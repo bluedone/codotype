@@ -8,7 +8,15 @@
       content="Remove Schema"
     /> -->
     <b-button
-      v-if="hasReverseRelations"
+      v-if="hidden"
+      class="destroy-button disabled invisible"
+      variant="link"
+      disabled
+    >
+      <i class="far fa-fw fa-trash-alt" />
+    </b-button>
+    <b-button
+      v-else-if="hasReverseRelations"
       class="destroy-button hasReverse"
       variant="link"
       v-b-tooltip.hover.left
@@ -36,6 +44,11 @@ import HelpPopover from '../../../HelpPopover'
 
 export default {
   name: 'SchemaDestroyButton',
+  props: {
+    hidden: {
+      type: Boolean
+    }
+  },
   components: {
     HelpPopover
   },

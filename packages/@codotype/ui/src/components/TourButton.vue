@@ -1,16 +1,11 @@
 <template>
   <b-button
-    variant="outline-dark"
-    :disabled="disabled"
-    :size="size"
+    variant="light"
+    class="mr-2 d-none d-md-block"
+    size="sm"
     @click.stop="startTour()"
-    @mouseover="$store.commit('editor/help/showing', true)"
-    @mouseout="$store.commit('editor/help/showing', false)"
-    v-b-tooltip.hover
-    :placement="tooltipPlacement || 'left' "
-    :title='"Click here to start tour"'
   >
-    <i class="fa fa-directions mr-1"></i>
+    <i class="fa fa-fw fa-book-open" />
     Tutorial
   </b-button>
 </template>
@@ -20,13 +15,12 @@ import Driver from 'driver.js'
 
 export default {
   name: 'TourButton',
-  props: ['tour', 'size', 'tooltipPlacement', 'disabled'],
   created () {
     this.driver = new Driver()
   },
   methods: {
     startTour () {
-      this.driver.defineSteps(this.$store.getters[`tour/${this.tour}`])
+      this.driver.defineSteps(this.$store.getters[`tour/appEditorSteps`])
       return this.driver.start()
     }
   }
