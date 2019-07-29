@@ -5,7 +5,7 @@
       src="https://res.cloudinary.com/codotype/image/upload/v1560045005/tech-logos/codotype.png"
       alt="Codotype Logo"
     />
-    <b-navbar-brand :to="url">
+    <b-navbar-brand :href="url">
       <h3 class="mb-0">codotype</h3>
     </b-navbar-brand>
   </div>
