@@ -12,6 +12,7 @@
 ![Star](https://img.shields.io/github/stars/codotype/codotype.svg?style=social&label=Star)
 
 <p align="center">
+    <h1>Codotype</h1>
     <img width="150" height="150" style="display: block; margin: 0 auto" src="https://raw.githubusercontent.com/codotype/codotype-branding/master/codotype-github.jpg" alt="Codotype Logo">
 </p>
 
