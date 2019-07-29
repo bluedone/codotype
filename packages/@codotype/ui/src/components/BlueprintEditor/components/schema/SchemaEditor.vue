@@ -7,7 +7,7 @@
         </b-col>
       </b-row>
       <b-row class='mt-3' v-else>
-        <b-col xl=3 lg=3 sm=12 class='border-right'>
+        <b-col sm=12 md=4 lg=3 xl=3 class='border-right'>
           <SchemaNewButton />
           <SchemaNewModal />
 
@@ -19,7 +19,7 @@
           <SchemaList />
         </b-col>
 
-        <b-col xl=9 lg=9 sm=12>
+        <b-col sm=12 md=8 lg=9 xl=9>
           <SchemaDetail />
         </b-col>
       </b-row>
