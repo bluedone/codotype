@@ -1,7 +1,6 @@
-# Codotype
-
 <p align="center">
   <img width="150" height="150" src="https://raw.githubusercontent.com/codotype/codotype-branding/master/codotype-github.jpg" alt="Codotype Logo">
+  <h1 align="center">Codotype</h1>
 </p>
 
 [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
