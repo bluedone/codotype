@@ -2,7 +2,10 @@
 
 [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcodotype%2Fcodotype.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcodotype%2Fcodotype?ref=badge_shield)
+[![GitHub contributors](https://img.shields.io/github/contributors/codotype/codotype.svg)](https://github.com/codotype/codotype/graphs/contributors)
 [![Build Status](https://travis-ci.org/codotype/codotype.svg?branch=master)](https://travis-ci.org/codotype/codotype)
+[![GitHub issues](https://img.shields.io/github/issues/codotype/codotype.svg)](https://github.com/codotype/codotype/issues)
+[![GitHub last commit](https://img.shields.io/github/last-commit/codotype/codotype.svg)](https://github.com/codotype/codotype/commits/master)
 
 [![Gitter](https://img.shields.io/gitter/room/codotype/codotype)](https://gitter.im/codotype/Lobby)
 [![Twitter](https://img.shields.io/twitter/follow/codotype.svg?style=social&label=Follow)](https://twitter.com/codotype)
