@@ -1,3 +1,12 @@
+### v0.1.14
+
+#### Changes
+* Added `MobileNotSupported` component
+* Tweaked layout for `md` size screens
+* Bug fix in `NavbarBrand` component
+
+---
+
 ### v0.1.13
 
 #### Changes
