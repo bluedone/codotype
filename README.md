@@ -1,5 +1,6 @@
 # Codotype
 
+
 [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcodotype%2Fcodotype.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcodotype%2Fcodotype?ref=badge_shield)
 [![GitHub contributors](https://img.shields.io/github/contributors/codotype/codotype.svg)](https://github.com/codotype/codotype/graphs/contributors)
@@ -10,6 +11,10 @@
 [![Gitter](https://img.shields.io/gitter/room/codotype/codotype)](https://gitter.im/codotype/Lobby)
 [![Twitter](https://img.shields.io/twitter/follow/codotype.svg?style=social&label=Follow)](https://twitter.com/codotype)
 ![Star](https://img.shields.io/github/stars/codotype/codotype.svg?style=social&label=Star)
+
+<span style="display:block;text-align:center">
+  <img width="150" height="150" src="https://raw.githubusercontent.com/codotype/codotype-branding/master/codotype-github.jpg" alt="Codotype Logo">
+</span>
 
 ### Stay on the bleeding edge — [join our Gitter room!](https://gitter.im/codotype/Lobby) 🎉
 
