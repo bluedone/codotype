@@ -7,7 +7,12 @@
 
           <span class='d-flex align-items-center'>
 
-            <h5 class="mb-0 mr-2 d-flex">{{ model.label + ' Schema' }}</h5>
+            <h5 class="mb-0 mr-2 d-flex align-items-center">
+              {{ model.label + ' Schema' }}
+              <template v-if="model.source === 'GENERATOR'">
+                <i class="fa fa-fw fa-sm fa-info-circle ml-2 text-success" v-b-tooltip.hover.right :title="`Supplied by ${generator.label} generator`" />
+              </template>
+            </h5>
 
             <SchemaEditButton v-if="isEditable" />
             <HelpPopover
@@ -31,9 +36,6 @@
         <b-col lg=12>
           <small class="text-muted">
             Describe the <strong>{{ model.label }} Schema</strong> with <strong>Attributes</strong> and <strong>Relations</strong>
-            <template v-if="model.source === 'GENERATOR'">
-              <span class="text-success"> (Supplied by <strong>{{ generator.label }} generator)</strong></span>
-            </template>
           </small>
         </b-col>
       </b-row>

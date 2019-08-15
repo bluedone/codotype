@@ -86,7 +86,7 @@ import {
 import OptionTemplateWrapper from './OptionTemplateWrapper'
 import MoreInfoLink from '../../../../../components/MoreInfoLink'
 import OptionFormItemIcon from './OptionFormItemIcon'
-import { mapGetters, mapMutations } from 'vuex'
+import { mapGetters, mapActions, mapMutations } from 'vuex'
 
 export default {
   name: 'OptionFormitem',
@@ -139,10 +139,11 @@ export default {
       })
 
       // Defines Vue.component.methods
+      // TODO - update other 3 methods to use `mapActions`
       this.$options.methods = {
         updateModel,
-        ...mapMutations({
-          setValue: 'build/editor/optionValue'
+        ...mapActions({
+          setValue: 'build/editor/setOptionValue'
         })
       }
     } else if (group.type === CONFIGURATION_GROUP_TYPE_OPTION && group.scope === CONFIGURATION_GROUP_SCOPE_SCHEMA) {
