@@ -2,8 +2,6 @@ import sanitizeLabel from '@codotype/util/lib/sanitizeLabel'
 import inflateMeta from '@codotype/util/lib/inflateMeta'
 
 function updateProjectLocalStorate(store, build) {
-  console.log(build.label)
-  console.log(build.identifier)
   store.dispatch('build/collection/insert', build)
   window.localStorage.setItem('projects', JSON.stringify(store.getters['build/collection/items']))
 }
@@ -19,14 +17,14 @@ export default function configureMediator (store) {
 
   // Attempt to load localStorage.schemas && localStorage.projectLabel
   try {
-    // Loads localstorage.projects, if it exitss
+    // Loads localStorage.projects, if it exitss
     let { projects = [] } = window.localStorage
 
     // Loads the projects
     store.commit('build/collection/items', JSON.parse(projects))
   } catch {
-    // console.log('ERROR LOADING FROM LOCAL STORAGE')
-    delete window.localstorage.projects
+    delete window.localStorage.vuex
+    delete window.localStorage.projects
   }
 
   store.subscribe(({ type, payload }) => {

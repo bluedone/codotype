@@ -1,3 +1,11 @@
+### v0.1.16
+
+#### Changes
+* Bug fix in `localStorageMediator`, improved inital loading handler
+
+
+---
+
 ### v0.1.15
 
 #### Changes

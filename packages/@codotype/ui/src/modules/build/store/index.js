@@ -66,7 +66,9 @@ export default {
         newModel.configuration = buildConfiguration({ schemas: newModel.schemas, generator: generatorMeta })
 
         // Saves the new model and re-dispatches this action
-        dispatch('collection/insert', newModel)
+        // dispatch('collection/insert', newModel)
+        const collection = [...state.collection.items, newModel]
+        commit('collection/items', collection)
         return dispatch('selectBuild', generator_id)
       }
 
