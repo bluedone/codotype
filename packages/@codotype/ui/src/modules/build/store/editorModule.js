@@ -58,6 +58,10 @@ export default {
       commit('configuration_groups', generator.configuration_groups)
       commit('generatorId', generator.id)
     },
+    setOptionValue({ state, commit }, { group, attribute, value }) {
+      commit('optionValue', { group, attribute, value })
+      commit('configuration', state.configuration)
+    },
     // CLEARS the editor module state
     // De-registers all dynamic modules
     clear ({}) {

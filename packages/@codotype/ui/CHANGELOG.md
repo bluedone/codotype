@@ -1,3 +1,10 @@
+### v0.1.15
+
+#### Changes
+* Updated `localStorageMediator` to scope all data under `projects` (sloppy first-pass)
+
+---
+
 ### v0.1.14
 
 #### Changes
