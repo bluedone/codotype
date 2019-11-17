@@ -17,11 +17,15 @@ export default {
     },
     createModel ({ getters, commit, dispatch }) {
       const model = getters['form/model']
+      // TODO - VERIFY UNIQUENESS OF RELATION TYPE + ALIAS
+      // SHORT-TERM - skip `collection/insert` if not unique
       dispatch('collection/insert', model)
       dispatch('editor/schema/updateRelations', {}, { root:true })
     },
     updateModel ({ getters, commit, dispatch }) {
       const model = getters['form/model']
+      // TODO - VERIFY UNIQUENESS OF RELATION TYPE + ALIAS
+      // SHORT-TERM - skip `collection/insert` if not unique
       dispatch('collection/insert', model)
       dispatch('editor/schema/updateRelations', {}, { root:true })
     },
