@@ -1,17 +1,20 @@
 import { CodotypeAttribute } from "./index";
+import { AttributePropertiesForm } from "./AttributePropertiesForm";
+import { AttributeDatatypeForm } from "./AttributeDatatypeForm";
+import { Datatype } from "./datatype";
 import * as React from "react";
 
 /**
  * AttributeFormProps
  * `editorModel` - the `CodotypeAttribute` currently being edited
- * `supportedAttributes` - the unique IDs of supported datatypes made available in the form
+ * `supportedDatatypes` - the unique IDs of supported datatypes made available in the form
  * `onSubmit` - submits the form to either create or update a `CodotypeAttribute`
  * `onCancel` - closes the formw
  */
 interface AttributeFormProps {
   attributes: CodotypeAttribute[];
   editorModel: CodotypeAttribute;
-  supportedAttributes: string[];
+  supportedDatatypes: Datatype[];
   onSubmit: (updatedAttribute: CodotypeAttribute) => void;
   onCancel: () => void;
 }
@@ -36,9 +39,13 @@ export function canSubmit(label: string): boolean {
 export function AttributeForm(props: AttributeFormProps) {
   const [label, setLabel] = React.useState<string>(props.editorModel.label);
   const [identifier, setIdentifier] = React.useState<string>(props.editorModel.identifier);
+  const [datatype, setDatatype] = React.useState<string>(
+    props.editorModel.datatype
+  );
 
   /**
    * setLabelAndIdentifier
+   * TODO - implement `sanitizeLabel` function here
    * @param updatedLabel
    */
   function setLabelAndIdentifier(updatedLabel: string) {
@@ -49,22 +56,21 @@ export function AttributeForm(props: AttributeFormProps) {
   return (
     <div className="row">
       <div className="col-lg-12">
-        <input
-          type="text"
-          placeholder="Label"
-          value={label}
-          onChange={(e) => {
-            setLabelAndIdentifier(e.currentTarget.value)
+        <AttributeDatatypeForm
+          datatype={datatype}
+          supportedDatatypes={props.supportedDatatypes}
+          onChangeDatatype={updatedDatatype => {
+            setDatatype(updatedDatatype);
           }}
         />
 
-        <input
-          type="text"
-          placeholder="Identifier"
-          value={identifier}
-          onChange={(e) => {
-            setIdentifier(e.currentTarget.value)
+        <AttributePropertiesForm
+          label={label}
+          identifier={identifier}
+          onLabelChange={(updatedLabel: string) => {
+            setLabelAndIdentifier(updatedLabel);
           }}
+          onIdentifierChange={setIdentifier}
         />
 
         <button
@@ -73,17 +79,15 @@ export function AttributeForm(props: AttributeFormProps) {
             props.onSubmit({
               ...props.editorModel,
               label,
-            })
+              identifier,
+              datatype
+            });
           }}
         >
           Save
         </button>
 
-        <button
-          onClick={props.onCancel}
-        >
-          Cancel
-        </button>
+        <button onClick={props.onCancel}>Cancel</button>
       </div>
     </div>
   );
