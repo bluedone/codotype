@@ -39,6 +39,8 @@ export function canSubmit(label: string): boolean {
 export function AttributeForm(props: AttributeFormProps) {
   const [label, setLabel] = React.useState<string>(props.editorModel.label);
   const [identifier, setIdentifier] = React.useState<string>(props.editorModel.identifier);
+  const [required, setRequired] = React.useState<boolean>(props.editorModel.required);
+  const [unique, setUnique] = React.useState<boolean>(props.editorModel.unique);
   const [datatype, setDatatype] = React.useState<string>(
     props.editorModel.datatype
   );
@@ -67,10 +69,14 @@ export function AttributeForm(props: AttributeFormProps) {
         <AttributePropertiesForm
           label={label}
           identifier={identifier}
+          required={required}
+          unique={unique}
           onLabelChange={(updatedLabel: string) => {
             setLabelAndIdentifier(updatedLabel);
           }}
           onIdentifierChange={setIdentifier}
+          onRequiredChange={setRequired}
+          onUniqueChange={setUnique}
         />
 
         <button
@@ -80,7 +86,9 @@ export function AttributeForm(props: AttributeFormProps) {
               ...props.editorModel,
               label,
               identifier,
-              datatype
+              datatype,
+              required,
+              unique,
             });
           }}
         >
