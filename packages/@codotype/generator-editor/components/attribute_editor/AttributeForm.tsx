@@ -58,52 +58,54 @@ export function AttributeForm(props: AttributeFormProps) {
   }
 
   return (
-    <div className="row">
-      <div className="col-lg-12">
-        <AttributeDatatypeForm
-          datatype={datatype}
-          supportedDatatypes={props.supportedDatatypes}
-          onChangeDatatype={updatedDatatype => {
-            setDatatype(updatedDatatype);
-          }}
-        />
+    <div className="card card-body mt-4">
+      <div className="row">
+        <div className="col-lg-12">
+          <AttributeDatatypeForm
+            datatype={datatype}
+            supportedDatatypes={props.supportedDatatypes}
+            onChangeDatatype={updatedDatatype => {
+              setDatatype(updatedDatatype);
+            }}
+          />
 
-        <AttributePropertiesForm
-          label={label}
-          identifier={identifier}
-          required={required}
-          unique={unique}
-          onLabelChange={(updatedLabel: string) => {
-            setLabelAndIdentifier(updatedLabel);
-          }}
-          onIdentifierChange={setIdentifier}
-          onRequiredChange={setRequired}
-          onUniqueChange={setUnique}
-        />
+          <AttributePropertiesForm
+            label={label}
+            identifier={identifier}
+            required={required}
+            unique={unique}
+            onLabelChange={(updatedLabel: string) => {
+              setLabelAndIdentifier(updatedLabel);
+            }}
+            onIdentifierChange={setIdentifier}
+            onRequiredChange={setRequired}
+            onUniqueChange={setUnique}
+          />
 
-        <AttributeMetaForm
-          description={description}
-          onDescriptionChange={setDescription}
-        />
+          <AttributeMetaForm
+            description={description}
+            onDescriptionChange={setDescription}
+          />
 
-        <button
-          disabled={!canSubmit(label)}
-          onClick={() => {
-            props.onSubmit({
-              ...props.editorModel,
-              label,
-              identifier,
-              datatype,
-              required,
-              unique,
-              description,
-            });
-          }}
-        >
-          Save
-        </button>
+          <button
+            disabled={!canSubmit(label)}
+            onClick={() => {
+              props.onSubmit({
+                ...props.editorModel,
+                label,
+                identifier,
+                datatype,
+                required,
+                unique,
+                description,
+              });
+            }}
+          >
+            Save
+          </button>
 
-        <button onClick={props.onCancel}>Cancel</button>
+          <button onClick={props.onCancel}>Cancel</button>
+        </div>
       </div>
     </div>
   );
