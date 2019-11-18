@@ -5,11 +5,12 @@ import { Dispatch } from "react";
 import { AttributeEditorAction, AttributeEditorActionType } from "./actions";
 import { AttributeList } from "./AttributeList";
 import { AttributeForm } from "./AttributeForm";
+import { Datatype } from "./datatype";
 import { AttributeListEmptyState } from "./AttributeListEmptyState";
 
 interface AttributeEditorProps {
   attributes: CodotypeAttribute[];
-  supportedAttributes: string[];
+  supportedDatatypes: Datatype[];
   onChange: (updatedAttributes: CodotypeAttribute[]) => void;
 }
 
@@ -63,7 +64,7 @@ export function AttributeEditor(props: AttributeEditorProps) {
           <AttributeForm
             attributes={state.attributes}
             editorModel={state.editorModel}
-            supportedAttributes={props.supportedAttributes}
+            supportedDatatypes={props.supportedDatatypes}
             onSubmit={(updatedAttribute: CodotypeAttribute) => {
               // Creates a new attribute
               if (updatedAttribute.id === null) {
