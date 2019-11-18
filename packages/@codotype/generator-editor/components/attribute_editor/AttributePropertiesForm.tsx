@@ -37,11 +37,11 @@ export function AttributePropertiesForm(props: AttributePropertiesFormProps) {
         {/* help="The input field will enforce proper capitalization and spacing." */}
         <input
           type="text"
-          placeholder="Identifier"
+          placeholder="Label"
           className="form-control"
-          value={props.identifier}
+          value={props.label}
           onChange={e => {
-            props.onIdentifierChange(e.currentTarget.value);
+            props.onLabelChange(e.currentTarget.value);
           }}
         />
       </div>
@@ -50,11 +50,11 @@ export function AttributePropertiesForm(props: AttributePropertiesFormProps) {
         {/* help="Supply a camel-cased or snake-cased value - no whitespace." */}
         <input
           type="text"
-          placeholder="Label"
+          placeholder="Identifier"
           className="form-control"
-          value={props.label}
+          value={props.identifier}
           onChange={e => {
-            props.onLabelChange(e.currentTarget.value);
+            props.onIdentifierChange(e.currentTarget.value);
           }}
         />
       </div>

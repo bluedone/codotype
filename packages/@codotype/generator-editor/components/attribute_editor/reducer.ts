@@ -23,11 +23,11 @@ export const defaultAttribute: CodotypeAttribute = {
   label: "",
   identifier: "",
   datatype: "",
-  help: "",
+  description: "",
   required: false,
   unique: false,
-  default_value: null,
-}
+  default_value: null
+};
 
 /**
  * getUniqueId

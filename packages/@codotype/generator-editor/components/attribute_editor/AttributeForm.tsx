@@ -1,6 +1,7 @@
 import { CodotypeAttribute } from "./index";
 import { AttributePropertiesForm } from "./AttributePropertiesForm";
 import { AttributeDatatypeForm } from "./AttributeDatatypeForm";
+import { AttributeMetaForm } from "./AttributeMetaForm";
 import { Datatype } from "./datatype";
 import * as React from "react";
 
@@ -41,6 +42,7 @@ export function AttributeForm(props: AttributeFormProps) {
   const [identifier, setIdentifier] = React.useState<string>(props.editorModel.identifier);
   const [required, setRequired] = React.useState<boolean>(props.editorModel.required);
   const [unique, setUnique] = React.useState<boolean>(props.editorModel.unique);
+  const [description, setDescription] = React.useState<string>(props.editorModel.description);
   const [datatype, setDatatype] = React.useState<string>(
     props.editorModel.datatype
   );
@@ -79,6 +81,11 @@ export function AttributeForm(props: AttributeFormProps) {
           onUniqueChange={setUnique}
         />
 
+        <AttributeMetaForm
+          description={description}
+          onDescriptionChange={setDescription}
+        />
+
         <button
           disabled={!canSubmit(label)}
           onClick={() => {
@@ -89,6 +96,7 @@ export function AttributeForm(props: AttributeFormProps) {
               datatype,
               required,
               unique,
+              description,
             });
           }}
         >

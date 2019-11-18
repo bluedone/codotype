@@ -4,7 +4,7 @@ export interface CodotypeAttribute {
   label: string;
   identifier: string;
   datatype: string; // TODO - should be an ENUM
-  help: string;
+  description: string;
   required: boolean;
   unique: boolean;
   default_value: string | number | boolean | null;
