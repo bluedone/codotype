@@ -9,7 +9,7 @@
     "dist"
   ],
   "scripts": {
-    "test": "nyc mocha --exit",
+    "test": "jest",
     "build": "npm run clean && npm run compile",
     "clean": "rm -rf ./dist",
     "compile": "tsc -p tsconfig.build.json",
@@ -18,9 +18,12 @@
   "author": "Alexander Schwartzberg",
   "license": "MIT",
   "devDependencies": {
-    "typescript": "~3.4.5",
+    "@types/jest": "^24.0.23",
     "chai": "^4.1.2",
+    "jest": "^24.9.0",
     "mocha": "^5.2.0",
-    "nyc": "^13.0.1"
+    "nyc": "^13.0.1",
+    "ts-jest": "^24.2.0",
+    "typescript": "~3.4.5"
   }
 }

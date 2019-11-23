@@ -1,6 +1,6 @@
 {
   "name": "@codotype/cli",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "CLI for development with codotype.io",
   "bin": {
     "codotype": "bin/codotype.js"
@@ -9,18 +9,30 @@
     "type": "git",
     "url": "git+https://github.com/codotype/codotype-cli.git"
   },
+  "main": "dist/index",
+  "types": "dist/index",
+  "homepage": "https://github.com/codotype/codotype#readme",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "jest",
+    "build": "npm run clean && npm run compile",
+    "clean": "rm -rf ./dist",
+    "compile": "tsc -p tsconfig.build.json",
+    "prepublishOnly": "npm run build"
+  },
   "author": "Alexander Schwartzberg",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/codotype/codotype-cli/issues"
   },
-  "homepage": "https://github.com/codotype/codotype-cli#readme",
   "dependencies": {
-    "@codotype/api": "^0.1.0",
+    "@codotype/api": "^1.0.0",
     "@codotype/cli-ui": "^0.1.1",
-    "@codotype/generator": "^0.6.0",
-    "@codotype/runtime": "^0.7.0",
-    "@codotype/util": "^0.4.1",
+    "@codotype/generator": "^1.0.0",
+    "@codotype/runtime": "^1.0.0",
+    "@codotype/util": "^1.0.0",
     "chalk": "^2.4.1",
     "commander": "^2.19.0",
     "fs-extra": "^7.0.1",
@@ -32,6 +44,13 @@
     "node": ">=8.9"
   },
   "devDependencies": {
-    "@codotype/blueprints": "^0.2.0"
+    "@codotype/blueprints": "^0.2.0",
+    "@types/jest": "^24.0.23",
+    "chai": "^4.1.2",
+    "jest": "^24.9.0",
+    "mocha": "^5.2.0",
+    "nyc": "^13.0.1",
+    "ts-jest": "^24.2.0",
+    "typescript": "~3.4.5"
   }
 }
