@@ -1,10 +1,9 @@
 {
   "name": "@codotype/util",
-  "version": "0.4.2",
+  "version": "1.0.0",
   "description": "Utility functions used throughout the Codotype ecosystem",
   "scripts": {
     "test": "jest",
-    "test-old": "nyc mocha --exit",
     "build": "npm run clean && npm run compile",
     "clean": "rm -rf ./dist",
     "compile": "tsc -p tsconfig.build.json",
@@ -40,8 +39,5 @@
   "bugs": {
     "url": "https://github.com/codotype/codotype-util/issues"
   },
-  "homepage": "https://github.com/codotype/codotype-util#readme",
-  "directories": {
-    "lib": "lib"
-  }
+  "homepage": "https://github.com/codotype/codotype-util#readme"
 }

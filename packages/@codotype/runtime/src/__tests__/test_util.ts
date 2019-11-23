@@ -1,5 +1,5 @@
-import meaningOfLife from "@codotype/types";
+import { goFish } from "../index";
 
 test("testing @codotype/runtime", () => {
-  expect(meaningOfLife).toBe(42);
+  expect(goFish()).toBe(false);
 })
