@@ -1,4 +1,4 @@
-const CodotypeGenerator = require('../lib/generator.js')
+const CodotypeGenerator = require('../../lib/generator.js')
 const chai = require("chai");
 const assert = chai.assert;
 

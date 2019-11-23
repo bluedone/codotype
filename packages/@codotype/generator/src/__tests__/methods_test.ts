@@ -1,7 +1,7 @@
 const chai = require("chai");
 const assert = chai.assert;
 const MockRuntime = require('./mockRuntime');
-const CodotypeGenerator = require('../lib/generator.js')
+const CodotypeGenerator = require('../../lib/generator.js')
 
 // // // //
 

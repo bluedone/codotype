@@ -1,7 +1,7 @@
 const path = require('path')
 
 // Mock CodotypeRuntime class definition
-module.exports = class CodotypeRuntime {
+export class CodotypeRuntime {
 
   // constructor
   // Handles options to run a single generator instance
