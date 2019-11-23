@@ -253,18 +253,20 @@ module.exports = class CodotypeRuntime {
     console.log('\nBuild complete\nThank you for using Codotype :)\nFollow us on github.com/codotype\n')
   }
 
-
-  // // // //
   // // // //
 
-  // templatePath
-  // TODO - document
+  /**
+   * templatePath
+   * Generates the full path to a specific template file, relative to the filepath of the generator in-which the template is compiled
+   * @param {string} generatorResolved
+   * @param {string} template_path
+   */
   templatePath (generatorResolved, template_path = './') {
     return path.join(generatorResolved, 'templates', template_path)
   }
 
   // destinationPath
-  // TODO - document
+  // Takes the destination name for a template and Generates
   destinationPath (destPath, dest = './') {
     return path.join(destPath, dest)
   }

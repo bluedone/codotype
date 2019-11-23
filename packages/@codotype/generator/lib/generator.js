@@ -163,6 +163,7 @@ module.exports = class CodotypeGenerator {
   // templatePath
   // TODO - DOCUMENT!!
   // TODO - DOCUMENT!!
+  
   templatePath (template_path = './') {
     return this.runtime.templatePath(this.resolved, template_path)
   }
