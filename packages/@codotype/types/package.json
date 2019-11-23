@@ -1,18 +1,24 @@
 {
   "name": "@codotype/types",
-  "version": "0.2.3",
+  "version": "1.0.0",
   "description": "Datatype definitions that power Codotype",
-  "main": "index.js",
+  "main": "dist/index",
+  "types": "dist/index",
   "homepage": "https://github.com/codotype/codotype#readme",
-  "directories": {
-    "lib": "lib"
-  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "test": "nyc mocha --exit"
+    "test": "nyc mocha --exit",
+    "build": "npm run clean && npm run compile",
+    "clean": "rm -rf ./dist",
+    "compile": "tsc -p tsconfig.build.json",
+    "prepublishOnly": "npm run build"
   },
   "author": "Alexander Schwartzberg",
   "license": "MIT",
   "devDependencies": {
+    "typescript": "~3.4.5",
     "chai": "^4.1.2",
     "mocha": "^5.2.0",
     "nyc": "^13.0.1"
