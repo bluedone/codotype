@@ -1,4 +1,5 @@
 import { CodotypeAttribute } from "./index";
+import { DestroyButton } from "./DestroyButton";
 import { AttributeListItemLabel } from "./AttributeListItemLabel";
 import { DATATYPE_META } from "./datatype-meta";
 import * as React from "react";
@@ -51,13 +52,11 @@ export function AttributeListItem(props: AttributeListItemProps) {
           >
             Edit
           </button>
-          <button
+          <DestroyButton
             onClick={() => {
               props.onRemoveButtonClick(props.attribute);
             }}
-          >
-            Remove
-          </button>
+          />
         </div>
       </div>
     </li>
