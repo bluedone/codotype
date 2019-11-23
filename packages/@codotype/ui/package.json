@@ -1,17 +1,24 @@
 {
   "name": "@codotype/ui",
-  "version": "0.1.16",
+  "version": "1.0.0",
   "description": "UI components used throughout the Codotype ecosystem",
   "author": "Alexander Schwartzberg <aeksco@gmail.com>",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "test": "nyc mocha --exit"
+    "test": "jest",
+    "build": "npm run clean && npm run compile",
+    "clean": "rm -rf ./dist",
+    "compile": "tsc -p tsconfig.build.json",
+    "prepublishOnly": "npm run build"
   },
+  "main": "dist/index",
+  "types": "dist/index",
+  "homepage": "https://github.com/codotype/codotype#readme",
+  "files": [
+    "dist"
+  ],
   "dependencies": {
-    "@codotype/types": "^0.2.3",
-    "@codotype/util": "^0.4.2",
+    "@codotype/types": "^1.0.0",
+    "@codotype/util": "^1.0.0",
     "axios": "^0.17.0",
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^1.0.2",
@@ -49,7 +56,11 @@
     "nyc": "^13.0.1",
     "raw-loader": "^1.0.0",
     "sass-loader": "^7.1.0",
-    "vue-template-compiler": "^2.5.21"
+    "vue-template-compiler": "^2.5.21",
+    "@types/jest": "^24.0.23",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.2.0",
+    "typescript": "~3.4.5"
   },
   "eslintConfig": {
     "root": true,
