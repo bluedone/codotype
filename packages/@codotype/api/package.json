@@ -1,15 +1,23 @@
 {
   "name": "@codotype/api",
-  "version": "0.1.4",
+  "version": "1.0.0",
   "description": "API utilities and helpers used throughout the Codotype ecosystem",
-  "main": "index.js",
   "scripts": {
-    "test": "nyc mocha --exit"
+    "test": "jest",
+    "build": "npm run clean && npm run compile",
+    "clean": "rm -rf ./dist",
+    "compile": "tsc -p tsconfig.build.json",
+    "prepublishOnly": "npm run build"
   },
+  "main": "dist/index",
+  "types": "dist/index",
+  "files": [
+    "dist"
+  ],
   "author": "Alexander Schwartzberg",
   "license": "MIT",
   "dependencies": {
-    "@codotype/runtime": "^0.7.0",
+    "@codotype/runtime": "^1.0.0",
     "archiver": "^2.1.1",
     "aws-sdk": "^2.322.0",
     "body-parser": "^1.18.2",
@@ -21,8 +29,12 @@
     "npm": "^5.6.0"
   },
   "devDependencies": {
+    "@types/jest": "^24.0.23",
     "chai": "^4.1.2",
+    "jest": "^24.9.0",
     "mocha": "^5.2.0",
-    "nyc": "^13.0.1"
+    "nyc": "^13.0.1",
+    "ts-jest": "^24.2.0",
+    "typescript": "~3.4.5"
   }
 }
