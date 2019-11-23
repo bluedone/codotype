@@ -1,4 +1,4 @@
-import { RelationType } from ".";
+import { RelationType } from "./relation";
 
 export const RELATION_META = {};
 

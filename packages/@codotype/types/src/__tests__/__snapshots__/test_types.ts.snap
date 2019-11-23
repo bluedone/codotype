@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`testing @codotype/types 1`] = `
+Object {
+  "datatype": null,
+  "datatypeOptions": Object {},
+  "default_value": null,
+  "description": "",
+  "id": null,
+  "identifier": "",
+  "label": "",
+  "required": false,
+  "unique": false,
+}
+`;
+
+exports[`testing @codotype/types 2`] = `
+Object {
+  "as": "",
+  "id": null,
+  "related_schema_id": "",
+  "required": false,
+  "reverse_as": "",
+  "reverse_relation_id": "",
+  "schema_id": "",
+  "type": null,
+}
+`;
+
+exports[`testing @codotype/types 3`] = `
+Object {
+  "attributes": Array [],
+  "class_name": "",
+  "class_name_plural": "",
+  "id": null,
+  "identifier": "",
+  "identifier_plural": "",
+  "label": "",
+  "label_plural": "",
+  "locked": false,
+  "relations": Array [],
+  "removable": true,
+  "reverse_relations": Array [],
+  "source": "USER",
+}
+`;
