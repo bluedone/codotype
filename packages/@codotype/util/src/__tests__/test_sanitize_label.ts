@@ -30,7 +30,7 @@ describe('/lib/sanitizeLabel.js', () => {
 
   describe('lowercase with whitespace between numbers/characters', () => {
     it('trailing whitespace should be removed', () => {
-      expect(sanitizeLabel('todo 123')).toBe('Todo')
+      expect(sanitizeLabel('todo 123')).toBe('Todo ')
     });
   });
 

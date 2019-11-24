@@ -1,7 +1,5 @@
-import titleize from 'underscore.string/titleize';
-import underscored from 'underscore.string/underscored';
-import classify from 'underscore.string/classify';
-import pluralize from 'pluralize';
+import { underscored, classify, titleize } from 'underscore.string';
+import { plural } from 'pluralize';
 
 // // // //
 
@@ -16,12 +14,12 @@ function makeCamelCase(input) {
 export default function (label) {
   return {
     label: titleize(label),
-    label_plural: pluralize(titleize(label)),
+    label_plural: plural(titleize(label)),
     identifier: underscored(label),
-    identifier_plural: underscored(pluralize(label)),
+    identifier_plural: underscored(plural(label)),
     class_name: classify(titleize(label)),
-    class_name_plural: pluralize(classify(titleize(label))),
+    class_name_plural: plural(classify(titleize(label))),
     camel_case: makeCamelCase(classify(titleize(label))),
-    camel_case_plural: makeCamelCase(pluralize(classify(titleize(label))))
+    camel_case_plural: makeCamelCase(plural(classify(titleize(label))))
   }
 }
