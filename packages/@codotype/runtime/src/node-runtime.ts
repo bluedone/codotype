@@ -8,8 +8,10 @@ import {
   inflate,
   trailingComma
 } from '@codotype/util';
-import { Datatype } from '@codotype/types/src/datatype';
-import { RelationType } from '@codotype/types/src/relation';
+import {
+  Datatype,
+  RelationType
+} from '@codotype/types';
 import CodotypeGenerator from '@codotype/generator';
 
 // // // //
