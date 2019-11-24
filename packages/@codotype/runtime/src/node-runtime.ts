@@ -1,13 +1,15 @@
-import Promise from 'bluebird';
+// import Promise from 'bluebird';
 import * as fs from 'fs';
 import fsExtra from 'fs-extra';
 import * as path from 'path';
 import ejs from 'ejs';
-import { indent } from '@codotype/util';
-import { trailingComma } from '@codotype/util';
-import datatypes from '@codotype/types/lib/datatypes';
-import relationTypes from '@codotype/types/lib/relation-types';
-import { inflate } from '@codotype/util';
+import {
+  indent,
+  inflate,
+  trailingComma
+} from '@codotype/util';
+import { Datatype } from '@codotype/types/src/datatype';
+import { RelationType } from '@codotype/types/src/relation';
 import CodotypeGenerator from '@codotype/generator';
 
 // // // //
@@ -298,8 +300,8 @@ export class CodotypeNodeRuntime {
           indent,
           trailingComma
         },
-        ...datatypes,
-        ...relationTypes,
+        ...Datatype,
+        ...RelationType,
         ...options // QUESTION - are options ever used here?
       }
       // // // //
@@ -455,6 +457,7 @@ export class CodotypeNodeRuntime {
       let resolvedDestination = parentGeneratorInstance.options.dest
       // @ts-ignore
       if (options.scope) {
+        // @ts-ignore
         resolvedDestination = path.resolve(parentGeneratorInstance.options.dest, options.scope)
       }
 

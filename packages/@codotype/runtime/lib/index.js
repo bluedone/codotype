@@ -3,11 +3,13 @@ const fs = require('fs');
 const fsExtra = require('fs-extra');
 const path = require('path');
 const ejs = require('ejs')
-const indent = require('@codotype/util/lib/indent')
-const trailingComma = require('@codotype/util/lib/trailingComma')
+const {
+  indent,
+  trailingComma,
+  inflate,
+} = require('@codotype/util')
 const datatypes = require('@codotype/types/lib/datatypes')
 const relationTypes = require('@codotype/types/lib/relation-types')
-const { inflate } = require('@codotype/util/lib/inflate')
 const CodotypeGenerator = require('@codotype/generator')
 
 // // // //
