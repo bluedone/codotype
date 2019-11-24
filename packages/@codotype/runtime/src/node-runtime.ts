@@ -1,13 +1,13 @@
 import Promise from 'bluebird';
-import fs from 'fs';
+import * as fs from 'fs';
 import fsExtra from 'fs-extra';
-import path from 'path';
+import * as path from 'path';
 import ejs from 'ejs';
-import indent from '@codotype/util/lib/indent';
-import trailingComma from '@codotype/util/lib/trailingComma';
+import { indent } from '@codotype/util';
+import { trailingComma } from '@codotype/util';
 import datatypes from '@codotype/types/lib/datatypes';
 import relationTypes from '@codotype/types/lib/relation-types';
-import { inflate } from '@codotype/util/lib/inflate';
+import { inflate } from '@codotype/util';
 import CodotypeGenerator from '@codotype/generator';
 
 // // // //
