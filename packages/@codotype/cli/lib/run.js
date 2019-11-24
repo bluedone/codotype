@@ -2,8 +2,8 @@ const fs = require('fs-extra')
 const path = require('path')
 const chalk = require('chalk')
 const inquirer = require('inquirer')
-const CodotypeRuntime = require('@codotype/runtime')
-const buildConfiguration = require('@codotype/util/lib/buildConfiguration')
+const { CodotypeNodeRuntime } = require('@codotype/runtime')
+const { buildConfiguration } = require('@codotype/util')
 
 // TODO - move blueprint validator into @codotype/util
 const validateBlueprint = (blueprint) => {
@@ -52,7 +52,7 @@ async function runGenerator (blueprint, options) {
   }
 
   // Invoke runtime directly with parameters
-  const runtime = new CodotypeRuntime()
+  const runtime = new CodotypeNodeRuntime();
 
   // Registers this generator via relative path
   runtime.registerGenerator({ absolute_path: process.cwd() })
