@@ -10,6 +10,7 @@ export interface Attribute {
   datatype: Datatype | null;
   default_value: null | string | boolean | number;
   datatypeOptions: { [key: string]: any };
+  locked: boolean;
 }
 
 export const DEFAULT_ATTRIBUTE: Attribute = {
@@ -21,5 +22,6 @@ export const DEFAULT_ATTRIBUTE: Attribute = {
   unique: false,
   datatype: null,
   default_value: null,
-  datatypeOptions: {}
+  datatypeOptions: {},
+  locked: false,
 }
