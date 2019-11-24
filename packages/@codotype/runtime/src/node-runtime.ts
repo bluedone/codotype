@@ -2,7 +2,7 @@
 import * as fs from 'fs';
 import * as fsExtra from 'fs-extra';
 import * as path from 'path';
-import ejs from 'ejs';
+import * as ejs from 'ejs';
 import {
   indent,
   inflate,
@@ -220,6 +220,7 @@ export class CodotypeNodeRuntime {
 
       // Creates CodotypeGenerator instance
       // TODO - pass runtime into this constructor (in generatorOptions)
+      // @ts-ignore
       const generatorInstance = new CodotypeGenerator(generatorPrototype, generatorOptions)
 
       // Invokes `generator.forEachSchema` once for each in blueprint.schemas
@@ -507,6 +508,7 @@ export class CodotypeNodeRuntime {
 
       // Invokes `generator.write()` once
       // TODO - abstract into @codotype/runtime
+      // @ts-ignore
       await generator.write(parentGeneratorInstance.options)
 
       // Invokes generator.compileTemplatesInPlace()
