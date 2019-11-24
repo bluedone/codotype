@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@codotype/types": "^1.0.0",
+    "@types/underscore.string": "0.0.38",
     "lodash": "^4.17.10",
     "pluralize": "^7.0.0",
     "underscore.string": "^3.3.4"
