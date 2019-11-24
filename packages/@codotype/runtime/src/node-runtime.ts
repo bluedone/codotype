@@ -303,8 +303,8 @@ export class CodotypeNodeRuntime {
           indent,
           trailingComma
         },
-        ...Datatype,
-        ...RelationType,
+        RelationType,
+        Datatype,
         ...options // QUESTION - are options ever used here?
       }
       // // // //
