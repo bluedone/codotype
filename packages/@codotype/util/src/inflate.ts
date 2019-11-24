@@ -1,7 +1,5 @@
 import { inflateMeta } from "./inflateMeta";
-import clone from "lodash/clone";
-import uniqueId from "lodash/uniqueId";
-import cloneDeep from "lodash/cloneDeep";
+import { clone, uniqueId, cloneDeep } from "lodash";
 import { RelationType } from "@codotype/types";
 
 // // // //

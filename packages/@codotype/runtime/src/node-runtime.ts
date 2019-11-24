@@ -1,6 +1,6 @@
 // import Promise from 'bluebird';
 import * as fs from 'fs';
-import fsExtra from 'fs-extra';
+import * as fsExtra from 'fs-extra';
 import * as path from 'path';
 import ejs from 'ejs';
 import {
@@ -12,7 +12,7 @@ import {
   Datatype,
   RelationType
 } from '@codotype/types';
-import CodotypeGenerator from '@codotype/generator';
+import { CodotypeGenerator } from '@codotype/generator';
 
 // // // //
 // Constants
@@ -150,7 +150,7 @@ export class CodotypeNodeRuntime {
   // TODO - this is repeated in @codotype/generator - should be abstracted, or only encapsulated in the runtime
   ensureDir(dir) {
     return new Promise((resolve, reject) => {
-      return this.fs.ensureDir(dir, (err) => {
+      return fsExtra.ensureDir(dir, (err) => {
         if (err) return reject(err)
         return resolve()
       })

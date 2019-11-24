@@ -1,4 +1,4 @@
-import titleize from 'titleize';
+import { titleize } from 'underscore.string';
 
 // // // //
 
