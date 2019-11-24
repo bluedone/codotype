@@ -1,7 +1,16 @@
-const path = require('path')
+import * as path from "path";
+import ejs from 'ejs';
+import {
+  indent,
+  trailingComma,
+} from "@codotype/util";
 
 // Mock CodotypeRuntime class definition
-export class CodotypeRuntime {
+export class MockRuntime {
+  fs: any;
+  options: { [key: string]: any };
+  generators: any[];
+  _mocks_: any;
 
   // constructor
   // Handles options to run a single generator instance
@@ -63,8 +72,8 @@ export class CodotypeRuntime {
           indent,
           trailingComma
         },
-        ...datatypes,
-        ...relationTypes,
+        // ...datatypes,
+        // ...relationTypes,
         ...options // QUESTION - are options ever used here?
       }
       // // // //

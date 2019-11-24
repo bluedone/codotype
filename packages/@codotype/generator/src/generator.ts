@@ -1,4 +1,4 @@
-import { buildDefault } from "@codotype/util/lib/buildDefault";
+import { buildDefault } from "@codotype/util";
 
 // // // //
 

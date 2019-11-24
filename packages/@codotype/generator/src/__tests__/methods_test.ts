@@ -1,7 +1,5 @@
-const chai = require("chai");
-const assert = chai.assert;
-const MockRuntime = require('./mockRuntime');
-const CodotypeGenerator = require('../../lib/generator.js')
+import { MockRuntime } from './mock_runtime';
+import { CodotypeGenerator } from '../generator'
 
 // // // //
 
@@ -24,10 +22,11 @@ describe('@codotype/generator', () => {
 
       const generatorPrototype = { write () {} }
       const generatorOptions = { runtime, dest, resolved }
+      // @ts-ignore
       const generatorInstance = new CodotypeGenerator(generatorPrototype, generatorOptions)
 
       const templatePath = generatorInstance.templatePath(template)
-      assert.equal(templatePath, `${resolved}/templates/${template}`)
+      expect(templatePath).toBe(`${resolved}/templates/${template}`)
 
     });
   });
@@ -41,10 +40,11 @@ describe('@codotype/generator', () => {
 
       const generatorPrototype = { write () {} }
       const generatorOptions = { runtime, dest, resolved: __dirname }
+      // @ts-ignore
       const generatorInstance = new CodotypeGenerator(generatorPrototype, generatorOptions)
 
       const destinationPath = generatorInstance.destinationPath(dirName)
-      assert.equal(destinationPath, `${dest}/${dirName}`)
+      expect(destinationPath).toBe(`${dest}/${dirName}`)
 
     });
   });
@@ -58,11 +58,12 @@ describe('@codotype/generator', () => {
 
       const generatorPrototype = { write () {} }
       const generatorOptions = { runtime, dest, resolved: __dirname }
+      // @ts-ignore
       const generatorInstance = new CodotypeGenerator(generatorPrototype, generatorOptions)
 
       generatorInstance.ensureDir(dirName)
       .then(() => {
-        assert.equal(runtime._mocks_.ensuredDir, `${dest}/${dirName}`)
+        expect(runtime._mocks_.ensuredDir).toBe(`${dest}/${dirName}`)
       })
 
     });
@@ -77,12 +78,13 @@ describe('@codotype/generator', () => {
 
       const generatorPrototype = { write () {} }
       const generatorOptions = { runtime, dest, resolved: __dirname }
+      // @ts-ignore
       const generatorInstance = new CodotypeGenerator(generatorPrototype, generatorOptions)
 
       generatorInstance.copyDir(src, dest)
       .then(() => {
-        assert.equal(runtime._mocks_.copiedDirSrc, src)
-        assert.equal(runtime._mocks_.copiedDirDest, dest)
+        expect(runtime._mocks_.copiedDirSrc).toBe(src)
+        expect(runtime._mocks_.copiedDirDest).toBe(dest)
       })
 
     });
