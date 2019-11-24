@@ -8,6 +8,7 @@ import {
   CONFIGURATION_GROUP_SCOPE_GLOBAL,
   CONFIGURATION_GROUP_SCOPE_SCHEMA,
 } from '@codotype/types/lib/configuration-group-types';
+import { Attribute } from '@codotype/types';
 
 // Validates the state
 // TODO - this must be moved elsewhere in @codotype/util
@@ -40,19 +41,7 @@ interface ConfigurationGroup {
   type: ConfigurationGroupType;
   scope: ConfigurationGroupScope;
   more_info_url: string;
-  attributes: CodotypeAttribute[]
-}
-
-interface CodotypeAttribute {
-  id: UUID,
-  identifier: string,
-  identifier_plural: string,
-  datatype: string // TODO - should be an ENUM
-  help: string,
-  required: boolean,
-  unique: boolean,
-  default_value: string | number | boolean | null,
-  datatypeOptions: {} // TODO - are we using this?
+  attributes: Attribute[]
 }
 
 interface CodotypeRelation {
@@ -79,7 +68,7 @@ interface CodotypeSchema {
   camel_case_plural: string,
   class_name: string,
   class_name_plural: string,
-  attributes: CodotypeAttribute[]
+  attributes: Attribute[]
   relations: CodotypeRelation[]
   reverse_relations: CodotypeRelation[]
 }
