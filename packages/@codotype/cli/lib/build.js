@@ -2,7 +2,7 @@ const fs = require('fs-extra')
 const path = require('path')
 const chalk = require('chalk')
 const { spawn } = require('child_process')
-const CodotypeRuntime = require('@codotype/runtime')
+const { CodotypeNodeRuntime } = require('@codotype/runtime')
 
 async function serve (options) {
 
@@ -17,7 +17,7 @@ async function serve (options) {
   const generatorMetaPath = path.resolve(process.cwd(), './codotype-generator.json') // CLEANUP - constantize MAGIC STRING
 
   // Invoke runtime directly with parameters
-  const runtime = new CodotypeRuntime()
+  const runtime = new CodotypeNodeRuntime();
 
   // Registers this generator via relative path
   try {
