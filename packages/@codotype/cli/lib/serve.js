@@ -3,7 +3,7 @@ const path = require('path')
 const chalk = require('chalk')
 const server = require('@codotype/api/lib/server')
 const { spawn } = require('child_process')
-const CodotypeRuntime = require('@codotype/runtime')
+const { CodotypeNodeRuntime } = require('@codotype/runtime')
 
 async function serve (options) {
 
@@ -19,7 +19,7 @@ async function serve (options) {
   // console.log(`the doctor says ${chalk.green(`this generator's metadata loaded correctly`)}`)
 
   // Invoke runtime directly with parameters
-  const runtime = new CodotypeRuntime()
+  const runtime = new CodotypeNodeRuntime()
 
   // Registers this generator via relative path
   try {

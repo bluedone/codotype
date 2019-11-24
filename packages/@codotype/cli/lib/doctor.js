@@ -15,7 +15,7 @@ async function doctor (options) {
   console.log(`the doctor says ${chalk.green(`this generator's metadata loaded correctly`)}`)
 
   // Invoke runtime directly with parameters
-  const runtime = new CodotypeNodeRuntime()
+  const runtime = new CodotypeNodeRuntime();
 
   // Registers this generator via relative path
   runtime.registerGenerator({ absolute_path: process.cwd() })
