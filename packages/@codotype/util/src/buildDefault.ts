@@ -1,106 +1,100 @@
-const datatypes = require('@codotype/types/lib/datatypes')
-const optiontypes = require('@codotype/types/lib/configuration-option-types')
-const { inflateRelation } = require('./inflate')
-
-const {
-  RELATION_TYPE_BELONGS_TO,
-  RELATION_TYPE_HAS_ONE,
-  RELATION_TYPE_HAS_MANY,
-  RELATION_TYPE_HAS_AND_BELONGS_TO_MANY,
-} = require('@codotype/types/lib/relation-types')
+import { inflateRelation } from "../lib/inflateRelation'
+import { ConfigurationOptionsType } from "@codotype/types/src/configuration-option-types";
+import { RelationType } from "@codotype/types/src/relation";
+import { Datatype } from "@codotype/types/src/datatype";
 
 // CLEANUP - document this function, write better tests
-const getDefaultAttributeValue = ({ type }) => {
+export const getDefaultAttributeValue = ({ type }) => {
   switch (type) {
-    case datatypes.DATATYPE_STRING:
+    case Datatype.STRING:
       return ''
-    case datatypes.DATATYPE_TEXT:
+    case Datatype.TEXT:
       return ''
-    case datatypes.DATATYPE_INTEGER:
+    case Datatype.INTEGER:
       return 0
-    case datatypes.DATATYPE_BIGINT:
+    case Datatype.BIGINT:
       return 0
-    case datatypes.DATATYPE_FLOAT:
+    case Datatype.FLOAT:
       return 0.0
-    case datatypes.DATATYPE_DECIMAL:
+    case Datatype.DECIMAL:
       return 0.0
-    case datatypes.DATATYPE_NUMERIC:
+    case Datatype.NUMERIC:
       return 0.0
-    case datatypes.DATATYPE_BOOLEAN:
+    case Datatype.BOOLEAN:
       return false
-    case datatypes.DATATYPE_JSON:
+    case Datatype.JSON:
       return {}
-    case datatypes.DATATYPE_JSONB:
+    case Datatype.JSONB:
       return {}
-    case datatypes.DATATYPE_DATE:
+    case Datatype.DATE:
       return '2019-03-11' // QUESTION - what's the best way to handle this?
-    case datatypes.DATATYPE_TIME:
+    case Datatype.TIME:
       return '17:04:14 GMT-0400' // QUESTION - what's the best way to handle this?
-    case datatypes.DATATYPE_DATETIME:
+    case Datatype.DATETIME:
       return '3/18/2019, 5:04:51 PM' // QUESTION - what's the best way to handle this?
-    case datatypes.DATATYPE_TIMESTAMP:
+    case Datatype.TIMESTAMP:
       return '3/18/2019, 5:04:51 PM' // QUESTION - what's the best way to handle this?
-    case datatypes.DATATYPE_STRING_ARRAY:
+    case Datatype.STRING_ARRAY:
       return []
-    case datatypes.DATATYPE_TEXT_ARRAY:
+    case Datatype.TEXT_ARRAY:
       return []
-    case datatypes.DATATYPE_INTEGER_ARRAY:
+    case Datatype.INTEGER_ARRAY:
       return []
-    case datatypes.DATATYPE_BIGINT_ARRAY:
+    case Datatype.BIGINT_ARRAY:
       return []
-    case datatypes.DATATYPE_FLOAT_ARRAY:
+    case Datatype.FLOAT_ARRAY:
       return []
-    case datatypes.DATATYPE_DECIMAL_ARRAY:
+    case Datatype.DECIMAL_ARRAY:
       return []
-    case datatypes.DATATYPE_NUMERIC_ARRAY:
+    case Datatype.NUMERIC_ARRAY:
       return []
-    case datatypes.DATATYPE_BOOLEAN_ARRAY:
+    case Datatype.BOOLEAN_ARRAY:
       return []
-    case datatypes.DATATYPE_DATE_ARRAY:
+    case Datatype.DATE_ARRAY:
       return []
-    case datatypes.DATATYPE_TIME_ARRAY:
+    case Datatype.TIME_ARRAY:
       return []
-    case datatypes.DATATYPE_DATETIME_ARRAY:
+    case Datatype.DATETIME_ARRAY:
       return []
-    case datatypes.DATATYPE_TIMESTAMP_ARRAY:
+    case Datatype.TIMESTAMP_ARRAY:
       return []
-    case optiontypes.OPTION_TYPE_STRING_SELECT:
+    case ConfigurationOptionsType.STRING_SELECT:
       return []
   }
 }
 
 // CLEANUP - document this function, write better tests
 // TODO - abstract this function into a separate helper that can be invoked in multiple places
-const getRelationKey = ({ relation }) => {
+export const getRelationKey = ({ relation }) => {
   // return relation.alias.attribute
   switch (relation.type) {
-    case RELATION_TYPE_BELONGS_TO:
+    case RelationType.BELONGS_TO:
       return relation.alias.identifier + '_id'
-    case RELATION_TYPE_HAS_ONE:
+    case RelationType.HAS_ONE:
       return relation.alias.identifier + '_id'
-    case RELATION_TYPE_HAS_MANY:
+    case RelationType.HAS_MANY:
       return relation.alias.identifier + '_ids'
-    case RELATION_TYPE_HAS_AND_BELONGS_TO_MANY:
+    case RelationType.HAS_AND_BELONGS_TO_MANY:
       return relation.alias.identifier + '_ids'
   }
 }
 
 // CLEANUP - document this function, write better tests
-const getDefaultRelationValue = ({ type }) => {
+export const getDefaultRelationValue = ({ type }) => {
   switch (type) {
-    case RELATION_TYPE_BELONGS_TO:
+    case RelationType.BELONGS_TO:
       return ''
-    case RELATION_TYPE_HAS_ONE:
+    case RelationType.HAS_ONE:
       return ''
-    case RELATION_TYPE_HAS_MANY:
+    case RelationType.HAS_MANY:
       return []
-    case RELATION_TYPE_HAS_AND_BELONGS_TO_MANY:
+    case RelationType.HAS_AND_BELONGS_TO_MANY:
       return []
   }
 }
 
 // CLEANUP - document this function, write better tests
-const buildDefault = ({ schema, schemas }) => {
+export const buildDefault = ({ schema, schemas }) => {
   const defaultState = {}
 
   // Iterate over each attribute
@@ -121,7 +115,7 @@ const buildDefault = ({ schema, schemas }) => {
 }
 
 // CLEANUP - document this function, write better tests
-const buildConfigurationDefault = ({ attributes }) => {
+export const buildConfigurationDefault = ({ attributes }) => {
   const defaultState = {}
 
   // Iterate over each attribute
@@ -130,9 +124,4 @@ const buildConfigurationDefault = ({ attributes }) => {
   })
 
   return defaultState
-}
-
-module.exports = {
-  buildDefault,
-  buildConfigurationDefault
 }

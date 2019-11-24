@@ -1,5 +1,5 @@
 import cloneDeep from 'lodash/cloneDeep';
-import { buildConfigurationDefault } = './buildDefault';
+import { buildConfigurationDefault } from "./buildDefault";
 
 // TODO - this should be an enum
 import {
