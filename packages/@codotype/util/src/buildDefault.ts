@@ -1,4 +1,4 @@
-import { inflateRelation } from "../lib/inflateRelation'
+import { inflateRelation } from "./inflate";
 import { ConfigurationOptionsType } from "@codotype/types/src/configuration-option-types";
 import { RelationType } from "@codotype/types/src/relation";
 import { Datatype } from "@codotype/types/src/datatype";

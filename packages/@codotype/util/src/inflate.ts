@@ -2,6 +2,7 @@ import { inflateMeta } from "./inflateMeta";
 import clone from "lodash/clone";
 import uniqueId from "lodash/uniqueId";
 import cloneDeep from "lodash/cloneDeep";
+import { RelationType } from "@codotype/types/src/relation";
 
 // // // //
 
@@ -24,7 +25,8 @@ export function inflateRelation({ schemas, relation }) {
 
   // Clean this up...
   function getAttr(type, source) {
-    if (['HAS_MANY', 'HAS_AND_BELONGS_TO_MANY'].includes(type)) {
+    // @ts-ignore
+    if ([RelationType.HAS_MANY, RelationType.HAS_AND_BELONGS_TO_MANY].includes(type)) {
       return inflated[source].identifier + '_ids'
     }
     return inflated[source].identifier + '_id'
