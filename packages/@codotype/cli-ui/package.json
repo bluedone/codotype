@@ -4,7 +4,7 @@
   "description": "Codotype web client that runs locally via the Codotype CLI",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build-client": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {

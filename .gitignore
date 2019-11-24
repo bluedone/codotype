@@ -11,6 +11,7 @@ selenium-debug.log
 *.pyc
 build/**/*
 !build/.gitkeep
+dist/
 
 # Editor directories and files
 .idea
