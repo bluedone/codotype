@@ -1,13 +1,12 @@
-import { CodotypeAttribute } from "./index";
 import { DestroyButton } from "./DestroyButton";
 import { AttributeListItemLabel } from "./AttributeListItemLabel";
-import { DATATYPE_META } from "./datatype-meta";
+import { DATATYPE_META, Attribute } from "@codotype/types";
 import * as React from "react";
 
 interface AttributeListItemProps {
-  attribute: CodotypeAttribute;
-  onEditButtonClick: (attributeToBeEdited: CodotypeAttribute) => void;
-  onRemoveButtonClick: (attributeToBeRemoved: CodotypeAttribute) => void;
+  attribute: Attribute;
+  onEditButtonClick: (attributeToBeEdited: Attribute) => void;
+  onRemoveButtonClick: (attributeToBeRemoved: Attribute) => void;
 }
 
 export function AttributeListItem(props: AttributeListItemProps) {
@@ -19,6 +18,7 @@ export function AttributeListItem(props: AttributeListItemProps) {
         <div className="col-sm-10">
           <AttributeListItemLabel
             attribute={props.attribute}
+             // @ts-ignore
             datatype={DATATYPE_META[props.attribute.datatype]}
           />
         </div>

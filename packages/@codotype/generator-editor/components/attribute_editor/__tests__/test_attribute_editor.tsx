@@ -8,7 +8,7 @@ export default () => {
       <div className="col-lg-12">
         <AttributeEditor
           attributes={[]}
-          supportedAttributes={[]}
+          supportedDatatypes={[]}
           onChange={(updatedAttributes: any[]) => {
             console.log(updatedAttributes);
           }}

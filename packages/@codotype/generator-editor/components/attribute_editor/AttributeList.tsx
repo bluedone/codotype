@@ -1,17 +1,17 @@
-import { CodotypeAttribute } from "./index";
+import { Attribute } from "@codotype/types";
 import * as React from "react";
 import { AttributeListItem } from "./AttributeListItem";
 
 interface AttributeListProps {
-  attributes: CodotypeAttribute[];
-  onEditButtonClick: (attributeToBeEdited: CodotypeAttribute) => void;
-  onRemoveButtonClick: (attributeToBeRemoved: CodotypeAttribute) => void;
+  attributes: Attribute[];
+  onEditButtonClick: (attributeToBeEdited: Attribute) => void;
+  onRemoveButtonClick: (attributeToBeRemoved: Attribute) => void;
 }
 
 export function AttributeList(props: AttributeListProps) {
   return (
     <ul className="list-group">
-      {props.attributes.map((attr: CodotypeAttribute) => {
+      {props.attributes.map((attr: Attribute) => {
         return (
           <AttributeListItem
             key={String(attr.id)}

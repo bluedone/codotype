@@ -1,17 +1,16 @@
-import { CodotypeAttribute } from "./index";
 import { AttributeEditorState, attributeEditorReducer, getInitialState, defaultAttribute } from "./reducer";
 import * as React from "react";
 import { Dispatch } from "react";
 import { AttributeEditorAction, AttributeEditorActionType } from "./actions";
 import { AttributeList } from "./AttributeList";
 import { AttributeForm } from "./AttributeForm";
-import { Datatype } from "./datatype";
+import { Datatype, Attribute } from "@codotype/types";
 import { AttributeListEmptyState } from "./AttributeListEmptyState";
 
 interface AttributeEditorProps {
-  attributes: CodotypeAttribute[];
+  attributes: Attribute[];
   supportedDatatypes: Datatype[];
-  onChange: (updatedAttributes: CodotypeAttribute[]) => void;
+  onChange: (updatedAttributes: Attribute[]) => void;
 }
 
 export function AttributeEditor(props: AttributeEditorProps) {
@@ -45,13 +44,13 @@ export function AttributeEditor(props: AttributeEditorProps) {
         { state.attributes.length > 0 && (
           <AttributeList
             attributes={state.attributes}
-            onEditButtonClick={(attributeToBeEdited: CodotypeAttribute) => {
+            onEditButtonClick={(attributeToBeEdited: Attribute) => {
               dispatch({
                 type: AttributeEditorActionType.EDIT,
                 attribute: attributeToBeEdited
               })
             }}
-            onRemoveButtonClick={(attributeToBeRemoved: CodotypeAttribute) => {
+            onRemoveButtonClick={(attributeToBeRemoved: Attribute) => {
               dispatch({
                 type: AttributeEditorActionType.REMOVE,
                 attribute: attributeToBeRemoved
@@ -65,7 +64,7 @@ export function AttributeEditor(props: AttributeEditorProps) {
             attributes={state.attributes}
             editorModel={state.editorModel}
             supportedDatatypes={props.supportedDatatypes}
-            onSubmit={(updatedAttribute: CodotypeAttribute) => {
+            onSubmit={(updatedAttribute: Attribute) => {
               // Creates a new attribute
               if (updatedAttribute.id === null) {
                 dispatch({

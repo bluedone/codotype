@@ -1,5 +1,5 @@
 import { AttributeEditor } from "../components/attribute_editor";
-import { Datatype } from "../components/attribute_editor/datatype";
+import { Datatype } from "@codotype/types";
 
 // // // //
 

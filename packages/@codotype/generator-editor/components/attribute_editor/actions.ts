@@ -1,4 +1,4 @@
-import { CodotypeAttribute } from "./index";
+import { Attribute } from "@codotype/types";
 
 export enum AttributeEditorActionType {
   CREATE = "CREATE",
@@ -10,7 +10,7 @@ export enum AttributeEditorActionType {
 
 export interface AttributeEditorDefaultAction {
   type: AttributeEditorActionType;
-  attribute: CodotypeAttribute;
+  attribute: Attribute;
 }
 
 export interface AttributeEditorClearEditorAction {

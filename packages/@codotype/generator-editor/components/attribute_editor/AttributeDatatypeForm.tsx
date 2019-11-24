@@ -2,13 +2,13 @@ import * as React from "react";
 import {
   DATATYPE_META,
   DatatypeMeta,
-} from "./datatype-meta";
-import { Datatype } from "./datatype";
+  Datatype,
+} from "@codotype/types";
 
 interface DatatypeOptionProps {
   active: boolean;
   datatype: DatatypeMeta;
-  onClick: (updatedDatatype: string) => void;
+  onClick: (updatedDatatype: Datatype) => void;
 }
 export function DatatypeOption(props: DatatypeOptionProps) {
   let buttonClassName: string = "btn btn-outline-dark btn-block text-left";
@@ -37,9 +37,9 @@ export function DatatypeOption(props: DatatypeOptionProps) {
  * TODO - annotate remaining props
  */
 interface AttributeDatatypeFormProps {
-  datatype: string;
+  datatype: Datatype | null;
   supportedDatatypes: Datatype[];
-  onChangeDatatype: (updatedDatatype: string) => void;
+  onChangeDatatype: (updatedDatatype: Datatype) => void;
 }
 
 
@@ -69,6 +69,7 @@ export function AttributeDatatypeForm(props: AttributeDatatypeFormProps) {
               props.supportedDatatypes.map(d=> String(d)).includes(datatype)
             )
             .map((datatype: string) => {
+              // @ts-ignore
               const attributeType = DATATYPE_META[datatype];
               return (
                 <DatatypeOption

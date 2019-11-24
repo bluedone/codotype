@@ -1,4 +1,4 @@
-import { CodotypeAttribute } from "./index";
+import { Attribute, DEFAULT_ATTRIBUTE } from "@codotype/types";
 import {
   AttributeEditorAction,
   AttributeEditorActionType,
@@ -9,8 +9,8 @@ import {
  * TODO - annotate
  */
 export interface AttributeEditorState {
-  attributes: CodotypeAttribute[];
-  editorModel: null | CodotypeAttribute;
+  attributes: Attribute[];
+  editorModel: null | Attribute;
   lastUpdatedTime: string | null;
 }
 
@@ -18,17 +18,7 @@ export interface AttributeEditorState {
  * defaultAttribute
  * TODO - annotate
  */
-export const defaultAttribute: CodotypeAttribute = {
-  id: null,
-  label: "",
-  identifier: "",
-  datatype: "",
-  description: "",
-  required: false,
-  unique: false,
-  default_value: null,
-  locked: false,
-};
+export const defaultAttribute: Attribute = { ...DEFAULT_ATTRIBUTE };
 
 /**
  * getUniqueId
@@ -48,7 +38,7 @@ export function getLastUpdatedTime(): string {
  * getInitialState
  * @param attributes
  */
-export function getInitialState(attributes: CodotypeAttribute[]): AttributeEditorState {
+export function getInitialState(attributes: Attribute[]): AttributeEditorState {
   return {
     attributes: [
       ...attributes
@@ -65,7 +55,7 @@ export function getInitialState(attributes: CodotypeAttribute[]): AttributeEdito
  * @param state
  * @param newAttribute
  */
-export function createAttribute(state: AttributeEditorState, newAttribute: CodotypeAttribute): AttributeEditorState {
+export function createAttribute(state: AttributeEditorState, newAttribute: Attribute): AttributeEditorState {
   return {
     ...state,
     editorModel: null,
@@ -86,7 +76,7 @@ export function createAttribute(state: AttributeEditorState, newAttribute: Codot
  * @param state
  * @param newAttribute
  */
-export function editAttribute(state: AttributeEditorState, editAttribute: CodotypeAttribute): AttributeEditorState {
+export function editAttribute(state: AttributeEditorState, editAttribute: Attribute): AttributeEditorState {
   return {
     ...state,
     editorModel: {
@@ -101,12 +91,12 @@ export function editAttribute(state: AttributeEditorState, editAttribute: Codoty
  * @param state
  * @param newAttribute
  */
-export function updateAttribute(state: AttributeEditorState, updatedAttribute: CodotypeAttribute): AttributeEditorState {
+export function updateAttribute(state: AttributeEditorState, updatedAttribute: Attribute): AttributeEditorState {
   return {
     ...state,
     editorModel: null,
     lastUpdatedTime: getLastUpdatedTime(),
-    attributes: state.attributes.map((attr: CodotypeAttribute) => {
+    attributes: state.attributes.map((attr: Attribute) => {
       if (attr.id === updatedAttribute.id) {
         return {
           ...updatedAttribute
@@ -123,12 +113,12 @@ export function updateAttribute(state: AttributeEditorState, updatedAttribute: C
  * @param state
  * @param newAttribute
  */
-export function removeAttribute(state: AttributeEditorState, toBeRemoved: CodotypeAttribute): AttributeEditorState {
+export function removeAttribute(state: AttributeEditorState, toBeRemoved: Attribute): AttributeEditorState {
   return {
     ...state,
     editorModel: null,
     lastUpdatedTime: getLastUpdatedTime(),
-    attributes: state.attributes.filter((attr: CodotypeAttribute) => {
+    attributes: state.attributes.filter((attr: Attribute) => {
       return attr.id !== toBeRemoved.id;
     })
   }

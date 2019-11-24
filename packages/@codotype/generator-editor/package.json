@@ -1,8 +1,6 @@
 {
-  "name": "next-typescript-starter",
+  "name": "@codotype/generator-editor",
   "version": "0.1.0",
-  "description": "A web starter project with React, Next.js, TypeScript, and Netlify",
-  "main": "index.js",
   "scripts": {
     "dev": "next",
     "build": "next build",
@@ -12,6 +10,9 @@
   "author": "Alexander Schwartzberg",
   "license": "MIT",
   "dependencies": {
+    "@codotype/generator": "^1.0.0",
+    "@codotype/types": "^1.0.0",
+    "@codotype/util": "^1.0.0",
     "@blueprintjs/core": "^3.17.1",
     "evergreen-ui": "^4.18.1",
     "next": "^9.0.1",

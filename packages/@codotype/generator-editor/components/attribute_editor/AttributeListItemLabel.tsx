@@ -1,9 +1,8 @@
-import { DatatypeMeta } from "./datatype-meta";
+import { DatatypeMeta, Attribute } from "@codotype/types";
 import * as React from "react";
-import { CodotypeAttribute } from ".";
 
 interface AttributeListItemLabelProps {
-  attribute: CodotypeAttribute;
+  attribute: Attribute;
   datatype: DatatypeMeta;
 }
 
