@@ -1,4 +1,4 @@
-import inflateMeta from '../inflateMeta';
+import { inflateMeta } from '../inflateMeta';
 
 // // // //
 

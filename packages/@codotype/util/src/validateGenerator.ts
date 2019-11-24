@@ -22,7 +22,7 @@ const requiredFields: string[] = [
 // validateGenerator
 // Returns an array of { valid: boolean, property: string } objects
 // representing if each required property is present in the generator's definition
-export default function validateGenerator({ generator }): { property: string, valid: boolean }[] {
+export function validateGenerator({ generator }): { property: string, valid: boolean }[] {
   const validations = requiredFields.map((property) => {
     if (generator[property] !== undefined) {
       return { property, valid: true }

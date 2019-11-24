@@ -1,4 +1,4 @@
-import sanitizeLabel from '../sanitizeLabel';
+import { sanitizeLabel } from '../sanitizeLabel';
 
 // // // //
 

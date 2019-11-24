@@ -1,4 +1,4 @@
-import validateGenerator from '../validateGenerator';
+import { validateGenerator } from '../validateGenerator';
 
 // // // //
 

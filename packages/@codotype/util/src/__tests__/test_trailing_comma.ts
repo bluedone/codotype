@@ -1,4 +1,4 @@
-import trailingComma from "../trailingComma";
+import { trailingComma } from "../trailingComma";
 
 // // // //
 

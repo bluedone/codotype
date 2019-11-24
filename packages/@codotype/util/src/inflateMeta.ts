@@ -11,7 +11,7 @@ function makeCamelCase(input) {
 // inflateMeta
 // Accepts a singlar, titleized, human-readable label
 // and produces all requisite metadata for sensible code generation
-export default function (label) {
+export function inflateMeta(label) {
   return {
     label: titleize(label),
     label_plural: plural(titleize(label)),

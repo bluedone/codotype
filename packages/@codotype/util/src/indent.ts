@@ -7,7 +7,7 @@
 //
 // Taken from a comment in the following EJS issue:
 // https://github.com/mde/ejs/issues/176
-export default (text, depth) => {
+export function indent(text, depth) {
 
   // Defines an array for the function output
   const output = []

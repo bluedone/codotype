@@ -1,4 +1,4 @@
-import inflateMeta from "./inflateMeta";
+import { inflateMeta } from "./inflateMeta";
 import clone from "lodash/clone";
 import uniqueId from "lodash/uniqueId";
 import cloneDeep from "lodash/cloneDeep";
