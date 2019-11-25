@@ -84,6 +84,8 @@ export function MetaPreview(props: MetaPreviewProps) {
 
 interface SchemaFormProps {
   schema: Schema;
+  onSubmit: (updatedSchema: Schema) => void;
+  onCancel: () => void;
 }
 
 /**
@@ -139,6 +141,20 @@ export function SchemaForm(props: SchemaFormProps) {
         </table>
 
       </div>
+
+      <button
+        // disabled={!canSubmit(label)}
+        onClick={() => {
+          props.onSubmit({
+            ...props.schema,
+            ...inflateMeta(label.trim()),
+          });
+        }}
+      >
+        Save
+          </button>
+
+      <button onClick={props.onCancel}>Cancel</button>
     </div>
   )
 }
