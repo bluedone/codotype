@@ -37,6 +37,7 @@
     "nyc": "^13.0.1",
     "ts-jest": "^24.2.0",
     "typescript": "~3.4.5"
+    
   },
   "author": "Alexander Schwartzberg",
   "license": "MIT",

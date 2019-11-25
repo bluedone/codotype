@@ -15,6 +15,8 @@ export interface Schema {
   identifier_plural: string;
   class_name: string;
   class_name_plural: string;
+  camel_case: string;
+  camel_case_plural: string;
   attributes: any[];
   relations: any[];
   reverse_relations: any[];
@@ -31,6 +33,8 @@ export const DEFAULT_SCHEMA: Schema = {
   identifier_plural: "",
   class_name: "",
   class_name_plural: "",
+  camel_case: "",
+  camel_case_plural: "",
   attributes: [],
   relations: [],
   reverse_relations: []
