@@ -26,6 +26,7 @@ export function SchemaEditor(props: SchemaEditorProps) {
       <div className="col-lg-12">
 
         <button
+          className="btn btn-lg btn-primary w-100 mb-3"
           onClick={() => {
             dispatch({
               type: SchemaEditorActionType.EDIT,
@@ -33,9 +34,11 @@ export function SchemaEditor(props: SchemaEditorProps) {
             })
           }}
         >
-          New +
+          New Schema
         </button>
+      </div>
 
+      <div className="col-lg-12">
         {state.schemas.length === 0 && (
           <SchemaListEmptyState />
         )}
