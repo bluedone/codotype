@@ -28,6 +28,7 @@ export function MoreInfoLink(props: MoreInfoLinkProps) {
 // // // //
 // // // //
 
+// Example OptionValueInstance
 // {
 //   componentName: "MoreInfoLink",
 //     componentSlug: "more_info_link",
@@ -230,6 +231,11 @@ export const ComponentBuilderConfigurationGroup: ConfigurationGroup = {
   properties: [ComponentBuilderConfigurationGroupProperty]
 };
 
+/**
+ * buildConfigurationGroupPropertyValue
+ * Accepts a single ConfigurationGroupProperty and recursively produces its associated OptionValue instance
+ * @param property - the single ConfigurationGroupProperty for which the OptionValue is being produced
+ */
 export function buildConfigurationGroupPropertyValue(
   property: ConfigurationGroupProperty
 ): OptionValue {
@@ -244,6 +250,8 @@ export function buildConfigurationGroupPropertyValue(
   }
   if (property.type === OptionType.COLLECTION) {
     return [buildConfigurationGroupValue(property.properties)];
+    // Should return this:
+    // return [];
   }
   if (property.type === OptionType.INSTANCE) {
     return buildConfigurationGroupValue(property.properties);
@@ -251,10 +259,15 @@ export function buildConfigurationGroupPropertyValue(
   return "";
 }
 
+/**
+ * buildConfigurationGroupValue
+ * Builds the top-level OptionValueInstance for a single ConfigurationGroup
+ * @param properties - array of ConfigurationGroupProperty
+ */
 export function buildConfigurationGroupValue(
   properties: ConfigurationGroupProperty[]
 ): OptionValueInstance {
-  const initialValue: any = {};
+  const initialValue: OptionValueInstance = {};
 
   // Defines empty ConfigurationGroupValue
   // Iterates over each property in the group and assigns values
@@ -274,7 +287,7 @@ export function buildConfigurationGroupValue(
       // Returns val
       return val;
     },
-    initialValue
+    initialValue // Passes in empty OptionValueInstance
   );
 
   // Returns ConfigurationGroupValue
