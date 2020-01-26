@@ -1,5 +1,4 @@
 import * as React from "react";
-import { string } from "prop-types";
 
 // // // //
 
@@ -7,6 +6,7 @@ import { string } from "prop-types";
  * SwitchInputProps
  * Props for the `SwitchInput` component
  * @param value - the current value of the switch (true/false)
+ * @param onChange - callback function to update `props.value`
  */
 interface SwitchInputProps {
   value: boolean;
@@ -15,7 +15,7 @@ interface SwitchInputProps {
 
 /**
  * SwitchInput
- * Renders a link that when clicked opens a new tab to some relevant information
+ * Renders an `<input type="checkbox" />` element
  */
 export function SwitchInput(props: SwitchInputProps) {
   return (

@@ -1,0 +1,1 @@
+export { ConfigurationGroupHeader } from "./component";

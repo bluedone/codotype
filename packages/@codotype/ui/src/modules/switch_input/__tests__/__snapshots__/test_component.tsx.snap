@@ -1,14 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MoreInfoLink render 1`] = `
-<a
-  href="https://codotype.org"
-  target="_blank"
->
-  More Info
-</a>
-`;
-
 exports[`SwitchInput render 1`] = `
 <input
   checked={true}
