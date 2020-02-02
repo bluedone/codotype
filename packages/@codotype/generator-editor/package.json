@@ -1,0 +1,36 @@
+{
+  "name": "@codotype/generator-editor",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "next",
+    "test": "jest",
+    "build": "next build",
+    "export": "next export",
+    "start": "next start"
+  },
+  "author": "Alexander Schwartzberg",
+  "license": "MIT",
+  "dependencies": {
+    "@blueprintjs/core": "^3.17.1",
+    "@codotype/generator": "^1.0.0",
+    "@codotype/types": "^1.0.0",
+    "@codotype/util": "^1.0.0",
+    "@types/jest": "^24.0.23",
+    "@types/react-test-renderer": "^16.9.1",
+    "evergreen-ui": "^4.18.1",
+    "jest": "^24.9.0",
+    "next": "^9.0.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "ts-jest": "^24.2.0",
+    "typedoc": "^0.15.3",
+    "typescript": "~3.4.5"
+  },
+  "devDependencies": {
+    "@types/node": "^12.6.2",
+    "@types/react": "^16.8.23",
+    "@types/react-dom": "^16.8.4",
+    "react-test-renderer": "^16.12.0",
+    "typescript": "^3.5.3"
+  }
+}

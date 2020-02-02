@@ -1,8 +1,8 @@
 const fs = require('fs-extra')
 const path = require('path')
 const chalk = require('chalk')
-const CodotypeRuntime = require('@codotype/runtime')
-const validateGenerator = require('@codotype/util/lib/validateGenerator')
+const { CodotypeNodeRuntime } = require('@codotype/runtime')
+const { validateGenerator } = require('@codotype/util')
 
 async function doctor (options) {
 
@@ -15,7 +15,7 @@ async function doctor (options) {
   console.log(`the doctor says ${chalk.green(`this generator's metadata loaded correctly`)}`)
 
   // Invoke runtime directly with parameters
-  const runtime = new CodotypeRuntime()
+  const runtime = new CodotypeNodeRuntime();
 
   // Registers this generator via relative path
   runtime.registerGenerator({ absolute_path: process.cwd() })

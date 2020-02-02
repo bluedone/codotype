@@ -1,0 +1,1 @@
+export { MoreInfoLink } from "./component";

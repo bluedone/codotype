@@ -1,34 +1,48 @@
 {
   "name": "@codotype/util",
-  "version": "0.4.2",
+  "version": "1.0.0",
   "description": "Utility functions used throughout the Codotype ecosystem",
-  "main": "index.js",
   "scripts": {
-    "test": "nyc mocha --exit"
+    "test": "jest",
+    "build": "npm run clean && npm run compile",
+    "clean": "rm -rf ./dist",
+    "compile": "tsc -p tsconfig.build.json",
+    "prepublishOnly": "npm run build"
   },
+  "main": "dist/index",
+  "types": "dist/index",
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/codotype/codotype-util.git"
   },
   "dependencies": {
-    "@codotype/types": "^0.2.2",
+    "@codotype/types": "^1.0.0",
+    "@types/lodash": "^4.14.149",
+    "@types/pluralize": "0.0.29",
+    "@types/underscore.string": "0.0.38",
+    "change-case": "^3.1.0",
     "lodash": "^4.17.10",
     "pluralize": "^7.0.0",
     "underscore.string": "^3.3.4"
   },
   "devDependencies": {
     "@codotype/blueprints": "^0.4.0",
+    "@types/jest": "^24.0.23",
     "chai": "^4.1.2",
+    "jest": "^24.9.0",
     "mocha": "^5.2.0",
-    "nyc": "^13.0.1"
+    "nyc": "^13.0.1",
+    "ts-jest": "^24.2.0",
+    "typescript": "~3.4.5"
+    
   },
   "author": "Alexander Schwartzberg",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/codotype/codotype-util/issues"
   },
-  "homepage": "https://github.com/codotype/codotype-util#readme",
-  "directories": {
-    "lib": "lib"
-  }
+  "homepage": "https://github.com/codotype/codotype-util#readme"
 }
