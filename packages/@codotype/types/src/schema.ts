@@ -1,11 +1,10 @@
-
 export enum SchemaSource {
   USER = "USER",
   GENERATOR = "GENERATOR"
 }
 
 export interface Schema {
-  id: null|string;
+  id: null | string;
   locked: boolean;
   source: SchemaSource;
   removable: boolean;
@@ -21,6 +20,34 @@ export interface Schema {
   relations: any[];
   reverse_relations: any[];
 }
+
+// // // //
+// TODO - schema metadata should be updated to someting like:
+export interface TokenPluralization {
+  singular: string;
+  plural: string;
+}
+
+export interface SchemaTokenCasing {
+  title: TokenPluralization;
+  snake: TokenPluralization;
+  camel: TokenPluralization;
+  pascal: TokenPluralization;
+}
+
+export interface SchemaV2 {
+  id: null | string;
+  locked: boolean;
+  source: SchemaSource;
+  removable: boolean;
+  tokens: SchemaTokenCasing;
+  attributes: any[];
+  relations: any[];
+  reverse_relations: any[];
+}
+
+//
+// // // //
 
 export const DEFAULT_SCHEMA: Schema = {
   id: null,
