@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ConfigurationGroupEditor render 1`] = `
+Object {
+  "components_group": Object {
+    "components": Array [
+      Object {
+        "componentName": "",
+        "componentSlug": "",
+        "props": Array [
+          Object {
+            "desc": "",
+            "name": "",
+            "type": "",
+          },
+        ],
+        "tests": Object {
+          "enabled": true,
+          "value": Object {
+            "testType": "",
+          },
+        },
+      },
+    ],
+  },
+}
+`;

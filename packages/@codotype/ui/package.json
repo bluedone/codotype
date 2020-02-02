@@ -19,6 +19,8 @@
   "dependencies": {
     "@codotype/types": "^1.0.0",
     "@codotype/util": "^1.0.0",
+    "@types/react": "^16.9.19",
+    "@types/react-test-renderer": "^16.9.2",
     "axios": "^0.17.0",
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^1.0.2",
@@ -27,6 +29,7 @@
     "driver.js": "^0.7.1",
     "lodash": "^4.17.4",
     "marked": "^0.5.0",
+    "react": "^16.12.0",
     "underscore.string": "^3.3.4",
     "v-runtime-template": "^1.5.2",
     "vue": "^2.5.2",
@@ -42,6 +45,7 @@
     "vuex-persistedstate": "^2.4.2"
   },
   "devDependencies": {
+    "@types/jest": "^24.0.23",
     "@vue/cli-plugin-babel": "^3.4.0",
     "@vue/cli-plugin-eslint": "^3.4.0",
     "@vue/cli-service": "^3.4.0",
@@ -51,16 +55,16 @@
     "chai": "^4.1.2",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0",
+    "jest": "^24.9.0",
     "mocha": "^5.2.0",
     "node-sass": "^4.11.0",
     "nyc": "^13.0.1",
     "raw-loader": "^1.0.0",
+    "react-test-renderer": "^16.12.0",
     "sass-loader": "^7.1.0",
-    "vue-template-compiler": "^2.5.21",
-    "@types/jest": "^24.0.23",
-    "jest": "^24.9.0",
     "ts-jest": "^24.2.0",
-    "typescript": "~3.4.5"
+    "typescript": "~3.4.5",
+    "vue-template-compiler": "^2.5.21"
   },
   "eslintConfig": {
     "root": true,
