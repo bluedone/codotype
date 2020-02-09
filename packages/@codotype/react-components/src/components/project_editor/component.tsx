@@ -30,6 +30,7 @@ export function buildDefaultProject(generatorMeta: GeneratorMeta): Project {
     const newProject: Project = {
         label: "My New Project",
         generatorId: generatorMeta.id,
+        schemas: [],
         generatorVersion: generatorMeta.version,
         configuration: projectConfiguration,
     };
@@ -44,11 +45,24 @@ export interface ProjectConfiguration {
     [key: string]: OptionValueInstance;
 }
 
+export interface SchemaV2 {
+    id: null | string;
+    locked: boolean;
+    source: string; // SchemaSource;
+    removable: boolean;
+    tokens: any; // SchemaTokenCasing;
+    attributes: any[];
+    relations: any[];
+    configuration: ProjectConfiguration; // ProjectConfiguration, wow!
+    // reverse_relations: any[]; <--- these are _derived_, a computed value - doesn't need to be stored
+}
+
 export interface Project {
     label: string;
     generatorId: string;
     generatorVersion: string;
     configuration: ProjectConfiguration;
+    schemas: SchemaV2[];
 }
 
 export enum ExperienceRecommendation {
@@ -56,6 +70,13 @@ export enum ExperienceRecommendation {
     JUNIOR = "junior",
     INTERMEDIATE = "intermediate",
     EXPERT = "expert",
+}
+
+export interface SchemaConfigurationGroup {
+    configurationGroups: any[]; // ConfigurationGroup
+    // defaultSchemas: any; // a Schemas array containing default schemas to load with the project.Learn more about default schema behavior here
+    supportedDatatypes: any[]; // The datatypes supported by this generator.Only an array of DATATYPE_ * identifiers that correspond to values defined in @codotype/types are accepted.
+    supportedRelations: any[]; // The relation types supported by this generator.Only an array of RELATION_TYPE_ * identifiers that correspond to values defined in @codotype/types are accepted.
 }
 
 export interface GeneratorMeta {
@@ -70,6 +91,7 @@ export interface GeneratorMeta {
     type_tags: any; // describes the type of codebase produced by this generator
     experience: ExperienceRecommendation; // an optional tag detailing the level of experience required to use the code produced by the generator
     project_path: string; // the name of the directory for the generator's output
+    schemaConfigurationGroup: SchemaConfigurationGroup;
     configuration_groups: ConfigurationGroup[]; // an array of OptionGroup objects that expose additional configuration provided by the generator
     // All of this gets merged into configuration groups
     // defaultSchemas: any; // a Schemas array containing default schemas to load with the project.Learn more about default schema behavior here
@@ -103,11 +125,11 @@ export function GenerateCodeButton(props: {
 // // // //
 
 function ConfigurationGroupTab(props: {
-    configurationGroup: ConfigurationGroup;
+    label: string;
     active: boolean;
     onClick: () => void;
 }) {
-    const { configurationGroup } = props;
+    const { label } = props;
     const btnClassName: string[] = ["mx-2", "btn", "btn-outline-primary"];
     if (props.active) {
         btnClassName.push("active");
@@ -115,7 +137,7 @@ function ConfigurationGroupTab(props: {
 
     return (
         <button onClick={props.onClick} className={btnClassName.join(" ")}>
-            {configurationGroup.label}
+            {label}
         </button>
     );
 }
@@ -140,9 +162,19 @@ export function ConfigurationGroupSelector(props: {
         selectedConfigurationGroup,
         selectConfigurationGroup,
     ] = React.useState<ConfigurationGroup>(defaultConfigurationGroup);
+
+    // NOTE - enable/disable this if schemas aren't supported
+    const [viewingSchemas, setViewingSchemas] = React.useState<boolean>(true);
     return (
         <div className="row">
             <div className="col-lg-12">
+                <ConfigurationGroupTab
+                    onClick={() => {
+                        setViewingSchemas(true);
+                    }}
+                    active={viewingSchemas}
+                    label={"Schemas"}
+                />
                 {/* Renders the navigation for selecting a ConfigurationGroup */}
                 {generatorMeta.configuration_groups.map(
                     (configurationGroup: ConfigurationGroup) => {
@@ -150,15 +182,17 @@ export function ConfigurationGroupSelector(props: {
                             <ConfigurationGroupTab
                                 key={configurationGroup.identifier}
                                 onClick={() => {
+                                    setViewingSchemas(false);
                                     selectConfigurationGroup(
                                         configurationGroup,
                                     );
                                 }}
                                 active={
                                     configurationGroup.identifier ===
-                                    selectedConfigurationGroup.identifier
+                                        selectedConfigurationGroup.identifier &&
+                                    !viewingSchemas
                                 }
-                                configurationGroup={configurationGroup}
+                                label={configurationGroup.label}
                             />
                         );
                     },
@@ -166,20 +200,25 @@ export function ConfigurationGroupSelector(props: {
             </div>
             <div className="col-lg-12">
                 {/* Renders the ConfigurationInput */}
-                <ConfigurationInput
-                    configurationGroup={selectedConfigurationGroup}
-                    value={
-                        props.project.configuration[
-                            selectedConfigurationGroup.identifier
-                        ]
-                    }
-                    onChange={(updatedVal: OptionValueInstance) => {
-                        console.log("OnChangeVal!");
-                        console.log(updatedVal);
-                        // setVal(updatedVal);
-                        // increment();
-                    }}
-                />
+                {!viewingSchemas && (
+                    <ConfigurationInput
+                        configurationGroup={selectedConfigurationGroup}
+                        value={
+                            props.project.configuration[
+                                selectedConfigurationGroup.identifier
+                            ]
+                        }
+                        onChange={(updatedVal: OptionValueInstance) => {
+                            console.log("OnChangeVal!");
+                            console.log(updatedVal);
+                            // setVal(updatedVal);
+                            // increment();
+                        }}
+                    />
+                )}
+
+                {/* Render SchemaEditor */}
+                {viewingSchemas && <p>SCHEMA EDITOR</p>}
             </div>
             {/* <pre>{JSON.stringify(val, null, 4)}</pre> */}
             {/* <pre>{JSON.stringify(props.configurationGroup, null, 4)}</pre> */}
@@ -241,33 +280,35 @@ export const ProjectEditor: FunctionComponent<ProjectEditorProps> = (
 ) => {
     const { generator, project } = props;
     return (
-        <div className="row">
-            <div className="col-sm-12">
-                {/* Render ProjectEditorHeader */}
-                <ProjectEditorHeader
-                    generatorMeta={generator}
-                    project={project}
-                    onChange={props.onChange}
-                    onClickGenerate={props.onClickGenerate}
-                />
+        <div className="card card-body">
+            <div className="row">
+                <div className="col-sm-12">
+                    {/* Render ProjectEditorHeader */}
+                    <ProjectEditorHeader
+                        generatorMeta={generator}
+                        project={project}
+                        onChange={props.onChange}
+                        onClickGenerate={props.onClickGenerate}
+                    />
 
-                {/* Render ConfigurationGroupSelector */}
-                <ConfigurationGroupSelector
-                    project={project}
-                    generatorMeta={generator}
-                    onChange={(
-                        updatedProjectConfiguration: ProjectConfiguration,
-                    ) => {
-                        // Defines the updated project
-                        const updatedProject: Project = {
-                            ...project,
-                            configuration: updatedProjectConfiguration,
-                        };
+                    {/* Render ConfigurationGroupSelector */}
+                    <ConfigurationGroupSelector
+                        project={project}
+                        generatorMeta={generator}
+                        onChange={(
+                            updatedProjectConfiguration: ProjectConfiguration,
+                        ) => {
+                            // Defines the updated project
+                            const updatedProject: Project = {
+                                ...project,
+                                configuration: updatedProjectConfiguration,
+                            };
 
-                        // Invokes props.onChange with the updated project
-                        props.onChange(updatedProject);
-                    }}
-                />
+                            // Invokes props.onChange with the updated project
+                            props.onChange(updatedProject);
+                        }}
+                    />
+                </div>
             </div>
         </div>
     );

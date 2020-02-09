@@ -1,11 +1,10 @@
-
 export enum SchemaSource {
   USER = "USER",
   GENERATOR = "GENERATOR"
 }
 
 export interface Schema {
-  id: null|string;
+  id: null | string;
   locked: boolean;
   source: SchemaSource;
   removable: boolean;
@@ -21,6 +20,48 @@ export interface Schema {
   relations: any[];
   reverse_relations: any[];
 }
+
+// // // //
+// TODO - schema metadata should be updated to someting like:
+export interface TokenPluralization {
+  singular: string;
+  plural: string;
+}
+
+export interface SchemaTokenCasing {
+  title: TokenPluralization;
+  snake: TokenPluralization;
+  camel: TokenPluralization;
+  pascal: TokenPluralization;
+}
+
+// // // //
+
+// export interface SchemaConfigurationGroup {
+//   id: null | string;
+//   locked: boolean;
+//   attributes: any[]; // AttributeType[]
+//   relations: any[]; // RelationType[]
+//   configurationGroups: any[]; // ConfigurationGroup
+//   // defaultSchemas: any; // a Schemas array containing default schemas to load with the project.Learn more about default schema behavior here
+//   supportedDatatypes: any[]; // The datatypes supported by this generator.Only an array of DATATYPE_ * identifiers that correspond to values defined in @codotype/types are accepted.
+//   supportedRelations: any[]; // The relation types supported by this generator.Only an array of RELATION_TYPE_ * identifiers that correspond to values defined in @codotype/types are accepted.
+// }
+
+export interface SchemaV2 {
+  id: null | string;
+  locked: boolean;
+  source: SchemaSource;
+  removable: boolean;
+  tokens: SchemaTokenCasing;
+  attributes: any[];
+  relations: any[];
+  configuration: any; // ProjectConfiguration, wow!
+  // reverse_relations: any[]; <--- these are _derived_, a computed value - doesn't need to be stored
+}
+
+//
+// // // //
 
 export const DEFAULT_SCHEMA: Schema = {
   id: null,

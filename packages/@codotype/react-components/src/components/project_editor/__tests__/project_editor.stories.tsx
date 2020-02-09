@@ -27,6 +27,11 @@ const dummyGeneratorMeta: GeneratorMeta = {
     type_tags: [], // describes the type of codebase produced by this generator
     experience: ExperienceRecommendation.BEGINNER, // an optional tag detailing the level of experience required to use the code produced by the generator
     project_path: "output", // the name of the directory for the generator's output
+    schemaConfigurationGroup: {
+        configurationGroups: [ComponentBuilderConfigurationGroup],
+        supportedDatatypes: [], // The datatypes supported by this generator.Only an array of DATATYPE_ * identifiers that correspond to values defined in @codotype/types are accepted.
+        supportedRelations: [], // The relation types supported by this generator.Only an array of RELATION_TYPE_ * identifiers that correspond to values defined in @codotype/types are accepted.
+    },
     configuration_groups: [
         ComponentBuilderConfigurationGroup,
         {
