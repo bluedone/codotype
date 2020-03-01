@@ -5,8 +5,8 @@ import {
     ProjectEditor,
     Project,
     GeneratorMeta,
-    buildDefaultProject,
 } from "../component";
+import { buildDefaultProject } from "../buildDefaultProject";
 import { GenerateCodeButton } from "../GenerateCodeButton";
 import { Story } from "@src/components/dev";
 import {
