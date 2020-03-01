@@ -72,6 +72,9 @@
         "webpack-merge": "^4.2.2"
     },
     "dependencies": {
+        "@fortawesome/fontawesome-svg-core": "^1.2.27",
+        "@fortawesome/free-solid-svg-icons": "^5.12.1",
+        "@fortawesome/react-fontawesome": "^0.1.8",
         "bootstrap": "^4.4.1",
         "react": "^16.12.0",
         "react-dom": "^16.12.0",
