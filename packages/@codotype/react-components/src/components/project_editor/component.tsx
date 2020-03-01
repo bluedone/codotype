@@ -6,6 +6,9 @@ import {
     OptionValueInstance,
     buildConfigurationGroupValue,
 } from "../configuration_group_input";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { GenerateCodeButton } from "./GenerateCodeButton";
+import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 
 // // // //
 
@@ -98,28 +101,6 @@ export interface GeneratorMeta {
     // defaultConfiguration: any; // object that can provide optional defaults / examples for each ConfigurationGroup.This is where you can supply default Addon data for different ConfigurationGroups
     // supportedDatatypes: any; // The datatypes supported by this generator.Only an array of DATATYPE_ * identifiers that correspond to values defined in @codotype/types are accepted.
     // supportedRelations: any; // The relation types supported by this generator.Only an array of RELATION_TYPE_ * identifiers that correspond to values defined in @codotype/types are accepted.
-}
-
-// // // //
-
-export function GenerateCodeButton(props: {
-    disabled?: boolean;
-    onClick: () => void;
-}) {
-    return (
-        <button
-            className="btn btn-sm btn-yellow"
-            disabled={props.disabled}
-            onClick={props.onClick}
-        >
-            {props.disabled ? (
-                <i className="fa fa-cog" />
-            ) : (
-                <i className="fa fa-spin fa-cog" v-else />
-            )}
-            Generate Code
-        </button>
-    );
 }
 
 // // // //
@@ -229,7 +210,11 @@ export function ConfigurationGroupSelector(props: {
 // // // //
 
 export function ProjectEditButton() {
-    return <button>edit</button>;
+    return (
+        <button className="btn btn-link">
+            <FontAwesomeIcon icon={faPencilAlt} />
+        </button>
+    );
 }
 
 export function ProjectEditorHeader(props: {

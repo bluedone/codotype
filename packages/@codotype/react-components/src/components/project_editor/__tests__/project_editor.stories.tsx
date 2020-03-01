@@ -7,6 +7,7 @@ import {
     GeneratorMeta,
     buildDefaultProject,
 } from "../component";
+import { GenerateCodeButton } from "../GenerateCodeButton";
 import { Story } from "@src/components/dev";
 import {
     ComponentBuilderConfigurationGroup,
@@ -59,6 +60,31 @@ storiesOf("ProjectEditor", module).add("renders", () => {
                 onChange={(updatedProject: Project) => {
                     console.log("onChange!");
                     console.log(updatedProject);
+                }}
+            />
+        </Story>
+    );
+});
+
+storiesOf("GenerateCodeButton", module).add("enabled", () => {
+    return (
+        <Story>
+            <GenerateCodeButton
+                onClick={() => {
+                    return;
+                }}
+            />
+        </Story>
+    );
+});
+
+storiesOf("GenerateCodeButton", module).add("disabled", () => {
+    return (
+        <Story>
+            <GenerateCodeButton
+                disabled
+                onClick={() => {
+                    return;
                 }}
             />
         </Story>
