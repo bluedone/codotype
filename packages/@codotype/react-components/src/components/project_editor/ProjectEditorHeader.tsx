@@ -23,7 +23,7 @@ export function ProjectEditorHeader(props: {
             </div>
             <div className="col-lg-6 d-flex justify-content-end">
                 {/* <HelpButton /> */}
-                {/* < TourButton /> */}
+                {/* <TourButton /> */}
                 {/* <ProjectDropdown /> */}
                 <GenerateCodeButton onClick={props.onClickGenerate} />
                 {/* <ImportModal /> */}
