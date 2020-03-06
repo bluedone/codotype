@@ -1,7 +1,7 @@
 import * as React from "react";
 import { GenerateCodeButton } from "./GenerateCodeButton";
 import { ProjectEditButton } from "./ProjectEditButton";
-import { Project, GeneratorMeta } from "./component";
+import { Project, GeneratorMeta } from "../types";
 
 // // // //
 

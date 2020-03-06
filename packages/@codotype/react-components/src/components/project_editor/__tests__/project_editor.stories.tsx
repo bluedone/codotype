@@ -1,11 +1,12 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
+import { ProjectEditor } from "../component";
 import {
     ExperienceRecommendation,
-    ProjectEditor,
     Project,
     GeneratorMeta,
-} from "../component";
+    Datatype,
+} from "../../types";
 import { buildDefaultProject } from "../buildDefaultProject";
 import { GenerateCodeButton } from "../GenerateCodeButton";
 import { Story } from "@src/components/dev";
@@ -46,6 +47,50 @@ const dummyGeneratorMeta: GeneratorMeta = {
 };
 
 const dummyProject: Project = buildDefaultProject(dummyGeneratorMeta);
+dummyProject.schemas.push({
+    id: "12345",
+    tokens: {
+        label: "User",
+        label_plural: "Users",
+        identifier: "user",
+        identifier_plural: "users",
+    },
+    attributes: [],
+    relations: [],
+    locked: false,
+    removable: false,
+    source: "USER",
+    configuration: {},
+});
+
+dummyProject.schemas.push({
+    id: "45678",
+    tokens: {
+        label: "Movie",
+        label_plural: "Movies",
+        identifier: "movie",
+        identifier_plural: "movies",
+    },
+    attributes: [
+        {
+            id: "name-attr",
+            label: "Name",
+            identifier: "name",
+            description: "the name of the user",
+            required: true,
+            unique: true,
+            locked: true,
+            datatype: Datatype.STRING,
+            default_value: "string",
+            datatypeOptions: {},
+        },
+    ],
+    relations: [],
+    locked: false,
+    removable: false,
+    source: "USER",
+    configuration: {},
+});
 
 storiesOf("ProjectEditor", module).add("renders", () => {
     return (

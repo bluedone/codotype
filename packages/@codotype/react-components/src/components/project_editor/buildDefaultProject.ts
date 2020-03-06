@@ -1,11 +1,12 @@
-import { GeneratorMeta, Project, ProjectConfiguration } from "./component";
-import "./styles.scss";
 import {
+    GeneratorMeta,
+    Project,
+    ProjectConfiguration,
     ConfigurationGroup,
-    ConfigurationInput,
     OptionValueInstance,
-    buildConfigurationGroupValue,
-} from "../configuration_group_input";
+} from "../types";
+import "./styles.scss";
+import { buildConfigurationGroupValue } from "../configuration_group_input";
 
 // // // //
 

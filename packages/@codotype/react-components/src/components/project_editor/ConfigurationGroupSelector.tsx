@@ -1,11 +1,14 @@
 import * as React from "react";
 import "./styles.scss";
+import { ConfigurationInput } from "../configuration_group_input";
+import { SchemaEditorLayout } from "../schema_editor";
 import {
+    Project,
+    GeneratorMeta,
+    ProjectConfiguration,
     ConfigurationGroup,
-    ConfigurationInput,
     OptionValueInstance,
-} from "../configuration_group_input";
-import { Project, GeneratorMeta, ProjectConfiguration } from "./component";
+} from "../types";
 
 // // // //
 
@@ -102,8 +105,10 @@ export function ConfigurationGroupSelector(props: {
                     />
                 )}
 
-                {/* Render SchemaEditor */}
-                {viewingSchemas && <p>SCHEMA EDITOR</p>}
+                {/* Render SchemaEditorLayout */}
+                {viewingSchemas && (
+                    <SchemaEditorLayout schemas={props.project.schemas} />
+                )}
             </div>
             {/* <pre>{JSON.stringify(val, null, 4)}</pre> */}
             {/* <pre>{JSON.stringify(props.configurationGroup, null, 4)}</pre> */}
