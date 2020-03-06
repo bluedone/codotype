@@ -1,71 +1,15 @@
 import React, { FunctionComponent } from "react";
 import "./styles.scss";
+import {
+    OptionType,
+    OptionValue,
+    OptionValueInstance,
+    DropdownOption,
+    ConfigurationGroupProperty,
+    ConfigurationGroup,
+} from "../types";
 
 // // // //
-
-export enum OptionType {
-    STRING = "STRING",
-    NUMBER = "NUMBER",
-    BOOLEAN = "BOOLEAN",
-    DROPDOWN = "DROPDOWN",
-    MULTI_DROPDOWN = "MULTI_DROPDOWN",
-    COLLECTION = "COLLECTION",
-    INSTANCE = "INSTANCE",
-}
-
-export type OptionValue =
-    | string
-    | string[]
-    | number
-    | number[]
-    | boolean
-    | OptionValueInstance
-    | OptionValueInstance[]
-    | null;
-
-export type OptionValueInstance =
-    | OptionValueInstanceStandard
-    | OptionValueInstanceAllowDisable;
-
-interface OptionValueInstanceStandard {
-    [key: string]: OptionValue;
-}
-
-interface OptionValueInstanceAllowDisable {
-    enabled: boolean;
-    value: {
-        [key: string]: OptionValue;
-    };
-}
-
-export interface DropdownOption {
-    label: string;
-    value: string;
-}
-
-export interface ConfigurationGroupProperty {
-    label: string;
-    identifier: string;
-    description: string;
-    type: OptionType;
-    defaultValue: OptionValue;
-    required: boolean;
-    enabled: boolean;
-    allowDisable: boolean;
-    properties: ConfigurationGroupProperty[];
-    dropdownOptions: DropdownOption[];
-}
-
-export interface ConfigurationGroup {
-    label: string;
-    identifier: string;
-    description: string;
-    enabled: boolean;
-    allowDisable: boolean;
-    scope: string; // enum
-    variant: string; //enum
-    properties: ConfigurationGroupProperty[];
-}
 
 /**
  * buildConfigurationGroupPropertyValue

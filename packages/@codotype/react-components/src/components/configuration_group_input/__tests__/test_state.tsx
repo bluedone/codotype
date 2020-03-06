@@ -2,7 +2,7 @@ import {
     ConfigurationGroup,
     ConfigurationGroupProperty,
     OptionType,
-} from "../component";
+} from "../../types";
 
 // // // //
 

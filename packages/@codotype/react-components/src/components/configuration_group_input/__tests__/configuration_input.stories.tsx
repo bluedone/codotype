@@ -1,10 +1,7 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
-import {
-    ConfigurationInput,
-    buildConfigurationGroupValue,
-    OptionValueInstance,
-} from "../component";
+import { ConfigurationInput, buildConfigurationGroupValue } from "../component";
+import { OptionValueInstance } from "../../types";
 import {
     ComponentBuilderConfigurationGroup,
     ComponentBuilderConfigurationGroupPropertySingleDropdown,
