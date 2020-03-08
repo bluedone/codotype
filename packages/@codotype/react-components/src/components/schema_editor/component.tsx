@@ -237,13 +237,6 @@ export function SchemaEditorLayout(props: {
                         }}
                     />
                 </SchemaFormModal>
-                <pre>
-                    {JSON.stringify(
-                        props.schemas.find(s => s.id === selectedSchemaId),
-                        null,
-                        4,
-                    )}
-                </pre>
             </div>
         </div>
     );

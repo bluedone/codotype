@@ -30,8 +30,12 @@ export function SchemaFormModal(props: {
             </Modal.Header>
             <Modal.Body>{props.children}</Modal.Body>
             <Modal.Footer>
-                <button onClick={props.handleClose}>Close</button>
-                <button onClick={props.onSubmit}>{title}</button>
+                <button className="btn btn-light" onClick={props.handleClose}>
+                    Close
+                </button>
+                <button className="btn btn-success" onClick={props.onSubmit}>
+                    {title}
+                </button>
             </Modal.Footer>
         </Modal>
     );
