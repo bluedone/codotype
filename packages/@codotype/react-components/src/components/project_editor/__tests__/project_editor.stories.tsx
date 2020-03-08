@@ -9,7 +9,6 @@ import {
     Datatype,
 } from "../../types";
 import { buildDefaultProject } from "../buildDefaultProject";
-import { GenerateCodeButton } from "../GenerateCodeButton";
 import { Story } from "@src/components/dev";
 import {
     ComponentBuilderConfigurationGroup,
@@ -81,7 +80,7 @@ const movieSchema: Schema = {
             description: "the name of the user",
             required: true,
             unique: true,
-            locked: true,
+            locked: false,
             datatype: Datatype.STRING,
             default_value: "string",
             datatypeOptions: {},
@@ -93,7 +92,7 @@ const movieSchema: Schema = {
             description: "the email of the user",
             required: true,
             unique: true,
-            locked: true,
+            locked: false,
             datatype: Datatype.STRING,
             default_value: "string",
             datatypeOptions: {},
@@ -126,31 +125,8 @@ storiesOf("ProjectEditor", module).add("renders", () => {
                     setProject(updatedProject);
                 }}
             />
-        </Story>
-    );
-});
-
-storiesOf("GenerateCodeButton", module).add("enabled", () => {
-    return (
-        <Story>
-            <GenerateCodeButton
-                onClick={() => {
-                    return;
-                }}
-            />
-        </Story>
-    );
-});
-
-storiesOf("GenerateCodeButton", module).add("disabled", () => {
-    return (
-        <Story>
-            <GenerateCodeButton
-                disabled
-                onClick={() => {
-                    return;
-                }}
-            />
+            <hr />
+            <pre>{JSON.stringify(project, null, 4)}</pre>
         </Story>
     );
 });

@@ -25,6 +25,9 @@ export function SchemaDetailHeader(props: {
                         handleClose={() => {
                             showEditModal(false);
                         }}
+                        onSubmit={() => {
+                            showEditModal(false);
+                        }}
                     >
                         <SchemaForm schema={props.schema} />
                     </SchemaFormModal>

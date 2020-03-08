@@ -4,6 +4,8 @@ import { SchemaDetail } from "./SchemaDetail";
 import { SchemaNewButton } from "./SchemaNewButton";
 import { DragDropContext } from "react-beautiful-dnd";
 import { SchemaFormModal } from "./SchemaFormModal";
+import { SchemaEditorEmptyState } from "./SchemaEditorEmptyState";
+import { SchemaForm } from "./SchemaForm";
 import { Schema } from "../types";
 
 // // // //
@@ -70,7 +72,7 @@ export function SchemaEditorLayout(props: {
 
     // Show empty state
     if (selectedSchemaId === null || selectedSchema === undefined) {
-        return <p>EmptyState</p>;
+        return <SchemaEditorEmptyState />;
     }
 
     // Defines onDragEnd callback for <DragDropContext />
@@ -103,12 +105,24 @@ export function SchemaEditorLayout(props: {
                 />
 
                 <SchemaFormModal
+                    renderNewTitle
                     show={showModal}
                     handleClose={() => {
                         setShowModal(false);
                     }}
+                    onSubmit={() => {
+                        setShowModal(false);
+                        const updatedSchemas: Schema[] = [
+                            ...state.schemas,
+                            {
+                                ...state.schemas[0],
+                                id: "NEW_SCHEMA_RANDOM_ID",
+                            },
+                        ];
+                        props.onChange(updatedSchemas);
+                    }}
                 >
-                    <p>Schema Form Goes Here</p>
+                    <SchemaForm schema={selectedSchema} />
                 </SchemaFormModal>
 
                 <DragDropContext onDragEnd={onDragEnd}>

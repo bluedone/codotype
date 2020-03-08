@@ -8,23 +8,30 @@ import { Modal } from "react-bootstrap";
  * @param props.show
  * @param props.children
  * @param props.handleClose
+ * @param props.onSubmit
  */
 export function SchemaFormModal(props: {
+    renderNewTitle?: boolean;
     show: boolean;
     children: React.ReactNode;
     handleClose: () => void;
+    onSubmit: () => void;
 }) {
+    // Defines title + submit button labels
+    let title = "Update Schema";
+    if (props.renderNewTitle) {
+        title = "Create Schema";
+    }
+
     return (
         <Modal size="lg" show={props.show} onHide={props.handleClose}>
             <Modal.Header closeButton>
-                <Modal.Title>Create / Update Schema</Modal.Title>
+                <Modal.Title>{title}</Modal.Title>
             </Modal.Header>
             <Modal.Body>{props.children}</Modal.Body>
             <Modal.Footer>
                 <button onClick={props.handleClose}>Close</button>
-                <button onClick={props.handleClose}>
-                    Create / Update Schema
-                </button>
+                <button onClick={props.onSubmit}>{title}</button>
             </Modal.Footer>
         </Modal>
     );

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Schema } from "../types";
-// import { inflateMeta, sanitizeLabel } from "@codotype/util";
+import { inflateMeta, sanitizeLabel } from "@codotype/util";
 
 // // // //
 
@@ -15,8 +15,7 @@ interface MetaPreviewProps {
  * MetaPreview
  */
 export function MetaPreview(props: MetaPreviewProps) {
-    // const schemaMeta = inflateMeta(props.label);
-    const schemaMeta: any = {};
+    const schemaMeta = inflateMeta(props.label);
 
     return (
         <tbody>
@@ -109,15 +108,14 @@ interface SchemaFormProps {
  * @param props
  */
 export function SchemaForm(props: SchemaFormProps) {
-    // const [label, setLabel] = React.useState<string>(props.schema.label);
-    const [label, setLabel] = React.useState<string>("");
+    const [label, setLabel] = React.useState<string>(props.schema.tokens.label);
 
     return (
         <div className="row">
             <div className="col-sm-12 col-lg-6 border-right">
                 <div className="row">
                     <div className="col-sm-12">
-                        <h4>New Schema</h4>
+                        <h4>Schema Tokens</h4>
 
                         <p className="small mt-2 mb-3 text-muted">
                             The <strong>Schema</strong> is a building block that
@@ -141,9 +139,9 @@ export function SchemaForm(props: SchemaFormProps) {
                             className="form-control form-control-lg"
                             placeholder="Label"
                             value={label}
-                            // onChange={e => {
-                            //     setLabel(sanitizeLabel(e.currentTarget.value));
-                            // }}
+                            onChange={e => {
+                                setLabel(sanitizeLabel(e.currentTarget.value));
+                            }}
                         />
 
                         <p className="small mt-4 text-muted">
