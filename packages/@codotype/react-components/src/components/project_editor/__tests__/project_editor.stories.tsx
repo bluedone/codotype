@@ -4,6 +4,7 @@ import { ProjectEditor } from "../component";
 import {
     ExperienceRecommendation,
     Project,
+    Schema,
     GeneratorMeta,
     Datatype,
 } from "../../types";
@@ -47,7 +48,8 @@ const dummyGeneratorMeta: GeneratorMeta = {
 };
 
 const dummyProject: Project = buildDefaultProject(dummyGeneratorMeta);
-dummyProject.schemas.push({
+
+const userSchema: Schema = {
     id: "12345",
     tokens: {
         label: "User",
@@ -61,9 +63,9 @@ dummyProject.schemas.push({
     removable: false,
     source: "USER",
     configuration: {},
-});
+};
 
-dummyProject.schemas.push({
+const movieSchema: Schema = {
     id: "45678",
     tokens: {
         label: "Movie",
@@ -84,13 +86,28 @@ dummyProject.schemas.push({
             default_value: "string",
             datatypeOptions: {},
         },
+        {
+            id: "email-attr",
+            label: "Email",
+            identifier: "email",
+            description: "the email of the user",
+            required: true,
+            unique: true,
+            locked: true,
+            datatype: Datatype.STRING,
+            default_value: "string",
+            datatypeOptions: {},
+        },
     ],
     relations: [],
     locked: false,
     removable: false,
     source: "USER",
     configuration: {},
-});
+};
+
+dummyProject.schemas.push(movieSchema);
+dummyProject.schemas.push(userSchema);
 
 storiesOf("ProjectEditor", module).add("renders", () => {
     return (
