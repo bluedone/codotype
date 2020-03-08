@@ -4,6 +4,7 @@ import { SchemaDeleteButton } from "./SchemaDeleteButton";
 import { SchemaDeleteModal } from "./SchemaDeleteModal";
 import { Schema } from "../types";
 import { SchemaFormModal } from "./SchemaFormModal";
+import { SchemaForm } from "./SchemaForm";
 
 // // // //
 
@@ -25,7 +26,7 @@ export function SchemaDetailHeader(props: {
                             showEditModal(false);
                         }}
                     >
-                        <p>Schema Form Goes Here</p>
+                        <SchemaForm schema={props.schema} />
                     </SchemaFormModal>
                 </h4>
             </div>

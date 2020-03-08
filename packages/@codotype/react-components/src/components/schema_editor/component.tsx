@@ -15,6 +15,11 @@ const reorder = (list: any[], startIndex: number, endIndex: number): any[] => {
     return result;
 };
 
+interface EditorState {
+    schemas: Schema[];
+    lastUpdatedAt: null | number;
+}
+
 /**
  * SchemaEditorLayout
  * @param props.schemas
@@ -25,21 +30,24 @@ export function SchemaEditorLayout(props: {
     onChange: (updatedSchemas: Schema[]) => void;
 }) {
     const [showModal, setShowModal] = React.useState(false);
-    const [state, setState] = React.useState({ schemas: props.schemas });
+    const [state, setState] = React.useState<EditorState>({
+        schemas: props.schemas,
+        lastUpdatedAt: null,
+    });
     const [selectedSchemaId, setSelectedSchemaId] = React.useState<
         string | null
     >(null);
 
     // Update state.schemas when props.schemas changes
     React.useEffect(() => {
-        setState({ schemas: props.schemas });
+        setState({ ...state, schemas: props.schemas });
     }, [props.schemas]);
 
     // Invoke props.onChange when state.schemas has updated
-    // React.useEffect(() => {
-    //     // setState({ schemas: props.schemas });
-    //     props.onChange(state.schemas);
-    // }, [state.schemas]);
+    // TODO - this should implement a similar approach using `state.lastUpdatedAt`
+    React.useEffect(() => {
+        props.onChange(state.schemas);
+    }, [state.lastUpdatedAt]);
 
     // Sets selectedSchemaId if none is defined
     if (state.schemas[0] && selectedSchemaId == null) {
@@ -54,11 +62,18 @@ export function SchemaEditorLayout(props: {
         },
     );
 
+    // Last check to ensure that selectedSchema _can_ be defined
+    // NOTE - this should be simpler + combined with the above
+    if (selectedSchema === undefined && state.schemas.length > 0) {
+        setSelectedSchemaId(state.schemas[0].id);
+    }
+
     // Show empty state
     if (selectedSchemaId === null || selectedSchema === undefined) {
         return <p>EmptyState</p>;
     }
 
+    // Defines onDragEnd callback for <DragDropContext />
     function onDragEnd(result: any) {
         if (!result.destination) {
             return;
@@ -74,7 +89,7 @@ export function SchemaEditorLayout(props: {
             result.destination.index,
         );
 
-        setState({ schemas: updatedSchemas });
+        setState({ lastUpdatedAt: Date.now(), schemas: updatedSchemas });
     }
 
     // Render schema editor layout
@@ -118,7 +133,11 @@ export function SchemaEditorLayout(props: {
                         );
 
                         // Invokes props.onChange with updated schemas
-                        props.onChange(updatedSchemas);
+                        // props.onChange(updatedSchemas);
+                        setState({
+                            lastUpdatedAt: Date.now(),
+                            schemas: updatedSchemas,
+                        });
 
                         // Sets selectedSchemaId to null
                         setSelectedSchemaId(null);
