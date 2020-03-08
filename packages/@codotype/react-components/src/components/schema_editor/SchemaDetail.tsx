@@ -6,11 +6,17 @@ import { SchemaDetailHeader } from "./SchemaDetailHeader";
 import { Schema } from "../types";
 // // // //
 
-export function SchemaDetail(props: { schema: Schema }) {
+export function SchemaDetail(props: {
+    schema: Schema;
+    onConfirmDelete: () => void;
+}) {
     return (
         <div className="row" style={{ borderLeft: "1px solid lightgrey" }}>
             <div className="col-sm-12">
-                <SchemaDetailHeader schema={props.schema} />
+                <SchemaDetailHeader
+                    schema={props.schema}
+                    onConfirmDelete={props.onConfirmDelete}
+                />
             </div>
 
             <div className="col-sm-6">

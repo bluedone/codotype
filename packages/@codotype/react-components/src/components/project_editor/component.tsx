@@ -36,15 +36,7 @@ export const ProjectEditor: FunctionComponent<ProjectEditorProps> = (
                     <ConfigurationGroupSelector
                         project={project}
                         generatorMeta={generator}
-                        onChange={(
-                            updatedProjectConfiguration: ProjectConfiguration,
-                        ) => {
-                            // Defines the updated project
-                            const updatedProject: Project = {
-                                ...project,
-                                configuration: updatedProjectConfiguration,
-                            };
-
+                        onChange={(updatedProject: Project) => {
                             // Invokes props.onChange with the updated project
                             props.onChange(updatedProject);
                         }}

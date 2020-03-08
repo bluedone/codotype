@@ -15,21 +15,40 @@ const reorder = (list: any[], startIndex: number, endIndex: number): any[] => {
     return result;
 };
 
-export function SchemaEditorLayout(props: { schemas: Schema[] }) {
+/**
+ * SchemaEditorLayout
+ * @param props.schemas
+ * @param props.onChange
+ */
+export function SchemaEditorLayout(props: {
+    schemas: Schema[];
+    onChange: (updatedSchemas: Schema[]) => void;
+}) {
     const [showModal, setShowModal] = React.useState(false);
     const [state, setState] = React.useState({ schemas: props.schemas });
     const [selectedSchemaId, setSelectedSchemaId] = React.useState<
         string | null
     >(null);
 
+    // Update state.schemas when props.schemas changes
+    React.useEffect(() => {
+        setState({ schemas: props.schemas });
+    }, [props.schemas]);
+
+    // Invoke props.onChange when state.schemas has updated
+    // React.useEffect(() => {
+    //     // setState({ schemas: props.schemas });
+    //     props.onChange(state.schemas);
+    // }, [state.schemas]);
+
     // Sets selectedSchemaId if none is defined
-    if (props.schemas[0] && selectedSchemaId == null) {
-        setSelectedSchemaId(props.schemas[0].id);
+    if (state.schemas[0] && selectedSchemaId == null) {
+        setSelectedSchemaId(state.schemas[0].id);
         return null;
     }
 
     // Defines selectedSchema
-    const selectedSchema: Schema | undefined = props.schemas.find(
+    const selectedSchema: Schema | undefined = state.schemas.find(
         (s: Schema) => {
             return s.id === selectedSchemaId;
         },
@@ -88,7 +107,23 @@ export function SchemaEditorLayout(props: { schemas: Schema[] }) {
                 </DragDropContext>
             </div>
             <div className="col-lg-8">
-                <SchemaDetail schema={selectedSchema} />
+                <SchemaDetail
+                    schema={selectedSchema}
+                    onConfirmDelete={() => {
+                        // Defines updatedSchemas without `selectedSchema`
+                        const updatedSchemas: Schema[] = state.schemas.filter(
+                            (s: Schema) => {
+                                return s.id !== selectedSchemaId;
+                            },
+                        );
+
+                        // Invokes props.onChange with updated schemas
+                        props.onChange(updatedSchemas);
+
+                        // Sets selectedSchemaId to null
+                        setSelectedSchemaId(null);
+                    }}
+                />
                 <pre>
                     {JSON.stringify(
                         props.schemas.find(s => s.id === selectedSchemaId),

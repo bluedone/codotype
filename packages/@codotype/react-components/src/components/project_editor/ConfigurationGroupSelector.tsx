@@ -4,6 +4,7 @@ import { ConfigurationInput } from "../configuration_group_input";
 import { SchemaEditorLayout } from "../schema_editor";
 import {
     Project,
+    Schema,
     GeneratorMeta,
     ProjectConfiguration,
     ConfigurationGroup,
@@ -30,10 +31,16 @@ function ConfigurationGroupTab(props: {
     );
 }
 
+/**
+ * ConfigurationGroupSelector
+ * @param props.project
+ * @param props.generatorMeta
+ * @param props.onChange
+ */
 export function ConfigurationGroupSelector(props: {
     project: Project;
     generatorMeta: GeneratorMeta;
-    onChange: (updatedConfiguration: ProjectConfiguration) => void;
+    onChange: (updatedProject: Project) => void;
 }) {
     const { generatorMeta } = props;
     // Gets default ConfigurationGroup to render
@@ -107,7 +114,22 @@ export function ConfigurationGroupSelector(props: {
 
                 {/* Render SchemaEditorLayout */}
                 {viewingSchemas && (
-                    <SchemaEditorLayout schemas={props.project.schemas} />
+                    <SchemaEditorLayout
+                        schemas={props.project.schemas}
+                        onChange={(updatedSchemas: Schema[]) => {
+                            console.log("Updated Schemas");
+                            console.log(updatedSchemas);
+                            // Defines updated project
+                            // TODO - update configuation after schemas update?
+                            const updatedProject: Project = {
+                                ...props.project,
+                                schemas: [...updatedSchemas],
+                            };
+
+                            // Invokes props.onChange with updated project
+                            props.onChange(updatedProject);
+                        }}
+                    />
                 )}
             </div>
             {/* <pre>{JSON.stringify(val, null, 4)}</pre> */}

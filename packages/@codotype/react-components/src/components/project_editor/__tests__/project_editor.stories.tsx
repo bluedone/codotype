@@ -110,18 +110,20 @@ dummyProject.schemas.push(movieSchema);
 dummyProject.schemas.push(userSchema);
 
 storiesOf("ProjectEditor", module).add("renders", () => {
+    const [project, setProject] = React.useState<Project>(dummyProject);
     return (
         <Story>
             <ProjectEditor
                 label={"Label"}
                 generator={dummyGeneratorMeta}
-                project={dummyProject}
+                project={project}
                 onClickGenerate={() => {
                     console.log("Generate Project!");
                 }}
                 onChange={(updatedProject: Project) => {
                     console.log("onChange!");
                     console.log(updatedProject);
+                    setProject(updatedProject);
                 }}
             />
         </Story>

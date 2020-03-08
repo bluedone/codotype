@@ -7,7 +7,10 @@ import { SchemaFormModal } from "./SchemaFormModal";
 
 // // // //
 
-export function SchemaDetailHeader(props: { schema: Schema }) {
+export function SchemaDetailHeader(props: {
+    schema: Schema;
+    onConfirmDelete: () => void;
+}) {
     const [showDeleteModal, showModal] = React.useState(false);
     const [showingEditModal, showEditModal] = React.useState(false);
     return (
@@ -33,6 +36,7 @@ export function SchemaDetailHeader(props: { schema: Schema }) {
                     onClose={() => showModal(false)}
                     onConfirmDelete={() => {
                         showModal(false);
+                        props.onConfirmDelete();
                     }}
                 />
             </div>
