@@ -15,7 +15,7 @@ export function AttributeFormModal(props: {
     handleClose: () => void;
 }) {
     return (
-        <Modal show={props.show} onHide={props.handleClose}>
+        <Modal size="lg" show={props.show} onHide={props.handleClose}>
             <Modal.Header closeButton>
                 <Modal.Title>Create / Update Attribute</Modal.Title>
             </Modal.Header>

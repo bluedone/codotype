@@ -1,10 +1,11 @@
 import * as React from "react";
 import { SortableListHeader } from "../sortable_list_header";
-import { Attribute } from "../types";
+import { Attribute, Datatype } from "../types";
 import { Droppable, DragDropContext } from "react-beautiful-dnd";
 import { AttributeFormModal } from "./AttributeFormModal";
 import { AttributeDeleteModal } from "./AttributeDeleteModal";
 import { AttributeListItem } from "./AttributeListItem";
+import { AttributeForm } from "./AttributeForm";
 
 // // // //
 
@@ -69,7 +70,20 @@ export function AttributeEditor(props: { attributes: Attribute[] }) {
                     showFormModal(false);
                 }}
             >
-                <p>Attribute Form Goes Here</p>
+                <AttributeForm
+                    attributes={state.attributes}
+                    editorModel={{
+                        ...state.attributes[0],
+                        datatype: null,
+                    }}
+                    supportedDatatypes={[Datatype.STRING, Datatype.INTEGER]}
+                    onSubmit={() => {
+                        console.log("OnSubmit");
+                    }}
+                    onCancel={() => {
+                        showFormModal(false);
+                    }}
+                />
             </AttributeFormModal>
 
             <AttributeDeleteModal

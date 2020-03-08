@@ -2,15 +2,24 @@ import * as React from "react";
 import { Attribute } from "../types";
 import { Draggable } from "react-beautiful-dnd";
 import { Dropdown } from "react-bootstrap";
+import { AttributeListItemLabel } from "./AttributeListItemLabel";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { DATATYPE_META } from "@codotype/types";
 import {
     faTrashAlt,
     faPencilAlt,
     faEllipsisH,
+    faLock,
 } from "@fortawesome/free-solid-svg-icons";
 import "./styles.scss";
 
 // // // //
+
+// interface AttributeListItemProps {
+//     attribute: Attribute;
+//     onEditButtonClick: (attributeToBeEdited: Attribute) => void;
+//     onRemoveButtonClick: (attributeToBeRemoved: Attribute) => void;
+// }
 
 /**
  * AttributeListItem
@@ -35,44 +44,75 @@ export function AttributeListItem(props: {
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                 >
-                    <div className="row">
-                        <div className="col-lg-9">{attribute.label}</div>
-                        <div className="col-lg-3 d-flex justify-content-end">
-                            <Dropdown alignRight className="no-caret">
-                                <Dropdown.Toggle
-                                    variant="outline-secondary"
-                                    size={"sm"}
-                                    id="dropdown-basic"
-                                >
-                                    <FontAwesomeIcon icon={faEllipsisH} />
-                                </Dropdown.Toggle>
-
-                                <Dropdown.Menu>
-                                    <Dropdown.Item
-                                        onClick={() => {
-                                            props.onClickEdit(attribute);
-                                        }}
-                                    >
-                                        <FontAwesomeIcon
-                                            className="mr-2"
-                                            icon={faPencilAlt}
-                                        />
-                                        Edit
-                                    </Dropdown.Item>
-                                    <Dropdown.Item
-                                        onClick={() => {
-                                            props.onClickDelete(attribute);
-                                        }}
-                                    >
-                                        <FontAwesomeIcon
-                                            className="mr-2"
-                                            icon={faTrashAlt}
-                                        />
-                                        Delete
-                                    </Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
+                    <div className="row d-flex align-items-center">
+                        <div className="col-sm-10">
+                            <AttributeListItemLabel
+                                attribute={props.attribute}
+                                // @ts-ignore
+                                datatype={
+                                    // DATATYPE_META[props.attribute.datatype]
+                                    DATATYPE_META.STRING
+                                }
+                            />
                         </div>
+
+                        {props.attribute.locked && (
+                            <div
+                                className="col-sm-2 text-right controls justify-content-end"
+                                v-if="item.locked"
+                            >
+                                <span
+                                    className=" badge badge-secondary"
+                                    // v-b-tooltip.hover.right
+                                    title="Attribute may not be edited or removed"
+                                >
+                                    {/* <i className="fa fa-fw fa-lock" /> */}
+                                    <FontAwesomeIcon icon={faLock} />
+                                </span>
+                            </div>
+                        )}
+
+                        {!props.attribute.locked && (
+                            <div
+                                className="col-sm-2 text-right controls"
+                                v-else
+                            >
+                                <Dropdown alignRight className="no-caret">
+                                    <Dropdown.Toggle
+                                        variant="outline-secondary"
+                                        size={"sm"}
+                                        id="dropdown-basic"
+                                    >
+                                        <FontAwesomeIcon icon={faEllipsisH} />
+                                    </Dropdown.Toggle>
+
+                                    <Dropdown.Menu>
+                                        <Dropdown.Item
+                                            onClick={() => {
+                                                props.onClickEdit(attribute);
+                                            }}
+                                        >
+                                            <FontAwesomeIcon
+                                                className="mr-2"
+                                                icon={faPencilAlt}
+                                            />
+                                            Edit
+                                        </Dropdown.Item>
+                                        <Dropdown.Item
+                                            onClick={() => {
+                                                props.onClickDelete(attribute);
+                                            }}
+                                        >
+                                            <FontAwesomeIcon
+                                                className="mr-2"
+                                                icon={faTrashAlt}
+                                            />
+                                            Delete
+                                        </Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                            </div>
+                        )}
                     </div>
                 </li>
             )}
