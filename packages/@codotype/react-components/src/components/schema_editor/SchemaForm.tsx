@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Schema } from "../types";
 import { inflateMeta, sanitizeLabel } from "@codotype/util";
 
 // // // //
@@ -100,7 +99,8 @@ export function MetaPreview(props: MetaPreviewProps) {
 // // // //
 
 interface SchemaFormProps {
-    schema: Schema;
+    label: string;
+    onChange: (updatedTokens: any) => void;
 }
 
 /**
@@ -108,7 +108,13 @@ interface SchemaFormProps {
  * @param props
  */
 export function SchemaForm(props: SchemaFormProps) {
-    const [label, setLabel] = React.useState<string>(props.schema.tokens.label);
+    const [label, setLabel] = React.useState<string>(props.label);
+
+    React.useEffect(() => {
+        props.onChange({
+            ...inflateMeta(label.trim()),
+        });
+    }, [label]);
 
     return (
         <div className="row">
@@ -167,20 +173,6 @@ export function SchemaForm(props: SchemaFormProps) {
                     <MetaPreview label={label} />
                 </table>
             </div>
-
-            {/* <button
-            disabled={!canSubmit(label)}
-            onClick={() => {
-            props.onSubmit({
-                ...props.schema,
-                ...inflateMeta(label.trim()),
-            });
-            }}
-            >
-                Save
-            </button> */}
-
-            {/* <button onClick={props.onCancel}>Cancel</button> */}
         </div>
     );
 }

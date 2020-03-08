@@ -7,9 +7,11 @@ import { SchemaFormModal } from "./SchemaFormModal";
 import { SchemaEditorEmptyState } from "./SchemaEditorEmptyState";
 import { SchemaForm } from "./SchemaForm";
 import { Schema } from "../types";
+import uniqueId from "lodash.uniqueid";
 
 // // // //
 
+// TODO - abstract this into a separate module, use generic version
 const reorder = (list: any[], startIndex: number, endIndex: number): any[] => {
     const result = Array.from(list);
     const [removed] = result.splice(startIndex, 1);
@@ -32,6 +34,10 @@ export function SchemaEditorLayout(props: {
     onChange: (updatedSchemas: Schema[]) => void;
 }) {
     const [showModal, setShowModal] = React.useState(false);
+    const [showEditModal, setShowEditModal] = React.useState(false);
+    const [newSchemaTokens, setNewSchemaTokens] = React.useState<any | null>(
+        null,
+    );
     const [state, setState] = React.useState<EditorState>({
         schemas: props.schemas,
         lastUpdatedAt: null,
@@ -91,7 +97,11 @@ export function SchemaEditorLayout(props: {
             result.destination.index,
         );
 
-        setState({ lastUpdatedAt: Date.now(), schemas: updatedSchemas });
+        setState({
+            ...state,
+            lastUpdatedAt: Date.now(),
+            schemas: updatedSchemas,
+        });
     }
 
     // Render schema editor layout
@@ -112,17 +122,41 @@ export function SchemaEditorLayout(props: {
                     }}
                     onSubmit={() => {
                         setShowModal(false);
+
+                        // Defines new schema
+                        const newSchema: Schema = {
+                            ...state.schemas[0],
+                            id: uniqueId("SCHEMA_"),
+                            attributes: [],
+                            relations: [],
+                            tokens: newSchemaTokens,
+                        };
+
+                        // Defines updated schemas, including NEW schema
                         const updatedSchemas: Schema[] = [
                             ...state.schemas,
-                            {
-                                ...state.schemas[0],
-                                id: "NEW_SCHEMA_RANDOM_ID",
-                            },
+                            newSchema,
                         ];
-                        props.onChange(updatedSchemas);
+
+                        // Updates state.schemas with the latest schemas
+                        setState({
+                            lastUpdatedAt: Date.now(),
+                            schemas: updatedSchemas,
+                        });
+
+                        // Select the newly created schema
+                        setSelectedSchemaId(newSchema.id);
+
+                        // Clears newSchemaTokens
+                        setNewSchemaTokens(null);
                     }}
                 >
-                    <SchemaForm schema={selectedSchema} />
+                    <SchemaForm
+                        label={""}
+                        onChange={updatedTokens => {
+                            setNewSchemaTokens(updatedTokens);
+                        }}
+                    />
                 </SchemaFormModal>
 
                 <DragDropContext onDragEnd={onDragEnd}>
@@ -138,6 +172,9 @@ export function SchemaEditorLayout(props: {
             <div className="col-lg-8">
                 <SchemaDetail
                     schema={selectedSchema}
+                    onClickEdit={() => {
+                        setShowEditModal(true);
+                    }}
                     onConfirmDelete={() => {
                         // Defines updatedSchemas without `selectedSchema`
                         const updatedSchemas: Schema[] = state.schemas.filter(
@@ -147,8 +184,8 @@ export function SchemaEditorLayout(props: {
                         );
 
                         // Invokes props.onChange with updated schemas
-                        // props.onChange(updatedSchemas);
                         setState({
+                            ...state,
                             lastUpdatedAt: Date.now(),
                             schemas: updatedSchemas,
                         });
@@ -157,6 +194,49 @@ export function SchemaEditorLayout(props: {
                         setSelectedSchemaId(null);
                     }}
                 />
+
+                {/* Render modal for Edit Form */}
+                <SchemaFormModal
+                    show={showEditModal}
+                    handleClose={() => {
+                        setShowEditModal(false);
+                    }}
+                    onSubmit={() => {
+                        setShowEditModal(false);
+
+                        // Defines updatedSchema
+                        const updatedSchema: Schema = {
+                            ...selectedSchema,
+                            tokens: newSchemaTokens,
+                        };
+
+                        // Defines updated schemas, including NEW schema
+                        const updatedSchemas: Schema[] = state.schemas.map(
+                            (s: Schema) => {
+                                if (s.id === updatedSchema.id) {
+                                    return updatedSchema;
+                                }
+                                return s;
+                            },
+                        );
+
+                        // Updates state.schemas with the latest schemas
+                        setState({
+                            lastUpdatedAt: Date.now(),
+                            schemas: updatedSchemas,
+                        });
+
+                        // Clears newSchemaTokens
+                        setNewSchemaTokens(null);
+                    }}
+                >
+                    <SchemaForm
+                        label={selectedSchema.tokens.label}
+                        onChange={updatedTokens => {
+                            setNewSchemaTokens(updatedTokens);
+                        }}
+                    />
+                </SchemaFormModal>
                 <pre>
                     {JSON.stringify(
                         props.schemas.find(s => s.id === selectedSchemaId),

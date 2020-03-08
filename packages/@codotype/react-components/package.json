@@ -73,12 +73,17 @@
         "webpack-merge": "^4.2.2"
     },
     "dependencies": {
+        "@codotype/types": "^1.0.0",
+        "@codotype/util": "^1.0.0",
         "@fortawesome/fontawesome-svg-core": "^1.2.27",
         "@fortawesome/free-solid-svg-icons": "^5.12.1",
         "@fortawesome/react-fontawesome": "^0.1.8",
         "@types/classnames": "^2.2.9",
+        "@types/lodash": "^4.14.149",
+        "@types/lodash.uniqueid": "^4.0.6",
         "bootstrap": "^4.4.1",
         "classnames": "^2.2.6",
+        "lodash.uniqueid": "^4.0.1",
         "react": "^16.12.0",
         "react-beautiful-dnd": "^13.0.0",
         "react-bootstrap": "^1.0.0-beta.17",

@@ -4,10 +4,12 @@ import { AttributeEditor } from "../attribute_editor";
 import { RelationEditor } from "../relation_editor";
 import { SchemaDetailHeader } from "./SchemaDetailHeader";
 import { Schema } from "../types";
+
 // // // //
 
 export function SchemaDetail(props: {
     schema: Schema;
+    onClickEdit: () => void;
     onConfirmDelete: () => void;
 }) {
     return (
@@ -15,6 +17,7 @@ export function SchemaDetail(props: {
             <div className="col-sm-12">
                 <SchemaDetailHeader
                     schema={props.schema}
+                    onClickEdit={props.onClickEdit}
                     onConfirmDelete={props.onConfirmDelete}
                 />
             </div>
