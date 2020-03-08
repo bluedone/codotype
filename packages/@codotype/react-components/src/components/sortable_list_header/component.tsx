@@ -6,6 +6,7 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 interface SortableListHeaderProps {
     label: string;
+    onClick: () => void;
 }
 
 /**
@@ -17,7 +18,10 @@ export function SortableListHeader(props: SortableListHeaderProps) {
     return (
         <div className="card-header">
             <div className="d-flex align-items-center">
-                <button className="btn btn-sm btn-primary">
+                <button
+                    className="btn btn-sm btn-primary"
+                    onClick={props.onClick}
+                >
                     <FontAwesomeIcon icon={faPlus} />
                 </button>
                 <p className="mb-0 ml-2">{props.label}</p>

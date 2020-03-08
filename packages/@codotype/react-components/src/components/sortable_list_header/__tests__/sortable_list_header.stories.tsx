@@ -6,17 +6,21 @@ import { Story } from "@src/components/dev";
 // // // //
 
 storiesOf("SortableListHeader", module).add("Attributes", () => {
+    const [count, increment] = React.useReducer(i => i++, 0);
     return (
         <Story>
-            <SortableListHeader label="Attributes" />
+            <SortableListHeader label="Attributes" onClick={increment} />
+            {count}
         </Story>
     );
 });
 
 storiesOf("SortableListHeader", module).add("Relations", () => {
+    const [count, increment] = React.useReducer(i => i++, 0);
     return (
         <Story>
-            <SortableListHeader label="Relations" />
+            <SortableListHeader label="Relations" onClick={increment} />
+            {count}
         </Story>
     );
 });
