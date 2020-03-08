@@ -8,7 +8,7 @@ import { Schema } from "../types";
 
 export function SchemaDetail(props: { schema: Schema }) {
     return (
-        <div className="row">
+        <div className="row" style={{ borderLeft: "1px solid lightgrey" }}>
             <div className="col-sm-12">
                 <SchemaDetailHeader schema={props.schema} />
             </div>

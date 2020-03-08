@@ -3,6 +3,7 @@ import { SchemaSelector } from "./SchemaSelector";
 import { SchemaDetail } from "./SchemaDetail";
 import { SchemaNewButton } from "./SchemaNewButton";
 import { DragDropContext } from "react-beautiful-dnd";
+import { SchemaFormModal } from "./SchemaFormModal";
 import { Schema } from "../types";
 
 // // // //
@@ -15,6 +16,7 @@ const reorder = (list: any[], startIndex: number, endIndex: number): any[] => {
 };
 
 export function SchemaEditorLayout(props: { schemas: Schema[] }) {
+    const [showModal, setShowModal] = React.useState(false);
     const [state, setState] = React.useState({ schemas: props.schemas });
     const [selectedSchemaId, setSelectedSchemaId] = React.useState<
         string | null
@@ -60,7 +62,21 @@ export function SchemaEditorLayout(props: { schemas: Schema[] }) {
     return (
         <div className="row mt-3">
             <div className="col-lg-4">
-                <SchemaNewButton />
+                <SchemaNewButton
+                    onClick={() => {
+                        setShowModal(true);
+                    }}
+                />
+
+                <SchemaFormModal
+                    show={showModal}
+                    handleClose={() => {
+                        setShowModal(false);
+                    }}
+                >
+                    <p>Schema Form Goes Here</p>
+                </SchemaFormModal>
+
                 <DragDropContext onDragEnd={onDragEnd}>
                     <SchemaSelector
                         schemas={state.schemas}
