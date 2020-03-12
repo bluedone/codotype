@@ -114,8 +114,10 @@ export function SchemaEditorLayout(props: {
                     }}
                 />
 
+                {/* Render SchemaForm + SchemaFormModal for CREATE Schema */}
                 <SchemaFormModal
                     renderNewTitle
+                    disableSubmit={false} // TODO - wire this up
                     show={showModal}
                     handleClose={() => {
                         setShowModal(false);
@@ -195,8 +197,9 @@ export function SchemaEditorLayout(props: {
                     }}
                 />
 
-                {/* Render modal for Edit Form */}
+                {/* Render SchemaForm + SchemaFormModal for UPDATE Schema */}
                 <SchemaFormModal
+                    disableSubmit={false} // TODO - wire this up
                     show={showEditModal}
                     handleClose={() => {
                         setShowEditModal(false);

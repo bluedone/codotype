@@ -1,5 +1,6 @@
 import * as React from "react";
-import { string } from "prop-types";
+import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // // // //
 
@@ -9,7 +10,7 @@ import { string } from "prop-types";
  * @param url - the URL thats linked to
  */
 interface MoreInfoLinkProps {
-  url: string;
+    url: string;
 }
 
 /**
@@ -17,9 +18,9 @@ interface MoreInfoLinkProps {
  * Renders a link that when clicked opens a new tab to some relevant information
  */
 export function MoreInfoLink(props: MoreInfoLinkProps) {
-  return (
-    <a href={props.url} target="_blank">
-      More Info
-    </a>
-  );
+    return (
+        <a href={props.url} target="_blank">
+            <FontAwesomeIcon icon={faExternalLinkAlt} />
+        </a>
+    );
 }

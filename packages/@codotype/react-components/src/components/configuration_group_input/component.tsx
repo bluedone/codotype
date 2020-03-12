@@ -8,6 +8,7 @@ import {
     ConfigurationGroupProperty,
     ConfigurationGroup,
 } from "../types";
+import { MoreInfoLink } from "../more_info_link";
 
 // // // //
 
@@ -84,11 +85,44 @@ export const ConfigurationInputFormGroup: FunctionComponent<ConfigurationInputFo
     props: ConfigurationInputFormGroupProps,
 ) => {
     return (
+        // <div className="col-lg-12">
         <div className="col-lg-6">
+            {/* <div className="card my-2 py-3 px-3"> */}
+            {/* <div className="form-group mb-0"> */}
             <div className="form-group">
-                <label htmlFor="">{props.property.label}</label>
+                <span className="d-flex align-items-center">
+                    {props.property.icon && (
+                        <img
+                            src={props.property.icon}
+                            style={{ maxWidth: "2rem" }}
+                            className="mr-2"
+                        />
+                    )}
+                    <label className="mb-0">{props.property.label}</label>
+                    <small className="mx-3">
+                        <MoreInfoLink url="https://github.com" />
+                    </small>
+                    {/* <small>Switch Goes Here</small> */}
+                </span>
+
+                {/* Render description IFF not empty */}
+                {props.property.description !== "" && (
+                    <small className="d-block mt-2 mb-2 text-muted">
+                        {props.property.description}
+                    </small>
+                )}
+
+                {/* Render empty description warning */}
+                {props.property.description === "" && (
+                    <small className="d-block mt-2 mb-2 text-danger">
+                        Warning - this input needs a description
+                    </small>
+                )}
+
+                {/* Renders props.children */}
                 {props.children}
             </div>
+            {/* </div> */}
         </div>
     );
 };
@@ -273,7 +307,7 @@ export const ConfigurationInput: FunctionComponent<ConfigurationInputProps> = (
     props: ConfigurationInputProps,
 ) => {
     return (
-        <div className="row">
+        <div className="row mt-3">
             <div className="col-lg-12">
                 {/* ConfigurationGroupHeader */}
                 <div className="row">
@@ -288,6 +322,7 @@ export const ConfigurationInput: FunctionComponent<ConfigurationInputProps> = (
                                 {props.configurationGroup.description}
                             </small>
                         </span>
+                        <hr />
                     </div>
                 </div>
 
@@ -321,7 +356,10 @@ export const ConfigurationInput: FunctionComponent<ConfigurationInputProps> = (
                                 // @ts-ignore
                                 const val = props.value[property.identifier];
                                 return (
-                                    <div className="card card-body mb-4">
+                                    <div
+                                        className="card card-body mb-4 mt-2 mx-2"
+                                        key={property.identifier}
+                                    >
                                         <ConfigurationInstanceInput
                                             label={property.label}
                                             properties={property.properties}
@@ -359,6 +397,7 @@ export const ConfigurationInput: FunctionComponent<ConfigurationInputProps> = (
                             return (
                                 <ConfigurationInputFormGroup
                                     property={property}
+                                    key={property.identifier}
                                 >
                                     <ConfigurationInputChild
                                         property={property}

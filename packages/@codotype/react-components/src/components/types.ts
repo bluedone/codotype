@@ -80,6 +80,7 @@ export interface ConfigurationGroupProperty {
     label: string;
     identifier: string;
     description: string;
+    icon: string;
     type: OptionType;
     defaultValue: OptionValue;
     required: boolean;

@@ -13,6 +13,7 @@ import { Story } from "@src/components/dev";
 import {
     ComponentBuilderConfigurationGroup,
     ComponentBuilderConfigurationGroupPropertyWithInstance,
+    ComponentBuilderConfigurationGroupPropertySingleNumber,
 } from "../../configuration_group_input/__tests__/test_state";
 
 // // // //
@@ -40,7 +41,7 @@ const dummyGeneratorMeta: GeneratorMeta = {
             ...ComponentBuilderConfigurationGroup,
             identifier: "foobar",
             properties: [
-                ComponentBuilderConfigurationGroupPropertyWithInstance,
+                ComponentBuilderConfigurationGroupPropertySingleNumber,
             ],
         },
     ], // an array of OptionGroup objects that expose additional configuration provided by the generator
