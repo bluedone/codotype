@@ -106,8 +106,18 @@ export function ConfigurationGroupSelector(props: {
                         onChange={(updatedVal: OptionValueInstance) => {
                             console.log("OnChangeVal!");
                             console.log(updatedVal);
-                            // setVal(updatedVal);
-                            // increment();
+
+                            // Defines updatd project with latest configuration value
+                            const updatedProject: Project = {
+                                ...props.project,
+                                configuration: {
+                                    ...props.project.configuration,
+                                    [selectedConfigurationGroup.identifier]: updatedVal,
+                                },
+                            };
+
+                            // Invokes props.onChange with updated project
+                            props.onChange(updatedProject);
                         }}
                     />
                 )}

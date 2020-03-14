@@ -85,8 +85,8 @@ export const ConfigurationInputFormGroup: FunctionComponent<ConfigurationInputFo
     props: ConfigurationInputFormGroupProps,
 ) => {
     return (
-        // <div className="col-lg-12">
-        <div className="col-lg-6">
+        <div className="col-lg-12">
+            {/* <div className="col-lg-6"> */}
             {/* <div className="card my-2 py-3 px-3"> */}
             {/* <div className="form-group mb-0"> */}
             <div className="form-group">
@@ -128,6 +128,7 @@ export const ConfigurationInputFormGroup: FunctionComponent<ConfigurationInputFo
 };
 
 interface ConfigurationInputChildProps {
+    value: any; // TODO - remove any here
     property: ConfigurationGroupProperty;
     onChange: (updatedValue: OptionValue) => void;
 }
@@ -140,6 +141,7 @@ export const ConfigurationInputChild: FunctionComponent<ConfigurationInputChildP
                 className="form-control"
                 type="text"
                 placeholder={props.property.label}
+                value={props.value}
                 onChange={e => {
                     props.onChange(e.currentTarget.value);
                 }}
@@ -153,6 +155,7 @@ export const ConfigurationInputChild: FunctionComponent<ConfigurationInputChildP
                 className="form-control"
                 type="number"
                 placeholder={props.property.label}
+                value={props.value}
                 onChange={e => {
                     props.onChange(e.currentTarget.value);
                 }}
@@ -163,6 +166,7 @@ export const ConfigurationInputChild: FunctionComponent<ConfigurationInputChildP
         return (
             <input
                 type="checkbox"
+                checked={props.value}
                 onChange={e => {
                     props.onChange(e.currentTarget.checked);
                 }}
@@ -173,6 +177,7 @@ export const ConfigurationInputChild: FunctionComponent<ConfigurationInputChildP
         return (
             <select
                 className="form-control"
+                value={props.value}
                 onChange={e => {
                     props.onChange(e.currentTarget.value);
                 }}
@@ -186,6 +191,8 @@ export const ConfigurationInputChild: FunctionComponent<ConfigurationInputChildP
             </select>
         );
     }
+
+    // TODO - throw error if OptionType dropdown is not handled
     return null;
 };
 
@@ -271,6 +278,7 @@ export const ConfigurationInstanceInput: FunctionComponent<ConfigurationInstance
                                     property={property}
                                 >
                                     <ConfigurationInputChild
+                                        value={null}
                                         property={property}
                                         onChange={(
                                             updatedValue: OptionValue,
@@ -283,7 +291,7 @@ export const ConfigurationInstanceInput: FunctionComponent<ConfigurationInstance
                                         }}
                                     />
                                     <pre>
-                                        {/* {JSON.stringify(props.value, null, 4)} */}
+                                        {JSON.stringify(props.value, null, 4)}
                                     </pre>
                                 </ConfigurationInputFormGroup>
                             );
@@ -385,21 +393,22 @@ export const ConfigurationInput: FunctionComponent<ConfigurationInputProps> = (
                                         />
                                         {/* <p>{property.identifier}</p> */}
                                         {/* <p>{JSON.stringify(property)}</p> */}
-                                        <p>
-                                            {/* //@ts-ignore */}
-                                            {JSON.stringify(val)}
-                                        </p>
+                                        {/* Debugging */}
+                                        {JSON.stringify(val)}
                                     </div>
                                 );
                             }
 
                             // Handle all simple inputs
+                            // @ts-ignore
+                            const value = props.value[property.identifier];
                             return (
                                 <ConfigurationInputFormGroup
                                     property={property}
                                     key={property.identifier}
                                 >
                                     <ConfigurationInputChild
+                                        value={value}
                                         property={property}
                                         onChange={(
                                             updatedValue: OptionValue,
@@ -410,6 +419,8 @@ export const ConfigurationInput: FunctionComponent<ConfigurationInputProps> = (
                                             });
                                         }}
                                     />
+                                    {/* Debugging */}
+                                    {/* {JSON.stringify(props.value)} */}
                                 </ConfigurationInputFormGroup>
                             );
                         },
