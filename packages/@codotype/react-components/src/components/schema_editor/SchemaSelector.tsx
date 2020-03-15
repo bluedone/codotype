@@ -3,6 +3,9 @@ import { Schema } from "../types";
 import classnames from "classnames";
 import "./styles.scss";
 import { Droppable, Draggable } from "react-beautiful-dnd";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 // // // //
 
@@ -29,7 +32,33 @@ export function SchemaSelectorItem(props: {
                         props.onClick(props.schema);
                     }}
                 >
-                    {props.schema.tokens.label}
+                    <div className="row align-items-center d-flex flex-row justify-content-between">
+                        <span className="d-flex ml-2">
+                            {props.schema.tokens.label}
+                        </span>
+
+                        {/* Renders warning tooltip */}
+                        {!props.schema.attributes.length &&
+                            !props.schema.relations.length && (
+                                <OverlayTrigger
+                                    placement="right"
+                                    overlay={
+                                        <Tooltip
+                                            id={`empty-schema-warning-tooltip-${props.schema.id}`}
+                                        >
+                                            Schema requires at least one
+                                            attribute or relation - empty
+                                            schemas will be ignored
+                                        </Tooltip>
+                                    }
+                                >
+                                    <FontAwesomeIcon
+                                        className="mr-1 text-warning"
+                                        icon={faExclamationCircle}
+                                    />
+                                </OverlayTrigger>
+                            )}
+                    </div>
                 </li>
             )}
         </Draggable>
@@ -43,7 +72,9 @@ export function SchemaSelector(props: {
 }) {
     return (
         <div className="card">
-            <div className="card-header">Schemas</div>
+            <div className="card-header text-muted">
+                <strong>Schemas</strong>
+            </div>
             <Droppable droppableId="schema-list">
                 {(provided: any) => {
                     return (
