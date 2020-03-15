@@ -1,6 +1,8 @@
 import * as React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Schema } from "../types";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 // // // //
 
@@ -8,13 +10,26 @@ import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
  * SchemaDeleteButton
  * @param props.onClick
  */
-export function SchemaDeleteButton(props: { onClick: () => void }) {
+export function SchemaDeleteButton(props: {
+    schema: Schema;
+    onClick: () => void;
+}) {
     return (
-        <button className="btn btn-link ml-2" onClick={props.onClick}>
-            <FontAwesomeIcon
-                className="ml-5-px text-danger"
-                icon={faTrashAlt}
-            />
-        </button>
+        <OverlayTrigger
+            placement="left"
+            overlay={
+                <Tooltip id="delete-button-tooltip">
+                    Remove the <strong>{props.schema.tokens.label}</strong>{" "}
+                    Schema.
+                </Tooltip>
+            }
+        >
+            <button className="btn btn-link ml-2" onClick={props.onClick}>
+                <FontAwesomeIcon
+                    className="ml-5-px text-danger"
+                    icon={faTrashAlt}
+                />
+            </button>
+        </OverlayTrigger>
     );
 }

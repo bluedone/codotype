@@ -42,29 +42,34 @@ export function SchemaSelector(props: {
     onChange: (selectedSchema: Schema) => void;
 }) {
     return (
-        <Droppable droppableId="schema-list">
-            {(provided: any) => {
-                return (
-                    <ul
-                        className="list-group"
-                        ref={provided.innerRef}
-                        {...provided.droppableProps}
-                    >
-                        {props.schemas.map((s: Schema, index: number) => {
-                            return (
-                                <SchemaSelectorItem
-                                    index={index}
-                                    key={s.id}
-                                    schema={s}
-                                    selected={s.id === props.selectedSchemaId}
-                                    onClick={props.onChange}
-                                />
-                            );
-                        })}
-                        {provided.placeholder}
-                    </ul>
-                );
-            }}
-        </Droppable>
+        <div className="card">
+            <div className="card-header">Schemas</div>
+            <Droppable droppableId="schema-list">
+                {(provided: any) => {
+                    return (
+                        <ul
+                            className="list-group list-group-flush"
+                            ref={provided.innerRef}
+                            {...provided.droppableProps}
+                        >
+                            {props.schemas.map((s: Schema, index: number) => {
+                                return (
+                                    <SchemaSelectorItem
+                                        index={index}
+                                        key={s.id}
+                                        schema={s}
+                                        selected={
+                                            s.id === props.selectedSchemaId
+                                        }
+                                        onClick={props.onChange}
+                                    />
+                                );
+                            })}
+                            {provided.placeholder}
+                        </ul>
+                    );
+                }}
+            </Droppable>
+        </div>
     );
 }

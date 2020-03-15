@@ -13,15 +13,22 @@ export function SchemaDetailHeader(props: {
 }) {
     const [showDeleteModal, showModal] = React.useState(false);
     return (
-        <div className="row">
+        <div className="row mb-2">
             <div className="col-lg-10">
                 <h4 className="mb-0">
                     {props.schema.tokens.label} Schema
-                    <SchemaEditButton onClick={props.onClickEdit} />
+                    <SchemaEditButton
+                        schema={props.schema}
+                        onClick={props.onClickEdit}
+                    />
                 </h4>
             </div>
             <div className="col-lg-2 d-flex justify-content-end">
-                <SchemaDeleteButton onClick={() => showModal(true)} />
+                <SchemaDeleteButton
+                    schema={props.schema}
+                    onClick={() => showModal(true)}
+                />
+
                 <SchemaDeleteModal
                     show={showDeleteModal}
                     onClose={() => showModal(false)}
@@ -32,7 +39,12 @@ export function SchemaDetailHeader(props: {
                 />
             </div>
             <div className="col-lg-12">
-                <hr />
+                <small className="text-muted">
+                    Describe the{" "}
+                    <strong>{props.schema.tokens.label} Schema</strong> with{" "}
+                    <strong>Attributes</strong> and <strong>Relations</strong>
+                </small>
+                {/* <hr /> */}
             </div>
         </div>
     );

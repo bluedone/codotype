@@ -22,10 +22,10 @@ export function SchemaDetail(props: {
                 />
             </div>
 
-            <div className="col-sm-6">
+            <div className="col-sm-12 col-md-6 col-lg-6">
                 <AttributeEditor attributes={props.schema.attributes} />
             </div>
-            <div className="col-sm-6">
+            <div className="pl-md-0 col-sm-12 col-md-6 col-lg-6">
                 <RelationEditor />
             </div>
             <div className="col-sm-6">

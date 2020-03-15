@@ -121,8 +121,6 @@ export function SchemaForm(props: SchemaFormProps) {
             <div className="col-sm-12 col-lg-6 border-right">
                 <div className="row">
                     <div className="col-sm-12">
-                        <h4>Schema Tokens</h4>
-
                         <p className="small mt-2 mb-3 text-muted">
                             The <strong>Schema</strong> is a building block that
                             describes <i>data</i>.
