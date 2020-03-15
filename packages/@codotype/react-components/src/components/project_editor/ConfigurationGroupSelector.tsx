@@ -29,6 +29,9 @@ function ConfigurationGroupTab(props: {
                 // href="#"
                 // TODO - fix styles here, replace with <button>
                 className={btnClassName.join(" ")}
+                style={{
+                    cursor: "pointer",
+                }}
                 onClick={props.onClick}
             >
                 {label}

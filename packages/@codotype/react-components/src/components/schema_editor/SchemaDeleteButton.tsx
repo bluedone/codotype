@@ -24,7 +24,7 @@ export function SchemaDeleteButton(props: {
                 </Tooltip>
             }
         >
-            <button className="btn btn-link ml-2" onClick={props.onClick}>
+            <button className="btn btn-link ml-2 py-0" onClick={props.onClick}>
                 <FontAwesomeIcon
                     className="ml-5-px text-danger"
                     icon={faTrashAlt}

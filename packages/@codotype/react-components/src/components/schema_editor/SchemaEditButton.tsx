@@ -20,7 +20,7 @@ export function SchemaEditButton(props: {
             }
         >
             <button
-                className="btn btn-sm btn-link ml-2"
+                className="btn btn-sm btn-link ml-2 py-0"
                 style={{ color: "#adb5bd" }}
                 onClick={props.onClick}
             >

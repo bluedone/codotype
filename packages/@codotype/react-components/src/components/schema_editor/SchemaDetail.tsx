@@ -29,7 +29,7 @@ export function SchemaDetail(props: {
                 <RelationEditor />
             </div>
             <div className="col-sm-6">
-                <SchemaPreview />
+                <SchemaPreview schema={props.schema} />
             </div>
             <div className="col-sm-6">
                 <p>Incoming Relations</p>

@@ -29,7 +29,7 @@ export function buildDefaultProject(generatorMeta: GeneratorMeta): Project {
 
     // Returns ConfigurationGroupValue
     const newProject: Project = {
-        label: "My New Project",
+        label: "Project Name",
         generatorId: generatorMeta.id,
         schemas: [],
         generatorVersion: generatorMeta.version,
