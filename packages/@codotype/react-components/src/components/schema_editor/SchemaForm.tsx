@@ -1,5 +1,7 @@
 import * as React from "react";
 import { inflateMeta, sanitizeLabel } from "@codotype/util";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLightbulb } from "@fortawesome/free-regular-svg-icons";
 
 // // // //
 
@@ -135,6 +137,10 @@ export function SchemaForm(props: SchemaFormProps) {
 
                         <small className="mb-2 text-muted">
                             <i className="far fa-lightbulb" />
+                            <FontAwesomeIcon
+                                icon={faLightbulb}
+                                className="mr-1"
+                            />
                             Try something simple like <code>Movie</code>, or{" "}
                             <code>Movie Rating</code>
                         </small>

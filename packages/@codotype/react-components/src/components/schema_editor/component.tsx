@@ -7,17 +7,10 @@ import { SchemaFormModal } from "./SchemaFormModal";
 import { SchemaEditorEmptyState } from "./SchemaEditorEmptyState";
 import { SchemaForm } from "./SchemaForm";
 import { Schema } from "../types";
+import { reorder } from "../attribute_editor/component";
 import uniqueId from "lodash.uniqueid";
 
 // // // //
-
-// TODO - abstract this into a separate module, use generic version
-const reorder = (list: any[], startIndex: number, endIndex: number): any[] => {
-    const result = Array.from(list);
-    const [removed] = result.splice(startIndex, 1);
-    result.splice(endIndex, 0, removed);
-    return result;
-};
 
 interface EditorState {
     schemas: Schema[];
@@ -91,7 +84,7 @@ export function SchemaEditorLayout(props: {
             return;
         }
 
-        const updatedSchemas = reorder(
+        const updatedSchemas = reorder<Schema>(
             state.schemas,
             result.source.index,
             result.destination.index,
@@ -117,7 +110,9 @@ export function SchemaEditorLayout(props: {
                 {/* Render SchemaForm + SchemaFormModal for CREATE Schema */}
                 <SchemaFormModal
                     renderNewTitle
-                    disableSubmit={false} // TODO - wire this up
+                    disableSubmit={
+                        newSchemaTokens === null || newSchemaTokens.label === ""
+                    }
                     show={showModal}
                     handleClose={() => {
                         setShowModal(false);
@@ -199,7 +194,9 @@ export function SchemaEditorLayout(props: {
 
                 {/* Render SchemaForm + SchemaFormModal for UPDATE Schema */}
                 <SchemaFormModal
-                    disableSubmit={false} // TODO - wire this up
+                    disableSubmit={
+                        newSchemaTokens === null || newSchemaTokens.label === ""
+                    }
                     show={showEditModal}
                     handleClose={() => {
                         setShowEditModal(false);

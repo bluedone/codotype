@@ -2,6 +2,7 @@ import * as React from "react";
 import { GenerateCodeButton } from "./GenerateCodeButton";
 import { ProjectEditButton } from "./ProjectEditButton";
 import { ProjectFormModal } from "./ProjectFormModal";
+import { ProjectForm } from "./ProjectForm";
 import { Project, GeneratorMeta } from "../types";
 
 // // // //
@@ -23,9 +24,8 @@ export function ProjectEditorHeader(props: {
                         show={showingModal}
                         handleClose={() => showModal(false)}
                     >
-                        <p>Project Form</p>
+                        <ProjectForm />
                     </ProjectFormModal>
-                    {/* <HelpPopover /> */}
                 </span>
             </div>
             <div className="col-lg-6 d-flex justify-content-end">

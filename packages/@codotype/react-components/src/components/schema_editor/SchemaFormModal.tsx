@@ -20,9 +20,11 @@ export function SchemaFormModal(props: {
     onSubmit: () => void;
 }) {
     // Defines title + submit button labels
-    let title = "Update Schema";
+    let title = "Edit Schema";
+    let submitLabel = "Update Schema";
     if (props.renderNewTitle) {
-        title = "Create Schema";
+        title = "New Schema";
+        submitLabel = "Create Schema";
     }
 
     return (
@@ -32,15 +34,15 @@ export function SchemaFormModal(props: {
             </Modal.Header>
             <Modal.Body>{props.children}</Modal.Body>
             <Modal.Footer>
-                <button
-                    className="btn btn-light"
-                    onClick={props.handleClose}
-                    disabled={props.disableSubmit}
-                >
+                <button className="btn btn-light" onClick={props.handleClose}>
                     Close
                 </button>
-                <button className="btn btn-success" onClick={props.onSubmit}>
-                    {title}
+                <button
+                    className="btn btn-primary"
+                    disabled={props.disableSubmit}
+                    onClick={props.onSubmit}
+                >
+                    {submitLabel}
                 </button>
             </Modal.Footer>
         </Modal>
