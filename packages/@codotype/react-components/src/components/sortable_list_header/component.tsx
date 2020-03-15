@@ -16,7 +16,7 @@ interface SortableListHeaderProps {
  */
 export function SortableListHeader(props: SortableListHeaderProps) {
     return (
-        <div className="card-header">
+        <div className="card-header p-2 d-flex align-items-center justify-content-between">
             <div className="d-flex align-items-center">
                 <button
                     className="btn btn-sm btn-primary"
@@ -24,7 +24,9 @@ export function SortableListHeader(props: SortableListHeaderProps) {
                 >
                     <FontAwesomeIcon icon={faPlus} />
                 </button>
-                <p className="mb-0 ml-2">{props.label}</p>
+                <strong className="d-block text-muted mb-0 ml-2">
+                    {props.label}
+                </strong>
             </div>
         </div>
     );

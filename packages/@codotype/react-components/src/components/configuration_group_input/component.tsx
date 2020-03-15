@@ -87,45 +87,61 @@ export const ConfigurationInputFormGroup: FunctionComponent<ConfigurationInputFo
     return (
         <div className="col-lg-12">
             {/* <div className="col-lg-6"> */}
-            {/* <div className="card my-2 py-3 px-3"> */}
-            {/* <div className="form-group mb-0"> */}
-            <div className="form-group">
-                <span className="d-flex align-items-center">
-                    {props.property.icon && (
-                        <img
-                            src={props.property.icon}
-                            style={{ maxWidth: "2rem" }}
-                            className="mr-2"
-                        />
+            <div className="card shadow-sm my-2 py-3 px-3">
+                {/* <div className="form-group mb-0"> */}
+                <div className="form-group mb-0">
+                    <div className="d-flex align-items-center">
+                        <div className="d-flex align-items-center">
+                            {props.property.icon && (
+                                <img
+                                    src={props.property.icon}
+                                    style={{ maxWidth: "2rem" }}
+                                    className="mr-2"
+                                />
+                            )}
+                            <label className="mb-0">
+                                {props.property.label}
+                            </label>
+                            <small className="mx-3">
+                                <MoreInfoLink url="https://github.com" />
+                            </small>
+                            {/* <small>Switch Goes Here</small> */}
+                        </div>
+
+                        {props.property.type === OptionType.BOOLEAN && (
+                            <div className="d-flex align-items-center">
+                                {props.children}
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Render description IFF not empty */}
+                    {props.property.description !== "" && (
+                        <small className="d-block mt-2 text-muted">
+                            {props.property.description}
+                        </small>
                     )}
-                    <label className="mb-0">{props.property.label}</label>
-                    <small className="mx-3">
-                        <MoreInfoLink url="https://github.com" />
-                    </small>
-                    {/* <small>Switch Goes Here</small> */}
-                </span>
 
-                {/* Render description IFF not empty */}
-                {props.property.description !== "" && (
-                    <small className="d-block mt-2 mb-2 text-muted">
-                        {props.property.description}
-                    </small>
-                )}
+                    {/* Render empty description warning */}
+                    {props.property.description === "" && (
+                        <small className="d-block mt-2 mb-2 text-danger">
+                            Warning - this input needs a description
+                        </small>
+                    )}
 
-                {/* Render empty description warning */}
-                {props.property.description === "" && (
-                    <small className="d-block mt-2 mb-2 text-danger">
-                        Warning - this input needs a description
-                    </small>
-                )}
-
-                {/* Renders props.children */}
-                {props.children}
+                    {/* Renders props.children */}
+                    {props.property.type !== OptionType.BOOLEAN && (
+                        <React.Fragment>{props.children}</React.Fragment>
+                    )}
+                </div>
             </div>
-            {/* </div> */}
         </div>
     );
 };
+
+// // // // //
+
+import Switch from "react-switch";
 
 interface ConfigurationInputChildProps {
     value: any; // TODO - remove any here
@@ -164,14 +180,30 @@ export const ConfigurationInputChild: FunctionComponent<ConfigurationInputChildP
     }
     if (props.property.type === OptionType.BOOLEAN) {
         return (
-            <input
-                type="checkbox"
-                checked={props.value}
-                onChange={e => {
-                    props.onChange(e.currentTarget.checked);
+            <Switch
+                height={22}
+                width={50}
+                // onHandleColor={}
+                // offHandleColor={}
+                offColor={"#888"}
+                onColor={"#4582ec"}
+                checkedIcon={false}
+                uncheckedIcon={false}
+                onChange={(updatedChecked: boolean) => {
+                    props.onChange(updatedChecked);
                 }}
+                checked={props.value}
             />
         );
+        // return (
+        //     <input
+        //         type="checkbox"
+        //         checked={props.value}
+        //         onChange={e => {
+        //             props.onChange(e.currentTarget.checked);
+        //         }}
+        //     />
+        // );
     }
     if (props.property.type === OptionType.DROPDOWN) {
         return (
