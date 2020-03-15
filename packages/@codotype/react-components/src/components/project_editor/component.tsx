@@ -7,7 +7,6 @@ import { GeneratorMeta, Project, ProjectConfiguration } from "../types";
 // // // //
 
 interface ProjectEditorProps {
-    label: string;
     generator: GeneratorMeta;
     project: Project;
     onChange: (updatedProject: Project) => void;
@@ -21,7 +20,7 @@ export const ProjectEditor: FunctionComponent<ProjectEditorProps> = (
 ) => {
     const { generator, project } = props;
     return (
-        <div className="card card-body">
+        <div className="card card-body shadow-sm">
             <div className="row">
                 <div className="col-sm-12">
                     {/* Render ProjectEditorHeader */}

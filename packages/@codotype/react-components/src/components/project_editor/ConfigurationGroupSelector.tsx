@@ -6,7 +6,6 @@ import {
     Project,
     Schema,
     GeneratorMeta,
-    ProjectConfiguration,
     ConfigurationGroup,
     OptionValueInstance,
 } from "../types";
@@ -19,15 +18,22 @@ function ConfigurationGroupTab(props: {
     onClick: () => void;
 }) {
     const { label } = props;
-    const btnClassName: string[] = ["mx-2", "btn", "btn-outline-primary"];
+    const btnClassName: string[] = ["nav-link"];
     if (props.active) {
         btnClassName.push("active");
     }
 
     return (
-        <button onClick={props.onClick} className={btnClassName.join(" ")}>
-            {label}
-        </button>
+        <li className="nav-item">
+            <a
+                // href="#"
+                // TODO - fix styles here, replace with <button>
+                className={btnClassName.join(" ")}
+                onClick={props.onClick}
+            >
+                {label}
+            </a>
+        </li>
     );
 }
 
@@ -63,35 +69,38 @@ export function ConfigurationGroupSelector(props: {
     return (
         <div className="row">
             <div className="col-lg-12">
-                <ConfigurationGroupTab
-                    onClick={() => {
-                        setViewingSchemas(true);
-                    }}
-                    active={viewingSchemas}
-                    label={"Schemas"}
-                />
-                {/* Renders the navigation for selecting a ConfigurationGroup */}
-                {generatorMeta.configuration_groups.map(
-                    (configurationGroup: ConfigurationGroup) => {
-                        return (
-                            <ConfigurationGroupTab
-                                key={configurationGroup.identifier}
-                                onClick={() => {
-                                    setViewingSchemas(false);
-                                    selectConfigurationGroup(
-                                        configurationGroup,
-                                    );
-                                }}
-                                active={
-                                    configurationGroup.identifier ===
-                                        selectedConfigurationGroup.identifier &&
-                                    !viewingSchemas
-                                }
-                                label={configurationGroup.label}
-                            />
-                        );
-                    },
-                )}
+                <ul className="nav nav-tabs">
+                    <ConfigurationGroupTab
+                        onClick={() => {
+                            setViewingSchemas(true);
+                        }}
+                        active={viewingSchemas}
+                        label={"Schemas"}
+                    />
+
+                    {/* Renders the navigation for selecting a ConfigurationGroup */}
+                    {generatorMeta.configuration_groups.map(
+                        (configurationGroup: ConfigurationGroup) => {
+                            return (
+                                <ConfigurationGroupTab
+                                    key={configurationGroup.identifier}
+                                    onClick={() => {
+                                        setViewingSchemas(false);
+                                        selectConfigurationGroup(
+                                            configurationGroup,
+                                        );
+                                    }}
+                                    active={
+                                        configurationGroup.identifier ===
+                                            selectedConfigurationGroup.identifier &&
+                                        !viewingSchemas
+                                    }
+                                    label={configurationGroup.label}
+                                />
+                            );
+                        },
+                    )}
+                </ul>
             </div>
             <div className="col-lg-12">
                 {/* Renders the ConfigurationInput */}

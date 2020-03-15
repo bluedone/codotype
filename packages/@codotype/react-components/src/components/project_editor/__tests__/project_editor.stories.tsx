@@ -75,11 +75,11 @@ storiesOf("ProjectEditor", module).add("renders", () => {
     return (
         <Story>
             <ProjectEditor
-                label={"Label"}
                 generator={dummyGeneratorMeta}
                 project={project}
                 onClickGenerate={() => {
                     console.log("Generate Project!");
+                    console.log(project);
                 }}
                 onChange={(updatedProject: Project) => {
                     console.log("onChange!");
