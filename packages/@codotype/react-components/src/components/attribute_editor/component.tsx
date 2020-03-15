@@ -6,6 +6,8 @@ import { AttributeFormModal } from "./AttributeFormModal";
 import { AttributeDeleteModal } from "./AttributeDeleteModal";
 import { AttributeListItem } from "./AttributeListItem";
 import { AttributeForm } from "./AttributeForm";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 // // // //
 
@@ -49,9 +51,71 @@ export function AttributeEditor(props: { attributes: Attribute[] }) {
         setState({ attributes: updatedAttributes });
     }
 
+    // Defines modal component
+    const formModal = (
+        <AttributeFormModal
+            show={showingFormModal}
+            handleClose={() => {
+                showFormModal(false);
+            }}
+        >
+            <AttributeForm
+                attributes={state.attributes}
+                editorModel={{
+                    ...state.attributes[0],
+                    datatype: null,
+                }}
+                supportedDatatypes={[Datatype.STRING, Datatype.INTEGER]}
+                onSubmit={() => {
+                    console.log("OnSubmit");
+                }}
+                onCancel={() => {
+                    showFormModal(false);
+                }}
+            />
+        </AttributeFormModal>
+    );
+
     // Render empty state
     if (state.attributes.length === 0) {
-        return <div className="card card-body">No attributes defined</div>;
+        return (
+            <div className="card">
+                <SortableListHeader
+                    label="Attributes"
+                    onClick={() => {
+                        showFormModal(true);
+                    }}
+                />
+
+                {/* Renders AttributeFormModal */}
+                {formModal}
+
+                <div className="card-body text-center">
+                    <strong className="mb-0 mt-1 text-muted d-block">
+                        No Attributes added yet
+                    </strong>
+                    <small className="text-muted mt-2">
+                        Attributes define properties on this Schema
+                    </small>
+                    <div className="row d-flex justify-content-center mt-2">
+                        <div className="col-lg-6">
+                            <button
+                                className="btn btn-sm btn-outline-primary"
+                                onClick={() => {
+                                    showFormModal(true);
+                                }}
+                            >
+                                <FontAwesomeIcon
+                                    className="mr-2"
+                                    icon={faPlus}
+                                />
+                                Add Attribute
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
     }
 
     // Render list
@@ -64,27 +128,8 @@ export function AttributeEditor(props: { attributes: Attribute[] }) {
                 }}
             />
 
-            <AttributeFormModal
-                show={showingFormModal}
-                handleClose={() => {
-                    showFormModal(false);
-                }}
-            >
-                <AttributeForm
-                    attributes={state.attributes}
-                    editorModel={{
-                        ...state.attributes[0],
-                        datatype: null,
-                    }}
-                    supportedDatatypes={[Datatype.STRING, Datatype.INTEGER]}
-                    onSubmit={() => {
-                        console.log("OnSubmit");
-                    }}
-                    onCancel={() => {
-                        showFormModal(false);
-                    }}
-                />
-            </AttributeFormModal>
+            {/* Renders AttributeFormModal */}
+            {formModal}
 
             <AttributeDeleteModal
                 show={showingDeleteModal}
