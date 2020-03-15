@@ -37,7 +37,8 @@ export function AttributeListItemLabel(props: AttributeListItemLabelProps) {
                     className="ml-2 badge badge-light"
                 >
                     <FontAwesomeIcon icon={faSnowflake} />
-                    Unique
+                    {/* Unique */}
+                    {/* TODO - add tooltip */}
                 </span>
             )}
         </small>

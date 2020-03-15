@@ -39,7 +39,7 @@ export function AttributeListItem(props: {
         <Draggable draggableId={props.attribute.id} index={props.index}>
             {provided => (
                 <li
-                    className="list-group-item"
+                    className="list-group-item py-0 px-2"
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
@@ -73,10 +73,7 @@ export function AttributeListItem(props: {
                         )}
 
                         {!props.attribute.locked && (
-                            <div
-                                className="col-sm-2 text-right controls"
-                                v-else
-                            >
+                            <div className="col-sm-2 text-right controls">
                                 <Dropdown alignRight className="no-caret">
                                     <Dropdown.Toggle
                                         variant="outline-secondary"
