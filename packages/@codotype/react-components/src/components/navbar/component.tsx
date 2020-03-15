@@ -1,25 +1,14 @@
 import React, { FunctionComponent } from "react";
 import { Navbar, NavDropdown, Nav } from "react-bootstrap";
+import "./styles.scss";
 
 // // // //
 
 export const AppNavbar: FunctionComponent<{}> = () => {
     return (
-        <Navbar
-            bg="light"
-            fixed="top"
-            expand="lg"
-            className="bg-white"
-            style={{
-                // font- family: $heading-font
-                padding: "0.4rem",
-                background: "#ffffff!important",
-                boxShadow: "0px 9px 68px 0px rgba(62, 57, 107, 0.1)",
-            }}
-        >
+        <Navbar bg="light" fixed="top" expand="lg" className="app-navbar">
             <div className="container">
-                {/* <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand> */}
-                <Navbar.Brand href="#home">
+                <div className="d-flex flew-row align-items-center">
                     <img
                         src="https://res.cloudinary.com/codotype/image/upload/v1560045005/tech-logos/codotype.png"
                         alt="Codotype Logo"
@@ -33,9 +22,11 @@ export const AppNavbar: FunctionComponent<{}> = () => {
                             width: "1.5rem",
                             // float: "left",
                         }}
-                    />{" "}
-                    codotype
-                </Navbar.Brand>
+                    />
+                    <Navbar.Brand href="#home">
+                        <h3 className="mb-0">codotype</h3>
+                    </Navbar.Brand>
+                </div>
 
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
