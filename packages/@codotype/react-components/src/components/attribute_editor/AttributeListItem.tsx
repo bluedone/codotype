@@ -39,7 +39,7 @@ export function AttributeListItem(props: {
         <Draggable draggableId={props.attribute.id} index={props.index}>
             {provided => (
                 <li
-                    className="list-group-item py-0 px-2"
+                    className="list-group-item list-group-item-action sortable py-0 px-2"
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}

@@ -20,7 +20,7 @@ export function SchemaSelectorItem(props: {
             {provided => (
                 <li
                     className={classnames(
-                        "list-group-item list-group-item-action",
+                        "list-group-item list-group-item-action sortable",
                         {
                             selected: props.selected,
                         },

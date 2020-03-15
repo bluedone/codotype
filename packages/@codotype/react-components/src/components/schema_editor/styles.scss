@@ -8,11 +8,13 @@ button.btn-yellow {
 
 // TODO - this should be a :local() module
 li.list-group-item {
-    cursor: pointer;
-    border-left: 6px solid $gray-500 !important;
-    &.selected {
-        border-left: 6px solid #4582ec !important;
-        font-weight: bold;
+    &.sortable {
+        cursor: pointer;
+        border-left: 6px solid $gray-500 !important;
+        &.selected {
+            border-left: 6px solid #4582ec !important;
+            font-weight: bold;
+        }
     }
 }
 
