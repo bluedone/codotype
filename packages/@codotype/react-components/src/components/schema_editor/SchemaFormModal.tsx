@@ -34,15 +34,15 @@ export function SchemaFormModal(props: {
             </Modal.Header>
             <Modal.Body>{props.children}</Modal.Body>
             <Modal.Footer>
-                <button className="btn btn-light" onClick={props.handleClose}>
-                    Close
-                </button>
                 <button
                     className="btn btn-primary"
                     disabled={props.disableSubmit}
                     onClick={props.onSubmit}
                 >
                     {submitLabel}
+                </button>
+                <button className="btn btn-light" onClick={props.handleClose}>
+                    Close
                 </button>
             </Modal.Footer>
         </Modal>

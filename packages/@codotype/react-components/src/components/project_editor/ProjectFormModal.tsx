@@ -21,8 +21,12 @@ export function ProjectFormModal(props: {
             </Modal.Header>
             <Modal.Body>{props.children}</Modal.Body>
             <Modal.Footer>
-                <button onClick={props.handleClose}>Close</button>
-                <button onClick={props.handleClose}>Update Project Name</button>
+                <button className="btn btn-primary" onClick={props.handleClose}>
+                    Update Project Name
+                </button>
+                <button className="btn btn-light" onClick={props.handleClose}>
+                    Close
+                </button>
             </Modal.Footer>
         </Modal>
     );

@@ -60,8 +60,10 @@ export function BuildFinished(props: {
                                     directory:
                                 </small>
                                 <p className="lead mb-0">
+                                    {/* TODO - add tooltip */}
                                     {/* v-b-tooltip.hover.bottom="'Copy to clipboard'" */}
                                     {/* TODO - set up copy-to-clipboard */}
+                                    {/* https://github.com/nkbt/react-copy-to-clipboard */}
                                     <button className="btn btn-sm btn-dark">
                                         {props.filepath}
                                     </button>
@@ -116,6 +118,7 @@ export function BuildFinished(props: {
 
                     <hr />
 
+                    {/* FOOTER */}
                     <div className="row d-flex justify-content-center">
                         <div className="col-lg-12 text-center">
                             <p className="mb-0">Support Codotype</p>
