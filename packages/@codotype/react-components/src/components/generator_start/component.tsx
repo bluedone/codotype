@@ -2,6 +2,7 @@ import * as React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { GeneratorMeta } from "../types";
+import { ChevronAnimation } from "../chevron_animation/component";
 
 // // // //
 
@@ -72,7 +73,7 @@ export function GeneratorStart(props: GeneratorStartProps) {
                         {props.buildLink && (
                             <button className="btn btn-block btn-primary btn-lg rounded-pill">
                                 Let's build something
-                                {/* <ChevronAnimation active :svg="svg" /> */}
+                                <ChevronAnimation active />
                             </button>
                         )}
 
@@ -83,7 +84,7 @@ export function GeneratorStart(props: GeneratorStartProps) {
                                 className="btn btn-block btn-primary btn-lg rounded-pill"
                             >
                                 Let's build something
-                                {/* <ChevronAnimation active :svg="svg" /> */}
+                                <ChevronAnimation active />
                             </button>
                         )}
                     </div>
