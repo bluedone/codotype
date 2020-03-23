@@ -94,10 +94,11 @@ export interface ConfigurationGroup {
     label: string;
     identifier: string;
     description: string;
+    documentation: string; // Markdown
     enabled: boolean;
     allowDisable: boolean;
     scope: string; // enum
-    variant: string; //enum
+    variant: "LIST" | "SIDEBYSIDE"; // TODO - enum + rename!
     properties: ConfigurationGroupProperty[];
 }
 

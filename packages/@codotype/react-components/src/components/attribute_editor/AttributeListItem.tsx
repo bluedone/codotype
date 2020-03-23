@@ -78,6 +78,7 @@ export function AttributeListItem(props: {
                                     <Dropdown.Toggle
                                         variant="outline-secondary"
                                         size={"sm"}
+                                        className="px-0 py-0"
                                         id="dropdown-basic"
                                     >
                                         <FontAwesomeIcon icon={faEllipsisH} />

@@ -28,8 +28,6 @@ export function ImageBlock(props: { alt: string; src: string }) {
 /**
  * MarkdownRenderer
  * Renders markdown
- * TODO - ensure that HTML is escaped + XSS isn't an issue here
- * TODO - sanitize markdown during `codotype-build` process in the future
  */
 export function MarkdownRenderer(props: { source: string }) {
     return (
