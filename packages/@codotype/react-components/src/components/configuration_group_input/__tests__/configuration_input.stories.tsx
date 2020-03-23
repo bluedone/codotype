@@ -4,11 +4,11 @@ import { ConfigurationInput, buildConfigurationGroupValue } from "../component";
 import { OptionValueInstance } from "../../types";
 import {
     ComponentBuilderConfigurationGroup,
+    ApiExamplesConfigurationGroup,
     ComponentBuilderConfigurationGroupPropertySingleDropdown,
     ComponentBuilderConfigurationGroupPropertyWithInstance,
     ComponentBuilderConfigurationGroupPropertyWithInstance01,
 } from "./test_state";
-
 import { Story } from "@src/components/dev";
 
 // // // //
@@ -131,3 +131,64 @@ storiesOf("ConfigurationInput", module).add("instance", () => {
         </Story>
     );
 });
+
+storiesOf("ConfigurationInput", module).add(
+    "API Examples - LIST Variant",
+    () => {
+        const [count, increment] = React.useReducer(i => i + 1, 0);
+        const [configurationOptionValue, setVal] = React.useState<
+            OptionValueInstance
+        >(
+            buildConfigurationGroupValue(
+                ApiExamplesConfigurationGroup.properties,
+            ),
+        );
+
+        return (
+            <Story>
+                <ConfigurationInput
+                    configurationGroup={ApiExamplesConfigurationGroup}
+                    value={configurationOptionValue}
+                    onChange={(updatedVal: OptionValueInstance) => {
+                        setVal(updatedVal);
+                        increment();
+                    }}
+                />
+                <p>{count}</p>
+                <pre>{JSON.stringify(configurationOptionValue, null, 4)}</pre>
+            </Story>
+        );
+    },
+);
+
+storiesOf("ConfigurationInput", module).add(
+    "API Examples - SIDEBYSIDE Variant",
+    () => {
+        const [count, increment] = React.useReducer(i => i + 1, 0);
+        const [configurationOptionValue, setVal] = React.useState<
+            OptionValueInstance
+        >(
+            buildConfigurationGroupValue(
+                ApiExamplesConfigurationGroup.properties,
+            ),
+        );
+
+        return (
+            <Story>
+                <ConfigurationInput
+                    configurationGroup={{
+                        ...ApiExamplesConfigurationGroup,
+                        variant: "SIDEBYSIDE",
+                    }}
+                    value={configurationOptionValue}
+                    onChange={(updatedVal: OptionValueInstance) => {
+                        setVal(updatedVal);
+                        increment();
+                    }}
+                />
+                <p>{count}</p>
+                <pre>{JSON.stringify(configurationOptionValue, null, 4)}</pre>
+            </Story>
+        );
+    },
+);
