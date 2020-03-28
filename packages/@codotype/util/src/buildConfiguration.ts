@@ -1,14 +1,10 @@
-import { cloneDeep } from 'lodash';
+import { cloneDeep } from "lodash";
 import { buildConfigurationDefault } from "./buildDefault";
-
-// TODO - this should be an enum
 import {
-  CONFIGURATION_GROUP_TYPE_OPTION,
-  CONFIGURATION_GROUP_TYPE_ADDON,
-  CONFIGURATION_GROUP_SCOPE_GLOBAL,
-  CONFIGURATION_GROUP_SCOPE_SCHEMA,
-} from '@codotype/types/lib/configuration-group-types';
-import { Attribute } from '@codotype/types';
+  Attribute,
+  ConfigurationGroupType,
+  ConfigurationGroupScope
+} from "@codotype/types";
 
 // Validates the state
 // TODO - this must be moved elsewhere in @codotype/util
@@ -22,17 +18,24 @@ import { Attribute } from '@codotype/types';
 // Type Definitions
 
 type UUID = string | number;
-type ConfigurationValue = string | number | boolean | number[] | string[] | { [key: string]: string }; // TODO - flesh this out
+type ConfigurationValue =
+  | string
+  | number
+  | boolean
+  | number[]
+  | string[]
+  | { [key: string]: string }; // TODO - flesh this out
 
 // TODO - update to ENUM
 // TODO - add `TO_ONE` and `TO_MANY` to help model GQL schemas
-type RelationType = "BELONGS_TO" | "HAS_ONE" | "HAS_MANY" | "HAS_AND_BELONGS_TO_MANY";
+type RelationType =
+  | "BELONGS_TO"
+  | "HAS_ONE"
+  | "HAS_MANY"
+  | "HAS_AND_BELONGS_TO_MANY";
 
 type AttributeType = "STRING" | "NUMBER" | "BOOLEAN"; // TODO - update to ENUM
 type CodotypeSchemaSouce = "GENERATOR" | "USER"; // TODO - update to ENUM
-
-type ConfigurationGroupType = CONFIGURATION_GROUP_TYPE_OPTION | CONFIGURATION_GROUP_TYPE_ADDON | CONFIGURATION_GROUP_SCOPE_GLOBAL | CONFIGURATION_GROUP_SCOPE_SCHEMA;
-type ConfigurationGroupScope = "CONFIGURATION_GROUP_SCOPE_GLOBAL";
 
 interface ConfigurationGroup {
   label: string;
@@ -41,49 +44,49 @@ interface ConfigurationGroup {
   type: ConfigurationGroupType;
   scope: ConfigurationGroupScope;
   more_info_url: string;
-  attributes: Attribute[]
+  attributes: Attribute[];
 }
 
 interface CodotypeRelation {
-  id: UUID,
-  type: RelationType,
-  required: boolean,
-  schema_id: UUID,
-  related_schema_id: UUID,
-  reverse_relation_id: UUID,
-  as: string, // TODO - rename 'as' to something else?
-  reverse_as: string // TODO - rename 'reverse_as' to something else?
+  id: UUID;
+  type: RelationType;
+  required: boolean;
+  schema_id: UUID;
+  related_schema_id: UUID;
+  reverse_relation_id: UUID;
+  as: string; // TODO - rename 'as' to something else?
+  reverse_as: string; // TODO - rename 'reverse_as' to something else?
 }
 
 interface CodotypeSchema {
-  id: UUID,
-  locked: boolean,
-  removable: boolean,
+  id: UUID;
+  locked: boolean;
+  removable: boolean;
   source: CodotypeSchemaSouce;
-  label: string,
-  label_plural: string,
-  identifier: string,
-  identifier_plural: string,
-  camel_case: string,
-  camel_case_plural: string,
-  class_name: string,
-  class_name_plural: string,
-  attributes: Attribute[]
-  relations: CodotypeRelation[]
-  reverse_relations: CodotypeRelation[]
+  label: string;
+  label_plural: string;
+  identifier: string;
+  identifier_plural: string;
+  camel_case: string;
+  camel_case_plural: string;
+  class_name: string;
+  class_name_plural: string;
+  attributes: Attribute[];
+  relations: CodotypeRelation[];
+  reverse_relations: CodotypeRelation[];
 }
 
 interface Configuration {
-  [key: string]: ConfigurationValue
+  [key: string]: ConfigurationValue;
 }
 
 interface CodotypeProject {
-  label: string,
-  identifier: string,
-  camel_case: string,
-  class_name: string,
-  configuration: Configuration
-  schemas: CodotypeSchema[]
+  label: string;
+  identifier: string;
+  camel_case: string;
+  class_name: string;
+  configuration: Configuration;
+  schemas: CodotypeSchema[];
 }
 
 interface CodotypeGenerator {
@@ -91,10 +94,10 @@ interface CodotypeGenerator {
   label: string;
   icon: string;
   description: string;
-  tech_tags: string[],
-  type_tags: string[],
-  self_configuring: boolean,
-  project_path: string,
+  tech_tags: string[];
+  type_tags: string[];
+  self_configuring: boolean;
+  project_path: string;
   github_url: string; // TODO - should be repo URL
   version: string;
   official: boolean; // TODO - remove this
@@ -114,57 +117,75 @@ interface BuildConfigurationProps {
   generator: CodotypeGenerator;
 }
 
-export function buildConfiguration(props: BuildConfigurationProps): Configuration {
-
+export function buildConfiguration(
+  props: BuildConfigurationProps
+): Configuration {
   // Destructure props
   // TODO - configuration should be immutable, should return a new copy
   const { schemas, generator, configuration = {} } = props;
 
   // Iterates over each option group in a single generator
-  generator.configuration_groups.forEach((group) => {
-
+  generator.configuration_groups.forEach(group => {
     // Handles CONFIGURATION_GROUP_TYPE_ADDON with CONFIGURATION_GROUP_SCOPE_SCHEMA
-    if (group.type === CONFIGURATION_GROUP_TYPE_ADDON && group.scope === CONFIGURATION_GROUP_SCOPE_SCHEMA) {
+    if (
+      group.type === CONFIGURATION_GROUP_TYPE_ADDON &&
+      group.scope === CONFIGURATION_GROUP_SCOPE_SCHEMA
+    ) {
       // Defines an object on to store the instance data for each option group
-      let instanceData = configuration[group.identifier] || {}
-      let newInstanceData = {}
+      let instanceData = configuration[group.identifier] || {};
+      let newInstanceData = {};
 
       // Iterates over each blueprint schema and creates an array
       // to store the addon instances associated with that schema
-      schemas.forEach((schema) => { newInstanceData[schema.identifier] = instanceData[schema.identifier] || [] })
+      schemas.forEach(schema => {
+        newInstanceData[schema.identifier] =
+          instanceData[schema.identifier] || [];
+      });
 
       // Assigns the instanceData object to the root configuration object
-      configuration[group.identifier] = newInstanceData
+      configuration[group.identifier] = newInstanceData;
 
-    // Handles CONFIGURATION_GROUP_TYPE_OPTION with CONFIGURATION_GROUP_SCOPE_SCHEMA
-    } else if (group.type === CONFIGURATION_GROUP_TYPE_OPTION && group.scope === CONFIGURATION_GROUP_SCOPE_SCHEMA) {
+      // Handles CONFIGURATION_GROUP_TYPE_OPTION with CONFIGURATION_GROUP_SCOPE_SCHEMA
+    } else if (
+      group.type === CONFIGURATION_GROUP_TYPE_OPTION &&
+      group.scope === CONFIGURATION_GROUP_SCOPE_SCHEMA
+    ) {
       // Defines an object on to store the instance data for each option group
-      let instanceData = configuration[group.identifier] || {}
-      let newInstanceData = {}
+      let instanceData = configuration[group.identifier] || {};
+      let newInstanceData = {};
 
       // Iterates over each blueprint schema and creates an array
       // to store the addon instances associated with that schema
-      schemas.forEach((schema) => {
-        newInstanceData[schema.identifier] = instanceData[schema.identifier] || buildConfigurationDefault({ attributes: group.attributes })
-      })
+      schemas.forEach(schema => {
+        newInstanceData[schema.identifier] =
+          instanceData[schema.identifier] ||
+          buildConfigurationDefault({ attributes: group.attributes });
+      });
 
       // Assigns the instanceData object to the root configuration object
-      configuration[group.identifier] = newInstanceData
+      configuration[group.identifier] = newInstanceData;
 
-    // Handles CONFIGURATION_GROUP_TYPE_ADDON with CONFIGURATION_GROUP_SCOPE_GLOBAL
-    } else if (group.type === CONFIGURATION_GROUP_TYPE_ADDON && group.scope === CONFIGURATION_GROUP_SCOPE_GLOBAL) {
+      // Handles CONFIGURATION_GROUP_TYPE_ADDON with CONFIGURATION_GROUP_SCOPE_GLOBAL
+    } else if (
+      group.type === CONFIGURATION_GROUP_TYPE_ADDON &&
+      group.scope === CONFIGURATION_GROUP_SCOPE_GLOBAL
+    ) {
       // Iterates over each attribute in the GLOBAL_OPTION type,
       // sets instanceData to the default value
-      configuration[group.identifier] = configuration[group.identifier] || []
+      configuration[group.identifier] = configuration[group.identifier] || [];
 
-    // Handles CONFIGURATION_GROUP_TYPE_OPTION with CONFIGURATION_GROUP_SCOPE_GLOBAL
-    } else if (group.type === CONFIGURATION_GROUP_TYPE_OPTION && group.scope === CONFIGURATION_GROUP_SCOPE_GLOBAL) {
+      // Handles CONFIGURATION_GROUP_TYPE_OPTION with CONFIGURATION_GROUP_SCOPE_GLOBAL
+    } else if (
+      group.type === CONFIGURATION_GROUP_TYPE_OPTION &&
+      group.scope === CONFIGURATION_GROUP_SCOPE_GLOBAL
+    ) {
       // Iterates over each attribute in the GLOBAL_OPTION type,
       // sets instanceData to the default value
-      configuration[group.identifier] = configuration[group.identifier] || buildConfigurationDefault({ attributes: group.attributes })
-
+      configuration[group.identifier] =
+        configuration[group.identifier] ||
+        buildConfigurationDefault({ attributes: group.attributes });
     }
-  })
+  });
 
   // // // //
 
@@ -172,5 +193,5 @@ export function buildConfiguration(props: BuildConfigurationProps): Configuratio
   // console.log(configuration)
 
   // Returns configuration object
-  return configuration
+  return configuration;
 }

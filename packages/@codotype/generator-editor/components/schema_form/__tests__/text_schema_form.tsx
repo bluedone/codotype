@@ -1,6 +1,6 @@
 import { SchemaForm } from "../index";
-import { DEFAULT_SCHEMA } from "@codotype/types"
-import TestRenderer, { ReactTestRendererJSON } from 'react-test-renderer'
+import { DEFAULT_SCHEMA } from "@codotype/types";
+import TestRenderer, { ReactTestRendererJSON } from "react-test-renderer";
 
 // // // //
 
@@ -11,5 +11,5 @@ describe("SchemaForm", () => {
     ).toJSON();
 
     expect(renderedComponent).toMatchSnapshot();
-  })
-})
+  });
+});
