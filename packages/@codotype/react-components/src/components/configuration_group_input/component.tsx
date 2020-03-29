@@ -142,6 +142,7 @@ export const ConfigurationInputFormGroup: FunctionComponent<ConfigurationInputFo
 // // // // //
 
 import Switch from "react-switch";
+import { MarkdownRenderer } from "../markdown_renderer";
 
 interface ConfigurationInputChildProps {
     value: any; // TODO - remove any here
@@ -292,14 +293,14 @@ export const ConfigurationInstanceInput: FunctionComponent<ConfigurationInstance
                                                 ]
                                             }
                                         />
-                                        {JSON.stringify(
+                                        {/* {JSON.stringify(
                                             // @ts-ignore
                                             props.value.value[
                                                 property.identifier
                                             ].value,
                                             null,
                                             4,
-                                        )}
+                                        )} */}
                                     </div>
                                 );
                             }
@@ -323,7 +324,8 @@ export const ConfigurationInstanceInput: FunctionComponent<ConfigurationInstance
                                         }}
                                     />
                                     <pre>
-                                        {JSON.stringify(props.value, null, 4)}
+                                        {/* TODO - render with DEBUG flag */}
+                                        {/* {JSON.stringify(props.value, null, 4)} */}
                                     </pre>
                                 </ConfigurationInputFormGroup>
                             );
@@ -335,6 +337,68 @@ export const ConfigurationInstanceInput: FunctionComponent<ConfigurationInstance
         </div>
     );
 };
+
+// // // //
+
+/**
+ * ConfigurationGroupHeader
+ * Renders the header for the ConfigurationInput component
+ * @param props.configurationGroup
+ */
+export function ConfigurationGroupHeader(props: {
+    configurationGroup: ConfigurationGroup;
+}) {
+    return (
+        <div className="row">
+            <div className="col-sm-12">
+                <span className="d-flex align-items-center">
+                    <p className="lead mb-0 mr-3">
+                        {props.configurationGroup.label}
+                    </p>
+                    {/* <br className="d-none d-sm-block d-md-none" /> */}
+                    {/* <MoreInfoLink : url="url"/> */}
+                    <small className="ml-2 text-muted">
+                        {props.configurationGroup.description}
+                    </small>
+                </span>
+                <hr />
+            </div>
+        </div>
+    );
+}
+
+// // // //
+
+export function ConfigurationGroupVariant(props: {
+    configurationGroup: ConfigurationGroup;
+    children: React.ReactNode;
+}) {
+    return (
+        <React.Fragment>
+            {/* Render inputs for ConfigurationGroup.properties */}
+            {/* RENDER variant === "LIST" */}
+            {props.configurationGroup.variant === "LIST" && (
+                <div className="row">
+                    {props.children}
+                    {/* <pre>{JSON.stringify(val, null, 4)}</pre> */}
+                    {/* <pre>{JSON.stringify(props.configurationGroup, null, 4)}</pre> */}
+                </div>
+            )}
+
+            {/* Render SIDEBYSIDE variant */}
+            {props.configurationGroup.variant === "SIDEBYSIDE" && (
+                <div className="row">
+                    <div className="col-lg-6">
+                        <MarkdownRenderer
+                            source={props.configurationGroup.documentation}
+                        />
+                    </div>
+                    <div className="col-lg-6">{props.children}</div>
+                </div>
+            )}
+        </React.Fragment>
+    );
+}
 
 // // // //
 
@@ -350,24 +414,15 @@ export const ConfigurationInput: FunctionComponent<ConfigurationInputProps> = (
         <div className="row mt-3">
             <div className="col-lg-12">
                 {/* ConfigurationGroupHeader */}
-                <div className="row">
-                    <div className="col-sm-12">
-                        <span className="d-flex align-items-center">
-                            <p className="lead mb-0 mr-3">
-                                {props.configurationGroup.label}
-                            </p>
-                            {/* <br className="d-none d-sm-block d-md-none" /> */}
-                            {/* <MoreInfoLink : url="url"/> */}
-                            <small className="ml-2 text-muted">
-                                {props.configurationGroup.description}
-                            </small>
-                        </span>
-                        <hr />
-                    </div>
-                </div>
+                <ConfigurationGroupHeader
+                    configurationGroup={props.configurationGroup}
+                />
 
-                {/* Render inputs for ConfigurationGroup.properties */}
-                <div className="row">
+                {/* Renders ConfigurationGroup variants */}
+                {/* QUESTION - maybe rename to `layout`? */}
+                <ConfigurationGroupVariant
+                    configurationGroup={props.configurationGroup}
+                >
                     {props.configurationGroup.properties.map(
                         (property: ConfigurationGroupProperty) => {
                             if (property.type === OptionType.COLLECTION) {
@@ -388,13 +443,16 @@ export const ConfigurationInput: FunctionComponent<ConfigurationInputProps> = (
                                 //         />
                                 //     </div>
                                 // );
-                                return null;
+                                return (
+                                    <p>TODO - RENDER COLLECTION EDITOR HERE</p>
+                                );
                             }
 
                             // Handle instance input
                             if (property.type === OptionType.INSTANCE) {
-                                // @ts-ignore
-                                const val = props.value[property.identifier];
+                                const val =
+                                    // @ts-ignore
+                                    props.value[property.identifier];
                                 return (
                                     <div
                                         className="card card-body mb-4 mt-2 mx-2"
@@ -426,7 +484,7 @@ export const ConfigurationInput: FunctionComponent<ConfigurationInputProps> = (
                                         {/* <p>{property.identifier}</p> */}
                                         {/* <p>{JSON.stringify(property)}</p> */}
                                         {/* Debugging */}
-                                        {JSON.stringify(val)}
+                                        {/* {JSON.stringify(val)} */}
                                     </div>
                                 );
                             }
@@ -457,9 +515,7 @@ export const ConfigurationInput: FunctionComponent<ConfigurationInputProps> = (
                             );
                         },
                     )}
-                    {/* <pre>{JSON.stringify(val, null, 4)}</pre> */}
-                    {/* <pre>{JSON.stringify(props.configurationGroup, null, 4)}</pre> */}
-                </div>
+                </ConfigurationGroupVariant>
             </div>
         </div>
     );

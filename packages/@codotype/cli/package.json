@@ -46,6 +46,7 @@
   "devDependencies": {
     "@codotype/blueprints": "^0.2.0",
     "@types/jest": "^24.0.23",
+    "@types/node": "^13.7.1",
     "chai": "^4.1.2",
     "jest": "^24.9.0",
     "mocha": "^5.2.0",

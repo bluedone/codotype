@@ -17,7 +17,13 @@ interface ChevronAnimationProps {
 export function ChevronAnimation(props: ChevronAnimationProps) {
     return (
         <span className="ml-2">
-            <FontAwesomeIcon icon={faChevronRight} className="animate-shift" />
+            {props.active && (
+                <FontAwesomeIcon
+                    icon={faChevronRight}
+                    className="animate-shift"
+                />
+            )}
+            {!props.active && <FontAwesomeIcon icon={faChevronRight} />}
         </span>
     );
 }
