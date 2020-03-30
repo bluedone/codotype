@@ -4,7 +4,6 @@ import { SchemaDetail } from "./SchemaDetail";
 import { SchemaNewButton } from "./SchemaNewButton";
 import { DragDropContext } from "react-beautiful-dnd";
 import { SchemaFormModal } from "./SchemaFormModal";
-import { SchemaEditorEmptyState } from "./SchemaEditorEmptyState";
 import { SchemaForm } from "./SchemaForm";
 import { Schema } from "../types";
 import { reorder } from "../attribute_editor/component";
@@ -45,8 +44,8 @@ export function SchemaEditorLayout(props: {
     }, [props.schemas]);
 
     // Invoke props.onChange when state.schemas has updated
-    // TODO - this should implement a similar approach using `state.lastUpdatedAt`
     React.useEffect(() => {
+        console.log("Should fire off use effect");
         props.onChange(state.schemas);
     }, [state.lastUpdatedAt]);
 
@@ -71,7 +70,64 @@ export function SchemaEditorLayout(props: {
 
     // Show empty state
     if (selectedSchemaId === null || selectedSchema === undefined) {
-        return <SchemaEditorEmptyState />;
+        // return <SchemaEditorEmptyState />;
+        return (
+            <div className="rowm px-4 py-4">
+                <div className="card card-body">
+                    <div className="row align-items-center justify-content-center">
+                        <div className="col-lg-12">
+                            <h4>New Schema</h4>
+
+                            <SchemaForm
+                                label={""}
+                                onChange={updatedTokens => {
+                                    setNewSchemaTokens(updatedTokens);
+                                }}
+                            />
+                        </div>
+                    </div>
+                    <div className="col-lg-12 text-right mt-2">
+                        <button
+                            className="btn btn-primary"
+                            disabled={
+                                newSchemaTokens === null ||
+                                newSchemaTokens.label === ""
+                            }
+                            onClick={() => {
+                                // Defines new schema
+                                const newSchema: Schema = {
+                                    ...state.schemas[0],
+                                    id: uniqueId("SCHEMA_"),
+                                    attributes: [],
+                                    relations: [],
+                                    tokens: newSchemaTokens,
+                                };
+
+                                // Defines updated schemas, including NEW schema
+                                const updatedSchemas: Schema[] = [
+                                    ...state.schemas,
+                                    newSchema,
+                                ];
+
+                                // Updates state.schemas with the latest schemas
+                                setState({
+                                    lastUpdatedAt: Date.now(),
+                                    schemas: updatedSchemas,
+                                });
+
+                                // Select the newly created schema
+                                setSelectedSchemaId(newSchema.id);
+
+                                // Clears newSchemaTokens
+                                setNewSchemaTokens(null);
+                            }}
+                        >
+                            Create Schema
+                        </button>
+                    </div>
+                </div>
+            </div>
+        );
     }
 
     // Defines onDragEnd callback for <DragDropContext />
@@ -169,6 +225,25 @@ export function SchemaEditorLayout(props: {
             <div className="col-lg-8">
                 <SchemaDetail
                     schema={selectedSchema}
+                    onChange={(updatedSchema: Schema) => {
+                        // Defines updatedSchemas to include `updatedSchema`
+                        const updatedSchemas: Schema[] = state.schemas.map(
+                            (s: Schema) => {
+                                if (s.id === selectedSchemaId) {
+                                    return updatedSchema;
+                                }
+                                return s;
+                            },
+                        );
+
+                        console.log("SCHEMA DETAIL ON CHANGE");
+
+                        // Updates local state
+                        setState({
+                            lastUpdatedAt: Date.now(),
+                            schemas: updatedSchemas,
+                        });
+                    }}
                     onClickEdit={() => {
                         setShowEditModal(true);
                     }}
@@ -180,9 +255,8 @@ export function SchemaEditorLayout(props: {
                             },
                         );
 
-                        // Invokes props.onChange with updated schemas
+                        // Updates local state
                         setState({
-                            ...state,
                             lastUpdatedAt: Date.now(),
                             schemas: updatedSchemas,
                         });
