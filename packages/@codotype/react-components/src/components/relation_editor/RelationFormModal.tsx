@@ -4,7 +4,7 @@ import { Modal } from "react-bootstrap";
 
 // // // //
 
-export interface AttributeInput {
+export interface RelationInput {
     id: string;
     label: string;
     identifier: string;
@@ -18,23 +18,23 @@ export interface AttributeInput {
 }
 
 /**
- * AttributeFormModal
+ * RelationFormModal
  * @param props.show
  * @param props.children
  * @param props.onCancel
  */
-export function AttributeFormModal(props: {
+export function RelationFormModal(props: {
     show: boolean;
     disableSubmit: boolean;
-    attributeInput: AttributeInput;
+    relationInput: RelationInput;
     children: React.ReactNode;
     onCancel: () => void;
     onSubmit: () => void;
 }) {
     // Defines title based on props.isNew
-    let title = "Update Attribute";
-    if (props.attributeInput.id === "") {
-        title = "Create Attribute";
+    let title = "Update Relation";
+    if (props.relationInput.id === "") {
+        title = "Create Relation";
     }
 
     return (

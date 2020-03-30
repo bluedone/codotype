@@ -2,17 +2,20 @@ import * as React from "react";
 import { Datatype } from "@codotype/types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-    faSnowflake,
     faQuoteRight,
     IconDefinition,
     faHashtag,
     faToggleOn,
+    faFileImage,
+    faFile,
+    faCalendar,
+    faCode,
 } from "@fortawesome/free-solid-svg-icons";
+import { faClock, faFileCode } from "@fortawesome/free-regular-svg-icons";
 
 // // // //
 
 // Maps datatype to FontAwesome icon
-// TODO - replace with actual icons for all of these
 const mapDatatypeToIcon: { [key in Datatype]: IconDefinition } = {
     [Datatype.STRING]: faQuoteRight,
     [Datatype.TEXT]: faQuoteRight,
@@ -22,34 +25,37 @@ const mapDatatypeToIcon: { [key in Datatype]: IconDefinition } = {
     [Datatype.DECIMAL]: faHashtag,
     [Datatype.NUMERIC]: faHashtag,
     [Datatype.BOOLEAN]: faToggleOn,
-    [Datatype.DATE]: faSnowflake,
-    [Datatype.TIME]: faSnowflake,
-    [Datatype.DATETIME]: faSnowflake,
-    [Datatype.TIMESTAMP]: faSnowflake,
-    [Datatype.BINARY]: faSnowflake,
-    [Datatype.JSON]: faSnowflake,
-    [Datatype.JSONB]: faSnowflake,
-    [Datatype.OBJECT]: faSnowflake,
-    [Datatype.STRING_ARRAY]: faSnowflake,
-    [Datatype.TEXT_ARRAY]: faSnowflake,
-    [Datatype.INTEGER_ARRAY]: faSnowflake,
-    [Datatype.BIGINT_ARRAY]: faSnowflake,
-    [Datatype.FLOAT_ARRAY]: faSnowflake,
-    [Datatype.DECIMAL_ARRAY]: faSnowflake,
-    [Datatype.NUMERIC_ARRAY]: faSnowflake,
-    [Datatype.BOOLEAN_ARRAY]: faSnowflake,
-    [Datatype.DATE_ARRAY]: faSnowflake,
-    [Datatype.TIME_ARRAY]: faSnowflake,
-    [Datatype.DATETIME_ARRAY]: faSnowflake,
-    [Datatype.TIMESTAMP_ARRAY]: faSnowflake,
-    [Datatype.SINGLE_FILE]: faSnowflake,
-    [Datatype.SINGLE_IMAGE]: faSnowflake,
+    [Datatype.DATE]: faCalendar,
+    [Datatype.TIME]: faClock,
+    [Datatype.DATETIME]: faCalendar,
+    [Datatype.TIMESTAMP]: faClock,
+    [Datatype.BINARY]: faFileCode,
+    [Datatype.JSON]: faCode,
+    [Datatype.JSONB]: faCode,
+    [Datatype.OBJECT]: faCode,
+    [Datatype.STRING_ARRAY]: faQuoteRight,
+    [Datatype.TEXT_ARRAY]: faQuoteRight,
+    [Datatype.INTEGER_ARRAY]: faHashtag,
+    [Datatype.BIGINT_ARRAY]: faHashtag,
+    [Datatype.FLOAT_ARRAY]: faHashtag,
+    [Datatype.DECIMAL_ARRAY]: faHashtag,
+    [Datatype.NUMERIC_ARRAY]: faHashtag,
+    [Datatype.BOOLEAN_ARRAY]: faToggleOn,
+    [Datatype.DATE_ARRAY]: faCalendar,
+    [Datatype.TIME_ARRAY]: faClock,
+    [Datatype.DATETIME_ARRAY]: faCalendar,
+    [Datatype.TIMESTAMP_ARRAY]: faClock,
+    [Datatype.SINGLE_FILE]: faFile,
+    [Datatype.SINGLE_IMAGE]: faFileImage,
 };
 
 export function DatatypeIcon(props: {
-    datatype: Datatype;
+    datatype: Datatype | null; // NOTE - only here because Attribute.datatype can be null, should be fixed
     className?: string;
 }) {
+    if (props.datatype === null) {
+        return null;
+    }
     return (
         <FontAwesomeIcon
             className={props.className}

@@ -4,12 +4,12 @@ import { Modal } from "react-bootstrap";
 // // // //
 
 /**
- * AttributeDeleteModal
+ * RelationDeleteModal
  * @param props.show
  * @param props.onClose
  * @param props.onConfirm
  */
-export function AttributeDeleteModal(props: {
+export function RelationDeleteModal(props: {
     show: boolean;
     onClose: () => void;
     onConfirm: () => void;
@@ -17,17 +17,17 @@ export function AttributeDeleteModal(props: {
     return (
         <Modal show={props.show} onHide={props.onClose}>
             <Modal.Header closeButton>
-                <Modal.Title>Delete Attribute</Modal.Title>
+                <Modal.Title>Delete Relation</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                Are you sure you want to delete this Attribute?
+                Are you sure you want to delete this Relation?
             </Modal.Body>
             <Modal.Footer>
                 <button className="btn btn-secondary" onClick={props.onClose}>
                     Close
                 </button>
                 <button className="btn btn-danger" onClick={props.onConfirm}>
-                    Delete Attribute
+                    Delete Relation
                 </button>
             </Modal.Footer>
         </Modal>

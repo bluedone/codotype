@@ -5,10 +5,10 @@ import { FormGroup } from "./FormGroup";
 // // // //
 
 /**
- * AttributePropertiesFormProps
+ * RelationPropertiesFormProps
  * TODO - annotate remaining props
  */
-interface AttributePropertiesFormProps {
+interface RelationPropertiesFormProps {
     label: string;
     identifier: string;
     required: boolean;
@@ -20,10 +20,10 @@ interface AttributePropertiesFormProps {
 }
 
 /**
- * AttributePropertiesForm
- * @param props - see `AttributePropertiesFormProps`
+ * RelationPropertiesForm
+ * @param props - see `RelationPropertiesFormProps`
  */
-export function AttributePropertiesForm(props: AttributePropertiesFormProps) {
+export function RelationPropertiesForm(props: RelationPropertiesFormProps) {
     return (
         <div className="row mt-2">
             <div className="col-lg-12">

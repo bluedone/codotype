@@ -15,6 +15,7 @@ export function BuildFinished(props: {
     responseType: "S3_DOWNLOAD" | "LOCAL_PATH";
     downloadUrl?: string;
     filepath?: string;
+    onClickBackToEditor: () => void;
 }) {
     return (
         <div className="row d-flex align-items-center h-100 justify-content-center">
@@ -106,7 +107,10 @@ export function BuildFinished(props: {
                         </div>
 
                         <div className="col-sm-12 col-md-4 mt-2">
-                            <button className="btn btn-block btn-outline-primary">
+                            <button
+                                className="btn btn-block btn-outline-primary"
+                                onClick={props.onClickBackToEditor}
+                            >
                                 <FontAwesomeIcon
                                     icon={faReply}
                                     className="mr-2"

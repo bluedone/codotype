@@ -4,19 +4,19 @@ import { FormGroup } from "./FormGroup";
 // // // //
 
 /**
- * AttributeMetaFormProps
+ * RelationMetaFormProps
  * TODO - annotate remaining props
  */
-interface AttributeMetaFormProps {
+interface RelationMetaFormProps {
     description: string;
     onDescriptionChange: (updatedDescription: string) => void;
 }
 
 /**
- * AttributeMetaForm
- * @param props - see `AttributeMetaFormProps`
+ * RelationMetaForm
+ * @param props - see `RelationMetaFormProps`
  */
-export function AttributeMetaForm(props: AttributeMetaFormProps) {
+export function RelationMetaForm(props: RelationMetaFormProps) {
     return (
         <div className="row mt-2">
             <div className="col-lg-12">
