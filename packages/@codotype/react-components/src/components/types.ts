@@ -119,6 +119,19 @@ export interface Attribute {
     locked: boolean;
 }
 
+export interface Relation {
+    id: string;
+    label: string;
+    identifier: string;
+    description: string;
+    required: boolean;
+    unique: boolean;
+    datatype: Datatype | null;
+    default_value: null | string | boolean | number;
+    datatypeOptions: { [key: string]: any };
+    locked: boolean;
+}
+
 export interface Schema {
     // id: null | string;
     id: string;
@@ -127,7 +140,7 @@ export interface Schema {
     removable: boolean;
     tokens: any; // SchemaTokenCasing;
     attributes: Attribute[];
-    relations: any[];
+    relations: Relation[];
     configuration: ProjectConfiguration;
     // reverse_relations: any[]; <--- these are _derived_, a computed value - doesn't need to be stored
 }

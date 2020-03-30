@@ -11,6 +11,9 @@ storiesOf("BuildFinished", module).add("S3 Download", () => {
             <BuildFinished
                 downloadUrl={"https://google.com"}
                 responseType={"S3_DOWNLOAD"}
+                onClickBackToEditor={() => {
+                    console.log("onClickBackToEditor");
+                }}
             />
         </Story>
     );
@@ -22,6 +25,9 @@ storiesOf("BuildFinished", module).add("Local Path", () => {
             <BuildFinished
                 filepath={"/foo/bar/codotype-build/project"}
                 responseType={"LOCAL_PATH"}
+                onClickBackToEditor={() => {
+                    console.log("onClickBackToEditor");
+                }}
             />
         </Story>
     );

@@ -4,8 +4,6 @@ import { RuntimeProvider } from "../component";
 import { Story } from "@src/components/dev";
 import { dummyGeneratorMeta } from "../../project_editor/__tests__/test_state";
 import { buildDefaultProject } from "../../project_editor/buildDefaultProject";
-import { BuildFinished } from "@src/components/build_finished/component";
-import { LoadingBuild } from "@src/components/loading_build";
 
 // // // //
 
@@ -17,28 +15,7 @@ storiesOf("RuntimeProvider", module).add("active = true", () => {
     return (
         <Story>
             <RuntimeProvider>
-                {({ loading, finished, generateCode, reset }) => {
-                    // Handle loading state
-                    if (loading) {
-                        return <LoadingBuild />;
-                    }
-
-                    // Handle finsihed state
-                    if (finished) {
-                        return (
-                            <React.Fragment>
-                                <BuildFinished
-                                    responseType="LOCAL_PATH"
-                                    filepath="/home/aeksco/code"
-                                    // TODO - pass in RESET prop here
-                                />
-                                <button disabled={loading} onClick={reset}>
-                                    Reset
-                                </button>
-                            </React.Fragment>
-                        );
-                    }
-
+                {({ loading, generateCode }) => {
                     // Render ProjectEditor here
                     return (
                         <div>

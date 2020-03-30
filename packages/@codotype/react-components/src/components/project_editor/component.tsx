@@ -37,6 +37,8 @@ export const ProjectEditor: FunctionComponent<ProjectEditorProps> = (
                         generatorMeta={generator}
                         onChange={(updatedProject: Project) => {
                             // Invokes props.onChange with the updated project
+                            console.log("UPDATED PROJECT");
+
                             props.onChange(updatedProject);
                         }}
                     />

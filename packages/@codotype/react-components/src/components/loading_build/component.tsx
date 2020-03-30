@@ -1,19 +1,39 @@
 import * as React from "react";
 import { LoadingSpinner } from "../loading_spinner";
+import sample from "lodash.sample";
 
 // // // //
 
-const quotes: [string, string][] = [
-    ["I have no patience with dinosaurs.", "AdamWest"],
+export const quotes: [string, string][] = [
+    ["I have no patience with dinosaurs.", "Adam West"],
+    [
+        "Have patience with all things, But, first of all with yourself.",
+        "Saint Francis de Sales",
+    ],
+    [
+        "Rivers know this: there is no hurry. We shall get there some day.",
+        "A.A. Milne",
+    ],
+    ["Trees that are slow to grow bear the best fruit.", "Moliere"],
+    ["Patience is bitter, but its fruit is sweet.", "Aristotle"],
+    ["Patience is a conquering virtue.", "Geoffrey Chaucer"],
+    [
+        "The strongest of all warriors are these two — Time and Patience.",
+        "Leo Tolstoy",
+    ],
 ];
 
 /**
  * LoadingBuild
  * Renders a spinning Codotype Logo
  */
-export function LoadingBuild() {
-    // TODO - sample quotes array using Lodash _.sample(collection)
-    const quote = quotes[0];
+export function LoadingBuild(props: { quote?: [string, string] }) {
+    // @ts-ignore
+    const quote = props.quote || sample<[string, string]>(quotes) || quotes[0];
+    // @ts-ignore
+    const quoteBody = quote[0];
+    // @ts-ignore
+    const quoteAuthor = quote[1];
 
     return (
         <div className="h-100 d-flex flex-row justify-content-center align-items-center">
@@ -39,8 +59,8 @@ export function LoadingBuild() {
                         </div>
                     </div>
                     <small className="text-muted">
-                        {quote[0]}
-                        <br />- <strong>{quote[1]}</strong>
+                        {quoteBody}
+                        <br />- <strong>{quoteAuthor}</strong>
                     </small>
                 </div>
             </div>
