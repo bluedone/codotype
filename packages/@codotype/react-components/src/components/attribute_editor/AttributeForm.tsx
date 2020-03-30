@@ -1,124 +1,209 @@
 import { AttributePropertiesForm } from "./AttributePropertiesForm";
 import { AttributeDatatypeForm } from "./AttributeDatatypeForm";
 import { AttributeMetaForm } from "./AttributeMetaForm";
-import { Datatype, Attribute } from "@codotype/types";
+import { Attribute, Datatype } from "../types";
 import { sanitizeLabel, makeIdentifier } from "@codotype/util";
 import * as React from "react";
+import { AttributeInput } from "./AttributeFormModal";
+
+// // // //
+
+function FormGroupTab(props: {
+    label: string;
+    active: boolean;
+    disabled: boolean;
+    onClick: () => void;
+}) {
+    const { label } = props;
+    const btnClassName: string[] = ["btn btn-block nav-link w-100"];
+    if (props.active) {
+        btnClassName.push("active");
+    }
+
+    return (
+        <li className="nav-item d-flex flex-grow-1">
+            <button
+                // href="#"
+                // TODO - fix styles here, replace with <button>
+                className={btnClassName.join(" ")}
+                disabled={props.disabled}
+                style={{
+                    cursor: "pointer",
+                }}
+                onClick={props.onClick}
+            >
+                {label}
+            </button>
+        </li>
+    );
+}
+
+/**
+ * AttributeFormSelector
+ */
+export function AttributeFormSelector(props: {
+    attributeInput: AttributeInput;
+    children: (childProps: {
+        selectedForm: string;
+        setSelectedForm: (updatedSelectedGroup: string) => void;
+    }) => React.ReactNode;
+}) {
+    const { attributeInput } = props;
+    const defaultSelectedForm =
+        attributeInput.datatype === null ? "DATATYPE" : "PROPERTIES";
+
+    const [selectedForm, setSelectedForm] = React.useState<string>(
+        defaultSelectedForm,
+    );
+
+    return (
+        <div className="row">
+            <div className="col-lg-12">
+                <ul className="nav nav-tabs w-100 d-flex">
+                    <FormGroupTab
+                        onClick={() => {
+                            setSelectedForm("DATATYPE");
+                        }}
+                        disabled={attributeInput.datatype === null}
+                        active={selectedForm === "DATATYPE"}
+                        label={"Datatype"}
+                    />
+
+                    <FormGroupTab
+                        onClick={() => {
+                            setSelectedForm("PROPERTIES");
+                        }}
+                        disabled={attributeInput.datatype === null}
+                        active={selectedForm === "PROPERTIES"}
+                        label={"Properties"}
+                    />
+
+                    <FormGroupTab
+                        onClick={() => {
+                            setSelectedForm("DESCRIPTION");
+                        }}
+                        disabled={attributeInput.datatype === null}
+                        active={selectedForm === "DESCRIPTION"}
+                        label={"Default & Description"}
+                    />
+                </ul>
+            </div>
+            <div className="col-lg-12">
+                {props.children({ selectedForm, setSelectedForm })}
+            </div>
+        </div>
+    );
+}
+
+// // // //
 
 /**
  * AttributeFormProps
- * `editorModel` - the `Attribute` currently being edited
+ * `attributeInput` - the `Attribute` currently being edited
  * `supportedDatatypes` - the unique IDs of supported datatypes made available in the form
- * `onSubmit` - submits the form to either create or update a `Attribute`
- * `onCancel` - closes the formw
  */
 interface AttributeFormProps {
     attributes: Attribute[];
-    editorModel: Attribute;
+    attributeInput: AttributeInput;
     supportedDatatypes: Datatype[];
-    onSubmit: (updatedAttribute: Attribute) => void;
-    onCancel: () => void;
+    onChange: (updatedAttributeInput: AttributeInput) => void;
 }
-
-/**
- * canSubmit
- * @param label
- */
-export function canSubmit(label: string): boolean {
-    return label !== "";
-}
-
-// TODO - this component will need its own reducer + actions to manage
-// currentStep
-// current editorModel
-// canSubmit state
 
 /**
  * AttributeForm
  * @param props - see `AttributeFormProps`
  */
 export function AttributeForm(props: AttributeFormProps) {
-    const [label, setLabel] = React.useState<string>(props.editorModel.label);
-    const [identifier, setIdentifier] = React.useState<string>(
-        props.editorModel.identifier,
-    );
-    const [required, setRequired] = React.useState<boolean>(
-        props.editorModel.required,
-    );
-    const [unique, setUnique] = React.useState<boolean>(
-        props.editorModel.unique,
-    );
-    const [description, setDescription] = React.useState<string>(
-        props.editorModel.description,
-    );
-    const [datatype, setDatatype] = React.useState<Datatype | null>(
-        props.editorModel.datatype,
-    );
-
-    /**
-     * setLabelAndIdentifier
-     * TODO - implement `sanitizeLabel` function here
-     * @param updatedLabel
-     */
-    function setLabelAndIdentifier(updatedLabel: string) {
-        const sanitizedLabel: string = sanitizeLabel(updatedLabel);
-        setLabel(sanitizedLabel);
-        setIdentifier(makeIdentifier(sanitizedLabel));
-    }
+    const { attributeInput, supportedDatatypes } = props;
 
     return (
         <div className="row">
             <div className="col-lg-12">
-                {!datatype && (
-                    <AttributeDatatypeForm
-                        datatype={datatype}
-                        supportedDatatypes={props.supportedDatatypes}
-                        onChangeDatatype={updatedDatatype => {
-                            setDatatype(updatedDatatype);
+                {/* {attributeInput.datatype && ( */}
+                <React.Fragment>
+                    <AttributeFormSelector attributeInput={attributeInput}>
+                        {({ selectedForm, setSelectedForm }) => {
+                            if (selectedForm === "DATATYPE") {
+                                return (
+                                    <AttributeDatatypeForm
+                                        datatype={attributeInput.datatype}
+                                        supportedDatatypes={supportedDatatypes}
+                                        onChangeDatatype={updatedDatatype => {
+                                            props.onChange({
+                                                ...attributeInput,
+                                                datatype: updatedDatatype,
+                                            });
+                                            setSelectedForm("PROPERTIES");
+                                        }}
+                                    />
+                                );
+                            }
+
+                            if (selectedForm === "PROPERTIES") {
+                                return (
+                                    <AttributePropertiesForm
+                                        label={attributeInput.label}
+                                        identifier={attributeInput.identifier}
+                                        required={attributeInput.required}
+                                        unique={attributeInput.unique}
+                                        onLabelChange={(
+                                            updatedLabel: string,
+                                        ) => {
+                                            const sanitizedLabel: string = sanitizeLabel(
+                                                updatedLabel,
+                                            );
+                                            props.onChange({
+                                                ...attributeInput,
+                                                label: sanitizedLabel,
+                                                identifier: makeIdentifier(
+                                                    sanitizedLabel,
+                                                ),
+                                            });
+                                        }}
+                                        onIdentifierChange={(
+                                            updatedIdentifier: string,
+                                        ) => {
+                                            props.onChange({
+                                                ...attributeInput,
+                                                identifier: updatedIdentifier,
+                                            });
+                                        }}
+                                        onRequiredChange={(
+                                            updatedRequired: boolean,
+                                        ) => {
+                                            props.onChange({
+                                                ...attributeInput,
+                                                required: updatedRequired,
+                                            });
+                                        }}
+                                        onUniqueChange={(
+                                            updatedUnique: boolean,
+                                        ) => {
+                                            props.onChange({
+                                                ...attributeInput,
+                                                unique: updatedUnique,
+                                            });
+                                        }}
+                                    />
+                                );
+                            }
+
+                            return (
+                                <AttributeMetaForm
+                                    description={attributeInput.description}
+                                    onDescriptionChange={(
+                                        updatedDescription: string,
+                                    ) => {
+                                        props.onChange({
+                                            ...attributeInput,
+                                            description: updatedDescription,
+                                        });
+                                    }}
+                                />
+                            );
                         }}
-                    />
-                )}
-
-                {datatype && (
-                    <React.Fragment>
-                        <AttributePropertiesForm
-                            label={label}
-                            identifier={identifier}
-                            required={required}
-                            unique={unique}
-                            onLabelChange={(updatedLabel: string) => {
-                                setLabelAndIdentifier(updatedLabel);
-                            }}
-                            onIdentifierChange={setIdentifier}
-                            onRequiredChange={setRequired}
-                            onUniqueChange={setUnique}
-                        />
-
-                        <AttributeMetaForm
-                            description={description}
-                            onDescriptionChange={setDescription}
-                        />
-                    </React.Fragment>
-                )}
-
-                <button
-                    disabled={!canSubmit(label)}
-                    onClick={() => {
-                        props.onSubmit({
-                            ...props.editorModel,
-                            label: label.trim(),
-                            identifier: identifier.trim(),
-                            datatype,
-                            required,
-                            unique,
-                            description,
-                        });
-                    }}
-                >
-                    Save
-                </button>
-
-                <button onClick={props.onCancel}>Cancel</button>
+                    </AttributeFormSelector>
+                </React.Fragment>
             </div>
         </div>
     );

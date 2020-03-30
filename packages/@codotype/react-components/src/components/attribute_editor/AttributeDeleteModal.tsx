@@ -23,8 +23,12 @@ export function AttributeDeleteModal(props: {
                 Are you sure you want to delete this Attribute?
             </Modal.Body>
             <Modal.Footer>
-                <button onClick={props.onClose}>Close</button>
-                <button onClick={props.onConfirm}>Delete Attribute</button>
+                <button className="btn btn-secondary" onClick={props.onClose}>
+                    Close
+                </button>
+                <button className="btn btn-danger" onClick={props.onConfirm}>
+                    Delete Attribute
+                </button>
             </Modal.Footer>
         </Modal>
     );

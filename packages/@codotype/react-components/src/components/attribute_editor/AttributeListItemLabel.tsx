@@ -2,6 +2,10 @@ import { DatatypeMeta, Attribute } from "@codotype/types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSnowflake } from "@fortawesome/free-solid-svg-icons";
 import * as React from "react";
+import { DatatypeIcon } from "./DatatypeIcon";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
+
+// // // //
 
 interface AttributeListItemLabelProps {
     attribute: Attribute;
@@ -9,16 +13,28 @@ interface AttributeListItemLabelProps {
 }
 
 export function AttributeListItemLabel(props: AttributeListItemLabelProps) {
+    const { attribute } = props;
     return (
         <small>
-            <i
-                className={"mr-1 fa-fw " + props.datatype.icon}
-                title={props.datatype.label}
-            />
-            {props.attribute.label}
-            <span className="text-danger" v-if="item.required">
-                *
-            </span>
+            {/* DatatypeIcon + Tooltip */}
+            <OverlayTrigger
+                placement="left"
+                overlay={
+                    <Tooltip id={`datatype-icon-${attribute.id}`}>
+                        {props.datatype.label}
+                    </Tooltip>
+                }
+            >
+                <span className="px-1">
+                    <DatatypeIcon datatype={attribute.datatype} />
+                </span>
+            </OverlayTrigger>
+
+            {/* Attribute label */}
+            <span className="ml-2">{attribute.label}</span>
+
+            {/* Required badge */}
+            {attribute.required && <span className="ml-1 text-danger">*</span>}
 
             {/* <b-badge
                 v-if="index === 0"
@@ -30,16 +46,20 @@ export function AttributeListItemLabel(props: AttributeListItemLabelProps) {
               <i class="fa text-primary fa-tag" />
             </b-badge> */}
 
-            {true && (
-                <span
-                    title="Unique"
-                    // v-b-tooltip.hover.right
-                    className="ml-2 badge badge-light"
+            {/* Unique badge + tooltip */}
+            {attribute.unique && (
+                <OverlayTrigger
+                    placement="right"
+                    overlay={
+                        <Tooltip id={`unique-badge-${attribute.id}`}>
+                            Unique
+                        </Tooltip>
+                    }
                 >
-                    <FontAwesomeIcon icon={faSnowflake} />
-                    {/* Unique */}
-                    {/* TODO - add tooltip */}
-                </span>
+                    <span className="ml-2 badge badge-light">
+                        <FontAwesomeIcon icon={faSnowflake} />
+                    </span>
+                </OverlayTrigger>
             )}
         </small>
     );
