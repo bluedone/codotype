@@ -5,18 +5,18 @@ import { Story } from "@src/components/dev";
 
 // // // //
 
-storiesOf("ChevronAnimation", module).add("active = true", () => {
-    return (
-        <Story>
-            <ChevronAnimation active />
-        </Story>
-    );
-});
-
-storiesOf("ChevronAnimation", module).add("active = false", () => {
-    return (
-        <Story>
-            <ChevronAnimation active={false} />
-        </Story>
-    );
-});
+storiesOf("Components/ChevronAnimation", module)
+    .add("active = true", () => {
+        return (
+            <Story>
+                <ChevronAnimation active />
+            </Story>
+        );
+    })
+    .add("active = false", () => {
+        return (
+            <Story>
+                <ChevronAnimation active={false} />
+            </Story>
+        );
+    });

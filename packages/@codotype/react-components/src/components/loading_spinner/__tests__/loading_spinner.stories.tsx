@@ -5,7 +5,7 @@ import { Story } from "@src/components/dev";
 
 // // // //
 
-storiesOf("LoadingSpinner", module).add("renders", () => {
+storiesOf("Components/LoadingSpinner", module).add("renders", () => {
     return (
         <Story>
             <LoadingSpinner />

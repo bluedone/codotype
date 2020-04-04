@@ -36,6 +36,13 @@ export enum Datatype {
     SINGLE_IMAGE = "SINGLE_IMAGE",
 }
 
+// TODO - what other types need to be supported here?
+// RADIO_GROUP (nice, but not necessary)
+// CHECKBOXES - nice, but functionally the same as a MULTI_DROPDOWN
+// DATE
+// TIME
+// DATETIME
+// JSON - low-priority, not really necessary
 export enum OptionType {
     STRING = "STRING",
     NUMBER = "NUMBER",
@@ -60,10 +67,21 @@ export type OptionValueInstance =
     | OptionValueInstanceStandard
     | OptionValueInstanceAllowDisable;
 
+// TODO - should be:
+// export interface OptionValueInstance {
+//     enabled: boolean;
+//     value: {
+//         [key: string]: OptionValue;
+//     };
+// }
+
 interface OptionValueInstanceStandard {
     [key: string]: OptionValue;
 }
 
+// NOTE - this distinction is confusing
+// it should always include he enabled + value pair
+// When we inflate the metadata to be used in the generator, we can simplify based on the allowDisable property
 interface OptionValueInstanceAllowDisable {
     enabled: boolean;
     value: {
@@ -71,11 +89,17 @@ interface OptionValueInstanceAllowDisable {
     };
 }
 
+// TODO - add `description` here -> label/value might not always be enough
 export interface DropdownOption {
     label: string;
     value: string;
 }
 
+// TODO - add variant to ConfigurationGroupProperty -> make list of use cases + mockups
+// TODO - add `documentation` property to `ConfigurationGroupProperty` - description might not always be enough.
+// TODO - add `filters` property to `ConfigurationGroupProperty` - should accept a set of ordered, pre-defined
+// transformations that can be applied to a `ConfigurationGroupProperty` of a specific OptionType.
+// i.e., for a Text input field, you can apply -> "strip numbers" -> "strip symbols" -> "lowercase" -> "underscored"
 export interface ConfigurationGroupProperty {
     label: string;
     identifier: string;
@@ -88,6 +112,12 @@ export interface ConfigurationGroupProperty {
     allowDisable: boolean;
     properties: ConfigurationGroupProperty[];
     dropdownOptions: DropdownOption[];
+}
+
+// TODO - integrate through the app
+// TODO - add the remaining variant values here
+export enum ConfigurationGroupLayoutVariant {
+    list = "LIST",
 }
 
 export interface ConfigurationGroup {
@@ -132,6 +162,28 @@ export interface Relation {
     locked: boolean;
 }
 
+// TODO - finish mapping this out
+// Must draw distinction between data that's needed at the editor level, and data that's needed at the UI + Runtime level
+export interface RelationV2 {
+    id: string;
+    label: string;
+    identifier: string;
+    description: string;
+    required: boolean;
+    unique: boolean;
+    datatype: Datatype | null;
+    default_value: null | string | boolean | number;
+    datatypeOptions: { [key: string]: any };
+    locked: boolean;
+
+    // : "BELONGS_TO",
+    source_schema_id: number;
+    destination_schema_id: number;
+    destination_alias: "Liege Lord";
+    source_alias: ""; // Why is this necessary, reverse as?
+    // reverse_relation_id: "", // THIS IS DISPLAY + RUNTIME ONLY
+}
+
 export interface Schema {
     // id: null | string;
     id: string;
@@ -160,6 +212,10 @@ export enum ExperienceRecommendation {
     EXPERT = "expert",
 }
 
+// TODO - should this be built-out to support enabling / disabling attribute properties?
+// i.e. enable support for "required" / "unique" / "primary key" / "default value" options?
+// Might make sense to add `constraints` object to the `Attribute` interface to support this cleanly.
+// Might also want to add camelCase/pascalCase/etc. to Attribute
 export interface SchemaConfigurationGroup {
     configurationGroups: any[]; // ConfigurationGroup
     // defaultSchemas: any; // a Schemas array containing default schemas to load with the project.Learn more about default schema behavior here
@@ -167,6 +223,11 @@ export interface SchemaConfigurationGroup {
     supportedRelations: any[]; // The relation types supported by this generator.Only an array of RELATION_TYPE_ * identifiers that correspond to values defined in @codotype/types are accepted.
 }
 
+// TODO - GeneratorMeta should be split up into:
+// Generator
+// GeneratorMeta
+// Generator encapsulate the GeneratorMeta + link to the entry point of the generator
+// Can be defined in `index.ts` in the root of the generator, or split up into smaller components in `src`
 export interface GeneratorMeta {
     id: string; // unique ID for the generator
     label: string; // short label for the generator
