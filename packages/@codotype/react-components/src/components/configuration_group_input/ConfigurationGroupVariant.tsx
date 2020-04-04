@@ -14,11 +14,11 @@ export function ConfigurationGroupVariant(props: {
             {/* Render inputs for ConfigurationGroup.properties */}
             {/* RENDER variant === "LIST" */}
             {props.configurationGroup.variant === "LIST" && (
-                <div className="row">
+                <React.Fragment>
                     {props.children}
                     {/* <pre>{JSON.stringify(val, null, 4)}</pre> */}
                     {/* <pre>{JSON.stringify(props.configurationGroup, null, 4)}</pre> */}
-                </div>
+                </React.Fragment>
             )}
 
             {/* Render SIDEBYSIDE variant */}

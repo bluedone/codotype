@@ -88,6 +88,7 @@ export const ConfigurationInstanceInput: FunctionComponent<ConfigurationInstance
                             // TODO - handle nested instance + collection
                             return (
                                 <ConfigurationInputFormGroup
+                                    card
                                     property={property}
                                 >
                                     <ConfigurationInputChild

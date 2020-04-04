@@ -13,6 +13,7 @@ import { ConfigurationGroupHeader } from "./ConfigurationGroupHeader";
 import { ConfigurationInputFormGroup } from "./ConfigurationInputFormGroup";
 import { ConfigurationInstanceInput } from "./ConfigurationInstanceInput";
 import { MoreInfoLink } from "../more_info_link";
+import { ConfigurationCollectionInput } from "./ConfigurationCollectionInput";
 
 // // // //
 
@@ -105,25 +106,18 @@ export const ConfigurationInput: FunctionComponent<ConfigurationInputProps> = (
                     {props.configurationGroup.properties.map(
                         (property: ConfigurationGroupProperty) => {
                             if (property.type === OptionType.COLLECTION) {
-                                // return (
-                                //     <div className="card card-body mb-4">
-                                //         <ConfigurationInstanceInput
-                                //             label={property.label}
-                                //             properties={property.properties}
-                                //             onChange={(
-                                //                 updatedVal: OptionValue,
-                                //             ) => {
-                                //                 props.onChange({
-                                //                     ...props.value,
-                                //                     // [property.identifier]: updatedVal,
-                                //                 });
-                                //             }}
-                                //             value={props.value}
-                                //         />
-                                //     </div>
-                                // );
                                 return (
-                                    <p>TODO - RENDER COLLECTION EDITOR HERE</p>
+                                    <ConfigurationCollectionInput
+                                        label={property.label}
+                                        properties={property.properties}
+                                        onChange={(updatedVal: OptionValue) => {
+                                            props.onChange({
+                                                ...props.value,
+                                                // [property.identifier]: updatedVal,
+                                            });
+                                        }}
+                                        value={props.value}
+                                    />
                                 );
                             }
 
@@ -173,6 +167,7 @@ export const ConfigurationInput: FunctionComponent<ConfigurationInputProps> = (
                             const value = props.value[property.identifier];
                             return (
                                 <ConfigurationInputFormGroup
+                                    card
                                     property={property}
                                     key={property.identifier}
                                 >

@@ -12,11 +12,7 @@ import { Story } from "@src/components/dev";
 
 // // // //
 
-const stories: Array<[
-    string,
-    ConfigurationGroupProperty[],
-    OptionValueInstance,
-]> = [
+const stories: [string, ConfigurationGroupProperty[], OptionValueInstance][] = [
     [
         "dropdown",
         [
