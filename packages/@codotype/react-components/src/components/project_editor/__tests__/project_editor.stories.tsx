@@ -81,6 +81,10 @@ storiesOf("ProjectEditor", module).add("renders", () => {
                     console.log("Generate Project!");
                     console.log(project);
                 }}
+                onResetProject={() => {
+                    console.log("RESET PROJECT");
+                    console.log(project);
+                }}
                 onChange={(updatedProject: Project) => {
                     console.log("onChange!");
                     console.log(updatedProject);

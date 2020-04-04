@@ -11,6 +11,7 @@ interface ProjectEditorProps {
     project: Project;
     onChange: (updatedProject: Project) => void;
     onClickGenerate: () => void;
+    onResetProject: () => void;
     // enableImport?: boolean;
     // enableExport?: boolean;
 }
@@ -29,6 +30,7 @@ export const ProjectEditor: FunctionComponent<ProjectEditorProps> = (
                         project={project}
                         onChange={props.onChange}
                         onClickGenerate={props.onClickGenerate}
+                        onConfirmReset={props.onResetProject}
                     />
 
                     {/* Render ConfigurationGroupSelector */}

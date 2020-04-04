@@ -67,19 +67,36 @@ export function ConfigurationGroupSelector(props: {
         selectConfigurationGroup,
     ] = React.useState<ConfigurationGroup>(defaultConfigurationGroup);
 
+    // Defines a flag indicating whether or not the SchemaEditor is enabled for props.generator
+    // If false, schemas will not be selectable
+    const {
+        configurationGroups,
+        supportedDatatypes,
+        supportedRelations,
+    } = generatorMeta.schemaConfigurationGroup;
+    const enableSchemaEditor: boolean =
+        configurationGroups.length > 0 ||
+        supportedDatatypes.length > 0 ||
+        supportedRelations.length > 0;
+
     // NOTE - enable/disable this if schemas aren't supported
-    const [viewingSchemas, setViewingSchemas] = React.useState<boolean>(true);
+    const [viewingSchemas, setViewingSchemas] = React.useState<boolean>(
+        enableSchemaEditor,
+    );
+
     return (
         <div className="row">
             <div className="col-lg-12">
                 <ul className="nav nav-tabs">
-                    <ConfigurationGroupTab
-                        onClick={() => {
-                            setViewingSchemas(true);
-                        }}
-                        active={viewingSchemas}
-                        label={"Schemas"}
-                    />
+                    {enableSchemaEditor && (
+                        <ConfigurationGroupTab
+                            onClick={() => {
+                                setViewingSchemas(true);
+                            }}
+                            active={viewingSchemas}
+                            label={"Schemas"}
+                        />
+                    )}
 
                     {/* Renders the navigation for selecting a ConfigurationGroup */}
                     {generatorMeta.configuration_groups.map(
@@ -135,7 +152,7 @@ export function ConfigurationGroupSelector(props: {
                 )}
 
                 {/* Render SchemaEditorLayout */}
-                {viewingSchemas && (
+                {viewingSchemas && enableSchemaEditor && (
                     <SchemaEditorLayout
                         schemas={props.project.schemas}
                         onChange={(updatedSchemas: Schema[]) => {

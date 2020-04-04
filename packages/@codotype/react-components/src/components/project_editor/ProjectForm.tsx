@@ -8,7 +8,10 @@ import { faLightbulb } from "@fortawesome/free-regular-svg-icons";
  * ProjectForm
  * @param props.label
  */
-export function ProjectForm() {
+export function ProjectForm(props: {
+    value: string;
+    onChange: (updatedProjectLabel: string) => void;
+}) {
     return (
         <div className="row align-items-center justify-content-center">
             <div className="col-sm-12">
@@ -26,12 +29,12 @@ export function ProjectForm() {
                 </small>
 
                 <input
-                    // ref="input_el"
-                    id="project-label"
                     className="form-control form-control-lg"
-                    v-model="projectLabel"
                     placeholder="Project Name"
-                    // @keyup.enter="onKeyEnter()"
+                    value={props.value}
+                    onChange={e => {
+                        props.onChange(e.currentTarget.value);
+                    }}
                 />
 
                 {/* <small className="text-muted">Identifier: {{ identifier || 'project_name'}}</small> */}
