@@ -225,6 +225,7 @@ export function SchemaEditorLayout(props: {
             <div className="col-lg-8">
                 <SchemaDetail
                     schema={selectedSchema}
+                    schemas={state.schemas}
                     onChange={(updatedSchema: Schema) => {
                         // Defines updatedSchemas to include `updatedSchema`
                         const updatedSchemas: Schema[] = state.schemas.map(

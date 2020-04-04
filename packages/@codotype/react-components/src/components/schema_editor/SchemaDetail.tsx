@@ -9,6 +9,7 @@ import { Schema, Attribute, Relation, Datatype } from "../types";
 
 interface SchemaDetailProps {
     schema: Schema;
+    schemas: Schema[];
     onChange: (updatedSchema: Schema) => void;
     onClickEdit: () => void;
     onConfirmDelete: () => void;
@@ -63,7 +64,7 @@ export function SchemaDetail(props: SchemaDetailProps) {
                 />
             </div>
             <div className="col-sm-6">
-                <SchemaPreview schema={props.schema} />
+                <SchemaPreview schema={props.schema} schemas={props.schemas} />
             </div>
             <div className="col-sm-6">
                 <p>Incoming Relations</p>

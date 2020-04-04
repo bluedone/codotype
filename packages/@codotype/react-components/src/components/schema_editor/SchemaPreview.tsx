@@ -3,17 +3,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { InfoTooltip } from "../info_tooltip";
 import { Schema } from "../types";
+import { buildDefault } from "@codotype/util";
 
 // // // //
 
 /**
  * SchemaPreview
+ * TODO - this should support switching between different preview types - JSON, GraphQL, TypeScript, JavaScript
+ * TODO - when hovering over a relation, it should display a tooltip with a preview of the related Schema
+ * TODO - when clicking a relation it should allow the user to
  */
-export function SchemaPreview(props: { schema: Schema }) {
-    const obj = {
-        label: "string",
-        score: 0,
-    };
+export function SchemaPreview(props: { schema: Schema; schemas: Schema[] }) {
+    const { schema, schemas } = props;
+    const obj = buildDefault({ schema, schemas });
 
     return (
         <div className="row">
@@ -27,7 +29,7 @@ export function SchemaPreview(props: { schema: Schema }) {
                         <InfoTooltip
                             id="schema-preview"
                             placement="left"
-                            message={`The data structure of a single ${props.schema.tokens.label} Schema`}
+                            message={`The data structure of a single ${schema.tokens.label} Schema`}
                         />
                     </span>
                     <small className="mb-0 text-muted">

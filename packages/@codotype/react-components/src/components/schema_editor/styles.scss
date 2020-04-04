@@ -20,3 +20,21 @@ li.list-group-item {
 
 // a.row.align-items-center
 //   text-decoration: none
+
+// // // //
+// SchemaDeleteButton styles
+.schema-delete-button {
+    transition: color 0.25s ease-in-out;
+    cursor: pointer;
+    color: $gray-500;
+    box-shadow: none;
+    &.hasReverse {
+        &:hover {
+            color: $gray-500 !important;
+            cursor: not-allowed;
+        }
+    }
+    &:hover {
+        color: $red;
+    }
+}
