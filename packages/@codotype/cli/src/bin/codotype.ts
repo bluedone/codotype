@@ -6,7 +6,8 @@ import minimist from "minimist";
 // @ts-ignore
 import * as program from "commander";
 import chalk from "chalk";
-import semver from "semver";
+import * as semver from "semver";
+import * as fs from "fs";
 import { buildCommand } from "../commands/build";
 import { runCommand } from "../commands/run";
 import { serveCommand } from "../commands/serve";
@@ -37,7 +38,8 @@ checkNodeVersion(requiredVersion, "codotype-cli");
 
 // // // //
 
-program.version(require("../package").version).usage("<command> [options]");
+// TODO - this should be pulled from package.json
+program.version("1.0.0").usage("<command> [options]");
 
 program
   .command("ui")

@@ -1,7 +1,7 @@
 import * as path from "path";
 import chalk from "chalk";
 import { spawn } from "child_process";
-import CodotypeRuntime from "@codotype/runtime";
+import { CodotypeNodeRuntime } from "@codotype/runtime";
 
 async function serve(options: any) {
   // Logs start message
@@ -19,11 +19,15 @@ async function serve(options: any) {
   // ); // CLEANUP - constantize MAGIC STRING
 
   // Invoke runtime directly with parameters
-  const runtime = new CodotypeRuntime();
+  const runtime = new CodotypeNodeRuntime();
 
   // Registers this generator via relative path
   try {
-    runtime.registerGenerator({ absolute_path: process.cwd() });
+    runtime.registerGenerator({
+      absolute_path: process.cwd(),
+      module_path: false,
+      relative_path: false,
+    });
   } catch (err) {
     throw err;
   }

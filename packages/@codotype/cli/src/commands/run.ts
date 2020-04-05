@@ -1,6 +1,7 @@
 import * as path from "path";
 import chalk from "chalk";
-import CodotypeRuntime from "@codotype/runtime";
+import { CodotypeNodeRuntime } from "@codotype/runtime";
+
 import { buildConfiguration } from "@codotype/util/dist/buildConfiguration";
 
 // TODO - implement `inquirer` for basic build
@@ -63,10 +64,14 @@ async function runGenerator(blueprint, options) {
   };
 
   // Invoke runtime directly with parameters
-  const runtime = new CodotypeRuntime();
+  const runtime = new CodotypeNodeRuntime();
 
   // Registers this generator via relative path
-  runtime.registerGenerator({ absolute_path: process.cwd() });
+  runtime.registerGenerator({
+    absolute_path: process.cwd(),
+    module_path: false,
+    relative_path: false,
+  });
 
   // Executes the build
   await runtime.execute({ build });

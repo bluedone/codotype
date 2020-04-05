@@ -1,6 +1,6 @@
 import * as path from "path";
 import chalk from "chalk";
-import CodotypeRuntime from "@codotype/runtime";
+import { CodotypeNodeRuntime } from "@codotype/runtime";
 import { validateGenerator } from "@codotype/util/dist/validateGenerator"; // CLEANUP - would be nice to just import from `@codotype/util`
 
 async function doctor(options) {
@@ -22,10 +22,14 @@ async function doctor(options) {
   );
 
   // Invoke runtime directly with parameters
-  const runtime = new CodotypeRuntime();
+  const runtime = new CodotypeNodeRuntime();
 
   // Registers this generator via relative path
-  runtime.registerGenerator({ absolute_path: process.cwd() });
+  runtime.registerGenerator({
+    absolute_path: process.cwd(),
+    module_path: false,
+    relative_path: false,
+  });
   console.log(
     `the doctor says ${
       chalk.green(`this generator can register with the `) +
@@ -52,7 +56,7 @@ async function doctor(options) {
   });
 
   // Logs validation success and error messages
-  if (validations.map((v) => v.valid).includes(false)) {
+  if (validations.map((v) => v.valid).some((bool) => bool === false)) {
     console.log(
       `the doctor says ${chalk.red(
         `this generator is missing some critical properties `

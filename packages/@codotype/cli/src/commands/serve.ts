@@ -1,8 +1,8 @@
 import * as path from "path";
 import chalk from "chalk";
-import { server } from "@codotype/api/src/server";
+// import { server } from "@codotype/api";
 import { spawn } from "child_process";
-import CodotypeRuntime from "@codotype/runtime";
+import { CodotypeNodeRuntime } from "@codotype/runtime";
 
 async function serve(options: any) {
   // Logs start message
@@ -20,11 +20,15 @@ async function serve(options: any) {
   // console.log(`the doctor says ${chalk.green(`this generator's metadata loaded correctly`)}`)
 
   // Invoke runtime directly with parameters
-  const runtime = new CodotypeRuntime();
+  const runtime = new CodotypeNodeRuntime();
 
   // Registers this generator via relative path
   try {
-    runtime.registerGenerator({ absolute_path: process.cwd() });
+    runtime.registerGenerator({
+      absolute_path: process.cwd(),
+      module_path: false,
+      relative_path: false,
+    });
   } catch (err) {
     throw err;
     return;
@@ -39,18 +43,18 @@ async function serve(options: any) {
   const port: number = Number(process.env.PORT) || 9090;
   const generateBuildId: boolean = false;
 
-  const app = server({
-    port,
-    runtime,
-    generateBuildId,
-    zipBuild: false,
-    uploadZipToS3: false,
-  });
+  // const app = server({
+  //   port,
+  //   runtime,
+  //   generateBuildId,
+  //   zipBuild: false,
+  //   uploadZipToS3: false,
+  // });
 
-  app.listen(port, () => {
-    console.log("Started API server...");
-    // console.log(`Express is running on port ${port}`)
-  });
+  // app.listen(port, () => {
+  //   console.log("Started API server...");
+  //   // console.log(`Express is running on port ${port}`)
+  // });
 
   // // // //
   // CLEANUP - running a user interface service will necessary in an number of places
