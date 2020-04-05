@@ -6,3 +6,5 @@ export * from "./datatype";
 export * from "./relation-meta";
 export * from "./relation";
 export * from "./schema";
+export * from "./project";
+export * from "./generator";
