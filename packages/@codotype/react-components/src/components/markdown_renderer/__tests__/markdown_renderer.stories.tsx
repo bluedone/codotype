@@ -6,7 +6,7 @@ import { stories } from "./test_state";
 
 // // // //
 
-const storiesModule = storiesOf("MarkdownRenderer", module);
+const storiesModule = storiesOf("Components/MarkdownRenderer", module);
 
 stories.forEach(story => {
     storiesModule.add(story[0], () => {

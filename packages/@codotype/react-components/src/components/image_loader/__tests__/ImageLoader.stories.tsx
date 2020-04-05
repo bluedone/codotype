@@ -5,7 +5,7 @@ import { Story } from "@src/components/dev";
 
 // // // //
 
-storiesOf("ImageLoader", module).add("active = true", () => {
+storiesOf("Components/ImageLoader", module).add("active = true", () => {
     return (
         <Story>
             <ImageLoader src="https://res.cloudinary.com/codotype/image/upload/v1558931014/product-logos/twitter-512.png" />

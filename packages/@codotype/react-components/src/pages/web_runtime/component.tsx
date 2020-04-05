@@ -43,6 +43,7 @@ function readProjectFromLocalStorage(props: {
 // // // //
 
 interface WebRuntimeProps {
+    generator: GeneratorMeta;
     children: (childProps: {
         generator: GeneratorMeta;
         project: Project;
@@ -57,26 +58,26 @@ interface WebRuntimeProps {
  */
 export function WebRuntime(props: WebRuntimeProps) {
     const [project, setProjectState] = React.useState<Project>(
-        readProjectFromLocalStorage({ generator: dummyGeneratorMeta }),
+        readProjectFromLocalStorage({ generator: props.generator }),
     );
 
     function setProject(updatedProject: Project) {
         setProjectState(updatedProject);
         writeProjectToLocalStorage({
-            generator: dummyGeneratorMeta,
+            generator: props.generator,
             project: updatedProject,
         });
     }
 
     function clearProject() {
-        clearLocalSorage({ generator: dummyGeneratorMeta });
-        setProjectState(buildDefaultProject(dummyGeneratorMeta));
+        clearLocalSorage({ generator: props.generator });
+        setProjectState(buildDefaultProject(props.generator));
     }
 
     return (
         <React.Fragment>
             {props.children({
-                generator: dummyGeneratorMeta,
+                generator: props.generator,
                 project,
                 setProject,
                 clearProject,
