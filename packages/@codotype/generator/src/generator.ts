@@ -1,15 +1,22 @@
 import { buildDefault } from "@codotype/util";
+import { MockRuntime } from "./mock_runtime";
 
 // // // //
 
 interface CodotypeRuntime {
   templatePath: (resolvedPath: string, templatePath: string) => string;
-  ensureDir: (dirPath: string) => boolean;
-  copyDir: (dirPath: string, destinationDirPath: string) => void;
+  ensureDir: (dirPath: string) => Promise<boolean>;
+  copyDir: (dirPath: string, destinationDirPath: string) => Promise<boolean>;
   renderTemplate: any;
   existsSync: (path: string) => boolean;
-  compareFile: (destinationPath: string, compiledTemplate: string) => Promise<any>;
-  writeFile: (destinationPath: string, compiledTemplate: string) => Promise<any>;
+  compareFile: (
+    destinationPath: string,
+    compiledTemplate: string
+  ) => Promise<any>;
+  writeFile: (
+    destinationPath: string,
+    compiledTemplate: string
+  ) => Promise<boolean>;
   destinationPath: (destination: string, filename: string) => string;
   composeWith: (generator: any, generatorModule: any, options: any) => any; // wtf is generatorModule
 }
@@ -21,13 +28,13 @@ interface WriteFunctionProps {
   configuration: any;
 }
 
-interface GeneratorOptions {
-  [key: string]: any
-  runtime: CodotypeRuntime;
+export interface GeneratorOptions {
+  [key: string]: any;
+  runtime: CodotypeRuntime | MockRuntime;
   resolved: string;
 }
 
-interface ConstructorOptions {
+export interface ConstructorOptions {
   write: any;
   compileInPlace: any;
   forEachSchema: any;
@@ -42,17 +49,17 @@ interface ConstructorOptions {
  * Encapsulates core features exposed to user-defined components
  */
 export class CodotypeGenerator {
-  runtime: CodotypeRuntime;
+  runtime: CodotypeRuntime | MockRuntime;
   compileInPlace: any;
   options: GeneratorOptions;
   resolved: string;
   buildDefault: any; // What is this doing here?
 
   /**
-  * constructor
-  * Handles build options
-  * TODO - pass in @codotype/runtime instance into this constructor (in options, maybe?)
-  */
+   * constructor
+   * Handles build options
+   * TODO - pass in @codotype/runtime instance into this constructor (in options, maybe?)
+   */
   constructor(
     constructorOptions: ConstructorOptions,
     options: GeneratorOptions
@@ -87,13 +94,11 @@ export class CodotypeGenerator {
 
     // Assigns constructorOptions
     this.write = constructorOptions.write || this.write;
-    this.forEachSchema =
-      constructorOptions.forEachSchema || this.forEachSchema;
+    this.forEachSchema = constructorOptions.forEachSchema || this.forEachSchema;
     this.forEachRelation =
       constructorOptions.forEachRelation || this.forEachRelation;
     this.forEachReverseRelation =
-      constructorOptions.forEachReverseRelation ||
-      this.forEachReverseRelation;
+      constructorOptions.forEachReverseRelation || this.forEachReverseRelation;
     this.compileInPlace = constructorOptions.compileInPlace || [];
 
     // Assigns this.options
@@ -111,48 +116,48 @@ export class CodotypeGenerator {
   }
 
   /**
-  * write
-  * Method to write files to the filesystem
-  */
+   * write
+   * Method to write files to the filesystem
+   */
   async write() {
     // console.log('NOTHING TO WRITE - this should be overwritten by a subclassed generator.')
   }
 
   /**
-  * forEachSchema
-  * Method to write files to the filesystem for each schema in blueprints.schemas
-  * @param - see `WriteFunctionProps`
-  */
+   * forEachSchema
+   * Method to write files to the filesystem for each schema in blueprints.schemas
+   * @param - see `WriteFunctionProps`
+   */
   async forEachSchema({
     schema,
     blueprint,
-    configuration
+    configuration,
   }: WriteFunctionProps) {
     // console.log('NOTHING TO WRITE - this should be overwritten by a subclassed generator.')
   }
 
   /**
-  * forEachRelation
-  * @param - see `WriteFunctionProps`
-  */
+   * forEachRelation
+   * @param - see `WriteFunctionProps`
+   */
   async forEachRelation({
     schema,
     relation,
     blueprint,
-    configuration
+    configuration,
   }: WriteFunctionProps) {
     // console.log('NOTHING TO WRITE - this should be overwritten by a subclassed generator.')
   }
 
   /**
-  * forEachReverseRelation
-  * @param - see `WriteFunctionProps`
-  */
+   * forEachReverseRelation
+   * @param - see `WriteFunctionProps`
+   */
   async forEachReverseRelation({
     schema,
     relation,
     blueprint,
-    configuration
+    configuration,
   }: WriteFunctionProps) {
     // console.log('NOTHING TO WRITE - this should be overwritten by a subclassed generator.')
   }
@@ -164,10 +169,10 @@ export class CodotypeGenerator {
   }
 
   /**
-  * copDir
-  * copy a directory from src to dest'copy a directory from src to dest
-  * @param param0
-  */
+   * copDir
+   * copy a directory from src to dest'copy a directory from src to dest
+   * @param param0
+   */
   copyDir({ src, dest }: { src: string; dest: string }) {
     return this.runtime.copyDir(
       this.templatePath(src),
@@ -176,9 +181,9 @@ export class CodotypeGenerator {
   }
 
   /**
-  * compileTemplatesInPlace
-  * Compiles and writes each template defined in the `compileInPlace` property
-  */
+   * compileTemplatesInPlace
+   * Compiles and writes each template defined in the `compileInPlace` property
+   */
   compileTemplatesInPlace() {
     // For each inPlaceTemplate, compile and write
     return Promise.all(
@@ -192,10 +197,10 @@ export class CodotypeGenerator {
   }
 
   /**
-  * renderComponent
-  * Compiles and writes each template defined in the `compileInPlace` property
-  * @param - TODO
-  */
+   * renderComponent
+   * Compiles and writes each template defined in the `compileInPlace` property
+   * @param - TODO
+   */
   renderComponent({ src, dest, data = {} }) {
     return this.copyTemplate(
       this.templatePath(src),
@@ -205,15 +210,14 @@ export class CodotypeGenerator {
   }
 
   /**
-  * copyTemplate
-  * Compiles a template and writes to the dest location
-  * TODO - split this up to rely on runtime methods instead of referencing FS directly
-  * @param src
-  * @param dest
-  * @param options
-  */
+   * copyTemplate
+   * Compiles a template and writes to the dest location
+   * TODO - split this up to rely on runtime methods instead of referencing FS directly
+   * @param src
+   * @param dest
+   * @param options
+   */
   copyTemplate(src: string, dest: string, options: object = {}): Promise<any> {
-
     // DEBUG
     // console.log('Copying:' + dest)
 
@@ -255,10 +259,10 @@ export class CodotypeGenerator {
   }
 
   /**
-  * templatePath
-  * Generates the full path to a specific template in the `./templates` directory relative to the generator
-  * @param {string} template_path
-  */
+   * templatePath
+   * Generates the full path to a specific template in the `./templates` directory relative to the generator
+   * @param {string} template_path
+   */
   templatePath(template_path: string = "./") {
     return this.runtime.templatePath(this.resolved, template_path);
   }
@@ -269,19 +273,16 @@ export class CodotypeGenerator {
    * @param destination_path
    */
   destinationPath(destination_path: string = "./") {
-    return this.runtime.destinationPath(
-      this.options.dest,
-      destination_path
-    );
+    return this.runtime.destinationPath(this.options.dest, destination_path);
   }
 
   /**
-  * composeWith
-  * Enables one generator to fire off several child generators
-  * @param generatorModule
-  * @param options
-  */
+   * composeWith
+   * Enables one generator to fire off several child generators
+   * @param generatorModule
+   * @param options
+   */
   composeWith(generatorModule: any, options: any) {
     return this.runtime.composeWith(this, generatorModule, options);
   }
-};
+}
