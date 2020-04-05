@@ -1,8 +1,7 @@
 import * as path from "path";
 import chalk from "chalk";
 import { CodotypeNodeRuntime } from "@codotype/runtime";
-
-import { buildConfiguration } from "@codotype/util/dist/buildConfiguration";
+import { buildConfiguration } from "@codotype/util";
 
 // TODO - implement `inquirer` for basic build
 // import inquirer from "inquirer";

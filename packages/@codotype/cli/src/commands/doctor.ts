@@ -1,7 +1,7 @@
 import * as path from "path";
 import chalk from "chalk";
 import { CodotypeNodeRuntime } from "@codotype/runtime";
-import { validateGenerator } from "@codotype/util/dist/validateGenerator"; // CLEANUP - would be nice to just import from `@codotype/util`
+import { validateGenerator } from "@codotype/util";
 
 async function doctor(options) {
   // Logs start message
