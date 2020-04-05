@@ -2,12 +2,10 @@
 
 // Check node version before requiring/doing anything else
 // The user may be on a very old node version
-import minimist from "minimist";
-// @ts-ignore
+// import minimist from "minimist";
 import * as program from "commander";
 import chalk from "chalk";
 import * as semver from "semver";
-import * as fs from "fs";
 import { buildCommand } from "../commands/build";
 import { runCommand } from "../commands/run";
 import { serveCommand } from "../commands/serve";
@@ -118,16 +116,20 @@ if (!process.argv.slice(2).length) {
   program.outputHelp();
 }
 
-function camelize(str) {
+/**
+ * camelize
+ * @param str - string that's being camelized
+ */
+function camelize(str: string): string {
   return str.replace(/-(\w)/g, (_, c) => (c ? c.toUpperCase() : ""));
 }
 
 // commander passes the Command object itself as options,
 // extract only actual options into a fresh object.
-function cleanArgs(cmd) {
+function cleanArgs(cmd): { [key: string]: string } {
   const args = {};
   cmd.options.forEach((o) => {
-    const key = camelize(o.long.replace(/^--/, ""));
+    const key: string = camelize(o.long.replace(/^--/, ""));
     // if an option is not present and Command has a method with the same name
     // it should not be copied
     if (typeof cmd[key] !== "function" && typeof cmd[key] !== "undefined") {
