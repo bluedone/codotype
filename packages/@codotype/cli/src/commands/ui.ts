@@ -1,7 +1,5 @@
-const fs = require("fs-extra");
-const path = require("path");
-const chalk = require("chalk");
-const { spawn } = require("child_process");
+import * as path from "path";
+import { spawn } from "child_process";
 
 async function runUi(options: any) {
   // Pulls in requisite paths for codotype runtime
@@ -31,7 +29,7 @@ async function runUi(options: any) {
   });
 }
 
-module.exports = (...args) => {
+export const uiCommand = (...args) => {
   return runUi({ ...args }).catch((err) => {
     // TODO - implement better error handling
     console.log("CODOTYPE CLI ERROR!!");

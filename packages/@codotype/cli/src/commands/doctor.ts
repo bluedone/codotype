@@ -77,7 +77,7 @@ async function doctor(options) {
   return;
 }
 
-module.exports = (...args) => {
+export const doctorCommand = (...args) => {
   return doctor({ ...args }).catch((err) => {
     // TODO - implement better error handling
     console.log(

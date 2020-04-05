@@ -72,7 +72,7 @@ async function runGenerator(blueprint, options) {
   await runtime.execute({ build });
 }
 
-module.exports = (...args) => {
+export const runCommand = (...args) => {
   // @ts-ignore
   return runGenerator(...args).catch((err) => {
     // TODO - implement better error handling
