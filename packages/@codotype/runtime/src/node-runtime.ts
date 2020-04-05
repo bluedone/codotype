@@ -1,28 +1,21 @@
 // import Promise from 'bluebird';
-import * as fs from 'fs';
-import * as fsExtra from 'fs-extra';
-import * as path from 'path';
-import * as ejs from 'ejs';
-import {
-  indent,
-  inflate,
-  trailingComma
-} from '@codotype/util';
-import {
-  Datatype,
-  RelationType
-} from '@codotype/types';
-import { CodotypeGenerator } from '@codotype/generator';
+import * as fs from "fs";
+import * as fsExtra from "fs-extra";
+import * as path from "path";
+import * as ejs from "ejs";
+import { indent, inflate, trailingComma } from "@codotype/util";
+import { Datatype, RelationType } from "@codotype/types";
+import { CodotypeGenerator } from "@codotype/generator";
 
 // // // //
 // Constants
 
-const OUTPUT_DIRECTORY: string = 'codotype-build';
-const CODOTYPE_MANIFEST_DIRECTORY: string = '.codotype';
-const MODULES_ROOT: string = 'node_modules';
-const GENERATOR_META_FILENAME: string = 'codotype-generator.json';
-const GENERATOR_CLASS_PATH: string = 'generator';
-const GENERATOR_README_FILENAME: string = 'README.md';
+const OUTPUT_DIRECTORY: string = "codotype-build";
+const CODOTYPE_MANIFEST_DIRECTORY: string = ".codotype";
+const MODULES_ROOT: string = "node_modules";
+const GENERATOR_META_FILENAME: string = "codotype-generator.json";
+const GENERATOR_CLASS_PATH: string = "generator";
+const GENERATOR_README_FILENAME: string = "README.md";
 
 // // // //
 
@@ -35,7 +28,6 @@ export class CodotypeNodeRuntime {
   // constructor
   // Handles options to run a single generator instance
   constructor(options = {}) {
-
     // Assigns this.options
     this.options = options;
 
@@ -49,33 +41,38 @@ export class CodotypeNodeRuntime {
     this.options.cwd = process.cwd();
 
     // Attaches fsExtra as this.fs
-    this.fs = fsExtra
+    this.fs = fsExtra;
 
     // Returns the runtime instance
-    return this
+    return this;
   }
 
   // registerGenerator
   // Registers an individual generator by it's node_modules name
   // i.e. 'codotype-generator-nuxt' in `node_modules/codotype-generator-nuxt'`
   registerGenerator({ module_path, relative_path, absolute_path }) {
-
     // Resolves path to generator
-    let engine_path: string = '';
+    let engine_path: string = "";
 
     // Generator is located in node_modules
     if (module_path) {
-      engine_path = path.join(this.options.cwd, MODULES_ROOT, module_path)
+      engine_path = path.join(this.options.cwd, MODULES_ROOT, module_path);
     } else if (relative_path) {
-      engine_path = path.join(this.options.cwd, relative_path)
+      engine_path = path.join(this.options.cwd, relative_path);
     } else {
-      engine_path = absolute_path
+      engine_path = absolute_path;
     }
 
     // Construct the module path
-    const generator_path: string = path.join(engine_path, GENERATOR_CLASS_PATH)
-    const generator_meta_path: string = path.join(engine_path, GENERATOR_META_FILENAME)
-    const generator_readme_path: string = path.join(engine_path, GENERATOR_README_FILENAME)
+    const generator_path: string = path.join(engine_path, GENERATOR_CLASS_PATH);
+    const generator_meta_path: string = path.join(
+      engine_path,
+      GENERATOR_META_FILENAME
+    );
+    const generator_readme_path: string = path.join(
+      engine_path,
+      GENERATOR_README_FILENAME
+    );
 
     // // // //
     // // // //
@@ -98,30 +95,29 @@ export class CodotypeNodeRuntime {
       // Adds generator to this.generators if requirements are met
       // if (GeneratorClass && GeneratorMeta && foundReadme) {
       if (GeneratorClass && GeneratorMeta && foundReadme) {
-
         // Adds generator_path (VERY IMPORTANT) to GeneratorMeta
-        GeneratorMeta.engine_path = engine_path
-        GeneratorMeta.generator_path = generator_path
+        GeneratorMeta.engine_path = engine_path;
+        GeneratorMeta.generator_path = generator_path;
 
         // Adds readme_markown to GeneratorMeta
-        GeneratorMeta.readme = fs.readFileSync(generator_readme_path, 'utf8')
+        GeneratorMeta.readme = fs.readFileSync(generator_readme_path, "utf8");
 
         // Tracks GeneratorMeta in this.generators
-        this.generators.push(GeneratorMeta)
+        this.generators.push(GeneratorMeta);
 
         // Logs
         // console.info(`Registered ${GeneratorClass.name} generator`)
         // console.info(`Registered generator`)
-        return
+        return;
       }
 
       // Logs which generator is being run
     } catch (err) {
-      if (err.code === 'MODULE_NOT_FOUND') {
-        console.log('REGISTRATION ERROR - GENERATOR NOT FOUND')
+      if (err.code === "MODULE_NOT_FOUND") {
+        console.log("REGISTRATION ERROR - GENERATOR NOT FOUND");
         throw err;
       } else {
-        console.log('REGISTRATION ERROR - OTHER')
+        console.log("REGISTRATION ERROR - OTHER");
         throw err;
       }
     }
@@ -130,18 +126,32 @@ export class CodotypeNodeRuntime {
   // writeBuildManifest
   // Writes the build and the blueprint data to the destination directory
   async writeBuildManifest({ build }) {
-    let output_directory = build.id || ''
-    const destRoot = path.join(this.options.cwd, OUTPUT_DIRECTORY, output_directory, build.blueprint.identifier);
-    await this.ensureDir(destRoot)
+    let output_directory = build.id || "";
+    const destRoot = path.join(
+      this.options.cwd,
+      OUTPUT_DIRECTORY,
+      output_directory,
+      build.blueprint.identifier
+    );
+    await this.ensureDir(destRoot);
 
     const manifestDest = path.join(destRoot, CODOTYPE_MANIFEST_DIRECTORY);
-    await this.ensureDir(manifestDest)
+    await this.ensureDir(manifestDest);
 
     // Writes two source files into the `.codotype` directory
     return new Promise((resolve, reject) => {
-      fs.writeFileSync(path.join(manifestDest + '/codotype-build.json'), JSON.stringify(build, null, 2))
-      fs.writeFileSync(path.join(manifestDest + `/${build.blueprint.identifier}-codotype-blueprint.json`), JSON.stringify(build.blueprint, null, 2))
-      return resolve()
+      fs.writeFileSync(
+        path.join(manifestDest + "/codotype-build.json"),
+        JSON.stringify(build, null, 2)
+      );
+      fs.writeFileSync(
+        path.join(
+          manifestDest +
+            `/${build.blueprint.identifier}-codotype-blueprint.json`
+        ),
+        JSON.stringify(build.blueprint, null, 2)
+      );
+      return resolve();
     });
   }
 
@@ -151,10 +161,10 @@ export class CodotypeNodeRuntime {
   ensureDir(dir) {
     return new Promise((resolve, reject) => {
       return fsExtra.ensureDir(dir, (err) => {
-        if (err) return reject(err)
-        return resolve()
-      })
-    })
+        if (err) return reject(err);
+        return resolve();
+      });
+    });
   }
 
   // getGenerators
@@ -167,35 +177,34 @@ export class CodotypeNodeRuntime {
   // Method for write files to the filesystem
   // TODO - accept OUTPUT_DIRECTORY override
   async execute({ build }) {
-
     // Pulls attributes out of build object
-    let {
-      id,
-      blueprint,
-      configuration,
-      generator_id
-    } = build
+    let { id, blueprint, configuration, generator_id } = build;
 
     // Inflates blueprint metadata
     // TODO - handle missing blueprint object
     blueprint = inflate({ blueprint });
 
     // TODO - annotate this
-    await this.writeBuildManifest({ build })
+    await this.writeBuildManifest({ build });
 
     // Pulls generator from registry runtime registry
     // TODO - conflate each stage to its respective generator,
     // skipping / throwing errors on those whos generator is missing
-    const generator = this.generators.find(g => g.id === generator_id)
-    if (!generator) return
-    const { generator_path } = generator
+    const generator = this.generators.find((g) => g.id === generator_id);
+    if (!generator) return;
+    const { generator_path } = generator;
 
     // Sets output_directory default to build ID by default
-    const output_directory = id || '';
+    const output_directory = id || "";
 
     // Assigns `dest` option for generator
     // TODO - handle condition of missing blueprint.identifier
-    const dest = path.join(this.options.cwd, OUTPUT_DIRECTORY, output_directory, blueprint.identifier);
+    const dest = path.join(
+      this.options.cwd,
+      OUTPUT_DIRECTORY,
+      output_directory,
+      blueprint.identifier
+    );
 
     // Try to load up the generator from generator_path, catch error
     // TODO - this final check should be abstracted into a separate function
@@ -211,54 +220,79 @@ export class CodotypeNodeRuntime {
         resolved,
         meta: generator,
         configuration,
-        runtime: this
-      }
+        runtime: this,
+      };
 
       // Logging
       // console.info(`Executing ${GeneratorClass.name} generators:`)
-      console.info(`Executing generators:`)
+      console.info(`Executing generators:`);
 
       // Creates CodotypeGenerator instance
       // TODO - pass runtime into this constructor (in generatorOptions)
       // @ts-ignore
-      const generatorInstance = new CodotypeGenerator(generatorPrototype, generatorOptions)
+      const generatorInstance = new CodotypeGenerator(
+        generatorPrototype,
+        generatorOptions
+      );
 
       // Invokes `generator.forEachSchema` once for each in blueprint.schemas
-      await Promise.all(blueprint.schemas.map((schema) => generatorInstance.forEachSchema({ schema: schema, ...this.options })))
+      await Promise.all(
+        blueprint.schemas.map((schema) =>
+          generatorInstance.forEachSchema({ schema: schema, ...this.options })
+        )
+      );
 
       // Invokes `generator.forEachRelation` once for each in blueprint.schemas
-      await Promise.all(blueprint.schemas.map((schema) => {
-        return Promise.all(schema.relations.map((relation) => {
-          return generatorInstance.forEachRelation({ schema: schema, relation, ...this.options })
-        }))
-      }))
+      await Promise.all(
+        blueprint.schemas.map((schema) => {
+          return Promise.all(
+            schema.relations.map((relation) => {
+              return generatorInstance.forEachRelation({
+                schema: schema,
+                relation,
+                ...this.options,
+              });
+            })
+          );
+        })
+      );
 
       // Invokes `generator.forEachReverseRelation` once for each in blueprint.schemas
-      await Promise.all(blueprint.schemas.map((schema) => {
-        return Promise.all(schema.reverse_relations.map((relation) => {
-          return generatorInstance.forEachReverseRelation({ schema: schema, relation, ...this.options })
-        }))
-      }))
+      await Promise.all(
+        blueprint.schemas.map((schema) => {
+          return Promise.all(
+            schema.reverse_relations.map((relation) => {
+              return generatorInstance.forEachReverseRelation({
+                schema: schema,
+                relation,
+                ...this.options,
+              });
+            })
+          );
+        })
+      );
 
       // Invokes `generator.write()` once
-      await generatorInstance.write(this.options)
+      await generatorInstance.write(this.options);
 
       // Invokes generator.compileTemplatesInPlace()
-      await generatorInstance.compileTemplatesInPlace()
+      await generatorInstance.compileTemplatesInPlace();
 
       // Logs which generator is being run
     } catch (err) {
-      if (err.code === 'MODULE_NOT_FOUND') {
-        console.log('RUNTIME ERROR - GENERATOR NOT FOUND')
+      if (err.code === "MODULE_NOT_FOUND") {
+        console.log("RUNTIME ERROR - GENERATOR NOT FOUND");
       } else {
-        console.log('RUNTIME ERROR - OTHER')
+        console.log("RUNTIME ERROR - OTHER");
         throw err;
       }
       // return reject(err)
     }
 
     // Thank you message
-    console.log('\nBuild complete\nThank you for using Codotype :)\nFollow us on github.com/codotype\n')
+    console.log(
+      "\nBuild complete\nThank you for using Codotype :)\nFollow us on github.com/codotype\n"
+    );
   }
 
   // // // //
@@ -269,14 +303,14 @@ export class CodotypeNodeRuntime {
    * @param {string} generatorResolved
    * @param {string} template_path
    */
-  templatePath(generatorResolved, template_path = './') {
-    return path.join(generatorResolved, 'templates', template_path)
+  templatePath(generatorResolved, template_path = "./") {
+    return path.join(generatorResolved, "templates", template_path);
   }
 
   // destinationPath
   // Takes the destination name for a template and Generates
-  destinationPath(destPath, dest = './') {
-    return path.join(destPath, dest)
+  destinationPath(destPath, dest = "./") {
+    return path.join(destPath, dest);
   }
 
   // // // //
@@ -286,13 +320,12 @@ export class CodotypeNodeRuntime {
   // Compiles an EJS template and returns the result
   renderTemplate(generatorInstance, src, options = {}) {
     return new Promise((resolve, reject) => {
-
       // default options padded into the renderFile
-      let renderOptions = {}
+      let renderOptions = {};
 
       // // // //
       // // // //
-      // TODO - document this structure
+      // TODO - type this object - TemplateProps interface
       // The `data` object is passed into each file that gets rendered
       // TODO - this should be abstracted into a separate function
       const data = {
@@ -301,27 +334,28 @@ export class CodotypeNodeRuntime {
         configuration: generatorInstance.options.configuration,
         helpers: {
           indent,
-          trailingComma
+          trailingComma,
+          // forEachSchema
+          // forEachAttribute
+          // forEachRelation
+          // forEachReverseRelation / forEachReference
         },
         RelationType,
         Datatype,
-        ...options // QUESTION - are options ever used here?
-      }
+        ...options, // QUESTION - are options ever used here?
+      };
       // // // //
       // // // //
 
       // Compiles EJS template
       return ejs.renderFile(src, data, renderOptions, (err, str) => {
-
         // Handles template compilation error
-        if (err) return reject(err)
+        if (err) return reject(err);
 
         // Resolves with compiled template
         return resolve(str);
-
-      })
-
-    })
+      });
+    });
   }
 
   // // // //
@@ -329,19 +363,19 @@ export class CodotypeNodeRuntime {
 
   // TODO - document
   existsSync(dest) {
-    return this.fs.existsSync(dest)
+    return this.fs.existsSync(dest);
   }
 
   // TODO - document
   compareFile(dest, compiledTemplate) {
     // TODO - document
-    const existing = this.fs.readFileSync(dest, 'utf8')
+    const existing = this.fs.readFileSync(dest, "utf8");
 
     // If exists, and it's the same, SKIP
     if (compiledTemplate === existing) {
-      return true
+      return true;
     } else {
-      return false
+      return false;
     }
   }
 
@@ -349,12 +383,12 @@ export class CodotypeNodeRuntime {
   writeFile(dest, compiledTemplate) {
     return new Promise((resolve, reject) => {
       this.fs.writeFile(dest, compiledTemplate, (err) => {
-        if (err) return reject(err)
+        if (err) return reject(err);
         // console.log('Wrote: ' + dest)
         // console.log('\n')
         return resolve();
       });
-    })
+    });
   }
 
   // // // //
@@ -366,10 +400,10 @@ export class CodotypeNodeRuntime {
   async copyDir(src, dest) {
     return new Promise((resolve, reject) => {
       return this.fs.copy(src, dest, (err) => {
-        if (err) return reject(err)
-        return resolve()
-      })
-    })
+        if (err) return reject(err);
+        return resolve();
+      });
+    });
   }
 
   // // // //
@@ -379,7 +413,7 @@ export class CodotypeNodeRuntime {
   // TODO - Add `verbose` option to runtime to conditionally output log statements
   // TODO - add `chalk` dependency for pretty logging
   log(...args) {
-    console.log(...args)
+    console.log(...args);
   }
 
   // // // //
@@ -392,43 +426,44 @@ export class CodotypeNodeRuntime {
   // TODO - clean up + document this function
   // TODO - abstract most of this into @codotype/runtime
   async composeWith(parentGeneratorInstance, generatorModule, options = {}) {
-
     // Defines module path
-    let modulePath
+    let modulePath;
 
     // // // //
     // // // //
     // // // //
     // TODO - move this into a function ( `getModulePath`, perhaps )
     // Handle relative paths
-    if (generatorModule.startsWith('./') || generatorModule.startsWith('../')) {
-
+    if (generatorModule.startsWith("./") || generatorModule.startsWith("../")) {
       // TODO - document
-      let base = ''
+      let base = "";
 
       // TODO - abstract into helper function?
-      const stats = this.fs.statSync(parentGeneratorInstance.resolved)
+      const stats = this.fs.statSync(parentGeneratorInstance.resolved);
 
       // TODO - document
       // TODO - document
       if (stats.isDirectory()) {
-        base = parentGeneratorInstance.resolved
+        base = parentGeneratorInstance.resolved;
       } else {
-        base = path.dirname(parentGeneratorInstance.resolved)
+        base = path.dirname(parentGeneratorInstance.resolved);
       }
 
       // TODO - document
-      modulePath = path.join(base, generatorModule)
+      modulePath = path.join(base, generatorModule);
 
       // Handle absolute path
       // } else if (generatorModule.absolute_path) {
-    } else if (generatorModule.startsWith('/')) {
-
-      modulePath = path.join(generatorModule)
+    } else if (generatorModule.startsWith("/")) {
+      modulePath = path.join(generatorModule);
 
       // Handle module path
     } else {
-      modulePath = path.join(parentGeneratorInstance.options.meta.engine_path, 'node_modules', generatorModule)
+      modulePath = path.join(
+        parentGeneratorInstance.options.meta.engine_path,
+        "node_modules",
+        generatorModule
+      );
     }
     // // // //
     // // // //
@@ -446,9 +481,9 @@ export class CodotypeNodeRuntime {
       // TODO - document
       // TODO - move into independent function, `getResolvedGeneratorPath`, perhaps
       // TODO - abstract into @codotype/runtime HELPER function
-      let resolvedGeneratorPath = generatorPrototype.resolved.split('/')
-      resolvedGeneratorPath.pop()
-      resolvedGeneratorPath = resolvedGeneratorPath.join('/')
+      let resolvedGeneratorPath = generatorPrototype.resolved.split("/");
+      resolvedGeneratorPath.pop();
+      resolvedGeneratorPath = resolvedGeneratorPath.join("/");
 
       // // // //
       // // // //
@@ -457,11 +492,14 @@ export class CodotypeNodeRuntime {
       // TODO - document
       // TODO - document
       // TODO - abstract into @codotype/runtime
-      let resolvedDestination = parentGeneratorInstance.options.dest
+      let resolvedDestination = parentGeneratorInstance.options.dest;
       // @ts-ignore
       if (options.scope) {
         // @ts-ignore
-        resolvedDestination = path.resolve(parentGeneratorInstance.options.dest, options.scope)
+        resolvedDestination = path.resolve(
+          parentGeneratorInstance.options.dest,
+          options.scope
+        );
       }
 
       // // // //
@@ -485,55 +523,76 @@ export class CodotypeNodeRuntime {
       const generator = new CodotypeGenerator(generatorPrototype, {
         ...parentGeneratorInstance.options,
         dest: resolvedDestination,
-        resolved: resolvedGeneratorPath
-      })
+        resolved: resolvedGeneratorPath,
+      });
 
       // Invokes `generator.forEachSchema` once for each in blueprint.schemas
       // TODO - abstract into @codotype/runtime
-      await Promise.all(parentGeneratorInstance.options.blueprint.schemas.map((schema) => generator.forEachSchema({ schema: schema, ...parentGeneratorInstance.options })))
+      await Promise.all(
+        parentGeneratorInstance.options.blueprint.schemas.map((schema) =>
+          generator.forEachSchema({
+            schema: schema,
+            ...parentGeneratorInstance.options,
+          })
+        )
+      );
 
       // Invokes `generator.forEachRelation` once for each in blueprint.schemas
-      await Promise.all(parentGeneratorInstance.options.blueprint.schemas.map((schema) => {
-        return Promise.all(schema.relations.map((relation) => {
-          return generator.forEachRelation({ relation, schema: schema, ...parentGeneratorInstance.options })
-        }))
-      }))
+      await Promise.all(
+        parentGeneratorInstance.options.blueprint.schemas.map((schema) => {
+          return Promise.all(
+            schema.relations.map((relation) => {
+              return generator.forEachRelation({
+                relation,
+                schema: schema,
+                ...parentGeneratorInstance.options,
+              });
+            })
+          );
+        })
+      );
 
       // Invokes `generator.forEachReverseRelation` once for each in blueprint.schemas
-      await Promise.all(parentGeneratorInstance.options.blueprint.schemas.map((schema) => {
-        return Promise.all(schema.reverse_relations.map((relation) => {
-          return generator.forEachReverseRelation({ relation, schema: schema, ...parentGeneratorInstance.options })
-        }))
-      }))
+      await Promise.all(
+        parentGeneratorInstance.options.blueprint.schemas.map((schema) => {
+          return Promise.all(
+            schema.reverse_relations.map((relation) => {
+              return generator.forEachReverseRelation({
+                relation,
+                schema: schema,
+                ...parentGeneratorInstance.options,
+              });
+            })
+          );
+        })
+      );
 
       // Invokes `generator.write()` once
       // TODO - abstract into @codotype/runtime
       // @ts-ignore
-      await generator.write(parentGeneratorInstance.options)
+      await generator.write(parentGeneratorInstance.options);
 
       // Invokes generator.compileTemplatesInPlace()
       // TODO - abstract into @codotype/runtime
-      await generator.compileTemplatesInPlace()
+      await generator.compileTemplatesInPlace();
 
       // Logs output
       // TODO - add --verbose flag to conditionally print this output
       // TODO - all logging should take place in @codotype/runtime
-      console.log(`Generated ${generatorPrototype.name}.\n`)
+      console.log(`Generated ${generatorPrototype.name}.\n`);
 
       // Logs which generator is being run
     } catch (err) {
-      if (err.code === 'MODULE_NOT_FOUND') {
-        console.log('MODULE NOT FOUND')
+      if (err.code === "MODULE_NOT_FOUND") {
+        console.log("MODULE NOT FOUND");
       } else {
-        console.log('OTHER ERROR')
-        console.log(err)
+        console.log("OTHER ERROR");
+        console.log(err);
         throw err;
       }
     }
-
   }
 
   // // // //
   // // // //
-
 }

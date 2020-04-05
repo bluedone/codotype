@@ -3,6 +3,7 @@ import { MockRuntime } from "./mock_runtime";
 
 // // // //
 
+// TODO - move this into @codotype/runtime
 interface CodotypeRuntime {
   templatePath: (resolvedPath: string, templatePath: string) => string;
   ensureDir: (dirPath: string) => Promise<boolean>;
@@ -120,7 +121,10 @@ export class CodotypeGenerator {
    * Method to write files to the filesystem
    */
   async write() {
-    // console.log('NOTHING TO WRITE - this should be overwritten by a subclassed generator.')
+    // Display warning if generator doesn't implement its own write method?
+    console.warn(
+      "NOTHING TO WRITE - this should be overwritten by a subclassed generator."
+    );
   }
 
   /**
