@@ -128,8 +128,8 @@ export function buildConfiguration(
   generator.configuration_groups.forEach(group => {
     // Handles CONFIGURATION_GROUP_TYPE_ADDON with CONFIGURATION_GROUP_SCOPE_SCHEMA
     if (
-      group.type === CONFIGURATION_GROUP_TYPE_ADDON &&
-      group.scope === CONFIGURATION_GROUP_SCOPE_SCHEMA
+      group.type === ConfigurationGroupType.ADDON &&
+      group.scope === ConfigurationGroupScope.SCHEMA
     ) {
       // Defines an object on to store the instance data for each option group
       let instanceData = configuration[group.identifier] || {};
@@ -147,8 +147,8 @@ export function buildConfiguration(
 
       // Handles CONFIGURATION_GROUP_TYPE_OPTION with CONFIGURATION_GROUP_SCOPE_SCHEMA
     } else if (
-      group.type === CONFIGURATION_GROUP_TYPE_OPTION &&
-      group.scope === CONFIGURATION_GROUP_SCOPE_SCHEMA
+      group.type === ConfigurationGroupType.OPTION &&
+      group.scope === ConfigurationGroupScope.SCHEMA
     ) {
       // Defines an object on to store the instance data for each option group
       let instanceData = configuration[group.identifier] || {};
@@ -167,8 +167,8 @@ export function buildConfiguration(
 
       // Handles CONFIGURATION_GROUP_TYPE_ADDON with CONFIGURATION_GROUP_SCOPE_GLOBAL
     } else if (
-      group.type === CONFIGURATION_GROUP_TYPE_ADDON &&
-      group.scope === CONFIGURATION_GROUP_SCOPE_GLOBAL
+      group.type === ConfigurationGroupType.ADDON &&
+      group.scope === ConfigurationGroupScope.GLOBAL
     ) {
       // Iterates over each attribute in the GLOBAL_OPTION type,
       // sets instanceData to the default value
@@ -176,8 +176,8 @@ export function buildConfiguration(
 
       // Handles CONFIGURATION_GROUP_TYPE_OPTION with CONFIGURATION_GROUP_SCOPE_GLOBAL
     } else if (
-      group.type === CONFIGURATION_GROUP_TYPE_OPTION &&
-      group.scope === CONFIGURATION_GROUP_SCOPE_GLOBAL
+      group.type === ConfigurationGroupType.OPTION &&
+      group.scope === ConfigurationGroupScope.GLOBAL
     ) {
       // Iterates over each attribute in the GLOBAL_OPTION type,
       // sets instanceData to the default value
