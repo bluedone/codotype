@@ -1,12 +1,13 @@
-const fs = require("fs-extra");
-const path = require("path");
-const chalk = require("chalk");
-const inquirer = require("inquirer");
-const CodotypeRuntime = require("@codotype/runtime");
-const buildConfiguration = require("@codotype/util/lib/buildConfiguration");
+import * as path from "path";
+import chalk from "chalk";
+import CodotypeRuntime from "@codotype/runtime";
+import { buildConfiguration } from "@codotype/util/dist/buildConfiguration";
+
+// TODO - implement `inquirer` for basic build
+// import inquirer from "inquirer";
 
 // TODO - move blueprint validator into @codotype/util
-const validateBlueprint = blueprint => {
+const validateBlueprint = (blueprint) => {
   return true;
 };
 
@@ -40,15 +41,17 @@ async function runGenerator(blueprint, options) {
     } catch (e) {
       console.log("Error loading configuration - using default");
       // console.log(e)
+      // @ts-ignore
       configurationJSON = buildConfiguration({
         schemas: blueprintJSON.schemas,
-        generator: require(generatorMetaPath)
+        generator: require(generatorMetaPath),
       });
     }
   } else {
+    // @ts-ignore
     configurationJSON = buildConfiguration({
       schemas: blueprintJSON.schemas,
-      generator: require(generatorMetaPath)
+      generator: require(generatorMetaPath),
     });
   }
 
@@ -56,7 +59,7 @@ async function runGenerator(blueprint, options) {
   const build = {
     blueprint: blueprintJSON,
     configuration: configurationJSON,
-    generator_id: require(generatorMetaPath).id
+    generator_id: require(generatorMetaPath).id,
   };
 
   // Invoke runtime directly with parameters
@@ -70,7 +73,8 @@ async function runGenerator(blueprint, options) {
 }
 
 module.exports = (...args) => {
-  return runGenerator(...args).catch(err => {
+  // @ts-ignore
+  return runGenerator(...args).catch((err) => {
     // TODO - implement better error handling
     console.log("CODOTYPE CLI ERROR!!");
     console.log(err);
