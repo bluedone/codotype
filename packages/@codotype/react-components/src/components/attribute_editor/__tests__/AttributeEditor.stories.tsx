@@ -1,7 +1,7 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { Story } from "@src/components/dev";
-import { Attribute } from "../../types";
+import { Attribute } from "../@codotype/types";
 import { AttributeEditor } from "../component";
 import {
     attributeExample01,

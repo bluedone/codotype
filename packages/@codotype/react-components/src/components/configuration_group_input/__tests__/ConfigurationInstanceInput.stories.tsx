@@ -1,7 +1,10 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { ConfigurationInstanceInput } from "../ConfigurationInstanceInput";
-import { OptionValueInstance, ConfigurationGroupProperty } from "../../types";
+import {
+    OptionValueInstance,
+    ConfigurationGroupProperty,
+} from "../@codotype/types";
 import {
     ComponentBuilderConfigurationGroupPropertySingleDropdown,
     ComponentBuilderConfigurationGroupPropertySingleNumber,

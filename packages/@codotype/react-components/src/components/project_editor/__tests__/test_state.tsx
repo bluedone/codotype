@@ -1,4 +1,4 @@
-import { ExperienceRecommendation, GeneratorMeta } from "../../types";
+import { ExperienceRecommendation, GeneratorMeta } from "../@codotype/types";
 import {
     gitHubApiOption,
     twitterApiOption,

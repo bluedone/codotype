@@ -5,7 +5,7 @@ import {
     OptionValue,
     DropdownOption,
     ConfigurationGroupProperty,
-} from "../types";
+} from "@codotype/types";
 import Switch from "react-switch";
 
 // // // //

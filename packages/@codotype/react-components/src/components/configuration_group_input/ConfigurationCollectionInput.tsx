@@ -5,7 +5,7 @@ import {
     OptionValue,
     OptionValueInstance,
     ConfigurationGroupProperty,
-} from "../types";
+} from "@codotype/types";
 import classnames from "classnames";
 import { ConfigurationInputChild } from "./ConfigurationInputChild";
 import { ConfigurationInputFormGroup } from "./ConfigurationInputFormGroup";

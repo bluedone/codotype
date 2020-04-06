@@ -2,7 +2,7 @@ import {
     ConfigurationGroup,
     ConfigurationGroupProperty,
     OptionType,
-} from "../../types";
+} from "../@codotype/types";
 import { syntaxHighlighting } from "../../markdown_renderer/__tests__/test_state";
 
 // // // //

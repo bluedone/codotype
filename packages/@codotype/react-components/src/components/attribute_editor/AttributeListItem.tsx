@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Attribute } from "../types";
+import { Attribute } from "@codotype/types";
 import { Draggable } from "react-beautiful-dnd";
 import { Dropdown } from "react-bootstrap";
 import { AttributeListItemLabel } from "./AttributeListItemLabel";

@@ -4,7 +4,7 @@ import { ProjectEditButton } from "./ProjectEditButton";
 import { ProjectFormModal } from "./ProjectFormModal";
 import { ProjectForm } from "./ProjectForm";
 import { sanitizeLabel, makeIdentifier } from "@codotype/util";
-import { Project, GeneratorMeta } from "../types";
+import { Project, GeneratorMeta } from "@codotype/types";
 import { ResetProjectButton } from "./ResetProjectButton";
 
 // // // //

@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 import "./styles.scss";
-import { OptionType, ConfigurationGroupProperty } from "../types";
+import { OptionType, ConfigurationGroupProperty } from "@codotype/types";
 import { MoreInfoLink } from "../more_info_link";
 import classnames from "classnames";
 

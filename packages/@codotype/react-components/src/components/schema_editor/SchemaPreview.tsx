@@ -2,7 +2,7 @@ import * as React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { InfoTooltip } from "../info_tooltip";
-import { Schema } from "../types";
+import { Schema } from "@codotype/types";
 import { buildDefault } from "@codotype/util";
 
 // // // //

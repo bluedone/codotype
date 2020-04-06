@@ -4,7 +4,7 @@ import {
     OptionType,
     ExperienceRecommendation,
     GeneratorMeta,
-} from "@src/components/types";
+} from "@codotype/types";
 // import { syntaxHighlighting } from "@src/components/markdown_renderer/__tests__/test_state";
 
 // // // //

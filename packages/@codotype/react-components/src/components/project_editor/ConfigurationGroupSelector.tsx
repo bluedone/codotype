@@ -8,7 +8,7 @@ import {
     GeneratorMeta,
     ConfigurationGroup,
     OptionValueInstance,
-} from "../types";
+} from "@codotype/types";
 
 // // // //
 

@@ -1,4 +1,4 @@
-import { Relation, Schema, Datatype } from "../../types";
+import { Relation, Schema, Datatype } from "../@codotype/types";
 
 // // // //
 

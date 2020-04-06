@@ -1,6 +1,6 @@
 import * as React from "react";
 import { SortableListHeader } from "../sortable_list_header";
-import { Attribute, Datatype } from "../types";
+import { Attribute, Datatype } from "@codotype/types";
 import { Droppable, DragDropContext } from "react-beautiful-dnd";
 import { AttributeFormModal, AttributeInput } from "./AttributeFormModal";
 import { AttributeDeleteModal } from "./AttributeDeleteModal";

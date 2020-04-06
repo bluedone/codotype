@@ -1,4 +1,4 @@
-import { Relation, Schema } from "../types";
+import { Relation, Schema } from "@codotype/types";
 import * as React from "react";
 import { RelationDiagram } from "./RelationDiagram";
 // import { inflateRelation } from "@codotype/util";

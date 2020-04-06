@@ -4,9 +4,9 @@ import {
     ProjectConfiguration,
     ConfigurationGroup,
     OptionValueInstance,
-} from "../types";
+} from "@codotype/types";
 import "./styles.scss";
-import { buildConfigurationGroupValue } from "../configuration_group_input";
+import { buildConfigurationGroupValue } from "@codotype/util";
 
 // // // //
 
@@ -30,9 +30,10 @@ export function buildDefaultProject(generatorMeta: GeneratorMeta): Project {
     // Returns ConfigurationGroupValue
     const newProject: Project = {
         label: "Project Name",
+        identifier: "project_name",
         generatorId: generatorMeta.id,
-        schemas: [],
         generatorVersion: generatorMeta.version,
+        schemas: [],
         configuration: projectConfiguration,
     };
 

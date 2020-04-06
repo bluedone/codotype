@@ -1,7 +1,7 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { Story } from "@src/components/dev";
-import { Attribute } from "../../types";
+import { Attribute } from "../@codotype/types";
 import { Droppable, DragDropContext } from "react-beautiful-dnd";
 import { RelationListItem } from "../RelationListItem";
 import { relationExample01, relationExample02, userSchema } from "./test_state";

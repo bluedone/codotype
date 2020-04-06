@@ -1,7 +1,7 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { WebRuntime } from "../component";
-import { Project, GeneratorMeta } from "../../../components/types";
+import { Project, GeneratorMeta } from "@codotype/types";
 import { Story } from "@src/components/dev";
 import { RuntimeProvider } from "@src/components/runtime_provider";
 import { ProjectEditor } from "@src/components/project_editor";

@@ -1,7 +1,7 @@
 import { AttributePropertiesForm } from "./AttributePropertiesForm";
 import { AttributeDatatypeForm } from "./AttributeDatatypeForm";
 import { AttributeMetaForm } from "./AttributeMetaForm";
-import { Attribute, Datatype } from "../types";
+import { Attribute, Datatype } from "@codotype/types";
 import { sanitizeLabel, makeIdentifier } from "@codotype/util";
 import * as React from "react";
 import { AttributeInput } from "./AttributeFormModal";

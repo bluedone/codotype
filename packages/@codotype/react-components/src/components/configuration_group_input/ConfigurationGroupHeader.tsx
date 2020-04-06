@@ -1,6 +1,6 @@
 import React from "react";
 import "./styles.scss";
-import { ConfigurationGroup } from "../types";
+import { ConfigurationGroup } from "@codotype/types";
 
 // // // //
 

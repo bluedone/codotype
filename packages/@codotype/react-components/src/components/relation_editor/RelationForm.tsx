@@ -1,7 +1,7 @@
 import { RelationPropertiesForm } from "./RelationPropertiesForm";
 import { RelationDatatypeForm } from "./RelationDatatypeForm";
 import { RelationMetaForm } from "./RelationMetaForm";
-import { Relation, Datatype } from "../types";
+import { Relation, Datatype } from "@codotype/types";
 import { sanitizeLabel, makeIdentifier } from "@codotype/util";
 import * as React from "react";
 import { RelationInput } from "./RelationFormModal";

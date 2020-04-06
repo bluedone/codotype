@@ -1,8 +1,8 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { ProjectEditor } from "../component";
-import { Project, Schema, Datatype } from "../../types";
-import { buildDefaultProject } from "../buildDefaultProject";
+import { Project, Schema, SchemaSource, Datatype } from "@codotype/types";
+import { buildDefaultProject } from "@codotype/util";
 import { Story } from "@src/components/dev";
 import { dummyGeneratorMeta } from "./test_state";
 
@@ -12,28 +12,33 @@ const dummyProject: Project = buildDefaultProject(dummyGeneratorMeta);
 
 const userSchema: Schema = {
     id: "12345",
-    tokens: {
-        label: "User",
-        label_plural: "Users",
-        identifier: "user",
-        identifier_plural: "users",
-    },
+    label: "User",
+    label_plural: "Users",
+    identifier: "user",
+    identifier_plural: "users",
+    class_name: "User",
+    class_name_plural: "Users",
+    camel_case: "user",
+    camel_case_plural: "users",
     attributes: [],
     relations: [],
+    reverse_relations: [],
     locked: false,
     removable: false,
-    source: "USER",
-    configuration: {},
+    source: SchemaSource.USER,
+    // configuration: {},
 };
 
 const movieSchema: Schema = {
     id: "45678",
-    tokens: {
-        label: "Movie",
-        label_plural: "Movies",
-        identifier: "movie",
-        identifier_plural: "movies",
-    },
+    label: "string",
+    label_plural: "string",
+    identifier: "string",
+    identifier_plural: "string",
+    class_name: "string",
+    class_name_plural: "string",
+    camel_case: "string",
+    camel_case_plural: "string",
     attributes: [
         {
             id: "name-attr",
@@ -63,8 +68,9 @@ const movieSchema: Schema = {
     relations: [],
     locked: false,
     removable: false,
-    source: "USER",
-    configuration: {},
+    source: SchemaSource.USER,
+    reverse_relations: [],
+    // configuration: {},
 };
 
 dummyProject.schemas.push(movieSchema);

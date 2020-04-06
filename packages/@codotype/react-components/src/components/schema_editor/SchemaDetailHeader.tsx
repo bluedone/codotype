@@ -2,7 +2,7 @@ import * as React from "react";
 import { SchemaEditButton } from "./SchemaEditButton";
 import { SchemaDeleteButton } from "./SchemaDeleteButton";
 import { SchemaDeleteModal } from "./SchemaDeleteModal";
-import { Schema } from "../types";
+import { Schema } from "@codotype/types";
 
 // // // //
 

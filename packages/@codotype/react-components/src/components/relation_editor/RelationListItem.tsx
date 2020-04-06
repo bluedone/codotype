@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Relation, Schema } from "../types";
+import { Relation, Schema } from "@codotype/types";
 import { Draggable } from "react-beautiful-dnd";
 import { Dropdown } from "react-bootstrap";
 import { RelationBadge } from "./RelationBadge";

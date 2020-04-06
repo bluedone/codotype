@@ -5,7 +5,7 @@ import { SchemaNewButton } from "./SchemaNewButton";
 import { DragDropContext } from "react-beautiful-dnd";
 import { SchemaFormModal } from "./SchemaFormModal";
 import { SchemaForm } from "./SchemaForm";
-import { Schema } from "../types";
+import { Schema } from "@codotype/types";
 import { reorder } from "../attribute_editor/component";
 import uniqueId from "lodash.uniqueid";
 

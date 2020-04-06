@@ -3,7 +3,7 @@ import { SchemaPreview } from "./SchemaPreview";
 import { AttributeEditor } from "../attribute_editor";
 import { RelationEditor } from "../relation_editor";
 import { SchemaDetailHeader } from "./SchemaDetailHeader";
-import { Schema, Attribute, Relation, Datatype } from "../types";
+import { Schema, Attribute, Relation, Datatype } from "@codotype/types";
 
 // // // //
 

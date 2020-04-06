@@ -1,7 +1,7 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { Story } from "@src/components/dev";
-import { Relation } from "../../types";
+import { Relation } from "../@codotype/types";
 import { RelationEditor } from "../component";
 import {
     relationExample01,
