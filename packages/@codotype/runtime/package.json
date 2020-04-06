@@ -5,6 +5,7 @@
   "scripts": {
     "test": "jest",
     "build": "npm run clean && npm run compile",
+    "dev": "tsc -w -p tsconfig.build.json",
     "clean": "rm -rf ./dist",
     "compile": "tsc -p tsconfig.build.json",
     "prepublishOnly": "npm run build"
@@ -36,7 +37,6 @@
     "fs-extra": "^7.0.1"
   },
   "devDependencies": {
-    "@codotype/blueprints": "^0.4.0",
     "@types/jest": "^24.0.23",
     "chai": "^4.1.2",
     "jest": "^24.9.0",

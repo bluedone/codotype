@@ -1,6 +1,8 @@
+import { UUID } from "./uuid";
+
 export enum SchemaSource {
   USER = "USER",
-  GENERATOR = "GENERATOR"
+  GENERATOR = "GENERATOR",
 }
 
 export interface Schema {
@@ -21,21 +23,39 @@ export interface Schema {
   reverse_relations: any[];
 }
 
+// Taken from @codotype/util
+// interface Schema {
+//   id: UUID;
+//   locked: boolean;
+//   removable: boolean;
+//   source: SchemaSource;
+//   label: string;
+//   label_plural: string;
+//   identifier: string;
+//   identifier_plural: string;
+//   camel_case: string;
+//   camel_case_plural: string;
+//   class_name: string;
+//   class_name_plural: string;
+//   attributes: Attribute[];
+//   relations: Relation[];
+//   reverse_relations: Relation[];
+// }
+
 // // // //
-// TODO - schema metadata should be updated to someting like:
+
 export interface TokenPluralization {
   singular: string;
   plural: string;
 }
 
 export interface SchemaTokenCasing {
-  title: TokenPluralization;
-  snake: TokenPluralization;
-  camel: TokenPluralization;
-  pascal: TokenPluralization;
+  label: TokenPluralization; // i.e "Token Pluralization"
+  snake: TokenPluralization; // i.e "token_pluralization"
+  camel: TokenPluralization; // i.e "tokenPluralization"
+  pascal: TokenPluralization; // i.e "TokenPluralization"
+  kebab: TokenPluralization; // i.e "token-pluralization"
 }
-
-// // // //
 
 // export interface SchemaConfigurationGroup {
 //   id: null | string;
@@ -49,10 +69,11 @@ export interface SchemaTokenCasing {
 // }
 
 export interface SchemaV2 {
-  id: null | string;
+  id: UUID;
   locked: boolean;
   source: SchemaSource;
   removable: boolean;
+  identifiers: SchemaTokenCasing; // Rename as `identifiers`?
   tokens: SchemaTokenCasing;
   attributes: any[];
   relations: any[];
@@ -63,6 +84,8 @@ export interface SchemaV2 {
 //
 // // // //
 
+// QUESTION - where should this be located?
+// ANSWER - this should live in react-components for now
 export const DEFAULT_SCHEMA: Schema = {
   id: null,
   locked: false,
@@ -78,5 +101,5 @@ export const DEFAULT_SCHEMA: Schema = {
   camel_case_plural: "",
   attributes: [],
   relations: [],
-  reverse_relations: []
+  reverse_relations: [],
 };

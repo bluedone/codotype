@@ -95,7 +95,6 @@ export interface ConfigurationGroup {
   documentation: string; // Markdown
   enabled: boolean;
   allowDisable: boolean;
-  scope: string; // enum
   variant: "LIST" | "SIDEBYSIDE"; // TODO - enum + rename!
   properties: ConfigurationGroupProperty[];
 }

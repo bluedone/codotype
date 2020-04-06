@@ -1,5 +1,4 @@
 export * from "./attribute";
-export * from "./configuration-group-types";
 export * from "./configuration-option-types";
 export * from "./datatype-meta";
 export * from "./datatype";
@@ -8,3 +7,4 @@ export * from "./relation";
 export * from "./schema";
 export * from "./project";
 export * from "./generator";
+export * from "./uuid";

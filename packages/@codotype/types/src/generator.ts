@@ -43,3 +43,26 @@ export interface GeneratorMeta {
   // supportedDatatypes: any; // The datatypes supported by this generator.Only an array of DATATYPE_ * identifiers that correspond to values defined in @codotype/types are accepted.
   // supportedRelations: any; // The relation types supported by this generator.Only an array of RELATION_TYPE_ * identifiers that correspond to values defined in @codotype/types are accepted.
 }
+
+// // // //
+
+// From @codtype/util
+// interface CodotypeGenerator {
+//   id: string;
+//   label: string;
+//   icon: string;
+//   description: string;
+//   tech_tags: string[];
+//   type_tags: string[];
+//   self_configuring: boolean;
+//   project_path: string;
+//   github_url: string; // TODO - should be repo URL
+//   version: string;
+//   official: boolean; // TODO - remove this
+//   experience: string;
+//   configuration_groups: ConfigurationGroup[];
+//   defaultConfiguration: Configuration;
+//   defaultSchemas: Schema[];
+//   supportedRelations: RelationType[];
+//   supportedDatatypes: Datatype[];
+// }

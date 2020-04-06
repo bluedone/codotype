@@ -51,7 +51,7 @@ export enum OptionType {
   DROPDOWN = "DROPDOWN",
   MULTI_DROPDOWN = "MULTI_DROPDOWN",
   COLLECTION = "COLLECTION",
-  INSTANCE = "INSTANCE"
+  INSTANCE = "INSTANCE",
 }
 
 export type OptionValue =
@@ -129,7 +129,7 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
       required: false,
       allowDisable: false,
       properties: [],
-      dropdownOptions: []
+      dropdownOptions: [],
     },
     {
       label: "Component Slug",
@@ -141,7 +141,7 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
       required: false,
       allowDisable: false,
       properties: [],
-      dropdownOptions: []
+      dropdownOptions: [],
     },
     {
       label: "Props",
@@ -164,7 +164,7 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
           required: false,
           allowDisable: false,
           dropdownOptions: [{ label: "String", value: "string" }],
-          properties: []
+          properties: [],
         },
         {
           label: "Name",
@@ -176,7 +176,7 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
           required: false,
           allowDisable: false,
           dropdownOptions: [],
-          properties: []
+          properties: [],
         },
         {
           label: "Desc",
@@ -188,9 +188,9 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
           required: false,
           allowDisable: false,
           dropdownOptions: [],
-          properties: []
-        }
-      ]
+          properties: [],
+        },
+      ],
     },
     {
       label: "Tests",
@@ -213,11 +213,11 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
           required: false,
           allowDisable: false,
           dropdownOptions: [],
-          properties: []
-        }
-      ]
-    }
-  ]
+          properties: [],
+        },
+      ],
+    },
+  ],
 };
 
 export const ComponentBuilderConfigurationGroup: ConfigurationGroup = {
@@ -228,7 +228,7 @@ export const ComponentBuilderConfigurationGroup: ConfigurationGroup = {
   allowDisable: false,
   variant: "",
   scope: "",
-  properties: [ComponentBuilderConfigurationGroupProperty]
+  properties: [ComponentBuilderConfigurationGroupProperty],
 };
 
 /**
@@ -277,7 +277,7 @@ export function buildConfigurationGroupValue(
       if (property.allowDisable && !property.required) {
         val[property.identifier] = {
           enabled: property.enabled,
-          value: buildConfigurationGroupPropertyValue(property)
+          value: buildConfigurationGroupPropertyValue(property),
         };
       } else {
         val[property.identifier] = buildConfigurationGroupPropertyValue(

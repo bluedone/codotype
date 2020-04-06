@@ -29,7 +29,6 @@
     "underscore.string": "^3.3.4"
   },
   "devDependencies": {
-    "@codotype/blueprints": "^0.4.0",
     "@types/jest": "^24.0.23",
     "chai": "^4.1.2",
     "jest": "^24.9.0",

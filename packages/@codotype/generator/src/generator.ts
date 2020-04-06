@@ -1,5 +1,11 @@
 import { buildDefault } from "@codotype/util";
 import { MockRuntime } from "./mock_runtime";
+import {
+  Schema,
+  Project,
+  ProjectConfiguration,
+  Relation,
+} from "@codotype/types";
 
 // // // //
 
@@ -35,12 +41,25 @@ export interface GeneratorOptions {
   resolved: string;
 }
 
+// TODO - add correct type signatures for these functions
 export interface ConstructorOptions {
-  write: any;
-  compileInPlace: any;
-  forEachSchema: any;
-  forEachRelation: any;
-  forEachReverseRelation: any;
+  name?: string;
+  compileInPlace?: any;
+  write: (writeProps: { project: Project }) => Promise<void>;
+  forEachRelation?: (params: {
+    schema: Schema;
+    relation: Relation;
+    project: Project;
+  }) => Promise<void>;
+  forEachReverseRelation?: (params: {
+    schema: Schema;
+    relation: Relation;
+    project: Project;
+  }) => Promise<void>;
+  forEachSchema?: (params: {
+    schema: Schema;
+    project: Project;
+  }) => Promise<void>;
 }
 
 // // // //
@@ -120,7 +139,7 @@ export class CodotypeGenerator {
    * write
    * Method to write files to the filesystem
    */
-  async write() {
+  async write({ project }: { project: Project }) {
     // Display warning if generator doesn't implement its own write method?
     console.warn(
       "NOTHING TO WRITE - this should be overwritten by a subclassed generator."
@@ -134,9 +153,11 @@ export class CodotypeGenerator {
    */
   async forEachSchema({
     schema,
-    blueprint,
-    configuration,
-  }: WriteFunctionProps) {
+    project,
+  }: {
+    schema: Schema;
+    project: Project;
+  }) {
     // console.log('NOTHING TO WRITE - this should be overwritten by a subclassed generator.')
   }
 
@@ -147,9 +168,12 @@ export class CodotypeGenerator {
   async forEachRelation({
     schema,
     relation,
-    blueprint,
-    configuration,
-  }: WriteFunctionProps) {
+    project,
+  }: {
+    schema: Schema;
+    relation: Relation;
+    project: Project;
+  }) {
     // console.log('NOTHING TO WRITE - this should be overwritten by a subclassed generator.')
   }
 
@@ -160,9 +184,12 @@ export class CodotypeGenerator {
   async forEachReverseRelation({
     schema,
     relation,
-    blueprint,
-    configuration,
-  }: WriteFunctionProps) {
+    project,
+  }: {
+    schema: Schema;
+    relation: Relation;
+    project: Project;
+  }) {
     // console.log('NOTHING TO WRITE - this should be overwritten by a subclassed generator.')
   }
 
@@ -205,7 +232,15 @@ export class CodotypeGenerator {
    * Compiles and writes each template defined in the `compileInPlace` property
    * @param - TODO
    */
-  renderComponent({ src, dest, data = {} }) {
+  renderComponent({
+    src,
+    dest,
+    data = {},
+  }: {
+    src: string;
+    dest: string;
+    data: { [key: string]: any };
+  }) {
     return this.copyTemplate(
       this.templatePath(src),
       this.destinationPath(dest),
@@ -286,7 +321,7 @@ export class CodotypeGenerator {
    * @param generatorModule
    * @param options
    */
-  composeWith(generatorModule: any, options: any) {
+  composeWith(generatorModule: string, options?: any) {
     return this.runtime.composeWith(this, generatorModule, options);
   }
 }
