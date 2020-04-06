@@ -25,8 +25,6 @@ async function serve(options: any) {
   try {
     runtime.registerGenerator({
       absolute_path: process.cwd(),
-      module_path: false,
-      relative_path: false,
     });
   } catch (err) {
     throw err;

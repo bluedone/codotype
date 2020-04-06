@@ -11,6 +11,7 @@ import { runCommand } from "../commands/run";
 import { serveCommand } from "../commands/serve";
 import { doctorCommand } from "../commands/doctor";
 import { uiCommand } from "../commands/ui";
+import { CommandOptions } from "../types";
 
 // TODO - pull this from package.json
 const requiredVersion = ">=8.9";
@@ -67,18 +68,18 @@ program
   });
 
 program
-  .command("generator-run <blueprint>")
+  .command("generator-run <project>")
   .option(
-    "-c --config <configuration>",
-    "Path to generator configuration file to pass into Codotype runtime"
+    "-p --project <codotype-project.json>",
+    "Runs the generator against the codotypeconfiguration file to pass into Codotype runtime"
   )
   // .parse(process.argv)
   .description(
     "run the generator in the current working directory against the blueprint argument"
   )
-  .action((blueprint, cmd) => {
+  .action((project, cmd) => {
     const options = cleanArgs(cmd);
-    runCommand(blueprint, options);
+    runCommand(project, options);
   });
 
 program
@@ -126,7 +127,7 @@ function camelize(str: string): string {
 
 // commander passes the Command object itself as options,
 // extract only actual options into a fresh object.
-function cleanArgs(cmd): { [key: string]: string } {
+function cleanArgs(cmd): CommandOptions {
   const args = {};
   cmd.options.forEach((o) => {
     const key: string = camelize(o.long.replace(/^--/, ""));

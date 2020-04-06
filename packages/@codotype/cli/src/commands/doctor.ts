@@ -3,11 +3,9 @@ import chalk from "chalk";
 import { CodotypeNodeRuntime } from "@codotype/runtime";
 import { validateGenerator } from "@codotype/util";
 
-async function doctor(options) {
+async function doctor() {
   // Logs start message
   console.log(`\nPaging ${chalk.blue(`codotype doctor`)}...\n`);
-  // TODO - remove
-  console.log(options);
 
   // Pulls in requisite paths for codotype runtime
   // TODO - constantize `codotype-generator.json` magic string
@@ -27,9 +25,8 @@ async function doctor(options) {
   // Registers this generator via relative path
   runtime.registerGenerator({
     absolute_path: process.cwd(),
-    module_path: false,
-    relative_path: false,
   });
+
   console.log(
     `the doctor says ${
       chalk.green(`this generator can register with the `) +
@@ -82,7 +79,7 @@ async function doctor(options) {
 }
 
 export const doctorCommand = (...args) => {
-  return doctor({ ...args }).catch((err) => {
+  return doctor().catch((err) => {
     // TODO - implement better error handling
     console.log(
       `${chalk.red(`ERROR`)} - something went wrong with ${chalk.cyan(
