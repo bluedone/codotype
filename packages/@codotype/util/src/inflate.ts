@@ -1,4 +1,4 @@
-import { inflateMeta } from "./inflateMeta";
+import { buildTokenPluralization } from "./buildTokenPluralization";
 import { clone, uniqueId, cloneDeep } from "lodash";
 import { RelationType } from "@codotype/types";
 
@@ -9,43 +9,56 @@ import { RelationType } from "@codotype/types";
 export function inflateRelation({ schemas, relation }) {
   // Clones the base attributes from the relation
   // let inflated = { ...relation }
-  let inflated = clone(relation)
+  let inflated = clone(relation);
 
   // console.log('INFLATE RELATION')
   // console.log(JSON.stringify(inflated, null, 2))
 
   // defines inflated.alias && inflate.schema
-  const ownedSchema = schemas.find((s) => { return s.id === inflated.schema_id })
+  const ownedSchema = schemas.find((s) => {
+    return s.id === inflated.schema_id;
+  });
   // console.log('OWNED SCHEMA????')
   // console.log(relation)
   // console.log(ownedSchema)
-  const relatedSchema = schemas.find((s) => { return s.id === inflated.related_schema_id })
+  const relatedSchema = schemas.find((s) => {
+    return s.id === inflated.related_schema_id;
+  });
 
   // Clean this up...
+  // TODO - clean this up, add support for every entry in the `RelationType` enum
   function getAttr(type, source) {
-    // @ts-ignore
-    if ([RelationType.HAS_MANY, RelationType.HAS_AND_BELONGS_TO_MANY].includes(type)) {
-      return inflated[source].identifier + '_ids'
+    if (
+      // @ts-ignore
+      [RelationType.HAS_MANY, RelationType.HAS_AND_BELONGS_TO_MANY].includes(
+        type
+      )
+    ) {
+      return inflated[source].identifier + "_ids";
     }
-    return inflated[source].identifier + '_id'
+    return inflated[source].identifier + "_id";
   }
 
   // Handle inflated.schema
   // TODO - define a nicer name for `attribute` (idAttribute?)
   // TODO - abstract `attribute` ternary into a separate function
-  inflated.schema = inflateMeta(relatedSchema.label)
+  inflated.schema = buildTokenPluralization(relatedSchema.label);
   // inflated.schema.attribute = inflated.type === 'HAS_MANY' ? inflated.schema.identifier + '_ids' : inflated.schema.identifier + '_id'
-  inflated.schema.attribute = getAttr(inflated.type, 'schema')
+  inflated.schema.attribute = getAttr(inflated.type, "schema");
 
   // Handle inflated.alias
   // TODO - define a nicer name for `attribute` (idAttribute?)
   // TODO - abstract `attribute` ternary into a separate function
-  inflated.alias = inflateMeta(inflated.as || relatedSchema.label)
+  inflated.alias = buildTokenPluralization(inflated.as || relatedSchema.label);
   // inflated.alias.attribute = inflated.type === 'HAS_MANY' ? inflated.alias.identifier + '_ids' : inflated.alias.identifier + '_id'
-  inflated.alias.attribute = getAttr(inflated.type, 'alias')
+  inflated.alias.attribute = getAttr(inflated.type, "alias");
 
-  inflated.reverse_alias = inflateMeta(inflated.reverse_as || ownedSchema.label)
-  inflated.related_lead_attribute = !!relatedSchema.attributes[0] ? relatedSchema.attributes[0].identifier : '_id' // TODO - use `slug` instead of
+  inflated.reverse_alias = buildTokenPluralization(
+    inflated.reverse_as || ownedSchema.label
+  );
+  inflated.related_lead_attribute = !!relatedSchema.attributes[0]
+    ? relatedSchema.attributes[0].identifier
+    : "_id"; // TODO - use `slug` instead of
 
   // Returns the inflated relation
   return inflated;
@@ -55,23 +68,23 @@ export function inflateRelation({ schemas, relation }) {
 // Purpose and requirements
 export function inflateSchema({ schema, schemas }) {
   // Clones original schema
-  let inflated = cloneDeep(schema)
+  let inflated = cloneDeep(schema);
 
   // Inflates meta (adds camel_case, camel_case_plural)
-  inflated = Object.assign(inflated, inflateMeta(inflated.label))
+  inflated = Object.assign(inflated, buildTokenPluralization(inflated.label));
 
   // Flushes reverse_relations
-  inflated.reverse_relations = []
+  inflated.reverse_relations = [];
 
   // Inflates relations
   inflated.relations = schema.relations.map((relation) => {
-    relation.schema_id = schema.id
-    return inflateRelation({ schemas, relation })
-  })
+    relation.schema_id = schema.id;
+    return inflateRelation({ schemas, relation });
+  });
 
   // Inflates attributes
   // QUESTION - is this needed?
-  inflated.attributes = schema.attributes.map(attribute => attribute)
+  inflated.attributes = schema.attributes.map((attribute) => attribute);
 
   // TODO - add inlineDeconstruction here?
   // TODO - add defaultObject here?
@@ -81,7 +94,7 @@ export function inflateSchema({ schema, schemas }) {
   // inflated.keys = Object.keys(defaultObject)
 
   // Returns the inflated schema
-  return inflated
+  return inflated;
 }
 
 // inflate
@@ -90,69 +103,68 @@ export function inflateSchema({ schema, schemas }) {
 // TODO - this may want to define the blueprint.identifier attribute (rather than relying on the client)
 // TODO - much of this logic should be moved into the inflateSchema method
 export function inflate({ blueprint }) {
-
   // Creates a deep-copy of the blueprint object
-  const inflated = cloneDeep(blueprint)
+  const inflated = cloneDeep(blueprint);
 
   // Iterates over each schema (prep)
   inflated.schemas = inflated.schemas.map((schema) => {
-    schema.reverse_relations = []
-    return schema
-  })
+    schema.reverse_relations = [];
+    return schema;
+  });
 
   // Iterates over each schema (inflate)
   inflated.schemas = inflated.schemas.map((schema) => {
-
     // Inflates meta (adds camel_case, camel_case_plural)
-    schema = Object.assign(schema, inflateMeta(schema.label))
+    schema = Object.assign(schema, buildTokenPluralization(schema.label));
 
     // Flushes schema.reverse_relations
     // schema.reverse_relations = []
 
     // Inflate relations
     schema.relations = schema.relations.map((relation) => {
-
       // Assigns relation.schema_id
-      relation.schema_id = schema.id
+      relation.schema_id = schema.id;
 
       // console.log('RELATIONS')
       // console.log(relation)
 
       let rel = inflateRelation({
         schemas: inflated.schemas,
-        relation: relation
-      })
+        relation: relation,
+      });
 
-      let relatedSchema = inflated.schemas.find(s => s.id === rel.related_schema_id)
+      let relatedSchema = inflated.schemas.find(
+        (s) => s.id === rel.related_schema_id
+      );
 
       // Handles REF_BELONGS_TO
       // TODO - clean this up!
       if (rel.type) {
-
         const ref_relation = {
-          id: uniqueId('REVERSE_' + rel.id),
+          id: uniqueId("REVERSE_" + rel.id),
           order: schema.reverse_relations.length,
           type: rel.type,
           required: false,
           schema_id: relatedSchema.id, // TODO - should these be flipped???
           related_schema_id: schema.id, // TODO - should these be flipped???
           as: rel.reverse_as,
-          reverse_as: rel.as
-        }
+          reverse_as: rel.as,
+        };
 
         // Inflates reference relation and appends to related schema
-        const ref_relation_inflated = inflateRelation({ relation: ref_relation, schemas: inflated.schemas })
+        const ref_relation_inflated = inflateRelation({
+          relation: ref_relation,
+          schemas: inflated.schemas,
+        });
         // relatedSchema.relations.push(ref_relation_inflated)
-        relatedSchema.reverse_relations.push(ref_relation_inflated)
+        relatedSchema.reverse_relations.push(ref_relation_inflated);
       }
 
-      return rel
-    })
+      return rel;
+    });
 
-    return schema
-  })
+    return schema;
+  });
 
-  return inflated
+  return inflated;
 }
-
-// // // //

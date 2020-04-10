@@ -1,59 +1,102 @@
-import { inflateMeta } from '../inflateMeta';
+import { buildTokenCasing } from "../buildTokenCasing";
+import { buildTokenPluralization } from "../buildTokenPluralization";
+import { TokenCasing, TokenPluralization } from "@codotype/types";
 
 // // // //
 
-describe('/lib/inflateMeta.js', () => {
+const testCases: [string, string, TokenCasing][] = [
+  [
+    "one word label",
+    "User",
+    {
+      label: "User",
+      snake: "user",
+      camel: "user",
+      pascal: "User",
+      kebab: "user",
+    },
+  ],
+  [
+    "two word label",
+    "User Registration",
+    {
+      label: "User Registration",
+      snake: "user_registration",
+      camel: "userRegistration",
+      pascal: "UserRegistration",
+      kebab: "user-registration",
+    },
+  ],
+  // ["two word label", "User Registration", "UserRegistration"],
+];
 
-  describe('one word label', () => {
-    test('properly pluralized labels, identifiers, and class_names, and camel_cases', () => {
+describe("/lib/buildTokenCasing.js", () => {
+  testCases.forEach((testCase) => {
+    test(testCase[0], () => {
+      const expectedCasing: TokenCasing = testCase[2];
 
-      const {
-        label,
-        label_plural,
-        identifier,
-        identifier_plural,
-        class_name,
-        class_name_plural,
-        camel_case,
-        camel_case_plural
-      } = inflateMeta('User')
+      const resultCasing: TokenCasing = buildTokenCasing(testCase[1]);
 
-      expect(label).toBe('User')
-      expect(label_plural).toBe('Users')
-      expect(identifier).toBe('user')
-      expect(identifier_plural).toBe('users')
-      expect(class_name).toBe('User')
-      expect(class_name_plural).toBe('Users')
-      expect(camel_case).toBe('user')
-      expect(camel_case_plural).toBe('users')
-
+      expect(resultCasing).toStrictEqual(expectedCasing);
     });
   });
+});
 
-  describe('two word label', () => {
-    test('properly pluralized labels, identifiers, and class_names', () => {
+// // // //
 
-      const {
-        label,
-        label_plural,
-        identifier,
-        identifier_plural,
-        class_name,
-        class_name_plural,
-        camel_case,
-        camel_case_plural
-      } = inflateMeta('User Registration')
+const pluralizedTestCases: [string, string, TokenPluralization][] = [
+  [
+    "one word label",
+    "User",
+    {
+      singular: {
+        label: "User",
+        snake: "user",
+        camel: "user",
+        pascal: "User",
+        kebab: "user",
+      },
+      plural: {
+        label: "Users",
+        snake: "users",
+        camel: "users",
+        pascal: "Users",
+        kebab: "users",
+      },
+    },
+  ],
+  [
+    "two word label",
+    "User Registration",
+    {
+      singular: {
+        label: "User Registration",
+        snake: "user_registration",
+        camel: "userRegistration",
+        pascal: "UserRegistration",
+        kebab: "user-registration",
+      },
+      plural: {
+        label: "User Registrations",
+        snake: "user_registrations",
+        camel: "userRegistrations",
+        pascal: "UserRegistrations",
+        kebab: "user-registrations",
+      },
+    },
+  ],
+];
 
-      expect(label).toBe('User Registration');
-      expect(label_plural).toBe('User Registrations');
-      expect(identifier).toBe('user_registration');
-      expect(identifier_plural).toBe('user_registrations');
-      expect(class_name).toBe('UserRegistration');
-      expect(class_name_plural).toBe('UserRegistrations');
-      expect(camel_case).toBe('userRegistration');
-      expect(camel_case_plural).toBe('userRegistrations');
+describe("/lib/buildTokenPluralization.js", () => {
+  pluralizedTestCases.forEach((testCase) => {
+    test(testCase[0], () => {
+      const expectedCasing: TokenPluralization = testCase[2];
 
+      const resultCasing: TokenPluralization = buildTokenPluralization(
+        testCase[1]
+      );
+
+      expect(resultCasing).toStrictEqual(expectedCasing);
     });
   });
-
 });

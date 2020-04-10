@@ -93,11 +93,17 @@ export function buildDefaultProject(generatorMeta: GeneratorMeta): Project {
 
   // Returns ConfigurationGroupValue
   const newProject: Project = {
-    label: "Project Name",
-    identifier: "project_name",
+    id: "",
+    identifiers: {
+      label: "",
+      snake: "",
+      camel: "",
+      pascal: "",
+      kebab: "",
+    },
     generatorId: generatorMeta.id,
-    schemas: [],
     generatorVersion: generatorMeta.version,
+    schemas: [],
     configuration: projectConfiguration,
   };
 

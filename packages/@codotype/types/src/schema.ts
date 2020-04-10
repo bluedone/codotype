@@ -2,23 +2,11 @@ import { UUID } from "./uuid";
 import { ProjectConfiguration } from "./ProjectConfiguration";
 import { Attribute } from "./attribute";
 import { Relation } from "./relation";
+import { TokenCasing, TokenPluralization } from "./token";
 
 export enum SchemaSource {
   USER = "USER",
   GENERATOR = "GENERATOR",
-}
-
-export interface TokenPluralization {
-  singular: string;
-  plural: string;
-}
-
-export interface SchemaTokenCasing {
-  label: TokenPluralization; // i.e "Token Pluralization"
-  snake: TokenPluralization; // i.e "token_pluralization"
-  camel: TokenPluralization; // i.e "tokenPluralization"
-  pascal: TokenPluralization; // i.e "TokenPluralization"
-  kebab: TokenPluralization; // i.e "token-pluralization"
 }
 
 export interface Schema {
@@ -28,7 +16,7 @@ export interface Schema {
   removable: boolean;
   attributes: Attribute[];
   relations: Relation[];
-  identifiers: SchemaTokenCasing;
+  identifiers: TokenPluralization;
   configuration: ProjectConfiguration;
 }
 
@@ -61,25 +49,19 @@ export const DEFAULT_SCHEMA: Schema = {
   relations: [],
   configuration: {},
   identifiers: {
-    label: {
-      singular: "",
-      plural: "",
+    singular: {
+      label: "",
+      snake: "",
+      camel: "",
+      pascal: "",
+      kebab: "",
     },
-    snake: {
-      singular: "",
-      plural: "",
-    },
-    camel: {
-      singular: "",
-      plural: "",
-    },
-    pascal: {
-      singular: "",
-      plural: "",
-    },
-    kebab: {
-      singular: "",
-      plural: "",
+    plural: {
+      label: "",
+      snake: "",
+      camel: "",
+      pascal: "",
+      kebab: "",
     },
   },
 };

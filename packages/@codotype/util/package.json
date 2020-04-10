@@ -5,6 +5,7 @@
   "scripts": {
     "test": "jest",
     "build": "npm run clean && npm run compile",
+    "dev": "tsc -w -p tsconfig.build.json",
     "clean": "rm -rf ./dist",
     "compile": "tsc -p tsconfig.build.json",
     "prepublishOnly": "npm run build"
