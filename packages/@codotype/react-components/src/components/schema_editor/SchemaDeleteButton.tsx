@@ -19,7 +19,8 @@ export function SchemaDeleteButton(props: {
             placement="left"
             overlay={
                 <Tooltip id="delete-button-tooltip">
-                    Remove the <strong>{props.schema.tokens.label}</strong>{" "}
+                    Remove the{" "}
+                    <strong>{props.schema.identifiers.label.singular}</strong>{" "}
                     Schema.
                 </Tooltip>
             }

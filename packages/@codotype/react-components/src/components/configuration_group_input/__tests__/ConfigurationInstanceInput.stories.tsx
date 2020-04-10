@@ -4,7 +4,7 @@ import { ConfigurationInstanceInput } from "../ConfigurationInstanceInput";
 import {
     OptionValueInstance,
     ConfigurationGroupProperty,
-} from "../@codotype/types";
+} from "@codotype/types";
 import {
     ComponentBuilderConfigurationGroupPropertySingleDropdown,
     ComponentBuilderConfigurationGroupPropertySingleNumber,

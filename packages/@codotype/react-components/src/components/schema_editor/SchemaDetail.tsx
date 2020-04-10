@@ -3,7 +3,13 @@ import { SchemaPreview } from "./SchemaPreview";
 import { AttributeEditor } from "../attribute_editor";
 import { RelationEditor } from "../relation_editor";
 import { SchemaDetailHeader } from "./SchemaDetailHeader";
-import { Schema, Attribute, Relation, Datatype } from "@codotype/types";
+import {
+    Schema,
+    Attribute,
+    Relation,
+    Datatype,
+    RelationType,
+} from "@codotype/types";
 
 // // // //
 
@@ -50,7 +56,10 @@ export function SchemaDetail(props: SchemaDetailProps) {
                 <RelationEditor
                     selectedSchema={props.schema}
                     relations={props.schema.relations}
-                    supportedDatatypes={[Datatype.STRING, Datatype.NUMERIC]}
+                    supportedRelationTypes={[
+                        RelationType.HAS_ONE,
+                        RelationType.HAS_MANY,
+                    ]}
                     onChange={(updatedRelations: Relation[]) => {
                         // Defines updated schema
                         const updatedSchema: Schema = {

@@ -1,6 +1,11 @@
 import * as React from "react";
 import { SortableListHeader } from "../sortable_list_header";
-import { Attribute, Schema, Datatype } from "@codotype/types";
+import {
+    Relation,
+    DEFAULT_RELATION,
+    Schema,
+    RelationType,
+} from "@codotype/types";
 import { Droppable, DragDropContext } from "react-beautiful-dnd";
 import { RelationFormModal, RelationInput } from "./RelationFormModal";
 import { RelationDeleteModal } from "./RelationDeleteModal";
@@ -26,48 +31,25 @@ export function reorder<T>(
 // // // //
 
 /**
- * defaultRelation
- * A "blank" relationto pass into the RelationForm
- */
-const defaultRelation: Attribute = {
-    id: "",
-    label: "",
-    identifier: "",
-    description: "",
-    required: false,
-    unique: false,
-    datatype: null,
-    default_value: null,
-    datatypeOptions: {},
-    locked: false,
-};
-
-// // // //
-
-/**
  * disableSubmit
  * @param label
  */
 export function disableSubmit(relationInput: RelationInput): boolean {
-    return (
-        relationInput.label === "" ||
-        relationInput.identifier === "" ||
-        relationInput.datatype === null
-    );
+    return relationInput.type === null;
 }
 
 // // // //
 
 interface RelationEditorState {
-    relations: Attribute[];
+    relations: Relation[];
     lastUpdatedAt: null | number;
 }
 
 interface RelationEditorProps {
-    relations: Attribute[];
+    relations: Relation[];
     selectedSchema: Schema;
-    supportedDatatypes: Datatype[];
-    onChange: (updatedAttributes: Attribute[]) => void;
+    supportedRelationTypes: RelationType[];
+    onChange: (updatedAttributes: Relation[]) => void;
 }
 
 export function RelationEditor(props: RelationEditorProps) {
@@ -82,7 +64,7 @@ export function RelationEditor(props: RelationEditorProps) {
     const [
         showingDeleteModal,
         showDeleteModal,
-    ] = React.useState<Attribute | null>(null);
+    ] = React.useState<Relation | null>(null);
 
     // Sets props.relations when props.relations changes
     React.useEffect(() => {
@@ -101,7 +83,7 @@ export function RelationEditor(props: RelationEditorProps) {
             <SortableListHeader
                 label="Relations"
                 onClick={() => {
-                    setRelationInput({ ...defaultRelation });
+                    setRelationInput({ ...DEFAULT_RELATION });
                 }}
             />
 
@@ -119,7 +101,7 @@ export function RelationEditor(props: RelationEditorProps) {
                         setRelationInput(null);
                         // Insert new Attribute
                         if (relationInput.id === "") {
-                            const newAttribute: Attribute = {
+                            const newAttribute: Relation = {
                                 ...relationInput,
                                 id: uniqueId("ATTR_"),
                             };
@@ -134,7 +116,7 @@ export function RelationEditor(props: RelationEditorProps) {
                         // Update existing relation
                         setState({
                             lastUpdatedAt: Date.now(),
-                            relations: props.relations.map((a: Attribute) => {
+                            relations: props.relations.map((a: Relation) => {
                                 if (a.id === relationInput.id) {
                                     return relationInput;
                                 }
@@ -150,7 +132,7 @@ export function RelationEditor(props: RelationEditorProps) {
                         onChange={(updatedRelationInput: RelationInput) => {
                             setRelationInput(updatedRelationInput);
                         }}
-                        supportedDatatypes={props.supportedDatatypes}
+                        supportedRelationTypes={props.supportedRelationTypes}
                     />
                 </RelationFormModal>
             )}
@@ -164,7 +146,7 @@ export function RelationEditor(props: RelationEditorProps) {
                             if (showingDeleteModal !== null) {
                                 setState({
                                     relations: props.relations.filter(
-                                        (a: Attribute) => {
+                                        (a: Relation) => {
                                             return (
                                                 a.id !== showingDeleteModal.id
                                             );
@@ -190,7 +172,7 @@ export function RelationEditor(props: RelationEditorProps) {
                                 return;
                             }
 
-                            const updatedAttributes = reorder<Attribute>(
+                            const updatedAttributes = reorder<Relation>(
                                 props.relations,
                                 result.source.index,
                                 result.destination.index,
@@ -209,7 +191,7 @@ export function RelationEditor(props: RelationEditorProps) {
                                         {...provided.droppableProps}
                                     >
                                         {props.relations.map(
-                                            (a: Attribute, index: number) => {
+                                            (a: Relation, index: number) => {
                                                 return (
                                                     <RelationListItem
                                                         key={a.id}
@@ -219,14 +201,14 @@ export function RelationEditor(props: RelationEditorProps) {
                                                         }
                                                         index={index}
                                                         onClickEdit={(
-                                                            relationToBeEdited: Attribute,
+                                                            relationToBeEdited: Relation,
                                                         ) => {
                                                             setRelationInput({
                                                                 ...relationToBeEdited,
                                                             });
                                                         }}
                                                         onClickDelete={(
-                                                            relationToDelete: Attribute,
+                                                            relationToDelete: Relation,
                                                         ) => {
                                                             showDeleteModal(
                                                                 relationToDelete,
@@ -249,7 +231,7 @@ export function RelationEditor(props: RelationEditorProps) {
             {props.relations.length === 0 && (
                 <RelationListEmpty
                     onClick={() => {
-                        setRelationInput({ ...defaultRelation });
+                        setRelationInput({ ...DEFAULT_RELATION });
                     }}
                 />
             )}

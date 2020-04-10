@@ -16,7 +16,7 @@ export enum RelationType {
  * Defines the Relation interface
  */
 export interface Relation {
-  id: null | string;
+  id: string;
   type: RelationType | null;
   required: boolean;
   schema_id: string;

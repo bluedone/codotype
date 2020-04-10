@@ -1,8 +1,5 @@
-import { RelationPropertiesForm } from "./RelationPropertiesForm";
 import { RelationDatatypeForm } from "./RelationDatatypeForm";
-import { RelationMetaForm } from "./RelationMetaForm";
-import { Relation, Datatype } from "@codotype/types";
-import { sanitizeLabel, makeIdentifier } from "@codotype/util";
+import { Relation, RelationType } from "@codotype/types";
 import * as React from "react";
 import { RelationInput } from "./RelationFormModal";
 
@@ -50,7 +47,7 @@ export function RelationFormSelector(props: {
 }) {
     const { relationInput } = props;
     const defaultSelectedForm =
-        relationInput.datatype === null ? "DATATYPE" : "PROPERTIES";
+        relationInput.type === null ? "DATATYPE" : "PROPERTIES";
 
     const [selectedForm, setSelectedForm] = React.useState<string>(
         defaultSelectedForm,
@@ -64,7 +61,7 @@ export function RelationFormSelector(props: {
                         onClick={() => {
                             setSelectedForm("DATATYPE");
                         }}
-                        disabled={relationInput.datatype === null}
+                        disabled={relationInput.type === null}
                         active={selectedForm === "DATATYPE"}
                         label={"Datatype"}
                     />
@@ -73,7 +70,7 @@ export function RelationFormSelector(props: {
                         onClick={() => {
                             setSelectedForm("PROPERTIES");
                         }}
-                        disabled={relationInput.datatype === null}
+                        disabled={relationInput.type === null}
                         active={selectedForm === "PROPERTIES"}
                         label={"Properties"}
                     />
@@ -82,7 +79,7 @@ export function RelationFormSelector(props: {
                         onClick={() => {
                             setSelectedForm("DESCRIPTION");
                         }}
-                        disabled={relationInput.datatype === null}
+                        disabled={relationInput.type === null}
                         active={selectedForm === "DESCRIPTION"}
                         label={"Default & Description"}
                     />
@@ -100,12 +97,12 @@ export function RelationFormSelector(props: {
 /**
  * RelationFormProps
  * `relationInput` - the `Attribute` currently being edited
- * `supportedDatatypes` - the unique IDs of supported datatypes made available in the form
+ * `supportedRelationTypes` - the unique IDs of supported datatypes made available in the form
  */
 interface RelationFormProps {
     relations: Relation[];
     relationInput: RelationInput;
-    supportedDatatypes: Datatype[];
+    supportedRelationTypes: RelationType[];
     onChange: (updatedRelationInput: RelationInput) => void;
 }
 
@@ -114,7 +111,7 @@ interface RelationFormProps {
  * @param props - see `RelationFormProps`
  */
 export function RelationForm(props: RelationFormProps) {
-    const { relationInput, supportedDatatypes } = props;
+    const { relationInput, supportedRelationTypes } = props;
 
     return (
         <div className="row">
@@ -122,7 +119,7 @@ export function RelationForm(props: RelationFormProps) {
                 {/* {!relationInput.datatype && (
                     <RelationDatatypeForm
                         datatype={relationInput.datatype}
-                        supportedDatatypes={supportedDatatypes}
+                        supportedRelationTypes={supportedRelationTypes}
                         onChangeDatatype={updatedDatatype => {
                             props.onChange({
                                 ...relationInput,
@@ -140,14 +137,16 @@ export function RelationForm(props: RelationFormProps) {
                                 if (selectedForm === "DATATYPE") {
                                     return (
                                         <RelationDatatypeForm
-                                            datatype={relationInput.datatype}
-                                            supportedDatatypes={
-                                                supportedDatatypes
+                                            type={relationInput.type}
+                                            supportedRelationTypes={
+                                                supportedRelationTypes
                                             }
-                                            onChangeDatatype={updatedDatatype => {
+                                            onChangeRelationType={(
+                                                updatedRelationType: RelationType,
+                                            ) => {
                                                 props.onChange({
                                                     ...relationInput,
-                                                    datatype: updatedDatatype,
+                                                    type: updatedRelationType,
                                                 });
                                                 setSelectedForm("PROPERTIES");
                                             }}
@@ -156,69 +155,10 @@ export function RelationForm(props: RelationFormProps) {
                                 }
 
                                 if (selectedForm === "PROPERTIES") {
-                                    return (
-                                        <RelationPropertiesForm
-                                            label={relationInput.label}
-                                            identifier={
-                                                relationInput.identifier
-                                            }
-                                            required={relationInput.required}
-                                            unique={relationInput.unique}
-                                            onLabelChange={(
-                                                updatedLabel: string,
-                                            ) => {
-                                                const sanitizedLabel: string = sanitizeLabel(
-                                                    updatedLabel,
-                                                );
-                                                props.onChange({
-                                                    ...relationInput,
-                                                    label: sanitizedLabel,
-                                                    identifier: makeIdentifier(
-                                                        sanitizedLabel,
-                                                    ),
-                                                });
-                                            }}
-                                            onIdentifierChange={(
-                                                updatedIdentifier: string,
-                                            ) => {
-                                                props.onChange({
-                                                    ...relationInput,
-                                                    identifier: updatedIdentifier,
-                                                });
-                                            }}
-                                            onRequiredChange={(
-                                                updatedRequired: boolean,
-                                            ) => {
-                                                props.onChange({
-                                                    ...relationInput,
-                                                    required: updatedRequired,
-                                                });
-                                            }}
-                                            onUniqueChange={(
-                                                updatedUnique: boolean,
-                                            ) => {
-                                                props.onChange({
-                                                    ...relationInput,
-                                                    unique: updatedUnique,
-                                                });
-                                            }}
-                                        />
-                                    );
+                                    return <p>RelationPropertiesForm Here</p>;
                                 }
 
-                                return (
-                                    <RelationMetaForm
-                                        description={relationInput.description}
-                                        onDescriptionChange={(
-                                            updatedDescription: string,
-                                        ) => {
-                                            props.onChange({
-                                                ...relationInput,
-                                                description: updatedDescription,
-                                            });
-                                        }}
-                                    />
-                                );
+                                return <p>Meta Form Here</p>;
                             }}
                         </RelationFormSelector>
                     </React.Fragment>

@@ -1,7 +1,8 @@
 import { Datatype } from "./datatype";
+import { UUID } from "./uuid";
 
 export interface Attribute {
-  id: null | string;
+  id: UUID;
   label: string;
   identifier: string;
   description: string;
@@ -24,4 +25,4 @@ export const DEFAULT_ATTRIBUTE: Attribute = {
   default_value: null,
   datatypeOptions: {},
   locked: false,
-}
+};

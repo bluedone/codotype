@@ -1,7 +1,7 @@
 import * as React from "react";
 import { GeneratorMeta, Project } from "@codotype/types";
 import { dummyGeneratorMeta } from "../../components/project_editor/__tests__/test_state";
-import { buildDefaultProject } from "../../components/project_editor/buildDefaultProject";
+import { buildDefaultProject } from "@codotype/util";
 
 // // // //
 

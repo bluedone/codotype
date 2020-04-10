@@ -1,12 +1,12 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { Story } from "@src/components/dev";
-import { Relation } from "../@codotype/types";
+import { Relation } from "@codotype/types";
 import { RelationEditor } from "../component";
 import {
     relationExample01,
     relationExample02,
-    supportedDatatypes,
+    supportedRelationTypes,
     userSchema,
 } from "./test_state";
 
@@ -22,7 +22,7 @@ storiesOf("RelationEditor/Layout", module).add("populated", () => {
             <RelationEditor
                 relations={relations}
                 selectedSchema={userSchema}
-                supportedDatatypes={supportedDatatypes}
+                supportedRelationTypes={supportedRelationTypes}
                 onChange={(updatedRelations: Relation[]) => {
                     console.log("RelationEditor - onChange");
                     console.log(updatedRelations);
@@ -45,7 +45,7 @@ storiesOf("RelationEditor/Layout", module).add("empty", () => {
             <RelationEditor
                 relations={relations}
                 selectedSchema={userSchema}
-                supportedDatatypes={supportedDatatypes}
+                supportedRelationTypes={supportedRelationTypes}
                 onChange={(updatedRelations: Relation[]) => {
                     console.log("RelationEditor - onChange");
                     console.log(updatedRelations);

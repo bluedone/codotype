@@ -1,11 +1,7 @@
 import { Schema } from "./schema";
-import { OptionValueInstance } from "./configuration-option-types";
+import { ProjectConfiguration } from "./ProjectConfiguration";
 
 // // // //
-
-export interface ProjectConfiguration {
-  [key: string]: OptionValueInstance;
-}
 
 export interface Project {
   label: string;

@@ -1,14 +1,14 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { Story } from "@src/components/dev";
-import { Attribute } from "../@codotype/types";
+import { Relation } from "@codotype/types";
 import { Droppable, DragDropContext } from "react-beautiful-dnd";
 import { RelationListItem } from "../RelationListItem";
 import { relationExample01, relationExample02, userSchema } from "./test_state";
 
 // // // //
 
-const testCases: [string, Attribute][] = [
+const testCases: [string, Relation][] = [
     ["Name", relationExample01],
     ["Email", relationExample02],
 ];
@@ -43,13 +43,13 @@ testCases.forEach(testCase => {
                                         relation={testCase[1]}
                                         index={0}
                                         onClickEdit={(
-                                            relationToBeEdited: Attribute,
+                                            relationToBeEdited: Relation,
                                         ) => {
                                             console.log("onClickEdit");
                                             console.log(relationToBeEdited);
                                         }}
                                         onClickDelete={(
-                                            relationToBeDelete: Attribute,
+                                            relationToBeDelete: Relation,
                                         ) => {
                                             console.log("onClickDelete");
                                             console.log(relationToBeDelete);

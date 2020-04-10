@@ -12,33 +12,60 @@ const dummyProject: Project = buildDefaultProject(dummyGeneratorMeta);
 
 const userSchema: Schema = {
     id: "12345",
-    label: "User",
-    label_plural: "Users",
-    identifier: "user",
-    identifier_plural: "users",
-    class_name: "User",
-    class_name_plural: "Users",
-    camel_case: "user",
-    camel_case_plural: "users",
+    identifiers: {
+        label: {
+            singular: "User",
+            plural: "Users",
+        },
+        snake: {
+            singular: "user",
+            plural: "users",
+        },
+        camel: {
+            singular: "user",
+            plural: "users",
+        },
+        pascal: {
+            singular: "User",
+            plural: "Users",
+        },
+        kebab: {
+            singular: "user",
+            plural: "users",
+        },
+    },
     attributes: [],
     relations: [],
-    reverse_relations: [],
     locked: false,
     removable: false,
     source: SchemaSource.USER,
-    // configuration: {},
+    configuration: {},
 };
 
 const movieSchema: Schema = {
     id: "45678",
-    label: "string",
-    label_plural: "string",
-    identifier: "string",
-    identifier_plural: "string",
-    class_name: "string",
-    class_name_plural: "string",
-    camel_case: "string",
-    camel_case_plural: "string",
+    identifiers: {
+        label: {
+            singular: "Movie",
+            plural: "Movies",
+        },
+        snake: {
+            singular: "movie",
+            plural: "movies",
+        },
+        camel: {
+            singular: "movie",
+            plural: "movies",
+        },
+        pascal: {
+            singular: "Movie",
+            plural: "Movies",
+        },
+        kebab: {
+            singular: "movie",
+            plural: "movies",
+        },
+    },
     attributes: [
         {
             id: "name-attr",
@@ -69,8 +96,7 @@ const movieSchema: Schema = {
     locked: false,
     removable: false,
     source: SchemaSource.USER,
-    reverse_relations: [],
-    // configuration: {},
+    configuration: {},
 };
 
 dummyProject.schemas.push(movieSchema);

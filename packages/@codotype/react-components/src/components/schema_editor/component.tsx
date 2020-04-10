@@ -5,7 +5,7 @@ import { SchemaNewButton } from "./SchemaNewButton";
 import { DragDropContext } from "react-beautiful-dnd";
 import { SchemaFormModal } from "./SchemaFormModal";
 import { SchemaForm } from "./SchemaForm";
-import { Schema } from "@codotype/types";
+import { Schema, SchemaTokenCasing } from "@codotype/types";
 import { reorder } from "../attribute_editor/component";
 import uniqueId from "lodash.uniqueid";
 
@@ -27,9 +27,10 @@ export function SchemaEditorLayout(props: {
 }) {
     const [showModal, setShowModal] = React.useState(false);
     const [showEditModal, setShowEditModal] = React.useState(false);
-    const [newSchemaTokens, setNewSchemaTokens] = React.useState<any | null>(
-        null,
-    );
+    const [
+        newSchemaTokens,
+        setNewSchemaTokens,
+    ] = React.useState<SchemaTokenCasing | null>(null);
     const [state, setState] = React.useState<EditorState>({
         schemas: props.schemas,
         lastUpdatedAt: null,
@@ -91,16 +92,21 @@ export function SchemaEditorLayout(props: {
                             className="btn btn-primary"
                             disabled={
                                 newSchemaTokens === null ||
-                                newSchemaTokens.label === ""
+                                newSchemaTokens.label.singular === ""
                             }
                             onClick={() => {
+                                // Short-circuit if newSchemaTokens is null
+                                if (newSchemaTokens === null) {
+                                    return;
+                                }
+
                                 // Defines new schema
                                 const newSchema: Schema = {
                                     ...state.schemas[0],
                                     id: uniqueId("SCHEMA_"),
                                     attributes: [],
                                     relations: [],
-                                    tokens: newSchemaTokens,
+                                    identifiers: newSchemaTokens,
                                 };
 
                                 // Defines updated schemas, including NEW schema
@@ -167,7 +173,8 @@ export function SchemaEditorLayout(props: {
                 <SchemaFormModal
                     renderNewTitle
                     disableSubmit={
-                        newSchemaTokens === null || newSchemaTokens.label === ""
+                        newSchemaTokens === null ||
+                        newSchemaTokens.label.singular === ""
                     }
                     show={showModal}
                     handleClose={() => {
@@ -176,13 +183,18 @@ export function SchemaEditorLayout(props: {
                     onSubmit={() => {
                         setShowModal(false);
 
+                        // Short-circuit if newSchemaTokens is null
+                        if (newSchemaTokens === null) {
+                            return;
+                        }
+
                         // Defines new schema
                         const newSchema: Schema = {
                             ...state.schemas[0],
                             id: uniqueId("SCHEMA_"),
                             attributes: [],
                             relations: [],
-                            tokens: newSchemaTokens,
+                            identifiers: newSchemaTokens,
                         };
 
                         // Defines updated schemas, including NEW schema
@@ -270,7 +282,8 @@ export function SchemaEditorLayout(props: {
                 {/* Render SchemaForm + SchemaFormModal for UPDATE Schema */}
                 <SchemaFormModal
                     disableSubmit={
-                        newSchemaTokens === null || newSchemaTokens.label === ""
+                        newSchemaTokens === null ||
+                        newSchemaTokens.label.singular === ""
                     }
                     show={showEditModal}
                     handleClose={() => {
@@ -279,10 +292,15 @@ export function SchemaEditorLayout(props: {
                     onSubmit={() => {
                         setShowEditModal(false);
 
+                        // Short-circuit if newSchemaTokens is null
+                        if (newSchemaTokens === null) {
+                            return;
+                        }
+
                         // Defines updatedSchema
                         const updatedSchema: Schema = {
                             ...selectedSchema,
-                            tokens: newSchemaTokens,
+                            identifiers: newSchemaTokens,
                         };
 
                         // Defines updated schemas, including NEW schema
@@ -306,7 +324,7 @@ export function SchemaEditorLayout(props: {
                     }}
                 >
                     <SchemaForm
-                        label={selectedSchema.tokens.label}
+                        label={selectedSchema.identifiers.label.singular}
                         onChange={updatedTokens => {
                             setNewSchemaTokens(updatedTokens);
                         }}

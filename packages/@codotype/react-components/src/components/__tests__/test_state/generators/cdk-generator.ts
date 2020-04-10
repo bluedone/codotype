@@ -296,7 +296,6 @@ export const ComponentBuilderConfigurationGroup: ConfigurationGroup = {
     enabled: true,
     allowDisable: false,
     variant: "LIST",
-    scope: "",
     properties: [
         ComponentBuilderConfigurationGroupPropertySingleText,
         ComponentBuilderConfigurationGroupPropertySingleNumber,
@@ -353,7 +352,6 @@ export const LambdaBuilderConfigurationGroup: ConfigurationGroup = {
     enabled: true,
     allowDisable: false,
     variant: "LIST",
-    scope: "", // TODO - ditch scope!
     properties: [
         {
             label: "Lambdas",
@@ -381,7 +379,6 @@ export const ApiExamplesConfigurationGroup: ConfigurationGroup = {
     enabled: true,
     allowDisable: false,
     variant: "LIST",
-    scope: "",
     properties: [twitterApiOption],
 };
 

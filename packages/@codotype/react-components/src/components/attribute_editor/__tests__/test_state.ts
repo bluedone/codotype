@@ -1,4 +1,4 @@
-import { Attribute, Datatype } from "../@codotype/types";
+import { Attribute, Datatype } from "@codotype/types";
 
 // // // //
 

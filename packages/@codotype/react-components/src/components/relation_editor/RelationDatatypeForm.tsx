@@ -1,12 +1,18 @@
 import * as React from "react";
-import { DATATYPE_META, DatatypeMeta, Datatype } from "@codotype/types";
+import {
+    RELATION_META,
+    DatatypeMeta,
+    Datatype,
+    RelationType,
+    RelationMeta,
+} from "@codotype/types";
 
 // // // //
 
 interface DatatypeOptionProps {
     active: boolean;
-    datatype: DatatypeMeta;
-    onClick: (updatedDatatype: Datatype) => void;
+    relationMeta: RelationMeta;
+    onClick: (updatedDatatype: RelationType) => void;
 }
 export function DatatypeOption(props: DatatypeOptionProps) {
     let buttonClassName: string = "btn btn-outline-dark btn-block text-left";
@@ -19,11 +25,11 @@ export function DatatypeOption(props: DatatypeOptionProps) {
             <button
                 className={buttonClassName}
                 onClick={() => {
-                    props.onClick(props.datatype.value);
+                    props.onClick(props.relationMeta.id);
                 }}
             >
-                <strong>{props.datatype.label}</strong>
-                <small className="ml-2">{props.datatype.description}</small>
+                <strong>{props.relationMeta.label}</strong>
+                <small className="ml-2">{props.relationMeta.description}</small>
             </button>
         </div>
     );
@@ -34,9 +40,9 @@ export function DatatypeOption(props: DatatypeOptionProps) {
  * TODO - annotate remaining props
  */
 interface RelationDatatypeFormProps {
-    datatype: Datatype | null;
-    supportedDatatypes: Datatype[];
-    onChangeDatatype: (updatedDatatype: Datatype) => void;
+    type: RelationType | null;
+    supportedRelationTypes: RelationType[];
+    onChangeRelationType: (updatedDatatype: RelationType) => void;
 }
 
 /**
@@ -51,7 +57,7 @@ export function RelationDatatypeForm(props: RelationDatatypeFormProps) {
                 <small className="form-text text-muted">
                     The <span className="text-success">Datatype</span>
                     describes the data represented by this
-                    <strong>Attribute</strong> - this{" "}
+                    <strong>Relation</strong> - this{" "}
                     <strong>Codotype Generator</strong> supports{" "}
                     <strong>{"X"} </strong>
                     <span className="text-success">Datatypes</span>
@@ -61,23 +67,21 @@ export function RelationDatatypeForm(props: RelationDatatypeFormProps) {
 
             <div className="col-lg-12">
                 <div className="row">
-                    {Object.keys(DATATYPE_META)
+                    {Object.keys(RELATION_META)
                         .filter((datatype: string) =>
-                            props.supportedDatatypes
+                            props.supportedRelationTypes
                                 .map(d => String(d))
                                 .includes(datatype),
                         )
                         .map((datatype: string) => {
                             // @ts-ignore
-                            const attributeType = DATATYPE_META[datatype];
+                            const relationMeta = RELATION_META[datatype];
                             return (
                                 <DatatypeOption
                                     key={datatype}
-                                    datatype={attributeType}
-                                    active={
-                                        props.datatype === attributeType.value
-                                    }
-                                    onClick={props.onChangeDatatype}
+                                    relationMeta={relationMeta}
+                                    active={props.type === relationMeta.value}
+                                    onClick={props.onChangeRelationType}
                                 />
                             );
                         })}

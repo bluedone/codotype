@@ -16,7 +16,7 @@ export function SchemaSelectorItem(props: {
     onClick: (selectedSchema: Schema) => void;
 }) {
     return (
-        <Draggable draggableId={props.schema.id} index={props.index}>
+        <Draggable draggableId={String(props.schema.id)} index={props.index}>
             {provided => (
                 <li
                     className={classnames(
@@ -34,7 +34,7 @@ export function SchemaSelectorItem(props: {
                 >
                     <div className="row align-items-center d-flex flex-row justify-content-between">
                         <span className="d-flex ml-2">
-                            {props.schema.tokens.label}
+                            {props.schema.identifiers.label.singular}
                         </span>
 
                         {/* Renders warning tooltip */}

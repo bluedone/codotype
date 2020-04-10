@@ -2,7 +2,7 @@ import {
     ConfigurationGroup,
     ConfigurationGroupProperty,
     OptionType,
-} from "../@codotype/types";
+} from "@codotype/types";
 import { syntaxHighlighting } from "../../markdown_renderer/__tests__/test_state";
 
 // // // //
@@ -577,7 +577,6 @@ export const ComponentBuilderConfigurationGroup: ConfigurationGroup = {
     enabled: true,
     allowDisable: false,
     variant: "LIST",
-    scope: "",
     properties: [
         ComponentBuilderConfigurationGroupPropertySingleText,
         ComponentBuilderConfigurationGroupPropertySingleNumber,
@@ -595,7 +594,6 @@ export const ApiExamplesConfigurationGroup: ConfigurationGroup = {
     enabled: true,
     allowDisable: false,
     variant: "LIST",
-    scope: "",
     properties: [
         gitHubApiOption,
         twitterApiOption,

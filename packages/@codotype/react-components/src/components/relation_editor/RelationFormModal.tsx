@@ -1,20 +1,18 @@
 import * as React from "react";
-import { Datatype } from "@codotype/types";
+import { RelationType } from "@codotype/types";
 import { Modal } from "react-bootstrap";
 
 // // // //
 
 export interface RelationInput {
     id: string;
-    label: string;
-    identifier: string;
+    type: RelationType | null;
     required: boolean;
-    unique: boolean;
-    description: string;
-    datatype: Datatype | null;
-    default_value: null | string | boolean | number;
-    datatypeOptions: { [key: string]: any };
-    locked: boolean;
+    schema_id: string;
+    related_schema_id: string;
+    reverse_relation_id: string;
+    as: string; // TODO - rename 'as' to something else?
+    reverse_as: string; // TODO - rename 'reverse_as' to something else?
 }
 
 /**

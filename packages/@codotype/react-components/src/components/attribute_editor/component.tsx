@@ -1,6 +1,6 @@
 import * as React from "react";
 import { SortableListHeader } from "../sortable_list_header";
-import { Attribute, Datatype } from "@codotype/types";
+import { Attribute, Datatype, DEFAULT_ATTRIBUTE } from "@codotype/types";
 import { Droppable, DragDropContext } from "react-beautiful-dnd";
 import { AttributeFormModal, AttributeInput } from "./AttributeFormModal";
 import { AttributeDeleteModal } from "./AttributeDeleteModal";
@@ -22,25 +22,6 @@ export function reorder<T>(
     result.splice(endIndex, 0, removed);
     return result;
 }
-
-// // // //
-
-/**
- * defaultAttribute
- * A "blank" attributeto pass into the AttributeForm
- */
-const defaultAttribute: Attribute = {
-    id: "",
-    label: "",
-    identifier: "",
-    description: "",
-    required: false,
-    unique: false,
-    datatype: null,
-    default_value: null,
-    datatypeOptions: {},
-    locked: false,
-};
 
 // // // //
 
@@ -100,7 +81,18 @@ export function AttributeEditor(props: AttributeEditorProps) {
             <SortableListHeader
                 label="Attributes"
                 onClick={() => {
-                    setAttributeInput({ ...defaultAttribute });
+                    setAttributeInput({
+                        id: DEFAULT_ATTRIBUTE.id,
+                        label: DEFAULT_ATTRIBUTE.label,
+                        identifier: DEFAULT_ATTRIBUTE.identifier,
+                        required: DEFAULT_ATTRIBUTE.required,
+                        unique: DEFAULT_ATTRIBUTE.unique,
+                        description: DEFAULT_ATTRIBUTE.description,
+                        datatype: DEFAULT_ATTRIBUTE.datatype,
+                        default_value: DEFAULT_ATTRIBUTE.datatype,
+                        datatypeOptions: DEFAULT_ATTRIBUTE.datatypeOptions,
+                        locked: DEFAULT_ATTRIBUTE.locked,
+                    });
                 }}
             />
 
@@ -245,7 +237,7 @@ export function AttributeEditor(props: AttributeEditorProps) {
             {props.attributes.length === 0 && (
                 <AttributeListEmpty
                     onClick={() => {
-                        setAttributeInput({ ...defaultAttribute });
+                        setAttributeInput({ ...DEFAULT_ATTRIBUTE });
                     }}
                 />
             )}
