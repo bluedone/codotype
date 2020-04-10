@@ -93,7 +93,6 @@ export function RelationEditor(props: RelationEditorProps) {
                     relationInput={relationInput}
                     show={relationInput !== null}
                     disableSubmit={disableSubmit(relationInput)}
-                    // disableSubmit={false}
                     onCancel={() => {
                         setRelationInput(null);
                     }}

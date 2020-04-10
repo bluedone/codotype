@@ -1,1 +1,0 @@
-export { AttributeEditor } from "./component";
