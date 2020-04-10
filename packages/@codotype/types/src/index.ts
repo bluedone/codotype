@@ -9,4 +9,5 @@ export * from "./ProjectConfiguration";
 export * from "./project";
 export * from "./generator";
 export * from "./token";
+export * from "./reference";
 export * from "./uuid";

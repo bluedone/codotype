@@ -95,6 +95,7 @@ export const getDefaultRelationValue = ({ type }) => {
   }
 };
 
+// TODO - type this function => `Schema` and `InflatedSchema`
 // CLEANUP - document this function, write better tests
 export const buildDefault = ({ schema, schemas }) => {
   const defaultState = {};

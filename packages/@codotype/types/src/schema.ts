@@ -2,7 +2,7 @@ import { UUID } from "./uuid";
 import { ProjectConfiguration } from "./ProjectConfiguration";
 import { Attribute } from "./attribute";
 import { Relation } from "./relation";
-import { TokenCasing, TokenPluralization } from "./token";
+import { TokenPluralization } from "./token";
 
 export enum SchemaSource {
   USER = "USER",

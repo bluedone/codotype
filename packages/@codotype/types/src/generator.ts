@@ -11,6 +11,7 @@ export enum ExperienceRecommendation {
 // i.e. enable support for "required" / "unique" / "primary key" / "default value" options?
 // Might make sense to add `constraints` object to the `Attribute` interface to support this cleanly.
 // Might also want to add camelCase/pascalCase/etc. to Attribute
+// TODO - rename this to `schemaEditorConfiguration`
 export interface SchemaConfigurationGroup {
   configurationGroups: any[]; // ConfigurationGroup
   // defaultSchemas: any; // a Schemas array containing default schemas to load with the project.Learn more about default schema behavior here

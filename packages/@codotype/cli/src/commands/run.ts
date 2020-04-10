@@ -25,8 +25,14 @@ export function transformJsonProject(jsonProject: any): Project {
   // Defines the project instance
   // TODO - ProjectConfiguation should have a separate validation/transformation function
   const projectInstance: Project = {
-    label: String(jsonProject.label),
-    identifier: String(jsonProject.identifier),
+    id: Math.random().toString(), // TODO - use `UUID` function from `@codotype/util`
+    identifiers: {
+      label: String(jsonProject.identifiers.label),
+      snake: String(jsonProject.identifiers.snake),
+      camel: String(jsonProject.identifiers.camel),
+      pascal: String(jsonProject.identifiers.pascal),
+      kebab: String(jsonProject.identifiers.kebab),
+    },
     generatorId: String(jsonProject.generatorId),
     generatorVersion: String(jsonProject.generatorVersion),
     configuration: jsonProject.configuration || {},

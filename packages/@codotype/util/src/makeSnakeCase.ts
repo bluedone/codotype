@@ -1,4 +1,4 @@
-import { classify, titleize } from "underscore.string";
+import { underscored } from "underscore.string";
 
 // // // //
 
@@ -7,5 +7,5 @@ import { classify, titleize } from "underscore.string";
  * @param label
  */
 export function makeSnakeCase(label: string): string {
-  return classify(titleize(label));
+  return underscored(label.toLowerCase());
 }

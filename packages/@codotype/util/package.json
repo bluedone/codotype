@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Utility functions used throughout the Codotype ecosystem",
   "scripts": {
-    "test": "jest",
+    "test": "jest --config=jest.config.js",
     "build": "npm run clean && npm run compile",
     "dev": "tsc -w -p tsconfig.build.json",
     "clean": "rm -rf ./dist",

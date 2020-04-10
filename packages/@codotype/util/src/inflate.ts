@@ -1,6 +1,18 @@
 import { buildTokenPluralization } from "./buildTokenPluralization";
 import { clone, uniqueId, cloneDeep } from "lodash";
-import { RelationType } from "@codotype/types";
+import {
+  RelationType,
+  Schema,
+  Relation,
+  Attribute,
+  RelationReference,
+  InflatedSchema,
+  TokenPluralization,
+  SchemaConfigurationGroup,
+  ProjectConfiguration,
+  UUID,
+  SchemaSource,
+} from "@codotype/types";
 
 // // // //
 
@@ -96,6 +108,134 @@ export function inflateSchema({ schema, schemas }) {
   // Returns the inflated schema
   return inflated;
 }
+
+// // // //
+
+export function buildRelationReferences(params: {
+  schema: Schema;
+  schemas: Schema[];
+}): RelationReference[] {
+  const { schema, schemas } = params;
+
+  // Defines array of RelationReferences we're going to return
+
+  return schemas.reduce((previous: RelationReference[], nextSchema: Schema) => {
+    return [
+      ...previous,
+      ...nextSchema.relations
+        .filter((r: Relation) => r.schema_id !== schema.id)
+        .map(
+          (r: Relation): RelationReference => {
+            return {
+              uuid: Math.random().toString(), // TODO - add UUID function to UTIL
+              type: RelationType.TO_ONE,
+              sourceSchemaId: nextSchema.id,
+              destinationSchemaId: schema.id,
+              identifiers: {
+                source: {
+                  canonical: { ...nextSchema.identifiers },
+                  alias: {
+                    ...buildTokenPluralization(
+                      r.reverse_as || nextSchema.identifiers.singular.label
+                    ),
+                  },
+                },
+                destination: {
+                  canonical: { ...schema.identifiers },
+                  alias: buildTokenPluralization(
+                    r.as || schema.identifiers.singular.label
+                  ),
+                },
+              },
+              // alias,
+              // inflated.alias = buildTokenPluralization(inflated.as || relatedSchema.label);
+              // required: false,
+              // as: rel.reverse_as,
+              // reverse_as: rel.as,
+            };
+          }
+        ),
+    ];
+  }, []);
+
+  // let inflated = clone(relation);
+  // Iterates over each schema (inflate)
+  // return schemas.map((schema) => {
+  // Inflates meta (adds camel_case, camel_case_plural)
+  // schema = Object.assign(schema, buildTokenPluralization(schema.label));
+
+  // Flushes schema.reverse_relations
+  // schema.reverse_relations = []
+
+  // Inflate relations
+  //   schema.relations = schema.relations.map((relation) => {
+  //     // Assigns relation.schema_id
+  //     relation.schema_id = schema.id;
+
+  //     // console.log('RELATIONS')
+  //     // console.log(relation)
+
+  //     let rel = inflateRelation({
+  //       schemas: inflated.schemas,
+  //       relation: relation,
+  //     });
+
+  //     let relatedSchema = inflated.schemas.find(
+  //       (s) => s.id === rel.related_schema_id
+  //     );
+
+  //     // Handles REF_BELONGS_TO
+  //     // TODO - clean this up!
+  //     if (rel.type) {
+  //       const ref_relation = {
+  //         id: uniqueId("REVERSE_" + rel.id),
+  //         order: schema.reverse_relations.length,
+  //         type: rel.type,
+  //         required: false,
+  //         schema_id: relatedSchema.id, // TODO - should these be flipped???
+  //         related_schema_id: schema.id, // TODO - should these be flipped???
+  //         as: rel.reverse_as,
+  //         reverse_as: rel.as,
+  //       };
+
+  //       // Inflates reference relation and appends to related schema
+  //       const ref_relation_inflated = inflateRelation({
+  //         relation: ref_relation,
+  //         schemas: inflated.schemas,
+  //       });
+  //       // relatedSchema.relations.push(ref_relation_inflated)
+  //       relatedSchema.reverse_relations.push(ref_relation_inflated);
+  //     }
+
+  //     return rel;
+  //   });
+
+  //   return schema;
+  // });
+}
+
+export function inflateSchemaV2(params: {
+  schema: Schema;
+  schemas: Schema[];
+  schemaEditorConfiguration: SchemaConfigurationGroup;
+}): InflatedSchema {
+  const { schema, schemas } = params;
+
+  // TODO - must inflate relations, add incomingRelations / references ?
+
+  return {
+    id: schema.id,
+    relations: schema.relations,
+    attributes: schema.attributes,
+    identifiers: {
+      ...schema.identifiers,
+    },
+    references: buildRelationReferences({ schema, schemas }),
+    configuration: schema.configuration, // Question - does anything need to be done for the configuration?
+  };
+}
+
+// // // //
 
 // inflate
 // Fomats the build parameters for the generator

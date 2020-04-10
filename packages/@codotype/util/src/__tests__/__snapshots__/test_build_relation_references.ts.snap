@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`/lib/buildRelationReferences.js one word label 1`] = `
+Array [
+  Object {
+    "destinationSchemaId": "12345",
+    "identifiers": Object {
+      "destination": Object {
+        "alias": Object {
+          "plural": Object {
+            "camel": "directors",
+            "kebab": "directors",
+            "label": "Directors",
+            "pascal": "Directors",
+            "snake": "directors",
+          },
+          "singular": Object {
+            "camel": "director",
+            "kebab": "director",
+            "label": "Director",
+            "pascal": "Director",
+            "snake": "director",
+          },
+        },
+        "canonical": Object {
+          "plural": Object {
+            "camel": "users",
+            "kebab": "users",
+            "label": "Users",
+            "pascal": "Users",
+            "snake": "users",
+          },
+          "singular": Object {
+            "camel": "user",
+            "kebab": "user",
+            "label": "User",
+            "pascal": "User",
+            "snake": "user",
+          },
+        },
+      },
+      "source": Object {
+        "alias": Object {
+          "plural": Object {
+            "camel": "directedMovies",
+            "kebab": "directed-movies",
+            "label": "Directed Movies",
+            "pascal": "DirectedMovies",
+            "snake": "directed_movies",
+          },
+          "singular": Object {
+            "camel": "directedMovie",
+            "kebab": "directed-movie",
+            "label": "Directed Movie",
+            "pascal": "DirectedMovie",
+            "snake": "directed_movie",
+          },
+        },
+        "canonical": Object {
+          "plural": Object {
+            "camel": "movies",
+            "kebab": "movies",
+            "label": "Movies",
+            "pascal": "Movies",
+            "snake": "movies",
+          },
+          "singular": Object {
+            "camel": "movie",
+            "kebab": "movie",
+            "label": "Movie",
+            "pascal": "Movie",
+            "snake": "movie",
+          },
+        },
+      },
+    },
+    "sourceSchemaId": "45678",
+    "type": "TO_ONE",
+    "uuid": "0.7281540883952122",
+  },
+]
+`;

@@ -1,3 +1,5 @@
+import { UUID } from "./uuid";
+
 /**
  * RelationType
  * Defines an enum of available RelationsTypes
@@ -16,12 +18,12 @@ export enum RelationType {
  * Defines the Relation interface
  */
 export interface Relation {
-  id: string;
+  id: UUID;
   type: RelationType | null;
   required: boolean;
   schema_id: string;
-  related_schema_id: string;
-  reverse_relation_id: string;
+  related_schema_id: UUID;
+  reverse_relation_id: UUID;
   as: string; // TODO - rename 'as' to something else?
   reverse_as: string; // TODO - rename 'reverse_as' to something else?
 }
