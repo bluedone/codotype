@@ -3,7 +3,7 @@ import { GenerateCodeButton } from "./GenerateCodeButton";
 import { ProjectEditButton } from "./ProjectEditButton";
 import { ProjectFormModal } from "./ProjectFormModal";
 import { ProjectForm } from "./ProjectForm";
-import { sanitizeLabel, makeIdentifier } from "@codotype/util";
+import { sanitizeLabel, buildTokenCasing } from "@codotype/util";
 import { Project, GeneratorMeta } from "@codotype/types";
 import { ResetProjectButton } from "./ResetProjectButton";
 
@@ -18,18 +18,20 @@ export function ProjectEditorHeader(props: {
 }) {
     const [showingModal, showModal] = React.useState<boolean>(false);
     const [labelValue, setLabelValue] = React.useState<string>(
-        props.project.label,
+        props.project.identifiers.label,
     );
     return (
         <div className="row d-flex align-items-center">
             <div className="col-lg-6">
                 <span className="d-flex align-items-center">
-                    <h4 className="mb-0 mr-2 d-flex">{props.project.label}</h4>
+                    <h4 className="mb-0 mr-2 d-flex">
+                        {props.project.identifiers.label}
+                    </h4>
                     <ProjectEditButton onClick={() => showModal(true)} />
                     <ProjectFormModal
                         show={showingModal}
                         handleClose={() => {
-                            setLabelValue(props.project.label);
+                            setLabelValue(props.project.identifiers.label);
                             showModal(false);
                         }}
                         onSubmit={() => {
@@ -38,8 +40,7 @@ export function ProjectEditorHeader(props: {
                             );
                             props.onChange({
                                 ...props.project,
-                                label: sanitizedLabel,
-                                // identifier: makeIdentifier(sanitizedLabel),
+                                identifiers: buildTokenCasing(sanitizedLabel),
                             });
                             showModal(false);
                         }}

@@ -5,7 +5,7 @@ import { SchemaNewButton } from "./SchemaNewButton";
 import { DragDropContext } from "react-beautiful-dnd";
 import { SchemaFormModal } from "./SchemaFormModal";
 import { SchemaForm } from "./SchemaForm";
-import { Schema, SchemaTokenCasing } from "@codotype/types";
+import { Schema, TokenPluralization } from "@codotype/types";
 import { reorder } from "../attribute_editor/component";
 import uniqueId from "lodash.uniqueid";
 
@@ -28,9 +28,9 @@ export function SchemaEditorLayout(props: {
     const [showModal, setShowModal] = React.useState(false);
     const [showEditModal, setShowEditModal] = React.useState(false);
     const [
-        newSchemaTokens,
-        setNewSchemaTokens,
-    ] = React.useState<SchemaTokenCasing | null>(null);
+        newTokenPluralization,
+        setNewTokenPluralization,
+    ] = React.useState<TokenPluralization | null>(null);
     const [state, setState] = React.useState<EditorState>({
         schemas: props.schemas,
         lastUpdatedAt: null,
@@ -82,7 +82,7 @@ export function SchemaEditorLayout(props: {
                             <SchemaForm
                                 label={""}
                                 onChange={updatedTokens => {
-                                    setNewSchemaTokens(updatedTokens);
+                                    setNewTokenPluralization(updatedTokens);
                                 }}
                             />
                         </div>
@@ -91,12 +91,12 @@ export function SchemaEditorLayout(props: {
                         <button
                             className="btn btn-primary"
                             disabled={
-                                newSchemaTokens === null ||
-                                newSchemaTokens.label.singular === ""
+                                newTokenPluralization === null ||
+                                newTokenPluralization.singular.label === ""
                             }
                             onClick={() => {
-                                // Short-circuit if newSchemaTokens is null
-                                if (newSchemaTokens === null) {
+                                // Short-circuit if newTokenPluralization is null
+                                if (newTokenPluralization === null) {
                                     return;
                                 }
 
@@ -106,7 +106,7 @@ export function SchemaEditorLayout(props: {
                                     id: uniqueId("SCHEMA_"),
                                     attributes: [],
                                     relations: [],
-                                    identifiers: newSchemaTokens,
+                                    identifiers: newTokenPluralization,
                                 };
 
                                 // Defines updated schemas, including NEW schema
@@ -124,8 +124,8 @@ export function SchemaEditorLayout(props: {
                                 // Select the newly created schema
                                 setSelectedSchemaId(newSchema.id);
 
-                                // Clears newSchemaTokens
-                                setNewSchemaTokens(null);
+                                // Clears newTokenPluralization
+                                setNewTokenPluralization(null);
                             }}
                         >
                             Create Schema
@@ -173,8 +173,8 @@ export function SchemaEditorLayout(props: {
                 <SchemaFormModal
                     renderNewTitle
                     disableSubmit={
-                        newSchemaTokens === null ||
-                        newSchemaTokens.label.singular === ""
+                        newTokenPluralization === null ||
+                        newTokenPluralization.singular.label === ""
                     }
                     show={showModal}
                     handleClose={() => {
@@ -183,8 +183,8 @@ export function SchemaEditorLayout(props: {
                     onSubmit={() => {
                         setShowModal(false);
 
-                        // Short-circuit if newSchemaTokens is null
-                        if (newSchemaTokens === null) {
+                        // Short-circuit if newTokenPluralization is null
+                        if (newTokenPluralization === null) {
                             return;
                         }
 
@@ -194,7 +194,7 @@ export function SchemaEditorLayout(props: {
                             id: uniqueId("SCHEMA_"),
                             attributes: [],
                             relations: [],
-                            identifiers: newSchemaTokens,
+                            identifiers: newTokenPluralization,
                         };
 
                         // Defines updated schemas, including NEW schema
@@ -212,14 +212,14 @@ export function SchemaEditorLayout(props: {
                         // Select the newly created schema
                         setSelectedSchemaId(newSchema.id);
 
-                        // Clears newSchemaTokens
-                        setNewSchemaTokens(null);
+                        // Clears newTokenPluralization
+                        setNewTokenPluralization(null);
                     }}
                 >
                     <SchemaForm
                         label={""}
                         onChange={updatedTokens => {
-                            setNewSchemaTokens(updatedTokens);
+                            setNewTokenPluralization(updatedTokens);
                         }}
                     />
                 </SchemaFormModal>
@@ -282,8 +282,8 @@ export function SchemaEditorLayout(props: {
                 {/* Render SchemaForm + SchemaFormModal for UPDATE Schema */}
                 <SchemaFormModal
                     disableSubmit={
-                        newSchemaTokens === null ||
-                        newSchemaTokens.label.singular === ""
+                        newTokenPluralization === null ||
+                        newTokenPluralization.singular.label === ""
                     }
                     show={showEditModal}
                     handleClose={() => {
@@ -292,15 +292,15 @@ export function SchemaEditorLayout(props: {
                     onSubmit={() => {
                         setShowEditModal(false);
 
-                        // Short-circuit if newSchemaTokens is null
-                        if (newSchemaTokens === null) {
+                        // Short-circuit if newTokenPluralization is null
+                        if (newTokenPluralization === null) {
                             return;
                         }
 
                         // Defines updatedSchema
                         const updatedSchema: Schema = {
                             ...selectedSchema,
-                            identifiers: newSchemaTokens,
+                            identifiers: newTokenPluralization,
                         };
 
                         // Defines updated schemas, including NEW schema
@@ -319,14 +319,14 @@ export function SchemaEditorLayout(props: {
                             schemas: updatedSchemas,
                         });
 
-                        // Clears newSchemaTokens
-                        setNewSchemaTokens(null);
+                        // Clears newTokenPluralization
+                        setNewTokenPluralization(null);
                     }}
                 >
                     <SchemaForm
-                        label={selectedSchema.identifiers.label.singular}
+                        label={selectedSchema.identifiers.singular.label}
                         onChange={updatedTokens => {
-                            setNewSchemaTokens(updatedTokens);
+                            setNewTokenPluralization(updatedTokens);
                         }}
                     />
                 </SchemaFormModal>

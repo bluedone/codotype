@@ -17,7 +17,7 @@ export function SchemaDetailHeader(props: {
             <div className="row d-flex align-items-center">
                 <div className="col-lg-10">
                     <h5 className="mb-0">
-                        {props.schema.identifiers.label.singular} Schema
+                        {props.schema.identifiers.singular.label} Schema
                         <SchemaEditButton
                             schema={props.schema}
                             onClick={props.onClickEdit}
@@ -45,7 +45,7 @@ export function SchemaDetailHeader(props: {
                     <small className="text-muted">
                         Describe the{" "}
                         <strong>
-                            {props.schema.identifiers.label.singular} Schema
+                            {props.schema.identifiers.singular.label} Schema
                         </strong>{" "}
                         with <strong>Attributes</strong> and{" "}
                         <strong>Relations</strong>

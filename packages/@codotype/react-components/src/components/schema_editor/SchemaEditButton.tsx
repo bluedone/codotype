@@ -16,7 +16,7 @@ export function SchemaEditButton(props: {
             overlay={
                 <Tooltip id="edit-button-tooltip">
                     Edit the{" "}
-                    <strong>{props.schema.identifiers.label.singular}</strong>{" "}
+                    <strong>{props.schema.identifiers.singular.label}</strong>{" "}
                     Schema
                 </Tooltip>
             }

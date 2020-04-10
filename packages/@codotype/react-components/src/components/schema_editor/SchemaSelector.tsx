@@ -34,7 +34,7 @@ export function SchemaSelectorItem(props: {
                 >
                     <div className="row align-items-center d-flex flex-row justify-content-between">
                         <span className="d-flex ml-2">
-                            {props.schema.identifiers.label.singular}
+                            {props.schema.identifiers.singular.label}
                         </span>
 
                         {/* Renders warning tooltip */}

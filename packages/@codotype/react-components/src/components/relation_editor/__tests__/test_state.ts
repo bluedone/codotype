@@ -35,25 +35,19 @@ export const supportedRelationTypes: RelationType[] = [
 export const userSchema: Schema = {
     id: "12345",
     identifiers: {
-        label: {
-            singular: "User",
-            plural: "Users",
+        singular: {
+            label: "User",
+            snake: "user",
+            camel: "user",
+            pascal: "User",
+            kebab: "user",
         },
-        snake: {
-            singular: "user",
-            plural: "users",
-        },
-        camel: {
-            singular: "user",
-            plural: "users",
-        },
-        pascal: {
-            singular: "User",
-            plural: "Users",
-        },
-        kebab: {
-            singular: "user",
-            plural: "users",
+        plural: {
+            label: "Users",
+            snake: "users",
+            camel: "users",
+            pascal: "Users",
+            kebab: "users",
         },
     },
     attributes: [],

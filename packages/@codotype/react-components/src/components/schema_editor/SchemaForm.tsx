@@ -1,7 +1,8 @@
 import * as React from "react";
-import { inflateMeta, sanitizeLabel } from "@codotype/util";
+import { buildTokenPluralization, sanitizeLabel } from "@codotype/util";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLightbulb } from "@fortawesome/free-regular-svg-icons";
+import { TokenPluralization } from "@codotype/types";
 
 // // // //
 
@@ -16,7 +17,7 @@ interface MetaPreviewProps {
  * MetaPreview
  */
 export function MetaPreview(props: MetaPreviewProps) {
-    const schemaMeta = inflateMeta(props.label);
+    const schemaMeta: TokenPluralization = buildTokenPluralization(props.label);
 
     return (
         <tbody>
@@ -28,32 +29,34 @@ export function MetaPreview(props: MetaPreviewProps) {
                     />
                 </td>
                 <td>Label</td>
-                <td className="text-success">{schemaMeta.label || "..."}</td>
+                <td className="text-success">
+                    {schemaMeta.singular.label || "..."}
+                </td>
             </tr>
             <tr>
                 <td></td>
                 <td>Label Plural</td>
                 <td className="text-success">
-                    {schemaMeta.label_plural || "..."}
+                    {schemaMeta.plural.label || "..."}
                 </td>
             </tr>
             <tr>
                 <td className="infoCol">
                     <i
                         className="fa fa-fw text-secondary fa-question-circle"
-                        title='"Identifier" is the lowecase, underscored token for this model'
+                        title='"Snake Case" is the lowecase, underscored token for this model'
                     />
                 </td>
-                <td>Identifier</td>
+                <td>Snake Case</td>
                 <td className="text-success">
-                    {schemaMeta.identifier || "..."}
+                    {schemaMeta.singular.snake || "..."}
                 </td>
             </tr>
             <tr>
                 <td></td>
-                <td>Identifier Plural</td>
+                <td>Snake Case Plural</td>
                 <td className="text-success">
-                    {schemaMeta.identifier_plural || "..."}
+                    {schemaMeta.plural.snake || "..."}
                 </td>
             </tr>
             <tr>
@@ -65,33 +68,52 @@ export function MetaPreview(props: MetaPreviewProps) {
                 </td>
                 <td>Camel Case</td>
                 <td className="text-success">
-                    {schemaMeta.camel_case || "..."}
+                    {schemaMeta.singular.camel || "..."}
                 </td>
             </tr>
             <tr>
                 <td></td>
                 <td>Camel Case Plural</td>
                 <td className="text-success">
-                    {schemaMeta.camel_case_plural || "..."}
+                    {schemaMeta.plural.camel || "..."}
                 </td>
             </tr>
             <tr>
                 <td className="infoCol">
                     <i
                         className="fa fa-fw text-secondary fa-question-circle"
-                        title='"Class Name" is title-cased whitespace-free token for this model'
+                        title='"Pascal Case" is title-cased whitespace-free token for this model'
                     />
                 </td>
-                <td>Class Name</td>
+                <td>Pascal Case</td>
                 <td className="text-success">
-                    {schemaMeta.class_name || "..."}
+                    {schemaMeta.singular.pascal || "..."}
                 </td>
             </tr>
             <tr>
                 <td></td>
-                <td>Class Name Plural</td>
+                <td>Pascal Case Plural</td>
                 <td className="text-success">
-                    {schemaMeta.class_name_plural || "..."}
+                    {schemaMeta.plural.pascal || "..."}
+                </td>
+            </tr>
+            <tr>
+                <td className="infoCol">
+                    <i
+                        className="fa fa-fw text-secondary fa-question-circle"
+                        title='"Kebab Case" is dash-erized whitespace-free token for this model'
+                    />
+                </td>
+                <td>Kebab Case</td>
+                <td className="text-success">
+                    {schemaMeta.singular.pascal || "..."}
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Kebab Case Plural</td>
+                <td className="text-success">
+                    {schemaMeta.plural.pascal || "..."}
                 </td>
             </tr>
         </tbody>
@@ -114,7 +136,7 @@ export function SchemaForm(props: SchemaFormProps) {
 
     React.useEffect(() => {
         props.onChange({
-            ...inflateMeta(label.trim()),
+            ...buildTokenPluralization(label.trim()),
         });
     }, [label]);
 

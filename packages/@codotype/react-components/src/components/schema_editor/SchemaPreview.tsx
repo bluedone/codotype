@@ -29,7 +29,7 @@ export function SchemaPreview(props: { schema: Schema; schemas: Schema[] }) {
                         <InfoTooltip
                             id="schema-preview"
                             placement="left"
-                            message={`The data structure of a single ${schema.identifiers.label.singular} Schema`}
+                            message={`The data structure of a single ${schema.identifiers.singular.label} Schema`}
                         />
                     </span>
                     <small className="mb-0 text-muted">

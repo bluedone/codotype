@@ -13,25 +13,19 @@ const dummyProject: Project = buildDefaultProject(dummyGeneratorMeta);
 const userSchema: Schema = {
     id: "12345",
     identifiers: {
-        label: {
-            singular: "User",
-            plural: "Users",
+        singular: {
+            label: "User",
+            snake: "user",
+            camel: "user",
+            pascal: "User",
+            kebab: "user",
         },
-        snake: {
-            singular: "user",
-            plural: "users",
-        },
-        camel: {
-            singular: "user",
-            plural: "users",
-        },
-        pascal: {
-            singular: "User",
-            plural: "Users",
-        },
-        kebab: {
-            singular: "user",
-            plural: "users",
+        plural: {
+            label: "Users",
+            snake: "users",
+            camel: "users",
+            pascal: "Users",
+            kebab: "users",
         },
     },
     attributes: [],
@@ -45,25 +39,19 @@ const userSchema: Schema = {
 const movieSchema: Schema = {
     id: "45678",
     identifiers: {
-        label: {
-            singular: "Movie",
-            plural: "Movies",
+        singular: {
+            label: "Movie",
+            snake: "movie",
+            camel: "movie",
+            pascal: "Movie",
+            kebab: "movie",
         },
-        snake: {
-            singular: "movie",
-            plural: "movies",
-        },
-        camel: {
-            singular: "movie",
-            plural: "movies",
-        },
-        pascal: {
-            singular: "Movie",
-            plural: "Movies",
-        },
-        kebab: {
-            singular: "movie",
-            plural: "movies",
+        plural: {
+            label: "Movies",
+            snake: "movies",
+            camel: "movies",
+            pascal: "Movies",
+            kebab: "movies",
         },
     },
     attributes: [

@@ -31,7 +31,7 @@ export function RelationBadge(props: RelationBadgeProps) {
                 <RelationDiagram
                     direction={"direction"}
                     sourcePlural={true}
-                    sourceLabel={selectedSchema.identifiers.label.plural}
+                    sourceLabel={selectedSchema.identifiers.plural.label}
                     sourceAlias={"inflated.reverse_alias.label_plural"}
                     destPlural={false}
                     destLabel={"inflated.schema.label"}
@@ -44,7 +44,7 @@ export function RelationBadge(props: RelationBadgeProps) {
                 <RelationDiagram
                     direction={"direction"}
                     sourcePlural={false}
-                    sourceLabel={selectedSchema.identifiers.label.singular}
+                    sourceLabel={selectedSchema.identifiers.singular.label}
                     sourceAlias={"inflated.reverse_alias.label"}
                     destPlural={false}
                     destLabel={"inflated.schema.label"}
@@ -57,7 +57,7 @@ export function RelationBadge(props: RelationBadgeProps) {
                 <RelationDiagram
                     direction={"direction"}
                     sourcePlural={false}
-                    sourceLabel={selectedSchema.identifiers.label.singular}
+                    sourceLabel={selectedSchema.identifiers.singular.label}
                     sourceAlias={"inflated.reverse_alias.label"}
                     destPlural={true}
                     destLabel={"inflated.schema.label_plural"}
@@ -70,7 +70,7 @@ export function RelationBadge(props: RelationBadgeProps) {
                 <RelationDiagram
                     direction={"direction"}
                     sourcePlural={true}
-                    sourceLabel={selectedSchema.identifiers.label.plural}
+                    sourceLabel={selectedSchema.identifiers.plural.label}
                     sourceAlias={"inflated.reverse_alias.label_plural"}
                     destPlural={true}
                     destLabel={"inflated.schema.label_plural"}
