@@ -31,21 +31,21 @@ export const getDatatypeValueJson = ({
     case Datatype.TEXT:
       return `"longer string for text"`;
     case Datatype.INTEGER:
-      return `"128"`;
+      return `128`;
     case Datatype.BIGINT:
-      return `"12378971290123987"`;
+      return `12378971290123987`;
     case Datatype.FLOAT:
-      return `"3.14159"`;
+      return `3.14159`;
     case Datatype.DECIMAL:
-      return `"3.14159"`;
+      return `3.14159`;
     case Datatype.NUMERIC:
-      return `"3.14159"`;
+      return `3.14159`;
     case Datatype.BOOLEAN:
-      return `"true"`;
+      return `true`;
     case Datatype.JSON:
-      return `"{}"`;
+      return `{}`;
     case Datatype.JSONB:
-      return `"{}"`;
+      return `{}`;
     case Datatype.DATE:
       return `"2019-03-11"`;
     case Datatype.TIME:
@@ -201,21 +201,21 @@ export const getDatatypeValueTypeScript = ({
 }): string => {
   switch (datatype) {
     case Datatype.STRING:
-      return `String`;
+      return `string`;
     case Datatype.TEXT:
-      return `String`;
+      return `string`;
     case Datatype.INTEGER:
-      return `Number`;
+      return `number`;
     case Datatype.BIGINT:
-      return `"Number`;
+      return `"number`;
     case Datatype.FLOAT:
-      return `Number`;
+      return `number`;
     case Datatype.DECIMAL:
-      return `Number`;
+      return `number`;
     case Datatype.NUMERIC:
-      return `Number`;
+      return `number`;
     case Datatype.BOOLEAN:
-      return `Boolean`;
+      return `boolean`;
     case Datatype.JSON:
       return `"{}"`;
     case Datatype.JSONB:
