@@ -1,15 +1,10 @@
 import { buildDefault } from "@codotype/util";
 import { MockRuntime } from "./mock_runtime";
-import {
-  Schema,
-  Project,
-  ProjectConfiguration,
-  Relation,
-} from "@codotype/types";
+import { Schema, InflatedProject, Relation } from "@codotype/types";
 
 // // // //
 
-// TODO - move this into @codotype/runtime
+// TODO - move this into @codotype/runtime - or @codotype/types?
 interface CodotypeRuntime {
   templatePath: (resolvedPath: string, templatePath: string) => string;
   ensureDir: (dirPath: string) => Promise<boolean>;
@@ -45,20 +40,20 @@ export interface GeneratorOptions {
 export interface ConstructorOptions {
   name?: string;
   compileInPlace?: any;
-  write: (writeProps: { project: Project }) => Promise<void>;
+  write: (writeProps: { project: InflatedProject }) => Promise<void>;
   forEachRelation?: (params: {
     schema: Schema;
     relation: Relation;
-    project: Project;
+    project: InflatedProject;
   }) => Promise<void>;
   forEachReverseRelation?: (params: {
     schema: Schema;
     relation: Relation;
-    project: Project;
+    project: InflatedProject;
   }) => Promise<void>;
   forEachSchema?: (params: {
     schema: Schema;
-    project: Project;
+    project: InflatedProject;
   }) => Promise<void>;
 }
 
@@ -139,7 +134,7 @@ export class CodotypeGenerator {
    * write
    * Method to write files to the filesystem
    */
-  async write({ project }: { project: Project }) {
+  async write({ project }: { project: InflatedProject }) {
     // Display warning if generator doesn't implement its own write method?
     console.warn(
       "NOTHING TO WRITE - this should be overwritten by a subclassed generator."
@@ -156,7 +151,7 @@ export class CodotypeGenerator {
     project,
   }: {
     schema: Schema;
-    project: Project;
+    project: InflatedProject;
   }) {
     // console.log('NOTHING TO WRITE - this should be overwritten by a subclassed generator.')
   }
@@ -172,7 +167,7 @@ export class CodotypeGenerator {
   }: {
     schema: Schema;
     relation: Relation;
-    project: Project;
+    project: InflatedProject;
   }) {
     // console.log('NOTHING TO WRITE - this should be overwritten by a subclassed generator.')
   }
@@ -188,7 +183,7 @@ export class CodotypeGenerator {
   }: {
     schema: Schema;
     relation: Relation;
-    project: Project;
+    project: InflatedProject;
   }) {
     // console.log('NOTHING TO WRITE - this should be overwritten by a subclassed generator.')
   }

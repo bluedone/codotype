@@ -12,6 +12,8 @@ import {
   ProjectConfiguration,
   UUID,
   SchemaSource,
+  Project,
+  InflatedProject,
 } from "@codotype/types";
 
 // // // //
@@ -147,77 +149,18 @@ export function buildRelationReferences(params: {
                   ),
                 },
               },
-              // alias,
-              // inflated.alias = buildTokenPluralization(inflated.as || relatedSchema.label);
-              // required: false,
-              // as: rel.reverse_as,
-              // reverse_as: rel.as,
             };
           }
         ),
     ];
   }, []);
-
-  // let inflated = clone(relation);
-  // Iterates over each schema (inflate)
-  // return schemas.map((schema) => {
-  // Inflates meta (adds camel_case, camel_case_plural)
-  // schema = Object.assign(schema, buildTokenPluralization(schema.label));
-
-  // Flushes schema.reverse_relations
-  // schema.reverse_relations = []
-
-  // Inflate relations
-  //   schema.relations = schema.relations.map((relation) => {
-  //     // Assigns relation.schema_id
-  //     relation.schema_id = schema.id;
-
-  //     // console.log('RELATIONS')
-  //     // console.log(relation)
-
-  //     let rel = inflateRelation({
-  //       schemas: inflated.schemas,
-  //       relation: relation,
-  //     });
-
-  //     let relatedSchema = inflated.schemas.find(
-  //       (s) => s.id === rel.related_schema_id
-  //     );
-
-  //     // Handles REF_BELONGS_TO
-  //     // TODO - clean this up!
-  //     if (rel.type) {
-  //       const ref_relation = {
-  //         id: uniqueId("REVERSE_" + rel.id),
-  //         order: schema.reverse_relations.length,
-  //         type: rel.type,
-  //         required: false,
-  //         schema_id: relatedSchema.id, // TODO - should these be flipped???
-  //         related_schema_id: schema.id, // TODO - should these be flipped???
-  //         as: rel.reverse_as,
-  //         reverse_as: rel.as,
-  //       };
-
-  //       // Inflates reference relation and appends to related schema
-  //       const ref_relation_inflated = inflateRelation({
-  //         relation: ref_relation,
-  //         schemas: inflated.schemas,
-  //       });
-  //       // relatedSchema.relations.push(ref_relation_inflated)
-  //       relatedSchema.reverse_relations.push(ref_relation_inflated);
-  //     }
-
-  //     return rel;
-  //   });
-
-  //   return schema;
-  // });
 }
+
+// // // //
 
 export function inflateSchemaV2(params: {
   schema: Schema;
   schemas: Schema[];
-  schemaEditorConfiguration: SchemaConfigurationGroup;
 }): InflatedSchema {
   const { schema, schemas } = params;
 
@@ -232,6 +175,36 @@ export function inflateSchemaV2(params: {
     },
     references: buildRelationReferences({ schema, schemas }),
     configuration: schema.configuration, // Question - does anything need to be done for the configuration?
+  };
+}
+
+// // // //
+
+// TODO - annotate
+export function inflateSchemasV2(params: {
+  schemas: Schema[];
+}): InflatedSchema[] {
+  return params.schemas.map(
+    (s: Schema): InflatedSchema =>
+      inflateSchemaV2({
+        schemas: params.schemas,
+        schema: s,
+      })
+  );
+}
+
+// // // //
+
+// TODO - annotate
+export function inflateProject(params: { project: Project }): InflatedProject {
+  const { project } = params;
+  return {
+    id: project.id,
+    schemas: inflateSchemasV2({ schemas: project.schemas }),
+    configuration: project.configuration,
+    generatorId: project.generatorId,
+    identifiers: project.identifiers,
+    generatorVersion: project.generatorVersion,
   };
 }
 

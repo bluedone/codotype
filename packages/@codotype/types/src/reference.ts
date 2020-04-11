@@ -6,6 +6,7 @@ import {
   ProjectConfiguration,
   UUID,
 } from "../";
+import { TokenCasing } from "./token";
 
 /**
  * RelationReference
@@ -36,5 +37,15 @@ export interface InflatedSchema {
   references: RelationReference[];
   attributes: Attribute[];
   identifiers: TokenPluralization;
+  configuration: ProjectConfiguration;
+}
+
+// TODO - include reference to original project here?
+export interface InflatedProject {
+  id: UUID;
+  schemas: InflatedSchema[];
+  identifiers: TokenCasing;
+  generatorId: string;
+  generatorVersion: string;
   configuration: ProjectConfiguration;
 }

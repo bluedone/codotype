@@ -1,10 +1,14 @@
-// import Promise from 'bluebird';
 import * as fs from "fs";
 import * as fsExtra from "fs-extra";
 import * as path from "path";
 import * as ejs from "ejs";
-import { indent, inflate, trailingComma } from "@codotype/util";
-import { Datatype, RelationType, Project } from "@codotype/types";
+import { indent, trailingComma, inflateProject } from "@codotype/util";
+import {
+  Datatype,
+  InflatedProject,
+  RelationType,
+  Project,
+} from "@codotype/types";
 import { CodotypeGenerator, GeneratorOptions } from "@codotype/generator";
 
 // // // //
@@ -172,7 +176,7 @@ export class CodotypeNodeRuntime {
       this.options.cwd,
       OUTPUT_DIRECTORY,
       buildID,
-      build.project.identifier
+      build.project.identifiers.snake
     );
 
     // Ensures presence of the destination directory
@@ -189,7 +193,8 @@ export class CodotypeNodeRuntime {
       // Writes Project JSON to output directory
       fs.writeFileSync(
         path.join(
-          manifestDest + `/${build.project.identifier}-codotype-project.json`
+          manifestDest +
+            `/${build.project.identifiers.kebab}-codotype-project.json`
         ),
         JSON.stringify(build.project, null, 2)
       );
@@ -233,8 +238,8 @@ export class CodotypeNodeRuntime {
     // Inflates blueprint metadata
     // TODO - handle missing blueprint object
     // TODO - fix any type here, should include InflatedProject
-    const inflatedProject: any = inflate({ blueprint: project });
-
+    // const inflatedProject: any = inflate({ blueprint: project });
+    const inflatedProject: InflatedProject = inflateProject({ project });
     // TODO - annotate this
     await this.writeBuildManifest({ build });
 
@@ -253,13 +258,12 @@ export class CodotypeNodeRuntime {
     // Sets output_directory default to build ID by default
     const output_directory = id || "";
 
-    // Assigns `dest` option for generator
-    // TODO - handle condition of missing blueprint.identifier
+    // Assigns `dest` option for project output
     const dest = path.join(
       this.options.cwd,
       OUTPUT_DIRECTORY,
       output_directory,
-      inflatedProject.identifier
+      inflatedProject.identifiers.snake
     );
 
     // Try to load up the generator from generator_path, catch error
