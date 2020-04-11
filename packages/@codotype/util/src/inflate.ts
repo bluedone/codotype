@@ -158,6 +158,52 @@ export function buildRelationReferences(params: {
 
 // // // //
 
+export function buildInflatedRelations(params: {
+  schema: Schema;
+  schemas: Schema[];
+}): RelationReference[] {
+  const { schema, schemas } = params;
+
+  // Defines array of RelationReferences we're going to return
+
+  return [
+    ...schema.relations
+      .filter((r: Relation) => r.schema_id !== schema.id)
+      .map(
+        (r: Relation): RelationReference => {
+          const nextSchema: Schema = schemas.find(
+            (s) => s.id === r.related_schema_id
+          );
+
+          return {
+            uuid: Math.random().toString(), // TODO - add UUID function to UTIL
+            type: RelationType.TO_ONE,
+            sourceSchemaId: nextSchema.id,
+            destinationSchemaId: schema.id,
+            identifiers: {
+              source: {
+                canonical: { ...schema.identifiers },
+                alias: buildTokenPluralization(
+                  r.as || schema.identifiers.singular.label
+                ),
+              },
+              destination: {
+                canonical: { ...nextSchema.identifiers },
+                alias: {
+                  ...buildTokenPluralization(
+                    r.reverse_as || nextSchema.identifiers.singular.label
+                  ),
+                },
+              },
+            },
+          };
+        }
+      ),
+  ];
+}
+
+// // // //
+
 export function inflateSchemaV2(params: {
   schema: Schema;
   schemas: Schema[];
@@ -168,7 +214,7 @@ export function inflateSchemaV2(params: {
 
   return {
     id: schema.id,
-    relations: schema.relations,
+    relations: buildInflatedRelations({ schema, schemas }),
     attributes: schema.attributes,
     identifiers: {
       ...schema.identifiers,

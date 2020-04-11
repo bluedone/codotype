@@ -12,3 +12,4 @@ export * from "./makeLabelCase";
 export * from "./makeKebabCase";
 export * from "./buildTokenCasing";
 export * from "./buildTokenPluralization";
+export * from "./schemaRenderer";

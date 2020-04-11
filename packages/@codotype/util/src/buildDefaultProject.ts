@@ -95,11 +95,11 @@ export function buildDefaultProject(generatorMeta: GeneratorMeta): Project {
   const newProject: Project = {
     id: "",
     identifiers: {
-      label: "",
-      snake: "",
-      camel: "",
-      pascal: "",
-      kebab: "",
+      label: "New Project",
+      snake: "new_project",
+      camel: "newProject",
+      pascal: "NewProject",
+      kebab: "new-project",
     },
     generatorId: generatorMeta.id,
     generatorVersion: generatorMeta.version,
