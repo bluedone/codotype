@@ -24,6 +24,7 @@ export interface SchemaConfigurationGroup {
 // GeneratorMeta
 // Generator encapsulate the GeneratorMeta + link to the entry point of the generator
 // Can be defined in `index.ts` in the root of the generator, or split up into smaller components in `src`
+// TODO - update this to include example projects (must be bundled at the generator-level)
 export interface GeneratorMeta {
   id: string; // unique ID for the generator
   label: string; // short label for the generator
