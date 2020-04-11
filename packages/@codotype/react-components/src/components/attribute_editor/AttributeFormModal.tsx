@@ -1,20 +1,11 @@
 import * as React from "react";
-import { Datatype } from "@codotype/types";
+import { Datatype, Attribute } from "@codotype/types";
 import { Modal } from "react-bootstrap";
 
 // // // //
 
-export interface AttributeInput {
-    id: string;
-    label: string;
-    identifier: string;
-    required: boolean;
-    unique: boolean;
-    description: string;
+export interface AttributeInput extends Attribute {
     datatype: Datatype | null;
-    default_value: null | string | boolean | number;
-    datatypeOptions: { [key: string]: any };
-    locked: boolean;
 }
 
 /**

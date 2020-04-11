@@ -1,10 +1,16 @@
-import { Relation, Schema, SchemaSource, RelationType } from "@codotype/types";
+import {
+    Relation,
+    Schema,
+    SchemaSource,
+    RelationType,
+    Datatype,
+} from "@codotype/types";
 
 // // // //
 
 export const relationExample01: Relation = {
     id: "name-attr",
-    type: null,
+    type: RelationType.TO_ONE,
     required: false,
     schema_id: "",
     related_schema_id: "",
@@ -15,7 +21,7 @@ export const relationExample01: Relation = {
 
 export const relationExample02: Relation = {
     id: "Email-attr",
-    type: null,
+    type: RelationType.TO_ONE,
     required: false,
     schema_id: "",
     related_schema_id: "",
@@ -50,7 +56,20 @@ export const userSchema: Schema = {
             kebab: "users",
         },
     },
-    attributes: [],
+    attributes: [
+        {
+            id: "ATTR_01",
+            label: "Email",
+            identifier: "email",
+            required: true,
+            unique: true,
+            datatype: Datatype.STRING,
+            datatypeOptions: {},
+            default_value: "",
+            locked: false,
+            description: "Email for the user",
+        },
+    ],
     relations: [],
     locked: false,
     removable: false,

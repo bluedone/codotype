@@ -5,7 +5,7 @@ import { SchemaNewButton } from "./SchemaNewButton";
 import { DragDropContext } from "react-beautiful-dnd";
 import { SchemaFormModal } from "./SchemaFormModal";
 import { SchemaForm } from "./SchemaForm";
-import { Schema, TokenPluralization } from "@codotype/types";
+import { Schema, TokenPluralization, UUID } from "@codotype/types";
 import { reorder } from "../attribute_editor/component";
 import uniqueId from "lodash.uniqueid";
 
@@ -35,9 +35,9 @@ export function SchemaEditorLayout(props: {
         schemas: props.schemas,
         lastUpdatedAt: null,
     });
-    const [selectedSchemaId, setSelectedSchemaId] = React.useState<
-        string | null
-    >(null);
+    const [selectedSchemaId, setSelectedSchemaId] = React.useState<UUID | null>(
+        null,
+    );
 
     // Update state.schemas when props.schemas changes
     React.useEffect(() => {

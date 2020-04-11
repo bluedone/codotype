@@ -6,10 +6,14 @@ import { Story } from "@src/components/dev";
 import { RuntimeProvider } from "@src/components/runtime_provider";
 import { ProjectEditor } from "@src/components/project_editor";
 import { cdkGeneratorMeta } from "@src/components/__tests__/test_state";
+import { dummyGeneratorMeta } from "@src/components/project_editor/__tests__/test_state";
 
 // // // //
 
-const stories: [string, GeneratorMeta][] = [["render", cdkGeneratorMeta]];
+const stories: [string, GeneratorMeta][] = [
+    ["w/ schemas", dummyGeneratorMeta],
+    ["w/o schemas", cdkGeneratorMeta],
+];
 
 // // // //
 
@@ -38,9 +42,6 @@ stories.forEach(story => {
                                             setProject(updatedProject);
                                         }}
                                     />
-                                    <button onClick={clearProject}>
-                                        clear
-                                    </button>
                                 </React.Fragment>
                             )}
                         </RuntimeProvider>

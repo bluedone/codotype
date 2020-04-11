@@ -107,7 +107,6 @@ export function AttributeEditor(props: AttributeEditorProps) {
                         setAttributeInput(null);
                     }}
                     onSubmit={() => {
-                        setAttributeInput(null);
                         // Insert new Attribute
                         if (attributeInput.id === "") {
                             const newAttribute: Attribute = {

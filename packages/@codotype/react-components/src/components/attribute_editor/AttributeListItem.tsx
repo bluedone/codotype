@@ -1,10 +1,9 @@
 import * as React from "react";
-import { Attribute } from "@codotype/types";
 import { Draggable } from "react-beautiful-dnd";
 import { Dropdown } from "react-bootstrap";
 import { AttributeListItemLabel } from "./AttributeListItemLabel";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { DATATYPE_META } from "@codotype/types";
+import { DATATYPE_META, Attribute } from "@codotype/types";
 import {
     faTrashAlt,
     faPencilAlt,
@@ -36,7 +35,7 @@ export function AttributeListItem(props: {
 }) {
     const { attribute } = props;
     return (
-        <Draggable draggableId={props.attribute.id} index={props.index}>
+        <Draggable draggableId={String(props.attribute.id)} index={props.index}>
             {provided => (
                 <li
                     className="list-group-item list-group-item-action sortable py-0 px-2"

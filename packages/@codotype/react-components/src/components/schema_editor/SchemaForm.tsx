@@ -1,8 +1,36 @@
 import * as React from "react";
-import { buildTokenPluralization, sanitizeLabel } from "@codotype/util";
+import {
+    buildTokenPluralization,
+    validateTokenPluralization,
+    sanitizeLabel,
+} from "@codotype/util";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLightbulb } from "@fortawesome/free-regular-svg-icons";
 import { TokenPluralization } from "@codotype/types";
+import { faAsterisk } from "@fortawesome/free-solid-svg-icons";
+
+// // // //
+
+function TokenCell(props: {
+    token: string;
+    value: string;
+    validationFailures: any;
+}) {
+    const { validationFailures, token, value } = props;
+    const hasError: boolean = validationFailures[token];
+    const isEmpty: boolean = value === "";
+    const className = hasError ? "text-danger" : "text-success";
+    return (
+        <td className={className}>
+            {value || "..."}
+            {hasError && !isEmpty && (
+                <small className="ml-1 text-danger">
+                    <FontAwesomeIcon icon={faAsterisk} />
+                </small>
+            )}
+        </td>
+    );
+}
 
 // // // //
 
@@ -16,8 +44,11 @@ interface MetaPreviewProps {
 /**
  * MetaPreview
  */
+// TODO - validation errors + tokens should be passed down into this
+// TODO - validation errors + tokens should be passed down into this
 export function MetaPreview(props: MetaPreviewProps) {
-    const schemaMeta: TokenPluralization = buildTokenPluralization(props.label);
+    const tokens: TokenPluralization = buildTokenPluralization(props.label);
+    const validationFailures = validateTokenPluralization(tokens);
 
     return (
         <tbody>
@@ -29,16 +60,20 @@ export function MetaPreview(props: MetaPreviewProps) {
                     />
                 </td>
                 <td>Label</td>
-                <td className="text-success">
-                    {schemaMeta.singular.label || "..."}
-                </td>
+                <TokenCell
+                    token="label"
+                    value={tokens.singular.label}
+                    validationFailures={validationFailures}
+                />
             </tr>
             <tr>
                 <td></td>
                 <td>Label Plural</td>
-                <td className="text-success">
-                    {schemaMeta.plural.label || "..."}
-                </td>
+                <TokenCell
+                    token="label"
+                    value={tokens.plural.label}
+                    validationFailures={validationFailures}
+                />
             </tr>
             <tr>
                 <td className="infoCol">
@@ -48,16 +83,20 @@ export function MetaPreview(props: MetaPreviewProps) {
                     />
                 </td>
                 <td>Snake Case</td>
-                <td className="text-success">
-                    {schemaMeta.singular.snake || "..."}
-                </td>
+                <TokenCell
+                    token="snake"
+                    value={tokens.singular.snake}
+                    validationFailures={validationFailures}
+                />
             </tr>
             <tr>
                 <td></td>
                 <td>Snake Case Plural</td>
-                <td className="text-success">
-                    {schemaMeta.plural.snake || "..."}
-                </td>
+                <TokenCell
+                    token="snake"
+                    value={tokens.plural.snake}
+                    validationFailures={validationFailures}
+                />
             </tr>
             <tr>
                 <td className="infoCol">
@@ -67,16 +106,20 @@ export function MetaPreview(props: MetaPreviewProps) {
                     />
                 </td>
                 <td>Camel Case</td>
-                <td className="text-success">
-                    {schemaMeta.singular.camel || "..."}
-                </td>
+                <TokenCell
+                    token="camel"
+                    value={tokens.singular.camel}
+                    validationFailures={validationFailures}
+                />
             </tr>
             <tr>
                 <td></td>
                 <td>Camel Case Plural</td>
-                <td className="text-success">
-                    {schemaMeta.plural.camel || "..."}
-                </td>
+                <TokenCell
+                    token="camel"
+                    value={tokens.plural.camel}
+                    validationFailures={validationFailures}
+                />
             </tr>
             <tr>
                 <td className="infoCol">
@@ -86,16 +129,20 @@ export function MetaPreview(props: MetaPreviewProps) {
                     />
                 </td>
                 <td>Pascal Case</td>
-                <td className="text-success">
-                    {schemaMeta.singular.pascal || "..."}
-                </td>
+                <TokenCell
+                    token="pascal"
+                    value={tokens.singular.pascal}
+                    validationFailures={validationFailures}
+                />
             </tr>
             <tr>
                 <td></td>
                 <td>Pascal Case Plural</td>
-                <td className="text-success">
-                    {schemaMeta.plural.pascal || "..."}
-                </td>
+                <TokenCell
+                    token="pascal"
+                    value={tokens.plural.pascal}
+                    validationFailures={validationFailures}
+                />
             </tr>
             <tr>
                 <td className="infoCol">
@@ -105,16 +152,20 @@ export function MetaPreview(props: MetaPreviewProps) {
                     />
                 </td>
                 <td>Kebab Case</td>
-                <td className="text-success">
-                    {schemaMeta.singular.pascal || "..."}
-                </td>
+                <TokenCell
+                    token="kebab"
+                    value={tokens.singular.kebab}
+                    validationFailures={validationFailures}
+                />
             </tr>
             <tr>
                 <td></td>
                 <td>Kebab Case Plural</td>
-                <td className="text-success">
-                    {schemaMeta.plural.pascal || "..."}
-                </td>
+                <TokenCell
+                    token="kebab"
+                    value={tokens.plural.kebab}
+                    validationFailures={validationFailures}
+                />
             </tr>
         </tbody>
     );

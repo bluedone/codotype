@@ -29,7 +29,7 @@ export function RelationListItem(props: {
 }) {
     const { relation, selectedSchema } = props;
     return (
-        <Draggable draggableId={relation.id} index={props.index}>
+        <Draggable draggableId={String(relation.id)} index={props.index}>
             {provided => (
                 <li
                     className="list-group-item list-group-item-action sortable py-0 px-2"
