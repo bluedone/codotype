@@ -19,11 +19,11 @@ export enum RelationType {
  */
 export interface Relation {
   id: UUID;
-  type: RelationType | null;
+  type: RelationType;
   required: boolean;
-  schema_id: string;
+  schema_id: string; // REMOVE THIS, only needed for `InflatedRelation` / `RelationReference`
   related_schema_id: UUID;
-  reverse_relation_id: UUID;
+  reverse_relation_id: UUID; // REMOVE THIS - only needed for `RelationReference`
   as: string; // TODO - rename 'as' to something else?
   reverse_as: string; // TODO - rename 'reverse_as' to something else?
 }
@@ -41,6 +41,7 @@ export interface Relation {
 // }
 
 // Relation constants
+// TODO - replace this with RelationInput
 export const DEFAULT_RELATION: Relation = {
   id: null,
   type: null,

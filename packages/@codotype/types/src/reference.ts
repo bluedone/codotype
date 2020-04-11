@@ -33,7 +33,7 @@ export interface RelationReference {
 // TODO - rename this to something else - what's a good name for this when you're building a generator?
 export interface InflatedSchema {
   id: UUID;
-  relations: Relation[];
+  relations: RelationReference[];
   references: RelationReference[];
   attributes: Attribute[];
   identifiers: TokenPluralization;

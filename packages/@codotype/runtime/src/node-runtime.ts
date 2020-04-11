@@ -8,6 +8,7 @@ import {
   InflatedProject,
   RelationType,
   Project,
+  InflatedSchema,
 } from "@codotype/types";
 import { CodotypeGenerator, GeneratorOptions } from "@codotype/generator";
 
@@ -300,49 +301,44 @@ export class CodotypeNodeRuntime {
       console.log("Instantiated CodotypeGenerator Instance");
 
       // Invokes `generator.forEachSchema` once for each in inflatedProject.schemas
-      // await Promise.all(
-      //   inflatedProject.schemas.map((schema) =>
-      //     generatorInstance.forEachSchema({
-      //       schema,
-      //       configuration: inflatedProject.configuration,
-      //       project: inflatedProject,
-      //     })
-      //   )
-      // );
+      await Promise.all(
+        inflatedProject.schemas.map((schema) =>
+          generatorInstance.forEachSchema({
+            schema,
+            project: inflatedProject,
+          })
+        )
+      );
 
       // Invokes `generator.forEachRelation` once for each in inflatedProject.schemas
-      // await Promise.all(
-      //   inflatedProject.schemas.map((schema) => {
-      //     return Promise.all(
-      //       schema.relations.map((relation) => {
-      //         return generatorInstance.forEachRelation({
-      //           schema: schema,
-      //           relation,
-      //           configuration: inflatedProject.configuration,
-      //           // @ts-ignore
-      //           project: inflatedProject,
-      //         });
-      //       })
-      //     );
-      //   })
-      // );
+      await Promise.all(
+        inflatedProject.schemas.map((schema) => {
+          return Promise.all(
+            schema.relations.map((relation) => {
+              return generatorInstance.forEachRelation({
+                schema: schema,
+                relation,
+                project: inflatedProject,
+              });
+            })
+          );
+        })
+      );
 
       // Invokes `generator.forEachReverseRelation` once for each in inflatedProject.schemas
-      // await Promise.all(
-      //   inflatedProject.schemas.map((schema) => {
-      //     return Promise.all(
-      //       schema.reverse_relations.map((relation) => {
-      //         return generatorInstance.forEachReverseRelation({
-      //           schema: schema,
-      //           relation,
-      //           configuration: inflatedProject.configuration,
-      //           // @ts-ignore
-      //           project: inflatedProject,
-      //         });
-      //       })
-      //     );
-      //   })
-      // );
+      await Promise.all(
+        inflatedProject.schemas.map((schema) => {
+          return Promise.all(
+            schema.references.map((relation) => {
+              return generatorInstance.forEachReverseRelation({
+                schema: schema,
+                relation,
+                project: inflatedProject,
+              });
+            })
+          );
+        })
+      );
 
       // Invokes `generator.write()` once
       await generatorInstance.write({ project: inflatedProject });
@@ -610,6 +606,11 @@ export class CodotypeNodeRuntime {
       // // // //
       // // // //
 
+      // Inflates project
+      const inflatedProject: InflatedProject = inflateProject({
+        project: parentGeneratorInstance.options.project,
+      });
+
       // Creates new instance of generatorPrototype
       // TODO - document this a bit more
       // TODO - abstract into @codotype/runtime
@@ -623,23 +624,23 @@ export class CodotypeNodeRuntime {
       // Invokes `generator.forEachSchema` once for each in project.schemas
       // TODO - abstract into @codotype/runtime
       await Promise.all(
-        parentGeneratorInstance.options.project.schemas.map((schema) =>
+        inflatedProject.schemas.map((schema: InflatedSchema) =>
           generator.forEachSchema({
             schema: schema,
-            project: parentGeneratorInstance.options.project,
+            project: inflatedProject,
           })
         )
       );
 
       // Invokes `generator.forEachRelation` once for each in project.schemas
       await Promise.all(
-        parentGeneratorInstance.options.project.schemas.map((schema) => {
+        inflatedProject.schemas.map((schema: InflatedSchema) => {
           return Promise.all(
             schema.relations.map((relation) => {
               return generator.forEachRelation({
                 relation,
                 schema: schema,
-                project: parentGeneratorInstance.options.project,
+                project: inflatedProject,
               });
             })
           );
@@ -649,19 +650,19 @@ export class CodotypeNodeRuntime {
       // Invokes `generator.forEachReverseRelation` once for each in project.schemas
       // NOTE - this is currently commented out B.C. the updated Schema interface doesn't have a property for `reverse_relations`
       // TODO - the `reverse_relations` property should be added by the inflateMeta function
-      // await Promise.all(
-      //   parentGeneratorInstance.options.project.schemas.map((schema) => {
-      //     return Promise.all(
-      //       schema.reverse_relations.map((relation) => {
-      //         return generator.forEachReverseRelation({
-      //           relation,
-      //           schema: schema,
-      //           project: parentGeneratorInstance.options.project,
-      //         });
-      //       })
-      //     );
-      //   })
-      // );
+      await Promise.all(
+        inflatedProject.schemas.map((schema: InflatedSchema) => {
+          return Promise.all(
+            schema.references.map((relation) => {
+              return generator.forEachReverseRelation({
+                relation,
+                schema: schema,
+                project: inflatedProject,
+              });
+            })
+          );
+        })
+      );
 
       // Invokes `generator.write()` once
       // TODO - abstract into @codotype/runtime

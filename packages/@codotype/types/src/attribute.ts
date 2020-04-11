@@ -15,7 +15,7 @@ export interface Attribute {
 }
 
 export const DEFAULT_ATTRIBUTE: Attribute = {
-  id: null,
+  id: "",
   label: "",
   identifier: "",
   description: "",

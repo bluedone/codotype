@@ -1,6 +1,10 @@
 import { buildDefault } from "@codotype/util";
 import { MockRuntime } from "./mock_runtime";
-import { Schema, InflatedProject, Relation } from "@codotype/types";
+import {
+  RelationReference,
+  InflatedProject,
+  InflatedSchema,
+} from "@codotype/types";
 
 // // // //
 
@@ -23,13 +27,6 @@ interface CodotypeRuntime {
   composeWith: (generator: any, generatorModule: any, options: any) => any; // wtf is generatorModule
 }
 
-interface WriteFunctionProps {
-  schema: any;
-  relation: any;
-  blueprint: any;
-  configuration: any;
-}
-
 export interface GeneratorOptions {
   [key: string]: any;
   runtime: CodotypeRuntime | MockRuntime;
@@ -40,19 +37,19 @@ export interface GeneratorOptions {
 export interface ConstructorOptions {
   name?: string;
   compileInPlace?: any;
-  write: (writeProps: { project: InflatedProject }) => Promise<void>;
+  write?: (writeProps: { project: InflatedProject }) => Promise<void>;
   forEachRelation?: (params: {
-    schema: Schema;
-    relation: Relation;
+    schema: InflatedSchema;
+    relation: RelationReference;
     project: InflatedProject;
   }) => Promise<void>;
   forEachReverseRelation?: (params: {
-    schema: Schema;
-    relation: Relation;
+    schema: InflatedSchema;
+    relation: RelationReference;
     project: InflatedProject;
   }) => Promise<void>;
   forEachSchema?: (params: {
-    schema: Schema;
+    schema: InflatedSchema;
     project: InflatedProject;
   }) => Promise<void>;
 }
@@ -136,9 +133,9 @@ export class CodotypeGenerator {
    */
   async write({ project }: { project: InflatedProject }) {
     // Display warning if generator doesn't implement its own write method?
-    console.warn(
-      "NOTHING TO WRITE - this should be overwritten by a subclassed generator."
-    );
+    // console.warn(
+    //   "NOTHING TO WRITE - this should be overwritten by a subclassed generator."
+    // );
   }
 
   /**
@@ -150,7 +147,7 @@ export class CodotypeGenerator {
     schema,
     project,
   }: {
-    schema: Schema;
+    schema: InflatedSchema;
     project: InflatedProject;
   }) {
     // console.log('NOTHING TO WRITE - this should be overwritten by a subclassed generator.')
@@ -165,8 +162,8 @@ export class CodotypeGenerator {
     relation,
     project,
   }: {
-    schema: Schema;
-    relation: Relation;
+    schema: InflatedSchema;
+    relation: RelationReference;
     project: InflatedProject;
   }) {
     // console.log('NOTHING TO WRITE - this should be overwritten by a subclassed generator.')
@@ -174,6 +171,7 @@ export class CodotypeGenerator {
 
   /**
    * forEachReverseRelation
+   * TODO - rename this function to forEachRelationReference
    * @param - see `WriteFunctionProps`
    */
   async forEachReverseRelation({
@@ -181,8 +179,8 @@ export class CodotypeGenerator {
     relation,
     project,
   }: {
-    schema: Schema;
-    relation: Relation;
+    schema: InflatedSchema;
+    relation: RelationReference;
     project: InflatedProject;
   }) {
     // console.log('NOTHING TO WRITE - this should be overwritten by a subclassed generator.')
