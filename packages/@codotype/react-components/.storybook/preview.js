@@ -1,4 +1,8 @@
-import { addParameters, INITIAL_VIEWPORTS } from "@storybook/react";
+import {
+    addParameters,
+    addDecorator,
+    INITIAL_VIEWPORTS,
+} from "@storybook/react";
 import { withConsole, setConsoleOptions } from "@storybook/addon-console";
 import { withInfo } from "@storybook/addon-info";
 

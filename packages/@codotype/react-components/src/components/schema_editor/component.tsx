@@ -5,7 +5,12 @@ import { SchemaNewButton } from "./SchemaNewButton";
 import { DragDropContext } from "react-beautiful-dnd";
 import { SchemaFormModal } from "./SchemaFormModal";
 import { SchemaForm } from "./SchemaForm";
-import { Schema, TokenPluralization, UUID } from "@codotype/types";
+import {
+    Schema,
+    TokenPluralization,
+    UUID,
+    SchemaSource,
+} from "@codotype/types";
 import { reorder } from "../attribute_editor/component";
 import uniqueId from "lodash.uniqueid";
 
@@ -190,11 +195,14 @@ export function SchemaEditorLayout(props: {
 
                         // Defines new schema
                         const newSchema: Schema = {
-                            ...state.schemas[0],
                             id: uniqueId("SCHEMA_"),
+                            source: SchemaSource.USER,
+                            locked: false,
+                            removable: true,
                             attributes: [],
                             relations: [],
                             identifiers: newTokenPluralization,
+                            configuration: {},
                         };
 
                         // Defines updated schemas, including NEW schema
