@@ -72,40 +72,53 @@ export function SchemaPreview(props: { schema: Schema; schemas: Schema[] }) {
                 </p>
             </div>
             <div className="col-lg-12">
-                <div className="row d-flex align-items-center">
-                    <div className="col-sm-8">
-                        <select
-                            value={renderType}
-                            onChange={e => {
-                                // @ts-ignore
-                                const value: RenderType = e.currentTarget.value;
-                                setRenderType(value);
-                            }}
-                            className="form-control form-control-sm"
-                        >
-                            <option value={"typescript"}>TypeScript</option>
-                            <option value={"json"}>JSON</option>
-                            <option value={"graphql"}>GraphQL</option>
-                        </select>
-                    </div>
-                    <div className="col-sm-4">
-                        <button className="btn btn-sm btn-block btn-secondary">
-                            <FontAwesomeIcon icon={faCopy} className="mr-2" />
-                            Copy
-                        </button>
+                <div className="rounded bg-dark" style={{ overflow: "hidden" }}>
+                    <pre className="px-3 pt-3 pb-3 mb-0">
+                        <small className="mb-0">
+                            <div className="text-light">
+                                {schemaPreviewContent({
+                                    schema,
+                                    schemas,
+                                    renderType,
+                                })}
+                            </div>
+                        </small>
+                    </pre>
+
+                    <div
+                        className="d-flex flex-row align-items-center border-primary"
+                        style={{ borderTop: "2px solid" }}
+                    >
+                        <div className="d-flex flex-column flex-grow-1">
+                            <select
+                                value={renderType}
+                                onChange={e => {
+                                    // @ts-ignore
+                                    const value: RenderType =
+                                        e.currentTarget.value;
+                                    setRenderType(value);
+                                }}
+                                className="form-control form-control-sm rounded-0 bg-dark text-light border-0"
+                            >
+                                <option value={"typescript"}>TypeScript</option>
+                                <option value={"json"}>JSON</option>
+                                <option value={"graphql"}>GraphQL</option>
+                            </select>
+                        </div>
+                        <div className="d-flex flex-column">
+                            <button
+                                className="btn btn-sm btn-block btn-dark rounded-0"
+                                style={{ boxShadow: "none" }}
+                            >
+                                <FontAwesomeIcon
+                                    icon={faCopy}
+                                    className="mr-2"
+                                />
+                                Copy
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <pre className="rounded bg-dark mt-2">
-                    <small className="mb-0 text-muted">
-                        <div className="px-3 py-2 text-light">
-                            {schemaPreviewContent({
-                                schema,
-                                schemas,
-                                renderType,
-                            })}
-                        </div>
-                    </small>
-                </pre>
             </div>
         </div>
     );
