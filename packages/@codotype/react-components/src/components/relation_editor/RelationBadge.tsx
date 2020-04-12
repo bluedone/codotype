@@ -1,81 +1,75 @@
-import { Relation, Schema } from "@codotype/types";
+import { RelationReference, Schema, RelationType } from "@codotype/types";
 import * as React from "react";
 import { RelationDiagram } from "./RelationDiagram";
-// import { inflateRelation } from "@codotype/util";
 
 // // // //
 
 export interface RelationBadgeProps {
     direction: "in" | "out";
-    relation: Relation;
+    relation: RelationReference;
     slim: boolean;
-    selectedSchema: Schema;
-    schemas: Schema[];
 }
 
 export function RelationBadge(props: RelationBadgeProps) {
-    const { slim = false, direction, selectedSchema, relation } = props;
-
-    // const model = inflateRelation({
-    //     relation: relation,
-    //     schemas: schemas,
-    // });
-
-    const model = {
-        type: "RELATION_TYPE_BELONGS_TO",
-    };
+    const { slim = false, direction, relation } = props;
+    const { identifiers } = relation;
 
     return (
         <React.Fragment>
-            {model.type === "RELATION_TYPE_BELONGS_TO" && (
+            {relation.type === RelationType.BELONGS_TO && (
                 <RelationDiagram
-                    direction={"direction"}
+                    direction={direction}
                     sourcePlural={true}
-                    sourceLabel={selectedSchema.identifiers.plural.label}
-                    sourceAlias={"inflated.reverse_alias.label_plural"}
+                    sourceLabel={identifiers.source.canonical.plural.label}
+                    sourceAlias={identifiers.source.alias.plural.label}
                     destPlural={false}
-                    destLabel={"inflated.schema.label"}
-                    destAlias={"inflated.alias.label"}
-                    slim={props.slim}
+                    destLabel={identifiers.destination.canonical.singular.label}
+                    destAlias={identifiers.destination.alias.singular.label}
+                    slim={slim}
                 />
             )}
 
-            {model.type === "RELATION_TYPE_HAS_ONE" && (
-                <RelationDiagram
-                    direction={"direction"}
-                    sourcePlural={false}
-                    sourceLabel={selectedSchema.identifiers.singular.label}
-                    sourceAlias={"inflated.reverse_alias.label"}
-                    destPlural={false}
-                    destLabel={"inflated.schema.label"}
-                    destAlias={"inflated.alias.label"}
-                    slim={props.slim}
-                />
-            )}
+            {relation.type === RelationType.HAS_ONE ||
+                (relation.type === RelationType.TO_ONE && (
+                    <RelationDiagram
+                        direction={direction}
+                        sourcePlural={false}
+                        sourceLabel={
+                            identifiers.source.canonical.singular.label
+                        }
+                        sourceAlias={identifiers.source.alias.singular.label}
+                        destPlural={false}
+                        destLabel={
+                            identifiers.destination.canonical.singular.label
+                        }
+                        destAlias={identifiers.destination.alias.singular.label}
+                        slim={slim}
+                    />
+                ))}
 
-            {model.type === "RELATION_TYPE_HAS_AND_BELONGS_TO_MANY" && (
+            {relation.type === RelationType.HAS_MANY && (
                 <RelationDiagram
-                    direction={"direction"}
+                    direction={direction}
                     sourcePlural={false}
-                    sourceLabel={selectedSchema.identifiers.singular.label}
-                    sourceAlias={"inflated.reverse_alias.label"}
+                    sourceLabel={identifiers.source.canonical.singular.label}
+                    sourceAlias={identifiers.destination.alias.singular.label}
                     destPlural={true}
-                    destLabel={"inflated.schema.label_plural"}
-                    destAlias={"inflated.alias.label_plural"}
-                    slim={props.slim}
+                    destLabel={identifiers.destination.canonical.plural.label}
+                    destAlias={identifiers.destination.alias.plural.label}
+                    slim={slim}
                 />
             )}
 
-            {model.type === "RELATION_TYPE_HAS_AND_BELONGS_TO_MANY" && (
+            {relation.type === RelationType.HAS_AND_BELONGS_TO_MANY && (
                 <RelationDiagram
-                    direction={"direction"}
+                    direction={direction}
                     sourcePlural={true}
-                    sourceLabel={selectedSchema.identifiers.plural.label}
-                    sourceAlias={"inflated.reverse_alias.label_plural"}
+                    sourceLabel={identifiers.source.canonical.singular.label}
+                    sourceAlias={identifiers.destination.alias.plural.label}
                     destPlural={true}
-                    destLabel={"inflated.schema.label_plural"}
-                    destAlias={"inflated.alias.label_plural"}
-                    slim={props.slim}
+                    destLabel={identifiers.destination.canonical.plural.label}
+                    destAlias={identifiers.destination.alias.plural.label}
+                    slim={slim}
                 />
             )}
         </React.Fragment>

@@ -3,12 +3,14 @@ import { SchemaPreview } from "./SchemaPreview";
 import { AttributeEditor } from "../attribute_editor";
 import { RelationEditor } from "../relation_editor";
 import { SchemaDetailHeader } from "./SchemaDetailHeader";
+import { inflateSchema } from "@codotype/util";
 import {
     Schema,
     Attribute,
     Relation,
     Datatype,
     RelationType,
+    InflatedSchema,
 } from "@codotype/types";
 
 // // // //
@@ -26,6 +28,11 @@ interface SchemaDetailProps {
  * @param props - see `SchemaDetailProps`
  */
 export function SchemaDetail(props: SchemaDetailProps) {
+    const inflatedSchema: InflatedSchema = inflateSchema({
+        schema: props.schema,
+        schemas: props.schemas,
+    });
+
     return (
         <div className="row" style={{ borderLeft: "1px solid lightgrey" }}>
             <div className="col-sm-12">
@@ -55,6 +62,8 @@ export function SchemaDetail(props: SchemaDetailProps) {
             <div className="pl-md-0 col-sm-12 col-md-6 col-lg-6">
                 <RelationEditor
                     selectedSchema={props.schema}
+                    relationReferences={inflatedSchema.relations}
+                    schemas={props.schemas}
                     relations={props.schema.relations}
                     supportedRelationTypes={[
                         RelationType.HAS_ONE,
@@ -77,6 +86,17 @@ export function SchemaDetail(props: SchemaDetailProps) {
             </div>
             <div className="col-sm-6">
                 <p>Incoming Relations</p>
+                <ul className="list-group">
+                    {inflatedSchema.references.map(r => {
+                        return (
+                            <li className="list-group-item" key={r.id}>
+                                {/* {JSON.stringify(r, null, 4)} */}
+                                {r.type} --{" "}
+                                {r.identifiers.source.canonical.plural.label}
+                            </li>
+                        );
+                    })}
+                </ul>
             </div>
         </div>
     );

@@ -7,7 +7,6 @@ import { AttributeDeleteModal } from "./AttributeDeleteModal";
 import { AttributeListItem } from "./AttributeListItem";
 import { AttributeForm } from "./AttributeForm";
 import { AttributeListEmpty } from "./AttributeListEmpty";
-import uniqueId from "lodash.uniqueid";
 
 // // // //
 
@@ -111,7 +110,7 @@ export function AttributeEditor(props: AttributeEditorProps) {
                         if (attributeInput.id === "") {
                             const newAttribute: Attribute = {
                                 ...attributeInput,
-                                id: uniqueId("ATTR_"),
+                                id: Math.random().toString(), // TODO - replace with UUID function from @codotype/util
                             };
                             setState({
                                 lastUpdatedAt: Date.now(),

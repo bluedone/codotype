@@ -20,12 +20,10 @@ export enum RelationType {
 export interface Relation {
   id: UUID;
   type: RelationType;
-  required: boolean;
-  schema_id: string; // REMOVE THIS, only needed for `InflatedRelation` / `RelationReference`
-  related_schema_id: UUID;
-  reverse_relation_id: UUID; // REMOVE THIS - only needed for `RelationReference`
-  as: string; // TODO - rename 'as' to something else?
-  reverse_as: string; // TODO - rename 'reverse_as' to something else?
+  required: boolean; // TODO - keep this for now, define `constraints` using SchemaEditorConfiguration.relationConstraints
+  destinationSchemaId: UUID; // TODO - rename to destinationSchemaId
+  sourceSchemaAlias: string;
+  destinationSchemaAlias: string;
 }
 
 // From UTIL
@@ -43,12 +41,10 @@ export interface Relation {
 // Relation constants
 // TODO - replace this with RelationInput
 export const DEFAULT_RELATION: Relation = {
-  id: null,
+  id: "",
   type: null,
   required: false,
-  schema_id: "",
-  related_schema_id: "",
-  reverse_relation_id: "",
-  as: "", // TODO - rename 'as' to something else?
-  reverse_as: "", // TODO - rename 'reverse_as' to something else?
+  destinationSchemaId: "",
+  sourceSchemaAlias: "",
+  destinationSchemaAlias: "",
 };

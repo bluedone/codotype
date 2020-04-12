@@ -1,5 +1,6 @@
 import { RelationDatatypeForm } from "./RelationDatatypeForm";
-import { Relation, RelationType } from "@codotype/types";
+import { RelationPropertiesForm } from "./RelationPropertiesForm";
+import { Relation, RelationType, Schema } from "@codotype/types";
 import * as React from "react";
 import { RelationInput } from "./RelationFormModal";
 
@@ -47,7 +48,7 @@ export function RelationFormSelector(props: {
 }) {
     const { relationInput } = props;
     const defaultSelectedForm =
-        relationInput.type === null ? "DATATYPE" : "PROPERTIES";
+        relationInput.type === null ? "PROPERTIES" : "PROPERTIES";
 
     const [selectedForm, setSelectedForm] = React.useState<string>(
         defaultSelectedForm,
@@ -59,18 +60,9 @@ export function RelationFormSelector(props: {
                 <ul className="nav nav-tabs w-100 d-flex">
                     <FormGroupTab
                         onClick={() => {
-                            setSelectedForm("DATATYPE");
-                        }}
-                        disabled={relationInput.type === null}
-                        active={selectedForm === "DATATYPE"}
-                        label={"Datatype"}
-                    />
-
-                    <FormGroupTab
-                        onClick={() => {
                             setSelectedForm("PROPERTIES");
                         }}
-                        disabled={relationInput.type === null}
+                        disabled={false}
                         active={selectedForm === "PROPERTIES"}
                         label={"Properties"}
                     />
@@ -79,7 +71,7 @@ export function RelationFormSelector(props: {
                         onClick={() => {
                             setSelectedForm("DESCRIPTION");
                         }}
-                        disabled={relationInput.type === null}
+                        disabled={false}
                         active={selectedForm === "DESCRIPTION"}
                         label={"Default & Description"}
                     />
@@ -100,6 +92,9 @@ export function RelationFormSelector(props: {
  * `supportedRelationTypes` - the unique IDs of supported datatypes made available in the form
  */
 interface RelationFormProps {
+    selectedSchema: Schema;
+    schema: Schema;
+    schemas: Schema[];
     relations: Relation[];
     relationInput: RelationInput;
     supportedRelationTypes: RelationType[];
@@ -116,53 +111,40 @@ export function RelationForm(props: RelationFormProps) {
     return (
         <div className="row">
             <div className="col-lg-12">
-                {/* {!relationInput.datatype && (
-                    <RelationDatatypeForm
-                        datatype={relationInput.datatype}
-                        supportedRelationTypes={supportedRelationTypes}
-                        onChangeDatatype={updatedDatatype => {
-                            props.onChange({
-                                ...relationInput,
-                                datatype: updatedDatatype,
-                            });
-                        }}
-                    />
-                )} */}
+                <RelationFormSelector relationInput={relationInput}>
+                    {({ selectedForm, setSelectedForm }) => {
+                        if (selectedForm === "PROPERTIES") {
+                            return (
+                                <RelationPropertiesForm
+                                    relationInput={props.relationInput}
+                                    supportedRelationTypes={
+                                        props.supportedRelationTypes
+                                    }
+                                    schema={props.schema}
+                                    schemas={props.schemas}
+                                    onChange={(
+                                        updatedRelationInput: RelationInput,
+                                    ) => {
+                                        console.log(
+                                            "onChange relation properties",
+                                        );
+                                        console.log({
+                                            ...relationInput,
+                                            ...updatedRelationInput,
+                                        });
+                                        props.onChange({
+                                            ...relationInput,
+                                            ...updatedRelationInput,
+                                        });
+                                        setSelectedForm("PROPERTIES");
+                                    }}
+                                />
+                            );
+                        }
 
-                {/* {relationInput.datatype && ( */}
-                {true && (
-                    <React.Fragment>
-                        <RelationFormSelector relationInput={relationInput}>
-                            {({ selectedForm, setSelectedForm }) => {
-                                if (selectedForm === "DATATYPE") {
-                                    return (
-                                        <RelationDatatypeForm
-                                            type={relationInput.type}
-                                            supportedRelationTypes={
-                                                supportedRelationTypes
-                                            }
-                                            onChangeRelationType={(
-                                                updatedRelationType: RelationType,
-                                            ) => {
-                                                props.onChange({
-                                                    ...relationInput,
-                                                    type: updatedRelationType,
-                                                });
-                                                setSelectedForm("PROPERTIES");
-                                            }}
-                                        />
-                                    );
-                                }
-
-                                if (selectedForm === "PROPERTIES") {
-                                    return <p>RelationPropertiesForm Here</p>;
-                                }
-
-                                return <p>Meta Form Here</p>;
-                            }}
-                        </RelationFormSelector>
-                    </React.Fragment>
-                )}
+                        return <p>Meta Form Here</p>;
+                    }}
+                </RelationFormSelector>
             </div>
         </div>
     );

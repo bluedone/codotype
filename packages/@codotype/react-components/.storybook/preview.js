@@ -1,18 +1,18 @@
 import {
-    addParameters,
+    // addParameters,
     addDecorator,
-    INITIAL_VIEWPORTS,
+    // INITIAL_VIEWPORTS,
 } from "@storybook/react";
 import { withConsole, setConsoleOptions } from "@storybook/addon-console";
 import { withInfo } from "@storybook/addon-info";
 
 // Configure Viewports addon
-addParameters({
-    viewport: {
-        viewports: INITIAL_VIEWPORTS,
-        defaultViewport: "someDefault",
-    },
-});
+// addParameters({
+//     viewport: {
+//         viewports: INITIAL_VIEWPORTS,
+//         defaultViewport: "someDefault",
+//     },
+// });
 
 // You'll start to receive all console messages, warnings, errors in your action logger panel - Everything except HMR logs.
 setConsoleOptions({

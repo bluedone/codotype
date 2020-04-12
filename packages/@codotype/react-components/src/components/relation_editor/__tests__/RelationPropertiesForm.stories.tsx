@@ -1,34 +1,36 @@
-import * as React from "react";
-import { storiesOf } from "@storybook/react";
-import { Story } from "@src/components/dev";
-import { RelationPropertiesForm } from "../RelationPropertiesForm";
+// import * as React from "react";
+// import { storiesOf } from "@storybook/react";
+// import { Story } from "@src/components/dev";
+// import { RelationPropertiesForm } from "../RelationPropertiesForm";
+// import { userSchema } from "./test_state";
+// import { RelationType } from "@codotype/types";
 
-// // // //
+// // // // //
 
-storiesOf("RelationEditor/RelationPropertiesForm", module).add(
-    "renders",
-    () => {
-        return (
-            <Story>
-                <RelationPropertiesForm
-                    label={""}
-                    identifier={"string"}
-                    required={false}
-                    unique={false}
-                    onLabelChange={(updatedLabel: string) => {
-                        console.log(updatedLabel);
-                    }}
-                    onIdentifierChange={(updatedIdentifier: string) => {
-                        console.log(updatedIdentifier);
-                    }}
-                    onRequiredChange={(updatedRequired: boolean) => {
-                        console.log(updatedRequired);
-                    }}
-                    onUniqueChange={(updatedUnique: boolean) => {
-                        console.log(updatedUnique);
-                    }}
-                />
-            </Story>
-        );
-    },
-);
+// storiesOf("RelationEditor/RelationPropertiesForm", module).add(
+//     "renders",
+//     () => {
+//         return (
+//             <Story>
+//                 <RelationPropertiesForm
+//                     schema={userSchema}
+//                     schemas={[userSchema]}
+//                     onChange={() => {
+//                         console.log("on change");
+//                     }}
+//                     relationInput={
+//                         id: "name-attr",
+//                         type: RelationType.TO_ONE,
+//                         required: false,
+//                         destinationSchemaID: "",
+//                         related_schema_id: "",
+//                         reverse_relation_id: "",
+//                         as: "",
+//                         reverse_as: "",
+//                     }}
+//                     supportedRelationTypes={[]}
+//                 />
+//             </Story>
+//         );
+//     },
+// );

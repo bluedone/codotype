@@ -9,25 +9,12 @@ import {
 // // // //
 
 export const relationExample01: Relation = {
-    id: "name-attr",
+    id: "relation-id-attr",
     type: RelationType.TO_ONE,
     required: false,
-    schema_id: "",
-    related_schema_id: "",
-    reverse_relation_id: "",
-    as: "",
-    reverse_as: "",
-};
-
-export const relationExample02: Relation = {
-    id: "Email-attr",
-    type: RelationType.TO_ONE,
-    required: false,
-    schema_id: "",
-    related_schema_id: "",
-    reverse_relation_id: "",
-    as: "",
-    reverse_as: "",
+    destinationSchemaId: "12345",
+    sourceSchemaAlias: "Employer",
+    destinationSchemaAlias: "Employee",
 };
 
 export const supportedRelationTypes: RelationType[] = [

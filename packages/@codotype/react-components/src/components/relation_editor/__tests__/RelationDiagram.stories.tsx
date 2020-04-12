@@ -147,3 +147,30 @@ storyCollection.add("all variants", () => {
         </Story>
     );
 });
+
+storyCollection.add("all in", () => {
+    return (
+        <Story>
+            <div className="row">
+                {testCases.map(testCase => {
+                    return (
+                        <div className="col-sm-12">
+                            <div className="card card-body mb-3">
+                                <div className="row">
+                                    <div className="col-sm-12">
+                                        <RelationDiagram
+                                            {...{
+                                                ...testCase[1],
+                                                direction: "in",
+                                            }}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    );
+                })}
+            </div>
+        </Story>
+    );
+});

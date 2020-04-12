@@ -12,7 +12,6 @@ import {
     SchemaSource,
 } from "@codotype/types";
 import { reorder } from "../attribute_editor/component";
-import uniqueId from "lodash.uniqueid";
 
 // // // //
 
@@ -108,7 +107,7 @@ export function SchemaEditorLayout(props: {
                                 // Defines new schema
                                 const newSchema: Schema = {
                                     ...state.schemas[0],
-                                    id: uniqueId("SCHEMA_"),
+                                    id: Math.random().toString(), // TODO - replace with UUID function from util
                                     attributes: [],
                                     relations: [],
                                     identifiers: newTokenPluralization,
@@ -195,7 +194,7 @@ export function SchemaEditorLayout(props: {
 
                         // Defines new schema
                         const newSchema: Schema = {
-                            id: uniqueId("SCHEMA_"),
+                            id: Math.random().toString(), // TODO - replace with UUID function from util
                             source: SchemaSource.USER,
                             locked: false,
                             removable: true,

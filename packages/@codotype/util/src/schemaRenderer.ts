@@ -1,21 +1,11 @@
-import { buildTokenPluralization } from "./buildTokenPluralization";
-import { clone, uniqueId, cloneDeep } from "lodash";
 import {
-  RelationType,
   Schema,
-  Relation,
   Datatype,
   Attribute,
-  RelationReference,
   InflatedSchema,
-  TokenPluralization,
-  SchemaConfigurationGroup,
-  ProjectConfiguration,
-  UUID,
-  SchemaSource,
-  Project,
-  InflatedProject,
+  RelationReference,
 } from "@codotype/types";
+import { inflateSchema } from "./inflate";
 
 // // // //
 
@@ -88,15 +78,21 @@ export function renderSchemaJson({
   schema: Schema;
   schemas: Schema[];
 }): string {
+  const inflatedSchema: InflatedSchema = inflateSchema({ schema, schemas });
   // Define + open JSON output
   let jsonOutput: string[] = [
     "{", // Open JSON output
     // Map each property
-    ...schema.attributes.map((attr: Attribute) => {
-      return `  "${attr.identifier}": ${getDatatypeValueJson({
-        datatype: attr.datatype,
-      })}`;
-    }),
+    [
+      ...schema.attributes.map((attr: Attribute) => {
+        return `  "${attr.identifier}": ${getDatatypeValueJson({
+          datatype: attr.datatype,
+        })}`;
+      }),
+      ...inflatedSchema.relations.map((r: RelationReference): string => {
+        return `  "${r.identifiers.destination.alias.singular.camel}": "${r.identifiers.destination.alias.singular.pascal} ID"`;
+      }),
+    ].join(",\n"),
     "}", // Close JSON output
   ];
 
@@ -175,6 +171,7 @@ export function renderSchemaGrapqhQL({
   schema: Schema;
   schemas: Schema[];
 }): string {
+  const inflatedSchema: InflatedSchema = inflateSchema({ schema, schemas });
   // Define + open JSON output
   let jsonOutput: string[] = [
     `type ${schema.identifiers.singular.pascal} {`, // Open JSON output
@@ -183,6 +180,9 @@ export function renderSchemaGrapqhQL({
       return `  ${attr.identifier}: ${getDatatypeValueGraphQL({
         datatype: attr.datatype,
       })}!`;
+    }),
+    ...inflatedSchema.relations.map((r: RelationReference): string => {
+      return `  ${r.identifiers.destination.alias.singular.camel}: ${r.identifiers.destination.alias.singular.pascal}!`;
     }),
     "}", // Close JSON output
   ];
@@ -262,6 +262,7 @@ export function renderSchemaTypeScript({
   schema: Schema;
   schemas: Schema[];
 }): string {
+  const inflatedSchema: InflatedSchema = inflateSchema({ schema, schemas });
   // Define + open JSON output
   let output: string[] = [
     `interface ${schema.identifiers.singular.pascal} {`, // Open JSON output
@@ -270,6 +271,9 @@ export function renderSchemaTypeScript({
       return `  ${attr.identifier}: ${getDatatypeValueTypeScript({
         datatype: attr.datatype,
       })};`;
+    }),
+    ...inflatedSchema.relations.map((r: RelationReference): string => {
+      return `  ${r.identifiers.destination.alias.singular.camel}Id: ${r.identifiers.destination.alias.singular.pascal};`;
     }),
     "}", // Close JSON output
   ];

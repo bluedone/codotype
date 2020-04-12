@@ -507,11 +507,9 @@ export const movieSchema: Schema = {
       id: "relation-example-01",
       type: RelationType.BELONGS_TO,
       required: false,
-      schema_id: "45678", // TODO - this can be removed
-      related_schema_id: userSchema.id,
-      reverse_relation_id: "string", // TODO - this can be removed
-      as: "Director", // TODO - rename 'as' to something else?
-      reverse_as: "Directed Movie", // TODO - rename 'reverse_as' to something else?
+      destinationSchemaId: userSchema.id,
+      sourceSchemaAlias: "Directed Movie",
+      destinationSchemaAlias: "Director",
     },
   ],
   locked: false,

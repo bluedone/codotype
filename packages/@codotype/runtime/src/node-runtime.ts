@@ -237,10 +237,8 @@ export class CodotypeNodeRuntime {
     let { id, project } = build;
 
     // Inflates blueprint metadata
-    // TODO - handle missing blueprint object
-    // TODO - fix any type here, should include InflatedProject
-    // const inflatedProject: any = inflate({ blueprint: project });
     const inflatedProject: InflatedProject = inflateProject({ project });
+
     // TODO - annotate this
     await this.writeBuildManifest({ build });
 

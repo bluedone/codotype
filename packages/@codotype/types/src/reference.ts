@@ -13,8 +13,9 @@ import { TokenCasing } from "./token";
  * Defines the Reference interface
  */
 export interface RelationReference {
-  uuid: UUID;
+  id: UUID;
   type: RelationType;
+  sourceRelationId: UUID;
   sourceSchemaId: UUID;
   destinationSchemaId: UUID;
   identifiers: {

@@ -1,27 +1,43 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { Story } from "@src/components/dev";
-import { Relation } from "@codotype/types";
+import { Relation, RelationType } from "@codotype/types";
 import { RelationEditor } from "../component";
 import {
     relationExample01,
-    relationExample02,
     supportedRelationTypes,
     userSchema,
 } from "./test_state";
+import { inflateSchema } from "@codotype/util";
 
 // // // //
 
 storiesOf("RelationEditor/Layout", module).add("populated", () => {
     const [relations, setRelations] = React.useState<Relation[]>([
         relationExample01,
-        relationExample02,
     ]);
+    const schema = {
+        ...userSchema,
+        relations: [
+            {
+                id: "dummy-relation",
+                type: RelationType.HAS_ONE,
+                required: false,
+                destinationSchemaId: userSchema.id,
+                sourceSchemaAlias: "",
+                destinationSchemaAlias: "Parent",
+            },
+        ],
+    };
     return (
         <Story>
             <RelationEditor
                 relations={relations}
-                selectedSchema={userSchema}
+                relationReferences={
+                    inflateSchema({ schema, schemas: [schema] }).relations
+                }
+                selectedSchema={schema}
+                schemas={[schema]}
                 supportedRelationTypes={supportedRelationTypes}
                 onChange={(updatedRelations: Relation[]) => {
                     console.log("RelationEditor - onChange");
@@ -45,6 +61,11 @@ storiesOf("RelationEditor/Layout", module).add("empty", () => {
             <RelationEditor
                 relations={relations}
                 selectedSchema={userSchema}
+                relationReferences={
+                    inflateSchema({ schema: userSchema, schemas: [userSchema] })
+                        .relations
+                }
+                schemas={[userSchema]}
                 supportedRelationTypes={supportedRelationTypes}
                 onChange={(updatedRelations: Relation[]) => {
                     console.log("RelationEditor - onChange");

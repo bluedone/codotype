@@ -1,6 +1,7 @@
 import * as React from "react";
-import Switch from "react-switch";
-import { FormGroup } from "./FormGroup";
+import { Schema, RelationType } from "@codotype/types";
+import { RelationDatatypeForm } from "./RelationDatatypeForm";
+import { RelationInput } from "./RelationFormModal";
 
 // // // //
 
@@ -9,14 +10,11 @@ import { FormGroup } from "./FormGroup";
  * TODO - annotate remaining props
  */
 interface RelationPropertiesFormProps {
-    label: string;
-    identifier: string;
-    required: boolean;
-    unique: boolean;
-    onLabelChange: (updatedLabel: string) => void;
-    onIdentifierChange: (updatedIdentifier: string) => void;
-    onRequiredChange: (updatedRequired: boolean) => void;
-    onUniqueChange: (updatedUnique: boolean) => void;
+    schema: Schema;
+    schemas: Schema[];
+    relationInput: RelationInput;
+    onChange: (updatedRelationInput: RelationInput) => void;
+    supportedRelationTypes: RelationType[];
 }
 
 /**
@@ -24,98 +22,105 @@ interface RelationPropertiesFormProps {
  * @param props - see `RelationPropertiesFormProps`
  */
 export function RelationPropertiesForm(props: RelationPropertiesFormProps) {
+    const { schema, schemas, relationInput, supportedRelationTypes } = props;
+
+    // Defines relationInput.destinationSchemaId if it's not present
+    if (relationInput.destinationSchemaId === "" && schemas.length > 0) {
+        props.onChange({
+            ...relationInput,
+            destinationSchemaId: schemas[0].id,
+        });
+    }
+
     return (
-        <div className="row mt-2">
-            <div className="col-lg-12">
-                <p className="lead mb-0">Properties</p>
-                <small className="text-muted">
-                    Define the <span className="text-success">Tokens</span> for
-                    this <strong>Attribute</strong> and set its{" "}
-                    <span className="text-success">Required</span> and{" "}
-                    <span className="text-success">Unique</span> constraints.
-                </small>
-                <hr />
-            </div>
-
-            <div className="col-sm-12 col-lg-6">
-                <FormGroup
-                    label="Label"
-                    help="The input field will enforce proper capitalization and spacing."
-                    required
-                >
+        <div className="row">
+            <div className="col-lg-4">
+                <div className="form-group text-primary text-center">
+                    <label className="mb-0">
+                        {schema.identifiers.singular.label}
+                    </label>
+                    <small className="form-text text-primary">
+                        Where the relational data is stored
+                    </small>
                     <input
                         type="text"
-                        placeholder="Label"
-                        className="form-control"
-                        value={props.label}
-                        onChange={e => {
-                            props.onLabelChange(e.currentTarget.value);
-                        }}
+                        className="form-control border-primary text-primary"
+                        disabled
+                        value={schema.identifiers.singular.label}
                     />
-                </FormGroup>
+                </div>
             </div>
 
-            <div className="col-sm-12 col-lg-6">
-                <FormGroup
-                    label="Identifier"
-                    help="Supply a camel-cased or snake-cased value - no whitespace."
-                    required
-                >
-                    <input
-                        type="text"
-                        placeholder="Identifier"
-                        className="form-control"
-                        value={props.identifier}
-                        onChange={e => {
-                            props.onIdentifierChange(e.currentTarget.value);
-                        }}
-                    />
-                </FormGroup>
+            <div className="col-lg-4">
+                <div className="row">
+                    <div className="col-lg-12">
+                        <div className="form-group mb-2 text-center">
+                            <label className="mb-0">
+                                {schema.identifiers.singular.label}
+                            </label>
+                            {/* <small className="form-text text-muted mb-0">{ schema.description }</small> */}
+                        </div>
+                    </div>
+                </div>
+
+                <div className="row">
+                    <div className="col-lg-12">
+                        <div className="btn-group w-100">
+                            <RelationDatatypeForm
+                                type={relationInput.type}
+                                supportedRelationTypes={supportedRelationTypes}
+                                onChangeRelationType={(
+                                    updatedRelationType: RelationType,
+                                ) => {
+                                    console.log("CHANGE TYPE");
+                                    console.log(updatedRelationType);
+                                    props.onChange({
+                                        ...relationInput,
+                                        type: updatedRelationType,
+                                    });
+                                }}
+                            />
+                            {/* <b-button
+                    v-for="relation in filteredRelationTypes"
+                    :key="relation.id"
+                    @click="setRelationType(relation.id)"
+                    size="sm"
+                    variant="outline-primary"
+                    :className="relation.id === model.type ? 'active' : ''"
+                  >
+                    <img className='relation-thumbnail' :src=" relation.id === model.type ? 'https://res.cloudinary.com/codotype/image/upload/v1551448517/codotype-icons/' + relation.id.toLowerCase() + '_active' + '.png' : 'https://res.cloudinary.com/codotype/image/upload/v1551448517/codotype-icons/' + relation.id.toLowerCase() + '.png'"/>
+                  </b-button> */}
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div className="col-lg-6 col-sm-12">
-                <FormGroup
-                    label="Required"
-                    help="Whether or not this Attribute is required."
-                >
-                    <Switch
-                        height={22}
-                        width={50}
-                        // onHandleColor={}
-                        // offHandleColor={}
-                        offColor={"#888"}
-                        onColor={"#4582ec"}
-                        checkedIcon={false}
-                        uncheckedIcon={false}
-                        onChange={(updatedChecked: boolean) => {
-                            props.onRequiredChange(updatedChecked);
+            <div className="col-lg-4">
+                <div className="form-group text-center">
+                    <label className="mb-0 text-info">Related Schema</label>
+                    <small className="form-text text-info">
+                        Schema referenced by this relation
+                    </small>
+                    <select
+                        className="form-control border-info text-info"
+                        v-model="model.related_schema_id"
+                        value={relationInput.destinationSchemaId}
+                        onChange={e => {
+                            console.log("onChange related schema");
+                            props.onChange({
+                                ...relationInput,
+                                destinationSchemaId: e.currentTarget.value,
+                            });
                         }}
-                        checked={props.required}
-                    />
-                </FormGroup>
-            </div>
-            <div className="col-lg-6 col-sm-12">
-                {/* v-if="![DATATYPE_JSON, DATATYPE_BOOLEAN].includes(model.datatype)" */}
-                <FormGroup
-                    label="Unique"
-                    help="Whether or not to enforce unique values for this
-                        Attribute."
-                >
-                    <Switch
-                        height={22}
-                        width={50}
-                        // onHandleColor={}
-                        // offHandleColor={}
-                        offColor={"#888"}
-                        onColor={"#4582ec"}
-                        checkedIcon={false}
-                        uncheckedIcon={false}
-                        onChange={(updatedChecked: boolean) => {
-                            props.onUniqueChange(updatedChecked);
-                        }}
-                        checked={props.unique}
-                    />
-                </FormGroup>
+                    >
+                        {/* TODO - use correct pluralization here depending on relationInput.type */}
+                        {schemas.map(s => (
+                            <option key={s.id} value={s.id}>
+                                {s.identifiers.plural.label}
+                            </option>
+                        ))}
+                    </select>
+                </div>
             </div>
         </div>
     );

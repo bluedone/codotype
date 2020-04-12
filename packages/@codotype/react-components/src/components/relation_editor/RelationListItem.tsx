@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Relation, Schema } from "@codotype/types";
+import { RelationReference, Schema } from "@codotype/types";
 import { Draggable } from "react-beautiful-dnd";
 import { Dropdown } from "react-bootstrap";
 import { RelationBadge } from "./RelationBadge";
@@ -21,13 +21,14 @@ import "./styles.scss";
  * @param onClickDelete
  */
 export function RelationListItem(props: {
-    relation: Relation;
+    relation: RelationReference;
     index: number;
     selectedSchema: Schema;
-    onClickEdit: (relationToBeEdited: Relation) => void;
-    onClickDelete: (relationToDelete: Relation) => void;
+    schemas: Schema[];
+    onClickEdit: (relationToBeEdited: RelationReference) => void;
+    onClickDelete: (relationToDelete: RelationReference) => void;
 }) {
-    const { relation, selectedSchema } = props;
+    const { relation, selectedSchema, schemas } = props;
     return (
         <Draggable draggableId={String(relation.id)} index={props.index}>
             {provided => (
@@ -44,8 +45,6 @@ export function RelationListItem(props: {
                                     slim
                                     direction="out"
                                     relation={relation}
-                                    schemas={[]}
-                                    selectedSchema={selectedSchema}
                                 />
                             </small>
                         </div>

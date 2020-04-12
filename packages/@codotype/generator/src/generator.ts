@@ -1,4 +1,5 @@
-import { buildDefault } from "@codotype/util";
+// import { buildDefault } from "@codotype/util";
+// TODO - remove this, replace with
 import { MockRuntime } from "./mock_runtime";
 import {
   RelationReference,
@@ -65,7 +66,7 @@ export class CodotypeGenerator {
   compileInPlace: any;
   options: GeneratorOptions;
   resolved: string;
-  buildDefault: any; // What is this doing here?
+  // buildDefault: any; // What is this doing here?
 
   /**
    * constructor
@@ -117,7 +118,7 @@ export class CodotypeGenerator {
     this.options = options;
 
     // Assigns buildDefault helpers from @codotype/util
-    this.buildDefault = buildDefault;
+    // this.buildDefault = buildDefault;
 
     // PASS this.options.resolved in from @codotype/runtime
     // TODO - throw error if this.options.resolved is undefined

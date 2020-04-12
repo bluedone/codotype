@@ -1,7 +1,7 @@
 import {
   buildRelationReferences,
-  inflateSchemasV2,
-  inflateSchemaV2,
+  inflateSchemas,
+  inflateSchema,
 } from "../inflate";
 import { Schema, RelationReference, InflatedSchema } from "@codotype/types";
 import { userSchema, movieSchema } from "./test_state";
@@ -26,10 +26,10 @@ describe("/lib/buildRelationReferences.js", () => {
 
 // // // //
 
-describe("/lib/inflateSchemaV2.js", () => {
+describe("/lib/inflateSchema.js", () => {
   testCases.forEach((testCase) => {
     test(testCase[0], () => {
-      const expectedSchema: InflatedSchema = inflateSchemaV2({
+      const expectedSchema: InflatedSchema = inflateSchema({
         schema: userSchema,
         schemas: [userSchema, movieSchema],
       });
@@ -40,10 +40,10 @@ describe("/lib/inflateSchemaV2.js", () => {
 
 // // // //
 
-describe("/lib/inflateSchemasV2.js", () => {
+describe("/lib/inflateSchemas.js", () => {
   testCases.forEach((testCase) => {
     test(testCase[0], () => {
-      const expectedSchemas: InflatedSchema[] = inflateSchemasV2({
+      const expectedSchemas: InflatedSchema[] = inflateSchemas({
         schemas: [userSchema, movieSchema],
       });
       expect(expectedSchemas).toMatchSnapshot();

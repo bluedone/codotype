@@ -1,4 +1,3 @@
-import { inflateRelation } from "./inflate";
 import {
   Datatype,
   RelationType,
@@ -95,43 +94,46 @@ export const getDefaultRelationValue = ({ type }) => {
   }
 };
 
+// TODO - remove this
+// TODO - remove this
+// TODO - remove this
 // TODO - type this function => `Schema` and `InflatedSchema`
 // CLEANUP - document this function, write better tests
-export const buildDefault = ({ schema, schemas }) => {
-  const defaultState = {};
+// export const buildDefault = ({ schema, schemas }) => {
+//   const defaultState = {};
 
-  // Iterate over each attribute
-  schema.attributes.forEach((attr) => {
-    defaultState[attr.identifier] =
-      attr.default_value || getDefaultAttributeValue({ type: attr.datatype });
-  });
+//   // Iterate over each attribute
+//   schema.attributes.forEach((attr) => {
+//     defaultState[attr.identifier] =
+//       attr.default_value || getDefaultAttributeValue({ type: attr.datatype });
+//   });
 
-  // Iterate over each relation
-  schema.relations.forEach((relation) => {
-    const rel = inflateRelation({ schemas, relation });
-    // QUESTION - this creates a problem after after the schema has been inflated - what's the solution?
-    // Best option is probably splitting reverse relations into their own schema property
-    const relationKey = getRelationKey({ relation: rel });
-    if (relationKey)
-      defaultState[
-        getRelationKey({ relation: rel })
-      ] = getDefaultRelationValue({ type: relation.type });
-  });
+//   // Iterate over each relation
+//   schema.relations.forEach((relation) => {
+//     const rel = inflateRelation({ schemas, relation });
+//     // QUESTION - this creates a problem after after the schema has been inflated - what's the solution?
+//     // Best option is probably splitting reverse relations into their own schema property
+//     const relationKey = getRelationKey({ relation: rel });
+//     if (relationKey)
+//       defaultState[
+//         getRelationKey({ relation: rel })
+//       ] = getDefaultRelationValue({ type: relation.type });
+//   });
 
-  return defaultState;
-};
+//   return defaultState;
+// };
 
-// CLEANUP - document this function, write better tests
-export const buildConfigurationDefault = ({ attributes }) => {
-  const defaultState = {};
+// // CLEANUP - document this function, write better tests
+// export const buildConfigurationDefault = ({ attributes }) => {
+//   const defaultState = {};
 
-  // Iterate over each attribute
-  attributes.forEach((attr) => {
-    defaultState[attr.identifier] =
-      attr.default_value === undefined
-        ? getDefaultAttributeValue({ type: attr.datatype })
-        : attr.default_value;
-  });
+//   // Iterate over each attribute
+//   attributes.forEach((attr) => {
+//     defaultState[attr.identifier] =
+//       attr.default_value === undefined
+//         ? getDefaultAttributeValue({ type: attr.datatype })
+//         : attr.default_value;
+//   });
 
-  return defaultState;
-};
+//   return defaultState;
+// };

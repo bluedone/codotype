@@ -4,9 +4,9 @@ module.exports = {
     stories: ["../src/**/*.stories.tsx"],
     addons: [
         "@storybook/addon-actions/register",
-        "@storybook/addon-viewport/register",
+        // "@storybook/addon-viewport/register",
     ],
-    webpackFinal: async config => {
+    webpack: async config => {
         config.module.rules.push({
             test: /\.(ts|tsx)$/,
             use: [
@@ -35,6 +35,11 @@ module.exports = {
                 },
             ],
         });
+
+        config.entry = {
+            ...config.entry,
+            src: path.join(__dirname, "../src/index.ts"),
+        };
 
         config.resolve = {
             ...config.resolve,

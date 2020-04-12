@@ -4,6 +4,7 @@ import {
     Relation,
     DEFAULT_RELATION,
     Schema,
+    RelationReference,
     RelationType,
 } from "@codotype/types";
 import { Droppable, DragDropContext } from "react-beautiful-dnd";
@@ -12,7 +13,6 @@ import { RelationDeleteModal } from "./RelationDeleteModal";
 import { RelationListItem } from "./RelationListItem";
 import { RelationForm } from "./RelationForm";
 import { RelationListEmpty } from "./RelationListEmpty";
-import uniqueId from "lodash.uniqueid";
 
 // // // //
 
@@ -47,12 +47,15 @@ interface RelationEditorState {
 
 interface RelationEditorProps {
     relations: Relation[];
+    schemas: Schema[];
     selectedSchema: Schema;
+    relationReferences: RelationReference[];
     supportedRelationTypes: RelationType[];
     onChange: (updatedAttributes: Relation[]) => void;
 }
 
 export function RelationEditor(props: RelationEditorProps) {
+    const { selectedSchema, schemas, relationReferences } = props;
     const [state, setState] = React.useState<RelationEditorState>({
         relations: props.relations,
         lastUpdatedAt: null,
@@ -97,12 +100,15 @@ export function RelationEditor(props: RelationEditorProps) {
                         setRelationInput(null);
                     }}
                     onSubmit={() => {
-                        setRelationInput(null);
                         // Insert new Attribute
-                        if (relationInput.id === "") {
+                        // TODO - fix this null check, should be removed
+                        if (
+                            relationInput.id === "" ||
+                            relationInput.id === null
+                        ) {
                             const newAttribute: Relation = {
                                 ...relationInput,
-                                id: uniqueId("ATTR_"),
+                                id: Math.random().toString(), // TODO - replace with UUID function from @codotype/util
                             };
                             setState({
                                 lastUpdatedAt: Date.now(),
@@ -127,6 +133,9 @@ export function RelationEditor(props: RelationEditorProps) {
                 >
                     <RelationForm
                         relations={props.relations}
+                        schema={selectedSchema}
+                        schemas={schemas}
+                        selectedSchema={selectedSchema}
                         relationInput={relationInput}
                         onChange={(updatedRelationInput: RelationInput) => {
                             setRelationInput(updatedRelationInput);
@@ -189,8 +198,11 @@ export function RelationEditor(props: RelationEditorProps) {
                                         ref={provided.innerRef}
                                         {...provided.droppableProps}
                                     >
-                                        {props.relations.map(
-                                            (a: Relation, index: number) => {
+                                        {relationReferences.map(
+                                            (
+                                                a: RelationReference,
+                                                index: number,
+                                            ) => {
                                                 return (
                                                     <RelationListItem
                                                         key={a.id}
@@ -198,20 +210,47 @@ export function RelationEditor(props: RelationEditorProps) {
                                                         selectedSchema={
                                                             props.selectedSchema
                                                         }
+                                                        schemas={schemas}
                                                         index={index}
                                                         onClickEdit={(
-                                                            relationToBeEdited: Relation,
+                                                            relationToBeEdited: RelationReference,
                                                         ) => {
+                                                            const relation:
+                                                                | Relation
+                                                                | undefined = props.relations.find(
+                                                                r =>
+                                                                    r.id ===
+                                                                    relationToBeEdited.sourceRelationId,
+                                                            );
+                                                            if (
+                                                                relation ===
+                                                                undefined
+                                                            ) {
+                                                                return;
+                                                            }
                                                             setRelationInput({
-                                                                ...relationToBeEdited,
+                                                                ...relation,
                                                             });
                                                         }}
                                                         onClickDelete={(
-                                                            relationToDelete: Relation,
+                                                            relationToDelete: RelationReference,
                                                         ) => {
-                                                            showDeleteModal(
-                                                                relationToDelete,
+                                                            const relation:
+                                                                | Relation
+                                                                | undefined = props.relations.find(
+                                                                r =>
+                                                                    r.id ===
+                                                                    relationToDelete.sourceRelationId,
                                                             );
+                                                            if (
+                                                                relation ===
+                                                                undefined
+                                                            ) {
+                                                                return;
+                                                            }
+                                                            showDeleteModal({
+                                                                ...relation,
+                                                            });
                                                         }}
                                                     />
                                                 );
