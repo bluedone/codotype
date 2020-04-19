@@ -10,7 +10,17 @@ import {
     faEllipsisH,
     faLock,
 } from "@fortawesome/free-solid-svg-icons";
-import "./styles.scss";
+
+// // // //
+
+// TODO - migrate this CSS to JS alternative
+// .dropdown.no-caret {
+//     .dropdown-toggle.btn.btn-sm {
+//         &:after {
+//             display: none;
+//         }
+//     }
+// }
 
 // // // //
 

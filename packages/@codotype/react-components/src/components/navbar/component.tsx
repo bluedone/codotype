@@ -1,6 +1,16 @@
 import React, { FunctionComponent } from "react";
 import { Navbar, NavDropdown, Nav } from "react-bootstrap";
-import "./styles.scss";
+
+// // // //
+
+// TODO - migrate this to JS alternative
+// @import "@src/scss/app.scss";
+
+// .app-navbar {
+//     font-family: $heading-font;
+//     padding: 0.4rem;
+//     box-shadow: 0px 9px 68px 0px rgba(62, 57, 107, 0.1);
+// }
 
 // // // //
 

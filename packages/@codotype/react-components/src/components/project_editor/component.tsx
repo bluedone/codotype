@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from "react";
-import "./styles.scss";
 import { ConfigurationGroupSelector } from "./ConfigurationGroupSelector";
 import { ProjectEditorHeader } from "./ProjectEditorHeader";
 import { GeneratorMeta, Project } from "@codotype/types";

@@ -55,7 +55,9 @@ export function LoadingBuild(props: { quote?: [string, string] }) {
                     </small>
                     <div className="row my-4">
                         <div className="col-lg-12 text-center d-flex justify-content-center">
-                            <LoadingSpinner className="my-2" />
+                            <div className="my-2">
+                                <LoadingSpinner />
+                            </div>
                         </div>
                     </div>
                     <small className="text-muted">

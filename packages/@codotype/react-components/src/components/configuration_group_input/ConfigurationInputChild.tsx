@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from "react";
-import "./styles.scss";
 import {
     OptionType,
     OptionValue,

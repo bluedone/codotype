@@ -9,7 +9,6 @@ import {
     faPencilAlt,
     faEllipsisH,
 } from "@fortawesome/free-solid-svg-icons";
-import "./styles.scss";
 
 // // // //
 

@@ -1,11 +1,6 @@
 import * as React from "react";
-import "./styles.scss";
 import { ConfigurationInput } from "../configuration_group_input";
-import { SchemaEditorLayout } from "../schema_editor";
 import {
-    Project,
-    Schema,
-    GeneratorMeta,
     ConfigurationGroup,
     OptionValueInstance,
     ProjectConfiguration,

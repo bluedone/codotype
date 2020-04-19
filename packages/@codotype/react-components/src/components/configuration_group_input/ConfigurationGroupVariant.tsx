@@ -1,5 +1,4 @@
 import React from "react";
-import "./styles.scss";
 import { ConfigurationGroup } from "@codotype/types";
 import { MarkdownRenderer } from "../markdown_renderer";
 

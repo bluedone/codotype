@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from "react";
-import "./styles.scss";
 import {
     OptionType,
     OptionValue,
@@ -12,7 +11,6 @@ import { ConfigurationGroupVariant } from "./ConfigurationGroupVariant";
 import { ConfigurationGroupHeader } from "./ConfigurationGroupHeader";
 import { ConfigurationInputFormGroup } from "./ConfigurationInputFormGroup";
 import { ConfigurationInstanceInput } from "./ConfigurationInstanceInput";
-import { MoreInfoLink } from "../more_info_link";
 import { ConfigurationCollectionInput } from "./ConfigurationCollectionInput";
 
 // // // //

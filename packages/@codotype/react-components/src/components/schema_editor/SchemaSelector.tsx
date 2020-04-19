@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Schema } from "@codotype/types";
 import classnames from "classnames";
-import "./styles.scss";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
