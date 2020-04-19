@@ -1,6 +1,6 @@
 {
   "name": "@codotype/util",
-  "version": "1.0.0",
+  "version": "0.8.0-canary.1",
   "description": "Utility functions used throughout the Codotype ecosystem",
   "scripts": {
     "test": "jest --config=jest.config.js",
@@ -20,7 +20,7 @@
     "url": "git+https://github.com/codotype/codotype-util.git"
   },
   "dependencies": {
-    "@codotype/types": "^1.0.0",
+    "@codotype/types": "0.8.0-canary.1",
     "@types/lodash": "^4.14.149",
     "@types/pluralize": "0.0.29",
     "@types/underscore.string": "0.0.38",
