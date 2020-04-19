@@ -75,13 +75,15 @@ export function buildConfigurationGroupValue(
 }
 
 /**
- * buildDefaultProject
- * Builds an empty Project
- * @param
+ * buildDefaultConfiguration
+ * Builds a new ProjectConfiguration instance based on an array of ConfigurationGroup instances
+ * @param configurationGroups - array of ConfigurationGroup instances
  */
-export function buildDefaultProject(generatorMeta: GeneratorMeta): Project {
+export function buildDefaultConfiguration(
+  configurationGroups: ConfigurationGroup[]
+): ProjectConfiguration {
   // Defines default ProjectConfiguration
-  const projectConfiguration: ProjectConfiguration = generatorMeta.configuration_groups.reduce(
+  const projectConfiguration: ProjectConfiguration = configurationGroups.reduce(
     (val, configurationGroup: ConfigurationGroup) => {
       const initialValue: OptionValueInstance = buildConfigurationGroupValue(
         configurationGroup.properties
@@ -89,6 +91,20 @@ export function buildDefaultProject(generatorMeta: GeneratorMeta): Project {
       return { ...val, [configurationGroup.identifier]: initialValue };
     },
     {} // Passes in empty ProjectConfiguration
+  );
+
+  return projectConfiguration;
+}
+
+/**
+ * buildDefaultProject
+ * Builds an empty Project
+ * @param
+ */
+export function buildDefaultProject(generatorMeta: GeneratorMeta): Project {
+  // Defines default ProjectConfiguration
+  const projectConfiguration: ProjectConfiguration = buildDefaultConfiguration(
+    generatorMeta.configuration_groups
   );
 
   // Returns ConfigurationGroupValue

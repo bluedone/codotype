@@ -90,7 +90,7 @@ export function renderSchemaJson({
         })}`;
       }),
       ...inflatedSchema.relations.map((r: RelationReference): string => {
-        return `  "${r.identifiers.destination.alias.singular.camel}": "${r.identifiers.destination.alias.singular.pascal} ID"`;
+        return `  "${r.identifiers.destination.alias.singular.camel}": "${r.identifiers.destination.canonical.singular.pascal} ID"`;
       }),
     ].join(",\n"),
     "}", // Close JSON output
@@ -182,7 +182,7 @@ export function renderSchemaGrapqhQL({
       })}!`;
     }),
     ...inflatedSchema.relations.map((r: RelationReference): string => {
-      return `  ${r.identifiers.destination.alias.singular.camel}: ${r.identifiers.destination.alias.singular.pascal}!`;
+      return `  ${r.identifiers.destination.alias.singular.camel}: ${r.identifiers.destination.canonical.singular.pascal}!`;
     }),
     "}", // Close JSON output
   ];
@@ -273,7 +273,7 @@ export function renderSchemaTypeScript({
       })};`;
     }),
     ...inflatedSchema.relations.map((r: RelationReference): string => {
-      return `  ${r.identifiers.destination.alias.singular.camel}Id: ${r.identifiers.destination.alias.singular.pascal};`;
+      return `  ${r.identifiers.destination.alias.singular.camel}Id: ${r.identifiers.destination.canonical.singular.pascal};`;
     }),
     "}", // Close JSON output
   ];
