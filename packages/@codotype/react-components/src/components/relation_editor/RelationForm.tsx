@@ -108,6 +108,11 @@ interface RelationFormProps {
 export function RelationForm(props: RelationFormProps) {
     const { relationInput, supportedRelationTypes } = props;
 
+    if (supportedRelationTypes[0] && !relationInput.type) {
+        props.onChange({ ...relationInput, type: supportedRelationTypes[0] });
+        return null;
+    }
+
     return (
         <div className="row">
             <div className="col-lg-12">
@@ -142,7 +147,41 @@ export function RelationForm(props: RelationFormProps) {
                             );
                         }
 
-                        return <p>Meta Form Here</p>;
+                        // return <p>Meta Form Here</p>;
+                        return (
+                            <div className="row">
+                                <div className="col-sm-12">
+                                    <input
+                                        placeholder="Source Schema Alias"
+                                        value={
+                                            props.relationInput
+                                                .sourceSchemaAlias
+                                        }
+                                        onChange={e => {
+                                            props.onChange({
+                                                ...relationInput,
+                                                sourceSchemaAlias:
+                                                    e.currentTarget.value,
+                                            });
+                                        }}
+                                    />
+                                    <input
+                                        placeholder="Destination Schema Alias"
+                                        value={
+                                            props.relationInput
+                                                .destinationSchemaAlias
+                                        }
+                                        onChange={e => {
+                                            props.onChange({
+                                                ...relationInput,
+                                                destinationSchemaAlias:
+                                                    e.currentTarget.value,
+                                            });
+                                        }}
+                                    />
+                                </div>
+                            </div>
+                        );
                     }}
                 </RelationFormSelector>
             </div>
