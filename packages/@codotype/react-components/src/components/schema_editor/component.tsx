@@ -10,8 +10,10 @@ import {
     TokenPluralization,
     UUID,
     SchemaSource,
+    GeneratorMeta,
 } from "@codotype/types";
 import { reorder } from "../attribute_editor/component";
+import { buildDefaultConfiguration } from "@codotype/util";
 
 // // // //
 
@@ -27,6 +29,7 @@ interface EditorState {
  */
 export function SchemaEditorLayout(props: {
     schemas: Schema[];
+    generatorMeta: GeneratorMeta;
     onChange: (updatedSchemas: Schema[]) => void;
 }) {
     const [showModal, setShowModal] = React.useState(false);
@@ -106,11 +109,18 @@ export function SchemaEditorLayout(props: {
 
                                 // Defines new schema
                                 const newSchema: Schema = {
-                                    ...state.schemas[0],
                                     id: Math.random().toString(), // TODO - replace with UUID function from util
                                     attributes: [],
                                     relations: [],
+                                    removable: true,
+                                    locked: false,
+                                    source: SchemaSource.USER,
                                     identifiers: newTokenPluralization,
+                                    configuration: buildDefaultConfiguration(
+                                        props.generatorMeta
+                                            .schemaConfigurationGroup
+                                            .configurationGroups,
+                                    ),
                                 };
 
                                 // Defines updated schemas, including NEW schema
@@ -201,7 +211,10 @@ export function SchemaEditorLayout(props: {
                             attributes: [],
                             relations: [],
                             identifiers: newTokenPluralization,
-                            configuration: {},
+                            configuration: buildDefaultConfiguration(
+                                props.generatorMeta.schemaConfigurationGroup
+                                    .configurationGroups,
+                            ),
                         };
 
                         // Defines updated schemas, including NEW schema
@@ -245,6 +258,7 @@ export function SchemaEditorLayout(props: {
                 <SchemaDetail
                     schema={selectedSchema}
                     schemas={state.schemas}
+                    generatorMeta={props.generatorMeta}
                     onChange={(updatedSchema: Schema) => {
                         // Defines updatedSchemas to include `updatedSchema`
                         const updatedSchemas: Schema[] = state.schemas.map(

@@ -1,6 +1,7 @@
 import * as React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faClipboard, faCopy } from "@fortawesome/free-solid-svg-icons";
+// import { faEye, faClipboard, faCopy } from "@fortawesome/free-solid-svg-icons";
+import { faCopy } from "@fortawesome/free-solid-svg-icons";
 import { InfoTooltip } from "../info_tooltip";
 import { Schema } from "@codotype/types";
 import {
@@ -58,11 +59,8 @@ export function SchemaPreview(props: { schema: Schema; schemas: Schema[] }) {
         <div className="row">
             <div className="col-lg-12">
                 <p className="mb-0 text-muted">
-                    <span className="d-flex align-items-center justify-content-between mb-1 mx-1">
-                        <span>
-                            <FontAwesomeIcon className="mr-2" icon={faEye} />
-                            <strong className="m-0">Preview</strong>
-                        </span>
+                    <span className="d-flex align-items-center justify-content-between mb-1">
+                        <strong className="m-0">Preview</strong>
                         <InfoTooltip
                             id="schema-preview"
                             placement="left"
