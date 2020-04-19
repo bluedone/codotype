@@ -1,6 +1,5 @@
 import * as React from "react";
-// import { Navbar, NavDropdown, Nav } from "react-bootstrap";
-import { Navbar } from "react-bootstrap";
+import { Navbar, NavDropdown, Nav } from "react-bootstrap";
 
 // // // //
 
@@ -34,13 +33,13 @@ export function AppNavbar() {
                             // float: "left",
                         }}
                     />
-                    {/* <Navbar.Brand href="#home"> */}
-                    <h3 className="mb-0">codotype</h3>
-                    {/* </Navbar.Brand> */}
+                    <Navbar.Brand href="#home">
+                        <h3 className="mb-0">codotype</h3>
+                    </Navbar.Brand>
                 </div>
 
-                {/* <Navbar.Toggle aria-controls="basic-navbar-nav" /> */}
-                {/* <Navbar.Collapse id="basic-navbar-nav">
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
                         <Nav.Link href="#home">Home</Nav.Link>
                         <Nav.Link href="#link">Link</Nav.Link>
@@ -60,7 +59,7 @@ export function AppNavbar() {
                             </NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
-                </Navbar.Collapse> */}
+                </Navbar.Collapse>
             </div>
         </Navbar>
     );
