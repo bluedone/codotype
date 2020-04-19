@@ -1,6 +1,7 @@
 import * as React from "react";
 import { InflatedSchema } from "@codotype/types";
 import { RelationBadge } from "../relation_editor/RelationBadge";
+import { InfoTooltip } from "../info_tooltip";
 
 // // // //
 
@@ -21,11 +22,11 @@ export function SchemaIncomingRelations(props: SchemaIncomingRelationsProps) {
                 <p className="mb-0 text-muted">
                     <span className="d-flex align-items-center justify-content-between mb-1">
                         <strong className="m-0">Incoming Relations</strong>
-                        {/* <InfoTooltip
-                            id="schema-preview"
+                        <InfoTooltip
+                            id="schema-incoming-relations"
                             placement="left"
-                            message={`The data structure of a single ${schema.identifiers.singular.label} Schema`}
-                        /> */}
+                            message={`Relations which reference the ${inflatedSchema.identifiers.singular.label} Schema`}
+                        />
                     </span>
                 </p>
             </div>
