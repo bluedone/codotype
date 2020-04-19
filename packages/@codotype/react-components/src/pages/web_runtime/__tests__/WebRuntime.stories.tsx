@@ -5,13 +5,29 @@ import { Project, GeneratorMeta } from "@codotype/types";
 import { Story } from "@src/components/dev";
 import { RuntimeProvider } from "@src/components/runtime_provider";
 import { ProjectEditor } from "@src/components/project_editor";
-import { cdkGeneratorMeta } from "@src/components/__tests__/test_state";
+import {
+    cdkGeneratorMeta,
+    ApiExamplesConfigurationGroup,
+} from "@src/components/__tests__/test_state";
 import { dummyGeneratorMeta } from "@src/components/project_editor/__tests__/test_state";
 
 // // // //
 
 const stories: [string, GeneratorMeta][] = [
     ["w/ schemas", dummyGeneratorMeta],
+    [
+        "w/ schemas + schema configuration groups",
+        {
+            ...dummyGeneratorMeta,
+            id: "chrome_extension_generator_02", // unique ID for the generator
+            schemaConfigurationGroup: {
+                ...dummyGeneratorMeta.schemaConfigurationGroup,
+                configurationGroups: [
+                    ...dummyGeneratorMeta.configuration_groups,
+                ],
+            },
+        },
+    ],
     ["w/o schemas", cdkGeneratorMeta],
 ];
 

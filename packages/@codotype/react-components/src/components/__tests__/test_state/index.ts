@@ -1,1 +1,4 @@
-export { cdkGeneratorMeta } from "./generators/cdk-generator";
+export {
+    cdkGeneratorMeta,
+    ApiExamplesConfigurationGroup,
+} from "./generators/cdk-generator";

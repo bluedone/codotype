@@ -12,7 +12,7 @@ import {
 
 // // // //
 
-function ConfigurationGroupTab(props: {
+export function ConfigurationGroupTab(props: {
     label: string;
     active: boolean;
     onClick: () => void;
@@ -155,6 +155,7 @@ export function ConfigurationGroupSelector(props: {
                 {viewingSchemas && enableSchemaEditor && (
                     <SchemaEditorLayout
                         schemas={props.project.schemas}
+                        generatorMeta={generatorMeta}
                         onChange={(updatedSchemas: Schema[]) => {
                             console.log("Updated Schemas");
                             console.log(updatedSchemas);
