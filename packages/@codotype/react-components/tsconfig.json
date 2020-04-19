@@ -8,7 +8,7 @@
         "module": "commonjs",
         "moduleResolution": "node",
         "rootDir": "./src",
-        "outDir": "dist/js",
+        "outDir": "dist",
         "strict": true,
         "sourceMap": true,
         "jsx": "react",
