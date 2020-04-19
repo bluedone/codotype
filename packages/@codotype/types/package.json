@@ -1,6 +1,6 @@
 {
   "name": "@codotype/types",
-  "version": "1.0.0",
+  "version": "0.8.0-canary.1",
   "description": "Datatype definitions that power Codotype",
   "main": "dist/index",
   "types": "dist/index",
