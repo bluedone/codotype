@@ -75,9 +75,10 @@ export const ConfigurationInputFormGroup: FunctionComponent<ConfigurationInputFo
 
     // Handle props.card
     return (
-        <div className="col-lg-12">
-            {/* <div className="col-lg-6"> */}
-            <div className="card shadow-sm my-2 py-3 px-3">{formGroup}</div>
+        <div className="row">
+            <div className="col-lg-12">
+                <div className="card shadow-sm my-2 py-3 px-3">{formGroup}</div>
+            </div>
         </div>
     );
 };

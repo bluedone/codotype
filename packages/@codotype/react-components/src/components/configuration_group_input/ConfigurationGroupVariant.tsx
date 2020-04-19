@@ -30,7 +30,9 @@ export function ConfigurationGroupVariant(props: {
                         />
                     </div>
                     <div className="col-lg-6">
-                        <div className="row">{props.children}</div>
+                        <div className="row">
+                            <div className="col-lg-12">{props.children}</div>
+                        </div>
                     </div>
                 </div>
             )}

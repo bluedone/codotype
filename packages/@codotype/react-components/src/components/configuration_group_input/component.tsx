@@ -63,7 +63,7 @@ export const ConfigurationInput: FunctionComponent<ConfigurationInputProps> = (
                                     props.value[property.identifier];
                                 return (
                                     <div
-                                        className="card card-body mb-4 mt-2 mx-2"
+                                        className="card card-body mb-4 mt-2"
                                         key={property.identifier}
                                     >
                                         <ConfigurationInstanceInput

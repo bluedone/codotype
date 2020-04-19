@@ -14,6 +14,7 @@ import { ConfigurationInputFormGroup } from "./ConfigurationInputFormGroup";
 interface ConfigurationInstanceInputProps {
     properties: ConfigurationGroupProperty[];
     label: string;
+    card?: boolean;
     value: OptionValueInstance;
     onChange: (updatedVal: OptionValueInstance) => void;
 }
@@ -51,6 +52,7 @@ export const ConfigurationInstanceInput: FunctionComponent<ConfigurationInstance
                                 return (
                                     <div className="card card-body mb-4">
                                         <ConfigurationInstanceInput
+                                            card={false}
                                             label={property.label}
                                             properties={property.properties}
                                             onChange={(
@@ -88,7 +90,7 @@ export const ConfigurationInstanceInput: FunctionComponent<ConfigurationInstance
                             // TODO - handle nested instance + collection
                             return (
                                 <ConfigurationInputFormGroup
-                                    card
+                                    card={props.card}
                                     property={property}
                                 >
                                     <ConfigurationInputChild
