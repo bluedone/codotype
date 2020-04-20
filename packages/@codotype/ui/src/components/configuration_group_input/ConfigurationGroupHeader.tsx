@@ -1,5 +1,6 @@
 import React from "react";
 import { ConfigurationGroup } from "@codotype/types";
+import { DocumentationModal } from "../DocumentationModal";
 
 // // // //
 
@@ -10,7 +11,9 @@ import { ConfigurationGroup } from "@codotype/types";
  */
 export function ConfigurationGroupHeader(props: {
     configurationGroup: ConfigurationGroup;
+    enableDocumentationModal?: boolean;
 }) {
+    const { enableDocumentationModal = false } = props;
     return (
         <div className="row">
             <div className="col-sm-12">
@@ -18,8 +21,15 @@ export function ConfigurationGroupHeader(props: {
                     <p className="lead mb-0 mr-3">
                         {props.configurationGroup.label}
                     </p>
+                    {enableDocumentationModal && (
+                        <DocumentationModal
+                            header={props.configurationGroup.label}
+                            documentation={
+                                props.configurationGroup.documentation
+                            }
+                        />
+                    )}
                     {/* <br className="d-none d-sm-block d-md-none" /> */}
-                    {/* <MoreInfoLink : url="url"/> */}
                     <small className="ml-2 text-muted">
                         {props.configurationGroup.description}
                     </small>

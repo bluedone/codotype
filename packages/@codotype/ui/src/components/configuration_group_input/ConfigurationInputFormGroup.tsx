@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
 import { OptionType, ConfigurationGroupProperty } from "@codotype/types";
-import { MoreInfoLink } from "../more_info_link";
 import classnames from "classnames";
+import { DocumentationModal } from "../DocumentationModal";
 
 // // // //
 
@@ -23,6 +23,7 @@ export const ConfigurationInputFormGroup: FunctionComponent<ConfigurationInputFo
                 [className]: className !== "",
             })}
         >
+            {/* TODO - replace this with modified ConfigurationGroupHeader */}
             <div className="d-flex align-items-center">
                 <div className="d-flex align-items-center">
                     {props.property.icon && (
@@ -34,9 +35,11 @@ export const ConfigurationInputFormGroup: FunctionComponent<ConfigurationInputFo
                     )}
                     <label className="mb-0">{props.property.label}</label>
                     <small className="mx-3">
-                        <MoreInfoLink url="https://github.com" />
+                        <DocumentationModal
+                            header={props.property.label}
+                            documentation={props.property.description} // TODO - update this to use property.documentation
+                        />
                     </small>
-                    {/* <small>Switch Goes Here</small> */}
                 </div>
 
                 {props.property.type === OptionType.BOOLEAN && (

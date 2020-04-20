@@ -29,6 +29,9 @@ export const ConfigurationInput: FunctionComponent<ConfigurationInputProps> = (
                 {/* ConfigurationGroupHeader */}
                 <ConfigurationGroupHeader
                     configurationGroup={props.configurationGroup}
+                    enableDocumentationModal={
+                        props.configurationGroup.variant !== "SIDEBYSIDE"
+                    }
                 />
 
                 {/* Renders ConfigurationGroup variants */}
