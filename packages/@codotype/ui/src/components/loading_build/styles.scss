@@ -1,0 +1,12 @@
+#loading {
+    animation: rotation 1000ms infinite cubic-bezier(0.62, 0.23, 0.01, 0.83);
+}
+
+@keyframes rotation {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(359deg);
+    }
+}

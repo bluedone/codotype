@@ -9,6 +9,7 @@ Object {
   "id": null,
   "identifier": "",
   "label": "",
+  "locked": false,
   "required": false,
   "unique": false,
 }
@@ -30,6 +31,8 @@ Object {
 exports[`testing @codotype/types 3`] = `
 Object {
   "attributes": Array [],
+  "camel_case": "",
+  "camel_case_plural": "",
   "class_name": "",
   "class_name_plural": "",
   "id": null,

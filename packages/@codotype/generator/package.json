@@ -4,6 +4,7 @@
   "description": "Generator system that produces code scaffolding from metadata",
   "scripts": {
     "test": "jest",
+    "dev": "tsc -w -p tsconfig.build.json",
     "build": "npm run clean && npm run compile",
     "clean": "rm -rf ./dist",
     "compile": "tsc -p tsconfig.build.json",

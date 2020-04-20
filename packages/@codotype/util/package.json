@@ -1,10 +1,11 @@
 {
   "name": "@codotype/util",
-  "version": "1.0.0",
+  "version": "0.8.0-canary.1",
   "description": "Utility functions used throughout the Codotype ecosystem",
   "scripts": {
-    "test": "jest",
+    "test": "jest --config=jest.config.js",
     "build": "npm run clean && npm run compile",
+    "dev": "tsc -w -p tsconfig.build.json",
     "clean": "rm -rf ./dist",
     "compile": "tsc -p tsconfig.build.json",
     "prepublishOnly": "npm run build"
@@ -19,7 +20,7 @@
     "url": "git+https://github.com/codotype/codotype-util.git"
   },
   "dependencies": {
-    "@codotype/types": "^1.0.0",
+    "@codotype/types": "0.8.0-canary.1",
     "@types/lodash": "^4.14.149",
     "@types/pluralize": "0.0.29",
     "@types/underscore.string": "0.0.38",
@@ -29,7 +30,6 @@
     "underscore.string": "^3.3.4"
   },
   "devDependencies": {
-    "@codotype/blueprints": "^0.4.0",
     "@types/jest": "^24.0.23",
     "chai": "^4.1.2",
     "jest": "^24.9.0",
@@ -37,7 +37,6 @@
     "nyc": "^13.0.1",
     "ts-jest": "^24.2.0",
     "typescript": "~3.4.5"
-    
   },
   "author": "Alexander Schwartzberg",
   "license": "MIT",

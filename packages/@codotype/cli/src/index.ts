@@ -1,3 +1,1 @@
-export function goFish() {
-  return false;
-}
+export * from "./types";

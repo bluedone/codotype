@@ -1,7 +1,16 @@
 import { Datatype } from "./datatype";
+import { UUID } from "./uuid";
 
+// TODO - add `{ identifiers: TokenCasing } here, replace label+identifier pair
+// TODO - break out the following into SchemaEditorConfiguration
+// - required
+// - unique
+// - default_value
+// - nullable (new)
+// - primary key (new, exclusive 1-per-schema)
+// - anything else?
 export interface Attribute {
-  id: null | string;
+  id: UUID;
   label: string;
   identifier: string;
   description: string;
@@ -14,7 +23,7 @@ export interface Attribute {
 }
 
 export const DEFAULT_ATTRIBUTE: Attribute = {
-  id: null,
+  id: "",
   label: "",
   identifier: "",
   description: "",
@@ -24,4 +33,4 @@ export const DEFAULT_ATTRIBUTE: Attribute = {
   default_value: null,
   datatypeOptions: {},
   locked: false,
-}
+};

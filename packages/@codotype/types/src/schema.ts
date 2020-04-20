@@ -1,42 +1,29 @@
+import { UUID } from "./uuid";
+import { ProjectConfiguration } from "./ProjectConfiguration";
+import { Attribute } from "./attribute";
+import { Relation } from "./relation";
+import { TokenPluralization } from "./token";
+
 export enum SchemaSource {
   USER = "USER",
-  GENERATOR = "GENERATOR"
+  GENERATOR = "GENERATOR",
 }
 
 export interface Schema {
-  id: null | string;
-  locked: boolean;
+  id: UUID;
   source: SchemaSource;
+  locked: boolean;
   removable: boolean;
-  label: string;
-  label_plural: string;
-  identifier: string;
-  identifier_plural: string;
-  class_name: string;
-  class_name_plural: string;
-  camel_case: string;
-  camel_case_plural: string;
-  attributes: any[];
-  relations: any[];
-  reverse_relations: any[];
-}
-
-// // // //
-// TODO - schema metadata should be updated to someting like:
-export interface TokenPluralization {
-  singular: string;
-  plural: string;
-}
-
-export interface SchemaTokenCasing {
-  title: TokenPluralization;
-  snake: TokenPluralization;
-  camel: TokenPluralization;
-  pascal: TokenPluralization;
+  attributes: Attribute[];
+  relations: Relation[];
+  identifiers: TokenPluralization;
+  configuration: ProjectConfiguration;
 }
 
 // // // //
 
+// TODO - FIGURE OUT SCHEMA CONFIGURATION
+// SHOULD INCLUDE DEFAULT SCHEMAS
 // export interface SchemaConfigurationGroup {
 //   id: null | string;
 //   locked: boolean;
@@ -48,35 +35,33 @@ export interface SchemaTokenCasing {
 //   supportedRelations: any[]; // The relation types supported by this generator.Only an array of RELATION_TYPE_ * identifiers that correspond to values defined in @codotype/types are accepted.
 // }
 
-export interface SchemaV2 {
-  id: null | string;
-  locked: boolean;
-  source: SchemaSource;
-  removable: boolean;
-  tokens: SchemaTokenCasing;
-  attributes: any[];
-  relations: any[];
-  configuration: any; // ProjectConfiguration, wow!
-  // reverse_relations: any[]; <--- these are _derived_, a computed value - doesn't need to be stored
-}
-
 //
 // // // //
 
+// QUESTION - where should this be located?
+// ANSWER - this should live in react-components for now
 export const DEFAULT_SCHEMA: Schema = {
-  id: null,
+  id: "",
   locked: false,
   source: SchemaSource.USER,
   removable: true,
-  label: "",
-  label_plural: "",
-  identifier: "",
-  identifier_plural: "",
-  class_name: "",
-  class_name_plural: "",
-  camel_case: "",
-  camel_case_plural: "",
   attributes: [],
   relations: [],
-  reverse_relations: []
+  configuration: {},
+  identifiers: {
+    singular: {
+      label: "",
+      snake: "",
+      camel: "",
+      pascal: "",
+      kebab: "",
+    },
+    plural: {
+      label: "",
+      snake: "",
+      camel: "",
+      pascal: "",
+      kebab: "",
+    },
+  },
 };

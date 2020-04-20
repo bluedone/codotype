@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`/src/schemaRenderer renders JSON representation correctly 1`] = `
+"{
+  \\"name\\": \\"string\\"
+  \\"email\\": \\"string\\"
+}"
+`;

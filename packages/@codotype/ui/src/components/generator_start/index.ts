@@ -1,0 +1,1 @@
+export { GeneratorStart } from "./component";
