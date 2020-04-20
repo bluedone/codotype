@@ -20,8 +20,6 @@ yarn storybook
 -   `yarn lint` - runs EsLint
 -   `yarn prettify` - runs Prettier
 
-![Installed Extension in Mozilla Firefox](https://i.imgur.com/gO2Lrb5.png "Installed Extension in Mozilla Firefox")
-
 **Notes**
 
 -   Includes ESLint configured to work with TypeScript and Prettier.
@@ -31,8 +29,6 @@ yarn storybook
 -   Recommended to use `Visual Studio Code` with the `Format on Save` setting turned on.
 
 -   Includes Storybook configured to work with React + TypeScript. Note that it maintains its own `webpack.config.js` and `tsconfig.json` files. See example story in `src/**/__tests__/*.stories.tsx`
-
-![Example Storybook Setup](https://i.imgur.com/ER0WHtY.png "Example Storybook Setup")
 
 **Built with**
 

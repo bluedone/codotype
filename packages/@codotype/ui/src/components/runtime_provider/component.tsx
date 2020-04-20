@@ -28,6 +28,7 @@ export function RuntimeProvider(props: RuntimeProviderProps) {
     const [loading, setLoading] = React.useState<boolean>(false);
     const [finished, setFinished] = React.useState<boolean>(false);
 
+    // TODO - update this to be passed in throug `props.runtimeAdaptor`
     function generateCode({ project, generator }: GenerateCodeProps) {
         setLoading(true);
 
