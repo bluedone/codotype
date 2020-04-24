@@ -3,7 +3,7 @@ import {
     Schema,
     SchemaSource,
     RelationType,
-    Datatype,
+    testState,
 } from "@codotype/types";
 
 // // // //
@@ -11,6 +11,7 @@ import {
 export const relationExample01: Relation = {
     id: "relation-id-attr",
     type: RelationType.TO_ONE,
+    source: SchemaSource.USER,
     required: false,
     destinationSchemaId: "12345",
     sourceSchemaAlias: "Employer",
@@ -43,20 +44,7 @@ export const userSchema: Schema = {
             kebab: "users",
         },
     },
-    attributes: [
-        {
-            id: "ATTR_01",
-            label: "Email",
-            identifier: "email",
-            required: true,
-            unique: true,
-            datatype: Datatype.STRING,
-            datatypeOptions: {},
-            default_value: "",
-            locked: false,
-            description: "Email for the user",
-        },
-    ],
+    attributes: [{ ...testState.emailAttribute }],
     relations: [],
     locked: false,
     removable: false,

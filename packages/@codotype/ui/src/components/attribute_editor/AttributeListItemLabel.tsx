@@ -31,10 +31,12 @@ export function AttributeListItemLabel(props: AttributeListItemLabelProps) {
             </OverlayTrigger>
 
             {/* Attribute label */}
-            <span className="ml-2">{attribute.label}</span>
+            <span className="ml-2">{attribute.identifiers.label}</span>
 
             {/* Required badge */}
-            {attribute.required && <span className="ml-1 text-danger">*</span>}
+            {attribute.addons.required && (
+                <span className="ml-1 text-danger">*</span>
+            )}
 
             {/* <b-badge
                 v-if="index === 0"
@@ -47,7 +49,7 @@ export function AttributeListItemLabel(props: AttributeListItemLabelProps) {
             </b-badge> */}
 
             {/* Unique badge + tooltip */}
-            {attribute.unique && (
+            {attribute.addons.unique && (
                 <OverlayTrigger
                     placement="right"
                     overlay={

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { Story } from "@src/components/dev";
-import { Relation, RelationType } from "@codotype/types";
+import { Relation, RelationType, Schema, SchemaSource } from "@codotype/types";
 import { RelationEditor } from "../component";
 import {
     relationExample01,
@@ -16,13 +16,14 @@ storiesOf("RelationEditor/Layout", module).add("populated", () => {
     const [relations, setRelations] = React.useState<Relation[]>([
         relationExample01,
     ]);
-    const schema = {
+    const schema: Schema = {
         ...userSchema,
         relations: [
             {
                 id: "dummy-relation",
                 type: RelationType.HAS_ONE,
                 required: false,
+                source: SchemaSource.USER,
                 destinationSchemaId: userSchema.id,
                 sourceSchemaAlias: "",
                 destinationSchemaAlias: "Parent",

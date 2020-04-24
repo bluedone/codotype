@@ -36,7 +36,7 @@ export function SchemaDetail(props: SchemaDetailProps) {
         schemas: props.schemas,
     });
 
-    const { schemaConfigurationGroup } = props.generatorMeta;
+    const { schemaEditorConfiguration } = props.generatorMeta;
 
     return (
         <div className="row" style={{ borderLeft: "1px solid lightgrey" }}>
@@ -52,7 +52,7 @@ export function SchemaDetail(props: SchemaDetailProps) {
                 <ConfigurationGroupSelector
                     configuration={props.schema.configuration}
                     configurationGroups={
-                        schemaConfigurationGroup.configurationGroups
+                        schemaEditorConfiguration.configurationGroups
                     }
                     onChange={(updatedConfiguration: ProjectConfiguration) => {
                         props.onChange({
@@ -66,7 +66,7 @@ export function SchemaDetail(props: SchemaDetailProps) {
                             <AttributeEditor
                                 attributes={props.schema.attributes}
                                 supportedDatatypes={
-                                    schemaConfigurationGroup.supportedDatatypes
+                                    schemaEditorConfiguration.supportedDatatypes
                                 }
                                 onChange={(updatedAttributes: Attribute[]) => {
                                     // Defines updated schema
@@ -87,7 +87,7 @@ export function SchemaDetail(props: SchemaDetailProps) {
                                 schemas={props.schemas}
                                 relations={props.schema.relations}
                                 supportedRelationTypes={
-                                    schemaConfigurationGroup.supportedRelations
+                                    schemaEditorConfiguration.supportedRelations
                                 }
                                 onChange={(updatedRelations: Relation[]) => {
                                     // Defines updated schema

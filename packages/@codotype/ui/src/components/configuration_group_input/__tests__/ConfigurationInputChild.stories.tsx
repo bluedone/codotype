@@ -1,13 +1,18 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { ConfigurationInputChild } from "../ConfigurationInputChild";
-import { OptionValue, ConfigurationGroupProperty } from "@codotype/types";
 import {
+    OptionValue,
+    ConfigurationGroupProperty,
+    testState,
+} from "@codotype/types";
+const {
     ComponentBuilderConfigurationGroupPropertySingleDropdown,
     ComponentBuilderConfigurationGroupPropertySingleNumber,
     ComponentBuilderConfigurationGroupPropertySingleText,
     twitterApiOption,
-} from "./test_state";
+} = testState;
+
 import { Story } from "@src/components/dev";
 
 // // // //

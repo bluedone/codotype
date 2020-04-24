@@ -2,7 +2,8 @@ import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { SchemaEditorLayout } from "../component";
 import { Story } from "@src/components/dev";
-import { cdkGeneratorMeta } from "@src/components/__tests__/test_state";
+import { testState } from "@codotype/types";
+const { cdkGeneratorMeta } = testState;
 
 // // // //
 

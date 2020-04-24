@@ -2,196 +2,172 @@ import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { ConfigurationInput } from "../component";
 import { buildConfigurationGroupValue } from "@codotype/util";
-import { OptionValueInstance } from "@codotype/types";
 import {
+    OptionValueInstance,
+    testState,
+    GroupLayoutVariant,
+} from "@codotype/types";
+const {
     ComponentBuilderConfigurationGroup,
     ApiExamplesConfigurationGroup,
     ComponentBuilderConfigurationGroupPropertySingleDropdown,
     ComponentBuilderConfigurationGroupPropertyWithInstance,
     ComponentBuilderConfigurationGroupPropertyWithInstance01,
-} from "./test_state";
+} = testState;
 import { Story } from "@src/components/dev";
 
 // // // //
 
-storiesOf("ConfigurationEditor/ConfigurationInput", module).add(
-    "renders",
-    () => {
-        const [count, increment] = React.useReducer(i => i + 1, 0);
-        const [configurationOptionValue, setVal] = React.useState<
-            OptionValueInstance
-        >(
-            buildConfigurationGroupValue(
-                ComponentBuilderConfigurationGroup.properties,
-            ),
-        );
-
-        return (
-            <Story>
-                <ConfigurationInput
-                    configurationGroup={ComponentBuilderConfigurationGroup}
-                    value={configurationOptionValue}
-                    onChange={(updatedVal: OptionValueInstance) => {
-                        setVal(updatedVal);
-                        increment();
-                    }}
-                />
-                <p>{count}</p>
-                <pre>{JSON.stringify(configurationOptionValue, null, 4)}</pre>
-            </Story>
-        );
-    },
+const storyCollection = storiesOf(
+    "ConfigurationEditor/ConfigurationInput",
+    module,
 );
 
-storiesOf("ConfigurationEditor/ConfigurationInput", module).add(
-    "single dropdown",
-    () => {
-        const [count, increment] = React.useReducer(i => i + 1, 0);
-        const [configurationOptionValue, setVal] = React.useState<
-            OptionValueInstance
-        >(
-            buildConfigurationGroupValue([
+storyCollection.add("renders", () => {
+    const [count, increment] = React.useReducer(i => i + 1, 0);
+    const [configurationOptionValue, setVal] = React.useState<
+        OptionValueInstance
+    >(buildConfigurationGroupValue(ComponentBuilderConfigurationGroup));
+
+    return (
+        <Story>
+            <ConfigurationInput
+                configurationGroup={ComponentBuilderConfigurationGroup}
+                value={configurationOptionValue}
+                onChange={(updatedVal: OptionValueInstance) => {
+                    setVal(updatedVal);
+                    increment();
+                }}
+            />
+            <p>{count}</p>
+            <pre>{JSON.stringify(configurationOptionValue, null, 4)}</pre>
+        </Story>
+    );
+});
+
+storyCollection.add("single dropdown", () => {
+    const [count, increment] = React.useReducer(i => i + 1, 0);
+    const [configurationOptionValue, setVal] = React.useState<
+        OptionValueInstance
+    >(
+        buildConfigurationGroupValue({
+            ...ComponentBuilderConfigurationGroup,
+            properties: [
                 ComponentBuilderConfigurationGroupPropertySingleDropdown,
-            ]),
-        );
+            ],
+        }),
+    );
 
-        return (
-            <Story>
-                <ConfigurationInput
-                    configurationGroup={{
-                        ...ComponentBuilderConfigurationGroup,
-                        properties: [
-                            ComponentBuilderConfigurationGroupPropertySingleDropdown,
-                        ],
-                    }}
-                    value={configurationOptionValue}
-                    onChange={(updatedVal: OptionValueInstance) => {
-                        setVal(updatedVal);
-                        increment();
-                    }}
-                />
-                <p>{count}</p>
-                <pre>{JSON.stringify(configurationOptionValue, null, 4)}</pre>
-            </Story>
-        );
-    },
-);
+    return (
+        <Story>
+            <ConfigurationInput
+                configurationGroup={{
+                    ...ComponentBuilderConfigurationGroup,
+                    properties: [],
+                }}
+                value={configurationOptionValue}
+                onChange={(updatedVal: OptionValueInstance) => {
+                    setVal(updatedVal);
+                    increment();
+                }}
+            />
+            <p>{count}</p>
+            <pre>{JSON.stringify(configurationOptionValue, null, 4)}</pre>
+        </Story>
+    );
+});
 
-storiesOf("ConfigurationEditor/ConfigurationInput", module).add(
-    "nested instance",
-    () => {
-        const [count, increment] = React.useReducer(i => i + 1, 0);
-        const [configurationOptionValue, setVal] = React.useState<
-            OptionValueInstance
-        >(
-            buildConfigurationGroupValue([
+storyCollection.add("nested instance", () => {
+    const [count, increment] = React.useReducer(i => i + 1, 0);
+    const [configurationOptionValue, setVal] = React.useState<
+        OptionValueInstance
+    >(
+        buildConfigurationGroupValue({
+            ...ComponentBuilderConfigurationGroup,
+            properties: [
                 ComponentBuilderConfigurationGroupPropertyWithInstance,
-            ]),
-        );
+            ],
+        }),
+    );
 
-        return (
-            <Story>
-                <ConfigurationInput
-                    configurationGroup={{
-                        ...ComponentBuilderConfigurationGroup,
-                        properties: [
-                            ComponentBuilderConfigurationGroupPropertyWithInstance,
-                        ],
-                    }}
-                    value={configurationOptionValue}
-                    onChange={(updatedVal: OptionValueInstance) => {
-                        setVal(updatedVal);
-                        increment();
-                    }}
-                />
-                <p>{count}</p>
-                <pre>{JSON.stringify(configurationOptionValue, null, 4)}</pre>
-            </Story>
-        );
-    },
-);
+    return (
+        <Story>
+            <ConfigurationInput
+                configurationGroup={{
+                    ...ComponentBuilderConfigurationGroup,
+                    properties: [
+                        ComponentBuilderConfigurationGroupPropertyWithInstance,
+                    ],
+                }}
+                value={configurationOptionValue}
+                onChange={(updatedVal: OptionValueInstance) => {
+                    setVal(updatedVal);
+                    increment();
+                }}
+            />
+            <p>{count}</p>
+            <pre>{JSON.stringify(configurationOptionValue, null, 4)}</pre>
+        </Story>
+    );
+});
 
-storiesOf("ConfigurationEditor/ConfigurationInput", module).add(
-    "instance",
-    () => {
-        const [count, increment] = React.useReducer(i => i + 1, 0);
-        const [configurationOptionValue, setVal] = React.useState<
-            OptionValueInstance
-        >(
-            buildConfigurationGroupValue([
+storyCollection.add("instance", () => {
+    const [count, increment] = React.useReducer(i => i + 1, 0);
+    const [configurationOptionValue, setVal] = React.useState<
+        OptionValueInstance
+    >(
+        buildConfigurationGroupValue({
+            ...ComponentBuilderConfigurationGroup,
+            properties: [
                 ComponentBuilderConfigurationGroupPropertyWithInstance01,
-            ]),
-        );
+            ],
+        }),
+    );
 
-        return (
-            <Story>
-                <ConfigurationInput
-                    configurationGroup={{
-                        ...ComponentBuilderConfigurationGroup,
-                        properties: [
-                            ComponentBuilderConfigurationGroupPropertyWithInstance01,
-                        ],
-                    }}
-                    value={configurationOptionValue}
-                    onChange={(updatedVal: OptionValueInstance) => {
-                        setVal(updatedVal);
-                        increment();
-                    }}
-                />
-                <p>{count}</p>
-                <pre>{JSON.stringify(configurationOptionValue, null, 4)}</pre>
-            </Story>
-        );
-    },
-);
+    return (
+        <Story>
+            <ConfigurationInput
+                configurationGroup={{
+                    ...ComponentBuilderConfigurationGroup,
+                    properties: [
+                        ComponentBuilderConfigurationGroupPropertyWithInstance01,
+                    ],
+                }}
+                value={configurationOptionValue}
+                onChange={(updatedVal: OptionValueInstance) => {
+                    setVal(updatedVal);
+                    increment();
+                }}
+            />
+            <p>{count}</p>
+            <pre>{JSON.stringify(configurationOptionValue, null, 4)}</pre>
+        </Story>
+    );
+});
 
-storiesOf("ConfigurationEditor/ConfigurationInput", module).add(
-    "API Examples - LIST Variant",
-    () => {
+// // // //
+
+const layoutVariantStories: [string, GroupLayoutVariant][] = [
+    ["API Examples - TABS layoutVariant", GroupLayoutVariant.TABS],
+    ["API Examples - LIST layoutVariant", GroupLayoutVariant.LIST],
+    ["API Examples - DOCS_3x9 layoutVariant", GroupLayoutVariant.DOCS_3x9],
+    ["API Examples - DOCS_4x8 layoutVariant", GroupLayoutVariant.DOCS_4x8],
+    ["API Examples - DOCS_6x6 layoutVariant", GroupLayoutVariant.DOCS_6x6],
+];
+
+layoutVariantStories.forEach(testCase => {
+    storyCollection.add(testCase[0], () => {
         const [count, increment] = React.useReducer(i => i + 1, 0);
         const [configurationOptionValue, setVal] = React.useState<
             OptionValueInstance
-        >(
-            buildConfigurationGroupValue(
-                ApiExamplesConfigurationGroup.properties,
-            ),
-        );
-
-        return (
-            <Story>
-                <ConfigurationInput
-                    configurationGroup={ApiExamplesConfigurationGroup}
-                    value={configurationOptionValue}
-                    onChange={(updatedVal: OptionValueInstance) => {
-                        setVal(updatedVal);
-                        increment();
-                    }}
-                />
-                <p>{count}</p>
-                <pre>{JSON.stringify(configurationOptionValue, null, 4)}</pre>
-            </Story>
-        );
-    },
-);
-
-storiesOf("ConfigurationEditor/ConfigurationInput", module).add(
-    "API Examples - SIDEBYSIDE Variant",
-    () => {
-        const [count, increment] = React.useReducer(i => i + 1, 0);
-        const [configurationOptionValue, setVal] = React.useState<
-            OptionValueInstance
-        >(
-            buildConfigurationGroupValue(
-                ApiExamplesConfigurationGroup.properties,
-            ),
-        );
+        >(buildConfigurationGroupValue(ApiExamplesConfigurationGroup));
 
         return (
             <Story>
                 <ConfigurationInput
                     configurationGroup={{
                         ...ApiExamplesConfigurationGroup,
-                        variant: "SIDEBYSIDE",
+                        layoutVariant: testCase[1],
                     }}
                     value={configurationOptionValue}
                     onChange={(updatedVal: OptionValueInstance) => {
@@ -203,5 +179,5 @@ storiesOf("ConfigurationEditor/ConfigurationInput", module).add(
                 <pre>{JSON.stringify(configurationOptionValue, null, 4)}</pre>
             </Story>
         );
-    },
-);
+    });
+});

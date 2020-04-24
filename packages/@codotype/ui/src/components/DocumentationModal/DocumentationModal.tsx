@@ -18,7 +18,7 @@ export function DocumentationModal(props: {
     return (
         <React.Fragment>
             <button
-                className="btn btn-link"
+                className="btn btn-link px-0 py-0"
                 onClick={() => {
                     showModal(true);
                 }}

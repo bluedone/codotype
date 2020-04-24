@@ -118,7 +118,7 @@ export function SchemaEditorLayout(props: {
                                     identifiers: newTokenPluralization,
                                     configuration: buildDefaultConfiguration(
                                         props.generatorMeta
-                                            .schemaConfigurationGroup
+                                            .schemaEditorConfiguration
                                             .configurationGroups,
                                     ),
                                 };
@@ -212,7 +212,7 @@ export function SchemaEditorLayout(props: {
                             relations: [],
                             identifiers: newTokenPluralization,
                             configuration: buildDefaultConfiguration(
-                                props.generatorMeta.schemaConfigurationGroup
+                                props.generatorMeta.schemaEditorConfiguration
                                     .configurationGroups,
                             ),
                         };

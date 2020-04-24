@@ -1,31 +1,18 @@
 import { Attribute, Datatype } from "@codotype/types";
+import { testState } from "@codotype/types";
+import { buildTokenCasing } from "@codotype/util";
+const { emailAttribute } = testState;
 
 // // // //
 
 export const attributeExample01: Attribute = {
-    id: "name-attr",
-    label: "Name",
-    identifier: "name",
-    description: "the name of the user",
-    required: true,
-    unique: true,
-    locked: false,
-    datatype: Datatype.STRING,
-    default_value: "string",
-    datatypeOptions: {},
+    ...emailAttribute,
+    identifiers: buildTokenCasing("Name"),
 };
 
 export const attributeExample02: Attribute = {
-    id: "email-attr",
-    label: "Email",
-    identifier: "email",
-    description: "the email of the user",
-    required: true,
-    unique: true,
-    locked: false,
-    datatype: Datatype.STRING,
-    default_value: "string",
-    datatypeOptions: {},
+    ...emailAttribute,
+    identifiers: buildTokenCasing("Email"),
 };
 
 export const supportedDatatypes: Datatype[] = [

@@ -4,13 +4,14 @@ import { ConfigurationInstanceInput } from "../ConfigurationInstanceInput";
 import {
     OptionValueInstance,
     ConfigurationGroupProperty,
+    testState,
 } from "@codotype/types";
-import {
+const {
     ComponentBuilderConfigurationGroupPropertySingleDropdown,
     ComponentBuilderConfigurationGroupPropertySingleNumber,
     ComponentBuilderConfigurationGroupPropertySingleText,
     twitterApiOption,
-} from "./test_state";
+} = testState;
 import { Story } from "@src/components/dev";
 
 // // // //
