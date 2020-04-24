@@ -20,8 +20,8 @@
     "url": "git+https://github.com/codotype/codotype.git"
   },
   "dependencies": {
-    "@codotype/types": "^1.0.0",
-    "@codotype/util": "^1.0.0",
+    "@codotype/types": "0.8.0-canary.1",
+    "@codotype/util": "0.8.0-canary.1",
     "@types/node": "^12.12.12",
     "bluebird": "^3.5.1",
     "ejs": "^2.6.1",

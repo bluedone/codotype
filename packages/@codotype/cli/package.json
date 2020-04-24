@@ -30,10 +30,10 @@
   },
   "dependencies": {
     "@codotype/api": "^1.0.0",
-    "@codotype/types": "^1.0.0",
+    "@codotype/types": "0.8.0-canary.1",
     "@codotype/generator": "^1.0.0",
     "@codotype/runtime": "^1.0.0",
-    "@codotype/util": "^1.0.0",
+    "@codotype/util": "0.8.0-canary.1",
     "chalk": "^2.4.1",
     "commander": "^2.19.0",
     "fs-extra": "^7.0.1",

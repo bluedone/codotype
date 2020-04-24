@@ -27,8 +27,8 @@
   "homepage": "https://github.com/codotype/codotype-runtime#readme",
   "dependencies": {
     "@codotype/generator": "^1.0.0",
-    "@codotype/types": "^1.0.0",
-    "@codotype/util": "^1.0.0",
+    "@codotype/types": "^0.8.0-canary.1",
+    "@codotype/util": "^0.8.0-canary.1",
     "@types/bluebird": "^3.5.29",
     "@types/ejs": "^2.6.3",
     "@types/node": "^12.12.12",
