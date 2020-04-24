@@ -5,6 +5,7 @@ import {
     OptionValueInstance,
     ConfigurationGroupProperty,
     ConfigurationGroup,
+    GroupLayoutVariant,
 } from "@codotype/types";
 import { ConfigurationInputChild } from "./ConfigurationInputChild";
 import { ConfigurationGroupVariant } from "./ConfigurationGroupVariant";
@@ -23,6 +24,10 @@ interface ConfigurationInputProps {
 export const ConfigurationInput: FunctionComponent<ConfigurationInputProps> = (
     props: ConfigurationInputProps,
 ) => {
+    if (!props.configurationGroup.properties) {
+        console.log("WARNING - NO CONFIGURATION GROUP PROPERTIES DEFINED");
+        return null;
+    }
     return (
         <div className="row mt-3">
             <div className="col-lg-12">
@@ -30,7 +35,8 @@ export const ConfigurationInput: FunctionComponent<ConfigurationInputProps> = (
                 <ConfigurationGroupHeader
                     configurationGroup={props.configurationGroup}
                     enableDocumentationModal={
-                        props.configurationGroup.variant !== "SIDEBYSIDE"
+                        props.configurationGroup.layoutVariant !==
+                        GroupLayoutVariant.DOCS_4x8
                     }
                 />
 

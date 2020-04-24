@@ -53,7 +53,7 @@ export function ConfigurationGroupSelector(props: {
     const { generatorMeta } = props;
     // Gets default ConfigurationGroup to render
     const defaultConfigurationGroup: ConfigurationGroup | undefined =
-        generatorMeta.configuration_groups[0];
+        generatorMeta.configurationGroups[0];
 
     // If there is no default ConfigurationGroup, return null
     if (!defaultConfigurationGroup) {
@@ -72,7 +72,7 @@ export function ConfigurationGroupSelector(props: {
         configurationGroups,
         supportedDatatypes,
         supportedRelations,
-    } = generatorMeta.schemaConfigurationGroup;
+    } = generatorMeta.schemaEditorConfiguration;
     const enableSchemaEditor: boolean =
         configurationGroups.length > 0 ||
         supportedDatatypes.length > 0 ||
@@ -98,7 +98,7 @@ export function ConfigurationGroupSelector(props: {
                     )}
 
                     {/* Renders the navigation for selecting a ConfigurationGroup */}
-                    {generatorMeta.configuration_groups.map(
+                    {generatorMeta.configurationGroups.map(
                         (configurationGroup: ConfigurationGroup) => {
                             return (
                                 <ConfigurationGroupTab

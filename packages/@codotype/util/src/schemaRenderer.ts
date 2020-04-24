@@ -85,7 +85,7 @@ export function renderSchemaJson({
     // Map each property
     [
       ...schema.attributes.map((attr: Attribute) => {
-        return `  "${attr.identifier}": ${getDatatypeValueJson({
+        return `  "${attr.identifiers.snake}": ${getDatatypeValueJson({
           datatype: attr.datatype,
         })}`;
       }),
@@ -177,7 +177,7 @@ export function renderSchemaGrapqhQL({
     `type ${schema.identifiers.singular.pascal} {`, // Open JSON output
     // Map each property
     ...schema.attributes.map((attr: Attribute) => {
-      return `  ${attr.identifier}: ${getDatatypeValueGraphQL({
+      return `  ${attr.identifiers.snake}: ${getDatatypeValueGraphQL({
         datatype: attr.datatype,
       })}!`;
     }),
@@ -268,7 +268,7 @@ export function renderSchemaTypeScript({
     `interface ${schema.identifiers.singular.pascal} {`, // Open JSON output
     // Map each property
     ...schema.attributes.map((attr: Attribute) => {
-      return `  ${attr.identifier}: ${getDatatypeValueTypeScript({
+      return `  ${attr.identifiers.snake}: ${getDatatypeValueTypeScript({
         datatype: attr.datatype,
       })};`;
     }),

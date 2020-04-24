@@ -5,11 +5,8 @@ import { Project, GeneratorMeta } from "@codotype/types";
 import { Story } from "@src/components/dev";
 import { RuntimeProvider } from "@src/components/runtime_provider";
 import { ProjectEditor } from "@src/components/project_editor";
-import {
-    cdkGeneratorMeta,
-    ApiExamplesConfigurationGroup,
-} from "@src/components/__tests__/test_state";
-import { dummyGeneratorMeta } from "@src/components/project_editor/__tests__/test_state";
+import { testState } from "@codotype/types";
+const { cdkGeneratorMeta, dummyGeneratorMeta } = testState;
 
 // // // //
 
@@ -19,11 +16,11 @@ const stories: [string, GeneratorMeta][] = [
         "w/ schemas + schema configuration groups",
         {
             ...dummyGeneratorMeta,
-            id: "chrome_extension_generator_02", // unique ID for the generator
-            schemaConfigurationGroup: {
-                ...dummyGeneratorMeta.schemaConfigurationGroup,
+            id: "chrome_extension_generator_03", // unique ID for the generator
+            schemaEditorConfiguration: {
+                ...dummyGeneratorMeta.schemaEditorConfiguration,
                 configurationGroups: [
-                    ...dummyGeneratorMeta.configuration_groups,
+                    ...dummyGeneratorMeta.configurationGroups,
                 ],
             },
         },

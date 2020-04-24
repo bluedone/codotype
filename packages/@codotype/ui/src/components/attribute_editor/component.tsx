@@ -1,12 +1,18 @@
 import * as React from "react";
 import { SortableListHeader } from "../sortable_list_header";
-import { Attribute, Datatype, DEFAULT_ATTRIBUTE } from "@codotype/types";
+import {
+    Attribute,
+    Datatype,
+    DEFAULT_ATTRIBUTE,
+    SchemaSource,
+} from "@codotype/types";
 import { Droppable, DragDropContext } from "react-beautiful-dnd";
 import { AttributeFormModal, AttributeInput } from "./AttributeFormModal";
 import { AttributeDeleteModal } from "./AttributeDeleteModal";
 import { AttributeListItem } from "./AttributeListItem";
 import { AttributeForm } from "./AttributeForm";
 import { AttributeListEmpty } from "./AttributeListEmpty";
+import { buildTokenCasing } from "@codotype/util";
 
 // // // //
 
@@ -30,8 +36,8 @@ export function reorder<T>(
  */
 export function disableSubmit(attributeInput: AttributeInput): boolean {
     return (
-        attributeInput.label === "" ||
-        attributeInput.identifier === "" ||
+        attributeInput.identifiers.label === "" ||
+        attributeInput.identifiers.snake === "" ||
         attributeInput.datatype === null
     );
 }
@@ -82,15 +88,15 @@ export function AttributeEditor(props: AttributeEditorProps) {
                 onClick={() => {
                     setAttributeInput({
                         id: DEFAULT_ATTRIBUTE.id,
-                        label: DEFAULT_ATTRIBUTE.label,
-                        identifier: DEFAULT_ATTRIBUTE.identifier,
-                        required: DEFAULT_ATTRIBUTE.required,
-                        unique: DEFAULT_ATTRIBUTE.unique,
-                        description: DEFAULT_ATTRIBUTE.description,
                         datatype: DEFAULT_ATTRIBUTE.datatype,
-                        default_value: DEFAULT_ATTRIBUTE.datatype,
-                        datatypeOptions: DEFAULT_ATTRIBUTE.datatypeOptions,
+                        defaultValue: DEFAULT_ATTRIBUTE.datatype,
+                        identifiers: buildTokenCasing(
+                            DEFAULT_ATTRIBUTE.identifiers.label,
+                        ),
+                        internalNote: DEFAULT_ATTRIBUTE.internalNote,
                         locked: DEFAULT_ATTRIBUTE.locked,
+                        source: SchemaSource.USER,
+                        addons: {},
                     });
                 }}
             />

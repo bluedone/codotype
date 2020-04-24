@@ -2,7 +2,7 @@ import { UUID } from "./uuid";
 import { ProjectConfiguration } from "./ProjectConfiguration";
 import { Attribute } from "./attribute";
 import { Relation } from "./relation";
-import { TokenPluralization } from "./token";
+import { TokenPluralization, EMPTY_TOKEN_CASING } from "./token";
 
 export enum SchemaSource {
   USER = "USER",
@@ -50,18 +50,10 @@ export const DEFAULT_SCHEMA: Schema = {
   configuration: {},
   identifiers: {
     singular: {
-      label: "",
-      snake: "",
-      camel: "",
-      pascal: "",
-      kebab: "",
+      ...EMPTY_TOKEN_CASING,
     },
     plural: {
-      label: "",
-      snake: "",
-      camel: "",
-      pascal: "",
-      kebab: "",
+      ...EMPTY_TOKEN_CASING,
     },
   },
 };

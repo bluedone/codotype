@@ -2,7 +2,11 @@ import { AttributePropertiesForm } from "./AttributePropertiesForm";
 import { AttributeDatatypeForm } from "./AttributeDatatypeForm";
 import { AttributeMetaForm } from "./AttributeMetaForm";
 import { Attribute, Datatype } from "@codotype/types";
-import { sanitizeLabel, makeIdentifier } from "@codotype/util";
+import {
+    sanitizeLabel,
+    makeIdentifier,
+    buildTokenCasing,
+} from "@codotype/util";
 import * as React from "react";
 import { AttributeInput } from "./AttributeFormModal";
 
@@ -142,10 +146,12 @@ export function AttributeForm(props: AttributeFormProps) {
                             if (selectedForm === "PROPERTIES") {
                                 return (
                                     <AttributePropertiesForm
-                                        label={attributeInput.label}
-                                        identifier={attributeInput.identifier}
-                                        required={attributeInput.required}
-                                        unique={attributeInput.unique}
+                                        label={attributeInput.identifiers.label}
+                                        identifier={
+                                            attributeInput.identifiers.snake
+                                        }
+                                        required={false}
+                                        unique={false}
                                         onLabelChange={(
                                             updatedLabel: string,
                                         ) => {
@@ -154,26 +160,23 @@ export function AttributeForm(props: AttributeFormProps) {
                                             );
                                             props.onChange({
                                                 ...attributeInput,
-                                                label: sanitizedLabel,
-                                                identifier: makeIdentifier(
+                                                identifiers: buildTokenCasing(
                                                     sanitizedLabel,
                                                 ),
                                             });
                                         }}
                                         onIdentifierChange={(
                                             updatedIdentifier: string,
-                                        ) => {
-                                            props.onChange({
-                                                ...attributeInput,
-                                                identifier: updatedIdentifier,
-                                            });
-                                        }}
+                                        ) => {}}
                                         onRequiredChange={(
                                             updatedRequired: boolean,
                                         ) => {
                                             props.onChange({
                                                 ...attributeInput,
-                                                required: updatedRequired,
+                                                addons: {
+                                                    ...attributeInput.addons,
+                                                    required: updatedRequired,
+                                                },
                                             });
                                         }}
                                         onUniqueChange={(
@@ -181,7 +184,10 @@ export function AttributeForm(props: AttributeFormProps) {
                                         ) => {
                                             props.onChange({
                                                 ...attributeInput,
-                                                unique: updatedUnique,
+                                                addons: {
+                                                    ...attributeInput.addons,
+                                                    unique: updatedUnique,
+                                                },
                                             });
                                         }}
                                     />
@@ -190,13 +196,13 @@ export function AttributeForm(props: AttributeFormProps) {
 
                             return (
                                 <AttributeMetaForm
-                                    description={attributeInput.description}
+                                    description={attributeInput.internalNote}
                                     onDescriptionChange={(
                                         updatedDescription: string,
                                     ) => {
                                         props.onChange({
                                             ...attributeInput,
-                                            description: updatedDescription,
+                                            internalNote: updatedDescription,
                                         });
                                     }}
                                 />

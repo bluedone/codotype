@@ -1,5 +1,5 @@
 {
-  "name": "@codotype/ui",
+  "name": "@codotype/ui-deprecated",
   "version": "1.0.0",
   "description": "UI components used throughout the Codotype ecosystem",
   "author": "Alexander Schwartzberg <aeksco@gmail.com>",
@@ -17,8 +17,8 @@
     "dist"
   ],
   "dependencies": {
-    "@codotype/types": "^1.0.0",
-    "@codotype/util": "^1.0.0",
+    "@codotype/types": "0.8.0-canary.1",
+    "@codotype/util": "0.8.0-canary.1",
     "@types/react": "^16.9.19",
     "@types/react-test-renderer": "^16.9.2",
     "axios": "^0.17.0",

@@ -1,10 +1,12 @@
 import {
+  Schema,
   Project,
   OptionType,
   OptionValue,
   ProjectConfiguration,
   OptionValueInstance,
   ConfigurationGroup,
+  ConfigurationGroupSection,
   GeneratorMeta,
   ConfigurationGroupProperty,
 } from "@codotype/types";
@@ -29,22 +31,22 @@ export function buildConfigurationGroupPropertyValue(
     return property.defaultValue || "";
   }
   if (property.type === OptionType.COLLECTION) {
-    return [buildConfigurationGroupValue(property.properties)];
+    return [buildValueFromProperties(property.properties)];
     // Should return this:
     // return [];
   }
   if (property.type === OptionType.INSTANCE) {
-    return buildConfigurationGroupValue(property.properties);
+    return buildValueFromProperties(property.properties);
   }
   return "";
 }
 
 /**
- * buildConfigurationGroupValue
+ * buildValueFromProperties
  * Builds the top-level OptionValueInstance for a single ConfigurationGroup
  * @param properties - array of ConfigurationGroupProperty
  */
-export function buildConfigurationGroupValue(
+export function buildValueFromProperties(
   properties: ConfigurationGroupProperty[]
 ): OptionValueInstance {
   const initialValue: OptionValueInstance = {};
@@ -75,6 +77,81 @@ export function buildConfigurationGroupValue(
 }
 
 /**
+ * buildConfigurationGroupValue
+ * Builds the top-level OptionValueInstance for a single ConfigurationGroup
+ * @param properties - array of ConfigurationGroupProperty
+ */
+export function buildConfigurationGroupValue(
+  configurationGroup: ConfigurationGroup
+): OptionValueInstance {
+  const initialValue: OptionValueInstance = {};
+
+  // Handle ConfigurationGroup w/ properties
+  if (configurationGroup.properties) {
+    // Defines empty ConfigurationGroupValue
+    // Iterates over each property in the group and assigns values
+    const configurationGroupValue: any = configurationGroup.properties.reduce(
+      (val, property: ConfigurationGroupProperty) => {
+        // Updates val with data for ConfigurationGroupProperty
+        // TODO - remove this - the UI should only care if the property can allow disable or not
+        if (property.allowDisable && !property.required) {
+          val[property.identifier] = {
+            enabled: property.enabled,
+            value: buildConfigurationGroupPropertyValue(property),
+          };
+        } else {
+          val[property.identifier] = buildConfigurationGroupPropertyValue(
+            property
+          );
+        }
+        // Returns val
+        return val;
+      },
+      initialValue // Passes in empty OptionValueInstance
+    );
+
+    // Returns ConfigurationGroupValue
+    return configurationGroupValue;
+  }
+
+  // Handle ConfigurationGroup w/ Sections
+  if (configurationGroup.sections) {
+    // Iterate over each section
+    const configurationGroupValue: OptionValueInstance = configurationGroup.sections.reduce(
+      (val, section: ConfigurationGroupSection) => {
+        // Defines initial value for the ConfigurationGroupSection
+        const initialSectionValue: OptionValueInstance = {};
+
+        // Iterates over each property in the ConfigurationGroupSection
+        const sectionValue: OptionValueInstance = section.properties.reduce(
+          (val, property: ConfigurationGroupProperty) => {
+            // Sets value for ConfigurationGroupSection
+            val[property.identifier] = {
+              enabled: property.enabled,
+              value: buildConfigurationGroupPropertyValue(property),
+            };
+
+            // Returns val
+            return val;
+          },
+          initialSectionValue // Passes in empty OptionValueInstance
+        );
+
+        // Returns ConfigurationGroupValue
+        return {
+          ...initialValue,
+          [section.identifier]: sectionValue,
+        };
+      },
+      initialValue
+    );
+
+    // Returns the configurationGroupValue
+    return configurationGroupValue;
+  }
+}
+
+/**
  * buildDefaultConfiguration
  * Builds a new ProjectConfiguration instance based on an array of ConfigurationGroup instances
  * @param configurationGroups - array of ConfigurationGroup instances
@@ -86,7 +163,7 @@ export function buildDefaultConfiguration(
   const projectConfiguration: ProjectConfiguration = configurationGroups.reduce(
     (val, configurationGroup: ConfigurationGroup) => {
       const initialValue: OptionValueInstance = buildConfigurationGroupValue(
-        configurationGroup.properties
+        configurationGroup
       );
       return { ...val, [configurationGroup.identifier]: initialValue };
     },
@@ -97,6 +174,17 @@ export function buildDefaultConfiguration(
 }
 
 /**
+ * buildDefaultSchemas
+ * Builds the default value for Project.schemas
+ */
+export function buildDefaultSchemas(generatorMeta: GeneratorMeta): Schema[] {
+  if (generatorMeta.schemaEditorConfiguration.defaultSchemas) {
+    return generatorMeta.schemaEditorConfiguration.defaultSchemas;
+  }
+  return [];
+}
+
+/**
  * buildDefaultProject
  * Builds an empty Project
  * @param
@@ -104,8 +192,11 @@ export function buildDefaultConfiguration(
 export function buildDefaultProject(generatorMeta: GeneratorMeta): Project {
   // Defines default ProjectConfiguration
   const projectConfiguration: ProjectConfiguration = buildDefaultConfiguration(
-    generatorMeta.configuration_groups
+    generatorMeta.configurationGroups
   );
+
+  // Defines default value for Project.schemas
+  const defaultSchemas: Schema[] = buildDefaultSchemas(generatorMeta);
 
   // Returns ConfigurationGroupValue
   const newProject: Project = {
@@ -119,7 +210,7 @@ export function buildDefaultProject(generatorMeta: GeneratorMeta): Project {
     },
     generatorId: generatorMeta.id,
     generatorVersion: generatorMeta.version,
-    schemas: [],
+    schemas: [...defaultSchemas],
     configuration: projectConfiguration,
   };
 

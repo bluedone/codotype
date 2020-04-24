@@ -2,66 +2,37 @@ import {
   Datatype,
   ConfigurationGroup,
   RelationType,
+  GroupLayoutVariant,
   ConfigurationGroupProperty,
   OptionType,
   ExperienceRecommendation,
   GeneratorMeta,
   SchemaSource,
   Schema,
-} from "@codotype/types";
-// import { syntaxHighlighting } from "@src/components/markdown_renderer/__tests__/test_state";
-
-// // // //
-
-export const syntaxHighlighting = `
-
-#### TypeScript
-\`\`\`ts
-const foo: string = "bar";
-console.log(foo);
-\`\`\`
-
-#### Javascript
-\`\`\`js
-const foo = "bar";
-console.log(foo);
-\`\`\`
-
-#### JSON
-\`\`\`json
-{
-  "foo": "bar",
-  "isJson": true,
-  "count": 12
-}
-\`\`\`
-
-#### Python
-\`\`\`py
-foo = "bar"
-print(foo)
-\`\`\`
-
-`;
-
-// // // //
-
-export const twitterApiOption: ConfigurationGroupProperty = {
-  label: "Twitter API",
-  identifier: "twitter",
-  type: OptionType.BOOLEAN,
-  description: "Read Tweets and user profiles with the Twitter API.",
-  defaultValue: false,
-  icon:
-    "https://res.cloudinary.com/codotype/image/upload/v1558931014/product-logos/twitter-512.png",
-
-  enabled: true,
-  required: false,
-  allowDisable: false,
-  properties: [],
-  dropdownOptions: [],
-  // more_info_url: "https://dev.twitter.com/rest/public",
-};
+  Attribute,
+} from "../../index";
+import {
+  gitHubApiOption,
+  twitterApiOption,
+  facebookApiOption,
+  foursquareApiOption,
+  instagramApiOption,
+  last_fmApiOption,
+  linkedinApiOption,
+  steamApiOption,
+  stripeApiOption,
+  paypalApiOption,
+  twilioApiOption,
+  tumblrApiOption,
+  web_scrapingApiOption,
+  clockwork_smsApiOption,
+  aviaryApiOption,
+  lobApiOption,
+  pinterestApiOption,
+  google_mapsApiOption,
+  chartjsApiOption,
+} from "./configuration-properties";
+import { syntaxHighlighting } from "./documentation";
 
 // // // //
 
@@ -69,6 +40,7 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
   label: "Component",
   identifier: "components",
   description: "Define the component data",
+  documentation: "",
   type: OptionType.COLLECTION,
   defaultValue: [],
   icon:
@@ -77,11 +49,14 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
   required: false,
   allowDisable: false,
   dropdownOptions: [],
+  filters: [],
+  validations: [],
   properties: [
     {
       label: "Component Name",
       identifier: "componentName",
       description: "Name of the component",
+      documentation: "",
       type: OptionType.STRING,
       defaultValue: "",
       icon: "",
@@ -90,11 +65,14 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
       allowDisable: false,
       properties: [],
       dropdownOptions: [],
+      filters: [],
+      validations: [],
     },
     {
       label: "Component Slug",
       identifier: "componentSlug",
       description: "Slug of the component",
+      documentation: "",
       type: OptionType.STRING,
       defaultValue: "",
       icon: "",
@@ -103,11 +81,14 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
       allowDisable: false,
       properties: [],
       dropdownOptions: [],
+      filters: [],
+      validations: [],
     },
     {
       label: "Props",
       identifier: "props",
       description: "",
+      documentation: "",
       dropdownOptions: [],
       type: OptionType.COLLECTION,
       defaultValue: "",
@@ -115,11 +96,14 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
       enabled: true,
       required: false,
       allowDisable: false,
+      filters: [],
+      validations: [],
       properties: [
         {
           label: "Type",
           identifier: "type",
           description: "",
+          documentation: "",
           type: OptionType.DROPDOWN,
           defaultValue: "",
           icon: "",
@@ -128,11 +112,14 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
           allowDisable: false,
           dropdownOptions: [{ label: "String", value: "string" }],
           properties: [],
+          filters: [],
+          validations: [],
         },
         {
           label: "Name",
           identifier: "name",
           description: "",
+          documentation: "",
           type: OptionType.STRING,
           defaultValue: "",
           icon: "",
@@ -141,11 +128,14 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
           allowDisable: false,
           dropdownOptions: [],
           properties: [],
+          filters: [],
+          validations: [],
         },
         {
           label: "Desc",
           identifier: "desc",
           description: "",
+          documentation: "",
           type: OptionType.STRING,
           defaultValue: "",
           icon: "",
@@ -154,6 +144,8 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
           allowDisable: false,
           dropdownOptions: [],
           properties: [],
+          filters: [],
+          validations: [],
         },
       ],
     },
@@ -161,6 +153,7 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
       label: "Tests",
       identifier: "tests",
       description: "",
+      documentation: "",
       type: OptionType.INSTANCE,
       defaultValue: "",
       icon: "",
@@ -168,11 +161,14 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
       required: false,
       allowDisable: true,
       dropdownOptions: [],
+      filters: [],
+      validations: [],
       properties: [
         {
           label: "Test Type",
           identifier: "testType",
           description: "",
+          documentation: "",
           type: OptionType.DROPDOWN,
           defaultValue: "",
           icon: "",
@@ -184,6 +180,8 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
             { value: "snapshot", label: "Snapshot Test" },
           ],
           properties: [],
+          filters: [],
+          validations: [],
         },
       ],
     },
@@ -194,6 +192,7 @@ export const ComponentBuilderConfigurationGroupPropertySingleText: Configuration
   label: "Component Name",
   identifier: "componentName",
   description: "Name of the component",
+  documentation: "",
   type: OptionType.STRING,
   defaultValue: "",
   icon: "",
@@ -202,12 +201,15 @@ export const ComponentBuilderConfigurationGroupPropertySingleText: Configuration
   allowDisable: false,
   properties: [],
   dropdownOptions: [],
+  filters: [],
+  validations: [],
 };
 
 export const ComponentBuilderConfigurationGroupPropertySingleDropdown: ConfigurationGroupProperty = {
   label: "Dropdown Test",
   identifier: "dropdownTest",
   description: "Dropdown Testing",
+  documentation: "",
   type: OptionType.DROPDOWN,
   defaultValue: "",
   icon:
@@ -216,6 +218,8 @@ export const ComponentBuilderConfigurationGroupPropertySingleDropdown: Configura
   required: false,
   allowDisable: false,
   properties: [],
+  filters: [],
+  validations: [],
   dropdownOptions: [
     {
       value: "OPTION_01",
@@ -230,6 +234,7 @@ export const ComponentBuilderConfigurationGroupPropertySingleNumber: Configurati
   identifier: "numberTest",
   description:
     "This is a number for testing. Don't overthink it. It's just a number. I'll should pull some configuration options from an existing generator to populate this placeholder.",
+  documentation: "",
   type: OptionType.NUMBER,
   defaultValue: "",
   icon: "",
@@ -238,18 +243,23 @@ export const ComponentBuilderConfigurationGroupPropertySingleNumber: Configurati
   allowDisable: false,
   properties: [],
   dropdownOptions: [],
+  filters: [],
+  validations: [],
 };
 
 export const ComponentBuilderConfigurationGroupPropertyWithInstance01: ConfigurationGroupProperty = {
   label: "RandomInstanceTest",
   identifier: "random_instance",
   description: "",
+  documentation: "",
   type: OptionType.INSTANCE,
   defaultValue: "",
   icon: "",
   enabled: true,
   required: false,
   allowDisable: true,
+  filters: [],
+  validations: [],
   dropdownOptions: [],
   properties: [ComponentBuilderConfigurationGroupPropertySingleDropdown],
 };
@@ -258,6 +268,7 @@ export const ComponentBuilderConfigurationGroupPropertyWithInstance: Configurati
   label: "Tests",
   identifier: "tests",
   description: "",
+  documentation: "",
   type: OptionType.INSTANCE,
   defaultValue: "",
   icon:
@@ -266,6 +277,8 @@ export const ComponentBuilderConfigurationGroupPropertyWithInstance: Configurati
   required: false,
   allowDisable: true,
   dropdownOptions: [],
+  filters: [],
+  validations: [],
   properties: [
     ComponentBuilderConfigurationGroupPropertySingleDropdown,
     ComponentBuilderConfigurationGroupPropertySingleText,
@@ -273,6 +286,7 @@ export const ComponentBuilderConfigurationGroupPropertyWithInstance: Configurati
       label: "Nested Instance",
       identifier: "nested_instance",
       description: "",
+      documentation: "",
       type: OptionType.INSTANCE,
       defaultValue: "",
       icon: "",
@@ -280,6 +294,8 @@ export const ComponentBuilderConfigurationGroupPropertyWithInstance: Configurati
       required: false,
       allowDisable: true,
       dropdownOptions: [],
+      filters: [],
+      validations: [],
       properties: [
         ComponentBuilderConfigurationGroupPropertySingleText,
         ComponentBuilderConfigurationGroupPropertySingleDropdown,
@@ -299,7 +315,8 @@ export const ComponentBuilderConfigurationGroup: ConfigurationGroup = {
   documentation: "Generate React components",
   enabled: true,
   allowDisable: false,
-  variant: "LIST",
+  layoutVariant: GroupLayoutVariant.TABS,
+  sections: [],
   properties: [
     ComponentBuilderConfigurationGroupPropertySingleText,
     ComponentBuilderConfigurationGroupPropertySingleNumber,
@@ -315,6 +332,7 @@ export const LambdaBuilderNameProperty: ConfigurationGroupProperty = {
   label: "Lambda Name",
   identifier: "lambdaName",
   description: "How the Lambda function will be namd in the AWS dashboard",
+  documentation: "",
   type: OptionType.STRING,
   defaultValue: "",
   icon: "",
@@ -323,12 +341,15 @@ export const LambdaBuilderNameProperty: ConfigurationGroupProperty = {
   allowDisable: false,
   properties: [],
   dropdownOptions: [],
+  filters: [],
+  validations: [],
 };
 
 export const LambdaLanguageProperty: ConfigurationGroupProperty = {
   label: "Language",
   identifier: "language",
   description: "The programming language used to build the Lambda",
+  documentation: "",
   type: OptionType.DROPDOWN,
   defaultValue: "",
   icon: "",
@@ -336,6 +357,8 @@ export const LambdaLanguageProperty: ConfigurationGroupProperty = {
   required: false,
   allowDisable: false,
   properties: [],
+  filters: [],
+  validations: [],
   dropdownOptions: [
     {
       label: "TypeScript",
@@ -355,12 +378,14 @@ export const LambdaBuilderConfigurationGroup: ConfigurationGroup = {
   documentation: syntaxHighlighting,
   enabled: true,
   allowDisable: false,
-  variant: "LIST",
+  layoutVariant: GroupLayoutVariant.LIST,
+  sections: [],
   properties: [
     {
       label: "Lambdas",
       identifier: "lambda_collection",
       description: "",
+      documentation: "",
       type: OptionType.COLLECTION,
       defaultValue: [],
       icon: "",
@@ -368,6 +393,8 @@ export const LambdaBuilderConfigurationGroup: ConfigurationGroup = {
       required: false,
       allowDisable: true,
       dropdownOptions: [],
+      filters: [],
+      validations: [],
       properties: [LambdaBuilderNameProperty, LambdaLanguageProperty],
     },
   ],
@@ -382,7 +409,8 @@ export const ApiExamplesConfigurationGroup: ConfigurationGroup = {
   documentation: syntaxHighlighting,
   enabled: true,
   allowDisable: false,
-  variant: "LIST",
+  layoutVariant: GroupLayoutVariant.LIST,
+  sections: [],
   properties: [twitterApiOption],
 };
 
@@ -390,7 +418,7 @@ export const SideBySideConfigurationGroup: ConfigurationGroup = {
   ...ComponentBuilderConfigurationGroup,
   label: "Architecture Configuration",
   identifier: "component_builder_side_by_side",
-  variant: "SIDEBYSIDE",
+  layoutVariant: GroupLayoutVariant.DOCS_4x8,
   description: "Configure the server architecture of your application",
   documentation: syntaxHighlighting,
   properties: [twitterApiOption],
@@ -403,21 +431,33 @@ export const cdkGeneratorMeta: GeneratorMeta = {
   id: "aws_cdk_starter", // unique ID for the generator
   label: "AWS CDK Starter", // short label for the generator
   description: "A Codotype Generator for AWS CDK", // brief description of the generator
+  documentation: "",
   icon: "https://codotype.org/logo.png", // URL to the generator's icon. Must be at least 200x200px
   homepage: "https://codotype.org", // the "homepage" for this generator
   version: "0.1.0", // the current version of the generator
-  created_by: "Codotype", // optional (replaces "official")
-  tech_tags: [], // an array of strings describing the tech used in the generator
-  type_tags: [], // describes the type of codebase produced by this generator
+  createdBy: {
+    name: "Codotype",
+    contact: {
+      website: "https://codotype.io",
+    },
+  },
+  techTags: [], // an array of strings describing the tech used in the generator
+  typeTags: [], // describes the type of codebase produced by this generator
   experience: ExperienceRecommendation.BEGINNER, // an optional tag detailing the level of experience required to use the code produced by the generator
   project_path: "output", // the name of the directory for the generator's output
-  schemaConfigurationGroup: {
-    // configurationGroups: [ComponentBuilderConfigurationGroup],
+  schemaEditorConfiguration: {
+    documentation: "",
     configurationGroups: [],
+    // configurationGroups: [ComponentBuilderConfigurationGroup],
     supportedDatatypes: [], // The datatypes supported by this generator.Only an array of DATATYPE_ * identifiers that correspond to values defined in @codotype/types are accepted.
     supportedRelations: [], // The relation types supported by this generator.Only an array of RELATION_TYPE_ * identifiers that correspond to values defined in @codotype/types are accepted.
+    defaultSchemas: [],
+    defaultAttributes: [],
+    defaultRelations: [],
+    attributeAddons: [],
+    enableAttributeDefaultValue: false,
   },
-  configuration_groups: [
+  configurationGroups: [
     LambdaBuilderConfigurationGroup,
     {
       ...ComponentBuilderConfigurationGroup,
@@ -458,6 +498,25 @@ export const userSchema: Schema = {
   configuration: {},
 };
 
+export const emailAttribute: Attribute = {
+  id: "email-attr",
+  datatype: Datatype.STRING,
+  defaultValue: null,
+  identifiers: {
+    label: "Email",
+    snake: "email",
+    camel: "email",
+    pascal: "Email",
+    kebab: "email",
+  },
+  internalNote: "the email of the user",
+  locked: false,
+  source: SchemaSource.USER,
+  addons: {
+    required: true,
+  },
+};
+
 export const movieSchema: Schema = {
   id: "45678",
   identifiers: {
@@ -479,27 +538,24 @@ export const movieSchema: Schema = {
   attributes: [
     {
       id: "name-attr",
-      label: "Name",
-      identifier: "name",
-      description: "the name of the user",
-      required: true,
-      unique: true,
-      locked: false,
       datatype: Datatype.STRING,
-      default_value: "string",
-      datatypeOptions: {},
+      defaultValue: null,
+      identifiers: {
+        label: "Name",
+        snake: "name",
+        camel: "name",
+        pascal: "Name",
+        kebab: "name",
+      },
+      internalNote: "the name of the user",
+      locked: false,
+      source: SchemaSource.USER,
+      addons: {
+        required: true,
+      },
     },
     {
-      id: "email-attr",
-      label: "Email",
-      identifier: "email",
-      description: "the email of the user",
-      required: true,
-      unique: true,
-      locked: false,
-      datatype: Datatype.STRING,
-      default_value: "string",
-      datatypeOptions: {},
+      ...emailAttribute,
     },
   ],
   relations: [
@@ -508,6 +564,7 @@ export const movieSchema: Schema = {
       type: RelationType.BELONGS_TO,
       required: false,
       destinationSchemaId: userSchema.id,
+      source: SchemaSource.USER,
       sourceSchemaAlias: "Directed Movie",
       destinationSchemaAlias: "Director",
     },
@@ -516,4 +573,78 @@ export const movieSchema: Schema = {
   removable: false,
   source: SchemaSource.USER,
   configuration: {},
+};
+
+// // // // // //
+
+export const dummyGeneratorMeta: GeneratorMeta = {
+  id: "chrome_extension_generator", // unique ID for the generator
+  label: "Chrome Extension Generator", // short label for the generator
+  description: "A Codotype Generator", // brief description of the generator
+  documentation: "A Codotype Generator", // Detailed description of the generator
+  icon: "https://codotype.org/logo.png", // URL to the generator's icon. Must be at least 200x200px
+  homepage: "https://codotype.org", // the "homepage" for this generator
+  version: "0.1.0", // the current version of the generator
+  createdBy: {
+    name: "Codotype",
+    contact: {},
+  },
+  techTags: [], // an array of strings describing the tech used in the generator
+  typeTags: [], // describes the type of codebase produced by this generator
+  experience: ExperienceRecommendation.BEGINNER, // an optional tag detailing the level of experience required to use the code produced by the generator
+  project_path: "output", // the name of the directory for the generator's output
+  schemaEditorConfiguration: {
+    configurationGroups: [],
+    documentation: "",
+    defaultSchemas: [],
+    supportedDatatypes: [
+      Datatype.STRING,
+      Datatype.TEXT,
+      Datatype.NUMERIC,
+      Datatype.TIMESTAMP,
+    ], // The datatypes supported by this generator.Only an array of DATATYPE_ * identifiers that correspond to values defined in @codotype/types are accepted.
+    supportedRelations: [RelationType.TO_ONE, RelationType.TO_MANY], // The relation types supported by this generator.Only an array of RELATION_TYPE_ * identifiers that correspond to values defined in @codotype/types are accepted.
+    defaultAttributes: [],
+    defaultRelations: [],
+    attributeAddons: [],
+    enableAttributeDefaultValue: true,
+  },
+  configurationGroups: [
+    {
+      ...ComponentBuilderConfigurationGroup,
+      label: "API Examples",
+      identifier: "api_examples",
+      properties: [
+        gitHubApiOption,
+        twitterApiOption,
+        facebookApiOption,
+        foursquareApiOption,
+        instagramApiOption,
+        last_fmApiOption,
+        linkedinApiOption,
+        steamApiOption,
+        stripeApiOption,
+        paypalApiOption,
+        twilioApiOption,
+        tumblrApiOption,
+        web_scrapingApiOption,
+        clockwork_smsApiOption,
+        aviaryApiOption,
+        lobApiOption,
+        pinterestApiOption,
+        google_mapsApiOption,
+        chartjsApiOption,
+      ],
+    },
+    {
+      ...ComponentBuilderConfigurationGroup,
+      label: "Architecture Configuration",
+      identifier: "component_builder_side_by_side",
+      layoutVariant: GroupLayoutVariant.DOCS_6x6,
+      description: "Configure the server architecture of your application",
+      documentation: syntaxHighlighting,
+      properties: [twitterApiOption],
+    },
+    ComponentBuilderConfigurationGroup,
+  ], // an array of OptionGroup objects that expose additional configuration provided by the generator
 };

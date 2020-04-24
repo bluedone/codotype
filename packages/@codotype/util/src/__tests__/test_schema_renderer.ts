@@ -1,7 +1,9 @@
 import { renderSchemaJson } from "../schemaRenderer";
-import { userSchema, movieSchema } from "./test_state";
+import { testState } from "@codotype/types";
 
 // // // //
+
+const { userSchema, movieSchema } = testState;
 
 describe("/src/schemaRenderer", () => {
   it("renders JSON representation correctly", () => {
