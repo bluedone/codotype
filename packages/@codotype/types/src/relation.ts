@@ -1,4 +1,5 @@
 import { UUID } from "./uuid";
+import { SchemaSource } from "./schema";
 
 /**
  * RelationType
@@ -20,30 +21,20 @@ export enum RelationType {
 export interface Relation {
   id: UUID;
   type: RelationType;
-  required: boolean; // TODO - keep this for now, define `constraints` using SchemaEditorConfiguration.relationConstraints
-  destinationSchemaId: UUID; // TODO - rename to destinationSchemaId
+  required: boolean; // TODO - keep this for now - should this be handled as an Addon?
+  source: SchemaSource;
+  destinationSchemaId: UUID;
   sourceSchemaAlias: string;
   destinationSchemaAlias: string;
 }
 
-// From UTIL
-// interface CodotypeRelation {
-//   id: UUID;
-//   type: RelationType;
-//   required: boolean;
-//   schema_id: UUID;
-//   related_schema_id: UUID;
-//   reverse_relation_id: UUID;
-//   as: string; // TODO - rename 'as' to something else?
-//   reverse_as: string; // TODO - rename 'reverse_as' to something else?
-// }
-
 // Relation constants
-// TODO - replace this with RelationInput
+// TODO - replace this with RelationInput?
 export const DEFAULT_RELATION: Relation = {
   id: "",
   type: null,
   required: false,
+  source: SchemaSource.USER,
   destinationSchemaId: "",
   sourceSchemaAlias: "",
   destinationSchemaAlias: "",

@@ -1,6 +1,6 @@
 {
   "name": "@codotype/types",
-  "version": "0.8.0-canary.1",
+  "version": "0.8.0-canary.2",
   "description": "Datatype definitions that power Codotype",
   "main": "dist/index",
   "types": "dist/index",
@@ -25,6 +25,7 @@
     "mocha": "^5.2.0",
     "nyc": "^13.0.1",
     "ts-jest": "^24.2.0",
+    "ts-xor": "^1.0.8",
     "typescript": "~3.4.5"
   }
 }

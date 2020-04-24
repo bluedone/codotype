@@ -11,3 +11,6 @@ export * from "./generator";
 export * from "./token";
 export * from "./reference";
 export * from "./uuid";
+
+// Exports test_state
+export { testState } from "./__tests__/test_state";

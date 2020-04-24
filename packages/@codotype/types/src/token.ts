@@ -10,3 +10,11 @@ export interface TokenCasing {
   pascal: string;
   kebab: string;
 }
+
+export const EMPTY_TOKEN_CASING: TokenCasing = {
+  label: "",
+  snake: "",
+  camel: "",
+  pascal: "",
+  kebab: "",
+};
