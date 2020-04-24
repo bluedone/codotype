@@ -4,7 +4,7 @@ exports[`/lib/buildRelationReferences.js one word label 1`] = `
 Array [
   Object {
     "destinationSchemaId": "12345",
-    "id": "0.8086620980913541",
+    "id": "0.8424631364020145",
     "identifiers": Object {
       "destination": Object {
         "alias": Object {
@@ -75,6 +75,7 @@ Array [
         },
       },
     },
+    "sourceRelationId": "relation-example-01",
     "sourceSchemaId": "45678",
     "type": "TO_ONE",
   },
@@ -105,7 +106,7 @@ Object {
   "references": Array [
     Object {
       "destinationSchemaId": "12345",
-      "id": "0.2434862764288792",
+      "id": "0.5587242960540222",
       "identifiers": Object {
         "destination": Object {
           "alias": Object {
@@ -176,6 +177,7 @@ Object {
           },
         },
       },
+      "sourceRelationId": "relation-example-01",
       "sourceSchemaId": "45678",
       "type": "TO_ONE",
     },
@@ -209,7 +211,7 @@ Array [
     "references": Array [
       Object {
         "destinationSchemaId": "12345",
-        "id": "0.22922418080168216",
+        "id": "0.8581728353497002",
         "identifiers": Object {
           "destination": Object {
             "alias": Object {
@@ -280,6 +282,7 @@ Array [
             },
           },
         },
+        "sourceRelationId": "relation-example-01",
         "sourceSchemaId": "45678",
         "type": "TO_ONE",
       },
@@ -289,28 +292,40 @@ Array [
   Object {
     "attributes": Array [
       Object {
+        "addons": Object {
+          "required": true,
+        },
         "datatype": "STRING",
-        "datatypeOptions": Object {},
-        "default_value": "string",
-        "description": "the name of the user",
+        "defaultValue": null,
         "id": "name-attr",
-        "identifier": "name",
-        "label": "Name",
+        "identifiers": Object {
+          "camel": "name",
+          "kebab": "name",
+          "label": "Name",
+          "pascal": "Name",
+          "snake": "name",
+        },
+        "internalNote": "the name of the user",
         "locked": false,
-        "required": true,
-        "unique": true,
+        "source": "USER",
       },
       Object {
+        "addons": Object {
+          "required": true,
+        },
         "datatype": "STRING",
-        "datatypeOptions": Object {},
-        "default_value": "string",
-        "description": "the email of the user",
+        "defaultValue": null,
         "id": "email-attr",
-        "identifier": "email",
-        "label": "Email",
+        "identifiers": Object {
+          "camel": "email",
+          "kebab": "email",
+          "label": "Email",
+          "pascal": "Email",
+          "snake": "email",
+        },
+        "internalNote": "the email of the user",
         "locked": false,
-        "required": true,
-        "unique": true,
+        "source": "USER",
       },
     ],
     "configuration": Object {},
@@ -331,88 +346,11 @@ Array [
         "snake": "movie",
       },
     },
-    "references": Array [
-      Object {
-        "destinationSchemaId": "45678",
-        "id": "0.7963309454102503",
-        "identifiers": Object {
-          "destination": Object {
-            "alias": Object {
-              "plural": Object {
-                "camel": "directedMovies",
-                "kebab": "directed-movies",
-                "label": "Directed Movies",
-                "pascal": "DirectedMovies",
-                "snake": "directed_movies",
-              },
-              "singular": Object {
-                "camel": "directedMovie",
-                "kebab": "directed-movie",
-                "label": "Directed Movie",
-                "pascal": "DirectedMovie",
-                "snake": "directed_movie",
-              },
-            },
-            "canonical": Object {
-              "plural": Object {
-                "camel": "movies",
-                "kebab": "movies",
-                "label": "Movies",
-                "pascal": "Movies",
-                "snake": "movies",
-              },
-              "singular": Object {
-                "camel": "movie",
-                "kebab": "movie",
-                "label": "Movie",
-                "pascal": "Movie",
-                "snake": "movie",
-              },
-            },
-          },
-          "source": Object {
-            "alias": Object {
-              "plural": Object {
-                "camel": "directors",
-                "kebab": "directors",
-                "label": "Directors",
-                "pascal": "Directors",
-                "snake": "directors",
-              },
-              "singular": Object {
-                "camel": "director",
-                "kebab": "director",
-                "label": "Director",
-                "pascal": "Director",
-                "snake": "director",
-              },
-            },
-            "canonical": Object {
-              "plural": Object {
-                "camel": "movies",
-                "kebab": "movies",
-                "label": "Movies",
-                "pascal": "Movies",
-                "snake": "movies",
-              },
-              "singular": Object {
-                "camel": "movie",
-                "kebab": "movie",
-                "label": "Movie",
-                "pascal": "Movie",
-                "snake": "movie",
-              },
-            },
-          },
-        },
-        "sourceSchemaId": "45678",
-        "type": "TO_ONE",
-      },
-    ],
+    "references": Array [],
     "relations": Array [
       Object {
-        "destinationSchemaId": "45678",
-        "id": "0.8236154122915136",
+        "destinationSchemaId": "12345",
+        "id": "0.17392259475243788",
         "identifiers": Object {
           "destination": Object {
             "alias": Object {
@@ -483,7 +421,8 @@ Array [
             },
           },
         },
-        "sourceSchemaId": "12345",
+        "sourceRelationId": "relation-example-01",
+        "sourceSchemaId": "45678",
         "type": "TO_ONE",
       },
     ],

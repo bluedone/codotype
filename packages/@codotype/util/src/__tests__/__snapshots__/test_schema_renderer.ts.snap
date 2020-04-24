@@ -2,7 +2,8 @@
 
 exports[`/src/schemaRenderer renders JSON representation correctly 1`] = `
 "{
-  \\"name\\": \\"string\\"
-  \\"email\\": \\"string\\"
+  \\"name\\": \\"string\\",
+  \\"email\\": \\"string\\",
+  \\"director\\": \\"User ID\\"
 }"
 `;

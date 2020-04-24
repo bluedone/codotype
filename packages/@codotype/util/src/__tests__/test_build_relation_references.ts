@@ -3,8 +3,14 @@ import {
   inflateSchemas,
   inflateSchema,
 } from "../inflate";
-import { Schema, RelationReference, InflatedSchema } from "@codotype/types";
-import { userSchema, movieSchema } from "./test_state";
+import {
+  Schema,
+  testState,
+  RelationReference,
+  InflatedSchema,
+} from "@codotype/types";
+
+const { userSchema, movieSchema } = testState;
 
 // // // //
 
