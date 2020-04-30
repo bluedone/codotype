@@ -42,6 +42,25 @@ export function disableSubmit(attributeInput: AttributeInput): boolean {
     );
 }
 
+/**
+ * validateAttribute
+ * @param params
+ */
+export function validateAttribute(params: {
+    attributeInput: AttributeInput;
+    attributeCollection: Attribute[];
+}): boolean {
+    const { attributeInput, attributeCollection } = params;
+    return (
+        attributeInput.identifiers.label !== "" &&
+        attributeInput.identifiers.snake !== "" &&
+        attributeInput.datatype !== null &&
+        !attributeCollection.some(
+            a => a.identifiers.label === attributeInput.identifiers.label,
+        )
+    );
+}
+
 // // // //
 
 interface AttributeEditorState {
