@@ -19,6 +19,7 @@ export function AttributeFormModal(props: {
     disableSubmit: boolean;
     attributeInput: AttributeInput;
     children: React.ReactNode;
+    errors: string[];
     onCancel: () => void;
     onSubmit: () => void;
 }) {
@@ -34,6 +35,7 @@ export function AttributeFormModal(props: {
                 <Modal.Title>{title}</Modal.Title>
             </Modal.Header>
             <Modal.Body>{props.children}</Modal.Body>
+            <pre>{JSON.stringify(props.errors, null, 4)}</pre>
             <Modal.Footer>
                 <button className="btn btn-secondary" onClick={props.onCancel}>
                     Close

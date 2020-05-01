@@ -13,6 +13,7 @@ import { AttributeListItem } from "./AttributeListItem";
 import { AttributeForm } from "./AttributeForm";
 import { AttributeListEmpty } from "./AttributeListEmpty";
 import { buildTokenCasing } from "@codotype/util";
+import { validateAttribute } from "./validateAttribute";
 
 // // // //
 
@@ -34,32 +35,31 @@ export function reorder<T>(
  * disableSubmit
  * @param label
  */
-export function disableSubmit(attributeInput: AttributeInput): boolean {
-    return (
-        attributeInput.identifiers.label === "" ||
-        attributeInput.identifiers.snake === "" ||
-        attributeInput.datatype === null
-    );
+export function disableSubmit(params: {
+    attributeInput: AttributeInput;
+    attributeCollection: Attribute[];
+}): boolean {
+    return validateAttribute(params).length > 0;
 }
 
 /**
  * validateAttribute
  * @param params
  */
-export function validateAttribute(params: {
-    attributeInput: AttributeInput;
-    attributeCollection: Attribute[];
-}): boolean {
-    const { attributeInput, attributeCollection } = params;
-    return (
-        attributeInput.identifiers.label !== "" &&
-        attributeInput.identifiers.snake !== "" &&
-        attributeInput.datatype !== null &&
-        !attributeCollection.some(
-            a => a.identifiers.label === attributeInput.identifiers.label,
-        )
-    );
-}
+// export function validateAttribute(params: {
+//     attributeInput: AttributeInput;
+//     attributeCollection: Attribute[];
+// }): boolean {
+//     const { attributeInput, attributeCollection } = params;
+//     return (
+//         attributeInput.identifiers.label !== "" &&
+//         attributeInput.identifiers.snake !== "" &&
+//         attributeInput.datatype !== null &&
+//         !attributeCollection.some(
+//             a => a.identifiers.label === attributeInput.identifiers.label,
+//         )
+//     );
+// }
 
 // // // //
 
@@ -125,7 +125,14 @@ export function AttributeEditor(props: AttributeEditorProps) {
                 <AttributeFormModal
                     attributeInput={attributeInput}
                     show={attributeInput !== null}
-                    disableSubmit={disableSubmit(attributeInput)}
+                    disableSubmit={disableSubmit({
+                        attributeInput,
+                        attributeCollection: props.attributes,
+                    })}
+                    errors={validateAttribute({
+                        attributeInput,
+                        attributeCollection: props.attributes,
+                    })}
                     // disableSubmit={false}
                     onCancel={() => {
                         setAttributeInput(null);

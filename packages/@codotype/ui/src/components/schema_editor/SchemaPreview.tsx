@@ -96,6 +96,7 @@ export function SchemaPreview(props: { schema: Schema; schemas: Schema[] }) {
                                         e.currentTarget.value;
                                     setRenderType(value);
                                 }}
+                                style={{ boxShadow: "none" }}
                                 className="form-control form-control-sm rounded-0 bg-dark text-light border-0"
                             >
                                 <option value={"typescript"}>TypeScript</option>

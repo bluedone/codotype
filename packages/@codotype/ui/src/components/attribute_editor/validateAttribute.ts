@@ -17,16 +17,17 @@ export enum ATTRIBUTE_ERROR_MESSAGE {
 export function validateAttribute(params: {
     attributeInput: AttributeInput;
     attributeCollection: Attribute[];
-}): string | null {
+}): string[] {
+    const errors: string[] = [];
     const { attributeInput, attributeCollection } = params;
     // Ensure Attribute label is defined
     if (attributeInput.identifiers.label === "") {
-        return ATTRIBUTE_ERROR_MESSAGE.emptyLabel;
+        errors.push(ATTRIBUTE_ERROR_MESSAGE.emptyLabel);
     }
 
     // Ensure Attribute datatype is defined
     if (attributeInput.datatype === null) {
-        return ATTRIBUTE_ERROR_MESSAGE.emptyDatatype;
+        errors.push(ATTRIBUTE_ERROR_MESSAGE.emptyDatatype);
     }
 
     // Ensure Attribute label is unique
@@ -35,9 +36,9 @@ export function validateAttribute(params: {
             a => a.identifiers.label === attributeInput.identifiers.label,
         )
     ) {
-        return ATTRIBUTE_ERROR_MESSAGE.duplicateLabel;
+        errors.push(ATTRIBUTE_ERROR_MESSAGE.duplicateLabel);
     }
 
-    // Return null if no
-    return null;
+    // Return errors array
+    return errors;
 }
