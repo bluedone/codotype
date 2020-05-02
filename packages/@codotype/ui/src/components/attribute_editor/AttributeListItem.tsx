@@ -14,37 +14,15 @@ import styled from "styled-components";
 
 // // // //
 
-// TODO - migrate this CSS to JS alternative
-// .dropdown.no-caret {
-//     .dropdown-toggle.btn.btn-sm {
-//         &:after {
-//             display: none;
-//         }
-//     }
-// }
-
-// // // //
-
 // interface AttributeListItemProps {
 //     attribute: Attribute;
 //     onEditButtonClick: (attributeToBeEdited: Attribute) => void;
 //     onRemoveButtonClick: (attributeToBeRemoved: Attribute) => void;
 // }
 
-{
-    /* <style lang='sass' scoped>
-    @import '../../../../sass/vendor.sass'
-
-    .list-group-item
-      padding: 0.25rem 0.5rem
-      border-left: 3px solid $gray-500 !important
-      cursor: grab
-
-      </style> */
-}
-
+// padding: 0.25rem 0.5rem
 const StyledListItem = styled.li`
-    cursor: pointer;
+    cursor: grab;
     border-left: 3px solid #adb5bd !important;
 
     &:hover {
