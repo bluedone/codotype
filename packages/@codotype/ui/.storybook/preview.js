@@ -4,7 +4,7 @@ import {
     // INITIAL_VIEWPORTS,
 } from "@storybook/react";
 import { withConsole, setConsoleOptions } from "@storybook/addon-console";
-import { withInfo } from "@storybook/addon-info";
+// import { withInfo } from "@storybook/addon-info";
 
 // Configure Viewports addon
 // addParameters({
@@ -20,7 +20,7 @@ setConsoleOptions({
 });
 
 // Setup StoryInfo addon
-addDecorator(withInfo);
+// addDecorator(withInfo);
 
 // You'll receive console outputs as a console,
 // warn and error actions in the panel. You might want to know from
