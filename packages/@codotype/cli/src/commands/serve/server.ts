@@ -4,26 +4,23 @@ import * as bodyParser from "body-parser";
 import * as path from "path";
 import next from "next";
 import { parse } from "url";
-
 // import { omit } from "lodash";
 
 // // // //
 
 // Exports a basic Express.js app
 export function server({ runtime }): any {
-  // Express.js App & Configuration
-  console.log("SERVER SERVER!");
-  console.log(__dirname);
-  console.log(path.resolve(__dirname, "../../../next-app"));
-
+  // Next.js App & Configuration
   const nextApp = next({
     dev: true,
     dir: path.resolve(__dirname, "../../../next-app")
   });
 
+  // Next.js handler
   const nextHandler = nextApp.getRequestHandler();
   const app = express();
 
+  // Next.js prepare
   nextApp.prepare().then(() => {
     // Print the request log on console
     app.use(

@@ -1048,7 +1048,7 @@
   resolved "https://registry.yarnpkg.com/@codotype/types/-/types-0.8.0-canary.2.tgz#e13bd687828c6d095df31bc04057e9833306c7b5"
   integrity sha512-3R+MldLjJ85osZ6/oSpaSvUcYI+0JOq9U6jQHx2K9GCMitZlUiI3nBp3QOgQIpO77Pun9KSk2/XCl5+GaQiKog==
 
-"@codotype/ui@^0.8.0-canary.2":
+"@codotype/ui@^0.8.0-canary.1":
   version "0.8.0-canary.1"
   resolved "https://registry.yarnpkg.com/@codotype/ui/-/ui-0.8.0-canary.1.tgz#0577e5d1164665bfb4dd06ff435e672dae2d00f0"
   integrity sha512-rQZz1eCxFwRmNMf1OU4oFxzkLfAdkYoIaYo8q2Jty5qzfDVQJhjZgkLfnVi2eRW2wfxjg9diR3324alSRgfPNA==
