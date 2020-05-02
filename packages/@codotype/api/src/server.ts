@@ -12,14 +12,14 @@ export function server({
   runtime,
   zipBuild,
   generateBuildId,
-  uploadZipToS3,
+  uploadZipToS3
 }) {
   // Generates requestHandler
   const requestHandler = handleRequest({
     runtime,
     zipBuild,
     generateBuildId,
-    uploadZipToS3,
+    uploadZipToS3
   });
 
   // Express.js App & Configuration
@@ -39,7 +39,7 @@ export function server({
     return res.send(
       runtime
         .getGenerators()
-        .map((g) => omit(g, ["generator_path", "engine_path"]))
+        .map(g => omit(g, ["generator_path", "engine_path"]))
     );
   });
 

@@ -1,6 +1,6 @@
 {
   "name": "@codotype/api",
-  "version": "1.0.0",
+  "version": "0.8.0-canary.1",
   "description": "API utilities and helpers used throughout the Codotype ecosystem",
   "scripts": {
     "test": "jest",
@@ -17,7 +17,8 @@
   "author": "Alexander Schwartzberg",
   "license": "MIT",
   "dependencies": {
-    "@codotype/runtime": "^1.0.0",
+    "@codotype/types": "^0.8.0-canary.2",
+    "@codotype/runtime": "^0.8.0-canary.1",
     "@types/node": "^12.12.12",
     "archiver": "^2.1.1",
     "aws-sdk": "^2.322.0",
