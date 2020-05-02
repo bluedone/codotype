@@ -185,6 +185,16 @@ interface SchemaFormProps {
  */
 export function SchemaForm(props: SchemaFormProps) {
     const [label, setLabel] = React.useState<string>(props.label);
+    const labelInput = React.useRef(null);
+
+    React.useEffect(() => {
+        if (labelInput === null) {
+            return;
+        }
+        // current property is refered to input element
+        // @ts-ignore
+        labelInput.current.focus();
+    }, []);
 
     React.useEffect(() => {
         props.onChange({
@@ -220,6 +230,7 @@ export function SchemaForm(props: SchemaFormProps) {
                         </small>
 
                         <input
+                            ref={labelInput}
                             className="form-control form-control-lg"
                             placeholder="Label"
                             value={label}

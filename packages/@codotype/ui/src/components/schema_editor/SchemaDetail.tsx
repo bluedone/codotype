@@ -68,6 +68,9 @@ export function SchemaDetail(props: SchemaDetailProps) {
                                 supportedDatatypes={
                                     schemaEditorConfiguration.supportedDatatypes
                                 }
+                                addons={
+                                    schemaEditorConfiguration.attributeAddons
+                                }
                                 onChange={(updatedAttributes: Attribute[]) => {
                                     // Defines updated schema
                                     const updatedSchema: Schema = {
