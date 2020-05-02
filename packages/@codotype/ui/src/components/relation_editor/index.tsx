@@ -1,1 +1,1 @@
-export * from "./component";
+export { RelationEditor } from "./component";
