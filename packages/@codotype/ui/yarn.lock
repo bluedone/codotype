@@ -1016,17 +1016,17 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@codotype/types@0.8.0-canary.1":
-  version "0.8.0-canary.1"
-  resolved "https://registry.yarnpkg.com/@codotype/types/-/types-0.8.0-canary.1.tgz#a9dc9ff0e4c60a672c300d8e608f29f018446c23"
-  integrity sha512-f11HkcugRADc8YmwF/s0DPXVPE/sjLdo627bTF7MyCTZTHvhgSm+c2+9Io8bmjN2OcKjhb7W7+Z3I6oq6gqQ1w==
+"@codotype/types@0.8.0-canary.2":
+  version "0.8.0-canary.2"
+  resolved "https://registry.yarnpkg.com/@codotype/types/-/types-0.8.0-canary.2.tgz#e13bd687828c6d095df31bc04057e9833306c7b5"
+  integrity sha512-3R+MldLjJ85osZ6/oSpaSvUcYI+0JOq9U6jQHx2K9GCMitZlUiI3nBp3QOgQIpO77Pun9KSk2/XCl5+GaQiKog==
 
-"@codotype/util@0.8.0-canary.1":
-  version "0.8.0-canary.1"
-  resolved "https://registry.yarnpkg.com/@codotype/util/-/util-0.8.0-canary.1.tgz#af321c2d70882a4eb4075235c6cd6d9ce154b797"
-  integrity sha512-ZA0Vjen1KhSpLAfRoVHWrqNnR5AdE8PRlkNzyrJk2OBvKMgYsKwXGCBrqSqI3iHRX06jPqOa51kFOF4OQzKIWQ==
+"@codotype/util@0.8.0-canary.2":
+  version "0.8.0-canary.2"
+  resolved "https://registry.yarnpkg.com/@codotype/util/-/util-0.8.0-canary.2.tgz#1bb3fced8d2bd764a22e772dce7c8d55a9d46b86"
+  integrity sha512-B03dG6g8R+ZoLMyhvB3rz89XjLqz4tznad5JYG/EYMLplFvvip3NHgef4YO/4naV8Y62mn/SjwYihIeqjWdjXw==
   dependencies:
-    "@codotype/types" "0.8.0-canary.1"
+    "@codotype/types" "0.8.0-canary.2"
     "@types/lodash" "^4.14.149"
     "@types/pluralize" "0.0.29"
     "@types/underscore.string" "0.0.38"
@@ -2320,6 +2320,13 @@
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/@types/react-color/-/react-color-3.0.1.tgz#5433e2f503ea0e0831cbc6fd0c20f8157d93add0"
   integrity sha512-J6mYm43Sid9y+OjZ7NDfJ2VVkeeuTPNVImNFITgQNXodHteKfl/t/5pAR5Z9buodZ2tCctsZjgiMlQOpfntakw==
+  dependencies:
+    "@types/react" "*"
+
+"@types/react-copy-to-clipboard@^4.3.0":
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/@types/react-copy-to-clipboard/-/react-copy-to-clipboard-4.3.0.tgz#8e07becb4f11cfced4bd36038cb5bdf5c2658be5"
+  integrity sha512-iideNPRyroENqsOFh1i2Dv3zkviYS9r/9qD9Uh3Z9NNoAAqqa2x53i7iGndGNnJFIo20wIu7Hgh77tx1io8bgw==
   dependencies:
     "@types/react" "*"
 
@@ -4409,6 +4416,13 @@ copy-descriptor@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/copy-descriptor/-/copy-descriptor-0.1.1.tgz#676f6eb3c39997c2ee1ac3a924fd6124748f578d"
   integrity sha1-Z29us8OZl8LuGsOpJP1hJHSPV40=
+
+copy-to-clipboard@^3:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/copy-to-clipboard/-/copy-to-clipboard-3.3.1.tgz#115aa1a9998ffab6196f93076ad6da3b913662ae"
+  integrity sha512-i13qo6kIHTTpCm8/Wup+0b1mVWETvu2kIMzKoK8FpkLkFxlt0znUAHcMzox+T8sPlqtZXq3CulEjQHsYiGFJUw==
+  dependencies:
+    toggle-selection "^1.0.6"
 
 copy-to-clipboard@^3.0.8:
   version "3.2.0"
@@ -9849,6 +9863,14 @@ react-color@^2.17.0:
     prop-types "^15.5.10"
     reactcss "^1.2.0"
     tinycolor2 "^1.4.1"
+
+react-copy-to-clipboard@^5.0.2:
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/react-copy-to-clipboard/-/react-copy-to-clipboard-5.0.2.tgz#d82a437e081e68dfca3761fbd57dbf2abdda1316"
+  integrity sha512-/2t5mLMMPuN5GmdXo6TebFa8IoFxZ+KTDDqYhcDm0PhkgEzSxVvIX26G20s1EB02A4h2UZgwtfymZ3lGJm0OLg==
+  dependencies:
+    copy-to-clipboard "^3"
+    prop-types "^15.5.8"
 
 react-dev-utils@^9.0.0:
   version "9.1.0"

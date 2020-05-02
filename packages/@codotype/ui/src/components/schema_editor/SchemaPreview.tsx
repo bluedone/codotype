@@ -1,5 +1,6 @@
 import * as React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import CopyToClipboard from "react-copy-to-clipboard";
 // import { faEye, faClipboard, faCopy } from "@fortawesome/free-solid-svg-icons";
 import { faCopy } from "@fortawesome/free-solid-svg-icons";
 import { InfoTooltip } from "../info_tooltip";
@@ -9,6 +10,7 @@ import {
     renderSchemaGrapqhQL,
     renderSchemaTypeScript,
 } from "@codotype/util";
+import { faCheckCircle } from "@fortawesome/free-regular-svg-icons";
 
 // // // //
 
@@ -55,6 +57,25 @@ export function SchemaPreview(props: { schema: Schema; schemas: Schema[] }) {
         "typescript",
     );
 
+    const [copyMessage, setCopyMessage] = React.useState<boolean>(false);
+
+    React.useEffect(() => {
+        if (copyMessage === false) {
+            return;
+        }
+
+        setTimeout(() => {
+            setCopyMessage(false);
+        }, 1000);
+    }, [copyMessage]);
+
+    const content: string =
+        schemaPreviewContent({
+            schema,
+            schemas,
+            renderType,
+        }) || "";
+
     return (
         <div className="row">
             <div className="col-lg-12">
@@ -73,13 +94,7 @@ export function SchemaPreview(props: { schema: Schema; schemas: Schema[] }) {
                 <div className="rounded bg-dark" style={{ overflow: "hidden" }}>
                     <pre className="px-3 pt-3 pb-3 mb-0">
                         <small className="mb-0">
-                            <div className="text-light">
-                                {schemaPreviewContent({
-                                    schema,
-                                    schemas,
-                                    renderType,
-                                })}
-                            </div>
+                            <div className="text-light">{content}</div>
                         </small>
                     </pre>
 
@@ -105,16 +120,40 @@ export function SchemaPreview(props: { schema: Schema; schemas: Schema[] }) {
                             </select>
                         </div>
                         <div className="d-flex flex-column">
-                            <button
-                                className="btn btn-sm btn-block btn-dark rounded-0"
-                                style={{ boxShadow: "none" }}
+                            <CopyToClipboard
+                                text={content}
+                                onCopy={() => {
+                                    setCopyMessage(true);
+                                }}
                             >
-                                <FontAwesomeIcon
-                                    icon={faCopy}
-                                    className="mr-2"
-                                />
-                                Copy
-                            </button>
+                                <button
+                                    className="btn btn-sm btn-block btn-dark rounded-0"
+                                    style={{
+                                        boxShadow: "none",
+                                        minWidth: "6rem",
+                                    }}
+                                >
+                                    {copyMessage && (
+                                        <span>
+                                            <FontAwesomeIcon
+                                                icon={faCheckCircle}
+                                                className="mr-2 text-success"
+                                            />
+                                            Copied
+                                        </span>
+                                    )}
+
+                                    {!copyMessage && (
+                                        <span>
+                                            <FontAwesomeIcon
+                                                icon={faCopy}
+                                                className="mr-2"
+                                            />
+                                            Copy
+                                        </span>
+                                    )}
+                                </button>
+                            </CopyToClipboard>
                         </div>
                     </div>
                 </div>
