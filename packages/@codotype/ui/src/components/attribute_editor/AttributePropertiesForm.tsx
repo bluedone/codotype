@@ -24,6 +24,17 @@ interface AttributePropertiesFormProps {
  * @param props - see `AttributePropertiesFormProps`
  */
 export function AttributePropertiesForm(props: AttributePropertiesFormProps) {
+    const labelInput = React.useRef(null);
+
+    React.useEffect(() => {
+        if (labelInput === null) {
+            return;
+        }
+        // current property is refered to input element
+        // @ts-ignore
+        labelInput.current.focus();
+    }, []);
+
     return (
         <div className="row mt-2">
             <div className="col-lg-12">
@@ -44,6 +55,7 @@ export function AttributePropertiesForm(props: AttributePropertiesFormProps) {
                     required
                 >
                     <input
+                        ref={labelInput}
                         type="text"
                         placeholder="Label"
                         className="form-control"
