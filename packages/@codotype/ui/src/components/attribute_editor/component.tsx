@@ -6,6 +6,7 @@ import {
     DEFAULT_ATTRIBUTE,
     SchemaSource,
     AttributeAddon,
+    AttributeAddonValue,
 } from "@codotype/types";
 import { Droppable, DragDropContext } from "react-beautiful-dnd";
 import { AttributeFormModal, AttributeInput } from "./AttributeFormModal";
@@ -31,6 +32,26 @@ export function reorder<T>(
 }
 
 // // // //
+
+/**
+ * buildDefaultAddonValue
+ * Builds the default value for attribute.addons
+ * @param addons
+ */
+export function buildDefaultAddonValue(
+    addons: AttributeAddon[],
+): AttributeAddonValue {
+    const addonValue: AttributeAddonValue = addons.reduce(
+        (av: AttributeAddonValue, addon: AttributeAddon) => {
+            return {
+                ...av,
+                [addon.identifier]: addon.defaultValue,
+            };
+        },
+        {},
+    );
+    return addonValue;
+}
 
 /**
  * disableSubmit
@@ -144,7 +165,12 @@ export function AttributeEditor(props: AttributeEditorProps) {
                         if (attributeInput.id === "") {
                             const newAttribute: Attribute = {
                                 ...attributeInput,
-                                id: Math.random().toString(), // TODO - replace with UUID function from @codotype/util
+                                addons: {
+                                    ...buildDefaultAddonValue(props.addons),
+                                    ...attributeInput.addons,
+                                },
+                                // TODO - replace with UUID function from @codotype/util
+                                id: Math.random().toString(),
                             };
                             setState({
                                 lastUpdatedAt: Date.now(),

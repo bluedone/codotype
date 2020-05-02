@@ -2,6 +2,7 @@ import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { Story } from "@src/components/dev";
 import { AttributeAddonForm } from "../AttributeAddonForm";
+import { buildDefaultAddonValue } from "../component";
 import {
     testState,
     Datatype,
@@ -11,12 +12,18 @@ import {
     AttributeAddonValue,
     ATTRIBUTE_ADDON_PRIMARY_KEY,
 } from "@codotype/types";
-import { AttributeFormSelector } from "../AttributeForm";
 
 // // // //
 
 storiesOf("AttributeEditor/AttributeAddonForm", module).add("renders", () => {
-    const [value, setValue] = React.useState<AttributeAddonValue>({});
+    const [value, setValue] = React.useState<AttributeAddonValue>(
+        buildDefaultAddonValue([
+            ATTRIBUTE_ADDON_NULLABLE,
+            ATTRIBUTE_ADDON_PRIMARY_KEY,
+            ATTRIBUTE_ADDON_REQUIRED,
+            ATTRIBUTE_ADDON_UNIQUE,
+        ]),
+    );
     return (
         <Story>
             <AttributeAddonForm
@@ -56,7 +63,9 @@ storiesOf("AttributeEditor/AttributeAddonForm", module).add("renders", () => {
                     setValue(updatedValue);
                 }}
             />
-            <pre>{JSON.stringify(value, null, 4)}</pre>
+            <pre className="px-3 py-3 rounded bg-dark text-light">
+                {JSON.stringify(value, null, 4)}
+            </pre>
         </Story>
     );
 });
