@@ -3,8 +3,25 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Schema } from "@codotype/types";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import styled from "styled-components";
 
 // // // //
+
+const StyledButton = styled.button`
+    transition: color 0.25s ease-in-out;
+    cursor: pointer;
+    color: #adb5bd;
+    box-shadow: none;
+    &.hasReverse {
+        &:hover {
+            color: #adb5bd !important;
+            cursor: not-allowed;
+        }
+    }
+    &:hover {
+        color: #d9534f;
+    }
+`;
 
 /**
  * SchemaDeleteButton
@@ -25,12 +42,12 @@ export function SchemaDeleteButton(props: {
                 </Tooltip>
             }
         >
-            <button
-                className="btn btn-link ml-2 py-0 schema-delete-button"
+            <StyledButton
+                className="btn btn-link ml-2 py-0"
                 onClick={props.onClick}
             >
                 <FontAwesomeIcon className="ml-5-px" icon={faTrashAlt} />
-            </button>
+            </StyledButton>
         </OverlayTrigger>
     );
 }

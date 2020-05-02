@@ -54,7 +54,6 @@ export function SchemaEditorLayout(props: {
 
     // Invoke props.onChange when state.schemas has updated
     React.useEffect(() => {
-        console.log("Should fire off use effect");
         props.onChange(state.schemas);
     }, [state.lastUpdatedAt]);
 
