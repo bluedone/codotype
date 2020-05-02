@@ -43,6 +43,7 @@ export function SchemaDetail(props: SchemaDetailProps) {
             <div className="col-sm-12">
                 <SchemaDetailHeader
                     schema={props.schema}
+                    schemas={props.schemas}
                     onClickEdit={props.onClickEdit}
                     onConfirmDelete={props.onConfirmDelete}
                 />

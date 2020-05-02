@@ -8,6 +8,7 @@ import { Schema } from "@codotype/types";
 
 export function SchemaDetailHeader(props: {
     schema: Schema;
+    schemas: Schema[];
     onClickEdit: () => void;
     onConfirmDelete: () => void;
 }) {
@@ -27,6 +28,7 @@ export function SchemaDetailHeader(props: {
                 <div className="col-lg-2 d-flex justify-content-end">
                     <SchemaDeleteButton
                         schema={props.schema}
+                        schemas={props.schemas}
                         onClick={() => showModal(true)}
                     />
 
