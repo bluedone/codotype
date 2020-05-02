@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Navbar, NavDropdown, Nav } from "react-bootstrap";
+import styled from "styled-components";
 
 // // // //
 
@@ -12,11 +13,17 @@ import { Navbar, NavDropdown, Nav } from "react-bootstrap";
 //     box-shadow: 0px 9px 68px 0px rgba(62, 57, 107, 0.1);
 // }
 
+const StyledNavbar = styled(Navbar)`
+    font-family: "Product Sans", Helvetica, Arial, serif;
+    padding: 0.4rem;
+    box-shadow: 0px 9px 68px 0px rgba(62, 57, 107, 0.1);
+`;
+
 // // // //
 
 export function AppNavbar() {
     return (
-        <Navbar bg="light" fixed="top" expand="lg" className="app-navbar">
+        <StyledNavbar bg="light" fixed="top" expand="lg" className="app-navbar">
             <div className="container">
                 <div className="d-flex flew-row align-items-center">
                     <img
@@ -61,6 +68,6 @@ export function AppNavbar() {
                     </Nav>
                 </Navbar.Collapse>
             </div>
-        </Navbar>
+        </StyledNavbar>
     );
 }
