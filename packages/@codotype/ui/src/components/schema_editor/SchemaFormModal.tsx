@@ -8,7 +8,6 @@ import { Modal } from "react-bootstrap";
  * @param props.show
  * @param props.children
  * @param props.handleClose
- * @param props.disableSubmit
  * @param props.onSubmit
  */
 export function SchemaFormModal(props: {
@@ -16,8 +15,8 @@ export function SchemaFormModal(props: {
     show: boolean;
     children: React.ReactNode;
     handleClose: () => void;
-    disableSubmit: boolean;
     onSubmit: () => void;
+    errors: string[];
 }) {
     // Defines title + submit button labels
     let title = "Edit Schema";
@@ -27,16 +26,19 @@ export function SchemaFormModal(props: {
         submitLabel = "Create Schema";
     }
 
+    const disableSubmit: boolean = props.errors.length > 0;
+
     return (
         <Modal size="lg" show={props.show} onHide={props.handleClose}>
             <Modal.Header closeButton>
                 <Modal.Title>{title}</Modal.Title>
             </Modal.Header>
             <Modal.Body>{props.children}</Modal.Body>
+            <pre>{JSON.stringify(props.errors, null, 4)}</pre>
             <Modal.Footer>
                 <button
                     className="btn btn-primary"
-                    disabled={props.disableSubmit}
+                    disabled={disableSubmit}
                     onClick={props.onSubmit}
                 >
                     {submitLabel}

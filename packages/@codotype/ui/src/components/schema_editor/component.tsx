@@ -14,6 +14,7 @@ import {
 } from "@codotype/types";
 import { reorder } from "../attribute_editor/component";
 import { buildDefaultConfiguration } from "@codotype/util";
+import { validateSchema } from "./validateSchema";
 
 // // // //
 
@@ -229,10 +230,6 @@ export function SchemaEditorLayout(props: {
                 {/* Render SchemaForm + SchemaFormModal for CREATE Schema */}
                 <SchemaFormModal
                     renderNewTitle
-                    disableSubmit={
-                        newTokenPluralization === null ||
-                        newTokenPluralization.singular.label === ""
-                    }
                     show={showModal}
                     handleClose={() => {
                         setShowModal(false);
@@ -240,6 +237,10 @@ export function SchemaEditorLayout(props: {
                     onSubmit={() => {
                         createNewSchema();
                     }}
+                    errors={validateSchema({
+                        schemaCollection: props.schemas,
+                        tokenPluralization: newTokenPluralization,
+                    })}
                 >
                     <SchemaForm
                         label={""}
@@ -308,10 +309,6 @@ export function SchemaEditorLayout(props: {
 
                 {/* Render SchemaForm + SchemaFormModal for UPDATE Schema */}
                 <SchemaFormModal
-                    disableSubmit={
-                        newTokenPluralization === null ||
-                        newTokenPluralization.singular.label === ""
-                    }
                     show={showEditModal}
                     handleClose={() => {
                         setShowEditModal(false);
@@ -319,6 +316,10 @@ export function SchemaEditorLayout(props: {
                     onSubmit={() => {
                         updateExistingSchema();
                     }}
+                    errors={validateSchema({
+                        schemaCollection: props.schemas,
+                        tokenPluralization: newTokenPluralization,
+                    })}
                 >
                     <SchemaForm
                         label={selectedSchema.identifiers.singular.label}

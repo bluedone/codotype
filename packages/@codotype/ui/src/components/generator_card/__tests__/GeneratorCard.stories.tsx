@@ -11,19 +11,6 @@ const { cdkGeneratorMeta, dummyGeneratorMeta } = testState;
 
 const stories: [string, GeneratorMeta][] = [
     ["w/ schemas", dummyGeneratorMeta],
-    [
-        "w/ schemas + schema configuration groups",
-        {
-            ...dummyGeneratorMeta,
-            id: "chrome_extension_generator_03", // unique ID for the generator
-            schemaEditorConfiguration: {
-                ...dummyGeneratorMeta.schemaEditorConfiguration,
-                configurationGroups: [
-                    ...dummyGeneratorMeta.configurationGroups,
-                ],
-            },
-        },
-    ],
     ["w/o schemas", cdkGeneratorMeta],
 ];
 
