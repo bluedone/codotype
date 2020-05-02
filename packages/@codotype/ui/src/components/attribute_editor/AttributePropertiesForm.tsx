@@ -11,12 +11,7 @@ import { FormGroup } from "./FormGroup";
 interface AttributePropertiesFormProps {
     label: string;
     identifier: string;
-    required: boolean;
-    unique: boolean;
     onLabelChange: (updatedLabel: string) => void;
-    onIdentifierChange: (updatedIdentifier: string) => void;
-    onRequiredChange: (updatedRequired: boolean) => void;
-    onUniqueChange: (updatedUnique: boolean) => void;
 }
 
 /**
@@ -78,54 +73,6 @@ export function AttributePropertiesForm(props: AttributePropertiesFormProps) {
                         placeholder="Identifier"
                         className="form-control"
                         value={props.identifier}
-                        onChange={e => {
-                            props.onIdentifierChange(e.currentTarget.value);
-                        }}
-                    />
-                </FormGroup>
-            </div>
-
-            <div className="col-lg-6 col-sm-12">
-                <FormGroup
-                    label="Required"
-                    help="Whether or not this Attribute is required."
-                >
-                    <Switch
-                        height={22}
-                        width={50}
-                        // onHandleColor={}
-                        // offHandleColor={}
-                        offColor={"#888"}
-                        onColor={"#4582ec"}
-                        checkedIcon={false}
-                        uncheckedIcon={false}
-                        onChange={(updatedChecked: boolean) => {
-                            props.onRequiredChange(updatedChecked);
-                        }}
-                        checked={props.required}
-                    />
-                </FormGroup>
-            </div>
-            <div className="col-lg-6 col-sm-12">
-                {/* v-if="![DATATYPE_JSON, DATATYPE_BOOLEAN].includes(model.datatype)" */}
-                <FormGroup
-                    label="Unique"
-                    help="Whether or not to enforce unique values for this
-                        Attribute."
-                >
-                    <Switch
-                        height={22}
-                        width={50}
-                        // onHandleColor={}
-                        // offHandleColor={}
-                        offColor={"#888"}
-                        onColor={"#4582ec"}
-                        checkedIcon={false}
-                        uncheckedIcon={false}
-                        onChange={(updatedChecked: boolean) => {
-                            props.onUniqueChange(updatedChecked);
-                        }}
-                        checked={props.unique}
                     />
                 </FormGroup>
             </div>

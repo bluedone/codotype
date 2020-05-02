@@ -1,10 +1,16 @@
 import { AttributePropertiesForm } from "./AttributePropertiesForm";
 import { AttributeDatatypeForm } from "./AttributeDatatypeForm";
 import { AttributeMetaForm } from "./AttributeMetaForm";
-import { Attribute, Datatype, AttributeAddon } from "@codotype/types";
+import {
+    Attribute,
+    Datatype,
+    AttributeAddon,
+    AttributeAddonValue,
+} from "@codotype/types";
 import { sanitizeLabel, buildTokenCasing } from "@codotype/util";
 import * as React from "react";
 import { AttributeInput } from "./AttributeFormModal";
+import { AttributeAddonForm } from "./AttributeAddonForm";
 
 // // // //
 
@@ -110,16 +116,6 @@ interface AttributeFormProps {
     onChange: (updatedAttributeInput: AttributeInput) => void;
 }
 
-export function AttributeAddonForm(props: { addons: AttributeAddon[] }) {
-    return (
-        <div className="row">
-            <div className="col-sm-12">
-                {JSON.stringify(props.addons, null, 4)}
-            </div>
-        </div>
-    );
-}
-
 /**
  * AttributeForm
  * @param props - see `AttributeFormProps`
@@ -160,8 +156,6 @@ export function AttributeForm(props: AttributeFormProps) {
                                             identifier={
                                                 attributeInput.identifiers.snake
                                             }
-                                            required={false}
-                                            unique={false}
                                             onLabelChange={(
                                                 updatedLabel: string,
                                             ) => {
@@ -175,35 +169,29 @@ export function AttributeForm(props: AttributeFormProps) {
                                                     ),
                                                 });
                                             }}
-                                            onIdentifierChange={(
-                                                updatedIdentifier: string,
-                                            ) => {}}
-                                            onRequiredChange={(
-                                                updatedRequired: boolean,
-                                            ) => {
-                                                props.onChange({
-                                                    ...attributeInput,
-                                                    addons: {
-                                                        ...attributeInput.addons,
-                                                        required: updatedRequired,
-                                                    },
-                                                });
-                                            }}
-                                            onUniqueChange={(
-                                                updatedUnique: boolean,
-                                            ) => {
-                                                props.onChange({
-                                                    ...attributeInput,
-                                                    addons: {
-                                                        ...attributeInput.addons,
-                                                        unique: updatedUnique,
-                                                    },
-                                                });
-                                            }}
                                         />
-                                        <AttributeAddonForm
-                                            addons={props.addons}
-                                        />
+
+                                        {/* Null-check for attributeInput.datatype */}
+                                        {attributeInput.datatype && (
+                                            <AttributeAddonForm
+                                                addons={props.addons}
+                                                attributeCollection={
+                                                    props.attributes
+                                                }
+                                                attributeInput={attributeInput}
+                                                value={attributeInput.addons}
+                                                onChange={(
+                                                    updatedAttributeAddons: AttributeAddonValue,
+                                                ) => {
+                                                    props.onChange({
+                                                        ...attributeInput,
+                                                        addons: {
+                                                            ...updatedAttributeAddons,
+                                                        },
+                                                    });
+                                                }}
+                                            />
+                                        )}
                                     </React.Fragment>
                                 );
                             }

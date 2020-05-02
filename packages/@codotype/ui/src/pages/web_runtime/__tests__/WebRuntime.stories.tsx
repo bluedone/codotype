@@ -5,7 +5,11 @@ import { Project, GeneratorMeta } from "@codotype/types";
 import { Story } from "@src/components/dev";
 import { RuntimeProvider } from "@src/components/runtime_provider";
 import { ProjectEditor } from "@src/components/project_editor";
-import { testState } from "@codotype/types";
+import {
+    testState,
+    ATTRIBUTE_ADDON_UNIQUE,
+    ATTRIBUTE_ADDON_REQUIRED,
+} from "@codotype/types";
 const { cdkGeneratorMeta, dummyGeneratorMeta } = testState;
 
 // // // //
@@ -19,6 +23,10 @@ const stories: [string, GeneratorMeta][] = [
             id: "chrome_extension_generator_03", // unique ID for the generator
             schemaEditorConfiguration: {
                 ...dummyGeneratorMeta.schemaEditorConfiguration,
+                attributeAddons: [
+                    ATTRIBUTE_ADDON_UNIQUE,
+                    ATTRIBUTE_ADDON_REQUIRED,
+                ],
                 configurationGroups: [
                     ...dummyGeneratorMeta.configurationGroups,
                 ],
