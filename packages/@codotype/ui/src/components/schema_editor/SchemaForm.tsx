@@ -176,6 +176,7 @@ export function MetaPreview(props: MetaPreviewProps) {
 interface SchemaFormProps {
     label: string;
     onChange: (updatedTokens: any) => void;
+    onKeydownEnter: () => void;
 }
 
 /**
@@ -224,6 +225,12 @@ export function SchemaForm(props: SchemaFormProps) {
                             value={label}
                             onChange={e => {
                                 setLabel(sanitizeLabel(e.currentTarget.value));
+                            }}
+                            onKeyDown={e => {
+                                if (e.keyCode === 13) {
+                                    // ENTER KEY CODE
+                                    props.onKeydownEnter();
+                                }
                             }}
                         />
 
