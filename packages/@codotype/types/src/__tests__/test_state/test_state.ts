@@ -9,7 +9,7 @@ import {
   GeneratorMeta,
   SchemaSource,
   Schema,
-  Attribute,
+  Attribute
 } from "../../index";
 import {
   gitHubApiOption,
@@ -30,7 +30,7 @@ import {
   lobApiOption,
   pinterestApiOption,
   google_mapsApiOption,
-  chartjsApiOption,
+  chartjsApiOption
 } from "./configuration-properties";
 import { syntaxHighlighting } from "./documentation";
 
@@ -66,7 +66,7 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
       properties: [],
       dropdownOptions: [],
       filters: [],
-      validations: [],
+      validations: []
     },
     {
       label: "Component Slug",
@@ -82,7 +82,7 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
       properties: [],
       dropdownOptions: [],
       filters: [],
-      validations: [],
+      validations: []
     },
     {
       label: "Props",
@@ -113,7 +113,7 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
           dropdownOptions: [{ label: "String", value: "string" }],
           properties: [],
           filters: [],
-          validations: [],
+          validations: []
         },
         {
           label: "Name",
@@ -129,7 +129,7 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
           dropdownOptions: [],
           properties: [],
           filters: [],
-          validations: [],
+          validations: []
         },
         {
           label: "Desc",
@@ -145,9 +145,9 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
           dropdownOptions: [],
           properties: [],
           filters: [],
-          validations: [],
-        },
-      ],
+          validations: []
+        }
+      ]
     },
     {
       label: "Tests",
@@ -177,15 +177,15 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
           allowDisable: false,
           dropdownOptions: [
             { value: "table", label: "Table Test" },
-            { value: "snapshot", label: "Snapshot Test" },
+            { value: "snapshot", label: "Snapshot Test" }
           ],
           properties: [],
           filters: [],
-          validations: [],
-        },
-      ],
-    },
-  ],
+          validations: []
+        }
+      ]
+    }
+  ]
 };
 
 export const ComponentBuilderConfigurationGroupPropertySingleText: ConfigurationGroupProperty = {
@@ -202,7 +202,7 @@ export const ComponentBuilderConfigurationGroupPropertySingleText: Configuration
   properties: [],
   dropdownOptions: [],
   filters: [],
-  validations: [],
+  validations: []
 };
 
 export const ComponentBuilderConfigurationGroupPropertySingleDropdown: ConfigurationGroupProperty = {
@@ -223,10 +223,10 @@ export const ComponentBuilderConfigurationGroupPropertySingleDropdown: Configura
   dropdownOptions: [
     {
       value: "OPTION_01",
-      label: "One",
+      label: "One"
     },
-    { value: "OPTION_02", label: "Two" },
-  ],
+    { value: "OPTION_02", label: "Two" }
+  ]
 };
 
 export const ComponentBuilderConfigurationGroupPropertySingleNumber: ConfigurationGroupProperty = {
@@ -244,7 +244,7 @@ export const ComponentBuilderConfigurationGroupPropertySingleNumber: Configurati
   properties: [],
   dropdownOptions: [],
   filters: [],
-  validations: [],
+  validations: []
 };
 
 export const ComponentBuilderConfigurationGroupPropertyWithInstance01: ConfigurationGroupProperty = {
@@ -261,7 +261,7 @@ export const ComponentBuilderConfigurationGroupPropertyWithInstance01: Configura
   filters: [],
   validations: [],
   dropdownOptions: [],
-  properties: [ComponentBuilderConfigurationGroupPropertySingleDropdown],
+  properties: [ComponentBuilderConfigurationGroupPropertySingleDropdown]
 };
 
 export const ComponentBuilderConfigurationGroupPropertyWithInstance: ConfigurationGroupProperty = {
@@ -299,10 +299,10 @@ export const ComponentBuilderConfigurationGroupPropertyWithInstance: Configurati
       properties: [
         ComponentBuilderConfigurationGroupPropertySingleText,
         ComponentBuilderConfigurationGroupPropertySingleDropdown,
-        ComponentBuilderConfigurationGroupPropertyWithInstance01,
-      ],
-    },
-  ],
+        ComponentBuilderConfigurationGroupPropertyWithInstance01
+      ]
+    }
+  ]
 };
 
 // // // //
@@ -321,9 +321,9 @@ export const ComponentBuilderConfigurationGroup: ConfigurationGroup = {
     ComponentBuilderConfigurationGroupPropertySingleText,
     ComponentBuilderConfigurationGroupPropertySingleNumber,
     ComponentBuilderConfigurationGroupPropertySingleDropdown,
-    ComponentBuilderConfigurationGroupPropertyWithInstance,
+    ComponentBuilderConfigurationGroupPropertyWithInstance
     // ComponentBuilderConfigurationGroupProperty,
-  ],
+  ]
 };
 
 // // // //
@@ -342,7 +342,7 @@ export const LambdaBuilderNameProperty: ConfigurationGroupProperty = {
   properties: [],
   dropdownOptions: [],
   filters: [],
-  validations: [],
+  validations: []
 };
 
 export const LambdaLanguageProperty: ConfigurationGroupProperty = {
@@ -362,13 +362,13 @@ export const LambdaLanguageProperty: ConfigurationGroupProperty = {
   dropdownOptions: [
     {
       label: "TypeScript",
-      value: "typescript",
+      value: "typescript"
     },
     {
       label: "JavaScript",
-      value: "javascrtip",
-    },
-  ],
+      value: "javascrtip"
+    }
+  ]
 };
 
 export const LambdaBuilderConfigurationGroup: ConfigurationGroup = {
@@ -395,9 +395,9 @@ export const LambdaBuilderConfigurationGroup: ConfigurationGroup = {
       dropdownOptions: [],
       filters: [],
       validations: [],
-      properties: [LambdaBuilderNameProperty, LambdaLanguageProperty],
-    },
-  ],
+      properties: [LambdaBuilderNameProperty, LambdaLanguageProperty]
+    }
+  ]
 };
 
 // // // //
@@ -411,7 +411,7 @@ export const ApiExamplesConfigurationGroup: ConfigurationGroup = {
   allowDisable: false,
   layoutVariant: GroupLayoutVariant.LIST,
   sections: [],
-  properties: [twitterApiOption],
+  properties: [twitterApiOption]
 };
 
 export const SideBySideConfigurationGroup: ConfigurationGroup = {
@@ -421,7 +421,7 @@ export const SideBySideConfigurationGroup: ConfigurationGroup = {
   layoutVariant: GroupLayoutVariant.DOCS_4x8,
   description: "Configure the server architecture of your application",
   documentation: syntaxHighlighting,
-  properties: [twitterApiOption],
+  properties: [twitterApiOption]
 };
 
 // // // // // // //
@@ -432,17 +432,18 @@ export const cdkGeneratorMeta: GeneratorMeta = {
   label: "AWS CDK Starter", // short label for the generator
   description: "A Codotype Generator for AWS CDK", // brief description of the generator
   documentation: "",
-  icon: "https://codotype.org/logo.png", // URL to the generator's icon. Must be at least 200x200px
+  icon:
+    "https://jaystack.com/wp-content/uploads/2015/12/nodejs-logo-e1497443346889.png", // URL to the generator's icon. Must be at least 200x200px
   homepage: "https://codotype.org", // the "homepage" for this generator
   version: "0.1.0", // the current version of the generator
   createdBy: {
     name: "Codotype",
     contact: {
-      website: "https://codotype.io",
-    },
+      website: "https://codotype.io"
+    }
   },
-  techTags: [], // an array of strings describing the tech used in the generator
-  typeTags: [], // describes the type of codebase produced by this generator
+  techTags: ["AWS", "React", "TypeScript", "CDK", "Lambda", "DynamoDB", "S3"], // an array of strings describing the tech used in the generator
+  typeTags: ["Full-stack", "Infrastructure"], // describes the type of codebase produced by this generator
   experience: ExperienceRecommendation.BEGINNER, // an optional tag detailing the level of experience required to use the code produced by the generator
   project_path: "output", // the name of the directory for the generator's output
   schemaEditorConfiguration: {
@@ -455,7 +456,7 @@ export const cdkGeneratorMeta: GeneratorMeta = {
     defaultAttributes: [],
     defaultRelations: [],
     attributeAddons: [],
-    enableAttributeDefaultValue: false,
+    enableAttributeDefaultValue: false
   },
   configurationGroups: [
     LambdaBuilderConfigurationGroup,
@@ -463,11 +464,11 @@ export const cdkGeneratorMeta: GeneratorMeta = {
       ...ComponentBuilderConfigurationGroup,
       label: "API Examples",
       identifier: "api_examples",
-      properties: [twitterApiOption],
+      properties: [twitterApiOption]
     },
     ComponentBuilderConfigurationGroup,
-    SideBySideConfigurationGroup,
-  ], // an array of OptionGroup objects that expose additional configuration provided by the generator
+    SideBySideConfigurationGroup
+  ] // an array of OptionGroup objects that expose additional configuration provided by the generator
 };
 
 // // // //
@@ -480,22 +481,22 @@ export const userSchema: Schema = {
       snake: "user",
       camel: "user",
       pascal: "User",
-      kebab: "user",
+      kebab: "user"
     },
     plural: {
       label: "Users",
       snake: "users",
       camel: "users",
       pascal: "Users",
-      kebab: "users",
-    },
+      kebab: "users"
+    }
   },
   attributes: [],
   relations: [],
   locked: false,
   removable: false,
   source: SchemaSource.USER,
-  configuration: {},
+  configuration: {}
 };
 
 export const emailAttribute: Attribute = {
@@ -507,14 +508,14 @@ export const emailAttribute: Attribute = {
     snake: "email",
     camel: "email",
     pascal: "Email",
-    kebab: "email",
+    kebab: "email"
   },
   internalNote: "the email of the user",
   locked: false,
   source: SchemaSource.USER,
   addons: {
-    required: true,
-  },
+    required: true
+  }
 };
 
 export const movieSchema: Schema = {
@@ -525,15 +526,15 @@ export const movieSchema: Schema = {
       snake: "movie",
       camel: "movie",
       pascal: "Movie",
-      kebab: "movie",
+      kebab: "movie"
     },
     plural: {
       label: "Movies",
       snake: "movies",
       camel: "movies",
       pascal: "Movies",
-      kebab: "movies",
-    },
+      kebab: "movies"
+    }
   },
   attributes: [
     {
@@ -545,18 +546,18 @@ export const movieSchema: Schema = {
         snake: "name",
         camel: "name",
         pascal: "Name",
-        kebab: "name",
+        kebab: "name"
       },
       internalNote: "the name of the user",
       locked: false,
       source: SchemaSource.USER,
       addons: {
-        required: true,
-      },
+        required: true
+      }
     },
     {
-      ...emailAttribute,
-    },
+      ...emailAttribute
+    }
   ],
   relations: [
     {
@@ -566,13 +567,13 @@ export const movieSchema: Schema = {
       destinationSchemaId: userSchema.id,
       source: SchemaSource.USER,
       sourceSchemaAlias: "Directed Movie",
-      destinationSchemaAlias: "Director",
-    },
+      destinationSchemaAlias: "Director"
+    }
   ],
   locked: false,
   removable: false,
   source: SchemaSource.USER,
-  configuration: {},
+  configuration: {}
 };
 
 // // // // // //
@@ -582,15 +583,16 @@ export const dummyGeneratorMeta: GeneratorMeta = {
   label: "Chrome Extension Generator", // short label for the generator
   description: "A Codotype Generator", // brief description of the generator
   documentation: "A Codotype Generator", // Detailed description of the generator
-  icon: "https://codotype.org/logo.png", // URL to the generator's icon. Must be at least 200x200px
+  icon:
+    "https://jaystack.com/wp-content/uploads/2015/12/nodejs-logo-e1497443346889.png", // URL to the generator's icon. Must be at least 200x200px
   homepage: "https://codotype.org", // the "homepage" for this generator
   version: "0.1.0", // the current version of the generator
   createdBy: {
     name: "Codotype",
-    contact: {},
+    contact: {}
   },
-  techTags: [], // an array of strings describing the tech used in the generator
-  typeTags: [], // describes the type of codebase produced by this generator
+  techTags: ["React", "TypeScript", "Bootstrap"], // an array of strings describing the tech used in the generator
+  typeTags: ["Chrome Extension", "Infrastructure"], // describes the type of codebase produced by this generator
   experience: ExperienceRecommendation.BEGINNER, // an optional tag detailing the level of experience required to use the code produced by the generator
   project_path: "output", // the name of the directory for the generator's output
   schemaEditorConfiguration: {
@@ -601,13 +603,13 @@ export const dummyGeneratorMeta: GeneratorMeta = {
       Datatype.STRING,
       Datatype.TEXT,
       Datatype.NUMERIC,
-      Datatype.TIMESTAMP,
+      Datatype.TIMESTAMP
     ], // The datatypes supported by this generator.Only an array of DATATYPE_ * identifiers that correspond to values defined in @codotype/types are accepted.
     supportedRelations: [RelationType.TO_ONE, RelationType.TO_MANY], // The relation types supported by this generator.Only an array of RELATION_TYPE_ * identifiers that correspond to values defined in @codotype/types are accepted.
     defaultAttributes: [],
     defaultRelations: [],
     attributeAddons: [],
-    enableAttributeDefaultValue: true,
+    enableAttributeDefaultValue: true
   },
   configurationGroups: [
     {
@@ -633,8 +635,8 @@ export const dummyGeneratorMeta: GeneratorMeta = {
         lobApiOption,
         pinterestApiOption,
         google_mapsApiOption,
-        chartjsApiOption,
-      ],
+        chartjsApiOption
+      ]
     },
     {
       ...ComponentBuilderConfigurationGroup,
@@ -643,8 +645,8 @@ export const dummyGeneratorMeta: GeneratorMeta = {
       layoutVariant: GroupLayoutVariant.DOCS_6x6,
       description: "Configure the server architecture of your application",
       documentation: syntaxHighlighting,
-      properties: [twitterApiOption],
+      properties: [twitterApiOption]
     },
-    ComponentBuilderConfigurationGroup,
-  ], // an array of OptionGroup objects that expose additional configuration provided by the generator
+    ComponentBuilderConfigurationGroup
+  ] // an array of OptionGroup objects that expose additional configuration provided by the generator
 };
