@@ -5,6 +5,7 @@ import {
     Datatype,
     DEFAULT_ATTRIBUTE,
     SchemaSource,
+    AttributeAddon,
 } from "@codotype/types";
 import { Droppable, DragDropContext } from "react-beautiful-dnd";
 import { AttributeFormModal, AttributeInput } from "./AttributeFormModal";
@@ -70,6 +71,7 @@ interface AttributeEditorState {
 
 interface AttributeEditorProps {
     attributes: Attribute[];
+    addons: AttributeAddon[];
     supportedDatatypes: Datatype[];
     onChange: (updatedAttributes: Attribute[]) => void;
 }
@@ -171,6 +173,7 @@ export function AttributeEditor(props: AttributeEditorProps) {
                         onChange={(updatedAttributeInput: AttributeInput) => {
                             setAttributeInput(updatedAttributeInput);
                         }}
+                        addons={props.addons}
                         supportedDatatypes={props.supportedDatatypes}
                     />
                 </AttributeFormModal>
