@@ -1195,17 +1195,17 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@codotype/types@0.8.0-canary.2", "@codotype/types@0.8.0-canary.3":
-  version "0.8.0-canary.2"
-  resolved "https://registry.yarnpkg.com/@codotype/types/-/types-0.8.0-canary.2.tgz#e13bd687828c6d095df31bc04057e9833306c7b5"
-  integrity sha512-3R+MldLjJ85osZ6/oSpaSvUcYI+0JOq9U6jQHx2K9GCMitZlUiI3nBp3QOgQIpO77Pun9KSk2/XCl5+GaQiKog==
+"@codotype/types@0.8.0-canary.3":
+  version "0.8.0-canary.3"
+  resolved "https://registry.yarnpkg.com/@codotype/types/-/types-0.8.0-canary.3.tgz#2fafc2ecf3d053b3f99437e87bdd79424cddae3a"
+  integrity sha512-4t+Tfytp+7JiJNh8HwdxapVUaFCnVlGyAgTnciToiqMzJzB2pYYRgfy/PLrx0NKab1vC8QZKSE6vSeCtdwChuw==
 
-"@codotype/util@0.8.0-canary.2":
-  version "0.8.0-canary.2"
-  resolved "https://registry.yarnpkg.com/@codotype/util/-/util-0.8.0-canary.2.tgz#1bb3fced8d2bd764a22e772dce7c8d55a9d46b86"
-  integrity sha512-B03dG6g8R+ZoLMyhvB3rz89XjLqz4tznad5JYG/EYMLplFvvip3NHgef4YO/4naV8Y62mn/SjwYihIeqjWdjXw==
+"@codotype/util@0.8.0-canary.3":
+  version "0.8.0-canary.3"
+  resolved "https://registry.yarnpkg.com/@codotype/util/-/util-0.8.0-canary.3.tgz#8839c49455cf38db988f0a25dc9ae686037721ef"
+  integrity sha512-O6XIHwdhFYjfZOjzXc1UYT7/sEfN38xlbv+NRc29rYEfOrwCZYfJndxoxOJro+LGF+7VoWQ1KPFOoR0WIBztKw==
   dependencies:
-    "@codotype/types" "0.8.0-canary.2"
+    "@codotype/types" "0.8.0-canary.3"
     "@types/lodash" "^4.14.149"
     "@types/pluralize" "0.0.29"
     "@types/underscore.string" "0.0.38"
