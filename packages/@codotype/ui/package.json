@@ -1,6 +1,6 @@
 {
     "name": "@codotype/ui",
-    "version": "0.8.0-canary.1",
+    "version": "0.8.0-canary.2",
     "description": "Codotype react + TypeScript components",
     "scripts": {
         "build": "npm run clean && npm run compile",
@@ -91,7 +91,7 @@
         "webpack-merge": "^4.2.2"
     },
     "dependencies": {
-        "@codotype/types": "0.8.0-canary.2",
+        "@codotype/types": "0.8.0-canary.3",
         "@codotype/util": "0.8.0-canary.2",
         "@fortawesome/fontawesome-svg-core": "^1.2.27",
         "@fortawesome/free-brands-svg-icons": "^5.12.1",
