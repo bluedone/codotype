@@ -1,5 +1,5 @@
 import * as React from "react";
-import ReactMarkdown from "react-markdown";
+// import ReactMarkdown from "react-markdown";
 // import SyntaxHighlighter from "react-syntax-highlighter";
 
 // // // //
@@ -30,19 +30,19 @@ import ReactMarkdown from "react-markdown";
  * Renders markdown
  */
 export function MarkdownRenderer(props: { source: string }) {
-    // {/* <pre className="bg-dark text-light px-3 py-3 rounded">
-    //     {props.source}
-    // </pre> */}
     return (
         <div>
-            <ReactMarkdown
+            <pre className="bg-dark text-light px-3 py-3 rounded">
+                {props.source}
+            </pre>
+            {/* <ReactMarkdown
                 skipHtml
                 source={props.source}
-                // renderers={{
-                //     code: CodeBlock,
-                //     image: ImageBlock,
-                // }}
-            />
+                renderers={{
+                    code: CodeBlock,
+                    image: ImageBlock,
+                }}
+            /> */}
         </div>
     );
 }
