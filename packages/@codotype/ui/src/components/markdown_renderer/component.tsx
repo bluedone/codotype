@@ -1,7 +1,6 @@
 import * as React from "react";
 const ReactMarkdown = require("react-markdown");
 import SyntaxHighlighter from "react-syntax-highlighter";
-// const SyntaxHighlighter = require("react-syntax-highlighter");
 
 // // // //
 
