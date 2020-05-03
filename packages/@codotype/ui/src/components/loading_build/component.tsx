@@ -1,8 +1,6 @@
 import * as React from "react";
 import { LoadingSpinner } from "../loading_spinner";
 const sample = require("lodash.sample");
-// import * as sample from "lodash.sample";
-// import sample from "lodash.sample";
 
 // // // //
 
