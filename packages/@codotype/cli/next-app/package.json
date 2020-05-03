@@ -6,8 +6,12 @@
     "export": "next export"
   },
   "dependencies": {
-    "next": "^8.0.0",
+    "@codotype/ui": "^0.8.0-canary.20",
+    "bootstrap": "^4.4.1",
+    "next": "^9.3.0",
     "react": "^16.5.1",
-    "react-dom": "^16.5.1"
+    "react-dom": "^16.5.1",
+    "react-markdown": "^4.3.1",
+    "sass": "^1.26.5"
   }
 }
