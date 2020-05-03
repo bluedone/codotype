@@ -1,6 +1,7 @@
 export * from "./components/attribute_editor";
 export * from "./components/build_finished";
 export * from "./components/chevron_animation";
+export * from "./components/configuration_group_input";
 export * from "./components/generator_card";
 export * from "./components/navbar";
 export * from "./components/project_editor";
