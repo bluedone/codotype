@@ -27,14 +27,14 @@ $body-bg: #f5f6f9 !default;
 $enable-shadows: true;
 $card-cap-bg: $gray-200;
 
-.shadow-hover {
-    @extend .shadow-sm;
-    -webkit-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-    &:hover {
-        @extend .shadow;
-    }
-}
+// .shadow-hover {
+//     @extend .shadow-sm;
+//     -webkit-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+//     transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+//     &:hover {
+//         @extend .shadow;
+//     }
+// }
 
 html {
     height: 100%;

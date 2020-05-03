@@ -1,5 +1,5 @@
 import * as React from "react";
-// import ReactMarkdown from "react-markdown";
+const ReactMarkdown = require("react-markdown");
 // import SyntaxHighlighter from "react-syntax-highlighter";
 
 // // // //
@@ -32,9 +32,10 @@ import * as React from "react";
 export function MarkdownRenderer(props: { source: string }) {
     return (
         <div>
-            <pre className="bg-dark text-light px-3 py-3 rounded">
+            <ReactMarkdown source={props.source} skipHtml />
+            {/* <pre className="bg-dark text-light px-3 py-3 rounded">
                 {props.source}
-            </pre>
+            </pre> */}
             {/* <ReactMarkdown
                 skipHtml
                 source={props.source}
