@@ -1048,10 +1048,10 @@
   resolved "https://registry.yarnpkg.com/@codotype/types/-/types-0.8.0-canary.3.tgz#2fafc2ecf3d053b3f99437e87bdd79424cddae3a"
   integrity sha512-4t+Tfytp+7JiJNh8HwdxapVUaFCnVlGyAgTnciToiqMzJzB2pYYRgfy/PLrx0NKab1vC8QZKSE6vSeCtdwChuw==
 
-"@codotype/ui@^0.8.0-canary.5":
-  version "0.8.0-canary.5"
-  resolved "https://registry.yarnpkg.com/@codotype/ui/-/ui-0.8.0-canary.5.tgz#896ddd029c16618135dedd4c240819a44a31277c"
-  integrity sha512-LRrainYzcUHIg4ISATZGsKOXuwekPAk0mWtruhDVzapBFyZlFj1/9Yu76qIUsWL5FIX5nzmP2lgDpvDI7EiBnw==
+"@codotype/ui@^0.8.0-canary.6":
+  version "0.8.0-canary.20"
+  resolved "https://registry.yarnpkg.com/@codotype/ui/-/ui-0.8.0-canary.20.tgz#e4269f66cacee2f892639367bdce0bf4421e814a"
+  integrity sha512-+GSuH2D7MNd+P0UFOdL0STfUvBg5RumujhfGGdUjdbNhMsZZ9HniFmTI5sKO3TYiFeLtGTVFMtlmgKoj6lefCw==
   dependencies:
     "@codotype/types" "0.8.0-canary.3"
     "@codotype/util" "0.8.0-canary.3"
