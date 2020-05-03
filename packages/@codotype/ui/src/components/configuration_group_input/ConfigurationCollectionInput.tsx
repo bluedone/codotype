@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import * as React from "react";
 import {
     OptionType,
     OptionValue,
@@ -92,9 +92,9 @@ interface ConfigurationCollectionInputProps {
     value: OptionValueInstance;
     onChange: (updatedVal: OptionValueInstance) => void;
 }
-export const ConfigurationCollectionInput: FunctionComponent<ConfigurationCollectionInputProps> = (
+export function ConfigurationCollectionInput(
     props: ConfigurationCollectionInputProps,
-) => {
+) {
     // Stores the current value of the collection
     const [collectionValue, setCollectionValue] = React.useState<
         CollectionItem[]
@@ -222,4 +222,4 @@ export const ConfigurationCollectionInput: FunctionComponent<ConfigurationCollec
             </div>
         </div>
     );
-};
+}

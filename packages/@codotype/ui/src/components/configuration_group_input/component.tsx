@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import * as React from "react";
 import {
     OptionType,
     OptionValue,
@@ -21,9 +21,7 @@ interface ConfigurationInputProps {
     configurationGroup: ConfigurationGroup;
     onChange: (updatedVal: OptionValueInstance) => void;
 }
-export const ConfigurationInput: FunctionComponent<ConfigurationInputProps> = (
-    props: ConfigurationInputProps,
-) => {
+export function ConfigurationInput(props: ConfigurationInputProps) {
     if (!props.configurationGroup.properties) {
         console.log("WARNING - NO CONFIGURATION GROUP PROPERTIES DEFINED");
         return null;
@@ -135,4 +133,4 @@ export const ConfigurationInput: FunctionComponent<ConfigurationInputProps> = (
             </div>
         </div>
     );
-};
+}
