@@ -1,6 +1,6 @@
 {
   "name": "@codotype/cli",
-  "version": "0.8.0-canary.4",
+  "version": "0.8.0-canary.5",
   "description": "CLI for development with codotype.io",
   "bin": {
     "codotype": "bin/codotype.js"
@@ -23,8 +23,7 @@
     "build": "npm run clean && npm run compile && npm run next:build",
     "clean": "rm -rf ./dist",
     "compile": "tsc -p tsconfig.build.json",
-    "prepublishOnly": "npm run build && next:prepublish",
-    "postinstall": "yarn run next:install",
+    "prepublishOnly": "npm run build && npm run next:prepublish",
     "next:prepublish": "yarn run next:install && yarn run next:build && yarn run next:export",
     "next:install": "yarn --cwd ./next-app install",
     "next:build": "yarn --cwd ./next-app build",
