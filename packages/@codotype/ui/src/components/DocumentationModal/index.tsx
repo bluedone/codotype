@@ -1,1 +1,1 @@
-export * from "./DocumentationModal";
+export { DocumentationModal } from "./DocumentationModal";

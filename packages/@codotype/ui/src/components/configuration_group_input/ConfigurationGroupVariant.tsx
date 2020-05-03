@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { ConfigurationGroup, GroupLayoutVariant } from "@codotype/types";
 import { MarkdownRenderer } from "../markdown_renderer";
 
