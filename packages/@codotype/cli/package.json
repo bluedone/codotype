@@ -1,6 +1,6 @@
 {
   "name": "@codotype/cli",
-  "version": "0.8.0-canary.5",
+  "version": "0.8.0-canary.7",
   "description": "CLI for development with codotype.io",
   "bin": {
     "codotype": "bin/codotype.js"
@@ -15,7 +15,8 @@
   "files": [
     "dist",
     "bin",
-    "next-app/out"
+    "next-app",
+    "next-app/out/**/*"
   ],
   "scripts": {
     "test": "jest",
