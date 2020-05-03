@@ -7,6 +7,8 @@ export * from "./components/DocumentationModal";
 export * from "./components/navbar";
 export * from "./components/project_editor";
 export * from "./components/relation_editor";
+export * from "./components/loading_build";
+export * from "./components/loading_spinner";
 export * from "./components/runtime_provider";
 export * from "./components/schema_editor";
 export * from "./pages/web_runtime";
