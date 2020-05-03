@@ -6,10 +6,7 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <link
-            rel="stylesheet"
-            href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          />
+          <title>Codotype - Local</title>
         </Head>
         <body>
           <Main />

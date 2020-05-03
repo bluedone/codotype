@@ -1,7 +1,6 @@
 import * as React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import CopyToClipboard from "react-copy-to-clipboard";
-// import { faEye, faClipboard, faCopy } from "@fortawesome/free-solid-svg-icons";
+import { CopyToClipboard } from "../copy_to_clipboard";
 import { faCopy } from "@fortawesome/free-solid-svg-icons";
 import { InfoTooltip } from "../info_tooltip";
 import { Schema } from "@codotype/types";
@@ -15,6 +14,8 @@ import { faCheckCircle } from "@fortawesome/free-regular-svg-icons";
 // // // //
 
 // TODO - move this into util
+// TODO - define this as a enum + meta object that includes label + description for each export type
+// TODO - update this to include optional headers? i.e. import statements when exporting JS
 type RenderType = "json" | "typescript" | "graphql";
 
 export function schemaPreviewContent(props: {
@@ -126,33 +127,36 @@ export function SchemaPreview(props: { schema: Schema; schemas: Schema[] }) {
                                     setCopyMessage(true);
                                 }}
                             >
-                                <button
-                                    className="btn btn-sm btn-block btn-dark rounded-0"
-                                    style={{
-                                        boxShadow: "none",
-                                        minWidth: "6rem",
-                                    }}
-                                >
-                                    {copyMessage && (
-                                        <span>
-                                            <FontAwesomeIcon
-                                                icon={faCheckCircle}
-                                                className="mr-2 text-success"
-                                            />
-                                            Copied
-                                        </span>
-                                    )}
+                                {({ copyToClipboard }) => (
+                                    <button
+                                        className="btn btn-sm btn-block btn-dark rounded-0"
+                                        onClick={copyToClipboard}
+                                        style={{
+                                            boxShadow: "none",
+                                            minWidth: "6rem",
+                                        }}
+                                    >
+                                        {copyMessage && (
+                                            <span>
+                                                <FontAwesomeIcon
+                                                    icon={faCheckCircle}
+                                                    className="mr-2 text-success"
+                                                />
+                                                Copied
+                                            </span>
+                                        )}
 
-                                    {!copyMessage && (
-                                        <span>
-                                            <FontAwesomeIcon
-                                                icon={faCopy}
-                                                className="mr-2"
-                                            />
-                                            Copy
-                                        </span>
-                                    )}
-                                </button>
+                                        {!copyMessage && (
+                                            <span>
+                                                <FontAwesomeIcon
+                                                    icon={faCopy}
+                                                    className="mr-2"
+                                                />
+                                                Copy
+                                            </span>
+                                        )}
+                                    </button>
+                                )}
                             </CopyToClipboard>
                         </div>
                     </div>

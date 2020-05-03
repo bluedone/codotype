@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import * as React from "react";
 import {
     OptionType,
     OptionValue,
@@ -17,9 +17,9 @@ interface ConfigurationInstanceInputProps {
     value: OptionValueInstance;
     onChange: (updatedVal: OptionValueInstance) => void;
 }
-export const ConfigurationInstanceInput: FunctionComponent<ConfigurationInstanceInputProps> = (
+export function ConfigurationInstanceInput(
     props: ConfigurationInstanceInputProps,
-) => {
+) {
     return (
         <div className="row">
             <div className="col-lg-12">
@@ -118,4 +118,4 @@ export const ConfigurationInstanceInput: FunctionComponent<ConfigurationInstance
             </div>
         </div>
     );
-};
+}

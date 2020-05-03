@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import * as React from "react";
 import { OptionType, ConfigurationGroupProperty } from "@codotype/types";
 import classnames from "classnames";
 import { DocumentationModal } from "../DocumentationModal";
@@ -12,9 +12,9 @@ interface ConfigurationInputFormGroupProps {
     children: React.ReactNode;
 }
 
-export const ConfigurationInputFormGroup: FunctionComponent<ConfigurationInputFormGroupProps> = (
+export function ConfigurationInputFormGroup(
     props: ConfigurationInputFormGroupProps,
-) => {
+) {
     const { className = "" } = props;
 
     const formGroup = (
@@ -83,4 +83,4 @@ export const ConfigurationInputFormGroup: FunctionComponent<ConfigurationInputFo
             </div>
         </div>
     );
-};
+}

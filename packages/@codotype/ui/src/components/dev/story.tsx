@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import * as React from "react";
 import { AppNavbar } from "../navbar";
 import "@src/scss/app.scss";
 
@@ -8,7 +8,7 @@ interface StoryProps {
     children: React.ReactNode;
 }
 
-export const Story: FunctionComponent<StoryProps> = (props: StoryProps) => {
+export function Story(props: StoryProps) {
     return (
         <React.Fragment>
             <AppNavbar />
@@ -27,4 +27,4 @@ export const Story: FunctionComponent<StoryProps> = (props: StoryProps) => {
             </div>
         </React.Fragment>
     );
-};
+}

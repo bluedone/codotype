@@ -1,5 +1,6 @@
 import * as React from "react";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
+import { keyframes } from "styled-components";
 
 // // // //
 
@@ -16,6 +17,8 @@ const rotation = keyframes`
 // Defines StyledImage using the `rotation` animation
 const StyledImage = styled.img`
     animation: ${rotation} 1000ms infinite cubic-bezier(0.62, 0.23, 0.01, 0.83);
+    width: 100px;
+    height: 100px;
 `;
 
 // // // //
@@ -29,8 +32,6 @@ export function LoadingSpinner() {
         <StyledImage
             id="loading"
             src="https://res.cloudinary.com/codotype/image/upload/c_scale,w_200/v1560045005/tech-logos/codotype.png"
-            width="100px"
-            height="100px"
         />
     );
 }

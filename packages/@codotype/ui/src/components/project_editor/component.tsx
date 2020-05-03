@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import * as React from "react";
 import { ConfigurationGroupSelector } from "./ConfigurationGroupSelector";
 import { ProjectEditorHeader } from "./ProjectEditorHeader";
 import { GeneratorMeta, Project } from "@codotype/types";
@@ -15,9 +15,7 @@ interface ProjectEditorProps {
     // enableExport?: boolean;
 }
 
-export const ProjectEditor: FunctionComponent<ProjectEditorProps> = (
-    props: ProjectEditorProps,
-) => {
+export function ProjectEditor(props: ProjectEditorProps) {
     const { generator, project } = props;
     return (
         <div className="card card-body shadow-sm">
@@ -47,4 +45,4 @@ export const ProjectEditor: FunctionComponent<ProjectEditorProps> = (
             </div>
         </div>
     );
-};
+}

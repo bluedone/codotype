@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import * as React from "react";
 import {
     OptionType,
     OptionValue,
@@ -15,9 +15,7 @@ interface ConfigurationInputChildProps {
     onChange: (updatedValue: OptionValue) => void;
 }
 
-export const ConfigurationInputChild: FunctionComponent<ConfigurationInputChildProps> = (
-    props: ConfigurationInputChildProps,
-) => {
+export function ConfigurationInputChild(props: ConfigurationInputChildProps) {
     if (props.property.type === OptionType.STRING) {
         return (
             <input
@@ -93,4 +91,4 @@ export const ConfigurationInputChild: FunctionComponent<ConfigurationInputChildP
 
     // TODO - throw error if OptionType dropdown is not handled
     return null;
-};
+}

@@ -2,22 +2,21 @@ import * as path from "path";
 import chalk from "chalk";
 import { server } from "./server";
 import { CodotypeNodeRuntime } from "@codotype/runtime";
-// import { spawn } from "child_process";
+
+// // // //
 
 async function serve(options: any) {
-  // Logs start message
+  // Logs command start message
   console.log(`\nStarting ${chalk.blue(`codotype serve`)}...`);
 
-  // // // //
   // CLEANUP - wrap this in a try/catch
   // CLEANUP - this type of checking will be necessary in a number of places
   // This logic should be abstracted & generalized as much as possible
   // Pulls in requisite paths for codotype runtime
   const generatorMetaPath = path.resolve(
     process.cwd(),
-    "./codotype-generator.json"
-  ); // CLEANUP - constantize MAGIC STRING
-  // console.log(`the doctor says ${chalk.green(`this generator's metadata loaded correctly`)}`)
+    "./codotype-generator.json" // CLEANUP - constantize MAGIC STRING
+  );
 
   // Invoke runtime directly with parameters
   const runtime = new CodotypeNodeRuntime();
@@ -32,65 +31,27 @@ async function serve(options: any) {
     return;
   }
 
-  //
   // // // //
 
-  // console.log("Starting API server...");
+  // Logs server start message
+  console.log("Starting Local Codotype Server...");
 
-  // Starts server
-  // const port: number = Number(process.env.PORT) || 9090;
-  // const generateBuildId: boolean = false;
-
-  // server.js
-  // const { createServer } = require('http')
-  // const { parse } = require('url')
-
-  console.log("Starting NEXT JS SERVER...");
+  // Instantiates app
   const app = server({
     runtime
   });
 
-  // app.listen(port, () => {
-  //   console.log("Started API server...");
-  //   console.log(`Express is running on port ${port}`);
-  // });
-
-  // // // //
-  // CLEANUP - running a user interface service will necessary in an number of places
-  // This process should be abstracted as much as possible
-
-  // Generates path from here to node_modules/@codotype/cli-ui
-  // const uiPath = path.resolve(__dirname, "../node_modules/@codotype/cli-ui");
-
-  // CLEANUP - add cleaner output message here
-  // console.log("Starting UI Webpack server...");
-
-  // Assembles arguments to start the UI server
-  // let args = [
-  //   "--cwd",
-  //   uiPath,
-  //   "run",
-  //   "serve",
-  //   "--generator_path",
-  //   process.cwd()
-  // ];
-  // const uiProc = spawn("yarn", args);
-
-  // uiProc.stdout.on("data", data => console.log(data.toString()));
-
-  // uiProc.stderr.on('data', (data) => {
-  //   console.log(`stderr: ${data}`);
-  // });
-
-  // uiProc.on("close", code => {
-  //   // console.log('CLOSED')
-  //   // process.exit(1)
-  // });
-
-  //
-  // // // //
+  // Start the app on port
+  const port: number = Number(process.env.PORT) || 9090;
+  app.listen(port, () => {
+    console.log("Started API server...");
+    console.log(`Express is running on port ${port}`);
+  });
 }
 
+// // // //
+
+// Exports `serve` command
 export const serveCommand = (...args) => {
   return serve({ ...args }).catch(err => {
     console.log(chalk.red("codotype cli error"));

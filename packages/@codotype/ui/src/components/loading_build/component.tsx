@@ -1,10 +1,11 @@
 import * as React from "react";
 import { LoadingSpinner } from "../loading_spinner";
-import sample from "lodash.sample";
+const sample = require("lodash.sample");
 
 // // // //
 
 export const quotes: [string, string][] = [
+    ["Patience is bitter, but its fruit is sweet.", "Aristotle"],
     ["I have no patience with dinosaurs.", "Adam West"],
     [
         "Have patience with all things, But, first of all with yourself.",
@@ -15,7 +16,6 @@ export const quotes: [string, string][] = [
         "A.A. Milne",
     ],
     ["Trees that are slow to grow bear the best fruit.", "Moliere"],
-    ["Patience is bitter, but its fruit is sweet.", "Aristotle"],
     ["Patience is a conquering virtue.", "Geoffrey Chaucer"],
     [
         "The strongest of all warriors are these two — Time and Patience.",
@@ -30,10 +30,15 @@ export const quotes: [string, string][] = [
 export function LoadingBuild(props: { quote?: [string, string] }) {
     // @ts-ignore
     const quote = props.quote || sample<[string, string]>(quotes) || quotes[0];
-    // @ts-ignore
+    // // @ts-ignore
     const quoteBody = quote[0];
-    // @ts-ignore
+    // // @ts-ignore
     const quoteAuthor = quote[1];
+
+    // Puls quote
+    // const quote = quotes[0];
+    // const quoteBody = quote[0];
+    // const quoteAuthor = quote[1];
 
     return (
         <div className="h-100 d-flex flex-row justify-content-center align-items-center">

@@ -1,1 +1,14 @@
-export * from "./component";
+export { SchemaEditorLayout } from "./component";
+export { SchemaDeleteModal } from "./SchemaDeleteModal";
+export { SchemaDeleteButton } from "./SchemaDeleteButton";
+export { SchemaDetail } from "./SchemaDetail";
+export { SchemaDetailHeader } from "./SchemaDetailHeader";
+export { SchemaEditButton } from "./SchemaEditButton";
+export { SchemaForm } from "./SchemaForm";
+export { SchemaFormModal } from "./SchemaFormModal";
+export { SchemaIncomingRelations } from "./SchemaIncomingRelations";
+export { SchemaNewButton } from "./SchemaNewButton";
+export { SchemaPreview } from "./SchemaPreview";
+export { ConfigurationGroupSelector } from "./ConfigurationGroupSelector";
+export { SchemaSelector } from "./SchemaSelector";
+export { validateSchema } from "./validateSchema";

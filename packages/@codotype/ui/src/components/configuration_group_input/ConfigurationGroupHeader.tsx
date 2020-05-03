@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { ConfigurationGroup } from "@codotype/types";
 import { DocumentationModal } from "../DocumentationModal";
 

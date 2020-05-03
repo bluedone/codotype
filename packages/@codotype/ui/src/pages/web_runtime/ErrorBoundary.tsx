@@ -14,6 +14,7 @@ export function FallbackComponent(props: any) {
             >
                 Click to reset Codotype Project
             </button>
+            <pre>{JSON.stringify(props, null, 4)}</pre>
         </React.Fragment>
     );
 }

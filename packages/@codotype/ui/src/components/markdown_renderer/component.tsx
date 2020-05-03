@@ -1,5 +1,5 @@
 import * as React from "react";
-import ReactMarkdown from "react-markdown";
+const ReactMarkdown = require("react-markdown");
 import SyntaxHighlighter from "react-syntax-highlighter";
 
 // // // //

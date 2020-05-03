@@ -1,6 +1,6 @@
 {
   "name": "@codotype/cli",
-  "version": "0.8.0-canary.2",
+  "version": "0.8.0-canary.7",
   "description": "CLI for development with codotype.io",
   "bin": {
     "codotype": "bin/codotype.js"
@@ -15,15 +15,20 @@
   "files": [
     "dist",
     "bin",
-    "next-app"
+    "next-app",
+    "next-app/out/**/*"
   ],
   "scripts": {
     "test": "jest",
     "dev": "tsc -w -p tsconfig.build.json",
-    "build": "npm run clean && npm run compile",
+    "build": "npm run clean && npm run compile && npm run next:build",
     "clean": "rm -rf ./dist",
     "compile": "tsc -p tsconfig.build.json",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build && npm run next:prepublish",
+    "next:prepublish": "yarn run next:install && yarn run next:build && yarn run next:export",
+    "next:install": "yarn --cwd ./next-app install",
+    "next:build": "yarn --cwd ./next-app build",
+    "next:export": "yarn --cwd ./next-app export"
   },
   "author": "Alexander Schwartzberg",
   "license": "MIT",
@@ -33,9 +38,9 @@
   "dependencies": {
     "@codotype/generator": "^0.8.0-canary.1",
     "@codotype/runtime": "^0.8.0-canary.1",
-    "@codotype/types": "0.8.0-canary.2",
-    "@codotype/ui": "^0.8.0-canary.1",
-    "@codotype/util": "0.8.0-canary.2",
+    "@codotype/types": "0.8.0-canary.3",
+    "@codotype/ui": "^0.8.0-canary.6",
+    "@codotype/util": "0.8.0-canary.3",
     "body-parser": "^1.19.0",
     "chalk": "^2.4.1",
     "commander": "^2.19.0",
