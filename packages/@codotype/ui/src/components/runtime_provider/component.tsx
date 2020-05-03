@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Project, GeneratorMeta } from "@codotype/types";
-import { BuildFinished } from "@src/components/build_finished/component";
-import { LoadingBuild } from "@src/components/loading_build";
+import { BuildFinished } from "../build_finished/component";
+import { LoadingBuild } from "../loading_build";
 
 // // // //
 
