@@ -2,7 +2,7 @@ import * as React from "react";
 import { LoadingSpinner } from "../loading_spinner";
 // import * as sample from "lodash.sample";
 // import sample from "lodash.sample";
-// import sample = require("lodash/isNil");
+import sample = require("lodash/isNil");
 
 // // // //
 
@@ -31,16 +31,16 @@ export const quotes: [string, string][] = [
  */
 export function LoadingBuild(props: { quote?: [string, string] }) {
     // @ts-ignore
-    // const quote = props.quote || sample<[string, string]>(quotes) || quotes[0];
+    const quote = props.quote || sample<[string, string]>(quotes) || quotes[0];
     // // @ts-ignore
-    // const quoteBody = quote[0];
+    const quoteBody = quote[0];
     // // @ts-ignore
-    // const quoteAuthor = quote[1];
+    const quoteAuthor = quote[1];
 
     // Puls quote
-    const quote = quotes[0];
-    const quoteBody = quote[0];
-    const quoteAuthor = quote[1];
+    // const quote = quotes[0];
+    // const quoteBody = quote[0];
+    // const quoteAuthor = quote[1];
 
     return (
         <div className="h-100 d-flex flex-row justify-content-center align-items-center">
