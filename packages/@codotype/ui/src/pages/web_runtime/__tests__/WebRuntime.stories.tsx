@@ -1,11 +1,18 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { WebRuntime } from "../component";
-import { Project, GeneratorMeta } from "@codotype/types";
 import { Story } from "@src/components/dev";
 import { RuntimeProvider } from "@src/components/runtime_provider";
 import { ProjectEditor } from "@src/components/project_editor";
-import { testState } from "@codotype/types";
+import {
+    Project,
+    GeneratorMeta,
+    testState,
+    ATTRIBUTE_ADDON_UNIQUE,
+    ATTRIBUTE_ADDON_REQUIRED,
+    ATTRIBUTE_ADDON_NULLABLE,
+    ATTRIBUTE_ADDON_PRIMARY_KEY,
+} from "@codotype/types";
 const { cdkGeneratorMeta, dummyGeneratorMeta } = testState;
 
 // // // //
@@ -19,6 +26,12 @@ const stories: [string, GeneratorMeta][] = [
             id: "chrome_extension_generator_03", // unique ID for the generator
             schemaEditorConfiguration: {
                 ...dummyGeneratorMeta.schemaEditorConfiguration,
+                attributeAddons: [
+                    ATTRIBUTE_ADDON_UNIQUE,
+                    ATTRIBUTE_ADDON_REQUIRED,
+                    ATTRIBUTE_ADDON_NULLABLE,
+                    ATTRIBUTE_ADDON_PRIMARY_KEY,
+                ],
                 configurationGroups: [
                     ...dummyGeneratorMeta.configurationGroups,
                 ],

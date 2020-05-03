@@ -43,6 +43,7 @@ export function SchemaDetail(props: SchemaDetailProps) {
             <div className="col-sm-12">
                 <SchemaDetailHeader
                     schema={props.schema}
+                    schemas={props.schemas}
                     onClickEdit={props.onClickEdit}
                     onConfirmDelete={props.onConfirmDelete}
                 />
@@ -67,6 +68,9 @@ export function SchemaDetail(props: SchemaDetailProps) {
                                 attributes={props.schema.attributes}
                                 supportedDatatypes={
                                     schemaEditorConfiguration.supportedDatatypes
+                                }
+                                addons={
+                                    schemaEditorConfiguration.attributeAddons
                                 }
                                 onChange={(updatedAttributes: Attribute[]) => {
                                     // Defines updated schema

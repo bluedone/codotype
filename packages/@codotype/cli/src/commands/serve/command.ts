@@ -1,8 +1,8 @@
 import * as path from "path";
 import chalk from "chalk";
-// import { server } from "@codotype/api";
-import { spawn } from "child_process";
+import { server } from "./server";
 import { CodotypeNodeRuntime } from "@codotype/runtime";
+// import { spawn } from "child_process";
 
 async function serve(options: any) {
   // Logs start message
@@ -25,7 +25,7 @@ async function serve(options: any) {
   // Registers this generator via relative path
   try {
     runtime.registerGenerator({
-      absolute_path: process.cwd(),
+      absolute_path: process.cwd()
     });
   } catch (err) {
     throw err;
@@ -35,23 +35,24 @@ async function serve(options: any) {
   //
   // // // //
 
-  console.log("Starting API server...");
+  // console.log("Starting API server...");
 
   // Starts server
-  const port: number = Number(process.env.PORT) || 9090;
-  const generateBuildId: boolean = false;
+  // const port: number = Number(process.env.PORT) || 9090;
+  // const generateBuildId: boolean = false;
 
-  // const app = server({
-  //   port,
-  //   runtime,
-  //   generateBuildId,
-  //   zipBuild: false,
-  //   uploadZipToS3: false,
-  // });
+  // server.js
+  // const { createServer } = require('http')
+  // const { parse } = require('url')
+
+  console.log("Starting NEXT JS SERVER...");
+  const app = server({
+    runtime
+  });
 
   // app.listen(port, () => {
   //   console.log("Started API server...");
-  //   // console.log(`Express is running on port ${port}`)
+  //   console.log(`Express is running on port ${port}`);
   // });
 
   // // // //
@@ -59,39 +60,39 @@ async function serve(options: any) {
   // This process should be abstracted as much as possible
 
   // Generates path from here to node_modules/@codotype/cli-ui
-  const uiPath = path.resolve(__dirname, "../node_modules/@codotype/cli-ui");
+  // const uiPath = path.resolve(__dirname, "../node_modules/@codotype/cli-ui");
 
   // CLEANUP - add cleaner output message here
-  console.log("Starting UI Webpack server...");
+  // console.log("Starting UI Webpack server...");
 
   // Assembles arguments to start the UI server
-  let args = [
-    "--cwd",
-    uiPath,
-    "run",
-    "serve",
-    "--generator_path",
-    process.cwd(),
-  ];
-  const uiProc = spawn("yarn", args);
+  // let args = [
+  //   "--cwd",
+  //   uiPath,
+  //   "run",
+  //   "serve",
+  //   "--generator_path",
+  //   process.cwd()
+  // ];
+  // const uiProc = spawn("yarn", args);
 
-  uiProc.stdout.on("data", (data) => console.log(data.toString()));
+  // uiProc.stdout.on("data", data => console.log(data.toString()));
 
   // uiProc.stderr.on('data', (data) => {
   //   console.log(`stderr: ${data}`);
   // });
 
-  uiProc.on("close", (code) => {
-    // console.log('CLOSED')
-    // process.exit(1)
-  });
+  // uiProc.on("close", code => {
+  //   // console.log('CLOSED')
+  //   // process.exit(1)
+  // });
 
   //
   // // // //
 }
 
 export const serveCommand = (...args) => {
-  return serve({ ...args }).catch((err) => {
+  return serve({ ...args }).catch(err => {
     console.log(chalk.red("codotype cli error"));
     console.log(chalk.yellow("generator not found in local directory"));
     console.log(err);

@@ -1,4 +1,5 @@
 export * from "./attribute";
+export * from "./attribute-addon";
 export * from "./configuration-option-types";
 export * from "./datatype-meta";
 export * from "./datatype";

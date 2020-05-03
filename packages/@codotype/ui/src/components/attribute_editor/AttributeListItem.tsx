@@ -10,17 +10,7 @@ import {
     faEllipsisH,
     faLock,
 } from "@fortawesome/free-solid-svg-icons";
-
-// // // //
-
-// TODO - migrate this CSS to JS alternative
-// .dropdown.no-caret {
-//     .dropdown-toggle.btn.btn-sm {
-//         &:after {
-//             display: none;
-//         }
-//     }
-// }
+import styled from "styled-components";
 
 // // // //
 
@@ -29,6 +19,28 @@ import {
 //     onEditButtonClick: (attributeToBeEdited: Attribute) => void;
 //     onRemoveButtonClick: (attributeToBeRemoved: Attribute) => void;
 // }
+
+// padding: 0.25rem 0.5rem
+const StyledListItem = styled.li`
+    cursor: grab;
+    border-left: 3px solid #adb5bd !important;
+
+    &:hover {
+        .controls {
+            opacity: 1;
+        }
+    }
+
+    .controls {
+        transition: opacity 0.25s ease-in;
+        opacity: 0;
+        .dropdown-toggle.btn.btn-sm {
+            &:after {
+                display: none;
+            }
+        }
+    }
+`;
 
 /**
  * AttributeListItem
@@ -47,8 +59,8 @@ export function AttributeListItem(props: {
     return (
         <Draggable draggableId={String(props.attribute.id)} index={props.index}>
             {provided => (
-                <li
-                    className="list-group-item list-group-item-action sortable py-0 px-2"
+                <StyledListItem
+                    className="list-group-item list-group-item-action py-0 px-2"
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
@@ -57,10 +69,9 @@ export function AttributeListItem(props: {
                         <div className="col-sm-10">
                             <AttributeListItemLabel
                                 attribute={props.attribute}
-                                // @ts-ignore
                                 datatype={
-                                    // DATATYPE_META[props.attribute.datatype]
-                                    DATATYPE_META.STRING
+                                    // @ts-ignore
+                                    DATATYPE_META[props.attribute.datatype]
                                 }
                             />
                         </div>
@@ -83,12 +94,12 @@ export function AttributeListItem(props: {
 
                         {!props.attribute.locked && (
                             <div className="col-sm-2 text-right controls">
-                                <Dropdown alignRight className="no-caret">
+                                <Dropdown alignRight>
                                     <Dropdown.Toggle
-                                        variant="outline-secondary"
-                                        size={"sm"}
-                                        className="px-0 py-0"
-                                        id="dropdown-basic"
+                                        variant="light"
+                                        size="sm"
+                                        className="rounded px-0 py-0 d-flex"
+                                        id={`attribute-${props.attribute.id}-list-item`}
                                     >
                                         <FontAwesomeIcon icon={faEllipsisH} />
                                     </Dropdown.Toggle>
@@ -121,7 +132,7 @@ export function AttributeListItem(props: {
                             </div>
                         )}
                     </div>
-                </li>
+                </StyledListItem>
             )}
         </Draggable>
     );

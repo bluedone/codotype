@@ -9,7 +9,7 @@ export enum ExperienceRecommendation {
   BEGINNER = "beginner",
   JUNIOR = "junior",
   INTERMEDIATE = "intermediate",
-  EXPERT = "expert",
+  EXPERT = "expert"
 }
 
 // TODO - should this be built-out to support enabling / disabling attribute properties?
@@ -60,7 +60,7 @@ enum GeneratorCreatorContactOption {
   twitter = "twitter",
   linkedin = "linkedin",
   email = "email",
-  website = "website",
+  website = "website"
 }
 
 /**
@@ -89,14 +89,15 @@ export interface GeneratorMeta {
   homepage: string; // the "homepage" for this generator
   version: string; // the current version of the generator
   createdBy: GeneratorCreator; // Metadata about the
-  techTags: any; // an array of strings describing the tech used in the generator
-  typeTags: any; // describes the type of codebase produced by this generator
+  techTags: string[]; // an array of strings describing the tech used in the generator
+  typeTags: string[]; // describes the type of codebase produced by this generator
   experience: ExperienceRecommendation; // an optional tag detailing the level of experience required to use the code produced by the generator
   project_path: string; // the name of the directory for the generator's output
   schemaEditorConfiguration: SchemaEditorConfiguration;
   configurationGroups: ConfigurationGroup[]; // an array of OptionGroup objects that expose additional configuration provided by the generator
   // All of this gets merged into configuration groups
-  // defaultConfiguration: any; // object that can provide optional defaults / examples for each ConfigurationGroup.This is where you can supply default Addon data for different ConfigurationGroups
+  // defaultConfiguration: any; // object that can provide optional defaults / examples for each ConfigurationGroup.
+  // This is where you can supply default Addon data for different ConfigurationGroups
 }
 
 // // // //

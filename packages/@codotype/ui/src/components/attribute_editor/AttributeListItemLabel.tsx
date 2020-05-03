@@ -26,7 +26,7 @@ export function AttributeListItemLabel(props: AttributeListItemLabelProps) {
                 }
             >
                 <span className="px-1">
-                    <DatatypeIcon datatype={attribute.datatype} />
+                    <DatatypeIcon size="xs" datatype={attribute.datatype} />
                 </span>
             </OverlayTrigger>
 

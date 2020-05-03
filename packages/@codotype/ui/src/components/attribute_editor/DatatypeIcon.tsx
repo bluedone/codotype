@@ -52,6 +52,7 @@ const mapDatatypeToIcon: { [key in Datatype]: IconDefinition } = {
 export function DatatypeIcon(props: {
     datatype: Datatype | null; // NOTE - only here because Attribute.datatype can be null, should be fixed
     className?: string;
+    size?: "xs";
 }) {
     if (props.datatype === null) {
         return null;
@@ -60,6 +61,7 @@ export function DatatypeIcon(props: {
         <FontAwesomeIcon
             className={props.className}
             icon={mapDatatypeToIcon[props.datatype]}
+            size={props.size}
         />
     );
 }

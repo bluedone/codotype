@@ -5,8 +5,18 @@ import { Droppable, Draggable } from "react-beautiful-dnd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import styled from "styled-components";
 
 // // // //
+
+const StyledListItem = styled.li`
+    cursor: pointer;
+    border-left: 6px solid #adb5bd !important;
+    &.selected {
+        border-left: 6px solid #4582ec !important;
+        font-weight: bold;
+    }
+`;
 
 export function SchemaSelectorItem(props: {
     schema: Schema;
@@ -17,9 +27,9 @@ export function SchemaSelectorItem(props: {
     return (
         <Draggable draggableId={String(props.schema.id)} index={props.index}>
             {provided => (
-                <li
+                <StyledListItem
                     className={classnames(
-                        "list-group-item list-group-item-action sortable",
+                        "list-group-item list-group-item-action",
                         {
                             selected: props.selected,
                         },
@@ -58,7 +68,7 @@ export function SchemaSelectorItem(props: {
                                 </OverlayTrigger>
                             )}
                     </div>
-                </li>
+                </StyledListItem>
             )}
         </Draggable>
     );

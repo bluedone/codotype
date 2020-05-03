@@ -2,10 +2,10 @@ const path = require("path");
 
 module.exports = {
     stories: ["../src/**/*.stories.tsx"],
-    addons: [
-        "@storybook/addon-actions/register",
-        // "@storybook/addon-viewport/register",
-    ],
+    // addons: [
+    //     // "@storybook/addon-actions/register",
+    //     // "@storybook/addon-viewport/register",
+    // ],
     webpack: async config => {
         config.module.rules.push({
             test: /\.(ts|tsx)$/,

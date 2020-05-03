@@ -33,7 +33,10 @@
         "webpack",
         "jest",
         "src/setupTests.ts",
-        "**/*/*.test.ts",
+        "**/*/test_*.ts",
+        "**/*/test_*.tsx",
+        "**/*/test_state.ts",
+        "**/*/*.stories.tsx",
         "examples"
     ]
 }

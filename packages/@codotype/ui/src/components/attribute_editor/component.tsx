@@ -5,6 +5,8 @@ import {
     Datatype,
     DEFAULT_ATTRIBUTE,
     SchemaSource,
+    AttributeAddon,
+    AttributeAddonValue,
 } from "@codotype/types";
 import { Droppable, DragDropContext } from "react-beautiful-dnd";
 import { AttributeFormModal, AttributeInput } from "./AttributeFormModal";
@@ -13,6 +15,7 @@ import { AttributeListItem } from "./AttributeListItem";
 import { AttributeForm } from "./AttributeForm";
 import { AttributeListEmpty } from "./AttributeListEmpty";
 import { buildTokenCasing } from "@codotype/util";
+import { validateAttribute } from "./validateAttribute";
 
 // // // //
 
@@ -31,16 +34,54 @@ export function reorder<T>(
 // // // //
 
 /**
+ * buildDefaultAddonValue
+ * Builds the default value for attribute.addons
+ * @param addons
+ */
+export function buildDefaultAddonValue(
+    addons: AttributeAddon[],
+): AttributeAddonValue {
+    const addonValue: AttributeAddonValue = addons.reduce(
+        (av: AttributeAddonValue, addon: AttributeAddon) => {
+            return {
+                ...av,
+                [addon.identifier]: addon.defaultValue,
+            };
+        },
+        {},
+    );
+    return addonValue;
+}
+
+/**
  * disableSubmit
  * @param label
  */
-export function disableSubmit(attributeInput: AttributeInput): boolean {
-    return (
-        attributeInput.identifiers.label === "" ||
-        attributeInput.identifiers.snake === "" ||
-        attributeInput.datatype === null
-    );
+export function disableSubmit(params: {
+    attributeInput: AttributeInput;
+    attributeCollection: Attribute[];
+}): boolean {
+    return validateAttribute(params).length > 0;
 }
+
+/**
+ * validateAttribute
+ * @param params
+ */
+// export function validateAttribute(params: {
+//     attributeInput: AttributeInput;
+//     attributeCollection: Attribute[];
+// }): boolean {
+//     const { attributeInput, attributeCollection } = params;
+//     return (
+//         attributeInput.identifiers.label !== "" &&
+//         attributeInput.identifiers.snake !== "" &&
+//         attributeInput.datatype !== null &&
+//         !attributeCollection.some(
+//             a => a.identifiers.label === attributeInput.identifiers.label,
+//         )
+//     );
+// }
 
 // // // //
 
@@ -51,6 +92,7 @@ interface AttributeEditorState {
 
 interface AttributeEditorProps {
     attributes: Attribute[];
+    addons: AttributeAddon[];
     supportedDatatypes: Datatype[];
     onChange: (updatedAttributes: Attribute[]) => void;
 }
@@ -106,7 +148,14 @@ export function AttributeEditor(props: AttributeEditorProps) {
                 <AttributeFormModal
                     attributeInput={attributeInput}
                     show={attributeInput !== null}
-                    disableSubmit={disableSubmit(attributeInput)}
+                    disableSubmit={disableSubmit({
+                        attributeInput,
+                        attributeCollection: props.attributes,
+                    })}
+                    errors={validateAttribute({
+                        attributeInput,
+                        attributeCollection: props.attributes,
+                    })}
                     // disableSubmit={false}
                     onCancel={() => {
                         setAttributeInput(null);
@@ -116,7 +165,12 @@ export function AttributeEditor(props: AttributeEditorProps) {
                         if (attributeInput.id === "") {
                             const newAttribute: Attribute = {
                                 ...attributeInput,
-                                id: Math.random().toString(), // TODO - replace with UUID function from @codotype/util
+                                addons: {
+                                    ...buildDefaultAddonValue(props.addons),
+                                    ...attributeInput.addons,
+                                },
+                                // TODO - replace with UUID function from @codotype/util
+                                id: Math.random().toString(),
                             };
                             setState({
                                 lastUpdatedAt: Date.now(),
@@ -145,6 +199,7 @@ export function AttributeEditor(props: AttributeEditorProps) {
                         onChange={(updatedAttributeInput: AttributeInput) => {
                             setAttributeInput(updatedAttributeInput);
                         }}
+                        addons={props.addons}
                         supportedDatatypes={props.supportedDatatypes}
                     />
                 </AttributeFormModal>

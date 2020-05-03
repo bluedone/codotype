@@ -1,10 +1,10 @@
-import {
-    // addParameters,
-    addDecorator,
-    // INITIAL_VIEWPORTS,
-} from "@storybook/react";
-import { withConsole, setConsoleOptions } from "@storybook/addon-console";
-import { withInfo } from "@storybook/addon-info";
+// import {
+// addParameters,
+// addDecorator,
+// INITIAL_VIEWPORTS,
+// } from "@storybook/react";
+// import { withConsole, setConsoleOptions } from "@storybook/addon-console";
+// import { withInfo } from "@storybook/addon-info";
 
 // Configure Viewports addon
 // addParameters({
@@ -15,14 +15,14 @@ import { withInfo } from "@storybook/addon-info";
 // });
 
 // You'll start to receive all console messages, warnings, errors in your action logger panel - Everything except HMR logs.
-setConsoleOptions({
-    panelExclude: [],
-});
+// setConsoleOptions({
+//     panelExclude: [],
+// });
 
 // Setup StoryInfo addon
-addDecorator(withInfo);
+// addDecorator(withInfo);
 
 // You'll receive console outputs as a console,
 // warn and error actions in the panel. You might want to know from
 // what stories they come. In this case, add withConsole decorator:
-addDecorator((storyFn, context) => withConsole()(storyFn)(context));
+// addDecorator((storyFn, context) => withConsole()(storyFn)(context));

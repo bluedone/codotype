@@ -13,19 +13,8 @@ storiesOf("AttributeEditor/AttributePropertiesForm", module).add(
                 <AttributePropertiesForm
                     label={""}
                     identifier={"string"}
-                    required={false}
-                    unique={false}
                     onLabelChange={(updatedLabel: string) => {
                         console.log(updatedLabel);
-                    }}
-                    onIdentifierChange={(updatedIdentifier: string) => {
-                        console.log(updatedIdentifier);
-                    }}
-                    onRequiredChange={(updatedRequired: boolean) => {
-                        console.log(updatedRequired);
-                    }}
-                    onUniqueChange={(updatedUnique: boolean) => {
-                        console.log(updatedUnique);
                     }}
                 />
             </Story>

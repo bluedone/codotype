@@ -1,7 +1,8 @@
 import * as React from "react";
 import { GeneratorMeta, Project } from "@codotype/types";
-import { dummyGeneratorMeta } from "../../components/project_editor/__tests__/test_state";
 import { buildDefaultProject } from "@codotype/util";
+import { ErrorBoundary } from "react-error-boundary";
+import { FallbackComponent } from "./ErrorBoundary";
 
 // // // //
 
@@ -19,7 +20,7 @@ function writeProjectToLocalStorage(props: {
     );
 }
 
-function clearLocalSorage(props: { generator: GeneratorMeta }) {
+function clearLocalStorage(props: { generator: GeneratorMeta }) {
     localStorage.removeItem(getLocalStorageKey(props.generator));
 }
 
@@ -70,18 +71,28 @@ export function WebRuntime(props: WebRuntimeProps) {
     }
 
     function clearProject() {
-        clearLocalSorage({ generator: props.generator });
+        clearLocalStorage({ generator: props.generator });
         setProjectState(buildDefaultProject(props.generator));
     }
 
     return (
-        <React.Fragment>
-            {props.children({
-                generator: props.generator,
-                project,
-                setProject,
-                clearProject,
-            })}
-        </React.Fragment>
+        <ErrorBoundary
+            fallbackRender={(errorBoundaryProps: any) => {
+                return <FallbackComponent {...errorBoundaryProps} />;
+            }}
+            onReset={() => {
+                clearLocalStorage({ generator: props.generator });
+                setProjectState(buildDefaultProject(props.generator));
+            }}
+        >
+            <React.Fragment>
+                {props.children({
+                    generator: props.generator,
+                    project,
+                    setProject,
+                    clearProject,
+                })}
+            </React.Fragment>
+        </ErrorBoundary>
     );
 }

@@ -1,14 +1,16 @@
 import { AttributePropertiesForm } from "./AttributePropertiesForm";
 import { AttributeDatatypeForm } from "./AttributeDatatypeForm";
 import { AttributeMetaForm } from "./AttributeMetaForm";
-import { Attribute, Datatype } from "@codotype/types";
 import {
-    sanitizeLabel,
-    makeIdentifier,
-    buildTokenCasing,
-} from "@codotype/util";
+    Attribute,
+    Datatype,
+    AttributeAddon,
+    AttributeAddonValue,
+} from "@codotype/types";
+import { sanitizeLabel, buildTokenCasing } from "@codotype/util";
 import * as React from "react";
 import { AttributeInput } from "./AttributeFormModal";
+import { AttributeAddonForm } from "./AttributeAddonForm";
 
 // // // //
 
@@ -108,6 +110,7 @@ export function AttributeFormSelector(props: {
  */
 interface AttributeFormProps {
     attributes: Attribute[];
+    addons: AttributeAddon[];
     attributeInput: AttributeInput;
     supportedDatatypes: Datatype[];
     onChange: (updatedAttributeInput: AttributeInput) => void;
@@ -145,52 +148,51 @@ export function AttributeForm(props: AttributeFormProps) {
 
                             if (selectedForm === "PROPERTIES") {
                                 return (
-                                    <AttributePropertiesForm
-                                        label={attributeInput.identifiers.label}
-                                        identifier={
-                                            attributeInput.identifiers.snake
-                                        }
-                                        required={false}
-                                        unique={false}
-                                        onLabelChange={(
-                                            updatedLabel: string,
-                                        ) => {
-                                            const sanitizedLabel: string = sanitizeLabel(
-                                                updatedLabel,
-                                            );
-                                            props.onChange({
-                                                ...attributeInput,
-                                                identifiers: buildTokenCasing(
-                                                    sanitizedLabel,
-                                                ),
-                                            });
-                                        }}
-                                        onIdentifierChange={(
-                                            updatedIdentifier: string,
-                                        ) => {}}
-                                        onRequiredChange={(
-                                            updatedRequired: boolean,
-                                        ) => {
-                                            props.onChange({
-                                                ...attributeInput,
-                                                addons: {
-                                                    ...attributeInput.addons,
-                                                    required: updatedRequired,
-                                                },
-                                            });
-                                        }}
-                                        onUniqueChange={(
-                                            updatedUnique: boolean,
-                                        ) => {
-                                            props.onChange({
-                                                ...attributeInput,
-                                                addons: {
-                                                    ...attributeInput.addons,
-                                                    unique: updatedUnique,
-                                                },
-                                            });
-                                        }}
-                                    />
+                                    <React.Fragment>
+                                        <AttributePropertiesForm
+                                            label={
+                                                attributeInput.identifiers.label
+                                            }
+                                            identifier={
+                                                attributeInput.identifiers.snake
+                                            }
+                                            onLabelChange={(
+                                                updatedLabel: string,
+                                            ) => {
+                                                const sanitizedLabel: string = sanitizeLabel(
+                                                    updatedLabel,
+                                                );
+                                                props.onChange({
+                                                    ...attributeInput,
+                                                    identifiers: buildTokenCasing(
+                                                        sanitizedLabel,
+                                                    ),
+                                                });
+                                            }}
+                                        />
+
+                                        {/* Null-check for attributeInput.datatype */}
+                                        {attributeInput.datatype && (
+                                            <AttributeAddonForm
+                                                addons={props.addons}
+                                                attributeCollection={
+                                                    props.attributes
+                                                }
+                                                attributeInput={attributeInput}
+                                                value={attributeInput.addons}
+                                                onChange={(
+                                                    updatedAttributeAddons: AttributeAddonValue,
+                                                ) => {
+                                                    props.onChange({
+                                                        ...attributeInput,
+                                                        addons: {
+                                                            ...updatedAttributeAddons,
+                                                        },
+                                                    });
+                                                }}
+                                            />
+                                        )}
+                                    </React.Fragment>
                                 );
                             }
 

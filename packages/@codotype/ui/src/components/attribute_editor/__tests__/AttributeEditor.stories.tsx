@@ -20,6 +20,7 @@ storiesOf("AttributeEditor/Layout", module).add("populated", () => {
         <Story>
             <AttributeEditor
                 attributes={attributes}
+                addons={[]}
                 supportedDatatypes={supportedDatatypes}
                 onChange={(updatedAttributes: Attribute[]) => {
                     console.log("AttributeEditor - onChange");
@@ -42,6 +43,7 @@ storiesOf("AttributeEditor/Layout", module).add("empty", () => {
         <Story>
             <AttributeEditor
                 attributes={attributes}
+                addons={[]}
                 supportedDatatypes={supportedDatatypes}
                 onChange={(updatedAttributes: Attribute[]) => {
                     console.log("AttributeEditor - onChange");

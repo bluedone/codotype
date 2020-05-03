@@ -14,6 +14,7 @@ import {
 } from "@codotype/types";
 import { reorder } from "../attribute_editor/component";
 import { buildDefaultConfiguration } from "@codotype/util";
+import { validateSchema } from "./validateSchema";
 
 // // // //
 
@@ -53,7 +54,6 @@ export function SchemaEditorLayout(props: {
 
     // Invoke props.onChange when state.schemas has updated
     React.useEffect(() => {
-        console.log("Should fire off use effect");
         props.onChange(state.schemas);
     }, [state.lastUpdatedAt]);
 
@@ -69,6 +69,83 @@ export function SchemaEditorLayout(props: {
             return s.id === selectedSchemaId;
         },
     );
+
+    // Defines handler for creating new schemas
+    function createNewSchema() {
+        // Short-circuit if newTokenPluralization is null
+        if (newTokenPluralization === null) {
+            return;
+        }
+
+        // Defines new schema
+        const newSchema: Schema = {
+            id: Math.random().toString(), // TODO - replace with UUID function from util
+            attributes: [],
+            relations: [],
+            removable: true,
+            locked: false,
+            source: SchemaSource.USER,
+            identifiers: newTokenPluralization,
+            configuration: buildDefaultConfiguration(
+                props.generatorMeta.schemaEditorConfiguration
+                    .configurationGroups,
+            ),
+        };
+
+        // Defines updated schemas, including NEW schema
+        const updatedSchemas: Schema[] = [...state.schemas, newSchema];
+
+        // Updates state.schemas with the latest schemas
+        setState({
+            lastUpdatedAt: Date.now(),
+            schemas: updatedSchemas,
+        });
+
+        // Select the newly created schema
+        setSelectedSchemaId(newSchema.id);
+
+        // Clears newTokenPluralization
+        setShowModal(false);
+        setNewTokenPluralization(null);
+    }
+
+    // Defines handler for updating existing schemas
+    function updateExistingSchema() {
+        // Short-circuit if newTokenPluralization is null
+        if (newTokenPluralization === null) {
+            return;
+        }
+
+        if (!selectedSchema) {
+            return;
+        }
+
+        // Defines updatedSchema
+        const updatedSchema: Schema = {
+            ...selectedSchema,
+            identifiers: newTokenPluralization,
+        };
+
+        // Defines updated schemas, including NEW schema
+        const updatedSchemas: Schema[] = state.schemas.map((s: Schema) => {
+            if (s.id === updatedSchema.id) {
+                return updatedSchema;
+            }
+            return s;
+        });
+
+        // Updates state.schemas with the latest schemas
+        setState({
+            lastUpdatedAt: Date.now(),
+            schemas: updatedSchemas,
+        });
+
+        // Closes edit modal
+        setShowEditModal(false);
+
+        // Clears newTokenPluralization
+        setNewTokenPluralization(null);
+    }
 
     // Last check to ensure that selectedSchema _can_ be defined
     // NOTE - this should be simpler + combined with the above
@@ -91,6 +168,9 @@ export function SchemaEditorLayout(props: {
                                 onChange={updatedTokens => {
                                     setNewTokenPluralization(updatedTokens);
                                 }}
+                                onKeydownEnter={() => {
+                                    createNewSchema();
+                                }}
                             />
                         </div>
                     </div>
@@ -102,44 +182,7 @@ export function SchemaEditorLayout(props: {
                                 newTokenPluralization.singular.label === ""
                             }
                             onClick={() => {
-                                // Short-circuit if newTokenPluralization is null
-                                if (newTokenPluralization === null) {
-                                    return;
-                                }
-
-                                // Defines new schema
-                                const newSchema: Schema = {
-                                    id: Math.random().toString(), // TODO - replace with UUID function from util
-                                    attributes: [],
-                                    relations: [],
-                                    removable: true,
-                                    locked: false,
-                                    source: SchemaSource.USER,
-                                    identifiers: newTokenPluralization,
-                                    configuration: buildDefaultConfiguration(
-                                        props.generatorMeta
-                                            .schemaEditorConfiguration
-                                            .configurationGroups,
-                                    ),
-                                };
-
-                                // Defines updated schemas, including NEW schema
-                                const updatedSchemas: Schema[] = [
-                                    ...state.schemas,
-                                    newSchema,
-                                ];
-
-                                // Updates state.schemas with the latest schemas
-                                setState({
-                                    lastUpdatedAt: Date.now(),
-                                    schemas: updatedSchemas,
-                                });
-
-                                // Select the newly created schema
-                                setSelectedSchemaId(newSchema.id);
-
-                                // Clears newTokenPluralization
-                                setNewTokenPluralization(null);
+                                createNewSchema();
                             }}
                         >
                             Create Schema
@@ -186,60 +229,25 @@ export function SchemaEditorLayout(props: {
                 {/* Render SchemaForm + SchemaFormModal for CREATE Schema */}
                 <SchemaFormModal
                     renderNewTitle
-                    disableSubmit={
-                        newTokenPluralization === null ||
-                        newTokenPluralization.singular.label === ""
-                    }
                     show={showModal}
                     handleClose={() => {
                         setShowModal(false);
                     }}
                     onSubmit={() => {
-                        setShowModal(false);
-
-                        // Short-circuit if newTokenPluralization is null
-                        if (newTokenPluralization === null) {
-                            return;
-                        }
-
-                        // Defines new schema
-                        const newSchema: Schema = {
-                            id: Math.random().toString(), // TODO - replace with UUID function from util
-                            source: SchemaSource.USER,
-                            locked: false,
-                            removable: true,
-                            attributes: [],
-                            relations: [],
-                            identifiers: newTokenPluralization,
-                            configuration: buildDefaultConfiguration(
-                                props.generatorMeta.schemaEditorConfiguration
-                                    .configurationGroups,
-                            ),
-                        };
-
-                        // Defines updated schemas, including NEW schema
-                        const updatedSchemas: Schema[] = [
-                            ...state.schemas,
-                            newSchema,
-                        ];
-
-                        // Updates state.schemas with the latest schemas
-                        setState({
-                            lastUpdatedAt: Date.now(),
-                            schemas: updatedSchemas,
-                        });
-
-                        // Select the newly created schema
-                        setSelectedSchemaId(newSchema.id);
-
-                        // Clears newTokenPluralization
-                        setNewTokenPluralization(null);
+                        createNewSchema();
                     }}
+                    errors={validateSchema({
+                        schemaCollection: props.schemas,
+                        tokenPluralization: newTokenPluralization,
+                    })}
                 >
                     <SchemaForm
                         label={""}
                         onChange={updatedTokens => {
                             setNewTokenPluralization(updatedTokens);
+                        }}
+                        onKeydownEnter={() => {
+                            createNewSchema();
                         }}
                     />
                 </SchemaFormModal>
@@ -269,8 +277,6 @@ export function SchemaEditorLayout(props: {
                                 return s;
                             },
                         );
-
-                        console.log("SCHEMA DETAIL ON CHANGE");
 
                         // Updates local state
                         setState({
@@ -302,52 +308,25 @@ export function SchemaEditorLayout(props: {
 
                 {/* Render SchemaForm + SchemaFormModal for UPDATE Schema */}
                 <SchemaFormModal
-                    disableSubmit={
-                        newTokenPluralization === null ||
-                        newTokenPluralization.singular.label === ""
-                    }
                     show={showEditModal}
                     handleClose={() => {
                         setShowEditModal(false);
                     }}
                     onSubmit={() => {
-                        setShowEditModal(false);
-
-                        // Short-circuit if newTokenPluralization is null
-                        if (newTokenPluralization === null) {
-                            return;
-                        }
-
-                        // Defines updatedSchema
-                        const updatedSchema: Schema = {
-                            ...selectedSchema,
-                            identifiers: newTokenPluralization,
-                        };
-
-                        // Defines updated schemas, including NEW schema
-                        const updatedSchemas: Schema[] = state.schemas.map(
-                            (s: Schema) => {
-                                if (s.id === updatedSchema.id) {
-                                    return updatedSchema;
-                                }
-                                return s;
-                            },
-                        );
-
-                        // Updates state.schemas with the latest schemas
-                        setState({
-                            lastUpdatedAt: Date.now(),
-                            schemas: updatedSchemas,
-                        });
-
-                        // Clears newTokenPluralization
-                        setNewTokenPluralization(null);
+                        updateExistingSchema();
                     }}
+                    errors={validateSchema({
+                        schemaCollection: props.schemas,
+                        tokenPluralization: newTokenPluralization,
+                    })}
                 >
                     <SchemaForm
                         label={selectedSchema.identifiers.singular.label}
                         onChange={updatedTokens => {
                             setNewTokenPluralization(updatedTokens);
+                        }}
+                        onKeydownEnter={() => {
+                            updateExistingSchema();
                         }}
                     />
                 </SchemaFormModal>
