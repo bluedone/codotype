@@ -1,27 +1,27 @@
 import * as React from "react";
 const ReactMarkdown = require("react-markdown");
-// import SyntaxHighlighter from "react-syntax-highlighter";
+const SyntaxHighlighter = require("react-syntax-highlighter");
 
 // // // //
 
-// export function CodeBlock(props: { value: string; language: string }) {
-//     const { language = undefined, value } = props;
-//     return <SyntaxHighlighter language={language}>{value}</SyntaxHighlighter>;
-// }
+export function CodeBlock(props: { value: string; language: string }) {
+    const { language = undefined, value } = props;
+    return <SyntaxHighlighter language={language}>{value}</SyntaxHighlighter>;
+}
 
 // // // //
 
-// export function ImageBlock(props: { alt: string; src: string }) {
-//     return (
-//         <img
-//             src={props.src}
-//             alt={props.alt}
-//             style={{
-//                 maxWidth: "50%",
-//             }}
-//         />
-//     );
-// }
+export function ImageBlock(props: { alt: string; src: string }) {
+    return (
+        <img
+            src={props.src}
+            alt={props.alt}
+            style={{
+                maxWidth: "50%",
+            }}
+        />
+    );
+}
 
 // // // //
 
@@ -32,18 +32,14 @@ const ReactMarkdown = require("react-markdown");
 export function MarkdownRenderer(props: { source: string }) {
     return (
         <div>
-            <ReactMarkdown source={props.source} skipHtml />
-            {/* <pre className="bg-dark text-light px-3 py-3 rounded">
-                {props.source}
-            </pre> */}
-            {/* <ReactMarkdown
+            <ReactMarkdown
                 skipHtml
                 source={props.source}
                 renderers={{
                     code: CodeBlock,
                     image: ImageBlock,
                 }}
-            /> */}
+            />
         </div>
     );
 }
