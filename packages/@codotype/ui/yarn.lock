@@ -7010,6 +7010,11 @@ hosted-git-info@^2.1.4:
   resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.8.5.tgz#759cfcf2c4d156ade59b0b2dfabddc42a6b9c70c"
   integrity sha512-kssjab8CvdXfcXMXVcvsXum4Hwdq9XGtRD3TteMEvEbq0LXyiNQr6AprqKqfeaDXze7SxWvRxdpwE6ku7ikLkg==
 
+hotkeys-js@^3.7.5:
+  version "3.7.6"
+  resolved "https://registry.yarnpkg.com/hotkeys-js/-/hotkeys-js-3.7.6.tgz#b90ae3453a7be2f2b2bed6ee55cb96443944c77b"
+  integrity sha512-X5d16trjp79o+OaCn7syXu0cs+TkLYlK/teE5FhpD1Cj9ROcEIhfIQ7Mhrk761ynF3NQLbLn5xRojP2UuSqDAw==
+
 html-attributes@1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/html-attributes/-/html-attributes-1.1.0.tgz#82027a4fac7a6070ea6c18cc3886aea18d6dea09"
@@ -11161,6 +11166,15 @@ react-helmet-async@^1.0.2:
     prop-types "^15.7.2"
     react-fast-compare "^2.0.4"
     shallowequal "^1.1.0"
+
+react-hot-keys@^2.5.2:
+  version "2.5.2"
+  resolved "https://registry.yarnpkg.com/react-hot-keys/-/react-hot-keys-2.5.2.tgz#27584c35597de67a39e341f0b70b95e8b15f3e1d"
+  integrity sha512-JnCDS/qtAOdjr1x+dWr/wbCgWGN7SrnKbqpk5+Y6iftrsMSrKcIWu3YaQrFnb7b5Sh5poc7vKZICV6zNYX+/Ow==
+  dependencies:
+    "@babel/runtime" "^7.8.4"
+    hotkeys-js "^3.7.5"
+    prop-types "^15.7.2"
 
 react-hotkeys@2.0.0:
   version "2.0.0"

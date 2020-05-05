@@ -16,6 +16,29 @@ import { AttributeForm } from "./AttributeForm";
 import { AttributeListEmpty } from "./AttributeListEmpty";
 import { buildTokenCasing } from "@codotype/util";
 import { validateAttribute } from "./validateAttribute";
+import Hotkeys from "react-hot-keys";
+
+// // // //
+
+export function HotkeysDemo(props: {
+    keyName: string;
+    onKeyDown: () => void;
+    // children: React.ReactNode;
+}) {
+    return (
+        <Hotkeys
+            keyName={props.keyName}
+            onKeyDown={args => {
+                // console.log(args);
+                props.onKeyDown();
+            }}
+            // onKeyUp={args => {
+            //     // console.log(args);
+            // }}
+        />
+    );
+    // {/* <div style={{ padding: "50px" }}>{"Hotkey"}</div> */}
+}
 
 // // // //
 
@@ -122,6 +145,41 @@ export function AttributeEditor(props: AttributeEditorProps) {
     }, [state.lastUpdatedAt]);
 
     // // // //
+    // Defines saveAttribute function
+    function saveAttribute(params: { attributeInput: AttributeInput }) {
+        // Insert new Attribute
+        if (params.attributeInput.id === "") {
+            const newAttribute: Attribute = {
+                ...params.attributeInput,
+                addons: {
+                    ...buildDefaultAddonValue(props.addons),
+                    ...params.attributeInput.addons,
+                },
+                // TODO - replace with UUID function from @codotype/util
+                id: Math.random().toString(),
+            };
+            setState({
+                lastUpdatedAt: Date.now(),
+                attributes: [...props.attributes, newAttribute],
+            });
+            setAttributeInput(null);
+            return;
+        }
+
+        // Update existing attribute
+        setState({
+            lastUpdatedAt: Date.now(),
+            attributes: props.attributes.map((a: Attribute) => {
+                if (a.id === params.attributeInput.id) {
+                    return params.attributeInput;
+                }
+                return a;
+            }),
+        });
+        setAttributeInput(null);
+    }
+
+    // // // //
 
     return (
         <div className="card">
@@ -142,7 +200,6 @@ export function AttributeEditor(props: AttributeEditorProps) {
                     });
                 }}
             />
-
             {/* Renders AttributeFormModal */}
             {attributeInput !== null && (
                 <AttributeFormModal
@@ -156,41 +213,11 @@ export function AttributeEditor(props: AttributeEditorProps) {
                         attributeInput,
                         attributeCollection: props.attributes,
                     })}
-                    // disableSubmit={false}
                     onCancel={() => {
                         setAttributeInput(null);
                     }}
                     onSubmit={() => {
-                        // Insert new Attribute
-                        if (attributeInput.id === "") {
-                            const newAttribute: Attribute = {
-                                ...attributeInput,
-                                addons: {
-                                    ...buildDefaultAddonValue(props.addons),
-                                    ...attributeInput.addons,
-                                },
-                                // TODO - replace with UUID function from @codotype/util
-                                id: Math.random().toString(),
-                            };
-                            setState({
-                                lastUpdatedAt: Date.now(),
-                                attributes: [...props.attributes, newAttribute],
-                            });
-                            setAttributeInput(null);
-                            return;
-                        }
-
-                        // Update existing attribute
-                        setState({
-                            lastUpdatedAt: Date.now(),
-                            attributes: props.attributes.map((a: Attribute) => {
-                                if (a.id === attributeInput.id) {
-                                    return attributeInput;
-                                }
-                                return a;
-                            }),
-                        });
-                        setAttributeInput(null);
+                        saveAttribute({ attributeInput });
                     }}
                 >
                     <AttributeForm
@@ -199,12 +226,23 @@ export function AttributeEditor(props: AttributeEditorProps) {
                         onChange={(updatedAttributeInput: AttributeInput) => {
                             setAttributeInput(updatedAttributeInput);
                         }}
+                        onKeydownEnter={() => {
+                            if (
+                                disableSubmit({
+                                    attributeInput,
+                                    attributeCollection: props.attributes,
+                                })
+                            ) {
+                                return;
+                            }
+                            // Save attribute on keydown "Enter"
+                            saveAttribute({ attributeInput });
+                        }}
                         addons={props.addons}
                         supportedDatatypes={props.supportedDatatypes}
                     />
                 </AttributeFormModal>
             )}
-
             {props.attributes.length > 0 && (
                 <React.Fragment>
                     <AttributeDeleteModal
@@ -291,7 +329,6 @@ export function AttributeEditor(props: AttributeEditorProps) {
                     </DragDropContext>
                 </React.Fragment>
             )}
-
             {/* Render empty state */}
             {props.attributes.length === 0 && (
                 <AttributeListEmpty
@@ -300,6 +337,24 @@ export function AttributeEditor(props: AttributeEditorProps) {
                     }}
                 />
             )}
+            <HotkeysDemo
+                keyName="shift+a"
+                onKeyDown={() => {
+                    console.log("ON KEYDOWN");
+                    setAttributeInput({
+                        id: DEFAULT_ATTRIBUTE.id,
+                        datatype: DEFAULT_ATTRIBUTE.datatype,
+                        defaultValue: DEFAULT_ATTRIBUTE.datatype,
+                        identifiers: buildTokenCasing(
+                            DEFAULT_ATTRIBUTE.identifiers.label,
+                        ),
+                        internalNote: DEFAULT_ATTRIBUTE.internalNote,
+                        locked: DEFAULT_ATTRIBUTE.locked,
+                        source: SchemaSource.USER,
+                        addons: {},
+                    });
+                }}
+            />
         </div>
     );
 }

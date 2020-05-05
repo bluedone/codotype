@@ -65,22 +65,22 @@ export function RelationPropertiesForm(props: RelationPropertiesFormProps) {
 
                 <div className="row">
                     <div className="col-lg-12">
-                        <div className="btn-group w-100">
-                            <RelationDatatypeForm
-                                type={relationInput.type}
-                                supportedRelationTypes={supportedRelationTypes}
-                                onChangeRelationType={(
-                                    updatedRelationType: RelationType,
-                                ) => {
-                                    console.log("CHANGE TYPE");
-                                    console.log(updatedRelationType);
-                                    props.onChange({
-                                        ...relationInput,
-                                        type: updatedRelationType,
-                                    });
-                                }}
-                            />
-                            {/* <b-button
+                        {/* <div className="btn-group w-100"> */}
+                        <RelationDatatypeForm
+                            type={relationInput.type}
+                            supportedRelationTypes={supportedRelationTypes}
+                            onChangeRelationType={(
+                                updatedRelationType: RelationType,
+                            ) => {
+                                console.log("CHANGE TYPE");
+                                console.log(updatedRelationType);
+                                props.onChange({
+                                    ...relationInput,
+                                    type: updatedRelationType,
+                                });
+                            }}
+                        />
+                        {/* <b-button
                     v-for="relation in filteredRelationTypes"
                     :key="relation.id"
                     @click="setRelationType(relation.id)"
@@ -90,7 +90,6 @@ export function RelationPropertiesForm(props: RelationPropertiesFormProps) {
                   >
                     <img className='relation-thumbnail' :src=" relation.id === model.type ? 'https://res.cloudinary.com/codotype/image/upload/v1551448517/codotype-icons/' + relation.id.toLowerCase() + '_active' + '.png' : 'https://res.cloudinary.com/codotype/image/upload/v1551448517/codotype-icons/' + relation.id.toLowerCase() + '.png'"/>
                   </b-button> */}
-                        </div>
                     </div>
                 </div>
             </div>

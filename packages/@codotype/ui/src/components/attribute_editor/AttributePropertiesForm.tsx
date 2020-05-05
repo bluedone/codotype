@@ -12,6 +12,7 @@ interface AttributePropertiesFormProps {
     label: string;
     identifier: string;
     onLabelChange: (updatedLabel: string) => void;
+    onKeydownEnter: () => void;
 }
 
 /**
@@ -55,6 +56,14 @@ export function AttributePropertiesForm(props: AttributePropertiesFormProps) {
                         placeholder="Label"
                         className="form-control"
                         value={props.label}
+                        onKeyDown={e => {
+                            // ENTER keycode === 13
+                            if (e.keyCode === 13) {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                props.onKeydownEnter();
+                            }
+                        }}
                         onChange={e => {
                             props.onLabelChange(e.currentTarget.value);
                         }}

@@ -1,3 +1,5 @@
+@import "./app.scss";
+
 /*!
  * Bootstrap v4.4.1 (https://getbootstrap.com/)
  * Copyright 2011-2019 The Bootstrap Authors
@@ -42,3 +44,16 @@
 @import "../../node_modules/bootstrap/scss/spinners";
 @import "../../node_modules/bootstrap/scss/utilities";
 @import "../../node_modules/bootstrap/scss/print";
+
+button.btn-yellow {
+    @include button-variant(#ffd700, #ffd700);
+}
+
+.shadow-hover {
+    @extend .shadow-sm;
+    -webkit-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    &:hover {
+        @extend .shadow;
+    }
+}
