@@ -1,12 +1,14 @@
 import * as React from "react";
-import { InflatedSchema } from "@codotype/types";
+import { InflatedSchema, UUID } from "@codotype/types";
 import { RelationBadge } from "../relation_editor/RelationBadge";
 import { InfoTooltip } from "../info_tooltip";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 // // // //
 
 interface SchemaIncomingRelationsProps {
     inflatedSchema: InflatedSchema;
+    onSelectSchema: (nextSelectedSchemaId: UUID) => void;
 }
 
 /**
@@ -47,18 +49,35 @@ export function SchemaIncomingRelations(props: SchemaIncomingRelationsProps) {
                     )}
                     {inflatedSchema.references.map(r => {
                         return (
-                            <li
-                                className="list-group-item py-0 px-2"
+                            <OverlayTrigger
                                 key={r.id}
+                                placement="left"
+                                overlay={
+                                    <Tooltip id="attribute-editor-header">
+                                        {"Jump to " +
+                                            r.identifiers.source.canonical
+                                                .singular.label +
+                                            " schema"}
+                                    </Tooltip>
+                                }
                             >
-                                <small>
-                                    <RelationBadge
-                                        slim
-                                        direction="in"
-                                        relation={r}
-                                    />
-                                </small>
-                            </li>
+                                <li
+                                    className="list-group-item list-group-item-action py-0 px-2"
+                                    style={{ cursor: "pointer" }}
+                                    key={r.id}
+                                    onClick={() => {
+                                        props.onSelectSchema(r.sourceSchemaId);
+                                    }}
+                                >
+                                    <small>
+                                        <RelationBadge
+                                            slim
+                                            direction="in"
+                                            relation={r}
+                                        />
+                                    </small>
+                                </li>
+                            </OverlayTrigger>
                         );
                     })}
                 </ul>

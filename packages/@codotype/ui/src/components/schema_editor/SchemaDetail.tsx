@@ -11,6 +11,7 @@ import {
     Relation,
     InflatedSchema,
     GeneratorMeta,
+    UUID,
 } from "@codotype/types";
 import { ConfigurationGroupSelector } from "./ConfigurationGroupSelector";
 import { SchemaIncomingRelations } from "./SchemaIncomingRelations";
@@ -24,6 +25,7 @@ interface SchemaDetailProps {
     onChange: (updatedSchema: Schema) => void;
     onClickEdit: () => void;
     onConfirmDelete: () => void;
+    onSelectSchema: (nextSelectedSchemaId: UUID) => void;
 }
 
 /**
@@ -106,14 +108,17 @@ export function SchemaDetail(props: SchemaDetailProps) {
                             />
                         </div>
                         <div className="col-sm-6">
-                            <SchemaPreview
-                                schema={props.schema}
-                                schemas={props.schemas}
-                            />
+                            <div className="mt-2">
+                                <SchemaPreview
+                                    schema={props.schema}
+                                    schemas={props.schemas}
+                                />
+                            </div>
                         </div>
                         <div className="pl-md-0 col-sm-6">
                             <SchemaIncomingRelations
                                 inflatedSchema={inflatedSchema}
+                                onSelectSchema={props.onSelectSchema}
                             />
                         </div>
                     </div>

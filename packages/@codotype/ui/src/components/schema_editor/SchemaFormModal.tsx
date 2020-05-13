@@ -34,18 +34,27 @@ export function SchemaFormModal(props: {
                 <Modal.Title>{title}</Modal.Title>
             </Modal.Header>
             <Modal.Body>{props.children}</Modal.Body>
-            <pre>{JSON.stringify(props.errors, null, 4)}</pre>
             <Modal.Footer>
-                <button
-                    className="btn btn-primary"
-                    disabled={disableSubmit}
-                    onClick={props.onSubmit}
-                >
-                    {submitLabel}
-                </button>
-                <button className="btn btn-light" onClick={props.handleClose}>
-                    Close
-                </button>
+                <div className="d-flex align-items-center justify-content-between flex-grow-1">
+                    <div className="d-flex flex-grow-1">
+                        <p className="mb-0 text-warning">{props.errors[0]}</p>
+                    </div>
+                    <div className="d-flex">
+                        <button
+                            className="btn btn-primary"
+                            disabled={disableSubmit}
+                            onClick={props.onSubmit}
+                        >
+                            {submitLabel}
+                        </button>
+                        <button
+                            className="btn btn-light ml-2"
+                            onClick={props.handleClose}
+                        >
+                            Close
+                        </button>
+                    </div>
+                </div>
             </Modal.Footer>
         </Modal>
     );
