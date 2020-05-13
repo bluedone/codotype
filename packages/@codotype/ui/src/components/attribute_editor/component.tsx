@@ -185,6 +185,7 @@ export function AttributeEditor(props: AttributeEditorProps) {
         <div className="card">
             <SortableListHeader
                 label="Attributes"
+                tooltip="shift+a"
                 onClick={() => {
                     setAttributeInput({
                         id: DEFAULT_ATTRIBUTE.id,
@@ -340,7 +341,6 @@ export function AttributeEditor(props: AttributeEditorProps) {
             <HotkeysDemo
                 keyName="shift+a"
                 onKeyDown={() => {
-                    console.log("ON KEYDOWN");
                     setAttributeInput({
                         id: DEFAULT_ATTRIBUTE.id,
                         datatype: DEFAULT_ATTRIBUTE.datatype,
