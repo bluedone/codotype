@@ -8,6 +8,7 @@ import {
     ConfigurationGroup,
     OptionValueInstance,
 } from "@codotype/types";
+import { GeneratorStart } from "../generator_start";
 
 // // // //
 
@@ -83,13 +84,26 @@ export function ConfigurationGroupSelector(props: {
         enableSchemaEditor,
     );
 
+    // NOTE - enable/disable this if schemas aren't supported
+    const [viewingReadme, setViewingReadme] = React.useState<boolean>(false);
+
     return (
         <div className="row">
             <div className="col-lg-12">
                 <ul className="nav nav-tabs">
+                    <ConfigurationGroupTab
+                        onClick={() => {
+                            setViewingReadme(true);
+                            setViewingSchemas(false);
+                        }}
+                        active={viewingReadme}
+                        label={"README.md"}
+                    />
+
                     {enableSchemaEditor && (
                         <ConfigurationGroupTab
                             onClick={() => {
+                                setViewingReadme(false);
                                 setViewingSchemas(true);
                             }}
                             active={viewingSchemas}
@@ -105,6 +119,7 @@ export function ConfigurationGroupSelector(props: {
                                     key={configurationGroup.identifier}
                                     onClick={() => {
                                         setViewingSchemas(false);
+                                        setViewingReadme(false);
                                         selectConfigurationGroup(
                                             configurationGroup,
                                         );
@@ -112,7 +127,8 @@ export function ConfigurationGroupSelector(props: {
                                     active={
                                         configurationGroup.identifier ===
                                             selectedConfigurationGroup.identifier &&
-                                        !viewingSchemas
+                                        !viewingSchemas &&
+                                        !viewingReadme
                                     }
                                     label={configurationGroup.label}
                                 />
@@ -123,7 +139,7 @@ export function ConfigurationGroupSelector(props: {
             </div>
             <div className="col-lg-12">
                 {/* Renders the ConfigurationInput */}
-                {!viewingSchemas && (
+                {!viewingSchemas && !viewingReadme && (
                     <ConfigurationInput
                         configurationGroup={selectedConfigurationGroup}
                         value={
@@ -132,9 +148,6 @@ export function ConfigurationGroupSelector(props: {
                             ]
                         }
                         onChange={(updatedVal: OptionValueInstance) => {
-                            console.log("OnChangeVal!");
-                            console.log(updatedVal);
-
                             // Defines updatd project with latest configuration value
                             const updatedProject: Project = {
                                 ...props.project,
@@ -148,6 +161,13 @@ export function ConfigurationGroupSelector(props: {
                             props.onChange(updatedProject);
                         }}
                     />
+                )}
+
+                {/* Render README tab */}
+                {viewingReadme && (
+                    <div className="mt-4">
+                        <GeneratorStart generator={props.generatorMeta} />
+                    </div>
                 )}
 
                 {/* Render SchemaEditorLayout */}
