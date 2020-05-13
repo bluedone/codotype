@@ -13,6 +13,9 @@ storiesOf("AttributeEditor/AttributePropertiesForm", module).add(
                 <AttributePropertiesForm
                     label={""}
                     identifier={"string"}
+                    onKeydownEnter={() => {
+                        console.log("On keydown enter");
+                    }}
                     onLabelChange={(updatedLabel: string) => {
                         console.log(updatedLabel);
                     }}

@@ -17,7 +17,7 @@ export function GenerateCodeButton(props: {
     return (
         <button
             // className="btn btn-sm btn-yellow d-flex align-items-center"
-            className="btn btn-yellow d-flex align-items-center"
+            className="btn btn-lg btn-yellow d-flex align-items-center"
             disabled={props.disabled}
             onClick={props.onClick}
         >

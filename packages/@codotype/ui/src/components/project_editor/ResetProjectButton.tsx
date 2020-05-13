@@ -1,6 +1,5 @@
 import * as React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCog } from "@fortawesome/free-solid-svg-icons";
+import { Dropdown } from "react-bootstrap";
 import { Modal } from "react-bootstrap";
 
 // // // //
@@ -18,14 +17,12 @@ export function ResetProjectButton(props: {
     const [showModal, setShowModal] = React.useState<boolean>(false);
     return (
         <React.Fragment>
-            <button
-                className="btn btn-sm btn-outline-danger d-flex align-items-center mr-2"
+            <Dropdown.Item
                 disabled={props.disabled}
                 onClick={() => setShowModal(true)}
             >
-                <FontAwesomeIcon className="mr-1" icon={faCog} />
                 Reset Project
-            </button>
+            </Dropdown.Item>
 
             <Modal show={showModal} onHide={() => setShowModal(false)}>
                 <Modal.Header closeButton>

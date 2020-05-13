@@ -1,6 +1,7 @@
 import * as path from "path";
-import ejs from "ejs";
+import * as ejs from "ejs";
 import { indent, trailingComma } from "@codotype/util";
+import { Datatype, RelationType } from "@codotype/types";
 
 // Mock CodotypeRuntime class definition
 export class MockRuntime {
@@ -11,6 +12,7 @@ export class MockRuntime {
     ensuredDir: string;
     copiedDirSrc: string;
     copiedDirDest: string;
+    files: { [key: string]: string };
   };
 
   // constructor
@@ -24,6 +26,7 @@ export class MockRuntime {
       ensuredDir: "",
       copiedDirDest: "",
       copiedDirSrc: "",
+      files: {}
     };
 
     // Assigns this.generators
@@ -48,6 +51,7 @@ export class MockRuntime {
 
   // templatePath
   templatePath(generatorResolved, template_path = "./") {
+    // return path.join(generatorResolved, "templates", template_path);
     return path.join(generatorResolved, "templates", template_path);
   }
 
@@ -74,11 +78,11 @@ export class MockRuntime {
         configuration: generatorInstance.options.configuration,
         helpers: {
           indent,
-          trailingComma,
+          trailingComma
         },
-        // ...datatypes,
-        // ...relationTypes,
-        ...options, // QUESTION - are options ever used here?
+        Datatype: Datatype,
+        RelationType: RelationType,
+        ...options // QUESTION - are options ever used here?
       };
       // // // //
       // // // //
@@ -95,14 +99,22 @@ export class MockRuntime {
   }
 
   existsSync(dest) {
-    return this.fs.existsSync(dest);
-  }
-
-  compareFile(dest, compiledTemplate) {
+    // return this.fs.existsSync(dest);
     return true;
   }
 
+  compareFile(dest, compiledTemplate) {
+    return this._mocks_.files[dest] === compiledTemplate;
+  }
+
   writeFile(dest, compiledTemplate) {
+    this._mocks_ = {
+      ...this._mocks_,
+      files: {
+        ...this._mocks_.files,
+        [dest]: compiledTemplate
+      }
+    };
     return Promise.resolve(true);
   }
 

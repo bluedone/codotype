@@ -114,6 +114,7 @@ interface AttributeFormProps {
     attributeInput: AttributeInput;
     supportedDatatypes: Datatype[];
     onChange: (updatedAttributeInput: AttributeInput) => void;
+    onKeydownEnter: () => void;
 }
 
 /**
@@ -155,6 +156,9 @@ export function AttributeForm(props: AttributeFormProps) {
                                             }
                                             identifier={
                                                 attributeInput.identifiers.snake
+                                            }
+                                            onKeydownEnter={
+                                                props.onKeydownEnter
                                             }
                                             onLabelChange={(
                                                 updatedLabel: string,

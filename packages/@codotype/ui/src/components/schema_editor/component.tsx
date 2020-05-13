@@ -267,6 +267,9 @@ export function SchemaEditorLayout(props: {
                     schema={selectedSchema}
                     schemas={state.schemas}
                     generatorMeta={props.generatorMeta}
+                    onSelectSchema={(nextSelectedSchemaId: UUID) => {
+                        setSelectedSchemaId(nextSelectedSchemaId);
+                    }}
                     onChange={(updatedSchema: Schema) => {
                         // Defines updatedSchemas to include `updatedSchema`
                         const updatedSchemas: Schema[] = state.schemas.map(

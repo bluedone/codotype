@@ -1,10 +1,8 @@
 import { Datatype } from "./datatype";
 import { UUID } from "./uuid";
-import {
-  OptionType,
-  DropdownOption,
-  OptionValue,
-} from "./configuration-option-types";
+import { OptionType, DropdownOption } from "./configuration-option-types";
+import { PropertyFilter } from "./property-filter";
+import { PropertyValidation } from "./property-validation";
 
 // // // //
 
@@ -12,6 +10,8 @@ import {
 // Defines an interface that can be used to extend the `Attribute` interface with
 // additional properties that can be defined on a per-generator basis
 // TODO - should this support a layoutVariant?
+// TODO - wire up `validations` and `filters` here -> see `ConfigurationGroupProperty` for details
+// TODO - add icon support for this -> ENUM of "asterisk" | "snowflake" | etc. -> match icons up to addons
 export interface AttributeAddon {
   id: UUID;
   label: string; // "Unique"
@@ -28,13 +28,38 @@ export interface AttributeAddon {
     | OptionType.NUMBER; // Only stores primative data
   dropdownOptions: DropdownOption[]; // Only used when datatype: OptionType.DROPDOWN;
   defaultValue: null | boolean | string | number;
+  validations?: PropertyValidation[]; // TODO - shouldn't be nullable
+  filters?: PropertyFilter[]; // TODO - shouldn't be nullable
 }
 
 // // // //
 
+export const ATTRIBUTE_ADDON_INDEX: AttributeAddon = {
+  id: "ATTRIBUTE_ADDON_INDEX",
+  label: "Index",
+  identifier: "Index",
+  description: "Whether to add an index on this Attribute",
+  documentation: "",
+  supportedDatatypes: [
+    Datatype.STRING,
+    Datatype.NUMERIC,
+    Datatype.INTEGER,
+    Datatype.TEXT,
+    Datatype.TIMESTAMP,
+    Datatype.TIME
+  ],
+  exclusive: false,
+  required: false,
+  propertyType: OptionType.BOOLEAN,
+  dropdownOptions: [],
+  defaultValue: false,
+  validations: [],
+  filters: []
+};
+
 export const ATTRIBUTE_ADDON_UNIQUE: AttributeAddon = {
   id: "ATTRIBUTE_ADDON_UNIQUE",
-  label: "Unique",
+  label: "Unique key",
   identifier: "unique",
   description: "Whether this Attribute's value is unique",
   documentation: "",
@@ -43,13 +68,15 @@ export const ATTRIBUTE_ADDON_UNIQUE: AttributeAddon = {
     Datatype.NUMERIC,
     Datatype.TEXT,
     Datatype.TIMESTAMP,
-    Datatype.TIME,
+    Datatype.TIME
   ],
   exclusive: false,
   required: false,
   propertyType: OptionType.BOOLEAN,
   dropdownOptions: [],
   defaultValue: false,
+  validations: [],
+  filters: []
 };
 
 export const ATTRIBUTE_ADDON_REQUIRED: AttributeAddon = {
@@ -63,13 +90,15 @@ export const ATTRIBUTE_ADDON_REQUIRED: AttributeAddon = {
     Datatype.NUMERIC,
     Datatype.TEXT,
     Datatype.TIMESTAMP,
-    Datatype.TIME,
+    Datatype.TIME
   ],
   exclusive: false,
   required: false,
   propertyType: OptionType.BOOLEAN,
   dropdownOptions: [],
   defaultValue: false,
+  validations: [],
+  filters: []
 };
 
 export const ATTRIBUTE_ADDON_NULLABLE: AttributeAddon = {
@@ -83,13 +112,15 @@ export const ATTRIBUTE_ADDON_NULLABLE: AttributeAddon = {
     Datatype.NUMERIC,
     Datatype.TEXT,
     Datatype.TIMESTAMP,
-    Datatype.TIME,
+    Datatype.TIME
   ],
   exclusive: false,
   required: false,
   propertyType: OptionType.BOOLEAN,
   dropdownOptions: [],
   defaultValue: false,
+  validations: [],
+  filters: []
 };
 
 export const ATTRIBUTE_ADDON_PRIMARY_KEY: AttributeAddon = {
@@ -104,13 +135,15 @@ export const ATTRIBUTE_ADDON_PRIMARY_KEY: AttributeAddon = {
     Datatype.NUMERIC,
     Datatype.TEXT,
     Datatype.TIMESTAMP,
-    Datatype.TIME,
+    Datatype.TIME
   ],
   exclusive: true,
   required: false,
   propertyType: OptionType.BOOLEAN,
   dropdownOptions: [],
   defaultValue: false,
+  validations: [],
+  filters: []
 };
 
 export const ATTRIBUTE_ADDON_SELECT: AttributeAddon = {
@@ -125,11 +158,13 @@ export const ATTRIBUTE_ADDON_SELECT: AttributeAddon = {
     Datatype.NUMERIC,
     Datatype.TEXT,
     Datatype.TIMESTAMP,
-    Datatype.TIME,
+    Datatype.TIME
   ],
   exclusive: false,
   required: false,
   propertyType: OptionType.BOOLEAN,
   dropdownOptions: [],
   defaultValue: false,
+  validations: [],
+  filters: []
 };

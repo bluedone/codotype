@@ -17,6 +17,9 @@ export function ConfigurationInputFormGroup(
 ) {
     const { className = "" } = props;
 
+    const renderDocumentationModal: boolean =
+        props.property.documentation !== "";
+
     const formGroup = (
         <div
             className={classnames("form-group mb-0", {
@@ -34,16 +37,22 @@ export function ConfigurationInputFormGroup(
                         />
                     )}
                     <label className="mb-0">{props.property.label}</label>
-                    <small className="mx-3">
-                        <DocumentationModal
-                            header={props.property.label}
-                            documentation={props.property.description} // TODO - update this to use property.documentation
-                        />
-                    </small>
+                    {renderDocumentationModal && (
+                        <small className="mx-3">
+                            <DocumentationModal
+                                header={props.property.label}
+                                documentation={props.property.description} // TODO - update this to use property.documentation
+                            />
+                        </small>
+                    )}
                 </div>
 
                 {props.property.type === OptionType.BOOLEAN && (
-                    <div className="d-flex align-items-center">
+                    <div
+                        className={classnames("d-flex align-items-center", {
+                            "ml-3": !renderDocumentationModal,
+                        })}
+                    >
                         {props.children}
                     </div>
                 )}

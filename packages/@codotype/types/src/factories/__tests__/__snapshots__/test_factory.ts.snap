@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`factory works 1`] = `
+ConfigurationGroupPropertyBuilder {
+  "allowDisable": false,
+  "defaultValue": undefined,
+  "description": "",
+  "documentation": "",
+  "dropdownOptions": Array [],
+  "enabled": true,
+  "filters": Array [],
+  "icon": "",
+  "id": "0.21643998893672078",
+  "identifier": "meh_value",
+  "label": "meh",
+  "properties": Array [],
+  "required": false,
+  "type": "BOOLEAN",
+  "validations": Array [],
+}
+`;
