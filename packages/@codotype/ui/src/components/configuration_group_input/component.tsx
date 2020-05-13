@@ -16,13 +16,43 @@ import { ConfigurationCollectionInput } from "./ConfigurationCollectionInput";
 
 // // // //
 
+/**
+ * shouldRenderDocumentationModal
+ * Determines whether or not the DocumentationModal should render for this ConfigurationGroup
+ * Depends on the LayoutVariant
+ * @param configurationGroup
+ */
+export function shouldRenderDocumentationModal(
+    configurationGroup: ConfigurationGroup,
+): boolean {
+    const { layoutVariant } = configurationGroup;
+
+    // Return false for DOCS_* layout variants
+    if (
+        [
+            GroupLayoutVariant.DOCS_3x9,
+            GroupLayoutVariant.DOCS_4x8,
+            GroupLayoutVariant.DOCS_6x6,
+        ].includes(layoutVariant)
+    ) {
+        return false;
+    }
+
+    // Return true for all others
+    return true;
+}
+
+// // // //
+
 interface ConfigurationInputProps {
     value: OptionValueInstance;
     configurationGroup: ConfigurationGroup;
     onChange: (updatedVal: OptionValueInstance) => void;
 }
 export function ConfigurationInput(props: ConfigurationInputProps) {
-    if (!props.configurationGroup.properties) {
+    const { configurationGroup } = props;
+
+    if (!configurationGroup.properties) {
         console.log("WARNING - NO CONFIGURATION GROUP PROPERTIES DEFINED");
         return null;
     }
@@ -31,19 +61,18 @@ export function ConfigurationInput(props: ConfigurationInputProps) {
             <div className="col-lg-12">
                 {/* ConfigurationGroupHeader */}
                 <ConfigurationGroupHeader
-                    configurationGroup={props.configurationGroup}
-                    enableDocumentationModal={
-                        props.configurationGroup.layoutVariant !==
-                        GroupLayoutVariant.DOCS_4x8
-                    }
+                    configurationGroup={configurationGroup}
+                    enableDocumentationModal={shouldRenderDocumentationModal(
+                        configurationGroup,
+                    )}
                 />
 
                 {/* Renders ConfigurationGroup variants */}
                 {/* QUESTION - maybe rename to `layout`? */}
                 <ConfigurationGroupVariant
-                    configurationGroup={props.configurationGroup}
+                    configurationGroup={configurationGroup}
                 >
-                    {props.configurationGroup.properties.map(
+                    {configurationGroup.properties.map(
                         (property: ConfigurationGroupProperty) => {
                             if (property.type === OptionType.COLLECTION) {
                                 return (
