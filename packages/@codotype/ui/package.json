@@ -86,7 +86,7 @@
     },
     "dependencies": {
         "@codotype/types": "0.8.0-canary.4",
-        "@codotype/util": "0.8.0-canary.3",
+        "@codotype/util": "0.8.0-canary.4",
         "@fortawesome/fontawesome-svg-core": "^1.2.27",
         "@fortawesome/free-brands-svg-icons": "^5.12.1",
         "@fortawesome/free-regular-svg-icons": "^5.12.1",

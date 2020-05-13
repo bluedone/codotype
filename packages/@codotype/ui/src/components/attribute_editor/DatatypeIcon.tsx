@@ -47,6 +47,10 @@ const mapDatatypeToIcon: { [key in Datatype]: IconDefinition } = {
     [Datatype.TIMESTAMP_ARRAY]: faClock,
     [Datatype.SINGLE_FILE]: faFile,
     [Datatype.SINGLE_IMAGE]: faFileImage,
+    [Datatype.UUID]: faQuoteRight,
+    [Datatype.UUID_ARRAY]: faQuoteRight,
+    [Datatype.OBJECT_ID]: faQuoteRight,
+    [Datatype.OBJECT_ID_ARRAY]: faQuoteRight,
 };
 
 export function DatatypeIcon(props: {
