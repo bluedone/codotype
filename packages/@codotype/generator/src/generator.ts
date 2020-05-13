@@ -4,7 +4,7 @@ import { MockRuntime } from "./mock_runtime";
 import {
   RelationReference,
   InflatedProject,
-  InflatedSchema,
+  InflatedSchema
 } from "@codotype/types";
 
 // // // //
@@ -146,7 +146,7 @@ export class CodotypeGenerator {
    */
   async forEachSchema({
     schema,
-    project,
+    project
   }: {
     schema: InflatedSchema;
     project: InflatedProject;
@@ -161,7 +161,7 @@ export class CodotypeGenerator {
   async forEachRelation({
     schema,
     relation,
-    project,
+    project
   }: {
     schema: InflatedSchema;
     relation: RelationReference;
@@ -178,7 +178,7 @@ export class CodotypeGenerator {
   async forEachReverseRelation({
     schema,
     relation,
-    project,
+    project
   }: {
     schema: InflatedSchema;
     relation: RelationReference;
@@ -229,7 +229,7 @@ export class CodotypeGenerator {
   renderComponent({
     src,
     dest,
-    data = {},
+    data = {}
   }: {
     src: string;
     dest: string;

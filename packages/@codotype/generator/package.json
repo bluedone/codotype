@@ -1,6 +1,6 @@
 {
   "name": "@codotype/generator",
-  "version": "0.8.0-canary.1",
+  "version": "0.8.0-canary.2",
   "description": "Generator system that produces code scaffolding from metadata",
   "scripts": {
     "test": "jest",
@@ -20,8 +20,8 @@
     "url": "git+https://github.com/codotype/codotype.git"
   },
   "dependencies": {
-    "@codotype/types": "0.8.0-canary.2",
-    "@codotype/util": "0.8.0-canary.2",
+    "@codotype/types": "0.8.0-canary.4",
+    "@codotype/util": "0.8.0-canary.3",
     "@types/node": "^12.12.12",
     "bluebird": "^3.5.1",
     "ejs": "^2.6.1",
@@ -29,10 +29,7 @@
   },
   "devDependencies": {
     "@types/jest": "^24.0.23",
-    "chai": "^4.1.2",
     "jest": "^24.9.0",
-    "mocha": "^5.2.0",
-    "nyc": "^13.0.1",
     "ts-jest": "^24.2.0",
     "typescript": "~3.4.5"
   },
