@@ -11,12 +11,13 @@ export enum RelationType {
   HAS_MANY = "HAS_MANY",
   TO_ONE = "TO_ONE",
   TO_MANY = "TO_MANY",
-  HAS_AND_BELONGS_TO_MANY = "HAS_AND_BELONGS_TO_MANY",
+  HAS_AND_BELONGS_TO_MANY = "HAS_AND_BELONGS_TO_MANY"
 }
 
 /**
  * Relation
  * Defines the Relation interface
+ * TODO - add support for addons here -> see AttributeAddon for context
  */
 export interface Relation {
   id: UUID;
@@ -37,5 +38,5 @@ export const DEFAULT_RELATION: Relation = {
   source: SchemaSource.USER,
   destinationSchemaId: "",
   sourceSchemaAlias: "",
-  destinationSchemaAlias: "",
+  destinationSchemaAlias: ""
 };

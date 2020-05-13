@@ -436,6 +436,7 @@ export const cdkGeneratorMeta: GeneratorMeta = {
     "https://jaystack.com/wp-content/uploads/2015/12/nodejs-logo-e1497443346889.png", // URL to the generator's icon. Must be at least 200x200px
   homepage: "https://codotype.org", // the "homepage" for this generator
   version: "0.1.0", // the current version of the generator
+  codotypeVersion: "0.1.0",
   createdBy: {
     name: "Codotype",
     contact: {
@@ -587,6 +588,7 @@ export const dummyGeneratorMeta: GeneratorMeta = {
     "https://jaystack.com/wp-content/uploads/2015/12/nodejs-logo-e1497443346889.png", // URL to the generator's icon. Must be at least 200x200px
   homepage: "https://codotype.org", // the "homepage" for this generator
   version: "0.1.0", // the current version of the generator
+  codotypeVersion: "0.1.0",
   createdBy: {
     name: "Codotype",
     contact: {}

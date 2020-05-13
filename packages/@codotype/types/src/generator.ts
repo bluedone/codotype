@@ -12,29 +12,7 @@ export enum ExperienceRecommendation {
   EXPERT = "expert"
 }
 
-// TODO - should this be built-out to support enabling / disabling attribute properties?
-// i.e. enable support for "required" / "unique" / "primary key" / "default value" options?
-// Might make sense to add `constraints` object to the `Attribute` interface to support this cleanly.
-// Might also want to add camelCase/pascalCase/etc. to Attribute
-// TODO - rename this to `schemaEditorConfiguration`
-// TODO - add defaultSchemas
-// TODO - add defaultAttributes
-// TODO - add defaultRelations
-// TODO - should the be split up into better separation of concerns? i.e. AttributeEditorConfiguration, SchemaEditorConfiguration, RelationEditorConfiguration
-export interface SchemaConfigurationGroup {
-  configurationGroups: ConfigurationGroup[];
-  supportedDatatypes: Datatype[]; // The datatypes supported by this generator.
-  supportedRelations: RelationType[]; // The relation types supported by this generator.
-  // defaultSchemas: Schema<SchemaSource.GENERATOR>[]; // a Schemas array containing default schemas to load with the project.
-  // defaultAttributes: Attribute[];
-  // defaultRelations: Relation[];
-  // attributeAddons: AttributeAddon[];
-  // enableAttributeDefaultValue: boolean;
-}
-
-// // // //
-// // // //
-
+// QUESTION - should the be split up into better separation of concerns? i.e. AttributeEditorConfiguration, SchemaEditorConfiguration, RelationEditorConfiguration
 export interface SchemaEditorConfiguration {
   documentation: string; // Any documentation for the SchemaEditor
   configurationGroups: ConfigurationGroup[]; // ConfigurationGroup
@@ -46,9 +24,6 @@ export interface SchemaEditorConfiguration {
   enableAttributeDefaultValue: boolean; // Whether or not to enable the `Default Value` input in the AttributeEditor
   defaultRelations: Relation[];
 }
-
-// // // //
-// // // //
 
 /**
  * GeneratorCreatorContactOption
@@ -88,6 +63,7 @@ export interface GeneratorMeta {
   icon: string; // URL to the generator's icon. Must be at least 200x200px
   homepage: string; // the "homepage" for this generator
   version: string; // the current version of the generator
+  codotypeVersion: string; // the version of codotype that runs this generator
   createdBy: GeneratorCreator; // Metadata about the
   techTags: string[]; // an array of strings describing the tech used in the generator
   typeTags: string[]; // describes the type of codebase produced by this generator
@@ -99,26 +75,3 @@ export interface GeneratorMeta {
   // defaultConfiguration: any; // object that can provide optional defaults / examples for each ConfigurationGroup.
   // This is where you can supply default Addon data for different ConfigurationGroups
 }
-
-// // // //
-
-// From @codtype/util
-// interface CodotypeGenerator {
-//   id: string;
-//   label: string;
-//   icon: string;
-//   description: string;
-//   tech_tags: string[];
-//   type_tags: string[];
-//   self_configuring: boolean;
-//   project_path: string;
-//   github_url: string; // TODO - should be repo URL
-//   version: string;
-//   official: boolean; // TODO - remove this
-//   experience: string;
-//   configuration_groups: ConfigurationGroup[];
-//   defaultConfiguration: Configuration;
-//   defaultSchemas: Schema[];
-//   supportedRelations: RelationType[];
-//   supportedDatatypes: Datatype[];
-// }

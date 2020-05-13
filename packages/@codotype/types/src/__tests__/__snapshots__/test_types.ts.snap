@@ -2,28 +2,31 @@
 
 exports[`testing @codotype/types 1`] = `
 Object {
+  "addons": Object {},
   "datatype": null,
-  "datatypeOptions": Object {},
-  "default_value": null,
-  "description": "",
-  "id": null,
-  "identifier": "",
-  "label": "",
+  "defaultValue": null,
+  "id": "",
+  "identifiers": Object {
+    "camel": "",
+    "kebab": "",
+    "label": "",
+    "pascal": "",
+    "snake": "",
+  },
+  "internalNote": "",
   "locked": false,
-  "required": false,
-  "unique": false,
+  "source": "USER",
 }
 `;
 
 exports[`testing @codotype/types 2`] = `
 Object {
-  "as": "",
-  "id": null,
-  "related_schema_id": "",
+  "destinationSchemaAlias": "",
+  "destinationSchemaId": "",
+  "id": "",
   "required": false,
-  "reverse_as": "",
-  "reverse_relation_id": "",
-  "schema_id": "",
+  "source": "USER",
+  "sourceSchemaAlias": "",
   "type": null,
 }
 `;
@@ -31,19 +34,27 @@ Object {
 exports[`testing @codotype/types 3`] = `
 Object {
   "attributes": Array [],
-  "camel_case": "",
-  "camel_case_plural": "",
-  "class_name": "",
-  "class_name_plural": "",
-  "id": null,
-  "identifier": "",
-  "identifier_plural": "",
-  "label": "",
-  "label_plural": "",
+  "configuration": Object {},
+  "id": "",
+  "identifiers": Object {
+    "plural": Object {
+      "camel": "",
+      "kebab": "",
+      "label": "",
+      "pascal": "",
+      "snake": "",
+    },
+    "singular": Object {
+      "camel": "",
+      "kebab": "",
+      "label": "",
+      "pascal": "",
+      "snake": "",
+    },
+  },
   "locked": false,
   "relations": Array [],
   "removable": true,
-  "reverse_relations": Array [],
   "source": "USER",
 }
 `;

@@ -6,7 +6,7 @@ import { TokenPluralization, EMPTY_TOKEN_CASING } from "./token";
 
 export enum SchemaSource {
   USER = "USER",
-  GENERATOR = "GENERATOR",
+  GENERATOR = "GENERATOR"
 }
 
 export interface Schema {
@@ -18,28 +18,11 @@ export interface Schema {
   relations: Relation[];
   identifiers: TokenPluralization;
   configuration: ProjectConfiguration;
+  internalNote?: string; // TODO - set internalNote as non-nullable
 }
 
 // // // //
 
-// TODO - FIGURE OUT SCHEMA CONFIGURATION
-// SHOULD INCLUDE DEFAULT SCHEMAS
-// export interface SchemaConfigurationGroup {
-//   id: null | string;
-//   locked: boolean;
-//   attributes: any[]; // AttributeType[]
-//   relations: any[]; // RelationType[]
-//   configurationGroups: any[]; // ConfigurationGroup
-//   // defaultSchemas: any; // a Schemas array containing default schemas to load with the project.Learn more about default schema behavior here
-//   supportedDatatypes: any[]; // The datatypes supported by this generator.Only an array of DATATYPE_ * identifiers that correspond to values defined in @codotype/types are accepted.
-//   supportedRelations: any[]; // The relation types supported by this generator.Only an array of RELATION_TYPE_ * identifiers that correspond to values defined in @codotype/types are accepted.
-// }
-
-//
-// // // //
-
-// QUESTION - where should this be located?
-// ANSWER - this should live in react-components for now
 export const DEFAULT_SCHEMA: Schema = {
   id: "",
   locked: false,
@@ -50,10 +33,10 @@ export const DEFAULT_SCHEMA: Schema = {
   configuration: {},
   identifiers: {
     singular: {
-      ...EMPTY_TOKEN_CASING,
+      ...EMPTY_TOKEN_CASING
     },
     plural: {
-      ...EMPTY_TOKEN_CASING,
-    },
-  },
+      ...EMPTY_TOKEN_CASING
+    }
+  }
 };

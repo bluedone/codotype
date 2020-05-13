@@ -4,7 +4,7 @@ import { PropertyValidation } from "./property-validation";
 // // // //
 
 export enum ConfigurationOptionsType {
-  STRING_SELECT = "STRING_SELECT",
+  STRING_SELECT = "STRING_SELECT"
 }
 
 // // // //
@@ -16,6 +16,18 @@ export enum ConfigurationOptionsType {
 // TIME
 // DATETIME
 // JSON - low-priority, not really necessary
+// QUESTION - how can this reference Schema Metadata?
+//          - Support SCHEMA / ATTRIBUTE / RELATION types here?
+//          - Schema -> Stores SchemaID
+//          - Attribute -> Stores SchemaID + AttributeID
+//          - Relation -> Stores SchemaID + RelationID
+// ---------------
+// QUESTION - how can this support Configuration Metadata?
+//          - What's the use case? -> You could create a "Role" in one
+//              COLLECTION, and select it as a property for an instance
+//              in another COLLECTION. Makes sense - powerful.
+//          - It should be limited to COLLECTION - the property.type can be "COLLECTION_REFERENCE"
+//          - We'll also need to store the ID of the associated COLLECTION property - where should that be done?
 export enum OptionType {
   STRING = "STRING",
   NUMBER = "NUMBER",
@@ -23,7 +35,7 @@ export enum OptionType {
   DROPDOWN = "DROPDOWN",
   MULTI_DROPDOWN = "MULTI_DROPDOWN",
   COLLECTION = "COLLECTION",
-  INSTANCE = "INSTANCE",
+  INSTANCE = "INSTANCE"
 }
 
 export type OptionValue =
@@ -75,6 +87,12 @@ export interface DropdownOption {
 }
 
 // TODO - add variant to ConfigurationGroupProperty -> make list of use cases + mockups
+// TOOD - this should include a TokenPluralization -> required for `COLLECTION` type
+// TODO - scope out preview/template feature, update this interface accordingly in preparation
+// QUESTION - how are we storing the ID of the associated COLLECTION property?
+//          - Should probably be a special object in `defaultValue`:
+//          - { enabled: boolean; value: { collectionSource: UUID, collectionValue: UUID } }
+// TODO - build a constructor for this! Too much manual work
 export interface ConfigurationGroupProperty {
   label: string;
   identifier: string;
@@ -96,7 +114,7 @@ export interface ConfigurationGroupProperty {
 // // // //
 
 export enum PropertyLayoutVariant {
-  HIDDEN = "hidden",
+  HIDDEN = "hidden"
 }
 
 // LIST - lists all the properties. Documentation renders in a modal.
@@ -109,7 +127,7 @@ export enum SectionLayoutVariant {
   DOCS_6x6 = "DOCS_6x6",
   DETAIL_3x9 = "DETAIL_3x9",
   DETAIL_4x8 = "DETAIL_4x8",
-  DETAIL_6x6 = "DETAIL_6x6",
+  DETAIL_6x6 = "DETAIL_6x6"
 }
 
 // Defines the LayoutVariant type that's ONLY used for ConfigurationGroup
@@ -122,7 +140,7 @@ export enum GroupLayoutVariant {
   DOCS_6x6 = "DOCS_6x6",
   DETAIL_3x9 = "DETAIL_3x9",
   DETAIL_4x8 = "DETAIL_4x8",
-  DETAIL_6x6 = "DETAIL_6x6",
+  DETAIL_6x6 = "DETAIL_6x6"
 }
 
 // // // //

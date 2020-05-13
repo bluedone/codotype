@@ -9,9 +9,20 @@ export interface DatatypeMeta {
 
 // Defines datatype metadata
 export const DATATYPE_META: {
-  [key in Datatype]: DatatypeMeta
+  [key in Datatype]: DatatypeMeta;
 } = {
-
+  [Datatype.UUID]: {
+    value: Datatype.UUID,
+    label: "UUID",
+    description: "Unique identifiers",
+    icon: "fa fa-tag"
+  },
+  [Datatype.OBJECT_ID]: {
+    value: Datatype.OBJECT_ID,
+    label: "ObjectID",
+    description: "A MongoDB ObjectID",
+    icon: "fa fa-table"
+  },
   [Datatype.STRING]: {
     value: Datatype.STRING,
     label: "String",
@@ -127,6 +138,20 @@ export const DATATYPE_META: {
   // // // //
   // Array Datatypes
 
+  [Datatype.UUID_ARRAY]: {
+    value: Datatype.UUID_ARRAY,
+    label: "UUID Array",
+    description: "An array of UUIDs",
+    icon: "fa fa-tags"
+  },
+
+  [Datatype.OBJECT_ID_ARRAY]: {
+    value: Datatype.STRING_ARRAY,
+    label: "ObjectID Array",
+    description: "An array of ObjectIDs",
+    icon: "fa fa-tags"
+  },
+
   [Datatype.STRING_ARRAY]: {
     value: Datatype.STRING_ARRAY,
     label: "String Array",
@@ -225,6 +250,5 @@ export const DATATYPE_META: {
     label: "Image Upload",
     description: "Single image upload",
     icon: "fa fa-image"
-  },
+  }
 };
-
