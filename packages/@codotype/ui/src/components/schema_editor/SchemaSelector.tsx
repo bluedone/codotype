@@ -12,11 +12,22 @@ import styled from "styled-components";
 const StyledListItem = styled.li`
     cursor: pointer;
     border-left: 6px solid #adb5bd !important;
+
     &.selected {
         border-left: 6px solid #4582ec !important;
         font-weight: bold;
     }
 `;
+
+// ALT STYLE
+// const StyledListItem = styled.li`
+//     cursor: pointer;
+//     border-right: 6px solid #adb5bd !important;
+//     &.selected {
+//         border-right: 6px solid #4582ec !important;
+//         font-weight: bold;
+//     }
+// `;
 
 export function SchemaSelectorItem(props: {
     schema: Schema;
@@ -32,6 +43,7 @@ export function SchemaSelectorItem(props: {
                         "list-group-item list-group-item-action",
                         {
                             selected: props.selected,
+                            "text-muted": !props.selected,
                         },
                     )}
                     ref={provided.innerRef}
@@ -80,10 +92,10 @@ export function SchemaSelector(props: {
     onChange: (selectedSchema: Schema) => void;
 }) {
     return (
-        <div className="card">
-            <div className="card-header text-muted">
-                <strong>Schemas</strong>
-            </div>
+        <div className="card shadow-sm">
+            {/* <div className="card-header text-muted"> */}
+            {/* <strong>Schemas</strong> */}
+            {/* </div> */}
             <Droppable droppableId="schema-list">
                 {(provided: any) => {
                     return (

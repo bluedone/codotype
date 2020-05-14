@@ -17,13 +17,14 @@ export function SchemaDetailHeader(props: {
         <React.Fragment>
             <div className="row d-flex align-items-center">
                 <div className="col-lg-10">
-                    <h5 className="mb-0">
-                        {props.schema.identifiers.singular.label} Schema
+                    <h4 className="mb-0">
+                        {/* {props.schema.identifiers.singular.label} Schema */}
+                        {props.schema.identifiers.singular.label}
                         <SchemaEditButton
                             schema={props.schema}
                             onClick={props.onClickEdit}
                         />
-                    </h5>
+                    </h4>
                 </div>
                 <div className="col-lg-2 d-flex justify-content-end">
                     <SchemaDeleteButton
@@ -42,16 +43,16 @@ export function SchemaDetailHeader(props: {
                     />
                 </div>
             </div>
-            <div className="row mb-2">
+            <div className="row mb-2 mt-2">
                 <div className="col-lg-12">
-                    <small className="text-muted">
+                    <p className="text-muted">
                         Describe the{" "}
                         <strong>
                             {props.schema.identifiers.singular.label} Schema
                         </strong>{" "}
                         with <strong>Attributes</strong> and{" "}
                         <strong>Relations</strong>
-                    </small>
+                    </p>
                     {/* <hr /> */}
                 </div>
             </div>

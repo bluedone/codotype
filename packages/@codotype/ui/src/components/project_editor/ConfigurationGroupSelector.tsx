@@ -166,7 +166,9 @@ export function ConfigurationGroupSelector(props: {
                 {/* Render README tab */}
                 {viewingReadme && (
                     <div className="mt-4">
-                        <GeneratorStart generator={props.generatorMeta} />
+                        <div className="card card-body">
+                            <GeneratorStart generator={props.generatorMeta} />
+                        </div>
                     </div>
                 )}
 

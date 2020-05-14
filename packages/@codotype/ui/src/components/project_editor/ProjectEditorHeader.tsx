@@ -22,12 +22,13 @@ export function ProjectEditorHeader(props: {
         props.project.identifiers.label,
     );
     return (
-        <div className="row d-flex align-items-center">
+        // <div className="row d-flex align-items-center">
+        <div className="row d-flex align-items-end">
             <div className="col-lg-6">
                 <span className="d-flex align-items-center">
-                    <h4 className="mb-0 mr-2 d-flex">
+                    <h2 className="mb-0 mr-2 d-flex">
                         {props.project.identifiers.label}
-                    </h4>
+                    </h2>
                     <ProjectEditButton onClick={() => showModal(true)} />
                     <ProjectFormModal
                         show={showingModal}
@@ -67,9 +68,6 @@ export function ProjectEditorHeader(props: {
                 <ProjectDropdown onConfirmReset={props.onConfirmReset} />
                 {/* <ResetProjectButton onConfirmReset={props.onConfirmReset} /> */}
                 <GenerateCodeButton onClick={props.onClickGenerate} />
-            </div>
-            <div className="col-lg-12">
-                <hr />
             </div>
         </div>
     );

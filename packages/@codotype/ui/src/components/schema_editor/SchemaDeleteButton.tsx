@@ -14,6 +14,7 @@ const StyledButton = styled.button`
     cursor: pointer;
     color: #adb5bd;
     box-shadow: none;
+    color: #d9534f;
     &.hasReverse {
         &:hover {
             color: #adb5bd !important;
