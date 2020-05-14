@@ -84,3 +84,26 @@ h6 {
 //         @extend .shadow;
 //     }
 // }
+
+// // // //
+// // // //
+
+// Overrides
+$border-radius: 0.5rem !default;
+$border-radius-lg: 0.5rem !default;
+$border-radius-sm: 0.5rem !default;
+
+a,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+li,
+span,
+small,
+strong {
+    letter-spacing: 0.025rem;
+}

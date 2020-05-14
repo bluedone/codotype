@@ -79,7 +79,7 @@ export function SchemaPreview(props: { schema: Schema; schemas: Schema[] }) {
 
     return (
         <div className="row">
-            <div className="col-lg-12">
+            {/* <div className="col-lg-12">
                 <p className="mb-0 text-muted">
                     <span className="d-flex align-items-center justify-content-between mb-1">
                         <strong className="m-0">Preview</strong>
@@ -90,10 +90,13 @@ export function SchemaPreview(props: { schema: Schema; schemas: Schema[] }) {
                         />
                     </span>
                 </p>
-            </div>
+            </div> */}
             <div className="col-lg-12">
                 <div className="rounded bg-dark" style={{ overflow: "hidden" }}>
-                    <pre className="px-3 pt-3 pb-3 mb-0">
+                    <pre
+                        className="px-3 pt-3 pb-3 mb-0"
+                        style={{ fontSize: "1rem" }}
+                    >
                         <small className="mb-0">
                             <div className="text-light">{content}</div>
                         </small>

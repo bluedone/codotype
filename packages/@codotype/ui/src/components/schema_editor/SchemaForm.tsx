@@ -4,6 +4,7 @@ import {
     validateTokenPluralization,
     sanitizeLabel,
 } from "@codotype/util";
+import classnames from "classnames";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLightbulb } from "@fortawesome/free-regular-svg-icons";
 import { TokenPluralization } from "@codotype/types";
@@ -14,15 +15,35 @@ import { faAsterisk } from "@fortawesome/free-solid-svg-icons";
 function TokenCell(props: {
     token: string;
     value: string;
+    valuePlural: string;
     validationFailures: any;
 }) {
-    const { validationFailures, token, value } = props;
+    const { validationFailures, token, value, valuePlural } = props;
+    const [showPlural, setShowPlural] = React.useState<boolean>(false);
     const hasError: boolean = validationFailures[token];
     const isEmpty: boolean = value === "";
-    const className = hasError ? "text-danger" : "text-success";
+
+    // Gets display value
+    let displayValue: string = "...";
+    if (showPlural && valuePlural) {
+        displayValue = valuePlural;
+    } else if (!showPlural && value) {
+        displayValue = value;
+    }
     return (
-        <td className={className}>
-            {value || "..."}
+        <td
+            className={classnames("d-flex justify-content-end", {
+                "text-danger": hasError,
+                "text-success": !hasError,
+            })}
+            onMouseEnter={() => {
+                setShowPlural(true);
+            }}
+            onMouseOut={() => {
+                setShowPlural(false);
+            }}
+        >
+            {displayValue || "..."}
             {hasError && !isEmpty && (
                 <small className="ml-1 text-danger">
                     <FontAwesomeIcon icon={faAsterisk} />
@@ -53,117 +74,77 @@ export function MetaPreview(props: MetaPreviewProps) {
     return (
         <tbody>
             <tr>
-                <td className="infoCol">
+                {/* <td className="infoCol">
                     <i
                         className="fa fa-fw text-secondary fa-question-circle"
                         title='"Label" is the user-facing token for this model - title-casing and spaces.'
                     />
-                </td>
+                </td> */}
                 <td>Label</td>
                 <TokenCell
                     token="label"
                     value={tokens.singular.label}
+                    valuePlural={tokens.plural.label}
                     validationFailures={validationFailures}
                 />
             </tr>
             <tr>
-                <td></td>
-                <td>Label Plural</td>
-                <TokenCell
-                    token="label"
-                    value={tokens.plural.label}
-                    validationFailures={validationFailures}
-                />
-            </tr>
-            <tr>
-                <td className="infoCol">
+                {/* <td className="infoCol">
                     <i
                         className="fa fa-fw text-secondary fa-question-circle"
                         title='"Snake Case" is the lowecase, underscored token for this model'
                     />
-                </td>
+                </td> */}
                 <td>Snake Case</td>
                 <TokenCell
                     token="snake"
                     value={tokens.singular.snake}
+                    valuePlural={tokens.plural.snake}
                     validationFailures={validationFailures}
                 />
             </tr>
             <tr>
-                <td></td>
-                <td>Snake Case Plural</td>
-                <TokenCell
-                    token="snake"
-                    value={tokens.plural.snake}
-                    validationFailures={validationFailures}
-                />
-            </tr>
-            <tr>
-                <td className="infoCol">
+                {/* <td className="infoCol">
                     <i
                         className="fa fa-fw text-secondary fa-question-circle"
                         title='"Camel Case" is the mixed-case whitespace-free token for this model'
                     />
-                </td>
+                </td> */}
                 <td>Camel Case</td>
                 <TokenCell
                     token="camel"
                     value={tokens.singular.camel}
+                    valuePlural={tokens.plural.camel}
                     validationFailures={validationFailures}
                 />
             </tr>
             <tr>
-                <td></td>
-                <td>Camel Case Plural</td>
-                <TokenCell
-                    token="camel"
-                    value={tokens.plural.camel}
-                    validationFailures={validationFailures}
-                />
-            </tr>
-            <tr>
-                <td className="infoCol">
+                {/* <td className="infoCol">
                     <i
                         className="fa fa-fw text-secondary fa-question-circle"
                         title='"Pascal Case" is title-cased whitespace-free token for this model'
                     />
-                </td>
+                </td> */}
                 <td>Pascal Case</td>
                 <TokenCell
                     token="pascal"
                     value={tokens.singular.pascal}
+                    valuePlural={tokens.plural.pascal}
                     validationFailures={validationFailures}
                 />
             </tr>
             <tr>
-                <td></td>
-                <td>Pascal Case Plural</td>
-                <TokenCell
-                    token="pascal"
-                    value={tokens.plural.pascal}
-                    validationFailures={validationFailures}
-                />
-            </tr>
-            <tr>
-                <td className="infoCol">
+                {/* <td className="infoCol">
                     <i
                         className="fa fa-fw text-secondary fa-question-circle"
                         title='"Kebab Case" is dash-erized whitespace-free token for this model'
                     />
-                </td>
+                </td> */}
                 <td>Kebab Case</td>
                 <TokenCell
                     token="kebab"
                     value={tokens.singular.kebab}
-                    validationFailures={validationFailures}
-                />
-            </tr>
-            <tr>
-                <td></td>
-                <td>Kebab Case Plural</td>
-                <TokenCell
-                    token="kebab"
-                    value={tokens.plural.kebab}
+                    valuePlural={tokens.plural.kebab}
                     validationFailures={validationFailures}
                 />
             </tr>
@@ -264,6 +245,14 @@ export function SchemaForm(props: SchemaFormProps) {
                     before proceeding
                 </p>
 
+                <div className="btn-group w-100 mt-2">
+                    <button className="btn btn-sm btn-outline-dark w-50">
+                        Singular
+                    </button>
+                    <button className="btn btn-sm btn-outline-dark w-50">
+                        Plural
+                    </button>
+                </div>
                 <table className="table table-sm mb-0 mt-2">
                     <MetaPreview label={label} />
                 </table>

@@ -41,7 +41,8 @@ export function SchemaDetail(props: SchemaDetailProps) {
     const { schemaEditorConfiguration } = props.generatorMeta;
 
     return (
-        <div className="row" style={{ borderLeft: "1px solid lightgrey" }}>
+        // <div className="row" style={{ borderLeft: "1px solid lightgrey" }}>
+        <div className="row">
             <div className="col-sm-12">
                 <SchemaDetailHeader
                     schema={props.schema}
@@ -85,8 +86,7 @@ export function SchemaDetail(props: SchemaDetailProps) {
                                     props.onChange(updatedSchema);
                                 }}
                             />
-                        </div>
-                        <div className="pl-md-0 col-sm-12 col-md-6 col-lg-6">
+                            <hr />
                             <RelationEditor
                                 selectedSchema={props.schema}
                                 relationReferences={inflatedSchema.relations}
@@ -107,20 +107,19 @@ export function SchemaDetail(props: SchemaDetailProps) {
                                 }}
                             />
                         </div>
-                        <div className="col-sm-6">
-                            <div className="mt-2">
-                                <SchemaPreview
-                                    schema={props.schema}
-                                    schemas={props.schemas}
-                                />
-                            </div>
-                        </div>
                         <div className="pl-md-0 col-sm-6">
+                            <SchemaPreview
+                                schema={props.schema}
+                                schemas={props.schemas}
+                            />
+                            <hr />
                             <SchemaIncomingRelations
                                 inflatedSchema={inflatedSchema}
                                 onSelectSchema={props.onSelectSchema}
                             />
                         </div>
+                        {/* <div className="col-sm-12 col-md-6 col-lg-6"></div> */}
+                        {/* <div className="pl-md-0 col-sm-6"></div> */}
                     </div>
                 </ConfigurationGroupSelector>
             </div>

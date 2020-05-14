@@ -15,7 +15,7 @@ interface AttributeListItemLabelProps {
 export function AttributeListItemLabel(props: AttributeListItemLabelProps) {
     const { attribute } = props;
     return (
-        <small>
+        <React.Fragment>
             {/* DatatypeIcon + Tooltip */}
             <OverlayTrigger
                 placement="left"
@@ -63,6 +63,6 @@ export function AttributeListItemLabel(props: AttributeListItemLabelProps) {
                     </span>
                 </OverlayTrigger>
             )}
-        </small>
+        </React.Fragment>
     );
 }

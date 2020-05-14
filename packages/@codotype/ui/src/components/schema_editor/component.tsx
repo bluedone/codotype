@@ -262,52 +262,57 @@ export function SchemaEditorLayout(props: {
                     />
                 </DragDropContext>
             </div>
-            <div className="col-lg-8">
-                <SchemaDetail
-                    schema={selectedSchema}
-                    schemas={state.schemas}
-                    generatorMeta={props.generatorMeta}
-                    onSelectSchema={(nextSelectedSchemaId: UUID) => {
-                        setSelectedSchemaId(nextSelectedSchemaId);
-                    }}
-                    onChange={(updatedSchema: Schema) => {
-                        // Defines updatedSchemas to include `updatedSchema`
-                        const updatedSchemas: Schema[] = state.schemas.map(
-                            (s: Schema) => {
-                                if (s.id === selectedSchemaId) {
-                                    return updatedSchema;
-                                }
-                                return s;
-                            },
-                        );
+            <div className="col-lg-8 pl-md-0">
+                <div
+                    className="card card-body shadow-sm"
+                    // style={{ borderLeft: "6px solid #4e92fc" }}
+                >
+                    <SchemaDetail
+                        schema={selectedSchema}
+                        schemas={state.schemas}
+                        generatorMeta={props.generatorMeta}
+                        onSelectSchema={(nextSelectedSchemaId: UUID) => {
+                            setSelectedSchemaId(nextSelectedSchemaId);
+                        }}
+                        onChange={(updatedSchema: Schema) => {
+                            // Defines updatedSchemas to include `updatedSchema`
+                            const updatedSchemas: Schema[] = state.schemas.map(
+                                (s: Schema) => {
+                                    if (s.id === selectedSchemaId) {
+                                        return updatedSchema;
+                                    }
+                                    return s;
+                                },
+                            );
 
-                        // Updates local state
-                        setState({
-                            lastUpdatedAt: Date.now(),
-                            schemas: updatedSchemas,
-                        });
-                    }}
-                    onClickEdit={() => {
-                        setShowEditModal(true);
-                    }}
-                    onConfirmDelete={() => {
-                        // Defines updatedSchemas without `selectedSchema`
-                        const updatedSchemas: Schema[] = state.schemas.filter(
-                            (s: Schema) => {
-                                return s.id !== selectedSchemaId;
-                            },
-                        );
+                            // Updates local state
+                            setState({
+                                lastUpdatedAt: Date.now(),
+                                schemas: updatedSchemas,
+                            });
+                        }}
+                        onClickEdit={() => {
+                            setShowEditModal(true);
+                        }}
+                        onConfirmDelete={() => {
+                            // Defines updatedSchemas without `selectedSchema`
+                            const updatedSchemas: Schema[] = state.schemas.filter(
+                                (s: Schema) => {
+                                    return s.id !== selectedSchemaId;
+                                },
+                            );
 
-                        // Updates local state
-                        setState({
-                            lastUpdatedAt: Date.now(),
-                            schemas: updatedSchemas,
-                        });
+                            // Updates local state
+                            setState({
+                                lastUpdatedAt: Date.now(),
+                                schemas: updatedSchemas,
+                            });
 
-                        // Sets selectedSchemaId to null
-                        setSelectedSchemaId(null);
-                    }}
-                />
+                            // Sets selectedSchemaId to null
+                            setSelectedSchemaId(null);
+                        }}
+                    />
+                </div>
 
                 {/* Render SchemaForm + SchemaFormModal for UPDATE Schema */}
                 <SchemaFormModal
