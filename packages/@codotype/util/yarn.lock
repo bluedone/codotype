@@ -197,7 +197,7 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@codotype/types@0.8.0-canary.4":
+"@codotype/types@0.8.0-canary.5":
   version "0.8.0-canary.4"
   resolved "https://registry.yarnpkg.com/@codotype/types/-/types-0.8.0-canary.4.tgz#fc1fb8dd0a4c6727393bda61fe10479c81a17ec5"
   integrity sha512-WdCpz02QK6APErad0DKSg+pe6tiW7ZgFW2WeMBDkTndTNGf9FN+81KGefBW/6orCY5T1qdsYrNdP4Mf/IR4DwA==
@@ -3817,6 +3817,11 @@ uuid@^3.3.2:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
   integrity sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==
+
+uuid@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.0.0.tgz#bc6ccf91b5ff0ac07bbcdbf1c7c4e150db4dbb6c"
+  integrity sha512-jOXGuXZAWdsTH7eZLtyXMqUb9EcWMGZNbL9YcGBJl4MH4nrxHmZJhEHvyLFrkxo+28uLb/NYRcStH48fnD0Vzw==
 
 validate-npm-package-license@^3.0.1:
   version "3.0.4"

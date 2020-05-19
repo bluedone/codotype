@@ -1,4 +1,5 @@
 import { buildTokenPluralization } from "./buildTokenPluralization";
+import { makeUniqueId } from "./makeUniqueId";
 import {
   RelationType,
   Schema,
@@ -6,7 +7,7 @@ import {
   RelationReference,
   InflatedSchema,
   Project,
-  InflatedProject,
+  InflatedProject
 } from "@codotype/types";
 
 // // // //
@@ -27,7 +28,7 @@ export function buildRelationReferences(params: {
         .map(
           (r: Relation): RelationReference => {
             return {
-              id: Math.random().toString(), // TODO - add UUID function to UTIL
+              id: makeUniqueId(),
               type: RelationType.TO_ONE,
               sourceSchemaId: nextSchema.id,
               destinationSchemaId: schema.id,
@@ -39,19 +40,19 @@ export function buildRelationReferences(params: {
                     ...buildTokenPluralization(
                       r.destinationSchemaAlias ||
                         nextSchema.identifiers.singular.label
-                    ),
-                  },
+                    )
+                  }
                 },
                 destination: {
                   canonical: { ...schema.identifiers },
                   alias: buildTokenPluralization(
                     r.sourceSchemaAlias || schema.identifiers.singular.label
-                  ),
-                },
-              },
+                  )
+                }
+              }
             };
           }
-        ),
+        )
     ];
   }, []);
 }
@@ -71,11 +72,11 @@ export function buildInflatedRelations(params: {
       .map(
         (r: Relation): RelationReference => {
           const nextSchema: Schema = schemas.find(
-            (s) => s.id === r.destinationSchemaId
+            s => s.id === r.destinationSchemaId
           );
 
           return {
-            id: Math.random().toString(), // TODO - add UUID function to UTIL
+            id: makeUniqueId(),
             type: RelationType.TO_ONE,
             sourceSchemaId: schema.id,
             destinationSchemaId: nextSchema.id,
@@ -85,7 +86,7 @@ export function buildInflatedRelations(params: {
                 canonical: { ...schema.identifiers },
                 alias: buildTokenPluralization(
                   r.sourceSchemaAlias || schema.identifiers.singular.label
-                ),
+                )
               },
               destination: {
                 canonical: { ...nextSchema.identifiers },
@@ -93,13 +94,13 @@ export function buildInflatedRelations(params: {
                   ...buildTokenPluralization(
                     r.destinationSchemaAlias ||
                       nextSchema.identifiers.singular.label
-                  ),
-                },
-              },
-            },
+                  )
+                }
+              }
+            }
           };
         }
-      ),
+      )
   ];
 }
 
@@ -118,10 +119,10 @@ export function inflateSchema(params: {
     relations: buildInflatedRelations({ schema, schemas }),
     attributes: schema.attributes,
     identifiers: {
-      ...schema.identifiers,
+      ...schema.identifiers
     },
     references: buildRelationReferences({ schema, schemas }),
-    configuration: schema.configuration, // Question - does anything need to be done for the configuration?
+    configuration: schema.configuration // Question - does anything need to be done for the configuration?
   };
 }
 
@@ -135,7 +136,7 @@ export function inflateSchemas(params: {
     (s: Schema): InflatedSchema =>
       inflateSchema({
         schemas: params.schemas,
-        schema: s,
+        schema: s
       })
   );
 }
@@ -151,6 +152,6 @@ export function inflateProject(params: { project: Project }): InflatedProject {
     configuration: project.configuration,
     generatorId: project.generatorId,
     identifiers: project.identifiers,
-    generatorVersion: project.generatorVersion,
+    generatorVersion: project.generatorVersion
   };
 }

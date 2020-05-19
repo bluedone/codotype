@@ -73,6 +73,41 @@ print(foo)
 
 `;
 
+export const generatorReadme = `
+
+# AWS CDK Starter
+
+**Generate full-stack applications with the AWS Cloud Development Kit**
+
+
+### CDK Code
+
+The CDK deployment is configured using TypeScript:
+\`\`\`ts
+
+import cdk = require("@aws-cdk/core");
+
+// // // //
+
+export class AppSyncCdkStack extends cdk.Stack {
+  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+    // What does this do??
+    super(scope, id, props);
+  }
+}
+
+// Defines CDK Stack
+const app = new cdk.App();
+new AppSyncCdkStack(app, "AppSyncGraphQLDynamoDBExample");
+app.synth();
+
+\`\`\`
+
+The stack can be customized to meet your requirements
+
+
+`;
+
 // // // //
 
 export const stories: [string, string][] = [

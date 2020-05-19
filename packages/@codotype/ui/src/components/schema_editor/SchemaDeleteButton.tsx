@@ -1,7 +1,7 @@
 import * as React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Schema } from "@codotype/types";
-import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { Schema, SchemaSource } from "@codotype/types";
+import { faTrashAlt, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import styled from "styled-components";
 import classnames from "classnames";
@@ -50,6 +50,25 @@ export function SchemaDeleteButton(props: {
 
     // Defines boolean indicating whether or not the schema can be removed
     const disableSubmit: boolean = inflatedSchema.references.length > 0;
+
+    if (schema.source === SchemaSource.GENERATOR && schema.locked) {
+        return (
+            <OverlayTrigger
+                placement="left"
+                overlay={
+                    <Tooltip id="auto-generated-schema-tooltip">
+                        The <strong>{schema.identifiers.singular.label}</strong>{" "}
+                        Schema is auto-generated and may not be edited.
+                    </Tooltip>
+                }
+            >
+                <span className="badge badge-success ml-2">
+                    <FontAwesomeIcon className="mr-2" icon={faInfoCircle} />
+                    Auto-Generated
+                </span>
+            </OverlayTrigger>
+        );
+    }
 
     let tooltipContent = (
         <React.Fragment>

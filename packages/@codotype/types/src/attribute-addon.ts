@@ -12,6 +12,7 @@ import { PropertyValidation } from "./property-validation";
 // TODO - should this support a layoutVariant?
 // TODO - wire up `validations` and `filters` here -> see `ConfigurationGroupProperty` for details
 // TODO - add icon support for this -> ENUM of "asterisk" | "snowflake" | etc. -> match icons up to addons
+// QUESTION - should this just wrap a ConfigurationGroupProperty instance?
 export interface AttributeAddon {
   id: UUID;
   label: string; // "Unique"

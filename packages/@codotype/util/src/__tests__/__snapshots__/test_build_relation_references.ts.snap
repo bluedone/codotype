@@ -4,7 +4,7 @@ exports[`/lib/buildRelationReferences.js one word label 1`] = `
 Array [
   Object {
     "destinationSchemaId": "12345",
-    "id": "0.12514354142998707",
+    "id": "daeda036-2332-4c12-af70-28902185f7f9",
     "identifiers": Object {
       "destination": Object {
         "alias": Object {
@@ -106,7 +106,7 @@ Object {
   "references": Array [
     Object {
       "destinationSchemaId": "12345",
-      "id": "0.6895551897600887",
+      "id": "c8a2e20f-2dbf-47c5-87e2-9b2a004ee7e5",
       "identifiers": Object {
         "destination": Object {
           "alias": Object {
@@ -211,7 +211,7 @@ Array [
     "references": Array [
       Object {
         "destinationSchemaId": "12345",
-        "id": "0.9082268226056438",
+        "id": "f6a58b43-be58-4172-9323-70b06e12b647",
         "identifiers": Object {
           "destination": Object {
             "alias": Object {
@@ -350,7 +350,7 @@ Array [
     "relations": Array [
       Object {
         "destinationSchemaId": "12345",
-        "id": "0.010669074478546703",
+        "id": "0b4bef9f-69e5-46a9-9ecd-b22238349ad9",
         "identifiers": Object {
           "destination": Object {
             "alias": Object {

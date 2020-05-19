@@ -40,11 +40,11 @@ export function SchemaIncomingRelations(props: SchemaIncomingRelationsProps) {
                                 No Incoming Relations
                             </strong>
                             <br />
-                            <small className="text-muted">
+                            <p className="text-muted mb-0">
                                 Relations which reference the{" "}
                                 {inflatedSchema.identifiers.singular.label}{" "}
                                 Schema
-                            </small>
+                            </p>
                         </li>
                     )}
                     {inflatedSchema.references.map(r => {
@@ -69,13 +69,11 @@ export function SchemaIncomingRelations(props: SchemaIncomingRelationsProps) {
                                         props.onSelectSchema(r.sourceSchemaId);
                                     }}
                                 >
-                                    <small>
-                                        <RelationBadge
-                                            slim
-                                            direction="in"
-                                            relation={r}
-                                        />
-                                    </small>
+                                    <RelationBadge
+                                        slim
+                                        direction="in"
+                                        relation={r}
+                                    />
                                 </li>
                             </OverlayTrigger>
                         );

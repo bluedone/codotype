@@ -25,7 +25,12 @@ import { ConfigurationCollectionInput } from "./ConfigurationCollectionInput";
 export function shouldRenderDocumentationModal(
     configurationGroup: ConfigurationGroup,
 ): boolean {
-    const { layoutVariant } = configurationGroup;
+    const { layoutVariant, documentation } = configurationGroup;
+
+    // Return false if documentation is not defined
+    if (!documentation) {
+        return false;
+    }
 
     // Return false for DOCS_* layout variants
     if (
@@ -49,6 +54,7 @@ interface ConfigurationInputProps {
     configurationGroup: ConfigurationGroup;
     onChange: (updatedVal: OptionValueInstance) => void;
 }
+// TODO - add prop here to adjust styles when rendered for a schema instead of a project
 export function ConfigurationInput(props: ConfigurationInputProps) {
     const { configurationGroup } = props;
 

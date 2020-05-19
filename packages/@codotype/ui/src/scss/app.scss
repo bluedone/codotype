@@ -93,6 +93,10 @@ $border-radius: 0.5rem !default;
 $border-radius-lg: 0.5rem !default;
 $border-radius-sm: 0.5rem !default;
 
+$component-active-color: $gray-700 !default;
+$component-active-bg: lighten($blue, 20%) !default;
+// $component-active-bg: $blue !default;
+
 a,
 h1,
 h2,

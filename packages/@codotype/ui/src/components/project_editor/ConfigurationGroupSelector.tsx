@@ -90,7 +90,7 @@ export function ConfigurationGroupSelector(props: {
     return (
         <div className="row">
             <div className="col-lg-12">
-                <ul className="nav nav-tabs">
+                <ul className="nav nav-pills">
                     <ConfigurationGroupTab
                         onClick={() => {
                             setViewingReadme(true);

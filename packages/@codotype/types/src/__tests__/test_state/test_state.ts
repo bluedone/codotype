@@ -33,6 +33,7 @@ import {
   chartjsApiOption
 } from "./configuration-properties";
 import { syntaxHighlighting } from "./documentation";
+import { ATTRIBUTE_ADDON_PRIMARY_KEY } from "../../attribute-addon";
 
 // // // //
 
@@ -450,7 +451,6 @@ export const cdkGeneratorMeta: GeneratorMeta = {
   schemaEditorConfiguration: {
     documentation: "",
     configurationGroups: [],
-    // configurationGroups: [ComponentBuilderConfigurationGroup],
     supportedDatatypes: [], // The datatypes supported by this generator.Only an array of DATATYPE_ * identifiers that correspond to values defined in @codotype/types are accepted.
     supportedRelations: [], // The relation types supported by this generator.Only an array of RELATION_TYPE_ * identifiers that correspond to values defined in @codotype/types are accepted.
     defaultSchemas: [],
@@ -608,7 +608,26 @@ export const dummyGeneratorMeta: GeneratorMeta = {
       Datatype.TIMESTAMP
     ], // The datatypes supported by this generator.Only an array of DATATYPE_ * identifiers that correspond to values defined in @codotype/types are accepted.
     supportedRelations: [RelationType.TO_ONE, RelationType.TO_MANY], // The relation types supported by this generator.Only an array of RELATION_TYPE_ * identifiers that correspond to values defined in @codotype/types are accepted.
-    defaultAttributes: [],
+    defaultAttributes: [
+      {
+        id: "UUID-Attribute",
+        identifiers: {
+          label: "ID",
+          snake: "id",
+          camel: "id",
+          pascal: "Id",
+          kebab: "id"
+        },
+        addons: {
+          [ATTRIBUTE_ADDON_PRIMARY_KEY.identifier]: true
+        },
+        datatype: Datatype.UUID,
+        locked: true,
+        source: SchemaSource.GENERATOR,
+        internalNote: "",
+        defaultValue: null
+      }
+    ],
     defaultRelations: [],
     attributeAddons: [],
     enableAttributeDefaultValue: true

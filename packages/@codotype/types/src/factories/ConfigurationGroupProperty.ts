@@ -29,9 +29,11 @@ interface ConfigurationGroupPropertyBuilderParams {
   validations?: PropertyValidation[];
 }
 
+// TODO - this should be moved into @codotype/util
+// b.c this depends on `makeUniqueId` from util, but util depends on types - can't have circular dependency
 export class ConfigurationGroupPropertyBuilder
   implements ConfigurationGroupProperty {
-  id: string = Math.random().toString();
+  id: string = Math.random().toString(); // TODO - replace with makeUniqueId from @codotype/util
   label: string;
   identifier: string;
   type: OptionType;
