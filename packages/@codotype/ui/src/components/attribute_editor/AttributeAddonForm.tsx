@@ -7,6 +7,7 @@ import {
     Attribute,
     OptionType,
     Datatype,
+    DropdownOption,
 } from "@codotype/types";
 import { AttributeInput } from "./AttributeFormModal";
 
@@ -96,6 +97,46 @@ export function AttributeAddonForm(props: {
                                     }}
                                     checked={addonValue}
                                 />
+                            </FormGroup>
+                        </div>
+                    );
+                }
+
+                // Dropdown
+                if (a.propertyType === OptionType.DROPDOWN) {
+                    // Form for boolean addon
+                    const addonValue: string = String(
+                        props.value[a.identifier],
+                    );
+
+                    return (
+                        <div className="col-lg-6 col-sm-12">
+                            <FormGroup label={a.label} help={a.description}>
+                                <select
+                                    className="form-control"
+                                    value={addonValue}
+                                    onChange={e => {
+                                        props.onChange({
+                                            ...props.value,
+                                            [a.identifier]:
+                                                e.currentTarget.value,
+                                        });
+                                    }}
+                                >
+                                    {!a.required && <option></option>}
+                                    {a.dropdownOptions.map(
+                                        (d: DropdownOption) => {
+                                            return (
+                                                <option
+                                                    value={d.value}
+                                                    key={d.value}
+                                                >
+                                                    {d.label}
+                                                </option>
+                                            );
+                                        },
+                                    )}
+                                </select>
                             </FormGroup>
                         </div>
                     );

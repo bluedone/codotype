@@ -11,12 +11,10 @@ interface RelationListEmptyProps {
 export function RelationListEmpty(props: RelationListEmptyProps) {
     return (
         <div className="card-body text-center">
-            <strong className="mb-0 mt-1 text-muted d-block">
-                No Relations added yet
-            </strong>
-            <small className="text-muted mt-2">
+            <h5 className="mb-0 mt-1 text-muted">No Relations added yet</h5>
+            <p className="text-muted mt-2 mb-0">
                 Relations define properties on this Schema
-            </small>
+            </p>
             <div className="row d-flex justify-content-center mt-2">
                 <div className="col-lg-6">
                     <button

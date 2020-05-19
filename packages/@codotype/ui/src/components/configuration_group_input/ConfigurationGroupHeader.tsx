@@ -18,9 +18,9 @@ export function ConfigurationGroupHeader(props: {
         <div className="row">
             <div className="col-sm-12">
                 <span className="d-flex align-items-center">
-                    <p className="lead mb-0 mr-3">
+                    <h4 className="mb-0 mr-2">
                         {props.configurationGroup.label}
-                    </p>
+                    </h4>
                     {enableDocumentationModal && (
                         <DocumentationModal
                             header={props.configurationGroup.label}
@@ -30,9 +30,9 @@ export function ConfigurationGroupHeader(props: {
                         />
                     )}
                     {/* <br className="d-none d-sm-block d-md-none" /> */}
-                    <small className="ml-2 text-muted">
+                    <p className="ml-2 text-muted mb-0">
                         {props.configurationGroup.description}
-                    </small>
+                    </p>
                 </span>
                 <hr />
             </div>

@@ -80,8 +80,16 @@ export function SchemaEditorLayout(props: {
         // Defines new schema
         const newSchema: Schema = {
             id: Math.random().toString(), // TODO - replace with UUID function from util
-            attributes: [],
-            relations: [],
+            attributes: [
+                // TODO - do a proper deep-copy here
+                ...props.generatorMeta.schemaEditorConfiguration
+                    .defaultAttributes,
+            ],
+            relations: [
+                // TODO - do a proper deep-copy here
+                ...props.generatorMeta.schemaEditorConfiguration
+                    .defaultRelations,
+            ],
             removable: true,
             locked: false,
             source: SchemaSource.USER,
@@ -91,6 +99,8 @@ export function SchemaEditorLayout(props: {
                     .configurationGroups,
             ),
         };
+
+        console.log(newSchema);
 
         // Defines updated schemas, including NEW schema
         const updatedSchemas: Schema[] = [...state.schemas, newSchema];
@@ -222,7 +232,9 @@ export function SchemaEditorLayout(props: {
             <div className="col-lg-4">
                 <SchemaNewButton
                     onClick={() => {
-                        setShowModal(true);
+                        if (showModal === false) {
+                            setShowModal(true);
+                        }
                     }}
                 />
 

@@ -7,6 +7,7 @@ import {
     SchemaSource,
     AttributeAddon,
     AttributeAddonValue,
+    Schema,
 } from "@codotype/types";
 import { Droppable, DragDropContext } from "react-beautiful-dnd";
 import { AttributeFormModal, AttributeInput } from "./AttributeFormModal";
@@ -16,29 +17,7 @@ import { AttributeForm } from "./AttributeForm";
 import { AttributeListEmpty } from "./AttributeListEmpty";
 import { buildTokenCasing } from "@codotype/util";
 import { validateAttribute } from "./validateAttribute";
-import Hotkeys from "react-hot-keys";
-
-// // // //
-
-export function HotkeysDemo(props: {
-    keyName: string;
-    onKeyDown: () => void;
-    // children: React.ReactNode;
-}) {
-    return (
-        <Hotkeys
-            keyName={props.keyName}
-            onKeyDown={args => {
-                // console.log(args);
-                props.onKeyDown();
-            }}
-            // onKeyUp={args => {
-            //     // console.log(args);
-            // }}
-        />
-    );
-    // {/* <div style={{ padding: "50px" }}>{"Hotkey"}</div> */}
-}
+import { Hotkey } from "../hotkey";
 
 // // // //
 
@@ -338,7 +317,7 @@ export function AttributeEditor(props: AttributeEditorProps) {
                     }}
                 />
             )}
-            <HotkeysDemo
+            <Hotkey
                 keyName="shift+a"
                 onKeyDown={() => {
                     setAttributeInput({

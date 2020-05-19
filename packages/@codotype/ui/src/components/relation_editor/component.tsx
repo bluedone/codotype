@@ -13,6 +13,7 @@ import { RelationDeleteModal } from "./RelationDeleteModal";
 import { RelationListItem } from "./RelationListItem";
 import { RelationForm } from "./RelationForm";
 import { RelationListEmpty } from "./RelationListEmpty";
+import { Hotkey } from "../hotkey";
 
 // // // //
 
@@ -79,7 +80,15 @@ export function RelationEditor(props: RelationEditorProps) {
 
     return (
         <div className="card">
+            <Hotkey
+                keyName="shift+r"
+                onKeyDown={() => {
+                    setRelationInput({ ...DEFAULT_RELATION });
+                }}
+            />
+
             <SortableListHeader
+                tooltip={"shift+r"}
                 label="Relations"
                 onClick={() => {
                     setRelationInput({ ...DEFAULT_RELATION });

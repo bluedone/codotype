@@ -62,13 +62,11 @@ export function RelationListItem(props: {
                 >
                     <div className="row d-flex align-items-center">
                         <div className="col-sm-10">
-                            <small>
-                                <RelationBadge
-                                    slim
-                                    direction="out"
-                                    relation={relation}
-                                />
-                            </small>
+                            <RelationBadge
+                                slim
+                                direction="out"
+                                relation={relation}
+                            />
                         </div>
                         <div className="col-sm-2 text-right d-flex controls justify-content-end">
                             <Dropdown alignRight className="no-caret">
