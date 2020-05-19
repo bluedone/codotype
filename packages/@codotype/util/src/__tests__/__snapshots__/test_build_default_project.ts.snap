@@ -1,0 +1,318 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`/buildDefaultProject cdkGeneratorMeta 1`] = `
+Object {
+  "configuration": Object {
+    "api_examples": Object {
+      "twitter": false,
+    },
+    "component_builder_side_by_side": Object {
+      "twitter": false,
+    },
+    "components_group": Object {
+      "componentName": "",
+      "dropdownTest": "",
+      "numberTest": "",
+      "tests": Object {
+        "enabled": true,
+        "value": Object {
+          "componentName": "",
+          "dropdownTest": "",
+          "nested_instance": Object {
+            "enabled": true,
+            "value": Object {
+              "componentName": "",
+              "dropdownTest": "",
+              "random_instance": Object {
+                "enabled": true,
+                "value": Object {
+                  "dropdownTest": "",
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+    "lambda_builder": Object {
+      "lambda_collection": Object {
+        "enabled": true,
+        "value": Array [
+          Object {
+            "lambdaName": "",
+            "language": "",
+          },
+        ],
+      },
+    },
+  },
+  "generatorId": "aws_cdk_starter",
+  "generatorVersion": "0.1.0",
+  "id": "",
+  "identifiers": Object {
+    "camel": "newProject",
+    "kebab": "new-project",
+    "label": "New Project",
+    "pascal": "NewProject",
+    "snake": "new_project",
+  },
+  "schemas": Array [],
+}
+`;
+
+exports[`/buildDefaultProject dummyGeneratorMeta 1`] = `
+Object {
+  "configuration": Object {
+    "api_examples": Object {
+      "aviary": false,
+      "chartjs": false,
+      "clockwork_sms": false,
+      "facebook": false,
+      "foursquare": false,
+      "github": false,
+      "google_maps": false,
+      "instagram": false,
+      "last_fm": true,
+      "linkedin": true,
+      "lob": false,
+      "paypal": false,
+      "pinterest": false,
+      "steam": false,
+      "stripe": false,
+      "tumblr": false,
+      "twilio": false,
+      "twitter": false,
+      "web_scraping": false,
+    },
+    "component_builder_side_by_side": Object {
+      "twitter": false,
+    },
+    "components_group": Object {
+      "componentName": "",
+      "dropdownTest": "",
+      "numberTest": "",
+      "tests": Object {
+        "enabled": true,
+        "value": Object {
+          "componentName": "",
+          "dropdownTest": "",
+          "nested_instance": Object {
+            "enabled": true,
+            "value": Object {
+              "componentName": "",
+              "dropdownTest": "",
+              "random_instance": Object {
+                "enabled": true,
+                "value": Object {
+                  "dropdownTest": "",
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+  "generatorId": "chrome_extension_generator",
+  "generatorVersion": "0.1.0",
+  "id": "",
+  "identifiers": Object {
+    "camel": "newProject",
+    "kebab": "new-project",
+    "label": "New Project",
+    "pascal": "NewProject",
+    "snake": "new_project",
+  },
+  "schemas": Array [],
+}
+`;
+
+exports[`/buildDefaultProject generator w/ defaultSchemas + schemaEditorConfiguration.configurationGroups 1`] = `
+Object {
+  "configuration": Object {
+    "api_examples": Object {
+      "aviary": false,
+      "chartjs": false,
+      "clockwork_sms": false,
+      "facebook": false,
+      "foursquare": false,
+      "github": false,
+      "google_maps": false,
+      "instagram": false,
+      "last_fm": true,
+      "linkedin": true,
+      "lob": false,
+      "paypal": false,
+      "pinterest": false,
+      "steam": false,
+      "stripe": false,
+      "tumblr": false,
+      "twilio": false,
+      "twitter": false,
+      "web_scraping": false,
+    },
+    "component_builder_side_by_side": Object {
+      "twitter": false,
+    },
+    "components_group": Object {
+      "componentName": "",
+      "dropdownTest": "",
+      "numberTest": "",
+      "tests": Object {
+        "enabled": true,
+        "value": Object {
+          "componentName": "",
+          "dropdownTest": "",
+          "nested_instance": Object {
+            "enabled": true,
+            "value": Object {
+              "componentName": "",
+              "dropdownTest": "",
+              "random_instance": Object {
+                "enabled": true,
+                "value": Object {
+                  "dropdownTest": "",
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+  "generatorId": "chrome_extension_generator",
+  "generatorVersion": "0.1.0",
+  "id": "",
+  "identifiers": Object {
+    "camel": "newProject",
+    "kebab": "new-project",
+    "label": "New Project",
+    "pascal": "NewProject",
+    "snake": "new_project",
+  },
+  "schemas": Array [
+    Object {
+      "attributes": Array [],
+      "configuration": Object {
+        "api_examples": Object {
+          "twitter": false,
+        },
+      },
+      "id": "12345",
+      "identifiers": Object {
+        "plural": Object {
+          "camel": "users",
+          "kebab": "users",
+          "label": "Users",
+          "pascal": "Users",
+          "snake": "users",
+        },
+        "singular": Object {
+          "camel": "user",
+          "kebab": "user",
+          "label": "User",
+          "pascal": "User",
+          "snake": "user",
+        },
+      },
+      "locked": true,
+      "relations": Array [],
+      "removable": false,
+      "source": "GENERATOR",
+    },
+  ],
+}
+`;
+
+exports[`/buildDefaultProject generator w/ defaultSchemas, no schemaEditorConfiguration.configurationGroups 1`] = `
+Object {
+  "configuration": Object {
+    "api_examples": Object {
+      "aviary": false,
+      "chartjs": false,
+      "clockwork_sms": false,
+      "facebook": false,
+      "foursquare": false,
+      "github": false,
+      "google_maps": false,
+      "instagram": false,
+      "last_fm": true,
+      "linkedin": true,
+      "lob": false,
+      "paypal": false,
+      "pinterest": false,
+      "steam": false,
+      "stripe": false,
+      "tumblr": false,
+      "twilio": false,
+      "twitter": false,
+      "web_scraping": false,
+    },
+    "component_builder_side_by_side": Object {
+      "twitter": false,
+    },
+    "components_group": Object {
+      "componentName": "",
+      "dropdownTest": "",
+      "numberTest": "",
+      "tests": Object {
+        "enabled": true,
+        "value": Object {
+          "componentName": "",
+          "dropdownTest": "",
+          "nested_instance": Object {
+            "enabled": true,
+            "value": Object {
+              "componentName": "",
+              "dropdownTest": "",
+              "random_instance": Object {
+                "enabled": true,
+                "value": Object {
+                  "dropdownTest": "",
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+  "generatorId": "chrome_extension_generator",
+  "generatorVersion": "0.1.0",
+  "id": "",
+  "identifiers": Object {
+    "camel": "newProject",
+    "kebab": "new-project",
+    "label": "New Project",
+    "pascal": "NewProject",
+    "snake": "new_project",
+  },
+  "schemas": Array [
+    Object {
+      "attributes": Array [],
+      "configuration": Object {},
+      "id": "12345",
+      "identifiers": Object {
+        "plural": Object {
+          "camel": "users",
+          "kebab": "users",
+          "label": "Users",
+          "pascal": "Users",
+          "snake": "users",
+        },
+        "singular": Object {
+          "camel": "user",
+          "kebab": "user",
+          "label": "User",
+          "pascal": "User",
+          "snake": "user",
+        },
+      },
+      "locked": true,
+      "relations": Array [],
+      "removable": false,
+      "source": "GENERATOR",
+    },
+  ],
+}
+`;

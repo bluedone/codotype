@@ -1,6 +1,6 @@
 {
   "name": "@codotype/util",
-  "version": "0.8.0-canary.4",
+  "version": "0.8.0-canary.5",
   "description": "Utility functions used throughout the Codotype ecosystem",
   "scripts": {
     "test": "jest --config=jest.config.js",
@@ -27,7 +27,8 @@
     "change-case": "^3.1.0",
     "lodash": "^4.17.10",
     "pluralize": "^7.0.0",
-    "underscore.string": "^3.3.4"
+    "underscore.string": "^3.3.4",
+    "uuid": "^8.0.0"
   },
   "devDependencies": {
     "@types/jest": "^24.0.23",

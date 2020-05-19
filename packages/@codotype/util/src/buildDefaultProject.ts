@@ -8,7 +8,7 @@ import {
   ConfigurationGroup,
   ConfigurationGroupSection,
   GeneratorMeta,
-  ConfigurationGroupProperty,
+  ConfigurationGroupProperty
 } from "@codotype/types";
 
 // // // //
@@ -59,7 +59,7 @@ export function buildValueFromProperties(
       if (property.allowDisable && !property.required) {
         val[property.identifier] = {
           enabled: property.enabled,
-          value: buildConfigurationGroupPropertyValue(property),
+          value: buildConfigurationGroupPropertyValue(property)
         };
       } else {
         val[property.identifier] = buildConfigurationGroupPropertyValue(
@@ -97,7 +97,7 @@ export function buildConfigurationGroupValue(
         if (property.allowDisable && !property.required) {
           val[property.identifier] = {
             enabled: property.enabled,
-            value: buildConfigurationGroupPropertyValue(property),
+            value: buildConfigurationGroupPropertyValue(property)
           };
         } else {
           val[property.identifier] = buildConfigurationGroupPropertyValue(
@@ -128,7 +128,7 @@ export function buildConfigurationGroupValue(
             // Sets value for ConfigurationGroupSection
             val[property.identifier] = {
               enabled: property.enabled,
-              value: buildConfigurationGroupPropertyValue(property),
+              value: buildConfigurationGroupPropertyValue(property)
             };
 
             // Returns val
@@ -140,7 +140,7 @@ export function buildConfigurationGroupValue(
         // Returns ConfigurationGroupValue
         return {
           ...initialValue,
-          [section.identifier]: sectionValue,
+          [section.identifier]: sectionValue
         };
       },
       initialValue
@@ -179,7 +179,14 @@ export function buildDefaultConfiguration(
  */
 export function buildDefaultSchemas(generatorMeta: GeneratorMeta): Schema[] {
   if (generatorMeta.schemaEditorConfiguration.defaultSchemas) {
-    return generatorMeta.schemaEditorConfiguration.defaultSchemas;
+    return generatorMeta.schemaEditorConfiguration.defaultSchemas.map(s => {
+      return {
+        ...s,
+        configuration: buildDefaultConfiguration(
+          generatorMeta.schemaEditorConfiguration.configurationGroups
+        )
+      };
+    });
   }
   return [];
 }
@@ -199,6 +206,7 @@ export function buildDefaultProject(generatorMeta: GeneratorMeta): Project {
   const defaultSchemas: Schema[] = buildDefaultSchemas(generatorMeta);
 
   // Returns ConfigurationGroupValue
+  // TODO - pull identifiers from generatorMeta
   const newProject: Project = {
     id: "",
     identifiers: {
@@ -206,12 +214,12 @@ export function buildDefaultProject(generatorMeta: GeneratorMeta): Project {
       snake: "new_project",
       camel: "newProject",
       pascal: "NewProject",
-      kebab: "new-project",
+      kebab: "new-project"
     },
     generatorId: generatorMeta.id,
     generatorVersion: generatorMeta.version,
     schemas: [...defaultSchemas],
-    configuration: projectConfiguration,
+    configuration: projectConfiguration
   };
 
   // Returns the new project
