@@ -1,7 +1,7 @@
 import * as React from "react";
 import { GeneratorMeta } from "@codotype/types";
 import useAxios from "axios-hooks";
-import { LoadingSpinner } from "@src/components/loading_spinner";
+import { LoadingSpinner } from "../../components/loading_spinner";
 
 // // // //
 
