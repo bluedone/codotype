@@ -5,7 +5,6 @@ import { ProjectFormModal } from "./ProjectFormModal";
 import { ProjectForm } from "./ProjectForm";
 import { sanitizeLabel, buildTokenCasing } from "@codotype/util";
 import { Project, GeneratorMeta } from "@codotype/types";
-import { ResetProjectButton } from "./ResetProjectButton";
 import { ProjectDropdown } from "./ProjectDropdown";
 
 // // // //
@@ -65,7 +64,10 @@ export function ProjectEditorHeader(props: {
                 {/* <ProjectDropdown /> */}
                 {/* <ImportModal /> */}
                 {/* <ExportModal /> */}
-                <ProjectDropdown onConfirmReset={props.onConfirmReset} />
+                <ProjectDropdown
+                    project={props.project}
+                    onConfirmReset={props.onConfirmReset}
+                />
                 {/* <ResetProjectButton onConfirmReset={props.onConfirmReset} /> */}
                 <GenerateCodeButton onClick={props.onClickGenerate} />
             </div>
