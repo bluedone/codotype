@@ -8,11 +8,8 @@ async function doctor() {
   console.log(`\nPaging ${chalk.blue(`codotype doctor`)}...\n`);
 
   // Pulls in requisite paths for codotype runtime
-  // TODO - constantize `codotype-generator.json` magic string
-  const generatorMetaPath = path.resolve(
-    process.cwd(),
-    "./codotype-generator.json"
-  );
+  // TODO - constantize `./generator/meta.js` magic string
+  const generatorMetaPath = path.resolve(process.cwd(), "./generator/meta.js");
   console.log(
     `the doctor says ${chalk.green(
       `this generator's metadata loaded correctly`
@@ -24,23 +21,22 @@ async function doctor() {
 
   // Registers this generator via relative path
   runtime.registerGenerator({
-    absolute_path: process.cwd(),
+    absolute_path: process.cwd()
   });
 
   console.log(
-    `the doctor says ${
-      chalk.green(`this generator can register with the `) +
-      chalk.green(`codotype runtime`)
-    }`
+    `the doctor says ${chalk.green(`this generator can register with the `) +
+      chalk.green(`codotype runtime`)}`
   );
 
   // Runs the generator through validateGenerator
   const generatorMeta = require(generatorMetaPath);
   const validations = validateGenerator({ generator: generatorMeta });
 
-  // Logs validation of properties in `codotype-generator.json`
+  // Logs validation of properties
+  // TODO - should be part of @codotype/util
   console.log(`the doctor is ${chalk.blue(`validating the generator:`)}`);
-  validations.forEach((v) => {
+  validations.forEach(v => {
     if (v.valid) {
       console.log(
         `\t${chalk.blue(`${v.property}`) + " is " + chalk.green(`is present`)}`
@@ -53,7 +49,7 @@ async function doctor() {
   });
 
   // Logs validation success and error messages
-  if (validations.map((v) => v.valid).some((bool) => bool === false)) {
+  if (validations.map(v => v.valid).some(bool => bool === false)) {
     console.log(
       `the doctor says ${chalk.red(
         `this generator is missing some critical properties `
@@ -69,17 +65,15 @@ async function doctor() {
 
   // Logs success message if nothing blows up
   console.log(
-    `\n${
-      chalk.blue(`codotype doctor`) +
+    `\n${chalk.blue(`codotype doctor`) +
       " says " +
-      chalk.yellow(`everything is splendid`)
-    }\n`
+      chalk.yellow(`everything is splendid`)}\n`
   );
   return;
 }
 
 export const doctorCommand = (...args) => {
-  return doctor().catch((err) => {
+  return doctor().catch(err => {
     // TODO - implement better error handling
     console.log(
       `${chalk.red(`ERROR`)} - something went wrong with ${chalk.cyan(

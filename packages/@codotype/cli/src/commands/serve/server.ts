@@ -2,6 +2,8 @@ import * as morgan from "morgan";
 import * as express from "express";
 import * as bodyParser from "body-parser";
 import * as path from "path";
+import { omit } from "lodash";
+import { CodotypeBuildJob } from "@codotype/runtime";
 
 // // // //
 
@@ -34,16 +36,26 @@ export function server({ runtime }): any {
   // List available generators
   app.get("/api/generators", (req, res) => {
     return res.send(
-      runtime.getGenerators()
-      // .map(g => omit(g, ["generator_path", "engine_path"]))
+      runtime
+        .getGenerators()
+        .map(g => omit(g, ["generator_path", "engine_path"]))
     );
   });
 
   // Run generator
   app.post("/api/generate", async (req, res) => {
-    // TODO - add correct types here from @codotype/types
-    const { build } = req.body;
-    build.id = build.blueprint.identifier;
+    // Return error if req.body.project
+    if (!req.body.project) {
+      return res.status(304).json({
+        message: "Invalid Project"
+      });
+    }
+
+    // Defines bodotype build
+    const build: CodotypeBuildJob = {
+      id: "",
+      project: req.body.project
+    };
 
     // Generates the application
     // CLEANUP - wrap this in an error hander?
@@ -52,7 +64,8 @@ export function server({ runtime }): any {
     // Sends the local directory path to the client
     // CLEANUP - pull the destination directory from the runtime?
     return res.json({
-      filepath: process.cwd() + "/codotype-build/" + build.blueprint.identifier,
+      filepath:
+        process.cwd() + "/codotype-build/" + build.project.identifiers.snake,
       type: "LOCAL_PATH"
     });
   });

@@ -31,12 +31,12 @@ export function transformJsonProject(jsonProject: any): Project {
       snake: String(jsonProject.identifiers.snake),
       camel: String(jsonProject.identifiers.camel),
       pascal: String(jsonProject.identifiers.pascal),
-      kebab: String(jsonProject.identifiers.kebab),
+      kebab: String(jsonProject.identifiers.kebab)
     },
     generatorId: String(jsonProject.generatorId),
     generatorVersion: String(jsonProject.generatorVersion),
     configuration: jsonProject.configuration || {},
-    schemas: jsonProject.schemas,
+    schemas: jsonProject.schemas
   };
 
   // Returns the Project instance
@@ -54,12 +54,6 @@ export function transformJsonProject(jsonProject: any): Project {
 async function runGenerator(projectPath: string, options: CommandOptions) {
   // Pulls in requisite paths for codotype runtime
   const projectRequirePath = path.resolve(process.cwd(), projectPath);
-
-  // NOTE - this will be needed for validating the project + project configuration
-  // const generatorMetaPath = path.resolve(
-  //   process.cwd(),
-  //   "./codotype-generator.json"
-  // ); // TODO - constantize MAGIC STRING
 
   // Validates project data
   // const result = validateProject(project);
@@ -79,7 +73,7 @@ async function runGenerator(projectPath: string, options: CommandOptions) {
   // NOTE - build.id is an empty string when building locally
   const build: CodotypeBuildJob = {
     id: "",
-    project: projectInstance,
+    project: projectInstance
   };
 
   // Invoke runtime directly with parameters
@@ -87,7 +81,7 @@ async function runGenerator(projectPath: string, options: CommandOptions) {
 
   // Registers this generator via relative path
   runtime.registerGenerator({
-    absolute_path: process.cwd(),
+    absolute_path: process.cwd()
   });
 
   // Executes the build
@@ -97,7 +91,7 @@ async function runGenerator(projectPath: string, options: CommandOptions) {
 // // // //
 
 export const runCommand = (projectPath: string, options: CommandOptions) => {
-  return runGenerator(projectPath, options).catch((err) => {
+  return runGenerator(projectPath, options).catch(err => {
     // TODO - implement better error handling
     console.log("CODOTYPE CLI ERROR!!");
     console.log(err);
