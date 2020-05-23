@@ -1,6 +1,6 @@
 {
   "name": "@codotype/generator",
-  "version": "0.8.0-canary.2",
+  "version": "0.8.0-canary.3",
   "description": "Generator system that produces code scaffolding from metadata",
   "scripts": {
     "test": "jest",
@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@codotype/types": "0.8.0-canary.4",
-    "@codotype/util": "0.8.0-canary.3",
+    "@codotype/util": "0.8.0-canary.5",
     "@types/node": "^12.12.12",
     "bluebird": "^3.5.1",
     "ejs": "^2.6.1",
