@@ -15,7 +15,7 @@ import { CodotypeGenerator, GeneratorOptions } from "@codotype/generator";
 // // // //
 // Constants
 
-const OUTPUT_DIRECTORY: string = "codotype-build";
+const OUTPUT_DIRECTORY: string = ".codotype-out";
 const CODOTYPE_MANIFEST_DIRECTORY: string = ".codotype";
 const MODULES_ROOT: string = "node_modules";
 const GENERATOR_META_FILENAME: string = "generator/meta.js";
@@ -177,7 +177,7 @@ export class CodotypeNodeRuntime {
    */
   async writeBuildManifest({ build }: { build: CodotypeBuildJob }) {
     // Debug log statements
-    console.log("Wroting build manfiest");
+    console.log("Writing build manfiest");
 
     // Defines directory to encapsulate build IFF build.id is defined
     let buildID: string = build.id || "";
