@@ -8,7 +8,7 @@ import {
   InflatedProject,
   RelationType,
   Project,
-  InflatedSchema,
+  InflatedSchema
 } from "@codotype/types";
 import { CodotypeGenerator, GeneratorOptions } from "@codotype/generator";
 
@@ -18,7 +18,7 @@ import { CodotypeGenerator, GeneratorOptions } from "@codotype/generator";
 const OUTPUT_DIRECTORY: string = "codotype-build";
 const CODOTYPE_MANIFEST_DIRECTORY: string = ".codotype";
 const MODULES_ROOT: string = "node_modules";
-const GENERATOR_META_FILENAME: string = "codotype-generator.json";
+const GENERATOR_META_FILENAME: string = "generator/meta.js";
 const GENERATOR_CLASS_PATH: string = "generator";
 const GENERATOR_README_FILENAME: string = "README.md";
 
@@ -48,7 +48,7 @@ export class CodotypeNodeRuntime {
     // Assigns this.options.cwd
     this.options = {
       ...options,
-      cwd: process.cwd(),
+      cwd: process.cwd()
     };
 
     // TODO - add option for LOG_LEVEL
@@ -79,7 +79,7 @@ export class CodotypeNodeRuntime {
     const {
       module_path = null,
       relative_path = null,
-      absolute_path = null,
+      absolute_path = null
     } = params;
 
     if (module_path) {
@@ -124,7 +124,14 @@ export class CodotypeNodeRuntime {
     try {
       // Require the class dynamically
       const GeneratorClass = require(generator_path); // eslint-disable-line import/no-dynamic-require
-      const GeneratorMeta = require(generator_meta_path); // eslint-disable-line import/no-dynamic-require
+      let GeneratorMeta = require(generator_meta_path); // eslint-disable-line import/no-dynamic-require
+
+      // Destructures the default export into GeneratorMeta
+      GeneratorMeta = { ...GeneratorMeta.default };
+
+      // Debugging new GeneratorMeta import
+      // console.log("GeneratorMeta");
+      // console.log(JSON.stringify(GeneratorMeta, null, 4));
 
       // Pull in the generator's README.md
       const foundReadme: boolean = fs.existsSync(generator_readme_path);
@@ -137,7 +144,10 @@ export class CodotypeNodeRuntime {
         GeneratorMeta.generator_path = generator_path;
 
         // Adds readme_markown to GeneratorMeta
-        GeneratorMeta.readme = fs.readFileSync(generator_readme_path, "utf8");
+        GeneratorMeta.documentation = fs.readFileSync(
+          generator_readme_path,
+          "utf8"
+        );
 
         // Tracks GeneratorMeta in this.generators
         this.generators.push(GeneratorMeta);
@@ -213,7 +223,7 @@ export class CodotypeNodeRuntime {
   // TODO - this is repeated in @codotype/generator - should be abstracted, or only encapsulated in the runtime
   ensureDir(dir) {
     return new Promise((resolve, reject) => {
-      return fsExtra.ensureDir(dir, (err) => {
+      return fsExtra.ensureDir(dir, err => {
         if (err) return reject(err);
         return resolve();
       });
@@ -245,7 +255,7 @@ export class CodotypeNodeRuntime {
     // Pulls generator from registry runtime registry
     // TODO - conflate each stage to its respective generator,
     // skipping / throwing errors on those whos generator is missing
-    const generator = this.generators.find((g) => g.id === project.generatorId);
+    const generator = this.generators.find(g => g.id === project.generatorId);
 
     // If generator is not found, log error message and short-circuit execution
     if (!generator) return;
@@ -280,7 +290,7 @@ export class CodotypeNodeRuntime {
         meta: generator,
         configuration: project.configuration,
         // @ts-ignore
-        runtime: this,
+        runtime: this
       };
 
       // Logging
@@ -300,23 +310,23 @@ export class CodotypeNodeRuntime {
 
       // Invokes `generator.forEachSchema` once for each in inflatedProject.schemas
       await Promise.all(
-        inflatedProject.schemas.map((schema) =>
+        inflatedProject.schemas.map(schema =>
           generatorInstance.forEachSchema({
             schema,
-            project: inflatedProject,
+            project: inflatedProject
           })
         )
       );
 
       // Invokes `generator.forEachRelation` once for each in inflatedProject.schemas
       await Promise.all(
-        inflatedProject.schemas.map((schema) => {
+        inflatedProject.schemas.map(schema => {
           return Promise.all(
-            schema.relations.map((relation) => {
+            schema.relations.map(relation => {
               return generatorInstance.forEachRelation({
                 schema: schema,
                 relation,
-                project: inflatedProject,
+                project: inflatedProject
               });
             })
           );
@@ -325,13 +335,13 @@ export class CodotypeNodeRuntime {
 
       // Invokes `generator.forEachReverseRelation` once for each in inflatedProject.schemas
       await Promise.all(
-        inflatedProject.schemas.map((schema) => {
+        inflatedProject.schemas.map(schema => {
           return Promise.all(
-            schema.references.map((relation) => {
+            schema.references.map(relation => {
               return generatorInstance.forEachReverseRelation({
                 schema: schema,
                 relation,
-                project: inflatedProject,
+                project: inflatedProject
               });
             })
           );
@@ -400,7 +410,7 @@ export class CodotypeNodeRuntime {
         // configuration: generatorInstance.options.configuration,
         helpers: {
           indent,
-          trailingComma,
+          trailingComma
           // forEachSchema
           // forEachAttribute
           // forEachRelation
@@ -408,7 +418,7 @@ export class CodotypeNodeRuntime {
         },
         RelationType,
         Datatype,
-        ...options, // QUESTION - are options ever used here?
+        ...options // QUESTION - are options ever used here?
       };
       // // // //
       // // // //
@@ -453,7 +463,7 @@ export class CodotypeNodeRuntime {
    */
   writeFile(dest: string, compiledTemplate: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      this.fs.writeFile(dest, compiledTemplate, (err) => {
+      this.fs.writeFile(dest, compiledTemplate, err => {
         // Handle error
         if (err) {
           // Logs debug statement
@@ -480,7 +490,7 @@ export class CodotypeNodeRuntime {
   // TODO - abstract FS-level operations into @codotype/runtime
   async copyDir(src, dest) {
     return new Promise((resolve, reject) => {
-      return this.fs.copy(src, dest, (err) => {
+      return this.fs.copy(src, dest, err => {
         if (err) return reject(err);
         return resolve();
       });
@@ -606,7 +616,7 @@ export class CodotypeNodeRuntime {
 
       // Inflates project
       const inflatedProject: InflatedProject = inflateProject({
-        project: parentGeneratorInstance.options.project,
+        project: parentGeneratorInstance.options.project
       });
 
       // Creates new instance of generatorPrototype
@@ -616,7 +626,7 @@ export class CodotypeNodeRuntime {
       const generator = new CodotypeGenerator(generatorPrototype, {
         ...parentGeneratorInstance.options,
         dest: resolvedDestination,
-        resolved: resolvedGeneratorPath,
+        resolved: resolvedGeneratorPath
       });
 
       // Invokes `generator.forEachSchema` once for each in project.schemas
@@ -625,7 +635,7 @@ export class CodotypeNodeRuntime {
         inflatedProject.schemas.map((schema: InflatedSchema) =>
           generator.forEachSchema({
             schema: schema,
-            project: inflatedProject,
+            project: inflatedProject
           })
         )
       );
@@ -634,11 +644,11 @@ export class CodotypeNodeRuntime {
       await Promise.all(
         inflatedProject.schemas.map((schema: InflatedSchema) => {
           return Promise.all(
-            schema.relations.map((relation) => {
+            schema.relations.map(relation => {
               return generator.forEachRelation({
                 relation,
                 schema: schema,
-                project: inflatedProject,
+                project: inflatedProject
               });
             })
           );
@@ -651,11 +661,11 @@ export class CodotypeNodeRuntime {
       await Promise.all(
         inflatedProject.schemas.map((schema: InflatedSchema) => {
           return Promise.all(
-            schema.references.map((relation) => {
+            schema.references.map(relation => {
               return generator.forEachReverseRelation({
                 relation,
                 schema: schema,
-                project: inflatedProject,
+                project: inflatedProject
               });
             })
           );
