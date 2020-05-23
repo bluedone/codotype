@@ -1,98 +1,39 @@
 import * as React from "react";
-import { GeneratorMeta, Project } from "@codotype/types";
-import { buildDefaultProject } from "@codotype/util";
-import { ErrorBoundary } from "react-error-boundary";
-import { FallbackComponent } from "./ErrorBoundary";
+import { GeneratorFetcher } from "./GeneratorFetcher";
+import { LocalStorageProvider } from "./LocalStorageProvider";
+import { GeneratorRunner } from "./GeneratorRunner";
+import { ProjectEditor } from "../../components/project_editor";
 
 // // // //
-
-function getLocalStorageKey(generator: GeneratorMeta): string {
-    return `${generator.id}-${generator.version}`;
-}
-
-function writeProjectToLocalStorage(props: {
-    project: Project;
-    generator: GeneratorMeta;
-}) {
-    localStorage.setItem(
-        getLocalStorageKey(props.generator),
-        JSON.stringify(props.project),
-    );
-}
-
-function clearLocalStorage(props: { generator: GeneratorMeta }) {
-    localStorage.removeItem(getLocalStorageKey(props.generator));
-}
-
-function readProjectFromLocalStorage(props: {
-    generator: GeneratorMeta;
-}): Project {
-    try {
-        const localStorageKey = getLocalStorageKey(props.generator);
-        // @ts-ignore
-        const localStorageValue: string = localStorage.getItem(localStorageKey);
-        if (!localStorageValue) {
-            return buildDefaultProject(props.generator);
-        }
-        const parsedProject: Project = JSON.parse(localStorageValue);
-        return parsedProject;
-    } catch (e) {
-        return buildDefaultProject(props.generator);
-    }
-}
-
-// // // //
-
-interface WebRuntimeProps {
-    generator: GeneratorMeta;
-    children: (childProps: {
-        generator: GeneratorMeta;
-        project: Project;
-        setProject: (updatedProject: Project) => void;
-        clearProject: () => void;
-    }) => React.ReactNode;
-}
 
 /**
- * WebRuntime
- * @param props - see `WebRuntimeProps`
+ * LocalRuntime
+ * Component designed to handle all the heavy lifting for running a generator locally using @codotype/cli
  */
-export function WebRuntime(props: WebRuntimeProps) {
-    const [project, setProjectState] = React.useState<Project>(
-        readProjectFromLocalStorage({ generator: props.generator }),
-    );
-
-    function setProject(updatedProject: Project) {
-        setProjectState(updatedProject);
-        writeProjectToLocalStorage({
-            generator: props.generator,
-            project: updatedProject,
-        });
-    }
-
-    function clearProject() {
-        clearLocalStorage({ generator: props.generator });
-        setProjectState(buildDefaultProject(props.generator));
-    }
-
+export function LocalRuntime() {
     return (
-        <ErrorBoundary
-            fallbackRender={(errorBoundaryProps: any) => {
-                return <FallbackComponent {...errorBoundaryProps} />;
-            }}
-            onReset={() => {
-                clearLocalStorage({ generator: props.generator });
-                setProjectState(buildDefaultProject(props.generator));
-            }}
-        >
-            <React.Fragment>
-                {props.children({
-                    generator: props.generator,
-                    project,
-                    setProject,
-                    clearProject,
-                })}
-            </React.Fragment>
-        </ErrorBoundary>
+        <GeneratorFetcher>
+            {({ generators }) => (
+                <GeneratorRunner generator={generators[0]}>
+                    {({ generateCode }) => (
+                        <LocalStorageProvider generator={generators[0]}>
+                            {({ project, clearProject, setProject }) => (
+                                <ProjectEditor
+                                    generator={generators[0]}
+                                    project={project}
+                                    onClickGenerate={() => {
+                                        generateCode({
+                                            project,
+                                        });
+                                    }}
+                                    onResetProject={clearProject}
+                                    onChange={setProject}
+                                />
+                            )}
+                        </LocalStorageProvider>
+                    )}
+                </GeneratorRunner>
+            )}
+        </GeneratorFetcher>
     );
 }
