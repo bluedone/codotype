@@ -197,22 +197,17 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@codotype/types@0.8.0-canary.3":
-  version "0.8.0-canary.3"
-  resolved "https://registry.yarnpkg.com/@codotype/types/-/types-0.8.0-canary.3.tgz#2fafc2ecf3d053b3f99437e87bdd79424cddae3a"
-  integrity sha512-4t+Tfytp+7JiJNh8HwdxapVUaFCnVlGyAgTnciToiqMzJzB2pYYRgfy/PLrx0NKab1vC8QZKSE6vSeCtdwChuw==
-
 "@codotype/types@0.8.0-canary.4":
   version "0.8.0-canary.4"
   resolved "https://registry.yarnpkg.com/@codotype/types/-/types-0.8.0-canary.4.tgz#fc1fb8dd0a4c6727393bda61fe10479c81a17ec5"
   integrity sha512-WdCpz02QK6APErad0DKSg+pe6tiW7ZgFW2WeMBDkTndTNGf9FN+81KGefBW/6orCY5T1qdsYrNdP4Mf/IR4DwA==
 
-"@codotype/util@0.8.0-canary.3":
-  version "0.8.0-canary.3"
-  resolved "https://registry.yarnpkg.com/@codotype/util/-/util-0.8.0-canary.3.tgz#8839c49455cf38db988f0a25dc9ae686037721ef"
-  integrity sha512-O6XIHwdhFYjfZOjzXc1UYT7/sEfN38xlbv+NRc29rYEfOrwCZYfJndxoxOJro+LGF+7VoWQ1KPFOoR0WIBztKw==
+"@codotype/util@0.8.0-canary.5":
+  version "0.8.0-canary.5"
+  resolved "https://registry.yarnpkg.com/@codotype/util/-/util-0.8.0-canary.5.tgz#2c6f11dddbd15cd1e28b40560744343d77b04cf7"
+  integrity sha512-ybZ4FP6pD1x8kheJVQuuygMvM+gi3forUH5fJ++695OqW0DhtXm5JjvmEq05Rn+KFNRgkG9/Fqat8tbxY4o+EA==
   dependencies:
-    "@codotype/types" "0.8.0-canary.3"
+    "@codotype/types" "0.8.0-canary.4"
     "@types/lodash" "^4.14.149"
     "@types/pluralize" "0.0.29"
     "@types/underscore.string" "0.0.38"
@@ -220,6 +215,7 @@
     lodash "^4.17.10"
     pluralize "^7.0.0"
     underscore.string "^3.3.4"
+    uuid "^8.0.0"
 
 "@jest/console@^24.7.1", "@jest/console@^24.9.0":
   version "24.9.0"
@@ -3441,6 +3437,11 @@ uuid@^3.3.2:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
   integrity sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==
+
+uuid@^8.0.0:
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.1.0.tgz#6f1536eb43249f473abc6bd58ff983da1ca30d8d"
+  integrity sha512-CI18flHDznR0lq54xBycOVmphdCYnQLKn8abKn7PXUiKUGdEd+/l9LWNJmugXel4hXq7S+RMNl34ecyC9TntWg==
 
 validate-npm-package-license@^3.0.1:
   version "3.0.4"
