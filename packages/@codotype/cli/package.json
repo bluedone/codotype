@@ -1,6 +1,6 @@
 {
   "name": "@codotype/cli",
-  "version": "0.8.0-canary.8",
+  "version": "0.8.0-canary.11",
   "description": "CLI for development with codotype.io",
   "bin": {
     "codotype": "bin/codotype.js"
@@ -14,21 +14,21 @@
   "homepage": "https://github.com/codotype/codotype#readme",
   "files": [
     "dist",
-    "bin",
-    "next-app",
-    "next-app/out/**/*"
+    "bin"
   ],
   "scripts": {
     "test": "jest",
     "dev": "tsc -w -p tsconfig.build.json",
-    "build": "npm run clean && npm run compile && npm run next:build",
+    "build": "npm run clean && npm run compile",
     "clean": "rm -rf ./dist",
     "compile": "tsc -p tsconfig.build.json",
     "prepublishOnly": "npm run build && npm run next:prepublish",
-    "next:prepublish": "yarn run next:install && yarn run next:build && yarn run next:export",
+    "next:prepublish": "npm run next:clean && yarn run next:install && yarn run next:build && yarn run next:export && yarn run next:copy",
     "next:install": "yarn --cwd ./next-app install",
     "next:build": "yarn --cwd ./next-app build",
-    "next:export": "yarn --cwd ./next-app export"
+    "next:export": "yarn --cwd ./next-app export",
+    "next:copy": "cp -R ./next-app/out ./dist/client",
+    "next:clean": "rm -rf ./next-app/out && rm -rf ./next-app/.next"
   },
   "author": "Alexander Schwartzberg",
   "license": "MIT",

@@ -23,14 +23,11 @@ export function server({ runtime }): any {
   app.use(bodyParser.json());
 
   // Serve static assets
-  app.use(
-    "/",
-    express.static(path.resolve(__dirname, "../../../next-app/out"))
-  );
+  app.use(express.static(path.resolve(__dirname, "../../client")));
 
   // Serves the static Next app
   app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname + "../../../next-app/out/index.html"));
+    res.sendFile(path.join(__dirname, "../../client/index.html"));
   });
 
   // List available generators
