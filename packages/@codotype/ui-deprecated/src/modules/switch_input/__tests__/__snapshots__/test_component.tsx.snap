@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`SwitchInput render 1`] = `
-<input
-  checked={true}
-  onChange={[Function]}
-  type="checkbox"
-/>
-`;
