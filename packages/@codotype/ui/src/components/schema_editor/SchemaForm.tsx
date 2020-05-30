@@ -263,17 +263,6 @@ export function SchemaForm(props: SchemaFormProps) {
 
 // // // //
 
-// mounted () {
-//   setTimeout(() => { this.$refs.input_el.focus() }, 500)
-// },
-// methods: {
-//   onKeyEnter() {
-// if (this.onKeypressEnter && this.enableSubmit) this.onKeypressEnter()
-// }
-// </script>
-
-// // // //
-
 // <style type="text/css" scoped>
 // .table-sm {
 //   font - size: 80%;

@@ -1,12 +1,5 @@
 import * as React from "react";
-import classnames from "classnames";
-import {
-    RELATION_META,
-    DatatypeMeta,
-    Datatype,
-    RelationType,
-    RelationMeta,
-} from "@codotype/types";
+import { RELATION_META, RelationType, RelationMeta } from "@codotype/types";
 
 // // // //
 
@@ -37,50 +30,30 @@ interface RelationDatatypeFormProps {
  */
 export function RelationDatatypeForm(props: RelationDatatypeFormProps) {
     return (
-        <div className="mt-2">
-            <div className="col-lg-12">
-                <div className="row">
-                    {/* <select
-                        className="form-control"
-                        value={props.type}
-                        onChange={e => {
-                            // @ts-ignore
-                            props.onChangeRelationType(e.currentTarget.value);
-                        }}
-                    >
-                    </select> */}
-                    {Object.keys(RELATION_META)
-                        .filter((datatype: string) =>
-                            props.supportedRelationTypes
-                                .map(d => String(d))
-                                .includes(datatype),
-                        )
-                        .map((datatype: string) => {
-                            const relationMeta: RelationMeta =
-                                // @ts-ignore
-                                RELATION_META[datatype];
-                            return (
-                                <button
-                                    key={relationMeta.id}
-                                    className={classnames({
-                                        "btn btn-sm btn-outline-primary": true,
-                                        active: relationMeta.id === props.type,
-                                    })}
-                                    // relationMeta={relationMeta}
-                                    onClick={e => {
-                                        // @ts-ignore
-                                        props.onChangeRelationType(
-                                            relationMeta.id,
-                                        );
-                                    }}
-                                >
-                                    {relationMeta.label}
-                                    {relationMeta.description}
-                                </button>
-                            );
-                        })}
-                </div>
-            </div>
-        </div>
+        <select
+            className="form-control"
+            value={props.type}
+            onChange={e => {
+                // @ts-ignore
+                props.onChangeRelationType(e.currentTarget.value);
+            }}
+        >
+            {Object.keys(RELATION_META)
+                .filter((datatype: string) =>
+                    props.supportedRelationTypes
+                        .map(d => String(d))
+                        .includes(datatype),
+                )
+                .map((datatype: string) => {
+                    const relationMeta: RelationMeta =
+                        // @ts-ignore
+                        RELATION_META[datatype];
+                    return (
+                        <option key={relationMeta.id}>
+                            {relationMeta.label}
+                        </option>
+                    );
+                })}
+        </select>
     );
 }
