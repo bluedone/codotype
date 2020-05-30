@@ -2,6 +2,7 @@ import * as React from "react";
 import { Schema, RelationType } from "@codotype/types";
 import { RelationDatatypeForm } from "./RelationDatatypeForm";
 import { RelationInput } from "./RelationFormModal";
+import { sanitizeLabel } from "@codotype/util";
 
 // // // //
 
@@ -33,94 +34,127 @@ export function RelationPropertiesForm(props: RelationPropertiesFormProps) {
     }
 
     return (
-        <div className="row">
-            <div className="col-lg-4">
-                <div className="form-group text-primary text-center">
-                    <label className="mb-0">
-                        {schema.identifiers.singular.label}
-                    </label>
-                    <small className="form-text text-primary">
-                        Where the relational data is stored
-                    </small>
-                    <input
-                        type="text"
-                        className="form-control border-primary text-primary"
-                        disabled
-                        value={schema.identifiers.singular.label}
-                    />
+        <React.Fragment>
+            <div className="row">
+                <div className="col-lg-4">
+                    <div className="form-group text-primary text-center">
+                        <label className="mb-0">
+                            {schema.identifiers.singular.label}
+                        </label>
+                        <small className="form-text text-primary">
+                            Where the relational data is stored
+                        </small>
+                        <input
+                            type="text"
+                            className="form-control border-primary text-primary"
+                            disabled
+                            value={schema.identifiers.singular.label}
+                        />
+                    </div>
                 </div>
-            </div>
 
-            <div className="col-lg-4">
-                <div className="row">
-                    <div className="col-lg-12">
-                        <div className="form-group mb-2 text-center">
-                            <label className="mb-0">
-                                {schema.identifiers.singular.label}
-                            </label>
-                            {/* <small className="form-text text-muted mb-0">{ schema.description }</small> */}
+                <div className="col-lg-4">
+                    <div className="row">
+                        <div className="col-lg-12">
+                            <div className="form-group text-center mb-0">
+                                <label className="mb-0">Relation Type</label>
+                                <small className="form-text text-muted mb-0">
+                                    Relation Desc.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="row">
+                        <div className="col-lg-12">
+                            <RelationDatatypeForm
+                                type={relationInput.type}
+                                supportedRelationTypes={supportedRelationTypes}
+                                onChangeRelationType={(
+                                    updatedRelationType: RelationType,
+                                ) => {
+                                    props.onChange({
+                                        ...relationInput,
+                                        type: updatedRelationType,
+                                    });
+                                }}
+                            />
                         </div>
                     </div>
                 </div>
 
-                <div className="row">
-                    <div className="col-lg-12">
-                        {/* <div className="btn-group w-100"> */}
-                        <RelationDatatypeForm
-                            type={relationInput.type}
-                            supportedRelationTypes={supportedRelationTypes}
-                            onChangeRelationType={(
-                                updatedRelationType: RelationType,
-                            ) => {
-                                console.log("CHANGE TYPE");
-                                console.log(updatedRelationType);
+                <div className="col-lg-4">
+                    <div className="form-group text-center">
+                        <label className="mb-0 text-info">Related Schema</label>
+                        <small className="form-text text-info">
+                            Schema referenced by this relation
+                        </small>
+                        <select
+                            className="form-control border-info text-info"
+                            v-model="model.related_schema_id"
+                            value={relationInput.destinationSchemaId}
+                            onChange={e => {
+                                console.log("onChange related schema");
                                 props.onChange({
                                     ...relationInput,
-                                    type: updatedRelationType,
+                                    destinationSchemaId: e.currentTarget.value,
                                 });
                             }}
-                        />
-                        {/* <b-button
-                    v-for="relation in filteredRelationTypes"
-                    :key="relation.id"
-                    @click="setRelationType(relation.id)"
-                    size="sm"
-                    variant="outline-primary"
-                    :className="relation.id === model.type ? 'active' : ''"
-                  >
-                    <img className='relation-thumbnail' :src=" relation.id === model.type ? 'https://res.cloudinary.com/codotype/image/upload/v1551448517/codotype-icons/' + relation.id.toLowerCase() + '_active' + '.png' : 'https://res.cloudinary.com/codotype/image/upload/v1551448517/codotype-icons/' + relation.id.toLowerCase() + '.png'"/>
-                  </b-button> */}
+                        >
+                            {/* TODO - use correct pluralization here depending on relationInput.type */}
+                            {schemas.map(s => (
+                                <option key={s.id} value={s.id}>
+                                    {s.identifiers.plural.label}
+                                </option>
+                            ))}
+                        </select>
                     </div>
                 </div>
             </div>
-
-            <div className="col-lg-4">
-                <div className="form-group text-center">
-                    <label className="mb-0 text-info">Related Schema</label>
-                    <small className="form-text text-info">
-                        Schema referenced by this relation
-                    </small>
-                    <select
-                        className="form-control border-info text-info"
-                        v-model="model.related_schema_id"
-                        value={relationInput.destinationSchemaId}
+            <div className="row">
+                <div className="col-sm-4">
+                    <input
+                        className="form-control"
+                        placeholder="Source Schema Alias"
+                        value={relationInput.sourceSchemaAlias}
                         onChange={e => {
-                            console.log("onChange related schema");
                             props.onChange({
                                 ...relationInput,
-                                destinationSchemaId: e.currentTarget.value,
+                                sourceSchemaAlias: sanitizeLabel(
+                                    e.currentTarget.value,
+                                ),
                             });
                         }}
-                    >
-                        {/* TODO - use correct pluralization here depending on relationInput.type */}
-                        {schemas.map(s => (
-                            <option key={s.id} value={s.id}>
-                                {s.identifiers.plural.label}
-                            </option>
-                        ))}
-                    </select>
+                    />
+                </div>
+                <div
+                    className="col-sm-4 text-center"
+                    style={{ visibility: "hidden" }}
+                />
+                <div className="col-sm-4">
+                    <input
+                        className="form-control"
+                        placeholder="Destination Schema Alias"
+                        value={relationInput.destinationSchemaAlias}
+                        onChange={e => {
+                            props.onChange({
+                                ...relationInput,
+                                destinationSchemaAlias: sanitizeLabel(
+                                    e.currentTarget.value,
+                                ),
+                            });
+                        }}
+                    />
                 </div>
             </div>
-        </div>
+            {/* <div className="row"> */}
+            {/* <div className="col-lg-12"> */}
+            {/* <hr /> */}
+            {/* </div> */}
+            {/* <div className="col-lg-12 text-center"> */}
+            {/* Relation Badge Goes Here */}
+            {/* </div> */}
+            {/* </div> */}
+        </React.Fragment>
     );
 }

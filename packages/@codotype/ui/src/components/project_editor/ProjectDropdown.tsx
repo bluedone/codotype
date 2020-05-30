@@ -4,8 +4,8 @@ import { Project } from "@codotype/types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
 import { ResetProjectButton } from "./ResetProjectButton";
+import { ProjectExportModal } from "./ProjectExportModal";
 import styled from "styled-components";
-import download from "downloadjs";
 
 // // // //
 
@@ -21,6 +21,9 @@ export function ProjectDropdown(props: {
     project: Project;
     onConfirmReset: () => void;
 }) {
+    const [showingExportModal, showExportModal] = React.useState<boolean>(
+        false,
+    );
     return (
         <StyledDiv>
             <Dropdown alignRight>
@@ -42,16 +45,7 @@ export function ProjectDropdown(props: {
                     {/* <Dropdown.Item>JSON</Dropdown.Item> */}
                     <Dropdown.Item
                         onClick={() => {
-                            // Defines filename
-                            const filename: string = `codotype-project-${
-                                props.project.identifiers.snake
-                            }-${Date.now()}.json`;
-                            // Downloads file
-                            download(
-                                JSON.stringify(props.project, null, 4),
-                                filename,
-                                "application/json",
-                            );
+                            showExportModal(true);
                         }}
                     >
                         Export Project
@@ -63,6 +57,14 @@ export function ProjectDropdown(props: {
                     <ResetProjectButton onConfirmReset={props.onConfirmReset} />
                 </Dropdown.Menu>
             </Dropdown>
+
+            <ProjectExportModal
+                project={props.project}
+                show={showingExportModal}
+                onHide={() => {
+                    showExportModal(false);
+                }}
+            />
         </StyledDiv>
     );
 }

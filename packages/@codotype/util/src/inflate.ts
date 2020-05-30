@@ -106,13 +106,18 @@ export function buildInflatedRelations(params: {
 
 // // // //
 
+/**
+ * inflateSchema
+ * Inflates a single Schema and returns an InflatedSchema instance
+ * @param params.schema The Schema instance being inflated
+ * @param params.schemas Array of all Schema instances
+ * @returns A single InflatedSchema instance
+ */
 export function inflateSchema(params: {
   schema: Schema;
   schemas: Schema[];
 }): InflatedSchema {
   const { schema, schemas } = params;
-
-  // TODO - must inflate relations, add incomingRelations / references ?
 
   return {
     id: schema.id,
@@ -122,13 +127,19 @@ export function inflateSchema(params: {
       ...schema.identifiers
     },
     references: buildRelationReferences({ schema, schemas }),
-    configuration: schema.configuration // Question - does anything need to be done for the configuration?
+    // QUESTION - does anything need to be done for the configuration?
+    configuration: schema.configuration
   };
 }
 
 // // // //
 
-// TODO - annotate
+/**
+ * inflateSchemas
+ * Inflates each schema in params.schemas
+ * @param params.schemas - array of Schema instances being inflated
+ * @returns array of InflatedSchema instances
+ */
 export function inflateSchemas(params: {
   schemas: Schema[];
 }): InflatedSchema[] {
@@ -143,7 +154,10 @@ export function inflateSchemas(params: {
 
 // // // //
 
-// TODO - annotate
+/**
+ * inflateProject
+ * @param params
+ */
 export function inflateProject(params: { project: Project }): InflatedProject {
   const { project } = params;
   return {

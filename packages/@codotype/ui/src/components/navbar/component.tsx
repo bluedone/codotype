@@ -1,6 +1,13 @@
 import * as React from "react";
-import { Navbar, NavDropdown, Nav } from "react-bootstrap";
+import { Navbar, Nav } from "react-bootstrap";
 import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faBook,
+    faQuestionCircle,
+    // faDollarSign,
+} from "@fortawesome/free-solid-svg-icons";
+import { faTwitter, faGithub } from "@fortawesome/free-brands-svg-icons";
 
 // // // //
 
@@ -37,34 +44,61 @@ export function AppNavbar() {
                             marginTop: ".25rem",
                             height: "1.5rem",
                             width: "1.5rem",
-                            // float: "left",
                         }}
                     />
                     <Navbar.Brand href="#home">
-                        <h3 className="mb-0">codotype</h3>
+                        <h3 className="mb-0">Codotype</h3>
                     </Navbar.Brand>
                 </div>
 
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="mr-auto">
-                        <Nav.Link href="#home">Home</Nav.Link>
-                        <Nav.Link href="#link">Link</Nav.Link>
-                        <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="#action/3.1">
-                                Action
-                            </NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.2">
-                                Another action
-                            </NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.3">
-                                Something
-                            </NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item href="#action/3.4">
-                                Separated link
-                            </NavDropdown.Item>
-                        </NavDropdown>
+                    <Nav className="ml-auto">
+                        <Nav.Link
+                            href="https://codotype.io/about"
+                            target="_blank"
+                        >
+                            <FontAwesomeIcon
+                                icon={faQuestionCircle}
+                                className="mr-1"
+                            />
+                            About
+                        </Nav.Link>
+
+                        <Nav.Link href="https://codotype.org" target="_blank">
+                            <FontAwesomeIcon
+                                icon={faBook}
+                                className="text-info mr-1"
+                            />
+                            Docs
+                        </Nav.Link>
+
+                        {/* <Nav.Link href="https://codotype.org" target="_blank"> */}
+                        {/* <FontAwesomeIcon
+                                icon={faDollarSign}
+                                className="text-success mr-1"
+                            /> */}
+                        {/* Donate */}
+                        {/* </Nav.Link> */}
+
+                        <Nav.Link
+                            target="_blank"
+                            href="https://twitter.com/codotype"
+                        >
+                            <FontAwesomeIcon
+                                icon={faTwitter}
+                                className="text-primary mr-1"
+                            />
+                            Twitter
+                        </Nav.Link>
+
+                        <Nav.Link
+                            target="_blank"
+                            href="https://github.com/codotype"
+                        >
+                            <FontAwesomeIcon icon={faGithub} className="mr-1" />
+                            GitHub
+                        </Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </div>

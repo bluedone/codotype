@@ -92,6 +92,7 @@ h6 {
 $border-radius: 0.5rem !default;
 $border-radius-lg: 0.5rem !default;
 $border-radius-sm: 0.5rem !default;
+$card-cap-bg: $gray-200;
 
 $component-active-color: $gray-700 !default;
 $component-active-bg: lighten($blue, 20%) !default;
@@ -111,3 +112,17 @@ small,
 strong {
     letter-spacing: 0.025rem;
 }
+
+// // // //
+// Copied from @codotype/ui-deprecated
+
+// $heading-font: 'Product Sans', Helvetica, Arial, serif
+// $sans-serif-font: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif
+
+// // Section
+// .section
+//     padding-top: 3em
+//     padding-bottom: 3em
+
+// .section-title
+//     margin: 2em auto
