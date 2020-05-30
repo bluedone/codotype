@@ -49,7 +49,9 @@ export function SchemaDeleteButton(props: {
     const inflatedSchema = inflateSchema({ schema, schemas });
 
     // Defines boolean indicating whether or not the schema can be removed
-    const disableSubmit: boolean = inflatedSchema.references.length > 0;
+    const disableSubmit: boolean =
+        inflatedSchema.references.filter(r => r.sourceSchemaId !== schema.id)
+            .length > 0;
 
     if (schema.source === SchemaSource.GENERATOR && schema.locked) {
         return (

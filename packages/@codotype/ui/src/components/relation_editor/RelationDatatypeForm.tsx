@@ -39,17 +39,17 @@ export function RelationDatatypeForm(props: RelationDatatypeFormProps) {
             }}
         >
             {Object.keys(RELATION_META)
-                .filter((datatype: string) =>
+                .filter((relType: string) =>
                     props.supportedRelationTypes
                         .map(d => String(d))
-                        .includes(datatype),
+                        .includes(relType),
                 )
-                .map((datatype: string) => {
+                .map((relType: string) => {
                     const relationMeta: RelationMeta =
                         // @ts-ignore
-                        RELATION_META[datatype];
+                        RELATION_META[relType];
                     return (
-                        <option key={relationMeta.id}>
+                        <option key={relationMeta.id} value={relationMeta.id}>
                             {relationMeta.label}
                         </option>
                     );
