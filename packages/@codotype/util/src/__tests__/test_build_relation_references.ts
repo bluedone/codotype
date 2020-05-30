@@ -1,13 +1,13 @@
 import {
   buildRelationReferences,
   inflateSchemas,
-  inflateSchema,
+  inflateSchema
 } from "../inflate";
 import {
   Schema,
   testState,
   RelationReference,
-  InflatedSchema,
+  InflatedSchema
 } from "@codotype/types";
 
 const { userSchema, movieSchema } = testState;
@@ -15,15 +15,15 @@ const { userSchema, movieSchema } = testState;
 // // // //
 
 const testCases: [string, Schema, Schema[]][] = [
-  ["one word label", userSchema, [userSchema, movieSchema]],
+  ["basic schemas", userSchema, [userSchema, movieSchema]]
 ];
 
 describe("/lib/buildRelationReferences.js", () => {
-  testCases.forEach((testCase) => {
+  testCases.forEach(testCase => {
     test(testCase[0], () => {
       const expectedReferences: RelationReference[] = buildRelationReferences({
         schema: testCase[1],
-        schemas: testCase[2],
+        schemas: testCase[2]
       });
       expect(expectedReferences).toMatchSnapshot();
     });
@@ -33,11 +33,11 @@ describe("/lib/buildRelationReferences.js", () => {
 // // // //
 
 describe("/lib/inflateSchema.js", () => {
-  testCases.forEach((testCase) => {
+  testCases.forEach(testCase => {
     test(testCase[0], () => {
       const expectedSchema: InflatedSchema = inflateSchema({
         schema: userSchema,
-        schemas: [userSchema, movieSchema],
+        schemas: [userSchema, movieSchema]
       });
       expect(expectedSchema).toMatchSnapshot();
     });
@@ -47,10 +47,10 @@ describe("/lib/inflateSchema.js", () => {
 // // // //
 
 describe("/lib/inflateSchemas.js", () => {
-  testCases.forEach((testCase) => {
+  testCases.forEach(testCase => {
     test(testCase[0], () => {
       const expectedSchemas: InflatedSchema[] = inflateSchemas({
-        schemas: [userSchema, movieSchema],
+        schemas: [userSchema, movieSchema]
       });
       expect(expectedSchemas).toMatchSnapshot();
     });
