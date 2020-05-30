@@ -43,6 +43,9 @@ function CollectionItemForm(props: {
                 // TODO - handle nested instance + collection
                 return (
                     <ConfigurationInputFormGroup
+                        card
+                        enabled
+                        onChangeEnabled={() => console.log("onChangeEnabled")}
                         property={property}
                         className="mt-3"
                     >

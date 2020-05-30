@@ -16,34 +16,55 @@ interface ConfigurationInputChildProps {
 }
 
 export function ConfigurationInputChild(props: ConfigurationInputChildProps) {
-    if (props.property.type === OptionType.STRING) {
+    const { property } = props;
+
+    // TODO - remove this after enabled/value obj is enforced everywhere
+    function setValue(updatedValue: OptionValue) {
+        if (property.allowDisable) {
+            props.onChange({
+                enabled: props.value.enabled,
+                value: updatedValue,
+            });
+            return;
+        }
+        props.onChange(updatedValue);
+    }
+
+    let value = props.value;
+    if (property.allowDisable) {
+        value = props.value.value;
+    }
+
+    // // // //
+
+    if (property.type === OptionType.STRING) {
         return (
             <input
                 className="form-control"
                 type="text"
-                placeholder={props.property.label}
-                value={props.value}
+                placeholder={property.label}
+                value={value}
                 onChange={e => {
-                    props.onChange(e.currentTarget.value);
+                    setValue(e.currentTarget.value);
                 }}
             />
         );
     }
-    if (props.property.type === OptionType.NUMBER) {
+    if (property.type === OptionType.NUMBER) {
         // TODO - add INTEGER
         return (
             <input
                 className="form-control"
                 type="number"
-                placeholder={props.property.label}
-                value={props.value}
+                placeholder={property.label}
+                value={value}
                 onChange={e => {
-                    props.onChange(e.currentTarget.value);
+                    setValue(e.currentTarget.value);
                 }}
             />
         );
     }
-    if (props.property.type === OptionType.BOOLEAN) {
+    if (property.type === OptionType.BOOLEAN) {
         return (
             <Switch
                 height={22}
@@ -55,35 +76,39 @@ export function ConfigurationInputChild(props: ConfigurationInputChildProps) {
                 checkedIcon={false}
                 uncheckedIcon={false}
                 onChange={(updatedChecked: boolean) => {
-                    props.onChange(updatedChecked);
+                    setValue(updatedChecked);
                 }}
-                checked={props.value}
+                checked={value}
             />
         );
         // return (
         //     <input
         //         type="checkbox"
-        //         checked={props.value}
+        //         checked={value}
         //         onChange={e => {
         //             props.onChange(e.currentTarget.checked);
         //         }}
         //     />
         // );
     }
-    if (props.property.type === OptionType.DROPDOWN) {
+    if (property.type === OptionType.DROPDOWN) {
         return (
             <select
                 className="form-control"
-                value={props.value}
+                value={value}
                 onChange={e => {
-                    props.onChange(e.currentTarget.value);
+                    setValue(e.currentTarget.value);
                 }}
             >
-                {props.property.required && (
-                    <option value="">{props.property.label}</option>
+                {property.required && (
+                    <option value="">{property.label}</option>
                 )}
-                {props.property.dropdownOptions.map((d: DropdownOption) => {
-                    return <option value={d.value}>{d.label}</option>;
+                {property.dropdownOptions.map((d: DropdownOption) => {
+                    return (
+                        <option key={d.value} value={d.value}>
+                            {d.label}
+                        </option>
+                    );
                 })}
             </select>
         );
