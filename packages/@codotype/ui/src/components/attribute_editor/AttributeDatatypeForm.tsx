@@ -10,7 +10,7 @@ interface DatatypeOptionProps {
     onClick: (updatedDatatype: Datatype) => void;
 }
 export function DatatypeOption(props: DatatypeOptionProps) {
-    let buttonClassName: string = "btn btn-outline-dark btn-block text-left";
+    let buttonClassName = "btn btn-outline-dark btn-block text-left";
     if (props.active) {
         buttonClassName += " active";
     }

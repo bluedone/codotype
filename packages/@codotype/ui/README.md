@@ -1,6 +1,6 @@
 # react-components
 
-:desktop_computer: Codotype UI with React + Typescript
+:desktop_computer: Codotype UI components - built with React + Typescript
 
 **Getting Started**
 
