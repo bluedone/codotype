@@ -5,7 +5,7 @@ import { Story } from "@src/components/dev";
 
 // // // //
 
-storiesOf("GenerateCodeButton", module).add("enabled", () => {
+storiesOf("Components/GenerateCodeButton", module).add("enabled", () => {
     return (
         <Story>
             <GenerateCodeButton
@@ -17,7 +17,7 @@ storiesOf("GenerateCodeButton", module).add("enabled", () => {
     );
 });
 
-storiesOf("GenerateCodeButton", module).add("disabled", () => {
+storiesOf("Components/GenerateCodeButton", module).add("disabled", () => {
     return (
         <Story>
             <GenerateCodeButton

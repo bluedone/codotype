@@ -6,7 +6,7 @@ import { userSchema } from "@src/components/relation_editor/__tests__/test_state
 
 // // // //
 
-storiesOf("SchemaPreview", module).add("renders", () => {
+storiesOf("Components/SchemaPreview", module).add("renders", () => {
     return (
         <Story>
             <SchemaPreview schema={userSchema} schemas={[]} />

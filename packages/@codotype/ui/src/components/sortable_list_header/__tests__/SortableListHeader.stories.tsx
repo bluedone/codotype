@@ -5,7 +5,7 @@ import { Story } from "@src/components/dev";
 
 // // // //
 
-storiesOf("SortableListHeader", module).add("Attributes", () => {
+storiesOf("Components/SortableListHeader", module).add("Attributes", () => {
     const [count, increment] = React.useReducer(i => i++, 0);
     return (
         <Story>
@@ -15,7 +15,7 @@ storiesOf("SortableListHeader", module).add("Attributes", () => {
     );
 });
 
-storiesOf("SortableListHeader", module).add("Relations", () => {
+storiesOf("Components/SortableListHeader", module).add("Relations", () => {
     const [count, increment] = React.useReducer(i => i++, 0);
     return (
         <Story>
