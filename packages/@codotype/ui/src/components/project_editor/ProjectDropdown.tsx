@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
 import { ResetProjectButton } from "./ResetProjectButton";
 import styled from "styled-components";
-import download from "downloadjs";
+const download = require("downloadjs");
 
 // // // //
 
