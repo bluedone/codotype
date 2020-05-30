@@ -206,7 +206,6 @@ export function buildDefaultProject(generatorMeta: GeneratorMeta): Project {
   const defaultSchemas: Schema[] = buildDefaultSchemas(generatorMeta);
 
   // Returns ConfigurationGroupValue
-  // TODO - pull identifiers from generatorMeta
   const newProject: Project = {
     id: "",
     identifiers: {
