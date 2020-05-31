@@ -4,7 +4,7 @@ import { Modal } from "react-bootstrap";
 
 // // // //
 
-export interface RelationInput extends Relation {}
+export type RelationInput = Relation;
 
 /**
  * RelationFormModal

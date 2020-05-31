@@ -5,7 +5,7 @@ import { Story } from "@src/components/dev";
 
 // // // //
 
-storiesOf("BuildFinished", module).add("S3 Download", () => {
+storiesOf("Components/BuildFinished", module).add("S3 Download", () => {
     return (
         <Story>
             <BuildFinished
@@ -19,7 +19,7 @@ storiesOf("BuildFinished", module).add("S3 Download", () => {
     );
 });
 
-storiesOf("BuildFinished", module).add("Local Path", () => {
+storiesOf("Components/BuildFinished", module).add("Local Path", () => {
     return (
         <Story>
             <BuildFinished

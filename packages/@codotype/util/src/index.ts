@@ -1,4 +1,3 @@
-export * from "./buildDefault";
 export * from "./indent";
 export * from "./inflate";
 export * from "./sanitizeLabel";

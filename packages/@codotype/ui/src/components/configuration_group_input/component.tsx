@@ -143,8 +143,12 @@ export function ConfigurationInput(props: ConfigurationInputProps) {
                             return (
                                 <ConfigurationInputFormGroup
                                     card
+                                    enabled={true}
                                     property={property}
                                     key={property.identifier}
+                                    onChangeEnabled={() => {
+                                        console.log("onChangeEnabled");
+                                    }}
                                 >
                                     <ConfigurationInputChild
                                         value={value}

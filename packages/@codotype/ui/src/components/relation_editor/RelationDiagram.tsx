@@ -7,6 +7,7 @@ import {
     faMask,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 // // // //
 
@@ -55,19 +56,25 @@ export function RelationDiagram(props: RelationDiagramProps) {
 
     const source = (
         <span className={textColor}>
-            {sourceManyOrOne} <strong>{sourceLabel}</strong>
+            {sourceManyOrOne} <strong>{sourceAlias}</strong>
             {slim && sourceLabel !== sourceAlias && (
-                // ADD TOOLTIP_LEFT => `as "${sourceAlias}"`
-                <span>
+                <OverlayTrigger
+                    placement="top"
+                    overlay={
+                        <Tooltip id={`edit-button-tooltip`}>
+                            References <strong>{sourceLabel}</strong> Schema
+                        </Tooltip>
+                    }
+                >
                     <FontAwesomeIcon
                         className={classnames("ml-1", textColor)}
                         icon={faMask}
                     />
-                </span>
+                </OverlayTrigger>
             )}
             {!slim && sourceLabel !== sourceAlias && (
                 <span className={classnames("ml-1", textColor)}>
-                    (as <i>{sourceAlias})</i>
+                    (as <i>{sourceLabel})</i>
                 </span>
             )}
         </span>
@@ -76,23 +83,29 @@ export function RelationDiagram(props: RelationDiagramProps) {
     const dest = (
         <React.Fragment>
             <span className={oppositeTextColor}>
-                {destManyOrOne} <strong>{destLabel}</strong>
+                {destManyOrOne} <strong>{destAlias}</strong>
             </span>
 
             {slim && destLabel !== destAlias && (
-                // TOOLTIP-RIGHT --> as ${destAlias}
-                <span>
+                <OverlayTrigger
+                    placement="top"
+                    overlay={
+                        <Tooltip id={`edit-button-tooltip`}>
+                            References <strong>{destLabel}</strong> Schema
+                        </Tooltip>
+                    }
+                >
                     <FontAwesomeIcon
                         className={classnames("ml-1", oppositeTextColor)}
                         icon={faMask}
                     />
-                </span>
+                </OverlayTrigger>
             )}
 
             {!slim && destLabel !== destAlias && (
                 <span className={oppositeTextColor}>
                     {" "}
-                    (as <i>{destAlias})</i>
+                    (as <i>{destLabel})</i>
                 </span>
             )}
         </React.Fragment>

@@ -47,25 +47,30 @@ export function RelationBadge(props: RelationBadgeProps) {
                     />
                 ))}
 
-            {relation.type === RelationType.HAS_MANY && (
-                <RelationDiagram
-                    direction={direction}
-                    sourcePlural={false}
-                    sourceLabel={identifiers.source.canonical.singular.label}
-                    sourceAlias={identifiers.destination.alias.singular.label}
-                    destPlural={true}
-                    destLabel={identifiers.destination.canonical.plural.label}
-                    destAlias={identifiers.destination.alias.plural.label}
-                    slim={slim}
-                />
-            )}
+            {relation.type === RelationType.HAS_MANY ||
+                (relation.type === RelationType.TO_MANY && (
+                    <RelationDiagram
+                        direction={direction}
+                        sourcePlural={false}
+                        sourceLabel={
+                            identifiers.source.canonical.singular.label
+                        }
+                        sourceAlias={identifiers.source.alias.singular.label}
+                        destPlural={true}
+                        destLabel={
+                            identifiers.destination.canonical.plural.label
+                        }
+                        destAlias={identifiers.destination.alias.plural.label}
+                        slim={slim}
+                    />
+                ))}
 
             {relation.type === RelationType.HAS_AND_BELONGS_TO_MANY && (
                 <RelationDiagram
                     direction={direction}
                     sourcePlural={true}
                     sourceLabel={identifiers.source.canonical.singular.label}
-                    sourceAlias={identifiers.destination.alias.plural.label}
+                    sourceAlias={identifiers.source.alias.plural.label}
                     destPlural={true}
                     destLabel={identifiers.destination.canonical.plural.label}
                     destAlias={identifiers.destination.alias.plural.label}

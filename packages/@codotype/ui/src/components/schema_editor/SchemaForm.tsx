@@ -24,7 +24,7 @@ function TokenCell(props: {
     const isEmpty: boolean = value === "";
 
     // Gets display value
-    let displayValue: string = "...";
+    let displayValue = "...";
     if (showPlural && valuePlural) {
         displayValue = valuePlural;
     } else if (!showPlural && value) {

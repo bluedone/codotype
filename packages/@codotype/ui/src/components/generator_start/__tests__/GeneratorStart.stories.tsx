@@ -6,7 +6,7 @@ import { dummyGeneratorMeta } from "@src/components/project_editor/__tests__/tes
 
 // // // //
 
-storiesOf("GeneratorStart", module).add("renders in card", () => {
+storiesOf("Components/GeneratorStart", module).add("renders in card", () => {
     return (
         <Story>
             <div className="card card-body">
@@ -19,7 +19,7 @@ storiesOf("GeneratorStart", module).add("renders in card", () => {
     );
 });
 
-storiesOf("GeneratorStart", module).add("renders", () => {
+storiesOf("Components/GeneratorStart", module).add("renders", () => {
     return (
         <Story>
             <GeneratorStart

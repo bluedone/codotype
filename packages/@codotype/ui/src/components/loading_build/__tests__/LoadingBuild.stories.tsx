@@ -5,7 +5,7 @@ import { Story } from "@src/components/dev";
 
 // // // //
 
-const storyCollection = storiesOf("LoadingBuild", module);
+const storyCollection = storiesOf("Components/LoadingBuild", module);
 quotes.forEach((quote, index) => {
     storyCollection.add(`quote ${index}`, () => {
         return (

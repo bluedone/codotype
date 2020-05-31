@@ -2,7 +2,8 @@ import * as React from "react";
 import { Schema, RelationType } from "@codotype/types";
 import { RelationDatatypeForm } from "./RelationDatatypeForm";
 import { RelationInput } from "./RelationFormModal";
-import { sanitizeLabel } from "@codotype/util";
+import { sanitizeLabel, buildRelationReference } from "@codotype/util";
+import { RelationBadge } from "./RelationBadge";
 
 // // // //
 
@@ -32,6 +33,11 @@ export function RelationPropertiesForm(props: RelationPropertiesFormProps) {
             destinationSchemaId: schemas[0].id,
         });
     }
+
+    // Locates destination schema
+    const destinationSchema = props.schemas.find(
+        s => s.id === relationInput.destinationSchemaId,
+    );
 
     return (
         <React.Fragment>
@@ -147,14 +153,24 @@ export function RelationPropertiesForm(props: RelationPropertiesFormProps) {
                     />
                 </div>
             </div>
-            {/* <div className="row"> */}
-            {/* <div className="col-lg-12"> */}
-            {/* <hr /> */}
-            {/* </div> */}
-            {/* <div className="col-lg-12 text-center"> */}
-            {/* Relation Badge Goes Here */}
-            {/* </div> */}
-            {/* </div> */}
+            {destinationSchema !== undefined && (
+                <div className="row">
+                    <div className="col-lg-12">
+                        <hr />
+                    </div>
+                    <div className="col-lg-12 text-center">
+                        <RelationBadge
+                            direction="out"
+                            relation={buildRelationReference({
+                                relation: relationInput,
+                                sourceSchema: props.schema,
+                                destinationSchema: destinationSchema,
+                            })}
+                            slim={false}
+                        />
+                    </div>
+                </div>
+            )}
         </React.Fragment>
     );
 }

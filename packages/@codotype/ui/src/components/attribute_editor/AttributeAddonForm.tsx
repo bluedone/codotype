@@ -47,7 +47,7 @@ export function AttributeAddonForm(props: {
                 }
 
                 // Define boolean indicating whether or not the addon field is disabled
-                let disableInput: boolean = false;
+                let disableInput = false;
                 if (
                     a.exclusive &&
                     attributeCollection.some(attr => {
@@ -105,9 +105,7 @@ export function AttributeAddonForm(props: {
                 // Dropdown
                 if (a.propertyType === OptionType.DROPDOWN) {
                     // Form for boolean addon
-                    const addonValue: string = String(
-                        props.value[a.identifier],
-                    );
+                    const addonValue = String(props.value[a.identifier]);
 
                     return (
                         <div className="col-lg-6 col-sm-12">

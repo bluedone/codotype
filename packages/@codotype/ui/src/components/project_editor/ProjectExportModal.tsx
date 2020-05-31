@@ -13,7 +13,7 @@ const download = require("downloadjs");
  */
 function downloadProject(project: Project) {
     // Defines filename
-    const filename: string = `codotype-project-${
+    const filename = `codotype-project-${
         project.identifiers.snake
     }-${Date.now()}.json`;
 

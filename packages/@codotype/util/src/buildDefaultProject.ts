@@ -53,7 +53,7 @@ export function buildValueFromProperties(
 
   // Defines empty ConfigurationGroupValue
   // Iterates over each property in the group and assigns values
-  const configurationGroupValue: any = properties.reduce(
+  const configurationGroupValue: OptionValueInstance = properties.reduce(
     (val, property: ConfigurationGroupProperty) => {
       // Updates val with data for ConfigurationGroupProperty
       if (property.allowDisable && !property.required) {
@@ -90,7 +90,7 @@ export function buildConfigurationGroupValue(
   if (configurationGroup.properties) {
     // Defines empty ConfigurationGroupValue
     // Iterates over each property in the group and assigns values
-    const configurationGroupValue: any = configurationGroup.properties.reduce(
+    const configurationGroupValue: OptionValueInstance = configurationGroup.properties.reduce(
       (val, property: ConfigurationGroupProperty) => {
         // Updates val with data for ConfigurationGroupProperty
         // TODO - remove this - the UI should only care if the property can allow disable or not

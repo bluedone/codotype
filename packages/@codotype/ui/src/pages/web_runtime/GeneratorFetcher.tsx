@@ -1,7 +1,7 @@
 import * as React from "react";
 import { GeneratorMeta } from "@codotype/types";
 import useAxios from "axios-hooks";
-import { LoadingSpinner } from "../../components/loading_spinner";
+import { LoadingPage } from "../../components/LoadingPage";
 
 // // // //
 
@@ -19,19 +19,7 @@ export function GeneratorFetcher(props: GeneratorFetcherProps) {
 
     // Renders PageLoader component
     if (loading) {
-        return (
-            <div className="h-100 d-flex flex-row justify-content-center align-items-center">
-                <div className="col-sm-12 col-md-8 col-lg-6">
-                    <div className="row my-4">
-                        <div className="col-lg-12 text-center d-flex justify-content-center">
-                            <div className="my-2">
-                                <LoadingSpinner />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        );
+        return <LoadingPage />;
     }
 
     // TODO - add better error handling here
