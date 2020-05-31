@@ -1,7 +1,7 @@
 import * as React from "react";
 import { GeneratorMeta } from "@codotype/types";
 import useAxios from "axios-hooks";
-import { LoadingPage } from "@src/components/LoadingPage";
+import { LoadingPage } from "../../components/LoadingPage";
 
 // // // //
 

@@ -45,8 +45,7 @@ function FooterLink(props: {
 export function AppFooter() {
     return (
         <div
-            id="footer"
-            className="section bg-grey mt-4"
+            className="section bg-grey mt-4 py-4"
             style={{ position: "relative" }}
         >
             <div className="container">
