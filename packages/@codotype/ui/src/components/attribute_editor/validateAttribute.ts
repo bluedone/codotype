@@ -20,14 +20,14 @@ export function validateAttribute(params: {
 }): string[] {
     const errors: string[] = [];
     const { attributeInput, attributeCollection } = params;
-    // Ensure Attribute label is defined
-    if (attributeInput.identifiers.label === "") {
-        errors.push(ATTRIBUTE_ERROR_MESSAGE.emptyLabel);
-    }
-
     // Ensure Attribute datatype is defined
     if (attributeInput.datatype === null) {
         errors.push(ATTRIBUTE_ERROR_MESSAGE.emptyDatatype);
+    }
+
+    // Ensure Attribute label is defined
+    if (attributeInput.identifiers.label === "") {
+        errors.push(ATTRIBUTE_ERROR_MESSAGE.emptyLabel);
     }
 
     // Ensure Attribute label is unique
