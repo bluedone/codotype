@@ -937,13 +937,13 @@
   resolved "https://registry.yarnpkg.com/@codotype/types/-/types-0.8.0-canary.4.tgz#fc1fb8dd0a4c6727393bda61fe10479c81a17ec5"
   integrity sha512-WdCpz02QK6APErad0DKSg+pe6tiW7ZgFW2WeMBDkTndTNGf9FN+81KGefBW/6orCY5T1qdsYrNdP4Mf/IR4DwA==
 
-"@codotype/ui@^0.8.0-canary.26":
-  version "0.8.0-canary.26"
-  resolved "https://registry.yarnpkg.com/@codotype/ui/-/ui-0.8.0-canary.26.tgz#f4cbc2dc076e394406fd474d8de207912dbe27f4"
-  integrity sha512-B0htsJyYmXD0MHsILSrEUXvDmXDIU6r346UxQJRbHASJLxeezZt2w/hJj/71kTQT2k7g47zGJ5lCDSVEFfg/XQ==
+"@codotype/ui@^0.8.0-canary.30":
+  version "0.8.0-canary.30"
+  resolved "https://registry.yarnpkg.com/@codotype/ui/-/ui-0.8.0-canary.30.tgz#11fd270ccadb09c89242ce0a0b97d598927c41ee"
+  integrity sha512-6Bj0NzAlEflvEJA7Z1yNum1LnQyDVK+8LQV9RVv+3ZUZEcTCCTAZ4CJg/hJ8WckzWzmwJwsaAjyH8KT7hHjnfQ==
   dependencies:
     "@codotype/types" "0.8.0-canary.4"
-    "@codotype/util" "0.8.0-canary.5"
+    "@codotype/util" "0.8.0-canary.7"
     "@fortawesome/fontawesome-svg-core" "^1.2.27"
     "@fortawesome/free-brands-svg-icons" "^5.12.1"
     "@fortawesome/free-regular-svg-icons" "^5.12.1"
@@ -972,10 +972,10 @@
     react-test-renderer "^16.13.1"
     styled-components "^5.1.0"
 
-"@codotype/util@0.8.0-canary.5":
-  version "0.8.0-canary.5"
-  resolved "https://registry.yarnpkg.com/@codotype/util/-/util-0.8.0-canary.5.tgz#2c6f11dddbd15cd1e28b40560744343d77b04cf7"
-  integrity sha512-ybZ4FP6pD1x8kheJVQuuygMvM+gi3forUH5fJ++695OqW0DhtXm5JjvmEq05Rn+KFNRgkG9/Fqat8tbxY4o+EA==
+"@codotype/util@0.8.0-canary.7":
+  version "0.8.0-canary.7"
+  resolved "https://registry.yarnpkg.com/@codotype/util/-/util-0.8.0-canary.7.tgz#990303e0821a8944285a2a89ac36868631e207ea"
+  integrity sha512-bArhKo6jMWLkWI1sU4/R1U6VHr0NiB3wDsmwMKRbit+gzpM/R6bjakx1RhDG5FDhxs0kn1Jxgf3j9D7FXOXGjA==
   dependencies:
     "@codotype/types" "0.8.0-canary.4"
     "@types/lodash" "^4.14.149"
