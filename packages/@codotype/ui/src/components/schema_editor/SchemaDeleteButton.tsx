@@ -64,7 +64,10 @@ export function SchemaDeleteButton(props: {
                     </Tooltip>
                 }
             >
-                <span className="badge badge-success ml-2">
+                <span
+                    className="badge badge-success ml-2"
+                    style={{ cursor: "default" }}
+                >
                     <FontAwesomeIcon className="mr-2" icon={faInfoCircle} />
                     Auto-Generated
                 </span>

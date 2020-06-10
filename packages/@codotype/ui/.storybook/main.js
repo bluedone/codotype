@@ -2,23 +2,29 @@ const path = require("path");
 
 module.exports = {
     stories: ["../src/**/*.stories.tsx"],
-    // addons: [
-    //     // "@storybook/addon-actions/register",
-    //     // "@storybook/addon-viewport/register",
-    // ],
+    addons: [
+        {
+            name: "@storybook/preset-typescript",
+            options: {
+                tsLoaderOptions: {
+                    configFile: path.resolve(__dirname, "./tsconfig.json"),
+                },
+                forkTsCheckerWebpackPluginOptions: {
+                    colors: false, // disables built-in colors in logger messages
+                },
+                include: [path.resolve(__dirname, "../src")],
+            },
+        },
+    ],
     webpack: async config => {
-        config.module.rules.push({
-            test: /\.(ts|tsx)$/,
-            use: [
-                {
-                    loader: require.resolve("ts-loader"),
-                },
-                // Optional
-                {
-                    loader: require.resolve("react-docgen-typescript-loader"),
-                },
-            ],
-        });
+        // config.module.rules.push({
+        //     test: /\.(ts|tsx)$/,
+        //     use: [
+        //         {
+        //             loader: require.resolve("ts-loader"),
+        //         },
+        //     ],
+        // });
 
         config.module.rules.push({
             exclude: /node_modules/,
@@ -36,10 +42,10 @@ module.exports = {
             ],
         });
 
-        config.entry = {
-            ...config.entry,
-            src: path.join(__dirname, "../src/index.ts"),
-        };
+        // config.entry = {
+        //     ...config.entry,
+        //     src: path.join(__dirname, "../src/index.ts"),
+        // };
 
         config.resolve = {
             ...config.resolve,
@@ -48,6 +54,8 @@ module.exports = {
                 "@src": path.resolve(__dirname, "../src/"),
             },
         };
+
+        console.log(config);
 
         return config;
     },

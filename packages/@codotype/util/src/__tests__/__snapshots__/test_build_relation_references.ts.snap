@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`/lib/buildRelationReferences.js one word label 1`] = `
+exports[`/lib/buildRelationReferences.js basic schemas 1`] = `
 Array [
   Object {
     "destinationSchemaId": "12345",
-    "id": "7ee2610f-c3a3-4b9c-887a-7fda8fa70be6",
+    "id": "c1cd0cfc-db13-403d-8fef-88e096bd9cd7",
     "identifiers": Object {
       "destination": Object {
         "alias": Object {
@@ -82,7 +82,7 @@ Array [
 ]
 `;
 
-exports[`/lib/inflateSchema.js one word label 1`] = `
+exports[`/lib/inflateSchema.js basic schemas 1`] = `
 Object {
   "attributes": Array [],
   "configuration": Object {},
@@ -106,7 +106,7 @@ Object {
   "references": Array [
     Object {
       "destinationSchemaId": "12345",
-      "id": "519961c4-d784-42ac-940c-992dd397e52c",
+      "id": "eb3b7211-2da1-408a-8a08-be17725befbc",
       "identifiers": Object {
         "destination": Object {
           "alias": Object {
@@ -186,7 +186,7 @@ Object {
 }
 `;
 
-exports[`/lib/inflateSchemas.js one word label 1`] = `
+exports[`/lib/inflateSchemas.js basic schemas 1`] = `
 Array [
   Object {
     "attributes": Array [],
@@ -211,7 +211,7 @@ Array [
     "references": Array [
       Object {
         "destinationSchemaId": "12345",
-        "id": "c8cae755-0970-42ac-96e7-65a3c2dbc304",
+        "id": "22579177-435a-441a-954f-bb1effce9fda",
         "identifiers": Object {
           "destination": Object {
             "alias": Object {
@@ -350,7 +350,7 @@ Array [
     "relations": Array [
       Object {
         "destinationSchemaId": "12345",
-        "id": "01405950-9557-4ed9-b28b-f1099312038b",
+        "id": "faae6968-4e65-46e6-8725-4005a1cbf061",
         "identifiers": Object {
           "destination": Object {
             "alias": Object {

@@ -2,6 +2,7 @@ import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { Story } from "@src/components/dev";
 import { AttributePropertiesForm } from "../AttributePropertiesForm";
+import { EMPTY_TOKEN_CASING } from "@codotype/types";
 
 // // // //
 
@@ -11,13 +12,12 @@ storiesOf("AttributeEditor/AttributePropertiesForm", module).add(
         return (
             <Story>
                 <AttributePropertiesForm
-                    label={""}
-                    identifier={"string"}
+                    tokenCasing={{ ...EMPTY_TOKEN_CASING }}
                     onKeydownEnter={() => {
                         console.log("On keydown enter");
                     }}
-                    onLabelChange={(updatedLabel: string) => {
-                        console.log(updatedLabel);
+                    onChange={updatedTokenCasing => {
+                        console.log(updatedTokenCasing);
                     }}
                 />
             </Story>

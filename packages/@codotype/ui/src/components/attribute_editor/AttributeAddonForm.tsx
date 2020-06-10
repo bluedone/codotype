@@ -39,7 +39,7 @@ export function AttributeAddonForm(props: {
     }
 
     return (
-        <div className="row">
+        <div className="row mt-3">
             {addons.map((a: AttributeAddon) => {
                 // Return null if datatype is not supported
                 if (!a.supportedDatatypes.includes(datatype)) {

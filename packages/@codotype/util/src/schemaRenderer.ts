@@ -3,7 +3,7 @@ import {
   Datatype,
   Attribute,
   InflatedSchema,
-  RelationReference,
+  RelationReference
 } from "@codotype/types";
 import { inflateSchema } from "./inflate";
 
@@ -11,11 +11,15 @@ import { inflateSchema } from "./inflate";
 
 // CLEANUP - document this function, write better tests
 export const getDatatypeValueJson = ({
-  datatype,
+  datatype
 }: {
   datatype: Datatype;
 }): string => {
   switch (datatype) {
+    // case Datatype.ID:
+    //   return `1`;
+    case Datatype.UUID:
+      return `"00112233-4455-6677-8899-aabbccddeeff"`;
     case Datatype.STRING:
       return `"string"`;
     case Datatype.TEXT:
@@ -44,6 +48,8 @@ export const getDatatypeValueJson = ({
       return `"3/18/2019, 5:04:51 PM"`;
     case Datatype.TIMESTAMP:
       return `"3/18/2019, 5:04:51 PM"`;
+    case Datatype.UUID_ARRAY:
+      return `["00112233-4455-6677-8899-aabbccddeeff"]`;
     case Datatype.STRING_ARRAY:
       return `["string", "array"]`;
     case Datatype.TEXT_ARRAY:
@@ -73,7 +79,7 @@ export const getDatatypeValueJson = ({
 
 export function renderSchemaJson({
   schema,
-  schemas,
+  schemas
 }: {
   schema: Schema;
   schemas: Schema[];
@@ -86,14 +92,14 @@ export function renderSchemaJson({
     [
       ...schema.attributes.map((attr: Attribute) => {
         return `  "${attr.identifiers.snake}": ${getDatatypeValueJson({
-          datatype: attr.datatype,
+          datatype: attr.datatype
         })}`;
       }),
       ...inflatedSchema.relations.map((r: RelationReference): string => {
         return `  "${r.identifiers.destination.alias.singular.camel}": "${r.identifiers.destination.canonical.singular.pascal} ID"`;
-      }),
+      })
     ].join(",\n"),
-    "}", // Close JSON output
+    "}" // Close JSON output
   ];
 
   // Joins lines
@@ -104,11 +110,13 @@ export function renderSchemaJson({
 
 // CLEANUP - document this function, write better tests
 export const getDatatypeValueGraphQL = ({
-  datatype,
+  datatype
 }: {
   datatype: Datatype;
 }): string => {
   switch (datatype) {
+    case Datatype.UUID:
+      return `String`;
     case Datatype.STRING:
       return `String`;
     case Datatype.TEXT:
@@ -137,6 +145,8 @@ export const getDatatypeValueGraphQL = ({
       return `Date`;
     case Datatype.TIMESTAMP:
       return `Date`;
+    case Datatype.UUID_ARRAY:
+      return `[String]`;
     case Datatype.STRING_ARRAY:
       return `[String]`;
     case Datatype.TEXT_ARRAY:
@@ -166,7 +176,7 @@ export const getDatatypeValueGraphQL = ({
 
 export function renderSchemaGrapqhQL({
   schema,
-  schemas,
+  schemas
 }: {
   schema: Schema;
   schemas: Schema[];
@@ -178,13 +188,13 @@ export function renderSchemaGrapqhQL({
     // Map each property
     ...schema.attributes.map((attr: Attribute) => {
       return `  ${attr.identifiers.snake}: ${getDatatypeValueGraphQL({
-        datatype: attr.datatype,
+        datatype: attr.datatype
       })}!`;
     }),
     ...inflatedSchema.relations.map((r: RelationReference): string => {
       return `  ${r.identifiers.destination.alias.singular.camel}: ${r.identifiers.destination.canonical.singular.pascal}!`;
     }),
-    "}", // Close JSON output
+    "}" // Close JSON output
   ];
 
   // Joins lines
@@ -195,11 +205,13 @@ export function renderSchemaGrapqhQL({
 
 // CLEANUP - document this function, write better tests
 export const getDatatypeValueTypeScript = ({
-  datatype,
+  datatype
 }: {
   datatype: Datatype;
 }): string => {
   switch (datatype) {
+    case Datatype.UUID:
+      return `string`;
     case Datatype.STRING:
       return `string`;
     case Datatype.TEXT:
@@ -221,43 +233,45 @@ export const getDatatypeValueTypeScript = ({
     case Datatype.JSONB:
       return `"{}"`;
     case Datatype.DATE:
-      return `Date`;
+      return `string`;
     case Datatype.TIME:
-      return `Time`;
+      return `string`;
     case Datatype.DATETIME:
-      return `Date`;
+      return `string`;
     case Datatype.TIMESTAMP:
-      return `Date`;
+      return `string`;
+    case Datatype.UUID_ARRAY:
+      return `string[]`;
     case Datatype.STRING_ARRAY:
-      return `String[]`;
+      return `string[]`;
     case Datatype.TEXT_ARRAY:
-      return `String[]`;
+      return `string[]`;
     case Datatype.INTEGER_ARRAY:
-      return `Number[]`;
+      return `number[]`;
     case Datatype.BIGINT_ARRAY:
-      return `Number[]`;
+      return `number[]`;
     case Datatype.FLOAT_ARRAY:
-      return `Number[]`;
+      return `number[]`;
     case Datatype.DECIMAL_ARRAY:
-      return `Number[]`;
+      return `number[]`;
     case Datatype.NUMERIC_ARRAY:
-      return `Number[]`;
+      return `number[]`;
     case Datatype.BOOLEAN_ARRAY:
-      return `Boolean[]`;
+      return `boolean[]`;
     case Datatype.DATE_ARRAY:
-      return `Date[]`;
+      return `string[]`;
     case Datatype.TIME_ARRAY:
-      return `Time[]`;
+      return `string[]`;
     case Datatype.DATETIME_ARRAY:
-      return `Date[]`;
+      return `string[]`;
     case Datatype.TIMESTAMP_ARRAY:
-      return `Date[]`;
+      return `string[]`;
   }
 };
 
 export function renderSchemaTypeScript({
   schema,
-  schemas,
+  schemas
 }: {
   schema: Schema;
   schemas: Schema[];
@@ -269,13 +283,13 @@ export function renderSchemaTypeScript({
     // Map each property
     ...schema.attributes.map((attr: Attribute) => {
       return `  ${attr.identifiers.snake}: ${getDatatypeValueTypeScript({
-        datatype: attr.datatype,
+        datatype: attr.datatype
       })};`;
     }),
     ...inflatedSchema.relations.map((r: RelationReference): string => {
       return `  ${r.identifiers.destination.alias.singular.camel}Id: ${r.identifiers.destination.canonical.singular.pascal};`;
     }),
-    "}", // Close JSON output
+    "}" // Close JSON output
   ];
 
   // Joins lines

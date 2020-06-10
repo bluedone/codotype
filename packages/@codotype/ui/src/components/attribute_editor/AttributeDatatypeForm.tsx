@@ -50,15 +50,15 @@ interface AttributeDatatypeFormProps {
  */
 export function AttributeDatatypeForm(props: AttributeDatatypeFormProps) {
     return (
-        <div className="mt-2">
+        <div className="row mt-3">
             <div className="col-lg-12">
                 <p className="lead mb-0">Datatype</p>
                 <small className="form-text text-muted">
-                    The <span className="text-success">Datatype</span>
-                    describes the data represented by this
+                    The <span className="text-success">Datatype </span>
+                    describes the data represented by this&nbsp;
                     <strong>Attribute</strong> - this{" "}
                     <strong>Codotype Generator</strong> supports{" "}
-                    <strong>{"X"} </strong>
+                    <strong>{props.supportedDatatypes.length} </strong>
                     <span className="text-success">Datatypes</span>
                 </small>
                 <hr />

@@ -4,10 +4,15 @@ import {
     OptionValue,
     OptionValueInstance,
     ConfigurationGroupProperty,
+    TokenPluralization,
 } from "@codotype/types";
 import classnames from "classnames";
 import { ConfigurationInputChild } from "./ConfigurationInputChild";
 import { ConfigurationInputFormGroup } from "./ConfigurationInputFormGroup";
+import {
+    buildConfigurationGroupPropertyValue,
+    makeUniqueId,
+} from "@codotype/util";
 
 // // // //
 
@@ -45,7 +50,17 @@ function CollectionItemForm(props: {
                     <ConfigurationInputFormGroup
                         card
                         enabled
-                        onChangeEnabled={() => console.log("onChangeEnabled")}
+                        onChangeEnabled={(updatedEnabled: boolean) => {
+                            const updatedPropertyValue: OptionValue =
+                                props.value[property.identifier];
+                            // @ts-ignore
+                            updatedPropertyValue.enabled = updatedEnabled;
+                            const updatedValue: CollectionItem = {
+                                ...props.value,
+                                [property.identifier]: updatedPropertyValue,
+                            };
+                            setFormValues(updatedValue);
+                        }}
                         property={property}
                         className="mt-3"
                     >
@@ -59,6 +74,7 @@ function CollectionItemForm(props: {
                                 });
                             }}
                         />
+                        <pre>{JSON.stringify(props.value, null, 4)}</pre>
                     </ConfigurationInputFormGroup>
                 );
             })}
@@ -92,12 +108,15 @@ function CollectionItemForm(props: {
 interface ConfigurationCollectionInputProps {
     properties: ConfigurationGroupProperty[];
     label: string;
-    value: OptionValueInstance;
-    onChange: (updatedVal: OptionValueInstance) => void;
+    value: OptionValue;
+    identifiers: TokenPluralization;
+    onChange: (updatedVal: OptionValue) => void;
 }
 export function ConfigurationCollectionInput(
     props: ConfigurationCollectionInputProps,
 ) {
+    const { identifiers } = props;
+
     // Stores the current value of the collection
     const [collectionValue, setCollectionValue] = React.useState<
         CollectionItem[]
@@ -113,6 +132,20 @@ export function ConfigurationCollectionInput(
         setEditCollectionItem,
     ] = React.useState<CollectionItem | null>(null);
 
+    function buildNewCollectionItem() {
+        return props.properties.reduce(
+            (val, property) => {
+                return {
+                    ...val,
+                    [property.identifier]: buildConfigurationGroupPropertyValue(
+                        property,
+                    ),
+                };
+            },
+            { id: "" },
+        );
+    }
+
     return (
         <div className="row">
             <div className="col-lg-12">
@@ -123,18 +156,18 @@ export function ConfigurationCollectionInput(
                             className="btn btn-block btn-primary"
                             onClick={() => {
                                 setEditCollectionItem(null);
-                                setNewCollectionItem({ id: "" });
+                                setNewCollectionItem(buildNewCollectionItem());
                             }}
                         >
-                            New Collection Item
+                            New {identifiers.singular.label}
                         </button>
 
                         <ul className="list-group mt-3">
                             {collectionValue.map(
-                                (collectionItem: CollectionItem) => {
+                                (collectionItem: CollectionItem, i: number) => {
                                     return (
                                         <li
-                                            key={collectionItem.id}
+                                            key={String(i)}
                                             className={classnames(
                                                 "list-group-item list-group-item-action",
                                                 {
@@ -160,7 +193,7 @@ export function ConfigurationCollectionInput(
 
                             {collectionValue.length === 0 && (
                                 <li className="list-group-item">
-                                    No LABEL_PLURAL defined
+                                    No {identifiers.plural.label} defined
                                 </li>
                             )}
                         </ul>
@@ -176,7 +209,7 @@ export function ConfigurationCollectionInput(
                                         ...collectionValue,
                                         {
                                             ...updatedCollectionItem,
-                                            id: Math.random().toString(),
+                                            id: makeUniqueId(),
                                         },
                                     ]);
 

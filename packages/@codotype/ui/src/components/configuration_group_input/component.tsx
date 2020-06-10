@@ -6,6 +6,7 @@ import {
     ConfigurationGroupProperty,
     ConfigurationGroup,
     GroupLayoutVariant,
+    EMPTY_TOKEN_CASING,
 } from "@codotype/types";
 import { ConfigurationInputChild } from "./ConfigurationInputChild";
 import { ConfigurationGroupVariant } from "./ConfigurationGroupVariant";
@@ -84,6 +85,14 @@ export function ConfigurationInput(props: ConfigurationInputProps) {
                                 return (
                                     <ConfigurationCollectionInput
                                         label={property.label}
+                                        identifiers={{
+                                            singular: {
+                                                ...EMPTY_TOKEN_CASING,
+                                            },
+                                            plural: {
+                                                ...EMPTY_TOKEN_CASING,
+                                            },
+                                        }}
                                         properties={property.properties}
                                         onChange={(updatedVal: OptionValue) => {
                                             props.onChange({

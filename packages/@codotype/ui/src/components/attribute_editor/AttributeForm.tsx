@@ -6,8 +6,8 @@ import {
     Datatype,
     AttributeAddon,
     AttributeAddonValue,
+    TokenCasing,
 } from "@codotype/types";
-import { sanitizeLabel, buildTokenCasing } from "@codotype/util";
 import * as React from "react";
 import { AttributeInput } from "./AttributeFormModal";
 import { AttributeAddonForm } from "./AttributeAddonForm";
@@ -81,7 +81,7 @@ export function AttributeFormSelector(props: {
                         }}
                         disabled={attributeInput.datatype === null}
                         active={selectedForm === "PROPERTIES"}
-                        label={"Properties"}
+                        label={"Tokens"}
                     />
 
                     <FormGroupTab
@@ -90,7 +90,7 @@ export function AttributeFormSelector(props: {
                         }}
                         disabled={attributeInput.datatype === null}
                         active={selectedForm === "DESCRIPTION"}
-                        label={"Default & Description"}
+                        label={"Internal Note"}
                     />
                 </ul>
             </div>
@@ -128,7 +128,7 @@ export function AttributeForm(props: AttributeFormProps) {
         <div className="row">
             <div className="col-lg-12">
                 {/* {attributeInput.datatype && ( */}
-                <React.Fragment>
+                <div className="mx-3">
                     <AttributeFormSelector attributeInput={attributeInput}>
                         {({ selectedForm, setSelectedForm }) => {
                             if (selectedForm === "DATATYPE") {
@@ -151,26 +151,18 @@ export function AttributeForm(props: AttributeFormProps) {
                                 return (
                                     <React.Fragment>
                                         <AttributePropertiesForm
-                                            label={
-                                                attributeInput.identifiers.label
-                                            }
-                                            identifier={
-                                                attributeInput.identifiers.snake
+                                            tokenCasing={
+                                                attributeInput.identifiers
                                             }
                                             onKeydownEnter={
                                                 props.onKeydownEnter
                                             }
-                                            onLabelChange={(
-                                                updatedLabel: string,
+                                            onChange={(
+                                                updatedTokenCasing: TokenCasing,
                                             ) => {
-                                                const sanitizedLabel: string = sanitizeLabel(
-                                                    updatedLabel,
-                                                );
                                                 props.onChange({
                                                     ...attributeInput,
-                                                    identifiers: buildTokenCasing(
-                                                        sanitizedLabel,
-                                                    ),
+                                                    identifiers: updatedTokenCasing,
                                                 });
                                             }}
                                         />
@@ -215,7 +207,7 @@ export function AttributeForm(props: AttributeFormProps) {
                             );
                         }}
                     </AttributeFormSelector>
-                </React.Fragment>
+                </div>
             </div>
         </div>
     );
