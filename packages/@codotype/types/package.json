@@ -1,6 +1,6 @@
 {
   "name": "@codotype/types",
-  "version": "0.8.0-canary.4",
+  "version": "0.8.0-canary.5",
   "description": "Datatype definitions that power Codotype",
   "main": "dist/index",
   "types": "dist/index",
@@ -18,6 +18,9 @@
   },
   "author": "Alexander Schwartzberg",
   "license": "MIT",
+  "dependencies": {
+    "uuid": "^8.0.0"
+  },
   "devDependencies": {
     "@types/jest": "^24.0.23",
     "chai": "^4.1.2",

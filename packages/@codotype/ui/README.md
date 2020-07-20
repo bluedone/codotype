@@ -1,4 +1,4 @@
-# react-components
+# @codotype/ui
 
 :desktop_computer: Codotype UI components - built with React + Typescript
 
