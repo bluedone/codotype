@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from "uuid";
 import {
   ConfigurationGroupProperty,
   DropdownOption,
@@ -29,11 +30,9 @@ interface ConfigurationGroupPropertyBuilderParams {
   validations?: PropertyValidation[];
 }
 
-// TODO - this should be moved into @codotype/util
-// b.c this depends on `makeUniqueId` from util, but util depends on types - can't have circular dependency
 export class ConfigurationGroupPropertyBuilder
   implements ConfigurationGroupProperty {
-  id: string = Math.random().toString(); // TODO - replace with makeUniqueId from @codotype/util
+  id: string = uuidv4();
   label: string;
   identifier: string;
   type: OptionType;
