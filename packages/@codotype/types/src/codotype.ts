@@ -1,14 +1,17 @@
 import { ConfigurationGroupPropertyBuilder } from "./factories/ConfigurationGroupProperty";
 import { RelationBuilder } from "./factories/RelationBuilder";
+import { AttributeBuilder } from "./factories/Attribute";
 
 // // // //
 
 export interface CodotypeFactory {
-  ConfigurationGroupProperty: typeof ConfigurationGroupPropertyBuilder;
+  Attribute: typeof AttributeBuilder;
   Relation: typeof RelationBuilder;
+  ConfigurationGroupProperty: typeof ConfigurationGroupPropertyBuilder;
 }
 
 export const Codotype: CodotypeFactory = {
-  ConfigurationGroupProperty: ConfigurationGroupPropertyBuilder,
+  Attribute: AttributeBuilder,
   Relation: RelationBuilder,
+  ConfigurationGroupProperty: ConfigurationGroupPropertyBuilder,
 };
