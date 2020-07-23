@@ -1,4 +1,4 @@
-import { RelationBuilder } from "../RelationBuilder";
+import { RelationBuilder } from "../Relation";
 import { RelationType } from "../../relation";
 
 // Mocks UUID module

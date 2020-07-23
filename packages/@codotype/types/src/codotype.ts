@@ -3,7 +3,7 @@ import { SchemaBuilder } from "./factories/Schema";
 import { ConfigurationGroupBuilder } from "./factories/ConfigurationGroup";
 import { ConfigurationGroupSectionBuilder } from "./factories/ConfigurationGroupSection";
 import { SchemaEditorBuilder } from "./factories/SchemaEditor";
-import { RelationBuilder } from "./factories/RelationBuilder";
+import { RelationBuilder } from "./factories/Relation";
 import { AttributeBuilder } from "./factories/Attribute";
 
 // // // //
