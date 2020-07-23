@@ -3,7 +3,7 @@
 exports[`factory works 1`] = `
 ConfigurationGroupPropertyBuilder {
   "allowDisable": false,
-  "defaultValue": undefined,
+  "defaultValue": null,
   "description": "",
   "documentation": "",
   "dropdownOptions": Array [],

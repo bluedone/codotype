@@ -4,7 +4,7 @@ import {
   DropdownOption,
   OptionType,
   OptionValue,
-  PropertyLayoutVariant
+  PropertyLayoutVariant,
 } from "../configuration-option-types";
 import { PropertyFilter } from "../property-filter";
 import { PropertyValidation } from "../property-validation";
@@ -55,7 +55,7 @@ export class ConfigurationGroupPropertyBuilder
     this.type = params.type;
 
     this.id = params.id || this.id;
-    this.defaultValue = params.defaultValue;
+    this.defaultValue = params.defaultValue || this.defaultValue;
     this.description = params.description || this.description;
     this.documentation = params.documentation || this.documentation;
     this.icon = params.icon || this.icon;
