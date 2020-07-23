@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Schema, RelationType } from "@codotype/types";
+import { Schema, RelationType, RELATION_META } from "@codotype/types";
 import { RelationDatatypeForm } from "./RelationDatatypeForm";
 import { RelationInput } from "./RelationFormModal";
 import { sanitizeLabel, buildRelationReference } from "@codotype/util";
@@ -65,7 +65,10 @@ export function RelationPropertiesForm(props: RelationPropertiesFormProps) {
                             <div className="form-group text-center mb-0">
                                 <label className="mb-0">Relation Type</label>
                                 <small className="form-text text-muted mb-0">
-                                    Relation Desc.
+                                    {
+                                        RELATION_META[relationInput.type]
+                                            .description
+                                    }
                                 </small>
                             </div>
                         </div>
