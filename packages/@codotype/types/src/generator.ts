@@ -9,7 +9,7 @@ export enum ExperienceRecommendation {
   BEGINNER = "beginner",
   JUNIOR = "junior",
   INTERMEDIATE = "intermediate",
-  EXPERT = "expert"
+  EXPERT = "expert",
 }
 
 // QUESTION - should the be split up into better separation of concerns? i.e. AttributeEditorConfiguration, SchemaEditorConfiguration, RelationEditorConfiguration
@@ -35,14 +35,14 @@ enum GeneratorCreatorContactOption {
   twitter = "twitter",
   linkedin = "linkedin",
   email = "email",
-  website = "website"
+  website = "website",
 }
 
 /**
  * GeneratorCreator
  * Stores metadata about the creator of the Generator
  */
-interface GeneratorCreator {
+export interface GeneratorCreator {
   name: string;
   contact: {
     [key in GeneratorCreatorContactOption]?: string;
