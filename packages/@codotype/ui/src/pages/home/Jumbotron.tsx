@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { GeneratorCard } from "../../components/generator_card";
 import { GeneratorMeta } from "@codotype/types";
+import { GitHubStar } from "@src/components/GitHubStar";
 
 // // // //
 
@@ -53,8 +54,7 @@ export function Jumbotron(props: {
 
                         <div className="row py-2">
                             <div className="col-lg-12 d-flex flex-column">
-                                {/* <gh-btns-star slug="codotype/codotype" show-count></gh-btns-star> */}
-                                GITHUB STAR HERE
+                                <GitHubStar />
                             </div>
                         </div>
                     </div>
