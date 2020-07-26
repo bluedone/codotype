@@ -6,6 +6,7 @@ import {
     OptionValueInstance,
     testState,
     GroupLayoutVariant,
+    ConfigurationGroup,
 } from "@codotype/types";
 const {
     ComponentBuilderConfigurationGroup,
@@ -147,36 +148,80 @@ storyCollection.add("instance", () => {
 
 // // // //
 
-const layoutVariantStories: [string, GroupLayoutVariant][] = [
-    ["API Examples - TABS layoutVariant", GroupLayoutVariant.TABS],
-    ["API Examples - LIST layoutVariant", GroupLayoutVariant.LIST],
-    ["API Examples - DOCS_3x9 layoutVariant", GroupLayoutVariant.DOCS_3x9],
-    ["API Examples - DOCS_4x8 layoutVariant", GroupLayoutVariant.DOCS_4x8],
-    ["API Examples - DOCS_6x6 layoutVariant", GroupLayoutVariant.DOCS_6x6],
+const allowDisableOptions = [false, true];
+
+const groupVariants = [
+    GroupLayoutVariant.TABS,
+    GroupLayoutVariant.LIST,
+    GroupLayoutVariant.DOCS_3x9,
+    GroupLayoutVariant.DOCS_4x8,
+    GroupLayoutVariant.DOCS_6x6,
+    GroupLayoutVariant.DETAIL_3x9,
+    GroupLayoutVariant.DETAIL_4x8,
+    GroupLayoutVariant.DETAIL_6x6,
 ];
 
-layoutVariantStories.forEach(testCase => {
-    storyCollection.add(testCase[0], () => {
+const layoutVariantStoriesNew: [
+    string,
+    string,
+    GroupLayoutVariant,
+    boolean,
+][] = [];
+allowDisableOptions.forEach(allowDisable => {
+    groupVariants.forEach(layoutVariant => {
+        layoutVariantStoriesNew.push([
+            `ConfigurationEditor/ConfigurationInput/${layoutVariant}`,
+            `allowDisable: ${allowDisable}`,
+            layoutVariant,
+            allowDisable,
+        ]);
+    });
+});
+
+// const layoutVariantStories: [string, GroupLayoutVariant, boolean][] = [
+//     ["API Examples - TABS layoutVariant", GroupLayoutVariant.TABS, false],
+//     ["API Examples - LIST layoutVariant", GroupLayoutVariant.LIST, false],
+//     ["API Examples - DOCS_3x9 layoutVariant", GroupLayoutVariant.DOCS_3x9, false],
+//     ["API Examples - DOCS_4x8 layoutVariant", GroupLayoutVariant.DOCS_4x8, false],
+//     ["API Examples - DOCS_6x6 layoutVariant", GroupLayoutVariant.DOCS_6x6, false],
+//     ["API Examples - DETAIL_3x9 layoutVariant", GroupLayoutVariant.DETAIL_3x9, false],
+//     ["API Examples - DETAIL_4x8 layoutVariant", GroupLayoutVariant.DETAIL_4x8, false],
+//     ["API Examples - DETAIL_6x6 layoutVariant", GroupLayoutVariant.DETAIL_6x6, false],
+// ];
+
+layoutVariantStoriesNew.forEach(testCase => {
+    const storyCollection = storiesOf(testCase[0], module);
+
+    // Defines configurationGroup from test case
+    const configurationGroup: ConfigurationGroup = {
+        ...ComponentBuilderConfigurationGroup,
+        documentation: ApiExamplesConfigurationGroup.documentation,
+        layoutVariant: testCase[2],
+        allowDisable: testCase[3],
+    };
+
+    storyCollection.add(testCase[1], () => {
         const [count, increment] = React.useReducer(i => i + 1, 0);
         const [configurationOptionValue, setVal] = React.useState<
             OptionValueInstance
-        >(buildConfigurationGroupValue(ApiExamplesConfigurationGroup));
+        >(buildConfigurationGroupValue(configurationGroup));
 
         return (
             <Story>
                 <ConfigurationInput
-                    configurationGroup={{
-                        ...ApiExamplesConfigurationGroup,
-                        layoutVariant: testCase[1],
-                    }}
+                    configurationGroup={configurationGroup}
                     value={configurationOptionValue}
                     onChange={(updatedVal: OptionValueInstance) => {
                         setVal(updatedVal);
                         increment();
                     }}
                 />
-                <p>{count}</p>
-                <pre>{JSON.stringify(configurationOptionValue, null, 4)}</pre>
+                <pre className="p-4 bg-dark text-light rounded mt-4">
+                    {JSON.stringify(configurationOptionValue, null, 4)}
+                </pre>
+                <pre className="p-4 bg-dark text-light rounded mt-4">
+                    {JSON.stringify(configurationGroup, null, 4)}
+                </pre>
             </Story>
         );
     });

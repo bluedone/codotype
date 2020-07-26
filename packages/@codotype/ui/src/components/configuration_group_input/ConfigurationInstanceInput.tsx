@@ -27,6 +27,7 @@ export function ConfigurationInstanceInput(
                 <div className="row">
                     {props.properties.map(
                         (property: ConfigurationGroupProperty) => {
+                            // Handle OptionType.INSTANCE
                             // if (property.type === OptionType.COLLECTION) {
                             //     return (
                             //         <div className="card card-body mb-4">
@@ -47,6 +48,7 @@ export function ConfigurationInstanceInput(
                             //     );
                             // }
 
+                            // Handle OptionType.INSTANCE
                             if (property.type === OptionType.INSTANCE) {
                                 return (
                                     <div className="card card-body mb-4">
@@ -86,7 +88,7 @@ export function ConfigurationInstanceInput(
                                 );
                             }
 
-                            // TODO - handle nested instance + collection
+                            // Handle OptionType.STRING + OptionType.NUMBER + OptionType.BOOLEAN + OptionType.BOOLEAN
                             return (
                                 <ConfigurationInputFormGroup
                                     card={props.card}

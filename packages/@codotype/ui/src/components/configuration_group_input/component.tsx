@@ -1,51 +1,40 @@
 import * as React from "react";
-import {
-    OptionType,
-    OptionValue,
-    OptionValueInstance,
-    ConfigurationGroupProperty,
-    ConfigurationGroup,
-    GroupLayoutVariant,
-    EMPTY_TOKEN_CASING,
-} from "@codotype/types";
-import { ConfigurationInputChild } from "./ConfigurationInputChild";
-import { ConfigurationGroupVariant } from "./ConfigurationGroupVariant";
+import { OptionValueInstance, ConfigurationGroup } from "@codotype/types";
+import { ConfigurationGroupPropertiesVariant } from "./ConfigurationGroupPropertiesVariant";
 import { ConfigurationGroupHeader } from "./ConfigurationGroupHeader";
-import { ConfigurationInputFormGroup } from "./ConfigurationInputFormGroup";
-import { ConfigurationInstanceInput } from "./ConfigurationInstanceInput";
-import { ConfigurationCollectionInput } from "./ConfigurationCollectionInput";
 
 // // // //
 
 /**
- * shouldRenderDocumentationModal
- * Determines whether or not the DocumentationModal should render for this ConfigurationGroup
- * Depends on the LayoutVariant
- * @param configurationGroup
+ * ToggleEnabled
+ * @param props
  */
-export function shouldRenderDocumentationModal(
-    configurationGroup: ConfigurationGroup,
-): boolean {
-    const { layoutVariant, documentation } = configurationGroup;
-
-    // Return false if documentation is not defined
-    if (!documentation) {
-        return false;
-    }
-
-    // Return false for DOCS_* layout variants
-    if (
-        [
-            GroupLayoutVariant.DOCS_3x9,
-            GroupLayoutVariant.DOCS_4x8,
-            GroupLayoutVariant.DOCS_6x6,
-        ].includes(layoutVariant)
-    ) {
-        return false;
-    }
-
-    // Return true for all others
-    return true;
+function ToggleEnabled(props: {
+    configurationGroup: ConfigurationGroup;
+    enabled: boolean;
+    onChange: (updatedEnabled: boolean) => void;
+}) {
+    const { configurationGroup, enabled, onChange } = props;
+    return (
+        <div className="mt-2 px-2 py-2 d-flex justify-content-center bg-dark text-white rounded">
+            <div className="d-flex flex-column align-items-center">
+                <p className="lead mb-0">Enable {configurationGroup.label}</p>
+                <p className="mb-0">
+                    Click to enable the {configurationGroup.label} configuration
+                    group.
+                </p>
+                <span className="mt-2">
+                    <input
+                        type="checkbox"
+                        checked={enabled}
+                        onChange={e => {
+                            onChange(e.currentTarget.checked);
+                        }}
+                    />
+                </span>
+            </div>
+        </div>
+    );
 }
 
 // // // //
@@ -55,129 +44,57 @@ interface ConfigurationInputProps {
     configurationGroup: ConfigurationGroup;
     onChange: (updatedVal: OptionValueInstance) => void;
 }
-// TODO - add prop here to adjust styles when rendered for a schema instead of a project
+// TODO - add prop here to adjust styles when rendered for a schema instead of a project..?
+// TODO - rename this file to `ConfigurationInput.tsx`
 export function ConfigurationInput(props: ConfigurationInputProps) {
-    const { configurationGroup } = props;
+    const { configurationGroup, value, onChange } = props;
+    // @ts-ignore
+    // const configurationGroupValue = value[configurationGroup.identifier];
 
-    if (!configurationGroup.properties) {
-        console.log("WARNING - NO CONFIGURATION GROUP PROPERTIES DEFINED");
+    // Log error message for invalid ConfigurationGroup
+    if (
+        configurationGroup.properties.length === 0 &&
+        configurationGroup.sections.length === 0
+    ) {
+        console.error(
+            "WARNING - NO CONFIGURATION GROUP PROPERTIES OR SECTIONS DEFINED",
+        );
         return null;
     }
+
+    // Handle ConfigurationGroup.allowDisable
     return (
         <div className="row mt-3">
             <div className="col-lg-12">
                 {/* ConfigurationGroupHeader */}
                 <ConfigurationGroupHeader
+                    value={value}
+                    onChange={onChange}
                     configurationGroup={configurationGroup}
-                    enableDocumentationModal={shouldRenderDocumentationModal(
-                        configurationGroup,
-                    )}
                 />
 
-                {/* Renders ConfigurationGroup variants */}
-                {/* QUESTION - maybe rename to `layout`? */}
-                <ConfigurationGroupVariant
+                {/* Renders message to turn this feature on */}
+                {configurationGroup.allowDisable && !value.enabled && (
+                    <ToggleEnabled
+                        configurationGroup={configurationGroup}
+                        // @ts-ignore
+                        checked={value.enabled}
+                        onChange={updatedEnabled => {
+                            const updatedValue = {
+                                ...value,
+                                enabled: updatedEnabled,
+                            };
+                            onChange(updatedValue);
+                        }}
+                    />
+                )}
+
+                {/* Renders ConfigurationGroupPropertiesVariant */}
+                <ConfigurationGroupPropertiesVariant
+                    value={value}
+                    onChange={onChange}
                     configurationGroup={configurationGroup}
-                >
-                    {configurationGroup.properties.map(
-                        (property: ConfigurationGroupProperty) => {
-                            if (property.type === OptionType.COLLECTION) {
-                                return (
-                                    <ConfigurationCollectionInput
-                                        label={property.label}
-                                        identifiers={{
-                                            singular: {
-                                                ...EMPTY_TOKEN_CASING,
-                                            },
-                                            plural: {
-                                                ...EMPTY_TOKEN_CASING,
-                                            },
-                                        }}
-                                        properties={property.properties}
-                                        onChange={(updatedVal: OptionValue) => {
-                                            props.onChange({
-                                                ...props.value,
-                                                // [property.identifier]: updatedVal,
-                                            });
-                                        }}
-                                        value={props.value}
-                                    />
-                                );
-                            }
-
-                            // Handle instance input
-                            if (property.type === OptionType.INSTANCE) {
-                                const val =
-                                    // @ts-ignore
-                                    props.value[property.identifier];
-                                return (
-                                    <div
-                                        className="card card-body mb-4 mt-2"
-                                        key={property.identifier}
-                                    >
-                                        <ConfigurationInstanceInput
-                                            label={property.label}
-                                            properties={property.properties}
-                                            onChange={(
-                                                updatedVal: OptionValueInstance,
-                                            ) => {
-                                                if (property.allowDisable) {
-                                                    props.onChange({
-                                                        ...props.value,
-                                                        [property.identifier]: {
-                                                            enabled: true,
-                                                            value: updatedVal,
-                                                        },
-                                                    });
-                                                } else {
-                                                    props.onChange({
-                                                        ...props.value,
-                                                        [property.identifier]: updatedVal,
-                                                    });
-                                                }
-                                            }}
-                                            value={val}
-                                        />
-                                        {/* <p>{property.identifier}</p> */}
-                                        {/* <p>{JSON.stringify(property)}</p> */}
-                                        {/* Debugging */}
-                                        {/* {JSON.stringify(val)} */}
-                                    </div>
-                                );
-                            }
-
-                            // Handle all simple inputs
-                            // @ts-ignore
-                            const value = props.value[property.identifier];
-                            return (
-                                <ConfigurationInputFormGroup
-                                    card
-                                    enabled={true}
-                                    property={property}
-                                    key={property.identifier}
-                                    onChangeEnabled={() => {
-                                        console.log("onChangeEnabled");
-                                    }}
-                                >
-                                    <ConfigurationInputChild
-                                        value={value}
-                                        property={property}
-                                        onChange={(
-                                            updatedValue: OptionValue,
-                                        ) => {
-                                            props.onChange({
-                                                ...props.value,
-                                                [property.identifier]: updatedValue,
-                                            });
-                                        }}
-                                    />
-                                    {/* Debugging */}
-                                    {/* {JSON.stringify(props.value)} */}
-                                </ConfigurationInputFormGroup>
-                            );
-                        },
-                    )}
-                </ConfigurationGroupVariant>
+                />
             </div>
         </div>
     );
