@@ -55,8 +55,6 @@ module.exports = {
             },
         };
 
-        console.log(config);
-
         return config;
     },
 };
