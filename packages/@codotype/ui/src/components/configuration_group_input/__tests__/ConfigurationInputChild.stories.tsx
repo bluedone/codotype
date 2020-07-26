@@ -37,13 +37,14 @@ const storyCollection = storiesOf(
 
 stories.forEach(story => {
     storyCollection.add(story[0], () => {
+        const [value, setValue] = React.useState<OptionValue>(story[2]);
         return (
             <Story>
                 <ConfigurationInputChild
                     property={story[1]}
-                    value={story[2]}
-                    onChange={(updatedVal: OptionValue) => {
-                        console.log(updatedVal);
+                    value={value}
+                    onChange={(updatedValue: OptionValue) => {
+                        setValue(updatedValue)
                     }}
                 />
             </Story>

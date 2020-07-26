@@ -5,6 +5,7 @@ import { ConfigurationInputChild } from "../ConfigurationInputChild";
 import {
     OptionValue,
     ConfigurationGroupProperty,
+    PropertyLayoutVariant,
     testState,
 } from "@codotype/types";
 const {
@@ -52,7 +53,7 @@ const stories: Array<[string, ConfigurationGroupProperty, OptionValue]> = [
 ];
 
 const storyCollection = storiesOf(
-    "ConfigurationEditor/ConfigurationInputFormGroup",
+    "ConfigurationEditor/02 - ConfigurationInputFormGroup",
     module,
 );
 

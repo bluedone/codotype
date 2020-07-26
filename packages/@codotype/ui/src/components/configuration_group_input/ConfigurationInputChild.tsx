@@ -15,6 +15,7 @@ interface ConfigurationInputChildProps {
     onChange: (updatedValue: OptionValue) => void;
 }
 
+// TODO - rename `ConfigurationInputChild` to `ConfigurationInputPrimative`
 export function ConfigurationInputChild(props: ConfigurationInputChildProps) {
     const { property } = props;
 
@@ -30,6 +31,8 @@ export function ConfigurationInputChild(props: ConfigurationInputChildProps) {
         props.onChange(updatedValue);
     }
 
+    // Pulls value from props.value
+    // TODO - remove this after enabled/value obj is enforced everywhere
     let value = props.value;
     if (property.allowDisable) {
         value = props.value.value;
@@ -37,6 +40,7 @@ export function ConfigurationInputChild(props: ConfigurationInputChildProps) {
 
     // // // //
 
+    // Handle OptionType.STRING
     if (property.type === OptionType.STRING) {
         return (
             <input
@@ -50,6 +54,8 @@ export function ConfigurationInputChild(props: ConfigurationInputChildProps) {
             />
         );
     }
+
+    // Handle OptionType.NUMBER
     if (property.type === OptionType.NUMBER) {
         // TODO - add INTEGER
         return (
@@ -64,6 +70,8 @@ export function ConfigurationInputChild(props: ConfigurationInputChildProps) {
             />
         );
     }
+    
+    // Handle OptionType.BOOLEAN
     if (property.type === OptionType.BOOLEAN) {
         return (
             <Switch
@@ -81,16 +89,9 @@ export function ConfigurationInputChild(props: ConfigurationInputChildProps) {
                 checked={value}
             />
         );
-        // return (
-        //     <input
-        //         type="checkbox"
-        //         checked={value}
-        //         onChange={e => {
-        //             props.onChange(e.currentTarget.checked);
-        //         }}
-        //     />
-        // );
     }
+
+    // Handle OptionType.DROPDOWN
     if (property.type === OptionType.DROPDOWN) {
         return (
             <select
@@ -115,5 +116,6 @@ export function ConfigurationInputChild(props: ConfigurationInputChildProps) {
     }
 
     // TODO - throw error if OptionType dropdown is not handled
+    // TODO - add support for MULTI_DROPDOWN
     return null;
 }
