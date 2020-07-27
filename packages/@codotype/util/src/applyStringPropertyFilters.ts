@@ -1,4 +1,4 @@
-import { StringValueFilter } from "@codotype/types/dist/property-filter";
+import { StringValueFilter } from "../../types/src/property-filter";
 import { makeLabelCase } from "./makeLabelCase";
 import { makeCamelCase } from "./makeCamelCase";
 import { makeSnakeCase } from "./makeSnakeCase";

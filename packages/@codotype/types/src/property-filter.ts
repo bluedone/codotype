@@ -27,8 +27,8 @@ export enum StringValueFilter {
  */
 export enum NumberValueFilter {
   positiveValue = "POSITIVE_VALUE",
-  absoluteValue = "ABSOLUTE_VALUE",
   negativeValue = "NEGATIVE_VALUE",
+  integerValue = "INTEGER_VALUE",
 }
 
 export type PropertyFilter = StringValueFilter | NumberValueFilter;
