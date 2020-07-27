@@ -5,7 +5,7 @@ import {
     OptionValueInstance,
 } from "@codotype/types";
 import { MarkdownRenderer } from "../markdown_renderer";
-import { CongifurationGroupPropertiesInputs } from "./CongifurationGroupPropertiesInputs";
+import { ConfigurationGroupPropertiesInput } from "./ConfigurationGroupPropertiesInput";
 
 // // // //
 
@@ -19,7 +19,7 @@ export function ConfigurationGroupPropertiesDocs(props: {
     value: OptionValueInstance;
     onChange: (updatedVal: OptionValueInstance) => void;
 }) {
-    const { configurationGroup } = props;
+    const { configurationGroup, value } = props;
     const { layoutVariant } = configurationGroup;
 
     // Get column spans based on `ConfigurationGroup.layoutVariant`
@@ -36,20 +36,19 @@ export function ConfigurationGroupPropertiesDocs(props: {
     return (
         <div className="row">
             <div className={`col-lg-${docsColumn} border-right`}>
-                <MarkdownRenderer
-                    source={configurationGroup.documentation}
-                />
+                <MarkdownRenderer source={configurationGroup.documentation} />
             </div>
             <div className={`col-lg-${inputsColumn}`}>
                 <div className="row">
                     <div className="col-lg-12">
-                        <CongifurationGroupPropertiesInputs
-                            {...props}
+                        <ConfigurationGroupPropertiesInput
+                            value={value}
+                            onChange={props.onChange}
+                            properties={configurationGroup.properties}
                         />
                     </div>
                 </div>
             </div>
         </div>
-    )
+    );
 }
-

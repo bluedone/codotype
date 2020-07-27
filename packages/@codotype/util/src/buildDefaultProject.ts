@@ -8,7 +8,7 @@ import {
   ConfigurationGroup,
   ConfigurationGroupSection,
   GeneratorMeta,
-  ConfigurationGroupProperty
+  ConfigurationGroupProperty,
 } from "@codotype/types";
 
 // // // //
@@ -59,7 +59,7 @@ export function buildValueFromProperties(
       if (property.allowDisable && !property.required) {
         val[property.identifier] = {
           enabled: property.enabled,
-          value: buildConfigurationGroupPropertyValue(property)
+          value: buildConfigurationGroupPropertyValue(property),
         };
       } else {
         val[property.identifier] = buildConfigurationGroupPropertyValue(
@@ -79,6 +79,7 @@ export function buildValueFromProperties(
 /**
  * buildConfigurationGroupValue
  * Builds the top-level OptionValueInstance for a single ConfigurationGroup
+ * TODO - update this to wrap the `OptionValueInstance` for the `configurationGroup` param in `{enabled, value}` if configurationGroup.allowDisable is true
  * @param properties - array of ConfigurationGroupProperty
  */
 export function buildConfigurationGroupValue(
@@ -97,7 +98,7 @@ export function buildConfigurationGroupValue(
         if (property.allowDisable && !property.required) {
           val[property.identifier] = {
             enabled: property.enabled,
-            value: buildConfigurationGroupPropertyValue(property)
+            value: buildConfigurationGroupPropertyValue(property),
           };
         } else {
           val[property.identifier] = buildConfigurationGroupPropertyValue(
@@ -128,7 +129,7 @@ export function buildConfigurationGroupValue(
             // Sets value for ConfigurationGroupSection
             val[property.identifier] = {
               enabled: property.enabled,
-              value: buildConfigurationGroupPropertyValue(property)
+              value: buildConfigurationGroupPropertyValue(property),
             };
 
             // Returns val
@@ -140,7 +141,7 @@ export function buildConfigurationGroupValue(
         // Returns ConfigurationGroupValue
         return {
           ...initialValue,
-          [section.identifier]: sectionValue
+          [section.identifier]: sectionValue,
         };
       },
       initialValue
@@ -179,12 +180,12 @@ export function buildDefaultConfiguration(
  */
 export function buildDefaultSchemas(generatorMeta: GeneratorMeta): Schema[] {
   if (generatorMeta.schemaEditorConfiguration.defaultSchemas) {
-    return generatorMeta.schemaEditorConfiguration.defaultSchemas.map(s => {
+    return generatorMeta.schemaEditorConfiguration.defaultSchemas.map((s) => {
       return {
         ...s,
         configuration: buildDefaultConfiguration(
           generatorMeta.schemaEditorConfiguration.configurationGroups
-        )
+        ),
       };
     });
   }
@@ -213,12 +214,12 @@ export function buildDefaultProject(generatorMeta: GeneratorMeta): Project {
       snake: "new_project",
       camel: "newProject",
       pascal: "NewProject",
-      kebab: "new-project"
+      kebab: "new-project",
     },
     generatorId: generatorMeta.id,
     generatorVersion: generatorMeta.version,
     schemas: [...defaultSchemas],
-    configuration: projectConfiguration
+    configuration: projectConfiguration,
   };
 
   // Returns the new project

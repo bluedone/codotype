@@ -4,7 +4,7 @@ import {
     ConfigurationGroupProperty,
     OptionValueInstance,
 } from "@codotype/types";
-import { CongifurationGroupPropertiesInputs } from "./CongifurationGroupPropertiesInputs";
+import { ConfigurationGroupPropertiesInput } from "./ConfigurationGroupPropertiesInput";
 
 // // // //
 
@@ -17,13 +17,16 @@ export function ConfigurationGroupPropertiesTabs(props: {
     value: OptionValueInstance;
     onChange: (updatedVal: OptionValueInstance) => void;
 }) {
-    const { configurationGroup } = props;
+    const { configurationGroup, value, onChange } = props;
 
     // Setup selectedPropertyID state
-    const [selectedPropertyID, setSelectedPropertyID] = React.useState<string>("");
+    const [selectedPropertyID, setSelectedPropertyID] = React.useState<string>(
+        "",
+    );
 
-    // Sets selectedPropertyID 
-    const firstProperty: ConfigurationGroupProperty | undefined = configurationGroup.properties[0];
+    // Sets selectedPropertyID
+    const firstProperty: ConfigurationGroupProperty | undefined =
+        configurationGroup.properties[0];
 
     // Return null if firstProperty is undefined
     if (firstProperty === undefined) {
@@ -37,7 +40,11 @@ export function ConfigurationGroupPropertiesTabs(props: {
     }
 
     // Finds selectedProperty
-    const selectedProperty: ConfigurationGroupProperty | undefined = configurationGroup.properties.find((p) => p.identifier === selectedPropertyID);
+    const selectedProperty:
+        | ConfigurationGroupProperty
+        | undefined = configurationGroup.properties.find(
+        p => p.identifier === selectedPropertyID,
+    );
 
     // Return null if selectedProperty is undefined
     if (selectedProperty === undefined) {
@@ -47,8 +54,7 @@ export function ConfigurationGroupPropertiesTabs(props: {
     return (
         <React.Fragment>
             <nav className="nav nav-tabs">
-                {configurationGroup.properties.map((property) => {
-
+                {configurationGroup.properties.map(property => {
                     // Defines className for tab
                     const tabClassName: string[] = ["nav-link w-100"];
                     if (property.identifier === selectedPropertyID) {
@@ -57,20 +63,28 @@ export function ConfigurationGroupPropertiesTabs(props: {
 
                     return (
                         <li className="nav-item">
-                            <a className={tabClassName.join()} href={"#"} onClick={(e) => {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                setSelectedPropertyID(property.identifier)
-                            }}>
+                            <a
+                                className={tabClassName.join()}
+                                href={"#"}
+                                onClick={e => {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    setSelectedPropertyID(property.identifier);
+                                }}
+                            >
                                 {property.label}
                             </a>
                         </li>
-                    )
+                    );
                 })}
             </nav>
 
-            {/* Render CongifurationGroupPropertiesInputs */}
-            <CongifurationGroupPropertiesInputs {...props} configurationGroup={{ ...configurationGroup, properties: [selectedProperty] }} />
+            {/* Render ConfigurationGroupPropertiesInput */}
+            <ConfigurationGroupPropertiesInput
+                value={value}
+                onChange={onChange}
+                properties={[selectedProperty]}
+            />
         </React.Fragment>
-    )
+    );
 }

@@ -6,7 +6,7 @@ import {
 } from "@codotype/types";
 import { ConfigurationGroupPropertiesTabs } from "./ConfigurationGroupPropertiesTabs";
 import { ConfigurationGroupPropertiesDetail } from "./ConfigurationGroupPropertiesDetail";
-import { CongifurationGroupPropertiesInputs } from "./CongifurationGroupPropertiesInputs";
+import { ConfigurationGroupPropertiesInput } from "./ConfigurationGroupPropertiesInput";
 import { ConfigurationGroupPropertiesDocs } from "./ConfigurationGroupPropertiesDocs";
 
 // // // //
@@ -35,7 +35,7 @@ export function ConfigurationGroupPropertiesVariant(props: {
         <React.Fragment>
             {/* Handle GroupLayoutVariant.LIST */}
             {layoutVariant === GroupLayoutVariant.LIST && (
-                <CongifurationGroupPropertiesInputs {...props} />
+                <ConfigurationGroupPropertiesInput {...props} />
             )}
 
             {/* Handle GroupLayoutVariant.TABS */}

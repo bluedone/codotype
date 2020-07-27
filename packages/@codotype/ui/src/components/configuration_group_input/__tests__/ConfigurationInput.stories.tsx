@@ -53,6 +53,7 @@ storyCollection.add("single dropdown", () => {
     >(
         buildConfigurationGroupValue({
             ...ComponentBuilderConfigurationGroup,
+            layoutVariant: GroupLayoutVariant.LIST,
             properties: [
                 ComponentBuilderConfigurationGroupPropertySingleDropdown,
             ],
@@ -64,7 +65,10 @@ storyCollection.add("single dropdown", () => {
             <ConfigurationInput
                 configurationGroup={{
                     ...ComponentBuilderConfigurationGroup,
-                    properties: [],
+                    layoutVariant: GroupLayoutVariant.LIST,
+                    properties: [
+                        ComponentBuilderConfigurationGroupPropertySingleDropdown,
+                    ],
                 }}
                 value={configurationOptionValue}
                 onChange={(updatedVal: OptionValueInstance) => {
@@ -147,7 +151,7 @@ storyCollection.add("instance", () => {
 });
 
 // // // //
-
+// Build test cases programatically from allowDisableOptions + groupVariants
 const allowDisableOptions = [false, true];
 
 const groupVariants = [
@@ -161,15 +165,16 @@ const groupVariants = [
     GroupLayoutVariant.DETAIL_6x6,
 ];
 
-const layoutVariantStoriesNew: [
-    string,
-    string,
+const layoutVariantStories: [
+    string, // Story Collection name
+    string, // Story name
     GroupLayoutVariant,
     boolean,
 ][] = [];
+
 allowDisableOptions.forEach(allowDisable => {
     groupVariants.forEach(layoutVariant => {
-        layoutVariantStoriesNew.push([
+        layoutVariantStories.push([
             `ConfigurationEditor/ConfigurationInput/${layoutVariant}`,
             `allowDisable: ${allowDisable}`,
             layoutVariant,
@@ -178,18 +183,7 @@ allowDisableOptions.forEach(allowDisable => {
     });
 });
 
-// const layoutVariantStories: [string, GroupLayoutVariant, boolean][] = [
-//     ["API Examples - TABS layoutVariant", GroupLayoutVariant.TABS, false],
-//     ["API Examples - LIST layoutVariant", GroupLayoutVariant.LIST, false],
-//     ["API Examples - DOCS_3x9 layoutVariant", GroupLayoutVariant.DOCS_3x9, false],
-//     ["API Examples - DOCS_4x8 layoutVariant", GroupLayoutVariant.DOCS_4x8, false],
-//     ["API Examples - DOCS_6x6 layoutVariant", GroupLayoutVariant.DOCS_6x6, false],
-//     ["API Examples - DETAIL_3x9 layoutVariant", GroupLayoutVariant.DETAIL_3x9, false],
-//     ["API Examples - DETAIL_4x8 layoutVariant", GroupLayoutVariant.DETAIL_4x8, false],
-//     ["API Examples - DETAIL_6x6 layoutVariant", GroupLayoutVariant.DETAIL_6x6, false],
-// ];
-
-layoutVariantStoriesNew.forEach(testCase => {
+layoutVariantStories.forEach(testCase => {
     const storyCollection = storiesOf(testCase[0], module);
 
     // Defines configurationGroup from test case
