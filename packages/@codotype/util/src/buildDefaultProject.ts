@@ -28,7 +28,11 @@ export function buildConfigurationGroupPropertyValue(
     return property.defaultValue || false;
   }
   if (property.type === OptionType.DROPDOWN) {
-    return property.defaultValue || "";
+    return property.defaultValue
+      ? property.defaultValue
+      : property.dropdownOptions.length > 0
+      ? property.dropdownOptions[0].value
+      : "";
   }
   if (property.type === OptionType.COLLECTION) {
     return [buildValueFromProperties(property.properties)];

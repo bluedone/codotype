@@ -11,22 +11,22 @@ Object {
     },
     "components_group": Object {
       "componentName": "",
-      "dropdownTest": "",
+      "dropdownTest": "OPTION_01",
       "numberTest": "",
       "tests": Object {
         "enabled": true,
         "value": Object {
           "componentName": "",
-          "dropdownTest": "",
+          "dropdownTest": "OPTION_01",
           "nested_instance": Object {
             "enabled": true,
             "value": Object {
               "componentName": "",
-              "dropdownTest": "",
+              "dropdownTest": "OPTION_01",
               "random_instance": Object {
                 "enabled": true,
                 "value": Object {
-                  "dropdownTest": "",
+                  "dropdownTest": "OPTION_01",
                 },
               },
             },
@@ -40,7 +40,7 @@ Object {
         "value": Array [
           Object {
             "lambdaName": "",
-            "language": "",
+            "language": "typescript",
           },
         ],
       },
@@ -89,22 +89,22 @@ Object {
     },
     "components_group": Object {
       "componentName": "",
-      "dropdownTest": "",
+      "dropdownTest": "OPTION_01",
       "numberTest": "",
       "tests": Object {
         "enabled": true,
         "value": Object {
           "componentName": "",
-          "dropdownTest": "",
+          "dropdownTest": "OPTION_01",
           "nested_instance": Object {
             "enabled": true,
             "value": Object {
               "componentName": "",
-              "dropdownTest": "",
+              "dropdownTest": "OPTION_01",
               "random_instance": Object {
                 "enabled": true,
                 "value": Object {
-                  "dropdownTest": "",
+                  "dropdownTest": "OPTION_01",
                 },
               },
             },
@@ -156,22 +156,22 @@ Object {
     },
     "components_group": Object {
       "componentName": "",
-      "dropdownTest": "",
+      "dropdownTest": "OPTION_01",
       "numberTest": "",
       "tests": Object {
         "enabled": true,
         "value": Object {
           "componentName": "",
-          "dropdownTest": "",
+          "dropdownTest": "OPTION_01",
           "nested_instance": Object {
             "enabled": true,
             "value": Object {
               "componentName": "",
-              "dropdownTest": "",
+              "dropdownTest": "OPTION_01",
               "random_instance": Object {
                 "enabled": true,
                 "value": Object {
-                  "dropdownTest": "",
+                  "dropdownTest": "OPTION_01",
                 },
               },
             },
@@ -253,22 +253,22 @@ Object {
     },
     "components_group": Object {
       "componentName": "",
-      "dropdownTest": "",
+      "dropdownTest": "OPTION_01",
       "numberTest": "",
       "tests": Object {
         "enabled": true,
         "value": Object {
           "componentName": "",
-          "dropdownTest": "",
+          "dropdownTest": "OPTION_01",
           "nested_instance": Object {
             "enabled": true,
             "value": Object {
               "componentName": "",
-              "dropdownTest": "",
+              "dropdownTest": "OPTION_01",
               "random_instance": Object {
                 "enabled": true,
                 "value": Object {
-                  "dropdownTest": "",
+                  "dropdownTest": "OPTION_01",
                 },
               },
             },
