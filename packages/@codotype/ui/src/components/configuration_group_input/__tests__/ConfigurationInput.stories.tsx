@@ -53,6 +53,7 @@ storyCollection.add("single dropdown", () => {
     >(
         buildConfigurationGroupValue({
             ...ComponentBuilderConfigurationGroup,
+            layoutVariant: GroupLayoutVariant.LIST,
             properties: [
                 ComponentBuilderConfigurationGroupPropertySingleDropdown,
             ],
@@ -64,7 +65,10 @@ storyCollection.add("single dropdown", () => {
             <ConfigurationInput
                 configurationGroup={{
                     ...ComponentBuilderConfigurationGroup,
-                    properties: [],
+                    layoutVariant: GroupLayoutVariant.LIST,
+                    properties: [
+                        ComponentBuilderConfigurationGroupPropertySingleDropdown,
+                    ],
                 }}
                 value={configurationOptionValue}
                 onChange={(updatedVal: OptionValueInstance) => {
