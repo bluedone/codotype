@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`factory works 1`] = `
+PluginBuilder {
+  "codotypeVersion": "0.0.0",
+  "configurationGroups": Array [],
+  "createdBy": Object {
+    "contact": Object {},
+    "name": "",
+  },
+  "description": "My Codotype Plugin description",
+  "documentation": "",
+  "experience": "beginner",
+  "homepage": "",
+  "icon": "",
+  "id": "my-codotype-plugin",
+  "label": "My Codotype Plugin",
+  "project_path": "my_codotype_plugin",
+  "schemaEditorConfiguration": SchemaEditorBuilder {
+    "attributeAddons": Array [],
+    "configurationGroups": Array [],
+    "defaultAttributes": Array [],
+    "defaultRelations": Array [],
+    "defaultSchemas": Array [],
+    "documentation": "",
+    "enableAttributeDefaultValue": false,
+    "supportedDatatypes": Array [],
+    "supportedRelations": Array [],
+  },
+  "techTags": Array [],
+  "typeTags": Array [],
+  "version": "0.0.1",
+}
+`;
