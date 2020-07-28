@@ -1,4 +1,4 @@
-import { StringValueFilter } from "../../types/src/property-filter";
+import { StringValueFilter } from "../property-filter";
 import { makeLabelCase } from "./makeLabelCase";
 import { makeCamelCase } from "./makeCamelCase";
 import { makeSnakeCase } from "./makeSnakeCase";

@@ -1,6 +1,6 @@
 # @codotype/core
 
-Different datatype definitions used throughout the tools that power [codotype.io](http://codotype.io).
+Different datatype definitions and utility functions used throughout the tools that power [codotype.io](http://codotype.io).
 
 ## Running tests
 

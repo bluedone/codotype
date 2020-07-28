@@ -12,6 +12,7 @@ export * from "./generator";
 export * from "./token";
 export * from "./reference";
 export * from "./uuid";
+export * from "./util";
 export * from "./codotype";
 
 // Exports test_state

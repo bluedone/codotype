@@ -1,10 +1,13 @@
 {
   "name": "@codotype/core",
   "version": "0.8.0-canary.1",
-  "description": "Datatype definitions that power Codotype",
+  "description": "Datatype definitions and utility functions that power Codotype",
   "main": "dist/index",
   "types": "dist/index",
   "homepage": "https://github.com/codotype/codotype#readme",
+  "bugs": {
+    "url": "https://github.com/codotype/codotype/issues"
+  },
   "files": [
     "dist"
   ],
@@ -19,6 +22,14 @@
   "author": "Alexander Schwartzberg",
   "license": "MIT",
   "dependencies": {
+    "@codotype/types": "0.8.0-canary.4",
+    "@types/lodash": "^4.14.149",
+    "@types/pluralize": "0.0.29",
+    "@types/underscore.string": "0.0.38",
+    "change-case": "^3.1.0",
+    "lodash": "^4.17.10",
+    "pluralize": "^7.0.0",
+    "underscore.string": "^3.3.4",
     "uuid": "^8.0.0"
   },
   "devDependencies": {

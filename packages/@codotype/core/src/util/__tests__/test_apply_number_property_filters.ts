@@ -1,4 +1,4 @@
-import { NumberValueFilter } from "../../../types/src/property-filter";
+import { NumberValueFilter } from "../../../../types/src/property-filter";
 import { applyNumberPropertyFilters } from "../applyNumberPropertyFilters";
 
 // testCase = [testName, props.value, props.filters, expectedResult]

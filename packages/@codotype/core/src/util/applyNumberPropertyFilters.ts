@@ -1,4 +1,4 @@
-import { NumberValueFilter } from "../../types/src/property-filter";
+import { NumberValueFilter } from "../property-filter";
 
 /** Maps every NumberValueFilter to its function. */
 const filterFuncs = {
