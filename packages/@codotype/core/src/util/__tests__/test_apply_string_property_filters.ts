@@ -1,4 +1,4 @@
-import { StringValueFilter } from "../../../../types/src/property-filter";
+import { StringValueFilter } from "../../property-filter";
 import { applyStringPropertyFilters } from "../applyStringPropertyFilters";
 
 // testCase = [testName, props.value, props.filters, expectedResult]
