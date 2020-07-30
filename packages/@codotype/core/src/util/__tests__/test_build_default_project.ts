@@ -1,10 +1,5 @@
 import { buildDefaultProject } from "../buildDefaultProject";
-import {
-  testState,
-  GeneratorMeta,
-  Project,
-  SchemaSource
-} from "@codotype/types";
+import { testState, GeneratorMeta, Project, SchemaSource } from "../../";
 
 // // // //
 
@@ -21,12 +16,12 @@ const testCases: [string, GeneratorMeta][] = [
           {
             ...testState.userSchema,
             locked: true,
-            source: SchemaSource.GENERATOR
-          }
+            source: SchemaSource.GENERATOR,
+          },
         ],
-        configurationGroups: []
-      }
-    }
+        configurationGroups: [],
+      },
+    },
   ],
   [
     "generator w/ defaultSchemas + schemaEditorConfiguration.configurationGroups",
@@ -38,17 +33,17 @@ const testCases: [string, GeneratorMeta][] = [
           {
             ...testState.userSchema,
             locked: true,
-            source: SchemaSource.GENERATOR
-          }
+            source: SchemaSource.GENERATOR,
+          },
         ],
-        configurationGroups: [testState.ApiExamplesConfigurationGroup]
-      }
-    }
-  ]
+        configurationGroups: [testState.ApiExamplesConfigurationGroup],
+      },
+    },
+  ],
 ];
 
 describe("/buildDefaultProject", () => {
-  testCases.forEach(testCase => {
+  testCases.forEach((testCase) => {
     test(testCase[0], () => {
       const expectedProject: Project = buildDefaultProject(testCase[1]);
       expect(expectedProject).toMatchSnapshot();

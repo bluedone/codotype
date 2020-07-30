@@ -1,6 +1,6 @@
 import { buildTokenCasing } from "../buildTokenCasing";
 import { buildTokenPluralization } from "../buildTokenPluralization";
-import { TokenCasing, TokenPluralization } from "@codotype/types";
+import { TokenCasing, TokenPluralization } from "../../";
 
 // // // //
 

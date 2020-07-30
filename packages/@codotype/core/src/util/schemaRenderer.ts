@@ -3,15 +3,15 @@ import {
   Datatype,
   Attribute,
   InflatedSchema,
-  RelationReference
-} from "@codotype/types";
+  RelationReference,
+} from "../";
 import { inflateSchema } from "./inflate";
 
 // // // //
 
 // CLEANUP - document this function, write better tests
 export const getDatatypeValueJson = ({
-  datatype
+  datatype,
 }: {
   datatype: Datatype;
 }): string => {
@@ -79,7 +79,7 @@ export const getDatatypeValueJson = ({
 
 export function renderSchemaJson({
   schema,
-  schemas
+  schemas,
 }: {
   schema: Schema;
   schemas: Schema[];
@@ -92,14 +92,14 @@ export function renderSchemaJson({
     [
       ...schema.attributes.map((attr: Attribute) => {
         return `  "${attr.identifiers.snake}": ${getDatatypeValueJson({
-          datatype: attr.datatype
+          datatype: attr.datatype,
         })}`;
       }),
       ...inflatedSchema.relations.map((r: RelationReference): string => {
         return `  "${r.identifiers.destination.alias.singular.camel}": "${r.identifiers.destination.canonical.singular.pascal} ID"`;
-      })
+      }),
     ].join(",\n"),
-    "}" // Close JSON output
+    "}", // Close JSON output
   ];
 
   // Joins lines
@@ -110,7 +110,7 @@ export function renderSchemaJson({
 
 // CLEANUP - document this function, write better tests
 export const getDatatypeValueGraphQL = ({
-  datatype
+  datatype,
 }: {
   datatype: Datatype;
 }): string => {
@@ -176,7 +176,7 @@ export const getDatatypeValueGraphQL = ({
 
 export function renderSchemaGrapqhQL({
   schema,
-  schemas
+  schemas,
 }: {
   schema: Schema;
   schemas: Schema[];
@@ -188,13 +188,13 @@ export function renderSchemaGrapqhQL({
     // Map each property
     ...schema.attributes.map((attr: Attribute) => {
       return `  ${attr.identifiers.snake}: ${getDatatypeValueGraphQL({
-        datatype: attr.datatype
+        datatype: attr.datatype,
       })}!`;
     }),
     ...inflatedSchema.relations.map((r: RelationReference): string => {
       return `  ${r.identifiers.destination.alias.singular.camel}: ${r.identifiers.destination.canonical.singular.pascal}!`;
     }),
-    "}" // Close JSON output
+    "}", // Close JSON output
   ];
 
   // Joins lines
@@ -205,7 +205,7 @@ export function renderSchemaGrapqhQL({
 
 // CLEANUP - document this function, write better tests
 export const getDatatypeValueTypeScript = ({
-  datatype
+  datatype,
 }: {
   datatype: Datatype;
 }): string => {
@@ -271,7 +271,7 @@ export const getDatatypeValueTypeScript = ({
 
 export function renderSchemaTypeScript({
   schema,
-  schemas
+  schemas,
 }: {
   schema: Schema;
   schemas: Schema[];
@@ -283,13 +283,13 @@ export function renderSchemaTypeScript({
     // Map each property
     ...schema.attributes.map((attr: Attribute) => {
       return `  ${attr.identifiers.snake}: ${getDatatypeValueTypeScript({
-        datatype: attr.datatype
+        datatype: attr.datatype,
       })};`;
     }),
     ...inflatedSchema.relations.map((r: RelationReference): string => {
       return `  ${r.identifiers.destination.alias.singular.camel}Id: ${r.identifiers.destination.canonical.singular.pascal};`;
     }),
-    "}" // Close JSON output
+    "}", // Close JSON output
   ];
 
   // Joins lines

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`testing @codotype/types 1`] = `
+exports[`testing @codotype/core 1`] = `
 Object {
   "addons": Object {},
   "datatype": null,
@@ -19,7 +19,7 @@ Object {
 }
 `;
 
-exports[`testing @codotype/types 2`] = `
+exports[`testing @codotype/core 2`] = `
 Object {
   "destinationSchemaAlias": "",
   "destinationSchemaId": "",
@@ -31,7 +31,7 @@ Object {
 }
 `;
 
-exports[`testing @codotype/types 3`] = `
+exports[`testing @codotype/core 3`] = `
 Object {
   "attributes": Array [],
   "configuration": Object {},

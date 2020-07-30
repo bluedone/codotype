@@ -1,14 +1,13 @@
 import { buildTokenPluralization } from "./buildTokenPluralization";
 import { makeUniqueId } from "./makeUniqueId";
 import {
-  RelationType,
   Schema,
   Relation,
   RelationReference,
   InflatedSchema,
   Project,
-  InflatedProject
-} from "@codotype/types";
+  InflatedProject,
+} from "../";
 
 // // // //
 
@@ -30,7 +29,7 @@ export function buildRelationReference(params: {
         canonical: { ...sourceSchema.identifiers },
         alias: buildTokenPluralization(
           relation.sourceSchemaAlias || sourceSchema.identifiers.singular.label
-        )
+        ),
       },
       destination: {
         canonical: { ...destinationSchema.identifiers },
@@ -38,10 +37,10 @@ export function buildRelationReference(params: {
           ...buildTokenPluralization(
             relation.destinationSchemaAlias ||
               destinationSchema.identifiers.singular.label
-          )
-        }
-      }
-    }
+          ),
+        },
+      },
+    },
   };
 }
 
@@ -66,10 +65,10 @@ export function buildRelationReferences(params: {
             return buildRelationReference({
               sourceSchema: nextSchema,
               destinationSchema: schema,
-              relation: r
+              relation: r,
             });
           }
-        )
+        ),
     ];
   }, []);
 }
@@ -87,16 +86,16 @@ export function buildInflatedRelations(params: {
     ...schema.relations.map(
       (r: Relation): RelationReference => {
         const nextSchema: Schema = schemas.find(
-          s => s.id === r.destinationSchemaId
+          (s) => s.id === r.destinationSchemaId
         );
 
         return buildRelationReference({
           sourceSchema: schema,
           destinationSchema: nextSchema,
-          relation: r
+          relation: r,
         });
       }
-    )
+    ),
   ];
 }
 
@@ -119,12 +118,12 @@ export function inflateSchema(params: {
     id: schema.id,
     attributes: schema.attributes,
     identifiers: {
-      ...schema.identifiers
+      ...schema.identifiers,
     },
     relations: buildInflatedRelations({ schema, schemas }),
     references: buildRelationReferences({ schema, schemas }),
     // QUESTION - does anything need to be done for the configuration?
-    configuration: schema.configuration
+    configuration: schema.configuration,
   };
 }
 
@@ -143,7 +142,7 @@ export function inflateSchemas(params: {
     (s: Schema): InflatedSchema =>
       inflateSchema({
         schemas: params.schemas,
-        schema: s
+        schema: s,
       })
   );
 }
@@ -162,6 +161,6 @@ export function inflateProject(params: { project: Project }): InflatedProject {
     configuration: project.configuration,
     generatorId: project.generatorId,
     identifiers: project.identifiers,
-    generatorVersion: project.generatorVersion
+    generatorVersion: project.generatorVersion,
   };
 }

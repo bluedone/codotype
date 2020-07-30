@@ -1,5 +1,5 @@
 import { renderSchemaJson } from "../schemaRenderer";
-import { testState } from "@codotype/types";
+import { testState } from "../../";
 
 // // // //
 

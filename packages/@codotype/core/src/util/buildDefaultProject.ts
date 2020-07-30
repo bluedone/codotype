@@ -9,7 +9,7 @@ import {
   ConfigurationGroupSection,
   GeneratorMeta,
   ConfigurationGroupProperty,
-} from "@codotype/types";
+} from "../";
 
 // // // //
 

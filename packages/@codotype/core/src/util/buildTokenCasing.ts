@@ -2,7 +2,7 @@ import { makeLabelCase } from "./makeLabelCase";
 import { makeKebabCase } from "./makeKebabCase";
 import { makePascalCase } from "./makePascalCase";
 import { makeCamelCase } from "./makeCamelCase";
-import { TokenCasing } from "@codotype/types";
+import { TokenCasing } from "../";
 import { makeSnakeCase } from "./makeSnakeCase";
 
 // // // //

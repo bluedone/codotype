@@ -1,6 +1,6 @@
 import { titleize } from "underscore.string";
 import { plural } from "pluralize";
-import { TokenPluralization } from "@codotype/types";
+import { TokenPluralization } from "../";
 import { buildTokenCasing } from "./buildTokenCasing";
 
 // // // //
