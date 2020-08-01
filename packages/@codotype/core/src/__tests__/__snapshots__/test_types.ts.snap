@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`testing @codotype/core 1`] = `
+Object {
+  "addons": Object {},
+  "datatype": null,
+  "defaultValue": null,
+  "id": "",
+  "identifiers": Object {
+    "camel": "",
+    "kebab": "",
+    "label": "",
+    "pascal": "",
+    "snake": "",
+  },
+  "internalNote": "",
+  "locked": false,
+  "source": "USER",
+}
+`;
+
+exports[`testing @codotype/core 2`] = `
+Object {
+  "destinationSchemaAlias": "",
+  "destinationSchemaId": "",
+  "id": "",
+  "required": false,
+  "source": "USER",
+  "sourceSchemaAlias": "",
+  "type": null,
+}
+`;
+
+exports[`testing @codotype/core 3`] = `
+Object {
+  "attributes": Array [],
+  "configuration": Object {},
+  "id": "",
+  "identifiers": Object {
+    "plural": Object {
+      "camel": "",
+      "kebab": "",
+      "label": "",
+      "pascal": "",
+      "snake": "",
+    },
+    "singular": Object {
+      "camel": "",
+      "kebab": "",
+      "label": "",
+      "pascal": "",
+      "snake": "",
+    },
+  },
+  "locked": false,
+  "relations": Array [],
+  "removable": true,
+  "source": "USER",
+}
+`;
