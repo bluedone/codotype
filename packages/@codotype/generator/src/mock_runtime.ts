@@ -1,7 +1,6 @@
 import * as path from "path";
 import * as ejs from "ejs";
-import { indent, trailingComma } from "@codotype/util";
-import { Datatype, RelationType } from "@codotype/types";
+import { indent, trailingComma, Datatype, RelationType } from "@codotype/core";
 
 // Mock CodotypeRuntime class definition
 export class MockRuntime {
@@ -128,5 +127,5 @@ export class MockRuntime {
   }
 
   // composeWith
-  async composeWith(parentGeneratorInstance, generatorModule, options = {}) {}
+  async composeWith(parentGeneratorInstance, generatorModule, options = {}) { }
 }

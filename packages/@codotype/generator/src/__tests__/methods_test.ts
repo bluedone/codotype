@@ -4,8 +4,7 @@ import {
   ConstructorOptions,
   GeneratorOptions
 } from "../generator";
-import { testState } from "@codotype/types";
-import { inflateProject } from "@codotype/util";
+import { testState, inflateProject } from "@codotype/core";
 import { write } from "fs";
 
 const project = inflateProject({
