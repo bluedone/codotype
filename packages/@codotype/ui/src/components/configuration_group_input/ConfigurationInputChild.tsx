@@ -4,7 +4,7 @@ import {
     OptionValue,
     DropdownOption,
     ConfigurationGroupProperty,
-} from "@codotype/types";
+} from "@codotype/core";
 import Switch from "react-switch";
 
 // // // //
@@ -70,7 +70,7 @@ export function ConfigurationInputChild(props: ConfigurationInputChildProps) {
             />
         );
     }
-    
+
     // Handle OptionType.BOOLEAN
     if (property.type === OptionType.BOOLEAN) {
         return (

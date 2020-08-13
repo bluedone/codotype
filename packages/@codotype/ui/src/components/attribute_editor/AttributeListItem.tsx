@@ -4,7 +4,7 @@ import { Draggable } from "react-beautiful-dnd";
 import { Dropdown } from "react-bootstrap";
 import { AttributeListItemLabel } from "./AttributeListItemLabel";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { DATATYPE_META, Attribute, SchemaSource } from "@codotype/types";
+import { DATATYPE_META, Attribute, SchemaSource } from "@codotype/core";
 import {
     faTrashAlt,
     faPencilAlt,

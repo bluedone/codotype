@@ -7,7 +7,7 @@ import {
     AttributeAddon,
     AttributeAddonValue,
     TokenCasing,
-} from "@codotype/types";
+} from "@codotype/core";
 import * as React from "react";
 import { AttributeInput } from "./AttributeFormModal";
 import { AttributeAddonForm } from "./AttributeAddonForm";

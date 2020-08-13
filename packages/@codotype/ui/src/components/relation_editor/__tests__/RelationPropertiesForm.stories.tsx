@@ -3,7 +3,7 @@
 // import { Story } from "@src/components/dev";
 // import { RelationPropertiesForm } from "../RelationPropertiesForm";
 // import { userSchema } from "./test_state";
-// import { RelationType } from "@codotype/types";
+// import { RelationType } from "@codotype/core";
 
 // // // // //
 

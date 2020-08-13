@@ -1,7 +1,6 @@
 import * as React from "react";
 import { FormGroup } from "../attribute_editor/FormGroup";
-import { buildTokenCasing, sanitizeLabel } from "@codotype/util";
-import { TokenCasing } from "@codotype/types";
+import { buildTokenCasing, sanitizeLabel, TokenCasing } from "@codotype/core";
 
 // // // //
 

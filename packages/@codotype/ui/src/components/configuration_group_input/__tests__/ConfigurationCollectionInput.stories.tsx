@@ -6,13 +6,11 @@ import {
     testState,
     ConfigurationGroup,
     OptionValue,
-} from "@codotype/types";
-const { LambdaBuilderConfigurationGroup } = testState;
-import { Story } from "@src/components/dev";
-import {
     buildConfigurationGroupValue,
     buildConfigurationGroupPropertyValue,
-} from "@codotype/util";
+} from "@codotype/core";
+const { LambdaBuilderConfigurationGroup } = testState;
+import { Story } from "@src/components/dev";
 
 // // // //
 

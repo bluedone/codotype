@@ -6,7 +6,7 @@ import {
     Schema,
     RelationReference,
     RelationType,
-} from "@codotype/types";
+} from "@codotype/core";
 import { Droppable, DragDropContext } from "react-beautiful-dnd";
 import { RelationFormModal, RelationInput } from "./RelationFormModal";
 import { RelationDeleteModal } from "./RelationDeleteModal";
@@ -113,7 +113,7 @@ export function RelationEditor(props: RelationEditorProps) {
                         ) {
                             const newAttribute: Relation = {
                                 ...relationInput,
-                                id: Math.random().toString(), // TODO - replace with UUID function from @codotype/util
+                                id: Math.random().toString(), // TODO - replace with UUID function from @codotype/core
                             };
                             setState({
                                 lastUpdatedAt: Date.now(),
@@ -223,10 +223,10 @@ export function RelationEditor(props: RelationEditorProps) {
                                                             const relation:
                                                                 | Relation
                                                                 | undefined = props.relations.find(
-                                                                r =>
-                                                                    r.id ===
-                                                                    relationToBeEdited.sourceRelationId,
-                                                            );
+                                                                    r =>
+                                                                        r.id ===
+                                                                        relationToBeEdited.sourceRelationId,
+                                                                );
                                                             if (
                                                                 relation ===
                                                                 undefined
@@ -243,10 +243,10 @@ export function RelationEditor(props: RelationEditorProps) {
                                                             const relation:
                                                                 | Relation
                                                                 | undefined = props.relations.find(
-                                                                r =>
-                                                                    r.id ===
-                                                                    relationToDelete.sourceRelationId,
-                                                            );
+                                                                    r =>
+                                                                        r.id ===
+                                                                        relationToDelete.sourceRelationId,
+                                                                );
                                                             if (
                                                                 relation ===
                                                                 undefined

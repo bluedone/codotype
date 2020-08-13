@@ -3,12 +3,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CopyToClipboard } from "../copy_to_clipboard";
 import { faCopy } from "@fortawesome/free-solid-svg-icons";
 import { InfoTooltip } from "../info_tooltip";
-import { Schema } from "@codotype/types";
 import {
+    Schema,
     renderSchemaJson,
     renderSchemaGrapqhQL,
     renderSchemaTypeScript,
-} from "@codotype/util";
+} from "@codotype/core";
 import { faCheckCircle } from "@fortawesome/free-regular-svg-icons";
 
 // // // //

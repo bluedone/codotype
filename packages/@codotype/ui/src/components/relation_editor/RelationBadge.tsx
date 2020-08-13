@@ -1,4 +1,4 @@
-import { RelationReference, Schema, RelationType } from "@codotype/types";
+import { RelationReference, Schema, RelationType } from "@codotype/core";
 import * as React from "react";
 import { RelationDiagram } from "./RelationDiagram";
 

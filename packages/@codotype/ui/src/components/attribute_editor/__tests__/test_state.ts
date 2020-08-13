@@ -1,6 +1,4 @@
-import { Attribute, Datatype } from "@codotype/types";
-import { testState } from "@codotype/types";
-import { buildTokenCasing } from "@codotype/util";
+import { Attribute, Datatype, buildTokenCasing, testState } from "@codotype/core";
 const { emailAttribute } = testState;
 
 // // // //

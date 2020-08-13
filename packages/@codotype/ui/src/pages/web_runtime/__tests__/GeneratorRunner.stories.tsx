@@ -2,8 +2,7 @@ import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { Story } from "@src/components/dev";
 import { GeneratorRunner } from "../GeneratorRunner";
-import { testState } from "@codotype/types";
-import { buildDefaultProject } from "@codotype/util";
+import { buildDefaultProject, testState } from "@codotype/core";
 const { cdkGeneratorMeta } = testState;
 
 // // // //

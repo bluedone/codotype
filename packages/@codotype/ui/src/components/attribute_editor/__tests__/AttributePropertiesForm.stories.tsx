@@ -2,7 +2,7 @@ import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { Story } from "@src/components/dev";
 import { AttributePropertiesForm } from "../AttributePropertiesForm";
-import { EMPTY_TOKEN_CASING } from "@codotype/types";
+import { EMPTY_TOKEN_CASING } from "@codotype/core";
 
 // // // //
 

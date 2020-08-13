@@ -1,6 +1,6 @@
 import * as React from "react";
 import { TokenCasingForm } from "../TokenCasingForm";
-import { TokenCasing } from "@codotype/types";
+import { TokenCasing } from "@codotype/core";
 
 // // // //
 

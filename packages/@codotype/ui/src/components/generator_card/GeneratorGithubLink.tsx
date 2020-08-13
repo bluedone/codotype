@@ -1,5 +1,5 @@
 import * as React from "react";
-import { GeneratorMeta } from "@codotype/types";
+import { GeneratorMeta } from "@codotype/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 

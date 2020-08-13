@@ -8,7 +8,7 @@ import {
     OptionType,
     Datatype,
     DropdownOption,
-} from "@codotype/types";
+} from "@codotype/core";
 import { AttributeInput } from "./AttributeFormModal";
 
 // // // //

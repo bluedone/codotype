@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Schema } from "@codotype/types";
+import { Schema } from "@codotype/core";
 import classnames from "classnames";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

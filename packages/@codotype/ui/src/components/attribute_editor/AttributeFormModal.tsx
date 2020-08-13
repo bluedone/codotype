@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Datatype, Attribute } from "@codotype/types";
+import { Datatype, Attribute } from "@codotype/core";
 import { Modal } from "react-bootstrap";
 
 // // // //

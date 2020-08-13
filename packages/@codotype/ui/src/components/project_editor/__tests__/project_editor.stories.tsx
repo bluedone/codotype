@@ -1,8 +1,7 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { ProjectEditor } from "../component";
-import { Project, testState } from "@codotype/types";
-import { buildDefaultProject } from "@codotype/util";
+import { Project, testState, buildDefaultProject } from "@codotype/core";
 import { Story } from "@src/components/dev";
 import { dummyGeneratorMeta } from "./test_state";
 

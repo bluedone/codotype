@@ -3,7 +3,7 @@ import {
     ConfigurationGroup,
     ConfigurationGroupProperty,
     OptionValueInstance,
-} from "@codotype/types";
+} from "@codotype/core";
 import { ConfigurationGroupPropertiesInput } from "./ConfigurationGroupPropertiesInput";
 
 // // // //
@@ -43,8 +43,8 @@ export function ConfigurationGroupPropertiesTabs(props: {
     const selectedProperty:
         | ConfigurationGroupProperty
         | undefined = configurationGroup.properties.find(
-        p => p.identifier === selectedPropertyID,
-    );
+            p => p.identifier === selectedPropertyID,
+        );
 
     // Return null if selectedProperty is undefined
     if (selectedProperty === undefined) {
