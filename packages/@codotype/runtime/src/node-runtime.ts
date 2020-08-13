@@ -2,14 +2,16 @@ import * as fs from "fs";
 import * as fsExtra from "fs-extra";
 import * as path from "path";
 import * as ejs from "ejs";
-import { indent, trailingComma, inflateProject } from "@codotype/util";
 import {
+  indent,
+  trailingComma,
+  inflateProject,
   Datatype,
   InflatedProject,
   RelationType,
   Project,
   InflatedSchema
-} from "@codotype/types";
+} from "@codotype/core";
 import { CodotypeGenerator, GeneratorOptions } from "@codotype/generator";
 
 // // // //
@@ -205,7 +207,7 @@ export class CodotypeNodeRuntime {
       fs.writeFileSync(
         path.join(
           manifestDest +
-            `/${build.project.identifiers.kebab}-codotype-project.json`
+          `/${build.project.identifiers.kebab}-codotype-project.json`
         ),
         JSON.stringify(build.project, null, 2)
       );
