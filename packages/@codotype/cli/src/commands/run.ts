@@ -1,14 +1,14 @@
 import * as path from "path";
 import { CodotypeNodeRuntime, CodotypeBuildJob } from "@codotype/runtime";
 import { CommandOptions } from "../types";
-import { Project } from "@codotype/types";
+import { Project } from "@codotype/core";
 
 // TODO - implement `inquirer` for basic build
 // import inquirer from "inquirer";
 
 // // // //
 
-// TODO - move project validator into @codotype/util
+// TODO - move project validator into @codotype/core
 // Validates Project instance against a Generator
 // const validateProject = (project, generator) => {
 //   return true;
@@ -18,14 +18,14 @@ import { Project } from "@codotype/types";
 
 /**
  * transformJsonProject
- * TODO - move this into @codotype/util
+ * TODO - move this into @codotype/core
  * @param jsonProject - Codotype Project parsed from codotype-project.json
  */
 export function transformJsonProject(jsonProject: any): Project {
   // Defines the project instance
   // TODO - ProjectConfiguation should have a separate validation/transformation function
   const projectInstance: Project = {
-    id: Math.random().toString(), // TODO - use `UUID` function from `@codotype/util`
+    id: Math.random().toString(), // TODO - use `UUID` function from `@codotype/core`
     identifiers: {
       label: String(jsonProject.identifiers.label),
       snake: String(jsonProject.identifiers.snake),

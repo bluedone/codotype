@@ -1,7 +1,7 @@
 import * as path from "path";
 import chalk from "chalk";
 import { CodotypeNodeRuntime } from "@codotype/runtime";
-import { validateGenerator } from "@codotype/util";
+import { validateGenerator } from "@codotype/core";
 
 async function doctor() {
   // Logs start message
@@ -26,7 +26,7 @@ async function doctor() {
 
   console.log(
     `the doctor says ${chalk.green(`this generator can register with the `) +
-      chalk.green(`codotype runtime`)}`
+    chalk.green(`codotype runtime`)}`
   );
 
   // Runs the generator through validateGenerator
@@ -34,7 +34,7 @@ async function doctor() {
   const validations = validateGenerator({ generator: generatorMeta });
 
   // Logs validation of properties
-  // TODO - should be part of @codotype/util
+  // TODO - should be part of @codotype/core
   console.log(`the doctor is ${chalk.blue(`validating the generator:`)}`);
   validations.forEach(v => {
     if (v.valid) {
@@ -66,8 +66,8 @@ async function doctor() {
   // Logs success message if nothing blows up
   console.log(
     `\n${chalk.blue(`codotype doctor`) +
-      " says " +
-      chalk.yellow(`everything is splendid`)}\n`
+    " says " +
+    chalk.yellow(`everything is splendid`)}\n`
   );
   return;
 }
