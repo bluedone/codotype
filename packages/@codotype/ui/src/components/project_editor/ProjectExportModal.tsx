@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Modal } from "react-bootstrap";
-import { Project } from "@codotype/types";
+import { Project } from "@codotype/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 const download = require("downloadjs");
@@ -15,7 +15,7 @@ function downloadProject(project: Project) {
     // Defines filename
     const filename = `codotype-project-${
         project.identifiers.snake
-    }-${Date.now()}.json`;
+        }-${Date.now()}.json`;
 
     // Defines JSON string
     const jsonString: string = JSON.stringify(project, null, 4);

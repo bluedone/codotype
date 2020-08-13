@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Datatype } from "@codotype/types";
+import { Datatype } from "@codotype/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faQuoteRight,

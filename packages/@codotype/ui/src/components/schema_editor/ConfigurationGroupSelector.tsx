@@ -4,7 +4,7 @@ import {
     ConfigurationGroup,
     OptionValueInstance,
     ProjectConfiguration,
-} from "@codotype/types";
+} from "@codotype/core";
 
 // // // //
 
@@ -94,7 +94,7 @@ export function ConfigurationGroupSelector(props: {
                                     }}
                                     active={
                                         configurationGroup.identifier ===
-                                            selectedConfigurationGroup.identifier &&
+                                        selectedConfigurationGroup.identifier &&
                                         !viewingSchemas
                                     }
                                     label={configurationGroup.label}
@@ -111,7 +111,7 @@ export function ConfigurationGroupSelector(props: {
                         configurationGroup={selectedConfigurationGroup}
                         value={
                             props.configuration[
-                                selectedConfigurationGroup.identifier
+                            selectedConfigurationGroup.identifier
                             ]
                         }
                         onChange={(updatedVal: OptionValueInstance) => {

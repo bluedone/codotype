@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Jumbotron } from "./Jumbotron";
 import styled from "styled-components";
-import { GeneratorMeta } from "@codotype/types";
+import { GeneratorMeta } from "@codotype/core";
 import { InfoBullets, InfoBullet } from "./InfoBullets";
 import { FeatureSections, FeatureSection } from "./FeatureSection";
 

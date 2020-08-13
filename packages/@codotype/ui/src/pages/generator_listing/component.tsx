@@ -1,6 +1,6 @@
 import * as React from "react";
 import { GeneratorListItem } from "../../components/generator_card";
-import { GeneratorMeta } from "@codotype/types";
+import { GeneratorMeta } from "@codotype/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 

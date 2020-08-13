@@ -11,7 +11,7 @@ import {
     ATTRIBUTE_ADDON_NULLABLE,
     AttributeAddonValue,
     ATTRIBUTE_ADDON_PRIMARY_KEY,
-} from "@codotype/types";
+} from "@codotype/core";
 
 // // // //
 

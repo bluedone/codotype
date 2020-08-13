@@ -1,4 +1,4 @@
-import { Schema, TokenPluralization } from "@codotype/types";
+import { Schema, TokenPluralization } from "@codotype/core";
 
 // // // //
 

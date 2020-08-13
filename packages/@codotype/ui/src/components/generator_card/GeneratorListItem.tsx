@@ -1,5 +1,5 @@
 import * as React from "react";
-import { GeneratorMeta } from "@codotype/types";
+import { GeneratorMeta } from "@codotype/core";
 import { GeneratorTypeTag } from "./GeneratorTypeTag";
 import { GeneratorVersionTag } from "./GeneratorVersionTag";
 import { GeneratorExperienceTag } from "./GeneratorExperienceTag";

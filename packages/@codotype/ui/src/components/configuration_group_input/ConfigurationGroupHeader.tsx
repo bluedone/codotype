@@ -3,7 +3,7 @@ import {
     OptionValueInstance,
     ConfigurationGroup,
     GroupLayoutVariant,
-} from "@codotype/types";
+} from "@codotype/core";
 import { DocumentationModal } from "../DocumentationModal";
 
 // // // //

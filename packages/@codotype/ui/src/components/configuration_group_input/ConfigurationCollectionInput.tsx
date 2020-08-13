@@ -5,14 +5,12 @@ import {
     OptionValueInstance,
     ConfigurationGroupProperty,
     TokenPluralization,
-} from "@codotype/types";
+    buildConfigurationGroupPropertyValue,
+    makeUniqueId,
+} from "@codotype/core";
 import classnames from "classnames";
 import { ConfigurationInputChild } from "./ConfigurationInputChild";
 import { ConfigurationInputFormGroup } from "./ConfigurationInputFormGroup";
-import {
-    buildConfigurationGroupPropertyValue,
-    makeUniqueId,
-} from "@codotype/util";
 
 // // // //
 
@@ -173,9 +171,9 @@ export function ConfigurationCollectionInput(
                                                 {
                                                     active:
                                                         editCollectionItem !==
-                                                            null &&
+                                                        null &&
                                                         collectionItem.id ===
-                                                            editCollectionItem.id,
+                                                        editCollectionItem.id,
                                                 },
                                             )}
                                             onClick={() => {

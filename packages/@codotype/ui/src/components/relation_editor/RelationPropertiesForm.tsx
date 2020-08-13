@@ -1,8 +1,7 @@
 import * as React from "react";
-import { Schema, RelationType, RELATION_META } from "@codotype/types";
 import { RelationDatatypeForm } from "./RelationDatatypeForm";
 import { RelationInput } from "./RelationFormModal";
-import { sanitizeLabel, buildRelationReference } from "@codotype/util";
+import { Schema, RelationType, RELATION_META, sanitizeLabel, buildRelationReference } from "@codotype/core";
 import { RelationBadge } from "./RelationBadge";
 
 // // // //

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ConfigurationGroup, GroupLayoutVariant, ConfigurationGroupProperty } from "@codotype/types";
+import { ConfigurationGroup, GroupLayoutVariant, ConfigurationGroupProperty } from "@codotype/core";
 import { ConfigurationInputFormGroup } from "./ConfigurationInputFormGroup";
 import { ConfigurationInputChild } from "./ConfigurationInputChild";
 

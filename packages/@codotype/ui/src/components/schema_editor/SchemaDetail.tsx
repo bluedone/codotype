@@ -3,8 +3,8 @@ import { SchemaPreview } from "./SchemaPreview";
 import { AttributeEditor } from "../attribute_editor";
 import { RelationEditor } from "../relation_editor";
 import { SchemaDetailHeader } from "./SchemaDetailHeader";
-import { inflateSchema } from "@codotype/util";
 import {
+    inflateSchema,
     ProjectConfiguration,
     Schema,
     Attribute,
@@ -12,7 +12,7 @@ import {
     InflatedSchema,
     GeneratorMeta,
     UUID,
-} from "@codotype/types";
+} from "@codotype/core";
 import { ConfigurationGroupSelector } from "./ConfigurationGroupSelector";
 import { SchemaIncomingRelations } from "./SchemaIncomingRelations";
 

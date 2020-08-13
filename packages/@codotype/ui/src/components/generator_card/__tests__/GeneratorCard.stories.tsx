@@ -2,9 +2,8 @@ import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { GeneratorCard } from "../GeneratorCard";
 import { GeneratorListItem } from "../GeneratorListItem";
-import { GeneratorMeta } from "@codotype/types";
+import { GeneratorMeta, testState } from "@codotype/core";
 import { Story } from "@src/components/dev";
-import { testState } from "@codotype/types";
 const { cdkGeneratorMeta, dummyGeneratorMeta } = testState;
 
 // // // //

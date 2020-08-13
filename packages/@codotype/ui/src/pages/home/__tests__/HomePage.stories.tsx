@@ -1,6 +1,6 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
-import { testState } from "@codotype/types";
+import { testState } from "@codotype/core";
 import { HomePage } from "../HomePage";
 import { Pricing } from "../Pricing";
 import { AppNavbar } from "@src/components/navbar";

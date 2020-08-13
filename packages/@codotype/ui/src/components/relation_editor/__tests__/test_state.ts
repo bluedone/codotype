@@ -4,7 +4,7 @@ import {
     SchemaSource,
     RelationType,
     testState,
-} from "@codotype/types";
+} from "@codotype/core";
 
 // // // //
 

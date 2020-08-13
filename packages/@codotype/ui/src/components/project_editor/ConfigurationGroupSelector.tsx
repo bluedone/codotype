@@ -7,7 +7,7 @@ import {
     GeneratorMeta,
     ConfigurationGroup,
     OptionValueInstance,
-} from "@codotype/types";
+} from "@codotype/core";
 import { GeneratorStart } from "../generator_start";
 
 // // // //
@@ -126,7 +126,7 @@ export function ConfigurationGroupSelector(props: {
                                     }}
                                     active={
                                         configurationGroup.identifier ===
-                                            selectedConfigurationGroup.identifier &&
+                                        selectedConfigurationGroup.identifier &&
                                         !viewingSchemas &&
                                         !viewingReadme
                                     }
@@ -144,7 +144,7 @@ export function ConfigurationGroupSelector(props: {
                         configurationGroup={selectedConfigurationGroup}
                         value={
                             props.project.configuration[
-                                selectedConfigurationGroup.identifier
+                            selectedConfigurationGroup.identifier
                             ]
                         }
                         onChange={(updatedVal: OptionValueInstance) => {

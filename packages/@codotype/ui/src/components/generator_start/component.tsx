@@ -1,7 +1,7 @@
 import * as React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { GeneratorMeta } from "@codotype/types";
+import { GeneratorMeta } from "@codotype/core";
 import { ChevronAnimation } from "../chevron_animation/component";
 import { MarkdownRenderer } from "../markdown_renderer";
 import { GeneratorTypeTag } from "../generator_card/GeneratorTypeTag";

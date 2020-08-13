@@ -8,14 +8,14 @@ import {
     AttributeAddon,
     AttributeAddonValue,
     Schema,
-} from "@codotype/types";
+    buildTokenCasing
+} from "@codotype/core";
 import { Droppable, DragDropContext } from "react-beautiful-dnd";
 import { AttributeFormModal, AttributeInput } from "./AttributeFormModal";
 import { AttributeDeleteModal } from "./AttributeDeleteModal";
 import { AttributeListItem } from "./AttributeListItem";
 import { AttributeForm } from "./AttributeForm";
 import { AttributeListEmpty } from "./AttributeListEmpty";
-import { buildTokenCasing } from "@codotype/util";
 import { validateAttribute } from "./validateAttribute";
 import { Hotkey } from "../hotkey";
 
@@ -134,7 +134,7 @@ export function AttributeEditor(props: AttributeEditorProps) {
                     ...buildDefaultAddonValue(props.addons),
                     ...params.attributeInput.addons,
                 },
-                // TODO - replace with UUID function from @codotype/util
+                // TODO - replace with UUID function from @codotype/core
                 id: Math.random().toString(),
             };
             setState({

@@ -1,4 +1,4 @@
-import { DatatypeMeta, Attribute } from "@codotype/types";
+import { DatatypeMeta, Attribute } from "@codotype/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSnowflake } from "@fortawesome/free-solid-svg-icons";
 import * as React from "react";

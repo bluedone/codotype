@@ -6,7 +6,7 @@ import {
     OptionValue,
     OptionValueInstance,
     EMPTY_TOKEN_CASING,
-} from "@codotype/types";
+} from "@codotype/core";
 import { ConfigurationInputChild } from "./ConfigurationInputChild";
 import { ConfigurationInputFormGroup } from "./ConfigurationInputFormGroup";
 import { ConfigurationCollectionInput } from "./ConfigurationCollectionInput";

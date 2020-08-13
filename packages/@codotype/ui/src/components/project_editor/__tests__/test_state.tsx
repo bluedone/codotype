@@ -1,4 +1,4 @@
-import { GeneratorMeta, testState } from "@codotype/types";
+import { GeneratorMeta, testState } from "@codotype/core";
 
 // // // //
 

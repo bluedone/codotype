@@ -4,7 +4,7 @@ import {
     testState,
     TokenPluralization,
     EMPTY_TOKEN_CASING,
-} from "@codotype/types";
+} from "@codotype/core";
 // schemas.push(testState.movieSchema);
 // schemas.push(testState.userSchema);
 
