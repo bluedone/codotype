@@ -1,4 +1,4 @@
-import { Attribute } from "@codotype/types";
+import { Attribute } from "@codotype/core";
 import { AttributeInput } from "./AttributeFormModal";
 
 // // // //

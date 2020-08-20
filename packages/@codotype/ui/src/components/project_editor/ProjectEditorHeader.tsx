@@ -3,8 +3,7 @@ import { GenerateCodeButton } from "./GenerateCodeButton";
 import { ProjectEditButton } from "./ProjectEditButton";
 import { ProjectFormModal } from "./ProjectFormModal";
 import { ProjectForm } from "./ProjectForm";
-import { sanitizeLabel, buildTokenCasing } from "@codotype/util";
-import { Project, GeneratorMeta } from "@codotype/types";
+import { sanitizeLabel, buildTokenCasing, Project, GeneratorMeta } from "@codotype/core";
 import { ProjectDropdown } from "./ProjectDropdown";
 
 // // // //

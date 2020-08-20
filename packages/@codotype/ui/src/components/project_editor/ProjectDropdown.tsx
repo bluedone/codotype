@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Dropdown } from "react-bootstrap";
-import { Project } from "@codotype/types";
+import { Project } from "@codotype/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
 import { ResetProjectButton } from "./ResetProjectButton";

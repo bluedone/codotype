@@ -1,5 +1,5 @@
 import * as React from "react";
-import { DATATYPE_META, DatatypeMeta, Datatype } from "@codotype/types";
+import { DATATYPE_META, DatatypeMeta, Datatype } from "@codotype/core";
 import { DatatypeIcon } from "./DatatypeIcon";
 
 // // // //

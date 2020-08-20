@@ -1,14 +1,13 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { Story } from "@src/components/dev";
-import { Relation, RelationType, Schema, SchemaSource } from "@codotype/types";
+import { Relation, RelationType, Schema, SchemaSource, inflateSchema } from "@codotype/core";
 import { RelationEditor } from "../component";
 import {
     relationExample01,
     supportedRelationTypes,
     userSchema,
 } from "./test_state";
-import { inflateSchema } from "@codotype/util";
 
 // // // //
 

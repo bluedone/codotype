@@ -2,7 +2,7 @@ import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { DatatypeIcon } from "../DatatypeIcon";
 import { Story } from "@src/components/dev";
-import { Datatype } from "@codotype/types";
+import { Datatype } from "@codotype/core";
 
 // // // //
 

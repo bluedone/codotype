@@ -1,13 +1,13 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { ConfigurationInput } from "../component";
-import { buildConfigurationGroupValue } from "@codotype/util";
 import {
+    buildConfigurationGroupValue,
     OptionValueInstance,
     testState,
     GroupLayoutVariant,
     ConfigurationGroup,
-} from "@codotype/types";
+} from "@codotype/core";
 const {
     ComponentBuilderConfigurationGroup,
     ApiExamplesConfigurationGroup,

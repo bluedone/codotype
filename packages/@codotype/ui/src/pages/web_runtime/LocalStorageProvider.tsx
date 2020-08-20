@@ -1,6 +1,5 @@
 import * as React from "react";
-import { GeneratorMeta, Project } from "@codotype/types";
-import { buildDefaultProject } from "@codotype/util";
+import { GeneratorMeta, Project, buildDefaultProject } from "@codotype/core";
 import { ErrorBoundary } from "react-error-boundary";
 import { FallbackComponent } from "./ErrorBoundary";
 

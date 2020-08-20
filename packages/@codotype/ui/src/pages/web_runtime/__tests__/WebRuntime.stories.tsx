@@ -17,7 +17,7 @@ import {
     RelationType,
     OptionType,
     Codotype,
-} from "@codotype/types";
+} from "@codotype/core";
 import { generatorReadme } from "@src/components/markdown_renderer/__tests__/test_state";
 const { cdkGeneratorMeta, dummyGeneratorMeta } = testState;
 

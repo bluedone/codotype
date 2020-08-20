@@ -5,7 +5,7 @@ import {
     OptionValue,
     ConfigurationGroupProperty,
     testState,
-} from "@codotype/types";
+} from "@codotype/core";
 const {
     ComponentBuilderConfigurationGroupPropertySingleDropdown,
     ComponentBuilderConfigurationGroupPropertySingleNumber,

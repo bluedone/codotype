@@ -3,7 +3,7 @@ import {
     ConfigurationGroup,
     GroupLayoutVariant,
     OptionValueInstance,
-} from "@codotype/types";
+} from "@codotype/core";
 import { MarkdownRenderer } from "../markdown_renderer";
 import { ConfigurationGroupPropertiesInput } from "./ConfigurationGroupPropertiesInput";
 

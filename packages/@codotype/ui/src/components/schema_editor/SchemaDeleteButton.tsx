@@ -1,11 +1,10 @@
 import * as React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Schema, SchemaSource } from "@codotype/types";
 import { faTrashAlt, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import styled from "styled-components";
 import classnames from "classnames";
-import { inflateSchema } from "@codotype/util";
+import { Schema, SchemaSource, inflateSchema } from "@codotype/core";
 
 // // // //
 

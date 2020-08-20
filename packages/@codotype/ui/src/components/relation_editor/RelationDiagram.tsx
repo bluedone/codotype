@@ -1,4 +1,4 @@
-import { Relation } from "@codotype/types";
+import { Relation } from "@codotype/core";
 import * as React from "react";
 import classnames from "classnames";
 import {

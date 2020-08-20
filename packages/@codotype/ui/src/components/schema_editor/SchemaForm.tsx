@@ -3,11 +3,11 @@ import {
     buildTokenPluralization,
     validateTokenPluralization,
     sanitizeLabel,
-} from "@codotype/util";
+    TokenPluralization
+} from "@codotype/core";
 import classnames from "classnames";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLightbulb } from "@fortawesome/free-regular-svg-icons";
-import { TokenPluralization } from "@codotype/types";
 import { faAsterisk } from "@fortawesome/free-solid-svg-icons";
 
 // // // //

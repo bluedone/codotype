@@ -1,7 +1,7 @@
 import * as React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
-import { Schema, SchemaSource } from "@codotype/types";
+import { Schema, SchemaSource } from "@codotype/core";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 // // // //

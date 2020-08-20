@@ -1,5 +1,5 @@
 import { RelationPropertiesForm } from "./RelationPropertiesForm";
-import { Relation, RelationType, Schema } from "@codotype/types";
+import { Relation, RelationType, Schema } from "@codotype/core";
 import * as React from "react";
 import { RelationInput } from "./RelationFormModal";
 

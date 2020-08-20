@@ -4,7 +4,7 @@ import {
   RelationReference,
   InflatedProject,
   InflatedSchema
-} from "@codotype/types";
+} from "@codotype/core";
 
 // // // //
 

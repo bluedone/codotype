@@ -1,5 +1,5 @@
 import * as React from "react";
-import { OptionType, ConfigurationGroupProperty } from "@codotype/types";
+import { OptionType, ConfigurationGroupProperty } from "@codotype/core";
 import classnames from "classnames";
 import { DocumentationModal } from "../DocumentationModal";
 

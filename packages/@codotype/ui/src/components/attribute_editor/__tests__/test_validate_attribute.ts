@@ -3,7 +3,7 @@ import {
     ATTRIBUTE_ERROR_MESSAGE,
 } from "../validateAttribute";
 import { AttributeInput } from "../AttributeFormModal";
-import { Attribute, EMPTY_TOKEN_CASING } from "@codotype/types";
+import { Attribute, EMPTY_TOKEN_CASING } from "@codotype/core";
 import { attributeExample01, attributeExample02 } from "./test_state";
 
 // // // //

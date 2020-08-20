@@ -1,5 +1,5 @@
 import * as React from "react";
-import { GeneratorMeta, Project } from "@codotype/types";
+import { GeneratorMeta, Project } from "@codotype/core";
 import { LocalStorageProvider } from "./LocalStorageProvider";
 
 // // // //

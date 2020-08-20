@@ -1,5 +1,5 @@
 import * as React from "react";
-import { GeneratorMeta, Project } from "@codotype/types";
+import { GeneratorMeta, Project } from "@codotype/core";
 import useAxios from "axios-hooks";
 import { BuildFinished } from "../../components/build_finished/component";
 import { LoadingBuild } from "../../components/loading_build";

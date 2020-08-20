@@ -7,7 +7,7 @@ import {
     ConfigurationGroupProperty,
     PropertyLayoutVariant,
     testState,
-} from "@codotype/types";
+} from "@codotype/core";
 const {
     ComponentBuilderConfigurationGroupPropertySingleDropdown,
     ComponentBuilderConfigurationGroupPropertySingleNumber,

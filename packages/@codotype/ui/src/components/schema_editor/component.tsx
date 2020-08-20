@@ -11,9 +11,9 @@ import {
     UUID,
     SchemaSource,
     GeneratorMeta,
-} from "@codotype/types";
+    buildDefaultConfiguration
+} from "@codotype/core";
 import { reorder } from "../attribute_editor/component";
-import { buildDefaultConfiguration } from "@codotype/util";
 import { validateSchema } from "./validateSchema";
 
 // // // //
@@ -277,7 +277,7 @@ export function SchemaEditorLayout(props: {
             <div className="col-lg-8 pl-md-0">
                 <div
                     className="card card-body shadow-sm"
-                    // style={{ borderLeft: "6px solid #4e92fc" }}
+                // style={{ borderLeft: "6px solid #4e92fc" }}
                 >
                     <SchemaDetail
                         schema={selectedSchema}

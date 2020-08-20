@@ -1,5 +1,5 @@
 import * as React from "react";
-import { RelationType, Relation } from "@codotype/types";
+import { RelationType, Relation } from "@codotype/core";
 import { Modal } from "react-bootstrap";
 
 // // // //
