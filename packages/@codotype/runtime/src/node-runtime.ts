@@ -8,9 +8,11 @@ import {
   InflatedProject,
   RelationType,
   Project,
-  InflatedSchema
+  InflatedSchema,
+  GeneratorMeta
 } from "@codotype/types";
 import { CodotypeGenerator, GeneratorOptions } from "@codotype/generator";
+import { prettify } from "./prettify";
 
 // // // //
 // Constants
@@ -221,9 +223,9 @@ export class CodotypeNodeRuntime {
   // ensureDir
   // Ensures presence of directory for template compilation
   // TODO - this is repeated in @codotype/generator - should be abstracted, or only encapsulated in the runtime
-  ensureDir(dir) {
+  ensureDir(dir: string) {
     return new Promise((resolve, reject) => {
-      return fsExtra.ensureDir(dir, err => {
+      return fsExtra.ensureDir(dir, (err: any) => {
         if (err) return reject(err);
         return resolve();
       });
@@ -379,13 +381,13 @@ export class CodotypeNodeRuntime {
    * @param {string} generatorResolved
    * @param {string} template_path
    */
-  templatePath(generatorResolved, template_path = "./") {
+  templatePath(generatorResolved: string, template_path = "./") {
     return path.join(generatorResolved, "templates", template_path);
   }
 
   // destinationPath
   // Takes the destination name for a template and Generates
-  destinationPath(destPath, dest = "./") {
+  destinationPath(destPath: string, dest = "./") {
     return path.join(destPath, dest);
   }
 
@@ -394,7 +396,7 @@ export class CodotypeNodeRuntime {
 
   // renderTemplate
   // Compiles an EJS template and returns the result
-  renderTemplate(generatorInstance, src, options = {}) {
+  renderTemplate(generatorInstance: CodotypeGenerator, src: string, options: any = {}) {
     return new Promise((resolve, reject) => {
       // default options padded into the renderFile
       let renderOptions = {};
@@ -428,6 +430,11 @@ export class CodotypeNodeRuntime {
         // Handles template compilation error
         if (err) return reject(err);
 
+        // Prettify if desired
+        if (options.prettify) {
+          str = prettify({ source: str })
+        }
+
         // Resolves with compiled template
         return resolve(str);
       });
@@ -438,12 +445,12 @@ export class CodotypeNodeRuntime {
   // // // //
 
   // TODO - document
-  existsSync(dest) {
+  existsSync(dest: any) {
     return this.fs.existsSync(dest);
   }
 
   // TODO - document
-  compareFile(dest, compiledTemplate) {
+  compareFile(dest: any, compiledTemplate: any) {
     // TODO - document
     const existing = this.fs.readFileSync(dest, "utf8");
 
@@ -463,7 +470,7 @@ export class CodotypeNodeRuntime {
    */
   writeFile(dest: string, compiledTemplate: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      this.fs.writeFile(dest, compiledTemplate, err => {
+      this.fs.writeFile(dest, compiledTemplate, (err: any) => {
         // Handle error
         if (err) {
           // Logs debug statement
@@ -488,9 +495,9 @@ export class CodotypeNodeRuntime {
   // copyDir
   // copy a directory from src to dest'
   // TODO - abstract FS-level operations into @codotype/runtime
-  async copyDir(src, dest) {
+  async copyDir(src: any, dest: any) {
     return new Promise((resolve, reject) => {
-      return this.fs.copy(src, dest, err => {
+      return this.fs.copy(src, dest, (err: any) => {
         if (err) return reject(err);
         return resolve();
       });
@@ -503,7 +510,7 @@ export class CodotypeNodeRuntime {
   // TODO - document
   // TODO - Add `verbose` option to runtime to conditionally output log statements
   // TODO - add `chalk` dependency for pretty logging
-  log(...args) {
+  log(...args: string[]) {
     console.log(...args);
   }
 
