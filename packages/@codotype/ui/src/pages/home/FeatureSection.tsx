@@ -35,8 +35,8 @@ export function FeatureSections(props: { featureSections: FeatureSection[] }) {
     return (
         <div className="section bg-white py-3">
             <div className="container">
-                {featureSections.map(f => (
-                    <div key={f.title} className="row align-items-center mt-5">
+                {featureSections.map((f, index) => (
+                    <div key={f.title} className={`row align-items-center mt-5 ${index % 2 === 1 ? 'flex-row-reverse' : ''}`}>
                         <div className="col-sm-4">
                             <div className="media">
                                 <div className="media-body">
