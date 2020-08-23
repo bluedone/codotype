@@ -30,9 +30,15 @@ const testCases: [string, AttributeInput, Attribute[], string[]][] = [
     ],
     [
         "invalid attr - duplicate label",
-        { ...attributeExample01 },
+        { ...attributeExample01, id: "3" },
         [attributeExample01, attributeExample02],
         [ATTRIBUTE_ERROR_MESSAGE.duplicateLabel],
+    ],
+    [
+        "invalid attr - no duplicate label when ID hasn't changed",
+        { ...attributeExample01 },
+        [attributeExample01, attributeExample02],
+        [],
     ],
 ];
 

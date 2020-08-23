@@ -932,52 +932,11 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@codotype/types@0.8.0-canary.4":
-  version "0.8.0-canary.4"
-  resolved "https://registry.yarnpkg.com/@codotype/types/-/types-0.8.0-canary.4.tgz#fc1fb8dd0a4c6727393bda61fe10479c81a17ec5"
-  integrity sha512-WdCpz02QK6APErad0DKSg+pe6tiW7ZgFW2WeMBDkTndTNGf9FN+81KGefBW/6orCY5T1qdsYrNdP4Mf/IR4DwA==
-
-"@codotype/ui@^0.8.0-canary.30":
-  version "0.8.0-canary.30"
-  resolved "https://registry.yarnpkg.com/@codotype/ui/-/ui-0.8.0-canary.30.tgz#11fd270ccadb09c89242ce0a0b97d598927c41ee"
-  integrity sha512-6Bj0NzAlEflvEJA7Z1yNum1LnQyDVK+8LQV9RVv+3ZUZEcTCCTAZ4CJg/hJ8WckzWzmwJwsaAjyH8KT7hHjnfQ==
+"@codotype/core@0.8.0-canary.1":
+  version "0.8.0-canary.1"
+  resolved "https://registry.yarnpkg.com/@codotype/core/-/core-0.8.0-canary.1.tgz#c18bbebaff38a2ce4f5f65bdd9c55d0d328efe62"
+  integrity sha512-kv2DCrz07DZu6FMCeGIy6FtEbWTMtV1Hnl3QTfUArj5Fj/1Q/PtvjSN8K47LhmqyB4oFi5Vn/IPXWbvJ/hxG9A==
   dependencies:
-    "@codotype/types" "0.8.0-canary.4"
-    "@codotype/util" "0.8.0-canary.7"
-    "@fortawesome/fontawesome-svg-core" "^1.2.27"
-    "@fortawesome/free-brands-svg-icons" "^5.12.1"
-    "@fortawesome/free-regular-svg-icons" "^5.12.1"
-    "@fortawesome/free-solid-svg-icons" "^5.12.1"
-    "@fortawesome/react-fontawesome" "^0.1.8"
-    "@types/classnames" "^2.2.9"
-    "@types/lodash" "^4.14.149"
-    "@types/lodash.sample" "^4.0.6"
-    "@types/lodash.uniqueid" "^4.0.6"
-    axios "^0.19.2"
-    axios-hooks "^1.10.0"
-    bootstrap "^4.4.1"
-    classnames "^2.2.6"
-    copy-to-clipboard "^3.3.1"
-    downloadjs "^1.4.7"
-    lodash.sample "^4.0.1"
-    lodash.uniqueid "^4.0.1"
-    react-beautiful-dnd "^13.0.0"
-    react-bootstrap "^1.0.0-beta.17"
-    react-error-boundary "^2.2.1"
-    react-hot-keys "^2.5.2"
-    react-image-fallback "^8.0.0"
-    react-markdown "^4.3.1"
-    react-switch "^5.0.1"
-    react-syntax-highlighter "^12.2.1"
-    react-test-renderer "^16.13.1"
-    styled-components "^5.1.0"
-
-"@codotype/util@0.8.0-canary.7":
-  version "0.8.0-canary.7"
-  resolved "https://registry.yarnpkg.com/@codotype/util/-/util-0.8.0-canary.7.tgz#990303e0821a8944285a2a89ac36868631e207ea"
-  integrity sha512-bArhKo6jMWLkWI1sU4/R1U6VHr0NiB3wDsmwMKRbit+gzpM/R6bjakx1RhDG5FDhxs0kn1Jxgf3j9D7FXOXGjA==
-  dependencies:
-    "@codotype/types" "0.8.0-canary.4"
     "@types/lodash" "^4.14.149"
     "@types/pluralize" "0.0.29"
     "@types/underscore.string" "0.0.38"
@@ -986,6 +945,36 @@
     pluralize "^7.0.0"
     underscore.string "^3.3.4"
     uuid "^8.0.0"
+
+"@codotype/ui@^0.8.0-canary.32":
+  version "0.8.0-canary.32"
+  resolved "https://registry.yarnpkg.com/@codotype/ui/-/ui-0.8.0-canary.32.tgz#d9954c58c5b41071097c90114d199585e67f2071"
+  integrity sha512-GROEp66g5tghFtYRAOBFj7Ju6TdpypPSQ8GybqMV+E6AcU9ZHSWflx+pmFH2CjFbOOBS+TjoSOR7bzMJd/ZOSQ==
+  dependencies:
+    "@codotype/core" "0.8.0-canary.1"
+    "@fortawesome/fontawesome-svg-core" "^1.2.27"
+    "@fortawesome/free-brands-svg-icons" "^5.12.1"
+    "@fortawesome/free-regular-svg-icons" "^5.12.1"
+    "@fortawesome/free-solid-svg-icons" "^5.12.1"
+    "@fortawesome/react-fontawesome" "^0.1.8"
+    axios "^0.19.2"
+    axios-hooks "^1.10.0"
+    bootstrap "^4.4.1"
+    classnames "^2.2.6"
+    copy-to-clipboard "^3.3.1"
+    downloadjs "^1.4.7"
+    lodash.sample "^4.0.1"
+    react-beautiful-dnd "^13.0.0"
+    react-bootstrap "^1.0.0-beta.17"
+    react-error-boundary "^2.2.1"
+    react-github-btn "^1.2.0"
+    react-hot-keys "^2.5.2"
+    react-image-fallback "^8.0.0"
+    react-markdown "^4.3.1"
+    react-switch "^5.0.1"
+    react-syntax-highlighter "^12.2.1"
+    react-test-renderer "^16.13.1"
+    styled-components "^5.1.0"
 
 "@emotion/is-prop-valid@^0.8.8":
   version "0.8.8"
@@ -1072,26 +1061,7 @@
     lodash "^4.17.15"
     lodash-es "^4.17.15"
 
-"@types/classnames@^2.2.9":
-  version "2.2.10"
-  resolved "https://registry.yarnpkg.com/@types/classnames/-/classnames-2.2.10.tgz#cc658ca319b6355399efc1f5b9e818f1a24bf999"
-  integrity sha512-1UzDldn9GfYYEsWWnn/P4wkTlkZDH7lDb0wBMGbtIQc9zXEQq7FlKBdZUn6OBqD8sKZZ2RQO2mAjGpXiDGoRmQ==
-
-"@types/lodash.sample@^4.0.6":
-  version "4.2.6"
-  resolved "https://registry.yarnpkg.com/@types/lodash.sample/-/lodash.sample-4.2.6.tgz#ec7f6a6dbd0401c4a1e5f5b3c85fa5a85a42a84a"
-  integrity sha512-hxBvsUjPcW1O8mC9TiBE4m8TwvLuUU+zW8J6GI1M6WmPg8J87mXGt7zavpJ/9Znb+0rVsSB3VNAjCFaJ9YUJKg==
-  dependencies:
-    "@types/lodash" "*"
-
-"@types/lodash.uniqueid@^4.0.6":
-  version "4.0.6"
-  resolved "https://registry.yarnpkg.com/@types/lodash.uniqueid/-/lodash.uniqueid-4.0.6.tgz#63f1354f9193896f77e4510d4b7bc763d1479b9a"
-  integrity sha512-WXXsDm7Q1SiAeCG9ubCiDxOuLEDi5x+Crx8SgwTFgBtofATwK1jAeSbGz2bHlfqWezi7mcjynenlBFCeDLhHlw==
-  dependencies:
-    "@types/lodash" "*"
-
-"@types/lodash@*", "@types/lodash@^4.14.149":
+"@types/lodash@^4.14.149":
   version "4.14.150"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.150.tgz#649fe44684c3f1fcb6164d943c5a61977e8cf0bd"
   integrity sha512-kMNLM5JBcasgYscD9x/Gvr6lTAv2NVgsKtet/hm93qMyf/D1pt+7jeEZklKJKxMVmXjxbRVQQGfqDSfipYCO6w==
@@ -2935,6 +2905,11 @@ get-value@^2.0.3, get-value@^2.0.6:
   resolved "https://registry.yarnpkg.com/get-value/-/get-value-2.0.6.tgz#dc15ca1c672387ca76bd37ac0a395ba2042a2c28"
   integrity sha1-3BXKHGcjh8p2vTesCjlbogQqLCg=
 
+github-buttons@^2.8.0:
+  version "2.14.0"
+  resolved "https://registry.yarnpkg.com/github-buttons/-/github-buttons-2.14.0.tgz#32ce381651091accda09217cd7a6e4c77f91e222"
+  integrity sha512-rAwKwFOiWoyhb3g5ZyXjI3XXprAa36jCd0tm467aEUYtiDZkqEXkepuzNg9LryLbnuLRQmcifIPTxLUBnuYpXQ==
+
 glob-parent@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/glob-parent/-/glob-parent-3.1.0.tgz#9e6af6299d8d3bd2bd40430832bd113df906c5ae"
@@ -3660,11 +3635,6 @@ lodash.uniq@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
-
-lodash.uniqueid@^4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/lodash.uniqueid/-/lodash.uniqueid-4.0.1.tgz#3268f26a7c88e4f4b1758d679271814e31fa5b26"
-  integrity sha1-MmjyanyI5PSxdY1nknGBTjH6WyY=
 
 lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.13, lodash@^4.17.15:
   version "4.17.19"
@@ -4943,6 +4913,13 @@ react-error-boundary@^2.2.1:
   integrity sha512-8SZMkJRFUb0JuluHKwuUtkh5vvVWBg3O/bJIWgNMhMJv529aG//TmcphR3cSMhCWjz1vFZDb4taJd6pmwP5mEQ==
   dependencies:
     "@babel/runtime" "^7.9.6"
+
+react-github-btn@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/react-github-btn/-/react-github-btn-1.2.0.tgz#464066f999a77c0eed27980260601b51cbe15614"
+  integrity sha512-/b2TGTeek5Ky+KtuP5BxOaXgb1FGhbwgZNI6rkwkGk7+xtCtsNMkdchOcCnC3qU1JGTWPKzYZWpPBIouVhXAoQ==
+  dependencies:
+    github-buttons "^2.8.0"
 
 react-hot-keys@^2.5.2:
   version "2.5.2"

@@ -46,7 +46,7 @@ function CollectionItemForm(props: {
                 // TODO - handle nested instance + collection
                 return (
                     <ConfigurationInputFormGroup
-                        card
+                        // card
                         enabled
                         onChangeEnabled={(updatedEnabled: boolean) => {
                             const updatedPropertyValue: OptionValue =
@@ -72,7 +72,7 @@ function CollectionItemForm(props: {
                                 });
                             }}
                         />
-                        <pre>{JSON.stringify(props.value, null, 4)}</pre>
+                        {/* <pre>{JSON.stringify(formValues, null, 4)}</pre> */}
                     </ConfigurationInputFormGroup>
                 );
             })}
@@ -171,9 +171,9 @@ export function ConfigurationCollectionInput(
                                                 {
                                                     active:
                                                         editCollectionItem !==
-                                                        null &&
+                                                            null &&
                                                         collectionItem.id ===
-                                                        editCollectionItem.id,
+                                                            editCollectionItem.id,
                                                 },
                                             )}
                                             onClick={() => {
