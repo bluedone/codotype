@@ -11,6 +11,8 @@ import {
 import classnames from "classnames";
 import { ConfigurationInputChild } from "./ConfigurationInputChild";
 import { ConfigurationInputFormGroup } from "./ConfigurationInputFormGroup";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 
 // // // //
 
@@ -105,20 +107,30 @@ function CollectionItemForm(props: {
 
 interface ConfigurationCollectionInputProps {
     properties: ConfigurationGroupProperty[];
-    label: string;
+    // label: string;
     value: OptionValue;
     identifiers: TokenPluralization;
     onChange: (updatedVal: OptionValue) => void;
 }
+
 export function ConfigurationCollectionInput(
     props: ConfigurationCollectionInputProps,
 ) {
     const { identifiers } = props;
 
     // Stores the current value of the collection
-    const [collectionValue, setCollectionValue] = React.useState<
-        CollectionItem[]
-    >([]);
+    // TODO - remove any type here
+    const [collectionValue, setCollectionValue] = React.useState<any>(
+        props.value,
+    );
+
+    console.log("VALUE");
+    console.log(props.value);
+
+    // Invokes props.onChange when collectionValue changes
+    React.useEffect(() => {
+        props.onChange(collectionValue);
+    }, [collectionValue]);
 
     // New + Edit hooks
     const [
@@ -130,6 +142,7 @@ export function ConfigurationCollectionInput(
         setEditCollectionItem,
     ] = React.useState<CollectionItem | null>(null);
 
+    // TODO - should this be abstracted outside the component?
     function buildNewCollectionItem() {
         return props.properties.reduce(
             (val, property) => {
@@ -144,59 +157,94 @@ export function ConfigurationCollectionInput(
         );
     }
 
+    const showList = editCollectionItem === null && newCollectionItem === null;
+
     return (
         <div className="row">
             <div className="col-lg-12">
-                <p className="lead mb-0">{props.label}</p>
                 <div className="row">
-                    <div className="col-sm-4">
-                        <button
-                            className="btn btn-block btn-primary"
-                            onClick={() => {
-                                setEditCollectionItem(null);
-                                setNewCollectionItem(buildNewCollectionItem());
-                            }}
-                        >
-                            New {identifiers.singular.label}
-                        </button>
-
-                        <ul className="list-group mt-3">
-                            {collectionValue.map(
-                                (collectionItem: CollectionItem, i: number) => {
-                                    return (
-                                        <li
-                                            key={String(i)}
-                                            className={classnames(
-                                                "list-group-item list-group-item-action",
-                                                {
-                                                    active:
-                                                        editCollectionItem !==
-                                                            null &&
-                                                        collectionItem.id ===
-                                                            editCollectionItem.id,
-                                                },
-                                            )}
-                                            onClick={() => {
-                                                setNewCollectionItem(null);
-                                                setEditCollectionItem(
-                                                    collectionItem,
-                                                );
-                                            }}
-                                        >
-                                            {JSON.stringify(collectionItem)}
-                                        </li>
+                    {showList && (
+                        <div className="col-sm-12">
+                            <button
+                                className="btn btn-block btn-primary"
+                                onClick={() => {
+                                    setEditCollectionItem(null);
+                                    setNewCollectionItem(
+                                        buildNewCollectionItem(),
                                     );
-                                },
-                            )}
+                                }}
+                            >
+                                New {identifiers.singular.label}
+                            </button>
 
-                            {collectionValue.length === 0 && (
-                                <li className="list-group-item">
-                                    No {identifiers.plural.label} defined
-                                </li>
-                            )}
-                        </ul>
-                    </div>
-                    <div className="col-sm-8">
+                            <ul className="list-group mt-3">
+                                {collectionValue.map(
+                                    (
+                                        collectionItem: CollectionItem,
+                                        i: number,
+                                    ) => {
+                                        return (
+                                            <li
+                                                key={String(i)}
+                                                className={classnames(
+                                                    "list-group-item list-group-item-action",
+                                                    {
+                                                        active:
+                                                            editCollectionItem !==
+                                                                null &&
+                                                            collectionItem.id ===
+                                                                editCollectionItem.id,
+                                                    },
+                                                )}
+                                                onClick={() => {
+                                                    setNewCollectionItem(null);
+                                                    setEditCollectionItem(
+                                                        collectionItem,
+                                                    );
+                                                }}
+                                            >
+                                                <div className="d-flex justify-content-between">
+                                                    <pre className="bg-dark text-light rounded p-2 mb-0">
+                                                        {JSON.stringify(
+                                                            collectionItem,
+                                                        )}
+                                                    </pre>
+                                                    <button
+                                                        className="btn btn-sm btn-outline-danger"
+                                                        onClick={e => {
+                                                            e.preventDefault();
+                                                            e.stopPropagation();
+                                                            const updatedCollection = collectionValue.filter(
+                                                                (
+                                                                    c: CollectionItem,
+                                                                ) =>
+                                                                    c.id !==
+                                                                    collectionItem.id,
+                                                            );
+                                                            setCollectionValue(
+                                                                updatedCollection,
+                                                            );
+                                                        }}
+                                                    >
+                                                        <FontAwesomeIcon
+                                                            icon={faTrashAlt}
+                                                        />
+                                                    </button>
+                                                </div>
+                                            </li>
+                                        );
+                                    },
+                                )}
+
+                                {collectionValue.length === 0 && (
+                                    <li className="list-group-item">
+                                        No {identifiers.plural.label} defined
+                                    </li>
+                                )}
+                            </ul>
+                        </div>
+                    )}
+                    <div className="col-sm-12">
                         {newCollectionItem !== null && (
                             <CollectionItemForm
                                 value={newCollectionItem}
@@ -227,6 +275,7 @@ export function ConfigurationCollectionInput(
                                 onSubmit={updatedCollectionItem => {
                                     // Updates collectionValue
                                     setCollectionValue(
+                                        // @ts-ignore
                                         collectionValue.map(c => {
                                             if (
                                                 c.id === editCollectionItem.id

@@ -17,8 +17,10 @@ import {
     RelationType,
     OptionType,
     Codotype,
+    GroupLayoutVariant,
 } from "@codotype/core";
 import { generatorReadme } from "@src/components/markdown_renderer/__tests__/test_state";
+import { identifier } from "@babel/types";
 const { cdkGeneratorMeta, dummyGeneratorMeta } = testState;
 
 // // // //
@@ -85,7 +87,10 @@ const stories: [string, GeneratorMeta][] = [
         {
             ...cdkGeneratorMeta,
             configurationGroups: [
-                testState.ComponentBuilderConfigurationGroup,
+                {
+                    ...testState.ComponentBuilderConfigurationGroup,
+                    layoutVariant: GroupLayoutVariant.LIST,
+                },
                 testState.SideBySideConfigurationGroup,
             ],
             id: "chrome_extension_generator_05", // unique ID for the generator
@@ -103,13 +108,12 @@ const stories: [string, GeneratorMeta][] = [
                     Datatype.STRING_ARRAY,
                 ],
                 configurationGroups: [
-                    {
-                        ...testState.ComponentBuilderConfigurationGroup,
+                    new Codotype.ConfigurationGroup({
                         label: "Meta",
                         identifier: "meta",
                         description:
                             "Define additional metadata for this Schema",
-                        documentation: "",
+                        layoutVariant: GroupLayoutVariant.LIST,
                         properties: [
                             new Codotype.ConfigurationGroupProperty({
                                 label: "Internal Note",
@@ -120,14 +124,55 @@ const stories: [string, GeneratorMeta][] = [
                                 type: OptionType.STRING,
                             }),
                         ],
-                    },
-                    {
-                        ...testState.ComponentBuilderConfigurationGroup,
+                    }),
+                    new Codotype.ConfigurationGroup({
+                        label: "API Actions",
+                        identifier: "api_actions",
+                        description: "Define individual REST api actions.",
+                        documentation:
+                            "This is documentation for the API Actions configuration group",
+                        layoutVariant: GroupLayoutVariant.LIST,
+                        properties: [
+                            new Codotype.ConfigurationGroupProperty({
+                                type: OptionType.COLLECTION,
+                                identifier: "api_actions_value",
+                                label: "API Actions",
+                                description: "Generate additional API actions",
+                                defaultValue: [],
+                                properties: [
+                                    new Codotype.ConfigurationGroupProperty({
+                                        label: "API Verb",
+                                        identifier: "verb",
+                                        description: "RETS API VERB",
+                                        type: OptionType.DROPDOWN,
+                                        defaultValue: "GET",
+                                        dropdownOptions: [
+                                            { value: "GET", label: "GET" },
+                                            { value: "POST", label: "POST" },
+                                            { value: "PUT", label: "PUT" },
+                                            {
+                                                value: "DELETE",
+                                                label: "DELETE",
+                                            },
+                                        ],
+                                    }),
+                                    new Codotype.ConfigurationGroupProperty({
+                                        label: "API Route",
+                                        identifier: "route",
+                                        description: "Route for the API Action",
+                                        type: OptionType.STRING,
+                                        defaultValue: "verify",
+                                    }),
+                                ],
+                            }),
+                        ],
+                    }),
+                    new Codotype.ConfigurationGroup({
                         label: "GraphQL API",
                         identifier: "graphql_api",
                         description:
                             "Configure the GraphQL API for this Schema",
-                        documentation: "",
+                        layoutVariant: GroupLayoutVariant.LIST,
                         properties: [
                             new Codotype.ConfigurationGroupProperty({
                                 type: OptionType.BOOLEAN,
@@ -146,7 +191,7 @@ const stories: [string, GeneratorMeta][] = [
                                 type: OptionType.STRING,
                             }),
                         ],
-                    },
+                    }),
                 ],
                 attributeAddons: [
                     ATTRIBUTE_ADDON_UNIQUE,

@@ -35,26 +35,43 @@ export function ConfigurationGroupPropertiesInput(props: {
             {properties.map((property: ConfigurationGroupProperty) => {
                 // Handle OptionType.COLLECTION
                 if (property.type === OptionType.COLLECTION) {
+                    const val =
+                        // @ts-ignore
+                        props.value[property.identifier];
                     return (
-                        <ConfigurationCollectionInput
-                            label={property.label}
-                            identifiers={{
-                                singular: {
-                                    ...EMPTY_TOKEN_CASING,
-                                },
-                                plural: {
-                                    ...EMPTY_TOKEN_CASING,
-                                },
-                            }}
-                            properties={property.properties}
-                            onChange={(updatedVal: OptionValue) => {
+                        <ConfigurationInputFormGroup
+                            enabled={!!val.enabled}
+                            property={property}
+                            key={property.identifier}
+                            onChangeEnabled={updatedEnabled => {
                                 props.onChange({
                                     ...props.value,
-                                    [property.identifier]: updatedVal,
+                                    [property.identifier]: {
+                                        ...val,
+                                        enabled: updatedEnabled,
+                                    },
                                 });
                             }}
-                            value={props.value}
-                        />
+                        >
+                            <ConfigurationCollectionInput
+                                identifiers={{
+                                    singular: {
+                                        ...EMPTY_TOKEN_CASING,
+                                    },
+                                    plural: {
+                                        ...EMPTY_TOKEN_CASING,
+                                    },
+                                }}
+                                properties={property.properties}
+                                onChange={(updatedVal: OptionValue) => {
+                                    props.onChange({
+                                        ...props.value,
+                                        [property.identifier]: updatedVal,
+                                    });
+                                }}
+                                value={val}
+                            />
+                        </ConfigurationInputFormGroup>
                     );
                 }
 
