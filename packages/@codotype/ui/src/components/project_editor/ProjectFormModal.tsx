@@ -17,8 +17,8 @@ export function ProjectFormModal(props: {
 }) {
     return (
         <Modal show={props.show} onHide={props.handleClose}>
-            <Modal.Header closeButton>
-                <Modal.Title>Project Form</Modal.Title>
+            <Modal.Header closeButton className="d-flex align-items-center">
+                <Modal.Title>Project Name</Modal.Title>
             </Modal.Header>
             <Modal.Body>{props.children}</Modal.Body>
             <Modal.Footer>
