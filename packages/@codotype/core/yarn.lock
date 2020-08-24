@@ -197,11 +197,6 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@codotype/types@0.8.0-canary.4":
-  version "0.8.0-canary.4"
-  resolved "https://registry.yarnpkg.com/@codotype/types/-/types-0.8.0-canary.4.tgz#fc1fb8dd0a4c6727393bda61fe10479c81a17ec5"
-  integrity sha512-WdCpz02QK6APErad0DKSg+pe6tiW7ZgFW2WeMBDkTndTNGf9FN+81KGefBW/6orCY5T1qdsYrNdP4Mf/IR4DwA==
-
 "@jest/console@^24.7.1", "@jest/console@^24.9.0":
   version "24.9.0"
   resolved "https://registry.yarnpkg.com/@jest/console/-/console-24.9.0.tgz#79b1bc06fb74a8cfb01cbdedf945584b1b9707f0"

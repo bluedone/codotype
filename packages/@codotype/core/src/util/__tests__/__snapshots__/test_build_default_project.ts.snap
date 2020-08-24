@@ -37,12 +37,7 @@ Object {
     "lambda_builder": Object {
       "lambda_collection": Object {
         "enabled": true,
-        "value": Array [
-          Object {
-            "lambdaName": "",
-            "language": "typescript",
-          },
-        ],
+        "value": Array [],
       },
     },
   },

@@ -1,23 +1,34 @@
+### 0.8.0-canary.2
+
+- Added values to `PropertyLayoutVariant` enum
+- Fixed bug in `buildConfigurationGroupPropertyValue` when handling `OptionType.COLLECTION`
+
+### 0.8.0-canary.1
+
+- Merged `@codotype/types` + `@codotype/util` into `@codotype/core`
+
 ### v0.2.3
 
 #### Changes
-* Added `removable` property to `DEFAULT_SCHEMA`
+
+- Added `removable` property to `DEFAULT_SCHEMA`
 
 ---
 
 ### v0.2.2
 
 #### Fixes
-* Cleaned up `datatype-meta.js`
-* Added `locked`, and `source` properties to `DEFAULT_SCHEMA`
-* Added `SCHEMA_SOURCE_GENERATOR` and `SCHEMA_SOURCE_GENERATOR` to `DEFAULT_SCHEMA`
-* Renamed `option-group-types.js` to `configuration-group-types.js`
-* Renamed `OPTION_GROUP_*` to `CONFIGURATION_GROUP_*`
-* Deprecated old `OPTION_GROUP_TYPE_*` variables in favor of maintaining `type` and `scope` properties
-* Added `CONFIGURATION_GROUP_TYPE_OPTION` and `CONFIGURATION_GROUP_TYPE_ADDON`
-* Added `CONFIGURATION_GROUP_SCOPE_GLOBAL` and `CONFIGURATION_GROUP_SCOPE_SCHEMA`
-* Added `configuration-option-types.js` to store types of attributes assigned to `ConfigurationGroups`
-* Added the following datatypes and datatype meta:
+
+- Cleaned up `datatype-meta.js`
+- Added `locked`, and `source` properties to `DEFAULT_SCHEMA`
+- Added `SCHEMA_SOURCE_GENERATOR` and `SCHEMA_SOURCE_GENERATOR` to `DEFAULT_SCHEMA`
+- Renamed `option-group-types.js` to `configuration-group-types.js`
+- Renamed `OPTION_GROUP_*` to `CONFIGURATION_GROUP_*`
+- Deprecated old `OPTION_GROUP_TYPE_*` variables in favor of maintaining `type` and `scope` properties
+- Added `CONFIGURATION_GROUP_TYPE_OPTION` and `CONFIGURATION_GROUP_TYPE_ADDON`
+- Added `CONFIGURATION_GROUP_SCOPE_GLOBAL` and `CONFIGURATION_GROUP_SCOPE_SCHEMA`
+- Added `configuration-option-types.js` to store types of attributes assigned to `ConfigurationGroups`
+- Added the following datatypes and datatype meta:
   - `DATATYPE_BIGINT`
   - `DATATYPE_DECIMAL`
   - `DATATYPE_NUMERIC`
@@ -44,29 +55,34 @@
 ### v0.2.1
 
 #### Fixes
-* Typo fixed in `datatype-meta.js`
-* Cleaned up formatting in `relation-meta.js`
+
+- Typo fixed in `datatype-meta.js`
+- Cleaned up formatting in `relation-meta.js`
 
 ---
 
 ### v0.2.0
 
 #### Features
-* Improved iconography and descriptions for datatypes
+
+- Improved iconography and descriptions for datatypes
 
 #### Deprecations
-* Deprecated `DATATYPE_DOUBLE` type - merged functionality with `DATATYPE_FLOAT`
+
+- Deprecated `DATATYPE_DOUBLE` type - merged functionality with `DATATYPE_FLOAT`
 
 ---
 
 ### v0.1.1
 
 #### Features
-* Added basic testing infrastructure with Mocha, Chai, & NYC
+
+- Added basic testing infrastructure with Mocha, Chai, & NYC
 
 ---
 
 ### v0.1.0
 
 #### Features
-* Added `@codotype/types` module
+
+- Added `@codotype/types` module

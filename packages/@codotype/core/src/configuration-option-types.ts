@@ -114,7 +114,20 @@ export interface ConfigurationGroupProperty {
 // // // //
 
 export enum PropertyLayoutVariant {
-  HIDDEN = "hidden"
+  COL_3 = "COL_3",
+  COL_4 = "COL_4",
+  COL_6 = "COL_6",
+  COL_8 = "COL_8",
+  COL_12 = "COL_12",
+  CARD_COL_3 = "CARD_COL_3",
+  CARD_COL_4 = "CARD_COL_4",
+  CARD_COL_6 = "CARD_COL_6",
+  CARD_COL_8 = "CARD_COL_8",
+  CARD_COL_12 = "CARD_COL_12"
+  // Additional variants:
+  // - inline documentation
+  // - modal?
+  // - else?
 }
 
 // LIST - lists all the properties. Documentation renders in a modal.
