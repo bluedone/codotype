@@ -13,6 +13,7 @@ ConfigurationGroupPropertyBuilder {
   "id": "1234-5678-1234-5678",
   "identifier": "meh_value",
   "label": "meh",
+  "layoutVariant": "CARD_COL_12",
   "properties": Array [],
   "required": false,
   "type": "BOOLEAN",

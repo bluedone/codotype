@@ -1,6 +1,4 @@
 import * as React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { GeneratorMeta } from "@codotype/core";
 import { ChevronAnimation } from "../chevron_animation/component";
 import { MarkdownRenderer } from "../markdown_renderer";
@@ -9,6 +7,7 @@ import { GeneratorTechTag } from "../generator_card/GeneratorTechTag";
 import { GeneratorExperienceTag } from "../generator_card/GeneratorExperienceTag";
 import { GeneratorVersionTag } from "../generator_card/GeneratorVersionTag";
 import { GeneratorGithubLink } from "../generator_card/GeneratorGithubLink";
+import { GitHubStar } from "../GitHubStar";
 
 // // // //
 
@@ -42,29 +41,7 @@ export function GeneratorStart(props: GeneratorStartProps) {
                     </div>
 
                     <div className="col-lg-12 d-flex justify-content-center">
-                        {/* <gh-btns-star slug="codotype/codotype" show-count></gh-btns-star> */}
-                        {/* GitHub Star Count */}
-                        {/* <!-- Place this tag where you want the button to render. --> */}
-                        <a
-                            className="github-button"
-                            href="https://github.com/sponsors/ntkme"
-                            data-icon="octicon-heart"
-                            aria-label="Sponsor @ntkme on GitHub"
-                        >
-                            Sponsor
-                        </a>
-
-                        {/* <!-- Place this tag where you want the button to render. --> */}
-                        <a
-                            href="https://github.com/codotype/codotype"
-                            data-icon="octicon-star"
-                            data-size="large"
-                            data-show-count="true"
-                            aria-label="Star codotype/codotype on GitHub"
-                            className="github-button"
-                        >
-                            Star
-                        </a>
+                        <GitHubStar />
                     </div>
                 </div>
 

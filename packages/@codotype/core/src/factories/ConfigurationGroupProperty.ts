@@ -4,7 +4,7 @@ import {
   DropdownOption,
   OptionType,
   OptionValue,
-  PropertyLayoutVariant,
+  PropertyLayoutVariant
 } from "../configuration-option-types";
 import { PropertyFilter } from "../property-filter";
 import { PropertyValidation } from "../property-validation";
@@ -43,7 +43,7 @@ export class ConfigurationGroupPropertyBuilder
   required: boolean = false; // TODO - remove this, handled by validations
   enabled: boolean = true;
   allowDisable: boolean = false; // QUESTION - should this be true?
-  // layoutVariant?: PropertyLayoutVariant;
+  layoutVariant: PropertyLayoutVariant;
   properties: ConfigurationGroupProperty[] = [];
   dropdownOptions: DropdownOption[] = [];
   filters: PropertyFilter[] = [];
@@ -62,6 +62,8 @@ export class ConfigurationGroupPropertyBuilder
     this.required = params.required || this.required;
     this.enabled = params.enabled || this.enabled;
     this.allowDisable = params.allowDisable || this.allowDisable;
+    this.layoutVariant =
+      params.layoutVariant || PropertyLayoutVariant.CARD_COL_12;
     this.properties = params.properties || this.properties;
     this.dropdownOptions = params.dropdownOptions || this.dropdownOptions;
     this.filters = params.filters || this.filters;

@@ -19,7 +19,7 @@ interface SortableListHeaderProps {
 export function SortableListHeader(props: SortableListHeaderProps) {
     const { tooltip = "" } = props;
     return (
-        <div className="card-header bg-light p-2 d-flex align-items-center justify-content-between">
+        <div className="card-header p-2 d-flex align-items-center justify-content-between">
             <div className="d-flex align-items-center">
                 <OverlayTrigger
                     placement="bottom"
@@ -36,9 +36,7 @@ export function SortableListHeader(props: SortableListHeaderProps) {
                         <FontAwesomeIcon icon={faPlus} />
                     </button>
                 </OverlayTrigger>
-                <strong className="d-block text-muted mb-0 ml-2">
-                    {props.label}
-                </strong>
+                <strong className="d-block mb-0 ml-2">{props.label}</strong>
             </div>
         </div>
     );

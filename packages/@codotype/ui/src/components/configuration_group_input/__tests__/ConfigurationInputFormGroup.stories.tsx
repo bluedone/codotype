@@ -50,6 +50,90 @@ const stories: Array<[string, ConfigurationGroupProperty, OptionValue]> = [
     ["number", ComponentBuilderConfigurationGroupPropertySingleNumber, 10],
     ["string", ComponentBuilderConfigurationGroupPropertySingleText, "foobar"],
     ["boolean", twitterApiOption, true],
+    // PropertyLayoutVariant Stories
+    [
+        "PropertyLayoutVariant.COL_3",
+        {
+            ...ComponentBuilderConfigurationGroupPropertySingleText,
+            layoutVariant: PropertyLayoutVariant.COL_3,
+        },
+        "foobar",
+    ],
+    [
+        "PropertyLayoutVariant.CARD_COL_3",
+        {
+            ...ComponentBuilderConfigurationGroupPropertySingleText,
+            layoutVariant: PropertyLayoutVariant.CARD_COL_3,
+        },
+        "foobar",
+    ],
+    [
+        "PropertyLayoutVariant.COL_4",
+        {
+            ...ComponentBuilderConfigurationGroupPropertySingleText,
+            layoutVariant: PropertyLayoutVariant.COL_4,
+        },
+        "foobar",
+    ],
+    [
+        "PropertyLayoutVariant.CARD_COL_4",
+        {
+            ...ComponentBuilderConfigurationGroupPropertySingleText,
+            layoutVariant: PropertyLayoutVariant.CARD_COL_4,
+        },
+        "foobar",
+    ],
+
+    [
+        "PropertyLayoutVariant.COL_6",
+        {
+            ...ComponentBuilderConfigurationGroupPropertySingleText,
+            layoutVariant: PropertyLayoutVariant.COL_6,
+        },
+        "foobar",
+    ],
+    [
+        "PropertyLayoutVariant.CARD_COL_6",
+        {
+            ...ComponentBuilderConfigurationGroupPropertySingleText,
+            layoutVariant: PropertyLayoutVariant.CARD_COL_6,
+        },
+        "foobar",
+    ],
+
+    [
+        "PropertyLayoutVariant.COL_8",
+        {
+            ...ComponentBuilderConfigurationGroupPropertySingleText,
+            layoutVariant: PropertyLayoutVariant.COL_8,
+        },
+        "foobar",
+    ],
+    [
+        "PropertyLayoutVariant.CARD_COL_8",
+        {
+            ...ComponentBuilderConfigurationGroupPropertySingleText,
+            layoutVariant: PropertyLayoutVariant.CARD_COL_8,
+        },
+        "foobar",
+    ],
+
+    [
+        "PropertyLayoutVariant.COL_12",
+        {
+            ...ComponentBuilderConfigurationGroupPropertySingleText,
+            layoutVariant: PropertyLayoutVariant.COL_12,
+        },
+        "foobar",
+    ],
+    [
+        "PropertyLayoutVariant.CARD_COL_12",
+        {
+            ...ComponentBuilderConfigurationGroupPropertySingleText,
+            layoutVariant: PropertyLayoutVariant.CARD_COL_12,
+        },
+        "foobar",
+    ],
 ];
 
 const storyCollection = storiesOf(
@@ -71,7 +155,6 @@ stories.forEach(story => {
         return (
             <Story>
                 <ConfigurationInputFormGroup
-                    card
                     property={property}
                     enabled={enabled}
                     onChangeEnabled={(updatedEnabled: boolean) => {

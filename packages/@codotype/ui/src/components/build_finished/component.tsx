@@ -20,7 +20,10 @@ export function BuildFinished(props: {
     return (
         <div className="row d-flex align-items-center h-100 justify-content-center">
             <div className="col-lg-8">
-                <div className="card card-body shadow-sm">
+                <div
+                    className="card card-body shadow-sm"
+                    style={{ minHeight: "10rem;" }}
+                >
                     {/* Header */}
                     <div className="row">
                         <div className="col-lg-12 text-center">

@@ -1,13 +1,66 @@
 import * as React from "react";
-import { OptionType, ConfigurationGroupProperty } from "@codotype/core";
+import {
+    OptionType,
+    ConfigurationGroupProperty,
+    PropertyLayoutVariant,
+} from "@codotype/core";
 import classnames from "classnames";
 import { DocumentationModal } from "../DocumentationModal";
 
 // // // //
 
+/**
+ * Gets the column span for a specific PropertyLayoutVariant
+ * @param layoutVariant
+ */
+function getColSpan(layoutVariant: PropertyLayoutVariant): number {
+    if (
+        [
+            PropertyLayoutVariant.CARD_COL_12,
+            PropertyLayoutVariant.COL_12,
+        ].includes(layoutVariant)
+    ) {
+        return 12;
+    }
+    if (
+        [
+            PropertyLayoutVariant.CARD_COL_8,
+            PropertyLayoutVariant.COL_8,
+        ].includes(layoutVariant)
+    ) {
+        return 8;
+    }
+    if (
+        [
+            PropertyLayoutVariant.CARD_COL_6,
+            PropertyLayoutVariant.COL_6,
+        ].includes(layoutVariant)
+    ) {
+        return 6;
+    }
+    if (
+        [
+            PropertyLayoutVariant.CARD_COL_4,
+            PropertyLayoutVariant.COL_4,
+        ].includes(layoutVariant)
+    ) {
+        return 4;
+    }
+    if (
+        [
+            PropertyLayoutVariant.CARD_COL_3,
+            PropertyLayoutVariant.COL_3,
+        ].includes(layoutVariant)
+    ) {
+        return 3;
+    }
+    return 12; // Default
+}
+
+// // // //
+
 interface ConfigurationInputFormGroupProps {
     property: ConfigurationGroupProperty;
-    card?: boolean;
     className?: string;
     enabled?: boolean;
     onChangeEnabled?: (updatedEnabled: boolean) => void;
@@ -21,6 +74,20 @@ export function ConfigurationInputFormGroup(
     const { enabled = property.enabled } = props;
 
     const renderDocumentationModal: boolean = property.documentation !== "";
+
+    const { layoutVariant = PropertyLayoutVariant.CARD_COL_12 } = property;
+
+    // Handle rendering the property inside a card
+    const renderInCard: boolean = [
+        PropertyLayoutVariant.CARD_COL_3,
+        PropertyLayoutVariant.CARD_COL_4,
+        PropertyLayoutVariant.CARD_COL_6,
+        PropertyLayoutVariant.CARD_COL_8,
+        PropertyLayoutVariant.CARD_COL_12,
+    ].includes(layoutVariant);
+
+    // Handle column span
+    const colSpan: number = getColSpan(layoutVariant);
 
     // Defines checkbox to enable/disable
     const toggleEnabledCheckbox = (
@@ -76,7 +143,7 @@ export function ConfigurationInputFormGroup(
 
     const formGroup = (
         <div
-            className={classnames("form-group mb-0", {
+            className={classnames("form-group", {
                 [className]: className !== "",
             })}
         >
@@ -110,7 +177,7 @@ export function ConfigurationInputFormGroup(
 
     const disabledFormGroup = (
         <div
-            className={classnames("form-group mb-0", {
+            className={classnames("form-group", {
                 [className]: className !== "",
             })}
         >
@@ -137,34 +204,28 @@ export function ConfigurationInputFormGroup(
     );
 
     // Handle property.allowDisable
-    if (property.allowDisable && !enabled && !props.card) {
-        return disabledFormGroup;
+    if (property.allowDisable && !enabled && !renderInCard) {
+        return <div className={`col-lg-${colSpan}`}>{disabledFormGroup}</div>;
     }
-    if (property.allowDisable && !enabled && props.card) {
+    if (property.allowDisable && !enabled && renderInCard) {
         return (
-            <div className="row">
-                <div className="col-lg-12">
-                    <div className="card shadow-sm my-2 py-3 px-3">
-                        {disabledFormGroup}
-                    </div>
+            <div className={`col-lg-${colSpan}`}>
+                <div className="card shadow-sm my-2 py-3 px-3">
+                    {disabledFormGroup}
                 </div>
             </div>
         );
     }
 
-    // Return standard if NOT props.card
-    // TODO - replace this prop
-    // TODO - handle `property.layoutVariant` => PropertyLayoutVariant
-    if (!props.card) {
-        return formGroup;
+    // Return standard if NOT renderInCard
+    if (!renderInCard) {
+        return <div className={`col-lg-${colSpan}`}>{formGroup}</div>;
     }
 
-    // Handle props.card
+    // Handle renderInCard
     return (
-        <div className="row">
-            <div className="col-lg-12">
-                <div className="card shadow-sm my-2 py-3 px-3">{formGroup}</div>
-            </div>
+        <div className={`col-lg-${colSpan}`}>
+            <div className="card shadow-sm my-2 py-3 px-3">{formGroup}</div>
         </div>
     );
 }

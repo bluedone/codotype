@@ -35,7 +35,7 @@ export function validateAttribute(params: {
         attributeCollection.some(
             a =>
                 a.identifiers.label === attributeInput.identifiers.label &&
-                a.id !== attributeInput.id, // TODO - add test to check a.id against attributeInput.id
+                a.id !== attributeInput.id,
         )
     ) {
         errors.push(ATTRIBUTE_ERROR_MESSAGE.duplicateLabel);

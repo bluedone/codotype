@@ -33,9 +33,12 @@ export function LoadingBuild(props: { quote?: [string, string] }) {
     const quoteAuthor = quote[1];
 
     return (
-        <div className="h-100 d-flex flex-row justify-content-center align-items-center">
-            <div className="col-sm-12 col-md-8 col-lg-6">
-                <div className="card card-body text-center shadow-sm">
+        <div className="row d-flex align-items-center h-100 justify-content-center">
+            <div className="col-lg-8">
+                <div
+                    className="card card-body text-center shadow-sm"
+                    style={{ minHeight: "10rem;" }}
+                >
                     <h3>
                         codotype{" "}
                         <span

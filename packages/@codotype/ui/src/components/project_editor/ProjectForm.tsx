@@ -1,6 +1,6 @@
 import * as React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLightbulb } from "@fortawesome/free-regular-svg-icons";
+import { faLightbulb, faLaugh } from "@fortawesome/free-regular-svg-icons";
 
 // // // //
 
@@ -15,7 +15,7 @@ export function ProjectForm(props: {
     return (
         <div className="row align-items-center justify-content-center">
             <div className="col-sm-12">
-                <p className="small mt-2 mb-3 text-muted">
+                <p className="mt-2 mb-3 text-muted">
                     <span className="text-success">Project Name</span> must be{" "}
                     <strong>alphabetic</strong> - no numbers or symbols, but
                     whitespace is allowed. The input field will enforce proper
@@ -38,16 +38,16 @@ export function ProjectForm(props: {
                 />
 
                 {/* <small className="text-muted">Identifier: {{ identifier || 'project_name'}}</small> */}
-                <small className="text-muted">Identifier: 'project_name'</small>
+                {/* <small className="text-muted">Identifier: 'project_name'</small> */}
 
-                <p className="small mt-2 text-muted">
+                <p className="mt-3 text-muted">
                     <strong>Codotype</strong> uses the{" "}
                     <span className="text-success">Project Name</span> for
                     naming things like <strong>files</strong>,{" "}
                     <strong>folders</strong>, <strong>namespaces</strong>, and{" "}
                     <strong>databases</strong>. No need to be picky, you can
                     rename your Project whenever you like{" "}
-                    <i className="far fa-laugh" />
+                    <FontAwesomeIcon icon={faLaugh} />
                 </p>
             </div>
         </div>

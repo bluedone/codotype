@@ -1,15 +1,22 @@
-import { Attribute, Datatype, buildTokenCasing, testState } from "@codotype/core";
+import {
+    Attribute,
+    Datatype,
+    buildTokenCasing,
+    testState,
+} from "@codotype/core";
 const { emailAttribute } = testState;
 
 // // // //
 
 export const attributeExample01: Attribute = {
     ...emailAttribute,
+    id: "1",
     identifiers: buildTokenCasing("Name"),
 };
 
 export const attributeExample02: Attribute = {
     ...emailAttribute,
+    id: "2",
     identifiers: buildTokenCasing("Email"),
 };
 
