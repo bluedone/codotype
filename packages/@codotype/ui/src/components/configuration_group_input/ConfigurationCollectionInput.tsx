@@ -124,9 +124,6 @@ export function ConfigurationCollectionInput(
         props.value,
     );
 
-    console.log("VALUE");
-    console.log(props.value);
-
     // Invokes props.onChange when collectionValue changes
     React.useEffect(() => {
         props.onChange(collectionValue);
@@ -294,11 +291,6 @@ export function ConfigurationCollectionInput(
                                 }}
                             />
                         )}
-
-                        {editCollectionItem === null &&
-                            newCollectionItem === null && (
-                                <p>Render Documentation Here</p>
-                            )}
                     </div>
                     {/* <pre>{JSON.stringify(props.configurationGroup, null, 4)}</pre> */}
                 </div>
