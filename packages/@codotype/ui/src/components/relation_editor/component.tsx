@@ -223,10 +223,10 @@ export function RelationEditor(props: RelationEditorProps) {
                                                             const relation:
                                                                 | Relation
                                                                 | undefined = props.relations.find(
-                                                                    r =>
-                                                                        r.id ===
-                                                                        relationToBeEdited.sourceRelationId,
-                                                                );
+                                                                r =>
+                                                                    r.id ===
+                                                                    relationToBeEdited.sourceRelationId,
+                                                            );
                                                             if (
                                                                 relation ===
                                                                 undefined
@@ -243,10 +243,10 @@ export function RelationEditor(props: RelationEditorProps) {
                                                             const relation:
                                                                 | Relation
                                                                 | undefined = props.relations.find(
-                                                                    r =>
-                                                                        r.id ===
-                                                                        relationToDelete.sourceRelationId,
-                                                                );
+                                                                r =>
+                                                                    r.id ===
+                                                                    relationToDelete.sourceRelationId,
+                                                            );
                                                             if (
                                                                 relation ===
                                                                 undefined
