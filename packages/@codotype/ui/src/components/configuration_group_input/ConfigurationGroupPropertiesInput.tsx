@@ -6,6 +6,7 @@ import {
     OptionValue,
     OptionValueInstance,
     EMPTY_TOKEN_CASING,
+    buildTokenPluralization,
 } from "@codotype/core";
 import { ConfigurationInputChild } from "./ConfigurationInputChild";
 import { ConfigurationInputFormGroup } from "./ConfigurationInputFormGroup";
@@ -31,7 +32,7 @@ export function ConfigurationGroupPropertiesInput(props: {
         props.properties || configurationGroup.properties;
 
     return (
-        <React.Fragment>
+        <div className="row">
             {properties.map((property: ConfigurationGroupProperty) => {
                 // Handle OptionType.COLLECTION
                 if (property.type === OptionType.COLLECTION) {
@@ -54,14 +55,7 @@ export function ConfigurationGroupPropertiesInput(props: {
                             }}
                         >
                             <ConfigurationCollectionInput
-                                identifiers={{
-                                    singular: {
-                                        ...EMPTY_TOKEN_CASING,
-                                    },
-                                    plural: {
-                                        ...EMPTY_TOKEN_CASING,
-                                    },
-                                }}
+                                identifiers={buildTokenPluralization("Item")} // TODO - replace with option taken from ConfigurationGroupProperty
                                 properties={property.properties}
                                 onChange={(updatedVal: OptionValue) => {
                                     props.onChange({
@@ -82,7 +76,6 @@ export function ConfigurationGroupPropertiesInput(props: {
                         props.value[property.identifier];
                     return (
                         <ConfigurationInputFormGroup
-                            card
                             enabled={!!val.enabled}
                             property={property}
                             key={property.identifier}
@@ -125,7 +118,6 @@ export function ConfigurationGroupPropertiesInput(props: {
                 const value = props.value[property.identifier];
                 return (
                     <ConfigurationInputFormGroup
-                        card
                         enabled={!!value.enabled}
                         property={property}
                         key={property.identifier}
@@ -152,6 +144,6 @@ export function ConfigurationGroupPropertiesInput(props: {
                     </ConfigurationInputFormGroup>
                 );
             })}
-        </React.Fragment>
+        </div>
     );
 }

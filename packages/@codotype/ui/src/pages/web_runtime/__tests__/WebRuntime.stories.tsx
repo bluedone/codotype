@@ -18,11 +18,81 @@ import {
     OptionType,
     Codotype,
     GroupLayoutVariant,
+    PropertyLayoutVariant,
 } from "@codotype/core";
 import { generatorReadme } from "@src/components/markdown_renderer/__tests__/test_state";
 const { cdkGeneratorMeta, dummyGeneratorMeta } = testState;
 
 // // // //
+
+const ApiActionsProperty = new Codotype.ConfigurationGroupProperty({
+    type: OptionType.COLLECTION,
+    identifier: "api_actions_value",
+    label: "API Actions",
+    description: "Generate additional API actions",
+    defaultValue: [],
+    layoutVariant: PropertyLayoutVariant.COL_12,
+    properties: [
+        new Codotype.ConfigurationGroupProperty({
+            label: "API Scope",
+            identifier: "scope",
+            description:
+                "Whether this route is scoped to the Collection or a single Model",
+            type: OptionType.DROPDOWN,
+            layoutVariant: PropertyLayoutVariant.COL_6,
+            defaultValue: "COLLECTION",
+            dropdownOptions: [
+                { value: "COLLECTION", label: "Collection" },
+                { value: "MODEL", label: "Model" },
+            ],
+        }),
+        new Codotype.ConfigurationGroupProperty({
+            label: "API Verb",
+            identifier: "verb",
+            description: "RETS API VERB",
+            type: OptionType.DROPDOWN,
+            layoutVariant: PropertyLayoutVariant.COL_6,
+            defaultValue: "GET",
+            dropdownOptions: [
+                { value: "GET", label: "GET" },
+                { value: "POST", label: "POST" },
+                { value: "PUT", label: "PUT" },
+                {
+                    value: "DELETE",
+                    label: "DELETE",
+                },
+            ],
+        }),
+        new Codotype.ConfigurationGroupProperty({
+            label: "API Route",
+            identifier: "route",
+            description: "Route for the API Action",
+            defaultValue: "verify",
+            type: OptionType.STRING,
+            layoutVariant: PropertyLayoutVariant.COL_6,
+        }),
+        new Codotype.ConfigurationGroupProperty({
+            label: "Function Name",
+            identifier: "functionName",
+            description: "Name of this function in the Express.js controller",
+            defaultValue: "verify",
+            type: OptionType.STRING,
+            layoutVariant: PropertyLayoutVariant.COL_6,
+        }),
+    ],
+});
+
+const NestedCollectionProperty = {
+    ...ApiActionsProperty,
+    identifier: "nested_api_actions",
+    properties: [
+        ...ApiActionsProperty.properties,
+        {
+            ...ApiActionsProperty,
+            layoutVariant: PropertyLayoutVariant.CARD_COL_12,
+        },
+    ],
+};
 
 const stories: [string, GeneratorMeta][] = [
     ["w/ schemas", dummyGeneratorMeta],
@@ -98,40 +168,13 @@ const stories: [string, GeneratorMeta][] = [
                     ...testState.SideBySideConfigurationGroup,
                     label: "API Actions",
                     identifier: "api_actions",
-                    properties: [
-                        new Codotype.ConfigurationGroupProperty({
-                            type: OptionType.COLLECTION,
-                            identifier: "api_actions_value",
-                            label: "API Actions",
-                            description: "Generate additional API actions",
-                            defaultValue: [],
-                            properties: [
-                                new Codotype.ConfigurationGroupProperty({
-                                    label: "API Verb",
-                                    identifier: "verb",
-                                    description: "RETS API VERB",
-                                    type: OptionType.DROPDOWN,
-                                    defaultValue: "GET",
-                                    dropdownOptions: [
-                                        { value: "GET", label: "GET" },
-                                        { value: "POST", label: "POST" },
-                                        { value: "PUT", label: "PUT" },
-                                        {
-                                            value: "DELETE",
-                                            label: "DELETE",
-                                        },
-                                    ],
-                                }),
-                                new Codotype.ConfigurationGroupProperty({
-                                    label: "API Route",
-                                    identifier: "route",
-                                    description: "Route for the API Action",
-                                    type: OptionType.STRING,
-                                    defaultValue: "verify",
-                                }),
-                            ],
-                        }),
-                    ],
+                    properties: [ApiActionsProperty],
+                },
+                {
+                    ...testState.SideBySideConfigurationGroup,
+                    label: "Nested API Actions",
+                    identifier: "nested_api_actions",
+                    properties: [NestedCollectionProperty],
                 },
             ],
             id: "chrome_extension_generator_05", // unique ID for the generator
@@ -173,40 +216,7 @@ const stories: [string, GeneratorMeta][] = [
                         documentation:
                             "This is documentation for the API Actions configuration group",
                         layoutVariant: GroupLayoutVariant.LIST,
-                        properties: [
-                            new Codotype.ConfigurationGroupProperty({
-                                type: OptionType.COLLECTION,
-                                identifier: "api_actions_value",
-                                label: "API Actions",
-                                description: "Generate additional API actions",
-                                defaultValue: [],
-                                properties: [
-                                    new Codotype.ConfigurationGroupProperty({
-                                        label: "API Verb",
-                                        identifier: "verb",
-                                        description: "RETS API VERB",
-                                        type: OptionType.DROPDOWN,
-                                        defaultValue: "GET",
-                                        dropdownOptions: [
-                                            { value: "GET", label: "GET" },
-                                            { value: "POST", label: "POST" },
-                                            { value: "PUT", label: "PUT" },
-                                            {
-                                                value: "DELETE",
-                                                label: "DELETE",
-                                            },
-                                        ],
-                                    }),
-                                    new Codotype.ConfigurationGroupProperty({
-                                        label: "API Route",
-                                        identifier: "route",
-                                        description: "Route for the API Action",
-                                        type: OptionType.STRING,
-                                        defaultValue: "verify",
-                                    }),
-                                ],
-                            }),
-                        ],
+                        properties: [ApiActionsProperty],
                     }),
                     new Codotype.ConfigurationGroup({
                         label: "GraphQL API",
@@ -231,38 +241,7 @@ const stories: [string, GeneratorMeta][] = [
                                 defaultValue: "",
                                 type: OptionType.STRING,
                             }),
-                            new Codotype.ConfigurationGroupProperty({
-                                type: OptionType.COLLECTION,
-                                identifier: "api_actions_value",
-                                label: "API Actions",
-                                description: "Generate additional API actions",
-                                defaultValue: [],
-                                properties: [
-                                    new Codotype.ConfigurationGroupProperty({
-                                        label: "API Verb",
-                                        identifier: "verb",
-                                        description: "RETS API VERB",
-                                        type: OptionType.DROPDOWN,
-                                        defaultValue: "GET",
-                                        dropdownOptions: [
-                                            { value: "GET", label: "GET" },
-                                            { value: "POST", label: "POST" },
-                                            { value: "PUT", label: "PUT" },
-                                            {
-                                                value: "DELETE",
-                                                label: "DELETE",
-                                            },
-                                        ],
-                                    }),
-                                    new Codotype.ConfigurationGroupProperty({
-                                        label: "API Route",
-                                        identifier: "route",
-                                        description: "Route for the API Action",
-                                        type: OptionType.STRING,
-                                        defaultValue: "verify",
-                                    }),
-                                ],
-                            }),
+                            ApiActionsProperty,
                         ],
                     }),
                 ],

@@ -1,18 +1,15 @@
 import * as React from "react";
 import {
-    OptionType,
     OptionValue,
-    OptionValueInstance,
     ConfigurationGroupProperty,
     TokenPluralization,
     buildConfigurationGroupPropertyValue,
     makeUniqueId,
 } from "@codotype/core";
 import classnames from "classnames";
-import { ConfigurationInputChild } from "./ConfigurationInputChild";
-import { ConfigurationInputFormGroup } from "./ConfigurationInputFormGroup";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
+import { ConfigurationGroupPropertiesInput } from "./ConfigurationGroupPropertiesInput";
 
 // // // //
 
@@ -44,40 +41,16 @@ function CollectionItemForm(props: {
 
     return (
         <div className="card card-body">
-            {props.properties.map((property: ConfigurationGroupProperty) => {
-                // TODO - handle nested instance + collection
-                return (
-                    <ConfigurationInputFormGroup
-                        // card
-                        enabled
-                        onChangeEnabled={(updatedEnabled: boolean) => {
-                            const updatedPropertyValue: OptionValue =
-                                props.value[property.identifier];
-                            // @ts-ignore
-                            updatedPropertyValue.enabled = updatedEnabled;
-                            const updatedValue: CollectionItem = {
-                                ...props.value,
-                                [property.identifier]: updatedPropertyValue,
-                            };
-                            setFormValues(updatedValue);
-                        }}
-                        property={property}
-                        className="mt-3"
-                    >
-                        <ConfigurationInputChild
-                            value={formValues[property.identifier]}
-                            property={property}
-                            onChange={(updatedValue: OptionValue) => {
-                                setFormValues({
-                                    ...formValues,
-                                    [property.identifier]: updatedValue,
-                                });
-                            }}
-                        />
-                        {/* <pre>{JSON.stringify(formValues, null, 4)}</pre> */}
-                    </ConfigurationInputFormGroup>
-                );
-            })}
+            <ConfigurationGroupPropertiesInput
+                properties={props.properties}
+                onChange={updatedValue => {
+                    setFormValues({
+                        ...formValues,
+                        ...updatedValue,
+                    });
+                }}
+                value={formValues}
+            />
 
             <hr />
             <div className="d-flex justify-content-end">
