@@ -3,15 +3,45 @@ import GitHubButton from "react-github-btn";
 
 // // // //
 
-export function GitHubStar() {
+// Doc: https://buttons.github.io/
+export function GitHubStar(props: {
+    href?: string;
+    label?: string;
+    size?: "large";
+    children?: React.ReactNode;
+}) {
+    const {
+        children = "Star",
+        href = "https://github.com/codotype/codotype",
+        label = "Star Codotype on GitHub",
+        size = "large",
+    } = props;
+
     return (
         <GitHubButton
-            href="https://github.com/codotype/codotype"
+            href={href}
+            data-size={size}
             data-icon="octicon-star"
             data-show-count={true}
-            aria-label="Star Codotype on GitHub"
+            aria-label={label}
         >
-            Star
+            {children}
+        </GitHubButton>
+    );
+}
+
+// // // //
+
+export function GitHubFollow() {
+    return (
+        <GitHubButton
+            href={"https://github.com/aeksco"}
+            data-size={"large"}
+            data-icon="octicon-follow"
+            data-show-count={true}
+            aria-label={"Follow @aeksco on GitHub"}
+        >
+            Follow
         </GitHubButton>
     );
 }
