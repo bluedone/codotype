@@ -14,6 +14,8 @@ export * from "./reference";
 export * from "./uuid";
 export * from "./util";
 export * from "./codotype";
+export * from "./property-filter";
+export * from "./property-validation";
 
 // Exports test_state
 export { testState } from "./__tests__/test_state";
