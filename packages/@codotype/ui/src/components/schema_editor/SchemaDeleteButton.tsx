@@ -112,7 +112,7 @@ export function SchemaDeleteButton(props: {
                     props.onClick();
                 }}
             >
-                <FontAwesomeIcon className="ml-5-px" icon={faTrashAlt} />
+                <FontAwesomeIcon className="ml-1" icon={faTrashAlt} />
             </StyledButton>
         </OverlayTrigger>
     );

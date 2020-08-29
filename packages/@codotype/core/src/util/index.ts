@@ -13,3 +13,5 @@ export * from "./makeKebabCase";
 export * from "./buildTokenCasing";
 export * from "./buildTokenPluralization";
 export * from "./schemaRenderer";
+export * from "./applyNumberPropertyFilters";
+export * from "./applyStringPropertyFilters";

@@ -1,3 +1,7 @@
+### 0.8.0-canary.3
+
+- Export `PropertyFilter` + `PropertyValidation` interfaces + enums
+
 ### 0.8.0-canary.2
 
 - Added values to `PropertyLayoutVariant` enum

@@ -4,6 +4,8 @@ import {
     OptionValue,
     DropdownOption,
     ConfigurationGroupProperty,
+    applyStringPropertyFilters,
+    applyNumberPropertyFilters,
 } from "@codotype/core";
 import Switch from "react-switch";
 
@@ -46,10 +48,26 @@ export function ConfigurationInputChild(props: ConfigurationInputChildProps) {
             <input
                 className="form-control"
                 type="text"
+                name={property.identifier}
+                required={property.required}
                 placeholder={property.label}
+                autoComplete="none"
                 value={value}
                 onChange={e => {
                     setValue(e.currentTarget.value);
+                }}
+                onBlur={e => {
+                    const value = e.currentTarget.value;
+
+                    // Applies PropertyFilters from ConfigurationGroupProperty
+                    const filteredValue: string = applyStringPropertyFilters({
+                        value,
+                        // @ts-ignore
+                        filters: property.filters,
+                    });
+
+                    // Sets value with filtered version on blur
+                    setValue(filteredValue);
                 }}
             />
         );
@@ -64,8 +82,27 @@ export function ConfigurationInputChild(props: ConfigurationInputChildProps) {
                 type="number"
                 placeholder={property.label}
                 value={value}
+                required={property.required}
                 onChange={e => {
                     setValue(e.currentTarget.value);
+                }}
+                onBlur={e => {
+                    const value = parseFloat(e.currentTarget.value);
+
+                    // Return if value is NaN for some reason
+                    if (Number.isNaN(value)) {
+                        return;
+                    }
+
+                    // Applies PropertyFilters from ConfigurationGroupProperty
+                    const filteredValue: number = applyNumberPropertyFilters({
+                        value,
+                        // @ts-ignore
+                        filters: property.filters,
+                    });
+
+                    // Sets value with filtered version on blur
+                    setValue(filteredValue);
                 }}
             />
         );

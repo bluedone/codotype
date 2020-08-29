@@ -205,6 +205,7 @@ const stories: [string, GeneratorMeta][] = [
                                 description:
                                     "Write an internal note describing this schema",
                                 defaultValue: "",
+                                layoutVariant: PropertyLayoutVariant.COL_12,
                                 type: OptionType.STRING,
                             }),
                         ],
@@ -232,6 +233,8 @@ const stories: [string, GeneratorMeta][] = [
                                 label: "Generate CRUD API",
                                 description:
                                     "Generate a CRUD API with GraphQL for this resource",
+                                layoutVariant:
+                                    PropertyLayoutVariant.CARD_COL_12,
                             }),
                             new Codotype.ConfigurationGroupProperty({
                                 label: "DynamoDB table name",
@@ -240,6 +243,8 @@ const stories: [string, GeneratorMeta][] = [
                                     "Define the name of the DynamoDB table for this",
                                 defaultValue: "",
                                 type: OptionType.STRING,
+                                layoutVariant:
+                                    PropertyLayoutVariant.CARD_COL_12,
                             }),
                             ApiActionsProperty,
                         ],
