@@ -75,7 +75,6 @@ export function ConfigurationInputChild(props: ConfigurationInputChildProps) {
 
     // Handle OptionType.NUMBER
     if (property.type === OptionType.NUMBER) {
-        // TODO - add INTEGER
         return (
             <input
                 className="form-control"
