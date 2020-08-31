@@ -3,14 +3,8 @@ import { PropertyValidation } from "./property-validation";
 
 // // // //
 
-export enum ConfigurationOptionsType {
-  STRING_SELECT = "STRING_SELECT"
-}
-
-// // // //
-
 // TODO - what other types need to be supported here?
-// RADIO_GROUP (nice, but not necessary)
+// RADIO_GROUP (nice, but not necessary - use DROPDOWN)
 // CHECKBOXES - nice, but functionally the same as a MULTI_DROPDOWN
 // DATE
 // TIME
@@ -92,7 +86,7 @@ export interface DropdownOption {
 // QUESTION - how are we storing the ID of the associated COLLECTION property?
 //          - Should probably be a special object in `defaultValue`:
 //          - { enabled: boolean; value: { collectionSource: UUID, collectionValue: UUID } }
-// TODO - build a constructor for this! Too much manual work
+// TODO - add "unique" prop (only applied inside of OptionType.COLLECTION)
 export interface ConfigurationGroupProperty {
   label: string;
   identifier: string;
