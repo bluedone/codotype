@@ -1,3 +1,8 @@
+### v0.8.0-canary.35
+
+-   Updated `@codotype/util` to `0.8.0-canary.5`
+-   Added `DataPreviewRenderer` component - implemented in `ConfigurationCollectionInput`
+
 ### v0.8.0-canary.34
 
 -   Updated `ConfigurationInputChild` to implement `applyStringPropertyFilter` + `applyNumberPropertyFilter` in `onBlur` event

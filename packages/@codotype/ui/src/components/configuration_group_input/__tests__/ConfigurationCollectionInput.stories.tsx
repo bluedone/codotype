@@ -2,16 +2,18 @@ import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { ConfigurationCollectionInput } from "../ConfigurationCollectionInput";
 import {
-    OptionValueInstance,
     testState,
     ConfigurationGroup,
     OptionValue,
-    buildConfigurationGroupValue,
     buildConfigurationGroupPropertyValue,
     buildTokenPluralization,
     Codotype,
     OptionType,
     PropertyLayoutVariant,
+    StringValueFilter,
+    DataPreviewLayoutVariant,
+    DataPreviewActionType,
+    DataPreviewConstraintType,
 } from "@codotype/core";
 const { LambdaBuilderConfigurationGroup } = testState;
 import { Story } from "@src/components/dev";
@@ -31,6 +33,57 @@ const ApiActionConfigurationGroup: ConfigurationGroup = new Codotype.Configurati
                 label: "Actions",
                 identifier: "actions",
                 type: OptionType.COLLECTION,
+                dataPreview: {
+                    rules: [
+                        {
+                            constraint: {
+                                dataProperty: "function_name",
+                                type: DataPreviewConstraintType.equals,
+                                value: "",
+                            },
+                            action: {
+                                type: DataPreviewActionType.literal,
+                                template: "",
+                            },
+                        },
+                        {
+                            constraint: {
+                                dataProperty: "route",
+                                type: DataPreviewConstraintType.equals,
+                                value: "",
+                            },
+                            action: {
+                                type: DataPreviewActionType.literal,
+                                template: "",
+                            },
+                        },
+                        {
+                            constraint: {
+                                dataProperty: "scope",
+                                type: DataPreviewConstraintType.equals,
+                                value: "COLLECTION",
+                            },
+                            action: {
+                                type: DataPreviewActionType.stringTemplate,
+                                template:
+                                    "{{data.verb}} /api/schema-scope/{{data.route}} -> {{data.function_name}}",
+                            },
+                        },
+                        {
+                            constraint: {
+                                dataProperty: "scope",
+                                type: DataPreviewConstraintType.equals,
+                                value: "MODEL",
+                            },
+                            action: {
+                                type: DataPreviewActionType.stringTemplate,
+                                template:
+                                    "{{data.verb}} /api/schema-scope/:id/{{data.route}} -> {{data.function_name}}",
+                            },
+                        },
+                    ],
+                    variant: DataPreviewLayoutVariant.CODE_DARK,
+                },
                 properties: [
                     new Codotype.ConfigurationGroupProperty({
                         label: "Verb",
@@ -53,6 +106,11 @@ const ApiActionConfigurationGroup: ConfigurationGroup = new Codotype.Configurati
                         defaultValue: "verify",
                         type: OptionType.STRING,
                         layoutVariant: PropertyLayoutVariant.COL_6,
+                        filters: [
+                            StringValueFilter.nonumbers,
+                            StringValueFilter.trimwhitespace,
+                            StringValueFilter.removewhitespace,
+                        ],
                     }),
                     new Codotype.ConfigurationGroupProperty({
                         label: "Function Name",
@@ -61,6 +119,13 @@ const ApiActionConfigurationGroup: ConfigurationGroup = new Codotype.Configurati
                         defaultValue: "verify",
                         layoutVariant: PropertyLayoutVariant.COL_6,
                         type: OptionType.STRING,
+                        filters: [
+                            StringValueFilter.camelcase,
+                            StringValueFilter.nonumbers,
+                            StringValueFilter.nosymbols,
+                            StringValueFilter.trimwhitespace,
+                            StringValueFilter.removewhitespace,
+                        ],
                     }),
                     new Codotype.ConfigurationGroupProperty({
                         label: "Scope",
@@ -119,6 +184,7 @@ stories.forEach(story => {
                     <ConfigurationCollectionInput
                         identifiers={buildTokenPluralization("Lambda")}
                         properties={story[1].properties[0].properties}
+                        dataPreview={story[1].properties[0].dataPreview}
                         value={value}
                         onChange={(updatedVal: OptionValue) => {
                             setValue(updatedVal);
