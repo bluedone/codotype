@@ -543,6 +543,7 @@ export const cdkGeneratorMeta: GeneratorMeta = {
     ComponentBuilderConfigurationGroup,
     SideBySideConfigurationGroup,
   ], // an array of OptionGroup objects that expose additional configuration provided by the generator
+  exampleProjects: [],
 };
 
 // // // //
@@ -670,6 +671,7 @@ export const dummyGeneratorMeta: GeneratorMeta = {
   typeTags: ["Chrome Extension", "Infrastructure"], // describes the type of codebase produced by this generator
   experience: ExperienceRecommendation.BEGINNER, // an optional tag detailing the level of experience required to use the code produced by the generator
   project_path: "output", // the name of the directory for the generator's output
+  exampleProjects: [],
   schemaEditorConfiguration: {
     configurationGroups: [],
     documentation: "",

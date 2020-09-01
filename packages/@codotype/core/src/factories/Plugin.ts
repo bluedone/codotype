@@ -5,6 +5,7 @@ import {
   GeneratorCreator,
 } from "../generator";
 import { SchemaEditorBuilder } from "./SchemaEditor";
+import { Project } from "../project";
 
 interface PluginBuilderParams {
   id: string;
@@ -22,6 +23,7 @@ interface PluginBuilderParams {
   configurationGroups?: ConfigurationGroup[];
   schemaEditorConfiguration?: SchemaEditorConfiguration;
   createdBy?: GeneratorCreator;
+  exampleProjects?: Project[];
 }
 
 export class PluginBuilder implements GeneratorMeta {
@@ -48,6 +50,7 @@ export class PluginBuilder implements GeneratorMeta {
     name: "",
     contact: {},
   };
+  exampleProjects: Project[] = [];
 
   constructor(params: PluginBuilderParams) {
     this.id = params.id;
@@ -68,5 +71,6 @@ export class PluginBuilder implements GeneratorMeta {
     this.schemaEditorConfiguration =
       params.schemaEditorConfiguration || this.schemaEditorConfiguration;
     this.createdBy = params.createdBy || this.createdBy;
+    this.exampleProjects = params.exampleProjects || this.exampleProjects;
   }
 }

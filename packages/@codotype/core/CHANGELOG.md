@@ -1,3 +1,8 @@
+### 0.8.0-canary.5
+
+- Export `DataPreview` interfaces + functions
+- Added `GeneratorMeta.exampleProjects`
+
 ### 0.8.0-canary.4
 
 - Added `DataPreview` interfaces + functions

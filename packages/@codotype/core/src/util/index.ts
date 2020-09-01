@@ -15,3 +15,4 @@ export * from "./buildTokenPluralization";
 export * from "./schemaRenderer";
 export * from "./applyNumberPropertyFilters";
 export * from "./applyStringPropertyFilters";
+export * from "./applyDataPreview";

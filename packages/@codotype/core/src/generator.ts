@@ -4,6 +4,7 @@ import { RelationType, Relation } from "./relation";
 import { Schema } from "./schema";
 import { Attribute } from "./attribute";
 import { AttributeAddon } from "./attribute-addon";
+import { Project } from "./project";
 
 export enum ExperienceRecommendation {
   BEGINNER = "beginner",
@@ -72,7 +73,5 @@ export interface GeneratorMeta {
   project_path: string; // the name of the directory for the generator's output
   schemaEditorConfiguration: SchemaEditorConfiguration;
   configurationGroups: ConfigurationGroup[]; // an array of OptionGroup objects that expose additional configuration provided by the generator
-  // All of this gets merged into configuration groups
-  // defaultConfiguration: any; // object that can provide optional defaults / examples for each ConfigurationGroup.
-  // This is where you can supply default Addon data for different ConfigurationGroups
+  exampleProjects: Project[];
 }
