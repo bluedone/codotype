@@ -1,8 +1,10 @@
 import {
   DataPreview,
-  DataPreviewAction,
+  DataPreviewActionType,
   DataPreviewConstraintType,
-  DataPreviewRule
+  DataPreviewRule,
+  DataPreviewConstraint,
+  DataPreviewAction,
 } from "../DataPreview";
 import { OptionValueInstance } from "../configuration-option-types";
 
@@ -13,24 +15,33 @@ import { OptionValueInstance } from "../configuration-option-types";
  * Returns a boolean indicating whether or not a specific DataPreviewRule should be applied against props.data
  * @param props.data - The data that's being evaluated by the DataPreviewRule
  * @param props.rule - The DataPreviewRule being evaluated
+ * TODO - write tests for this
  */
 export function shouldApplyDataPreviewRule(props: {
   data: Record<string, OptionValueInstance>;
-  rule: DataPreviewRule;
+  constraint: DataPreviewConstraint;
 }): boolean {
-  const { rule, data } = props;
+  const { constraint, data } = props;
 
-  const sourceValue: any = data[rule.sourceProperty];
+  const sourceValue: any = data[constraint.dataProperty];
 
   // Handle EQUALS
-  if (rule.operation === DataPreviewConstraintType.equals) {
-    if (sourceValue === rule.value) {
+  if (constraint.type === DataPreviewConstraintType.equals) {
+    if (sourceValue === constraint.value) {
       return true;
     }
   }
 
+  // Handle contains
+  if (
+    constraint.type === DataPreviewConstraintType.contains &&
+    typeof sourceValue === "string"
+  ) {
+    return sourceValue.includes(constraint.value);
+  }
+
   // Handle exists
-  if (rule.operation === DataPreviewConstraintType.exists) {
+  if (constraint.type === DataPreviewConstraintType.exists) {
     if (sourceValue) {
       return true;
     }
@@ -47,18 +58,18 @@ export function shouldApplyDataPreviewRule(props: {
  */
 export function applyDataPreviewRule(props: {
   data: Record<string, OptionValueInstance>;
-  rule: DataPreviewRule;
+  action: DataPreviewAction;
 }): string {
-  const { rule, data } = props;
+  const { action, data } = props;
 
   // Handle LITERAL
-  if (rule.action.type === DataPreviewAction.literal) {
-    return rule.template;
+  if (action.type === DataPreviewActionType.literal) {
+    return action.template;
   }
 
   // Handle STRING_TEMPLATE
-  if (rule.action.type === DataPreviewAction.stringTemplate) {
-    let templateString = rule.template;
+  if (action.type === DataPreviewActionType.stringTemplate) {
+    let templateString = action.template;
     let templateFragments: string[] = [];
 
     // Handle template opener
@@ -67,7 +78,7 @@ export function applyDataPreviewRule(props: {
       // Handle template closer
       if (s.includes("}}")) {
         const closeFragments = s.split("}}");
-        closeFragments.forEach(sf => {
+        closeFragments.forEach((sf) => {
           if (sf !== "") {
             templateFragments.push(sf);
           }
@@ -79,9 +90,9 @@ export function applyDataPreviewRule(props: {
 
     // TODO - annotate
     const finalFragments: string[] = [];
-    templateFragments.forEach(tf => {
+    templateFragments.forEach((tf) => {
       let finalFragment = "";
-      Object.keys(data).forEach(key => {
+      Object.keys(data).forEach((key) => {
         if (tf.includes(`data.${key}`)) {
           // TODO - handle non-string values here
           finalFragment = String(data[key]);
@@ -125,8 +136,11 @@ export function applyDataPreview(props: {
     }
 
     // Invoke applyDataPreviewRule, if constraint is met
-    if (shouldApplyDataPreviewRule({ rule, data })) {
-      dataPreviewContent = applyDataPreviewRule({ rule, data });
+    if (shouldApplyDataPreviewRule({ constraint: rule.constraint, data })) {
+      dataPreviewContent = applyDataPreviewRule({
+        action: rule.action,
+        data,
+      });
     }
   });
 

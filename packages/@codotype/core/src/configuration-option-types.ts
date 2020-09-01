@@ -1,5 +1,6 @@
 import { PropertyFilter } from "./property-filter";
 import { PropertyValidation } from "./property-validation";
+import { DataPreview } from "./DataPreview";
 
 // // // //
 
@@ -29,7 +30,7 @@ export enum OptionType {
   DROPDOWN = "DROPDOWN",
   MULTI_DROPDOWN = "MULTI_DROPDOWN",
   COLLECTION = "COLLECTION",
-  INSTANCE = "INSTANCE"
+  INSTANCE = "INSTANCE",
 }
 
 export type OptionValue =
@@ -103,6 +104,7 @@ export interface ConfigurationGroupProperty {
   dropdownOptions: DropdownOption[];
   filters: PropertyFilter[];
   validations: PropertyValidation[];
+  dataPreview: DataPreview;
 }
 
 // // // //
@@ -117,7 +119,7 @@ export enum PropertyLayoutVariant {
   CARD_COL_4 = "CARD_COL_4",
   CARD_COL_6 = "CARD_COL_6",
   CARD_COL_8 = "CARD_COL_8",
-  CARD_COL_12 = "CARD_COL_12"
+  CARD_COL_12 = "CARD_COL_12",
   // Additional variants:
   // - inline documentation
   // - modal?
@@ -134,7 +136,7 @@ export enum SectionLayoutVariant {
   DOCS_6x6 = "DOCS_6x6",
   DETAIL_3x9 = "DETAIL_3x9",
   DETAIL_4x8 = "DETAIL_4x8",
-  DETAIL_6x6 = "DETAIL_6x6"
+  DETAIL_6x6 = "DETAIL_6x6",
 }
 
 // Defines the LayoutVariant type that's ONLY used for ConfigurationGroup
@@ -147,7 +149,7 @@ export enum GroupLayoutVariant {
   DOCS_6x6 = "DOCS_6x6",
   DETAIL_3x9 = "DETAIL_3x9",
   DETAIL_4x8 = "DETAIL_4x8",
-  DETAIL_6x6 = "DETAIL_6x6"
+  DETAIL_6x6 = "DETAIL_6x6",
 }
 
 // // // //

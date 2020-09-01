@@ -3,6 +3,10 @@
 exports[`factory works 1`] = `
 ConfigurationGroupPropertyBuilder {
   "allowDisable": false,
+  "dataPreview": Object {
+    "rules": Array [],
+    "variant": "CODE_DARK",
+  },
   "defaultValue": null,
   "description": "",
   "documentation": "",

@@ -4,10 +4,11 @@ import {
   DropdownOption,
   OptionType,
   OptionValue,
-  PropertyLayoutVariant
+  PropertyLayoutVariant,
 } from "../configuration-option-types";
 import { PropertyFilter } from "../property-filter";
 import { PropertyValidation } from "../property-validation";
+import { DataPreviewLayoutVariant, DataPreview } from "../DataPreview";
 
 // // // //
 
@@ -28,6 +29,7 @@ interface ConfigurationGroupPropertyBuilderParams {
   properties?: ConfigurationGroupProperty[];
   filters?: PropertyFilter[];
   validations?: PropertyValidation[];
+  dataPreview?: DataPreview;
 }
 
 export class ConfigurationGroupPropertyBuilder
@@ -48,6 +50,10 @@ export class ConfigurationGroupPropertyBuilder
   dropdownOptions: DropdownOption[] = [];
   filters: PropertyFilter[] = [];
   validations: PropertyValidation[] = [];
+  dataPreview: DataPreview = {
+    rules: [],
+    variant: DataPreviewLayoutVariant.CODE_DARK,
+  };
 
   constructor(params: ConfigurationGroupPropertyBuilderParams) {
     this.label = params.label;
@@ -68,5 +74,6 @@ export class ConfigurationGroupPropertyBuilder
     this.dropdownOptions = params.dropdownOptions || this.dropdownOptions;
     this.filters = params.filters || this.filters;
     this.validations = params.validations || this.validations;
+    this.dataPreview = params.dataPreview || this.dataPreview;
   }
 }

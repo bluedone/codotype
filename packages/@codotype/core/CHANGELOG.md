@@ -1,3 +1,8 @@
+### 0.8.0-canary.4
+
+- Added `DataPreview` interfaces + functions
+- Added `ConfigurationGroupProperty.dataPreview`
+
 ### 0.8.0-canary.3
 
 - Export `PropertyFilter` + `PropertyValidation` interfaces + enums
