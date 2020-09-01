@@ -1,16 +1,11 @@
 import { PropertyFilter } from "./property-filter";
 import { PropertyValidation } from "./property-validation";
-
-// // // //
-
-export enum ConfigurationOptionsType {
-  STRING_SELECT = "STRING_SELECT"
-}
+import { DataPreview } from "./DataPreview";
 
 // // // //
 
 // TODO - what other types need to be supported here?
-// RADIO_GROUP (nice, but not necessary)
+// RADIO_GROUP (nice, but not necessary - use DROPDOWN)
 // CHECKBOXES - nice, but functionally the same as a MULTI_DROPDOWN
 // DATE
 // TIME
@@ -35,7 +30,7 @@ export enum OptionType {
   DROPDOWN = "DROPDOWN",
   MULTI_DROPDOWN = "MULTI_DROPDOWN",
   COLLECTION = "COLLECTION",
-  INSTANCE = "INSTANCE"
+  INSTANCE = "INSTANCE",
 }
 
 export type OptionValue =
@@ -92,7 +87,7 @@ export interface DropdownOption {
 // QUESTION - how are we storing the ID of the associated COLLECTION property?
 //          - Should probably be a special object in `defaultValue`:
 //          - { enabled: boolean; value: { collectionSource: UUID, collectionValue: UUID } }
-// TODO - build a constructor for this! Too much manual work
+// TODO - add "unique" prop (only applied inside of OptionType.COLLECTION)
 export interface ConfigurationGroupProperty {
   label: string;
   identifier: string;
@@ -109,6 +104,7 @@ export interface ConfigurationGroupProperty {
   dropdownOptions: DropdownOption[];
   filters: PropertyFilter[];
   validations: PropertyValidation[];
+  dataPreview: DataPreview;
 }
 
 // // // //
@@ -123,7 +119,7 @@ export enum PropertyLayoutVariant {
   CARD_COL_4 = "CARD_COL_4",
   CARD_COL_6 = "CARD_COL_6",
   CARD_COL_8 = "CARD_COL_8",
-  CARD_COL_12 = "CARD_COL_12"
+  CARD_COL_12 = "CARD_COL_12",
   // Additional variants:
   // - inline documentation
   // - modal?
@@ -140,7 +136,7 @@ export enum SectionLayoutVariant {
   DOCS_6x6 = "DOCS_6x6",
   DETAIL_3x9 = "DETAIL_3x9",
   DETAIL_4x8 = "DETAIL_4x8",
-  DETAIL_6x6 = "DETAIL_6x6"
+  DETAIL_6x6 = "DETAIL_6x6",
 }
 
 // Defines the LayoutVariant type that's ONLY used for ConfigurationGroup
@@ -153,7 +149,7 @@ export enum GroupLayoutVariant {
   DOCS_6x6 = "DOCS_6x6",
   DETAIL_3x9 = "DETAIL_3x9",
   DETAIL_4x8 = "DETAIL_4x8",
-  DETAIL_6x6 = "DETAIL_6x6"
+  DETAIL_6x6 = "DETAIL_6x6",
 }
 
 // // // //

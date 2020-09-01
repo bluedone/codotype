@@ -10,6 +10,7 @@ PluginBuilder {
   },
   "description": "My Codotype Plugin description",
   "documentation": "",
+  "exampleProjects": Array [],
   "experience": "beginner",
   "homepage": "",
   "icon": "",

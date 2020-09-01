@@ -5,11 +5,13 @@ import {
     TokenPluralization,
     buildConfigurationGroupPropertyValue,
     makeUniqueId,
+    DataPreview,
 } from "@codotype/core";
 import classnames from "classnames";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 import { ConfigurationGroupPropertiesInput } from "./ConfigurationGroupPropertiesInput";
+import { DataPreviewRenderer } from "../DataPreviewRenderer";
 
 // // // //
 
@@ -23,6 +25,7 @@ interface CollectionItem {
 function CollectionItemForm(props: {
     properties: ConfigurationGroupProperty[];
     value: CollectionItem;
+    dataPreview: DataPreview;
     onSubmit: (updatedCollectionItem: CollectionItem) => void;
     onCancel: () => void;
 }) {
@@ -53,6 +56,12 @@ function CollectionItemForm(props: {
             />
 
             <hr />
+            <DataPreviewRenderer
+                data={formValues}
+                dataPreview={props.dataPreview}
+            />
+            <hr />
+
             <div className="d-flex justify-content-end">
                 <button
                     className="btn btn-success"
@@ -83,6 +92,7 @@ interface ConfigurationCollectionInputProps {
     // label: string;
     value: OptionValue;
     identifiers: TokenPluralization;
+    dataPreview: DataPreview;
     onChange: (updatedVal: OptionValue) => void;
 }
 
@@ -101,6 +111,13 @@ export function ConfigurationCollectionInput(
     React.useEffect(() => {
         props.onChange(collectionValue);
     }, [collectionValue]);
+
+    // Invokes props.onChange when collectionValue changes
+    React.useEffect(() => {
+        setNewCollectionItem(null);
+        setEditCollectionItem(null);
+        setCollectionValue(props.value);
+    }, [props.value]);
 
     // New + Edit hooks
     const [
@@ -174,11 +191,12 @@ export function ConfigurationCollectionInput(
                                                 }}
                                             >
                                                 <div className="d-flex justify-content-between">
-                                                    <pre className="bg-dark text-light rounded p-2 mb-0">
-                                                        {JSON.stringify(
-                                                            collectionItem,
-                                                        )}
-                                                    </pre>
+                                                    <DataPreviewRenderer
+                                                        data={collectionItem}
+                                                        dataPreview={
+                                                            props.dataPreview
+                                                        }
+                                                    />
                                                     <button
                                                         className="btn btn-sm btn-outline-danger"
                                                         onClick={e => {
@@ -219,6 +237,7 @@ export function ConfigurationCollectionInput(
                             <CollectionItemForm
                                 value={newCollectionItem}
                                 properties={props.properties}
+                                dataPreview={props.dataPreview}
                                 onSubmit={updatedCollectionItem => {
                                     // Updates collectionValue
                                     setCollectionValue([
@@ -242,6 +261,7 @@ export function ConfigurationCollectionInput(
                             <CollectionItemForm
                                 value={editCollectionItem}
                                 properties={props.properties}
+                                dataPreview={props.dataPreview}
                                 onSubmit={updatedCollectionItem => {
                                     // Updates collectionValue
                                     setCollectionValue(

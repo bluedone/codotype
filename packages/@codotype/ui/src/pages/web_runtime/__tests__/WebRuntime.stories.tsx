@@ -19,6 +19,10 @@ import {
     Codotype,
     GroupLayoutVariant,
     PropertyLayoutVariant,
+    StringValueFilter,
+    DataPreviewLayoutVariant,
+    DataPreviewActionType,
+    DataPreviewConstraintType,
 } from "@codotype/core";
 import { generatorReadme } from "@src/components/markdown_renderer/__tests__/test_state";
 const { cdkGeneratorMeta, dummyGeneratorMeta } = testState;
@@ -26,58 +30,114 @@ const { cdkGeneratorMeta, dummyGeneratorMeta } = testState;
 // // // //
 
 const ApiActionsProperty = new Codotype.ConfigurationGroupProperty({
+    label: "Actions",
+    identifier: "actions",
     type: OptionType.COLLECTION,
-    identifier: "api_actions_value",
-    label: "API Actions",
-    description: "Generate additional API actions",
-    defaultValue: [],
-    layoutVariant: PropertyLayoutVariant.COL_12,
+    dataPreview: {
+        rules: [
+            {
+                constraint: {
+                    dataProperty: "function_name",
+                    type: DataPreviewConstraintType.equals,
+                    value: "",
+                },
+                action: {
+                    type: DataPreviewActionType.literal,
+                    template: "",
+                },
+            },
+            {
+                constraint: {
+                    dataProperty: "route",
+                    type: DataPreviewConstraintType.equals,
+                    value: "",
+                },
+                action: {
+                    type: DataPreviewActionType.literal,
+                    template: "",
+                },
+            },
+            {
+                constraint: {
+                    dataProperty: "scope",
+                    type: DataPreviewConstraintType.equals,
+                    value: "COLLECTION",
+                },
+                action: {
+                    type: DataPreviewActionType.stringTemplate,
+                    template:
+                        "{{data.verb}} /api/schema-scope/{{data.route}} -> {{data.function_name}}",
+                },
+            },
+            {
+                constraint: {
+                    dataProperty: "scope",
+                    type: DataPreviewConstraintType.equals,
+                    value: "MODEL",
+                },
+                action: {
+                    type: DataPreviewActionType.stringTemplate,
+                    template:
+                        "{{data.verb}} /api/schema-scope/:id/{{data.route}} -> {{data.function_name}}",
+                },
+            },
+        ],
+        variant: DataPreviewLayoutVariant.CODE_DARK,
+    },
     properties: [
         new Codotype.ConfigurationGroupProperty({
-            label: "API Scope",
-            identifier: "scope",
-            description:
-                "Whether this route is scoped to the Collection or a single Model",
-            type: OptionType.DROPDOWN,
-            layoutVariant: PropertyLayoutVariant.COL_6,
-            defaultValue: "COLLECTION",
-            dropdownOptions: [
-                { value: "COLLECTION", label: "Collection" },
-                { value: "MODEL", label: "Model" },
-            ],
-        }),
-        new Codotype.ConfigurationGroupProperty({
-            label: "API Verb",
+            label: "Verb",
             identifier: "verb",
-            description: "RETS API VERB",
+            description: "Verify",
+            defaultValue: "GET",
             type: OptionType.DROPDOWN,
             layoutVariant: PropertyLayoutVariant.COL_6,
-            defaultValue: "GET",
             dropdownOptions: [
                 { value: "GET", label: "GET" },
                 { value: "POST", label: "POST" },
                 { value: "PUT", label: "PUT" },
-                {
-                    value: "DELETE",
-                    label: "DELETE",
-                },
+                { value: "DELETE", label: "DELETE" },
             ],
         }),
         new Codotype.ConfigurationGroupProperty({
-            label: "API Route",
+            label: "Route",
             identifier: "route",
-            description: "Route for the API Action",
+            description: "Route",
             defaultValue: "verify",
             type: OptionType.STRING,
             layoutVariant: PropertyLayoutVariant.COL_6,
+            filters: [
+                StringValueFilter.nonumbers,
+                StringValueFilter.trimwhitespace,
+                StringValueFilter.removewhitespace,
+            ],
         }),
         new Codotype.ConfigurationGroupProperty({
             label: "Function Name",
-            identifier: "functionName",
-            description: "Name of this function in the Express.js controller",
+            identifier: "function_name",
+            description: "function_name",
             defaultValue: "verify",
-            type: OptionType.STRING,
             layoutVariant: PropertyLayoutVariant.COL_6,
+            type: OptionType.STRING,
+            filters: [
+                StringValueFilter.camelcase,
+                StringValueFilter.nonumbers,
+                StringValueFilter.nosymbols,
+                StringValueFilter.trimwhitespace,
+                StringValueFilter.removewhitespace,
+            ],
+        }),
+        new Codotype.ConfigurationGroupProperty({
+            label: "Scope",
+            identifier: "scope",
+            description: "scope",
+            defaultValue: "COLLECTION",
+            layoutVariant: PropertyLayoutVariant.COL_6,
+            type: OptionType.DROPDOWN,
+            dropdownOptions: [
+                { value: "COLLECTION", label: "Collection" },
+                { value: "MODEL", label: "Model" },
+            ],
         }),
     ],
 });

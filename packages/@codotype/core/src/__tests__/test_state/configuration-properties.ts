@@ -3,9 +3,10 @@ import {
   GroupLayoutVariant,
   ConfigurationGroupProperty,
   PropertyLayoutVariant,
-  OptionType
+  OptionType,
 } from "../../index";
 import { syntaxHighlighting } from "./documentation";
+import { DataPreviewLayoutVariant } from "../../DataPreview";
 
 // // // //
 
@@ -24,7 +25,11 @@ export const BASE_CONFIGURATION_GROUP_PROPERTY: ConfigurationGroupProperty = {
   properties: [],
   dropdownOptions: [],
   filters: [],
-  validations: []
+  validations: [],
+  dataPreview: {
+    rules: [],
+    variant: DataPreviewLayoutVariant.CODE_DARK,
+  },
 };
 
 export const gitHubApiOption: ConfigurationGroupProperty = {
@@ -35,7 +40,7 @@ export const gitHubApiOption: ConfigurationGroupProperty = {
   description: "Create and update repositories with the GitHub API.",
   defaultValue: false,
   icon: "",
-  dropdownOptions: []
+  dropdownOptions: [],
 };
 
 export const twitterApiOption: ConfigurationGroupProperty = {
@@ -48,7 +53,7 @@ export const twitterApiOption: ConfigurationGroupProperty = {
   icon:
     "https://res.cloudinary.com/codotype/image/upload/v1558931014/product-logos/twitter-512.png",
 
-  dropdownOptions: []
+  dropdownOptions: [],
 };
 
 export const facebookApiOption: ConfigurationGroupProperty = {
@@ -62,7 +67,7 @@ export const facebookApiOption: ConfigurationGroupProperty = {
   icon:
     "https://res.cloudinary.com/codotype/image/upload/v1558930988/product-logos/facebook-icon-preview-1.png",
 
-  dropdownOptions: []
+  dropdownOptions: [],
 };
 
 export const foursquareApiOption: ConfigurationGroupProperty = {
@@ -76,7 +81,7 @@ export const foursquareApiOption: ConfigurationGroupProperty = {
   icon:
     "https://res.cloudinary.com/codotype/image/upload/v1558930927/product-logos/foursquare-512.png",
 
-  dropdownOptions: []
+  dropdownOptions: [],
 };
 
 export const instagramApiOption: ConfigurationGroupProperty = {
@@ -90,7 +95,7 @@ export const instagramApiOption: ConfigurationGroupProperty = {
   icon:
     "https://res.cloudinary.com/codotype/image/upload/v1558930904/product-logos/Instagram_AppIcon_Aug2017.png",
 
-  dropdownOptions: []
+  dropdownOptions: [],
 };
 
 export const last_fmApiOption: ConfigurationGroupProperty = {
@@ -104,7 +109,7 @@ export const last_fmApiOption: ConfigurationGroupProperty = {
   icon:
     "https://res.cloudinary.com/codotype/image/upload/v1558930875/product-logos/last_fm-512.png",
 
-  dropdownOptions: []
+  dropdownOptions: [],
 };
 
 export const linkedinApiOption: ConfigurationGroupProperty = {
@@ -118,7 +123,7 @@ export const linkedinApiOption: ConfigurationGroupProperty = {
   icon:
     "https://res.cloudinary.com/codotype/image/upload/v1558930840/product-logos/square-linkedin-512.png",
 
-  dropdownOptions: []
+  dropdownOptions: [],
 };
 
 export const steamApiOption: ConfigurationGroupProperty = {
@@ -132,7 +137,7 @@ export const steamApiOption: ConfigurationGroupProperty = {
   icon:
     "https://res.cloudinary.com/codotype/image/upload/v1558930764/product-logos/steam-logo-transparent.png",
 
-  dropdownOptions: []
+  dropdownOptions: [],
 };
 
 export const stripeApiOption: ConfigurationGroupProperty = {
@@ -146,7 +151,7 @@ export const stripeApiOption: ConfigurationGroupProperty = {
   icon:
     "https://res.cloudinary.com/codotype/image/upload/v1558930739/product-logos/twitter.png",
 
-  dropdownOptions: []
+  dropdownOptions: [],
 };
 
 export const paypalApiOption: ConfigurationGroupProperty = {
@@ -160,7 +165,7 @@ export const paypalApiOption: ConfigurationGroupProperty = {
   icon:
     "https://res.cloudinary.com/codotype/image/upload/v1558930714/product-logos/paypal-logo.png",
 
-  dropdownOptions: []
+  dropdownOptions: [],
 };
 
 export const twilioApiOption: ConfigurationGroupProperty = {
@@ -174,7 +179,7 @@ export const twilioApiOption: ConfigurationGroupProperty = {
   icon:
     "https://res.cloudinary.com/codotype/image/upload/v1558930682/product-logos/twilio.svg",
 
-  dropdownOptions: []
+  dropdownOptions: [],
 };
 
 export const tumblrApiOption: ConfigurationGroupProperty = {
@@ -188,7 +193,7 @@ export const tumblrApiOption: ConfigurationGroupProperty = {
   icon:
     "https://res.cloudinary.com/codotype/image/upload/v1558930402/product-logos/tumblr-icon-logo-png-transparent.png",
 
-  dropdownOptions: []
+  dropdownOptions: [],
 };
 
 export const web_scrapingApiOption: ConfigurationGroupProperty = {
@@ -202,7 +207,7 @@ export const web_scrapingApiOption: ConfigurationGroupProperty = {
   icon:
     "https://res.cloudinary.com/codotype/image/upload/v1558930643/product-logos/google-chrome-1326908_960_720.png",
 
-  dropdownOptions: []
+  dropdownOptions: [],
 };
 
 export const clockwork_smsApiOption: ConfigurationGroupProperty = {
@@ -216,7 +221,7 @@ export const clockwork_smsApiOption: ConfigurationGroupProperty = {
   icon:
     "https://res.cloudinary.com/codotype/image/upload/v1558930520/product-logos/clockwork-sms.png",
 
-  dropdownOptions: []
+  dropdownOptions: [],
 };
 
 export const aviaryApiOption: ConfigurationGroupProperty = {
@@ -229,7 +234,7 @@ export const aviaryApiOption: ConfigurationGroupProperty = {
   icon:
     "https://res.cloudinary.com/codotype/image/upload/v1558930486/product-logos/96px-Aviary_Logo.png",
 
-  dropdownOptions: []
+  dropdownOptions: [],
 };
 
 export const lobApiOption: ConfigurationGroupProperty = {
@@ -243,7 +248,7 @@ export const lobApiOption: ConfigurationGroupProperty = {
   icon:
     "https://res.cloudinary.com/codotype/image/upload/v1558928124/product-logos/lob-logo.png",
 
-  dropdownOptions: []
+  dropdownOptions: [],
 };
 
 export const pinterestApiOption: ConfigurationGroupProperty = {
@@ -256,7 +261,7 @@ export const pinterestApiOption: ConfigurationGroupProperty = {
   icon:
     "https://res.cloudinary.com/codotype/image/upload/v1558928786/product-logos/Pinterest-logo-circle.png",
 
-  dropdownOptions: []
+  dropdownOptions: [],
 };
 
 export const google_mapsApiOption: ConfigurationGroupProperty = {
@@ -270,7 +275,7 @@ export const google_mapsApiOption: ConfigurationGroupProperty = {
   icon:
     "https://res.cloudinary.com/codotype/image/upload/v1558928683/product-logos/1011px-GoogleMaps_logo.svg.png",
 
-  dropdownOptions: []
+  dropdownOptions: [],
 };
 
 export const chartjsApiOption: ConfigurationGroupProperty = {
@@ -284,7 +289,7 @@ export const chartjsApiOption: ConfigurationGroupProperty = {
   icon:
     "https://res.cloudinary.com/codotype/image/upload/v1558928549/product-logos/chartjs-logo.svg",
 
-  dropdownOptions: []
+  dropdownOptions: [],
 };
 
 // // // //
@@ -308,7 +313,7 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
       identifier: "componentName",
       description: "Name of the component",
       type: OptionType.STRING,
-      defaultValue: ""
+      defaultValue: "",
     },
     {
       ...BASE_CONFIGURATION_GROUP_PROPERTY,
@@ -316,7 +321,7 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
       identifier: "componentSlug",
       description: "Slug of the component",
       type: OptionType.STRING,
-      defaultValue: ""
+      defaultValue: "",
     },
     {
       ...BASE_CONFIGURATION_GROUP_PROPERTY,
@@ -334,7 +339,7 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
           description: "",
           type: OptionType.DROPDOWN,
           defaultValue: "",
-          dropdownOptions: [{ label: "String", value: "string" }]
+          dropdownOptions: [{ label: "String", value: "string" }],
         },
         {
           ...BASE_CONFIGURATION_GROUP_PROPERTY,
@@ -342,7 +347,7 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
           identifier: "name",
           description: "",
           type: OptionType.STRING,
-          defaultValue: ""
+          defaultValue: "",
         },
         {
           ...BASE_CONFIGURATION_GROUP_PROPERTY,
@@ -350,9 +355,9 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
           identifier: "desc",
           description: "",
           type: OptionType.STRING,
-          defaultValue: ""
-        }
-      ]
+          defaultValue: "",
+        },
+      ],
     },
     {
       ...BASE_CONFIGURATION_GROUP_PROPERTY,
@@ -376,12 +381,12 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
           defaultValue: "",
           dropdownOptions: [
             { value: "table", label: "Table Test" },
-            { value: "snapshot", label: "Snapshot Test" }
-          ]
-        }
-      ]
-    }
-  ]
+            { value: "snapshot", label: "Snapshot Test" },
+          ],
+        },
+      ],
+    },
+  ],
 };
 
 export const ComponentBuilderConfigurationGroupPropertySingleText: ConfigurationGroupProperty = {
@@ -395,7 +400,7 @@ export const ComponentBuilderConfigurationGroupPropertySingleText: Configuration
   icon: "",
   enabled: true,
   required: false,
-  allowDisable: false
+  allowDisable: false,
 };
 
 export const ComponentBuilderConfigurationGroupPropertySingleDropdown: ConfigurationGroupProperty = {
@@ -410,10 +415,10 @@ export const ComponentBuilderConfigurationGroupPropertySingleDropdown: Configura
   dropdownOptions: [
     {
       value: "OPTION_01",
-      label: "One"
+      label: "One",
     },
-    { value: "OPTION_02", label: "Two" }
-  ]
+    { value: "OPTION_02", label: "Two" },
+  ],
 };
 
 export const ComponentBuilderConfigurationGroupPropertySingleNumber: ConfigurationGroupProperty = {
@@ -425,7 +430,7 @@ export const ComponentBuilderConfigurationGroupPropertySingleNumber: Configurati
   type: OptionType.NUMBER,
   defaultValue: "",
   icon: "",
-  dropdownOptions: []
+  dropdownOptions: [],
 };
 
 export const ComponentBuilderConfigurationGroupPropertyWithInstance01: ConfigurationGroupProperty = {
@@ -440,7 +445,7 @@ export const ComponentBuilderConfigurationGroupPropertyWithInstance01: Configura
   required: false,
   allowDisable: true,
   dropdownOptions: [],
-  properties: [ComponentBuilderConfigurationGroupPropertySingleDropdown]
+  properties: [ComponentBuilderConfigurationGroupPropertySingleDropdown],
 };
 
 export const ComponentBuilderConfigurationGroupPropertyWithInstance: ConfigurationGroupProperty = {
@@ -468,10 +473,10 @@ export const ComponentBuilderConfigurationGroupPropertyWithInstance: Configurati
       properties: [
         ComponentBuilderConfigurationGroupPropertySingleText,
         ComponentBuilderConfigurationGroupPropertySingleDropdown,
-        ComponentBuilderConfigurationGroupPropertyWithInstance01
-      ]
-    }
-  ]
+        ComponentBuilderConfigurationGroupPropertyWithInstance01,
+      ],
+    },
+  ],
 };
 
 export const ComponentBuilderConfigurationGroup: ConfigurationGroup = {
@@ -487,9 +492,9 @@ export const ComponentBuilderConfigurationGroup: ConfigurationGroup = {
     ComponentBuilderConfigurationGroupPropertySingleText,
     ComponentBuilderConfigurationGroupPropertySingleNumber,
     ComponentBuilderConfigurationGroupPropertySingleDropdown,
-    ComponentBuilderConfigurationGroupPropertyWithInstance
+    ComponentBuilderConfigurationGroupPropertyWithInstance,
     // ComponentBuilderConfigurationGroupProperty,
-  ]
+  ],
 };
 
 export const ApiExamplesConfigurationGroup: ConfigurationGroup = {
@@ -520,8 +525,8 @@ export const ApiExamplesConfigurationGroup: ConfigurationGroup = {
     lobApiOption,
     pinterestApiOption,
     google_mapsApiOption,
-    chartjsApiOption
-  ]
+    chartjsApiOption,
+  ],
 };
 
 export const SideBySideConfigurationGroup: ConfigurationGroup = {
@@ -531,5 +536,5 @@ export const SideBySideConfigurationGroup: ConfigurationGroup = {
   layoutVariant: GroupLayoutVariant.DOCS_3x9,
   description: "Configure the server architecture of your application",
   documentation: syntaxHighlighting,
-  properties: [twitterApiOption]
+  properties: [twitterApiOption],
 };

@@ -57,6 +57,7 @@ export function ConfigurationGroupPropertiesInput(props: {
                             <ConfigurationCollectionInput
                                 identifiers={buildTokenPluralization("Item")} // TODO - replace with option taken from ConfigurationGroupProperty
                                 properties={property.properties}
+                                dataPreview={property.dataPreview}
                                 onChange={(updatedVal: OptionValue) => {
                                     props.onChange({
                                         ...props.value,

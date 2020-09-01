@@ -34,6 +34,7 @@ import {
 } from "./configuration-properties";
 import { syntaxHighlighting } from "./documentation";
 import { ATTRIBUTE_ADDON_PRIMARY_KEY } from "../../attribute-addon";
+import { DataPreviewLayoutVariant } from "../../DataPreview";
 
 // // // //
 
@@ -52,6 +53,10 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
   dropdownOptions: [],
   filters: [],
   validations: [],
+  dataPreview: {
+    rules: [],
+    variant: DataPreviewLayoutVariant.CODE_DARK,
+  },
   properties: [
     {
       label: "Component Name",
@@ -68,6 +73,10 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
       dropdownOptions: [],
       filters: [],
       validations: [],
+      dataPreview: {
+        rules: [],
+        variant: DataPreviewLayoutVariant.CODE_DARK,
+      },
     },
     {
       label: "Component Slug",
@@ -84,6 +93,10 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
       dropdownOptions: [],
       filters: [],
       validations: [],
+      dataPreview: {
+        rules: [],
+        variant: DataPreviewLayoutVariant.CODE_DARK,
+      },
     },
     {
       label: "Props",
@@ -99,6 +112,10 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
       allowDisable: false,
       filters: [],
       validations: [],
+      dataPreview: {
+        rules: [],
+        variant: DataPreviewLayoutVariant.CODE_DARK,
+      },
       properties: [
         {
           label: "Type",
@@ -115,6 +132,10 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
           properties: [],
           filters: [],
           validations: [],
+          dataPreview: {
+            rules: [],
+            variant: DataPreviewLayoutVariant.CODE_DARK,
+          },
         },
         {
           label: "Name",
@@ -131,6 +152,10 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
           properties: [],
           filters: [],
           validations: [],
+          dataPreview: {
+            rules: [],
+            variant: DataPreviewLayoutVariant.CODE_DARK,
+          },
         },
         {
           label: "Desc",
@@ -147,6 +172,10 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
           properties: [],
           filters: [],
           validations: [],
+          dataPreview: {
+            rules: [],
+            variant: DataPreviewLayoutVariant.CODE_DARK,
+          },
         },
       ],
     },
@@ -183,8 +212,16 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
           properties: [],
           filters: [],
           validations: [],
+          dataPreview: {
+            rules: [],
+            variant: DataPreviewLayoutVariant.CODE_DARK,
+          },
         },
       ],
+      dataPreview: {
+        rules: [],
+        variant: DataPreviewLayoutVariant.CODE_DARK,
+      },
     },
   ],
 };
@@ -204,6 +241,10 @@ export const ComponentBuilderConfigurationGroupPropertySingleText: Configuration
   dropdownOptions: [],
   filters: [],
   validations: [],
+  dataPreview: {
+    rules: [],
+    variant: DataPreviewLayoutVariant.CODE_DARK,
+  },
 };
 
 export const ComponentBuilderConfigurationGroupPropertySingleDropdown: ConfigurationGroupProperty = {
@@ -228,6 +269,10 @@ export const ComponentBuilderConfigurationGroupPropertySingleDropdown: Configura
     },
     { value: "OPTION_02", label: "Two" },
   ],
+  dataPreview: {
+    rules: [],
+    variant: DataPreviewLayoutVariant.CODE_DARK,
+  },
 };
 
 export const ComponentBuilderConfigurationGroupPropertySingleNumber: ConfigurationGroupProperty = {
@@ -246,6 +291,10 @@ export const ComponentBuilderConfigurationGroupPropertySingleNumber: Configurati
   dropdownOptions: [],
   filters: [],
   validations: [],
+  dataPreview: {
+    rules: [],
+    variant: DataPreviewLayoutVariant.CODE_DARK,
+  },
 };
 
 export const ComponentBuilderConfigurationGroupPropertyWithInstance01: ConfigurationGroupProperty = {
@@ -263,6 +312,10 @@ export const ComponentBuilderConfigurationGroupPropertyWithInstance01: Configura
   validations: [],
   dropdownOptions: [],
   properties: [ComponentBuilderConfigurationGroupPropertySingleDropdown],
+  dataPreview: {
+    rules: [],
+    variant: DataPreviewLayoutVariant.CODE_DARK,
+  },
 };
 
 export const ComponentBuilderConfigurationGroupPropertyWithInstance: ConfigurationGroupProperty = {
@@ -280,6 +333,10 @@ export const ComponentBuilderConfigurationGroupPropertyWithInstance: Configurati
   dropdownOptions: [],
   filters: [],
   validations: [],
+  dataPreview: {
+    rules: [],
+    variant: DataPreviewLayoutVariant.CODE_DARK,
+  },
   properties: [
     ComponentBuilderConfigurationGroupPropertySingleDropdown,
     ComponentBuilderConfigurationGroupPropertySingleText,
@@ -297,6 +354,10 @@ export const ComponentBuilderConfigurationGroupPropertyWithInstance: Configurati
       dropdownOptions: [],
       filters: [],
       validations: [],
+      dataPreview: {
+        rules: [],
+        variant: DataPreviewLayoutVariant.CODE_DARK,
+      },
       properties: [
         ComponentBuilderConfigurationGroupPropertySingleText,
         ComponentBuilderConfigurationGroupPropertySingleDropdown,
@@ -344,6 +405,10 @@ export const LambdaBuilderNameProperty: ConfigurationGroupProperty = {
   dropdownOptions: [],
   filters: [],
   validations: [],
+  dataPreview: {
+    rules: [],
+    variant: DataPreviewLayoutVariant.CODE_DARK,
+  },
 };
 
 export const LambdaLanguageProperty: ConfigurationGroupProperty = {
@@ -360,6 +425,10 @@ export const LambdaLanguageProperty: ConfigurationGroupProperty = {
   properties: [],
   filters: [],
   validations: [],
+  dataPreview: {
+    rules: [],
+    variant: DataPreviewLayoutVariant.CODE_DARK,
+  },
   dropdownOptions: [
     {
       label: "TypeScript",
@@ -397,6 +466,10 @@ export const LambdaBuilderConfigurationGroup: ConfigurationGroup = {
       filters: [],
       validations: [],
       properties: [LambdaBuilderNameProperty, LambdaLanguageProperty],
+      dataPreview: {
+        rules: [],
+        variant: DataPreviewLayoutVariant.CODE_DARK,
+      },
     },
   ],
 };
@@ -470,6 +543,7 @@ export const cdkGeneratorMeta: GeneratorMeta = {
     ComponentBuilderConfigurationGroup,
     SideBySideConfigurationGroup,
   ], // an array of OptionGroup objects that expose additional configuration provided by the generator
+  exampleProjects: [],
 };
 
 // // // //
@@ -597,6 +671,7 @@ export const dummyGeneratorMeta: GeneratorMeta = {
   typeTags: ["Chrome Extension", "Infrastructure"], // describes the type of codebase produced by this generator
   experience: ExperienceRecommendation.BEGINNER, // an optional tag detailing the level of experience required to use the code produced by the generator
   project_path: "output", // the name of the directory for the generator's output
+  exampleProjects: [],
   schemaEditorConfiguration: {
     configurationGroups: [],
     documentation: "",
