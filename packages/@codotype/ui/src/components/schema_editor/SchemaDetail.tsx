@@ -86,7 +86,7 @@ export function SchemaDetail(props: SchemaDetailProps) {
                                     props.onChange(updatedSchema);
                                 }}
                             />
-                            <hr />
+                            {/* <hr /> */}
                             <RelationEditor
                                 selectedSchema={props.schema}
                                 relationReferences={inflatedSchema.relations}

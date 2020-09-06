@@ -3,7 +3,7 @@ import {
     buildTokenPluralization,
     validateTokenPluralization,
     sanitizeLabel,
-    TokenPluralization
+    TokenPluralization,
 } from "@codotype/core";
 import classnames from "classnames";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -185,7 +185,7 @@ export function SchemaForm(props: SchemaFormProps) {
 
     return (
         <div className="row">
-            <div className="col-sm-12 col-lg-6 border-right">
+            <div className="col-sm-12">
                 <div className="row">
                     <div className="col-sm-12">
                         <p className="small mt-2 mb-3 text-muted">
@@ -239,24 +239,24 @@ export function SchemaForm(props: SchemaFormProps) {
                 </div>
             </div>
 
-            <div className="col-sm-12 col-lg-6 d-flex justify-content-center align-items-center flex-column">
-                <p className="mb-0 text-muted">
-                    Verify these <span className="text-success">Tokens </span>{" "}
-                    before proceeding
-                </p>
+            {/* <div className="col-sm-12 col-lg-6 d-flex justify-content-center align-items-center flex-column"> */}
+            {/* <p className="mb-0 text-muted"> */}
+            {/* Verify these <span className="text-success">Tokens </span>{" "} */}
+            {/* before proceeding */}
+            {/* </p> */}
 
-                <div className="btn-group w-100 mt-2">
-                    <button className="btn btn-sm btn-outline-dark w-50">
-                        Singular
-                    </button>
-                    <button className="btn btn-sm btn-outline-dark w-50">
-                        Plural
-                    </button>
-                </div>
-                <table className="table table-sm mb-0 mt-2">
-                    <MetaPreview label={label} />
-                </table>
-            </div>
+            {/* <div className="btn-group w-100 mt-2"> */}
+            {/* <button className="btn btn-sm btn-outline-dark w-50"> */}
+            {/* Singular */}
+            {/* </button> */}
+            {/* <button className="btn btn-sm btn-outline-dark w-50"> */}
+            {/* Plural */}
+            {/* </button> */}
+            {/* </div> */}
+            {/* <table className="table table-sm mb-0 mt-2"> */}
+            {/* <MetaPreview label={label} /> */}
+            {/* </table> */}
+            {/* </div> */}
         </div>
     );
 }

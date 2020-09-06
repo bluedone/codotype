@@ -13,10 +13,10 @@ export function RelationListEmpty(props: RelationListEmptyProps) {
         <div className="card-body text-center">
             <h5 className="mb-0 mt-1 text-muted">No Relations added yet</h5>
             <p className="text-muted mt-2 mb-0">
-                Relations define properties on this Schema
+                Relations define references to other schemas
             </p>
             <div className="row d-flex justify-content-center mt-2">
-                <div className="col-lg-6">
+                <div className="col-lg-10">
                     <button
                         className="btn btn-sm btn-outline-primary"
                         onClick={props.onClick}

@@ -8,7 +8,7 @@ import {
     AttributeAddon,
     AttributeAddonValue,
     Schema,
-    buildTokenCasing
+    buildTokenCasing,
 } from "@codotype/core";
 import { Droppable, DragDropContext } from "react-beautiful-dnd";
 import { AttributeFormModal, AttributeInput } from "./AttributeFormModal";
@@ -161,7 +161,14 @@ export function AttributeEditor(props: AttributeEditorProps) {
     // // // //
 
     return (
-        <div className="card">
+        <div
+            className="card"
+            style={{
+                borderBottom: "none",
+                borderBottomLeftRadius: "0px",
+                borderBottomRightRadius: "0px",
+            }}
+        >
             <SortableListHeader
                 label="Attributes"
                 tooltip="shift+a"

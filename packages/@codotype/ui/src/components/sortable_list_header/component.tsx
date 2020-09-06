@@ -9,6 +9,7 @@ interface SortableListHeaderProps {
     label: string;
     onClick: () => void;
     tooltip?: string;
+    rounded?: boolean;
 }
 
 /**
@@ -17,9 +18,20 @@ interface SortableListHeaderProps {
  * @param props - see `SortableListHeaderProps`
  */
 export function SortableListHeader(props: SortableListHeaderProps) {
-    const { tooltip = "" } = props;
+    const { tooltip = "", rounded = true } = props;
+    let styles = {};
+    if (!rounded) {
+        styles = {
+            borderTopLeftRadius: "0px",
+            borderTopRightRadius: "0px",
+        };
+    }
+
     return (
-        <div className="card-header p-2 d-flex align-items-center justify-content-between">
+        <div
+            className="card-header p-2 d-flex align-items-center justify-content-between"
+            style={styles}
+        >
             <div className="d-flex align-items-center">
                 <OverlayTrigger
                     placement="bottom"

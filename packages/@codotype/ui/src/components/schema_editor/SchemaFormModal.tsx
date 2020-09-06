@@ -29,7 +29,7 @@ export function SchemaFormModal(props: {
     const disableSubmit: boolean = props.errors.length > 0;
 
     return (
-        <Modal size="lg" show={props.show} onHide={props.handleClose}>
+        <Modal show={props.show} onHide={props.handleClose}>
             <Modal.Header closeButton>
                 <Modal.Title>{title}</Modal.Title>
             </Modal.Header>
