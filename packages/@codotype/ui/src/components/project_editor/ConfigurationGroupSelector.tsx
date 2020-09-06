@@ -9,18 +9,25 @@ import {
     OptionValueInstance,
 } from "@codotype/core";
 import { GeneratorStart } from "../generator_start";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFlag } from "@fortawesome/free-solid-svg-icons";
 
 // // // //
 
 export function ConfigurationGroupTab(props: {
     label: string;
     active: boolean;
+    pinned?: boolean;
     onClick: () => void;
 }) {
-    const { label } = props;
+    const { label, pinned = false } = props;
     const btnClassName: string[] = ["nav-link"];
     if (props.active) {
         btnClassName.push("active");
+    }
+
+    if (props.pinned) {
+        btnClassName.push("bg-dark mr-2 text-white");
     }
 
     return (
@@ -34,6 +41,9 @@ export function ConfigurationGroupTab(props: {
                 }}
                 onClick={props.onClick}
             >
+                {props.pinned && (
+                    <FontAwesomeIcon icon={faFlag} className="mr-2" />
+                )}
                 {label}
             </a>
         </li>
@@ -92,12 +102,14 @@ export function ConfigurationGroupSelector(props: {
             <div className="col-lg-12">
                 <ul className="nav nav-pills">
                     <ConfigurationGroupTab
+                        pinned
                         onClick={() => {
                             setViewingReadme(true);
                             setViewingSchemas(false);
                         }}
                         active={viewingReadme}
-                        label={"README.md"}
+                        label={"Start"}
+                        // label={"README.md"}
                     />
 
                     {enableSchemaEditor && (
@@ -126,7 +138,7 @@ export function ConfigurationGroupSelector(props: {
                                     }}
                                     active={
                                         configurationGroup.identifier ===
-                                        selectedConfigurationGroup.identifier &&
+                                            selectedConfigurationGroup.identifier &&
                                         !viewingSchemas &&
                                         !viewingReadme
                                     }
@@ -144,7 +156,7 @@ export function ConfigurationGroupSelector(props: {
                         configurationGroup={selectedConfigurationGroup}
                         value={
                             props.project.configuration[
-                            selectedConfigurationGroup.identifier
+                                selectedConfigurationGroup.identifier
                             ]
                         }
                         onChange={(updatedVal: OptionValueInstance) => {

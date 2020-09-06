@@ -41,7 +41,6 @@ export function SchemaDetail(props: SchemaDetailProps) {
     const { schemaEditorConfiguration } = props.generatorMeta;
 
     return (
-        // <div className="row" style={{ borderLeft: "1px solid lightgrey" }}>
         <div className="row">
             <div className="col-sm-12">
                 <SchemaDetailHeader
@@ -107,7 +106,7 @@ export function SchemaDetail(props: SchemaDetailProps) {
                                 }}
                             />
                         </div>
-                        <div className="pl-md-0 col-sm-6">
+                        <div className="pl-md-0 col-sm-6 mt-3 mt-lg-0">
                             <SchemaPreview
                                 schema={props.schema}
                                 schemas={props.schemas}
@@ -118,8 +117,6 @@ export function SchemaDetail(props: SchemaDetailProps) {
                                 onSelectSchema={props.onSelectSchema}
                             />
                         </div>
-                        {/* <div className="col-sm-12 col-md-6 col-lg-6"></div> */}
-                        {/* <div className="pl-md-0 col-sm-6"></div> */}
                     </div>
                 </ConfigurationGroupSelector>
             </div>

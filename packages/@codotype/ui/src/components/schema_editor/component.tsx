@@ -276,11 +276,8 @@ export function SchemaEditorLayout(props: {
                     />
                 </DragDropContext>
             </div>
-            <div className="col-lg-8 pl-md-0">
-                <div
-                    className="card card-body shadow-sm"
-                    // style={{ borderLeft: "6px solid #4e92fc" }}
-                >
+            <div className="col-lg-8 pl-3 pl-lg-0 mt-4 mt-lg-0">
+                <div className="card card-body shadow-sm">
                     <SchemaDetail
                         schema={selectedSchema}
                         schemas={state.schemas}

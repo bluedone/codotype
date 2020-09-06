@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { GeneratorCard } from "../../components/generator_card";
 import { GeneratorMeta } from "@codotype/core";
-import { GitHubStar } from "@src/components/GitHubStar";
+import { GitHubStar } from "../../components/GitHubStar";
 
 // // // //
 
