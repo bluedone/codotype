@@ -1,6 +1,6 @@
 {
   "name": "@codotype/core",
-  "version": "0.8.0-canary.5",
+  "version": "0.8.0-canary.6",
   "description": "Datatype definitions and utility functions that power Codotype",
   "main": "dist/index",
   "types": "dist/index",
@@ -25,7 +25,7 @@
     "@types/lodash": "^4.14.149",
     "@types/pluralize": "0.0.29",
     "@types/underscore.string": "0.0.38",
-    "change-case": "^3.1.0",
+    "change-case": "^4.1.1",
     "lodash": "^4.17.10",
     "pluralize": "^7.0.0",
     "underscore.string": "^3.3.4",

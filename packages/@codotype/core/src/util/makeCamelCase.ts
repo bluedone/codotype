@@ -1,4 +1,4 @@
-import { makePascalCase } from "./makePascalCase";
+import { camelCase } from "change-case";
 
 // // // //
 
@@ -7,6 +7,5 @@ import { makePascalCase } from "./makePascalCase";
  * @param label
  */
 export function makeCamelCase(label: string): string {
-  const pascalCased = makePascalCase(label);
-  return pascalCased.charAt(0).toLowerCase() + pascalCased.slice(1);
+  return camelCase(label);
 }
