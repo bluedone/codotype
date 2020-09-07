@@ -1,6 +1,13 @@
 ### v0.8.0-canary.35
 
--   Updated `@codotype/util` to `0.8.0-canary.5`
+-   Updated `@codotype/core` to `0.8.0-canary.6`
+-   Added `ExampleProjectDropdown` component
+-   Responsive `SchemaEditor`
+-   Simplified `ProjectEditor` and `SchemaEditor` UI
+
+### v0.8.0-canary.35
+
+-   Updated `@codotype/core` to `0.8.0-canary.5`
 -   Added `DataPreviewRenderer` component - implemented in `ConfigurationCollectionInput`
 
 ### v0.8.0-canary.34

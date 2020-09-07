@@ -3,8 +3,14 @@ import { GenerateCodeButton } from "./GenerateCodeButton";
 import { ProjectEditButton } from "./ProjectEditButton";
 import { ProjectFormModal } from "./ProjectFormModal";
 import { ProjectForm } from "./ProjectForm";
-import { sanitizeLabel, buildTokenCasing, Project, GeneratorMeta } from "@codotype/core";
+import {
+    sanitizeLabel,
+    buildTokenCasing,
+    Project,
+    GeneratorMeta,
+} from "@codotype/core";
 import { ProjectDropdown } from "./ProjectDropdown";
+import { ExampleProjectDropdown } from "./ExampleProjectDropdown";
 
 // // // //
 
@@ -15,12 +21,12 @@ export function ProjectEditorHeader(props: {
     onClickGenerate: () => void;
     onConfirmReset: () => void;
 }) {
+    const { generatorMeta } = props;
     const [showingModal, showModal] = React.useState<boolean>(false);
     const [labelValue, setLabelValue] = React.useState<string>(
         props.project.identifiers.label,
     );
     return (
-        // <div className="row d-flex align-items-center">
         <div className="row d-flex align-items-end">
             <div className="col-lg-6">
                 <span className="d-flex align-items-center">
@@ -60,9 +66,16 @@ export function ProjectEditorHeader(props: {
             <div className="col-lg-6 d-flex justify-content-end">
                 {/* <HelpButton /> */}
                 {/* <TourButton /> */}
-                {/* <ProjectDropdown /> */}
                 {/* <ImportModal /> */}
                 {/* <ExportModal /> */}
+
+                <ExampleProjectDropdown
+                    plugin={generatorMeta}
+                    loadExampleProject={exampleProject => {
+                        props.onChange(exampleProject);
+                    }}
+                />
+
                 <ProjectDropdown
                     project={props.project}
                     onConfirmReset={props.onConfirmReset}

@@ -1,8 +1,8 @@
 import * as React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
-import { GitHubStar } from "@src/components/GitHubStar";
-import { GitHubFollow } from "@src/components/GitHubStar/GitHubStar";
+import { GitHubStar } from "../../components/GitHubStar";
+import { GitHubFollow } from "../../components/GitHubStar/GitHubStar";
 
 // // // //
 

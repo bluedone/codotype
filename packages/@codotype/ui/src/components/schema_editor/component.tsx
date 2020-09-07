@@ -11,7 +11,7 @@ import {
     UUID,
     SchemaSource,
     GeneratorMeta,
-    buildDefaultConfiguration
+    buildDefaultConfiguration,
 } from "@codotype/core";
 import { reorder } from "../attribute_editor/component";
 import { validateSchema } from "./validateSchema";
@@ -167,36 +167,38 @@ export function SchemaEditorLayout(props: {
     if (selectedSchemaId === null || selectedSchema === undefined) {
         // return <SchemaEditorEmptyState />;
         return (
-            <div className="rowm px-4 py-4">
-                <div className="card card-body">
-                    <div className="row align-items-center justify-content-center">
-                        <div className="col-lg-12">
-                            <h4>New Schema</h4>
+            <div className="row d-flex px-4 py-4 justify-content-center align-items-center">
+                <div className="col-sm-8">
+                    <div className="card card-body">
+                        <div className="row align-items-center justify-content-center">
+                            <div className="col-lg-12">
+                                <h4>New Schema</h4>
 
-                            <SchemaForm
-                                label={""}
-                                onChange={updatedTokens => {
-                                    setNewTokenPluralization(updatedTokens);
-                                }}
-                                onKeydownEnter={() => {
+                                <SchemaForm
+                                    label={""}
+                                    onChange={updatedTokens => {
+                                        setNewTokenPluralization(updatedTokens);
+                                    }}
+                                    onKeydownEnter={() => {
+                                        createNewSchema();
+                                    }}
+                                />
+                            </div>
+                        </div>
+                        <div className="col-lg-12 text-right mt-2">
+                            <button
+                                className="btn btn-primary"
+                                disabled={
+                                    newTokenPluralization === null ||
+                                    newTokenPluralization.singular.label === ""
+                                }
+                                onClick={() => {
                                     createNewSchema();
                                 }}
-                            />
+                            >
+                                Create Schema
+                            </button>
                         </div>
-                    </div>
-                    <div className="col-lg-12 text-right mt-2">
-                        <button
-                            className="btn btn-primary"
-                            disabled={
-                                newTokenPluralization === null ||
-                                newTokenPluralization.singular.label === ""
-                            }
-                            onClick={() => {
-                                createNewSchema();
-                            }}
-                        >
-                            Create Schema
-                        </button>
                     </div>
                 </div>
             </div>
@@ -274,11 +276,8 @@ export function SchemaEditorLayout(props: {
                     />
                 </DragDropContext>
             </div>
-            <div className="col-lg-8 pl-md-0">
-                <div
-                    className="card card-body shadow-sm"
-                // style={{ borderLeft: "6px solid #4e92fc" }}
-                >
+            <div className="col-lg-8 pl-3 pl-lg-0 mt-4 mt-lg-0">
+                <div className="card card-body shadow-sm">
                     <SchemaDetail
                         schema={selectedSchema}
                         schemas={state.schemas}

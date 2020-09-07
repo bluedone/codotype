@@ -79,7 +79,13 @@ export function RelationEditor(props: RelationEditorProps) {
     // // // //
 
     return (
-        <div className="card">
+        <div
+            className="card"
+            style={{
+                borderTopLeftRadius: "0px",
+                borderTopRightRadius: "0px",
+            }}
+        >
             <Hotkey
                 keyName="shift+r"
                 onKeyDown={() => {
@@ -93,6 +99,7 @@ export function RelationEditor(props: RelationEditorProps) {
                 onClick={() => {
                     setRelationInput({ ...DEFAULT_RELATION });
                 }}
+                rounded={false}
             />
 
             {/* Renders RelationFormModal */}

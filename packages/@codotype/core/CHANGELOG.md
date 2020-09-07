@@ -1,3 +1,8 @@
+### 0.8.0-canary.6
+
+- Add [change-case](https://www.npmjs.com/package/change-case) dependency
+- Fixed bug in `makeCamelCase`
+
 ### 0.8.0-canary.5
 
 - Export `DataPreview` interfaces + functions

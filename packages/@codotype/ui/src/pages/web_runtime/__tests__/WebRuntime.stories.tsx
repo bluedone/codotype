@@ -23,6 +23,11 @@ import {
     DataPreviewLayoutVariant,
     DataPreviewActionType,
     DataPreviewConstraintType,
+    buildDefaultProject,
+    makeIdentifier,
+    buildTokenCasing,
+    buildTokenPluralization,
+    buildDefaultConfiguration,
 } from "@codotype/core";
 import { generatorReadme } from "@src/components/markdown_renderer/__tests__/test_state";
 const { cdkGeneratorMeta, dummyGeneratorMeta } = testState;
@@ -124,7 +129,6 @@ const ApiActionsProperty = new Codotype.ConfigurationGroupProperty({
                 StringValueFilter.nonumbers,
                 StringValueFilter.nosymbols,
                 StringValueFilter.trimwhitespace,
-                StringValueFilter.removewhitespace,
             ],
         }),
         new Codotype.ConfigurationGroupProperty({
@@ -154,6 +158,96 @@ const NestedCollectionProperty = {
     ],
 };
 
+const pluginExample01: GeneratorMeta = {
+    ...dummyGeneratorMeta,
+    id: "chrome_extension_generator_03", // unique ID for the generator
+    schemaEditorConfiguration: {
+        ...dummyGeneratorMeta.schemaEditorConfiguration,
+        attributeAddons: [
+            ATTRIBUTE_ADDON_UNIQUE,
+            ATTRIBUTE_ADDON_REQUIRED,
+            ATTRIBUTE_ADDON_NULLABLE,
+            ATTRIBUTE_ADDON_PRIMARY_KEY,
+        ],
+        configurationGroups: [
+            {
+                ...dummyGeneratorMeta.configurationGroups[0],
+                layoutVariant: GroupLayoutVariant.LIST,
+            },
+        ],
+    },
+};
+
+const projectExample01: Project = {
+    ...buildDefaultProject(pluginExample01),
+    identifiers: buildTokenCasing("Movie Reviews"),
+    schemas: [
+        new Codotype.Schema({
+            identifiers: buildTokenPluralization("User"),
+            attributes: [
+                new Codotype.Attribute({
+                    identifiers: buildTokenCasing("ID"),
+                    datatype: Datatype.UUID,
+                }),
+                new Codotype.Attribute({
+                    identifiers: buildTokenCasing("Email"),
+                    datatype: Datatype.STRING,
+                }),
+                new Codotype.Attribute({
+                    identifiers: buildTokenCasing("First Name"),
+                    datatype: Datatype.STRING,
+                }),
+                new Codotype.Attribute({
+                    identifiers: buildTokenCasing("Last Name"),
+                    datatype: Datatype.STRING,
+                }),
+            ],
+            relations: [],
+            configuration: buildDefaultConfiguration(
+                pluginExample01.schemaEditorConfiguration.configurationGroups,
+            ),
+        }),
+        new Codotype.Schema({
+            identifiers: buildTokenPluralization("Director"),
+            attributes: [
+                new Codotype.Attribute({
+                    identifiers: buildTokenCasing("ID"),
+                    datatype: Datatype.UUID,
+                }),
+                new Codotype.Attribute({
+                    identifiers: buildTokenCasing("First Name"),
+                    datatype: Datatype.STRING,
+                }),
+                new Codotype.Attribute({
+                    identifiers: buildTokenCasing("Last Name"),
+                    datatype: Datatype.STRING,
+                }),
+            ],
+            relations: [],
+            configuration: buildDefaultConfiguration(
+                pluginExample01.schemaEditorConfiguration.configurationGroups,
+            ),
+        }),
+        new Codotype.Schema({
+            identifiers: buildTokenPluralization("Movie"),
+            attributes: [
+                new Codotype.Attribute({
+                    identifiers: buildTokenCasing("ID"),
+                    datatype: Datatype.UUID,
+                }),
+                new Codotype.Attribute({
+                    identifiers: buildTokenCasing("Title"),
+                    datatype: Datatype.STRING,
+                }),
+            ],
+            relations: [],
+            configuration: buildDefaultConfiguration(
+                pluginExample01.schemaEditorConfiguration.configurationGroups,
+            ),
+        }),
+    ],
+};
+
 const stories: [string, GeneratorMeta][] = [
     ["w/ schemas", dummyGeneratorMeta],
     [
@@ -176,6 +270,13 @@ const stories: [string, GeneratorMeta][] = [
                     },
                 ],
             },
+        },
+    ],
+    [
+        "w/ exampleProjects",
+        {
+            ...pluginExample01,
+            exampleProjects: [projectExample01],
         },
     ],
     [

@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Modal } from "react-bootstrap";
 import { GeneratorMeta, Project } from "@codotype/core";
 import useAxios from "axios-hooks";
 import { BuildFinished } from "../../components/build_finished/component";
@@ -26,7 +27,6 @@ export function GeneratorRunner(props: GeneratorRunnerProps) {
     const [finished, setFinished] = React.useState<boolean>(false);
 
     function reset() {
-        // setLoading(false);
         setFinished(false);
     }
 
@@ -47,28 +47,44 @@ export function GeneratorRunner(props: GeneratorRunnerProps) {
     function generateCode(params: GenerateCodeProps) {
         executePostRequest({ data: { ...params } }).then(() => {
             setFinished(true);
-            console.log(data);
         });
     }
 
-    // Handle loading state
-    if (loading) {
-        return <LoadingBuild />;
-    }
-
-    // Handle finsihed state
-    if (finished) {
-        return (
-            <React.Fragment>
-                <BuildFinished
-                    responseType="LOCAL_PATH" // TODO - simplify this so LOCAL_PATH isn't hardcoded
-                    filepath={data.filepath}
-                    onClickBackToEditor={reset}
-                />
-            </React.Fragment>
-        );
-    }
-
     // Passes generateCode function to props.children
-    return <React.Fragment>{props.children({ generateCode })}</React.Fragment>;
+    return (
+        <React.Fragment>
+            {props.children({ generateCode })}
+            {/* Handle Loading */}
+            {(loading || finished) && (
+                <Modal
+                    size="lg"
+                    show={loading || finished}
+                    onHide={() => {
+                        // Don't allow the modal to close while loading
+                        if (loading) {
+                            return;
+                        }
+
+                        // Otherwise, invoke reset to close the modal
+                        reset();
+                    }}
+                >
+                    {/* <Modal.Header closeButton={finished}> */}
+                    {/* {loading && <Modal.Title>Loading</Modal.Title>} */}
+                    {/* {finished && <Modal.Title>Export Code</Modal.Title>} */}
+                    {/* </Modal.Header> */}
+                    <Modal.Body>
+                        {loading && <LoadingBuild />}
+                        {finished && (
+                            <BuildFinished
+                                responseType="LOCAL_PATH"
+                                filepath={data.filepath}
+                                onClickBackToEditor={reset}
+                            />
+                        )}
+                    </Modal.Body>
+                </Modal>
+            )}
+        </React.Fragment>
+    );
 }

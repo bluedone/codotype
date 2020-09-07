@@ -33,39 +33,35 @@ export function LoadingBuild(props: { quote?: [string, string] }) {
     const quoteAuthor = quote[1];
 
     return (
-        <div className="row d-flex align-items-center h-100 justify-content-center">
-            <div className="col-lg-8">
-                <div
-                    className="card card-body text-center shadow-sm"
-                    style={{ minHeight: "10rem;" }}
+        <div
+            className="d-flex flex-column align-items-center h-100 justify-content-center"
+            style={{ minHeight: "26rem" }}
+        >
+            <h3>
+                codotype{" "}
+                <span
+                    style={{
+                        fontWeight: "lighter",
+                    }}
                 >
-                    <h3>
-                        codotype{" "}
-                        <span
-                            style={{
-                                fontWeight: "lighter",
-                            }}
-                        >
-                            is generating your codebase
-                        </span>
-                    </h3>
-                    <p className="text-muted mb-0">
-                        This should only take a few moments
-                        <i className="far fa-laugh" />
-                    </p>
-                    <div className="row my-4">
-                        <div className="col-lg-12 text-center d-flex justify-content-center">
-                            <div className="my-2">
-                                <LoadingSpinner />
-                            </div>
-                        </div>
+                    is generating your codebase
+                </span>
+            </h3>
+            <p className="text-muted mb-0">
+                This should only take a few moments
+                <i className="far fa-laugh" />
+            </p>
+            <div className="row my-4">
+                <div className="col-lg-12 text-center d-flex justify-content-center">
+                    <div className="my-2">
+                        <LoadingSpinner />
                     </div>
-                    <small className="text-muted">
-                        {quoteBody}
-                        <br />- <strong>{quoteAuthor}</strong>
-                    </small>
                 </div>
             </div>
+            <small className="text-muted">
+                {quoteBody}
+                <br />- <strong>{quoteAuthor}</strong>
+            </small>
         </div>
     );
 }

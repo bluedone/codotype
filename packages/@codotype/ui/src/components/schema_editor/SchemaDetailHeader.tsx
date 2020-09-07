@@ -19,8 +19,8 @@ export function SchemaDetailHeader(props: {
                 <div className="col-lg-10">
                     <div className="d-flex align-items-center">
                         <h4 className="mb-0">
-                            {/* {props.schema.identifiers.singular.label} Schema */}
                             {props.schema.identifiers.singular.label}
+                            <span className="text-muted ml-2">Schema</span>
                         </h4>
                         <SchemaEditButton
                             schema={props.schema}
@@ -45,17 +45,9 @@ export function SchemaDetailHeader(props: {
                     />
                 </div>
             </div>
-            <div className="row mb-2 mt-2">
+            <div className="row mb-2">
                 <div className="col-lg-12">
-                    <p className="text-muted">
-                        Describe the{" "}
-                        <strong>
-                            {props.schema.identifiers.singular.label} Schema
-                        </strong>{" "}
-                        with <strong>Attributes</strong> and{" "}
-                        <strong>Relations</strong>
-                    </p>
-                    {/* <hr /> */}
+                    <hr />
                 </div>
             </div>
         </React.Fragment>

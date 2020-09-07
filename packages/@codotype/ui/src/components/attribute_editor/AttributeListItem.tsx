@@ -36,6 +36,11 @@ const StyledListItem = styled.li`
         }
     }
 
+    &:last-child {
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+    }
+
     .controls {
         transition: opacity 0.25s ease-in;
         opacity: 0;
