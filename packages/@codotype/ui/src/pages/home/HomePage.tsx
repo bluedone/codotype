@@ -2,7 +2,6 @@ import * as React from "react";
 import { Jumbotron } from "./Jumbotron";
 import { GeneratorMeta } from "@codotype/core";
 import { InfoBullets, InfoBullet } from "./InfoBullets";
-import { FeatureSections } from "./FeatureSection";
 import { GitHubStar } from "../../components/GitHubStar";
 import { Shapes } from "./Shapes";
 
@@ -26,7 +25,6 @@ export function HomePage(props: {
                 <GitHubStar />
             </Jumbotron>
             <InfoBullets infoSections={props.infoBullets} />
-            <FeatureSections featureSections={props.infoBullets} />
         </Shapes>
     );
 }

@@ -1,3 +1,13 @@
+### v0.8.0-canary.40
+
+-   Fix `FaqPage` component `react` import statements
+-   Fix `GeneratorListing` page to use `Plugin` terminology
+-   Tightened up `HomePage` styles and layout
+
+### v0.8.0-canary.39
+
+-   Updated Navbar + Homepage component exports to allow Next.js to gracefully handle SSR for the `GitHubButton` component
+
 ### v0.8.0-canary.38
 
 -   Removed `@src` alias, dependency injection now handled only by relative paths

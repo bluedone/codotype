@@ -16,7 +16,7 @@ export function InfoBullets(props: { infoSections: InfoBullet[] }) {
     const { infoSections } = props;
 
     return (
-        <div className="section bg-white py-3">
+        <div className="section bg-white py-5">
             <div className="container">
                 <div className="row">
                     {infoSections.map((each: any) => (

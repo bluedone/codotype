@@ -44,9 +44,6 @@ export function FeatureSections(props: { featureSections: FeatureSection[] }) {
                         <div className="col-sm-8">
                             <img
                                 src={f.imgSrc}
-                                // src={
-                                //     "https://res.cloudinary.com/codotype/image/upload/v1560045410/product-images/codotype-dashboard-02.png"
-                                // }
                                 alt="image"
                                 className="img-fluid shadow-lg rounded-sm my-5"
                             />

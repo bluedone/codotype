@@ -5,7 +5,8 @@ import styled from "styled-components";
 
 const ShapeOne = styled.div`
     padding: 0.2em 0;
-    position: absolute;
+    position: fixed;
+    z-index: -10;
     background-color: #4e92fc;
     background-image: linear-gradient(100deg, #4e92fc, #1fd3f2);
     top: -350px;
@@ -18,7 +19,8 @@ const ShapeOne = styled.div`
 `;
 
 const ShapeTwo = styled.div`
-    position: absolute;
+    position: fixed;
+    z-index: -10;
     background-color: #4e92fc;
     background-image: linear-gradient(100deg, #4e92fc, #1fd3f2);
     top: -400px;
@@ -30,7 +32,8 @@ const ShapeTwo = styled.div`
 `;
 
 const ShapeThree = styled.div`
-    position: absolute;
+    position: fixed;
+    z-index: -10;
     background-color: #4e92fc;
     background-image: linear-gradient(100deg, #4e92fc, #1fd3f2);
     top: 150px;

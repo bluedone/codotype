@@ -33,12 +33,12 @@ export function GeneratorListPage(props: { generators: GeneratorMeta[] }) {
     return (
         <div className="row mt-3 mb-5">
             <div className="col-lg-12 d-flex justify-content-between align-items-center">
-                <h2>Code Generators</h2>
+                <h2>Codotype Plugins</h2>
             </div>
             <div className="col-lg-12">
                 <p className="mb-0 text-muted">
                     Instantly generate your next codebase using any of the
-                    following generators
+                    following plugins
                 </p>
             </div>
 
