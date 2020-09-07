@@ -1,6 +1,6 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
-import { Story } from "@src/components/dev";
+import { Story } from "../../dev";
 import { Attribute } from "@codotype/core";
 import { Droppable, DragDropContext } from "react-beautiful-dnd";
 import { AttributeListItem } from "../AttributeListItem";

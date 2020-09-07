@@ -1,7 +1,7 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { RelationDiagram, RelationDiagramProps } from "../RelationDiagram";
-import { Story } from "@src/components/dev";
+import { Story } from "../../dev";
 
 // // // //
 

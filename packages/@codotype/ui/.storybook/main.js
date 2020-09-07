@@ -50,9 +50,6 @@ module.exports = {
         config.resolve = {
             ...config.resolve,
             extensions: [".ts", ".tsx", ".js"],
-            alias: {
-                "@src": path.resolve(__dirname, "../src/"),
-            },
         };
 
         return config;

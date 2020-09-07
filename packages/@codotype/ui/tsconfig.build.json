@@ -14,9 +14,6 @@
         "moduleResolution": "node",
         "rootDir": "./",
         "baseUrl": "./",
-        "paths": {
-            "@src/*": ["src/*"]
-        },
         "noImplicitReturns": true,
         "noImplicitThis": true,
         "noImplicitAny": true,

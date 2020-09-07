@@ -7,7 +7,6 @@ class MyDocument extends Document {
       <Html>
         <Head>
           <meta charset="utf-8" />
-          <title>Codotype - Home</title>
           <meta property="twitter:card" content="summary" />
           <meta property="twitter:site" value="@codotype" />
           <meta property="twitter:creator" value="@aeksco" />
@@ -33,11 +32,6 @@ class MyDocument extends Document {
           <meta
             property="og:image"
             content="https://res.cloudinary.com/codotype/image/upload/v1563148543/product-images/thumbnail.png"
-          />
-
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
           />
 
           <link

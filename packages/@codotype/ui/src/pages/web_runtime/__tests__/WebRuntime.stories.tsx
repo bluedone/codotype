@@ -1,9 +1,9 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { WebRuntime } from "../component";
-import { Story } from "@src/components/dev";
-import { RuntimeProvider } from "@src/components/runtime_provider";
-import { ProjectEditor } from "@src/components/project_editor";
+import { Story } from "../../../components/dev";
+import { RuntimeProvider } from "../../../components/runtime_provider";
+import { ProjectEditor } from "../../../components/project_editor";
 import {
     Project,
     Datatype,
@@ -29,7 +29,7 @@ import {
     buildTokenPluralization,
     buildDefaultConfiguration,
 } from "@codotype/core";
-import { generatorReadme } from "@src/components/markdown_renderer/__tests__/test_state";
+import { generatorReadme } from "../../../components/markdown_renderer/__tests__/test_state";
 const { cdkGeneratorMeta, dummyGeneratorMeta } = testState;
 
 // // // //

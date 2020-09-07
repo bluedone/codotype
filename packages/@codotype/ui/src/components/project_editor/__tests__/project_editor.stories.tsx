@@ -2,7 +2,7 @@ import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { ProjectEditor } from "../component";
 import { Project, testState, buildDefaultProject } from "@codotype/core";
-import { Story } from "@src/components/dev";
+import { Story } from "../../dev";
 import { dummyGeneratorMeta } from "./test_state";
 
 // // // //

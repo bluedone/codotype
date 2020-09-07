@@ -1,6 +1,6 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
-import { Story } from "@src/components/dev";
+import { Story } from "../../dev";
 import { MarkdownRenderer } from "../component";
 import { stories } from "./test_state";
 

@@ -1,8 +1,8 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { GeneratorStart } from "../component";
-import { Story } from "@src/components/dev";
-import { dummyGeneratorMeta } from "@src/components/project_editor/__tests__/test_state";
+import { Story } from "../../dev";
+import { dummyGeneratorMeta } from "../../project_editor/__tests__/test_state";
 
 // // // //
 

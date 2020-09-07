@@ -1,7 +1,7 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { RelationPropertiesForm } from "../RelationPropertiesForm";
-import { Story } from "@src/components/dev";
+import { Story } from "../../dev";
 import { RelationInput } from "../RelationFormModal";
 import { testState, RelationType, SchemaSource } from "@codotype/core";
 const { userSchema, movieSchema } = testState;

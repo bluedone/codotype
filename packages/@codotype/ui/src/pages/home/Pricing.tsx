@@ -40,7 +40,7 @@ const PricingCard = styled.div`
  */
 export function Pricing() {
     return (
-        <div id="pricing" className="section bg-light py-lg">
+        <div id="pricing" className="section bg-light py-5">
             <div className="container">
                 <div className="section-title text-center mt-0 mb-5">
                     <h3>Choose your plan</h3>

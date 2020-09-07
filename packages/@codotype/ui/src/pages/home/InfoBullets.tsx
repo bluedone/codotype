@@ -1,20 +1,6 @@
 import * as React from "react";
-// import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faOsi } from "@fortawesome/free-brands-svg-icons";
-
-// // // //
-
-// const JumbotronSection = styled.div`
-//     .jumbotron-splash {
-//         padding: 2rem 0;
-//         color: #3e396b;
-//         .lead {
-//             max-width: 500px;
-//             margin: 0;
-//         }
-//     }
-// `;
 
 // // // //
 
@@ -30,7 +16,7 @@ export function InfoBullets(props: { infoSections: InfoBullet[] }) {
     const { infoSections } = props;
 
     return (
-        <div className="section bg-white py-3">
+        <div className="section bg-white py-5">
             <div className="container">
                 <div className="row">
                     {infoSections.map((each: any) => (

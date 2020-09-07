@@ -1,4 +1,6 @@
-import React from "react";
+import * as React from "react";
+
+// // // //
 
 export interface FaqItem {
     question: string;
@@ -17,7 +19,10 @@ export function FaqItemCard({ faqItem }: FaqItemProps) {
                     <p className="lead mb-0 w-100">{faqItem.question}</p>
                 </div>
                 <div className="col-sm-12 mt-2">
-                    <p className="card-text mb-2" dangerouslySetInnerHTML={{ __html: faqItem.answer }} />
+                    <p
+                        className="card-text mb-2"
+                        dangerouslySetInnerHTML={{ __html: faqItem.answer }}
+                    />
                 </div>
             </div>
         </div>

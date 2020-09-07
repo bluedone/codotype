@@ -1,9 +1,10 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
-import { Story } from "@src/components/dev";
+import { Story } from "../../../components/dev";
 import { AboutAttribution } from "../AboutAttribution";
 import { AboutBody } from "../AboutBody";
 import { AboutJumbotron } from "../AboutJumbotron";
+import { GitHubFollow } from "../../../components/GitHubStar/GitHubStar";
 
 // // // //
 
@@ -12,7 +13,9 @@ storiesOf("Pages/About/Layout", module).add("renders", () => {
         <Story>
             <AboutJumbotron />
             <AboutBody />
-            <AboutAttribution />
+            <AboutAttribution>
+                <GitHubFollow />
+            </AboutAttribution>
         </Story>
     );
 });
@@ -20,7 +23,9 @@ storiesOf("Pages/About/Layout", module).add("renders", () => {
 storiesOf("Pages/About/AboutAttribution", module).add("renders", () => {
     return (
         <Story>
-            <AboutAttribution />
+            <AboutAttribution>
+                <GitHubFollow />
+            </AboutAttribution>
         </Story>
     );
 });

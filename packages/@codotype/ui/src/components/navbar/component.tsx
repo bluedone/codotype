@@ -5,21 +5,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faBook,
     faQuestionCircle,
-    // faDollarSign,
+    faDollarSign,
 } from "@fortawesome/free-solid-svg-icons";
 import { faTwitter, faGithub } from "@fortawesome/free-brands-svg-icons";
 
 // // // //
-
-// TODO - migrate this to JS alternative
-// @import "@src/scss/app.scss";
-
-// .app-navbar {
-//     font-family: $heading-font;
-//     padding: 0.4rem;
-//     box-shadow: 0px 9px 68px 0px rgba(62, 57, 107, 0.1);
-// }
-
 const StyledNavbar = styled(Navbar)`
     font-family: "Product Sans", Helvetica, Arial, serif;
     padding: 0.4rem;
@@ -30,7 +20,7 @@ const StyledNavbar = styled(Navbar)`
 
 export function AppNavbar() {
     return (
-        <StyledNavbar bg="light" fixed="top" expand="lg" className="app-navbar">
+        <StyledNavbar bg="light" fixed="top" expand="lg">
             <div className="container">
                 <div className="d-flex flew-row align-items-center">
                     <img
@@ -38,7 +28,6 @@ export function AppNavbar() {
                         alt="Codotype Logo"
                         width="30"
                         height="30"
-                        // className="d-inline-block align-top"
                         style={{
                             marginRight: ".5rem",
                             marginTop: ".25rem",
@@ -47,7 +36,7 @@ export function AppNavbar() {
                         }}
                     />
                     <Navbar.Brand href="#home">
-                        <h3 className="mb-0">Codotype</h3>
+                        <h3 className="mb-0">codotype</h3>
                     </Navbar.Brand>
                 </div>
 
@@ -73,13 +62,13 @@ export function AppNavbar() {
                             Docs
                         </Nav.Link>
 
-                        {/* <Nav.Link href="https://codotype.org" target="_blank"> */}
-                        {/* <FontAwesomeIcon
+                        <Nav.Link href="https://codotype.org" target="_blank">
+                            <FontAwesomeIcon
                                 icon={faDollarSign}
                                 className="text-success mr-1"
-                            /> */}
-                        {/* Donate */}
-                        {/* </Nav.Link> */}
+                            />
+                            Donate
+                        </Nav.Link>
 
                         <Nav.Link
                             target="_blank"

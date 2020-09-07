@@ -14,7 +14,7 @@ const {
     ComponentBuilderConfigurationGroupPropertySingleText,
     twitterApiOption,
 } = testState;
-import { Story } from "@src/components/dev";
+import { Story } from "../../dev";
 
 // // // //
 

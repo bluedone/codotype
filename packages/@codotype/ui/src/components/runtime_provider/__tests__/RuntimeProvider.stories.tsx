@@ -1,7 +1,7 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { RuntimeProvider } from "../component";
-import { Story } from "@src/components/dev";
+import { Story } from "../../dev";
 import { dummyGeneratorMeta } from "../../project_editor/__tests__/test_state";
 import { buildDefaultProject } from "@codotype/core";
 

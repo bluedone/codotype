@@ -35,6 +35,7 @@ export function Jumbotron(props: {
     subtitle: string;
     body: string;
     generators: GeneratorMeta[];
+    children: React.ReactNode;
 }) {
     const { title, subtitle, body, generators } = props;
 
@@ -54,7 +55,7 @@ export function Jumbotron(props: {
 
                         <div className="row py-2">
                             <div className="col-lg-12 d-flex flex-column">
-                                <GitHubStar />
+                                {props.children}
                             </div>
                         </div>
                     </div>

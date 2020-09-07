@@ -15,7 +15,7 @@ const {
     ComponentBuilderConfigurationGroupPropertyWithInstance,
     ComponentBuilderConfigurationGroupPropertyWithInstance01,
 } = testState;
-import { Story } from "@src/components/dev";
+import { Story } from "../../dev";
 
 // // // //
 

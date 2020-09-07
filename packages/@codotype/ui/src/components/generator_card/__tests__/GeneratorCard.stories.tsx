@@ -3,7 +3,7 @@ import { storiesOf } from "@storybook/react";
 import { GeneratorCard } from "../GeneratorCard";
 import { GeneratorListItem } from "../GeneratorListItem";
 import { GeneratorMeta, testState } from "@codotype/core";
-import { Story } from "@src/components/dev";
+import { Story } from "../../dev";
 const { cdkGeneratorMeta, dummyGeneratorMeta } = testState;
 
 // // // //
