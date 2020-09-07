@@ -1,3 +1,15 @@
+### v0.8.0-canary.38
+
+-   Removed `@src` alias, dependency injection now handled only by relative paths
+
+### v0.8.0-canary.37
+
+-   Simplified dependency injection of `GitHubButton` component
+
+### v0.8.0-canary.36
+
+-   Remove `react-github-btn` - replaced with our own `GitHubButton` component
+
 ### v0.8.0-canary.35
 
 -   Updated `@codotype/core` to `0.8.0-canary.6`

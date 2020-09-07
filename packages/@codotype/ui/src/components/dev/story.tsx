@@ -1,6 +1,6 @@
 import * as React from "react";
 import { AppNavbar } from "../navbar";
-import "@src/scss/storybook.scss";
+import "../../scss/storybook.scss";
 
 // // // //
 

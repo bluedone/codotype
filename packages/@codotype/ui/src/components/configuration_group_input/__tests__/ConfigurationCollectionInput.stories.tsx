@@ -16,7 +16,7 @@ import {
     DataPreviewConstraintType,
 } from "@codotype/core";
 const { LambdaBuilderConfigurationGroup } = testState;
-import { Story } from "@src/components/dev";
+import { Story } from "../../dev";
 import { ConfigurationInputFormGroup } from "../ConfigurationInputFormGroup";
 
 // // // //

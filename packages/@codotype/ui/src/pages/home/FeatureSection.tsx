@@ -1,21 +1,4 @@
 import * as React from "react";
-// import styled from "styled-components";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faOsi } from "@fortawesome/free-brands-svg-icons";
-// import classnames from "classnames";
-
-// // // //
-
-// const JumbotronSection = styled.div`
-//     .jumbotron-splash {
-//         padding: 2rem 0;
-//         color: #3e396b;
-//         .lead {
-//             max-width: 500px;
-//             margin: 0;
-//         }
-//     }
-// `;
 
 // // // //
 
@@ -36,7 +19,12 @@ export function FeatureSections(props: { featureSections: FeatureSection[] }) {
         <div className="section bg-white py-3">
             <div className="container">
                 {featureSections.map((f, index) => (
-                    <div key={f.title} className={`row align-items-center mt-5 ${index % 2 === 1 ? 'flex-row-reverse' : ''}`}>
+                    <div
+                        key={f.title}
+                        className={`row align-items-center mt-5 ${
+                            index % 2 === 1 ? "flex-row-reverse" : ""
+                        }`}
+                    >
                         <div className="col-sm-4">
                             <div className="media">
                                 <div className="media-body">
@@ -55,10 +43,10 @@ export function FeatureSections(props: { featureSections: FeatureSection[] }) {
 
                         <div className="col-sm-8">
                             <img
-                                // src={f.imgSrc}
-                                src={
-                                    "https://res.cloudinary.com/codotype/image/upload/v1560045410/product-images/codotype-dashboard-02.png"
-                                }
+                                src={f.imgSrc}
+                                // src={
+                                //     "https://res.cloudinary.com/codotype/image/upload/v1560045410/product-images/codotype-dashboard-02.png"
+                                // }
                                 alt="image"
                                 className="img-fluid shadow-lg rounded-sm my-5"
                             />

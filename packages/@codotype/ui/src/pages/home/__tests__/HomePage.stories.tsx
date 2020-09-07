@@ -3,8 +3,8 @@ import { storiesOf } from "@storybook/react";
 import { testState } from "@codotype/core";
 import { HomePage } from "../HomePage";
 import { Pricing } from "../Pricing";
-import { AppNavbar } from "@src/components/navbar";
-import { AppFooter } from "@src/components/AppFooter";
+import { AppNavbar } from "../../../components/navbar";
+import { AppFooter } from "../../../components/AppFooter";
 
 // // // //
 

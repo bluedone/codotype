@@ -28,7 +28,10 @@ export function GeneratorStart(props: GeneratorStartProps) {
             <div className="col-lg-12">
                 <div className="row">
                     <div className="col-lg-12 text-center">
-                        {/* <img style={{ maxWidth: "4rem !important" }} src={props.label.icon}/> */}
+                        <img
+                            style={{ maxWidth: "4rem !important" }}
+                            src={props.generator.icon}
+                        />
                         <h3 className="display-4 mt-3">
                             {props.generator.label}
                         </h3>
@@ -44,8 +47,6 @@ export function GeneratorStart(props: GeneratorStartProps) {
                         <GitHubStar />
                     </div>
                 </div>
-
-                {/* <FontAwesomeIcon icon={faPlus} /> */}
 
                 <div className="row mt-3">
                     <div className="col-lg-12 text-center">
@@ -113,31 +114,3 @@ export function GeneratorStart(props: GeneratorStartProps) {
         </div>
     );
 }
-
-// import GeneratorTypeTag from './GeneratorTypeTag'
-// import GeneratorTechTag from './GeneratorTechTag'
-// import GeneratorVersionTag from './GeneratorVersionTag'
-// import ChevronAnimation from '../../../components/ChevronAnimation'
-
-// export default {
-//   props: {
-//     model: {
-//       required: true
-//     },
-//     buildLink: {
-//       type: String
-//     },
-//     externalLink: {
-//       type: String
-//     },
-//     svg: {
-//       type: Boolean
-//     }
-//   },
-//   components: {
-//     GeneratorTypeTag,
-//     GeneratorTechTag,
-//     GeneratorVersionTag,
-//     ChevronAnimation
-//   }
-// } */}
