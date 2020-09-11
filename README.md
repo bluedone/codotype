@@ -7,8 +7,9 @@
 <div align="center">
   <strong>Plugin-based framework for generating custom boilerplate code and scaffolding</strong>
 </div>
+<br/>
 <div align="center">
-  Save <strong>weeks</strong> of development time on your next web project :tada:
+  Save <i>weeks</i> of development time on your next web project :tada:
 </div>
 
 <br />
@@ -62,7 +63,7 @@
 
 <div align="center">
   <sub>
-    Language + framework agnostic, open-source for now and forever. Built with ❤︎ by
+    Language + framework agnostic, open-source for now and forever. Built with ❤︎&nbsp;by
   <a href="https://twitter.com/aeksco">@aeksco</a>
   </a>
 
