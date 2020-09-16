@@ -9,7 +9,7 @@ import { AppFooter } from "../../../components/AppFooter";
 
 // // // //
 
-storiesOf("Pages/HomePage", module).add("renders", () => {
+storiesOf("Pages/www/HomePage", module).add("renders", () => {
     return (
         <React.Fragment>
             <AppNavbar />

@@ -18,7 +18,7 @@ const faqItems: FaqItem[] = [
     },
 ];
 
-storiesOf("Pages/Faq/Layout", module).add("renders", () => {
+storiesOf("Pages/www/Faq/Layout", module).add("renders", () => {
     return (
         <Story>
             <FaqPage faqItems={faqItems} />
@@ -26,7 +26,7 @@ storiesOf("Pages/Faq/Layout", module).add("renders", () => {
     );
 });
 
-storiesOf("Pages/Faq/FaqItemCard", module).add("renders", () => {
+storiesOf("Pages/www/Faq/FaqItemCard", module).add("renders", () => {
     return (
         <Story>
             <FaqItemCard faqItem={faqItems[0]} />

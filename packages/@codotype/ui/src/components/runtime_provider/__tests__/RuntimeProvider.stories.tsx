@@ -11,7 +11,7 @@ const dummyProject = buildDefaultProject(dummyGeneratorMeta);
 
 // // // //
 
-storiesOf("RuntimeProvider", module).add("active = true", () => {
+storiesOf("Util/RuntimeProvider", module).add("active = true", () => {
     return (
         <Story>
             <RuntimeProvider>

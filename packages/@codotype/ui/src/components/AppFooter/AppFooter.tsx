@@ -62,8 +62,9 @@ export function AppFooter() {
                             />
                             <p className="ml-3 mb-0">
                                 <span>
-                                    Codotype is a code generation tool for the
-                                    modern web.
+                                    Codotype is a plugin-based framework for
+                                    generating custom boilerplate code and
+                                    scaffolding.
                                 </span>
                                 <br />
                             </p>

@@ -6,7 +6,7 @@ import { testState } from "@codotype/core";
 
 // // // //
 
-storiesOf("Pages/GeneratorListing", module).add("renders", () => {
+storiesOf("Pages/www/GeneratorListing", module).add("renders", () => {
     return (
         <Story>
             <GeneratorListPage

@@ -28,7 +28,7 @@ export function ProjectEditorHeader(props: {
     );
     return (
         <div className="row d-flex align-items-end">
-            <div className="col-lg-6">
+            <div className="col-sm-12 col-md-6">
                 <span className="d-flex align-items-center">
                     <h2 className="mb-0 mr-2 d-flex">
                         {props.project.identifiers.label}
@@ -63,7 +63,7 @@ export function ProjectEditorHeader(props: {
                     </ProjectFormModal>
                 </span>
             </div>
-            <div className="col-lg-6 d-flex justify-content-end">
+            <div className="col-sm-12 col-md-6 d-flex justify-content-end mt-2 mt-md-0">
                 {/* <HelpButton /> */}
                 {/* <TourButton /> */}
                 {/* <ImportModal /> */}

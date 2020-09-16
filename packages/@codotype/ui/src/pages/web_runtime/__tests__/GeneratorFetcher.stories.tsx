@@ -5,7 +5,7 @@ import { GeneratorFetcher } from "../GeneratorFetcher";
 
 // // // //
 
-storiesOf("GeneratorFetcher", module).add("loads", () => {
+storiesOf("Util/GeneratorFetcher", module).add("loads", () => {
     return (
         <Story>
             <GeneratorFetcher>

@@ -125,7 +125,10 @@ const testCases: [string, RelationDiagramProps][] = [
     ],
 ];
 
-const storyCollection = storiesOf("RelationEditor/RelationDiagram", module);
+const storyCollection = storiesOf(
+    "ProjectEditor/RelationEditor/RelationDiagram",
+    module,
+);
 storyCollection.add("all variants", () => {
     return (
         <Story>

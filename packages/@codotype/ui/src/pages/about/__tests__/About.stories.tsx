@@ -8,7 +8,7 @@ import { GitHubFollow } from "../../../components/GitHubStar/GitHubStar";
 
 // // // //
 
-storiesOf("Pages/About/Layout", module).add("renders", () => {
+storiesOf("Pages/www/About/Layout", module).add("renders", () => {
     return (
         <Story>
             <AboutJumbotron />
@@ -20,7 +20,7 @@ storiesOf("Pages/About/Layout", module).add("renders", () => {
     );
 });
 
-storiesOf("Pages/About/AboutAttribution", module).add("renders", () => {
+storiesOf("Pages/www/About/AboutAttribution", module).add("renders", () => {
     return (
         <Story>
             <AboutAttribution>
@@ -30,7 +30,7 @@ storiesOf("Pages/About/AboutAttribution", module).add("renders", () => {
     );
 });
 
-storiesOf("Pages/About/AboutBody", module).add("renders", () => {
+storiesOf("Pages/www/About/AboutBody", module).add("renders", () => {
     return (
         <Story>
             <AboutBody />
@@ -38,7 +38,7 @@ storiesOf("Pages/About/AboutBody", module).add("renders", () => {
     );
 });
 
-storiesOf("Pages/About/AboutJumbotron", module).add("renders", () => {
+storiesOf("Pages/www/About/AboutJumbotron", module).add("renders", () => {
     return (
         <Story>
             <AboutJumbotron />

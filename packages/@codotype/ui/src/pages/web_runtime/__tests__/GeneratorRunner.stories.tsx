@@ -7,7 +7,7 @@ const { cdkGeneratorMeta } = testState;
 
 // // // //
 
-storiesOf("GeneratorRunner", module).add("loads", () => {
+storiesOf("Util/GeneratorRunner", module).add("loads", () => {
     const project = buildDefaultProject(cdkGeneratorMeta);
     return (
         <Story>

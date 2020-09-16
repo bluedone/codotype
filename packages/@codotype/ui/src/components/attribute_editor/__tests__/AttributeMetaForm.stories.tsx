@@ -5,14 +5,17 @@ import { AttributeMetaForm } from "../AttributeMetaForm";
 
 // // // //
 
-storiesOf("AttributeEditor/AttributeMetaForm", module).add("renders", () => {
-    const [description, setDescription] = React.useState("");
-    return (
-        <Story>
-            <AttributeMetaForm
-                description={description}
-                onDescriptionChange={setDescription}
-            />
-        </Story>
-    );
-});
+storiesOf("ProjectEditor/AttributeEditor/AttributeMetaForm", module).add(
+    "renders",
+    () => {
+        const [description, setDescription] = React.useState("");
+        return (
+            <Story>
+                <AttributeMetaForm
+                    description={description}
+                    onDescriptionChange={setDescription}
+                />
+            </Story>
+        );
+    },
+);

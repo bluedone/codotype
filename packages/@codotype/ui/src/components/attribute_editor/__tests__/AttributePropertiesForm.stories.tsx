@@ -6,7 +6,7 @@ import { EMPTY_TOKEN_CASING } from "@codotype/core";
 
 // // // //
 
-storiesOf("AttributeEditor/AttributePropertiesForm", module).add(
+storiesOf("ProjectEditor/AttributeEditor/AttributePropertiesForm", module).add(
     "renders",
     () => {
         return (
