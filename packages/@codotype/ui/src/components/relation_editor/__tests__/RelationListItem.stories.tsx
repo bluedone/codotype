@@ -12,7 +12,7 @@
 //     ["Email", relationExample02],
 // ];
 
-// const storyCollection = storiesOf("RelationEditor/RelationListItem", module);
+// const storyCollection = storiesOf("ProjectEditor/RelationEditor/RelationListItem", module);
 
 // testCases.forEach(testCase => {
 //     storyCollection.add(testCase[0], () => {

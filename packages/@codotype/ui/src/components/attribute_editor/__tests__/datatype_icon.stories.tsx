@@ -39,7 +39,10 @@ const testCases: [string, Datatype][] = [
     ["Datatype.SINGLE_IMAGE", Datatype.SINGLE_IMAGE],
 ];
 
-const storyCollection = storiesOf("AttributeEditor/DatatypeIcon", module);
+const storyCollection = storiesOf(
+    "ProjectEditor/AttributeEditor/DatatypeIcon",
+    module,
+);
 storyCollection.add("all variants", () => {
     return (
         <Story>

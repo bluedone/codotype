@@ -15,57 +15,60 @@ import {
 
 // // // //
 
-storiesOf("AttributeEditor/AttributeAddonForm", module).add("renders", () => {
-    const [value, setValue] = React.useState<AttributeAddonValue>(
-        buildDefaultAddonValue([
-            ATTRIBUTE_ADDON_NULLABLE,
-            ATTRIBUTE_ADDON_PRIMARY_KEY,
-            ATTRIBUTE_ADDON_REQUIRED,
-            ATTRIBUTE_ADDON_UNIQUE,
-        ]),
-    );
-    return (
-        <Story>
-            <AttributeAddonForm
-                addons={[
-                    {
-                        ...ATTRIBUTE_ADDON_NULLABLE,
-                        supportedDatatypes: [Datatype.BOOLEAN],
-                    },
-                    {
-                        ...ATTRIBUTE_ADDON_PRIMARY_KEY,
-                        supportedDatatypes: [Datatype.BOOLEAN],
-                    },
-                    {
-                        ...ATTRIBUTE_ADDON_REQUIRED,
-                        supportedDatatypes: [Datatype.BOOLEAN],
-                    },
-                    {
-                        ...ATTRIBUTE_ADDON_UNIQUE,
-                        supportedDatatypes: [Datatype.BOOLEAN],
-                    },
-                ]}
-                attributeCollection={[
-                    {
-                        ...testState.emailAttribute,
-                        addons: {
-                            [ATTRIBUTE_ADDON_PRIMARY_KEY.identifier]: false,
+storiesOf("ProjectEditor/AttributeEditor/AttributeAddonForm", module).add(
+    "renders",
+    () => {
+        const [value, setValue] = React.useState<AttributeAddonValue>(
+            buildDefaultAddonValue([
+                ATTRIBUTE_ADDON_NULLABLE,
+                ATTRIBUTE_ADDON_PRIMARY_KEY,
+                ATTRIBUTE_ADDON_REQUIRED,
+                ATTRIBUTE_ADDON_UNIQUE,
+            ]),
+        );
+        return (
+            <Story>
+                <AttributeAddonForm
+                    addons={[
+                        {
+                            ...ATTRIBUTE_ADDON_NULLABLE,
+                            supportedDatatypes: [Datatype.BOOLEAN],
                         },
-                    },
-                ]}
-                attributeInput={{
-                    ...testState.emailAttribute,
-                    datatype: Datatype.BOOLEAN,
-                    id: "",
-                }}
-                value={value}
-                onChange={(updatedValue: AttributeAddonValue) => {
-                    setValue(updatedValue);
-                }}
-            />
-            <pre className="px-3 py-3 rounded bg-dark text-light">
-                {JSON.stringify(value, null, 4)}
-            </pre>
-        </Story>
-    );
-});
+                        {
+                            ...ATTRIBUTE_ADDON_PRIMARY_KEY,
+                            supportedDatatypes: [Datatype.BOOLEAN],
+                        },
+                        {
+                            ...ATTRIBUTE_ADDON_REQUIRED,
+                            supportedDatatypes: [Datatype.BOOLEAN],
+                        },
+                        {
+                            ...ATTRIBUTE_ADDON_UNIQUE,
+                            supportedDatatypes: [Datatype.BOOLEAN],
+                        },
+                    ]}
+                    attributeCollection={[
+                        {
+                            ...testState.emailAttribute,
+                            addons: {
+                                [ATTRIBUTE_ADDON_PRIMARY_KEY.identifier]: false,
+                            },
+                        },
+                    ]}
+                    attributeInput={{
+                        ...testState.emailAttribute,
+                        datatype: Datatype.BOOLEAN,
+                        id: "",
+                    }}
+                    value={value}
+                    onChange={(updatedValue: AttributeAddonValue) => {
+                        setValue(updatedValue);
+                    }}
+                />
+                <pre className="px-3 py-3 rounded bg-dark text-light">
+                    {JSON.stringify(value, null, 4)}
+                </pre>
+            </Story>
+        );
+    },
+);

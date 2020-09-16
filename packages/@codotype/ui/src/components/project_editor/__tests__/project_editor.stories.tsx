@@ -7,16 +7,22 @@ import { dummyGeneratorMeta } from "./test_state";
 
 // // // //
 
-const dummyProject: Project = buildDefaultProject(dummyGeneratorMeta);
+const chromeExtensionPlugin = {
+    ...dummyGeneratorMeta,
+    icon:
+        "https://res.cloudinary.com/codotype/image/upload/v1553197653/tech-logos/nodejs.png",
+};
+
+const dummyProject: Project = buildDefaultProject(chromeExtensionPlugin);
 dummyProject.schemas.push(testState.movieSchema);
 dummyProject.schemas.push(testState.userSchema);
 
-storiesOf("ProjectEditor", module).add("renders", () => {
+storiesOf("ProjectEditor/Layout", module).add("renders", () => {
     const [project, setProject] = React.useState<Project>(dummyProject);
     return (
         <Story>
             <ProjectEditor
-                generator={dummyGeneratorMeta}
+                generator={chromeExtensionPlugin}
                 project={project}
                 onClickGenerate={() => {
                     console.log("Generate Project!");

@@ -83,7 +83,7 @@ export function GeneratorStart(props: GeneratorStartProps) {
                         ))}
                     </div>
 
-                    <div className="col-lg-12 d-flex justify-content-center align-items-center mt-2">
+                    <div className="col-lg-12 d-flex justify-content-center align-items-center flex-wrap mt-2">
                         {props.generator.typeTags.map(tag => (
                             <GeneratorTypeTag key={tag} tag={tag} />
                         ))}

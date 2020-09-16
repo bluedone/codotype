@@ -8,7 +8,7 @@ import { faGithub } from "@fortawesome/free-brands-svg-icons";
 export function GeneratorGithubLink(props: { generator: GeneratorMeta }) {
     const { generator } = props;
     return (
-        <small className="d-flex flex-row align-items-center text-muted">
+        <small className="d-flex flex-row align-items-center text-muted mt-2">
             {/* <font-awesome-icon v-if="svg" : icon="['fab', 'github']" className="mr-1" /> */}
             <FontAwesomeIcon icon={faGithub} />
             <i className="fab fa-github mr-1" />

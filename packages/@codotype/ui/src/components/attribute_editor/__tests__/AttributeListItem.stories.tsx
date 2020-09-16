@@ -13,7 +13,10 @@ const testCases: [string, Attribute][] = [
     ["Email", attributeExample02],
 ];
 
-const storyCollection = storiesOf("AttributeEditor/AttributeListItem", module);
+const storyCollection = storiesOf(
+    "ProjectEditor/AttributeEditor/AttributeListItem",
+    module,
+);
 
 testCases.forEach(testCase => {
     storyCollection.add(testCase[0], () => {
