@@ -4,7 +4,7 @@ exports[`/lib/buildRelationReferences.js basic schemas 1`] = `
 Array [
   Object {
     "destinationSchemaId": "12345",
-    "id": "90361ceb-a6fe-45af-97ce-21ceabed4d42",
+    "id": "1aee1847-8d9f-49fd-ab45-b3b5896f4eec",
     "identifiers": Object {
       "destination": Object {
         "alias": Object {
@@ -106,7 +106,7 @@ Object {
   "references": Array [
     Object {
       "destinationSchemaId": "12345",
-      "id": "0ae9e82a-b224-405f-a5c6-8ddc765df4f7",
+      "id": "da12feb1-d12f-476d-9552-608b587a99b7",
       "identifiers": Object {
         "destination": Object {
           "alias": Object {
@@ -211,7 +211,7 @@ Array [
     "references": Array [
       Object {
         "destinationSchemaId": "12345",
-        "id": "35617229-da61-4a78-a260-5061b54e8f47",
+        "id": "eca67609-6819-4769-b9ed-2c61820dc4f2",
         "identifiers": Object {
           "destination": Object {
             "alias": Object {
@@ -350,7 +350,7 @@ Array [
     "relations": Array [
       Object {
         "destinationSchemaId": "12345",
-        "id": "c059137d-08b2-4214-a68a-a7d16f1e81d8",
+        "id": "76ed32ac-5b1d-44a9-9a63-07d2f6ab5f84",
         "identifiers": Object {
           "destination": Object {
             "alias": Object {
