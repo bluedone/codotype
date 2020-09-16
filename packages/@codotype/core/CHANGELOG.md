@@ -1,3 +1,7 @@
+### 0.8.0-canary.7
+
+- Fixed icons in `test_state` module
+
 ### 0.8.0-canary.6
 
 - Add [change-case](https://www.npmjs.com/package/change-case) dependency
