@@ -13,7 +13,7 @@ import { faCheckCircle } from "@fortawesome/free-regular-svg-icons";
 
 // // // //
 
-// TODO - move this into util
+// TODO - move this into core
 // TODO - define this as a enum + meta object that includes label + description for each export type
 // TODO - update this to include optional headers? i.e. import statements when exporting JS
 type RenderType = "json" | "typescript" | "graphql";
@@ -45,8 +45,6 @@ export function schemaPreviewContent(props: {
 
 /**
  * SchemaPreview
- * TODO - this should support switching between different preview types - JSON, GraphQL, TypeScript, JavaScript
- * TODO - add "Copy to Clipboard" button for different preview types - use https://clipboardjs.com/
  * TODO - when hovering over a relation, it should display a tooltip with a preview of the related Schema
  * TODO - when clicking a relation it should jump to the corresponding schema
  * QUESTION - should generators be able to configure which is the default preview type?

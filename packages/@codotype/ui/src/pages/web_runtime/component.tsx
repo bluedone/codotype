@@ -16,7 +16,7 @@ interface WebRuntimeProps {
 
 /**
  * WebRuntime
- * TODO - this component can likely be retired...? Been replaced by LocalStorageProvider
+ * Sets up <LocalStorageProvider /> and sends to props.children
  * @param props - see `WebRuntimeProps`
  */
 export function WebRuntime(props: WebRuntimeProps) {

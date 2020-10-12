@@ -69,7 +69,6 @@ export class CodotypeGenerator {
   /**
    * constructor
    * Handles build options
-   * TODO - pass in @codotype/runtime instance into this constructor (in options, maybe?)
    */
   constructor(
     constructorOptions: ConstructorOptions,
@@ -116,7 +115,6 @@ export class CodotypeGenerator {
     this.options = options;
 
     // PASS this.options.resolved in from @codotype/runtime
-    // TODO - throw error if this.options.resolved is undefined
     this.resolved = this.options.resolved;
 
     // Returns the instance
