@@ -30,6 +30,7 @@ import {
 // // // //
 
 interface PluginRegistration {
+    // QUESTION - should this be the generic that's passed in?
     id: string;
     pluginPath: string;
     pluginDynamicImportPath: string;
@@ -122,7 +123,7 @@ export class CodotypeNodeRuntime {
         modulePath?: string;
         relativePath?: string;
         absolutePath?: string;
-    }) {
+    }): void {
         // Resolves path to Codotype Plugin
         const pluginPath: string = getPluginPath(props);
 

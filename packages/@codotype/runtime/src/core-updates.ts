@@ -98,3 +98,51 @@ export interface ConstructorOptions {
 }
 
 // // // //
+// // // //
+// // // //
+// // // //
+// // // //
+
+export class RuntimeBuilder implements CodotypeRuntime {
+    templatePath: (resolvedPath: string, templatePath: string) => string;
+    ensureDir: (dirPath: string) => Promise<boolean>;
+    copyDir: (dirPath: string, destinationDirPath: string) => Promise<boolean>;
+    renderTemplate: any;
+    existsSync: (path: string) => boolean;
+    compareFile: (
+        destinationPath: string,
+        compiledTemplate: string,
+    ) => Promise<any>;
+    writeFile: (
+        destinationPath: string,
+        compiledTemplate: string,
+    ) => Promise<boolean>;
+    destinationPath: (destination: string, filename: string) => string;
+    composeWith: (generator: any, generatorModule: any, options: any) => any; // wtf is generatorModule
+
+    constructor(params: CodotypeRuntime) {
+        this.templatePath = params.templatePath;
+        this.ensureDir = params.ensureDir;
+        this.copyDir = params.copyDir;
+        this.renderTemplate = params.renderTemplate;
+        this.existsSync = params.existsSync;
+        this.compareFile = params.compareFile;
+        this.writeFile = params.writeFile;
+        this.destinationPath = params.destinationPath;
+        this.composeWith = params.composeWith;
+    }
+}
+
+// - [ ] registerPlugin (registerPlugin) -> currently accepts strings, could be updated to accept others!
+// - [ ] getPlugins
+// - [ ] execute
+// - [ ] fileExists (EASY)
+// - [ ] log (EASY)
+// - [X] ensureDir
+// - [X] templatePath
+// - [X] destinationPath
+// - [X] renderTemplate
+// - [X] compareFile
+// - [X] writeFile
+// - [X] copyDir
+// - [X] composeWith
