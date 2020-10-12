@@ -1,3 +1,3 @@
 test("testing @codotype/runtime", () => {
-  expect(true).toBe(true);
-})
+    expect(true).toBe(true);
+});

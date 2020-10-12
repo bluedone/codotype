@@ -1,5 +1,5 @@
-import { format } from 'prettier'
+import { format } from "prettier";
 
-export function prettify ({ source }: { source: string }) {
-  return format(source, { semi: false })
+export function prettify({ source }: { source: string }) {
+    return format(source, { semi: false });
 }

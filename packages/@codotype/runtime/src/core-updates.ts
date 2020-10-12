@@ -1,9 +1,9 @@
 import {
-  RelationReference,
-  InflatedProject,
-  InflatedSchema,
-  Project,
-  GeneratorMeta
+    RelationReference,
+    InflatedProject,
+    InflatedSchema,
+    Project,
+    GeneratorMeta,
 } from "@codotype/core";
 
 // // // //
@@ -18,11 +18,11 @@ export const PLUGIN_DISTRIBUTABLE_DIR: string = "generator"; // TODO - change va
 // // // //
 
 export enum RuntimeLogLevel {
-  verbose = "verbose"
+    verbose = "verbose",
 }
 
 export enum RuntimeErrorCodes {
-  MODULE_NOT_FOUND = "MODULE_NOT_FOUND"
+    MODULE_NOT_FOUND = "MODULE_NOT_FOUND",
 }
 
 export interface PluginMetadata extends GeneratorMeta {}
@@ -33,15 +33,15 @@ export interface PluginMetadata extends GeneratorMeta {}
  * TODO - add timestamps here
  */
 export interface ProjectBuild {
-  id: string;
-  project: Project;
+    id: string;
+    project: Project;
 }
 
 // TODO - add option for LOG_LEVEL
 // TODO - add option for FORCE (overwrite existing files, or prompt user to overwrite if changes are detected)
 export interface CodotypeRuntimeConstructorOptions {
-  cwd: string;
-  logLevel: RuntimeLogLevel;
+    cwd: string;
+    logLevel: RuntimeLogLevel;
 }
 
 // // // //
@@ -52,49 +52,49 @@ export interface CodotypeRuntimeConstructorOptions {
 // TODO - add CodotypeRuntime constructor to @codotype/core
 // Should accept `RuntimeConstructorOptions` -> return `CodotypeRuntime`
 export interface CodotypeRuntime {
-  templatePath: (resolvedPath: string, templatePath: string) => string;
-  ensureDir: (dirPath: string) => Promise<boolean>;
-  copyDir: (dirPath: string, destinationDirPath: string) => Promise<boolean>;
-  renderTemplate: any;
-  existsSync: (path: string) => boolean;
-  compareFile: (
-    destinationPath: string,
-    compiledTemplate: string
-  ) => Promise<any>;
-  writeFile: (
-    destinationPath: string,
-    compiledTemplate: string
-  ) => Promise<boolean>;
-  destinationPath: (destination: string, filename: string) => string;
-  composeWith: (generator: any, generatorModule: any, options: any) => any; // wtf is generatorModule
+    templatePath: (resolvedPath: string, templatePath: string) => string;
+    ensureDir: (dirPath: string) => Promise<boolean>;
+    copyDir: (dirPath: string, destinationDirPath: string) => Promise<boolean>;
+    renderTemplate: any;
+    existsSync: (path: string) => boolean;
+    compareFile: (
+        destinationPath: string,
+        compiledTemplate: string,
+    ) => Promise<any>;
+    writeFile: (
+        destinationPath: string,
+        compiledTemplate: string,
+    ) => Promise<boolean>;
+    destinationPath: (destination: string, filename: string) => string;
+    composeWith: (generator: any, generatorModule: any, options: any) => any; // wtf is generatorModule
 }
 
 export interface GeneratorOptions {
-  [key: string]: any;
-  // runtime: CodotypeRuntime | MockRuntime;
-  runtime: CodotypeRuntime; // TODO - ensure this can accept runtime + mock runtime
-  resolved: string;
+    [key: string]: any;
+    // runtime: CodotypeRuntime | MockRuntime;
+    runtime: CodotypeRuntime; // TODO - ensure this can accept runtime + mock runtime
+    resolved: string;
 }
 
 // TODO - add correct type signatures for these functions
 export interface ConstructorOptions {
-  name?: string;
-  compileInPlace?: any;
-  write?: (writeProps: { project: InflatedProject }) => Promise<void>;
-  forEachRelation?: (params: {
-    schema: InflatedSchema;
-    relation: RelationReference;
-    project: InflatedProject;
-  }) => Promise<void>;
-  forEachReverseRelation?: (params: {
-    schema: InflatedSchema;
-    relation: RelationReference;
-    project: InflatedProject;
-  }) => Promise<void>;
-  forEachSchema?: (params: {
-    schema: InflatedSchema;
-    project: InflatedProject;
-  }) => Promise<void>;
+    name?: string;
+    compileInPlace?: any;
+    write?: (writeProps: { project: InflatedProject }) => Promise<void>;
+    forEachRelation?: (params: {
+        schema: InflatedSchema;
+        relation: RelationReference;
+        project: InflatedProject;
+    }) => Promise<void>;
+    forEachReverseRelation?: (params: {
+        schema: InflatedSchema;
+        relation: RelationReference;
+        project: InflatedProject;
+    }) => Promise<void>;
+    forEachSchema?: (params: {
+        schema: InflatedSchema;
+        project: InflatedProject;
+    }) => Promise<void>;
 }
 
 // // // //
