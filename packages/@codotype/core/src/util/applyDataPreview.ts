@@ -1,10 +1,10 @@
 import {
-  DataPreview,
-  DataPreviewActionType,
-  DataPreviewConstraintType,
-  DataPreviewRule,
-  DataPreviewConstraint,
-  DataPreviewAction,
+    DataPreview,
+    DataPreviewActionType,
+    DataPreviewConstraintType,
+    DataPreviewRule,
+    DataPreviewConstraint,
+    DataPreviewAction,
 } from "../DataPreview";
 import { OptionValueInstance } from "../configuration-option-types";
 
@@ -18,37 +18,37 @@ import { OptionValueInstance } from "../configuration-option-types";
  * TODO - write tests for this
  */
 export function shouldApplyDataPreviewRule(props: {
-  data: Record<string, OptionValueInstance>;
-  constraint: DataPreviewConstraint;
+    data: Record<string, OptionValueInstance>;
+    constraint: DataPreviewConstraint;
 }): boolean {
-  const { constraint, data } = props;
+    const { constraint, data } = props;
 
-  const sourceValue: any = data[constraint.dataProperty];
+    const sourceValue: any = data[constraint.dataProperty];
 
-  // Handle EQUALS
-  if (constraint.type === DataPreviewConstraintType.equals) {
-    if (sourceValue === constraint.value) {
-      return true;
+    // Handle EQUALS
+    if (constraint.type === DataPreviewConstraintType.equals) {
+        if (sourceValue === constraint.value) {
+            return true;
+        }
     }
-  }
 
-  // Handle contains
-  if (
-    constraint.type === DataPreviewConstraintType.contains &&
-    typeof sourceValue === "string"
-  ) {
-    return sourceValue.includes(constraint.value);
-  }
-
-  // Handle exists
-  if (constraint.type === DataPreviewConstraintType.exists) {
-    if (sourceValue) {
-      return true;
+    // Handle contains
+    if (
+        constraint.type === DataPreviewConstraintType.contains &&
+        typeof sourceValue === "string"
+    ) {
+        return sourceValue.includes(constraint.value);
     }
-  }
 
-  // Return false by default
-  return false;
+    // Handle exists
+    if (constraint.type === DataPreviewConstraintType.exists) {
+        if (sourceValue) {
+            return true;
+        }
+    }
+
+    // Return false by default
+    return false;
 }
 
 /**
@@ -57,60 +57,60 @@ export function shouldApplyDataPreviewRule(props: {
  * @param props.rule - The DataPreviewRule being evaluated
  */
 export function applyDataPreviewRule(props: {
-  data: Record<string, OptionValueInstance>;
-  action: DataPreviewAction;
+    data: Record<string, OptionValueInstance>;
+    action: DataPreviewAction;
 }): string {
-  const { action, data } = props;
+    const { action, data } = props;
 
-  // Handle LITERAL
-  if (action.type === DataPreviewActionType.literal) {
-    return action.template;
-  }
-
-  // Handle STRING_TEMPLATE
-  if (action.type === DataPreviewActionType.stringTemplate) {
-    let templateString = action.template;
-    let templateFragments: string[] = [];
-
-    // Handle template opener
-    const openFragments = templateString.split("{{");
-    for (const s of openFragments) {
-      // Handle template closer
-      if (s.includes("}}")) {
-        const closeFragments = s.split("}}");
-        closeFragments.forEach((sf) => {
-          if (sf !== "") {
-            templateFragments.push(sf);
-          }
-        });
-      } else {
-        templateFragments.push(s);
-      }
+    // Handle LITERAL
+    if (action.type === DataPreviewActionType.literal) {
+        return action.template;
     }
 
-    // TODO - annotate
-    const finalFragments: string[] = [];
-    templateFragments.forEach((tf) => {
-      let finalFragment = "";
-      Object.keys(data).forEach((key) => {
-        if (tf.includes(`data.${key}`)) {
-          // TODO - handle non-string values here
-          finalFragment = String(data[key]);
+    // Handle STRING_TEMPLATE
+    if (action.type === DataPreviewActionType.stringTemplate) {
+        let templateString = action.template;
+        let templateFragments: string[] = [];
+
+        // Handle template opener
+        const openFragments = templateString.split("{{");
+        for (const s of openFragments) {
+            // Handle template closer
+            if (s.includes("}}")) {
+                const closeFragments = s.split("}}");
+                closeFragments.forEach((sf) => {
+                    if (sf !== "") {
+                        templateFragments.push(sf);
+                    }
+                });
+            } else {
+                templateFragments.push(s);
+            }
         }
-      });
-      if (finalFragment) {
-        finalFragments.push(finalFragment);
-      } else {
-        finalFragments.push(tf);
-      }
-    });
 
-    // Join finalFragments and return
-    return finalFragments.join("");
-  }
+        // TODO - annotate
+        const finalFragments: string[] = [];
+        templateFragments.forEach((tf) => {
+            let finalFragment = "";
+            Object.keys(data).forEach((key) => {
+                if (tf.includes(`data.${key}`)) {
+                    // TODO - handle non-string values here
+                    finalFragment = String(data[key]);
+                }
+            });
+            if (finalFragment) {
+                finalFragments.push(finalFragment);
+            } else {
+                finalFragments.push(tf);
+            }
+        });
 
-  // Empty return statement
-  return "";
+        // Join finalFragments and return
+        return finalFragments.join("");
+    }
+
+    // Empty return statement
+    return "";
 }
 
 /**
@@ -120,30 +120,30 @@ export function applyDataPreviewRule(props: {
  * @param props.dataPreview - The DataPreview being applied against props.data
  */
 export function applyDataPreview(props: {
-  data: Record<string, OptionValueInstance>;
-  dataPreview: DataPreview;
+    data: Record<string, OptionValueInstance>;
+    dataPreview: DataPreview;
 }): string {
-  const { data, dataPreview } = props;
+    const { data, dataPreview } = props;
 
-  // Defines variable for return value
-  let dataPreviewContent: null | string = null;
+    // Defines variable for return value
+    let dataPreviewContent: null | string = null;
 
-  // Iterates over each rule and evaluates accordingly
-  dataPreview.rules.forEach((rule: DataPreviewRule) => {
-    // Skip others if dataPreviewContent is already defined
-    if (dataPreviewContent !== null) {
-      return;
-    }
+    // Iterates over each rule and evaluates accordingly
+    dataPreview.rules.forEach((rule: DataPreviewRule) => {
+        // Skip others if dataPreviewContent is already defined
+        if (dataPreviewContent !== null) {
+            return;
+        }
 
-    // Invoke applyDataPreviewRule, if constraint is met
-    if (shouldApplyDataPreviewRule({ constraint: rule.constraint, data })) {
-      dataPreviewContent = applyDataPreviewRule({
-        action: rule.action,
-        data,
-      });
-    }
-  });
+        // Invoke applyDataPreviewRule, if constraint is met
+        if (shouldApplyDataPreviewRule({ constraint: rule.constraint, data })) {
+            dataPreviewContent = applyDataPreviewRule({
+                action: rule.action,
+                data,
+            });
+        }
+    });
 
-  // return content
-  return dataPreviewContent || "";
+    // return content
+    return dataPreviewContent || "";
 }

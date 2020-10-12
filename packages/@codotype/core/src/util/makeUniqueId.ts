@@ -7,5 +7,5 @@ import { v4 as uuidv4 } from "uuid";
  * Returns a unique ID for a Codotype entity
  */
 export function makeUniqueId(): string {
-  return uuidv4();
+    return uuidv4();
 }

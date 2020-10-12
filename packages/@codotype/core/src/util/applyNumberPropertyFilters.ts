@@ -2,9 +2,9 @@ import { NumberValueFilter } from "../property-filter";
 
 /** Maps every NumberValueFilter to its function. */
 const filterFuncs = {
-  [NumberValueFilter.integerValue]: (num) => Math.floor(num),
-  [NumberValueFilter.positiveValue]: (num) => Math.abs(num),
-  [NumberValueFilter.negativeValue]: (num) => -1 * Math.abs(num),
+    [NumberValueFilter.integerValue]: (num) => Math.floor(num),
+    [NumberValueFilter.positiveValue]: (num) => Math.abs(num),
+    [NumberValueFilter.negativeValue]: (num) => -1 * Math.abs(num),
 };
 
 /**
@@ -16,14 +16,14 @@ const filterFuncs = {
  * @returns Filtered number value
  */
 export function applyNumberPropertyFilters({
-  value,
-  filters,
+    value,
+    filters,
 }: {
-  value: number;
-  filters: NumberValueFilter[];
+    value: number;
+    filters: NumberValueFilter[];
 }): number {
-  return filters.reduce(
-    (str, filter) => filterFuncs[String(filter)](str),
-    value
-  );
+    return filters.reduce(
+        (str, filter) => filterFuncs[String(filter)](str),
+        value,
+    );
 }

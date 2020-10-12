@@ -7,5 +7,5 @@ import { dasherize } from "underscore.string";
  * @param {string} label
  */
 export function makeKebabCase(label: string): string {
-  return dasherize(label).toLowerCase().slice(1); // TODO - why slice at 1....?
+    return dasherize(label).toLowerCase().slice(1); // TODO - why slice at 1....?
 }

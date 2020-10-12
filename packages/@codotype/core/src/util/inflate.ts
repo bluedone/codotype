@@ -1,102 +1,108 @@
 import { buildTokenPluralization } from "./buildTokenPluralization";
 import { makeUniqueId } from "./makeUniqueId";
 import {
-  Schema,
-  Relation,
-  RelationReference,
-  InflatedSchema,
-  Project,
-  InflatedProject,
+    Schema,
+    Relation,
+    RelationReference,
+    InflatedSchema,
+    Project,
+    InflatedProject,
 } from "../";
 
 // // // //
 
 export function buildRelationReference(params: {
-  relation: Relation;
-  sourceSchema: Schema;
-  destinationSchema: Schema;
+    relation: Relation;
+    sourceSchema: Schema;
+    destinationSchema: Schema;
 }): RelationReference {
-  const { relation, sourceSchema, destinationSchema } = params;
+    const { relation, sourceSchema, destinationSchema } = params;
 
-  return {
-    id: makeUniqueId(),
-    type: relation.type,
-    sourceSchemaId: sourceSchema.id,
-    destinationSchemaId: destinationSchema.id,
-    sourceRelationId: relation.id,
-    identifiers: {
-      source: {
-        canonical: { ...sourceSchema.identifiers },
-        alias: buildTokenPluralization(
-          relation.sourceSchemaAlias || sourceSchema.identifiers.singular.label
-        ),
-      },
-      destination: {
-        canonical: { ...destinationSchema.identifiers },
-        alias: {
-          ...buildTokenPluralization(
-            relation.destinationSchemaAlias ||
-              destinationSchema.identifiers.singular.label
-          ),
+    return {
+        id: makeUniqueId(),
+        type: relation.type,
+        sourceSchemaId: sourceSchema.id,
+        destinationSchemaId: destinationSchema.id,
+        sourceRelationId: relation.id,
+        identifiers: {
+            source: {
+                canonical: { ...sourceSchema.identifiers },
+                alias: buildTokenPluralization(
+                    relation.sourceSchemaAlias ||
+                        sourceSchema.identifiers.singular.label,
+                ),
+            },
+            destination: {
+                canonical: { ...destinationSchema.identifiers },
+                alias: {
+                    ...buildTokenPluralization(
+                        relation.destinationSchemaAlias ||
+                            destinationSchema.identifiers.singular.label,
+                    ),
+                },
+            },
         },
-      },
-    },
-  };
+    };
 }
 
 // // // //
 // // // //
 
 export function buildRelationReferences(params: {
-  schema: Schema;
-  schemas: Schema[];
+    schema: Schema;
+    schemas: Schema[];
 }): RelationReference[] {
-  const { schema, schemas } = params;
+    const { schema, schemas } = params;
 
-  // Defines array of RelationReferences we're going to return
+    // Defines array of RelationReferences we're going to return
 
-  return schemas.reduce((previous: RelationReference[], nextSchema: Schema) => {
-    return [
-      ...previous,
-      ...nextSchema.relations
-        .filter((r: Relation) => r.destinationSchemaId === schema.id)
-        .map(
-          (r: Relation): RelationReference => {
-            return buildRelationReference({
-              sourceSchema: nextSchema,
-              destinationSchema: schema,
-              relation: r,
-            });
-          }
-        ),
-    ];
-  }, []);
+    return schemas.reduce(
+        (previous: RelationReference[], nextSchema: Schema) => {
+            return [
+                ...previous,
+                ...nextSchema.relations
+                    .filter(
+                        (r: Relation) => r.destinationSchemaId === schema.id,
+                    )
+                    .map(
+                        (r: Relation): RelationReference => {
+                            return buildRelationReference({
+                                sourceSchema: nextSchema,
+                                destinationSchema: schema,
+                                relation: r,
+                            });
+                        },
+                    ),
+            ];
+        },
+        [],
+    );
 }
 
 // // // //
 
 export function buildInflatedRelations(params: {
-  schema: Schema;
-  schemas: Schema[];
+    schema: Schema;
+    schemas: Schema[];
 }): RelationReference[] {
-  const { schema, schemas } = params;
+    const { schema, schemas } = params;
 
-  // Defines array of RelationReferences we're going to return
-  return [
-    ...schema.relations.map(
-      (r: Relation): RelationReference => {
-        const nextSchema: Schema = schemas.find(
-          (s) => s.id === r.destinationSchemaId
-        );
+    // Defines array of RelationReferences we're going to return
+    return [
+        ...schema.relations.map(
+            (r: Relation): RelationReference => {
+                const nextSchema: Schema = schemas.find(
+                    (s) => s.id === r.destinationSchemaId,
+                );
 
-        return buildRelationReference({
-          sourceSchema: schema,
-          destinationSchema: nextSchema,
-          relation: r,
-        });
-      }
-    ),
-  ];
+                return buildRelationReference({
+                    sourceSchema: schema,
+                    destinationSchema: nextSchema,
+                    relation: r,
+                });
+            },
+        ),
+    ];
 }
 
 // // // //
@@ -109,22 +115,22 @@ export function buildInflatedRelations(params: {
  * @returns A single InflatedSchema instance
  */
 export function inflateSchema(params: {
-  schema: Schema;
-  schemas: Schema[];
+    schema: Schema;
+    schemas: Schema[];
 }): InflatedSchema {
-  const { schema, schemas } = params;
+    const { schema, schemas } = params;
 
-  return {
-    id: schema.id,
-    attributes: schema.attributes,
-    identifiers: {
-      ...schema.identifiers,
-    },
-    relations: buildInflatedRelations({ schema, schemas }),
-    references: buildRelationReferences({ schema, schemas }),
-    // QUESTION - does anything need to be done for the configuration?
-    configuration: schema.configuration,
-  };
+    return {
+        id: schema.id,
+        attributes: schema.attributes,
+        identifiers: {
+            ...schema.identifiers,
+        },
+        relations: buildInflatedRelations({ schema, schemas }),
+        references: buildRelationReferences({ schema, schemas }),
+        // QUESTION - does anything need to be done for the configuration?
+        configuration: schema.configuration,
+    };
 }
 
 // // // //
@@ -136,15 +142,15 @@ export function inflateSchema(params: {
  * @returns array of InflatedSchema instances
  */
 export function inflateSchemas(params: {
-  schemas: Schema[];
+    schemas: Schema[];
 }): InflatedSchema[] {
-  return params.schemas.map(
-    (s: Schema): InflatedSchema =>
-      inflateSchema({
-        schemas: params.schemas,
-        schema: s,
-      })
-  );
+    return params.schemas.map(
+        (s: Schema): InflatedSchema =>
+            inflateSchema({
+                schemas: params.schemas,
+                schema: s,
+            }),
+    );
 }
 
 // // // //
@@ -154,13 +160,13 @@ export function inflateSchemas(params: {
  * @param params
  */
 export function inflateProject(params: { project: Project }): InflatedProject {
-  const { project } = params;
-  return {
-    id: project.id,
-    schemas: inflateSchemas({ schemas: project.schemas }),
-    configuration: project.configuration,
-    generatorId: project.generatorId,
-    identifiers: project.identifiers,
-    generatorVersion: project.generatorVersion,
-  };
+    const { project } = params;
+    return {
+        id: project.id,
+        schemas: inflateSchemas({ schemas: project.schemas }),
+        configuration: project.configuration,
+        generatorId: project.generatorId,
+        identifiers: project.identifiers,
+        generatorVersion: project.generatorVersion,
+    };
 }

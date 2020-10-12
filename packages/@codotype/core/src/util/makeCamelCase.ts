@@ -7,5 +7,5 @@ import { camelCase } from "change-case";
  * @param label
  */
 export function makeCamelCase(label: string): string {
-  return camelCase(label);
+    return camelCase(label);
 }

@@ -24,28 +24,28 @@ import { DataPreview } from "./DataPreview";
 //          - It should be limited to COLLECTION - the property.type can be "COLLECTION_REFERENCE"
 //          - We'll also need to store the ID of the associated COLLECTION property - where should that be done?
 export enum OptionType {
-  STRING = "STRING",
-  NUMBER = "NUMBER",
-  BOOLEAN = "BOOLEAN",
-  DROPDOWN = "DROPDOWN",
-  MULTI_DROPDOWN = "MULTI_DROPDOWN",
-  COLLECTION = "COLLECTION",
-  INSTANCE = "INSTANCE",
+    STRING = "STRING",
+    NUMBER = "NUMBER",
+    BOOLEAN = "BOOLEAN",
+    DROPDOWN = "DROPDOWN",
+    MULTI_DROPDOWN = "MULTI_DROPDOWN",
+    COLLECTION = "COLLECTION",
+    INSTANCE = "INSTANCE",
 }
 
 export type OptionValue =
-  | string
-  | string[]
-  | number
-  | number[]
-  | boolean
-  | OptionValueInstance
-  | OptionValueInstance[]
-  | null;
+    | string
+    | string[]
+    | number
+    | number[]
+    | boolean
+    | OptionValueInstance
+    | OptionValueInstance[]
+    | null;
 
 export type OptionValueInstance =
-  | OptionValueInstanceStandard
-  | OptionValueInstanceAllowDisable;
+    | OptionValueInstanceStandard
+    | OptionValueInstanceAllowDisable;
 
 // TODO - should be:
 // export interface OptionValueInstance {
@@ -56,17 +56,17 @@ export type OptionValueInstance =
 // }
 
 interface OptionValueInstanceStandard {
-  [key: string]: OptionValue;
+    [key: string]: OptionValue;
 }
 
 // NOTE - this distinction is confusing
 // it should always include he enabled + value pair
 // When we inflate the metadata to be used in the generator, we can simplify based on the allowDisable property
 interface OptionValueInstanceAllowDisable {
-  enabled: boolean;
-  value: {
-    [key: string]: OptionValue;
-  };
+    enabled: boolean;
+    value: {
+        [key: string]: OptionValue;
+    };
 }
 
 /**
@@ -75,10 +75,10 @@ interface OptionValueInstanceAllowDisable {
  * Label + identifier is required, description + documentation is optional
  */
 export interface DropdownOption {
-  label: string;
-  value: string;
-  description?: string;
-  documentation?: string;
+    label: string;
+    value: string;
+    description?: string;
+    documentation?: string;
 }
 
 // TODO - add variant to ConfigurationGroupProperty -> make list of use cases + mockups
@@ -89,78 +89,78 @@ export interface DropdownOption {
 //          - { enabled: boolean; value: { collectionSource: UUID, collectionValue: UUID } }
 // TODO - add "unique" prop (only applied inside of OptionType.COLLECTION)
 export interface ConfigurationGroupProperty {
-  label: string;
-  identifier: string;
-  description: string;
-  documentation: string;
-  icon: string;
-  type: OptionType;
-  defaultValue: OptionValue;
-  required: boolean;
-  enabled: boolean;
-  allowDisable: boolean;
-  layoutVariant?: PropertyLayoutVariant;
-  properties: ConfigurationGroupProperty[];
-  dropdownOptions: DropdownOption[];
-  filters: PropertyFilter[];
-  validations: PropertyValidation[];
-  dataPreview: DataPreview;
+    label: string;
+    identifier: string;
+    description: string;
+    documentation: string;
+    icon: string;
+    type: OptionType;
+    defaultValue: OptionValue;
+    required: boolean;
+    enabled: boolean;
+    allowDisable: boolean;
+    layoutVariant?: PropertyLayoutVariant;
+    properties: ConfigurationGroupProperty[];
+    dropdownOptions: DropdownOption[];
+    filters: PropertyFilter[];
+    validations: PropertyValidation[];
+    dataPreview: DataPreview;
 }
 
 // // // //
 
 export enum PropertyLayoutVariant {
-  COL_3 = "COL_3",
-  COL_4 = "COL_4",
-  COL_6 = "COL_6",
-  COL_8 = "COL_8",
-  COL_12 = "COL_12",
-  CARD_COL_3 = "CARD_COL_3",
-  CARD_COL_4 = "CARD_COL_4",
-  CARD_COL_6 = "CARD_COL_6",
-  CARD_COL_8 = "CARD_COL_8",
-  CARD_COL_12 = "CARD_COL_12",
-  // Additional variants:
-  // - inline documentation
-  // - modal?
-  // - else?
+    COL_3 = "COL_3",
+    COL_4 = "COL_4",
+    COL_6 = "COL_6",
+    COL_8 = "COL_8",
+    COL_12 = "COL_12",
+    CARD_COL_3 = "CARD_COL_3",
+    CARD_COL_4 = "CARD_COL_4",
+    CARD_COL_6 = "CARD_COL_6",
+    CARD_COL_8 = "CARD_COL_8",
+    CARD_COL_12 = "CARD_COL_12",
+    // Additional variants:
+    // - inline documentation
+    // - modal?
+    // - else?
 }
 
 // LIST - lists all the properties. Documentation renders in a modal.
 // DOCS - Half documentation, half properties. Documentation renders in-line.
 // DETAIL - master/detail layout. Documentation renders in a modal.
 export enum SectionLayoutVariant {
-  LIST = "LIST",
-  DOCS_3x9 = "DOCS_3x9",
-  DOCS_4x8 = "DOCS_4x8",
-  DOCS_6x6 = "DOCS_6x6",
-  DETAIL_3x9 = "DETAIL_3x9",
-  DETAIL_4x8 = "DETAIL_4x8",
-  DETAIL_6x6 = "DETAIL_6x6",
+    LIST = "LIST",
+    DOCS_3x9 = "DOCS_3x9",
+    DOCS_4x8 = "DOCS_4x8",
+    DOCS_6x6 = "DOCS_6x6",
+    DETAIL_3x9 = "DETAIL_3x9",
+    DETAIL_4x8 = "DETAIL_4x8",
+    DETAIL_6x6 = "DETAIL_6x6",
 }
 
 // Defines the LayoutVariant type that's ONLY used for ConfigurationGroup
 // TABS - Renders a Tab for each ConfigurationGroupSection
 export enum GroupLayoutVariant {
-  TABS = "TABS",
-  LIST = "LIST",
-  DOCS_3x9 = "DOCS_3x9",
-  DOCS_4x8 = "DOCS_4x8",
-  DOCS_6x6 = "DOCS_6x6",
-  DETAIL_3x9 = "DETAIL_3x9",
-  DETAIL_4x8 = "DETAIL_4x8",
-  DETAIL_6x6 = "DETAIL_6x6",
+    TABS = "TABS",
+    LIST = "LIST",
+    DOCS_3x9 = "DOCS_3x9",
+    DOCS_4x8 = "DOCS_4x8",
+    DOCS_6x6 = "DOCS_6x6",
+    DETAIL_3x9 = "DETAIL_3x9",
+    DETAIL_4x8 = "DETAIL_4x8",
+    DETAIL_6x6 = "DETAIL_6x6",
 }
 
 // // // //
 
 interface ConfigurationBase {
-  label: string;
-  identifier: string;
-  description: string;
-  documentation: string; // Markdown
-  enabled: boolean;
-  allowDisable: boolean;
+    label: string;
+    identifier: string;
+    description: string;
+    documentation: string; // Markdown
+    enabled: boolean;
+    allowDisable: boolean;
 }
 
 // // // //
@@ -173,14 +173,14 @@ interface ConfigurationBase {
  * and many ConfigurationGroups in a Generator or SchemaEditorConfiguration
  */
 export interface ConfigurationGroupSection extends ConfigurationBase {
-  layoutVariant: SectionLayoutVariant;
-  properties: ConfigurationGroupProperty[];
+    layoutVariant: SectionLayoutVariant;
+    properties: ConfigurationGroupProperty[];
 }
 
 // // // //
 
 export interface ConfigurationGroup extends ConfigurationBase {
-  layoutVariant: GroupLayoutVariant;
-  sections: ConfigurationGroupSection[];
-  properties: ConfigurationGroupProperty[];
+    layoutVariant: GroupLayoutVariant;
+    sections: ConfigurationGroupSection[];
+    properties: ConfigurationGroupProperty[];
 }

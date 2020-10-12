@@ -9,21 +9,21 @@ import { AttributeBuilder } from "./factories/Attribute";
 // // // //
 
 export interface CodotypeFactory {
-  ConfigurationGroup: typeof ConfigurationGroupBuilder;
-  ConfigurationGroupSection: typeof ConfigurationGroupSectionBuilder;
-  ConfigurationGroupProperty: typeof ConfigurationGroupPropertyBuilder;
-  Attribute: typeof AttributeBuilder;
-  Relation: typeof RelationBuilder;
-  Schema: typeof SchemaBuilder;
-  SchemaEditor: typeof SchemaEditorBuilder;
+    ConfigurationGroup: typeof ConfigurationGroupBuilder;
+    ConfigurationGroupSection: typeof ConfigurationGroupSectionBuilder;
+    ConfigurationGroupProperty: typeof ConfigurationGroupPropertyBuilder;
+    Attribute: typeof AttributeBuilder;
+    Relation: typeof RelationBuilder;
+    Schema: typeof SchemaBuilder;
+    SchemaEditor: typeof SchemaEditorBuilder;
 }
 
 export const Codotype: CodotypeFactory = {
-  ConfigurationGroup: ConfigurationGroupBuilder,
-  ConfigurationGroupSection: ConfigurationGroupSectionBuilder,
-  ConfigurationGroupProperty: ConfigurationGroupPropertyBuilder,
-  Attribute: AttributeBuilder,
-  Relation: RelationBuilder,
-  Schema: SchemaBuilder,
-  SchemaEditor: SchemaEditorBuilder,
+    ConfigurationGroup: ConfigurationGroupBuilder,
+    ConfigurationGroupSection: ConfigurationGroupSectionBuilder,
+    ConfigurationGroupProperty: ConfigurationGroupPropertyBuilder,
+    Attribute: AttributeBuilder,
+    Relation: RelationBuilder,
+    Schema: SchemaBuilder,
+    SchemaEditor: SchemaEditorBuilder,
 };

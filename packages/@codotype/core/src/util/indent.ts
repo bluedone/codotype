@@ -8,21 +8,20 @@
 // Taken from a comment in the following EJS issue:
 // https://github.com/mde/ejs/issues/176
 export function indent(text, depth) {
+    // Defines an array for the function output
+    const output = [];
 
-  // Defines an array for the function output
-  const output = []
+    // Splits the input text on each newline
+    text.split("\n").forEach((line, num) => {
+        // To avoid indenting the first line
+        if (num > 0) {
+            for (var i = 0; i < depth; i++) {
+                line = " " + line;
+            }
+        }
+        output.push(line);
+    });
 
-  // Splits the input text on each newline
-  text.split("\n").forEach((line, num) => {
-    // To avoid indenting the first line
-    if (num > 0) {
-      for (var i = 0; i < depth; i++) {
-        line = ' ' + line;
-      }
-    }
-    output.push(line);
-  });
-
-  // Returns the output, rejoined with a newline each
-  return output.join('\n')
+    // Returns the output, rejoined with a newline each
+    return output.join("\n");
 }

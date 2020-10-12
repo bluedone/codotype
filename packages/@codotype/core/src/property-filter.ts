@@ -7,17 +7,17 @@
  * the the value on a ConfigurationGroupProperty (STRING ONLY)
  */
 export enum StringValueFilter {
-  lowercase = "LOWERCASE",
-  uppercase = "UPPERCASE",
-  titlecase = "TITLECASE",
-  camelcase = "CAMELCASE",
-  snakecase = "SNAKECASE",
-  pascalcase = "PASCALCASE",
-  kebabcase = "KEBABCASE",
-  nonumbers = "NO_NUMBERS",
-  nosymbols = "NO_SYMBOLS",
-  trimwhitespace = "TRIM_WHITESPACE",
-  removewhitespace = "REMOVE_WHITESPACE",
+    lowercase = "LOWERCASE",
+    uppercase = "UPPERCASE",
+    titlecase = "TITLECASE",
+    camelcase = "CAMELCASE",
+    snakecase = "SNAKECASE",
+    pascalcase = "PASCALCASE",
+    kebabcase = "KEBABCASE",
+    nonumbers = "NO_NUMBERS",
+    nosymbols = "NO_SYMBOLS",
+    trimwhitespace = "TRIM_WHITESPACE",
+    removewhitespace = "REMOVE_WHITESPACE",
 }
 
 /*
@@ -26,9 +26,9 @@ export enum StringValueFilter {
  * the the value on a ConfigurationGroupProperty (NUMBER ONLY)
  */
 export enum NumberValueFilter {
-  positiveValue = "POSITIVE_VALUE",
-  negativeValue = "NEGATIVE_VALUE",
-  integerValue = "INTEGER_VALUE",
+    positiveValue = "POSITIVE_VALUE",
+    negativeValue = "NEGATIVE_VALUE",
+    integerValue = "INTEGER_VALUE",
 }
 
 export type PropertyFilter = StringValueFilter | NumberValueFilter;

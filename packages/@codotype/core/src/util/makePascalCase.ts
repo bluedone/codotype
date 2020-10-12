@@ -7,5 +7,5 @@ import { classify, titleize } from "underscore.string";
  * @param label
  */
 export function makePascalCase(label: string): string {
-  return classify(titleize(label));
+    return classify(titleize(label));
 }

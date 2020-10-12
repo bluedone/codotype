@@ -11,11 +11,11 @@ import { makeSnakeCase } from "./makeSnakeCase";
 // Accepts a singlar, titleized, human-readable label
 // and produces all requisite metadata for sensible code generation
 export function buildTokenCasing(label: string): TokenCasing {
-  return {
-    label: makeLabelCase(label),
-    snake: makeSnakeCase(label),
-    camel: makeCamelCase(label),
-    pascal: makePascalCase(label),
-    kebab: makeKebabCase(label),
-  };
+    return {
+        label: makeLabelCase(label),
+        snake: makeSnakeCase(label),
+        camel: makeCamelCase(label),
+        pascal: makePascalCase(label),
+        kebab: makeKebabCase(label),
+    };
 }

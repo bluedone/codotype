@@ -8,5 +8,5 @@ import { underscored } from "underscore.string";
  * @param {string} identifier - the `Identifier` produced
  */
 export function makeIdentifier(label: string): string {
-  return underscored(label.toLowerCase());
+    return underscored(label.toLowerCase());
 }

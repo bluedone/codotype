@@ -1,10 +1,10 @@
 import { StringValueFilter, NumberValueFilter } from "./property-filter";
 
 export interface PropertyValueFilterMeta {
-  label: string; // "Lowercase"
-  id: StringValueFilter | NumberValueFilter;
-  description: string; // "Transforms the input value into lowercase"
-  documentation: string; // "Includes input + output examples"
+    label: string; // "Lowercase"
+    id: StringValueFilter | NumberValueFilter;
+    description: string; // "Transforms the input value into lowercase"
+    documentation: string; // "Includes input + output examples"
 }
 
 // Defines PROPERTY_FILTER_META metadata
