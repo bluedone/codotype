@@ -273,7 +273,7 @@ export class CodotypeNodeRuntime {
      * TODO - accept OUTPUT_DIRECTORY override
      * @param props.build - ProjectBuild
      */
-    async execute({ build }: { build: ProjectBuild }) {
+    async execute({ build }: { build: ProjectBuild }): Promise<void> {
         // Logs debug statements
         console.log("CodotypeNodeRuntime - start execute({ build })");
 

@@ -133,11 +133,14 @@ export class RuntimeBuilder implements CodotypeRuntime {
     }
 }
 
-// - [ ] registerPlugin (registerPlugin) -> currently accepts strings, could be updated to accept others!
-// - [ ] getPlugins
-// - [ ] execute
+// This should all be pretty managable
+// TODO - make sure that `this.x` is bound to each function passed in props
+// - [ ] registerPlugin: () => void; (registerPlugin) -> currently accepts strings, could be updated to accept others!
+// - [ ] getPlugins() => PluginRegistration[] (EASY)
+// - [ ] execute: => Promise<void> (EASY)
 // - [ ] fileExists (EASY)
-// - [ ] log (EASY)
+// - [ ] log (EASY) <------ this should NOT be implemented individually
+// - [ ] prepareProjectBuildDestination() <------ this should NOT be implemented individually
 // - [X] ensureDir
 // - [X] templatePath
 // - [X] destinationPath
