@@ -22,20 +22,14 @@ import {
     PLUGIN_DISTRIBUTABLE_DIR,
     RuntimeLogLevel,
     RuntimeErrorCodes,
+    CodotypeRuntime,
     PluginMetadata,
     ProjectBuild,
     CodotypeRuntimeConstructorOptions,
+    PluginRegistration,
 } from "./core-updates";
 
 // // // //
-
-interface PluginRegistration {
-    // QUESTION - should this be the generic that's passed in?
-    id: string;
-    pluginPath: string;
-    pluginDynamicImportPath: string;
-    pluginMetadata: PluginMetadata;
-}
 
 /**
  * getPluginPath
@@ -84,7 +78,7 @@ export function getPluginPath(props: {
  * CodotypeNodeRuntime
  * Runtime for running Codotype plugins through Node.js
  */
-export class CodotypeNodeRuntime {
+export class CodotypeNodeRuntime implements CodotypeRuntime {
     options: CodotypeRuntimeConstructorOptions;
     plugins: PluginRegistration[];
 
@@ -123,7 +117,7 @@ export class CodotypeNodeRuntime {
         modulePath?: string;
         relativePath?: string;
         absolutePath?: string;
-    }): void {
+    }): Promise<PluginRegistration> {
         // Resolves path to Codotype Plugin
         const pluginPath: string = getPluginPath(props);
 
@@ -179,7 +173,8 @@ export class CodotypeNodeRuntime {
                 this.log(`Registered Codotype Plugin`, {
                     level: RuntimeLogLevel.verbose,
                 });
-                return;
+
+                return Promise.resolve(newPluginRegistration);
             }
 
             // Logs which generator is being run
@@ -201,7 +196,11 @@ export class CodotypeNodeRuntime {
      * Provisions the output directory and writes the Codotype Project JSON to the output directory
      * @param param.build - see ProjectBuild
      */
-    async prepareProjectBuildDestination({ build }: { build: ProjectBuild }) {
+    async prepareProjectBuildDestination({
+        build,
+    }: {
+        build: ProjectBuild;
+    }): Promise<void> {
         // Debug log statements
         console.log("Writing build manfiest");
 
@@ -250,11 +249,11 @@ export class CodotypeNodeRuntime {
      * TODO - this is repeated in @codotype/generator - should be abstracted, or only encapsulated in the runtime
      * @param dir
      */
-    ensureDir(dir: string) {
+    ensureDir(dir: string): Promise<boolean> {
         return new Promise((resolve, reject) => {
             return fsExtra.ensureDir(dir, (err: any) => {
                 if (err) return reject(err);
-                return resolve();
+                return resolve(true);
             });
         });
     }
@@ -263,8 +262,8 @@ export class CodotypeNodeRuntime {
      * getPlugins
      * Returns an array of PluginRegistration instances currently to this runtime instance
      */
-    getPlugins(): PluginRegistration[] {
-        return this.plugins;
+    getPlugins(): Promise<PluginRegistration[]> {
+        return Promise.resolve(this.plugins);
     }
 
     /**
@@ -491,8 +490,8 @@ export class CodotypeNodeRuntime {
      * Checks to see if a file exists at the destination in the filesystem
      * @param filepath - string
      */
-    fileExists(filepath: string): boolean {
-        return fsExtra.fileExists(filepath);
+    fileExists(filepath: string): Promise<boolean> {
+        return Promise.resolve(fsExtra.fileExists(filepath));
     }
 
     /**
@@ -504,15 +503,15 @@ export class CodotypeNodeRuntime {
     compareFile(
         destinationFilepath: string,
         compiledTemplate: string,
-    ): boolean {
+    ): Promise<boolean> {
         // Reads the file from FS
         const existing = fsExtra.readFileSync(destinationFilepath, "utf8");
 
         // If exists, and it's the same, SKIP
         if (compiledTemplate === existing) {
-            return true;
+            return Promise.resolve(true);
         } else {
-            return false;
+            return Promise.resolve(false);
         }
     }
 
@@ -553,11 +552,11 @@ export class CodotypeNodeRuntime {
      * @param src
      * @param dest
      */
-    async copyDir(src: any, dest: any): Promise<void> {
+    async copyDir(src: any, dest: any): Promise<boolean> {
         return new Promise((resolve, reject) => {
             return fsExtra.copy(src, dest, (err: any) => {
                 if (err) return reject(err);
-                return resolve();
+                return resolve(true);
             });
         });
     }
@@ -578,6 +577,7 @@ export class CodotypeNodeRuntime {
      * composeWith
      * TODO - annotate, cleanup, test
      * Enables one generator to fire off several child generators
+     * TODO - why doesn't this just accept the generator props?
      * @param parentGeneratorInstance
      * @param generatorModule
      * @param options
