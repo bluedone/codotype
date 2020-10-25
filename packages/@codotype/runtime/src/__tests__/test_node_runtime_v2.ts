@@ -1,8 +1,10 @@
-import { CodotypeNodeRuntime } from "../node-runtime-v2";
-import { RuntimeLogLevel, CodotypeRuntime, MockRuntime } from "../core-updates";
+import { RuntimeLogLevel, CodotypeRuntime } from "../types";
+import { MockRuntime } from "../MockRuntime";
 
 // // // //
 
+// TODO - test each method with MockRuntime
+// TODO - test each method with NodeRuntime
 describe("testing @codotype/runtime v2", () => {
     test("testing @codotype/runtime v2", async () => {
         const mockRuntime: CodotypeRuntime = new MockRuntime({
