@@ -4,7 +4,11 @@ module.exports = {
         "**/__tests__/**/*.+(ts|tsx|js)",
         "**/?(*.)+(spec|test).+(ts|tsx|js)",
     ],
-    testPathIgnorePatterns: ["/node_modules/", "test_state.ts"],
+    testPathIgnorePatterns: [
+        "/node_modules/",
+        "test_state.ts",
+        "/mock_plugin/",
+    ],
     transform: {
         "^.+\\.(ts|tsx)$": "ts-jest",
     },
