@@ -12,8 +12,8 @@ import {
     RelationType,
 } from "@codotype/core";
 import { CodotypeGenerator } from "./generator";
-import { runGenerator } from "./runGenerator";
-import { prettify } from "./prettify";
+import { runGenerator } from "./utils/runGenerator";
+import { prettify } from "./utils/prettify";
 import {
     RuntimeLogLevel,
     CodotypeRuntime,
@@ -30,9 +30,9 @@ import {
     GENERATOR_META_FILENAME,
     PLUGIN_DISTRIBUTABLE_DIR,
 } from "./constants";
-import { getPluginPath } from "./getPluginPath";
-import { prepareProjectBuildDestination } from "./prepareProjectBuildDestination";
-import { logger } from "./logger";
+import { getPluginPath } from "./utils/getPluginPath";
+import { prepareProjectBuildDestination } from "./utils/prepareProjectBuildDestination";
+import { logger } from "./utils/logger";
 
 // // // //
 

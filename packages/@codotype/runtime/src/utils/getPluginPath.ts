@@ -1,6 +1,6 @@
 import * as fs from "fs";
 import * as path from "path";
-import { MODULES_ROOT } from "./constants";
+import { MODULES_ROOT } from "../constants";
 
 // // // //
 

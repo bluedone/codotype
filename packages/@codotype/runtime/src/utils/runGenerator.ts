@@ -3,7 +3,7 @@ import {
     InflatedSchema,
     RelationReference,
 } from "@codotype/core";
-import { RuntimeAdaptor } from "./types";
+import { RuntimeAdaptor } from "../types";
 
 // // // //
 

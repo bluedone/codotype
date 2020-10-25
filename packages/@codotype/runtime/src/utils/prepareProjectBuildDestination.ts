@@ -1,6 +1,6 @@
 import * as path from "path";
-import { CodotypeRuntime, ProjectBuild, RuntimeLogLevel } from "./types";
-import { OUTPUT_DIRECTORY, CODOTYPE_MANIFEST_DIRECTORY } from "./constants";
+import { CodotypeRuntime, ProjectBuild, RuntimeLogLevel } from "../types";
+import { OUTPUT_DIRECTORY, CODOTYPE_MANIFEST_DIRECTORY } from "../constants";
 
 // // // //
 

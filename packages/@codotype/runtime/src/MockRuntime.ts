@@ -8,7 +8,7 @@ import {
 } from "./types";
 import * as path from "path";
 import * as ejs from "ejs";
-import { logger } from "./logger";
+import { logger } from "./utils/logger";
 
 // // // //
 

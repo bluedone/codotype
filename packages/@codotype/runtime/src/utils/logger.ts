@@ -1,4 +1,4 @@
-import { RuntimeLogLevel } from "./types";
+import { RuntimeLogLevel } from "../types";
 
 // // // //
 
