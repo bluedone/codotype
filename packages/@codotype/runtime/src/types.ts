@@ -45,7 +45,6 @@ export interface PluginRegistration {
 
 // // // //
 // Generator function type aliases
-
 // TODO - move most of this into `@codotype/core`
 
 type WriteFileFunction = (
@@ -61,30 +60,30 @@ type RenderComponentFunction = (params: {
 
 type WriteFunction = (params: {
     project: InflatedProject;
-    runtime: SLIM_RUNTIME_ADAPTOR;
+    runtime: RuntimeProxy;
 }) => Promise<void>;
 
 type ForEachSchemaFunction = (params: {
     schema: InflatedSchema;
     project: InflatedProject;
-    runtime: SLIM_RUNTIME_ADAPTOR;
+    runtime: RuntimeProxy;
 }) => Promise<void>;
 
 type ForEachRelationFunction = (params: {
     schema: InflatedSchema;
     relation: RelationReference;
     project: InflatedProject;
-    runtime: SLIM_RUNTIME_ADAPTOR;
+    runtime: RuntimeProxy;
 }) => Promise<void>;
 
 type ForEachReverseRelationFunction = (params: {
     schema: InflatedSchema; // TODO - rename `Schema` to `SchemaInput`, `InflatedSchema` to `Schema`
     relation: RelationReference;
     project: InflatedProject;
-    runtime: SLIM_RUNTIME_ADAPTOR;
+    runtime: RuntimeProxy;
 }) => Promise<void>;
 
-// TODO - move this into @codotype/runtime - or @codotype/types?
+// TODO - move this into @codotype/types
 // TODO - add type aliases for these functions since their APIs don't change between (runtime -> runtime injector -> generator) layers
 export interface CodotypeRuntime {
     templatePath: (resolvedPath: string, templatePath: string) => string;
@@ -112,9 +111,19 @@ export interface CodotypeRuntime {
     execute: (props: { build: ProjectBuild }) => Promise<void>;
 }
 
-// TODO - gotta rename this too, to what?
+// TODO - rename this? GeneratorProperties? GeneratorParameters?
+export interface GeneratorConfiguration {
+    name: string;
+    compileInPlace?: any;
+    write: WriteFunction;
+    forEachRelation?: ForEachRelationFunction;
+    forEachReverseRelation?: ForEachReverseRelationFunction;
+    forEachSchema?: ForEachSchemaFunction;
+}
+
 // CONTEXT - these are passed into the "CodotypeGeneratorRunner" component
-export interface GeneratorOptions {
+// WHAT DO THEY DO - provide runtime + plugin + project + filepath + destination
+export interface RuntimeInjectorProps {
     resolved: string; // What's this?
     project: InflatedProject; // TODO - rename `InflatedProject` to `Project`, rename `Project` to `ProjectInput`
     dest: string; // What's this?
@@ -124,12 +133,30 @@ export interface GeneratorOptions {
 
 // // // //
 
+// TODO - rename this to
+// - GeneratorAgent?
+// - GeneratorInitiator?
+// - GeneratorInvoker? -> It ALSO exposes a RuntimeAdaptor
+// - GeneratorLauncher?
+// - GeneratorLoader?
+// - GeneratorRunner?
+// - GeneratorStarter?
+// - GeneratorWrapper?
+// - RuntimeAdaptorInjector?
+// - RuntimeAgent?
+// - RuntimeBroker?
+// - RuntimeConnector?
+// - RuntimeDelegate?
+// - RuntimeInjector?
+// - RuntimeInvoker?
+// - RuntimeMediator?
 export interface RuntimeAdaptor {
-    options: GeneratorOptions;
+    runtimeProxy: RuntimeProxy;
+    options: RuntimeInjectorProps;
     write: WriteFunction;
     forEachSchema: ForEachSchemaFunction;
     forEachRelation: ForEachRelationFunction;
-    forEachReverseRelation?: ForEachReverseRelationFunction;
+    forEachReverseRelation: ForEachReverseRelationFunction;
     ensureDir: (dir: string) => Promise<boolean>;
     writeFile: WriteFileFunction;
     copyDir: ({ src, dest }: { src: string; dest: string }) => Promise<boolean>;
@@ -143,19 +170,8 @@ export interface RuntimeAdaptor {
 
 // // // //
 
-// TODO - add correct type signatures for these functions
-export interface ConstructorOptions {
-    name?: string;
-    compileInPlace?: any;
-    write: WriteFunction;
-    forEachRelation?: ForEachRelationFunction;
-    forEachReverseRelation?: ForEachReverseRelationFunction;
-    forEachSchema: ForEachSchemaFunction;
-}
-
-// // // //
-// Defines slimmed-down Runtime passed into each generator
-export interface SLIM_RUNTIME_ADAPTOR {
+// Defines slimmed-down Runtime passed into each generator, fascade/proxy
+export interface RuntimeProxy {
     ensureDir: (dir: string) => Promise<boolean>;
     writeFile: WriteFileFunction;
     copyDir: ({ src, dest }: { src: string; dest: string }) => Promise<boolean>;

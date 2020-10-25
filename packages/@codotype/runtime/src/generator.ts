@@ -4,35 +4,32 @@ import {
     InflatedSchema,
 } from "@codotype/core";
 import {
-    ConstructorOptions,
+    GeneratorConfiguration,
     CodotypeRuntime,
-    GeneratorOptions,
+    RuntimeInjectorProps,
     RuntimeAdaptor,
-    SLIM_RUNTIME_ADAPTOR,
+    RuntimeProxy,
 } from "./types";
 
 // // // //
-// Constants
 
 /**
- * CodotypeGenerator
- * Encapsulates core features exposed to user-defined components
  * TODO - rename this to RuntimeAdaptor?
  */
 export class CodotypeGenerator implements RuntimeAdaptor {
     private runtime: CodotypeRuntime;
     compileInPlace: string[];
-    options: GeneratorOptions;
+    options: RuntimeInjectorProps;
     resolved: string;
-    SLIM_RUNTIME_ADAPTOR: SLIM_RUNTIME_ADAPTOR;
+    runtimeProxy: RuntimeProxy;
 
     /**
      * constructor
      * Handles build options
      */
     constructor(
-        constructorOptions: ConstructorOptions,
-        options: GeneratorOptions,
+        generatorConfiguration: GeneratorConfiguration,
+        options: RuntimeInjectorProps,
     ) {
         // Throw error if options.runtime isn't defined
         if (!options.runtime) {
@@ -45,16 +42,16 @@ export class CodotypeGenerator implements RuntimeAdaptor {
             throw Error("CodotypeGenerator options requires options.resolved");
         }
 
-        // Validates constructorOptions
+        // Validates GeneratorConfiguration
         if (
-            !constructorOptions.write &&
-            !constructorOptions.compileInPlace &&
-            !constructorOptions.forEachSchema &&
-            !constructorOptions.forEachRelation &&
-            !constructorOptions.forEachReverseRelation
+            !generatorConfiguration.write &&
+            !generatorConfiguration.compileInPlace &&
+            !generatorConfiguration.forEachSchema &&
+            !generatorConfiguration.forEachRelation &&
+            !generatorConfiguration.forEachReverseRelation
         ) {
             throw Error(
-                "CodotypeGenerator constructorOptions requires either write, forEachSchema, forEachRelation, forEachReverseRelation, or compileInPlace properties",
+                "GeneratorConfiguration requires either write, forEachSchema, forEachRelation, forEachReverseRelation, or compileInPlace properties",
             );
         }
 
@@ -62,16 +59,16 @@ export class CodotypeGenerator implements RuntimeAdaptor {
         // this.runtime must be a compatible CodotypeRuntime class instance
         this.runtime = options.runtime;
 
-        // Assigns constructorOptions
-        this.write = constructorOptions.write || this.write;
+        // Assigns generatorConfiguration
+        this.write = generatorConfiguration.write || this.write;
         this.forEachSchema =
-            constructorOptions.forEachSchema || this.forEachSchema;
+            generatorConfiguration.forEachSchema || this.forEachSchema;
         this.forEachRelation =
-            constructorOptions.forEachRelation || this.forEachRelation;
+            generatorConfiguration.forEachRelation || this.forEachRelation;
         this.forEachReverseRelation =
-            constructorOptions.forEachReverseRelation ||
+            generatorConfiguration.forEachReverseRelation ||
             this.forEachReverseRelation;
-        this.compileInPlace = constructorOptions.compileInPlace || [];
+        this.compileInPlace = generatorConfiguration.compileInPlace || [];
 
         // Assigns this.options
         this.options = options;
@@ -79,7 +76,7 @@ export class CodotypeGenerator implements RuntimeAdaptor {
         // PASS this.options.resolved in from @codotype/runtime
         this.resolved = this.options.resolved;
 
-        this.SLIM_RUNTIME_ADAPTOR = {
+        this.runtimeProxy = {
             ensureDir: this.ensureDir,
             writeFile: this.writeFile,
             copyDir: this.copyDir,
@@ -103,7 +100,7 @@ export class CodotypeGenerator implements RuntimeAdaptor {
         runtime,
     }: {
         project: InflatedProject;
-        runtime: SLIM_RUNTIME_ADAPTOR;
+        runtime: RuntimeProxy;
     }): Promise<void> {
         // Display warning if generator doesn't implement its own write method?
         // console.warn(
@@ -124,7 +121,7 @@ export class CodotypeGenerator implements RuntimeAdaptor {
     }: {
         schema: InflatedSchema;
         project: InflatedProject;
-        runtime: SLIM_RUNTIME_ADAPTOR;
+        runtime: RuntimeProxy;
     }): Promise<void> {
         // console.log('NOTHING TO WRITE - this should be overwritten by a subclassed generator.')
         return Promise.resolve();
@@ -142,6 +139,7 @@ export class CodotypeGenerator implements RuntimeAdaptor {
         schema: InflatedSchema;
         relation: RelationReference;
         project: InflatedProject;
+        runtime: RuntimeProxy;
     }): Promise<void> {
         // console.log('NOTHING TO WRITE - this should be overwritten by a subclassed generator.')
         return Promise.resolve();

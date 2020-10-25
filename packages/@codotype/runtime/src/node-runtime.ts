@@ -10,25 +10,22 @@ import {
     Datatype,
     InflatedProject,
     RelationType,
-    InflatedSchema,
 } from "@codotype/core";
 import { CodotypeGenerator } from "./generator";
+import { runGenerator } from "./runGenerator";
 import { prettify } from "./prettify";
 import {
     RuntimeLogLevel,
-    RuntimeErrorCodes,
     CodotypeRuntime,
     PluginMetadata,
-    SLIM_RUNTIME_ADAPTOR,
     ProjectBuild,
     CodotypeRuntimeConstructorOptions,
     PluginRegistration,
-    GeneratorOptions,
+    RuntimeInjectorProps,
     RuntimeAdaptor,
 } from "./types";
 import {
     OUTPUT_DIRECTORY,
-    CODOTYPE_MANIFEST_DIRECTORY,
     GENERATOR_META_FILENAME,
     PLUGIN_DISTRIBUTABLE_DIR,
 } from "./constants";
@@ -56,7 +53,7 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
         // TODO - replace this.options with something else? Do we need to keep this.options
         this.options = {
             ...options,
-            cwd: process.cwd(),
+            // cwd: process.cwd(), // TODO - do we want to harcode this....? Should we rename this to output directory or something...?
             logLevel: options.logLevel || RuntimeLogLevel.verbose,
         };
 
@@ -87,6 +84,9 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
             cwd: this.options.cwd,
         });
 
+        console.log("pluginPath");
+        console.log(pluginPath);
+
         // Construct path to the generator module
         const pluginDynamicImportPath: string = path.join(
             pluginPath,
@@ -111,14 +111,19 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
             const pluginDynamicImport = require(pluginDynamicImportPath); // eslint-disable-line import/no-dynamic-require
             const pluginMetadataImport = require(pluginMetadataImportPath); // eslint-disable-line import/no-dynamic-require
 
+            console.log("pluginDynamicImport");
+            console.log(pluginDynamicImport);
+
             // Destructures the default export into pluginMetadata
             const pluginMetadata: PluginMetadata = {
                 ...pluginMetadataImport.default,
             };
 
             // Debugging PluginMetadata import
-            // this.log("pluginMetadata");
-            // this.log(JSON.stringify(pluginMetadata, null, 4));
+            this.log("pluginMetadata", { level: RuntimeLogLevel.verbose });
+            // this.log(JSON.stringify(pluginMetadata, null, 4), {
+            //     level: RuntimeLogLevel.verbose,
+            // });
 
             // Add Codotype Plugin to this.plugins if import paths resolve correctly are met
             if (pluginDynamicImport && pluginMetadata) {
@@ -135,7 +140,7 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
 
                 // Logs
                 // TODO - can we improve the logging here?
-                // console.info(`Registered ${GeneratorClass.name} generator`)
+                // this.log(`Registered ${GeneratorClass.name} generator`)
                 this.log(`Registered Codotype Plugin`, {
                     level: RuntimeLogLevel.verbose,
                 });
@@ -210,6 +215,10 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
         // Pulls generator from registry runtime registry
         // TODO - conflate each stage to its respective generator,
         // skipping / throwing errors on those whos generator is missing
+        const plugins = await this.getPlugins();
+        console.log("plugins");
+        console.log(plugins);
+
         const pluginRegistration:
             | PluginRegistration
             | undefined = this.plugins.find(
@@ -218,7 +227,10 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
 
         // If pluginRegistration is not found, log error message and short-circuit execution
         // TODO - log error message here
+        console.log("HAS PLUGIN REGISTRATION??");
+        console.log(this.getPlugins());
         if (!pluginRegistration) return;
+        console.log("HAS PLUGIN REGISTRATION!");
 
         // Pulls pluginDynamicImportPath from pluginRegistration
         const { pluginDynamicImportPath } = pluginRegistration;
@@ -242,7 +254,7 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
             const resolved: string = require.resolve(pluginDynamicImportPath);
 
             // Defines options for generator instance
-            const generatorOptions: GeneratorOptions = {
+            const generatorOptions: RuntimeInjectorProps = {
                 project: inflatedProject,
                 dest,
                 resolved,
@@ -251,8 +263,10 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
             };
 
             // Logging
-            // console.info(`Executing ${GeneratorClass.name} generators:`)
-            console.info(`Executing generators:`);
+            // this.log(`Executing ${GeneratorClass.name} generators:`)
+            this.log(`Executing generators:`, {
+                level: RuntimeLogLevel.verbose,
+            });
 
             // Creates CodotypeGenerator instance
             const generatorInstance = new CodotypeGenerator(
@@ -263,55 +277,11 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
             // Debug log statement
             console.log("Instantiated CodotypeGenerator Instance");
 
-            // Invokes `generator.forEachSchema` once for each in inflatedProject.schemas
-            await Promise.all(
-                inflatedProject.schemas.map((schema) =>
-                    generatorInstance.forEachSchema({
-                        schema,
-                        project: inflatedProject,
-                        runtime: generatorInstance, // TODO - rename all the stuff like this
-                    }),
-                ),
-            );
-
-            // Invokes `generator.forEachRelation` once for each in inflatedProject.schemas
-            await Promise.all(
-                inflatedProject.schemas.map((schema) => {
-                    return Promise.all(
-                        schema.relations.map((relation) => {
-                            return generatorInstance.forEachRelation({
-                                schema: schema,
-                                relation,
-                                project: inflatedProject,
-                            });
-                        }),
-                    );
-                }),
-            );
-
-            // Invokes `generator.forEachReverseRelation` once for each in inflatedProject.schemas
-            await Promise.all(
-                inflatedProject.schemas.map((schema) => {
-                    return Promise.all(
-                        schema.references.map((relation) => {
-                            return generatorInstance.forEachReverseRelation({
-                                schema: schema,
-                                relation,
-                                project: inflatedProject,
-                            });
-                        }),
-                    );
-                }),
-            );
-
-            // Invokes `generator.write()` once
-            await generatorInstance.write({
-                project: inflatedProject,
-                runtime: generatorInstance,
+            // Invokes runGenerator w/ generatorInstance + inflatedProject
+            await runGenerator({
+                generatorInstance,
+                inflatedProject,
             });
-
-            // Invokes generator.compileTemplatesInPlace()
-            await generatorInstance.compileTemplatesInPlace();
 
             // Logs which generator is being run
         } catch (err) {
@@ -365,7 +335,6 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
             let renderOptions = {};
 
             // // // //
-            // // // //
             // TODO - type this object - TemplateProps interface
             // The `data` object is passed into each file that gets rendered
             // TODO - this should be abstracted into a separate function?
@@ -376,16 +345,15 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
                 helpers: {
                     indent,
                     trailingComma,
-                    // forEachSchema
-                    // forEachAttribute
-                    // forEachRelation
-                    // forEachReverseRelation / forEachReference
+                    // forEachSchema?
+                    // forEachAttribute?
+                    // forEachRelation?
+                    // forEachReverseRelation / forEachReference?
                 },
                 RelationType,
                 Datatype,
                 ...options, // QUESTION - are options ever used here?
             };
-            // // // //
             // // // //
 
             // Compiles EJS template
@@ -404,16 +372,13 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
         });
     }
 
-    // // // //
-    // // // //
-
     /**
      * fileExists
      * Checks to see if a file exists at the destination in the filesystem
      * @param filepath - string
      */
     fileExists(filepath: string): Promise<boolean> {
-        return Promise.resolve(fsExtra.fileExists(filepath));
+        return Promise.resolve(fs.existsSync(filepath));
     }
 
     /**
@@ -445,6 +410,7 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
      */
     writeFile(dest: string, compiledTemplate: string): Promise<boolean> {
         return new Promise((resolve, reject) => {
+            console.log(dest);
             fsExtra.writeFile(dest, compiledTemplate, (err: any) => {
                 // Handle error
                 if (err) {
@@ -458,12 +424,12 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
                 }
 
                 // Logs debug statement
-                this.log("writeFile: " + dest, {
-                    level: RuntimeLogLevel.verbose,
-                });
+                // this.log("writeFile: " + dest, {
+                //     level: RuntimeLogLevel.verbose,
+                // });
 
                 // Resovles
-                return resolve();
+                return resolve(true);
             });
         });
     }
@@ -486,12 +452,11 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
     /**
      * log
      * TODO - document
-     * TODO - Add `verbose` constructor option to runtime to conditionally output log statements
+     * TODO - Add logic for `verbose` log level
      * TODO - add `chalk` dependency for pretty logging
      * @param args
      */
     log(args: any, options: { level: RuntimeLogLevel }) {
-        // console.log(options);
         console.log(args);
     }
 
@@ -507,7 +472,7 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
     async composeWith(
         parentGeneratorInstance: CodotypeGenerator,
         generatorModule: string,
-        options = {},
+        options = {}, // TODO - add proper type annotation here
     ) {
         // Debug log statement
         console.log("Composing with generator");
@@ -566,18 +531,16 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
         }
 
         // // // //
-        // // // //
 
         try {
             // console.log(modulePath)
 
             // TODO - document
-            // TODO - document
+            // TODO - what the hell is actually happening here?
             // TODO - abstract into @codotype/runtime
             const generatorPrototype = require(modulePath); // eslint-disable-line import/no-dynamic-require
             generatorPrototype.resolved = require.resolve(modulePath);
 
-            // TODO - document
             // TODO - document
             // TODO - move into independent function, `getResolvedGeneratorPath`, perhaps
             // TODO - abstract into @codotype/runtime HELPER function
@@ -586,11 +549,8 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
             resolvedGeneratorPath = resolvedGeneratorPath.join("/");
 
             // // // //
-            // // // //
+            // TODO - document
             // TODO - move into independent function, `resolveDestination`, perhaps
-            // TODO - document
-            // TODO - document
-            // TODO - document
             // TODO - abstract into @codotype/runtime
             let resolvedDestination = parentGeneratorInstance.options.dest;
 
@@ -604,86 +564,28 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
             //     options.scope
             //   );
             // }
+            //
+            // // // //
 
-            // // // //
-            // // // //
-            // TODO - add verbose logging function call here
-
-            // console.log('\n')
-            // console.log('this.options.dest')
-            // console.log(this.options.dest)
-            // console.log('\n')
-            // console.log('RESOLVEDDESTINATION')
-            // console.log(resolvedDestination)
-
-            // // // //
-            // // // //
+            // Debug statements
+            this.log("RESOLVEDDESTINATION", { level: RuntimeLogLevel.verbose });
+            this.log(resolvedDestination, { level: RuntimeLogLevel.verbose });
 
             // Inflates project
             const inflatedProject = parentGeneratorInstance.options.project;
 
-            // Creates new instance of generatorPrototype
-            // TODO - document this a bit more
-            // TODO - abstract into @codotype/runtime
-            // TODO - pass in @codotype/runtime instance here
+            // Creates new CodotypeGenerator
             const generator = new CodotypeGenerator(generatorPrototype, {
                 ...parentGeneratorInstance.options,
                 dest: resolvedDestination,
                 resolved: resolvedGeneratorPath,
             });
 
-            // Invokes `generator.forEachSchema` once for each in project.schemas
-            // TODO - abstract into @codotype/runtime
-            await Promise.all(
-                inflatedProject.schemas.map((schema: InflatedSchema) =>
-                    generator.forEachSchema({
-                        schema: schema,
-                        project: inflatedProject,
-                        runtime: generator,
-                    }),
-                ),
-            );
-
-            // Invokes `generator.forEachRelation` once for each in project.schemas
-            await Promise.all(
-                inflatedProject.schemas.map((schema: InflatedSchema) => {
-                    return Promise.all(
-                        schema.relations.map((relation) => {
-                            return generator.forEachRelation({
-                                relation,
-                                schema: schema,
-                                project: inflatedProject,
-                            });
-                        }),
-                    );
-                }),
-            );
-
-            // Invokes `generator.forEachReverseRelation` once for each in project.schemas
-            // NOTE - this is currently commented out B.C. the updated Schema interface doesn't have a property for `reverse_relations`
-            // TODO - the `reverse_relations` property should be added by the inflateMeta function
-            await Promise.all(
-                inflatedProject.schemas.map((schema: InflatedSchema) => {
-                    return Promise.all(
-                        schema.references.map((relation) => {
-                            return generator.forEachReverseRelation({
-                                relation,
-                                schema: schema,
-                                project: inflatedProject,
-                            });
-                        }),
-                    );
-                }),
-            );
-
-            // Invokes `generator.write()` once
-            // TODO - abstract into @codotype/runtime
-            // @ts-ignore
-            await generator.write(parentGeneratorInstance.options);
-
-            // Invokes generator.compileTemplatesInPlace()
-            // TODO - abstract into @codotype/runtime
-            await generator.compileTemplatesInPlace();
+            // Invokes runGenerator w/ generatorInstance + inflatedProject
+            await runGenerator({
+                generatorInstance: generator,
+                inflatedProject,
+            });
 
             // Logs output
             // TODO - add --verbose flag to conditionally print this output
@@ -692,6 +594,7 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
 
             // Logs which generator is being run
         } catch (err) {
+            // TODO - improve error handling here
             if (err.code === "MODULE_NOT_FOUND") {
                 console.log("MODULE NOT FOUND");
             } else {

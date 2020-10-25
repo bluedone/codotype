@@ -59,6 +59,7 @@ export class MockRuntime implements CodotypeRuntime {
     }): Promise<PluginRegistration> {
         return Promise.resolve(this.plugins[0]);
     }
+
     execute(): Promise<void> {
         return Promise.resolve();
     }

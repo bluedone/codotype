@@ -1,9 +1,18 @@
-import { RuntimeLogLevel, CodotypeRuntime } from "../types";
+import * as fs from "fs";
+import {
+    RuntimeLogLevel,
+    CodotypeRuntime,
+    ProjectBuild,
+    PluginMetadata,
+} from "../types";
 import { MockRuntime } from "../MockRuntime";
+import { CodotypeNodeRuntime } from "../node-runtime";
+import { buildDefaultProject, Codotype, makeUniqueId } from "@codotype/core";
+import { runtimeConstructorOptions } from "./test_state";
+import { resolve } from "path";
 
 // // // //
 
-// TODO - test each method with MockRuntime
 // TODO - test each method with NodeRuntime
 describe("testing @codotype/runtime v2", () => {
     test("testing @codotype/runtime v2", async () => {
@@ -34,20 +43,58 @@ describe("testing @codotype/runtime v2", () => {
         );
         expect(comparedFalse).toBe(comparedFalse);
     });
-});
 
-// templatePath: (resolvedPath: string, templatePath: string) => string;
-// ensureDir: (dirPath: string) => Promise<boolean>;
-// copyDir: (dirPath: string, destinationDirPath: string) => Promise<boolean>;
-// renderTemplate: any;
-// existsSync: (path: string) => boolean;
-// compareFile: (
-//     destinationPath: string,
-//     compiledTemplate: string,
-// ) => Promise<any>;
-// writeFile: (
-//     destinationPath: string,
-//     compiledTemplate: string,
-// ) => Promise<boolean>;
-// destinationPath: (destination: string, filename: string) => string;
-// composeWith: (generator: any, generatorModule: any, options: any) => any; // wtf is generatorModule
+    test("testing @codotype/runtime composeWith", async () => {
+        // Defines CWD for new CodotypeNodeRuntime
+        // Uses `__tests__/__snapshots__` dir as the CWD
+        const cwd: string = `${__dirname}/__snapshots__`;
+
+        // Instantiates new CodotypeRuntime w/ verbose LogLevel
+        const nodeRuntime: CodotypeRuntime = new CodotypeNodeRuntime({
+            cwd,
+            logLevel: RuntimeLogLevel.verbose,
+        });
+
+        // Registers the mock_plugin
+        // NOTE - the "relativePath" value here is relative to CWD, up one directory
+        const pluginRegistration = await nodeRuntime.registerPlugin({
+            relativePath: "../mock_plugin",
+        });
+
+        // If pluginRegistration is null => return
+        // Just needs to be here to ensure that plugin registers successfully before referencing `PluginRegistration
+        if (pluginRegistration === null) {
+            return;
+        }
+
+        // Defines default ProjectInput
+        const projectInput = buildDefaultProject(
+            pluginRegistration.pluginMetadata,
+        );
+
+        // Defines the ProjectBuild
+        const build: ProjectBuild = {
+            id: "test-project",
+            project: projectInput,
+        };
+
+        // Execute the build via nodeRuntime
+        await nodeRuntime.execute({ build });
+
+        // Define flags indicating whether or not file creation occured as anticipated
+        const txtExists = fs.existsSync(
+            resolve(cwd, ".codotype-out/test-project/new_project/Hello.txt"),
+        );
+
+        const readmeExists = fs.existsSync(
+            resolve(
+                cwd,
+                ".codotype-out/test-project/new_project/README-TEST.md",
+            ),
+        );
+
+        // Asserts existence of files
+        expect(txtExists).toBe(true);
+        expect(readmeExists).toBe(true);
+    });
+});

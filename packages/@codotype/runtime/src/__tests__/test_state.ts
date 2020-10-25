@@ -4,8 +4,8 @@ import { testState, inflateProject, InflatedProject } from "@codotype/core";
 import {
     CodotypeRuntimeConstructorOptions,
     RuntimeLogLevel,
-    ConstructorOptions,
-    GeneratorOptions,
+    GeneratorConfiguration,
+    RuntimeInjectorProps,
     RuntimeAdaptor,
 } from "../types";
 
@@ -21,7 +21,7 @@ export const runtimeConstructorOptions: CodotypeRuntimeConstructorOptions = {
     logLevel: RuntimeLogLevel.verbose,
 };
 
-export const baseGeneratorOptions: GeneratorOptions = {
+export const baseGeneratorOptions: RuntimeInjectorProps = {
     dest: "destination",
     resolved: "my/resolved/path",
     project,
@@ -29,7 +29,8 @@ export const baseGeneratorOptions: GeneratorOptions = {
     runtime: new MockRuntime(runtimeConstructorOptions),
 };
 
-export const generatorPrototype: ConstructorOptions = {
+export const generatorPrototype: GeneratorConfiguration = {
+    name: "Prototype Generator",
     write: jest.fn(),
     compileInPlace: jest.fn(),
     forEachSchema: jest.fn(),
@@ -37,7 +38,7 @@ export const generatorPrototype: ConstructorOptions = {
     forEachReverseRelation: jest.fn(),
 };
 
-export const generatorPrototype01: ConstructorOptions = {
+export const generatorPrototype01: GeneratorConfiguration = {
     name: "ModuleComponents",
     async write({ project, runtime }) {
         runtime.writeFile("", '{\nname: "project"\n}');
@@ -60,7 +61,7 @@ export const generatorPrototype01: ConstructorOptions = {
 };
 
 // // Defines typed generator constant
-export const generatorPrototype02: ConstructorOptions = {
+export const generatorPrototype02: GeneratorConfiguration = {
     name: "Fullstack TypeScript Generator",
     async write(this: CodotypeGenerator) {
         await this.composeWith("./base");
