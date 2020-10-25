@@ -9,31 +9,31 @@ import { RuntimeAdaptor } from "./types";
 
 // TODO - rename this
 export async function runGenerator(props: {
-    inflatedProject: InflatedProject;
+    project: InflatedProject; // TODO - rename InflatedProject to Project
     generatorInstance: RuntimeAdaptor;
 }): Promise<void> {
-    const { inflatedProject, generatorInstance } = props;
+    const { project, generatorInstance } = props;
 
-    // Invokes `generator.forEachSchema` once for each in inflatedProject.schemas
+    // Invokes `generator.forEachSchema` once for each in project.schemas
     await Promise.all(
-        inflatedProject.schemas.map((schema: InflatedSchema) =>
+        project.schemas.map((schema: InflatedSchema) =>
             generatorInstance.forEachSchema({
                 schema,
-                project: inflatedProject,
+                project,
                 runtime: generatorInstance, // TODO - rename all the stuff like this
             }),
         ),
     );
 
-    // Invokes `generator.forEachRelation` once for each in inflatedProject.schemas
+    // Invokes `generator.forEachRelation` once for each in project.schemas
     await Promise.all(
-        inflatedProject.schemas.map((schema: InflatedSchema) => {
+        project.schemas.map((schema: InflatedSchema) => {
             return Promise.all(
                 schema.relations.map((relation: RelationReference) => {
                     return generatorInstance.forEachRelation({
                         schema: schema,
                         relation,
-                        project: inflatedProject,
+                        project,
                         runtime: generatorInstance.runtimeProxy,
                     });
                 }),
@@ -41,15 +41,15 @@ export async function runGenerator(props: {
         }),
     );
 
-    // Invokes `generator.forEachReverseRelation` once for each in inflatedProject.schemas
+    // Invokes `generator.forEachReverseRelation` once for each in project.schemas
     await Promise.all(
-        inflatedProject.schemas.map((schema: InflatedSchema) => {
+        project.schemas.map((schema: InflatedSchema) => {
             return Promise.all(
                 schema.references.map((relation: RelationReference) => {
                     return generatorInstance.forEachReverseRelation({
                         schema: schema,
                         relation,
-                        project: inflatedProject,
+                        project,
                         runtime: generatorInstance.runtimeProxy,
                     });
                 }),
@@ -59,14 +59,8 @@ export async function runGenerator(props: {
 
     // Invokes `generator.write()` once
     await generatorInstance.write({
-        project: inflatedProject,
+        project,
         runtime: generatorInstance,
-
-        //     project: inflatedProject,
-        //     dest,
-        //     resolved,
-        //     plugin: pluginRegistration.pluginMetadata,
-        //     runtime: this,
     });
 
     // Invokes generator.compileTemplatesInPlace()

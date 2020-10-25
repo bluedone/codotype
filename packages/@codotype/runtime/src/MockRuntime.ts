@@ -8,7 +8,7 @@ import {
 } from "./types";
 import * as path from "path";
 import * as ejs from "ejs";
-import { CodotypeGenerator } from "./generator";
+import { logger } from "./logger";
 
 // // // //
 
@@ -48,8 +48,14 @@ export class MockRuntime implements CodotypeRuntime {
         return this;
     }
 
-    log(msg: any, options: { level: RuntimeLogLevel }): void {
-        console.log(msg);
+    /**
+     * log
+     * A logging function used internally by the Runtime
+     * Invokes logger function with args, options, and Runtime.options.logLevel
+     * @param args - see logger.ts
+     */
+    log(args: any, options: { level: RuntimeLogLevel }) {
+        logger(args, options, this.options.logLevel);
     }
 
     registerPlugin(props: {

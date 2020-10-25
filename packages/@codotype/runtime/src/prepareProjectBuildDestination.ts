@@ -1,18 +1,5 @@
-import * as fs from "fs";
-// @ts-ignore
-import * as fsExtra from "fs-extra";
 import * as path from "path";
-import * as ejs from "ejs";
-import {
-    indent,
-    trailingComma,
-    inflateProject,
-    Datatype,
-    InflatedProject,
-    RelationType,
-    InflatedSchema,
-} from "@codotype/core";
-import { CodotypeRuntime, ProjectBuild } from "./types";
+import { CodotypeRuntime, ProjectBuild, RuntimeLogLevel } from "./types";
 import { OUTPUT_DIRECTORY, CODOTYPE_MANIFEST_DIRECTORY } from "./constants";
 
 // // // //
@@ -20,20 +7,22 @@ import { OUTPUT_DIRECTORY, CODOTYPE_MANIFEST_DIRECTORY } from "./constants";
 /**
  * prepareProjectBuildDestination
  * Provisions the output directory and writes the Codotype Project JSON to the output directory
+ * TODO - move into ./util directory
+ * @param param.runtime - see CodotypeRuntime
+ * @param param.cwd - see RuntimeConstructorOptions.cwd
  * @param param.build - see ProjectBuild
- * TODO - abstract this into a separate function that's imported by the Runtime
  */
-export async function prepareProjectBuildDestination({
-    runtime,
-    cwd,
-    build,
-}: {
+export async function prepareProjectBuildDestination(params: {
     runtime: CodotypeRuntime;
     cwd: string;
     build: ProjectBuild;
 }): Promise<void> {
+    const { runtime, cwd, build } = params;
+
     // Debug log statements
-    console.log("Writing build manfiest");
+    runtime.log("Writing build manfiest", {
+        level: RuntimeLogLevel.debug,
+    });
 
     // Defines directory to encapsulate build IFF build.id is defined
     let buildID: string = build.id || "";
@@ -56,18 +45,20 @@ export async function prepareProjectBuildDestination({
     await runtime.ensureDir(manifestDest);
 
     // Writes two source files into the `.codotype` directory
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve) => {
         // Writes Project JSON to output directory
         runtime.writeFile(
             path.join(
                 manifestDest +
-                    `/${build.project.identifiers.kebab}-codotype-project.json`,
+                    `/${build.project.identifiers.kebab}-codotype-project.json`, // TODO - use a constant here
             ),
             JSON.stringify(build.project, null, 2),
         );
 
         // Debug log statement
-        console.log("Wrote codotype-project.json");
+        runtime.log("Wrote codotype-project.json", {
+            level: RuntimeLogLevel.debug,
+        });
 
         // Resolves the Promise
         return resolve();

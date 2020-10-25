@@ -9,7 +9,12 @@ import {
 // // // //
 
 export enum RuntimeLogLevel {
+    debug = "debug",
+    error = "error",
+    info = "info",
+    success = "success",
     verbose = "verbose",
+    warning = "warning",
 }
 
 export enum RuntimeErrorCodes {

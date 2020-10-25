@@ -26,11 +26,13 @@ import {
 } from "./types";
 import {
     OUTPUT_DIRECTORY,
+    TEMPLATES_DIRECTORY_NAME,
     GENERATOR_META_FILENAME,
     PLUGIN_DISTRIBUTABLE_DIR,
 } from "./constants";
 import { getPluginPath } from "./getPluginPath";
 import { prepareProjectBuildDestination } from "./prepareProjectBuildDestination";
+import { logger } from "./logger";
 
 // // // //
 
@@ -39,13 +41,13 @@ import { prepareProjectBuildDestination } from "./prepareProjectBuildDestination
  * Runtime for running Codotype plugins through Node.js
  */
 export class CodotypeNodeRuntime implements CodotypeRuntime {
-    options: CodotypeRuntimeConstructorOptions;
-    plugins: PluginRegistration[];
+    private options: CodotypeRuntimeConstructorOptions;
+    private plugins: PluginRegistration[];
 
     /**
      * constructor
      * Handles options to run a single generator instance
-     * @param options
+     * @param options - see `CodotypeRuntimeConstructorOptions`
      */
     constructor(options: CodotypeRuntimeConstructorOptions) {
         // Assigns this.options + default values
@@ -66,12 +68,9 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
 
     /**
      * registerPlugin
-     * TODO - add example invocations for each parameter
      * Registers an individual Codotype Plugin with the runtime
-     * This allows the runtime to execute a "BUILD" against the Plugin
-     * @param props.modulePath
-     * @param props.relativePath
-     * @param props.absolutePath
+     * This allows the runtime to execute a Build against the registered Codotype Plugin
+     * @param props - see `getPluginPath` function
      */
     registerPlugin(props: {
         modulePath?: string;
@@ -83,9 +82,6 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
             ...props,
             cwd: this.options.cwd,
         });
-
-        console.log("pluginPath");
-        console.log(pluginPath);
 
         // Construct path to the generator module
         const pluginDynamicImportPath: string = path.join(
@@ -100,30 +96,21 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
             GENERATOR_META_FILENAME,
         );
 
-        // Debugging
+        // Debugging plugin import paths
         this.log(pluginDynamicImportPath, { level: RuntimeLogLevel.verbose });
         this.log(pluginMetadataImportPath, { level: RuntimeLogLevel.verbose });
 
         // Attempt to load up plugin import and metadata, catch error on failure
         try {
             // Import the the class dynamically
-            // TODO - can these be done with `import`?
+            // QUESTION - can these be done with `import`?
             const pluginDynamicImport = require(pluginDynamicImportPath); // eslint-disable-line import/no-dynamic-require
             const pluginMetadataImport = require(pluginMetadataImportPath); // eslint-disable-line import/no-dynamic-require
-
-            console.log("pluginDynamicImport");
-            console.log(pluginDynamicImport);
 
             // Destructures the default export into pluginMetadata
             const pluginMetadata: PluginMetadata = {
                 ...pluginMetadataImport.default,
             };
-
-            // Debugging PluginMetadata import
-            this.log("pluginMetadata", { level: RuntimeLogLevel.verbose });
-            // this.log(JSON.stringify(pluginMetadata, null, 4), {
-            //     level: RuntimeLogLevel.verbose,
-            // });
 
             // Add Codotype Plugin to this.plugins if import paths resolve correctly are met
             if (pluginDynamicImport && pluginMetadata) {
@@ -138,39 +125,34 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
                 // Tracks newPluginRegistration in this.plugins
                 this.plugins.push(newPluginRegistration);
 
-                // Logs
-                // TODO - can we improve the logging here?
-                // this.log(`Registered ${GeneratorClass.name} generator`)
-                this.log(`Registered Codotype Plugin`, {
+                // Logs successful registration message
+                this.log(`Registered ${pluginMetadata.label} Codotype Plugin`, {
                     level: RuntimeLogLevel.verbose,
                 });
 
+                // Resolves the promise with the newPluginRegistration
                 return Promise.resolve(newPluginRegistration);
             }
-
-            // Logs which generator is being run
         } catch (err) {
             // TODO - add enum of error codes
             // TODO - Improve logging here + add tests
             if (err.code === "MODULE_NOT_FOUND") {
                 console.log("REGISTRATION ERROR - PLUGIN NOT FOUND");
-                // throw err;
                 return Promise.resolve(null);
             } else {
                 console.log("REGISTRATION ERROR - OTHER");
-                // throw err;
                 return Promise.resolve(null);
             }
         }
 
+        // Includes default Promise resolution to prevent invariant error
         return Promise.resolve(null);
     }
 
     /**
      * ensureDir
      * Ensures presence of directory for template compilation
-     * TODO - this is repeated in @codotype/generator - should be abstracted, or only encapsulated in the runtime
-     * @param dir
+     * @param dir - the directory whose existance is being ensured
      */
     ensureDir(dir: string): Promise<boolean> {
         return new Promise((resolve, reject) => {
@@ -190,20 +172,32 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
     }
 
     /**
+     * findPlugin
+     * Finds a PluginRegistration based on PluginRegistration.id
+     * TODO - finish implementing this, replace duplicate code throughout the
+     */
+    // findPlugin(pluginID: string): Promise<PluginRegistration|null> {}
+
+    /**
      * execute
-     * Method for write files to the filesystem
-     * TODO - accept OUTPUT_DIRECTORY override
+     * Executes a single ProjectBuild against a Codotype Plugin
      * @param props.build - ProjectBuild
+     * TODO - accept OUTPUT_DIRECTORY override?
      */
     async execute({ build }: { build: ProjectBuild }): Promise<void> {
-        // Logs debug statements
-        console.log("CodotypeNodeRuntime - start execute({ build })");
+        // Logs "Start Execution" statement
+        this.log("CodotypeNodeRuntime - start execute({ build })", {
+            level: RuntimeLogLevel.verbose,
+        });
 
-        // Pulls attributes out of build object
-        let { id, project } = build;
+        // Pulls id, projectInput from build object
+        let { id } = build;
 
-        // Inflates blueprint metadata
-        const inflatedProject: InflatedProject = inflateProject({ project });
+        // Inflates Project from ProjectInput
+        // TODO - rename InflatedProject to Project
+        const project: InflatedProject = inflateProject({
+            project: build.project,
+        });
 
         // Provisions the output directory and writes the Codotype Project JSON to the output directory
         await prepareProjectBuildDestination({
@@ -212,59 +206,60 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
             cwd: this.options.cwd,
         });
 
-        // Pulls generator from registry runtime registry
-        // TODO - conflate each stage to its respective generator,
-        // skipping / throwing errors on those whos generator is missing
+        // Gets array of PluginRegistrations from this.getPlugins()
         const plugins = await this.getPlugins();
-        console.log("plugins");
-        console.log(plugins);
 
-        const pluginRegistration:
-            | PluginRegistration
-            | undefined = this.plugins.find(
+        // Finds the pluginRegistration associated with the ProjectBuild
+        // TODO - rename to `project.generatorID` to `project.pluginID`
+        // TODO - check version here, use semver if possible
+        const pluginRegistration: PluginRegistration | undefined = plugins.find(
             (g) => g.id === project.generatorId,
         );
 
-        // If pluginRegistration is not found, log error message and short-circuit execution
-        // TODO - log error message here
-        console.log("HAS PLUGIN REGISTRATION??");
-        console.log(this.getPlugins());
-        if (!pluginRegistration) return;
-        console.log("HAS PLUGIN REGISTRATION!");
+        // If pluginRegistration is not found -> log error message and short-circuit execution
+        if (pluginRegistration === undefined) {
+            // Logs error message
+            this.log(
+                "CodotypeNodeRuntime.execute - Codotype Plugin not found. Please ensure that Codotype Plugin has been correctly registered with Runtime.registerPlugin",
+                { level: RuntimeLogLevel.verbose },
+            );
+
+            // Resolves Promise<void>
+            return Promise.resolve();
+        }
 
         // Pulls pluginDynamicImportPath from pluginRegistration
         const { pluginDynamicImportPath } = pluginRegistration;
 
-        // Sets output_directory default to build ID by default
-        const output_directory = id || "";
+        // Sets buildOutputDirectory default to build ID by default
+        // NOTE - if `build.id` is an empty string, the project is placed directly inside OUTPUT_DIRECTORY
+        const buildOutputDirectory: string = id || "";
 
         // Assigns `dest` option for project output
         const dest: string = path.join(
             this.options.cwd,
             OUTPUT_DIRECTORY,
-            output_directory,
-            inflatedProject.identifiers.snake,
+            buildOutputDirectory,
+            project.identifiers.snake,
         );
 
-        // Try to load up the generator from pluginDynamicImportPath, catch error
-        // TODO - this final check should be abstracted into a separate function
+        // Attempt to load the Generator from pluginDynamicImportPath, handle error
         try {
-            // const GeneratorClass = require(pluginDynamicImportPath); // eslint-disable-line import/no-dynamic-require
+            // TODO - add proper type annotation for generatorPrototype here
             const generatorPrototype = require(pluginDynamicImportPath); // eslint-disable-line import/no-dynamic-require
             const resolved: string = require.resolve(pluginDynamicImportPath);
 
             // Defines options for generator instance
             const generatorOptions: RuntimeInjectorProps = {
-                project: inflatedProject,
+                project,
                 dest,
                 resolved,
                 plugin: pluginRegistration.pluginMetadata,
                 runtime: this,
             };
 
-            // Logging
-            // this.log(`Executing ${GeneratorClass.name} generators:`)
-            this.log(`Executing generators:`, {
+            // Log "Running Plugin Generator" statement
+            this.log(`Running Plugin Generator: ${generatorPrototype.name}`, {
                 level: RuntimeLogLevel.verbose,
             });
 
@@ -274,30 +269,34 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
                 generatorOptions,
             );
 
-            // Debug log statement
-            console.log("Instantiated CodotypeGenerator Instance");
-
             // Invokes runGenerator w/ generatorInstance + inflatedProject
             await runGenerator({
-                generatorInstance,
-                inflatedProject,
+                project,
+                generatorInstance, // TODO - rename this to generator..? ReneratorRunner? Should align with the current `CodotypeGenerator` class name
             });
 
             // Logs which generator is being run
         } catch (err) {
+            // TODO - clean up error handling here
+            // TODO - abstract all error handling into independent function
             if (err.code === "MODULE_NOT_FOUND") {
                 console.log("RUNTIME ERROR - GENERATOR NOT FOUND");
             } else {
                 console.log("RUNTIME ERROR - OTHER");
-                throw err;
             }
-            // return reject(err)
+
+            // Resolves with Promise<void>
+            return Promise.resolve();
         }
 
-        // Thank you message
-        console.log(
+        // Logs "Thank you" message
+        this.log(
             "\nBuild complete\nThank you for using Codotype :)\nFollow us on github.com/codotype\n",
+            { level: RuntimeLogLevel.verbose },
         );
+
+        // Resolves with Promise<void>
+        return Promise.resolve();
     }
 
     /**
@@ -307,7 +306,11 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
      * @param {string} template_path
      */
     templatePath(generatorResolved: string, template_path = "./"): string {
-        return path.join(generatorResolved, "templates", template_path);
+        return path.join(
+            generatorResolved,
+            TEMPLATES_DIRECTORY_NAME,
+            template_path,
+        );
     }
 
     /**
@@ -345,10 +348,11 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
                 helpers: {
                     indent,
                     trailingComma,
-                    // forEachSchema?
-                    // forEachAttribute?
-                    // forEachRelation?
-                    // forEachReverseRelation / forEachReference?
+                    // forEachSchema helper function?
+                    // forEachAttribute helper function?
+                    // forEachRelation helper function?
+                    // forEachReverseRelation helper function?
+                    // forEachReference helper function?
                 },
                 RelationType,
                 Datatype,
@@ -383,9 +387,9 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
 
     /**
      * compareFile
-     * TODO - rename this to....?
-     * @param destinationFilepath
-     * @param compiledTemplate
+     * Compares an existing file against a compiled template, returns true/false
+     * @param destinationFilepath - the destination file being compared against compiledTemplate
+     * @param compiledTemplate - the text being compared against the contents of the file at destinationFilepath
      */
     compareFile(
         destinationFilepath: string,
@@ -410,7 +414,6 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
      */
     writeFile(dest: string, compiledTemplate: string): Promise<boolean> {
         return new Promise((resolve, reject) => {
-            console.log(dest);
             fsExtra.writeFile(dest, compiledTemplate, (err: any) => {
                 // Handle error
                 if (err) {
@@ -424,9 +427,9 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
                 }
 
                 // Logs debug statement
-                // this.log("writeFile: " + dest, {
-                //     level: RuntimeLogLevel.verbose,
-                // });
+                this.log("writeFile: " + dest, {
+                    level: RuntimeLogLevel.verbose,
+                });
 
                 // Resovles
                 return resolve(true);
@@ -437,8 +440,8 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
     /**
      * copyDir
      * Copy a directory from src to dest
-     * @param src TODO
-     * @param dest TODO
+     * @param src - the name of the directory being copied inside the `templates` directory relative to the Codotype Generator invoking this method
+     * @param dest - the name of the destination directory
      */
     async copyDir(src: any, dest: any): Promise<boolean> {
         return new Promise((resolve, reject) => {
@@ -451,19 +454,18 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
 
     /**
      * log
-     * TODO - document
-     * TODO - Add logic for `verbose` log level
-     * TODO - add `chalk` dependency for pretty logging
-     * @param args
+     * A logging function used internally by the Runtime
+     * Invokes logger function with args, options, and Runtime.options.logLevel
+     * @param args - see logger.ts
      */
     log(args: any, options: { level: RuntimeLogLevel }) {
-        console.log(args);
+        logger(args, options, this.options.logLevel);
     }
 
     /**
      * composeWith
-     * TODO - annotate, cleanup, test
      * Enables one generator to fire off several child generators
+     * TODO - annotate, cleanup, test
      * TODO - why doesn't this just accept the generator props?
      * @param parentGeneratorInstance
      * @param generatorModule
@@ -474,15 +476,18 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
         generatorModule: string,
         options = {}, // TODO - add proper type annotation here
     ) {
-        // Debug log statement
-        console.log("Composing with generator");
+        // Log composeWith debug statement
+        this.log(`Composing Generator: ${generatorModule}`, {
+            level: RuntimeLogLevel.debug,
+        });
 
         // Defines module path
         let modulePath: string = "";
 
         // // // //
-
-        // (await this.getPlugins()).find(())
+        // TODO - abstract this into a separate function, we're using this in a few different places
+        //
+        // Finds the currently active plugin
         const plugins = await this.getPlugins();
         const activePlugin = plugins.find(
             (p) => p.id === parentGeneratorInstance.options.plugin.id,
@@ -492,7 +497,10 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
             console.log("MODULE NOT FOUND");
             throw new Error("NodeRuntime - composeWith - plugin not found");
         }
+        //
+        // // // //
 
+        // // // //
         // TODO - move this into a function ( `getModulePath`, perhaps )
         // Handle relative paths
         if (
@@ -529,21 +537,17 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
                 generatorModule,
             );
         }
-
+        //
         // // // //
 
+        // Attempt to load the Generator from pluginDynamicImportPath, handle error
         try {
-            // console.log(modulePath)
-
             // TODO - document
-            // TODO - what the hell is actually happening here?
-            // TODO - abstract into @codotype/runtime
             const generatorPrototype = require(modulePath); // eslint-disable-line import/no-dynamic-require
             generatorPrototype.resolved = require.resolve(modulePath);
 
             // TODO - document
             // TODO - move into independent function, `getResolvedGeneratorPath`, perhaps
-            // TODO - abstract into @codotype/runtime HELPER function
             let resolvedGeneratorPath = generatorPrototype.resolved.split("/");
             resolvedGeneratorPath.pop();
             resolvedGeneratorPath = resolvedGeneratorPath.join("/");
@@ -551,10 +555,11 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
             // // // //
             // TODO - document
             // TODO - move into independent function, `resolveDestination`, perhaps
-            // TODO - abstract into @codotype/runtime
             let resolvedDestination = parentGeneratorInstance.options.dest;
 
+            // // // //
             // TODO - re-introduce support for options.scope
+            // TODO - why is this necessary? Used for importing individual generator modules from an external plugin - correct?
             // options.scope is super important - need it to compose packages from one generator into another
             // // @ts-ignore
             // if (options.scope) {
@@ -568,11 +573,13 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
             // // // //
 
             // Debug statements
-            this.log("RESOLVEDDESTINATION", { level: RuntimeLogLevel.verbose });
-            this.log(resolvedDestination, { level: RuntimeLogLevel.verbose });
+            this.log(
+                `Runtime.composeWith - resolvedDestination: ${resolvedDestination}`,
+                { level: RuntimeLogLevel.debug },
+            );
 
-            // Inflates project
-            const inflatedProject = parentGeneratorInstance.options.project;
+            // Gets project from parentGeneratorInstance.options
+            const project = parentGeneratorInstance.options.project;
 
             // Creates new CodotypeGenerator
             const generator = new CodotypeGenerator(generatorPrototype, {
@@ -581,10 +588,10 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
                 resolved: resolvedGeneratorPath,
             });
 
-            // Invokes runGenerator w/ generatorInstance + inflatedProject
+            // Invokes runGenerator w/ generatorInstance + project
             await runGenerator({
+                project,
                 generatorInstance: generator,
-                inflatedProject,
             });
 
             // Logs output
