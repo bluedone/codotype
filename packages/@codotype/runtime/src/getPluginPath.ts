@@ -8,37 +8,38 @@ import { MODULES_ROOT } from "./constants";
  * getPluginPath
  * Gets the absolute path to a Codotype Plugin
  * Used by CodotypeNodeJsRuntime.registerPlugin
- * @param props.module_path
- * @param props.relative_path
- * @param props.absoluate_path
+ * @param props.cwd the current working directory where the build is being executed by the Runtime
+ * @param props.modulePath (optional) the path in node_modules directory relative to CWD where the Codotype Plugin is located
+ * @param props.relativePath (optional) the relative path to CWD where the Codotype Plugin is located
+ * @param props.absoluatePath (optional) the absolute path to the Codotype Plugin
  */
 export function getPluginPath(props: {
     cwd: string;
-    module_path?: string;
-    relative_path?: string;
-    absolute_path?: string;
+    modulePath?: string;
+    relativePath?: string;
+    absolutePath?: string;
 }): string {
-    // Pulls module_path, relative_path, absoluate_path from params
+    // Pulls modulePath, relativePath, absoluatePath from params
     const {
         cwd,
-        module_path = null,
-        relative_path = null,
-        absolute_path = null,
+        modulePath = null,
+        relativePath = null,
+        absolutePath = null,
     } = props;
 
     // Generator is located in node_modules
-    if (module_path) {
-        return path.join(cwd, MODULES_ROOT, module_path);
+    if (modulePath) {
+        return path.join(cwd, MODULES_ROOT, modulePath);
     }
 
     // Generator is located relative to process.cwd()
-    if (relative_path) {
-        return path.join(cwd, relative_path);
+    if (relativePath) {
+        return path.join(cwd, relativePath);
     }
 
     // Generator path is absolute path on the filesystem, i.e. /tmp/my-generator
-    if (absolute_path) {
-        return absolute_path;
+    if (absolutePath) {
+        return absolutePath;
     }
 
     // Throw error
