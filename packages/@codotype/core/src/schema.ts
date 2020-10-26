@@ -1,5 +1,5 @@
 import { UUID } from "./uuid";
-import { ProjectConfiguration } from "./ProjectConfiguration";
+import { PluginConfiguration } from "./plugin";
 import { Attribute } from "./attribute";
 import { RelationReference } from "./reference";
 import { Relation } from "./relation";
@@ -9,9 +9,10 @@ import { TokenPluralization } from "./token";
 
 /**
  * SchemaCreator
- * Used to differentiate between SchemaInput created by the User, or the Plugin
+ * Used to differentiate between SchemaInput created by a User or a Plugin
+ * Determines whether or not a SchemaInput may be removed from ProjectInput.schemas in @codotype/ui
  */
-type SchemaCreator = "user" | "plugin";
+export type SchemaCreator = "user" | "plugin";
 export enum SchemaCreators {
     user = "user",
     plugin = "plugin",
@@ -19,7 +20,7 @@ export enum SchemaCreators {
 
 /**
  * SchemaInput
- * Interface used to describe the input used to derive a Codotype Schema
+ * Interface used to describe the input used to derive Schema data used by a Plugin
  */
 export interface SchemaInput {
     id: UUID;
@@ -27,10 +28,10 @@ export interface SchemaInput {
     locked: boolean;
     removable: boolean;
     attributes: Attribute[];
+    identifiers: TokenPluralization; // TODO - remove TokenPluralization from SchemaInput?
+    internalNote: string;
+    configuration: PluginConfiguration;
     relations: Relation[]; // TODO - remove this
-    identifiers: TokenPluralization;
-    configuration: ProjectConfiguration; // TODO - rename this to `PluginConfiguration`, accept update to accept a generic?
-    internalNote: string; // TODO - set internalNote as non-nullable
 }
 
 /**
@@ -43,5 +44,5 @@ export interface Schema {
     references: RelationReference[];
     attributes: Attribute[];
     identifiers: TokenPluralization;
-    configuration: ProjectConfiguration;
+    configuration: PluginConfiguration;
 }

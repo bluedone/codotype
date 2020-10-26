@@ -7,7 +7,7 @@ export * from "./datatype";
 export * from "./relation-meta";
 export * from "./relation";
 export * from "./schema";
-export * from "./ProjectConfiguration";
+export * from "./plugin";
 export * from "./project";
 export * from "./generator";
 export * from "./token";

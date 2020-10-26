@@ -1,5 +1,6 @@
-import { Project, ProjectInput } from "./Project";
-import { Schema, RelationReference } from "../";
+import { Project, ProjectInput } from "./project";
+import { RelationReference } from "./";
+import { Schema } from "./schema";
 import { PluginMetadata } from "./plugin";
 
 // // // //
@@ -96,8 +97,8 @@ export interface PluginRegistration {
 /**
  * RuntimeProxy
  * Defines slimmed-down Runtime passed into each generator, fascade/proxy
- * @param ensureDir - TODO - annotate this
- * @param writeFile - TODO - annotate this
+ * @param ensureDir - TODO - this should be removed
+ * @param writeFile - write a string to a file in OUTPUT_DIRECTORY/my_project
  * @param copyDir - TODO - annotate this
  * @param renderComponent - TODO - annotate this
  * @param templatePath - TODO - annotate this
@@ -105,9 +106,9 @@ export interface PluginRegistration {
  * @param composeWith - TODO - annotate this
  */
 export interface RuntimeProxy {
-    ensureDir: (dir: string) => Promise<boolean>;
+    ensureDir: EnsureDirFunction; // TODO - this should be removed from RuntimeProxy and handled automatically in Runtime
     writeFile: WriteFileFunction;
-    copyDir: ({ src, dest }: { src: string; dest: string }) => Promise<boolean>;
+    copyDir: CopyDirFunction;
     renderComponent: RenderComponentFunction;
     copyTemplate: (src: string, dest: string, options: object) => Promise<any>;
     templatePath: (template_path: string) => string;
@@ -139,9 +140,9 @@ export interface RuntimeAdaptor {
     forEachSchema: ForEachSchemaFunction;
     forEachRelation: ForEachRelationFunction;
     forEachReverseRelation: ForEachReverseRelationFunction;
-    ensureDir: (dir: string) => Promise<boolean>;
+    ensureDir: EnsureDirFunction;
     writeFile: WriteFileFunction;
-    copyDir: ({ src, dest }: { src: string; dest: string }) => Promise<boolean>;
+    copyDir: CopyDirFunction;
     compileTemplatesInPlace: () => Promise<Array<unknown>>;
     renderComponent: RenderComponentFunction;
     copyTemplate: (src: string, dest: string, options: object) => Promise<any>;
@@ -199,6 +200,22 @@ export type ForEachReverseRelationFunction = (params: {
     runtime: RuntimeProxy;
 }) => Promise<void>;
 
+/**
+ * EnsureDirFunction
+ * Used by the Runtime to ensure the presence of a directory
+ * NOTE - we SHOULD remove this from RuntimeProxy and just have the Runtime handle this part entirely
+ */
+export type EnsureDirFunction = (dir: string) => Promise<boolean>;
+
+/**
+ * CopyDirFunction
+ * Used by the Runtime to copy a directory of files from src to dest
+ */
+export type CopyDirFunction = (params: {
+    src: string;
+    dest: string;
+}) => Promise<boolean>;
+
 // // // //
 
 /**
@@ -208,7 +225,7 @@ export type ForEachReverseRelationFunction = (params: {
 export interface Runtime {
     templatePath: (resolvedPath: string, templatePath: string) => string;
     ensureDir: (dirPath: string) => Promise<boolean>;
-    copyDir: (dirPath: string, destinationDirPath: string) => Promise<boolean>;
+    copyDir: CopyDirFunction;
     renderTemplate: (
         generatorInstance: RuntimeAdaptor,
         src: string,

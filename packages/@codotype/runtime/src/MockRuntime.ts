@@ -155,7 +155,8 @@ export class MockRuntime implements Runtime {
     }
 
     // copyDir
-    copyDir(src: string, dest: string): Promise<boolean> {
+    copyDir(params: { src: string; dest: string }): Promise<boolean> {
+        const { src, dest } = params;
         this._mocks_.copiedDirSrc = src;
         this._mocks_.copiedDirDest = dest;
         return new Promise((resolve, reject) => {

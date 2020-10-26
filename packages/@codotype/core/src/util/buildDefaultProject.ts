@@ -3,7 +3,7 @@ import {
     ProjectInput,
     OptionType,
     OptionValue,
-    ProjectConfiguration,
+    PluginConfiguration,
     OptionValueInstance,
     ConfigurationGroup,
     ConfigurationGroupSection,
@@ -162,24 +162,24 @@ export function buildConfigurationGroupValue(
 
 /**
  * buildDefaultConfiguration
- * Builds a new ProjectConfiguration instance based on an array of ConfigurationGroup instances
+ * Builds a new PluginConfiguration instance based on an array of ConfigurationGroup instances
  * @param configurationGroups - array of ConfigurationGroup instances
  */
 export function buildDefaultConfiguration(
     configurationGroups: ConfigurationGroup[],
-): ProjectConfiguration {
-    // Defines default ProjectConfiguration
-    const projectConfiguration: ProjectConfiguration = configurationGroups.reduce(
+): PluginConfiguration {
+    // Defines default PluginConfiguration
+    const PluginConfiguration: PluginConfiguration = configurationGroups.reduce(
         (val, configurationGroup: ConfigurationGroup) => {
             const initialValue: OptionValueInstance = buildConfigurationGroupValue(
                 configurationGroup,
             );
             return { ...val, [configurationGroup.identifier]: initialValue };
         },
-        {}, // Passes in empty ProjectConfiguration
+        {}, // Passes in empty PluginConfiguration
     );
 
-    return projectConfiguration;
+    return PluginConfiguration;
 }
 
 /**
@@ -213,8 +213,8 @@ export function buildDefaultSchemas(
 export function buildDefaultProjectInput(
     pluginMetadata: PluginMetadata,
 ): ProjectInput {
-    // Defines default ProjectConfiguration
-    const projectConfiguration: ProjectConfiguration = buildDefaultConfiguration(
+    // Defines default PluginConfiguration
+    const PluginConfiguration: PluginConfiguration = buildDefaultConfiguration(
         pluginMetadata.configurationGroups,
     );
 
@@ -236,7 +236,7 @@ export function buildDefaultProjectInput(
         generatorVersion: pluginMetadata.version, // TODO - rename to `pluginVersion`
         schemas: [...defaultSchemas],
         // TODO - add `relations` here
-        configuration: projectConfiguration,
+        configuration: PluginConfiguration,
     };
 
     // Returns the new project

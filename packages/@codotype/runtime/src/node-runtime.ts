@@ -8,7 +8,7 @@ import {
     trailingComma,
     inflateProject,
     Datatype,
-    InflatedProject,
+    Project,
     RelationType,
     RuntimeLogLevel,
     RuntimeLogLevels,
@@ -190,12 +190,11 @@ export class CodotypeNodeRuntime implements Runtime {
         });
 
         // Pulls id, projectInput from build object
-        let { id } = build;
+        let { id, projectInput } = build;
 
         // Inflates Project from ProjectInput
-        // TODO - rename InflatedProject to Project
-        const project: InflatedProject = inflateProject({
-            project: build.projectInput,
+        const project: Project = inflateProject({
+            projectInput,
         });
 
         // Provisions the output directory and writes the Codotype Project JSON to the output directory
@@ -268,7 +267,7 @@ export class CodotypeNodeRuntime implements Runtime {
                 generatorOptions,
             );
 
-            // Invokes runGenerator w/ generatorInstance + inflatedProject
+            // Invokes runGenerator w/ generatorInstance + Project
             await runGenerator({
                 project,
                 generatorInstance, // TODO - rename this to generator..? ReneratorRunner? Should align with the current `CodotypeGenerator` class name
@@ -442,7 +441,8 @@ export class CodotypeNodeRuntime implements Runtime {
      * @param src - the name of the directory being copied inside the `templates` directory relative to the Codotype Generator invoking this method
      * @param dest - the name of the destination directory
      */
-    async copyDir(src: any, dest: any): Promise<boolean> {
+    async copyDir(params: { src: string; dest: string }): Promise<boolean> {
+        const { src, dest } = params;
         return new Promise((resolve, reject) => {
             return fsExtra.copy(src, dest, (err: any) => {
                 if (err) return reject(err);

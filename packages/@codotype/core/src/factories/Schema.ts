@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from "uuid";
 import { SchemaInput, Attribute, Relation } from "..";
 import { SchemaCreators } from "../schema";
 import { TokenPluralization } from "../token";
-import { ProjectConfiguration } from "../ProjectConfiguration";
+import { PluginConfiguration } from "../plugin";
 
 // // // //
 
@@ -14,7 +14,7 @@ interface SchemaBuilderParams {
     source?: SchemaCreators;
     locked?: boolean;
     removable?: boolean;
-    configuration?: ProjectConfiguration;
+    configuration?: PluginConfiguration;
     internalNote?: string;
 }
 
@@ -26,7 +26,7 @@ export class SchemaBuilder implements SchemaInput {
     source: SchemaCreators = SchemaCreators.user;
     locked: boolean = false;
     removable: boolean = true;
-    configuration: ProjectConfiguration = {};
+    configuration: PluginConfiguration = {};
     internalNote: string = "";
 
     constructor(params: SchemaBuilderParams) {

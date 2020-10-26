@@ -1,10 +1,4 @@
-import {
-    RelationType,
-    Attribute,
-    TokenPluralization,
-    ProjectConfiguration,
-    UUID,
-} from "../";
+import { RelationType, Attribute, TokenPluralization, UUID } from "../";
 
 // // // //
 

@@ -1,4 +1,7 @@
-import { ConfigurationGroup } from "./configuration-option-types";
+import {
+    OptionValueInstance,
+    ConfigurationGroup,
+} from "./configuration-option-types";
 import { Datatype } from "./datatype";
 import { RelationType, Relation } from "./relation";
 import { SchemaInput } from "./schema";
@@ -76,4 +79,9 @@ export interface PluginMetadata {
     schemaEditorConfiguration: SchemaEditorConfiguration;
     configurationGroups: ConfigurationGroup[]; // an array of OptionGroup objects that expose additional configuration provided by the generator
     exampleProjects: ProjectInput[];
+}
+
+// TODO - investigate this accepting a generic type to ensure type-safe enumeration of specific keys
+export interface PluginConfiguration {
+    [key: string]: OptionValueInstance;
 }

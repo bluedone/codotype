@@ -9,6 +9,8 @@ export interface AttributeAddonValue {
     [key: string]: null | string | boolean | number;
 }
 
+// TODO - add AttributeInput interface here
+
 export interface Attribute {
     id: UUID;
     datatype: Datatype | null;

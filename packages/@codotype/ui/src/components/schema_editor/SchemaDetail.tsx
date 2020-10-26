@@ -5,7 +5,7 @@ import { RelationEditor } from "../relation_editor";
 import { SchemaDetailHeader } from "./SchemaDetailHeader";
 import {
     inflateSchema,
-    ProjectConfiguration,
+    PluginConfiguration,
     Schema,
     Attribute,
     Relation,
@@ -57,7 +57,7 @@ export function SchemaDetail(props: SchemaDetailProps) {
                     configurationGroups={
                         schemaEditorConfiguration.configurationGroups
                     }
-                    onChange={(updatedConfiguration: ProjectConfiguration) => {
+                    onChange={(updatedConfiguration: PluginConfiguration) => {
                         props.onChange({
                             ...props.schema,
                             configuration: updatedConfiguration,

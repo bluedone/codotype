@@ -155,16 +155,19 @@ export function inflateSchemas(params: { schemas: SchemaInput[] }): Schema[] {
 
 /**
  * inflateProject
+ * TODO - rename this to "inflateProjectInput"?
  * @param params
  */
-export function inflateProject(params: { project: ProjectInput }): Project {
-    const { project } = params;
+export function inflateProject(params: {
+    projectInput: ProjectInput;
+}): Project {
+    const { projectInput } = params;
     return {
-        id: project.id,
-        schemas: inflateSchemas({ schemas: project.schemas }),
-        configuration: project.configuration,
-        generatorId: project.generatorId,
-        identifiers: project.identifiers,
-        generatorVersion: project.generatorVersion,
+        id: projectInput.id,
+        schemas: inflateSchemas({ schemas: projectInput.schemas }),
+        configuration: projectInput.configuration,
+        generatorId: projectInput.generatorId,
+        identifiers: projectInput.identifiers,
+        generatorVersion: projectInput.generatorVersion,
     };
 }

@@ -1,5 +1,5 @@
 import { SchemaInput } from "./schema";
-import { ProjectConfiguration } from "./ProjectConfiguration";
+import { PluginConfiguration } from "./plugin";
 import { TokenCasing } from "./token";
 import { Schema } from "./";
 import { UUID } from "./uuid";
@@ -16,7 +16,7 @@ export interface ProjectInput {
     generatorId: string;
     generatorVersion: string;
     identifiers: TokenCasing;
-    configuration: ProjectConfiguration;
+    configuration: PluginConfiguration;
     schemas: SchemaInput[]; // TODO - rename this to SchemaInput
     // relations: RelationInput[];
     // TODO - move relations here, migrate away from Schema.relations?
@@ -35,5 +35,5 @@ export interface Project {
     identifiers: TokenCasing;
     generatorId: string;
     generatorVersion: string;
-    configuration: ProjectConfiguration;
+    configuration: PluginConfiguration;
 }
