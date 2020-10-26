@@ -166,8 +166,8 @@ export function inflateProject(params: {
         id: projectInput.id,
         schemas: inflateSchemas({ schemas: projectInput.schemas }),
         configuration: projectInput.configuration,
-        generatorId: projectInput.generatorId,
+        pluginID: projectInput.pluginID,
         identifiers: projectInput.identifiers,
-        generatorVersion: projectInput.generatorVersion,
+        pluginVersion: projectInput.pluginVersion,
     };
 }

@@ -232,8 +232,8 @@ export function buildDefaultProjectInput(
             pascal: "NewProject",
             kebab: "new-project",
         },
-        generatorId: pluginMetadata.id, // TODO - rename to `pluginID`
-        generatorVersion: pluginMetadata.version, // TODO - rename to `pluginVersion`
+        pluginID: pluginMetadata.id, // TODO - rename to `pluginID`
+        pluginVersion: pluginMetadata.version, // TODO - rename to `pluginVersion`
         schemas: [...defaultSchemas],
         // TODO - add `relations` here
         configuration: PluginConfiguration,

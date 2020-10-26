@@ -13,11 +13,11 @@ import { UUID } from "./uuid";
  */
 export interface ProjectInput {
     id: UUID;
-    generatorId: string;
-    generatorVersion: string;
+    pluginID: string;
+    pluginVersion: string;
     identifiers: TokenCasing;
     configuration: PluginConfiguration;
-    schemas: SchemaInput[]; // TODO - rename this to SchemaInput
+    schemas: SchemaInput[];
     // relations: RelationInput[];
     // TODO - move relations here, migrate away from Schema.relations?
     // I *think* this should allow for more flexibility going forward, and really it's just a
@@ -33,7 +33,7 @@ export interface Project {
     id: UUID;
     schemas: Schema[];
     identifiers: TokenCasing;
-    generatorId: string;
-    generatorVersion: string;
+    pluginID: string;
+    pluginVersion: string;
     configuration: PluginConfiguration;
 }
