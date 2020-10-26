@@ -1,5 +1,5 @@
 import * as React from "react";
-import { InflatedSchema, UUID } from "@codotype/core";
+import { Schema, UUID } from "@codotype/core";
 import { RelationBadge } from "../relation_editor/RelationBadge";
 import { InfoTooltip } from "../info_tooltip";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
@@ -7,7 +7,7 @@ import { OverlayTrigger, Tooltip } from "react-bootstrap";
 // // // //
 
 interface SchemaIncomingRelationsProps {
-    inflatedSchema: InflatedSchema;
+    inflatedSchema: Schema;
     onSelectSchema: (nextSelectedSchemaId: UUID) => void;
 }
 

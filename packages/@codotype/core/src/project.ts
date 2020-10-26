@@ -1,7 +1,7 @@
 import { SchemaInput } from "./schema";
 import { ProjectConfiguration } from "./ProjectConfiguration";
 import { TokenCasing } from "./token";
-import { InflatedSchema } from "./";
+import { Schema } from "./";
 import { UUID } from "./uuid";
 
 // // // //
@@ -31,7 +31,7 @@ export interface ProjectInput {
  */
 export interface Project {
     id: UUID;
-    schemas: InflatedSchema[];
+    schemas: Schema[];
     identifiers: TokenCasing;
     generatorId: string;
     generatorVersion: string;

@@ -1,6 +1,6 @@
 import {
     InflatedProject,
-    InflatedSchema,
+    Schema,
     RuntimeAdaptor,
     RelationReference,
 } from "@codotype/core";
@@ -16,7 +16,7 @@ export async function runGenerator(props: {
 
     // Invokes `generator.forEachSchema` once for each in project.schemas
     await Promise.all(
-        project.schemas.map((schema: InflatedSchema) =>
+        project.schemas.map((schema: Schema) =>
             generatorInstance.forEachSchema({
                 schema,
                 project,
@@ -27,7 +27,7 @@ export async function runGenerator(props: {
 
     // Invokes `generator.forEachRelation` once for each in project.schemas
     await Promise.all(
-        project.schemas.map((schema: InflatedSchema) => {
+        project.schemas.map((schema: Schema) => {
             return Promise.all(
                 schema.relations.map((relation: RelationReference) => {
                     return generatorInstance.forEachRelation({
@@ -43,7 +43,7 @@ export async function runGenerator(props: {
 
     // Invokes `generator.forEachReverseRelation` once for each in project.schemas
     await Promise.all(
-        project.schemas.map((schema: InflatedSchema) => {
+        project.schemas.map((schema: Schema) => {
             return Promise.all(
                 schema.references.map((relation: RelationReference) => {
                     return generatorInstance.forEachReverseRelation({

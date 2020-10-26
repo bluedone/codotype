@@ -9,7 +9,7 @@ import {
     Schema,
     Attribute,
     Relation,
-    InflatedSchema,
+    Schema,
     GeneratorMeta,
     UUID,
 } from "@codotype/core";
@@ -33,7 +33,7 @@ interface SchemaDetailProps {
  * @param props - see `SchemaDetailProps`
  */
 export function SchemaDetail(props: SchemaDetailProps) {
-    const inflatedSchema: InflatedSchema = inflateSchema({
+    const inflatedSchema: Schema = inflateSchema({
         schema: props.schema,
         schemas: props.schemas,
     });

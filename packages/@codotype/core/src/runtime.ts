@@ -1,5 +1,5 @@
 import { Project, ProjectInput } from "./Project";
-import { RelationReference, InflatedSchema } from "./reference";
+import { Schema, RelationReference } from "../";
 import { PluginMetadata } from "./plugin";
 
 // // // //
@@ -180,20 +180,20 @@ export type WriteFunction = (params: {
 }) => Promise<void>;
 
 export type ForEachSchemaFunction = (params: {
-    schema: InflatedSchema;
+    schema: Schema;
     project: Project;
     runtime: RuntimeProxy;
 }) => Promise<void>;
 
 export type ForEachRelationFunction = (params: {
-    schema: InflatedSchema;
+    schema: Schema;
     relation: RelationReference;
     project: Project;
     runtime: RuntimeProxy;
 }) => Promise<void>;
 
 export type ForEachReverseRelationFunction = (params: {
-    schema: InflatedSchema; // TODO - rename `Schema` to `SchemaInput`, `InflatedSchema` to `Schema`
+    schema: Schema; // TODO - rename `Schema` to `SchemaInput`, `Schema` to `Schema`
     relation: RelationReference;
     project: Project;
     runtime: RuntimeProxy;

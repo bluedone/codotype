@@ -1,8 +1,9 @@
 import { UUID } from "./uuid";
 import { ProjectConfiguration } from "./ProjectConfiguration";
 import { Attribute } from "./attribute";
+import { RelationReference } from "./reference";
 import { Relation } from "./relation";
-import { TokenPluralization, EMPTY_TOKEN_CASING } from "./token";
+import { TokenPluralization } from "./token";
 
 // // // //
 
@@ -32,27 +33,15 @@ export interface SchemaInput {
     internalNote: string; // TODO - set internalNote as non-nullable
 }
 
-// TODO - move Schema here, add note differentiating the two
-
-// // // //
-
-// QUESTION - do we need to keep this...?
-export const DEFAULT_SCHEMA_INPUT: SchemaInput = {
-    id: "",
-    locked: false,
-    source: SchemaCreators.user,
-    removable: true,
-    attributes: [],
-    relations: [], // TODO - remove this
-    configuration: {},
-    internalNote: "",
-    // TODO - can this be changed to just be `identifier`? Abstract all casing / pluralization away
-    identifiers: {
-        singular: {
-            ...EMPTY_TOKEN_CASING,
-        },
-        plural: {
-            ...EMPTY_TOKEN_CASING,
-        },
-    },
-};
+/**
+ * Schema
+ * TODO - annotate this interface
+ */
+export interface Schema {
+    id: UUID;
+    relations: RelationReference[];
+    references: RelationReference[];
+    attributes: Attribute[];
+    identifiers: TokenPluralization;
+    configuration: ProjectConfiguration;
+}

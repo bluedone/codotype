@@ -2,7 +2,7 @@ import {
     SchemaInput,
     Datatype,
     Attribute,
-    InflatedSchema,
+    Schema,
     RelationReference,
 } from "../";
 import { inflateSchema } from "./inflate";
@@ -84,7 +84,7 @@ export function renderSchemaJson({
     schema: SchemaInput;
     schemas: SchemaInput[];
 }): string {
-    const inflatedSchema: InflatedSchema = inflateSchema({ schema, schemas });
+    const inflatedSchema: Schema = inflateSchema({ schema, schemas });
     // Define + open JSON output
     let jsonOutput: string[] = [
         "{", // Open JSON output
@@ -181,7 +181,7 @@ export function renderSchemaGrapqhQL({
     schema: SchemaInput;
     schemas: SchemaInput[];
 }): string {
-    const inflatedSchema: InflatedSchema = inflateSchema({ schema, schemas });
+    const inflatedSchema: Schema = inflateSchema({ schema, schemas });
     // Define + open JSON output
     let jsonOutput: string[] = [
         `type ${schema.identifiers.singular.pascal} {`, // Open JSON output
@@ -276,7 +276,7 @@ export function renderSchemaTypeScript({
     schema: SchemaInput;
     schemas: SchemaInput[];
 }): string {
-    const inflatedSchema: InflatedSchema = inflateSchema({ schema, schemas });
+    const inflatedSchema: Schema = inflateSchema({ schema, schemas });
     // Define + open JSON output
     let output: string[] = [
         `interface ${schema.identifiers.singular.pascal} {`, // Open JSON output

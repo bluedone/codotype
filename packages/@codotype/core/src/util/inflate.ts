@@ -4,7 +4,7 @@ import {
     SchemaInput,
     Relation,
     RelationReference,
-    InflatedSchema,
+    Schema,
     ProjectInput,
     Project,
 } from "../";
@@ -109,15 +109,15 @@ export function buildInflatedRelations(params: {
 
 /**
  * inflateSchema
- * Inflates a single Schema and returns an InflatedSchema instance
+ * Inflates a single Schema and returns an Schema instance
  * @param params.schema The Schema instance being inflated
  * @param params.schemas Array of all Schema instances
- * @returns A single InflatedSchema instance
+ * @returns A single Schema instance
  */
 export function inflateSchema(params: {
     schema: SchemaInput;
     schemas: SchemaInput[];
-}): InflatedSchema {
+}): Schema {
     const { schema, schemas } = params;
 
     return {
@@ -139,13 +139,11 @@ export function inflateSchema(params: {
  * inflateSchemas
  * Inflates each schema in params.schemas
  * @param params.schemas - array of Schema instances being inflated
- * @returns array of InflatedSchema instances
+ * @returns array of Schema instances
  */
-export function inflateSchemas(params: {
-    schemas: SchemaInput[];
-}): InflatedSchema[] {
+export function inflateSchemas(params: { schemas: SchemaInput[] }): Schema[] {
     return params.schemas.map(
-        (s: SchemaInput): InflatedSchema =>
+        (s: SchemaInput): Schema =>
             inflateSchema({
                 schemas: params.schemas,
                 schema: s,

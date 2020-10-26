@@ -1,7 +1,7 @@
 import {
     RelationReference,
     InflatedProject,
-    InflatedSchema,
+    Schema,
     GeneratorConstructorParams,
     RuntimeInjectorProps,
     RuntimeAdaptor,
@@ -117,7 +117,7 @@ export class CodotypeGenerator implements RuntimeAdaptor {
         project,
         runtime,
     }: {
-        schema: InflatedSchema;
+        schema: Schema;
         project: InflatedProject;
         runtime: RuntimeProxy;
     }): Promise<void> {
@@ -134,7 +134,7 @@ export class CodotypeGenerator implements RuntimeAdaptor {
         relation,
         project,
     }: {
-        schema: InflatedSchema;
+        schema: Schema;
         relation: RelationReference;
         project: InflatedProject;
         runtime: RuntimeProxy;
@@ -153,7 +153,7 @@ export class CodotypeGenerator implements RuntimeAdaptor {
         relation,
         project,
     }: {
-        schema: InflatedSchema;
+        schema: Schema;
         relation: RelationReference;
         project: InflatedProject;
     }): Promise<void> {

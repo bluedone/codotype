@@ -3,12 +3,7 @@ import {
     inflateSchemas,
     inflateSchema,
 } from "../inflate";
-import {
-    SchemaInput,
-    testState,
-    RelationReference,
-    InflatedSchema,
-} from "../../";
+import { SchemaInput, testState, RelationReference, Schema } from "../../";
 
 const { userSchema, movieSchema } = testState;
 
@@ -37,7 +32,7 @@ describe("/lib/buildRelationReferences.js", () => {
 describe("/lib/inflateSchema.js", () => {
     testCases.forEach((testCase) => {
         test(testCase[0], () => {
-            const expectedSchema: InflatedSchema = inflateSchema({
+            const expectedSchema: Schema = inflateSchema({
                 schema: userSchema,
                 schemas: [userSchema, movieSchema],
             });
@@ -51,7 +46,7 @@ describe("/lib/inflateSchema.js", () => {
 describe("/lib/inflateSchemas.js", () => {
     testCases.forEach((testCase) => {
         test(testCase[0], () => {
-            const expectedSchemas: InflatedSchema[] = inflateSchemas({
+            const expectedSchemas: Schema[] = inflateSchemas({
                 schemas: [userSchema, movieSchema],
             });
             expect(expectedSchemas).toMatchSnapshot();
