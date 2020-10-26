@@ -73,7 +73,6 @@ export class MockRuntime implements Runtime {
 
     // ensureDir
     // Ensures presence of directory for template compilation
-    // TODO - this is repeated in @codotype/generator - should be abstracted, or only encapsulated in the runtime
     async ensureDir(dir: string): Promise<boolean> {
         this._mocks_.ensuredDir = dir;
         return new Promise((resolve, reject) => {
