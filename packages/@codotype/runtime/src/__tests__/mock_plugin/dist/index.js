@@ -10,5 +10,10 @@ module.exports = {
 
         // Compose ./base generator
         await runtime.composeWith("./base");
+
+        // Compose ./scoped generator
+        await runtime.composeWith("./scoped", {
+            outputDirectoryScope: "scoped-output",
+        });
     },
 };

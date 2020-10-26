@@ -11,7 +11,6 @@ import { RuntimeLogLevel, RuntimeLogLevels } from "@codotype/core";
  * TODO - add support for RuntimeLogLevel.success
  * TODO - add support for RuntimeLogLevel.warning
  * TODO - add support for RuntimeLogLevel.error
- * TODO - add support for RuntimeLogLevel.debug
  * TODO - add tests for this function
  * @param args - arguments passed into `console.log` statement
  */
@@ -21,6 +20,11 @@ export function logger(
     runtimeLogLevel: RuntimeLogLevel,
 ) {
     const { level } = options;
+
+    // If runtimeLogLevel === suppress -> short-circuit
+    if (runtimeLogLevel === RuntimeLogLevels.suppress) {
+        return;
+    }
 
     // Only output verbose logs when runtime.options.logLevel is "verbose"
     if (

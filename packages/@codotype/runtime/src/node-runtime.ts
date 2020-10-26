@@ -488,7 +488,7 @@ export class CodotypeNodeRuntime implements Runtime {
     async composeWith(
         parentRuntimeAdaptor: RuntimeAdaptor,
         generatorModulePath: string,
-        options: ComposeWithOptions, // TODO - add proper type annotation here
+        options: ComposeWithOptions = {},
     ) {
         // Log composeWith debug statement
         this.log(`Composing Generator: ${generatorModulePath}`, {
@@ -569,22 +569,18 @@ export class CodotypeNodeRuntime implements Runtime {
             resolvedGeneratorPath = resolvedGeneratorPath.join("/");
 
             // // // //
-            // TODO - document
             // TODO - move into independent function, `resolveDestination`, perhaps
             let resolvedDestination = parentRuntimeAdaptor.options.dest;
 
-            // // // //
-            // TODO - re-introduce support for options.scope
-            // TODO - why is this necessary? Used for importing individual generator modules from an external plugin - correct?
-            // options.scope is super important - need it to compose packages from one generator into another
-            // // @ts-ignore
-            // if (options.scope) {
-            //   // @ts-ignore
-            //   resolvedDestination = path.resolve(
-            //     parentRuntimeAdaptor.options.dest,
-            //     options.scope
-            //   );
-            // }
+            // Handle ComposeWithOptions.outputDirectoryScope
+            // Scope the output of the composed Generator inside a different directory within OUTPUT_DIRECTORY/my_project
+            if (options.outputDirectoryScope) {
+                // Updates resolvedDestination to include the additional outputDirectoryScope
+                resolvedDestination = path.resolve(
+                    parentRuntimeAdaptor.options.dest,
+                    options.outputDirectoryScope,
+                );
+            }
             //
             // // // //
 
@@ -611,9 +607,9 @@ export class CodotypeNodeRuntime implements Runtime {
             });
 
             // Logs output
-            // TODO - add --verbose flag to conditionally print this output
-            // TODO - all logging should take place in @codotype/runtime
-            console.log(`Generated ${generatorPrototype.name}.\n`);
+            this.log(`Generated ${generatorPrototype.name}.\n`, {
+                level: RuntimeLogLevels.info,
+            });
 
             // Logs which generator is being run
         } catch (err) {

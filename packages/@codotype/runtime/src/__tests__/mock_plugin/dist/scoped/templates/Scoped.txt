@@ -1,0 +1,1 @@
+This is a dummy file copied over using composeWith - it should be nested one directory down from the root of the Project output.

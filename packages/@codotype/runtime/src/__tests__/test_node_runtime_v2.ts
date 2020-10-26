@@ -51,7 +51,7 @@ describe("testing @codotype/runtime v2", () => {
         // Instantiates new CodotypeRuntime w/ verbose LogLevel
         const nodeRuntime: Runtime = new CodotypeNodeRuntime({
             cwd,
-            logLevel: RuntimeLogLevels.info,
+            logLevel: RuntimeLogLevels.suppress,
             fileOverwriteBehavior: "force",
         });
 
@@ -85,7 +85,6 @@ describe("testing @codotype/runtime v2", () => {
         const txtExists = fs.existsSync(
             resolve(cwd, ".codotype-out/test-project/new_project/Hello.txt"),
         );
-
         const readmeExists = fs.existsSync(
             resolve(
                 cwd,
@@ -93,8 +92,17 @@ describe("testing @codotype/runtime v2", () => {
             ),
         );
 
+        // Tests ComposeWithOptions.outputDirectoryScope
+        const scopedFile = fs.existsSync(
+            resolve(
+                cwd,
+                ".codotype-out/test-project/new_project/scoped-output/SCOPED-TEST.md",
+            ),
+        );
+
         // Asserts existence of files
         expect(txtExists).toBe(true);
         expect(readmeExists).toBe(true);
+        expect(scopedFile).toBe(true);
     });
 });
