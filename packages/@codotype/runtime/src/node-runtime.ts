@@ -20,6 +20,7 @@ import {
     Runtime,
     ProjectBuild,
     RuntimeInjectorProps,
+    GeneratorConstructorParams,
 } from "@codotype/core";
 import { RuntimeProxyAdaptor } from "./utils/runtimeProxyAdaptor";
 import { runGenerator } from "./utils/runGenerator";
@@ -33,7 +34,6 @@ import {
 import { getPluginPath } from "./utils/getPluginPath";
 import { prepareProjectBuildDestination } from "./utils/prepareProjectBuildDestination";
 import { logger } from "./utils/logger";
-import { GeneratorConstructorParams } from "packages/@codotype/core/dist";
 
 // // // //
 // TODO - cleanup + simplify error handling
