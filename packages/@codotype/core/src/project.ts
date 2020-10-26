@@ -3,6 +3,7 @@ import { PluginConfiguration } from "./plugin";
 import { TokenCasing } from "./token";
 import { Schema } from "./";
 import { UUID } from "./uuid";
+import { RelationInput } from "./relation";
 
 // // // //
 
@@ -18,11 +19,7 @@ export interface ProjectInput {
     identifiers: TokenCasing;
     configuration: PluginConfiguration;
     schemas: SchemaInput[];
-    // relations: RelationInput[];
-    // TODO - move relations here, migrate away from Schema.relations?
-    // I *think* this should allow for more flexibility going forward, and really it's just a
-    // matter of filtering project.relations in SchemaDetail, few little refactors but nothing major.
-    // Makes more sense from a data+design perspetive.
+    relations: RelationInput[];
 }
 
 /**

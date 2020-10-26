@@ -2,8 +2,8 @@ import { buildTokenPluralization } from "./buildTokenPluralization";
 import { makeUniqueId } from "./makeUniqueId";
 import {
     SchemaInput,
+    RelationInput,
     Relation,
-    RelationReference,
     Schema,
     ProjectInput,
     Project,
@@ -11,24 +11,24 @@ import {
 
 // // // //
 
-export function buildRelationReference(params: {
-    relation: Relation;
+export function buildRelation(params: {
+    relationInput: RelationInput;
     sourceSchema: SchemaInput;
     destinationSchema: SchemaInput;
-}): RelationReference {
-    const { relation, sourceSchema, destinationSchema } = params;
+}): Relation {
+    const { relationInput, sourceSchema, destinationSchema } = params;
 
     return {
         id: makeUniqueId(),
-        type: relation.type,
+        type: relationInput.type,
         sourceSchemaId: sourceSchema.id,
         destinationSchemaId: destinationSchema.id,
-        sourceRelationId: relation.id,
+        sourceRelationId: relationInput.id,
         identifiers: {
             source: {
                 canonical: { ...sourceSchema.identifiers },
                 alias: buildTokenPluralization(
-                    relation.sourceSchemaAlias ||
+                    relationInput.sourceSchemaAlias ||
                         sourceSchema.identifiers.singular.label,
                 ),
             },
@@ -36,7 +36,7 @@ export function buildRelationReference(params: {
                 canonical: { ...destinationSchema.identifiers },
                 alias: {
                     ...buildTokenPluralization(
-                        relation.destinationSchemaAlias ||
+                        relationInput.destinationSchemaAlias ||
                             destinationSchema.identifiers.singular.label,
                     ),
                 },
@@ -46,63 +46,27 @@ export function buildRelationReference(params: {
 }
 
 // // // //
-// // // //
 
-export function buildRelationReferences(params: {
-    schema: SchemaInput;
-    schemas: SchemaInput[];
-}): RelationReference[] {
-    const { schema, schemas } = params;
-
-    // Defines array of RelationReferences we're going to return
-
-    return schemas.reduce(
-        (previous: RelationReference[], nextSchema: SchemaInput) => {
-            return [
-                ...previous,
-                ...nextSchema.relations
-                    .filter(
-                        (r: Relation) => r.destinationSchemaId === schema.id,
-                    )
-                    .map(
-                        (r: Relation): RelationReference => {
-                            return buildRelationReference({
-                                sourceSchema: nextSchema,
-                                destinationSchema: schema,
-                                relation: r,
-                            });
-                        },
-                    ),
-            ];
-        },
-        [],
-    );
-}
-
-// // // //
-
-export function buildInflatedRelations(params: {
-    schema: SchemaInput;
-    schemas: SchemaInput[];
-}): RelationReference[] {
-    const { schema, schemas } = params;
+export function buildRelations(params: {
+    schemaInputs: SchemaInput[];
+    relationInputs: RelationInput[];
+}): Relation[] {
+    const { relationInputs, schemaInputs } = params;
 
     // Defines array of RelationReferences we're going to return
-    return [
-        ...schema.relations.map(
-            (r: Relation): RelationReference => {
-                const nextSchema: SchemaInput = schemas.find(
-                    (s) => s.id === r.destinationSchemaId,
-                );
-
-                return buildRelationReference({
-                    sourceSchema: schema,
-                    destinationSchema: nextSchema,
-                    relation: r,
-                });
-            },
-        ),
-    ];
+    return relationInputs.map(relationInput => {
+        const sourceSchema = schemaInputs.find(
+            s => s.id === relationInput.sourceSchemaID,
+        );
+        const destinationSchema = schemaInputs.find(
+            s => s.id === relationInput.destinationSchemaID,
+        );
+        return buildRelation({
+            sourceSchema,
+            destinationSchema,
+            relationInput,
+        });
+    });
 }
 
 // // // //
@@ -110,26 +74,24 @@ export function buildInflatedRelations(params: {
 /**
  * inflateSchema
  * Inflates a single Schema and returns an Schema instance
- * @param params.schema The Schema instance being inflated
- * @param params.schemas Array of all Schema instances
- * @returns A single Schema instance
  */
 export function inflateSchema(params: {
-    schema: SchemaInput;
-    schemas: SchemaInput[];
+    schemaInput: SchemaInput;
+    relations: Relation[];
 }): Schema {
-    const { schema, schemas } = params;
+    const { schemaInput, relations } = params;
 
     return {
-        id: schema.id,
-        attributes: schema.attributes,
+        id: schemaInput.id,
+        attributes: schemaInput.attributes,
         identifiers: {
-            ...schema.identifiers,
+            ...schemaInput.identifiers,
         },
-        relations: buildInflatedRelations({ schema, schemas }),
-        references: buildRelationReferences({ schema, schemas }),
-        // QUESTION - does anything need to be done for the configuration?
-        configuration: schema.configuration,
+        configuration: schemaInput.configuration,
+        relations: relations.filter(r => r.sourceSchemaId === schemaInput.id),
+        references: relations.filter(
+            r => r.destinationSchemaId === schemaInput.id,
+        ),
     };
 }
 
@@ -138,15 +100,16 @@ export function inflateSchema(params: {
 /**
  * inflateSchemas
  * Inflates each schema in params.schemas
- * @param params.schemas - array of Schema instances being inflated
- * @returns array of Schema instances
  */
-export function inflateSchemas(params: { schemas: SchemaInput[] }): Schema[] {
-    return params.schemas.map(
+export function inflateSchemas(params: {
+    schemaInputs: SchemaInput[];
+    relations: Relation[];
+}): Schema[] {
+    return params.schemaInputs.map(
         (s: SchemaInput): Schema =>
             inflateSchema({
-                schemas: params.schemas,
-                schema: s,
+                schemaInput: s,
+                relations: params.relations,
             }),
     );
 }
@@ -162,9 +125,18 @@ export function inflateProject(params: {
     projectInput: ProjectInput;
 }): Project {
     const { projectInput } = params;
+
+    const relations: Relation[] = buildRelations({
+        schemaInputs: projectInput.schemas,
+        relationInputs: projectInput.relations,
+    });
+
     return {
         id: projectInput.id,
-        schemas: inflateSchemas({ schemas: projectInput.schemas }),
+        schemas: inflateSchemas({
+            relations,
+            schemaInputs: projectInput.schemas,
+        }),
         configuration: projectInput.configuration,
         pluginID: projectInput.pluginID,
         identifiers: projectInput.identifiers,

@@ -1,6 +1,6 @@
 import { SchemaEditorBuilder } from "../SchemaEditor";
 import { Datatype } from "../../datatype";
-import { RelationType } from "../../relation";
+import { RelationTypes } from "../../relation";
 
 // // // //
 
@@ -8,7 +8,7 @@ describe("factory", () => {
     test("works", () => {
         const schemaEditor = new SchemaEditorBuilder({
             supportedDatatypes: [Datatype.STRING],
-            supportedRelations: [RelationType.TO_ONE],
+            supportedRelations: [RelationTypes.TO_ONE],
         });
 
         expect(schemaEditor).toMatchSnapshot();

@@ -1,4 +1,4 @@
-import { RelationReference } from "./";
+import { Relation } from "./";
 import { PluginMetadata } from "./plugin";
 import { Project, ProjectInput } from "./project";
 import { Schema } from "./schema";
@@ -200,14 +200,14 @@ export type ForEachSchemaFunction = (params: {
 
 export type ForEachRelationFunction = (params: {
     schema: Schema;
-    relation: RelationReference; // TODO - rename to "Relation"
+    relation: Relation; // TODO - rename to "Relation"
     project: Project;
     runtime: RuntimeProxy;
 }) => Promise<void>;
 
 export type ForEachReverseRelationFunction = (params: {
     schema: Schema;
-    relation: RelationReference; // TODO - rename to "Relation"
+    relation: Relation; // TODO - rename to "Relation"
     project: Project;
     runtime: RuntimeProxy;
 }) => Promise<void>;

@@ -16,8 +16,11 @@ export interface CodotypeFactory {
     Relation: typeof RelationBuilder;
     Schema: typeof SchemaBuilder;
     SchemaEditor: typeof SchemaEditorBuilder;
+    // Generator: typeof GeneratorBuilder; // TODO - add GeneratorBuilder
+    // Plugin: typeof PluginBuilder; // TODO - add PluginBuilder
 }
 
+// TODO - abstract into @codotype/primatives
 export const Codotype: CodotypeFactory = {
     ConfigurationGroup: ConfigurationGroupBuilder,
     ConfigurationGroupSection: ConfigurationGroupSectionBuilder,

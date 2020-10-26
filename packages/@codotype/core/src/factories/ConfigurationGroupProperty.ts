@@ -7,7 +7,7 @@ import {
     PropertyLayoutVariant,
 } from "../configuration-option-types";
 import { PropertyFilter } from "../property-filter";
-import { PropertyValidation } from "../property-validation";
+import { PropertyValidations } from "../property-validation";
 import { DataPreviewLayoutVariant, DataPreview } from "../data-preview";
 
 // // // //
@@ -28,7 +28,7 @@ interface ConfigurationGroupPropertyBuilderParams {
     layoutVariant?: PropertyLayoutVariant;
     properties?: ConfigurationGroupProperty[];
     filters?: PropertyFilter[];
-    validations?: PropertyValidation[];
+    validations?: PropertyValidations;
     dataPreview?: DataPreview;
 }
 
@@ -49,7 +49,7 @@ export class ConfigurationGroupPropertyBuilder
     properties: ConfigurationGroupProperty[] = [];
     dropdownOptions: DropdownOption[] = [];
     filters: PropertyFilter[] = [];
-    validations: PropertyValidation[] = [];
+    validations: PropertyValidations = [];
     dataPreview: DataPreview = {
         rules: [],
         variant: DataPreviewLayoutVariant.CODE_DARK,

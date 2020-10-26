@@ -1,36 +1,36 @@
-import { NumberValueFilter } from "../../property-filter";
+import { NumberValueFilters } from "../../property-filter";
 import { applyNumberPropertyFilters } from "../applyNumberPropertyFilters";
 
 // testCase = [testName, props.value, props.filters, expectedResult]
-const testCases: [string, number, NumberValueFilter[], number][] = [
+const testCases: [string, number, NumberValueFilters[], number][] = [
     [
         "NumberValueFilter.negativeValue",
         -123,
-        [NumberValueFilter.negativeValue],
+        [NumberValueFilters.negativeValue],
         -123,
     ],
     [
         "NumberValueFilter.positiveValue",
         -123,
-        [NumberValueFilter.positiveValue],
+        [NumberValueFilters.positiveValue],
         123,
     ],
     [
         "NumberValueFilter.positiveValue 2",
         123.45,
-        [NumberValueFilter.positiveValue],
+        [NumberValueFilters.positiveValue],
         123.45,
     ],
     [
         "NumberValueFilter.integerValue",
         123.75,
-        [NumberValueFilter.integerValue],
+        [NumberValueFilters.integerValue],
         123,
     ],
     [
         "NumberValueFilter.integerValue and NumberValueFilter.negativeValue",
         123.75,
-        [NumberValueFilter.integerValue, NumberValueFilter.negativeValue],
+        [NumberValueFilters.integerValue, NumberValueFilters.negativeValue],
         -123,
     ],
 ];

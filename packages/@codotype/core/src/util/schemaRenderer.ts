@@ -1,11 +1,6 @@
-import {
-    SchemaInput,
-    Datatype,
-    Attribute,
-    Schema,
-    RelationReference,
-} from "../";
-import { inflateSchema } from "./inflate";
+import { SchemaInput, Datatype, Attribute, Schema, Relation } from "../";
+import { inflateSchema, buildRelations } from "./inflate";
+import { ProjectInput } from "../project";
 
 // // // //
 
@@ -24,7 +19,7 @@ export const getDatatypeValueJson = ({
             return `"string"`;
         case Datatype.TEXT:
             return `"longer string for text"`;
-        case Datatype.INTEGER:
+        case Datatype.INT:
             return `128`;
         case Datatype.BIGINT:
             return `12378971290123987`;
@@ -54,7 +49,7 @@ export const getDatatypeValueJson = ({
             return `["string", "array"]`;
         case Datatype.TEXT_ARRAY:
             return `["text", "array"]`;
-        case Datatype.INTEGER_ARRAY:
+        case Datatype.INT_ARRAY:
             return `[128, 256]`;
         case Datatype.BIGINT_ARRAY:
             return `[128128309810198, 128128309810198]`;
@@ -78,24 +73,30 @@ export const getDatatypeValueJson = ({
 };
 
 export function renderSchemaJson({
-    schema,
-    schemas,
+    schemaInput,
+    projectInput,
 }: {
-    schema: SchemaInput;
-    schemas: SchemaInput[];
+    projectInput: ProjectInput;
+    schemaInput: SchemaInput;
 }): string {
-    const inflatedSchema: Schema = inflateSchema({ schema, schemas });
+    const inflatedSchema: Schema = inflateSchema({
+        schemaInput,
+        relations: buildRelations({
+            schemaInputs: projectInput.schemas,
+            relationInputs: projectInput.relations,
+        }),
+    });
     // Define + open JSON output
     let jsonOutput: string[] = [
         "{", // Open JSON output
         // Map each property
         [
-            ...schema.attributes.map((attr: Attribute) => {
+            ...schemaInput.attributes.map((attr: Attribute) => {
                 return `  "${attr.identifiers.snake}": ${getDatatypeValueJson({
                     datatype: attr.datatype,
                 })}`;
             }),
-            ...inflatedSchema.relations.map((r: RelationReference): string => {
+            ...inflatedSchema.relations.map((r: Relation): string => {
                 return `  "${r.identifiers.destination.alias.singular.camel}": "${r.identifiers.destination.canonical.singular.pascal} ID"`;
             }),
         ].join(",\n"),
@@ -121,7 +122,7 @@ export const getDatatypeValueGraphQL = ({
             return `String`;
         case Datatype.TEXT:
             return `String`;
-        case Datatype.INTEGER:
+        case Datatype.INT:
             return `Number`;
         case Datatype.BIGINT:
             return `"Number`;
@@ -151,7 +152,7 @@ export const getDatatypeValueGraphQL = ({
             return `[String]`;
         case Datatype.TEXT_ARRAY:
             return `[String]`;
-        case Datatype.INTEGER_ARRAY:
+        case Datatype.INT_ARRAY:
             return `[Number]`;
         case Datatype.BIGINT_ARRAY:
             return `[Number]`;
@@ -175,23 +176,29 @@ export const getDatatypeValueGraphQL = ({
 };
 
 export function renderSchemaGrapqhQL({
-    schema,
-    schemas,
+    schemaInput,
+    projectInput,
 }: {
-    schema: SchemaInput;
-    schemas: SchemaInput[];
+    projectInput: ProjectInput;
+    schemaInput: SchemaInput;
 }): string {
-    const inflatedSchema: Schema = inflateSchema({ schema, schemas });
+    const inflatedSchema: Schema = inflateSchema({
+        schemaInput,
+        relations: buildRelations({
+            schemaInputs: projectInput.schemas,
+            relationInputs: projectInput.relations,
+        }),
+    });
     // Define + open JSON output
     let jsonOutput: string[] = [
-        `type ${schema.identifiers.singular.pascal} {`, // Open JSON output
+        `type ${schemaInput.identifiers.singular.pascal} {`, // Open JSON output
         // Map each property
-        ...schema.attributes.map((attr: Attribute) => {
+        ...schemaInput.attributes.map((attr: Attribute) => {
             return `  ${attr.identifiers.snake}: ${getDatatypeValueGraphQL({
                 datatype: attr.datatype,
             })}!`;
         }),
-        ...inflatedSchema.relations.map((r: RelationReference): string => {
+        ...inflatedSchema.relations.map((r: Relation): string => {
             return `  ${r.identifiers.destination.alias.singular.camel}: ${r.identifiers.destination.canonical.singular.pascal}!`;
         }),
         "}", // Close JSON output
@@ -216,7 +223,7 @@ export const getDatatypeValueTypeScript = ({
             return `string`;
         case Datatype.TEXT:
             return `string`;
-        case Datatype.INTEGER:
+        case Datatype.INT:
             return `number`;
         case Datatype.BIGINT:
             return `"number`;
@@ -246,7 +253,7 @@ export const getDatatypeValueTypeScript = ({
             return `string[]`;
         case Datatype.TEXT_ARRAY:
             return `string[]`;
-        case Datatype.INTEGER_ARRAY:
+        case Datatype.INT_ARRAY:
             return `number[]`;
         case Datatype.BIGINT_ARRAY:
             return `number[]`;
@@ -270,23 +277,29 @@ export const getDatatypeValueTypeScript = ({
 };
 
 export function renderSchemaTypeScript({
-    schema,
-    schemas,
+    schemaInput,
+    projectInput,
 }: {
-    schema: SchemaInput;
-    schemas: SchemaInput[];
+    projectInput: ProjectInput;
+    schemaInput: SchemaInput;
 }): string {
-    const inflatedSchema: Schema = inflateSchema({ schema, schemas });
+    const inflatedSchema: Schema = inflateSchema({
+        schemaInput,
+        relations: buildRelations({
+            schemaInputs: projectInput.schemas,
+            relationInputs: projectInput.relations,
+        }),
+    });
     // Define + open JSON output
     let output: string[] = [
-        `interface ${schema.identifiers.singular.pascal} {`, // Open JSON output
+        `interface ${schemaInput.identifiers.singular.pascal} {`, // Open JSON output
         // Map each property
-        ...schema.attributes.map((attr: Attribute) => {
+        ...schemaInput.attributes.map((attr: Attribute) => {
             return `  ${attr.identifiers.snake}: ${getDatatypeValueTypeScript({
                 datatype: attr.datatype,
             })};`;
         }),
-        ...inflatedSchema.relations.map((r: RelationReference): string => {
+        ...inflatedSchema.relations.map((r: Relation): string => {
             return `  ${r.identifiers.destination.alias.singular.camel}Id: ${r.identifiers.destination.canonical.singular.pascal};`;
         }),
         "}", // Close JSON output

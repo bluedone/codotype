@@ -1,5 +1,7 @@
 import { Datatype } from "./datatype";
 
+// // // //
+
 export interface DatatypeMeta {
     value: Datatype;
     label: string;
@@ -11,6 +13,18 @@ export interface DatatypeMeta {
 export const DATATYPE_META: {
     [key in Datatype]: DatatypeMeta;
 } = {
+    [Datatype.ID]: {
+        value: Datatype.ID,
+        label: "ID",
+        description: "Unique ID",
+        icon: "fa fa-tag",
+    },
+    [Datatype.AUTO_INCREMENTED_ID]: {
+        value: Datatype.AUTO_INCREMENTED_ID,
+        label: "Auto-incremented ID",
+        description: "Automatically incremented numeric ID",
+        icon: "fa fa-tag",
+    },
     [Datatype.UUID]: {
         value: Datatype.UUID,
         label: "UUID",
@@ -44,8 +58,8 @@ export const DATATYPE_META: {
         icon: "fa fa-toggle-on",
     },
 
-    [Datatype.INTEGER]: {
-        value: Datatype.INTEGER,
+    [Datatype.INT]: {
+        value: Datatype.INT,
         label: "Integer",
         description: "Whole numbers",
         icon: "fa fa-hashtag",
@@ -166,8 +180,8 @@ export const DATATYPE_META: {
         icon: "fa fa-tags",
     },
 
-    [Datatype.INTEGER_ARRAY]: {
-        value: Datatype.INTEGER_ARRAY,
+    [Datatype.INT_ARRAY]: {
+        value: Datatype.INT_ARRAY,
         label: "Integer Array",
         description: "An array of Integers",
         icon: "fa fa-tags",

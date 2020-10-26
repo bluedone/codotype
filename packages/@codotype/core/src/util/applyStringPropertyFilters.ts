@@ -1,4 +1,4 @@
-import { StringValueFilter } from "../property-filter";
+import { StringValueFilters } from "../property-filter";
 import { makeLabelCase } from "./makeLabelCase";
 import { makeCamelCase } from "./makeCamelCase";
 import { makeSnakeCase } from "./makeSnakeCase";
@@ -7,18 +7,18 @@ import { makeKebabCase } from "./makeKebabCase";
 
 /** Maps every StringValueFilter (hopefully) to its function. */
 const filterFuncs = {
-    [StringValueFilter.lowercase]: (val: string) => val.toLowerCase(),
-    [StringValueFilter.uppercase]: (val: string) => val.toUpperCase(),
-    [StringValueFilter.titlecase]: makeLabelCase,
-    [StringValueFilter.camelcase]: makeCamelCase,
-    [StringValueFilter.snakecase]: makeSnakeCase,
-    [StringValueFilter.pascalcase]: makePascalCase,
-    [StringValueFilter.kebabcase]: makeKebabCase,
-    [StringValueFilter.nonumbers]: (val: string) => val.replace(/[0-9]/g, ""),
-    [StringValueFilter.nosymbols]: (val: string) =>
+    [StringValueFilters.lowercase]: (val: string) => val.toLowerCase(),
+    [StringValueFilters.uppercase]: (val: string) => val.toUpperCase(),
+    [StringValueFilters.titlecase]: makeLabelCase,
+    [StringValueFilters.camelcase]: makeCamelCase,
+    [StringValueFilters.snakecase]: makeSnakeCase,
+    [StringValueFilters.pascalcase]: makePascalCase,
+    [StringValueFilters.kebabcase]: makeKebabCase,
+    [StringValueFilters.nonumbers]: (val: string) => val.replace(/[0-9]/g, ""),
+    [StringValueFilters.nosymbols]: (val: string) =>
         val.replace(/[^a-zA-Z\s]/gi, ""),
-    [StringValueFilter.trimwhitespace]: (val: string) => val.trim(),
-    [StringValueFilter.removewhitespace]: (val: string) =>
+    [StringValueFilters.trimwhitespace]: (val: string) => val.trim(),
+    [StringValueFilters.removewhitespace]: (val: string) =>
         val.replace(/\s/g, ""),
 };
 
@@ -35,7 +35,7 @@ export function applyStringPropertyFilters({
     filters,
 }: {
     value: string;
-    filters: StringValueFilter[];
+    filters: StringValueFilters[];
 }): string {
     return filters.reduce(
         (str, filter) => filterFuncs[String(filter)](str),

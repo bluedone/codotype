@@ -1,5 +1,5 @@
 import { PropertyFilter } from "./property-filter";
-import { PropertyValidation } from "./property-validation";
+import { PropertyValidations } from "./property-validation";
 import { DataPreview } from "./data-preview";
 
 // // // //
@@ -103,7 +103,7 @@ export interface ConfigurationGroupProperty {
     properties: ConfigurationGroupProperty[];
     dropdownOptions: DropdownOption[];
     filters: PropertyFilter[];
-    validations: PropertyValidation[];
+    validations: PropertyValidations;
     dataPreview: DataPreview;
 }
 

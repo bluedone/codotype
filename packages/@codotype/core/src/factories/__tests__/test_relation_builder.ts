@@ -1,5 +1,5 @@
 import { RelationBuilder } from "../Relation";
-import { RelationType } from "../../relation";
+import { RelationTypes } from "../../relation";
 
 // Mocks UUID module
 jest.mock("uuid", () => ({
@@ -12,7 +12,7 @@ jest.mock("uuid", () => ({
 describe("factory", () => {
     test("works", () => {
         const relationBuilder = new RelationBuilder({
-            type: RelationType.BELONGS_TO,
+            type: RelationTypes.BELONGS_TO,
             destinationSchemaId: "SCHEMA_01",
         });
 

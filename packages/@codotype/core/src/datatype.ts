@@ -2,7 +2,7 @@ export enum Datatype {
     // Standard datatypes
     STRING = "STRING", // Postgres, MongoDB
     TEXT = "TEXT", // Postgres, MongoDB (Equiv. to String)
-    INTEGER = "INTEGER", // Postgres, MongoDB
+    INT = "INT", // Postgres, MongoDB
     BIGINT = "BIGINT", // Postgres
     FLOAT = "FLOAT", // Postgres
     DECIMAL = "DECIMAL", // Postgres
@@ -16,13 +16,15 @@ export enum Datatype {
     JSON = "JSON", // Postgres
     JSONB = "JSONB", // Postgres
     OBJECT = "OBJECT", // MongoDB
+    ID = "ID", // Postgres, MongoDB
     UUID = "UUID", // Postgres
+    AUTO_INCREMENTED_ID = "AUTO_INCREMENTED_ID", // Postgres
     OBJECT_ID = "OBJECT_ID", // MongoDB
 
     // Array datatypes
     STRING_ARRAY = "STRING_ARRAY", // Postgres, MongoDB
     TEXT_ARRAY = "TEXT_ARRAY", // Postgres, MongoDB (Equiv. to String)
-    INTEGER_ARRAY = "INTEGER_ARRAY", // Postgres, MongoDB
+    INT_ARRAY = "INT_ARRAY", // Postgres, MongoDB
     BIGINT_ARRAY = "BIGINT_ARRAY", // Postgres
     FLOAT_ARRAY = "FLOAT_ARRAY", // Postgres
     DECIMAL_ARRAY = "DECIMAL_ARRAY", // Postgres
@@ -39,7 +41,7 @@ export enum Datatype {
     SINGLE_FILE = "SINGLE_FILE",
     SINGLE_IMAGE = "SINGLE_IMAGE",
 
-    // Future datatypes
+    // Future datatypes?
     // BLOB = "BLOB";
     // BYTEA = "BYTEA";
     // CHAR = "CHAR";
@@ -48,7 +50,6 @@ export enum Datatype {
     // ENUM = "ENUM";
     // GEOMETRY = "GEOMETRY";
     // GEOMETRY_COLLECTION = "GEOMETRY_COLLECTION";
-    // INT = "INT"; <- replaces `Datatype.INTEGER`
     // LINESTRING = "LINESTRING";
     // LONGTEXT = "LONGTEXT";
     // MEDIUM_INT = "MEDIUM_INT";
