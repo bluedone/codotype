@@ -1,4 +1,4 @@
-import { RuntimeLogLevel } from "../types";
+import { RuntimeLogLevel, RuntimeLogLevels } from "@codotype/core";
 
 // // // //
 
@@ -24,10 +24,8 @@ export function logger(
 
     // Only output verbose logs when runtime.options.logLevel is "verbose"
     if (
-        level === RuntimeLogLevel.verbose &&
-        [RuntimeLogLevel.verbose, RuntimeLogLevel.debug].includes(
-            runtimeLogLevel,
-        )
+        level === RuntimeLogLevels.verbose &&
+        runtimeLogLevel === RuntimeLogLevels.verbose
     ) {
         console.log(args);
         return;

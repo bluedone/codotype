@@ -6,16 +6,16 @@ import {
     inflateProject,
     RuntimeConstructorParams,
     FileOverwriteBehaviors,
-    InflatedProject,
+    Project,
     GeneratorConstructorParams,
 } from "@codotype/core";
 import { RuntimeInjectorProps } from "../types";
 
 // // // //
 
-export const project: InflatedProject = inflateProject({
+export const project: Project = inflateProject({
     // @ts-ignore
-    project: { schemas: [testState.userSchema, testState.movieSchema] },
+    projectInput: { schemas: [testState.userSchema, testState.movieSchema] },
 });
 
 export const runtimeConstructorOptions: RuntimeConstructorParams = {

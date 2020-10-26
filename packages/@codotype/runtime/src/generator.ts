@@ -1,6 +1,6 @@
 import {
     RelationReference,
-    InflatedProject,
+    Project,
     Schema,
     GeneratorConstructorParams,
     RuntimeInjectorProps,
@@ -97,7 +97,7 @@ export class CodotypeGenerator implements RuntimeAdaptor {
         project,
         runtime,
     }: {
-        project: InflatedProject;
+        project: Project;
         runtime: RuntimeProxy;
     }): Promise<void> {
         // Display warning if generator doesn't implement its own write method?
@@ -118,7 +118,7 @@ export class CodotypeGenerator implements RuntimeAdaptor {
         runtime,
     }: {
         schema: Schema;
-        project: InflatedProject;
+        project: Project;
         runtime: RuntimeProxy;
     }): Promise<void> {
         // console.log('NOTHING TO WRITE - this should be overwritten by a subclassed generator.')
@@ -136,7 +136,7 @@ export class CodotypeGenerator implements RuntimeAdaptor {
     }: {
         schema: Schema;
         relation: RelationReference;
-        project: InflatedProject;
+        project: Project;
         runtime: RuntimeProxy;
     }): Promise<void> {
         // console.log('NOTHING TO WRITE - this should be overwritten by a subclassed generator.')
@@ -155,7 +155,7 @@ export class CodotypeGenerator implements RuntimeAdaptor {
     }: {
         schema: Schema;
         relation: RelationReference;
-        project: InflatedProject;
+        project: Project;
     }): Promise<void> {
         // console.log('NOTHING TO WRITE - this should be overwritten by a subclassed generator.')
         return Promise.resolve();
@@ -170,13 +170,13 @@ export class CodotypeGenerator implements RuntimeAdaptor {
     /**
      * copDir
      * copy a directory from src to dest'copy a directory from src to dest
-     * @param param0
      */
-    copyDir({ src, dest }: { src: string; dest: string }) {
-        return this.runtime.copyDir(
-            this.templatePath(src),
-            this.destinationPath(dest),
-        );
+    copyDir(params: { src: string; dest: string }) {
+        const { src, dest } = params;
+        return this.runtime.copyDir({
+            src: this.templatePath(src),
+            dest: this.destinationPath(dest),
+        });
     }
 
     /**

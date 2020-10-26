@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BasicConfigurationGroup = void 0;
-const types_1 = require("@codotype/types");
+const types_1 = require("@codotype/core");
 // // // //
 const BASE_CONFIGURATION_GROUP_PROPERTY = {
     label: "BASE_PROPERTY",
@@ -134,7 +134,7 @@ const FullStackTypescriptGenerator = {
                 },
                 defaultValue: "",
                 internalNote: "",
-                source: types_1.SchemaSource.GENERATOR,
+                source: types_1.SchemaCreators.plugin,
                 locked: true,
                 addons: {},
             },

@@ -26,7 +26,7 @@ import { RuntimeInjectorProps } from "./types";
 import {
     OUTPUT_DIRECTORY,
     TEMPLATES_DIRECTORY_NAME,
-    GENERATOR_META_FILENAME,
+    PLUGIN_METADATA_FILENAME,
     PLUGIN_DISTRIBUTABLE_DIR,
 } from "./constants";
 import { getPluginPath } from "./utils/getPluginPath";
@@ -88,16 +88,29 @@ export class CodotypeNodeRuntime implements Runtime {
             PLUGIN_DISTRIBUTABLE_DIR,
         );
 
-        // Path to GENERATOR_META
-        // NOTE - this should be reworked to accept `codotype-generator.js` or `codotype-generator.ts`
+        // Path to PluginMetadata
         const pluginMetadataImportPath: string = path.join(
             pluginPath,
-            GENERATOR_META_FILENAME,
+            PLUGIN_DISTRIBUTABLE_DIR,
+            PLUGIN_METADATA_FILENAME,
         );
 
-        // Debugging plugin import paths
-        this.log(pluginDynamicImportPath, { level: RuntimeLogLevels.verbose });
-        this.log(pluginMetadataImportPath, { level: RuntimeLogLevels.verbose });
+        // Debug pluginPath
+        this.log(`registerPlugin - pluginPath: ${pluginPath}`, {
+            level: RuntimeLogLevels.verbose,
+        });
+
+        // Debug pluginDynamicImportPath
+        this.log(
+            `registerPlugin - pluginDynamicImportPath: ${pluginDynamicImportPath}`,
+            { level: RuntimeLogLevels.verbose },
+        );
+
+        // Debug pluginMetadataImportPath
+        this.log(
+            `registerPlugin - pluginMetadataImportPath: ${pluginMetadataImportPath}`,
+            { level: RuntimeLogLevels.verbose },
+        );
 
         // Attempt to load up plugin import and metadata, catch error on failure
         try {
@@ -133,6 +146,7 @@ export class CodotypeNodeRuntime implements Runtime {
                 return Promise.resolve(newPluginRegistration);
             }
         } catch (err) {
+            console.log(err);
             // TODO - add enum of error codes
             // TODO - Improve logging here + add tests
             if (err.code === "MODULE_NOT_FOUND") {

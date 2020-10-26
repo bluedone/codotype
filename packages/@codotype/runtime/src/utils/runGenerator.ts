@@ -1,5 +1,5 @@
 import {
-    InflatedProject,
+    Project,
     Schema,
     RuntimeAdaptor,
     RelationReference,
@@ -9,7 +9,7 @@ import {
 
 // TODO - rename this
 export async function runGenerator(props: {
-    project: InflatedProject; // TODO - rename InflatedProject to Project
+    project: Project;
     generatorInstance: RuntimeAdaptor;
 }): Promise<void> {
     const { project, generatorInstance } = props;

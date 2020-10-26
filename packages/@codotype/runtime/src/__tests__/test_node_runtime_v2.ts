@@ -55,7 +55,7 @@ describe("testing @codotype/runtime v2", () => {
         // Instantiates new CodotypeRuntime w/ verbose LogLevel
         const nodeRuntime: Runtime = new CodotypeNodeRuntime({
             cwd,
-            logLevel: RuntimeLogLevels.verbose,
+            logLevel: RuntimeLogLevels.info,
             fileOverwriteBehavior: "force",
         });
 
@@ -70,6 +70,8 @@ describe("testing @codotype/runtime v2", () => {
         if (pluginRegistration === null) {
             return;
         }
+
+        console.log("NOT FOUND???");
 
         // Defines default ProjectInput
         const projectInput = buildDefaultProjectInput(
