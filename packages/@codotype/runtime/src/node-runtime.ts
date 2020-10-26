@@ -5,6 +5,7 @@ import * as path from "path";
 import * as ejs from "ejs";
 import {
     indent,
+    ComposeWithOptions,
     trailingComma,
     inflateProject,
     Datatype,
@@ -480,17 +481,17 @@ export class CodotypeNodeRuntime implements Runtime {
      * Enables one generator to fire off several child generators
      * TODO - annotate, cleanup, test
      * TODO - why doesn't this just accept the generator props?
-     * @param parentGeneratorInstance
-     * @param generatorModule
-     * @param options
+     * @param parentRuntimeAdaptor
+     * @param generatorModulePath
+     * @param options - @see ComposeWithOptions
      */
     async composeWith(
-        parentGeneratorInstance: CodotypeGenerator,
-        generatorModule: string,
-        options = {}, // TODO - add proper type annotation here
+        parentRuntimeAdaptor: RuntimeAdaptor,
+        generatorModulePath: string,
+        options: ComposeWithOptions, // TODO - add proper type annotation here
     ) {
         // Log composeWith debug statement
-        this.log(`Composing Generator: ${generatorModule}`, {
+        this.log(`Composing Generator: ${generatorModulePath}`, {
             level: RuntimeLogLevels.verbose,
         });
 
@@ -503,7 +504,7 @@ export class CodotypeNodeRuntime implements Runtime {
         // Finds the currently active plugin
         const plugins = await this.getPlugins();
         const activePlugin = plugins.find(
-            (p) => p.id === parentGeneratorInstance.options.plugin.id,
+            (p) => p.id === parentRuntimeAdaptor.options.plugin.id,
         );
 
         if (activePlugin === undefined) {
@@ -517,37 +518,39 @@ export class CodotypeNodeRuntime implements Runtime {
         // TODO - move this into a function ( `getModulePath`, perhaps )
         // Handle relative paths
         if (
-            generatorModule.startsWith("./") ||
-            generatorModule.startsWith("../")
+            generatorModulePath.startsWith("./") ||
+            generatorModulePath.startsWith("../")
         ) {
             // TODO - document
             let base: string = "";
 
             // TODO - abstract into helper function?
-            const stats = fsExtra.statSync(parentGeneratorInstance.resolved);
+            const stats = fsExtra.statSync(
+                parentRuntimeAdaptor.options.resolved,
+            );
 
             // TODO - document
             // TODO - document
             if (stats.isDirectory()) {
-                base = parentGeneratorInstance.resolved;
+                base = parentRuntimeAdaptor.options.resolved;
             } else {
-                base = path.dirname(parentGeneratorInstance.resolved);
+                base = path.dirname(parentRuntimeAdaptor.options.resolved);
             }
 
             // TODO - document
-            modulePath = path.join(base, generatorModule);
+            modulePath = path.join(base, generatorModulePath);
 
             // Handle absolute path
-            // } else if (generatorModule.absolutePath) {
-        } else if (generatorModule.startsWith("/")) {
-            modulePath = path.join(generatorModule);
+            // } else if (generatorModulePath.absolutePath) {
+        } else if (generatorModulePath.startsWith("/")) {
+            modulePath = path.join(generatorModulePath);
 
             // Handle module path
         } else {
             modulePath = path.join(
                 activePlugin.pluginDynamicImportPath, // TODO - ensure this is correct!!!
                 "node_modules",
-                generatorModule,
+                generatorModulePath,
             );
         }
         //
@@ -568,7 +571,7 @@ export class CodotypeNodeRuntime implements Runtime {
             // // // //
             // TODO - document
             // TODO - move into independent function, `resolveDestination`, perhaps
-            let resolvedDestination = parentGeneratorInstance.options.dest;
+            let resolvedDestination = parentRuntimeAdaptor.options.dest;
 
             // // // //
             // TODO - re-introduce support for options.scope
@@ -578,7 +581,7 @@ export class CodotypeNodeRuntime implements Runtime {
             // if (options.scope) {
             //   // @ts-ignore
             //   resolvedDestination = path.resolve(
-            //     parentGeneratorInstance.options.dest,
+            //     parentRuntimeAdaptor.options.dest,
             //     options.scope
             //   );
             // }
@@ -591,12 +594,12 @@ export class CodotypeNodeRuntime implements Runtime {
                 { level: RuntimeLogLevels.verbose },
             );
 
-            // Gets project from parentGeneratorInstance.options
-            const project = parentGeneratorInstance.options.project;
+            // Gets project from parentRuntimeAdaptor.options
+            const project = parentRuntimeAdaptor.options.project;
 
             // Creates new CodotypeGenerator
             const generator = new CodotypeGenerator(generatorPrototype, {
-                ...parentGeneratorInstance.options,
+                ...parentRuntimeAdaptor.options,
                 dest: resolvedDestination,
                 resolved: resolvedGeneratorPath,
             });

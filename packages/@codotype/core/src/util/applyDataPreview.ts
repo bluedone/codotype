@@ -1,7 +1,7 @@
 import {
     DataPreview,
-    DataPreviewActionType,
-    DataPreviewConstraintType,
+    DataPreviewActionTypes,
+    DataPreviewConstraintTypes,
     DataPreviewRule,
     DataPreviewConstraint,
     DataPreviewAction,
@@ -26,7 +26,7 @@ export function shouldApplyDataPreviewRule(props: {
     const sourceValue: any = data[constraint.dataProperty];
 
     // Handle EQUALS
-    if (constraint.type === DataPreviewConstraintType.equals) {
+    if (constraint.type === DataPreviewConstraintTypes.equals) {
         if (sourceValue === constraint.value) {
             return true;
         }
@@ -34,14 +34,14 @@ export function shouldApplyDataPreviewRule(props: {
 
     // Handle contains
     if (
-        constraint.type === DataPreviewConstraintType.contains &&
+        constraint.type === DataPreviewConstraintTypes.contains &&
         typeof sourceValue === "string"
     ) {
         return sourceValue.includes(constraint.value);
     }
 
     // Handle exists
-    if (constraint.type === DataPreviewConstraintType.exists) {
+    if (constraint.type === DataPreviewConstraintTypes.exists) {
         if (sourceValue) {
             return true;
         }
@@ -63,12 +63,12 @@ export function applyDataPreviewRule(props: {
     const { action, data } = props;
 
     // Handle LITERAL
-    if (action.type === DataPreviewActionType.literal) {
+    if (action.type === DataPreviewActionTypes.literal) {
         return action.template;
     }
 
     // Handle STRING_TEMPLATE
-    if (action.type === DataPreviewActionType.stringTemplate) {
+    if (action.type === DataPreviewActionTypes.stringTemplate) {
         let templateString = action.template;
         let templateFragments: string[] = [];
 

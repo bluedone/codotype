@@ -4,13 +4,9 @@ import { CodotypeNodeRuntime } from "../node-runtime";
 import {
     buildDefaultProjectInput,
     Runtime,
-    PluginMetadata,
     ProjectBuild,
     RuntimeLogLevels,
-    Codotype,
-    makeUniqueId,
 } from "@codotype/core";
-import { runtimeConstructorOptions } from "./test_state";
 import { resolve } from "path";
 
 // // // //
@@ -70,8 +66,6 @@ describe("testing @codotype/runtime v2", () => {
         if (pluginRegistration === null) {
             return;
         }
-
-        console.log("NOT FOUND???");
 
         // Defines default ProjectInput
         const projectInput = buildDefaultProjectInput(

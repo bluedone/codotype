@@ -1,7 +1,7 @@
-import { Project, ProjectInput } from "./project";
 import { RelationReference } from "./";
-import { Schema } from "./schema";
 import { PluginMetadata } from "./plugin";
+import { Project, ProjectInput } from "./project";
+import { Schema } from "./schema";
 
 // // // //
 
@@ -113,7 +113,19 @@ export interface RuntimeProxy {
     copyTemplate: (src: string, dest: string, options: object) => Promise<any>;
     templatePath: (template_path: string) => string;
     destinationPath: (destination_path: string) => string;
-    composeWith: (generatorModule: string, options?: any) => Promise<any>;
+    composeWith: ComposeWithFunction;
+}
+
+/**
+ * ComposeWithOptions
+ * Optional parameters accepted by RuntimeAdaptor.composeWith()
+ * Used when composing one generator inside another
+ * @param outputDirectoryScope - dictates the output directory of the composed generator.
+ *      Helpful when working with generators (i.e. located in NPM an package) that writes to the root of OUTPUT_DIRECTORY/my_project.
+ *      Allows Plugin authors to render the output of another plugin in a different subdirectory.
+ */
+export interface ComposeWithOptions {
+    outputDirectoryScope?: string;
 }
 
 // TODO - rename this to
@@ -148,7 +160,7 @@ export interface RuntimeAdaptor {
     copyTemplate: (src: string, dest: string, options: object) => Promise<any>;
     templatePath: (template_path: string) => string;
     destinationPath: (destination_path: string) => string;
-    composeWith: (generatorModule: string, options?: any) => Promise<any>;
+    composeWith: ComposeWithFunction;
 }
 
 // CONTEXT - these are passed into the "CodotypeGeneratorRunner" component
@@ -188,17 +200,25 @@ export type ForEachSchemaFunction = (params: {
 
 export type ForEachRelationFunction = (params: {
     schema: Schema;
-    relation: RelationReference;
+    relation: RelationReference; // TODO - rename to "Relation"
     project: Project;
     runtime: RuntimeProxy;
 }) => Promise<void>;
 
 export type ForEachReverseRelationFunction = (params: {
-    schema: Schema; // TODO - rename `Schema` to `SchemaInput`, `Schema` to `Schema`
-    relation: RelationReference;
+    schema: Schema;
+    relation: RelationReference; // TODO - rename to "Relation"
     project: Project;
     runtime: RuntimeProxy;
 }) => Promise<void>;
+
+/**
+ * ComposeWithFunction
+ */
+export type ComposeWithFunction = (
+    generatorModule: string, // TODO - should this use the modulePath / relativePath / absolutePath pattern?
+    options?: ComposeWithOptions,
+) => Promise<void>;
 
 /**
  * EnsureDirFunction
@@ -238,7 +258,6 @@ export interface Runtime {
     ) => Promise<boolean>;
     writeFile: WriteFileFunction;
     destinationPath: (destination: string, filename: string) => string;
-    composeWith: (generator: any, generatorModule: any, options: any) => any; // wtf is generatorModule
     log: (message: any, options: { level: RuntimeLogLevel }) => void;
     registerPlugin: (props: {
         modulePath?: string;
@@ -246,6 +265,11 @@ export interface Runtime {
         absolutePath?: string;
     }) => Promise<PluginRegistration | null>;
     execute: (props: { build: ProjectBuild }) => Promise<void>;
+    composeWith: (
+        parentRuntimeAdaptor: RuntimeAdaptor,
+        generatorModulePath: string,
+        options: ComposeWithOptions,
+    ) => Promise<void>;
 }
 
 //////////////

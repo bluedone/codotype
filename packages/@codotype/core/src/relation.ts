@@ -1,5 +1,5 @@
 import { UUID } from "./uuid";
-import { TokenPluralization } from "../";
+import { TokenPluralization } from "./token";
 import { SchemaCreators } from "./schema";
 
 // // // //
