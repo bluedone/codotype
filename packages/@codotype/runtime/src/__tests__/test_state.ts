@@ -1,5 +1,5 @@
 import { MockRuntime } from "../MockRuntime";
-import { CodotypeGenerator } from "../generator";
+import { RuntimeProxyAdaptor } from "../utils/runtimeProxyAdaptor";
 import {
     testState,
     RuntimeLogLevels,
@@ -7,9 +7,9 @@ import {
     RuntimeConstructorParams,
     FileOverwriteBehaviors,
     Project,
+    RuntimeInjectorProps,
     GeneratorConstructorParams,
 } from "@codotype/core";
-import { RuntimeInjectorProps } from "../types";
 
 // // // //
 
@@ -66,7 +66,7 @@ export const generatorPrototype01: GeneratorConstructorParams = {
 // // Defines typed generator constant
 export const generatorPrototype02: GeneratorConstructorParams = {
     name: "Fullstack TypeScript Generator",
-    async write(this: CodotypeGenerator) {
+    async write(this: RuntimeProxyAdaptor) {
         await this.composeWith("./base");
         await this.composeWith("./rest-api");
         await this.composeWith("./react-components");

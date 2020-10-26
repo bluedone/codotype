@@ -19,11 +19,11 @@ import {
     RuntimeAdaptor,
     Runtime,
     ProjectBuild,
+    RuntimeInjectorProps,
 } from "@codotype/core";
-import { CodotypeGenerator } from "./generator";
+import { RuntimeProxyAdaptor } from "./utils/runtimeProxyAdaptor";
 import { runGenerator } from "./utils/runGenerator";
 import { prettify } from "./utils/prettify";
-import { RuntimeInjectorProps } from "./types";
 import {
     OUTPUT_DIRECTORY,
     TEMPLATES_DIRECTORY_NAME,
@@ -263,7 +263,7 @@ export class CodotypeNodeRuntime implements Runtime {
             const resolved: string = require.resolve(pluginDynamicImportPath);
 
             // Defines options for generator instance
-            const generatorOptions: RuntimeInjectorProps = {
+            const runtimeAdaptorProps: RuntimeInjectorProps = {
                 project,
                 dest,
                 resolved,
@@ -277,9 +277,9 @@ export class CodotypeNodeRuntime implements Runtime {
             });
 
             // Creates CodotypeGenerator instance
-            const generatorInstance = new CodotypeGenerator(
+            const generatorInstance = new RuntimeProxyAdaptor(
                 generatorPrototype,
-                generatorOptions,
+                runtimeAdaptorProps,
             );
 
             // Invokes runGenerator w/ generatorInstance + Project
@@ -594,7 +594,7 @@ export class CodotypeNodeRuntime implements Runtime {
             const project = parentRuntimeAdaptor.options.project;
 
             // Creates new CodotypeGenerator
-            const generator = new CodotypeGenerator(generatorPrototype, {
+            const generator = new RuntimeProxyAdaptor(generatorPrototype, {
                 ...parentRuntimeAdaptor.options,
                 dest: resolvedDestination,
                 resolved: resolvedGeneratorPath,

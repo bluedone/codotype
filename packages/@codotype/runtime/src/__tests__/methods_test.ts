@@ -1,5 +1,5 @@
 import { MockRuntime } from "../MockRuntime";
-import { CodotypeGenerator } from "../generator";
+import { RuntimeProxyAdaptor } from "../utils/runtimeProxyAdaptor";
 import {
     project,
     runtimeConstructorOptions,
@@ -24,7 +24,7 @@ describe("templatePath method", () => {
             dest,
             resolved,
         };
-        const generatorInstance = new CodotypeGenerator(
+        const generatorInstance = new RuntimeProxyAdaptor(
             generatorPrototype,
             generatorOptions,
         );
@@ -53,7 +53,7 @@ describe("destinationPath method", () => {
         // and links them to an active Codotype Runtime instance
         // WHY - this prevents plugin/generator authors from having to worry about the runtime altogether - the runtime adaptor "joins" a generator to
         // its runtime so it can produce files. Without the runtime, the generator is little more than an object.
-        const generatorInstance = new CodotypeGenerator(
+        const generatorInstance = new RuntimeProxyAdaptor(
             generatorPrototype,
             generatorOptions,
         );
@@ -75,7 +75,7 @@ describe("ensureDir method", () => {
             dest,
             resolved: __dirname,
         };
-        const generatorInstance = new CodotypeGenerator(
+        const generatorInstance = new RuntimeProxyAdaptor(
             generatorPrototype,
             generatorOptions,
         );
@@ -99,7 +99,7 @@ describe("copyDir method", () => {
             resolved: "dir",
         };
 
-        const generatorInstance = new CodotypeGenerator(
+        const generatorInstance = new RuntimeProxyAdaptor(
             generatorPrototype,
             generatorOptions,
         );
@@ -125,7 +125,7 @@ describe("renderComponent", () => {
             resolved: __dirname, // NOTE - need to use __dirname here beacuse the `templates` directory sits next to this test
         };
 
-        const generatorInstance = new CodotypeGenerator(
+        const generatorInstance = new RuntimeProxyAdaptor(
             generatorPrototype01,
             generatorOptions,
         );

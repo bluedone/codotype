@@ -7,14 +7,19 @@ import {
     RuntimeAdaptor,
     RuntimeProxy,
     Runtime,
+    ComposeWithOptions,
 } from "@codotype/core";
 
 // // // //
 
 /**
+ * RuntimeAdaptor?
+ * RuntimeProxyAdaptor?
  * TODO - rename this to RuntimeAdaptor?
+ * Implements an adaptor between the RuntimeProxy and the Runtime
+ * Allows a generator to safely access and invoke simplified Runtime methods for abstract filesystem manipulation
  */
-export class CodotypeGenerator implements RuntimeAdaptor {
+export class RuntimeProxyAdaptor implements RuntimeAdaptor {
     private runtime: Runtime;
     compileInPlace: string[];
     options: RuntimeInjectorProps;
@@ -74,6 +79,7 @@ export class CodotypeGenerator implements RuntimeAdaptor {
         // PASS this.options.resolved in from @codotype/runtime
         this.resolved = this.options.resolved;
 
+        // Defuines this.runtimeProxy
         this.runtimeProxy = {
             ensureDir: this.ensureDir,
             writeFile: this.writeFile,
@@ -306,7 +312,10 @@ export class CodotypeGenerator implements RuntimeAdaptor {
      * @param generatorModule
      * @param options - TODO - add type for ComposeWithOptions -> WHAT ARE THEY????
      */
-    composeWith(generatorModule: string, options?: any) {
-        return this.runtime.composeWith(this, generatorModule, options);
+    composeWith(
+        generatorModule: string,
+        options?: ComposeWithOptions,
+    ): Promise<void> {
+        return this.runtime.composeWith(this, generatorModule, options || {});
     }
 }
