@@ -1,6 +1,6 @@
 import * as fs from "fs";
 import { MockRuntime } from "../MockRuntime";
-import { CodotypeNodeRuntime } from "../node-runtime";
+import { NodeRuntime } from "../node-runtime";
 import {
     buildDefaultProjectInput,
     Runtime,
@@ -44,12 +44,12 @@ describe("testing @codotype/runtime v2", () => {
     });
 
     test("testing @codotype/runtime composeWith", async () => {
-        // Defines CWD for new CodotypeNodeRuntime
+        // Defines CWD for new NodeRuntime
         // Uses `__tests__/__snapshots__` dir as the CWD
         const cwd: string = `${__dirname}/__snapshots__`;
 
         // Instantiates new CodotypeRuntime w/ verbose LogLevel
-        const nodeRuntime: Runtime = new CodotypeNodeRuntime({
+        const nodeRuntime: Runtime = new NodeRuntime({
             cwd,
             logLevel: RuntimeLogLevels.suppress,
             fileOverwriteBehavior: "force",
