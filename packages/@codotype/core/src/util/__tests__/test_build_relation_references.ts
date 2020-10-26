@@ -3,13 +3,18 @@ import {
     inflateSchemas,
     inflateSchema,
 } from "../inflate";
-import { Schema, testState, RelationReference, InflatedSchema } from "../../";
+import {
+    SchemaInput,
+    testState,
+    RelationReference,
+    InflatedSchema,
+} from "../../";
 
 const { userSchema, movieSchema } = testState;
 
 // // // //
 
-const testCases: [string, Schema, Schema[]][] = [
+const testCases: [string, SchemaInput, SchemaInput[]][] = [
     ["basic schemas", userSchema, [userSchema, movieSchema]],
 ];
 

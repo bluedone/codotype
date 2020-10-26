@@ -1,5 +1,5 @@
 import { UUID } from "./uuid";
-import { SchemaSource } from "./schema";
+import { SchemaCreators } from "./schema";
 
 /**
  * RelationType
@@ -23,7 +23,7 @@ export interface Relation {
     id: UUID;
     type: RelationType;
     required: boolean; // TODO - keep this for now - should this be handled as an Addon?
-    source: SchemaSource;
+    source: SchemaCreators;
     destinationSchemaId: UUID;
     sourceSchemaAlias: string;
     destinationSchemaAlias: string;
@@ -35,7 +35,7 @@ export const DEFAULT_RELATION: Relation = {
     id: "",
     type: null,
     required: false,
-    source: SchemaSource.USER,
+    source: SchemaCreators.user,
     destinationSchemaId: "",
     sourceSchemaAlias: "",
     destinationSchemaAlias: "",

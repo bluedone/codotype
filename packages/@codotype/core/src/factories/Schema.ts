@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
-import { Schema, Attribute, Relation } from "..";
-import { SchemaSource } from "../schema";
+import { SchemaInput, Attribute, Relation } from "..";
+import { SchemaCreators } from "../schema";
 import { TokenPluralization } from "../token";
 import { ProjectConfiguration } from "../ProjectConfiguration";
 
@@ -11,19 +11,19 @@ interface SchemaBuilderParams {
     attributes: Attribute[];
     relations: Relation[];
     identifiers: TokenPluralization;
-    source?: SchemaSource;
+    source?: SchemaCreators;
     locked?: boolean;
     removable?: boolean;
     configuration?: ProjectConfiguration;
     internalNote?: string;
 }
 
-export class SchemaBuilder implements Schema {
+export class SchemaBuilder implements SchemaInput {
     id: string = uuidv4();
     attributes: Attribute[];
     relations: Relation[];
     identifiers: TokenPluralization;
-    source: SchemaSource = SchemaSource.USER;
+    source: SchemaCreators = SchemaCreators.user;
     locked: boolean = false;
     removable: boolean = true;
     configuration: ProjectConfiguration = {};

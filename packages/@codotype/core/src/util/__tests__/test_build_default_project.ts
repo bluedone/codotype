@@ -1,9 +1,14 @@
-import { buildDefaultProject } from "../buildDefaultProject";
-import { testState, GeneratorMeta, Project, SchemaSource } from "../../";
+import { buildDefaultProjectInput } from "../buildDefaultProject";
+import {
+    testState,
+    PluginMetadata,
+    ProjectInput,
+    SchemaCreators,
+} from "../../";
 
 // // // //
 
-const testCases: [string, GeneratorMeta][] = [
+const testCases: [string, PluginMetadata][] = [
     ["cdkGeneratorMeta", testState.cdkGeneratorMeta],
     ["dummyGeneratorMeta", testState.dummyGeneratorMeta],
     [
@@ -16,7 +21,7 @@ const testCases: [string, GeneratorMeta][] = [
                     {
                         ...testState.userSchema,
                         locked: true,
-                        source: SchemaSource.GENERATOR,
+                        source: SchemaCreators.plugin,
                     },
                 ],
                 configurationGroups: [],
@@ -33,7 +38,7 @@ const testCases: [string, GeneratorMeta][] = [
                     {
                         ...testState.userSchema,
                         locked: true,
-                        source: SchemaSource.GENERATOR,
+                        source: SchemaCreators.plugin,
                     },
                 ],
                 configurationGroups: [testState.ApiExamplesConfigurationGroup],
@@ -45,7 +50,9 @@ const testCases: [string, GeneratorMeta][] = [
 describe("/buildDefaultProject", () => {
     testCases.forEach((testCase) => {
         test(testCase[0], () => {
-            const expectedProject: Project = buildDefaultProject(testCase[1]);
+            const expectedProject: ProjectInput = buildDefaultProjectInput(
+                testCase[1],
+            );
             expect(expectedProject).toMatchSnapshot();
         });
     });

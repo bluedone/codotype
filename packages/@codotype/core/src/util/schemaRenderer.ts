@@ -1,5 +1,5 @@
 import {
-    Schema,
+    SchemaInput,
     Datatype,
     Attribute,
     InflatedSchema,
@@ -81,8 +81,8 @@ export function renderSchemaJson({
     schema,
     schemas,
 }: {
-    schema: Schema;
-    schemas: Schema[];
+    schema: SchemaInput;
+    schemas: SchemaInput[];
 }): string {
     const inflatedSchema: InflatedSchema = inflateSchema({ schema, schemas });
     // Define + open JSON output
@@ -178,8 +178,8 @@ export function renderSchemaGrapqhQL({
     schema,
     schemas,
 }: {
-    schema: Schema;
-    schemas: Schema[];
+    schema: SchemaInput;
+    schemas: SchemaInput[];
 }): string {
     const inflatedSchema: InflatedSchema = inflateSchema({ schema, schemas });
     // Define + open JSON output
@@ -273,8 +273,8 @@ export function renderSchemaTypeScript({
     schema,
     schemas,
 }: {
-    schema: Schema;
-    schemas: Schema[];
+    schema: SchemaInput;
+    schemas: SchemaInput[];
 }): string {
     const inflatedSchema: InflatedSchema = inflateSchema({ schema, schemas });
     // Define + open JSON output

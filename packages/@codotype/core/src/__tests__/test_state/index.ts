@@ -1,5 +1,5 @@
 export * from "./documentation";
-import { Schema } from "../../schema";
+import { SchemaInput } from "../../schema";
 
 import {
     ComponentBuilderConfigurationGroupProperty,
@@ -45,7 +45,7 @@ import {
     ConfigurationGroupProperty,
     ConfigurationGroup,
 } from "../../configuration-option-types";
-import { GeneratorMeta } from "../../generator";
+import { PluginMetadata } from "../../plugin";
 import { Attribute } from "../../attribute";
 
 interface TestState {
@@ -61,10 +61,10 @@ interface TestState {
     LambdaBuilderConfigurationGroup: ConfigurationGroup;
     ApiExamplesConfigurationGroup: ConfigurationGroup;
     SideBySideConfigurationGroup: ConfigurationGroup;
-    cdkGeneratorMeta: GeneratorMeta;
-    dummyGeneratorMeta: GeneratorMeta;
-    userSchema: Schema;
-    movieSchema: Schema;
+    cdkGeneratorMeta: PluginMetadata;
+    dummyGeneratorMeta: PluginMetadata;
+    userSchema: SchemaInput;
+    movieSchema: SchemaInput;
     emailAttribute: Attribute;
     gitHubApiOption: ConfigurationGroupProperty;
     twitterApiOption: ConfigurationGroupProperty;

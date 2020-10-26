@@ -1,7 +1,7 @@
 import { Datatype } from "./datatype";
 import { UUID } from "./uuid";
 import { TokenCasing, EMPTY_TOKEN_CASING } from "./token";
-import { SchemaSource } from "./schema";
+import { SchemaCreators } from "./schema";
 
 // // // //
 
@@ -15,7 +15,7 @@ export interface Attribute {
     defaultValue: null | string | boolean | number;
     identifiers: TokenCasing;
     internalNote: string; // Good place to store data relevant to the person editing the Codotype project
-    source: SchemaSource;
+    source: SchemaCreators;
     locked: boolean;
     addons: AttributeAddonValue;
 }
@@ -30,7 +30,7 @@ export const DEFAULT_ATTRIBUTE: Attribute = {
         ...EMPTY_TOKEN_CASING,
     },
     internalNote: "",
-    source: SchemaSource.USER,
+    source: SchemaCreators.user,
     locked: false,
     addons: {},
 };

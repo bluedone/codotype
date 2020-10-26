@@ -1,20 +1,20 @@
 import { buildTokenPluralization } from "./buildTokenPluralization";
 import { makeUniqueId } from "./makeUniqueId";
 import {
-    Schema,
+    SchemaInput,
     Relation,
     RelationReference,
     InflatedSchema,
+    ProjectInput,
     Project,
-    InflatedProject,
 } from "../";
 
 // // // //
 
 export function buildRelationReference(params: {
     relation: Relation;
-    sourceSchema: Schema;
-    destinationSchema: Schema;
+    sourceSchema: SchemaInput;
+    destinationSchema: SchemaInput;
 }): RelationReference {
     const { relation, sourceSchema, destinationSchema } = params;
 
@@ -49,15 +49,15 @@ export function buildRelationReference(params: {
 // // // //
 
 export function buildRelationReferences(params: {
-    schema: Schema;
-    schemas: Schema[];
+    schema: SchemaInput;
+    schemas: SchemaInput[];
 }): RelationReference[] {
     const { schema, schemas } = params;
 
     // Defines array of RelationReferences we're going to return
 
     return schemas.reduce(
-        (previous: RelationReference[], nextSchema: Schema) => {
+        (previous: RelationReference[], nextSchema: SchemaInput) => {
             return [
                 ...previous,
                 ...nextSchema.relations
@@ -82,8 +82,8 @@ export function buildRelationReferences(params: {
 // // // //
 
 export function buildInflatedRelations(params: {
-    schema: Schema;
-    schemas: Schema[];
+    schema: SchemaInput;
+    schemas: SchemaInput[];
 }): RelationReference[] {
     const { schema, schemas } = params;
 
@@ -91,7 +91,7 @@ export function buildInflatedRelations(params: {
     return [
         ...schema.relations.map(
             (r: Relation): RelationReference => {
-                const nextSchema: Schema = schemas.find(
+                const nextSchema: SchemaInput = schemas.find(
                     (s) => s.id === r.destinationSchemaId,
                 );
 
@@ -115,8 +115,8 @@ export function buildInflatedRelations(params: {
  * @returns A single InflatedSchema instance
  */
 export function inflateSchema(params: {
-    schema: Schema;
-    schemas: Schema[];
+    schema: SchemaInput;
+    schemas: SchemaInput[];
 }): InflatedSchema {
     const { schema, schemas } = params;
 
@@ -142,10 +142,10 @@ export function inflateSchema(params: {
  * @returns array of InflatedSchema instances
  */
 export function inflateSchemas(params: {
-    schemas: Schema[];
+    schemas: SchemaInput[];
 }): InflatedSchema[] {
     return params.schemas.map(
-        (s: Schema): InflatedSchema =>
+        (s: SchemaInput): InflatedSchema =>
             inflateSchema({
                 schemas: params.schemas,
                 schema: s,
@@ -159,7 +159,7 @@ export function inflateSchemas(params: {
  * inflateProject
  * @param params
  */
-export function inflateProject(params: { project: Project }): InflatedProject {
+export function inflateProject(params: { project: ProjectInput }): Project {
     const { project } = params;
     return {
         id: project.id,

@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
-import { TokenCasing, Datatype, SchemaSource, AttributeAddonValue } from "..";
+import { TokenCasing, Datatype, SchemaCreators, AttributeAddonValue } from "..";
 import { Attribute } from "../attribute";
 
 interface AttributeBuilderParams {
@@ -8,7 +8,7 @@ interface AttributeBuilderParams {
     datatype: Datatype;
     defaultValue?: null | string | boolean | number;
     internalNote?: string;
-    source?: SchemaSource;
+    source?: SchemaCreators;
     locked?: boolean;
     addons?: AttributeAddonValue;
 }
@@ -19,7 +19,7 @@ export class AttributeBuilder implements Attribute {
     datatype: Datatype;
     defaultValue: string | number | boolean = null;
     internalNote: string = "";
-    source: SchemaSource = SchemaSource.USER;
+    source: SchemaCreators = SchemaCreators.user;
     locked: boolean = false;
     addons: AttributeAddonValue = {};
 

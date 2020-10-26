@@ -6,9 +6,9 @@ import {
     ConfigurationGroupProperty,
     OptionType,
     ExperienceRecommendation,
-    GeneratorMeta,
-    SchemaSource,
-    Schema,
+    PluginMetadata,
+    SchemaCreators,
+    SchemaInput,
     Attribute,
 } from "../../index";
 import {
@@ -499,9 +499,9 @@ export const SideBySideConfigurationGroup: ConfigurationGroup = {
 };
 
 // // // // // // //
-// GeneratorMeta
+// PluginMetadata
 
-export const cdkGeneratorMeta: GeneratorMeta = {
+export const cdkGeneratorMeta: PluginMetadata = {
     id: "aws_cdk_starter", // unique ID for the generator
     label: "AWS CDK Starter", // short label for the generator
     description: "A Codotype Generator for AWS CDK", // brief description of the generator
@@ -548,7 +548,7 @@ export const cdkGeneratorMeta: GeneratorMeta = {
 
 // // // //
 // Schemas
-export const userSchema: Schema = {
+export const userSchema: SchemaInput = {
     id: "12345",
     identifiers: {
         singular: {
@@ -568,9 +568,10 @@ export const userSchema: Schema = {
     },
     attributes: [],
     relations: [],
+    internalNote: "",
     locked: false,
     removable: false,
-    source: SchemaSource.USER,
+    source: SchemaCreators.user,
     configuration: {},
 };
 
@@ -587,13 +588,13 @@ export const emailAttribute: Attribute = {
     },
     internalNote: "the email of the user",
     locked: false,
-    source: SchemaSource.USER,
+    source: SchemaCreators.user,
     addons: {
         required: true,
     },
 };
 
-export const movieSchema: Schema = {
+export const movieSchema: SchemaInput = {
     id: "45678",
     identifiers: {
         singular: {
@@ -611,6 +612,7 @@ export const movieSchema: Schema = {
             kebab: "movies",
         },
     },
+    internalNote: "",
     attributes: [
         {
             id: "name-attr",
@@ -625,7 +627,7 @@ export const movieSchema: Schema = {
             },
             internalNote: "the name of the user",
             locked: false,
-            source: SchemaSource.USER,
+            source: SchemaCreators.user,
             addons: {
                 required: true,
             },
@@ -640,20 +642,20 @@ export const movieSchema: Schema = {
             type: RelationType.BELONGS_TO,
             required: false,
             destinationSchemaId: userSchema.id,
-            source: SchemaSource.USER,
+            source: SchemaCreators.user,
             sourceSchemaAlias: "Directed Movie",
             destinationSchemaAlias: "Director",
         },
     ],
     locked: false,
     removable: false,
-    source: SchemaSource.USER,
+    source: SchemaCreators.user,
     configuration: {},
 };
 
 // // // // // //
 
-export const dummyGeneratorMeta: GeneratorMeta = {
+export const dummyGeneratorMeta: PluginMetadata = {
     id: "chrome_extension_generator", // unique ID for the generator
     label: "Chrome Extension Generator", // short label for the generator
     description: "A Codotype Generator", // brief description of the generator
@@ -698,7 +700,7 @@ export const dummyGeneratorMeta: GeneratorMeta = {
                 },
                 datatype: Datatype.UUID,
                 locked: true,
-                source: SchemaSource.GENERATOR,
+                source: SchemaCreators.plugin,
                 internalNote: "",
                 defaultValue: null,
             },

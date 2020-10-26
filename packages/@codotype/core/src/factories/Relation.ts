@@ -1,13 +1,13 @@
 import { v4 as uuidv4 } from "uuid";
 import { RelationType, Relation } from "../relation";
-import { SchemaSource } from "../schema";
+import { SchemaCreators } from "../schema";
 
 interface RelationBuilderParams {
     id?: string;
     type: RelationType;
     destinationSchemaId: string;
     required?: boolean;
-    source?: SchemaSource;
+    source?: SchemaCreators;
     sourceSchemeAlias?: string;
     destinationSchemeAlias?: string;
 }
@@ -17,7 +17,7 @@ export class RelationBuilder implements Relation {
     type: RelationType;
     destinationSchemaId: string;
     required: boolean = false;
-    source: SchemaSource = SchemaSource.USER;
+    source: SchemaCreators = SchemaCreators.user;
     sourceSchemaAlias: string = "";
     destinationSchemaAlias: string = "";
 

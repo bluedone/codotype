@@ -2,7 +2,7 @@ import { SchemaEditorConfiguration } from "..";
 import { Datatype } from "../datatype";
 import { RelationType, Relation } from "../relation";
 import { AttributeAddon } from "../attribute-addon";
-import { Schema } from "../schema";
+import { SchemaInput } from "../schema";
 import { Attribute } from "../attribute";
 import { ConfigurationGroup } from "../configuration-option-types";
 
@@ -11,7 +11,7 @@ interface SchemaEditorBuilderParams {
     supportedRelations: RelationType[];
     enableAttributeDefaultValue?: boolean;
     documentation?: string;
-    defaultSchemas?: Schema[];
+    defaultSchemas?: SchemaInput[];
     attributeAddons?: AttributeAddon[];
     defaultAttributes?: Attribute[];
     defaultRelations?: Relation[];
@@ -24,7 +24,7 @@ export class SchemaEditorBuilder implements SchemaEditorConfiguration {
 
     enableAttributeDefaultValue: boolean = false;
     documentation: string = "";
-    defaultSchemas: Schema[] = [];
+    defaultSchemas: SchemaInput[] = [];
     attributeAddons: AttributeAddon[] = [];
     defaultAttributes: Attribute[] = [];
     defaultRelations: Relation[] = [];

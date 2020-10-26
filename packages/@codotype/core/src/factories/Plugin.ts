@@ -1,11 +1,12 @@
-import { GeneratorMeta, ConfigurationGroup } from "..";
 import {
-    ExperienceRecommendation,
+    PluginMetadata,
     SchemaEditorConfiguration,
-    GeneratorCreator,
-} from "../generator";
+    ExperienceRecommendation,
+    PluginCreator,
+    ConfigurationGroup,
+} from "..";
 import { SchemaEditorBuilder } from "./SchemaEditor";
-import { Project } from "../project";
+import { ProjectInput } from "../project";
 
 interface PluginBuilderParams {
     id: string;
@@ -22,11 +23,11 @@ interface PluginBuilderParams {
     experience?: ExperienceRecommendation;
     configurationGroups?: ConfigurationGroup[];
     schemaEditorConfiguration?: SchemaEditorConfiguration;
-    createdBy?: GeneratorCreator;
-    exampleProjects?: Project[];
+    createdBy?: PluginCreator;
+    exampleProjects?: ProjectInput[];
 }
 
-export class PluginBuilder implements GeneratorMeta {
+export class PluginBuilder implements PluginMetadata {
     id: string;
     label: string;
     description: string;
@@ -46,11 +47,11 @@ export class PluginBuilder implements GeneratorMeta {
             supportedRelations: [],
         },
     );
-    createdBy: GeneratorCreator = {
+    createdBy: PluginCreator = {
         name: "",
         contact: {},
     };
-    exampleProjects: Project[] = [];
+    exampleProjects: ProjectInput[] = [];
 
     constructor(params: PluginBuilderParams) {
         this.id = params.id;

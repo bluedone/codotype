@@ -1,13 +1,13 @@
 import {
-    Schema,
-    Project,
+    SchemaInput,
+    ProjectInput,
     OptionType,
     OptionValue,
     ProjectConfiguration,
     OptionValueInstance,
     ConfigurationGroup,
     ConfigurationGroupSection,
-    GeneratorMeta,
+    PluginMetadata,
     ConfigurationGroupProperty,
 } from "../";
 
@@ -186,14 +186,16 @@ export function buildDefaultConfiguration(
  * buildDefaultSchemas
  * Builds the default value for Project.schemas
  */
-export function buildDefaultSchemas(generatorMeta: GeneratorMeta): Schema[] {
-    if (generatorMeta.schemaEditorConfiguration.defaultSchemas) {
-        return generatorMeta.schemaEditorConfiguration.defaultSchemas.map(
+export function buildDefaultSchemas(
+    pluginMetadata: PluginMetadata,
+): SchemaInput[] {
+    if (pluginMetadata.schemaEditorConfiguration.defaultSchemas) {
+        return pluginMetadata.schemaEditorConfiguration.defaultSchemas.map(
             (s) => {
                 return {
                     ...s,
                     configuration: buildDefaultConfiguration(
-                        generatorMeta.schemaEditorConfiguration
+                        pluginMetadata.schemaEditorConfiguration
                             .configurationGroups,
                     ),
                 };
@@ -208,17 +210,20 @@ export function buildDefaultSchemas(generatorMeta: GeneratorMeta): Schema[] {
  * Builds an empty Project
  * @param
  */
-export function buildDefaultProject(generatorMeta: GeneratorMeta): Project {
+export function buildDefaultProjectInput(
+    pluginMetadata: PluginMetadata,
+): ProjectInput {
     // Defines default ProjectConfiguration
     const projectConfiguration: ProjectConfiguration = buildDefaultConfiguration(
-        generatorMeta.configurationGroups,
+        pluginMetadata.configurationGroups,
     );
 
     // Defines default value for Project.schemas
-    const defaultSchemas: Schema[] = buildDefaultSchemas(generatorMeta);
+    const defaultSchemas: SchemaInput[] = buildDefaultSchemas(pluginMetadata);
 
     // Returns ConfigurationGroupValue
-    const newProject: Project = {
+    // TODO - change to `ProjectInput`
+    const newProject: ProjectInput = {
         id: "",
         identifiers: {
             label: "New Project",
@@ -227,9 +232,10 @@ export function buildDefaultProject(generatorMeta: GeneratorMeta): Project {
             pascal: "NewProject",
             kebab: "new-project",
         },
-        generatorId: generatorMeta.id,
-        generatorVersion: generatorMeta.version,
+        generatorId: pluginMetadata.id, // TODO - rename to `pluginID`
+        generatorVersion: pluginMetadata.version, // TODO - rename to `pluginVersion`
         schemas: [...defaultSchemas],
+        // TODO - add `relations` here
         configuration: projectConfiguration,
     };
 
