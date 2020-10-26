@@ -2,8 +2,8 @@ import {
     DataPreviewLayoutVariant,
     DataPreviewRule,
     DataPreviewConstraint,
-    DataPreviewConstraintType,
-} from "../../DataPreview";
+    DataPreviewConstraintTypes,
+} from "../../data-preview";
 import {
     testDataPreviewConstraint01,
     testDataPreviewConstraint02,
@@ -25,30 +25,30 @@ const shouldApplyDataPreviewRuleTestCases: [
     boolean,
 ][] = [
     [
-        "DataPreviewConstraintType.equals",
+        "DataPreviewConstraintTypes.equals",
         { label: "My Label" },
         {
-            type: DataPreviewConstraintType.equals,
+            type: DataPreviewConstraintTypes.equals,
             value: "My Label",
             dataProperty: "label",
         },
         true,
     ],
     [
-        "DataPreviewConstraintType.contains",
+        "DataPreviewConstraintTypes.contains",
         { label: "My Label" },
         {
-            type: DataPreviewConstraintType.contains,
+            type: DataPreviewConstraintTypes.contains,
             value: "My",
             dataProperty: "label",
         },
         true,
     ],
     [
-        "DataPreviewConstraintType.contains",
+        "DataPreviewConstraintTypes.contains",
         { label: "My Label" },
         {
-            type: DataPreviewConstraintType.exists,
+            type: DataPreviewConstraintTypes.exists,
             value: "",
             dataProperty: "label",
         },
@@ -74,7 +74,7 @@ describe("shouldApplyDataPreviewRule", () => {
 
 // testCase = [testName, props.data, props.dataPreview, expectedResult]
 const applyDataPreviewTestCases: [string, any, DataPreviewRule[], string][] = [
-    ["DataPreviewConstraintType.equals", {}, [], ""],
+    ["DataPreviewConstraintTypes.equals", {}, [], ""],
     [
         "test 02",
         { label: "" },
@@ -87,7 +87,7 @@ const applyDataPreviewTestCases: [string, any, DataPreviewRule[], string][] = [
         "Please define a label",
     ],
     [
-        "DataPreviewConstraintType.exists",
+        "DataPreviewConstraintTypes.exists",
         { label: "My Label" },
         [
             {

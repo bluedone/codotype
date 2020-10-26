@@ -8,7 +8,7 @@ import {
 } from "../configuration-option-types";
 import { PropertyFilter } from "../property-filter";
 import { PropertyValidation } from "../property-validation";
-import { DataPreviewLayoutVariant, DataPreview } from "../DataPreview";
+import { DataPreviewLayoutVariant, DataPreview } from "../data-preview";
 
 // // // //
 

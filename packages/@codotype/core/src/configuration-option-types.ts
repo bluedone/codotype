@@ -1,6 +1,6 @@
 import { PropertyFilter } from "./property-filter";
 import { PropertyValidation } from "./property-validation";
-import { DataPreview } from "./DataPreview";
+import { DataPreview } from "./data-preview";
 
 // // // //
 

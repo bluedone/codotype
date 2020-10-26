@@ -1,5 +1,8 @@
 import { UUID } from "./uuid";
+import { TokenPluralization } from "../";
 import { SchemaCreators } from "./schema";
+
+// // // //
 
 /**
  * RelationType
@@ -17,6 +20,7 @@ export enum RelationType {
 /**
  * Relation
  * Defines the Relation interface
+ * TODO - rename this to RelationInput
  * TODO - add support for addons here -> see AttributeAddon for context
  */
 export interface Relation {
@@ -40,3 +44,28 @@ export const DEFAULT_RELATION: Relation = {
     sourceSchemaAlias: "",
     destinationSchemaAlias: "",
 };
+
+// // // //
+
+/**
+ * RelationReference
+ * TODO - rename this to `Relation`
+ * Defines the Reference interface
+ */
+export interface RelationReference {
+    id: UUID;
+    type: RelationType;
+    sourceRelationId: UUID;
+    sourceSchemaId: UUID;
+    destinationSchemaId: UUID;
+    identifiers: {
+        source: {
+            canonical: TokenPluralization;
+            alias: TokenPluralization;
+        };
+        destination: {
+            canonical: TokenPluralization;
+            alias: TokenPluralization;
+        };
+    };
+}

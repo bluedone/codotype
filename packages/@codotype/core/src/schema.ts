@@ -1,7 +1,7 @@
 import { UUID } from "./uuid";
 import { PluginConfiguration } from "./plugin";
 import { Attribute } from "./attribute";
-import { RelationReference } from "./reference";
+import { RelationReference } from "./relation";
 import { Relation } from "./relation";
 import { TokenPluralization } from "./token";
 

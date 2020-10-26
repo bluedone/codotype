@@ -1,10 +1,19 @@
-export enum DataPreviewConstraintType {
+/**
+ * DataPreviewConstraintType
+ * Defines the types of available constraints to determine the behavior of
+ */
+export type DataPreviewConstraintType = "exists" | "contains" | "equals";
+export enum DataPreviewConstraintTypes {
     exists = "exists",
     contains = "contains",
     equals = "equals",
 }
 
-export enum DataPreviewActionType {
+/**
+ * DataPreviewActionType
+ */
+export type DataPreviewActionType = "literal" | "block" | "stringTemplate";
+export enum DataPreviewActionTypes {
     literal = "literal",
     block = "block",
     stringTemplate = "stringTemplate",
@@ -21,22 +30,38 @@ export enum DataPreviewLayoutVariant {
     BADGE_DARK = "BADGE_DARK",
 }
 
+/**
+ * DataPreviewConstraint
+ * TODO - annotate
+ */
 export interface DataPreviewConstraint {
     dataProperty: string;
     type: DataPreviewConstraintType;
     value: string;
 }
 
+/**
+ * DataPreviewAction
+ * TODO - annotate
+ */
 export interface DataPreviewAction {
     type: DataPreviewActionType;
     template: string;
 }
 
+/**
+ * DataPreviewRule
+ * TODO - annotate
+ */
 export interface DataPreviewRule {
     constraint: DataPreviewConstraint;
     action: DataPreviewAction;
 }
 
+/**
+ * DataPreview
+ * TODO - annotate
+ */
 export interface DataPreview {
     rules: DataPreviewRule[];
     variant: DataPreviewLayoutVariant;

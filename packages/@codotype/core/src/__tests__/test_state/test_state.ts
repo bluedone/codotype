@@ -34,7 +34,7 @@ import {
 } from "./configuration-properties";
 import { syntaxHighlighting } from "./documentation";
 import { ATTRIBUTE_ADDON_PRIMARY_KEY } from "../../attribute-addon";
-import { DataPreviewLayoutVariant } from "../../DataPreview";
+import { DataPreviewLayoutVariant } from "../../data-preview";
 
 // // // //
 

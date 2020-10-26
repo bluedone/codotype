@@ -6,7 +6,7 @@ import {
     OptionType,
 } from "../../index";
 import { syntaxHighlighting } from "./documentation";
-import { DataPreviewLayoutVariant } from "../../DataPreview";
+import { DataPreviewLayoutVariant } from "../../data-preview";
 
 // // // //
 

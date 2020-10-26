@@ -7,12 +7,18 @@ import {
 
 // // // //
 
-// TODO - rename this
-export async function runGenerator(props: {
+/**
+ * runGenerator
+ * TODO - rename this
+ * Accepts a project and runtimeAdaptor -> invokes each method passed in with GeneratorConstructorOptions
+ * @param project - the Project being run against params.generatorInstance
+ * @param generatorInstance - (TODO: RENAME) the RuntimeAdaptor being passed into each function on GeneratorConstructorOptions
+ */
+export async function runGenerator(params: {
     project: Project;
     generatorInstance: RuntimeAdaptor;
 }): Promise<void> {
-    const { project, generatorInstance } = props;
+    const { project, generatorInstance } = params;
 
     // Invokes `generator.forEachSchema` once for each in project.schemas
     await Promise.all(
