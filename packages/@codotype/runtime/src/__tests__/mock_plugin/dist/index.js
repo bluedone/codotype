@@ -12,6 +12,8 @@ module.exports = {
         await runtime.composeWith("./base");
 
         // Compose ./scoped generator
+        // TODO - remove ensureDir when it's handled internally by the runtime
+        await runtime.ensureDir("./scoped-output");
         await runtime.composeWith("./scoped", {
             outputDirectoryScope: "scoped-output",
         });

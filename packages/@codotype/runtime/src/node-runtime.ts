@@ -33,6 +33,31 @@ import {
 import { getPluginPath } from "./utils/getPluginPath";
 import { prepareProjectBuildDestination } from "./utils/prepareProjectBuildDestination";
 import { logger } from "./utils/logger";
+import { GeneratorConstructorParams } from "packages/@codotype/core/dist";
+
+// // // //
+// TODO - cleanup + simplify error handling
+
+function handlePluginImportError(error: any): Promise<null> {
+    console.log(error);
+    if (error.code === "MODULE_NOT_FOUND") {
+        console.log("REGISTRATION ERROR - PLUGIN NOT FOUND");
+        return Promise.resolve(null);
+    } else {
+        console.log("REGISTRATION ERROR - OTHER");
+        return Promise.resolve(null);
+    }
+}
+
+function handleExecuteImportError(error: any): Promise<void> {
+    if (error.code === "MODULE_NOT_FOUND") {
+        console.log("RUNTIME ERROR - GENERATOR NOT FOUND");
+    } else {
+        console.log("RUNTIME ERROR - OTHER");
+    }
+    // Resolves with Promise<void>
+    return Promise.resolve();
+}
 
 // // // //
 
@@ -46,16 +71,13 @@ export class CodotypeNodeRuntime implements Runtime {
 
     /**
      * constructor
-     * Handles options to run a single generator instance
+     * Instantiates a new CodotypeNodeRuntime and returns it
      * @param options - see `RuntimeConstructorParams`
      */
     constructor(options: RuntimeConstructorParams) {
         // Assigns this.options + default values
-        // Assigns this.options.cwd
-        // TODO - replace this.options with something else? Do we need to keep this.options
         this.options = {
             ...options,
-            // cwd: process.cwd(), // TODO - do we want to harcode this....? Should we rename this to output directory or something...?
             logLevel: options.logLevel || RuntimeLogLevels.verbose,
         };
 
@@ -147,16 +169,8 @@ export class CodotypeNodeRuntime implements Runtime {
                 return Promise.resolve(newPluginRegistration);
             }
         } catch (err) {
-            console.log(err);
-            // TODO - add enum of error codes
-            // TODO - Improve logging here + add tests
-            if (err.code === "MODULE_NOT_FOUND") {
-                console.log("REGISTRATION ERROR - PLUGIN NOT FOUND");
-                return Promise.resolve(null);
-            } else {
-                console.log("REGISTRATION ERROR - OTHER");
-                return Promise.resolve(null);
-            }
+            // Invoke handlePluginImportError and return result
+            return handlePluginImportError(err);
         }
 
         // Includes default Promise resolution to prevent invariant error
@@ -195,8 +209,8 @@ export class CodotypeNodeRuntime implements Runtime {
     /**
      * execute
      * Executes a single ProjectBuild against a Codotype Plugin
+     * QUESTION - accept OUTPUT_DIRECTORY override here?
      * @param props.build - ProjectBuild
-     * TODO - accept OUTPUT_DIRECTORY override?
      */
     async execute({ build }: { build: ProjectBuild }): Promise<void> {
         // Logs "Start Execution" statement
@@ -219,15 +233,19 @@ export class CodotypeNodeRuntime implements Runtime {
             cwd: this.options.cwd,
         });
 
+        // // // //
+        // TODO - abstract into findPlugin()
+        //
         // Gets array of PluginRegistrations from this.getPlugins()
         const plugins = await this.getPlugins();
 
         // Finds the pluginRegistration associated with the ProjectBuild
-        // TODO - rename to `project.generatorID` to `project.pluginID`
         // TODO - check version here, use semver if possible
         const pluginRegistration: PluginRegistration | undefined = plugins.find(
-            (g) => g.id === project.generatorId,
+            (g) => g.id === project.pluginID,
         );
+        //
+        // // // //
 
         // If pluginRegistration is not found -> log error message and short-circuit execution
         if (pluginRegistration === undefined) {
@@ -258,12 +276,12 @@ export class CodotypeNodeRuntime implements Runtime {
 
         // Attempt to load the Generator from pluginDynamicImportPath, handle error
         try {
-            // TODO - add proper type annotation for generatorPrototype here
-            const generatorPrototype = require(pluginDynamicImportPath); // eslint-disable-line import/no-dynamic-require
+            // Defines generator and it's associated absolute filepath for module resolution
+            const generator: GeneratorConstructorParams = require(pluginDynamicImportPath); // eslint-disable-line import/no-dynamic-require
             const resolved: string = require.resolve(pluginDynamicImportPath);
 
             // Defines options for generator instance
-            const runtimeAdaptorProps: RuntimeInjectorProps = {
+            const runtimeProxyAdaptorProps: RuntimeInjectorProps = {
                 project,
                 dest,
                 resolved,
@@ -272,34 +290,25 @@ export class CodotypeNodeRuntime implements Runtime {
             };
 
             // Log "Running Plugin Generator" statement
-            this.log(`Running Plugin Generator: ${generatorPrototype.name}`, {
+            this.log(`Running Plugin Generator: ${generator.name}`, {
                 level: RuntimeLogLevels.verbose,
             });
 
-            // Creates CodotypeGenerator instance
-            const generatorInstance = new RuntimeProxyAdaptor(
-                generatorPrototype,
-                runtimeAdaptorProps,
+            // Creates RuntimeProxyAdaptor instance
+            const runtimeProxyAdaptor = new RuntimeProxyAdaptor(
+                generator,
+                runtimeProxyAdaptorProps,
             );
 
-            // Invokes runGenerator w/ generatorInstance + Project
+            // Invokes runGenerator w/ Project + RuntimeProxyAdaptor
             await runGenerator({
                 project,
-                generatorInstance, // TODO - rename this to generator..? ReneratorRunner? Should align with the current `CodotypeGenerator` class name
+                runtimeProxyAdaptor,
             });
 
             // Logs which generator is being run
         } catch (err) {
-            // TODO - clean up error handling here
-            // TODO - abstract all error handling into independent function
-            if (err.code === "MODULE_NOT_FOUND") {
-                console.log("RUNTIME ERROR - GENERATOR NOT FOUND");
-            } else {
-                console.log("RUNTIME ERROR - OTHER");
-            }
-
-            // Resolves with Promise<void>
-            return Promise.resolve();
+            return handleExecuteImportError(err);
         }
 
         // Logs "Thank you" message
@@ -352,8 +361,8 @@ export class CodotypeNodeRuntime implements Runtime {
 
             // // // //
             // TODO - type this object - TemplateProps interface
+            // TODO - should be abstracted into a separate function?
             // The `data` object is passed into each file that gets rendered
-            // TODO - this should be abstracted into a separate function?
             const data = {
                 project: generatorInstance.options.project,
                 plugin: generatorInstance.options.plugin,
@@ -479,8 +488,6 @@ export class CodotypeNodeRuntime implements Runtime {
     /**
      * composeWith
      * Enables one generator to fire off several child generators
-     * TODO - annotate, cleanup, test
-     * TODO - why doesn't this just accept the generator props?
      * @param parentRuntimeAdaptor
      * @param generatorModulePath
      * @param options - @see ComposeWithOptions
@@ -489,7 +496,7 @@ export class CodotypeNodeRuntime implements Runtime {
         parentRuntimeAdaptor: RuntimeAdaptor,
         generatorModulePath: string,
         options: ComposeWithOptions = {},
-    ) {
+    ): Promise<void> {
         // Log composeWith debug statement
         this.log(`Composing Generator: ${generatorModulePath}`, {
             level: RuntimeLogLevels.verbose,
@@ -558,15 +565,16 @@ export class CodotypeNodeRuntime implements Runtime {
 
         // Attempt to load the Generator from pluginDynamicImportPath, handle error
         try {
-            // TODO - document
-            const generatorPrototype = require(modulePath); // eslint-disable-line import/no-dynamic-require
-            generatorPrototype.resolved = require.resolve(modulePath);
+            // Defines generator and it's associated absolute filepath for module resolution
+            const generator: GeneratorConstructorParams = require(modulePath); // eslint-disable-line import/no-dynamic-require
+            const resolved: string = require.resolve(modulePath);
 
-            // TODO - document
+            // TODO - document this, clean it all up
             // TODO - move into independent function, `getResolvedGeneratorPath`, perhaps
-            let resolvedGeneratorPath = generatorPrototype.resolved.split("/");
-            resolvedGeneratorPath.pop();
-            resolvedGeneratorPath = resolvedGeneratorPath.join("/");
+            let resolvedGeneratorPath = resolved;
+            let resolvedGeneratorPathParts = resolvedGeneratorPath.split("/");
+            resolvedGeneratorPathParts.pop();
+            resolvedGeneratorPath = resolvedGeneratorPathParts.join("/");
 
             // // // //
             // TODO - move into independent function, `resolveDestination`, perhaps
@@ -594,7 +602,7 @@ export class CodotypeNodeRuntime implements Runtime {
             const project = parentRuntimeAdaptor.options.project;
 
             // Creates new CodotypeGenerator
-            const generator = new RuntimeProxyAdaptor(generatorPrototype, {
+            const runtimeProxyAdaptor = new RuntimeProxyAdaptor(generator, {
                 ...parentRuntimeAdaptor.options,
                 dest: resolvedDestination,
                 resolved: resolvedGeneratorPath,
@@ -603,24 +611,17 @@ export class CodotypeNodeRuntime implements Runtime {
             // Invokes runGenerator w/ generatorInstance + project
             await runGenerator({
                 project,
-                generatorInstance: generator,
+                runtimeProxyAdaptor,
             });
 
             // Logs output
-            this.log(`Generated ${generatorPrototype.name}.\n`, {
+            this.log(`Generated ${generator.name}.\n`, {
                 level: RuntimeLogLevels.info,
             });
 
             // Logs which generator is being run
         } catch (err) {
-            // TODO - improve error handling here
-            if (err.code === "MODULE_NOT_FOUND") {
-                console.log("MODULE NOT FOUND");
-            } else {
-                console.log("OTHER ERROR");
-                console.log(err);
-                throw err;
-            }
+            return handleExecuteImportError(err);
         }
     }
 }

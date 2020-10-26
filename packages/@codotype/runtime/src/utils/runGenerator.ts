@@ -16,17 +16,17 @@ import {
  */
 export async function runGenerator(params: {
     project: Project;
-    generatorInstance: RuntimeAdaptor;
+    runtimeProxyAdaptor: RuntimeAdaptor;
 }): Promise<void> {
-    const { project, generatorInstance } = params;
+    const { project, runtimeProxyAdaptor } = params;
 
     // Invokes `generator.forEachSchema` once for each in project.schemas
     await Promise.all(
         project.schemas.map((schema: Schema) =>
-            generatorInstance.forEachSchema({
+            runtimeProxyAdaptor.forEachSchema({
                 schema,
                 project,
-                runtime: generatorInstance, // TODO - rename all the stuff like this
+                runtime: runtimeProxyAdaptor, // TODO - rename all the stuff like this
             }),
         ),
     );
@@ -36,11 +36,11 @@ export async function runGenerator(params: {
         project.schemas.map((schema: Schema) => {
             return Promise.all(
                 schema.relations.map((relation: RelationReference) => {
-                    return generatorInstance.forEachRelation({
+                    return runtimeProxyAdaptor.forEachRelation({
                         schema: schema,
                         relation,
                         project,
-                        runtime: generatorInstance.runtimeProxy,
+                        runtime: runtimeProxyAdaptor.runtimeProxy,
                     });
                 }),
             );
@@ -52,11 +52,11 @@ export async function runGenerator(params: {
         project.schemas.map((schema: Schema) => {
             return Promise.all(
                 schema.references.map((relation: RelationReference) => {
-                    return generatorInstance.forEachReverseRelation({
+                    return runtimeProxyAdaptor.forEachReverseRelation({
                         schema: schema,
                         relation,
                         project,
-                        runtime: generatorInstance.runtimeProxy,
+                        runtime: runtimeProxyAdaptor.runtimeProxy,
                     });
                 }),
             );
@@ -64,11 +64,11 @@ export async function runGenerator(params: {
     );
 
     // Invokes `generator.write()` once
-    await generatorInstance.write({
+    await runtimeProxyAdaptor.write({
         project,
-        runtime: generatorInstance,
+        runtime: runtimeProxyAdaptor,
     });
 
     // Invokes generator.compileTemplatesInPlace()
-    await generatorInstance.compileTemplatesInPlace();
+    await runtimeProxyAdaptor.compileTemplatesInPlace();
 }
