@@ -1,5 +1,5 @@
 import * as path from "path";
-import { CodotypeRuntime, ProjectBuild, RuntimeLogLevel } from "../types";
+import { Runtime, ProjectBuild, RuntimeLogLevels } from "@codotype/core";
 import { OUTPUT_DIRECTORY, CODOTYPE_MANIFEST_DIRECTORY } from "../constants";
 
 // // // //
@@ -13,7 +13,7 @@ import { OUTPUT_DIRECTORY, CODOTYPE_MANIFEST_DIRECTORY } from "../constants";
  * @param param.build - see ProjectBuild
  */
 export async function prepareProjectBuildDestination(params: {
-    runtime: CodotypeRuntime;
+    runtime: Runtime;
     cwd: string;
     build: ProjectBuild;
 }): Promise<void> {
@@ -21,7 +21,7 @@ export async function prepareProjectBuildDestination(params: {
 
     // Debug log statements
     runtime.log("Writing build manfiest", {
-        level: RuntimeLogLevel.debug,
+        level: RuntimeLogLevels.verbose,
     });
 
     // Defines directory to encapsulate build IFF build.id is defined
@@ -32,7 +32,7 @@ export async function prepareProjectBuildDestination(params: {
         cwd,
         OUTPUT_DIRECTORY,
         buildID,
-        build.project.identifiers.snake,
+        build.projectInput.identifiers.snake,
     );
 
     // Ensures presence of the destination directory
@@ -50,14 +50,14 @@ export async function prepareProjectBuildDestination(params: {
         runtime.writeFile(
             path.join(
                 manifestDest +
-                    `/${build.project.identifiers.kebab}-codotype-project.json`, // TODO - use a constant here
+                    `/${build.projectInput.identifiers.kebab}-codotype-project.json`, // TODO - use a constant here
             ),
-            JSON.stringify(build.project, null, 2),
+            JSON.stringify(build.projectInput, null, 2),
         );
 
         // Debug log statement
         runtime.log("Wrote codotype-project.json", {
-            level: RuntimeLogLevel.debug,
+            level: RuntimeLogLevels.verbose,
         });
 
         // Resolves the Promise

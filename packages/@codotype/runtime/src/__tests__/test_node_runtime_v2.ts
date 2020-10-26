@@ -1,13 +1,15 @@
 import * as fs from "fs";
-import {
-    RuntimeLogLevel,
-    CodotypeRuntime,
-    ProjectBuild,
-    PluginMetadata,
-} from "../types";
 import { MockRuntime } from "../MockRuntime";
 import { CodotypeNodeRuntime } from "../node-runtime";
-import { buildDefaultProject, Codotype, makeUniqueId } from "@codotype/core";
+import {
+    buildDefaultProjectInput,
+    Runtime,
+    PluginMetadata,
+    ProjectBuild,
+    RuntimeLogLevels,
+    Codotype,
+    makeUniqueId,
+} from "@codotype/core";
 import { runtimeConstructorOptions } from "./test_state";
 import { resolve } from "path";
 
@@ -16,9 +18,10 @@ import { resolve } from "path";
 // TODO - test each method with NodeRuntime
 describe("testing @codotype/runtime v2", () => {
     test("testing @codotype/runtime v2", async () => {
-        const mockRuntime: CodotypeRuntime = new MockRuntime({
+        const mockRuntime: Runtime = new MockRuntime({
             cwd: "/",
-            logLevel: RuntimeLogLevel.verbose,
+            logLevel: RuntimeLogLevels.verbose,
+            fileOverwriteBehavior: "force",
         });
 
         // console.log(mockRuntime);
@@ -50,9 +53,10 @@ describe("testing @codotype/runtime v2", () => {
         const cwd: string = `${__dirname}/__snapshots__`;
 
         // Instantiates new CodotypeRuntime w/ verbose LogLevel
-        const nodeRuntime: CodotypeRuntime = new CodotypeNodeRuntime({
+        const nodeRuntime: Runtime = new CodotypeNodeRuntime({
             cwd,
-            logLevel: RuntimeLogLevel.verbose,
+            logLevel: RuntimeLogLevels.verbose,
+            fileOverwriteBehavior: "force",
         });
 
         // Registers the mock_plugin
@@ -68,14 +72,14 @@ describe("testing @codotype/runtime v2", () => {
         }
 
         // Defines default ProjectInput
-        const projectInput = buildDefaultProject(
+        const projectInput = buildDefaultProjectInput(
             pluginRegistration.pluginMetadata,
         );
 
         // Defines the ProjectBuild
         const build: ProjectBuild = {
             id: "test-project",
-            project: projectInput,
+            projectInput,
         };
 
         // Execute the build via nodeRuntime

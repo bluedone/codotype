@@ -1,6 +1,6 @@
 {
     "name": "@codotype/runtime",
-    "version": "0.8.0-canary.5",
+    "version": "0.8.0-canary.6",
     "description": "Runtime environment that registers and runs Codotype generators",
     "scripts": {
         "test": "jest",
@@ -27,8 +27,7 @@
     },
     "homepage": "https://github.com/codotype/codotype-runtime#readme",
     "dependencies": {
-        "@codotype/core": "^0.8.0-canary.1",
-        "@codotype/generator": "^0.8.0-canary.3",
+        "@codotype/core": "^0.8.0-canary.8",
         "@types/bluebird": "^3.5.29",
         "@types/ejs": "^2.6.3",
         "@types/node": "^12.12.12",

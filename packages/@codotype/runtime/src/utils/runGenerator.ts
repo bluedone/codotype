@@ -1,9 +1,9 @@
 import {
     InflatedProject,
     InflatedSchema,
+    RuntimeAdaptor,
     RelationReference,
 } from "@codotype/core";
-import { RuntimeAdaptor } from "../types";
 
 // // // //
 

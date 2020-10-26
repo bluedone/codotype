@@ -1,11 +1,12 @@
-import { Datatype, RelationType } from "@codotype/core";
 import {
-    CodotypeRuntime,
     PluginRegistration,
-    CodotypeRuntimeConstructorOptions,
     RuntimeLogLevel,
+    Datatype,
+    RelationType,
     RuntimeAdaptor,
-} from "./types";
+    RuntimeConstructorParams,
+    Runtime,
+} from "@codotype/core";
 import * as path from "path";
 import * as ejs from "ejs";
 import { logger } from "./utils/logger";
@@ -13,8 +14,8 @@ import { logger } from "./utils/logger";
 // // // //
 
 // Mock CodotypeRuntime class definition
-export class MockRuntime implements CodotypeRuntime {
-    options: CodotypeRuntimeConstructorOptions;
+export class MockRuntime implements Runtime {
+    options: RuntimeConstructorParams;
     plugins: PluginRegistration[];
 
     _mocks_: {
@@ -26,7 +27,7 @@ export class MockRuntime implements CodotypeRuntime {
 
     // constructor
     // Handles options to run a single generator instance
-    constructor(options: CodotypeRuntimeConstructorOptions) {
+    constructor(options: RuntimeConstructorParams) {
         // Assigns this.options
         this.options = options;
 

@@ -2,14 +2,12 @@ import {
     RelationReference,
     InflatedProject,
     InflatedSchema,
-} from "@codotype/core";
-import {
-    GeneratorConfiguration,
-    CodotypeRuntime,
+    GeneratorConstructorParams,
     RuntimeInjectorProps,
     RuntimeAdaptor,
     RuntimeProxy,
-} from "./types";
+    Runtime,
+} from "@codotype/core";
 
 // // // //
 
@@ -17,7 +15,7 @@ import {
  * TODO - rename this to RuntimeAdaptor?
  */
 export class CodotypeGenerator implements RuntimeAdaptor {
-    private runtime: CodotypeRuntime;
+    private runtime: Runtime;
     compileInPlace: string[];
     options: RuntimeInjectorProps;
     resolved: string;
@@ -28,7 +26,7 @@ export class CodotypeGenerator implements RuntimeAdaptor {
      * Handles build options
      */
     constructor(
-        generatorConfiguration: GeneratorConfiguration,
+        generatorConfiguration: GeneratorConstructorParams,
         options: RuntimeInjectorProps,
     ) {
         // Throw error if options.runtime isn't defined

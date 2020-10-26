@@ -10,20 +10,19 @@ import {
     Datatype,
     InflatedProject,
     RelationType,
+    RuntimeLogLevel,
+    RuntimeLogLevels,
+    PluginMetadata,
+    PluginRegistration,
+    RuntimeConstructorParams,
+    RuntimeAdaptor,
+    Runtime,
+    ProjectBuild,
 } from "@codotype/core";
 import { CodotypeGenerator } from "./generator";
 import { runGenerator } from "./utils/runGenerator";
 import { prettify } from "./utils/prettify";
-import {
-    RuntimeLogLevel,
-    CodotypeRuntime,
-    PluginMetadata,
-    ProjectBuild,
-    CodotypeRuntimeConstructorOptions,
-    PluginRegistration,
-    RuntimeInjectorProps,
-    RuntimeAdaptor,
-} from "./types";
+import { RuntimeInjectorProps } from "./types";
 import {
     OUTPUT_DIRECTORY,
     TEMPLATES_DIRECTORY_NAME,
@@ -40,23 +39,23 @@ import { logger } from "./utils/logger";
  * CodotypeNodeRuntime
  * Runtime for running Codotype plugins through Node.js
  */
-export class CodotypeNodeRuntime implements CodotypeRuntime {
-    private options: CodotypeRuntimeConstructorOptions;
+export class CodotypeNodeRuntime implements Runtime {
+    private options: RuntimeConstructorParams;
     private plugins: PluginRegistration[];
 
     /**
      * constructor
      * Handles options to run a single generator instance
-     * @param options - see `CodotypeRuntimeConstructorOptions`
+     * @param options - see `RuntimeConstructorParams`
      */
-    constructor(options: CodotypeRuntimeConstructorOptions) {
+    constructor(options: RuntimeConstructorParams) {
         // Assigns this.options + default values
         // Assigns this.options.cwd
         // TODO - replace this.options with something else? Do we need to keep this.options
         this.options = {
             ...options,
             // cwd: process.cwd(), // TODO - do we want to harcode this....? Should we rename this to output directory or something...?
-            logLevel: options.logLevel || RuntimeLogLevel.verbose,
+            logLevel: options.logLevel || RuntimeLogLevels.verbose,
         };
 
         // Assigns this.plugins
@@ -97,8 +96,8 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
         );
 
         // Debugging plugin import paths
-        this.log(pluginDynamicImportPath, { level: RuntimeLogLevel.verbose });
-        this.log(pluginMetadataImportPath, { level: RuntimeLogLevel.verbose });
+        this.log(pluginDynamicImportPath, { level: RuntimeLogLevels.verbose });
+        this.log(pluginMetadataImportPath, { level: RuntimeLogLevels.verbose });
 
         // Attempt to load up plugin import and metadata, catch error on failure
         try {
@@ -127,7 +126,7 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
 
                 // Logs successful registration message
                 this.log(`Registered ${pluginMetadata.label} Codotype Plugin`, {
-                    level: RuntimeLogLevel.verbose,
+                    level: RuntimeLogLevels.verbose,
                 });
 
                 // Resolves the promise with the newPluginRegistration
@@ -187,7 +186,7 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
     async execute({ build }: { build: ProjectBuild }): Promise<void> {
         // Logs "Start Execution" statement
         this.log("CodotypeNodeRuntime - start execute({ build })", {
-            level: RuntimeLogLevel.verbose,
+            level: RuntimeLogLevels.verbose,
         });
 
         // Pulls id, projectInput from build object
@@ -196,7 +195,7 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
         // Inflates Project from ProjectInput
         // TODO - rename InflatedProject to Project
         const project: InflatedProject = inflateProject({
-            project: build.project,
+            project: build.projectInput,
         });
 
         // Provisions the output directory and writes the Codotype Project JSON to the output directory
@@ -221,7 +220,7 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
             // Logs error message
             this.log(
                 "CodotypeNodeRuntime.execute - Codotype Plugin not found. Please ensure that Codotype Plugin has been correctly registered with Runtime.registerPlugin",
-                { level: RuntimeLogLevel.verbose },
+                { level: RuntimeLogLevels.verbose },
             );
 
             // Resolves Promise<void>
@@ -260,7 +259,7 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
 
             // Log "Running Plugin Generator" statement
             this.log(`Running Plugin Generator: ${generatorPrototype.name}`, {
-                level: RuntimeLogLevel.verbose,
+                level: RuntimeLogLevels.verbose,
             });
 
             // Creates CodotypeGenerator instance
@@ -292,7 +291,7 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
         // Logs "Thank you" message
         this.log(
             "\nBuild complete\nThank you for using Codotype :)\nFollow us on github.com/codotype\n",
-            { level: RuntimeLogLevel.verbose },
+            { level: RuntimeLogLevels.verbose },
         );
 
         // Resolves with Promise<void>
@@ -419,7 +418,7 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
                 if (err) {
                     // Logs debug statement
                     this.log("writeFile error: " + dest, {
-                        level: RuntimeLogLevel.verbose,
+                        level: RuntimeLogLevels.verbose,
                     });
 
                     // Rejects error
@@ -428,7 +427,7 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
 
                 // Logs debug statement
                 this.log("writeFile: " + dest, {
-                    level: RuntimeLogLevel.verbose,
+                    level: RuntimeLogLevels.verbose,
                 });
 
                 // Resovles
@@ -478,7 +477,7 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
     ) {
         // Log composeWith debug statement
         this.log(`Composing Generator: ${generatorModule}`, {
-            level: RuntimeLogLevel.debug,
+            level: RuntimeLogLevels.verbose,
         });
 
         // Defines module path
@@ -575,7 +574,7 @@ export class CodotypeNodeRuntime implements CodotypeRuntime {
             // Debug statements
             this.log(
                 `Runtime.composeWith - resolvedDestination: ${resolvedDestination}`,
-                { level: RuntimeLogLevel.debug },
+                { level: RuntimeLogLevels.verbose },
             );
 
             // Gets project from parentGeneratorInstance.options

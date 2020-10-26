@@ -1,13 +1,15 @@
 import { MockRuntime } from "../MockRuntime";
 import { CodotypeGenerator } from "../generator";
-import { testState, inflateProject, InflatedProject } from "@codotype/core";
 import {
-    CodotypeRuntimeConstructorOptions,
-    RuntimeLogLevel,
-    GeneratorConfiguration,
-    RuntimeInjectorProps,
-    RuntimeAdaptor,
-} from "../types";
+    testState,
+    RuntimeLogLevels,
+    inflateProject,
+    RuntimeConstructorParams,
+    FileOverwriteBehaviors,
+    InflatedProject,
+    GeneratorConstructorParams,
+} from "@codotype/core";
+import { RuntimeInjectorProps } from "../types";
 
 // // // //
 
@@ -16,9 +18,10 @@ export const project: InflatedProject = inflateProject({
     project: { schemas: [testState.userSchema, testState.movieSchema] },
 });
 
-export const runtimeConstructorOptions: CodotypeRuntimeConstructorOptions = {
+export const runtimeConstructorOptions: RuntimeConstructorParams = {
     cwd: "/test-cwd/",
-    logLevel: RuntimeLogLevel.verbose,
+    logLevel: RuntimeLogLevels.verbose,
+    fileOverwriteBehavior: FileOverwriteBehaviors.force,
 };
 
 export const baseGeneratorOptions: RuntimeInjectorProps = {
@@ -29,16 +32,16 @@ export const baseGeneratorOptions: RuntimeInjectorProps = {
     runtime: new MockRuntime(runtimeConstructorOptions),
 };
 
-export const generatorPrototype: GeneratorConfiguration = {
+export const generatorPrototype: GeneratorConstructorParams = {
     name: "Prototype Generator",
     write: jest.fn(),
-    compileInPlace: jest.fn(),
+    compileInPlace: [],
     forEachSchema: jest.fn(),
     forEachRelation: jest.fn(),
     forEachReverseRelation: jest.fn(),
 };
 
-export const generatorPrototype01: GeneratorConfiguration = {
+export const generatorPrototype01: GeneratorConstructorParams = {
     name: "ModuleComponents",
     async write({ project, runtime }) {
         runtime.writeFile("", '{\nname: "project"\n}');
@@ -61,7 +64,7 @@ export const generatorPrototype01: GeneratorConfiguration = {
 };
 
 // // Defines typed generator constant
-export const generatorPrototype02: GeneratorConfiguration = {
+export const generatorPrototype02: GeneratorConstructorParams = {
     name: "Fullstack TypeScript Generator",
     async write(this: CodotypeGenerator) {
         await this.composeWith("./base");
