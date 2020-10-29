@@ -3,7 +3,7 @@ import {
     ConfigurationGroup,
 } from "./configuration-option-types";
 import { Datatype } from "./datatype";
-import { RelationType, Relation } from "./relation";
+import { RelationTypes, RelationInput } from "./relation";
 import { SchemaInput } from "./schema";
 import { Attribute } from "./attribute";
 import { AttributeAddon } from "./attribute-addon";
@@ -24,11 +24,11 @@ export interface SchemaEditorConfiguration {
     configurationGroups: ConfigurationGroup[]; // ConfigurationGroup
     defaultSchemas: SchemaInput[]; // QUESTION - how do we enforce Schema.source = SchemaSource.GENERATOR?
     supportedDatatypes: Datatype[]; // The datatypes supported by this generator
-    supportedRelations: RelationType[]; // The relation types supported by this generator
+    supportedRelations: RelationTypes[]; // The relation types supported by this generator
     defaultAttributes: Attribute[]; // Default attributes applied to _every_ new Attribute - QUESTION - how do we enforce Addon value for any Attributes defined here?
     attributeAddons: AttributeAddon[]; // Addons made available to the AttributeEditor
     enableAttributeDefaultValue: boolean; // Whether or not to enable the `Default Value` input in the AttributeEditor
-    defaultRelations: Relation[];
+    defaultRelations: RelationInput[];
 }
 
 /**

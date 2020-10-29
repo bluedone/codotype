@@ -26,7 +26,10 @@ export interface TokenCasing {
     kebab: string;
 }
 
-// TODO - is this needed?
+/**
+ * EMPTY_TOKEN_CASING
+ * Defines an empty TokenCasing object
+ */
 export const EMPTY_TOKEN_CASING: TokenCasing = {
     label: "",
     snake: "",

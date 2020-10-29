@@ -2,7 +2,7 @@ import { Datatype } from "./datatype";
 import { UUID } from "./uuid";
 import { OptionType, DropdownOption } from "./configuration-option-types";
 import { PropertyFilter } from "./property-filter";
-import { PropertyValidation } from "./property-validation";
+import { PropertyValidations } from "./property-validation";
 
 // // // //
 
@@ -29,7 +29,7 @@ export interface AttributeAddon {
         | OptionType.NUMBER; // Only stores primative data
     dropdownOptions: DropdownOption[]; // Only used when datatype: OptionType.DROPDOWN;
     defaultValue: null | boolean | string | number;
-    validations?: PropertyValidation[]; // TODO - shouldn't be nullable
+    validations?: PropertyValidations; // TODO - shouldn't be nullable
     filters?: PropertyFilter[]; // TODO - shouldn't be nullable
 }
 

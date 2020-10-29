@@ -8,7 +8,14 @@ import { SchemaCreators } from "./schema";
  * RelationType
  * Defines an enum of available RelationsTypes
  */
-export enum RelationType {
+export type RelationType =
+    | "BELONGS_TO"
+    | "HAS_ONE"
+    | "HAS_MANY"
+    | "TO_ONE"
+    | "TO_MANY"
+    | "HAS_AND_BELONGS_TO_MANY";
+export enum RelationTypes {
     BELONGS_TO = "BELONGS_TO",
     HAS_ONE = "HAS_ONE",
     HAS_MANY = "HAS_MANY",
@@ -18,29 +25,29 @@ export enum RelationType {
 }
 
 /**
- * Relation
- * Defines the Relation interface
- * TODO - rename this to RelationInput
+ * RelationInput
+ * Defines the RelationInput interface
  * TODO - add support for addons here -> see AttributeAddon for context
  */
-export interface Relation {
+export interface RelationInput {
     id: UUID;
     type: RelationType;
-    required: boolean; // TODO - keep this for now - should this be handled as an Addon?
+    required: boolean; // TODO - keep this for now - should this be handled as an Addon? YES.
     source: SchemaCreators;
-    destinationSchemaId: UUID;
+    sourceSchemaID: UUID;
+    destinationSchemaID: UUID;
     sourceSchemaAlias: string;
     destinationSchemaAlias: string;
 }
 
 // Relation constants
-// TODO - replace this with RelationInput?
-export const DEFAULT_RELATION: Relation = {
+export const DEFAULT_RELATION_INPUT: RelationInput = {
     id: "",
     type: null,
     required: false,
     source: SchemaCreators.user,
-    destinationSchemaId: "",
+    sourceSchemaID: "",
+    destinationSchemaID: "",
     sourceSchemaAlias: "",
     destinationSchemaAlias: "",
 };
@@ -48,11 +55,11 @@ export const DEFAULT_RELATION: Relation = {
 // // // //
 
 /**
- * RelationReference
- * TODO - rename this to `Relation`
+ * Relation
  * Defines the Reference interface
+ * TODO - add support for addons here -> see AttributeAddon for context
  */
-export interface RelationReference {
+export interface Relation {
     id: UUID;
     type: RelationType;
     sourceRelationId: UUID;

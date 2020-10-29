@@ -25,6 +25,6 @@ SchemaBuilder {
   "locked": false,
   "relations": Array [],
   "removable": true,
-  "source": "USER",
+  "source": "user",
 }
 `;

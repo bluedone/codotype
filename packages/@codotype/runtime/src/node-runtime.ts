@@ -62,16 +62,16 @@ function handleExecuteImportError(error: any): Promise<void> {
 // // // //
 
 /**
- * CodotypeNodeRuntime
+ * NodeRuntime
  * Runtime for running Codotype plugins through Node.js
  */
-export class CodotypeNodeRuntime implements Runtime {
+export class NodeRuntime implements Runtime {
     private options: RuntimeConstructorParams;
     private plugins: PluginRegistration[];
 
     /**
      * constructor
-     * Instantiates a new CodotypeNodeRuntime and returns it
+     * Instantiates a new NodeRuntime and returns it
      * @param options - see `RuntimeConstructorParams`
      */
     constructor(options: RuntimeConstructorParams) {
@@ -214,7 +214,7 @@ export class CodotypeNodeRuntime implements Runtime {
      */
     async execute({ build }: { build: ProjectBuild }): Promise<void> {
         // Logs "Start Execution" statement
-        this.log("CodotypeNodeRuntime - start execute({ build })", {
+        this.log("NodeRuntime - start execute({ build })", {
             level: RuntimeLogLevels.verbose,
         });
 
@@ -251,7 +251,7 @@ export class CodotypeNodeRuntime implements Runtime {
         if (pluginRegistration === undefined) {
             // Logs error message
             this.log(
-                "CodotypeNodeRuntime.execute - Codotype Plugin not found. Please ensure that Codotype Plugin has been correctly registered with Runtime.registerPlugin",
+                "NodeRuntime.execute - Codotype Plugin not found. Please ensure that Codotype Plugin has been correctly registered with Runtime.registerPlugin",
                 { level: RuntimeLogLevels.verbose },
             );
 

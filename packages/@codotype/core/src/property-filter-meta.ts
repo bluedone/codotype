@@ -1,8 +1,8 @@
-import { StringValueFilter, NumberValueFilter } from "./property-filter";
+import { StringValueFilters, NumberValueFilters } from "./property-filter";
 
 export interface PropertyValueFilterMeta {
     label: string; // "Lowercase"
-    id: StringValueFilter | NumberValueFilter;
+    id: StringValueFilters | NumberValueFilters;
     description: string; // "Transforms the input value into lowercase"
     documentation: string; // "Includes input + output examples"
 }

@@ -1,6 +1,6 @@
 import { SchemaEditorConfiguration } from "..";
 import { Datatype } from "../datatype";
-import { RelationType, Relation } from "../relation";
+import { RelationTypes, RelationInput } from "../relation";
 import { AttributeAddon } from "../attribute-addon";
 import { SchemaInput } from "../schema";
 import { Attribute } from "../attribute";
@@ -8,26 +8,26 @@ import { ConfigurationGroup } from "../configuration-option-types";
 
 interface SchemaEditorBuilderParams {
     supportedDatatypes: Datatype[];
-    supportedRelations: RelationType[];
+    supportedRelations: RelationTypes[];
     enableAttributeDefaultValue?: boolean;
     documentation?: string;
     defaultSchemas?: SchemaInput[];
     attributeAddons?: AttributeAddon[];
     defaultAttributes?: Attribute[];
-    defaultRelations?: Relation[];
+    defaultRelations?: RelationInput[];
     configurationGroups?: ConfigurationGroup[];
 }
 
 export class SchemaEditorBuilder implements SchemaEditorConfiguration {
     supportedDatatypes: Datatype[];
-    supportedRelations: RelationType[];
+    supportedRelations: RelationTypes[];
 
     enableAttributeDefaultValue: boolean = false;
     documentation: string = "";
     defaultSchemas: SchemaInput[] = [];
     attributeAddons: AttributeAddon[] = [];
     defaultAttributes: Attribute[] = [];
-    defaultRelations: Relation[] = [];
+    defaultRelations: RelationInput[] = [];
     configurationGroups: ConfigurationGroup[] = [];
 
     constructor(params: SchemaEditorBuilderParams) {

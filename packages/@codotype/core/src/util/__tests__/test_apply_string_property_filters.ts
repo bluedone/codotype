@@ -1,81 +1,81 @@
-import { StringValueFilter } from "../../property-filter";
+import { StringValueFilters } from "../../property-filter";
 import { applyStringPropertyFilters } from "../applyStringPropertyFilters";
 
 // testCase = [testName, props.value, props.filters, expectedResult]
-const testCases: [string, string, StringValueFilter[], string][] = [
+const testCases: [string, string, StringValueFilters[], string][] = [
     [
         "StringValueFilter.lowercase",
         "Hello, Codotype!",
-        [StringValueFilter.lowercase],
+        [StringValueFilters.lowercase],
         "hello, codotype!",
     ],
     [
         "StringValueFilter.uppercase",
         "Hello, Codotype!",
-        [StringValueFilter.uppercase],
+        [StringValueFilters.uppercase],
         "HELLO, CODOTYPE!",
     ],
     [
         "StringValueFilter.titlecase",
         "hello, codotype!",
-        [StringValueFilter.titlecase],
+        [StringValueFilters.titlecase],
         "Hello, Codotype!",
     ],
     [
         "StringValueFilter.camelcase",
         "Hello, codotype!",
-        [StringValueFilter.camelcase],
+        [StringValueFilters.camelcase],
         "helloCodotype",
     ],
     [
         "StringValueFilter.snakecase",
         "Hello, codotype!",
-        [StringValueFilter.snakecase],
+        [StringValueFilters.snakecase],
         "hello,_codotype!",
     ],
     [
         "StringValueFilter.pascalcase",
         "Hello, codotype!",
-        [StringValueFilter.pascalcase],
+        [StringValueFilters.pascalcase],
         "HelloCodotype",
     ],
     [
         "StringValueFilter.kebabcase",
         "Hello, codotype!",
-        [StringValueFilter.kebabcase],
+        [StringValueFilters.kebabcase],
         "hello,-codotype!",
     ],
     [
         "StringValueFilter.nonumbers",
         "Hello 2 codotype! 123",
-        [StringValueFilter.nonumbers],
+        [StringValueFilters.nonumbers],
         "Hello  codotype! ",
     ],
     [
         "StringValueFilter.nosymbols",
         "Hello, @#!$",
-        [StringValueFilter.nosymbols],
+        [StringValueFilters.nosymbols],
         "Hello ",
     ],
     [
         "StringValueFilter.trimwhitespace",
         "   Hello, Codotype! ",
-        [StringValueFilter.trimwhitespace],
+        [StringValueFilters.trimwhitespace],
         "Hello, Codotype!",
     ],
     [
         "StringValueFilter.removewhitespace",
         "   Hello, Codotype! ",
-        [StringValueFilter.removewhitespace],
+        [StringValueFilters.removewhitespace],
         "Hello,Codotype!",
     ],
     [
         "combined filters",
         "   Hello, Codotype! This is like test #123.",
         [
-            StringValueFilter.trimwhitespace,
-            StringValueFilter.uppercase,
-            StringValueFilter.nonumbers,
+            StringValueFilters.trimwhitespace,
+            StringValueFilters.uppercase,
+            StringValueFilters.nonumbers,
         ],
         "HELLO, CODOTYPE! THIS IS LIKE TEST #.",
     ],

@@ -1,21 +1,23 @@
 import { v4 as uuidv4 } from "uuid";
-import { RelationType, Relation } from "../relation";
+import { RelationTypes, RelationInput } from "../relation";
 import { SchemaCreators } from "../schema";
 
 interface RelationBuilderParams {
     id?: string;
-    type: RelationType;
-    destinationSchemaId: string;
+    type: RelationTypes;
+    sourceSchemaID: string;
+    destinationSchemaID: string;
     required?: boolean;
     source?: SchemaCreators;
-    sourceSchemeAlias?: string;
-    destinationSchemeAlias?: string;
+    sourceSchemaAlias?: string;
+    destinationSchemaAlias?: string;
 }
 
-export class RelationBuilder implements Relation {
+export class RelationBuilder implements RelationInput {
     id: string = uuidv4();
-    type: RelationType;
-    destinationSchemaId: string;
+    type: RelationTypes;
+    sourceSchemaID: string;
+    destinationSchemaID: string;
     required: boolean = false;
     source: SchemaCreators = SchemaCreators.user;
     sourceSchemaAlias: string = "";
@@ -23,14 +25,15 @@ export class RelationBuilder implements Relation {
 
     constructor(params: RelationBuilderParams) {
         this.type = params.type;
-        this.destinationSchemaId = params.destinationSchemaId;
+        this.sourceSchemaID = params.sourceSchemaID;
+        this.destinationSchemaID = params.destinationSchemaID;
 
         this.id = params.id || this.id;
         this.required = params.required || this.required;
         this.source = params.source || this.source;
         this.sourceSchemaAlias =
-            params.sourceSchemeAlias || this.sourceSchemaAlias;
+            params.sourceSchemaAlias || this.sourceSchemaAlias;
         this.destinationSchemaAlias =
-            params.destinationSchemeAlias || this.destinationSchemaAlias;
+            params.destinationSchemaAlias || this.destinationSchemaAlias;
     }
 }

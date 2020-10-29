@@ -1,7 +1,6 @@
 import { UUID } from "./uuid";
 import { PluginConfiguration } from "./plugin";
 import { Attribute } from "./attribute";
-import { RelationReference } from "./relation";
 import { Relation } from "./relation";
 import { TokenPluralization } from "./token";
 
@@ -28,10 +27,9 @@ export interface SchemaInput {
     locked: boolean;
     removable: boolean;
     attributes: Attribute[];
-    identifiers: TokenPluralization; // TODO - remove TokenPluralization from SchemaInput?
+    identifiers: TokenPluralization;
     internalNote: string;
     configuration: PluginConfiguration;
-    relations: Relation[]; // TODO - remove this
 }
 
 /**
@@ -40,8 +38,8 @@ export interface SchemaInput {
  */
 export interface Schema {
     id: UUID;
-    relations: RelationReference[];
-    references: RelationReference[];
+    relations: Relation[];
+    references: Relation[];
     attributes: Attribute[];
     identifiers: TokenPluralization;
     configuration: PluginConfiguration;

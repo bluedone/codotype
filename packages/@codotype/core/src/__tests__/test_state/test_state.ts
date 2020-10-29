@@ -1,7 +1,7 @@
 import {
     Datatype,
     ConfigurationGroup,
-    RelationType,
+    RelationTypes,
     GroupLayoutVariant,
     ConfigurationGroupProperty,
     OptionType,
@@ -567,7 +567,7 @@ export const userSchema: SchemaInput = {
         },
     },
     attributes: [],
-    relations: [],
+    // relations: [],
     internalNote: "",
     locked: false,
     removable: false,
@@ -636,17 +636,17 @@ export const movieSchema: SchemaInput = {
             ...emailAttribute,
         },
     ],
-    relations: [
-        {
-            id: "relation-example-01",
-            type: RelationType.BELONGS_TO,
-            required: false,
-            destinationSchemaId: userSchema.id,
-            source: SchemaCreators.user,
-            sourceSchemaAlias: "Directed Movie",
-            destinationSchemaAlias: "Director",
-        },
-    ],
+    // relations: [
+    //     {
+    //         id: "relation-example-01",
+    //         type: RelationType.belongsTo,
+    //         required: false,
+    //         destinationSchemaId: userSchema.id,
+    //         source: SchemaCreators.user,
+    //         sourceSchemaAlias: "Directed Movie",
+    //         destinationSchemaAlias: "Director",
+    //     },
+    // ],
     locked: false,
     removable: false,
     source: SchemaCreators.user,
@@ -684,7 +684,7 @@ export const dummyGeneratorMeta: PluginMetadata = {
             Datatype.NUMERIC,
             Datatype.TIMESTAMP,
         ], // The datatypes supported by this generator.Only an array of DATATYPE_ * identifiers that correspond to values defined in @codotype/core are accepted.
-        supportedRelations: [RelationType.TO_ONE, RelationType.TO_MANY], // The relation types supported by this generator.Only an array of RELATION_TYPE_ * identifiers that correspond to values defined in @codotype/core are accepted.
+        supportedRelations: [RelationTypes.TO_ONE, RelationTypes.TO_MANY], // The relation types supported by this generator.Only an array of RELATION_TYPE_ * identifiers that correspond to values defined in @codotype/core are accepted.
         defaultAttributes: [
             {
                 id: "UUID-Attribute",

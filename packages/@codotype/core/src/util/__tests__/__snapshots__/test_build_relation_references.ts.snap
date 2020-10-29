@@ -1,87 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`/lib/buildRelationReferences.js basic schemas 1`] = `
-Array [
-  Object {
-    "destinationSchemaId": "12345",
-    "id": "c9a9d172-c2af-47ca-baa1-aa8516d6bf90",
-    "identifiers": Object {
-      "destination": Object {
-        "alias": Object {
-          "plural": Object {
-            "camel": "directors",
-            "kebab": "directors",
-            "label": "Directors",
-            "pascal": "Directors",
-            "snake": "directors",
-          },
-          "singular": Object {
-            "camel": "director",
-            "kebab": "director",
-            "label": "Director",
-            "pascal": "Director",
-            "snake": "director",
-          },
-        },
-        "canonical": Object {
-          "plural": Object {
-            "camel": "users",
-            "kebab": "users",
-            "label": "Users",
-            "pascal": "Users",
-            "snake": "users",
-          },
-          "singular": Object {
-            "camel": "user",
-            "kebab": "user",
-            "label": "User",
-            "pascal": "User",
-            "snake": "user",
-          },
-        },
-      },
-      "source": Object {
-        "alias": Object {
-          "plural": Object {
-            "camel": "directedMovies",
-            "kebab": "directed-movies",
-            "label": "Directed Movies",
-            "pascal": "DirectedMovies",
-            "snake": "directed_movies",
-          },
-          "singular": Object {
-            "camel": "directedMovie",
-            "kebab": "directed-movie",
-            "label": "Directed Movie",
-            "pascal": "DirectedMovie",
-            "snake": "directed_movie",
-          },
-        },
-        "canonical": Object {
-          "plural": Object {
-            "camel": "movies",
-            "kebab": "movies",
-            "label": "Movies",
-            "pascal": "Movies",
-            "snake": "movies",
-          },
-          "singular": Object {
-            "camel": "movie",
-            "kebab": "movie",
-            "label": "Movie",
-            "pascal": "Movie",
-            "snake": "movie",
-          },
-        },
-      },
-    },
-    "sourceRelationId": "relation-example-01",
-    "sourceSchemaId": "45678",
-    "type": "BELONGS_TO",
-  },
-]
-`;
-
 exports[`/lib/inflateSchema.js basic schemas 1`] = `
 Object {
   "attributes": Array [],
@@ -103,85 +21,7 @@ Object {
       "snake": "user",
     },
   },
-  "references": Array [
-    Object {
-      "destinationSchemaId": "12345",
-      "id": "7f4c62f0-84f7-4a5c-8628-9a92e2634e37",
-      "identifiers": Object {
-        "destination": Object {
-          "alias": Object {
-            "plural": Object {
-              "camel": "directors",
-              "kebab": "directors",
-              "label": "Directors",
-              "pascal": "Directors",
-              "snake": "directors",
-            },
-            "singular": Object {
-              "camel": "director",
-              "kebab": "director",
-              "label": "Director",
-              "pascal": "Director",
-              "snake": "director",
-            },
-          },
-          "canonical": Object {
-            "plural": Object {
-              "camel": "users",
-              "kebab": "users",
-              "label": "Users",
-              "pascal": "Users",
-              "snake": "users",
-            },
-            "singular": Object {
-              "camel": "user",
-              "kebab": "user",
-              "label": "User",
-              "pascal": "User",
-              "snake": "user",
-            },
-          },
-        },
-        "source": Object {
-          "alias": Object {
-            "plural": Object {
-              "camel": "directedMovies",
-              "kebab": "directed-movies",
-              "label": "Directed Movies",
-              "pascal": "DirectedMovies",
-              "snake": "directed_movies",
-            },
-            "singular": Object {
-              "camel": "directedMovie",
-              "kebab": "directed-movie",
-              "label": "Directed Movie",
-              "pascal": "DirectedMovie",
-              "snake": "directed_movie",
-            },
-          },
-          "canonical": Object {
-            "plural": Object {
-              "camel": "movies",
-              "kebab": "movies",
-              "label": "Movies",
-              "pascal": "Movies",
-              "snake": "movies",
-            },
-            "singular": Object {
-              "camel": "movie",
-              "kebab": "movie",
-              "label": "Movie",
-              "pascal": "Movie",
-              "snake": "movie",
-            },
-          },
-        },
-      },
-      "sourceRelationId": "relation-example-01",
-      "sourceSchemaId": "45678",
-      "type": "BELONGS_TO",
-    },
-  ],
+  "references": Array [],
   "relations": Array [],
 }
 `;
@@ -208,85 +48,7 @@ Array [
         "snake": "user",
       },
     },
-    "references": Array [
-      Object {
-        "destinationSchemaId": "12345",
-        "id": "74e1bc53-f5cb-41c7-88e4-6adf0341f866",
-        "identifiers": Object {
-          "destination": Object {
-            "alias": Object {
-              "plural": Object {
-                "camel": "directors",
-                "kebab": "directors",
-                "label": "Directors",
-                "pascal": "Directors",
-                "snake": "directors",
-              },
-              "singular": Object {
-                "camel": "director",
-                "kebab": "director",
-                "label": "Director",
-                "pascal": "Director",
-                "snake": "director",
-              },
-            },
-            "canonical": Object {
-              "plural": Object {
-                "camel": "users",
-                "kebab": "users",
-                "label": "Users",
-                "pascal": "Users",
-                "snake": "users",
-              },
-              "singular": Object {
-                "camel": "user",
-                "kebab": "user",
-                "label": "User",
-                "pascal": "User",
-                "snake": "user",
-              },
-            },
-          },
-          "source": Object {
-            "alias": Object {
-              "plural": Object {
-                "camel": "directedMovies",
-                "kebab": "directed-movies",
-                "label": "Directed Movies",
-                "pascal": "DirectedMovies",
-                "snake": "directed_movies",
-              },
-              "singular": Object {
-                "camel": "directedMovie",
-                "kebab": "directed-movie",
-                "label": "Directed Movie",
-                "pascal": "DirectedMovie",
-                "snake": "directed_movie",
-              },
-            },
-            "canonical": Object {
-              "plural": Object {
-                "camel": "movies",
-                "kebab": "movies",
-                "label": "Movies",
-                "pascal": "Movies",
-                "snake": "movies",
-              },
-              "singular": Object {
-                "camel": "movie",
-                "kebab": "movie",
-                "label": "Movie",
-                "pascal": "Movie",
-                "snake": "movie",
-              },
-            },
-          },
-        },
-        "sourceRelationId": "relation-example-01",
-        "sourceSchemaId": "45678",
-        "type": "BELONGS_TO",
-      },
-    ],
+    "references": Array [],
     "relations": Array [],
   },
   Object {
@@ -307,7 +69,7 @@ Array [
         },
         "internalNote": "the name of the user",
         "locked": false,
-        "source": "USER",
+        "source": "user",
       },
       Object {
         "addons": Object {
@@ -325,7 +87,7 @@ Array [
         },
         "internalNote": "the email of the user",
         "locked": false,
-        "source": "USER",
+        "source": "user",
       },
     ],
     "configuration": Object {},
@@ -347,85 +109,7 @@ Array [
       },
     },
     "references": Array [],
-    "relations": Array [
-      Object {
-        "destinationSchemaId": "12345",
-        "id": "93e5132a-2db9-4e64-b710-c9271540cd46",
-        "identifiers": Object {
-          "destination": Object {
-            "alias": Object {
-              "plural": Object {
-                "camel": "directors",
-                "kebab": "directors",
-                "label": "Directors",
-                "pascal": "Directors",
-                "snake": "directors",
-              },
-              "singular": Object {
-                "camel": "director",
-                "kebab": "director",
-                "label": "Director",
-                "pascal": "Director",
-                "snake": "director",
-              },
-            },
-            "canonical": Object {
-              "plural": Object {
-                "camel": "users",
-                "kebab": "users",
-                "label": "Users",
-                "pascal": "Users",
-                "snake": "users",
-              },
-              "singular": Object {
-                "camel": "user",
-                "kebab": "user",
-                "label": "User",
-                "pascal": "User",
-                "snake": "user",
-              },
-            },
-          },
-          "source": Object {
-            "alias": Object {
-              "plural": Object {
-                "camel": "directedMovies",
-                "kebab": "directed-movies",
-                "label": "Directed Movies",
-                "pascal": "DirectedMovies",
-                "snake": "directed_movies",
-              },
-              "singular": Object {
-                "camel": "directedMovie",
-                "kebab": "directed-movie",
-                "label": "Directed Movie",
-                "pascal": "DirectedMovie",
-                "snake": "directed_movie",
-              },
-            },
-            "canonical": Object {
-              "plural": Object {
-                "camel": "movies",
-                "kebab": "movies",
-                "label": "Movies",
-                "pascal": "Movies",
-                "snake": "movies",
-              },
-              "singular": Object {
-                "camel": "movie",
-                "kebab": "movie",
-                "label": "Movie",
-                "pascal": "Movie",
-                "snake": "movie",
-              },
-            },
-          },
-        },
-        "sourceRelationId": "relation-example-01",
-        "sourceSchemaId": "45678",
-        "type": "BELONGS_TO",
-      },
-    ],
+    "relations": Array [],
   },
 ]
 `;
