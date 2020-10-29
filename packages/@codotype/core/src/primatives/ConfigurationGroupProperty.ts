@@ -23,7 +23,7 @@ interface ConfigurationGroupPropertyBuilderParams {
     documentation?: string;
     icon?: string;
     required?: boolean;
-    enabled?: boolean;
+    enabledByDefault?: boolean;
     allowDisable?: boolean;
     layoutVariant?: PropertyLayoutVariant;
     properties?: ConfigurationGroupProperty[];
@@ -42,8 +42,9 @@ export class ConfigurationGroupPropertyBuilder
     description: string = "";
     documentation: string = "";
     icon: string = "";
-    required: boolean = false; // TODO - remove this, handled by validations
-    enabled: boolean = true;
+    required: boolean = false; // TODO - remove this, handled by validations?
+    unique: boolean = false; // TODO - remove this, handled by validations?
+    enabledByDefault: boolean = true;
     allowDisable: boolean = false; // QUESTION - should this be true?
     layoutVariant: PropertyLayoutVariant;
     properties: ConfigurationGroupProperty[] = [];
@@ -66,7 +67,8 @@ export class ConfigurationGroupPropertyBuilder
         this.documentation = params.documentation || this.documentation;
         this.icon = params.icon || this.icon;
         this.required = params.required || this.required;
-        this.enabled = params.enabled || this.enabled;
+        this.enabledByDefault =
+            params.enabledByDefault || this.enabledByDefault;
         this.allowDisable = params.allowDisable || this.allowDisable;
         this.layoutVariant =
             params.layoutVariant || PropertyLayoutVariant.CARD_COL_12;

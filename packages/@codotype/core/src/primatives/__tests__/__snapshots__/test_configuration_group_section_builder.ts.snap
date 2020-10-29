@@ -5,7 +5,7 @@ ConfigurationGroupSectionBuilder {
   "allowDisable": false,
   "description": "Turn API Examples on/off",
   "documentation": "",
-  "enabled": true,
+  "enabledByDefault": true,
   "identifier": "api_examples",
   "label": "API Examples",
   "layoutVariant": "LIST",

@@ -25,7 +25,7 @@ export class ConfigurationGroupBuilder implements ConfigurationGroup {
     sections: ConfigurationGroupSection[] = [];
     properties: ConfigurationGroupProperty[] = [];
     documentation: string = "";
-    enabled: boolean = true;
+    enabledByDefault: boolean = true;
     allowDisable: boolean = false;
 
     constructor(params: ConfigurationGroupBuilderParams) {
@@ -37,8 +37,10 @@ export class ConfigurationGroupBuilder implements ConfigurationGroup {
         this.sections = params.sections || this.sections;
         this.properties = params.properties || this.properties;
         this.documentation = params.documentation || this.documentation;
-        this.enabled =
-            params.enabled !== undefined ? params.enabled : this.enabled;
+        this.enabledByDefault =
+            params.enabled !== undefined
+                ? params.enabled
+                : this.enabledByDefault;
         this.allowDisable =
             params.allowDisable !== undefined
                 ? params.allowDisable

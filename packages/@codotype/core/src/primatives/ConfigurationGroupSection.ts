@@ -22,7 +22,7 @@ export class ConfigurationGroupSectionBuilder
     description: string;
     properties: ConfigurationGroupProperty[] = [];
     documentation: string = "";
-    enabled: boolean = true;
+    enabledByDefault: boolean = true;
     allowDisable: boolean = false;
     layoutVariant: SectionLayoutVariant = SectionLayoutVariant.LIST;
 
@@ -33,8 +33,10 @@ export class ConfigurationGroupSectionBuilder
 
         this.properties = params.properties || this.properties;
         this.documentation = params.documentation || this.documentation;
-        this.enabled =
-            params.enabled !== undefined ? params.enabled : this.enabled;
+        this.enabledByDefault =
+            params.enabled !== undefined
+                ? params.enabled
+                : this.enabledByDefault;
         this.allowDisable =
             params.allowDisable !== undefined
                 ? params.allowDisable

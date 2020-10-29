@@ -11,7 +11,7 @@ ConfigurationGroupPropertyBuilder {
   "description": "",
   "documentation": "",
   "dropdownOptions": Array [],
-  "enabled": true,
+  "enabledByDefault": true,
   "filters": Array [],
   "icon": "",
   "id": "1234-5678-1234-5678",
@@ -21,6 +21,7 @@ ConfigurationGroupPropertyBuilder {
   "properties": Array [],
   "required": false,
   "type": "BOOLEAN",
+  "unique": false,
   "validations": Array [],
 }
 `;

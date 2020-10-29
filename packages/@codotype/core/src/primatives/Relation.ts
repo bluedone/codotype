@@ -11,6 +11,7 @@ interface RelationBuilderParams {
     source?: SchemaCreators;
     sourceSchemaAlias?: string;
     destinationSchemaAlias?: string;
+    internalNote?: string;
 }
 
 export class RelationBuilder implements RelationInput {
@@ -18,6 +19,7 @@ export class RelationBuilder implements RelationInput {
     type: RelationTypes;
     sourceSchemaID: string;
     destinationSchemaID: string;
+    internalNote: string = "";
     required: boolean = false;
     source: SchemaCreators = SchemaCreators.user;
     sourceSchemaAlias: string = "";
@@ -27,6 +29,7 @@ export class RelationBuilder implements RelationInput {
         this.type = params.type;
         this.sourceSchemaID = params.sourceSchemaID;
         this.destinationSchemaID = params.destinationSchemaID;
+        this.internalNote = params.internalNote;
 
         this.id = params.id || this.id;
         this.required = params.required || this.required;

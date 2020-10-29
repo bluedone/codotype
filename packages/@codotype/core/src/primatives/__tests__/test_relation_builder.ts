@@ -13,7 +13,8 @@ describe("factory", () => {
     test("works", () => {
         const relationBuilder = new RelationBuilder({
             type: RelationTypes.BELONGS_TO,
-            destinationSchemaId: "SCHEMA_01",
+            sourceSchemaID: "SCHEMA_01",
+            destinationSchemaID: "SCHEMA_02",
         });
 
         expect(relationBuilder).toMatchSnapshot();

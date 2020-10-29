@@ -14,12 +14,10 @@ export * from "./token";
 export * from "./plugin";
 export * from "./uuid";
 export * from "./util";
-export * from "./codotype";
+export * from "./primatives";
 export * from "./property-filter";
 export * from "./property-validation";
 export * from "./data-preview";
 
 // Exports test_state
 export { testState } from "./__tests__/test_state";
-
-// TODO - export `factories` as a new package called `@codotype/primatives`
