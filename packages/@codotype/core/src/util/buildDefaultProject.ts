@@ -64,7 +64,7 @@ export function buildValueFromProperties(
             // Updates val with data for ConfigurationGroupProperty
             if (property.allowDisable && !property.required) {
                 val[property.identifier] = {
-                    enabled: property.enabled,
+                    enabled: property.enabledByDefault,
                     value: buildConfigurationGroupPropertyValue(property),
                 };
             } else {
@@ -103,7 +103,7 @@ export function buildConfigurationGroupValue(
                 // TODO - remove this - the UI should only care if the property can allow disable or not
                 if (property.allowDisable && !property.required) {
                     val[property.identifier] = {
-                        enabled: property.enabled,
+                        enabled: property.enabledByDefault,
                         value: buildConfigurationGroupPropertyValue(property),
                     };
                 } else {
@@ -134,7 +134,7 @@ export function buildConfigurationGroupValue(
                     (val, property: ConfigurationGroupProperty) => {
                         // Sets value for ConfigurationGroupSection
                         val[property.identifier] = {
-                            enabled: property.enabled,
+                            enabled: property.enabledByDefault,
                             value: buildConfigurationGroupPropertyValue(
                                 property,
                             ),
@@ -191,7 +191,7 @@ export function buildDefaultSchemas(
 ): SchemaInput[] {
     if (pluginMetadata.schemaEditorConfiguration.defaultSchemas) {
         return pluginMetadata.schemaEditorConfiguration.defaultSchemas.map(
-            (s) => {
+            s => {
                 return {
                     ...s,
                     configuration: buildDefaultConfiguration(
@@ -235,7 +235,7 @@ export function buildDefaultProjectInput(
         pluginID: pluginMetadata.id, // TODO - rename to `pluginID`
         pluginVersion: pluginMetadata.version, // TODO - rename to `pluginVersion`
         schemas: [...defaultSchemas],
-        // TODO - add `relations` here
+        relations: [],
         configuration: PluginConfiguration,
     };
 

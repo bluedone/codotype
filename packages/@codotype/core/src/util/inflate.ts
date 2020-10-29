@@ -117,11 +117,11 @@ export function inflateSchemas(params: {
 // // // //
 
 /**
- * inflateProject
- * TODO - rename this to "inflateProjectInput"?
- * @param params
+ * normalizeProjectInput
+ * Accepts ProjectInput and returns Project
+ * @param params.projectInput - the ProjectInput being normalized
  */
-export function inflateProject(params: {
+export function normalizeProjectInput(params: {
     projectInput: ProjectInput;
 }): Project {
     const { projectInput } = params;

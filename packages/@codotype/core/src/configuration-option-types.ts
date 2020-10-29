@@ -81,30 +81,37 @@ export interface DropdownOption {
     documentation?: string;
 }
 
-// TODO - add variant to ConfigurationGroupProperty -> make list of use cases + mockups
-// TOOD - this should include a TokenPluralization -> required for `COLLECTION` type
+// TOOD - this should include a TokenPluralization -> required for `COLLECTION` type?
 // TODO - scope out preview/template feature, update this interface accordingly in preparation
 // QUESTION - how are we storing the ID of the associated COLLECTION property?
 //          - Should probably be a special object in `defaultValue`:
 //          - { enabled: boolean; value: { collectionSource: UUID, collectionValue: UUID } }
-// TODO - add "unique" prop (only applied inside of OptionType.COLLECTION)
 export interface ConfigurationGroupProperty {
-    label: string;
-    identifier: string;
-    description: string;
-    documentation: string;
-    icon: string;
+    // Functional
+    identifier: string; // NOTE - this is "identifier" so if its ever stored in a database, the "id" column will be available
     type: OptionType;
     defaultValue: OptionValue;
-    required: boolean;
-    enabled: boolean;
-    allowDisable: boolean;
-    layoutVariant?: PropertyLayoutVariant;
-    properties: ConfigurationGroupProperty[];
     dropdownOptions: DropdownOption[];
-    filters: PropertyFilter[];
-    validations: PropertyValidations;
+    properties: ConfigurationGroupProperty[];
+
+    // Meta/Content
+    label: string;
+    description: string;
+    icon: string;
+    documentation: string;
+
+    // Aesthetic
+    enabledByDefault: boolean; // TODO - rename to "enabledByDefault"
+    allowDisable: boolean;
     dataPreview: DataPreview;
+    layoutVariant: PropertyLayoutVariant;
+    // collectionTokenCasing
+
+    // Validation
+    required: boolean; // Do we need this?
+    unique: boolean; // NOTE - this is new. Only used with COLLECTION type
+    filters: PropertyFilter[]; // TODO - rename this..?
+    validations: PropertyValidations;
 }
 
 // // // //
@@ -154,12 +161,13 @@ export enum GroupLayoutVariant {
 
 // // // //
 
+// TODO - replace most of this with
 interface ConfigurationBase {
     label: string;
     identifier: string;
     description: string;
     documentation: string; // Markdown
-    enabled: boolean;
+    enabledByDefault: boolean;
     allowDisable: boolean;
 }
 
@@ -179,6 +187,7 @@ export interface ConfigurationGroupSection extends ConfigurationBase {
 
 // // // //
 
+// TODO - rename ConfigurationGroup?
 export interface ConfigurationGroup extends ConfigurationBase {
     layoutVariant: GroupLayoutVariant;
     sections: ConfigurationGroupSection[];

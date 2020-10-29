@@ -21,14 +21,14 @@ export enum ExperienceRecommendation {
 // QUESTION - should the be split up into better separation of concerns? i.e. AttributeEditorConfiguration, SchemaEditorConfiguration, RelationEditorConfiguration
 export interface SchemaEditorConfiguration {
     documentation: string; // Any documentation for the SchemaEditor
-    configurationGroups: ConfigurationGroup[]; // ConfigurationGroup
-    defaultSchemas: SchemaInput[]; // QUESTION - how do we enforce Schema.source = SchemaSource.GENERATOR?
+    configurationGroups: ConfigurationGroup[]; // ConfigurationGroups scoped to each schema
+    defaultSchemas: SchemaInput[]; // The default schemas included in a new project
+    defaultRelations: RelationInput[]; // The default relations included in a new project
     supportedDatatypes: Datatype[]; // The datatypes supported by this generator
     supportedRelations: RelationTypes[]; // The relation types supported by this generator
     defaultAttributes: Attribute[]; // Default attributes applied to _every_ new Attribute - QUESTION - how do we enforce Addon value for any Attributes defined here?
     attributeAddons: AttributeAddon[]; // Addons made available to the AttributeEditor
     enableAttributeDefaultValue: boolean; // Whether or not to enable the `Default Value` input in the AttributeEditor
-    defaultRelations: RelationInput[];
 }
 
 /**

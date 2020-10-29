@@ -34,13 +34,13 @@ export interface SchemaInput {
 
 /**
  * Schema
- * TODO - annotate this interface
+ * Interface used to describe the Schema data that's passed into the Plugin to generate code
  */
 export interface Schema {
     id: UUID;
+    attributes: Attribute[];
     relations: Relation[];
     references: Relation[];
-    attributes: Attribute[];
     identifiers: TokenPluralization;
     configuration: PluginConfiguration;
 }

@@ -12,7 +12,7 @@ export interface TokenPluralization {
 /**
  * TokenCasing
  * Encapsulates different tokens used by a Plugin to produce code that matches situational expectations
- * @param label - the title-cased token, i.e. `My Project`
+ * @param label - the title-cased token, i.e. `My Project` // TODO - make this "title" instead of "label"
  * @param snake - the snake-cased token, i.e. `my_project`
  * @param camel - the camel-cased token, i.e. `myProject`
  * @param pascal - the pascal-cased token, i.e. `MyProject`

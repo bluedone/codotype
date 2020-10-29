@@ -9,10 +9,11 @@ import { PropertyValidations } from "./property-validation";
 // AttributeAddon
 // Defines an interface that can be used to extend the `Attribute` interface with
 // additional properties that can be defined on a per-generator basis
-// TODO - should this support a layoutVariant?
+// TODO - should this support a layoutVariant? Yes.
 // TODO - wire up `validations` and `filters` here -> see `ConfigurationGroupProperty` for details
 // TODO - add icon support for this -> ENUM of "asterisk" | "snowflake" | etc. -> match icons up to addons
-// QUESTION - should this just wrap a ConfigurationGroupProperty instance?
+// QUESTION - should this just wrap a ConfigurationGroupProperty instance? -> Nah, best to keep
+// it simple - but abstract this a bit to share some common patterns with ConfigurationGroupProperty
 export interface AttributeAddon {
     id: UUID;
     label: string; // "Unique"
@@ -29,8 +30,8 @@ export interface AttributeAddon {
         | OptionType.NUMBER; // Only stores primative data
     dropdownOptions: DropdownOption[]; // Only used when datatype: OptionType.DROPDOWN;
     defaultValue: null | boolean | string | number;
-    validations?: PropertyValidations; // TODO - shouldn't be nullable
-    filters?: PropertyFilter[]; // TODO - shouldn't be nullable
+    validations: PropertyValidations;
+    filters: PropertyFilter[];
 }
 
 // // // //
@@ -44,7 +45,7 @@ export const ATTRIBUTE_ADDON_INDEX: AttributeAddon = {
     supportedDatatypes: [
         Datatype.STRING,
         Datatype.NUMERIC,
-        Datatype.INTEGER,
+        Datatype.INT,
         Datatype.TEXT,
         Datatype.TIMESTAMP,
         Datatype.TIME,

@@ -1,6 +1,6 @@
 import { renderSchemaJson } from "../schemaRenderer";
 import { testState } from "../../";
-import { Codotype } from "../../codotype";
+import { Primatives } from "../../primatives";
 import { EMPTY_TOKEN_CASING } from "../../token";
 import { RelationTypes } from "../../relation";
 
@@ -19,7 +19,7 @@ describe("/src/schemaRenderer", () => {
                 pluginVersion: "",
                 configuration: {},
                 relations: [
-                    new Codotype.Relation({
+                    new Primatives.Relation({
                         type: RelationTypes.BELONGS_TO,
                         sourceSchemaID: userSchema.id,
                         destinationSchemaID: movieSchema.id,

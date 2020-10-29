@@ -241,6 +241,8 @@ export type CopyDirFunction = (params: {
 /**
  * Runtime
  * TODO - clean this up a bit more
+ * TODO - annotate
+ * TODO - add FileSystemAdaptor to RuntimeConstructorParams, Runtime interface
  */
 export interface Runtime {
     templatePath: (resolvedPath: string, templatePath: string) => string;
@@ -270,6 +272,24 @@ export interface Runtime {
         generatorModulePath: string,
         options: ComposeWithOptions,
     ) => Promise<void>;
+}
+
+// // // //
+
+/**
+ * FileSystemAdaptor
+ * Defines an interface between the Runtime and the FileSystem
+ * Allows the Runtime to write Plugin output to local filesystem, S3 storage, or in-memory representation for testing
+ * TODO - should be passed into Runtime constructor
+ * TODO - add LocalFileSystemAdaptor
+ * TODO - add InMemoryFileSystemAdaptor
+ * TODO - add S3FileSystemAdaptor
+ */
+export interface FileSystemAdaptor {
+    copyDir: CopyDirFunction;
+    writeFile: WriteFileFunction;
+    ensureDir: (dirPath: string) => Promise<boolean>;
+    fileExists: (filepath: string) => Promise<boolean>;
 }
 
 //////////////

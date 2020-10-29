@@ -42,4 +42,14 @@ export const RELATION_META: {
         label: "To Many",
         description: "One references Many",
     },
+    [RelationTypes.EMBEDS_ONE]: {
+        id: RelationTypes.EMBEDS_ONE,
+        label: "Embeds One",
+        description: "One embeds one",
+    },
+    [RelationTypes.EMBEDS_MANY]: {
+        id: RelationTypes.TO_MANY,
+        label: "Embeds Many",
+        description: "One embeds Many",
+    },
 };

@@ -51,6 +51,7 @@ Object {
   },
   "pluginID": "aws_cdk_starter",
   "pluginVersion": "0.1.0",
+  "relations": Array [],
   "schemas": Array [],
 }
 `;
@@ -118,6 +119,7 @@ Object {
   },
   "pluginID": "chrome_extension_generator",
   "pluginVersion": "0.1.0",
+  "relations": Array [],
   "schemas": Array [],
 }
 `;
@@ -185,6 +187,7 @@ Object {
   },
   "pluginID": "chrome_extension_generator",
   "pluginVersion": "0.1.0",
+  "relations": Array [],
   "schemas": Array [
     Object {
       "attributes": Array [],
@@ -282,6 +285,7 @@ Object {
   },
   "pluginID": "chrome_extension_generator",
   "pluginVersion": "0.1.0",
+  "relations": Array [],
   "schemas": Array [
     Object {
       "attributes": Array [],

@@ -14,7 +14,9 @@ export type RelationType =
     | "HAS_MANY"
     | "TO_ONE"
     | "TO_MANY"
-    | "HAS_AND_BELONGS_TO_MANY";
+    | "HAS_AND_BELONGS_TO_MANY"
+    | "EMBEDS_ONE"
+    | "EMBEDS_MANY";
 export enum RelationTypes {
     BELONGS_TO = "BELONGS_TO",
     HAS_ONE = "HAS_ONE",
@@ -22,6 +24,8 @@ export enum RelationTypes {
     TO_ONE = "TO_ONE",
     TO_MANY = "TO_MANY",
     HAS_AND_BELONGS_TO_MANY = "HAS_AND_BELONGS_TO_MANY",
+    EMBEDS_ONE = "EMBEDS_ONE",
+    EMBEDS_MANY = "EMBEDS_MANY",
 }
 
 /**
@@ -34,10 +38,11 @@ export interface RelationInput {
     type: RelationType;
     required: boolean; // TODO - keep this for now - should this be handled as an Addon? YES.
     source: SchemaCreators;
+    internalNote: string;
     sourceSchemaID: UUID;
     destinationSchemaID: UUID;
-    sourceSchemaAlias: string;
-    destinationSchemaAlias: string;
+    sourceSchemaAlias: string; // TODO - make this TokenPluralization?
+    destinationSchemaAlias: string; // TODO - make this TokenPluralization?
 }
 
 // Relation constants
@@ -46,6 +51,7 @@ export const DEFAULT_RELATION_INPUT: RelationInput = {
     type: null,
     required: false,
     source: SchemaCreators.user,
+    internalNote: "",
     sourceSchemaID: "",
     destinationSchemaID: "",
     sourceSchemaAlias: "",
