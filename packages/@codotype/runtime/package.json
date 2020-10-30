@@ -30,6 +30,7 @@
         "@codotype/core": "^0.8.0-canary.8",
         "@types/bluebird": "^3.5.29",
         "@types/ejs": "^2.6.3",
+        "@types/fs-extra": "^9.0.2",
         "@types/node": "^12.12.12",
         "@types/prettier": "^2.0.2",
         "bluebird": "^3.5.1",

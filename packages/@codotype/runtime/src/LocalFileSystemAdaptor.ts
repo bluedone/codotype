@@ -1,6 +1,5 @@
-import * as fs from "fs";
-// @ts-ignore
 import * as fsExtra from "fs-extra";
+import * as fs from "fs";
 import { FileSystemAdaptor } from "@codotype/core";
 
 // // // //
@@ -12,9 +11,8 @@ import { FileSystemAdaptor } from "@codotype/core";
 export class LocalFileSystemAdaptor implements FileSystemAdaptor {
     ensureDir(dir: string): Promise<boolean> {
         return new Promise((resolve, reject) => {
-            return fsExtra.ensureDir(dir, (err: any) => {
-                if (err) return reject(err);
-                return resolve(true);
+            fsExtra.ensureDir(dir).then(() => {
+                resolve(true);
             });
         });
     }
@@ -29,7 +27,7 @@ export class LocalFileSystemAdaptor implements FileSystemAdaptor {
     }
     writeFile(dest: string, compiledTemplate: string): Promise<boolean> {
         return new Promise((resolve, reject) => {
-            fsExtra.writeFile(dest, compiledTemplate, (err: any) => {
+            fs.writeFile(dest, compiledTemplate, (err: any) => {
                 // Handle error
                 if (err) {
                     // Rejects error
