@@ -241,12 +241,12 @@ export type CopyDirFunction = (params: {
 
 /**
  * Runtime
- * TODO - clean this up a bit more
+ * TODO - clean this up a bit more - how many of these methods are needed / need to be exposed?
  * TODO - annotate
- * TODO - add FileSystemAdaptor to RuntimeConstructorParams, Runtime interface
  */
 export interface Runtime {
     templatePath: (resolvedPath: string, templatePath: string) => string;
+    destinationPath: (destination: string, filename: string) => string;
     ensureDir: (dirPath: string) => Promise<boolean>;
     copyDir: CopyDirFunction;
     renderTemplate: (
@@ -260,7 +260,6 @@ export interface Runtime {
         compiledTemplate: string,
     ) => Promise<boolean>;
     writeFile: WriteFileFunction;
-    destinationPath: (destination: string, filename: string) => string;
     log: (message: any, options: { level: RuntimeLogLevel }) => void;
     registerPlugin: (props: {
         modulePath?: string;
