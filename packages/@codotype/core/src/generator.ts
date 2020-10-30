@@ -9,7 +9,7 @@ import {
 
 /**
  * GeneratorConstructorParams
- * TODO - annotate this
+ * Parameters passed into
  */
 export interface GeneratorConstructorParams {
     name: string;

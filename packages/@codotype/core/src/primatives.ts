@@ -23,6 +23,8 @@ export interface CodotypePrimatives {
     ConfigurationGroup: typeof ConfigurationGroupBuilder;
     ConfigurationGroupSection: typeof ConfigurationGroupSectionBuilder;
     ConfigurationProperty: typeof ConfigurationGroupPropertyBuilder;
+    // TODO - add TokenCasing
+    // TODO - add TokenPluralization
 }
 
 /**

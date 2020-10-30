@@ -64,6 +64,7 @@ export interface RuntimeConstructorParams {
     cwd: string;
     logLevel: RuntimeLogLevel;
     fileOverwriteBehavior: FileOverwriteBehavior;
+    fileSystemAdaptor: FileSystemAdaptor;
 }
 
 /**
@@ -286,10 +287,10 @@ export interface Runtime {
  * TODO - add S3FileSystemAdaptor
  */
 export interface FileSystemAdaptor {
-    copyDir: CopyDirFunction;
     writeFile: WriteFileFunction;
     ensureDir: (dirPath: string) => Promise<boolean>;
     fileExists: (filepath: string) => Promise<boolean>;
+    readFile: (filepath: string) => Promise<string | null>;
 }
 
 //////////////
