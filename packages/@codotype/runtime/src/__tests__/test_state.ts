@@ -1,27 +1,57 @@
-import { MockRuntime } from "../MockRuntime";
 import { RuntimeProxyAdaptor } from "../utils/runtimeProxyAdaptor";
 import {
     testState,
     RuntimeLogLevels,
-    inflateProject,
+    normalizeProjectInput,
     RuntimeConstructorParams,
     FileOverwriteBehaviors,
     Project,
     RuntimeInjectorProps,
     GeneratorConstructorParams,
+    buildTokenCasing,
+    Primatives,
 } from "@codotype/core";
+// import { LocalFileSystemAdaptor } from "../LocalFileSystemAdaptor";
+import { InMemoryFileSystemAdaptor } from "../InMemoryFileSystemAdaptor";
+import { NodeRuntime } from "../node-runtime";
 
 // // // //
 
-export const project: Project = inflateProject({
-    // @ts-ignore
-    projectInput: { schemas: [testState.userSchema, testState.movieSchema] },
+// const x = new Primatives.Plugin({
+//     id: "my-plugin",
+//     label: "My Plugin",
+//     description: "",
+//     project_path: "plugin-output",
+//     schemaEditorConfiguration: {
+//         defaultRelations: [],
+//         defaultSchemas: [],
+//         defaultAttributes: [],
+//         configurationGroups: [],
+//         documentation: "",
+//         supportedDatatypes: [],
+//         supportedRelations: [],
+//         attributeAddons: [],
+//         enableAttributeDefaultValue: false,
+//     },
+// });
+
+export const project: Project = normalizeProjectInput({
+    projectInput: {
+        schemas: [testState.userSchema, testState.movieSchema],
+        relations: [],
+        configuration: {},
+        pluginID: "123",
+        pluginVersion: "0.1.1",
+        id: "project-id",
+        identifiers: buildTokenCasing("My Project"),
+    },
 });
 
 export const runtimeConstructorOptions: RuntimeConstructorParams = {
     cwd: "/test-cwd/",
     logLevel: RuntimeLogLevels.verbose,
     fileOverwriteBehavior: FileOverwriteBehaviors.force,
+    fileSystemAdaptor: new InMemoryFileSystemAdaptor(),
 };
 
 export const baseGeneratorOptions: RuntimeInjectorProps = {
@@ -29,7 +59,7 @@ export const baseGeneratorOptions: RuntimeInjectorProps = {
     resolved: "my/resolved/path",
     project,
     plugin: testState.cdkGeneratorMeta,
-    runtime: new MockRuntime(runtimeConstructorOptions),
+    runtime: new NodeRuntime(runtimeConstructorOptions),
 };
 
 export const generatorPrototype: GeneratorConstructorParams = {
@@ -43,7 +73,7 @@ export const generatorPrototype: GeneratorConstructorParams = {
 
 export const generatorPrototype01: GeneratorConstructorParams = {
     name: "ModuleComponents",
-    async write({ project, runtime }) {
+    async write({ runtime }) {
         runtime.writeFile("", '{\nname: "project"\n}');
     },
     async forEachSchema({ schema, runtime }) {

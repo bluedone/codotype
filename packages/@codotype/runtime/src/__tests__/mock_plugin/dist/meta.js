@@ -147,7 +147,7 @@ const FullStackTypescriptGenerator = {
             types_1.Datatype.BOOLEAN,
             types_1.Datatype.DATE,
         ],
-        supportedRelations: [types_1.RelationType.TO_ONE],
+        supportedRelations: [types_1.RelationTypes.TO_ONE],
     },
     configurationGroups: [exports.BasicConfigurationGroup],
 };

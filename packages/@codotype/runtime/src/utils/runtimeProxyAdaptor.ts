@@ -1,5 +1,5 @@
 import {
-    RelationReference,
+    Relation,
     Project,
     Schema,
     GeneratorConstructorParams,
@@ -141,7 +141,7 @@ export class RuntimeProxyAdaptor implements RuntimeAdaptor {
         project,
     }: {
         schema: Schema;
-        relation: RelationReference;
+        relation: Relation;
         project: Project;
         runtime: RuntimeProxy;
     }): Promise<void> {
@@ -151,7 +151,7 @@ export class RuntimeProxyAdaptor implements RuntimeAdaptor {
 
     /**
      * forEachReverseRelation
-     * TODO - rename this function to forEachRelationReference
+     * TODO - rename this function to forEachRelation
      * @param - see `WriteFunctionProps`
      */
     async forEachReverseRelation({
@@ -160,7 +160,7 @@ export class RuntimeProxyAdaptor implements RuntimeAdaptor {
         project,
     }: {
         schema: Schema;
-        relation: RelationReference;
+        relation: Relation;
         project: Project;
     }): Promise<void> {
         // console.log('NOTHING TO WRITE - this should be overwritten by a subclassed generator.')

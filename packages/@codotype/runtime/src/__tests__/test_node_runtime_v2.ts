@@ -1,5 +1,4 @@
 import * as fs from "fs";
-import { MockRuntime } from "../MockRuntime";
 import { NodeRuntime } from "../node-runtime";
 import {
     buildDefaultProjectInput,
@@ -8,40 +7,41 @@ import {
     RuntimeLogLevels,
 } from "@codotype/core";
 import { resolve } from "path";
+import { LocalFileSystemAdaptor } from "../LocalFileSystemAdaptor";
 
 // // // //
 
 // TODO - test each method with NodeRuntime
 describe("testing @codotype/runtime v2", () => {
-    test("testing @codotype/runtime v2", async () => {
-        const mockRuntime: Runtime = new MockRuntime({
-            cwd: "/",
-            logLevel: RuntimeLogLevels.verbose,
-            fileOverwriteBehavior: "force",
-        });
+    // test("testing @codotype/runtime v2", async () => {
+    //     const mockRuntime: Runtime = new MockRuntime({
+    //         cwd: "/",
+    //         logLevel: RuntimeLogLevels.verbose,
+    //         fileOverwriteBehavior: "force",
+    //     });
 
-        // console.log(mockRuntime);
+    //     // console.log(mockRuntime);
 
-        const res = await mockRuntime.writeFile(
-            "path/to/file.js",
-            "compiledTemplateString",
-        );
+    //     const res = await mockRuntime.writeFile(
+    //         "path/to/file.js",
+    //         "compiledTemplateString",
+    //     );
 
-        const exists = await mockRuntime.fileExists("path/to/file.js");
-        expect(exists).toBe(true);
+    //     const exists = await mockRuntime.fileExists("path/to/file.js");
+    //     expect(exists).toBe(true);
 
-        const compared = await mockRuntime.compareFile(
-            "path/to/file.js",
-            "compiledTemplateString",
-        );
-        expect(compared).toBe(true);
+    //     const compared = await mockRuntime.compareFile(
+    //         "path/to/file.js",
+    //         "compiledTemplateString",
+    //     );
+    //     expect(compared).toBe(true);
 
-        const comparedFalse = await mockRuntime.compareFile(
-            "path/to/file.js",
-            "compiledTemplateString",
-        );
-        expect(comparedFalse).toBe(comparedFalse);
-    });
+    //     const comparedFalse = await mockRuntime.compareFile(
+    //         "path/to/file.js",
+    //         "compiledTemplateString",
+    //     );
+    //     expect(comparedFalse).toBe(comparedFalse);
+    // });
 
     test("testing @codotype/runtime composeWith", async () => {
         // Defines CWD for new NodeRuntime
@@ -53,6 +53,7 @@ describe("testing @codotype/runtime v2", () => {
             cwd,
             logLevel: RuntimeLogLevels.suppress,
             fileOverwriteBehavior: "force",
+            fileSystemAdaptor: new LocalFileSystemAdaptor(),
         });
 
         // Registers the mock_plugin

@@ -1,9 +1,4 @@
-import {
-    Project,
-    Schema,
-    RuntimeAdaptor,
-    RelationReference,
-} from "@codotype/core";
+import { Project, Schema, RuntimeAdaptor, Relation } from "@codotype/core";
 
 // // // //
 
@@ -35,7 +30,7 @@ export async function runGenerator(params: {
     await Promise.all(
         project.schemas.map((schema: Schema) => {
             return Promise.all(
-                schema.relations.map((relation: RelationReference) => {
+                schema.relations.map((relation: Relation) => {
                     return runtimeProxyAdaptor.forEachRelation({
                         schema: schema,
                         relation,
@@ -51,7 +46,7 @@ export async function runGenerator(params: {
     await Promise.all(
         project.schemas.map((schema: Schema) => {
             return Promise.all(
-                schema.references.map((relation: RelationReference) => {
+                schema.references.map((relation: Relation) => {
                     return runtimeProxyAdaptor.forEachReverseRelation({
                         schema: schema,
                         relation,

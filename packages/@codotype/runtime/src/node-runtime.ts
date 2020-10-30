@@ -7,10 +7,10 @@ import {
     indent,
     ComposeWithOptions,
     trailingComma,
-    inflateProject,
+    normalizeProjectInput,
     Datatype,
     Project,
-    RelationType,
+    RelationTypes,
     RuntimeLogLevel,
     RuntimeLogLevels,
     PluginMetadata,
@@ -38,6 +38,22 @@ import { logger } from "./utils/logger";
 // // // //
 // TODO - cleanup + simplify error handling
 
+function getAllFiles(dirPath: string, arrayOfFiles: string[]): string[] {
+    const files = fs.readdirSync(dirPath);
+
+    arrayOfFiles = arrayOfFiles || [];
+
+    files.forEach(function(file) {
+        if (fs.statSync(dirPath + "/" + file).isDirectory()) {
+            arrayOfFiles = getAllFiles(dirPath + "/" + file, arrayOfFiles);
+        } else {
+            arrayOfFiles.push([dirPath, "/", file].join(""));
+        }
+    });
+
+    return arrayOfFiles;
+}
+
 function handlePluginImportError(error: any): Promise<null> {
     console.log(error);
     if (error.code === "MODULE_NOT_FOUND") {
@@ -63,6 +79,7 @@ function handleExecuteImportError(error: any): Promise<void> {
 
 /**
  * NodeRuntime
+ * TODO - rename this to Runtime
  * Runtime for running Codotype plugins through Node.js
  */
 export class NodeRuntime implements Runtime {
@@ -183,12 +200,7 @@ export class NodeRuntime implements Runtime {
      * @param dir - the directory whose existance is being ensured
      */
     ensureDir(dir: string): Promise<boolean> {
-        return new Promise((resolve, reject) => {
-            return fsExtra.ensureDir(dir, (err: any) => {
-                if (err) return reject(err);
-                return resolve(true);
-            });
-        });
+        return this.options.fileSystemAdaptor.ensureDir(dir);
     }
 
     /**
@@ -222,7 +234,7 @@ export class NodeRuntime implements Runtime {
         let { id, projectInput } = build;
 
         // Inflates Project from ProjectInput
-        const project: Project = inflateProject({
+        const project: Project = normalizeProjectInput({
             projectInput,
         });
 
@@ -242,7 +254,7 @@ export class NodeRuntime implements Runtime {
         // Finds the pluginRegistration associated with the ProjectBuild
         // TODO - check version here, use semver if possible
         const pluginRegistration: PluginRegistration | undefined = plugins.find(
-            (g) => g.id === project.pluginID,
+            g => g.id === project.pluginID,
         );
         //
         // // // //
@@ -376,7 +388,7 @@ export class NodeRuntime implements Runtime {
                     // forEachReverseRelation helper function?
                     // forEachReference helper function?
                 },
-                RelationType,
+                RelationTypes,
                 Datatype,
                 ...options, // QUESTION - are options ever used here?
             };
@@ -404,7 +416,7 @@ export class NodeRuntime implements Runtime {
      * @param filepath - string
      */
     fileExists(filepath: string): Promise<boolean> {
-        return Promise.resolve(fs.existsSync(filepath));
+        return this.options.fileSystemAdaptor.fileExists(filepath);
     }
 
     /**
@@ -413,19 +425,22 @@ export class NodeRuntime implements Runtime {
      * @param destinationFilepath - the destination file being compared against compiledTemplate
      * @param compiledTemplate - the text being compared against the contents of the file at destinationFilepath
      */
-    compareFile(
+    async compareFile(
         destinationFilepath: string,
         compiledTemplate: string,
     ): Promise<boolean> {
         // Reads the file from FS
-        const existing = fsExtra.readFileSync(destinationFilepath, "utf8");
+        const existingFile:
+            | string
+            | null = await this.options.fileSystemAdaptor.readFile(
+            destinationFilepath,
+        );
 
         // If exists, and it's the same, SKIP
-        if (compiledTemplate === existing) {
-            return Promise.resolve(true);
-        } else {
+        if (existingFile === null) {
             return Promise.resolve(false);
         }
+        return Promise.resolve(compiledTemplate === existingFile);
     }
 
     /**
@@ -435,44 +450,48 @@ export class NodeRuntime implements Runtime {
      * @param compiledTemplate - the text being written inside `dest`
      */
     writeFile(dest: string, compiledTemplate: string): Promise<boolean> {
-        return new Promise((resolve, reject) => {
-            fsExtra.writeFile(dest, compiledTemplate, (err: any) => {
-                // Handle error
-                if (err) {
-                    // Logs debug statement
-                    this.log("writeFile error: " + dest, {
-                        level: RuntimeLogLevels.verbose,
-                    });
-
-                    // Rejects error
-                    return reject(err);
-                }
-
-                // Logs debug statement
-                this.log("writeFile: " + dest, {
-                    level: RuntimeLogLevels.verbose,
-                });
-
-                // Resovles
-                return resolve(true);
-            });
-        });
+        return this.options.fileSystemAdaptor.writeFile(dest, compiledTemplate);
     }
 
     /**
      * copyDir
      * Copy a directory from src to dest
+     * TODO - annotate this
      * @param src - the name of the directory being copied inside the `templates` directory relative to the Codotype Generator invoking this method
      * @param dest - the name of the destination directory
      */
     async copyDir(params: { src: string; dest: string }): Promise<boolean> {
         const { src, dest } = params;
-        return new Promise((resolve, reject) => {
-            return fsExtra.copy(src, dest, (err: any) => {
-                if (err) return reject(err);
-                return resolve(true);
-            });
-        });
+        // TODO - update allFiles to produce contents + destination pairs
+        const allFiles = getAllFiles(src, []);
+        for (const i in allFiles) {
+            const sourcePath = allFiles[i];
+
+            let destPath: string | undefined = sourcePath
+                .split(`/${TEMPLATES_DIRECTORY_NAME}/`)
+                .pop();
+
+            if (destPath === undefined) {
+                console.log("Runtime Error - destination path not found!");
+                continue;
+            }
+
+            destPath = path.resolve(dest, destPath);
+
+            // TODO - wrap in try/catch
+            const contents: string = fs.readFileSync(sourcePath, "utf8");
+
+            await this.options.fileSystemAdaptor.writeFile(destPath, contents);
+        }
+
+        return Promise.resolve(true);
+        // console.log("allFiles");
+        // console.log(allFiles);
+        // console.log(this.options.cwd);
+        // return fsExtra.copy(src, dest, (err: any) => {
+        //     if (err) return reject(err);
+        //     return resolve(true);
+        // });
     }
 
     /**
@@ -511,7 +530,7 @@ export class NodeRuntime implements Runtime {
         // Finds the currently active plugin
         const plugins = await this.getPlugins();
         const activePlugin = plugins.find(
-            (p) => p.id === parentRuntimeAdaptor.options.plugin.id,
+            p => p.id === parentRuntimeAdaptor.options.plugin.id,
         );
 
         if (activePlugin === undefined) {
