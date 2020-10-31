@@ -5,7 +5,7 @@ import {
     GroupLayoutVariant,
     ConfigurationGroupProperty,
     OptionType,
-    ExperienceRecommendation,
+    ExperienceRecommendations,
     PluginMetadata,
     SchemaCreators,
     SchemaInput,
@@ -589,11 +589,13 @@ export const SideBySideConfigurationGroup: ConfigurationGroup = {
 
 export const cdkGeneratorMeta: PluginMetadata = {
     id: "aws_cdk_starter", // unique ID for the generator
-    label: "AWS CDK Starter", // short label for the generator
-    description: "A Codotype Generator for AWS CDK", // brief description of the generator
-    documentation: "",
-    icon:
-        "https://res.cloudinary.com/codotype/image/upload/v1553197653/tech-logos/nodejs.png", // URL to the generator's icon. Must be at least 200x200px
+    content: {
+        label: "AWS CDK Starter", // short label for the generator
+        description: "A Codotype Generator for AWS CDK", // brief description of the generator
+        documentation: "",
+        icon:
+            "https://res.cloudinary.com/codotype/image/upload/v1553197653/tech-logos/nodejs.png", // URL to the generator's icon. Must be at least 200x200px
+    },
     homepage: "https://codotype.org", // the "homepage" for this generator
     version: "0.1.0", // the current version of the generator
     codotypeVersion: "0.1.0",
@@ -605,7 +607,7 @@ export const cdkGeneratorMeta: PluginMetadata = {
     },
     techTags: ["AWS", "React", "TypeScript", "CDK", "Lambda", "DynamoDB", "S3"], // an array of strings describing the tech used in the generator
     typeTags: ["Full-stack", "Infrastructure"], // describes the type of codebase produced by this generator
-    experience: ExperienceRecommendation.BEGINNER, // an optional tag detailing the level of experience required to use the code produced by the generator
+    experience: ExperienceRecommendations.beginner, // an optional tag detailing the level of experience required to use the code produced by the generator
     project_path: "output", // the name of the directory for the generator's output
     schemaEditorConfiguration: {
         documentation: "",
@@ -641,14 +643,14 @@ export const userSchema: SchemaInput = {
     id: "12345",
     identifiers: {
         singular: {
-            label: "User",
+            title: "User",
             snake: "user",
             camel: "user",
             pascal: "User",
             kebab: "user",
         },
         plural: {
-            label: "Users",
+            title: "Users",
             snake: "users",
             camel: "users",
             pascal: "Users",
@@ -669,7 +671,7 @@ export const emailAttribute: Attribute = {
     datatype: Datatype.STRING,
     defaultValue: null,
     identifiers: {
-        label: "Email",
+        title: "Email",
         snake: "email",
         camel: "email",
         pascal: "Email",
@@ -687,14 +689,14 @@ export const movieSchema: SchemaInput = {
     id: "45678",
     identifiers: {
         singular: {
-            label: "Movie",
+            title: "Movie",
             snake: "movie",
             camel: "movie",
             pascal: "Movie",
             kebab: "movie",
         },
         plural: {
-            label: "Movies",
+            title: "Movies",
             snake: "movies",
             camel: "movies",
             pascal: "Movies",
@@ -708,7 +710,7 @@ export const movieSchema: SchemaInput = {
             datatype: Datatype.STRING,
             defaultValue: null,
             identifiers: {
-                label: "Name",
+                title: "Name",
                 snake: "name",
                 camel: "name",
                 pascal: "Name",
@@ -746,11 +748,13 @@ export const movieSchema: SchemaInput = {
 
 export const dummyGeneratorMeta: PluginMetadata = {
     id: "chrome_extension_generator", // unique ID for the generator
-    label: "Chrome Extension Generator", // short label for the generator
-    description: "A Codotype Generator", // brief description of the generator
-    documentation: "A Codotype Generator", // Detailed description of the generator
-    icon:
-        "https://res.cloudinary.com/codotype/image/upload/v1553197653/tech-logos/nodejs.png", // URL to the generator's icon. Must be at least 200x200px
+    content: {
+        label: "Chrome Extension Generator", // short label for the generator
+        description: "A Codotype Generator", // brief description of the generator
+        documentation: "A Codotype Generator", // Detailed description of the generator
+        icon:
+            "https://res.cloudinary.com/codotype/image/upload/v1553197653/tech-logos/nodejs.png", // URL to the generator's icon. Must be at least 200x200px
+    },
     homepage: "https://codotype.org", // the "homepage" for this generator
     version: "0.1.0", // the current version of the generator
     codotypeVersion: "0.1.0",
@@ -760,7 +764,7 @@ export const dummyGeneratorMeta: PluginMetadata = {
     },
     techTags: ["React", "TypeScript", "Bootstrap"], // an array of strings describing the tech used in the generator
     typeTags: ["Chrome Extension", "Infrastructure"], // describes the type of codebase produced by this generator
-    experience: ExperienceRecommendation.BEGINNER, // an optional tag detailing the level of experience required to use the code produced by the generator
+    experience: ExperienceRecommendations.beginner, // an optional tag detailing the level of experience required to use the code produced by the generator
     project_path: "output", // the name of the directory for the generator's output
     exampleProjects: [],
     schemaEditorConfiguration: {
@@ -778,7 +782,7 @@ export const dummyGeneratorMeta: PluginMetadata = {
             {
                 id: "UUID-Attribute",
                 identifiers: {
-                    label: "ID",
+                    title: "ID",
                     snake: "id",
                     camel: "id",
                     pascal: "Id",
