@@ -36,6 +36,7 @@ export enum OptionType {
     INSTANCE = "INSTANCE",
 }
 
+// Feature: update this to store a value that references an instance in a collection defined in another ConfigurationProperty( i.e. { enabled: boolean; value: { collectionSource: UUID, collectionValue: UUID }})
 export type OptionValue =
     | string
     | string[]
@@ -86,13 +87,9 @@ export interface DropdownOption {
 
 /**
  * ConfigurationProperty
- * TODO - annnotate this
+ * Represents a single user-configurable property for a Plugin
  */
-// TOOD - WHERE should this include a TokenPluralization -> required for `COLLECTION` type?
-// TODO - scope out preview/template feature, update this interface accordingly in preparation
-// QUESTION - how are we storing the ID of the associated COLLECTION property?
-//          - Should probably be a special object in `defaultValue`:
-//          - { enabled: boolean; value: { collectionSource: UUID, collectionValue: UUID } }
+// TOOD - WHERE should this include the TokenPluralization required for `COLLECTION` type?
 export interface ConfigurationProperty {
     // Meta/Content
     content: Content;
@@ -148,7 +145,7 @@ export enum PropertyLayoutVariants {
     CARD_COL_6 = "CARD_COL_6",
     CARD_COL_8 = "CARD_COL_8",
     CARD_COL_12 = "CARD_COL_12",
-    // Additional variants:
+    // FEATURE: Add additional variants:
     // - inline documentation
     // - modal?
     // - else?

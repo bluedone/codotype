@@ -6,6 +6,8 @@ import { SchemaEditorBuilder } from "./primatives/SchemaEditor";
 import { RelationBuilder } from "./primatives/Relation";
 import { AttributeBuilder } from "./primatives/Attribute";
 import { PluginBuilder } from "./primatives/Plugin";
+import { TokenCasingBuilder } from "./primatives/TokenCasing";
+import { TokenPluralizationBuilder } from "./primatives/TokenPluralization";
 
 // // // //
 
@@ -23,8 +25,8 @@ export interface CodotypePrimatives {
     ConfigurationGroup: typeof ConfigurationGroupBuilder;
     ConfigurationGroupSection: typeof ConfigurationGroupSectionBuilder;
     ConfigurationProperty: typeof ConfigurationPropertyBuilder;
-    // TODO - add TokenCasing
-    // TODO - add TokenPluralization
+    TokenCasing: typeof TokenCasingBuilder;
+    TokenPluralization: typeof TokenPluralizationBuilder;
 }
 
 /**
@@ -40,4 +42,6 @@ export const Primatives: CodotypePrimatives = {
     ConfigurationGroup: ConfigurationGroupBuilder,
     ConfigurationGroupSection: ConfigurationGroupSectionBuilder,
     ConfigurationProperty: ConfigurationPropertyBuilder,
+    TokenCasing: TokenCasingBuilder,
+    TokenPluralization: TokenPluralizationBuilder,
 };
