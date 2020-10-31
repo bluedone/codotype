@@ -40,14 +40,16 @@ import { PropertyLayoutVariant } from "../../configuration-option-types";
 // // // //
 
 export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupProperty = {
-    label: "Component",
     identifier: "components",
-    description: "Define the component data",
-    documentation: "",
+    content: {
+        label: "Component",
+        description: "Define the component data",
+        documentation: "",
+        icon:
+            "https://res.cloudinary.com/codotype/image/upload/v1558931014/product-logos/twitter-512.png",
+    },
     type: OptionType.COLLECTION,
     defaultValue: [],
-    icon:
-        "https://res.cloudinary.com/codotype/image/upload/v1558931014/product-logos/twitter-512.png",
     enabledByDefault: true,
     required: false,
     allowDisable: false,
@@ -62,13 +64,15 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
     },
     properties: [
         {
-            label: "Component Name",
             identifier: "componentName",
-            description: "Name of the component",
-            documentation: "",
+            content: {
+                label: "Component Name",
+                description: "Name of the component",
+                icon: "",
+                documentation: "",
+            },
             type: OptionType.STRING,
             defaultValue: "",
-            icon: "",
             enabledByDefault: true,
             required: false,
             allowDisable: false,
@@ -84,13 +88,15 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
             },
         },
         {
-            label: "Component Slug",
             identifier: "componentSlug",
-            description: "Slug of the component",
-            documentation: "",
+            content: {
+                label: "Component Slug",
+                description: "Slug of the component",
+                documentation: "",
+                icon: "",
+            },
             type: OptionType.STRING,
             defaultValue: "",
-            icon: "",
             enabledByDefault: true,
             required: false,
             allowDisable: false,
@@ -106,14 +112,16 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
             },
         },
         {
-            label: "Props",
             identifier: "props",
-            description: "",
-            documentation: "",
+            content: {
+                label: "Props",
+                description: "",
+                documentation: "",
+                icon: "",
+            },
             dropdownOptions: [],
             type: OptionType.COLLECTION,
             defaultValue: "",
-            icon: "",
             enabledByDefault: true,
             unique: false,
             layoutVariant: PropertyLayoutVariant.COL_12,
@@ -127,13 +135,15 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
             },
             properties: [
                 {
-                    label: "Type",
                     identifier: "type",
-                    description: "",
-                    documentation: "",
+                    content: {
+                        label: "Type",
+                        description: "",
+                        documentation: "",
+                        icon: "",
+                    },
                     type: OptionType.DROPDOWN,
                     defaultValue: "",
-                    icon: "",
                     enabledByDefault: true,
                     required: false,
                     unique: false,
@@ -149,13 +159,15 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
                     },
                 },
                 {
-                    label: "Name",
                     identifier: "name",
-                    description: "",
-                    documentation: "",
+                    content: {
+                        label: "Name",
+                        description: "",
+                        documentation: "",
+                        icon: "",
+                    },
                     type: OptionType.STRING,
                     defaultValue: "",
-                    icon: "",
                     enabledByDefault: true,
                     required: false,
                     allowDisable: false,
@@ -171,13 +183,15 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
                     },
                 },
                 {
-                    label: "Desc",
                     identifier: "desc",
-                    description: "",
-                    documentation: "",
+                    content: {
+                        label: "Desc",
+                        description: "",
+                        documentation: "",
+                        icon: "",
+                    },
                     type: OptionType.STRING,
                     defaultValue: "",
-                    icon: "",
                     enabledByDefault: true,
                     required: false,
                     allowDisable: false,
@@ -195,13 +209,15 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
             ],
         },
         {
-            label: "Tests",
             identifier: "tests",
-            description: "",
-            documentation: "",
+            content: {
+                label: "Tests",
+                description: "",
+                documentation: "",
+                icon: "",
+            },
             type: OptionType.INSTANCE,
             defaultValue: "",
-            icon: "",
             enabledByDefault: true,
             unique: false,
             layoutVariant: PropertyLayoutVariant.COL_12,
@@ -212,13 +228,15 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
             validations: [],
             properties: [
                 {
-                    label: "Test Type",
                     identifier: "testType",
-                    description: "",
-                    documentation: "",
+                    content: {
+                        label: "Test Type",
+                        description: "",
+                        documentation: "",
+                        icon: "",
+                    },
                     type: OptionType.DROPDOWN,
                     defaultValue: "",
-                    icon: "",
                     enabledByDefault: true,
                     unique: false,
                     layoutVariant: PropertyLayoutVariant.COL_12,
@@ -246,13 +264,15 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
 };
 
 export const ComponentBuilderConfigurationGroupPropertySingleText: ConfigurationGroupProperty = {
-    label: "Component Name",
+    content: {
+        label: "Component Name",
+        description: "Name of the component",
+        documentation: "",
+        icon: "",
+    },
     identifier: "componentName",
-    description: "Name of the component",
-    documentation: "",
     type: OptionType.STRING,
     defaultValue: "",
-    icon: "",
     enabledByDefault: true,
     unique: false,
     layoutVariant: PropertyLayoutVariant.COL_12,
@@ -269,14 +289,16 @@ export const ComponentBuilderConfigurationGroupPropertySingleText: Configuration
 };
 
 export const ComponentBuilderConfigurationGroupPropertySingleDropdown: ConfigurationGroupProperty = {
-    label: "Dropdown Test",
+    content: {
+        label: "Dropdown Test",
+        description: "Dropdown Testing",
+        documentation: "",
+        icon:
+            "https://res.cloudinary.com/codotype/image/upload/v1558931014/product-logos/twitter-512.png",
+    },
     identifier: "dropdownTest",
-    description: "Dropdown Testing",
-    documentation: "",
     type: OptionType.DROPDOWN,
     defaultValue: "",
-    icon:
-        "https://res.cloudinary.com/codotype/image/upload/v1558931014/product-logos/twitter-512.png",
     enabledByDefault: true,
     unique: false,
     layoutVariant: PropertyLayoutVariant.COL_12,
@@ -299,14 +321,16 @@ export const ComponentBuilderConfigurationGroupPropertySingleDropdown: Configura
 };
 
 export const ComponentBuilderConfigurationGroupPropertySingleNumber: ConfigurationGroupProperty = {
-    label: "Number Test",
+    content: {
+        label: "Number Test",
+        description:
+            "This is a number for testing. Don't overthink it. It's just a number. I'll should pull some configuration options from an existing generator to populate this placeholder.",
+        documentation: "",
+        icon: "",
+    },
     identifier: "numberTest",
-    description:
-        "This is a number for testing. Don't overthink it. It's just a number. I'll should pull some configuration options from an existing generator to populate this placeholder.",
-    documentation: "",
     type: OptionType.NUMBER,
     defaultValue: "",
-    icon: "",
     enabledByDefault: true,
     unique: false,
     layoutVariant: PropertyLayoutVariant.COL_12,
@@ -323,13 +347,15 @@ export const ComponentBuilderConfigurationGroupPropertySingleNumber: Configurati
 };
 
 export const ComponentBuilderConfigurationGroupPropertyWithInstance01: ConfigurationGroupProperty = {
-    label: "RandomInstanceTest",
     identifier: "random_instance",
-    description: "",
-    documentation: "",
+    content: {
+        label: "RandomInstanceTest",
+        description: "",
+        documentation: "",
+        icon: "",
+    },
     type: OptionType.INSTANCE,
     defaultValue: "",
-    icon: "",
     enabledByDefault: true,
     unique: false,
     layoutVariant: PropertyLayoutVariant.COL_12,
@@ -346,14 +372,16 @@ export const ComponentBuilderConfigurationGroupPropertyWithInstance01: Configura
 };
 
 export const ComponentBuilderConfigurationGroupPropertyWithInstance: ConfigurationGroupProperty = {
-    label: "Tests",
     identifier: "tests",
-    description: "",
-    documentation: "",
+    content: {
+        label: "Tests",
+        icon:
+            "https://res.cloudinary.com/codotype/image/upload/v1558931014/product-logos/twitter-512.png",
+        description: "",
+        documentation: "",
+    },
     type: OptionType.INSTANCE,
     defaultValue: "",
-    icon:
-        "https://res.cloudinary.com/codotype/image/upload/v1558931014/product-logos/twitter-512.png",
     enabledByDefault: true,
     required: false,
     allowDisable: true,
@@ -370,15 +398,17 @@ export const ComponentBuilderConfigurationGroupPropertyWithInstance: Configurati
         ComponentBuilderConfigurationGroupPropertySingleDropdown,
         ComponentBuilderConfigurationGroupPropertySingleText,
         {
-            label: "Nested Instance",
             identifier: "nested_instance",
-            description: "",
-            documentation: "",
+            content: {
+                label: "Nested Instance",
+                description: "",
+                documentation: "",
+                icon: "",
+            },
             type: OptionType.INSTANCE,
             unique: false,
             layoutVariant: PropertyLayoutVariant.COL_12,
             defaultValue: "",
-            icon: "",
             enabledByDefault: true,
             required: false,
             allowDisable: true,
@@ -402,10 +432,13 @@ export const ComponentBuilderConfigurationGroupPropertyWithInstance: Configurati
 // ConfigurationGroups
 
 export const ComponentBuilderConfigurationGroup: ConfigurationGroup = {
-    label: "Component Generator",
     identifier: "components_group",
-    description: "Generate React components",
-    documentation: "Generate React components",
+    content: {
+        label: "Component Generator",
+        description: "Generate React components",
+        documentation: "Generate React components",
+        icon: "",
+    },
     enabledByDefault: true,
     allowDisable: false,
     layoutVariant: GroupLayoutVariant.TABS,
@@ -422,13 +455,16 @@ export const ComponentBuilderConfigurationGroup: ConfigurationGroup = {
 // // // //
 
 export const LambdaBuilderNameProperty: ConfigurationGroupProperty = {
-    label: "Lambda Name",
     identifier: "lambdaName",
-    description: "How the Lambda function will be namd in the AWS dashboard",
-    documentation: "",
+    content: {
+        label: "Lambda Name",
+        description:
+            "How the Lambda function will be namd in the AWS dashboard",
+        documentation: "",
+        icon: "",
+    },
     type: OptionType.STRING,
     defaultValue: "",
-    icon: "",
     enabledByDefault: true,
     required: false,
     unique: false,
@@ -445,13 +481,15 @@ export const LambdaBuilderNameProperty: ConfigurationGroupProperty = {
 };
 
 export const LambdaLanguageProperty: ConfigurationGroupProperty = {
-    label: "Language",
     identifier: "language",
-    description: "The programming language used to build the Lambda",
-    documentation: "",
+    content: {
+        label: "Language",
+        description: "The programming language used to build the Lambda",
+        documentation: "",
+        icon: "",
+    },
     type: OptionType.DROPDOWN,
     defaultValue: "",
-    icon: "",
     unique: false,
     layoutVariant: PropertyLayoutVariant.COL_12,
     enabledByDefault: true,
@@ -477,25 +515,30 @@ export const LambdaLanguageProperty: ConfigurationGroupProperty = {
 };
 
 export const LambdaBuilderConfigurationGroup: ConfigurationGroup = {
-    label: "Lambda Builder",
     identifier: "lambda_builder",
-    description: "Generate AWS Lambdas",
-    documentation: syntaxHighlighting,
+    content: {
+        label: "Lambda Builder",
+        description: "Generate AWS Lambdas",
+        documentation: syntaxHighlighting,
+        icon: "",
+    },
     enabledByDefault: true,
     allowDisable: false,
     layoutVariant: GroupLayoutVariant.LIST,
     sections: [],
     properties: [
         {
-            label: "Lambdas",
             identifier: "lambda_collection",
-            description: "",
-            documentation: "",
+            content: {
+                label: "Lambdas",
+                description: "",
+                documentation: "",
+                icon: "",
+            },
             type: OptionType.COLLECTION,
             defaultValue: [],
             unique: false,
             layoutVariant: PropertyLayoutVariant.COL_12,
-            icon: "",
             enabledByDefault: true,
             required: false,
             allowDisable: true,
@@ -514,10 +557,13 @@ export const LambdaBuilderConfigurationGroup: ConfigurationGroup = {
 // // // //
 
 export const ApiExamplesConfigurationGroup: ConfigurationGroup = {
-    label: "API Examples",
     identifier: "api_examples",
-    description: "Configurate API examples for the Application",
-    documentation: syntaxHighlighting,
+    content: {
+        label: "API Examples",
+        description: "Configurate API examples for the Application",
+        documentation: syntaxHighlighting,
+        icon: "",
+    },
     enabledByDefault: true,
     allowDisable: false,
     layoutVariant: GroupLayoutVariant.LIST,
@@ -527,11 +573,14 @@ export const ApiExamplesConfigurationGroup: ConfigurationGroup = {
 
 export const SideBySideConfigurationGroup: ConfigurationGroup = {
     ...ComponentBuilderConfigurationGroup,
-    label: "Architecture Configuration",
+    content: {
+        label: "Architecture Configuration",
+        description: "Configure the server architecture of your application",
+        documentation: syntaxHighlighting,
+        icon: "",
+    },
     identifier: "component_builder_side_by_side",
     layoutVariant: GroupLayoutVariant.DOCS_4x8,
-    description: "Configure the server architecture of your application",
-    documentation: syntaxHighlighting,
     properties: [twitterApiOption],
 };
 
@@ -573,8 +622,11 @@ export const cdkGeneratorMeta: PluginMetadata = {
         LambdaBuilderConfigurationGroup,
         {
             ...ComponentBuilderConfigurationGroup,
-            label: "API Examples",
             identifier: "api_examples",
+            content: {
+                ...ComponentBuilderConfigurationGroup.content,
+                label: "API Examples",
+            },
             properties: [twitterApiOption],
         },
         ComponentBuilderConfigurationGroup,
@@ -749,8 +801,11 @@ export const dummyGeneratorMeta: PluginMetadata = {
     configurationGroups: [
         {
             ...ComponentBuilderConfigurationGroup,
-            label: "API Examples",
             identifier: "api_examples",
+            content: {
+                ...ComponentBuilderConfigurationGroup.content,
+                label: "API Examples",
+            },
             properties: [
                 gitHubApiOption,
                 twitterApiOption,
@@ -775,12 +830,15 @@ export const dummyGeneratorMeta: PluginMetadata = {
         },
         {
             ...ComponentBuilderConfigurationGroup,
-            label: "Architecture Configuration",
             identifier: "component_builder_side_by_side",
+            content: {
+                label: "Architecture Configuration",
+                description:
+                    "Configure the server architecture of your application",
+                documentation: syntaxHighlighting,
+                icon: "",
+            },
             layoutVariant: GroupLayoutVariant.DOCS_6x6,
-            description:
-                "Configure the server architecture of your application",
-            documentation: syntaxHighlighting,
             properties: [twitterApiOption],
         },
         ComponentBuilderConfigurationGroup,

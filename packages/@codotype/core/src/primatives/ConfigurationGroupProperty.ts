@@ -9,19 +9,22 @@ import {
 import { PropertyFilter } from "../property-filter";
 import { PropertyValidations } from "../property-validation";
 import { DataPreviewLayoutVariant, DataPreview } from "../data-preview";
+import { Content } from "../content";
 
 // // // //
 
 interface ConfigurationGroupPropertyBuilderParams {
     id?: string;
-    label: string;
     identifier: string;
+    content: {
+        label: string;
+        description?: string;
+        documentation?: string;
+        icon?: string;
+    };
     type: OptionType;
     dropdownOptions?: DropdownOption[];
     defaultValue?: OptionValue;
-    description?: string;
-    documentation?: string;
-    icon?: string;
     required?: boolean;
     enabledByDefault?: boolean;
     allowDisable?: boolean;
@@ -35,13 +38,15 @@ interface ConfigurationGroupPropertyBuilderParams {
 export class ConfigurationGroupPropertyBuilder
     implements ConfigurationGroupProperty {
     id: string = uuidv4();
-    label: string;
     identifier: string;
+    content: Content = {
+        label: "",
+        description: "",
+        documentation: "",
+        icon: "",
+    };
     type: OptionType;
     defaultValue: OptionValue = null;
-    description: string = "";
-    documentation: string = "";
-    icon: string = "";
     required: boolean = false; // TODO - remove this, handled by validations?
     unique: boolean = false; // TODO - remove this, handled by validations?
     enabledByDefault: boolean = true;
@@ -57,15 +62,20 @@ export class ConfigurationGroupPropertyBuilder
     };
 
     constructor(params: ConfigurationGroupPropertyBuilderParams) {
-        this.label = params.label;
-        this.identifier = params.identifier;
-        this.type = params.type;
-
         this.id = params.id || this.id;
+        this.identifier = params.identifier;
+
+        // Sets this.content
+        this.content = {
+            label: params.content.label,
+            description: params.content.description || this.content.description,
+            documentation:
+                params.content.documentation || this.content.documentation,
+            icon: params.content.icon || this.content.icon,
+        };
+
+        this.type = params.type;
         this.defaultValue = params.defaultValue || this.defaultValue;
-        this.description = params.description || this.description;
-        this.documentation = params.documentation || this.documentation;
-        this.icon = params.icon || this.icon;
         this.required = params.required || this.required;
         this.enabledByDefault =
             params.enabledByDefault || this.enabledByDefault;

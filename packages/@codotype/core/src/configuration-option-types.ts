@@ -1,6 +1,7 @@
 import { PropertyFilter } from "./property-filter";
 import { PropertyValidations } from "./property-validation";
 import { DataPreview } from "./data-preview";
+import { Content } from "./content";
 
 // // // //
 
@@ -97,10 +98,7 @@ export interface ConfigurationGroupProperty {
     properties: ConfigurationGroupProperty[];
 
     // Meta/Content
-    label: string;
-    description: string;
-    icon: string;
-    documentation: string;
+    content: Content;
 
     // Aesthetic
     enabledByDefault: boolean; // TODO - rename to "enabledByDefault"
@@ -165,10 +163,13 @@ export enum GroupLayoutVariant {
 
 // TODO - replace most of this with
 interface ConfigurationBase {
-    label: string;
     identifier: string;
-    description: string;
-    documentation: string; // Markdown
+    content: {
+        label: string;
+        icon: string;
+        description: string;
+        documentation: string; // Markdown
+    };
     enabledByDefault: boolean;
     allowDisable: boolean;
 }

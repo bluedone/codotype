@@ -4,12 +4,16 @@ import {
     ConfigurationGroupSection,
     ConfigurationGroupProperty,
 } from "../configuration-option-types";
+import { Content } from "../content";
 
 interface ConfigurationGroupBuilderParams {
-    label: string;
     identifier: string;
-    description: string;
-    documentation?: string;
+    content: {
+        label: string;
+        description: string;
+        documentation?: string;
+        icon?: string;
+    };
     enabled?: boolean;
     allowDisable?: boolean;
     layoutVariant?: GroupLayoutVariant;
@@ -18,25 +22,34 @@ interface ConfigurationGroupBuilderParams {
 }
 
 export class ConfigurationGroupBuilder implements ConfigurationGroup {
-    label: string;
     identifier: string;
-    description: string;
+    content: Content = {
+        label: "",
+        description: "",
+        documentation: "",
+        icon: "",
+    };
     layoutVariant: GroupLayoutVariant = GroupLayoutVariant.LIST;
     sections: ConfigurationGroupSection[] = [];
     properties: ConfigurationGroupProperty[] = [];
-    documentation: string = "";
     enabledByDefault: boolean = true;
     allowDisable: boolean = false;
 
     constructor(params: ConfigurationGroupBuilderParams) {
-        this.label = params.label;
         this.identifier = params.identifier;
-        this.description = params.description;
+
+        // Sets this.content
+        this.content = {
+            label: params.content.label,
+            description: params.content.description || this.content.description,
+            documentation:
+                params.content.documentation || this.content.documentation,
+            icon: params.content.icon || this.content.icon,
+        };
 
         this.layoutVariant = params.layoutVariant || this.layoutVariant;
         this.sections = params.sections || this.sections;
         this.properties = params.properties || this.properties;
-        this.documentation = params.documentation || this.documentation;
         this.enabledByDefault =
             params.enabled !== undefined
                 ? params.enabled

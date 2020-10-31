@@ -3,6 +3,7 @@ import { UUID } from "./uuid";
 import { OptionType, DropdownOption } from "./configuration-option-types";
 import { PropertyFilter } from "./property-filter";
 import { PropertyValidations } from "./property-validation";
+import { Content } from "./content";
 
 // // // //
 
@@ -11,15 +12,13 @@ import { PropertyValidations } from "./property-validation";
 // additional properties that can be defined on a per-generator basis
 // TODO - should this support a layoutVariant? Yes.
 // TODO - wire up `validations` and `filters` here -> see `ConfigurationGroupProperty` for details
-// TODO - add icon support for this -> ENUM of "asterisk" | "snowflake" | etc. -> match icons up to addons
+// TODO - add icon support -> ENUM of basic symbols ("asterisk" | "snowflake" | "star" | "tag" | "check" | etc. -> match icons up to addons
 // QUESTION - should this just wrap a ConfigurationGroupProperty instance? -> Nah, best to keep
 // it simple - but abstract this a bit to share some common patterns with ConfigurationGroupProperty
 export interface AttributeAddon {
     id: UUID;
-    label: string; // "Unique"
+    content: Content;
     identifier: string; // "unique"
-    description: string; // "Whether this property is unique"
-    documentation: string; // Enforced at the SQL level
     supportedDatatypes: Datatype[]; // [Datatype.STRING, Datatype.NUMBER]
     exclusive: boolean; // False - one schema can have multiple unique properties
     required: boolean; // Does this need to be populated?
@@ -38,10 +37,13 @@ export interface AttributeAddon {
 
 export const ATTRIBUTE_ADDON_INDEX: AttributeAddon = {
     id: "ATTRIBUTE_ADDON_INDEX",
-    label: "Index",
     identifier: "Index",
-    description: "Whether to add an index on this Attribute",
-    documentation: "",
+    content: {
+        label: "Index",
+        description: "Whether to add an index on this Attribute",
+        documentation: "",
+        icon: "",
+    },
     supportedDatatypes: [
         Datatype.STRING,
         Datatype.NUMERIC,
@@ -61,10 +63,13 @@ export const ATTRIBUTE_ADDON_INDEX: AttributeAddon = {
 
 export const ATTRIBUTE_ADDON_UNIQUE: AttributeAddon = {
     id: "ATTRIBUTE_ADDON_UNIQUE",
-    label: "Unique key",
+    content: {
+        label: "Unique key",
+        description: "Whether this Attribute's value is unique",
+        documentation: "",
+        icon: "",
+    },
     identifier: "unique",
-    description: "Whether this Attribute's value is unique",
-    documentation: "",
     supportedDatatypes: [
         Datatype.STRING,
         Datatype.NUMERIC,
@@ -83,10 +88,13 @@ export const ATTRIBUTE_ADDON_UNIQUE: AttributeAddon = {
 
 export const ATTRIBUTE_ADDON_REQUIRED: AttributeAddon = {
     id: "ATTRIBUTE_ADDON_REQUIRED",
-    label: "Required",
+    content: {
+        label: "Required",
+        description: "Whether this Attribute's value is required",
+        documentation: "",
+        icon: "",
+    },
     identifier: "required",
-    description: "Whether this Attribute's value is required",
-    documentation: "",
     supportedDatatypes: [
         Datatype.STRING,
         Datatype.NUMERIC,
@@ -105,10 +113,13 @@ export const ATTRIBUTE_ADDON_REQUIRED: AttributeAddon = {
 
 export const ATTRIBUTE_ADDON_NULLABLE: AttributeAddon = {
     id: "ATTRIBUTE_ADDON_NULLABLE",
-    label: "Nullable",
+    content: {
+        label: "Nullable",
+        description: "Whether this Attribute's value is nullable",
+        documentation: "",
+        icon: "",
+    },
     identifier: "nullable",
-    description: "Whether this Attribute's value is nullable",
-    documentation: "",
     supportedDatatypes: [
         Datatype.STRING,
         Datatype.NUMERIC,
@@ -127,11 +138,14 @@ export const ATTRIBUTE_ADDON_NULLABLE: AttributeAddon = {
 
 export const ATTRIBUTE_ADDON_PRIMARY_KEY: AttributeAddon = {
     id: "ATTRIBUTE_ADDON_PRIMARY_KEY",
-    label: "Primary Key",
+    content: {
+        label: "Primary Key",
+        description:
+            "Whether this Attribute's value is the primary key for its Schema",
+        documentation: "",
+        icon: "",
+    },
     identifier: "primaryKey",
-    description:
-        "Whether this Attribute's value is the primary key for its Schema",
-    documentation: "",
     supportedDatatypes: [
         Datatype.STRING,
         Datatype.NUMERIC,
@@ -150,11 +164,14 @@ export const ATTRIBUTE_ADDON_PRIMARY_KEY: AttributeAddon = {
 
 export const ATTRIBUTE_ADDON_SELECT: AttributeAddon = {
     id: "ATTRIBUTE_ADDON_SELECT",
-    label: "Select",
+    content: {
+        label: "Select",
+        description:
+            "Whether this Attribute's value is selected when querying the database",
+        documentation: "",
+        icon: "",
+    },
     identifier: "select",
-    description:
-        "Whether this Attribute's value is selected when querying the database",
-    documentation: "",
     supportedDatatypes: [
         Datatype.STRING,
         Datatype.NUMERIC,

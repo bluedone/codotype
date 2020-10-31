@@ -3,11 +3,14 @@
 exports[`factory works 1`] = `
 ConfigurationGroupBuilder {
   "allowDisable": false,
-  "description": "Turn API Examples on/off",
-  "documentation": "",
+  "content": Object {
+    "description": "Turn API Examples on/off",
+    "documentation": "",
+    "icon": "",
+    "label": "API Examples",
+  },
   "enabledByDefault": true,
   "identifier": "api_examples",
-  "label": "API Examples",
   "layoutVariant": "LIST",
   "properties": Array [],
   "sections": Array [],

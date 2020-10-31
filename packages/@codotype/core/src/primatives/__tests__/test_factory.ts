@@ -13,9 +13,11 @@ describe("factory", () => {
     test("works", () => {
         const configurationGroupProperty = new ConfigurationGroupPropertyBuilder(
             {
-                label: "meh",
                 identifier: "meh_value",
                 type: OptionType.BOOLEAN,
+                content: {
+                    label: "meh",
+                },
             },
         );
 

@@ -3,12 +3,18 @@ import {
     ConfigurationGroupProperty,
     SectionLayoutVariant,
 } from "../configuration-option-types";
+import { Content } from "../content";
+
+// // // //
 
 interface ConfigurationGroupSectionBuilderParams {
-    label: string;
     identifier: string;
-    description: string;
-    documentation?: string;
+    content: {
+        label: string;
+        description?: string;
+        documentation?: string;
+        icon?: string;
+    };
     enabled?: boolean;
     allowDisable?: boolean;
     layoutVariant?: SectionLayoutVariant;
@@ -17,22 +23,31 @@ interface ConfigurationGroupSectionBuilderParams {
 
 export class ConfigurationGroupSectionBuilder
     implements ConfigurationGroupSection {
-    label: string;
     identifier: string;
-    description: string;
+    content: Content = {
+        label: "",
+        description: "",
+        documentation: "",
+        icon: "",
+    };
     properties: ConfigurationGroupProperty[] = [];
-    documentation: string = "";
     enabledByDefault: boolean = true;
     allowDisable: boolean = false;
     layoutVariant: SectionLayoutVariant = SectionLayoutVariant.LIST;
 
     constructor(params: ConfigurationGroupSectionBuilderParams) {
-        this.label = params.label;
         this.identifier = params.identifier;
-        this.description = params.description;
+
+        // Sets this.content
+        this.content = {
+            label: params.content.label,
+            description: params.content.description || this.content.description,
+            documentation:
+                params.content.documentation || this.content.documentation,
+            icon: params.content.icon || this.content.icon,
+        };
 
         this.properties = params.properties || this.properties;
-        this.documentation = params.documentation || this.documentation;
         this.enabledByDefault =
             params.enabled !== undefined
                 ? params.enabled

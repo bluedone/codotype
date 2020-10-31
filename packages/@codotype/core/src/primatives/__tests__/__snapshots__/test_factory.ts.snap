@@ -3,20 +3,22 @@
 exports[`factory works 1`] = `
 ConfigurationGroupPropertyBuilder {
   "allowDisable": false,
+  "content": Object {
+    "description": "",
+    "documentation": "",
+    "icon": "",
+    "label": "meh",
+  },
   "dataPreview": Object {
     "rules": Array [],
     "variant": "CODE_DARK",
   },
   "defaultValue": null,
-  "description": "",
-  "documentation": "",
   "dropdownOptions": Array [],
   "enabledByDefault": true,
   "filters": Array [],
-  "icon": "",
   "id": "1234-5678-1234-5678",
   "identifier": "meh_value",
-  "label": "meh",
   "layoutVariant": "CARD_COL_12",
   "properties": Array [],
   "required": false,
