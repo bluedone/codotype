@@ -10,5 +10,5 @@ export interface Content {
     label: string;
     description: string;
     documentation: string;
-    icon: string;
+    icon: string; // Must be at least 200x200px for Plugin
 }

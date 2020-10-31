@@ -191,7 +191,7 @@ export function buildDefaultSchemas(
 ): SchemaInput[] {
     if (pluginMetadata.schemaEditorConfiguration.defaultSchemas) {
         return pluginMetadata.schemaEditorConfiguration.defaultSchemas.map(
-            s => {
+            (s) => {
                 return {
                     ...s,
                     configuration: buildDefaultConfiguration(
@@ -226,7 +226,7 @@ export function buildDefaultProjectInput(
     const newProject: ProjectInput = {
         id: "",
         identifiers: {
-            label: "New Project",
+            title: "New Project",
             snake: "new_project",
             camel: "newProject",
             pascal: "NewProject",

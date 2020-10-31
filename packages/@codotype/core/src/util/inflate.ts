@@ -29,7 +29,7 @@ export function buildRelation(params: {
                 canonical: { ...sourceSchema.identifiers },
                 alias: buildTokenPluralization(
                     relationInput.sourceSchemaAlias ||
-                        sourceSchema.identifiers.singular.label,
+                        sourceSchema.identifiers.singular.title,
                 ),
             },
             destination: {
@@ -37,7 +37,7 @@ export function buildRelation(params: {
                 alias: {
                     ...buildTokenPluralization(
                         relationInput.destinationSchemaAlias ||
-                            destinationSchema.identifiers.singular.label,
+                            destinationSchema.identifiers.singular.title,
                     ),
                 },
             },
@@ -54,12 +54,12 @@ export function buildRelations(params: {
     const { relationInputs, schemaInputs } = params;
 
     // Defines array of RelationReferences we're going to return
-    return relationInputs.map(relationInput => {
+    return relationInputs.map((relationInput) => {
         const sourceSchema = schemaInputs.find(
-            s => s.id === relationInput.sourceSchemaID,
+            (s) => s.id === relationInput.sourceSchemaID,
         );
         const destinationSchema = schemaInputs.find(
-            s => s.id === relationInput.destinationSchemaID,
+            (s) => s.id === relationInput.destinationSchemaID,
         );
         return buildRelation({
             sourceSchema,
@@ -88,9 +88,9 @@ export function inflateSchema(params: {
             ...schemaInput.identifiers,
         },
         configuration: schemaInput.configuration,
-        relations: relations.filter(r => r.sourceSchemaId === schemaInput.id),
+        relations: relations.filter((r) => r.sourceSchemaId === schemaInput.id),
         references: relations.filter(
-            r => r.destinationSchemaId === schemaInput.id,
+            (r) => r.destinationSchemaId === schemaInput.id,
         ),
     };
 }

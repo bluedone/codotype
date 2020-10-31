@@ -9,7 +9,7 @@ const testCases: [string, string, TokenCasing][] = [
         "one word label",
         "User",
         {
-            label: "User",
+            title: "User",
             snake: "user",
             camel: "user",
             pascal: "User",
@@ -20,7 +20,7 @@ const testCases: [string, string, TokenCasing][] = [
         "two word label",
         "User Registration",
         {
-            label: "User Registration",
+            title: "User Registration",
             snake: "user_registration",
             camel: "userRegistration",
             pascal: "UserRegistration",
@@ -50,14 +50,14 @@ const pluralizedTestCases: [string, string, TokenPluralization][] = [
         "User",
         {
             singular: {
-                label: "User",
+                title: "User",
                 snake: "user",
                 camel: "user",
                 pascal: "User",
                 kebab: "user",
             },
             plural: {
-                label: "Users",
+                title: "Users",
                 snake: "users",
                 camel: "users",
                 pascal: "Users",
@@ -70,14 +70,14 @@ const pluralizedTestCases: [string, string, TokenPluralization][] = [
         "User Registration",
         {
             singular: {
-                label: "User Registration",
+                title: "User Registration",
                 snake: "user_registration",
                 camel: "userRegistration",
                 pascal: "UserRegistration",
                 kebab: "user-registration",
             },
             plural: {
-                label: "User Registrations",
+                title: "User Registrations",
                 snake: "user_registrations",
                 camel: "userRegistrations",
                 pascal: "UserRegistrations",

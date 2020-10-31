@@ -4,18 +4,21 @@ exports[`factory works 1`] = `
 PluginBuilder {
   "codotypeVersion": "0.0.0",
   "configurationGroups": Array [],
+  "content": Object {
+    "description": "My Codotype Plugin description",
+    "documentation": "My Codotype Plugin documentation",
+    "icon": "",
+    "label": "My Codotype Plugin",
+  },
   "createdBy": Object {
     "contact": Object {},
     "name": "",
   },
-  "description": "My Codotype Plugin description",
   "documentation": "",
   "exampleProjects": Array [],
   "experience": "beginner",
   "homepage": "",
-  "icon": "",
   "id": "my-codotype-plugin",
-  "label": "My Codotype Plugin",
   "project_path": "my_codotype_plugin",
   "schemaEditorConfiguration": SchemaEditorBuilder {
     "attributeAddons": Array [],

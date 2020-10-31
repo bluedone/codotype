@@ -17,6 +17,15 @@ export type RelationType =
     | "HAS_AND_BELONGS_TO_MANY"
     | "EMBEDS_ONE"
     | "EMBEDS_MANY";
+// TODO - update enum casing to:
+// RelationTypes.belongsTo
+// RelationTypes.hasOne
+// RelationTypes.hasMany
+// RelationTypes.hasAndBelongsToMany
+// RelationTypes.toOne
+// RelationTypes.toMany
+// RelationTypes.embedsOne
+// RelationTypes.embedsMany
 export enum RelationTypes {
     BELONGS_TO = "BELONGS_TO",
     HAS_ONE = "HAS_ONE",
