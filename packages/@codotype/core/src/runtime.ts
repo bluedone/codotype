@@ -278,12 +278,9 @@ export interface Runtime {
 
 /**
  * FileSystemAdaptor
+ * TODO - rename to FileSystemAdapter
  * Defines an interface between the Runtime and the FileSystem
  * Allows the Runtime to write Plugin output to local filesystem, S3 storage, or in-memory representation for testing
- * TODO - should be passed into Runtime constructor
- * TODO - add LocalFileSystemAdaptor
- * TODO - add InMemoryFileSystemAdaptor
- * TODO - add S3FileSystemAdaptor
  */
 export interface FileSystemAdaptor {
     writeFile: WriteFileFunction;

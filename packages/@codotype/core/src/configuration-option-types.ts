@@ -4,6 +4,8 @@ import { DataPreview } from "./data-preview";
 
 // // // //
 
+// TODO - split this file up a bit?
+
 // TODO - what other types need to be supported here?
 // RADIO_GROUP (nice, but not necessary - use DROPDOWN)
 // CHECKBOXES - nice, but functionally the same as a MULTI_DROPDOWN
