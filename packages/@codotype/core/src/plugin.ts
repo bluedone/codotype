@@ -8,17 +8,29 @@ import { SchemaInput } from "./schema";
 import { Attribute } from "./attribute";
 import { AttributeAddon } from "./attribute-addon";
 import { ProjectInput } from "./project";
+import { Content } from "./content";
 
 // // // //
 
-export enum ExperienceRecommendation {
-    BEGINNER = "beginner",
-    JUNIOR = "junior",
-    INTERMEDIATE = "intermediate",
-    EXPERT = "expert",
+/**
+ * ExperienceRecommendation
+ * Defines an recommendation for how experienced a user should be to use a specific Plugin
+ * Note that "Level of experience" is subject to all sorts of interpretation by individual developing a plugin
+ */
+export type ExperienceRecommendation =
+    | "beginner"
+    | "junior"
+    | "intermediate"
+    | "expert";
+export enum ExperienceRecommendations {
+    beginner = "beginner",
+    junior = "junior",
+    intermediate = "intermediate",
+    expert = "expert",
 }
 
-// QUESTION - should the be split up into better separation of concerns? i.e. AttributeEditorConfiguration, SchemaEditorConfiguration, RelationEditorConfiguration
+// QUESTION - should the be split up into better separation of concerns?
+// i.e. AttributeEditorConfiguration, SchemaEditorConfiguration, RelationEditorConfiguration
 export interface SchemaEditorConfiguration {
     documentation: string; // Any documentation for the SchemaEditor
     configurationGroups: ConfigurationGroup[]; // ConfigurationGroups scoped to each schema
@@ -64,10 +76,7 @@ export interface PluginCreator {
 
 export interface PluginMetadata {
     id: string; // unique ID for the generator
-    label: string; // short label for the generator
-    description: string; // brief description of the generator
-    documentation: string; // More thorough documentation of the Generator
-    icon: string; // URL to the generator's icon. Must be at least 200x200px
+    content: Content;
     homepage: string; // the "homepage" for this generator
     version: string; // the current version of the generator
     codotypeVersion: string; // the version of codotype that runs this generator
