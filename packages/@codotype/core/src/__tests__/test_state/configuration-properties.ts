@@ -1,6 +1,6 @@
 import {
     ConfigurationGroup,
-    GroupLayoutVariant,
+    GroupLayoutVariants,
     ConfigurationProperty,
     OptionType,
 } from "../../index";
@@ -503,7 +503,7 @@ export const ComponentBuilderConfigurationGroup: ConfigurationGroup = {
     identifier: "components_group",
     enabledByDefault: true,
     allowDisable: false,
-    layoutVariant: GroupLayoutVariant.LIST,
+    layoutVariant: GroupLayoutVariants.LIST,
     sections: [],
     content: {
         label: "Component Generator",
@@ -524,7 +524,7 @@ export const ApiExamplesConfigurationGroup: ConfigurationGroup = {
     identifier: "api_examples",
     enabledByDefault: true,
     allowDisable: false,
-    layoutVariant: GroupLayoutVariant.LIST,
+    layoutVariant: GroupLayoutVariants.LIST,
     sections: [],
     content: {
         label: "API Examples",
@@ -564,6 +564,6 @@ export const SideBySideConfigurationGroup: ConfigurationGroup = {
         description: "Configure the server architecture of your application",
         documentation: syntaxHighlighting,
     },
-    layoutVariant: GroupLayoutVariant.DOCS_3x9,
+    layoutVariant: GroupLayoutVariants.DOCS_3x9,
     properties: [twitterApiOption],
 };

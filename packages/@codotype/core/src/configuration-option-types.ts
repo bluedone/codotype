@@ -1,11 +1,12 @@
 import { ConfigurationProperty } from "./configuration-property";
+import { Content } from "./content";
 
 // // // //
 
 // LIST - lists all the properties. Documentation renders in a modal.
 // DOCS - Half documentation, half properties. Documentation renders in-line.
 // DETAIL - main/detail layout. Documentation renders in a modal.
-export enum SectionLayoutVariant {
+export enum SectionLayoutVariants {
     LIST = "LIST",
     DOCS_3x9 = "DOCS_3x9",
     DOCS_4x8 = "DOCS_4x8",
@@ -17,7 +18,7 @@ export enum SectionLayoutVariant {
 
 // Defines the LayoutVariant type that's ONLY used for ConfigurationGroup
 // TABS - Renders a Tab for each ConfigurationGroupSection
-export enum GroupLayoutVariant {
+export enum GroupLayoutVariants {
     TABS = "TABS",
     LIST = "LIST",
     DOCS_3x9 = "DOCS_3x9",
@@ -28,22 +29,12 @@ export enum GroupLayoutVariant {
     DETAIL_6x6 = "DETAIL_6x6",
 }
 
-// // // //
-
-// TODO - replace most of this with....? wtf
 interface ConfigurationBase {
     identifier: string;
-    content: {
-        label: string;
-        icon: string;
-        description: string;
-        documentation: string; // Markdown
-    };
+    content: Content;
     enabledByDefault: boolean;
     allowDisable: boolean;
 }
-
-// // // //
 
 /**
  * ConfigurationGroupSection
@@ -53,7 +44,7 @@ interface ConfigurationBase {
  * and many ConfigurationGroups in a Generator or SchemaEditorConfiguration
  */
 export interface ConfigurationGroupSection extends ConfigurationBase {
-    layoutVariant: SectionLayoutVariant;
+    layoutVariant: SectionLayoutVariants;
     properties: ConfigurationProperty[];
 }
 
@@ -61,7 +52,7 @@ export interface ConfigurationGroupSection extends ConfigurationBase {
 
 // TODO - rename ConfigurationGroup?
 export interface ConfigurationGroup extends ConfigurationBase {
-    layoutVariant: GroupLayoutVariant;
+    layoutVariant: GroupLayoutVariants;
     sections: ConfigurationGroupSection[];
     properties: ConfigurationProperty[];
 }

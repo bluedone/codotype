@@ -2,7 +2,7 @@ import {
     Datatype,
     ConfigurationGroup,
     RelationTypes,
-    GroupLayoutVariant,
+    GroupLayoutVariants,
     ConfigurationProperty,
     OptionType,
     ExperienceRecommendations,
@@ -441,7 +441,7 @@ export const ComponentBuilderConfigurationGroup: ConfigurationGroup = {
     },
     enabledByDefault: true,
     allowDisable: false,
-    layoutVariant: GroupLayoutVariant.TABS,
+    layoutVariant: GroupLayoutVariants.TABS,
     sections: [],
     properties: [
         ComponentBuilderConfigurationPropertySingleText,
@@ -524,7 +524,7 @@ export const LambdaBuilderConfigurationGroup: ConfigurationGroup = {
     },
     enabledByDefault: true,
     allowDisable: false,
-    layoutVariant: GroupLayoutVariant.LIST,
+    layoutVariant: GroupLayoutVariants.LIST,
     sections: [],
     properties: [
         {
@@ -566,7 +566,7 @@ export const ApiExamplesConfigurationGroup: ConfigurationGroup = {
     },
     enabledByDefault: true,
     allowDisable: false,
-    layoutVariant: GroupLayoutVariant.LIST,
+    layoutVariant: GroupLayoutVariants.LIST,
     sections: [],
     properties: [twitterApiOption],
 };
@@ -580,7 +580,7 @@ export const SideBySideConfigurationGroup: ConfigurationGroup = {
         icon: "",
     },
     identifier: "component_builder_side_by_side",
-    layoutVariant: GroupLayoutVariant.DOCS_4x8,
+    layoutVariant: GroupLayoutVariants.DOCS_4x8,
     properties: [twitterApiOption],
 };
 
@@ -842,7 +842,7 @@ export const dummyGeneratorMeta: PluginMetadata = {
                 documentation: syntaxHighlighting,
                 icon: "",
             },
-            layoutVariant: GroupLayoutVariant.DOCS_6x6,
+            layoutVariant: GroupLayoutVariants.DOCS_6x6,
             properties: [twitterApiOption],
         },
         ComponentBuilderConfigurationGroup,

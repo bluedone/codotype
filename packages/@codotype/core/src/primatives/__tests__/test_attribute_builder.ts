@@ -14,7 +14,7 @@ describe("AttributeBuilder", () => {
         const attribute = new AttributeBuilder({
             datatype: Datatype.STRING,
             identifiers: {
-                label: "My String",
+                title: "My String",
                 snake: "my_string",
                 camel: "myString",
                 pascal: "MyString",

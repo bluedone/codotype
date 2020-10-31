@@ -1,7 +1,5 @@
-import {
-    OptionValueInstance,
-    ConfigurationGroup,
-} from "./configuration-option-types";
+import { ConfigurationGroup } from "./configuration-option-types";
+import { OptionValueInstance } from "./configuration-property";
 import { Datatype } from "./datatype";
 import { RelationTypes, RelationInput } from "./relation";
 import { SchemaInput } from "./schema";

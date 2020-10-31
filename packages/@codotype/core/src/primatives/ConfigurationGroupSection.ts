@@ -1,8 +1,8 @@
 import {
     ConfigurationGroupSection,
-    ConfigurationProperty,
-    SectionLayoutVariant,
+    SectionLayoutVariants,
 } from "../configuration-option-types";
+import { ConfigurationProperty } from "../configuration-property";
 import { Content } from "../content";
 
 // // // //
@@ -17,7 +17,7 @@ interface ConfigurationGroupSectionBuilderParams {
     };
     enabled?: boolean;
     allowDisable?: boolean;
-    layoutVariant?: SectionLayoutVariant;
+    layoutVariant?: SectionLayoutVariants;
     properties?: ConfigurationProperty[];
 }
 
@@ -33,7 +33,7 @@ export class ConfigurationGroupSectionBuilder
     properties: ConfigurationProperty[] = [];
     enabledByDefault: boolean = true;
     allowDisable: boolean = false;
-    layoutVariant: SectionLayoutVariant = SectionLayoutVariant.LIST;
+    layoutVariant: SectionLayoutVariants = SectionLayoutVariants.LIST;
 
     constructor(params: ConfigurationGroupSectionBuilderParams) {
         this.identifier = params.identifier;

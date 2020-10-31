@@ -41,10 +41,8 @@ import {
     google_mapsApiOption,
     chartjsApiOption,
 } from "./configuration-properties";
-import {
-    ConfigurationProperty,
-    ConfigurationGroup,
-} from "../../configuration-option-types";
+import { ConfigurationGroup } from "../../configuration-option-types";
+import { ConfigurationProperty } from "../../configuration-property";
 import { PluginMetadata } from "../../plugin";
 import { Attribute } from "../../attribute";
 

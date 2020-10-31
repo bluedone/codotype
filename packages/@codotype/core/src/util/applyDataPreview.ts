@@ -6,7 +6,7 @@ import {
     DataPreviewConstraint,
     DataPreviewAction,
 } from "../data-preview";
-import { OptionValueInstance } from "../configuration-option-types";
+import { OptionValueInstance } from "../configuration-property";
 
 // // // //
 

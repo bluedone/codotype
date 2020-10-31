@@ -1,9 +1,9 @@
 import { ConfigurationGroup } from "..";
 import {
-    GroupLayoutVariant,
+    GroupLayoutVariants,
     ConfigurationGroupSection,
-    ConfigurationProperty,
 } from "../configuration-option-types";
+import { ConfigurationProperty } from "../configuration-property";
 import { Content } from "../content";
 
 interface ConfigurationGroupBuilderParams {
@@ -16,7 +16,7 @@ interface ConfigurationGroupBuilderParams {
     };
     enabled?: boolean;
     allowDisable?: boolean;
-    layoutVariant?: GroupLayoutVariant;
+    layoutVariant?: GroupLayoutVariants;
     sections?: ConfigurationGroupSection[];
     properties?: ConfigurationProperty[];
 }
@@ -29,7 +29,7 @@ export class ConfigurationGroupBuilder implements ConfigurationGroup {
         documentation: "",
         icon: "",
     };
-    layoutVariant: GroupLayoutVariant = GroupLayoutVariant.LIST;
+    layoutVariant: GroupLayoutVariants = GroupLayoutVariants.LIST;
     sections: ConfigurationGroupSection[] = [];
     properties: ConfigurationProperty[] = [];
     enabledByDefault: boolean = true;
