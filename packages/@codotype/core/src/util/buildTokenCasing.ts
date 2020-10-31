@@ -1,4 +1,4 @@
-import { makeLabelCase } from "./makeLabelCase";
+import { makeTitleCase } from "./makeTitleCase";
 import { makeKebabCase } from "./makeKebabCase";
 import { makePascalCase } from "./makePascalCase";
 import { makeCamelCase } from "./makeCamelCase";
@@ -12,7 +12,7 @@ import { makeSnakeCase } from "./makeSnakeCase";
 // and produces all requisite metadata for sensible code generation
 export function buildTokenCasing(label: string): TokenCasing {
     return {
-        label: makeLabelCase(label),
+        title: makeTitleCase(label),
         snake: makeSnakeCase(label),
         camel: makeCamelCase(label),
         pascal: makePascalCase(label),

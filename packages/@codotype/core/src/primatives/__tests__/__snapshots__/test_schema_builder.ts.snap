@@ -9,16 +9,16 @@ SchemaBuilder {
     "plural": Object {
       "camel": "",
       "kebab": "",
-      "label": "",
       "pascal": "",
       "snake": "",
+      "title": "",
     },
     "singular": Object {
       "camel": "",
       "kebab": "",
-      "label": "",
       "pascal": "",
       "snake": "",
+      "title": "",
     },
   },
   "internalNote": "",

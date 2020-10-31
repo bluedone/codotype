@@ -9,9 +9,9 @@ Object {
   "identifiers": Object {
     "camel": "",
     "kebab": "",
-    "label": "",
     "pascal": "",
     "snake": "",
+    "title": "",
   },
   "internalNote": "",
   "locked": false,

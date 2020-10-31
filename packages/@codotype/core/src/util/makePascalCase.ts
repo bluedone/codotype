@@ -4,8 +4,9 @@ import { classify, titleize } from "underscore.string";
 
 /**
  * makePascalCase
- * @param label
+ * Accepts string and returns PascalCase version
+ * @param input - the input string being transformed into PascalCase
  */
-export function makePascalCase(label: string): string {
-    return classify(titleize(label));
+export function makePascalCase(input: string): string {
+    return classify(titleize(input));
 }

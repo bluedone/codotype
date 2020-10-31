@@ -8,7 +8,7 @@ export * from "./makeCamelCase";
 export * from "./makeSnakeCase";
 export * from "./makeIdentifier";
 export * from "./makeUniqueId";
-export * from "./makeLabelCase";
+export * from "./makeTitleCase";
 export * from "./makeKebabCase";
 export * from "./buildTokenCasing";
 export * from "./buildTokenPluralization";

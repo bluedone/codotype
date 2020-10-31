@@ -1,5 +1,5 @@
 import { StringValueFilters } from "../property-filter";
-import { makeLabelCase } from "./makeLabelCase";
+import { makeTitleCase } from "./makeTitleCase";
 import { makeCamelCase } from "./makeCamelCase";
 import { makeSnakeCase } from "./makeSnakeCase";
 import { makePascalCase } from "./makePascalCase";
@@ -9,7 +9,7 @@ import { makeKebabCase } from "./makeKebabCase";
 const filterFuncs = {
     [StringValueFilters.lowercase]: (val: string) => val.toLowerCase(),
     [StringValueFilters.uppercase]: (val: string) => val.toUpperCase(),
-    [StringValueFilters.titlecase]: makeLabelCase,
+    [StringValueFilters.titlecase]: makeTitleCase,
     [StringValueFilters.camelcase]: makeCamelCase,
     [StringValueFilters.snakecase]: makeSnakeCase,
     [StringValueFilters.pascalcase]: makePascalCase,
@@ -23,8 +23,8 @@ const filterFuncs = {
 };
 
 /**
+ * applyStringPropertyFilters
  * Apply StringValueFilter(s) to a string value in order.
- *
  * @param props Options object
  * @param props.value The string value to apply the filters to
  * @param props.filters The array of StringValueFilters to apply **in order**

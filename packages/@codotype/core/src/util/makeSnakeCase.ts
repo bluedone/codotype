@@ -4,8 +4,9 @@ import { underscored } from "underscore.string";
 
 /**
  * makeSnakeCase
- * @param label
+ * Accepts string and returns snake_case version
+ * @param input - the input string being transformed into snake_case
  */
-export function makeSnakeCase(label: string): string {
-    return underscored(label.toLowerCase());
+export function makeSnakeCase(input: string): string {
+    return underscored(input.toLowerCase());
 }
