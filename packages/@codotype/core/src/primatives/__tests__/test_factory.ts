@@ -1,4 +1,4 @@
-import { OptionType } from "../../configuration-option-types";
+import { OptionType } from "../../configuration-property";
 import { ConfigurationPropertyBuilder } from "../ConfigurationProperty";
 
 // Mocks UUID module

@@ -85,7 +85,6 @@ export function buildValueFromProperties(
 /**
  * buildConfigurationGroupValue
  * Builds the top-level OptionValueInstance for a single ConfigurationGroup
- * TODO - update this to wrap the `OptionValueInstance` for the `configurationGroup` param in `{enabled, value}` if configurationGroup.allowDisable is true
  * @param properties - array of ConfigurationProperty
  */
 export function buildConfigurationGroupValue(
@@ -100,6 +99,9 @@ export function buildConfigurationGroupValue(
         const configurationGroupValue: OptionValueInstance = configurationGroup.properties.reduce(
             (val, property: ConfigurationProperty) => {
                 // Updates val with data for ConfigurationProperty
+                // TODO - remove this - the UI should only care if the property can allow disable or not
+                // TODO - remove this - the UI should only care if the property can allow disable or not
+                // TODO - remove this - the UI should only care if the property can allow disable or not
                 // TODO - remove this - the UI should only care if the property can allow disable or not
                 if (property.allowDisable && !property.required) {
                     val[property.identifier] = {
@@ -206,7 +208,7 @@ export function buildDefaultSchemas(
 /**
  * buildDefaultProject
  * Builds an empty Project
- * @param
+ * @param pluginMetadata - the PluginMetadata for-which the ProjectInput is being constructed
  */
 export function buildDefaultProjectInput(
     pluginMetadata: PluginMetadata,
@@ -220,8 +222,7 @@ export function buildDefaultProjectInput(
     const defaultSchemas: SchemaInput[] = buildDefaultSchemas(pluginMetadata);
 
     // Returns ConfigurationGroupValue
-    // TODO - change to `ProjectInput`
-    const newProject: ProjectInput = {
+    const projectInput: ProjectInput = {
         id: "",
         identifiers: {
             title: "New Project",
@@ -230,13 +231,13 @@ export function buildDefaultProjectInput(
             pascal: "NewProject",
             kebab: "new-project",
         },
-        pluginID: pluginMetadata.id, // TODO - rename to `pluginID`
-        pluginVersion: pluginMetadata.version, // TODO - rename to `pluginVersion`
+        pluginID: pluginMetadata.id,
+        pluginVersion: pluginMetadata.version,
         schemas: [...defaultSchemas],
         relations: [],
         configuration: PluginConfiguration,
     };
 
     // Returns the new project
-    return newProject;
+    return projectInput;
 }

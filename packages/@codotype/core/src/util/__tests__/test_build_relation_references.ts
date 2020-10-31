@@ -1,5 +1,5 @@
 import { inflateSchemas, inflateSchema } from "../inflate";
-import { SchemaInput, testState, Relation, Schema } from "../../";
+import { SchemaInput, testState, Schema } from "../../";
 
 const { userSchema, movieSchema } = testState;
 

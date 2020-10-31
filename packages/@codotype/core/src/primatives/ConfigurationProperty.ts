@@ -5,7 +5,7 @@ import {
     OptionType,
     OptionValue,
     PropertyLayoutVariants,
-} from "../configuration-option-types";
+} from "../configuration-property";
 import { PropertyTransformation } from "../property-transformation";
 import { PropertyValidation } from "../property-validation";
 import { DataPreviewLayoutVariant, DataPreview } from "../data-preview";

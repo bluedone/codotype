@@ -77,5 +77,14 @@ export interface DataPreview {
     variant: DataPreviewLayoutVariant;
 }
 
+// TODO - rename this to property-preview
+// TODO - add examples to test_data module
+// PropertyPreview
+// PropertyPreviewRule
+// PropertyPreviewAction
+// PropertyPreviewConstraintTypes
+// PropertyPreviewActionTypes
+// PropertyPreviewLayoutVariant
+
 // // // //
 // CHORE - add examples to test_data module

@@ -1,6 +1,6 @@
 import { Datatype } from "./datatype";
 import { UUID } from "./uuid";
-import { OptionType, DropdownOption } from "./configuration-option-types";
+import { OptionType, DropdownOption } from "./configuration-property";
 import { PropertyTransformation } from "./property-transformation";
 import { PropertyValidation } from "./property-validation";
 import { Content } from "./content";
