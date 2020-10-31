@@ -12,7 +12,7 @@ const testCases: [string, SchemaInput, SchemaInput[]][] = [
 // // // //
 
 describe("/lib/inflateSchema.js", () => {
-    testCases.forEach(testCase => {
+    testCases.forEach((testCase) => {
         test(testCase[0], () => {
             const expectedSchema: Schema = inflateSchema({
                 schemaInput: userSchema,
@@ -26,7 +26,7 @@ describe("/lib/inflateSchema.js", () => {
 // // // //
 
 describe("/lib/inflateSchemas.js", () => {
-    testCases.forEach(testCase => {
+    testCases.forEach((testCase) => {
         test(testCase[0], () => {
             const expectedSchemas: Schema[] = inflateSchemas({
                 schemaInputs: [userSchema, movieSchema],

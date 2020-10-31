@@ -1,9 +1,9 @@
 /*
- * StringPropertyFilters
+ * StringPropertyTransformations
  * Defines the types of changes that are applied to the user-provided string input for a ConfigurationGroupProperty
  * These are only applied when ConfigurationGroupProperty.datatype === "STRING"
  */
-export enum StringPropertyFilters {
+export enum StringPropertyTransformations {
     lowercase = "lowercase",
     uppercase = "uppercase",
     titlecase = "titlecase",
@@ -18,22 +18,22 @@ export enum StringPropertyFilters {
 }
 
 /*
- * NumberPropertyFilters
+ * NumberPropertyTransformations
  * Defines the types of changes that are applied to the user-provided numeric input for a ConfigurationGroupProperty
  * These are only applied when ConfigurationGroupProperty.datatype === "NUMBER"
  */
-export enum NumberPropertyFilters {
+export enum NumberPropertyTransformations {
     positiveValue = "positive_value",
     negativeValue = "negative_value",
     integerValue = "integer_value",
 }
 
 /**
- * PropertyFilter
+ * PropertyTransformation
  * Defines a type alias of acceptable values for ConfigurationGroupProperty.filters
- * Includes the union of values defined in StringPropertyFilters & NumberPropertyFilters
+ * Includes the union of values defined in StringPropertyTransformations & NumberPropertyTransformations
  */
-export type PropertyFilter =
+export type PropertyTransformation =
     | "lowercase"
     | "uppercase"
     | "titlecase"

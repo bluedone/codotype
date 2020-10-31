@@ -1,8 +1,8 @@
 import { Datatype } from "./datatype";
 import { UUID } from "./uuid";
 import { OptionType, DropdownOption } from "./configuration-option-types";
-import { PropertyFilter } from "./property-filter";
-import { PropertyValidations } from "./property-validation";
+import { PropertyTransformation } from "./property-transformation";
+import { PropertyValidation } from "./property-validation";
 import { Content } from "./content";
 
 // // // //
@@ -29,8 +29,8 @@ export interface AttributeAddon {
         | OptionType.NUMBER; // Only stores primative data
     dropdownOptions: DropdownOption[]; // Only used when datatype: OptionType.DROPDOWN;
     defaultValue: null | boolean | string | number;
-    validations: PropertyValidations;
-    filters: PropertyFilter[];
+    validations: PropertyValidation[];
+    transformations: PropertyTransformation[];
 }
 
 // // // //
@@ -58,7 +58,7 @@ export const ATTRIBUTE_ADDON_INDEX: AttributeAddon = {
     dropdownOptions: [],
     defaultValue: false,
     validations: [],
-    filters: [],
+    transformations: [],
 };
 
 export const ATTRIBUTE_ADDON_UNIQUE: AttributeAddon = {
@@ -83,7 +83,7 @@ export const ATTRIBUTE_ADDON_UNIQUE: AttributeAddon = {
     dropdownOptions: [],
     defaultValue: false,
     validations: [],
-    filters: [],
+    transformations: [],
 };
 
 export const ATTRIBUTE_ADDON_REQUIRED: AttributeAddon = {
@@ -108,7 +108,7 @@ export const ATTRIBUTE_ADDON_REQUIRED: AttributeAddon = {
     dropdownOptions: [],
     defaultValue: false,
     validations: [],
-    filters: [],
+    transformations: [],
 };
 
 export const ATTRIBUTE_ADDON_NULLABLE: AttributeAddon = {
@@ -133,7 +133,7 @@ export const ATTRIBUTE_ADDON_NULLABLE: AttributeAddon = {
     dropdownOptions: [],
     defaultValue: false,
     validations: [],
-    filters: [],
+    transformations: [],
 };
 
 export const ATTRIBUTE_ADDON_PRIMARY_KEY: AttributeAddon = {
@@ -159,7 +159,7 @@ export const ATTRIBUTE_ADDON_PRIMARY_KEY: AttributeAddon = {
     dropdownOptions: [],
     defaultValue: false,
     validations: [],
-    filters: [],
+    transformations: [],
 };
 
 export const ATTRIBUTE_ADDON_SELECT: AttributeAddon = {
@@ -185,5 +185,5 @@ export const ATTRIBUTE_ADDON_SELECT: AttributeAddon = {
     dropdownOptions: [],
     defaultValue: false,
     validations: [],
-    filters: [],
+    transformations: [],
 };

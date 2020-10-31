@@ -1,5 +1,5 @@
-import { PropertyFilter } from "./property-filter";
-import { PropertyValidations } from "./property-validation";
+import { PropertyTransformation } from "./property-transformation";
+import { PropertyValidation } from "./property-validation";
 import { DataPreview } from "./data-preview";
 import { Content } from "./content";
 
@@ -110,8 +110,8 @@ export interface ConfigurationGroupProperty {
     // Validation
     required: boolean; // Do we need this?
     unique: boolean; // NOTE - this is new. Only used with COLLECTION type
-    filters: PropertyFilter[]; // TODO - rename this..?
-    validations: PropertyValidations;
+    validations: PropertyValidation[];
+    transformations: PropertyTransformation[];
 }
 
 // // // //

@@ -64,7 +64,7 @@ export interface RuntimeConstructorParams {
     cwd: string;
     logLevel: RuntimeLogLevel;
     fileOverwriteBehavior: FileOverwriteBehavior;
-    fileSystemAdaptor: FileSystemAdaptor;
+    fileSystemAdapter: FileSystemAdapter;
 }
 
 /**
@@ -277,21 +277,20 @@ export interface Runtime {
 // // // //
 
 /**
- * FileSystemAdaptor
- * TODO - rename to FileSystemAdapter
+ * FileSystemAdapter
  * Defines an interface between the Runtime and the FileSystem
- * Allows the Runtime to write Plugin output to local filesystem, S3 storage, or in-memory representation for testing
+ * Allows the Runtime to write Plugin output to local filesystem, in-memory cache, or alterative output destination like an S3 bucket
  */
-export interface FileSystemAdaptor {
+export interface FileSystemAdapter {
     writeFile: WriteFileFunction;
     ensureDir: (dirPath: string) => Promise<boolean>;
     fileExists: (filepath: string) => Promise<boolean>;
     readFile: (filepath: string) => Promise<string | null>;
 }
 
-//////////////
+// // // //
+// CHORE - add examples to test_data module
 
-// NOTE - these work, add to test_state?
 // const myOpts: CodotypeRuntimeConstructorOptions = {
 //     cwd: "string",
 //     logLevel: RuntimeLogLevels.verbose,

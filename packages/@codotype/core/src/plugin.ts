@@ -74,6 +74,10 @@ export interface PluginCreator {
     };
 }
 
+/**
+ * PluginMetadata
+ * TODO - annotate
+ */
 export interface PluginMetadata {
     id: string; // unique ID for the generator
     content: Content;
@@ -90,7 +94,10 @@ export interface PluginMetadata {
     exampleProjects: ProjectInput[];
 }
 
-// TODO - investigate this accepting a generic type to ensure type-safe enumeration of specific keys
+/**
+ * PluginConfiguration
+ * TODO - annotate
+ */
 export interface PluginConfiguration {
     [key: string]: OptionValueInstance;
 }

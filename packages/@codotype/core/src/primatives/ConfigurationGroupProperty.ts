@@ -6,8 +6,8 @@ import {
     OptionValue,
     PropertyLayoutVariant,
 } from "../configuration-option-types";
-import { PropertyFilter } from "../property-filter";
-import { PropertyValidations } from "../property-validation";
+import { PropertyTransformation } from "../property-transformation";
+import { PropertyValidation } from "../property-validation";
 import { DataPreviewLayoutVariant, DataPreview } from "../data-preview";
 import { Content } from "../content";
 
@@ -30,8 +30,8 @@ interface ConfigurationGroupPropertyBuilderParams {
     allowDisable?: boolean;
     layoutVariant?: PropertyLayoutVariant;
     properties?: ConfigurationGroupProperty[];
-    filters?: PropertyFilter[];
-    validations?: PropertyValidations;
+    transformations?: PropertyTransformation[];
+    validations?: PropertyValidation[];
     dataPreview?: DataPreview;
 }
 
@@ -47,15 +47,15 @@ export class ConfigurationGroupPropertyBuilder
     };
     type: OptionType;
     defaultValue: OptionValue = null;
-    required: boolean = false; // TODO - remove this, handled by validations?
-    unique: boolean = false; // TODO - remove this, handled by validations?
+    required: boolean = false;
+    unique: boolean = false;
     enabledByDefault: boolean = true;
-    allowDisable: boolean = false; // QUESTION - should this be true?
+    allowDisable: boolean = false;
     layoutVariant: PropertyLayoutVariant;
     properties: ConfigurationGroupProperty[] = [];
     dropdownOptions: DropdownOption[] = [];
-    filters: PropertyFilter[] = [];
-    validations: PropertyValidations = [];
+    transformations: PropertyTransformation[] = [];
+    validations: PropertyValidation[] = [];
     dataPreview: DataPreview = {
         rules: [],
         variant: DataPreviewLayoutVariant.CODE_DARK,
@@ -84,8 +84,8 @@ export class ConfigurationGroupPropertyBuilder
             params.layoutVariant || PropertyLayoutVariant.CARD_COL_12;
         this.properties = params.properties || this.properties;
         this.dropdownOptions = params.dropdownOptions || this.dropdownOptions;
-        this.filters = params.filters || this.filters;
         this.validations = params.validations || this.validations;
+        this.transformations = params.transformations || this.transformations;
         this.dataPreview = params.dataPreview || this.dataPreview;
     }
 }

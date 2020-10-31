@@ -15,7 +15,7 @@ export * from "./plugin";
 export * from "./uuid";
 export * from "./util";
 export * from "./primatives";
-export * from "./property-filter";
+export * from "./property-transformation";
 export * from "./property-validation";
 export * from "./data-preview";
 
