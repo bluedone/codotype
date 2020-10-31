@@ -1,7 +1,7 @@
 import {
     ConfigurationGroup,
     GroupLayoutVariant,
-    ConfigurationGroupProperty,
+    ConfigurationProperty,
     OptionType,
 } from "../../index";
 import { syntaxHighlighting } from "./documentation";
@@ -9,7 +9,7 @@ import { Primatives } from "../../primatives";
 
 // // // //
 
-export const gitHubApiOption: ConfigurationGroupProperty = new Primatives.ConfigurationProperty(
+export const gitHubApiOption: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "github",
         type: OptionType.BOOLEAN,
@@ -21,7 +21,7 @@ export const gitHubApiOption: ConfigurationGroupProperty = new Primatives.Config
     },
 );
 
-export const twitterApiOption: ConfigurationGroupProperty = new Primatives.ConfigurationProperty(
+export const twitterApiOption: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "twitter",
         type: OptionType.BOOLEAN,
@@ -35,7 +35,7 @@ export const twitterApiOption: ConfigurationGroupProperty = new Primatives.Confi
     },
 );
 
-export const facebookApiOption: ConfigurationGroupProperty = new Primatives.ConfigurationProperty(
+export const facebookApiOption: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "facebook",
         type: OptionType.BOOLEAN,
@@ -50,7 +50,7 @@ export const facebookApiOption: ConfigurationGroupProperty = new Primatives.Conf
     },
 );
 
-export const foursquareApiOption: ConfigurationGroupProperty = new Primatives.ConfigurationProperty(
+export const foursquareApiOption: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "foursquare",
         type: OptionType.BOOLEAN,
@@ -65,7 +65,7 @@ export const foursquareApiOption: ConfigurationGroupProperty = new Primatives.Co
     },
 );
 
-export const instagramApiOption: ConfigurationGroupProperty = new Primatives.ConfigurationProperty(
+export const instagramApiOption: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "instagram",
         type: OptionType.BOOLEAN,
@@ -80,7 +80,7 @@ export const instagramApiOption: ConfigurationGroupProperty = new Primatives.Con
     },
 );
 
-export const last_fmApiOption: ConfigurationGroupProperty = new Primatives.ConfigurationProperty(
+export const last_fmApiOption: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "last_fm",
         type: OptionType.BOOLEAN,
@@ -95,7 +95,7 @@ export const last_fmApiOption: ConfigurationGroupProperty = new Primatives.Confi
     },
 );
 
-export const linkedinApiOption: ConfigurationGroupProperty = new Primatives.ConfigurationProperty(
+export const linkedinApiOption: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "linkedin",
         type: OptionType.BOOLEAN,
@@ -110,7 +110,7 @@ export const linkedinApiOption: ConfigurationGroupProperty = new Primatives.Conf
     },
 );
 
-export const steamApiOption: ConfigurationGroupProperty = new Primatives.ConfigurationProperty(
+export const steamApiOption: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "steam",
         type: OptionType.BOOLEAN,
@@ -125,7 +125,7 @@ export const steamApiOption: ConfigurationGroupProperty = new Primatives.Configu
     },
 );
 
-export const stripeApiOption: ConfigurationGroupProperty = new Primatives.ConfigurationProperty(
+export const stripeApiOption: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "stripe",
         type: OptionType.BOOLEAN,
@@ -140,7 +140,7 @@ export const stripeApiOption: ConfigurationGroupProperty = new Primatives.Config
     },
 );
 
-export const paypalApiOption: ConfigurationGroupProperty = new Primatives.ConfigurationProperty(
+export const paypalApiOption: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "paypal",
         type: OptionType.BOOLEAN,
@@ -155,7 +155,7 @@ export const paypalApiOption: ConfigurationGroupProperty = new Primatives.Config
     },
 );
 
-export const twilioApiOption: ConfigurationGroupProperty = new Primatives.ConfigurationProperty(
+export const twilioApiOption: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "twilio",
         type: OptionType.BOOLEAN,
@@ -170,7 +170,7 @@ export const twilioApiOption: ConfigurationGroupProperty = new Primatives.Config
     },
 );
 
-export const tumblrApiOption: ConfigurationGroupProperty = new Primatives.ConfigurationProperty(
+export const tumblrApiOption: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "tumblr",
         type: OptionType.BOOLEAN,
@@ -185,7 +185,7 @@ export const tumblrApiOption: ConfigurationGroupProperty = new Primatives.Config
     },
 );
 
-export const web_scrapingApiOption: ConfigurationGroupProperty = new Primatives.ConfigurationProperty(
+export const web_scrapingApiOption: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "web_scraping",
         type: OptionType.BOOLEAN,
@@ -200,7 +200,7 @@ export const web_scrapingApiOption: ConfigurationGroupProperty = new Primatives.
     },
 );
 
-export const clockwork_smsApiOption: ConfigurationGroupProperty = new Primatives.ConfigurationProperty(
+export const clockwork_smsApiOption: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "clockwork_sms",
         type: OptionType.BOOLEAN,
@@ -215,7 +215,7 @@ export const clockwork_smsApiOption: ConfigurationGroupProperty = new Primatives
     },
 );
 
-export const aviaryApiOption: ConfigurationGroupProperty = new Primatives.ConfigurationProperty(
+export const aviaryApiOption: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "aviary",
         type: OptionType.BOOLEAN,
@@ -230,7 +230,7 @@ export const aviaryApiOption: ConfigurationGroupProperty = new Primatives.Config
     },
 );
 
-export const lobApiOption: ConfigurationGroupProperty = new Primatives.ConfigurationProperty(
+export const lobApiOption: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "lob",
         type: OptionType.BOOLEAN,
@@ -245,7 +245,7 @@ export const lobApiOption: ConfigurationGroupProperty = new Primatives.Configura
     },
 );
 
-export const pinterestApiOption: ConfigurationGroupProperty = new Primatives.ConfigurationProperty(
+export const pinterestApiOption: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "pinterest",
         type: OptionType.BOOLEAN,
@@ -259,7 +259,7 @@ export const pinterestApiOption: ConfigurationGroupProperty = new Primatives.Con
     },
 );
 
-export const google_mapsApiOption: ConfigurationGroupProperty = new Primatives.ConfigurationProperty(
+export const google_mapsApiOption: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "google_maps",
         type: OptionType.BOOLEAN,
@@ -274,7 +274,7 @@ export const google_mapsApiOption: ConfigurationGroupProperty = new Primatives.C
     },
 );
 
-export const chartjsApiOption: ConfigurationGroupProperty = new Primatives.ConfigurationProperty(
+export const chartjsApiOption: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "chartjs",
         type: OptionType.BOOLEAN,
@@ -291,7 +291,7 @@ export const chartjsApiOption: ConfigurationGroupProperty = new Primatives.Confi
 
 // // // //
 
-export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupProperty = new Primatives.ConfigurationProperty(
+export const ComponentBuilderConfigurationProperty: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "components",
         type: OptionType.COLLECTION,
@@ -396,7 +396,7 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
     },
 );
 
-export const ComponentBuilderConfigurationGroupPropertySingleText: ConfigurationGroupProperty = new Primatives.ConfigurationProperty(
+export const ComponentBuilderConfigurationPropertySingleText: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "componentName",
         type: OptionType.STRING,
@@ -412,7 +412,7 @@ export const ComponentBuilderConfigurationGroupPropertySingleText: Configuration
     },
 );
 
-export const ComponentBuilderConfigurationGroupPropertySingleDropdown: ConfigurationGroupProperty = new Primatives.ConfigurationProperty(
+export const ComponentBuilderConfigurationPropertySingleDropdown: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "dropdownTest",
         type: OptionType.DROPDOWN,
@@ -433,7 +433,7 @@ export const ComponentBuilderConfigurationGroupPropertySingleDropdown: Configura
     },
 );
 
-export const ComponentBuilderConfigurationGroupPropertySingleNumber: ConfigurationGroupProperty = new Primatives.ConfigurationProperty(
+export const ComponentBuilderConfigurationPropertySingleNumber: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "numberTest",
         type: OptionType.NUMBER,
@@ -447,7 +447,7 @@ export const ComponentBuilderConfigurationGroupPropertySingleNumber: Configurati
     },
 );
 
-export const ComponentBuilderConfigurationGroupPropertyWithInstance01: ConfigurationGroupProperty = new Primatives.ConfigurationProperty(
+export const ComponentBuilderConfigurationPropertyWithInstance01: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "random_instance",
         type: OptionType.INSTANCE,
@@ -456,7 +456,7 @@ export const ComponentBuilderConfigurationGroupPropertyWithInstance01: Configura
         required: false,
         allowDisable: true,
         dropdownOptions: [],
-        properties: [ComponentBuilderConfigurationGroupPropertySingleDropdown],
+        properties: [ComponentBuilderConfigurationPropertySingleDropdown],
         content: {
             label: "RandomInstanceTest",
             description: "",
@@ -464,7 +464,7 @@ export const ComponentBuilderConfigurationGroupPropertyWithInstance01: Configura
     },
 );
 
-export const ComponentBuilderConfigurationGroupPropertyWithInstance: ConfigurationGroupProperty = new Primatives.ConfigurationProperty(
+export const ComponentBuilderConfigurationPropertyWithInstance: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "tests",
         content: {
@@ -479,8 +479,8 @@ export const ComponentBuilderConfigurationGroupPropertyWithInstance: Configurati
         required: false,
         allowDisable: true,
         properties: [
-            ComponentBuilderConfigurationGroupPropertySingleDropdown,
-            ComponentBuilderConfigurationGroupPropertySingleText,
+            ComponentBuilderConfigurationPropertySingleDropdown,
+            ComponentBuilderConfigurationPropertySingleText,
             new Primatives.ConfigurationProperty({
                 identifier: "nested_instance",
                 type: OptionType.INSTANCE,
@@ -490,9 +490,9 @@ export const ComponentBuilderConfigurationGroupPropertyWithInstance: Configurati
                     description: "",
                 },
                 properties: [
-                    ComponentBuilderConfigurationGroupPropertySingleText,
-                    ComponentBuilderConfigurationGroupPropertySingleDropdown,
-                    ComponentBuilderConfigurationGroupPropertyWithInstance01,
+                    ComponentBuilderConfigurationPropertySingleText,
+                    ComponentBuilderConfigurationPropertySingleDropdown,
+                    ComponentBuilderConfigurationPropertyWithInstance01,
                 ],
             }),
         ],
@@ -512,11 +512,11 @@ export const ComponentBuilderConfigurationGroup: ConfigurationGroup = {
         icon: "",
     },
     properties: [
-        ComponentBuilderConfigurationGroupPropertySingleText,
-        ComponentBuilderConfigurationGroupPropertySingleNumber,
-        ComponentBuilderConfigurationGroupPropertySingleDropdown,
-        ComponentBuilderConfigurationGroupPropertyWithInstance,
-        // ComponentBuilderConfigurationGroupProperty,
+        ComponentBuilderConfigurationPropertySingleText,
+        ComponentBuilderConfigurationPropertySingleNumber,
+        ComponentBuilderConfigurationPropertySingleDropdown,
+        ComponentBuilderConfigurationPropertyWithInstance,
+        // ComponentBuilderConfigurationProperty,
     ],
 };
 

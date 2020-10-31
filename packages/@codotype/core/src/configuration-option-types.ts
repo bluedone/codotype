@@ -84,27 +84,33 @@ export interface DropdownOption {
     documentation?: string;
 }
 
-// TOOD - this should include a TokenPluralization -> required for `COLLECTION` type?
+/**
+ * ConfigurationProperty
+ * TODO - annnotate this
+ */
+// TOOD - WHERE should this include a TokenPluralization -> required for `COLLECTION` type?
 // TODO - scope out preview/template feature, update this interface accordingly in preparation
 // QUESTION - how are we storing the ID of the associated COLLECTION property?
 //          - Should probably be a special object in `defaultValue`:
 //          - { enabled: boolean; value: { collectionSource: UUID, collectionValue: UUID } }
-export interface ConfigurationGroupProperty {
+export interface ConfigurationProperty {
+    // Meta/Content
+    content: Content;
+
     // Functional
     identifier: string; // NOTE - this is "identifier" so if its ever stored in a database, the "id" column will be available
     type: OptionType;
     defaultValue: OptionValue;
     dropdownOptions: DropdownOption[];
-    properties: ConfigurationGroupProperty[];
-
-    // Meta/Content
-    content: Content;
+    properties: ConfigurationProperty[];
 
     // Aesthetic
-    enabledByDefault: boolean; // TODO - rename to "enabledByDefault"
+    enabledByDefault: boolean;
     allowDisable: boolean;
     dataPreview: DataPreview;
-    layoutVariant: PropertyLayoutVariant;
+    layoutVariant: PropertyLayoutVariants;
+    // columnSpan: 3 | 4 | 6 | 8 | 9 | 12;
+    // style: ConfigurationPropertyStyle
     // collectionTokenCasing
 
     // Validation
@@ -116,7 +122,22 @@ export interface ConfigurationGroupProperty {
 
 // // // //
 
-export enum PropertyLayoutVariant {
+/**
+ * PropertyLayoutVariant
+ * Dictates the layout styles for a ConfigurationProperty
+ */
+type PropertyLayoutVariantz =
+    | "COL_3"
+    | "COL_4"
+    | "COL_6"
+    | "COL_8"
+    | "COL_12"
+    | "CARD_COL_3"
+    | "CARD_COL_4"
+    | "CARD_COL_6"
+    | "CARD_COL_8"
+    | "CARD_COL_12";
+export enum PropertyLayoutVariants {
     COL_3 = "COL_3",
     COL_4 = "COL_4",
     COL_6 = "COL_6",
@@ -185,7 +206,7 @@ interface ConfigurationBase {
  */
 export interface ConfigurationGroupSection extends ConfigurationBase {
     layoutVariant: SectionLayoutVariant;
-    properties: ConfigurationGroupProperty[];
+    properties: ConfigurationProperty[];
 }
 
 // // // //
@@ -194,5 +215,5 @@ export interface ConfigurationGroupSection extends ConfigurationBase {
 export interface ConfigurationGroup extends ConfigurationBase {
     layoutVariant: GroupLayoutVariant;
     sections: ConfigurationGroupSection[];
-    properties: ConfigurationGroupProperty[];
+    properties: ConfigurationProperty[];
 }

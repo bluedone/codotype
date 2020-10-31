@@ -46,17 +46,17 @@ const stringTransforms: {
  * Apply StringPropertyTransformations to a string value, in order of props.filters
  * @param props Options object
  * @param props.value The string value to apply the filters to
- * @param props.filters The array of StringPropertyTransformations to apply **in order**
+ * @param props.transformations The array of StringPropertyTransformations to apply **in order**
  * @returns Filtered string value
  */
 export function applyStringPropertyTransformations({
     value,
-    filters,
+    transformations,
 }: {
     value: string;
-    filters: StringPropertyTransformations[];
+    transformations: StringPropertyTransformations[];
 }): string {
-    return filters.reduce(
+    return transformations.reduce(
         (str, filter) => stringTransforms[String(filter)](str),
         value,
     );
@@ -90,17 +90,17 @@ const numberTransforms: {
  * Apply NumberPropertyTransformations to a numeric value, in order of props.filters
  * @param props Options object
  * @param props.value The number value to apply the filters to
- * @param props.filters The array of NumberPropertyTransformations to apply **in order**
+ * @param props.transformations The array of NumberPropertyTransformations to apply **in order**
  * @returns Filtered number value
  */
 export function applyNumberPropertyTransformations({
     value,
-    filters,
+    transformations,
 }: {
     value: number;
-    filters: NumberPropertyTransformations[];
+    transformations: NumberPropertyTransformations[];
 }): number {
-    return filters.reduce(
+    return transformations.reduce(
         (str, filter) => numberTransforms[String(filter)](str),
         value,
     );

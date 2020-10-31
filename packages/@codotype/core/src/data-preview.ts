@@ -59,7 +59,7 @@ export interface DataPreviewAction {
  * DataPreviewRule
  * Defines an interface used to descirbe a single step taken to build the DataPreview output
  * @param constraint - dictates a conditional behavior, that when true, invokes the rule's action
- * @param action - dictates the process invoked upon the data associated with the ConfigurationGroupProperty to which the DataPreview is assigned
+ * @param action - dictates the process invoked upon the data associated with the ConfigurationProperty to which the DataPreview is assigned
  */
 export interface DataPreviewRule {
     constraint: DataPreviewConstraint;

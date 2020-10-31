@@ -1,5 +1,5 @@
 import { OptionType } from "../../configuration-option-types";
-import { ConfigurationGroupPropertyBuilder } from "../ConfigurationGroupProperty";
+import { ConfigurationPropertyBuilder } from "../ConfigurationProperty";
 
 // Mocks UUID module
 jest.mock("uuid", () => ({
@@ -11,15 +11,13 @@ jest.mock("uuid", () => ({
 
 describe("factory", () => {
     test("works", () => {
-        const configurationGroupProperty = new ConfigurationGroupPropertyBuilder(
-            {
-                identifier: "meh_value",
-                type: OptionType.BOOLEAN,
-                content: {
-                    label: "meh",
-                },
+        const configurationGroupProperty = new ConfigurationPropertyBuilder({
+            identifier: "meh_value",
+            type: OptionType.BOOLEAN,
+            content: {
+                label: "meh",
             },
-        );
+        });
 
         expect(configurationGroupProperty).toMatchSnapshot();
     });

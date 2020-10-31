@@ -1,4 +1,4 @@
-import { ConfigurationGroupPropertyBuilder } from "./primatives/ConfigurationGroupProperty";
+import { ConfigurationPropertyBuilder } from "./primatives/ConfigurationProperty";
 import { SchemaBuilder } from "./primatives/Schema";
 import { ConfigurationGroupBuilder } from "./primatives/ConfigurationGroup";
 import { ConfigurationGroupSectionBuilder } from "./primatives/ConfigurationGroupSection";
@@ -22,7 +22,7 @@ export interface CodotypePrimatives {
     SchemaEditor: typeof SchemaEditorBuilder;
     ConfigurationGroup: typeof ConfigurationGroupBuilder;
     ConfigurationGroupSection: typeof ConfigurationGroupSectionBuilder;
-    ConfigurationProperty: typeof ConfigurationGroupPropertyBuilder;
+    ConfigurationProperty: typeof ConfigurationPropertyBuilder;
     // TODO - add TokenCasing
     // TODO - add TokenPluralization
 }
@@ -39,5 +39,5 @@ export const Primatives: CodotypePrimatives = {
     SchemaEditor: SchemaEditorBuilder,
     ConfigurationGroup: ConfigurationGroupBuilder,
     ConfigurationGroupSection: ConfigurationGroupSectionBuilder,
-    ConfigurationProperty: ConfigurationGroupPropertyBuilder,
+    ConfigurationProperty: ConfigurationPropertyBuilder,
 };

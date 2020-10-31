@@ -1,10 +1,10 @@
 import { v4 as uuidv4 } from "uuid";
 import {
-    ConfigurationGroupProperty,
+    ConfigurationProperty,
     DropdownOption,
     OptionType,
     OptionValue,
-    PropertyLayoutVariant,
+    PropertyLayoutVariants,
 } from "../configuration-option-types";
 import { PropertyTransformation } from "../property-transformation";
 import { PropertyValidation } from "../property-validation";
@@ -13,7 +13,7 @@ import { Content } from "../content";
 
 // // // //
 
-interface ConfigurationGroupPropertyBuilderParams {
+interface ConfigurationPropertyBuilderParams {
     id?: string;
     identifier: string;
     content: {
@@ -28,15 +28,14 @@ interface ConfigurationGroupPropertyBuilderParams {
     required?: boolean;
     enabledByDefault?: boolean;
     allowDisable?: boolean;
-    layoutVariant?: PropertyLayoutVariant;
-    properties?: ConfigurationGroupProperty[];
+    layoutVariant?: PropertyLayoutVariants;
+    properties?: ConfigurationProperty[];
     transformations?: PropertyTransformation[];
     validations?: PropertyValidation[];
     dataPreview?: DataPreview;
 }
 
-export class ConfigurationGroupPropertyBuilder
-    implements ConfigurationGroupProperty {
+export class ConfigurationPropertyBuilder implements ConfigurationProperty {
     id: string = uuidv4();
     identifier: string;
     content: Content = {
@@ -51,8 +50,8 @@ export class ConfigurationGroupPropertyBuilder
     unique: boolean = false;
     enabledByDefault: boolean = true;
     allowDisable: boolean = false;
-    layoutVariant: PropertyLayoutVariant;
-    properties: ConfigurationGroupProperty[] = [];
+    layoutVariant: PropertyLayoutVariants;
+    properties: ConfigurationProperty[] = [];
     dropdownOptions: DropdownOption[] = [];
     transformations: PropertyTransformation[] = [];
     validations: PropertyValidation[] = [];
@@ -61,7 +60,7 @@ export class ConfigurationGroupPropertyBuilder
         variant: DataPreviewLayoutVariant.CODE_DARK,
     };
 
-    constructor(params: ConfigurationGroupPropertyBuilderParams) {
+    constructor(params: ConfigurationPropertyBuilderParams) {
         this.id = params.id || this.id;
         this.identifier = params.identifier;
 
@@ -81,7 +80,7 @@ export class ConfigurationGroupPropertyBuilder
             params.enabledByDefault || this.enabledByDefault;
         this.allowDisable = params.allowDisable || this.allowDisable;
         this.layoutVariant =
-            params.layoutVariant || PropertyLayoutVariant.CARD_COL_12;
+            params.layoutVariant || PropertyLayoutVariants.CARD_COL_12;
         this.properties = params.properties || this.properties;
         this.dropdownOptions = params.dropdownOptions || this.dropdownOptions;
         this.validations = params.validations || this.validations;

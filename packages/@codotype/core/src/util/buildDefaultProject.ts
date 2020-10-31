@@ -8,18 +8,18 @@ import {
     ConfigurationGroup,
     ConfigurationGroupSection,
     PluginMetadata,
-    ConfigurationGroupProperty,
+    ConfigurationProperty,
 } from "../";
 
 // // // //
 
 /**
- * buildConfigurationGroupPropertyValue
- * Accepts a single ConfigurationGroupProperty and recursively produces its associated OptionValue instance
- * @param property - the single ConfigurationGroupProperty for which the OptionValue is being produced
+ * buildConfigurationPropertyValue
+ * Accepts a single ConfigurationProperty and recursively produces its associated OptionValue instance
+ * @param property - the single ConfigurationProperty for which the OptionValue is being produced
  */
-export function buildConfigurationGroupPropertyValue(
-    property: ConfigurationGroupProperty,
+export function buildConfigurationPropertyValue(
+    property: ConfigurationProperty,
 ): OptionValue {
     if (property.type === OptionType.STRING) {
         return property.defaultValue || "";
@@ -50,25 +50,25 @@ export function buildConfigurationGroupPropertyValue(
 /**
  * buildValueFromProperties
  * Builds the top-level OptionValueInstance for a single ConfigurationGroup
- * @param properties - array of ConfigurationGroupProperty
+ * @param properties - array of ConfigurationProperty
  */
 export function buildValueFromProperties(
-    properties: ConfigurationGroupProperty[],
+    properties: ConfigurationProperty[],
 ): OptionValueInstance {
     const initialValue: OptionValueInstance = {};
 
     // Defines empty ConfigurationGroupValue
     // Iterates over each property in the group and assigns values
     const configurationGroupValue: OptionValueInstance = properties.reduce(
-        (val, property: ConfigurationGroupProperty) => {
-            // Updates val with data for ConfigurationGroupProperty
+        (val, property: ConfigurationProperty) => {
+            // Updates val with data for ConfigurationProperty
             if (property.allowDisable && !property.required) {
                 val[property.identifier] = {
                     enabled: property.enabledByDefault,
-                    value: buildConfigurationGroupPropertyValue(property),
+                    value: buildConfigurationPropertyValue(property),
                 };
             } else {
-                val[property.identifier] = buildConfigurationGroupPropertyValue(
+                val[property.identifier] = buildConfigurationPropertyValue(
                     property,
                 );
             }
@@ -86,7 +86,7 @@ export function buildValueFromProperties(
  * buildConfigurationGroupValue
  * Builds the top-level OptionValueInstance for a single ConfigurationGroup
  * TODO - update this to wrap the `OptionValueInstance` for the `configurationGroup` param in `{enabled, value}` if configurationGroup.allowDisable is true
- * @param properties - array of ConfigurationGroupProperty
+ * @param properties - array of ConfigurationProperty
  */
 export function buildConfigurationGroupValue(
     configurationGroup: ConfigurationGroup,
@@ -98,18 +98,18 @@ export function buildConfigurationGroupValue(
         // Defines empty ConfigurationGroupValue
         // Iterates over each property in the group and assigns values
         const configurationGroupValue: OptionValueInstance = configurationGroup.properties.reduce(
-            (val, property: ConfigurationGroupProperty) => {
-                // Updates val with data for ConfigurationGroupProperty
+            (val, property: ConfigurationProperty) => {
+                // Updates val with data for ConfigurationProperty
                 // TODO - remove this - the UI should only care if the property can allow disable or not
                 if (property.allowDisable && !property.required) {
                     val[property.identifier] = {
                         enabled: property.enabledByDefault,
-                        value: buildConfigurationGroupPropertyValue(property),
+                        value: buildConfigurationPropertyValue(property),
                     };
                 } else {
-                    val[
-                        property.identifier
-                    ] = buildConfigurationGroupPropertyValue(property);
+                    val[property.identifier] = buildConfigurationPropertyValue(
+                        property,
+                    );
                 }
                 // Returns val
                 return val;
@@ -131,13 +131,11 @@ export function buildConfigurationGroupValue(
 
                 // Iterates over each property in the ConfigurationGroupSection
                 const sectionValue: OptionValueInstance = section.properties.reduce(
-                    (val, property: ConfigurationGroupProperty) => {
+                    (val, property: ConfigurationProperty) => {
                         // Sets value for ConfigurationGroupSection
                         val[property.identifier] = {
                             enabled: property.enabledByDefault,
-                            value: buildConfigurationGroupPropertyValue(
-                                property,
-                            ),
+                            value: buildConfigurationPropertyValue(property),
                         };
 
                         // Returns val

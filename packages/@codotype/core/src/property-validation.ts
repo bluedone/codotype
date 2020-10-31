@@ -1,7 +1,7 @@
 /**
  * StringPropertyValidationType
  * Designates different types of string validations to run against the
- * value of a specific ConfigurationGroupProperty
+ * value of a specific ConfigurationProperty
  */
 export enum StringPropertyValidationTypes {
     minLength = "min_length",
@@ -11,7 +11,7 @@ export enum StringPropertyValidationTypes {
 /**
  * NumberPropertyValidationType
  * Designates different types of number validations to run against the
- * value of a specific ConfigurationGroupProperty
+ * value of a specific ConfigurationProperty
  */
 export enum NumberPropertyValidationTypes {
     minValue = "min_value",

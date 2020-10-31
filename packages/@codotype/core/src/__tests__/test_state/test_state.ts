@@ -3,7 +3,7 @@ import {
     ConfigurationGroup,
     RelationTypes,
     GroupLayoutVariant,
-    ConfigurationGroupProperty,
+    ConfigurationProperty,
     OptionType,
     ExperienceRecommendations,
     PluginMetadata,
@@ -35,11 +35,11 @@ import {
 import { syntaxHighlighting } from "./documentation";
 import { ATTRIBUTE_ADDON_PRIMARY_KEY } from "../../attribute-addon";
 import { DataPreviewLayoutVariant } from "../../data-preview";
-import { PropertyLayoutVariant } from "../../configuration-option-types";
+import { PropertyLayoutVariants } from "../../configuration-option-types";
 
 // // // //
 
-export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupProperty = {
+export const ComponentBuilderConfigurationProperty: ConfigurationProperty = {
     identifier: "components",
     content: {
         label: "Component",
@@ -54,9 +54,9 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
     required: false,
     allowDisable: false,
     unique: false,
-    layoutVariant: PropertyLayoutVariant.COL_12,
+    layoutVariant: PropertyLayoutVariants.COL_12,
     dropdownOptions: [],
-    filters: [],
+    transformations: [],
     validations: [],
     dataPreview: {
         rules: [],
@@ -79,8 +79,8 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
             properties: [],
             dropdownOptions: [],
             unique: false,
-            layoutVariant: PropertyLayoutVariant.COL_12,
-            filters: [],
+            layoutVariant: PropertyLayoutVariants.COL_12,
+            transformations: [],
             validations: [],
             dataPreview: {
                 rules: [],
@@ -101,10 +101,10 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
             required: false,
             allowDisable: false,
             unique: false,
-            layoutVariant: PropertyLayoutVariant.COL_12,
+            layoutVariant: PropertyLayoutVariants.COL_12,
             properties: [],
             dropdownOptions: [],
-            filters: [],
+            transformations: [],
             validations: [],
             dataPreview: {
                 rules: [],
@@ -124,10 +124,10 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
             defaultValue: "",
             enabledByDefault: true,
             unique: false,
-            layoutVariant: PropertyLayoutVariant.COL_12,
+            layoutVariant: PropertyLayoutVariants.COL_12,
             required: false,
             allowDisable: false,
-            filters: [],
+            transformations: [],
             validations: [],
             dataPreview: {
                 rules: [],
@@ -147,11 +147,11 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
                     enabledByDefault: true,
                     required: false,
                     unique: false,
-                    layoutVariant: PropertyLayoutVariant.COL_12,
+                    layoutVariant: PropertyLayoutVariants.COL_12,
                     allowDisable: false,
                     dropdownOptions: [{ label: "String", value: "string" }],
                     properties: [],
-                    filters: [],
+                    transformations: [],
                     validations: [],
                     dataPreview: {
                         rules: [],
@@ -172,10 +172,10 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
                     required: false,
                     allowDisable: false,
                     unique: false,
-                    layoutVariant: PropertyLayoutVariant.COL_12,
+                    layoutVariant: PropertyLayoutVariants.COL_12,
                     dropdownOptions: [],
                     properties: [],
-                    filters: [],
+                    transformations: [],
                     validations: [],
                     dataPreview: {
                         rules: [],
@@ -196,10 +196,10 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
                     required: false,
                     allowDisable: false,
                     unique: false,
-                    layoutVariant: PropertyLayoutVariant.COL_12,
+                    layoutVariant: PropertyLayoutVariants.COL_12,
                     dropdownOptions: [],
                     properties: [],
-                    filters: [],
+                    transformations: [],
                     validations: [],
                     dataPreview: {
                         rules: [],
@@ -220,11 +220,11 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
             defaultValue: "",
             enabledByDefault: true,
             unique: false,
-            layoutVariant: PropertyLayoutVariant.COL_12,
+            layoutVariant: PropertyLayoutVariants.COL_12,
             required: false,
             allowDisable: true,
             dropdownOptions: [],
-            filters: [],
+            transformations: [],
             validations: [],
             properties: [
                 {
@@ -239,7 +239,7 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
                     defaultValue: "",
                     enabledByDefault: true,
                     unique: false,
-                    layoutVariant: PropertyLayoutVariant.COL_12,
+                    layoutVariant: PropertyLayoutVariants.COL_12,
                     required: false,
                     allowDisable: false,
                     dropdownOptions: [
@@ -247,7 +247,7 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
                         { value: "snapshot", label: "Snapshot Test" },
                     ],
                     properties: [],
-                    filters: [],
+                    transformations: [],
                     validations: [],
                     dataPreview: {
                         rules: [],
@@ -263,7 +263,7 @@ export const ComponentBuilderConfigurationGroupProperty: ConfigurationGroupPrope
     ],
 };
 
-export const ComponentBuilderConfigurationGroupPropertySingleText: ConfigurationGroupProperty = {
+export const ComponentBuilderConfigurationPropertySingleText: ConfigurationProperty = {
     content: {
         label: "Component Name",
         description: "Name of the component",
@@ -275,12 +275,12 @@ export const ComponentBuilderConfigurationGroupPropertySingleText: Configuration
     defaultValue: "",
     enabledByDefault: true,
     unique: false,
-    layoutVariant: PropertyLayoutVariant.COL_12,
+    layoutVariant: PropertyLayoutVariants.COL_12,
     required: false,
     allowDisable: false,
     properties: [],
     dropdownOptions: [],
-    filters: [],
+    transformations: [],
     validations: [],
     dataPreview: {
         rules: [],
@@ -288,7 +288,7 @@ export const ComponentBuilderConfigurationGroupPropertySingleText: Configuration
     },
 };
 
-export const ComponentBuilderConfigurationGroupPropertySingleDropdown: ConfigurationGroupProperty = {
+export const ComponentBuilderConfigurationPropertySingleDropdown: ConfigurationProperty = {
     content: {
         label: "Dropdown Test",
         description: "Dropdown Testing",
@@ -301,11 +301,11 @@ export const ComponentBuilderConfigurationGroupPropertySingleDropdown: Configura
     defaultValue: "",
     enabledByDefault: true,
     unique: false,
-    layoutVariant: PropertyLayoutVariant.COL_12,
+    layoutVariant: PropertyLayoutVariants.COL_12,
     required: false,
     allowDisable: false,
     properties: [],
-    filters: [],
+    transformations: [],
     validations: [],
     dropdownOptions: [
         {
@@ -320,7 +320,7 @@ export const ComponentBuilderConfigurationGroupPropertySingleDropdown: Configura
     },
 };
 
-export const ComponentBuilderConfigurationGroupPropertySingleNumber: ConfigurationGroupProperty = {
+export const ComponentBuilderConfigurationPropertySingleNumber: ConfigurationProperty = {
     content: {
         label: "Number Test",
         description:
@@ -333,12 +333,12 @@ export const ComponentBuilderConfigurationGroupPropertySingleNumber: Configurati
     defaultValue: "",
     enabledByDefault: true,
     unique: false,
-    layoutVariant: PropertyLayoutVariant.COL_12,
+    layoutVariant: PropertyLayoutVariants.COL_12,
     required: false,
     allowDisable: false,
     properties: [],
     dropdownOptions: [],
-    filters: [],
+    transformations: [],
     validations: [],
     dataPreview: {
         rules: [],
@@ -346,7 +346,7 @@ export const ComponentBuilderConfigurationGroupPropertySingleNumber: Configurati
     },
 };
 
-export const ComponentBuilderConfigurationGroupPropertyWithInstance01: ConfigurationGroupProperty = {
+export const ComponentBuilderConfigurationPropertyWithInstance01: ConfigurationProperty = {
     identifier: "random_instance",
     content: {
         label: "RandomInstanceTest",
@@ -358,20 +358,20 @@ export const ComponentBuilderConfigurationGroupPropertyWithInstance01: Configura
     defaultValue: "",
     enabledByDefault: true,
     unique: false,
-    layoutVariant: PropertyLayoutVariant.COL_12,
+    layoutVariant: PropertyLayoutVariants.COL_12,
     required: false,
     allowDisable: true,
-    filters: [],
+    transformations: [],
     validations: [],
     dropdownOptions: [],
-    properties: [ComponentBuilderConfigurationGroupPropertySingleDropdown],
+    properties: [ComponentBuilderConfigurationPropertySingleDropdown],
     dataPreview: {
         rules: [],
         variant: DataPreviewLayoutVariant.CODE_DARK,
     },
 };
 
-export const ComponentBuilderConfigurationGroupPropertyWithInstance: ConfigurationGroupProperty = {
+export const ComponentBuilderConfigurationPropertyWithInstance: ConfigurationProperty = {
     identifier: "tests",
     content: {
         label: "Tests",
@@ -386,17 +386,17 @@ export const ComponentBuilderConfigurationGroupPropertyWithInstance: Configurati
     required: false,
     allowDisable: true,
     unique: false,
-    layoutVariant: PropertyLayoutVariant.COL_12,
+    layoutVariant: PropertyLayoutVariants.COL_12,
     dropdownOptions: [],
-    filters: [],
+    transformations: [],
     validations: [],
     dataPreview: {
         rules: [],
         variant: DataPreviewLayoutVariant.CODE_DARK,
     },
     properties: [
-        ComponentBuilderConfigurationGroupPropertySingleDropdown,
-        ComponentBuilderConfigurationGroupPropertySingleText,
+        ComponentBuilderConfigurationPropertySingleDropdown,
+        ComponentBuilderConfigurationPropertySingleText,
         {
             identifier: "nested_instance",
             content: {
@@ -407,22 +407,22 @@ export const ComponentBuilderConfigurationGroupPropertyWithInstance: Configurati
             },
             type: OptionType.INSTANCE,
             unique: false,
-            layoutVariant: PropertyLayoutVariant.COL_12,
+            layoutVariant: PropertyLayoutVariants.COL_12,
             defaultValue: "",
             enabledByDefault: true,
             required: false,
             allowDisable: true,
             dropdownOptions: [],
-            filters: [],
+            transformations: [],
             validations: [],
             dataPreview: {
                 rules: [],
                 variant: DataPreviewLayoutVariant.CODE_DARK,
             },
             properties: [
-                ComponentBuilderConfigurationGroupPropertySingleText,
-                ComponentBuilderConfigurationGroupPropertySingleDropdown,
-                ComponentBuilderConfigurationGroupPropertyWithInstance01,
+                ComponentBuilderConfigurationPropertySingleText,
+                ComponentBuilderConfigurationPropertySingleDropdown,
+                ComponentBuilderConfigurationPropertyWithInstance01,
             ],
         },
     ],
@@ -444,17 +444,17 @@ export const ComponentBuilderConfigurationGroup: ConfigurationGroup = {
     layoutVariant: GroupLayoutVariant.TABS,
     sections: [],
     properties: [
-        ComponentBuilderConfigurationGroupPropertySingleText,
-        ComponentBuilderConfigurationGroupPropertySingleNumber,
-        ComponentBuilderConfigurationGroupPropertySingleDropdown,
-        ComponentBuilderConfigurationGroupPropertyWithInstance,
-        // ComponentBuilderConfigurationGroupProperty,
+        ComponentBuilderConfigurationPropertySingleText,
+        ComponentBuilderConfigurationPropertySingleNumber,
+        ComponentBuilderConfigurationPropertySingleDropdown,
+        ComponentBuilderConfigurationPropertyWithInstance,
+        // ComponentBuilderConfigurationProperty,
     ],
 };
 
 // // // //
 
-export const LambdaBuilderNameProperty: ConfigurationGroupProperty = {
+export const LambdaBuilderNameProperty: ConfigurationProperty = {
     identifier: "lambdaName",
     content: {
         label: "Lambda Name",
@@ -468,11 +468,11 @@ export const LambdaBuilderNameProperty: ConfigurationGroupProperty = {
     enabledByDefault: true,
     required: false,
     unique: false,
-    layoutVariant: PropertyLayoutVariant.COL_12,
+    layoutVariant: PropertyLayoutVariants.COL_12,
     allowDisable: false,
     properties: [],
     dropdownOptions: [],
-    filters: [],
+    transformations: [],
     validations: [],
     dataPreview: {
         rules: [],
@@ -480,7 +480,7 @@ export const LambdaBuilderNameProperty: ConfigurationGroupProperty = {
     },
 };
 
-export const LambdaLanguageProperty: ConfigurationGroupProperty = {
+export const LambdaLanguageProperty: ConfigurationProperty = {
     identifier: "language",
     content: {
         label: "Language",
@@ -491,12 +491,12 @@ export const LambdaLanguageProperty: ConfigurationGroupProperty = {
     type: OptionType.DROPDOWN,
     defaultValue: "",
     unique: false,
-    layoutVariant: PropertyLayoutVariant.COL_12,
+    layoutVariant: PropertyLayoutVariants.COL_12,
     enabledByDefault: true,
     required: false,
     allowDisable: false,
     properties: [],
-    filters: [],
+    transformations: [],
     validations: [],
     dataPreview: {
         rules: [],
@@ -538,12 +538,12 @@ export const LambdaBuilderConfigurationGroup: ConfigurationGroup = {
             type: OptionType.COLLECTION,
             defaultValue: [],
             unique: false,
-            layoutVariant: PropertyLayoutVariant.COL_12,
+            layoutVariant: PropertyLayoutVariants.COL_12,
             enabledByDefault: true,
             required: false,
             allowDisable: true,
             dropdownOptions: [],
-            filters: [],
+            transformations: [],
             validations: [],
             properties: [LambdaBuilderNameProperty, LambdaLanguageProperty],
             dataPreview: {

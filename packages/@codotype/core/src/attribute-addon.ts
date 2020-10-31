@@ -11,10 +11,10 @@ import { Content } from "./content";
 // Defines an interface that can be used to extend the `Attribute` interface with
 // additional properties that can be defined on a per-generator basis
 // TODO - should this support a layoutVariant? Yes.
-// TODO - wire up `validations` and `filters` here -> see `ConfigurationGroupProperty` for details
+// TODO - wire up `validations` and `filters` here -> see `ConfigurationProperty` for details
 // TODO - add icon support -> ENUM of basic symbols ("asterisk" | "snowflake" | "star" | "tag" | "check" | etc. -> match icons up to addons
-// QUESTION - should this just wrap a ConfigurationGroupProperty instance? -> Nah, best to keep
-// it simple - but abstract this a bit to share some common patterns with ConfigurationGroupProperty
+// QUESTION - should this just wrap a ConfigurationProperty instance? -> Nah, best to keep
+// it simple - but abstract this a bit to share some common patterns with ConfigurationProperty
 export interface AttributeAddon {
     id: UUID;
     content: Content;

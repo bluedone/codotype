@@ -2,12 +2,12 @@ export * from "./documentation";
 import { SchemaInput } from "../../schema";
 
 import {
-    ComponentBuilderConfigurationGroupProperty,
-    ComponentBuilderConfigurationGroupPropertySingleText,
-    ComponentBuilderConfigurationGroupPropertySingleDropdown,
-    ComponentBuilderConfigurationGroupPropertySingleNumber,
-    ComponentBuilderConfigurationGroupPropertyWithInstance01,
-    ComponentBuilderConfigurationGroupPropertyWithInstance,
+    ComponentBuilderConfigurationProperty,
+    ComponentBuilderConfigurationPropertySingleText,
+    ComponentBuilderConfigurationPropertySingleDropdown,
+    ComponentBuilderConfigurationPropertySingleNumber,
+    ComponentBuilderConfigurationPropertyWithInstance01,
+    ComponentBuilderConfigurationPropertyWithInstance,
     ComponentBuilderConfigurationGroup,
     LambdaBuilderNameProperty,
     LambdaLanguageProperty,
@@ -42,22 +42,22 @@ import {
     chartjsApiOption,
 } from "./configuration-properties";
 import {
-    ConfigurationGroupProperty,
+    ConfigurationProperty,
     ConfigurationGroup,
 } from "../../configuration-option-types";
 import { PluginMetadata } from "../../plugin";
 import { Attribute } from "../../attribute";
 
 interface TestState {
-    ComponentBuilderConfigurationGroupProperty: ConfigurationGroupProperty;
-    ComponentBuilderConfigurationGroupPropertySingleText: ConfigurationGroupProperty;
-    ComponentBuilderConfigurationGroupPropertySingleDropdown: ConfigurationGroupProperty;
-    ComponentBuilderConfigurationGroupPropertySingleNumber: ConfigurationGroupProperty;
-    ComponentBuilderConfigurationGroupPropertyWithInstance01: ConfigurationGroupProperty;
-    ComponentBuilderConfigurationGroupPropertyWithInstance: ConfigurationGroupProperty;
+    ComponentBuilderConfigurationProperty: ConfigurationProperty;
+    ComponentBuilderConfigurationPropertySingleText: ConfigurationProperty;
+    ComponentBuilderConfigurationPropertySingleDropdown: ConfigurationProperty;
+    ComponentBuilderConfigurationPropertySingleNumber: ConfigurationProperty;
+    ComponentBuilderConfigurationPropertyWithInstance01: ConfigurationProperty;
+    ComponentBuilderConfigurationPropertyWithInstance: ConfigurationProperty;
     ComponentBuilderConfigurationGroup: ConfigurationGroup;
-    LambdaBuilderNameProperty: ConfigurationGroupProperty;
-    LambdaLanguageProperty: ConfigurationGroupProperty;
+    LambdaBuilderNameProperty: ConfigurationProperty;
+    LambdaLanguageProperty: ConfigurationProperty;
     LambdaBuilderConfigurationGroup: ConfigurationGroup;
     ApiExamplesConfigurationGroup: ConfigurationGroup;
     SideBySideConfigurationGroup: ConfigurationGroup;
@@ -66,34 +66,34 @@ interface TestState {
     userSchema: SchemaInput;
     movieSchema: SchemaInput;
     emailAttribute: Attribute;
-    gitHubApiOption: ConfigurationGroupProperty;
-    twitterApiOption: ConfigurationGroupProperty;
-    facebookApiOption: ConfigurationGroupProperty;
-    foursquareApiOption: ConfigurationGroupProperty;
-    instagramApiOption: ConfigurationGroupProperty;
-    last_fmApiOption: ConfigurationGroupProperty;
-    linkedinApiOption: ConfigurationGroupProperty;
-    steamApiOption: ConfigurationGroupProperty;
-    stripeApiOption: ConfigurationGroupProperty;
-    paypalApiOption: ConfigurationGroupProperty;
-    twilioApiOption: ConfigurationGroupProperty;
-    tumblrApiOption: ConfigurationGroupProperty;
-    web_scrapingApiOption: ConfigurationGroupProperty;
-    clockwork_smsApiOption: ConfigurationGroupProperty;
-    aviaryApiOption: ConfigurationGroupProperty;
-    lobApiOption: ConfigurationGroupProperty;
-    pinterestApiOption: ConfigurationGroupProperty;
-    google_mapsApiOption: ConfigurationGroupProperty;
-    chartjsApiOption: ConfigurationGroupProperty;
+    gitHubApiOption: ConfigurationProperty;
+    twitterApiOption: ConfigurationProperty;
+    facebookApiOption: ConfigurationProperty;
+    foursquareApiOption: ConfigurationProperty;
+    instagramApiOption: ConfigurationProperty;
+    last_fmApiOption: ConfigurationProperty;
+    linkedinApiOption: ConfigurationProperty;
+    steamApiOption: ConfigurationProperty;
+    stripeApiOption: ConfigurationProperty;
+    paypalApiOption: ConfigurationProperty;
+    twilioApiOption: ConfigurationProperty;
+    tumblrApiOption: ConfigurationProperty;
+    web_scrapingApiOption: ConfigurationProperty;
+    clockwork_smsApiOption: ConfigurationProperty;
+    aviaryApiOption: ConfigurationProperty;
+    lobApiOption: ConfigurationProperty;
+    pinterestApiOption: ConfigurationProperty;
+    google_mapsApiOption: ConfigurationProperty;
+    chartjsApiOption: ConfigurationProperty;
 }
 
 export const testState: TestState = {
-    ComponentBuilderConfigurationGroupProperty,
-    ComponentBuilderConfigurationGroupPropertySingleText,
-    ComponentBuilderConfigurationGroupPropertySingleDropdown,
-    ComponentBuilderConfigurationGroupPropertySingleNumber,
-    ComponentBuilderConfigurationGroupPropertyWithInstance01,
-    ComponentBuilderConfigurationGroupPropertyWithInstance,
+    ComponentBuilderConfigurationProperty,
+    ComponentBuilderConfigurationPropertySingleText,
+    ComponentBuilderConfigurationPropertySingleDropdown,
+    ComponentBuilderConfigurationPropertySingleNumber,
+    ComponentBuilderConfigurationPropertyWithInstance01,
+    ComponentBuilderConfigurationPropertyWithInstance,
     ComponentBuilderConfigurationGroup,
     LambdaBuilderNameProperty,
     LambdaLanguageProperty,

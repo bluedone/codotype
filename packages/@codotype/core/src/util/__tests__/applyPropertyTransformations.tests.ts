@@ -9,7 +9,7 @@ import {
 
 // // // //
 
-// testCase = [testName, props.value, props.filters, expectedResult]
+// testCase = [testName, props.value, props.transformations, expectedResult]
 const numberTransformTests: [
     string,
     number,
@@ -52,20 +52,22 @@ const numberTransformTests: [
 ];
 
 describe("/util/applyPropertyTransformations.ts - numbers", () => {
-    numberTransformTests.forEach(([testName, value, filters, expected]) => {
-        test(testName, () => {
-            const result: number = applyNumberPropertyTransformations({
-                value,
-                filters,
+    numberTransformTests.forEach(
+        ([testName, value, transformations, expected]) => {
+            test(testName, () => {
+                const result: number = applyNumberPropertyTransformations({
+                    value,
+                    transformations,
+                });
+                expect(expected).toBe(result);
             });
-            expect(expected).toBe(result);
-        });
-    });
+        },
+    );
 });
 
 // // // //
 
-// testCase = [testName, props.value, props.filters, expectedResult]
+// testCase = [testName, props.value, props.transformations, expectedResult]
 const stringTransformTests: [
     string,
     string,
@@ -139,7 +141,7 @@ const stringTransformTests: [
         "Hello,Codotype!",
     ],
     [
-        "combined filters",
+        "combined transformations",
         "   Hello, Codotype! This is like test #123.",
         [
             StringPropertyTransformations.trimwhitespace,
@@ -151,13 +153,15 @@ const stringTransformTests: [
 ];
 
 describe("/util/applyPropertyTransformations.ts - strings", () => {
-    stringTransformTests.forEach(([testName, value, filters, expected]) => {
-        test(testName, () => {
-            const result: string = applyStringPropertyTransformations({
-                value,
-                filters,
+    stringTransformTests.forEach(
+        ([testName, value, transformations, expected]) => {
+            test(testName, () => {
+                const result: string = applyStringPropertyTransformations({
+                    value,
+                    transformations: transformations,
+                });
+                expect(result).toBe(expected);
             });
-            expect(result).toBe(expected);
-        });
-    });
+        },
+    );
 });

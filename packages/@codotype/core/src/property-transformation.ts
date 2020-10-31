@@ -1,7 +1,7 @@
 /*
  * StringPropertyTransformations
- * Defines the types of changes that are applied to the user-provided string input for a ConfigurationGroupProperty
- * These are only applied when ConfigurationGroupProperty.datatype === "STRING"
+ * Defines the types of changes that are applied to the user-provided string input for a ConfigurationProperty
+ * These are only applied when ConfigurationProperty.datatype === "STRING"
  */
 export enum StringPropertyTransformations {
     lowercase = "lowercase",
@@ -19,8 +19,8 @@ export enum StringPropertyTransformations {
 
 /*
  * NumberPropertyTransformations
- * Defines the types of changes that are applied to the user-provided numeric input for a ConfigurationGroupProperty
- * These are only applied when ConfigurationGroupProperty.datatype === "NUMBER"
+ * Defines the types of changes that are applied to the user-provided numeric input for a ConfigurationProperty
+ * These are only applied when ConfigurationProperty.datatype === "NUMBER"
  */
 export enum NumberPropertyTransformations {
     positiveValue = "positive_value",
@@ -30,7 +30,7 @@ export enum NumberPropertyTransformations {
 
 /**
  * PropertyTransformation
- * Defines a type alias of acceptable values for ConfigurationGroupProperty.filters
+ * Defines a type alias of acceptable values for ConfigurationProperty.filters
  * Includes the union of values defined in StringPropertyTransformations & NumberPropertyTransformations
  */
 export type PropertyTransformation =
