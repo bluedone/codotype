@@ -76,3 +76,6 @@ export interface DataPreview {
     rules: DataPreviewRule[];
     variant: DataPreviewLayoutVariant;
 }
+
+// // // //
+// CHORE - add examples to test_data module

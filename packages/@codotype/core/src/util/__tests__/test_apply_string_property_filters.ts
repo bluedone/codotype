@@ -1,6 +1,8 @@
 import { StringPropertyFilters } from "../../property-filter";
 import { applyStringPropertyFilters } from "../applyStringPropertyFilters";
 
+// // // //
+
 // testCase = [testName, props.value, props.filters, expectedResult]
 const testCases: [string, string, StringPropertyFilters[], string][] = [
     [

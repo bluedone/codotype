@@ -1,6 +1,6 @@
 export * from "./indent";
 export * from "./inflate";
-export * from "./sanitizeLabel";
+export * from "./sanitizeTitle";
 export * from "./trailingComma";
 export * from "./validateGenerator";
 export * from "./buildDefaultProject";
