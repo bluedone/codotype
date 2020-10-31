@@ -1,51 +1,50 @@
-// TODO - need a mechanism to ensure that filters
-// are only applied to applicable datatypes
-
 /*
- * StringValueFilters
- * Defines the types of filters that can be applied
- * the the value on a ConfigurationGroupProperty (STRING ONLY)
+ * StringPropertyFilters
+ * Defines the types of changes that are applied to the user-provided string input for a ConfigurationGroupProperty
+ * These are only applied when ConfigurationGroupProperty.datatype === "STRING"
  */
-export enum StringValueFilters {
-    lowercase = "LOWERCASE",
-    uppercase = "UPPERCASE",
-    titlecase = "TITLECASE",
-    camelcase = "CAMELCASE",
-    snakecase = "SNAKECASE",
-    pascalcase = "PASCALCASE",
-    kebabcase = "KEBABCASE",
-    nonumbers = "NO_NUMBERS",
-    nosymbols = "NO_SYMBOLS",
-    trimwhitespace = "TRIM_WHITESPACE",
-    removewhitespace = "REMOVE_WHITESPACE",
+export enum StringPropertyFilters {
+    lowercase = "lowercase",
+    uppercase = "uppercase",
+    titlecase = "titlecase",
+    camelcase = "camelcase",
+    snakecase = "snakecase",
+    pascalcase = "pascalcase",
+    kebabcase = "kebabcase",
+    nonumbers = "no_numbers",
+    nosymbols = "no_symbols",
+    trimwhitespace = "trim_whitespace",
+    removewhitespace = "remove_whitespace",
 }
 
 /*
- * NumberValueFilters
- * Defines the types of filters that can be applied
- * the the value on a ConfigurationGroupProperty (NUMBER ONLY)
+ * NumberPropertyFilters
+ * Defines the types of changes that are applied to the user-provided numeric input for a ConfigurationGroupProperty
+ * These are only applied when ConfigurationGroupProperty.datatype === "NUMBER"
  */
-export enum NumberValueFilters {
-    positiveValue = "POSITIVE_VALUE",
-    negativeValue = "NEGATIVE_VALUE",
-    integerValue = "INTEGER_VALUE",
+export enum NumberPropertyFilters {
+    positiveValue = "positive_value",
+    negativeValue = "negative_value",
+    integerValue = "integer_value",
 }
 
 /**
  * PropertyFilter
+ * Defines a type alias of acceptable values for ConfigurationGroupProperty.filters
+ * Includes the union of values defined in StringPropertyFilters & NumberPropertyFilters
  */
 export type PropertyFilter =
-    | "LOWERCASE"
-    | "UPPERCASE"
-    | "TITLECASE"
-    | "CAMELCASE"
-    | "SNAKECASE"
-    | "PASCALCASE"
-    | "KEBABCASE"
-    | "NO_NUMBERS"
-    | "NO_SYMBOLS"
-    | "TRIM_WHITESPACE"
-    | "REMOVE_WHITESPACE"
-    | "POSITIVE_VALUE"
-    | "NEGATIVE_VALUE"
-    | "INTEGER_VALUE";
+    | "lowercase"
+    | "uppercase"
+    | "titlecase"
+    | "camelcase"
+    | "snakecase"
+    | "pascalcase"
+    | "kebabcase"
+    | "no_numbers"
+    | "no_symbols"
+    | "trim_whitespace"
+    | "remove_whitespace"
+    | "positive_value"
+    | "negative_value"
+    | "integer_value";
