@@ -1,4 +1,4 @@
-import { Schema, TokenPluralization } from "@codotype/core";
+import { SchemaInput, TokenPluralization } from "@codotype/core";
 
 // // // //
 
@@ -9,12 +9,13 @@ export enum SCHEMA_ERROR_MESSAGE {
 
 /**
  * validateSchema
+ * TODO - move this into @codotype/core
  * Validates SchemaInput -> returns string[] or null
  * @param params
  */
 export function validateSchema(params: {
     tokenPluralization: TokenPluralization | null;
-    schemaCollection: Schema[];
+    schemaCollection: SchemaInput[];
 }): string[] {
     const errors: string[] = [];
     const { tokenPluralization, schemaCollection } = params;

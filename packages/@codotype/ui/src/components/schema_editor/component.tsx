@@ -9,9 +9,11 @@ import {
     Schema,
     TokenPluralization,
     UUID,
-    SchemaSource,
-    GeneratorMeta,
+    CreatedByValues,
+    PluginMetadata,
     buildDefaultConfiguration,
+    SchemaInput,
+    Primatives,
 } from "@codotype/core";
 import { reorder } from "../attribute_editor/component";
 import { validateSchema } from "./validateSchema";
@@ -30,7 +32,7 @@ interface EditorState {
  */
 export function SchemaEditorLayout(props: {
     schemas: Schema[];
-    generatorMeta: GeneratorMeta;
+    pluginMetadata: PluginMetadata;
     onChange: (updatedSchemas: Schema[]) => void;
 }) {
     const [showModal, setShowModal] = React.useState(false);
@@ -78,27 +80,23 @@ export function SchemaEditorLayout(props: {
         }
 
         // Defines new schema
-        const newSchema: Schema = {
-            id: Math.random().toString(), // TODO - replace with UUID function from util
+        const newSchema: SchemaInput = new Primatives.Schema({
             attributes: [
                 // TODO - do a proper deep-copy here
-                ...props.generatorMeta.schemaEditorConfiguration
-                    .defaultAttributes,
-            ],
-            relations: [
-                // TODO - do a proper deep-copy here
-                ...props.generatorMeta.schemaEditorConfiguration
-                    .defaultRelations,
+                ...props.pluginMetadata.schemaEditorConfiguration
+                    .newSchemaDefaults.attributes,
             ],
             removable: true,
             locked: false,
-            source: SchemaSource.USER,
+            source: CreatedByValues.user,
             identifiers: newTokenPluralization,
             configuration: buildDefaultConfiguration(
-                props.generatorMeta.schemaEditorConfiguration
+                props.pluginMetadata.schemaEditorConfiguration
                     .configurationGroups,
             ),
-        };
+        });
+
+        // TODO - add a mechanism here to update ProjectInput.relations with a new default RelationInput pulled from PluginMetadata.schema
 
         console.log(newSchema);
 
@@ -281,7 +279,7 @@ export function SchemaEditorLayout(props: {
                     <SchemaDetail
                         schema={selectedSchema}
                         schemas={state.schemas}
-                        generatorMeta={props.generatorMeta}
+                        PluginMetadata={props.pluginMetadata}
                         onSelectSchema={(nextSelectedSchemaId: UUID) => {
                             setSelectedSchemaId(nextSelectedSchemaId);
                         }}

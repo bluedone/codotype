@@ -39,7 +39,7 @@ export function ConfigurationGroupTab(props: {
 /**
  * ConfigurationGroupSelector
  * @param props.project
- * @param props.generatorMeta
+ * @param props.PluginMetadata
  * @param props.onChange
  */
 export function ConfigurationGroupSelector(props: {
@@ -94,7 +94,7 @@ export function ConfigurationGroupSelector(props: {
                                     }}
                                     active={
                                         configurationGroup.identifier ===
-                                        selectedConfigurationGroup.identifier &&
+                                            selectedConfigurationGroup.identifier &&
                                         !viewingSchemas
                                     }
                                     label={configurationGroup.label}
@@ -111,7 +111,7 @@ export function ConfigurationGroupSelector(props: {
                         configurationGroup={selectedConfigurationGroup}
                         value={
                             props.configuration[
-                            selectedConfigurationGroup.identifier
+                                selectedConfigurationGroup.identifier
                             ]
                         }
                         onChange={(updatedVal: OptionValueInstance) => {

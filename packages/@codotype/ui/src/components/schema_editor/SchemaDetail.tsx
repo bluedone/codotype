@@ -10,7 +10,7 @@ import {
     Attribute,
     Relation,
     Schema,
-    GeneratorMeta,
+    PluginMetadata,
     UUID,
 } from "@codotype/core";
 import { ConfigurationGroupSelector } from "./ConfigurationGroupSelector";
@@ -21,7 +21,7 @@ import { SchemaIncomingRelations } from "./SchemaIncomingRelations";
 interface SchemaDetailProps {
     schema: Schema;
     schemas: Schema[];
-    generatorMeta: GeneratorMeta;
+    PluginMetadata: PluginMetadata;
     onChange: (updatedSchema: Schema) => void;
     onClickEdit: () => void;
     onConfirmDelete: () => void;
@@ -38,7 +38,7 @@ export function SchemaDetail(props: SchemaDetailProps) {
         schemas: props.schemas,
     });
 
-    const { schemaEditorConfiguration } = props.generatorMeta;
+    const { schemaEditorConfiguration } = props.PluginMetadata;
 
     return (
         <div className="row">

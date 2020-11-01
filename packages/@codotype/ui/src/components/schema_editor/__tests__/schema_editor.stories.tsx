@@ -3,7 +3,7 @@ import { storiesOf } from "@storybook/react";
 import { SchemaEditorLayout } from "../component";
 import { Story } from "../../dev";
 import { testState } from "@codotype/core";
-const { cdkGeneratorMeta } = testState;
+const { cdkPluginMetadata } = testState;
 
 // // // //
 
@@ -12,7 +12,7 @@ storiesOf("ProjectEditor/SchemaEditor", module).add("renders", () => {
         <Story>
             <SchemaEditorLayout
                 schemas={[]}
-                generatorMeta={cdkGeneratorMeta}
+                PluginMetadata={cdkPluginMetadata}
                 onChange={updatedSchemas => {
                     console.log("Updated Schemas");
                     console.log(updatedSchemas);

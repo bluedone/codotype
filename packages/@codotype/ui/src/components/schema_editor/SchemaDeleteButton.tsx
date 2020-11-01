@@ -4,7 +4,7 @@ import { faTrashAlt, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import styled from "styled-components";
 import classnames from "classnames";
-import { Schema, SchemaSource, inflateSchema } from "@codotype/core";
+import { Schema, CreatedByValues, inflateSchema } from "@codotype/core";
 
 // // // //
 
@@ -52,7 +52,7 @@ export function SchemaDeleteButton(props: {
         inflatedSchema.references.filter(r => r.sourceSchemaId !== schema.id)
             .length > 0;
 
-    if (schema.source === SchemaSource.GENERATOR && schema.locked) {
+    if (schema.source === CreatedByValues.plugin && schema.locked) {
         return (
             <OverlayTrigger
                 placement="left"
