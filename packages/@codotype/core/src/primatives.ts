@@ -27,9 +27,9 @@ export interface CodotypePrimatives {
     ConfigurationProperty: typeof ConfigurationPropertyBuilder;
     TokenCasing: typeof TokenCasingBuilder;
     TokenPluralization: typeof TokenPluralizationBuilder;
-    // TODO - add AddonProperty
-    // TODO - add RelationAddon
-    // TODO - add AttributeAddon
+    // FEATURE - add AddonProperty
+    // FEATURE - add RelationAddon
+    // FEATURE - add AttributeAddon
 }
 
 /**
