@@ -4,8 +4,8 @@ import { ChevronAnimation } from "../chevron_animation";
 
 // // // //
 
-export function GeneratorCard(props: { generator: PluginMetadata }) {
-    const { generator } = props;
+export function PluginCard(props: { plugin: PluginMetadata }) {
+    const { plugin } = props;
     return (
         <div className="card col-lg-12 shadow border-light">
             <div className="card-body">
@@ -13,23 +13,23 @@ export function GeneratorCard(props: { generator: PluginMetadata }) {
                     <div className="col-lg-12 d-flex justify-content-center">
                         <p className="lead mb-0">
                             <a
-                                href={`/generators/${generator.id}/build`}
+                                href={`/generators/${plugin.identifier}/build`}
                                 className="btn btn-link d-flex align-items-center flex-column"
                                 style={{ textDecoration: "none" }}
                             >
                                 <img
                                     className="mb-2"
-                                    src={generator.icon}
+                                    src={plugin.content.icon}
                                     style={{ maxWidth: "2rem" }}
                                 />
-                                {generator.label}
+                                {plugin.content.label}
                             </a>
                         </p>
                     </div>
 
                     <div className="col-lg-12">
                         <p className="card-text mt-2">
-                            <small>{generator.description}</small>
+                            <small>{plugin.content.description}</small>
                         </p>
                     </div>
                 </div>
@@ -37,7 +37,7 @@ export function GeneratorCard(props: { generator: PluginMetadata }) {
 
             <div className="card-footer bg-white border-top-none">
                 <a
-                    href={`/generators/${generator.id}`}
+                    href={`/plugins/${plugin.identifier}`}
                     className="btn btn-block btn-xl btn-primary rounded-pill"
                 >
                     <span className="d-flex justify-content-center align-items-center">

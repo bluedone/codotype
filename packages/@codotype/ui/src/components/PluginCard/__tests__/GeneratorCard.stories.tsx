@@ -1,16 +1,16 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
-import { GeneratorCard } from "../GeneratorCard";
-import { GeneratorListItem } from "../GeneratorListItem";
+import { PluginCard } from "../GeneratorCard";
+import { PluginListItem } from "../GeneratorListItem";
 import { PluginMetadata, testState } from "@codotype/core";
 import { Story } from "../../dev";
-const { cdkPluginMetadata, dummyPluginMetadata } = testState;
+const { cdkPluginMeta, dummyPluginMetadata } = testState;
 
 // // // //
 
 const stories: [string, PluginMetadata][] = [
     ["w/ schemas", dummyPluginMetadata],
-    ["w/o schemas", cdkPluginMetadata],
+    ["w/o schemas", cdkPluginMeta],
 ];
 
 // // // //
@@ -23,7 +23,7 @@ stories.forEach(story => {
             <Story>
                 <div className="row d-flex justify-content-center">
                     <div className="col-sm-4">
-                        <GeneratorCard generator={story[1]} />
+                        <PluginCard plugin={story[1]} />
                     </div>
                 </div>
             </Story>
@@ -32,10 +32,7 @@ stories.forEach(story => {
 });
 
 // // // //
-const storyCollectionListItem = storiesOf(
-    "Components/GeneratorListItem",
-    module,
-);
+const storyCollectionListItem = storiesOf("Components/PluginListItem", module);
 
 stories.forEach(story => {
     storyCollectionListItem.add(story[0], () => {
@@ -43,7 +40,7 @@ stories.forEach(story => {
             <Story>
                 <div className="row">
                     <div className="col-sm-12">
-                        <GeneratorListItem generator={story[1]} />
+                        <PluginListItem plugin={story[1]} />
                     </div>
                 </div>
             </Story>

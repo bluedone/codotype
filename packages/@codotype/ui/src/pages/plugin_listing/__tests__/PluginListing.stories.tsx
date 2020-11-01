@@ -1,17 +1,17 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { Story } from "../../../components/dev";
-import { GeneratorListPage } from "../component";
+import { PluginListPage } from "../component";
 import { testState } from "@codotype/core";
 
 // // // //
 
-storiesOf("Pages/www/GeneratorListing", module).add("renders", () => {
+storiesOf("Pages/www/PluginListPage", module).add("renders", () => {
     return (
         <Story>
-            <GeneratorListPage
-                generators={[
-                    testState.cdkPluginMetadata,
+            <PluginListPage
+                plugins={[
+                    testState.cdkPluginMeta,
                     testState.dummyPluginMetadata,
                 ]}
             />

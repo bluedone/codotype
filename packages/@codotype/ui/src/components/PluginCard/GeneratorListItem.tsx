@@ -8,8 +8,8 @@ import { GeneratorTechTag } from "./GeneratorTechTag";
 
 // // // //
 
-export function GeneratorListItem(props: { generator: PluginMetadata }) {
-    const { generator } = props;
+export function PluginListItem(props: { plugin: PluginMetadata }) {
+    const { plugin } = props;
     return (
         <div className="card card-body border-light shadow-hover mb-2">
             <div className="row">
@@ -18,32 +18,33 @@ export function GeneratorListItem(props: { generator: PluginMetadata }) {
                         <img
                             className="mr-2"
                             style={{ maxWidth: "2rem" }}
-                            src={generator.icon}
+                            src={plugin.content.icon}
                         />
-                        {generator.label}
+                        {plugin.content.label}
 
-                        <GeneratorGithubLink generator={generator} />
+                        <GeneratorGithubLink plugin={plugin} />
                     </p>
                 </div>
                 <div className="col-lg-12 mt-2">
-                    <p className="card-text mb-2">{generator.description}</p>
+                    <p className="card-text mb-2">
+                        {plugin.content.description}
+                    </p>
                 </div>
                 <div className="col-lg-12 d-flex justify-content-between align-items-center">
                     <span className="d-flex">
-                        {generator.typeTags.map((tag: string) => (
+                        {plugin.typeTags.map((tag: string) => (
                             <GeneratorTypeTag tag={tag} key={tag} />
                         ))}
-                        {generator.techTags.map((tag: string) => (
+                        {plugin.techTags.map((tag: string) => (
                             <GeneratorTechTag tag={tag} key={tag} />
                         ))}
-                        {/* <span className='badge badge-info' v-if="generator.self_configuring">Self-Configuring</span> */}
                     </span>
 
                     <span className="d-flex">
                         <GeneratorExperienceTag
-                            experience={generator.experience}
+                            experience={plugin.experience}
                         />
-                        <GeneratorVersionTag version={generator.version} />
+                        <GeneratorVersionTag version={plugin.version} />
                     </span>
                 </div>
             </div>

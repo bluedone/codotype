@@ -1,5 +1,5 @@
 import * as React from "react";
-import { GeneratorListItem } from "../../components/generator_card";
+import { PluginListItem } from "../../components/PluginCard";
 import { PluginMetadata } from "@codotype/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
@@ -12,16 +12,16 @@ import { faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 export function PluginListPage(props: { plugins: PluginMetadata[] }) {
     const [filter, setFilter] = React.useState<string>("");
 
-    // Filters available generators based on `filter` state
-    const filteredGenerators: PluginMetadata[] = props.plugins.filter(g => {
+    // Filters available plugins based on `filter` state
+    const filteredPlugins: PluginMetadata[] = props.plugins.filter(g => {
         if (filter === "") return true;
 
         // Assembles query string for local filtering
         const queryString = [
             g.techTags.join(" "),
             g.typeTags.join(" "),
-            g.label,
-            g.description,
+            g.content.label,
+            g.content.description,
         ]
             .join(" ")
             .toLowerCase();
@@ -38,7 +38,7 @@ export function PluginListPage(props: { plugins: PluginMetadata[] }) {
             <div className="col-lg-12">
                 <p className="mb-0 text-muted">
                     Instantly generate your next codebase using any of the
-                    following plugins
+                    following Plugins
                 </p>
             </div>
 
@@ -52,7 +52,7 @@ export function PluginListPage(props: { plugins: PluginMetadata[] }) {
                         <input
                             type="text"
                             className="form-control form-control-lg mb-2"
-                            placeholder="Filter Generators"
+                            placeholder="Filter Plugins"
                             value={filter}
                             onChange={e => setFilter(e.currentTarget.value)}
                         />
@@ -73,8 +73,8 @@ export function PluginListPage(props: { plugins: PluginMetadata[] }) {
 
                 <div className="row">
                     <div className="col-lg-12">
-                        {filteredGenerators.map(g => (
-                            <GeneratorListItem key={g.id} generator={g} />
+                        {filteredPlugins.map(g => (
+                            <PluginListItem key={g.identifier} plugin={g} />
                         ))}
                     </div>
 
