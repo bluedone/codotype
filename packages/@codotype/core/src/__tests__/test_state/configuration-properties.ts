@@ -442,7 +442,7 @@ export const ComponentBuilderConfigurationPropertySingleNumber: ConfigurationPro
         content: {
             label: "Number Test",
             description:
-                "This is a number for testing. Don't overthink it. It's just a number. I'll should pull some configuration options from an existing generator to populate this placeholder.",
+                "This is a number for testing. Don't overthink it. It's just a number. I'll should pull some configuration options from an existing plugin to populate this placeholder.",
         },
     },
 );
@@ -506,7 +506,7 @@ export const ComponentBuilderConfigurationGroup: ConfigurationGroup = {
     layoutVariant: GroupLayoutVariants.LIST,
     sections: [],
     content: {
-        label: "Component Generator",
+        label: "React Component Generator",
         description: "Generate React components",
         documentation: "Generate React components",
         icon: "",

@@ -34,7 +34,7 @@ interface PluginBuilderParams {
 }
 
 export class PluginBuilder implements PluginMetadata {
-    id: string;
+    identifier: string;
     content: Content = {
         label: "",
         description: "",
@@ -63,7 +63,7 @@ export class PluginBuilder implements PluginMetadata {
     exampleProjects: ProjectInput[] = [];
 
     constructor(params: PluginBuilderParams) {
-        this.id = params.id;
+        this.identifier = params.id;
         this.project_path = params.project_path;
 
         // Sets this.content

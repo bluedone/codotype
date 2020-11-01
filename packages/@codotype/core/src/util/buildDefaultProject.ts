@@ -205,7 +205,7 @@ export function buildDefaultProjectInput(
             pascal: "NewProject",
             kebab: "new-project",
         },
-        pluginID: pluginMetadata.id,
+        pluginID: pluginMetadata.identifier,
         pluginVersion: pluginMetadata.version,
         schemas: [...pluginMetadata.schemaEditorConfiguration.defaultSchemas],
         relations: [

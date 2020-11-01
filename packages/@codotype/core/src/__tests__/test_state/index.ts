@@ -1,6 +1,5 @@
 export * from "./documentation";
 import { SchemaInput } from "../../schema";
-
 import {
     ComponentBuilderConfigurationProperty,
     ComponentBuilderConfigurationPropertySingleText,
@@ -14,11 +13,11 @@ import {
     LambdaBuilderConfigurationGroup,
     ApiExamplesConfigurationGroup,
     SideBySideConfigurationGroup,
-    cdkGeneratorMeta,
+    dummyPluginMetadata,
     userSchema,
     movieSchema,
     emailAttribute,
-    dummyGeneratorMeta,
+    cdkPluginMeta,
 } from "./test_state";
 import {
     gitHubApiOption,
@@ -46,6 +45,8 @@ import { ConfigurationProperty } from "../../configuration-property";
 import { PluginMetadata } from "../../plugin";
 import { Attribute } from "../../attribute";
 
+// // // //
+
 interface TestState {
     ComponentBuilderConfigurationProperty: ConfigurationProperty;
     ComponentBuilderConfigurationPropertySingleText: ConfigurationProperty;
@@ -59,8 +60,8 @@ interface TestState {
     LambdaBuilderConfigurationGroup: ConfigurationGroup;
     ApiExamplesConfigurationGroup: ConfigurationGroup;
     SideBySideConfigurationGroup: ConfigurationGroup;
-    cdkGeneratorMeta: PluginMetadata;
-    dummyGeneratorMeta: PluginMetadata;
+    cdkPluginMeta: PluginMetadata;
+    dummyPluginMetadata: PluginMetadata;
     userSchema: SchemaInput;
     movieSchema: SchemaInput;
     emailAttribute: Attribute;
@@ -98,8 +99,8 @@ export const testState: TestState = {
     LambdaBuilderConfigurationGroup,
     ApiExamplesConfigurationGroup,
     SideBySideConfigurationGroup,
-    dummyGeneratorMeta,
-    cdkGeneratorMeta,
+    cdkPluginMeta: cdkPluginMeta,
+    dummyPluginMetadata,
     userSchema,
     movieSchema,
     emailAttribute,

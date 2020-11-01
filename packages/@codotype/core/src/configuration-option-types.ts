@@ -41,7 +41,7 @@ interface ConfigurationBase {
  * Defines values for ConfigurationGroup.sections
  * Encapsulates a section of the configuration that can hold many properties
  * Many sections can be encapsulated together in a ConfigurationGroup,
- * and many ConfigurationGroups in a Generator or SchemaEditorConfiguration
+ * and many ConfigurationGroups in a Plugin or SchemaEditorConfiguration
  */
 export interface ConfigurationGroupSection extends ConfigurationBase {
     layoutVariant: SectionLayoutVariants;

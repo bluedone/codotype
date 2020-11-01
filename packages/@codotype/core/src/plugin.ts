@@ -56,21 +56,21 @@ export interface PluginAuthor {
 
 /**
  * PluginMetadata
- * TODO - annotate
+ * Defines an interface to encapsulate all the metadata for a single Plugin
  */
 export interface PluginMetadata {
-    id: string; // unique ID for the generator
-    content: Content;
-    homepage: string; // the "homepage" for this generator
-    version: string; // the current version of the generator
-    codotypeVersion: string; // the version of codotype that runs this generator
+    identifier: string; // unique ID for the Plugin
+    content: Content; // See `Content` interface
+    homepage: string; // the "homepage" for this Plugin
+    version: string; // the current version of the Plugin
+    codotypeVersion: string; // the version of codotype that runs this Plugin
     createdBy: PluginAuthor; // Metadata about the
-    techTags: string[]; // an array of strings describing the tech used in the generator
-    typeTags: string[]; // describes the type of codebase produced by this generator
-    experience: ExperienceRecommendation; // an optional tag detailing the level of experience required to use the code produced by the generator
-    project_path: string; // the name of the directory for the generator's output
+    techTags: string[]; // an array of strings describing the tech used in the Plugin
+    typeTags: string[]; // describes the type of codebase produced by this Plugin
+    experience: ExperienceRecommendation; // an optional tag detailing the level of experience required to use the code produced by the Plugin
+    project_path: string; // the name of the directory for the Plugin's output
     schemaEditorConfiguration: SchemaEditorConfiguration;
-    configurationGroups: ConfigurationGroup[]; // an array of OptionGroup objects that expose additional configuration provided by the generator
+    configurationGroups: ConfigurationGroup[]; // an array of OptionGroup objects that expose additional configuration provided by the Plugin
     exampleProjects: ProjectInput[];
 }
 

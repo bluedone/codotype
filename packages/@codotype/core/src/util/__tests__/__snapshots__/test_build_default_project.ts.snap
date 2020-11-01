@@ -56,7 +56,7 @@ Object {
 }
 `;
 
-exports[`/buildDefaultProject dummyGeneratorMeta 1`] = `
+exports[`/buildDefaultProject dummyPluginMetadata 1`] = `
 Object {
   "configuration": Object {
     "api_examples": Object {
@@ -117,7 +117,7 @@ Object {
     "snake": "new_project",
     "title": "New Project",
   },
-  "pluginID": "chrome_extension_generator",
+  "pluginID": "chrome_extension_plugin",
   "pluginVersion": "0.1.0",
   "relations": Array [],
   "schemas": Array [],
@@ -185,7 +185,7 @@ Object {
     "snake": "new_project",
     "title": "New Project",
   },
-  "pluginID": "chrome_extension_generator",
+  "pluginID": "chrome_extension_plugin",
   "pluginVersion": "0.1.0",
   "relations": Array [],
   "schemas": Array [
@@ -278,7 +278,7 @@ Object {
     "snake": "new_project",
     "title": "New Project",
   },
-  "pluginID": "chrome_extension_generator",
+  "pluginID": "chrome_extension_plugin",
   "pluginVersion": "0.1.0",
   "relations": Array [],
   "schemas": Array [

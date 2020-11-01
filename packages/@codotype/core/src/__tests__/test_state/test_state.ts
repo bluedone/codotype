@@ -328,7 +328,7 @@ export const ComponentBuilderConfigurationPropertySingleNumber: ConfigurationPro
     content: {
         label: "Number Test",
         description:
-            "This is a number for testing. Don't overthink it. It's just a number. I'll should pull some configuration options from an existing generator to populate this placeholder.",
+            "This is a number for testing. Don't overthink it. It's just a number. I'll should pull some configuration options from an existing plugin to populate this placeholder.",
         documentation: "",
         icon: "",
     },
@@ -438,7 +438,7 @@ export const ComponentBuilderConfigurationPropertyWithInstance: ConfigurationPro
 export const ComponentBuilderConfigurationGroup: ConfigurationGroup = {
     identifier: "components_group",
     content: {
-        label: "Component Generator",
+        label: "Component plugin",
         description: "Generate React components",
         documentation: "Generate React components",
         icon: "",
@@ -591,17 +591,17 @@ export const SideBySideConfigurationGroup: ConfigurationGroup = {
 // // // // // // //
 // PluginMetadata
 
-export const cdkGeneratorMeta: PluginMetadata = {
-    id: "aws_cdk_starter", // unique ID for the generator
+export const cdkPluginMeta: PluginMetadata = {
+    identifier: "aws_cdk_starter", // unique ID for the plugin
     content: {
-        label: "AWS CDK Starter", // short label for the generator
-        description: "A Codotype Generator for AWS CDK", // brief description of the generator
+        label: "AWS CDK Starter", // short label for the plugin
+        description: "A Codotype plugin for AWS CDK", // brief description of the plugin
         documentation: "",
         icon:
-            "https://res.cloudinary.com/codotype/image/upload/v1553197653/tech-logos/nodejs.png", // URL to the generator's icon. Must be at least 200x200px
+            "https://res.cloudinary.com/codotype/image/upload/v1553197653/tech-logos/nodejs.png", // URL to the plugin's icon. Must be at least 200x200px
     },
-    homepage: "https://codotype.org", // the "homepage" for this generator
-    version: "0.1.0", // the current version of the generator
+    homepage: "https://codotype.org", // the "homepage" for this plugin
+    version: "0.1.0", // the current version of the plugin
     codotypeVersion: "0.1.0",
     createdBy: {
         name: "Codotype",
@@ -609,14 +609,14 @@ export const cdkGeneratorMeta: PluginMetadata = {
             website: "https://codotype.io",
         },
     },
-    techTags: ["AWS", "React", "TypeScript", "CDK", "Lambda", "DynamoDB", "S3"], // an array of strings describing the tech used in the generator
-    typeTags: ["Full-stack", "Infrastructure"], // describes the type of codebase produced by this generator
-    experience: ExperienceRecommendations.beginner, // an optional tag detailing the level of experience required to use the code produced by the generator
-    project_path: "output", // the name of the directory for the generator's output
+    techTags: ["AWS", "React", "TypeScript", "CDK", "Lambda", "DynamoDB", "S3"], // an array of strings describing the tech used in the plugin
+    typeTags: ["Full-stack", "Infrastructure"], // describes the type of codebase produced by this plugin
+    experience: ExperienceRecommendations.beginner, // an optional tag detailing the level of experience required to use the code produced by the plugin
+    project_path: "output", // the name of the directory for the plugin's output
     schemaEditorConfiguration: {
         configurationGroups: [],
-        supportedDatatypes: [], // The datatypes supported by this generator.Only an array of DATATYPE_ * identifiers that correspond to values defined in @codotype/core are accepted.
-        supportedRelationTypes: [], // The relation types supported by this generator.Only an array of RELATION_TYPE_ * identifiers that correspond to values defined in @codotype/core are accepted.
+        supportedDatatypes: [], // The datatypes supported by this plugin.Only an array of DATATYPE_ * identifiers that correspond to values defined in @codotype/core are accepted.
+        supportedRelationTypes: [], // The relation types supported by this plugin.Only an array of RELATION_TYPE_ * identifiers that correspond to values defined in @codotype/core are accepted.
         defaultSchemas: [],
         newSchemaDefaults: {
             attributes: [],
@@ -639,7 +639,7 @@ export const cdkGeneratorMeta: PluginMetadata = {
         },
         ComponentBuilderConfigurationGroup,
         SideBySideConfigurationGroup,
-    ], // an array of OptionGroup objects that expose additional configuration provided by the generator
+    ], // an array of OptionGroup objects that expose additional configuration provided by the plugin
     exampleProjects: [],
 };
 
@@ -751,26 +751,26 @@ CreatedByValues;
 
 // // // // // //
 
-export const dummyGeneratorMeta: PluginMetadata = {
-    id: "chrome_extension_generator", // unique ID for the generator
+export const dummyPluginMetadata: PluginMetadata = {
+    identifier: "chrome_extension_plugin", // unique ID for the plugin
     content: {
-        label: "Chrome Extension Generator", // short label for the generator
-        description: "A Codotype Generator", // brief description of the generator
-        documentation: "A Codotype Generator", // Detailed description of the generator
+        label: "Chrome Extension plugin", // short label for the plugin
+        description: "A Codotype plugin", // brief description of the plugin
+        documentation: "A Codotype plugin", // Detailed description of the plugin
         icon:
-            "https://res.cloudinary.com/codotype/image/upload/v1553197653/tech-logos/nodejs.png", // URL to the generator's icon. Must be at least 200x200px
+            "https://res.cloudinary.com/codotype/image/upload/v1553197653/tech-logos/nodejs.png", // URL to the plugin's icon. Must be at least 200x200px
     },
-    homepage: "https://codotype.org", // the "homepage" for this generator
-    version: "0.1.0", // the current version of the generator
+    homepage: "https://codotype.org", // the "homepage" for this plugin
+    version: "0.1.0", // the current version of the plugin
     codotypeVersion: "0.1.0",
     createdBy: {
         name: "Codotype",
         contact: {},
     },
-    techTags: ["React", "TypeScript", "Bootstrap"], // an array of strings describing the tech used in the generator
-    typeTags: ["Chrome Extension", "Infrastructure"], // describes the type of codebase produced by this generator
-    experience: ExperienceRecommendations.beginner, // an optional tag detailing the level of experience required to use the code produced by the generator
-    project_path: "output", // the name of the directory for the generator's output
+    techTags: ["React", "TypeScript", "Bootstrap"], // an array of strings describing the tech used in the plugin
+    typeTags: ["Chrome Extension", "Infrastructure"], // describes the type of codebase produced by this plugin
+    experience: ExperienceRecommendations.beginner, // an optional tag detailing the level of experience required to use the code produced by the plugin
+    project_path: "output", // the name of the directory for the plugin's output
     exampleProjects: [],
     schemaEditorConfiguration: {
         configurationGroups: [],
@@ -780,8 +780,8 @@ export const dummyGeneratorMeta: PluginMetadata = {
             Datatypes.TEXT,
             Datatypes.NUMERIC,
             Datatypes.TIMESTAMP,
-        ], // The datatypes supported by this generator.Only an array of DATATYPE_ * identifiers that correspond to values defined in @codotype/core are accepted.
-        supportedRelationTypes: [RelationTypes.TO_ONE, RelationTypes.TO_MANY], // The relation types supported by this generator.Only an array of RELATION_TYPE_ * identifiers that correspond to values defined in @codotype/core are accepted.
+        ], // The datatypes supported by this plugin.Only an array of DATATYPE_ * identifiers that correspond to values defined in @codotype/core are accepted.
+        supportedRelationTypes: [RelationTypes.TO_ONE, RelationTypes.TO_MANY], // The relation types supported by this plugin.Only an array of RELATION_TYPE_ * identifiers that correspond to values defined in @codotype/core are accepted.
         newSchemaDefaults: {
             attributes: [
                 {
@@ -853,5 +853,5 @@ export const dummyGeneratorMeta: PluginMetadata = {
             properties: [twitterApiOption],
         },
         ComponentBuilderConfigurationGroup,
-    ], // an array of OptionGroup objects that expose additional configuration provided by the generator
+    ], // an array of OptionGroup objects that expose additional configuration provided by the plugin
 };

@@ -97,7 +97,7 @@ interface OptionValueInstanceStandard {
 
 // NOTE - this distinction is confusing
 // it should always include he enabled + value pair
-// When we inflate the metadata to be used in the generator, we can simplify based on the allowDisable property
+// When we inflate the metadata to be used in the Plugin, we can simplify based on the allowDisable property
 interface OptionValueInstanceAllowDisable {
     enabled: boolean;
     value: {

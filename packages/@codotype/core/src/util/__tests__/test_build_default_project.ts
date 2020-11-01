@@ -9,14 +9,14 @@ import {
 // // // //
 
 const testCases: [string, PluginMetadata][] = [
-    ["cdkGeneratorMeta", testState.cdkGeneratorMeta],
-    ["dummyGeneratorMeta", testState.dummyGeneratorMeta],
+    ["cdkGeneratorMeta", testState.cdkPluginMeta],
+    ["dummyPluginMetadata", testState.dummyPluginMetadata],
     [
         "generator w/ defaultSchemas, no schemaEditorConfiguration.configurationGroups",
         {
-            ...testState.dummyGeneratorMeta,
+            ...testState.dummyPluginMetadata,
             schemaEditorConfiguration: {
-                ...testState.dummyGeneratorMeta.schemaEditorConfiguration,
+                ...testState.dummyPluginMetadata.schemaEditorConfiguration,
                 defaultSchemas: [
                     {
                         ...testState.userSchema,
@@ -31,9 +31,9 @@ const testCases: [string, PluginMetadata][] = [
     [
         "generator w/ defaultSchemas + schemaEditorConfiguration.configurationGroups",
         {
-            ...testState.dummyGeneratorMeta,
+            ...testState.dummyPluginMetadata,
             schemaEditorConfiguration: {
-                ...testState.dummyGeneratorMeta.schemaEditorConfiguration,
+                ...testState.dummyPluginMetadata.schemaEditorConfiguration,
                 defaultSchemas: [
                     {
                         ...testState.userSchema,

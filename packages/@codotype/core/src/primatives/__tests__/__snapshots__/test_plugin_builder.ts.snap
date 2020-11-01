@@ -18,7 +18,7 @@ PluginBuilder {
   "exampleProjects": Array [],
   "experience": "beginner",
   "homepage": "",
-  "id": "my-codotype-plugin",
+  "identifier": "my-codotype-plugin",
   "project_path": "my_codotype_plugin",
   "schemaEditorConfiguration": SchemaEditorBuilder {
     "attributeAddons": Array [],

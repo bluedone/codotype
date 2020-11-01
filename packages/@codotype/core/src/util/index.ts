@@ -2,7 +2,7 @@ export * from "./indent";
 export * from "./inflate";
 export * from "./sanitizeTitle";
 export * from "./trailingComma";
-export * from "./validateGenerator";
+export * from "./validatePlugin";
 export * from "./buildDefaultProject";
 export * from "./makeCamelCase";
 export * from "./makeSnakeCase";
