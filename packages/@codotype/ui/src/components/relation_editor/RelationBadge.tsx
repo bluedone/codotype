@@ -1,4 +1,4 @@
-import { RelationReference, Schema, RelationType } from "@codotype/core";
+import { Relation, RelationTypes } from "@codotype/core";
 import * as React from "react";
 import { RelationDiagram } from "./RelationDiagram";
 
@@ -6,7 +6,7 @@ import { RelationDiagram } from "./RelationDiagram";
 
 export interface RelationBadgeProps {
     direction: "in" | "out";
-    relation: RelationReference;
+    relation: Relation;
     slim: boolean;
 }
 
@@ -16,64 +16,64 @@ export function RelationBadge(props: RelationBadgeProps) {
 
     return (
         <React.Fragment>
-            {relation.type === RelationType.BELONGS_TO && (
+            {relation.type === RelationTypes.BELONGS_TO && (
                 <RelationDiagram
                     direction={direction}
                     sourcePlural={true}
-                    sourceLabel={identifiers.source.canonical.plural.label}
-                    sourceAlias={identifiers.source.alias.plural.label}
+                    sourceLabel={identifiers.source.canonical.plural.title}
+                    sourceAlias={identifiers.source.alias.plural.title}
                     destPlural={false}
-                    destLabel={identifiers.destination.canonical.singular.label}
-                    destAlias={identifiers.destination.alias.singular.label}
+                    destLabel={identifiers.destination.canonical.singular.title}
+                    destAlias={identifiers.destination.alias.singular.title}
                     slim={slim}
                 />
             )}
 
-            {relation.type === RelationType.HAS_ONE ||
-                (relation.type === RelationType.TO_ONE && (
+            {relation.type === RelationTypes.HAS_ONE ||
+                (relation.type === RelationTypes.TO_ONE && (
                     <RelationDiagram
                         direction={direction}
                         sourcePlural={false}
                         sourceLabel={
-                            identifiers.source.canonical.singular.label
+                            identifiers.source.canonical.singular.title
                         }
-                        sourceAlias={identifiers.source.alias.singular.label}
+                        sourceAlias={identifiers.source.alias.singular.title}
                         destPlural={false}
                         destLabel={
-                            identifiers.destination.canonical.singular.label
+                            identifiers.destination.canonical.singular.title
                         }
-                        destAlias={identifiers.destination.alias.singular.label}
+                        destAlias={identifiers.destination.alias.singular.title}
                         slim={slim}
                     />
                 ))}
 
-            {relation.type === RelationType.HAS_MANY ||
-                (relation.type === RelationType.TO_MANY && (
+            {relation.type === RelationTypes.HAS_MANY ||
+                (relation.type === RelationTypes.TO_MANY && (
                     <RelationDiagram
                         direction={direction}
                         sourcePlural={false}
                         sourceLabel={
-                            identifiers.source.canonical.singular.label
+                            identifiers.source.canonical.singular.title
                         }
-                        sourceAlias={identifiers.source.alias.singular.label}
+                        sourceAlias={identifiers.source.alias.singular.title}
                         destPlural={true}
                         destLabel={
-                            identifiers.destination.canonical.plural.label
+                            identifiers.destination.canonical.plural.title
                         }
-                        destAlias={identifiers.destination.alias.plural.label}
+                        destAlias={identifiers.destination.alias.plural.title}
                         slim={slim}
                     />
                 ))}
 
-            {relation.type === RelationType.HAS_AND_BELONGS_TO_MANY && (
+            {relation.type === RelationTypes.HAS_AND_BELONGS_TO_MANY && (
                 <RelationDiagram
                     direction={direction}
                     sourcePlural={true}
-                    sourceLabel={identifiers.source.canonical.singular.label}
-                    sourceAlias={identifiers.source.alias.plural.label}
+                    sourceLabel={identifiers.source.canonical.singular.title}
+                    sourceAlias={identifiers.source.alias.plural.title}
                     destPlural={true}
-                    destLabel={identifiers.destination.canonical.plural.label}
-                    destAlias={identifiers.destination.alias.plural.label}
+                    destLabel={identifiers.destination.canonical.plural.title}
+                    destAlias={identifiers.destination.alias.plural.title}
                     slim={slim}
                 />
             )}

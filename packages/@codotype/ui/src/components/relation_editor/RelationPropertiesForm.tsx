@@ -1,7 +1,13 @@
 import * as React from "react";
 import { RelationDatatypeForm } from "./RelationDatatypeForm";
-import { RelationInput } from "./RelationFormModal";
-import { Schema, RelationType, RELATION_META, sanitizeLabel, buildRelationReference } from "@codotype/core";
+import {
+    Schema,
+    RelationType,
+    RELATION_META,
+    sanitizeTitle,
+    buildRelation,
+    RelationInput,
+} from "@codotype/core";
 import { RelationBadge } from "./RelationBadge";
 
 // // // //
@@ -25,17 +31,17 @@ interface RelationPropertiesFormProps {
 export function RelationPropertiesForm(props: RelationPropertiesFormProps) {
     const { schema, schemas, relationInput, supportedRelationTypes } = props;
 
-    // Defines relationInput.destinationSchemaId if it's not present
-    if (relationInput.destinationSchemaId === "" && schemas.length > 0) {
+    // Defines relationInput.destinationSchemaID if it's not present
+    if (relationInput.destinationSchemaID === "" && schemas.length > 0) {
         props.onChange({
             ...relationInput,
-            destinationSchemaId: schemas[0].id,
+            destinationSchemaID: schemas[0].id,
         });
     }
 
     // Locates destination schema
     const destinationSchema = props.schemas.find(
-        s => s.id === relationInput.destinationSchemaId,
+        s => s.id === relationInput.destinationSchemaID,
     );
 
     return (
@@ -44,7 +50,7 @@ export function RelationPropertiesForm(props: RelationPropertiesFormProps) {
                 <div className="col-lg-4">
                     <div className="form-group text-primary text-center">
                         <label className="mb-0">
-                            {schema.identifiers.singular.label}
+                            {schema.identifiers.singular.title}
                         </label>
                         <small className="form-text text-primary">
                             Where the relational data is stored
@@ -53,7 +59,7 @@ export function RelationPropertiesForm(props: RelationPropertiesFormProps) {
                             type="text"
                             className="form-control border-primary text-primary"
                             disabled
-                            value={schema.identifiers.singular.label}
+                            value={schema.identifiers.singular.title}
                         />
                     </div>
                 </div>
@@ -102,19 +108,19 @@ export function RelationPropertiesForm(props: RelationPropertiesFormProps) {
                         <select
                             className="form-control border-info text-info"
                             v-model="model.related_schema_id"
-                            value={relationInput.destinationSchemaId}
+                            value={relationInput.destinationSchemaID}
                             onChange={e => {
                                 console.log("onChange related schema");
                                 props.onChange({
                                     ...relationInput,
-                                    destinationSchemaId: e.currentTarget.value,
+                                    destinationSchemaID: e.currentTarget.value,
                                 });
                             }}
                         >
                             {/* TODO - use correct pluralization here depending on relationInput.type */}
                             {schemas.map(s => (
                                 <option key={s.id} value={s.id}>
-                                    {s.identifiers.plural.label}
+                                    {s.identifiers.plural.title}
                                 </option>
                             ))}
                         </select>
@@ -130,7 +136,7 @@ export function RelationPropertiesForm(props: RelationPropertiesFormProps) {
                         onChange={e => {
                             props.onChange({
                                 ...relationInput,
-                                sourceSchemaAlias: sanitizeLabel(
+                                sourceSchemaAlias: sanitizeTitle(
                                     e.currentTarget.value,
                                 ),
                             });
@@ -149,7 +155,7 @@ export function RelationPropertiesForm(props: RelationPropertiesFormProps) {
                         onChange={e => {
                             props.onChange({
                                 ...relationInput,
-                                destinationSchemaAlias: sanitizeLabel(
+                                destinationSchemaAlias: sanitizeTitle(
                                     e.currentTarget.value,
                                 ),
                             });
@@ -165,9 +171,10 @@ export function RelationPropertiesForm(props: RelationPropertiesFormProps) {
                     <div className="col-lg-12 text-center">
                         <RelationBadge
                             direction="out"
-                            relation={buildRelationReference({
-                                relation: relationInput,
+                            relation={buildRelation({
+                                // TODO - fix this
                                 sourceSchema: props.schema,
+                                relationInput: relationInput,
                                 destinationSchema: destinationSchema,
                             })}
                             slim={false}

@@ -7,7 +7,7 @@ import { Story } from "../../dev";
 
 const testCases: [string, RelationDiagramProps][] = [
     [
-        "Datatype.STRING",
+        "Datatypes.STRING",
         {
             direction: "out",
             sourcePlural: false,
@@ -20,7 +20,7 @@ const testCases: [string, RelationDiagramProps][] = [
         },
     ],
     [
-        "Datatype.STRING",
+        "Datatypes.STRING",
         {
             direction: "out",
             sourcePlural: false,
@@ -33,7 +33,7 @@ const testCases: [string, RelationDiagramProps][] = [
         },
     ],
     [
-        "Datatype.STRING",
+        "Datatypes.STRING",
         {
             direction: "out",
             sourcePlural: false,
@@ -46,7 +46,7 @@ const testCases: [string, RelationDiagramProps][] = [
         },
     ],
     [
-        "Datatype.STRING",
+        "Datatypes.STRING",
         {
             direction: "out",
             sourcePlural: true,
@@ -59,7 +59,7 @@ const testCases: [string, RelationDiagramProps][] = [
         },
     ],
     [
-        "Datatype.STRING",
+        "Datatypes.STRING",
         {
             direction: "out",
             sourcePlural: false,
@@ -72,7 +72,7 @@ const testCases: [string, RelationDiagramProps][] = [
         },
     ],
     [
-        "Datatype.STRING",
+        "Datatypes.STRING",
         {
             direction: "out",
             sourcePlural: true,
@@ -85,7 +85,7 @@ const testCases: [string, RelationDiagramProps][] = [
         },
     ],
     [
-        "Datatype.STRING",
+        "Datatypes.STRING",
         {
             direction: "out",
             sourcePlural: true,
@@ -98,7 +98,7 @@ const testCases: [string, RelationDiagramProps][] = [
         },
     ],
     [
-        "Datatype.STRING",
+        "Datatypes.STRING",
         {
             direction: "out",
             sourcePlural: true,
@@ -111,7 +111,7 @@ const testCases: [string, RelationDiagramProps][] = [
         },
     ],
     [
-        "Datatype.STRING",
+        "Datatypes.STRING",
         {
             direction: "out",
             sourcePlural: true,

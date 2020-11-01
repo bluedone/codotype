@@ -5,7 +5,7 @@ import {
     Relation,
     RelationType,
     Schema,
-    SchemaSource,
+    CreatedByValues,
     inflateSchema,
 } from "@codotype/core";
 import { RelationEditor } from "../component";
@@ -30,7 +30,7 @@ storiesOf("ProjectEditor/RelationEditor/Layout", module).add(
                     id: "dummy-relation",
                     type: RelationType.HAS_ONE,
                     required: false,
-                    source: SchemaSource.USER,
+                    source: CreatedByValues.user,
                     destinationSchemaId: userSchema.id,
                     sourceSchemaAlias: "",
                     destinationSchemaAlias: "Parent",

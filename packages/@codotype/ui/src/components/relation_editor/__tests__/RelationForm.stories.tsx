@@ -3,7 +3,7 @@ import { storiesOf } from "@storybook/react";
 import { RelationPropertiesForm } from "../RelationPropertiesForm";
 import { Story } from "../../dev";
 import { RelationInput } from "../RelationFormModal";
-import { testState, RelationType, SchemaSource } from "@codotype/core";
+import { testState, RelationType, CreatedByValues } from "@codotype/core";
 const { userSchema, movieSchema } = testState;
 
 // // // //
@@ -15,7 +15,7 @@ const testCases: [string, RelationInput][] = [
             id: "test-01",
             type: RelationType.TO_ONE,
             required: false,
-            source: SchemaSource.USER,
+            source: CreatedByValues.user,
             destinationSchemaId: userSchema.id,
             sourceSchemaAlias: "Directed Movie",
             destinationSchemaAlias: "Director",
