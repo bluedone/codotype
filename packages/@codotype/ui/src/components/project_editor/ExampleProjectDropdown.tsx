@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Dropdown } from "react-bootstrap";
-import { GeneratorMeta, Project } from "@codotype/core";
+import { PluginMetadata, Project } from "@codotype/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFolderOpen } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
@@ -17,7 +17,7 @@ const StyledDiv = styled.div`
 `;
 
 export function ExampleProjectDropdown(props: {
-    plugin: GeneratorMeta;
+    plugin: PluginMetadata;
     loadExampleProject: (exampleProject: Project) => void;
 }) {
     const { exampleProjects = [] } = props.plugin;

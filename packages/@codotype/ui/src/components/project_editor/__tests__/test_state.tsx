@@ -1,7 +1,7 @@
-import { GeneratorMeta, testState } from "@codotype/core";
+import { PluginMetadata, testState } from "@codotype/core";
 
 // // // //
 
-export const dummyGeneratorMeta: GeneratorMeta = {
-    ...testState.dummyGeneratorMeta,
+export const dummyPluginMetadata: PluginMetadata = {
+    ...testState.dummyPluginMetadata,
 };

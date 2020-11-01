@@ -7,7 +7,7 @@ import {
     sanitizeLabel,
     buildTokenCasing,
     Project,
-    GeneratorMeta,
+    PluginMetadata,
 } from "@codotype/core";
 import { ProjectDropdown } from "./ProjectDropdown";
 import { ExampleProjectDropdown } from "./ExampleProjectDropdown";
@@ -15,13 +15,13 @@ import { ExampleProjectDropdown } from "./ExampleProjectDropdown";
 // // // //
 
 export function ProjectEditorHeader(props: {
-    generatorMeta: GeneratorMeta;
+    PluginMetadata: PluginMetadata;
     project: Project;
     onChange: (updatedProject: Project) => void;
     onClickGenerate: () => void;
     onConfirmReset: () => void;
 }) {
-    const { generatorMeta } = props;
+    const { PluginMetadata } = props;
     const [showingModal, showModal] = React.useState<boolean>(false);
     const [labelValue, setLabelValue] = React.useState<string>(
         props.project.identifiers.label,
@@ -70,7 +70,7 @@ export function ProjectEditorHeader(props: {
                 {/* <ExportModal /> */}
 
                 <ExampleProjectDropdown
-                    plugin={generatorMeta}
+                    plugin={PluginMetadata}
                     loadExampleProject={exampleProject => {
                         props.onChange(exampleProject);
                     }}

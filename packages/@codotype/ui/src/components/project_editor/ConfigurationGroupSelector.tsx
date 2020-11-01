@@ -4,7 +4,7 @@ import { SchemaEditorLayout } from "../schema_editor";
 import {
     Project,
     Schema,
-    GeneratorMeta,
+    PluginMetadata,
     ConfigurationGroup,
     OptionValueInstance,
 } from "@codotype/core";
@@ -53,18 +53,18 @@ export function ConfigurationGroupTab(props: {
 /**
  * ConfigurationGroupSelector
  * @param props.project
- * @param props.generatorMeta
+ * @param props.PluginMetadata
  * @param props.onChange
  */
 export function ConfigurationGroupSelector(props: {
     project: Project;
-    generatorMeta: GeneratorMeta;
+    PluginMetadata: PluginMetadata;
     onChange: (updatedProject: Project) => void;
 }) {
-    const { generatorMeta } = props;
+    const { PluginMetadata } = props;
     // Gets default ConfigurationGroup to render
     const defaultConfigurationGroup: ConfigurationGroup | undefined =
-        generatorMeta.configurationGroups[0];
+        PluginMetadata.configurationGroups[0];
 
     // If there is no default ConfigurationGroup, return null
     if (!defaultConfigurationGroup) {
@@ -83,7 +83,7 @@ export function ConfigurationGroupSelector(props: {
         configurationGroups,
         supportedDatatypes,
         supportedRelations,
-    } = generatorMeta.schemaEditorConfiguration;
+    } = PluginMetadata.schemaEditorConfiguration;
     const enableSchemaEditor: boolean =
         configurationGroups.length > 0 ||
         supportedDatatypes.length > 0 ||
@@ -124,7 +124,7 @@ export function ConfigurationGroupSelector(props: {
                     )}
 
                     {/* Renders the navigation for selecting a ConfigurationGroup */}
-                    {generatorMeta.configurationGroups.map(
+                    {PluginMetadata.configurationGroups.map(
                         (configurationGroup: ConfigurationGroup) => {
                             return (
                                 <ConfigurationGroupTab
@@ -179,7 +179,7 @@ export function ConfigurationGroupSelector(props: {
                 {viewingReadme && (
                     <div className="mt-4">
                         <div className="card card-body">
-                            <GeneratorStart generator={props.generatorMeta} />
+                            <GeneratorStart generator={props.PluginMetadata} />
                         </div>
                     </div>
                 )}
@@ -188,7 +188,7 @@ export function ConfigurationGroupSelector(props: {
                 {viewingSchemas && enableSchemaEditor && (
                     <SchemaEditorLayout
                         schemas={props.project.schemas}
-                        generatorMeta={generatorMeta}
+                        PluginMetadata={PluginMetadata}
                         onChange={(updatedSchemas: Schema[]) => {
                             console.log("Updated Schemas");
                             console.log(updatedSchemas);

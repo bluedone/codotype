@@ -3,12 +3,12 @@ import { storiesOf } from "@storybook/react";
 import { ProjectEditor } from "../component";
 import { Project, testState, buildDefaultProject } from "@codotype/core";
 import { Story } from "../../dev";
-import { dummyGeneratorMeta } from "./test_state";
+import { dummyPluginMetadata } from "./test_state";
 
 // // // //
 
 const chromeExtensionPlugin = {
-    ...dummyGeneratorMeta,
+    ...dummyPluginMetadata,
     icon:
         "https://res.cloudinary.com/codotype/image/upload/v1553197653/tech-logos/nodejs.png",
 };

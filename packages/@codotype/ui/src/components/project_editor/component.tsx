@@ -1,12 +1,12 @@
 import * as React from "react";
 import { ConfigurationGroupSelector } from "./ConfigurationGroupSelector";
 import { ProjectEditorHeader } from "./ProjectEditorHeader";
-import { GeneratorMeta, Project } from "@codotype/core";
+import { PluginMetadata, Project } from "@codotype/core";
 
 // // // //
 
 interface ProjectEditorProps {
-    generator: GeneratorMeta;
+    generator: PluginMetadata;
     project: Project;
     onChange: (updatedProject: Project) => void;
     onClickGenerate: () => void;
@@ -23,7 +23,7 @@ export function ProjectEditor(props: ProjectEditorProps) {
             <div className="col-sm-12">
                 {/* Render ProjectEditorHeader */}
                 <ProjectEditorHeader
-                    generatorMeta={generator}
+                    PluginMetadata={generator}
                     project={project}
                     onChange={props.onChange}
                     onClickGenerate={props.onClickGenerate}
@@ -37,7 +37,7 @@ export function ProjectEditor(props: ProjectEditorProps) {
                 {/* Render ConfigurationGroupSelector */}
                 <ConfigurationGroupSelector
                     project={project}
-                    generatorMeta={generator}
+                    PluginMetadata={generator}
                     onChange={(updatedProject: Project) => {
                         // Invokes props.onChange with the updated project
                         console.log("UPDATED PROJECT");
