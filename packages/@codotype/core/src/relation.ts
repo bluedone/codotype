@@ -18,7 +18,7 @@ export type RelationType =
     | "HAS_AND_BELONGS_TO_MANY"
     | "EMBEDS_ONE"
     | "EMBEDS_MANY";
-// TODO - update enum casing?
+// QUESTION - update enum casing?
 // RelationTypes.belongsTo
 // RelationTypes.hasOne
 // RelationTypes.hasMany
@@ -40,7 +40,8 @@ export enum RelationTypes {
 
 /**
  * RelationInput
- * Defines the RelationInput interface
+ * The `RelationInput` interface represents the data to describe a single Relation in @codotype/ui
+ * The `RelationInput` is goes through additional processing before being passed into a Plugin as a `Relation`
  */
 export interface RelationInput {
     id: UUID;
@@ -59,7 +60,8 @@ export interface RelationInput {
 
 /**
  * Relation
- * Defines the Reference interface
+ * The Reference interface encapsulates the complete metadata used to describe a reference between two Schemas
+ * Used by a Plugin to generate the code required to successfully model that reference in generated code
  */
 export interface Relation {
     id: UUID;
