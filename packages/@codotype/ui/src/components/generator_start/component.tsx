@@ -1,5 +1,5 @@
 import * as React from "react";
-import { GeneratorMeta } from "@codotype/core";
+import { PluginMetadata } from "@codotype/core";
 import { ChevronAnimation } from "../chevron_animation/component";
 import { MarkdownRenderer } from "../markdown_renderer";
 import { GeneratorTypeTag } from "../generator_card/GeneratorTypeTag";
@@ -12,7 +12,7 @@ import { GitHubStar } from "../GitHubStar";
 // // // //
 
 interface GeneratorStartProps {
-    generator: GeneratorMeta;
+    generator: PluginMetadata;
     externalLink?: string;
     buildLink?: string;
 }

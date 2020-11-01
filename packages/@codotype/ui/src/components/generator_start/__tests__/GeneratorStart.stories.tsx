@@ -2,7 +2,7 @@ import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { GeneratorStart } from "../component";
 import { Story } from "../../dev";
-import { dummyGeneratorMeta } from "../../project_editor/__tests__/test_state";
+import { dummyPluginMetadata } from "../../project_editor/__tests__/test_state";
 
 // // // //
 
@@ -12,7 +12,7 @@ storiesOf("Components/GeneratorStart", module).add("renders in card", () => {
             <div className="card card-body">
                 <GeneratorStart
                     externalLink={"https://google.com"}
-                    generator={dummyGeneratorMeta}
+                    generator={dummyPluginMetadata}
                 />
             </div>
         </Story>
@@ -24,7 +24,7 @@ storiesOf("Components/GeneratorStart", module).add("renders", () => {
         <Story>
             <GeneratorStart
                 buildLink={"https://google.com"}
-                generator={dummyGeneratorMeta}
+                generator={dummyPluginMetadata}
             />
         </Story>
     );

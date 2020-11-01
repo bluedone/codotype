@@ -1,5 +1,5 @@
 import * as React from "react";
-import { GeneratorMeta } from "@codotype/core";
+import { PluginMetadata } from "@codotype/core";
 import { GeneratorTypeTag } from "./GeneratorTypeTag";
 import { GeneratorVersionTag } from "./GeneratorVersionTag";
 import { GeneratorExperienceTag } from "./GeneratorExperienceTag";
@@ -8,7 +8,7 @@ import { GeneratorTechTag } from "./GeneratorTechTag";
 
 // // // //
 
-export function GeneratorListItem(props: { generator: GeneratorMeta }) {
+export function GeneratorListItem(props: { generator: PluginMetadata }) {
     const { generator } = props;
     return (
         <div className="card card-body border-light shadow-hover mb-2">

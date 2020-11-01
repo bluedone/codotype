@@ -2,15 +2,15 @@ import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { GeneratorCard } from "../GeneratorCard";
 import { GeneratorListItem } from "../GeneratorListItem";
-import { GeneratorMeta, testState } from "@codotype/core";
+import { PluginMetadata, testState } from "@codotype/core";
 import { Story } from "../../dev";
-const { cdkGeneratorMeta, dummyGeneratorMeta } = testState;
+const { cdkPluginMetadata, dummyPluginMetadata } = testState;
 
 // // // //
 
-const stories: [string, GeneratorMeta][] = [
-    ["w/ schemas", dummyGeneratorMeta],
-    ["w/o schemas", cdkGeneratorMeta],
+const stories: [string, PluginMetadata][] = [
+    ["w/ schemas", dummyPluginMetadata],
+    ["w/o schemas", cdkPluginMetadata],
 ];
 
 // // // //

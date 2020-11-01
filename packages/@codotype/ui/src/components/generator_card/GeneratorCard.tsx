@@ -1,10 +1,10 @@
 import * as React from "react";
-import { GeneratorMeta } from "@codotype/core";
+import { PluginMetadata } from "@codotype/core";
 import { ChevronAnimation } from "../chevron_animation";
 
 // // // //
 
-export function GeneratorCard(props: { generator: GeneratorMeta }) {
+export function GeneratorCard(props: { generator: PluginMetadata }) {
     const { generator } = props;
     return (
         <div className="card col-lg-12 shadow border-light">

@@ -1,11 +1,11 @@
 import * as React from "react";
-import { GeneratorMeta } from "@codotype/core";
+import { PluginMetadata } from "@codotype/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 // // // //
 
-export function GeneratorGithubLink(props: { generator: GeneratorMeta }) {
+export function GeneratorGithubLink(props: { generator: PluginMetadata }) {
     const { generator } = props;
     return (
         <small className="d-flex flex-row align-items-center text-muted mt-2">
