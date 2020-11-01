@@ -1,19 +1,19 @@
 import * as React from "react";
 import { GeneratorListItem } from "../../components/generator_card";
-import { GeneratorMeta } from "@codotype/core";
+import { PluginMetadata } from "@codotype/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 
 // // // //
 
 /**
- * GeneratorListPage
+ * PluginListPage
  */
-export function GeneratorListPage(props: { generators: GeneratorMeta[] }) {
+export function PluginListPage(props: { plugins: PluginMetadata[] }) {
     const [filter, setFilter] = React.useState<string>("");
 
     // Filters available generators based on `filter` state
-    const filteredGenerators: GeneratorMeta[] = props.generators.filter(g => {
+    const filteredGenerators: PluginMetadata[] = props.plugins.filter(g => {
         if (filter === "") return true;
 
         // Assembles query string for local filtering

@@ -11,8 +11,8 @@ storiesOf("Pages/www/GeneratorListing", module).add("renders", () => {
         <Story>
             <GeneratorListPage
                 generators={[
-                    testState.cdkGeneratorMeta,
-                    testState.dummyGeneratorMeta,
+                    testState.cdkPluginMetadata,
+                    testState.dummyPluginMetadata,
                 ]}
             />
         </Story>
