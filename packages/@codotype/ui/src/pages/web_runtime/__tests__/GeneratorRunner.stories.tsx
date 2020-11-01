@@ -3,15 +3,15 @@ import { storiesOf } from "@storybook/react";
 import { Story } from "../../../components/dev";
 import { GeneratorRunner } from "../GeneratorRunner";
 import { buildDefaultProject, testState } from "@codotype/core";
-const { cdkGeneratorMeta } = testState;
+const { cdkPluginMetadata } = testState;
 
 // // // //
 
 storiesOf("Util/GeneratorRunner", module).add("loads", () => {
-    const project = buildDefaultProject(cdkGeneratorMeta);
+    const project = buildDefaultProject(cdkPluginMetadata);
     return (
         <Story>
-            <GeneratorRunner generator={cdkGeneratorMeta}>
+            <GeneratorRunner generator={cdkPluginMetadata}>
                 {({ generateCode }) => {
                     return (
                         <div className="card card-body">

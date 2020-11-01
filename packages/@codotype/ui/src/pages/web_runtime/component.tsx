@@ -1,13 +1,13 @@
 import * as React from "react";
-import { GeneratorMeta, Project } from "@codotype/core";
+import { PluginMetadata, Project } from "@codotype/core";
 import { LocalStorageProvider } from "./LocalStorageProvider";
 
 // // // //
 
 interface WebRuntimeProps {
-    generator: GeneratorMeta;
+    generator: PluginMetadata;
     children: (childProps: {
-        generator: GeneratorMeta;
+        generator: PluginMetadata;
         project: Project;
         setProject: (updatedProject: Project) => void;
         clearProject: () => void;

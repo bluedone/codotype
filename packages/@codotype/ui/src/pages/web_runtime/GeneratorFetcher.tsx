@@ -1,12 +1,12 @@
 import * as React from "react";
-import { GeneratorMeta } from "@codotype/core";
+import { PluginMetadata } from "@codotype/core";
 import useAxios from "axios-hooks";
 import { LoadingPage } from "../../components/LoadingPage";
 
 // // // //
 
 interface GeneratorFetcherProps {
-    children: (childProps: { generators: GeneratorMeta[] }) => React.ReactNode;
+    children: (childProps: { generators: PluginMetadata[] }) => React.ReactNode;
 }
 
 /**

@@ -6,17 +6,17 @@ import { RuntimeProvider } from "../../../components/runtime_provider";
 import { ProjectEditor } from "../../../components/project_editor";
 import {
     Project,
-    Datatype,
-    SchemaSource,
-    GeneratorMeta,
+    Datatypes,
+    CreatedByValues,
+    PluginMetadata,
     testState,
-    ATTRIBUTE_ADDON_UNIQUE,
-    ATTRIBUTE_ADDON_REQUIRED,
-    ATTRIBUTE_ADDON_NULLABLE,
-    ATTRIBUTE_ADDON_PRIMARY_KEY,
+    // ATTRIBUTE_ADDON_UNIQUE,
+    // ATTRIBUTE_ADDON_REQUIRED,
+    // ATTRIBUTE_ADDON_NULLABLE,
+    // ATTRIBUTE_ADDON_PRIMARY_KEY,
     RelationType,
     OptionType,
-    Codotype,
+    Primatives,
     GroupLayoutVariant,
     PropertyLayoutVariant,
     StringValueFilter,
@@ -30,11 +30,11 @@ import {
     buildDefaultConfiguration,
 } from "@codotype/core";
 import { generatorReadme } from "../../../components/markdown_renderer/__tests__/test_state";
-const { cdkGeneratorMeta, dummyGeneratorMeta } = testState;
+const { cdkPluginMetadata, dummyPluginMetadata } = testState;
 
 // // // //
 
-const ApiActionsProperty = new Codotype.ConfigurationGroupProperty({
+const ApiActionsProperty = new Primatives.ConfigurationProperty({
     label: "Actions",
     identifier: "actions",
     type: OptionType.COLLECTION,
@@ -90,7 +90,7 @@ const ApiActionsProperty = new Codotype.ConfigurationGroupProperty({
         variant: DataPreviewLayoutVariant.CODE_DARK,
     },
     properties: [
-        new Codotype.ConfigurationGroupProperty({
+        new Primatives.ConfigurationProperty({
             label: "Verb",
             identifier: "verb",
             description: "Verify",
@@ -104,7 +104,7 @@ const ApiActionsProperty = new Codotype.ConfigurationGroupProperty({
                 { value: "DELETE", label: "DELETE" },
             ],
         }),
-        new Codotype.ConfigurationGroupProperty({
+        new Primatives.ConfigurationProperty({
             label: "Route",
             identifier: "route",
             description: "Route",
@@ -117,7 +117,7 @@ const ApiActionsProperty = new Codotype.ConfigurationGroupProperty({
                 StringValueFilter.removewhitespace,
             ],
         }),
-        new Codotype.ConfigurationGroupProperty({
+        new Primatives.ConfigurationProperty({
             label: "Function Name",
             identifier: "function_name",
             description: "function_name",
@@ -131,7 +131,7 @@ const ApiActionsProperty = new Codotype.ConfigurationGroupProperty({
                 StringValueFilter.trimwhitespace,
             ],
         }),
-        new Codotype.ConfigurationGroupProperty({
+        new Primatives.ConfigurationProperty({
             label: "Scope",
             identifier: "scope",
             description: "scope",
@@ -158,11 +158,11 @@ const NestedCollectionProperty = {
     ],
 };
 
-const pluginExample01: GeneratorMeta = {
-    ...dummyGeneratorMeta,
+const pluginExample01: PluginMetadata = {
+    ...dummyPluginMetadata,
     id: "chrome_extension_generator_03", // unique ID for the generator
     schemaEditorConfiguration: {
-        ...dummyGeneratorMeta.schemaEditorConfiguration,
+        ...dummyPluginMetadata.schemaEditorConfiguration,
         attributeAddons: [
             ATTRIBUTE_ADDON_UNIQUE,
             ATTRIBUTE_ADDON_REQUIRED,
@@ -171,7 +171,7 @@ const pluginExample01: GeneratorMeta = {
         ],
         configurationGroups: [
             {
-                ...dummyGeneratorMeta.configurationGroups[0],
+                ...dummyPluginMetadata.configurationGroups[0],
                 layoutVariant: GroupLayoutVariant.LIST,
             },
         ],
@@ -182,24 +182,24 @@ const projectExample01: Project = {
     ...buildDefaultProject(pluginExample01),
     identifiers: buildTokenCasing("Movie Reviews"),
     schemas: [
-        new Codotype.Schema({
+        new Primatives.Schema({
             identifiers: buildTokenPluralization("User"),
             attributes: [
-                new Codotype.Attribute({
+                new Primatives.Attribute({
                     identifiers: buildTokenCasing("ID"),
-                    datatype: Datatype.UUID,
+                    datatype: Datatypes.UUID,
                 }),
-                new Codotype.Attribute({
+                new Primatives.Attribute({
                     identifiers: buildTokenCasing("Email"),
-                    datatype: Datatype.STRING,
+                    datatype: Datatypes.STRING,
                 }),
-                new Codotype.Attribute({
+                new Primatives.Attribute({
                     identifiers: buildTokenCasing("First Name"),
-                    datatype: Datatype.STRING,
+                    datatype: Datatypes.STRING,
                 }),
-                new Codotype.Attribute({
+                new Primatives.Attribute({
                     identifiers: buildTokenCasing("Last Name"),
-                    datatype: Datatype.STRING,
+                    datatype: Datatypes.STRING,
                 }),
             ],
             relations: [],
@@ -207,20 +207,20 @@ const projectExample01: Project = {
                 pluginExample01.schemaEditorConfiguration.configurationGroups,
             ),
         }),
-        new Codotype.Schema({
+        new Primatives.Schema({
             identifiers: buildTokenPluralization("Director"),
             attributes: [
-                new Codotype.Attribute({
+                new Primatives.Attribute({
                     identifiers: buildTokenCasing("ID"),
-                    datatype: Datatype.UUID,
+                    datatype: Datatypes.UUID,
                 }),
-                new Codotype.Attribute({
+                new Primatives.Attribute({
                     identifiers: buildTokenCasing("First Name"),
-                    datatype: Datatype.STRING,
+                    datatype: Datatypes.STRING,
                 }),
-                new Codotype.Attribute({
+                new Primatives.Attribute({
                     identifiers: buildTokenCasing("Last Name"),
-                    datatype: Datatype.STRING,
+                    datatype: Datatypes.STRING,
                 }),
             ],
             relations: [],
@@ -228,16 +228,16 @@ const projectExample01: Project = {
                 pluginExample01.schemaEditorConfiguration.configurationGroups,
             ),
         }),
-        new Codotype.Schema({
+        new Primatives.Schema({
             identifiers: buildTokenPluralization("Movie"),
             attributes: [
-                new Codotype.Attribute({
+                new Primatives.Attribute({
                     identifiers: buildTokenCasing("ID"),
-                    datatype: Datatype.UUID,
+                    datatype: Datatypes.UUID,
                 }),
-                new Codotype.Attribute({
+                new Primatives.Attribute({
                     identifiers: buildTokenCasing("Title"),
-                    datatype: Datatype.STRING,
+                    datatype: Datatypes.STRING,
                 }),
             ],
             relations: [],
@@ -248,15 +248,15 @@ const projectExample01: Project = {
     ],
 };
 
-const stories: [string, GeneratorMeta][] = [
-    ["w/ schemas", dummyGeneratorMeta],
+const stories: [string, PluginMetadata][] = [
+    ["w/ schemas", dummyPluginMetadata],
     [
         "w/ schemas + schema configuration groups",
         {
-            ...dummyGeneratorMeta,
+            ...dummyPluginMetadata,
             id: "chrome_extension_generator_03", // unique ID for the generator
             schemaEditorConfiguration: {
-                ...dummyGeneratorMeta.schemaEditorConfiguration,
+                ...dummyPluginMetadata.schemaEditorConfiguration,
                 attributeAddons: [
                     ATTRIBUTE_ADDON_UNIQUE,
                     ATTRIBUTE_ADDON_REQUIRED,
@@ -265,7 +265,7 @@ const stories: [string, GeneratorMeta][] = [
                 ],
                 configurationGroups: [
                     {
-                        ...dummyGeneratorMeta.configurationGroups[0],
+                        ...dummyPluginMetadata.configurationGroups[0],
                         layoutVariant: GroupLayoutVariant.LIST,
                     },
                 ],
@@ -282,10 +282,10 @@ const stories: [string, GeneratorMeta][] = [
     [
         "w/ schemas + default attributes",
         {
-            ...dummyGeneratorMeta,
+            ...dummyPluginMetadata,
             id: "chrome_extension_generator_04", // unique ID for the generator
             schemaEditorConfiguration: {
-                ...dummyGeneratorMeta.schemaEditorConfiguration,
+                ...dummyPluginMetadata.schemaEditorConfiguration,
                 attributeAddons: [
                     ATTRIBUTE_ADDON_UNIQUE,
                     ATTRIBUTE_ADDON_REQUIRED,
@@ -305,9 +305,9 @@ const stories: [string, GeneratorMeta][] = [
                         addons: {
                             [ATTRIBUTE_ADDON_PRIMARY_KEY.identifier]: true,
                         },
-                        datatype: Datatype.UUID,
+                        datatype: Datatypes.UUID,
                         locked: true,
-                        source: SchemaSource.GENERATOR,
+                        source: CreatedByValues.plugin,
                         internalNote: "",
                         defaultValue: null,
                     },
@@ -318,7 +318,7 @@ const stories: [string, GeneratorMeta][] = [
     [
         "AWS CDK Starter",
         {
-            ...cdkGeneratorMeta,
+            ...cdkPluginMetadata,
             configurationGroups: [
                 {
                     ...testState.ComponentBuilderConfigurationGroup,
@@ -345,22 +345,22 @@ const stories: [string, GeneratorMeta][] = [
                 documentation: "",
                 supportedRelations: [RelationType.TO_ONE, RelationType.TO_MANY],
                 supportedDatatypes: [
-                    Datatype.STRING,
-                    Datatype.DATE,
-                    Datatype.DATETIME,
-                    Datatype.INTEGER,
-                    Datatype.FLOAT,
-                    Datatype.STRING_ARRAY,
+                    Datatypes.STRING,
+                    Datatypes.DATE,
+                    Datatypes.DATETIME,
+                    Datatypes.INTEGER,
+                    Datatypes.FLOAT,
+                    Datatypes.STRING_ARRAY,
                 ],
                 configurationGroups: [
-                    new Codotype.ConfigurationGroup({
+                    new Primatives.ConfigurationGroup({
                         label: "Meta",
                         identifier: "meta",
                         description:
                             "Define additional metadata for this Schema",
                         layoutVariant: GroupLayoutVariant.LIST,
                         properties: [
-                            new Codotype.ConfigurationGroupProperty({
+                            new Primatives.ConfigurationProperty({
                                 label: "Internal Note",
                                 identifier: "internal_note",
                                 description:
@@ -371,7 +371,7 @@ const stories: [string, GeneratorMeta][] = [
                             }),
                         ],
                     }),
-                    new Codotype.ConfigurationGroup({
+                    new Primatives.ConfigurationGroup({
                         label: "API Actions",
                         identifier: "api_actions",
                         description: "Define individual REST api actions.",
@@ -380,14 +380,14 @@ const stories: [string, GeneratorMeta][] = [
                         layoutVariant: GroupLayoutVariant.LIST,
                         properties: [ApiActionsProperty],
                     }),
-                    new Codotype.ConfigurationGroup({
+                    new Primatives.ConfigurationGroup({
                         label: "GraphQL API",
                         identifier: "graphql_api",
                         description:
                             "Configure the GraphQL API for this Schema",
                         layoutVariant: GroupLayoutVariant.LIST,
                         properties: [
-                            new Codotype.ConfigurationGroupProperty({
+                            new Primatives.ConfigurationProperty({
                                 type: OptionType.BOOLEAN,
                                 defaultValue: true,
                                 identifier: "generate_crud_api",
@@ -397,7 +397,7 @@ const stories: [string, GeneratorMeta][] = [
                                 layoutVariant:
                                     PropertyLayoutVariant.CARD_COL_12,
                             }),
-                            new Codotype.ConfigurationGroupProperty({
+                            new Primatives.ConfigurationProperty({
                                 label: "DynamoDB table name",
                                 identifier: "dynamodb_table_name",
                                 description:
@@ -418,12 +418,12 @@ const stories: [string, GeneratorMeta][] = [
                     {
                         ...ATTRIBUTE_ADDON_REQUIRED,
                         supportedDatatypes: [
-                            Datatype.STRING,
-                            Datatype.DATE,
-                            Datatype.DATETIME,
-                            Datatype.INTEGER,
-                            Datatype.FLOAT,
-                            Datatype.STRING_ARRAY,
+                            Datatypes.STRING,
+                            Datatypes.DATE,
+                            Datatypes.DATETIME,
+                            Datatypes.INTEGER,
+                            Datatypes.FLOAT,
+                            Datatypes.STRING_ARRAY,
                         ],
                     },
                     {
@@ -446,12 +446,12 @@ const stories: [string, GeneratorMeta][] = [
                             },
                         ],
                         supportedDatatypes: [
-                            Datatype.STRING,
-                            Datatype.DATE,
-                            Datatype.DATETIME,
-                            Datatype.INTEGER,
-                            Datatype.FLOAT,
-                            Datatype.STRING_ARRAY,
+                            Datatypes.STRING,
+                            Datatypes.DATE,
+                            Datatypes.DATETIME,
+                            Datatypes.INTEGER,
+                            Datatypes.FLOAT,
+                            Datatypes.STRING_ARRAY,
                         ],
                     },
                 ],
@@ -462,7 +462,7 @@ const stories: [string, GeneratorMeta][] = [
                         type: RelationType.TO_ONE,
                         destinationSchemaAlias: "Creator",
                         sourceSchemaAlias: "",
-                        source: SchemaSource.GENERATOR,
+                        source: CreatedByValues.plugin,
                         destinationSchemaId: "USER_SCHEMA",
                     },
                 ],
@@ -479,9 +479,9 @@ const stories: [string, GeneratorMeta][] = [
                         addons: {
                             [ATTRIBUTE_ADDON_PRIMARY_KEY.identifier]: true,
                         },
-                        datatype: Datatype.UUID,
+                        datatype: Datatypes.UUID,
                         locked: true,
-                        source: SchemaSource.GENERATOR,
+                        source: CreatedByValues.plugin,
                         internalNote: "",
                         defaultValue: null,
                     },
@@ -507,7 +507,7 @@ const stories: [string, GeneratorMeta][] = [
                         },
                         locked: true,
                         removable: false,
-                        source: SchemaSource.GENERATOR,
+                        source: CreatedByValues.plugin,
                         internalNote: "",
                         attributes: [
                             {
@@ -524,9 +524,9 @@ const stories: [string, GeneratorMeta][] = [
                                     [ATTRIBUTE_ADDON_PRIMARY_KEY.identifier]: true,
                                     [ATTRIBUTE_ADDON_UNIQUE.identifier]: true,
                                 },
-                                datatype: Datatype.STRING,
+                                datatype: Datatypes.STRING,
                                 locked: true,
-                                source: SchemaSource.GENERATOR,
+                                source: CreatedByValues.plugin,
                                 internalNote: "The uniqie ID of the user",
                                 defaultValue: null,
                             },
@@ -543,9 +543,9 @@ const stories: [string, GeneratorMeta][] = [
                                     [ATTRIBUTE_ADDON_REQUIRED.identifier]: true,
                                     [ATTRIBUTE_ADDON_UNIQUE.identifier]: true,
                                 },
-                                datatype: Datatype.STRING,
+                                datatype: Datatypes.STRING,
                                 locked: true,
-                                source: SchemaSource.GENERATOR,
+                                source: CreatedByValues.plugin,
                                 internalNote: "The email of the user",
                                 defaultValue: null,
                             },

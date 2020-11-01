@@ -1,17 +1,17 @@
 import * as React from "react";
-import { GeneratorMeta, Project, buildDefaultProject } from "@codotype/core";
+import { PluginMetadata, Project, buildDefaultProject } from "@codotype/core";
 import { ErrorBoundary } from "react-error-boundary";
 import { FallbackComponent } from "./ErrorBoundary";
 
 // // // //
 
-function getLocalStorageKey(generator: GeneratorMeta): string {
+function getLocalStorageKey(generator: PluginMetadata): string {
     return `${generator.id}-${generator.version}`;
 }
 
 function writeProjectToLocalStorage(props: {
     project: Project;
-    generator: GeneratorMeta;
+    generator: PluginMetadata;
 }) {
     localStorage.setItem(
         getLocalStorageKey(props.generator),
@@ -19,12 +19,12 @@ function writeProjectToLocalStorage(props: {
     );
 }
 
-function clearLocalStorage(props: { generator: GeneratorMeta }) {
+function clearLocalStorage(props: { generator: PluginMetadata }) {
     localStorage.removeItem(getLocalStorageKey(props.generator));
 }
 
 function readProjectFromLocalStorage(props: {
-    generator: GeneratorMeta;
+    generator: PluginMetadata;
 }): Project {
     try {
         const localStorageKey = getLocalStorageKey(props.generator);
@@ -43,7 +43,7 @@ function readProjectFromLocalStorage(props: {
 // // // //
 
 interface LocalStorageProviderProps {
-    generator: GeneratorMeta;
+    generator: PluginMetadata;
     children: (childProps: {
         project: Project;
         setProject: (updatedProject: Project) => void;

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Modal } from "react-bootstrap";
-import { GeneratorMeta, Project } from "@codotype/core";
+import { PluginMetadata, Project } from "@codotype/core";
 import useAxios from "axios-hooks";
 import { BuildFinished } from "../../components/build_finished/component";
 import { LoadingBuild } from "../../components/loading_build";
@@ -12,7 +12,7 @@ interface GenerateCodeProps {
 }
 
 interface GeneratorRunnerProps {
-    generator: GeneratorMeta;
+    generator: PluginMetadata;
     children: (childProps: {
         generateCode: (params: GenerateCodeProps) => void;
     }) => React.ReactNode;
