@@ -18,8 +18,10 @@ export const getDatatypeValueJson = ({
     datatype: Datatype;
 }): string => {
     switch (datatype) {
-        // case Datatypes.ID:
-        //   return `1`;
+        case Datatypes.ID:
+            return "1";
+        case Datatypes.AUTO_INCREMENTED_ID:
+            return "1";
         case Datatypes.UUID:
             return `"00112233-4455-6677-8899-aabbccddeeff"`;
         case Datatypes.STRING:
@@ -123,6 +125,10 @@ export const getDatatypeValueGraphQL = ({
     datatype: Datatype;
 }): string => {
     switch (datatype) {
+        case Datatypes.ID:
+            return `ID`;
+        case Datatypes.AUTO_INCREMENTED_ID:
+            return `Number`;
         case Datatypes.UUID:
             return `String`;
         case Datatypes.STRING:
@@ -132,7 +138,7 @@ export const getDatatypeValueGraphQL = ({
         case Datatypes.INT:
             return `Number`;
         case Datatypes.BIGINT:
-            return `"Number`;
+            return `Number`;
         case Datatypes.FLOAT:
             return `Number`;
         case Datatypes.DECIMAL:
@@ -224,6 +230,10 @@ export const getDatatypeValueTypeScript = ({
     datatype: Datatype;
 }): string => {
     switch (datatype) {
+        case Datatypes.ID:
+            return `ID`;
+        case Datatypes.AUTO_INCREMENTED_ID:
+            return `number`;
         case Datatypes.UUID:
             return `string`;
         case Datatypes.STRING:
