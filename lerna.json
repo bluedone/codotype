@@ -1,4 +1,8 @@
 {
-    "packages": ["packages/@codotype/core", "packages/@codotype/runtime"],
+    "packages": [
+        "packages/@codotype/core",
+        "packages/@codotype/runtime",
+        "packages/@codotype/ui"
+    ],
     "version": "independent"
 }
