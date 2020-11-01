@@ -1,5 +1,5 @@
 import { AttributeBuilder } from "../Attribute";
-import { Datatype } from "../..";
+import { Datatypes } from "../..";
 
 // Mocks UUID module
 jest.mock("uuid", () => ({
@@ -12,7 +12,7 @@ jest.mock("uuid", () => ({
 describe("AttributeBuilder", () => {
     test("works", () => {
         const attribute = new AttributeBuilder({
-            datatype: Datatype.STRING,
+            datatype: Datatypes.STRING,
             identifiers: {
                 title: "My String",
                 snake: "my_string",

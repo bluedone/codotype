@@ -1,4 +1,4 @@
-import { Datatype } from "./datatype";
+import { Datatype, Datatypes } from "./datatype";
 
 // // // //
 
@@ -11,139 +11,139 @@ export interface DatatypeMeta {
 
 // Defines datatype metadata
 export const DATATYPE_META: {
-    [key in Datatype]: DatatypeMeta;
+    [key in Datatypes]: DatatypeMeta;
 } = {
-    [Datatype.ID]: {
-        value: Datatype.ID,
+    [Datatypes.ID]: {
+        value: Datatypes.ID,
         label: "ID",
         description: "Unique ID",
         icon: "fa fa-tag",
     },
-    [Datatype.AUTO_INCREMENTED_ID]: {
-        value: Datatype.AUTO_INCREMENTED_ID,
+    [Datatypes.AUTO_INCREMENTED_ID]: {
+        value: Datatypes.AUTO_INCREMENTED_ID,
         label: "Auto-incremented ID",
         description: "Automatically incremented numeric ID",
         icon: "fa fa-tag",
     },
-    [Datatype.UUID]: {
-        value: Datatype.UUID,
+    [Datatypes.UUID]: {
+        value: Datatypes.UUID,
         label: "UUID",
         description: "Unique identifiers",
         icon: "fa fa-tag",
     },
-    [Datatype.OBJECT_ID]: {
-        value: Datatype.OBJECT_ID,
+    [Datatypes.OBJECT_ID]: {
+        value: Datatypes.OBJECT_ID,
         label: "ObjectID",
         description: "A MongoDB ObjectID",
         icon: "fa fa-table",
     },
-    [Datatype.STRING]: {
-        value: Datatype.STRING,
+    [Datatypes.STRING]: {
+        value: Datatypes.STRING,
         label: "String",
         description: "Titles, names, and labels",
         icon: "fa fa-quote-left",
     },
 
-    [Datatype.TEXT]: {
-        value: Datatype.TEXT,
+    [Datatypes.TEXT]: {
+        value: Datatypes.TEXT,
         label: "Text",
         description: "Descriptions, paragraphs, and articles",
         icon: "fa fa-align-left",
     },
 
-    [Datatype.BOOLEAN]: {
-        value: Datatype.BOOLEAN,
+    [Datatypes.BOOLEAN]: {
+        value: Datatypes.BOOLEAN,
         label: "Boolean",
         description: "Yes or no, true or false",
         icon: "fa fa-toggle-on",
     },
 
-    [Datatype.INT]: {
-        value: Datatype.INT,
+    [Datatypes.INT]: {
+        value: Datatypes.INT,
         label: "Integer",
         description: "Whole numbers",
         icon: "fa fa-hashtag",
     },
 
-    [Datatype.BIGINT]: {
-        value: Datatype.BIGINT,
+    [Datatypes.BIGINT]: {
+        value: Datatypes.BIGINT,
         label: "BigInt",
         description: "Data in BigInt format",
         icon: "fa fa-hashtag",
     },
 
-    [Datatype.FLOAT]: {
-        value: Datatype.FLOAT,
+    [Datatypes.FLOAT]: {
+        value: Datatypes.FLOAT,
         label: "Float",
         description: "Numbers with decimals",
         icon: "fa fa-divide",
     },
 
-    [Datatype.DECIMAL]: {
-        value: Datatype.DECIMAL,
+    [Datatypes.DECIMAL]: {
+        value: Datatypes.DECIMAL,
         label: "Decimal",
         description: "Data in Decimal format",
         icon: "fa fa-hashtag",
     },
 
-    [Datatype.NUMERIC]: {
-        value: Datatype.NUMERIC,
+    [Datatypes.NUMERIC]: {
+        value: Datatypes.NUMERIC,
         label: "Numeric",
         description: "Data in Numeric format",
         icon: "fa fa-hashtag",
     },
 
-    [Datatype.DATE]: {
-        value: Datatype.DATE,
+    [Datatypes.DATE]: {
+        value: Datatypes.DATE,
         label: "Date",
         description: "Calendar date, no time of day",
         icon: "far fa-calendar",
     },
 
-    [Datatype.TIME]: {
-        value: Datatype.TIME,
+    [Datatypes.TIME]: {
+        value: Datatypes.TIME,
         label: "Time",
         description: "Time of day, no date",
         icon: "far fa-clock",
     },
 
-    [Datatype.DATETIME]: {
-        value: Datatype.DATETIME,
+    [Datatypes.DATETIME]: {
+        value: Datatypes.DATETIME,
         label: "Datetime",
         description: "Event dates, deadlines, opening hours",
         icon: "far fa-calendar-alt",
     },
 
-    [Datatype.TIMESTAMP]: {
-        value: Datatype.TIMESTAMP,
+    [Datatypes.TIMESTAMP]: {
+        value: Datatypes.TIMESTAMP,
         label: "Timestamp",
         description: "Data in Timestamp format",
         icon: "fa fa-hashtag",
     },
 
-    [Datatype.BINARY]: {
-        value: Datatype.BINARY,
+    [Datatypes.BINARY]: {
+        value: Datatypes.BINARY,
         label: "Binary",
         description: "Data in Binary format",
         icon: "fa fa-hashtag",
     },
 
-    [Datatype.JSON]: {
-        value: Datatype.JSON,
+    [Datatypes.JSON]: {
+        value: Datatypes.JSON,
         label: "JSON",
         description: "Data in JSON format",
         icon: "fa fa-code",
     },
 
-    [Datatype.JSONB]: {
-        value: Datatype.JSONB,
+    [Datatypes.JSONB]: {
+        value: Datatypes.JSONB,
         label: "JSONB",
         description: "Data in JSONB format",
         icon: "fa fa-code",
     },
 
-    [Datatype.OBJECT]: {
-        value: Datatype.OBJECT,
+    [Datatypes.OBJECT]: {
+        value: Datatypes.OBJECT,
         label: "Object",
         description: "Data in JSONB format",
         icon: "fa fa-code",
@@ -152,99 +152,99 @@ export const DATATYPE_META: {
     // // // //
     // Array Datatypes
 
-    [Datatype.UUID_ARRAY]: {
-        value: Datatype.UUID_ARRAY,
+    [Datatypes.UUID_ARRAY]: {
+        value: Datatypes.UUID_ARRAY,
         label: "UUID Array",
         description: "An array of UUIDs",
         icon: "fa fa-tags",
     },
 
-    [Datatype.OBJECT_ID_ARRAY]: {
-        value: Datatype.STRING_ARRAY,
+    [Datatypes.OBJECT_ID_ARRAY]: {
+        value: Datatypes.STRING_ARRAY,
         label: "ObjectID Array",
         description: "An array of ObjectIDs",
         icon: "fa fa-tags",
     },
 
-    [Datatype.STRING_ARRAY]: {
-        value: Datatype.STRING_ARRAY,
+    [Datatypes.STRING_ARRAY]: {
+        value: Datatypes.STRING_ARRAY,
         label: "String Array",
         description: "An array of Strings",
         icon: "fa fa-tags",
     },
 
-    [Datatype.TEXT_ARRAY]: {
-        value: Datatype.TEXT_ARRAY,
+    [Datatypes.TEXT_ARRAY]: {
+        value: Datatypes.TEXT_ARRAY,
         label: "Text Array",
         description: "An array of Text",
         icon: "fa fa-tags",
     },
 
-    [Datatype.INT_ARRAY]: {
-        value: Datatype.INT_ARRAY,
+    [Datatypes.INT_ARRAY]: {
+        value: Datatypes.INT_ARRAY,
         label: "Integer Array",
         description: "An array of Integers",
         icon: "fa fa-tags",
     },
 
-    [Datatype.BIGINT_ARRAY]: {
-        value: Datatype.BIGINT_ARRAY,
+    [Datatypes.BIGINT_ARRAY]: {
+        value: Datatypes.BIGINT_ARRAY,
         label: "BigInt Array",
         description: "An array of BigInts",
         icon: "fa fa-tags",
     },
 
-    [Datatype.FLOAT_ARRAY]: {
-        value: Datatype.FLOAT_ARRAY,
+    [Datatypes.FLOAT_ARRAY]: {
+        value: Datatypes.FLOAT_ARRAY,
         label: "Float Array",
         description: "An array of Floats",
         icon: "fa fa-tags",
     },
 
-    [Datatype.DECIMAL_ARRAY]: {
-        value: Datatype.DECIMAL_ARRAY,
+    [Datatypes.DECIMAL_ARRAY]: {
+        value: Datatypes.DECIMAL_ARRAY,
         label: "Decimal Array",
         description: "An array of Decimals",
         icon: "fa fa-tags",
     },
 
-    [Datatype.NUMERIC_ARRAY]: {
-        value: Datatype.NUMERIC_ARRAY,
+    [Datatypes.NUMERIC_ARRAY]: {
+        value: Datatypes.NUMERIC_ARRAY,
         label: "Numeric Array",
         description: "An array of Numerics",
         icon: "fa fa-tags",
     },
 
-    [Datatype.BOOLEAN_ARRAY]: {
-        value: Datatype.BOOLEAN_ARRAY,
+    [Datatypes.BOOLEAN_ARRAY]: {
+        value: Datatypes.BOOLEAN_ARRAY,
         label: "Boolean Array",
         description: "An array of Booleans",
         icon: "fa fa-tags",
     },
 
-    [Datatype.DATE_ARRAY]: {
-        value: Datatype.DATE_ARRAY,
+    [Datatypes.DATE_ARRAY]: {
+        value: Datatypes.DATE_ARRAY,
         label: "Date Array",
         description: "An array of Dates",
         icon: "fa fa-tags",
     },
 
-    [Datatype.TIME_ARRAY]: {
-        value: Datatype.TIME_ARRAY,
+    [Datatypes.TIME_ARRAY]: {
+        value: Datatypes.TIME_ARRAY,
         label: "Time Array",
         description: "An array of Times",
         icon: "fa fa-tags",
     },
 
-    [Datatype.DATETIME_ARRAY]: {
-        value: Datatype.DATETIME_ARRAY,
+    [Datatypes.DATETIME_ARRAY]: {
+        value: Datatypes.DATETIME_ARRAY,
         label: "Datetime Array",
         description: "An array of Datetimes",
         icon: "fa fa-tags",
     },
 
-    [Datatype.TIMESTAMP_ARRAY]: {
-        value: Datatype.TIMESTAMP_ARRAY,
+    [Datatypes.TIMESTAMP_ARRAY]: {
+        value: Datatypes.TIMESTAMP_ARRAY,
         label: "Timestamp Array",
         description: "An array of Timestamps",
         icon: "fa fa-tags",
@@ -252,15 +252,15 @@ export const DATATYPE_META: {
 
     // // // //
     // Special Datatypes
-    [Datatype.SINGLE_FILE]: {
-        value: Datatype.SINGLE_FILE,
+    [Datatypes.SINGLE_FILE]: {
+        value: Datatypes.SINGLE_FILE,
         label: "File Upload",
         description: "Single file upload",
         icon: "fa fa-file",
     },
 
-    [Datatype.SINGLE_IMAGE]: {
-        value: Datatype.SINGLE_IMAGE,
+    [Datatypes.SINGLE_IMAGE]: {
+        value: Datatypes.SINGLE_IMAGE,
         label: "Image Upload",
         description: "Single image upload",
         icon: "fa fa-image",

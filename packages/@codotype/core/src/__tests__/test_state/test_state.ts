@@ -1,5 +1,5 @@
 import {
-    Datatype,
+    Datatypes,
     ConfigurationGroup,
     RelationTypes,
     GroupLayoutVariants,
@@ -38,6 +38,8 @@ import { PropertyPreviewLayoutVariant } from "../../property-preview";
 import { PropertyLayoutVariants } from "../../configuration-property";
 
 // // // //
+
+// TODO - clean up test state module, growing impossible to work with
 
 export const ComponentBuilderConfigurationProperty: ConfigurationProperty = {
     identifier: "components",
@@ -668,7 +670,7 @@ export const userSchema: SchemaInput = {
 
 export const emailAttribute: Attribute = {
     id: "email-attr",
-    datatype: Datatype.STRING,
+    datatype: Datatypes.STRING,
     defaultValue: null,
     identifiers: {
         title: "Email",
@@ -707,7 +709,7 @@ export const movieSchema: SchemaInput = {
     attributes: [
         {
             id: "name-attr",
-            datatype: Datatype.STRING,
+            datatype: Datatypes.STRING,
             defaultValue: null,
             identifiers: {
                 title: "Name",
@@ -772,10 +774,10 @@ export const dummyGeneratorMeta: PluginMetadata = {
         documentation: "",
         defaultSchemas: [],
         supportedDatatypes: [
-            Datatype.STRING,
-            Datatype.TEXT,
-            Datatype.NUMERIC,
-            Datatype.TIMESTAMP,
+            Datatypes.STRING,
+            Datatypes.TEXT,
+            Datatypes.NUMERIC,
+            Datatypes.TIMESTAMP,
         ], // The datatypes supported by this generator.Only an array of DATATYPE_ * identifiers that correspond to values defined in @codotype/core are accepted.
         supportedRelations: [RelationTypes.TO_ONE, RelationTypes.TO_MANY], // The relation types supported by this generator.Only an array of RELATION_TYPE_ * identifiers that correspond to values defined in @codotype/core are accepted.
         defaultAttributes: [
@@ -791,7 +793,7 @@ export const dummyGeneratorMeta: PluginMetadata = {
                 addons: {
                     [ATTRIBUTE_ADDON_PRIMARY_KEY.identifier]: true,
                 },
-                datatype: Datatype.UUID,
+                datatype: Datatypes.UUID,
                 locked: true,
                 source: SchemaCreators.plugin,
                 internalNote: "",

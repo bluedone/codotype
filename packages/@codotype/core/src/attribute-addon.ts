@@ -1,4 +1,4 @@
-import { Datatype } from "./datatype";
+import { Datatype, Datatypes } from "./datatype";
 import { UUID } from "./uuid";
 import { PropertyType, DropdownOption } from "./configuration-property";
 import { PropertyTransformation } from "./property-transformation";
@@ -10,16 +10,12 @@ import { Content } from "./content";
 // AttributeAddon
 // Defines an interface that can be used to extend the `Attribute` interface with
 // additional properties that can be defined on a per-generator basis
-// TODO - should this support a layoutVariant? Yes.
-// TODO - wire up `validations` and `filters` here -> see `ConfigurationProperty` for details
 // TODO - add icon support -> ENUM of basic symbols ("asterisk" | "snowflake" | "star" | "tag" | "check" | etc. -> match icons up to addons
 // QUESTION - should this just wrap a ConfigurationProperty instance? -> Nah, best to keep
 // it simple - but abstract this a bit to share some common patterns with ConfigurationProperty
 export interface AttributeAddon {
-    id: UUID;
     content: Content;
     identifier: string; // "unique"
-    supportedDatatypes: Datatype[]; // [Datatype.STRING, Datatype.NUMBER]
     exclusive: boolean; // False - one schema can have multiple unique properties
     required: boolean; // Does this need to be populated?
     propertyType:
@@ -27,16 +23,20 @@ export interface AttributeAddon {
         | PropertyType.DROPDOWN
         | PropertyType.STRING
         | PropertyType.NUMBER; // Only stores primative data
-    dropdownOptions: DropdownOption[]; // Only used when datatype: OptionType.DROPDOWN;
     defaultValue: null | boolean | string | number;
+    dropdownOptions: DropdownOption[]; // Only used when datatype: OptionType.DROPDOWN;
+
     validations: PropertyValidation[];
     transformations: PropertyTransformation[];
+
+    supportedDatatypes: Datatype[]; // [Datatypes.STRING, Datatypes.NUMBER]
+    // supportedRelationTypes: RelationType[]; // [RelationType.toOne, RelationType.toMany]
 }
 
 // // // //
+// TODO - move all of this into test_state module
 
 export const ATTRIBUTE_ADDON_INDEX: AttributeAddon = {
-    id: "ATTRIBUTE_ADDON_INDEX",
     identifier: "Index",
     content: {
         label: "Index",
@@ -45,12 +45,12 @@ export const ATTRIBUTE_ADDON_INDEX: AttributeAddon = {
         icon: "",
     },
     supportedDatatypes: [
-        Datatype.STRING,
-        Datatype.NUMERIC,
-        Datatype.INT,
-        Datatype.TEXT,
-        Datatype.TIMESTAMP,
-        Datatype.TIME,
+        Datatypes.STRING,
+        Datatypes.NUMERIC,
+        Datatypes.INT,
+        Datatypes.TEXT,
+        Datatypes.TIMESTAMP,
+        Datatypes.TIME,
     ],
     exclusive: false,
     required: false,
@@ -62,7 +62,6 @@ export const ATTRIBUTE_ADDON_INDEX: AttributeAddon = {
 };
 
 export const ATTRIBUTE_ADDON_UNIQUE: AttributeAddon = {
-    id: "ATTRIBUTE_ADDON_UNIQUE",
     content: {
         label: "Unique key",
         description: "Whether this Attribute's value is unique",
@@ -71,11 +70,11 @@ export const ATTRIBUTE_ADDON_UNIQUE: AttributeAddon = {
     },
     identifier: "unique",
     supportedDatatypes: [
-        Datatype.STRING,
-        Datatype.NUMERIC,
-        Datatype.TEXT,
-        Datatype.TIMESTAMP,
-        Datatype.TIME,
+        Datatypes.STRING,
+        Datatypes.NUMERIC,
+        Datatypes.TEXT,
+        Datatypes.TIMESTAMP,
+        Datatypes.TIME,
     ],
     exclusive: false,
     required: false,
@@ -87,7 +86,6 @@ export const ATTRIBUTE_ADDON_UNIQUE: AttributeAddon = {
 };
 
 export const ATTRIBUTE_ADDON_REQUIRED: AttributeAddon = {
-    id: "ATTRIBUTE_ADDON_REQUIRED",
     content: {
         label: "Required",
         description: "Whether this Attribute's value is required",
@@ -96,11 +94,11 @@ export const ATTRIBUTE_ADDON_REQUIRED: AttributeAddon = {
     },
     identifier: "required",
     supportedDatatypes: [
-        Datatype.STRING,
-        Datatype.NUMERIC,
-        Datatype.TEXT,
-        Datatype.TIMESTAMP,
-        Datatype.TIME,
+        Datatypes.STRING,
+        Datatypes.NUMERIC,
+        Datatypes.TEXT,
+        Datatypes.TIMESTAMP,
+        Datatypes.TIME,
     ],
     exclusive: false,
     required: false,
@@ -112,7 +110,6 @@ export const ATTRIBUTE_ADDON_REQUIRED: AttributeAddon = {
 };
 
 export const ATTRIBUTE_ADDON_NULLABLE: AttributeAddon = {
-    id: "ATTRIBUTE_ADDON_NULLABLE",
     content: {
         label: "Nullable",
         description: "Whether this Attribute's value is nullable",
@@ -121,11 +118,11 @@ export const ATTRIBUTE_ADDON_NULLABLE: AttributeAddon = {
     },
     identifier: "nullable",
     supportedDatatypes: [
-        Datatype.STRING,
-        Datatype.NUMERIC,
-        Datatype.TEXT,
-        Datatype.TIMESTAMP,
-        Datatype.TIME,
+        Datatypes.STRING,
+        Datatypes.NUMERIC,
+        Datatypes.TEXT,
+        Datatypes.TIMESTAMP,
+        Datatypes.TIME,
     ],
     exclusive: false,
     required: false,
@@ -137,7 +134,6 @@ export const ATTRIBUTE_ADDON_NULLABLE: AttributeAddon = {
 };
 
 export const ATTRIBUTE_ADDON_PRIMARY_KEY: AttributeAddon = {
-    id: "ATTRIBUTE_ADDON_PRIMARY_KEY",
     content: {
         label: "Primary Key",
         description:
@@ -147,11 +143,11 @@ export const ATTRIBUTE_ADDON_PRIMARY_KEY: AttributeAddon = {
     },
     identifier: "primaryKey",
     supportedDatatypes: [
-        Datatype.STRING,
-        Datatype.NUMERIC,
-        Datatype.TEXT,
-        Datatype.TIMESTAMP,
-        Datatype.TIME,
+        Datatypes.STRING,
+        Datatypes.NUMERIC,
+        Datatypes.TEXT,
+        Datatypes.TIMESTAMP,
+        Datatypes.TIME,
     ],
     exclusive: true,
     required: false,
@@ -163,7 +159,6 @@ export const ATTRIBUTE_ADDON_PRIMARY_KEY: AttributeAddon = {
 };
 
 export const ATTRIBUTE_ADDON_SELECT: AttributeAddon = {
-    id: "ATTRIBUTE_ADDON_SELECT",
     content: {
         label: "Select",
         description:
@@ -173,11 +168,11 @@ export const ATTRIBUTE_ADDON_SELECT: AttributeAddon = {
     },
     identifier: "select",
     supportedDatatypes: [
-        Datatype.STRING,
-        Datatype.NUMERIC,
-        Datatype.TEXT,
-        Datatype.TIMESTAMP,
-        Datatype.TIME,
+        Datatypes.STRING,
+        Datatypes.NUMERIC,
+        Datatypes.TEXT,
+        Datatypes.TIMESTAMP,
+        Datatypes.TIME,
     ],
     exclusive: false,
     required: false,

@@ -21,6 +21,7 @@ export function buildRelation(params: {
     return {
         id: makeUniqueId(),
         type: relationInput.type,
+        internalNote: relationInput.internalNote,
         sourceSchemaId: sourceSchema.id,
         destinationSchemaId: destinationSchema.id,
         sourceRelationId: relationInput.id,

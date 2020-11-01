@@ -1,4 +1,49 @@
-export enum Datatype {
+export type Datatype =
+    // Standard datatypes
+    | "STRING"
+    | "TEXT"
+    | "INT"
+    | "BIGINT"
+    | "FLOAT"
+    | "DECIMAL"
+    | "NUMERIC"
+    | "BOOLEAN"
+    | "DATE"
+    | "TIME"
+    | "DATETIME"
+    | "TIMESTAMP"
+    | "BINARY"
+    | "JSON"
+    | "JSONB"
+    | "OBJECT"
+    | "ID"
+    | "UUID"
+    | "AUTO_INCREMENTED_ID"
+    | "OBJECT_ID"
+
+    // Array datatypes
+    | "STRING_ARRAY"
+    | "TEXT_ARRAY"
+    | "INT_ARRAY"
+    | "BIGINT_ARRAY"
+    | "FLOAT_ARRAY"
+    | "DECIMAL_ARRAY"
+    | "NUMERIC_ARRAY"
+    | "BOOLEAN_ARRAY"
+    | "DATE_ARRAY"
+    | "TIME_ARRAY"
+    | "DATETIME_ARRAY"
+    | "TIMESTAMP_ARRAY"
+    | "UUID_ARRAY"
+    | "OBJECT_ID_ARRAY"
+
+    // Special Datatypes
+    | "SINGLE_FILE"
+    | "SINGLE_IMAGE";
+
+// // // //
+
+export enum Datatypes {
     // Standard datatypes
     STRING = "STRING", // Postgres, MongoDB
     TEXT = "TEXT", // Postgres, MongoDB (Equiv. to String)

@@ -1,4 +1,11 @@
-import { SchemaInput, Datatype, Attribute, Schema, Relation } from "../";
+import {
+    SchemaInput,
+    Datatype,
+    Datatypes,
+    Attribute,
+    Schema,
+    Relation,
+} from "../";
 import { inflateSchema, buildRelations } from "./inflate";
 import { ProjectInput } from "../project";
 
@@ -11,63 +18,63 @@ export const getDatatypeValueJson = ({
     datatype: Datatype;
 }): string => {
     switch (datatype) {
-        // case Datatype.ID:
+        // case Datatypes.ID:
         //   return `1`;
-        case Datatype.UUID:
+        case Datatypes.UUID:
             return `"00112233-4455-6677-8899-aabbccddeeff"`;
-        case Datatype.STRING:
+        case Datatypes.STRING:
             return `"string"`;
-        case Datatype.TEXT:
+        case Datatypes.TEXT:
             return `"longer string for text"`;
-        case Datatype.INT:
+        case Datatypes.INT:
             return `128`;
-        case Datatype.BIGINT:
+        case Datatypes.BIGINT:
             return `12378971290123987`;
-        case Datatype.FLOAT:
+        case Datatypes.FLOAT:
             return `3.14159`;
-        case Datatype.DECIMAL:
+        case Datatypes.DECIMAL:
             return `3.14159`;
-        case Datatype.NUMERIC:
+        case Datatypes.NUMERIC:
             return `3.14159`;
-        case Datatype.BOOLEAN:
+        case Datatypes.BOOLEAN:
             return `true`;
-        case Datatype.JSON:
+        case Datatypes.JSON:
             return `{}`;
-        case Datatype.JSONB:
+        case Datatypes.JSONB:
             return `{}`;
-        case Datatype.DATE:
+        case Datatypes.DATE:
             return `"2019-03-11"`;
-        case Datatype.TIME:
+        case Datatypes.TIME:
             return `"17:04:14 GMT-0400"`;
-        case Datatype.DATETIME:
+        case Datatypes.DATETIME:
             return `"3/18/2019, 5:04:51 PM"`;
-        case Datatype.TIMESTAMP:
+        case Datatypes.TIMESTAMP:
             return `"3/18/2019, 5:04:51 PM"`;
-        case Datatype.UUID_ARRAY:
+        case Datatypes.UUID_ARRAY:
             return `["00112233-4455-6677-8899-aabbccddeeff"]`;
-        case Datatype.STRING_ARRAY:
+        case Datatypes.STRING_ARRAY:
             return `["string", "array"]`;
-        case Datatype.TEXT_ARRAY:
+        case Datatypes.TEXT_ARRAY:
             return `["text", "array"]`;
-        case Datatype.INT_ARRAY:
+        case Datatypes.INT_ARRAY:
             return `[128, 256]`;
-        case Datatype.BIGINT_ARRAY:
+        case Datatypes.BIGINT_ARRAY:
             return `[128128309810198, 128128309810198]`;
-        case Datatype.FLOAT_ARRAY:
+        case Datatypes.FLOAT_ARRAY:
             return `[3.14156, 64.23012]`;
-        case Datatype.DECIMAL_ARRAY:
+        case Datatypes.DECIMAL_ARRAY:
             return `[0.12390123, 0.12312442]`;
-        case Datatype.NUMERIC_ARRAY:
+        case Datatypes.NUMERIC_ARRAY:
             return `[128, 255.9]`;
-        case Datatype.BOOLEAN_ARRAY:
+        case Datatypes.BOOLEAN_ARRAY:
             return `[true, false, true]`;
-        case Datatype.DATE_ARRAY:
+        case Datatypes.DATE_ARRAY:
             return `["2019-03-11", "2020-03-11]`;
-        case Datatype.TIME_ARRAY:
+        case Datatypes.TIME_ARRAY:
             return `["17:04:14 GMT-0400", "12:04:14 GMT-0400"]`;
-        case Datatype.DATETIME_ARRAY:
+        case Datatypes.DATETIME_ARRAY:
             return `[128]`;
-        case Datatype.TIMESTAMP_ARRAY:
+        case Datatypes.TIMESTAMP_ARRAY:
             return `["3/18/2019, 5:04:51 PM", "3/20/2019, 1:04:51 PM"]`;
     }
 };
@@ -116,61 +123,61 @@ export const getDatatypeValueGraphQL = ({
     datatype: Datatype;
 }): string => {
     switch (datatype) {
-        case Datatype.UUID:
+        case Datatypes.UUID:
             return `String`;
-        case Datatype.STRING:
+        case Datatypes.STRING:
             return `String`;
-        case Datatype.TEXT:
+        case Datatypes.TEXT:
             return `String`;
-        case Datatype.INT:
+        case Datatypes.INT:
             return `Number`;
-        case Datatype.BIGINT:
+        case Datatypes.BIGINT:
             return `"Number`;
-        case Datatype.FLOAT:
+        case Datatypes.FLOAT:
             return `Number`;
-        case Datatype.DECIMAL:
+        case Datatypes.DECIMAL:
             return `Number`;
-        case Datatype.NUMERIC:
+        case Datatypes.NUMERIC:
             return `Number`;
-        case Datatype.BOOLEAN:
+        case Datatypes.BOOLEAN:
             return `Boolean`;
-        case Datatype.JSON:
+        case Datatypes.JSON:
             return `"{}"`;
-        case Datatype.JSONB:
+        case Datatypes.JSONB:
             return `"{}"`;
-        case Datatype.DATE:
+        case Datatypes.DATE:
             return `Date`;
-        case Datatype.TIME:
+        case Datatypes.TIME:
             return `Time`;
-        case Datatype.DATETIME:
+        case Datatypes.DATETIME:
             return `Date`;
-        case Datatype.TIMESTAMP:
+        case Datatypes.TIMESTAMP:
             return `Date`;
-        case Datatype.UUID_ARRAY:
+        case Datatypes.UUID_ARRAY:
             return `[String]`;
-        case Datatype.STRING_ARRAY:
+        case Datatypes.STRING_ARRAY:
             return `[String]`;
-        case Datatype.TEXT_ARRAY:
+        case Datatypes.TEXT_ARRAY:
             return `[String]`;
-        case Datatype.INT_ARRAY:
+        case Datatypes.INT_ARRAY:
             return `[Number]`;
-        case Datatype.BIGINT_ARRAY:
+        case Datatypes.BIGINT_ARRAY:
             return `[Number]`;
-        case Datatype.FLOAT_ARRAY:
+        case Datatypes.FLOAT_ARRAY:
             return `[Number]`;
-        case Datatype.DECIMAL_ARRAY:
+        case Datatypes.DECIMAL_ARRAY:
             return `[Number]`;
-        case Datatype.NUMERIC_ARRAY:
+        case Datatypes.NUMERIC_ARRAY:
             return `[Number]`;
-        case Datatype.BOOLEAN_ARRAY:
+        case Datatypes.BOOLEAN_ARRAY:
             return `[Boolean]`;
-        case Datatype.DATE_ARRAY:
+        case Datatypes.DATE_ARRAY:
             return `[Date]`;
-        case Datatype.TIME_ARRAY:
+        case Datatypes.TIME_ARRAY:
             return `[Time]`;
-        case Datatype.DATETIME_ARRAY:
+        case Datatypes.DATETIME_ARRAY:
             return `[Date]`;
-        case Datatype.TIMESTAMP_ARRAY:
+        case Datatypes.TIMESTAMP_ARRAY:
             return `[Date]`;
     }
 };
@@ -217,61 +224,61 @@ export const getDatatypeValueTypeScript = ({
     datatype: Datatype;
 }): string => {
     switch (datatype) {
-        case Datatype.UUID:
+        case Datatypes.UUID:
             return `string`;
-        case Datatype.STRING:
+        case Datatypes.STRING:
             return `string`;
-        case Datatype.TEXT:
+        case Datatypes.TEXT:
             return `string`;
-        case Datatype.INT:
+        case Datatypes.INT:
             return `number`;
-        case Datatype.BIGINT:
+        case Datatypes.BIGINT:
             return `"number`;
-        case Datatype.FLOAT:
+        case Datatypes.FLOAT:
             return `number`;
-        case Datatype.DECIMAL:
+        case Datatypes.DECIMAL:
             return `number`;
-        case Datatype.NUMERIC:
+        case Datatypes.NUMERIC:
             return `number`;
-        case Datatype.BOOLEAN:
+        case Datatypes.BOOLEAN:
             return `boolean`;
-        case Datatype.JSON:
+        case Datatypes.JSON:
             return `"{}"`;
-        case Datatype.JSONB:
+        case Datatypes.JSONB:
             return `"{}"`;
-        case Datatype.DATE:
+        case Datatypes.DATE:
             return `string`;
-        case Datatype.TIME:
+        case Datatypes.TIME:
             return `string`;
-        case Datatype.DATETIME:
+        case Datatypes.DATETIME:
             return `string`;
-        case Datatype.TIMESTAMP:
+        case Datatypes.TIMESTAMP:
             return `string`;
-        case Datatype.UUID_ARRAY:
+        case Datatypes.UUID_ARRAY:
             return `string[]`;
-        case Datatype.STRING_ARRAY:
+        case Datatypes.STRING_ARRAY:
             return `string[]`;
-        case Datatype.TEXT_ARRAY:
+        case Datatypes.TEXT_ARRAY:
             return `string[]`;
-        case Datatype.INT_ARRAY:
+        case Datatypes.INT_ARRAY:
             return `number[]`;
-        case Datatype.BIGINT_ARRAY:
+        case Datatypes.BIGINT_ARRAY:
             return `number[]`;
-        case Datatype.FLOAT_ARRAY:
+        case Datatypes.FLOAT_ARRAY:
             return `number[]`;
-        case Datatype.DECIMAL_ARRAY:
+        case Datatypes.DECIMAL_ARRAY:
             return `number[]`;
-        case Datatype.NUMERIC_ARRAY:
+        case Datatypes.NUMERIC_ARRAY:
             return `number[]`;
-        case Datatype.BOOLEAN_ARRAY:
+        case Datatypes.BOOLEAN_ARRAY:
             return `boolean[]`;
-        case Datatype.DATE_ARRAY:
+        case Datatypes.DATE_ARRAY:
             return `string[]`;
-        case Datatype.TIME_ARRAY:
+        case Datatypes.TIME_ARRAY:
             return `string[]`;
-        case Datatype.DATETIME_ARRAY:
+        case Datatypes.DATETIME_ARRAY:
             return `string[]`;
-        case Datatype.TIMESTAMP_ARRAY:
+        case Datatypes.TIMESTAMP_ARRAY:
             return `string[]`;
     }
 };

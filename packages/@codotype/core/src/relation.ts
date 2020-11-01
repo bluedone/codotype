@@ -45,41 +45,29 @@ export enum RelationTypes {
 export interface RelationInput {
     id: UUID;
     type: RelationType;
-    required: boolean; // TODO - keep this for now - should this be handled as an Addon? YES.
     source: SchemaCreators;
     internalNote: string;
     sourceSchemaID: UUID;
     destinationSchemaID: UUID;
     sourceSchemaAlias: string; // TODO - make this TokenPluralization?
     destinationSchemaAlias: string; // TODO - make this TokenPluralization?
+    // TODO - add addons here
 }
-
-// Relation constants
-export const DEFAULT_RELATION_INPUT: RelationInput = {
-    id: "",
-    type: null,
-    required: false,
-    source: SchemaCreators.user,
-    internalNote: "",
-    sourceSchemaID: "",
-    destinationSchemaID: "",
-    sourceSchemaAlias: "",
-    destinationSchemaAlias: "",
-};
 
 // // // //
 
 /**
  * Relation
  * Defines the Reference interface
- * TODO - add support for addons here -> see AttributeAddon for context
  */
 export interface Relation {
     id: UUID;
     type: RelationType;
+    internalNote: string;
     sourceRelationId: UUID;
     sourceSchemaId: UUID;
     destinationSchemaId: UUID;
+    // TODO - add addons here
     identifiers: {
         source: {
             canonical: TokenPluralization;

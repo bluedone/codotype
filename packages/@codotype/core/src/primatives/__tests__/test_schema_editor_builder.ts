@@ -1,5 +1,5 @@
 import { SchemaEditorBuilder } from "../SchemaEditor";
-import { Datatype } from "../../datatype";
+import { Datatypes } from "../../datatype";
 import { RelationTypes } from "../../relation";
 
 // // // //
@@ -7,7 +7,7 @@ import { RelationTypes } from "../../relation";
 describe("factory", () => {
     test("works", () => {
         const schemaEditor = new SchemaEditorBuilder({
-            supportedDatatypes: [Datatype.STRING],
+            supportedDatatypes: [Datatypes.STRING],
             supportedRelations: [RelationTypes.TO_ONE],
         });
 
