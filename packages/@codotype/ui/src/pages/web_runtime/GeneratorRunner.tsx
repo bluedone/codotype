@@ -11,7 +11,7 @@ interface GenerateCodeProps {
     project: Project;
 }
 
-interface GeneratorRunnerProps {
+interface PluginRunnerProps {
     generator: PluginMetadata;
     children: (childProps: {
         generateCode: (params: GenerateCodeProps) => void;
@@ -19,11 +19,11 @@ interface GeneratorRunnerProps {
 }
 
 /**
- * GeneratorRunner
+ * PluginRunner
  * Runs the generator to produce output through the API
- * @param props - see `GeneratorRunnerProps`
+ * @param props - see `PluginRunnerProps`
  */
-export function GeneratorRunner(props: GeneratorRunnerProps) {
+export function PluginRunner(props: PluginRunnerProps) {
     const [finished, setFinished] = React.useState<boolean>(false);
 
     function reset() {

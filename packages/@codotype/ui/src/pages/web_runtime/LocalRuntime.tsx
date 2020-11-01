@@ -1,7 +1,7 @@
 import * as React from "react";
-import { GeneratorFetcher } from "./GeneratorFetcher";
+import { PluginFetcher } from "./GeneratorFetcher";
 import { LocalStorageProvider } from "./LocalStorageProvider";
-import { GeneratorRunner } from "./GeneratorRunner";
+import { PluginRunner } from "./GeneratorRunner";
 import { ProjectEditor } from "../../components/project_editor";
 
 // // // //
@@ -12,9 +12,9 @@ import { ProjectEditor } from "../../components/project_editor";
  */
 export function LocalRuntime() {
     return (
-        <GeneratorFetcher>
+        <PluginFetcher>
             {({ generators }) => (
-                <GeneratorRunner generator={generators[0]}>
+                <PluginRunner generator={generators[0]}>
                     {({ generateCode }) => (
                         <LocalStorageProvider generator={generators[0]}>
                             {({ project, clearProject, setProject }) => (
@@ -32,8 +32,8 @@ export function LocalRuntime() {
                             )}
                         </LocalStorageProvider>
                     )}
-                </GeneratorRunner>
+                </PluginRunner>
             )}
-        </GeneratorFetcher>
+        </PluginFetcher>
     );
 }

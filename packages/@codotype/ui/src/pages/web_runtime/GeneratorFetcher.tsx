@@ -5,16 +5,16 @@ import { LoadingPage } from "../../components/LoadingPage";
 
 // // // //
 
-interface GeneratorFetcherProps {
+interface PluginFetcherProps {
     children: (childProps: { generators: PluginMetadata[] }) => React.ReactNode;
 }
 
 /**
  * GeneratorFetcher
  * Fetches generator metadata from the API
- * @param props - see `GeneratorFetcherProps`
+ * @param props - see `PluginFetcherProps`
  */
-export function GeneratorFetcher(props: GeneratorFetcherProps) {
+export function PluginFetcher(props: PluginFetcherProps) {
     const [{ data, loading, error }] = useAxios("/api/generators");
 
     // Renders PageLoader component

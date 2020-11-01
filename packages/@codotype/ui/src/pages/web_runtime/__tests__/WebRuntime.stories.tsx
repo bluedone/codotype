@@ -10,6 +10,7 @@ import {
     CreatedByValues,
     PluginMetadata,
     testState,
+    // makeIdentifier,
     // ATTRIBUTE_ADDON_UNIQUE,
     // ATTRIBUTE_ADDON_REQUIRED,
     // ATTRIBUTE_ADDON_NULLABLE,
@@ -24,7 +25,6 @@ import {
     DataPreviewActionType,
     DataPreviewConstraintType,
     buildDefaultProject,
-    makeIdentifier,
     buildTokenCasing,
     buildTokenPluralization,
     buildDefaultConfiguration,
@@ -164,10 +164,10 @@ const pluginExample01: PluginMetadata = {
     schemaEditorConfiguration: {
         ...dummyPluginMetadata.schemaEditorConfiguration,
         attributeAddons: [
-            ATTRIBUTE_ADDON_UNIQUE,
-            ATTRIBUTE_ADDON_REQUIRED,
-            ATTRIBUTE_ADDON_NULLABLE,
-            ATTRIBUTE_ADDON_PRIMARY_KEY,
+            // ATTRIBUTE_ADDON_UNIQUE,
+            // ATTRIBUTE_ADDON_REQUIRED,
+            // ATTRIBUTE_ADDON_NULLABLE,
+            // ATTRIBUTE_ADDON_PRIMARY_KEY,
         ],
         configurationGroups: [
             {
@@ -258,10 +258,10 @@ const stories: [string, PluginMetadata][] = [
             schemaEditorConfiguration: {
                 ...dummyPluginMetadata.schemaEditorConfiguration,
                 attributeAddons: [
-                    ATTRIBUTE_ADDON_UNIQUE,
-                    ATTRIBUTE_ADDON_REQUIRED,
-                    ATTRIBUTE_ADDON_NULLABLE,
-                    ATTRIBUTE_ADDON_PRIMARY_KEY,
+                    // ATTRIBUTE_ADDON_UNIQUE,
+                    // ATTRIBUTE_ADDON_REQUIRED,
+                    // ATTRIBUTE_ADDON_NULLABLE,
+                    // ATTRIBUTE_ADDON_PRIMARY_KEY,
                 ],
                 configurationGroups: [
                     {
@@ -287,10 +287,10 @@ const stories: [string, PluginMetadata][] = [
             schemaEditorConfiguration: {
                 ...dummyPluginMetadata.schemaEditorConfiguration,
                 attributeAddons: [
-                    ATTRIBUTE_ADDON_UNIQUE,
-                    ATTRIBUTE_ADDON_REQUIRED,
-                    ATTRIBUTE_ADDON_NULLABLE,
-                    ATTRIBUTE_ADDON_PRIMARY_KEY,
+                    // ATTRIBUTE_ADDON_UNIQUE,
+                    // ATTRIBUTE_ADDON_REQUIRED,
+                    // ATTRIBUTE_ADDON_NULLABLE,
+                    // ATTRIBUTE_ADDON_PRIMARY_KEY,
                 ],
                 defaultAttributes: [
                     {
@@ -303,7 +303,7 @@ const stories: [string, PluginMetadata][] = [
                             kebab: "id",
                         },
                         addons: {
-                            [ATTRIBUTE_ADDON_PRIMARY_KEY.identifier]: true,
+                            // [ATTRIBUTE_ADDON_PRIMARY_KEY.identifier]: true,
                         },
                         datatype: Datatypes.UUID,
                         locked: true,
@@ -412,48 +412,48 @@ const stories: [string, PluginMetadata][] = [
                     }),
                 ],
                 attributeAddons: [
-                    ATTRIBUTE_ADDON_UNIQUE,
-                    ATTRIBUTE_ADDON_NULLABLE,
-                    ATTRIBUTE_ADDON_PRIMARY_KEY,
-                    {
-                        ...ATTRIBUTE_ADDON_REQUIRED,
-                        supportedDatatypes: [
-                            Datatypes.STRING,
-                            Datatypes.DATE,
-                            Datatypes.DATETIME,
-                            Datatypes.INTEGER,
-                            Datatypes.FLOAT,
-                            Datatypes.STRING_ARRAY,
-                        ],
-                    },
-                    {
-                        ...ATTRIBUTE_ADDON_REQUIRED,
-                        label: "Mock Data",
-                        identifier: "mock_data_type",
-                        description:
-                            "Type of Mockaroo mock data to use for this field",
-                        propertyType: OptionType.DROPDOWN,
-                        dropdownOptions: [
-                            {
-                                value: "name",
-                                label: "Name",
-                                description: "First + Last",
-                            },
-                            {
-                                value: "zipcode",
-                                label: "Zipcode",
-                                description: "Zipcode",
-                            },
-                        ],
-                        supportedDatatypes: [
-                            Datatypes.STRING,
-                            Datatypes.DATE,
-                            Datatypes.DATETIME,
-                            Datatypes.INTEGER,
-                            Datatypes.FLOAT,
-                            Datatypes.STRING_ARRAY,
-                        ],
-                    },
+                    // ATTRIBUTE_ADDON_UNIQUE,
+                    // ATTRIBUTE_ADDON_NULLABLE,
+                    // ATTRIBUTE_ADDON_PRIMARY_KEY,
+                    // {
+                    //     ...ATTRIBUTE_ADDON_REQUIRED,
+                    //     supportedDatatypes: [
+                    //         Datatypes.STRING,
+                    //         Datatypes.DATE,
+                    //         Datatypes.DATETIME,
+                    //         Datatypes.INTEGER,
+                    //         Datatypes.FLOAT,
+                    //         Datatypes.STRING_ARRAY,
+                    //     ],
+                    // },
+                    // {
+                    //     ...ATTRIBUTE_ADDON_REQUIRED,
+                    //     label: "Mock Data",
+                    //     identifier: "mock_data_type",
+                    //     description:
+                    //         "Type of Mockaroo mock data to use for this field",
+                    //     propertyType: OptionType.DROPDOWN,
+                    //     dropdownOptions: [
+                    //         {
+                    //             value: "name",
+                    //             label: "Name",
+                    //             description: "First + Last",
+                    //         },
+                    //         {
+                    //             value: "zipcode",
+                    //             label: "Zipcode",
+                    //             description: "Zipcode",
+                    //         },
+                    //     ],
+                    //     supportedDatatypes: [
+                    //         Datatypes.STRING,
+                    //         Datatypes.DATE,
+                    //         Datatypes.DATETIME,
+                    //         Datatypes.INTEGER,
+                    //         Datatypes.FLOAT,
+                    //         Datatypes.STRING_ARRAY,
+                    //     ],
+                    // },
                 ],
                 defaultRelations: [
                     {
@@ -477,7 +477,7 @@ const stories: [string, PluginMetadata][] = [
                             kebab: "id",
                         },
                         addons: {
-                            [ATTRIBUTE_ADDON_PRIMARY_KEY.identifier]: true,
+                            // [ATTRIBUTE_ADDON_PRIMARY_KEY.identifier]: true,
                         },
                         datatype: Datatypes.UUID,
                         locked: true,
@@ -520,9 +520,9 @@ const stories: [string, PluginMetadata][] = [
                                     kebab: "id",
                                 },
                                 addons: {
-                                    [ATTRIBUTE_ADDON_REQUIRED.identifier]: true,
-                                    [ATTRIBUTE_ADDON_PRIMARY_KEY.identifier]: true,
-                                    [ATTRIBUTE_ADDON_UNIQUE.identifier]: true,
+                                    // [ATTRIBUTE_ADDON_REQUIRED.identifier]: true,
+                                    // [ATTRIBUTE_ADDON_PRIMARY_KEY.identifier]: true,
+                                    // [ATTRIBUTE_ADDON_UNIQUE.identifier]: true,
                                 },
                                 datatype: Datatypes.STRING,
                                 locked: true,
@@ -540,8 +540,8 @@ const stories: [string, PluginMetadata][] = [
                                     kebab: "email",
                                 },
                                 addons: {
-                                    [ATTRIBUTE_ADDON_REQUIRED.identifier]: true,
-                                    [ATTRIBUTE_ADDON_UNIQUE.identifier]: true,
+                                    // [ATTRIBUTE_ADDON_REQUIRED.identifier]: true,
+                                    // [ATTRIBUTE_ADDON_UNIQUE.identifier]: true,
                                 },
                                 datatype: Datatypes.STRING,
                                 locked: true,
