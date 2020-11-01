@@ -1,54 +1,54 @@
 import {
-    DataPreviewLayoutVariant,
-    DataPreviewRule,
-    DataPreviewConstraint,
-    DataPreviewConstraintTypes,
+    PropertyPreviewLayoutVariant,
+    PropertyPreviewRule,
+    PropertyPreviewConstraint,
+    PropertyPreviewConstraintTypes,
 } from "../../property-preview";
 import {
-    testDataPreviewConstraint01,
-    testDataPreviewConstraint02,
-    testDataPreviewAction01,
-    testDataPreviewAction02,
+    testPropertyPreviewConstraint01,
+    testPropertyPreviewConstraint02,
+    testPropertyPreviewAction01,
+    testPropertyPreviewAction02,
 } from "../../__tests__/test_state/data_preview_test_state";
 import {
-    applyDataPreview,
-    shouldApplyDataPreviewRule,
-} from "../applyDataPreview";
+    applyPropertyPreview,
+    shouldApplyPropertyPreviewRule,
+} from "../applyPropertyPreview";
 
 // // // //
 
 // testCase = [testName, props.data, props.constraint, expectedResult]
-const shouldApplyDataPreviewRuleTestCases: [
+const shouldApplyPropertyPreviewRuleTestCases: [
     string,
     any,
-    DataPreviewConstraint,
+    PropertyPreviewConstraint,
     boolean,
 ][] = [
     [
-        "DataPreviewConstraintTypes.equals",
+        "PropertyPreviewConstraintTypes.equals",
         { label: "My Label" },
         {
-            type: DataPreviewConstraintTypes.equals,
+            type: PropertyPreviewConstraintTypes.equals,
             value: "My Label",
             dataProperty: "label",
         },
         true,
     ],
     [
-        "DataPreviewConstraintTypes.contains",
+        "PropertyPreviewConstraintTypes.contains",
         { label: "My Label" },
         {
-            type: DataPreviewConstraintTypes.contains,
+            type: PropertyPreviewConstraintTypes.contains,
             value: "My",
             dataProperty: "label",
         },
         true,
     ],
     [
-        "DataPreviewConstraintTypes.contains",
+        "PropertyPreviewConstraintTypes.contains",
         { label: "My Label" },
         {
-            type: DataPreviewConstraintTypes.exists,
+            type: PropertyPreviewConstraintTypes.exists,
             value: "",
             dataProperty: "label",
         },
@@ -56,11 +56,11 @@ const shouldApplyDataPreviewRuleTestCases: [
     ],
 ];
 
-describe("shouldApplyDataPreviewRule", () => {
-    shouldApplyDataPreviewRuleTestCases.forEach(
+describe("shouldApplyPropertyPreviewRule", () => {
+    shouldApplyPropertyPreviewRuleTestCases.forEach(
         ([testName, data, constraint, expected]) => {
             test(testName, () => {
-                const result: boolean = shouldApplyDataPreviewRule({
+                const result: boolean = shouldApplyPropertyPreviewRule({
                     data,
                     constraint,
                 });
@@ -72,44 +72,51 @@ describe("shouldApplyDataPreviewRule", () => {
 
 // // // //
 
-// testCase = [testName, props.data, props.dataPreview, expectedResult]
-const applyDataPreviewTestCases: [string, any, DataPreviewRule[], string][] = [
-    ["DataPreviewConstraintTypes.equals", {}, [], ""],
+// testCase = [testName, props.data, props.propertyPreview, expectedResult]
+const applyPropertyPreviewTestCases: [
+    string,
+    any,
+    PropertyPreviewRule[],
+    string,
+][] = [
+    ["PropertyPreviewConstraintTypes.equals", {}, [], ""],
     [
         "test 02",
         { label: "" },
         [
             {
-                constraint: testDataPreviewConstraint01,
-                action: testDataPreviewAction01,
+                constraint: testPropertyPreviewConstraint01,
+                action: testPropertyPreviewAction01,
             },
         ],
         "Please define a label",
     ],
     [
-        "DataPreviewConstraintTypes.exists",
+        "PropertyPreviewConstraintTypes.exists",
         { label: "My Label" },
         [
             {
-                constraint: testDataPreviewConstraint02,
-                action: testDataPreviewAction02,
+                constraint: testPropertyPreviewConstraint02,
+                action: testPropertyPreviewAction02,
             },
         ],
         "Label: My Label",
     ],
 ];
 
-describe("/lib/applyDataPreview.ts", () => {
-    applyDataPreviewTestCases.forEach(([testName, data, rules, expected]) => {
-        test(testName, () => {
-            const result: string = applyDataPreview({
-                data,
-                dataPreview: {
-                    rules,
-                    variant: DataPreviewLayoutVariant.CODE_DARK,
-                },
+describe("/util/applyPropertyPreview.ts", () => {
+    applyPropertyPreviewTestCases.forEach(
+        ([testName, data, rules, expected]) => {
+            test(testName, () => {
+                const result: string = applyPropertyPreview({
+                    data,
+                    propertyPreview: {
+                        rules,
+                        variant: PropertyPreviewLayoutVariant.CODE_DARK,
+                    },
+                });
+                expect(expected).toBe(result);
             });
-            expect(expected).toBe(result);
-        });
-    });
+        },
+    );
 });

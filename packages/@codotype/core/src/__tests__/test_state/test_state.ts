@@ -34,7 +34,7 @@ import {
 } from "./configuration-properties";
 import { syntaxHighlighting } from "./documentation";
 import { ATTRIBUTE_ADDON_PRIMARY_KEY } from "../../attribute-addon";
-import { DataPreviewLayoutVariant } from "../../property-preview";
+import { PropertyPreviewLayoutVariant } from "../../property-preview";
 import { PropertyLayoutVariants } from "../../configuration-property";
 
 // // // //
@@ -58,9 +58,9 @@ export const ComponentBuilderConfigurationProperty: ConfigurationProperty = {
     dropdownOptions: [],
     transformations: [],
     validations: [],
-    dataPreview: {
+    preview: {
         rules: [],
-        variant: DataPreviewLayoutVariant.CODE_DARK,
+        variant: PropertyPreviewLayoutVariant.CODE_DARK,
     },
     properties: [
         {
@@ -82,9 +82,9 @@ export const ComponentBuilderConfigurationProperty: ConfigurationProperty = {
             layoutVariant: PropertyLayoutVariants.COL_12,
             transformations: [],
             validations: [],
-            dataPreview: {
+            preview: {
                 rules: [],
-                variant: DataPreviewLayoutVariant.CODE_DARK,
+                variant: PropertyPreviewLayoutVariant.CODE_DARK,
             },
         },
         {
@@ -106,9 +106,9 @@ export const ComponentBuilderConfigurationProperty: ConfigurationProperty = {
             dropdownOptions: [],
             transformations: [],
             validations: [],
-            dataPreview: {
+            preview: {
                 rules: [],
-                variant: DataPreviewLayoutVariant.CODE_DARK,
+                variant: PropertyPreviewLayoutVariant.CODE_DARK,
             },
         },
         {
@@ -129,9 +129,9 @@ export const ComponentBuilderConfigurationProperty: ConfigurationProperty = {
             allowDisable: false,
             transformations: [],
             validations: [],
-            dataPreview: {
+            preview: {
                 rules: [],
-                variant: DataPreviewLayoutVariant.CODE_DARK,
+                variant: PropertyPreviewLayoutVariant.CODE_DARK,
             },
             properties: [
                 {
@@ -153,9 +153,9 @@ export const ComponentBuilderConfigurationProperty: ConfigurationProperty = {
                     properties: [],
                     transformations: [],
                     validations: [],
-                    dataPreview: {
+                    preview: {
                         rules: [],
-                        variant: DataPreviewLayoutVariant.CODE_DARK,
+                        variant: PropertyPreviewLayoutVariant.CODE_DARK,
                     },
                 },
                 {
@@ -177,9 +177,9 @@ export const ComponentBuilderConfigurationProperty: ConfigurationProperty = {
                     properties: [],
                     transformations: [],
                     validations: [],
-                    dataPreview: {
+                    preview: {
                         rules: [],
-                        variant: DataPreviewLayoutVariant.CODE_DARK,
+                        variant: PropertyPreviewLayoutVariant.CODE_DARK,
                     },
                 },
                 {
@@ -201,9 +201,9 @@ export const ComponentBuilderConfigurationProperty: ConfigurationProperty = {
                     properties: [],
                     transformations: [],
                     validations: [],
-                    dataPreview: {
+                    preview: {
                         rules: [],
-                        variant: DataPreviewLayoutVariant.CODE_DARK,
+                        variant: PropertyPreviewLayoutVariant.CODE_DARK,
                     },
                 },
             ],
@@ -249,15 +249,15 @@ export const ComponentBuilderConfigurationProperty: ConfigurationProperty = {
                     properties: [],
                     transformations: [],
                     validations: [],
-                    dataPreview: {
+                    preview: {
                         rules: [],
-                        variant: DataPreviewLayoutVariant.CODE_DARK,
+                        variant: PropertyPreviewLayoutVariant.CODE_DARK,
                     },
                 },
             ],
-            dataPreview: {
+            preview: {
                 rules: [],
-                variant: DataPreviewLayoutVariant.CODE_DARK,
+                variant: PropertyPreviewLayoutVariant.CODE_DARK,
             },
         },
     ],
@@ -282,9 +282,9 @@ export const ComponentBuilderConfigurationPropertySingleText: ConfigurationPrope
     dropdownOptions: [],
     transformations: [],
     validations: [],
-    dataPreview: {
+    preview: {
         rules: [],
-        variant: DataPreviewLayoutVariant.CODE_DARK,
+        variant: PropertyPreviewLayoutVariant.CODE_DARK,
     },
 };
 
@@ -314,9 +314,9 @@ export const ComponentBuilderConfigurationPropertySingleDropdown: ConfigurationP
         },
         { value: "OPTION_02", label: "Two" },
     ],
-    dataPreview: {
+    preview: {
         rules: [],
-        variant: DataPreviewLayoutVariant.CODE_DARK,
+        variant: PropertyPreviewLayoutVariant.CODE_DARK,
     },
 };
 
@@ -340,9 +340,9 @@ export const ComponentBuilderConfigurationPropertySingleNumber: ConfigurationPro
     dropdownOptions: [],
     transformations: [],
     validations: [],
-    dataPreview: {
+    preview: {
         rules: [],
-        variant: DataPreviewLayoutVariant.CODE_DARK,
+        variant: PropertyPreviewLayoutVariant.CODE_DARK,
     },
 };
 
@@ -365,9 +365,9 @@ export const ComponentBuilderConfigurationPropertyWithInstance01: ConfigurationP
     validations: [],
     dropdownOptions: [],
     properties: [ComponentBuilderConfigurationPropertySingleDropdown],
-    dataPreview: {
+    preview: {
         rules: [],
-        variant: DataPreviewLayoutVariant.CODE_DARK,
+        variant: PropertyPreviewLayoutVariant.CODE_DARK,
     },
 };
 
@@ -390,9 +390,9 @@ export const ComponentBuilderConfigurationPropertyWithInstance: ConfigurationPro
     dropdownOptions: [],
     transformations: [],
     validations: [],
-    dataPreview: {
+    preview: {
         rules: [],
-        variant: DataPreviewLayoutVariant.CODE_DARK,
+        variant: PropertyPreviewLayoutVariant.CODE_DARK,
     },
     properties: [
         ComponentBuilderConfigurationPropertySingleDropdown,
@@ -415,9 +415,9 @@ export const ComponentBuilderConfigurationPropertyWithInstance: ConfigurationPro
             dropdownOptions: [],
             transformations: [],
             validations: [],
-            dataPreview: {
+            preview: {
                 rules: [],
-                variant: DataPreviewLayoutVariant.CODE_DARK,
+                variant: PropertyPreviewLayoutVariant.CODE_DARK,
             },
             properties: [
                 ComponentBuilderConfigurationPropertySingleText,
@@ -474,9 +474,9 @@ export const LambdaBuilderNameProperty: ConfigurationProperty = {
     dropdownOptions: [],
     transformations: [],
     validations: [],
-    dataPreview: {
+    preview: {
         rules: [],
-        variant: DataPreviewLayoutVariant.CODE_DARK,
+        variant: PropertyPreviewLayoutVariant.CODE_DARK,
     },
 };
 
@@ -498,9 +498,9 @@ export const LambdaLanguageProperty: ConfigurationProperty = {
     properties: [],
     transformations: [],
     validations: [],
-    dataPreview: {
+    preview: {
         rules: [],
-        variant: DataPreviewLayoutVariant.CODE_DARK,
+        variant: PropertyPreviewLayoutVariant.CODE_DARK,
     },
     dropdownOptions: [
         {
@@ -546,9 +546,9 @@ export const LambdaBuilderConfigurationGroup: ConfigurationGroup = {
             transformations: [],
             validations: [],
             properties: [LambdaBuilderNameProperty, LambdaLanguageProperty],
-            dataPreview: {
+            preview: {
                 rules: [],
-                variant: DataPreviewLayoutVariant.CODE_DARK,
+                variant: PropertyPreviewLayoutVariant.CODE_DARK,
             },
         },
     ],

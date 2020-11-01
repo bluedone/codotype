@@ -1,38 +1,38 @@
 import {
-    DataPreviewActionTypes,
-    DataPreviewConstraintTypes,
-    DataPreviewConstraint,
-    DataPreviewAction,
+    PropertyPreviewActionTypes,
+    PropertyPreviewConstraintTypes,
+    PropertyPreviewConstraint,
+    PropertyPreviewAction,
 } from "../../property-preview";
 
 // // // //
 
-export const testDataPreviewConstraint01: DataPreviewConstraint = {
+export const testPropertyPreviewConstraint01: PropertyPreviewConstraint = {
     dataProperty: "label",
-    type: DataPreviewConstraintTypes.equals,
+    type: PropertyPreviewConstraintTypes.equals,
     value: "",
 };
 
-export const testDataPreviewConstraint02: DataPreviewConstraint = {
+export const testPropertyPreviewConstraint02: PropertyPreviewConstraint = {
     dataProperty: "label",
-    type: DataPreviewConstraintTypes.exists,
+    type: PropertyPreviewConstraintTypes.exists,
     value: "",
 };
 
-export const testDataPreviewConstraint03: DataPreviewConstraint = {
+export const testPropertyPreviewConstraint03: PropertyPreviewConstraint = {
     dataProperty: "label",
-    type: DataPreviewConstraintTypes.contains,
+    type: PropertyPreviewConstraintTypes.contains,
     value: "hello",
 };
 
 // // // //
 
-export const testDataPreviewAction01: DataPreviewAction = {
-    type: DataPreviewActionTypes.literal,
+export const testPropertyPreviewAction01: PropertyPreviewAction = {
+    type: PropertyPreviewActionTypes.literal,
     template: "Please define a label",
 };
 
-export const testDataPreviewAction02: DataPreviewAction = {
-    type: DataPreviewActionTypes.stringTemplate,
+export const testPropertyPreviewAction02: PropertyPreviewAction = {
+    type: PropertyPreviewActionTypes.stringTemplate,
     template: "Label: {{data.label}}",
 };

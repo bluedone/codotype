@@ -30,18 +30,3 @@ export interface Attribute {
     locked: boolean;
     addons: AttributeAddonValue;
 }
-
-// // // //
-
-export const DEFAULT_ATTRIBUTE: Attribute = {
-    id: "",
-    datatype: null,
-    defaultValue: null,
-    identifiers: {
-        ...EMPTY_TOKEN_CASING,
-    },
-    internalNote: "",
-    source: SchemaCreators.user,
-    locked: false,
-    addons: {},
-};

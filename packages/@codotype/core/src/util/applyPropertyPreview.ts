@@ -1,33 +1,31 @@
 import {
-    DataPreview,
-    DataPreviewActionTypes,
-    DataPreviewConstraintTypes,
-    DataPreviewRule,
-    DataPreviewConstraint,
-    DataPreviewAction,
+    PropertyPreview,
+    PropertyPreviewActionTypes,
+    PropertyPreviewConstraintTypes,
+    PropertyPreviewRule,
+    PropertyPreviewConstraint,
+    PropertyPreviewAction,
 } from "../property-preview";
 import { OptionValueInstance } from "../configuration-property";
 
 // // // //
 
 /**
- * shouldApplyDataPreviewRule
- * Returns a boolean indicating whether or not a specific DataPreviewRule should be applied against props.data
- * @param props.data - The data that's being evaluated by the DataPreviewRule
- * @param props.rule - The DataPreviewRule being evaluated
- * TODO - write tests for this
- * TODO - write tests for this
+ * shouldApplyPropertyPreviewRule
+ * Returns a boolean indicating whether or not a specific PropertyPreviewRule should be applied against props.data
+ * @param props.data - The data that's being evaluated by the PropertyPreviewRule
+ * @param props.rule - The PropertyPreviewRule being evaluated
  */
-export function shouldApplyDataPreviewRule(props: {
+export function shouldApplyPropertyPreviewRule(props: {
     data: Record<string, OptionValueInstance>;
-    constraint: DataPreviewConstraint;
+    constraint: PropertyPreviewConstraint;
 }): boolean {
     const { constraint, data } = props;
 
     const sourceValue: any = data[constraint.dataProperty];
 
     // Handle EQUALS
-    if (constraint.type === DataPreviewConstraintTypes.equals) {
+    if (constraint.type === PropertyPreviewConstraintTypes.equals) {
         if (sourceValue === constraint.value) {
             return true;
         }
@@ -35,14 +33,14 @@ export function shouldApplyDataPreviewRule(props: {
 
     // Handle contains
     if (
-        constraint.type === DataPreviewConstraintTypes.contains &&
+        constraint.type === PropertyPreviewConstraintTypes.contains &&
         typeof sourceValue === "string"
     ) {
         return sourceValue.includes(constraint.value);
     }
 
     // Handle exists
-    if (constraint.type === DataPreviewConstraintTypes.exists) {
+    if (constraint.type === PropertyPreviewConstraintTypes.exists) {
         if (sourceValue) {
             return true;
         }
@@ -53,23 +51,23 @@ export function shouldApplyDataPreviewRule(props: {
 }
 
 /**
- * applyDataPreviewRule
- * @param props.data - The data that's being evaluated by the DataPreviewRule
- * @param props.rule - The DataPreviewRule being evaluated
+ * applyPropertyPreviewRule
+ * @param props.data - The data that's being evaluated by the PropertyPreviewRule
+ * @param props.rule - The PropertyPreviewRule being evaluated
  */
-export function applyDataPreviewRule(props: {
+export function applyPropertyPreviewRule(props: {
     data: Record<string, OptionValueInstance>;
-    action: DataPreviewAction;
+    action: PropertyPreviewAction;
 }): string {
     const { action, data } = props;
 
     // Handle LITERAL
-    if (action.type === DataPreviewActionTypes.literal) {
+    if (action.type === PropertyPreviewActionTypes.literal) {
         return action.template;
     }
 
     // Handle STRING_TEMPLATE
-    if (action.type === DataPreviewActionTypes.stringTemplate) {
+    if (action.type === PropertyPreviewActionTypes.stringTemplate) {
         let templateString = action.template;
         let templateFragments: string[] = [];
 
@@ -89,13 +87,12 @@ export function applyDataPreviewRule(props: {
             }
         }
 
-        // TODO - annotate
+        // Iterate over templateFragments and perform replacement operations to produce finalFragments array
         const finalFragments: string[] = [];
         templateFragments.forEach((tf) => {
             let finalFragment = "";
             Object.keys(data).forEach((key) => {
                 if (tf.includes(`data.${key}`)) {
-                    // TODO - handle non-string values here
                     finalFragment = String(data[key]);
                 }
             });
@@ -115,30 +112,35 @@ export function applyDataPreviewRule(props: {
 }
 
 /**
- * applyDataPreview
- * Applies DataPreview and returns resulting content
+ * applyPropertyPreview
+ * Applies PropertyPreview and returns resulting content
  * @param props.data - The data that's being inspected
- * @param props.dataPreview - The DataPreview being applied against props.data
+ * @param props.propertyPreview - The PropertyPreview being applied against props.data
  */
-export function applyDataPreview(props: {
+export function applyPropertyPreview(props: {
     data: Record<string, OptionValueInstance>;
-    dataPreview: DataPreview;
+    propertyPreview: PropertyPreview;
 }): string {
-    const { data, dataPreview } = props;
+    const { data, propertyPreview } = props;
 
     // Defines variable for return value
-    let dataPreviewContent: null | string = null;
+    let propertyPreviewContent: null | string = null;
 
     // Iterates over each rule and evaluates accordingly
-    dataPreview.rules.forEach((rule: DataPreviewRule) => {
-        // Skip others if dataPreviewContent is already defined
-        if (dataPreviewContent !== null) {
+    propertyPreview.rules.forEach((rule: PropertyPreviewRule) => {
+        // Skip others if propertyPreviewContent is already defined
+        if (propertyPreviewContent !== null) {
             return;
         }
 
-        // Invoke applyDataPreviewRule, if constraint is met
-        if (shouldApplyDataPreviewRule({ constraint: rule.constraint, data })) {
-            dataPreviewContent = applyDataPreviewRule({
+        // Invoke applyPropertyPreviewRule if constraint is met
+        if (
+            shouldApplyPropertyPreviewRule({
+                constraint: rule.constraint,
+                data,
+            })
+        ) {
+            propertyPreviewContent = applyPropertyPreviewRule({
                 action: rule.action,
                 data,
             });
@@ -146,5 +148,5 @@ export function applyDataPreview(props: {
     });
 
     // return content
-    return dataPreviewContent || "";
+    return propertyPreviewContent || "";
 }

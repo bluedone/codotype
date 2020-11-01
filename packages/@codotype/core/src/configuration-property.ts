@@ -1,6 +1,6 @@
 import { PropertyTransformation } from "./property-transformation";
 import { PropertyValidation } from "./property-validation";
-import { DataPreview } from "./property-preview";
+import { PropertyPreview } from "./property-preview";
 import { Content } from "./content";
 
 // // // //
@@ -78,7 +78,7 @@ export type OptionValue =
     | OptionValueInstance[]
     | null;
 
-// Todo - rename this to ConfigurationPropertyValue
+// TODO - rename this to ConfigurationPropertyValue
 export type OptionValueInstance =
     | OptionValueInstanceStandard
     | OptionValueInstanceAllowDisable;
@@ -136,7 +136,7 @@ export interface ConfigurationProperty {
     // Aesthetic
     enabledByDefault: boolean;
     allowDisable: boolean;
-    dataPreview: DataPreview;
+    preview: PropertyPreview;
     layoutVariant: PropertyLayoutVariant;
     // columnSpan: 3 | 4 | 6 | 8 | 9 | 12;
     // style: ConfigurationPropertyStyle

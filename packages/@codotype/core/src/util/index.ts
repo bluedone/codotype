@@ -14,4 +14,4 @@ export * from "./buildTokenCasing";
 export * from "./buildTokenPluralization";
 export * from "./schemaRenderer";
 export * from "./applyPropertyTransformations";
-export * from "./applyDataPreview";
+export * from "./applyPropertyPreview";

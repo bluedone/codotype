@@ -8,7 +8,10 @@ import {
 } from "../configuration-property";
 import { PropertyTransformation } from "../property-transformation";
 import { PropertyValidation } from "../property-validation";
-import { DataPreviewLayoutVariant, DataPreview } from "../property-preview";
+import {
+    PropertyPreviewLayoutVariant,
+    PropertyPreview,
+} from "../property-preview";
 import { Content } from "../content";
 
 // // // //
@@ -32,7 +35,7 @@ interface ConfigurationPropertyBuilderParams {
     properties?: ConfigurationProperty[];
     transformations?: PropertyTransformation[];
     validations?: PropertyValidation[];
-    dataPreview?: DataPreview;
+    preview?: PropertyPreview;
 }
 
 export class ConfigurationPropertyBuilder implements ConfigurationProperty {
@@ -55,9 +58,9 @@ export class ConfigurationPropertyBuilder implements ConfigurationProperty {
     dropdownOptions: DropdownOption[] = [];
     transformations: PropertyTransformation[] = [];
     validations: PropertyValidation[] = [];
-    dataPreview: DataPreview = {
+    preview: PropertyPreview = {
         rules: [],
-        variant: DataPreviewLayoutVariant.CODE_DARK,
+        variant: PropertyPreviewLayoutVariant.CODE_DARK,
     };
 
     constructor(params: ConfigurationPropertyBuilderParams) {
@@ -85,6 +88,6 @@ export class ConfigurationPropertyBuilder implements ConfigurationProperty {
         this.dropdownOptions = params.dropdownOptions || this.dropdownOptions;
         this.validations = params.validations || this.validations;
         this.transformations = params.transformations || this.transformations;
-        this.dataPreview = params.dataPreview || this.dataPreview;
+        this.preview = params.preview || this.preview;
     }
 }
