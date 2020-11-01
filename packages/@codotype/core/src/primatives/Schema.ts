@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from "uuid";
 import { SchemaInput, Attribute, RelationInput } from "..";
 import { CreatedBy, CreatedByValues } from "../created-by";
 import { TokenPluralization } from "../token";
-import { PluginConfiguration } from "../plugin";
+import { ConfigurationValue } from "../configuration-value";
 
 // // // //
 
@@ -13,7 +13,7 @@ interface SchemaBuilderParams {
     identifiers: TokenPluralization;
     source?: CreatedBy;
     locked?: boolean;
-    configuration?: PluginConfiguration;
+    configuration?: ConfigurationValue;
     internalNote?: string;
 }
 
@@ -24,7 +24,7 @@ export class SchemaBuilder implements SchemaInput {
     identifiers: TokenPluralization;
     createdBy: CreatedBy = CreatedByValues.user;
     locked: boolean = false;
-    configuration: PluginConfiguration = {};
+    configuration: ConfigurationValue = {};
     internalNote: string = "";
 
     constructor(params: SchemaBuilderParams) {

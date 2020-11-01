@@ -1,5 +1,5 @@
 import { SchemaInput } from "./schema";
-import { PluginConfiguration } from "./plugin";
+import { ConfigurationValue } from "./configuration-value";
 import { TokenCasing } from "./token";
 import { Schema } from "./";
 import { UUID } from "./uuid";
@@ -17,7 +17,7 @@ export interface ProjectInput {
     pluginID: string;
     pluginVersion: string;
     identifiers: TokenCasing;
-    configuration: PluginConfiguration;
+    configuration: ConfigurationValue;
     schemas: SchemaInput[];
     relations: RelationInput[];
 }
@@ -32,5 +32,5 @@ export interface Project {
     identifiers: TokenCasing;
     pluginID: string;
     pluginVersion: string;
-    configuration: PluginConfiguration;
+    configuration: ConfigurationValue;
 }

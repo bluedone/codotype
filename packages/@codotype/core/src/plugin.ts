@@ -1,5 +1,4 @@
 import { ConfigurationGroup } from "./configuration-option-types";
-import { OptionValueInstance } from "./configuration-property";
 import { ProjectInput } from "./project";
 import { Content } from "./content";
 import { SchemaEditorConfiguration } from "./schema-editor";
@@ -72,12 +71,4 @@ export interface PluginMetadata {
     schemaEditorConfiguration: SchemaEditorConfiguration;
     configurationGroups: ConfigurationGroup[]; // an array of OptionGroup objects that expose additional configuration provided by the Plugin
     exampleProjects: ProjectInput[];
-}
-
-/**
- * PluginConfiguration
- * TODO - annotate
- */
-export interface PluginConfiguration {
-    [key: string]: OptionValueInstance;
 }

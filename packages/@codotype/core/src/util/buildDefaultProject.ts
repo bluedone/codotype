@@ -3,7 +3,7 @@ import {
     ProjectInput,
     PropertyType,
     OptionValue,
-    PluginConfiguration,
+    ConfigurationValue,
     OptionValueInstance,
     ConfigurationGroup,
     ConfigurationGroupSection,
@@ -162,24 +162,24 @@ export function buildConfigurationGroupValue(
 
 /**
  * buildDefaultConfiguration
- * Builds a new PluginConfiguration instance based on an array of ConfigurationGroup instances
+ * Builds a new ConfigurationValue instance based on an array of ConfigurationGroup instances
  * @param configurationGroups - array of ConfigurationGroup instances
  */
 export function buildDefaultConfiguration(
     configurationGroups: ConfigurationGroup[],
-): PluginConfiguration {
-    // Defines default PluginConfiguration
-    const PluginConfiguration: PluginConfiguration = configurationGroups.reduce(
+): ConfigurationValue {
+    // Defines default ConfigurationValue
+    const configurationValue: ConfigurationValue = configurationGroups.reduce(
         (val, configurationGroup: ConfigurationGroup) => {
             const initialValue: OptionValueInstance = buildConfigurationGroupValue(
                 configurationGroup,
             );
             return { ...val, [configurationGroup.identifier]: initialValue };
         },
-        {}, // Passes in empty PluginConfiguration
+        {}, // Passes in empty ConfigurationValue
     );
 
-    return PluginConfiguration;
+    return configurationValue;
 }
 
 /**
@@ -190,8 +190,8 @@ export function buildDefaultConfiguration(
 export function buildDefaultProjectInput(
     pluginMetadata: PluginMetadata,
 ): ProjectInput {
-    // Defines default PluginConfiguration
-    const PluginConfiguration: PluginConfiguration = buildDefaultConfiguration(
+    // Defines default ConfigurationValue
+    const configuration: ConfigurationValue = buildDefaultConfiguration(
         pluginMetadata.configurationGroups,
     );
 
@@ -211,7 +211,7 @@ export function buildDefaultProjectInput(
         relations: [
             ...pluginMetadata.schemaEditorConfiguration.defaultRelations,
         ],
-        configuration: PluginConfiguration,
+        configuration,
     };
 
     // Returns the new project

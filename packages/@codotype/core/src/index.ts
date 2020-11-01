@@ -10,6 +10,7 @@ export * from "./plugin";
 export * from "./project";
 export * from "./generator";
 export * from "./configuration-property";
+export * from "./configuration-value";
 export * from "./created-by";
 export * from "./token";
 export * from "./plugin";

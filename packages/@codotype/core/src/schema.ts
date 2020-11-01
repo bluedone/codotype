@@ -1,5 +1,5 @@
 import { UUID } from "./uuid";
-import { PluginConfiguration } from "./plugin";
+import { ConfigurationValue } from "./configuration-value";
 import { Attribute } from "./attribute";
 import { Relation } from "./relation";
 import { TokenPluralization } from "./token";
@@ -18,7 +18,7 @@ export interface SchemaInput {
     attributes: Attribute[];
     identifiers: TokenPluralization;
     internalNote: string;
-    configuration: PluginConfiguration;
+    configuration: ConfigurationValue;
 }
 
 /**
@@ -33,5 +33,5 @@ export interface Schema {
     relations: Relation[];
     referencedBy: Relation[];
     identifiers: TokenPluralization;
-    configuration: PluginConfiguration;
+    configuration: ConfigurationValue;
 }
