@@ -1,3 +1,5 @@
+// TODO - add ID_ARRAY
+// TODO - add AUTO_INCREMENTED_ID_ARRAY
 export type Datatype =
     // Standard datatypes
     | "STRING"

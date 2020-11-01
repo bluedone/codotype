@@ -8,7 +8,7 @@ import { Attribute } from "../attribute";
 interface AttributeBuilderParams {
     id?: string;
     identifiers: TokenCasing;
-    datatype: Datatype;
+    datatype: Datatype | null;
     defaultValue?: null | string | boolean | number;
     internalNote?: string;
     source?: CreatedBy;

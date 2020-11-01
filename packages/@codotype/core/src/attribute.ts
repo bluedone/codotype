@@ -7,7 +7,7 @@ import { AddonsValue } from "./schema-editor-addon";
 // // // //
 
 export interface AttributeInput {
-    id: UUID | null;
+    id: UUID | null; // TODO - rename to identifier, rename token to tokens?
     datatype: Datatype | null;
     defaultValue: null | string | boolean | number;
     identifiers: TokenCasing; // Keep this, maybe allow users to edit later
@@ -18,7 +18,7 @@ export interface AttributeInput {
 }
 
 export interface Attribute {
-    id: UUID;
+    id: UUID; // TODO - rename to identifier?
     datatype: Datatype;
     defaultValue: null | string | boolean | number;
     identifiers: TokenCasing;

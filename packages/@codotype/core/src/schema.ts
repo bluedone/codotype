@@ -1,6 +1,6 @@
 import { UUID } from "./uuid";
 import { ConfigurationValue } from "./configuration-value";
-import { Attribute } from "./attribute";
+import { Attribute, AttributeInput } from "./attribute";
 import { Relation } from "./relation";
 import { TokenPluralization } from "./token";
 import { CreatedBy } from "./created-by";
@@ -15,7 +15,7 @@ export interface SchemaInput {
     id: UUID;
     createdBy: CreatedBy;
     locked: boolean;
-    attributes: Attribute[];
+    attributes: AttributeInput[];
     identifiers: TokenPluralization;
     internalNote: string;
     configuration: ConfigurationValue;
