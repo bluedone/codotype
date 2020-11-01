@@ -33,7 +33,7 @@ export function AttributePropertiesForm(props: AttributePropertiesFormProps) {
 
             <div className="col-sm-12">
                 <TokenCasingForm
-                    label={props.tokenCasing.label}
+                    label={props.tokenCasing.title}
                     onKeydownEnter={props.onKeydownEnter}
                     onChange={updatedTokenCasing => {
                         props.onChange(updatedTokenCasing);

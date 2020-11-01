@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Datatype } from "@codotype/core";
+import { Datatypes } from "@codotype/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faQuoteRight,
@@ -16,45 +16,47 @@ import { faClock, faFileCode } from "@fortawesome/free-regular-svg-icons";
 // // // //
 
 // Maps datatype to FontAwesome icon
-const mapDatatypeToIcon: { [key in Datatype]: IconDefinition } = {
-    [Datatype.STRING]: faQuoteRight,
-    [Datatype.TEXT]: faQuoteRight,
-    [Datatype.INTEGER]: faHashtag,
-    [Datatype.BIGINT]: faHashtag,
-    [Datatype.FLOAT]: faHashtag,
-    [Datatype.DECIMAL]: faHashtag,
-    [Datatype.NUMERIC]: faHashtag,
-    [Datatype.BOOLEAN]: faToggleOn,
-    [Datatype.DATE]: faCalendar,
-    [Datatype.TIME]: faClock,
-    [Datatype.DATETIME]: faCalendar,
-    [Datatype.TIMESTAMP]: faClock,
-    [Datatype.BINARY]: faFileCode,
-    [Datatype.JSON]: faCode,
-    [Datatype.JSONB]: faCode,
-    [Datatype.OBJECT]: faCode,
-    [Datatype.STRING_ARRAY]: faQuoteRight,
-    [Datatype.TEXT_ARRAY]: faQuoteRight,
-    [Datatype.INTEGER_ARRAY]: faHashtag,
-    [Datatype.BIGINT_ARRAY]: faHashtag,
-    [Datatype.FLOAT_ARRAY]: faHashtag,
-    [Datatype.DECIMAL_ARRAY]: faHashtag,
-    [Datatype.NUMERIC_ARRAY]: faHashtag,
-    [Datatype.BOOLEAN_ARRAY]: faToggleOn,
-    [Datatype.DATE_ARRAY]: faCalendar,
-    [Datatype.TIME_ARRAY]: faClock,
-    [Datatype.DATETIME_ARRAY]: faCalendar,
-    [Datatype.TIMESTAMP_ARRAY]: faClock,
-    [Datatype.SINGLE_FILE]: faFile,
-    [Datatype.SINGLE_IMAGE]: faFileImage,
-    [Datatype.UUID]: faQuoteRight,
-    [Datatype.UUID_ARRAY]: faQuoteRight,
-    [Datatype.OBJECT_ID]: faQuoteRight,
-    [Datatype.OBJECT_ID_ARRAY]: faQuoteRight,
+const mapDatatypeToIcon: { [key in Datatypes]: IconDefinition } = {
+    [Datatypes.STRING]: faQuoteRight,
+    [Datatypes.TEXT]: faQuoteRight,
+    [Datatypes.INT]: faHashtag,
+    [Datatypes.BIGINT]: faHashtag,
+    [Datatypes.FLOAT]: faHashtag,
+    [Datatypes.DECIMAL]: faHashtag,
+    [Datatypes.NUMERIC]: faHashtag,
+    [Datatypes.BOOLEAN]: faToggleOn,
+    [Datatypes.DATE]: faCalendar,
+    [Datatypes.TIME]: faClock,
+    [Datatypes.DATETIME]: faCalendar,
+    [Datatypes.TIMESTAMP]: faClock,
+    [Datatypes.BINARY]: faFileCode,
+    [Datatypes.JSON]: faCode,
+    [Datatypes.JSONB]: faCode,
+    [Datatypes.OBJECT]: faCode,
+    [Datatypes.STRING_ARRAY]: faQuoteRight,
+    [Datatypes.TEXT_ARRAY]: faQuoteRight,
+    [Datatypes.INT_ARRAY]: faHashtag,
+    [Datatypes.BIGINT_ARRAY]: faHashtag,
+    [Datatypes.FLOAT_ARRAY]: faHashtag,
+    [Datatypes.DECIMAL_ARRAY]: faHashtag,
+    [Datatypes.NUMERIC_ARRAY]: faHashtag,
+    [Datatypes.BOOLEAN_ARRAY]: faToggleOn,
+    [Datatypes.DATE_ARRAY]: faCalendar,
+    [Datatypes.TIME_ARRAY]: faClock,
+    [Datatypes.DATETIME_ARRAY]: faCalendar,
+    [Datatypes.TIMESTAMP_ARRAY]: faClock,
+    [Datatypes.SINGLE_FILE]: faFile,
+    [Datatypes.SINGLE_IMAGE]: faFileImage,
+    [Datatypes.UUID]: faQuoteRight,
+    [Datatypes.UUID_ARRAY]: faQuoteRight,
+    [Datatypes.OBJECT_ID]: faQuoteRight,
+    [Datatypes.OBJECT_ID_ARRAY]: faQuoteRight,
+    [Datatypes.ID]: faQuoteRight,
+    [Datatypes.AUTO_INCREMENTED_ID]: faQuoteRight,
 };
 
 export function DatatypeIcon(props: {
-    datatype: Datatype | null; // NOTE - only here because Attribute.datatype can be null, should be fixed
+    datatype: Datatypes | null; // NOTE - only here because Attribute.datatype can be null, should be fixed
     className?: string;
     size?: "xs";
 }) {

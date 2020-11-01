@@ -3,15 +3,13 @@ import { SortableListHeader } from "../sortable_list_header";
 import {
     Attribute,
     Datatype,
-    DEFAULT_ATTRIBUTE,
-    SchemaSource,
     AttributeAddon,
-    AttributeAddonValue,
-    Schema,
-    buildTokenCasing,
+    AttributeInput,
+    Primatives,
+    Datatypes,
 } from "@codotype/core";
 import { Droppable, DragDropContext } from "react-beautiful-dnd";
-import { AttributeFormModal, AttributeInput } from "./AttributeFormModal";
+import { AttributeFormModal } from "./AttributeFormModal";
 import { AttributeDeleteModal } from "./AttributeDeleteModal";
 import { AttributeListItem } from "./AttributeListItem";
 import { AttributeForm } from "./AttributeForm";
@@ -34,27 +32,6 @@ export function reorder<T>(
 }
 
 // // // //
-
-/**
- * buildDefaultAddonValue
- * Builds the default value for attribute.addons
- * TODO - replace with compatible function from @codotype/core
- * @param addons
- */
-export function buildDefaultAddonValue(
-    addons: AttributeAddon[],
-): AttributeAddonValue {
-    const addonValue: AttributeAddonValue = addons.reduce(
-        (av: AttributeAddonValue, addon: AttributeAddon) => {
-            return {
-                ...av,
-                [addon.identifier]: addon.defaultValue,
-            };
-        },
-        {},
-    );
-    return addonValue;
-}
 
 /**
  * disableSubmit
@@ -129,15 +106,17 @@ export function AttributeEditor(props: AttributeEditorProps) {
     function saveAttribute(params: { attributeInput: AttributeInput }) {
         // Insert new Attribute
         if (params.attributeInput.id === "") {
-            const newAttribute: Attribute = {
+            const newAttribute: AttributeInput = new Primatives.Attribute({
                 ...params.attributeInput,
-                addons: {
-                    ...buildDefaultAddonValue(props.addons),
-                    ...params.attributeInput.addons,
-                },
-                // TODO - replace with UUID function from @codotype/core
-                id: Math.random().toString(),
-            };
+            });
+            //  = {
+            //     addons: {
+            //         ...buildDefaultAddonValue(props.addons),
+            //         ...params.attributeInput.addons,
+            //     },
+            //     // TODO - replace with UUID function from @codotype/core
+            //     id: Math.random().toString(),
+            // };
             setState({
                 lastUpdatedAt: Date.now(),
                 attributes: [...props.attributes, newAttribute],
@@ -174,18 +153,16 @@ export function AttributeEditor(props: AttributeEditorProps) {
                 label="Attributes"
                 tooltip="shift+a"
                 onClick={() => {
-                    setAttributeInput({
-                        id: DEFAULT_ATTRIBUTE.id,
-                        datatype: DEFAULT_ATTRIBUTE.datatype,
-                        defaultValue: DEFAULT_ATTRIBUTE.datatype,
-                        identifiers: buildTokenCasing(
-                            DEFAULT_ATTRIBUTE.identifiers.label,
-                        ),
-                        internalNote: DEFAULT_ATTRIBUTE.internalNote,
-                        locked: DEFAULT_ATTRIBUTE.locked,
-                        source: SchemaSource.USER,
-                        addons: {},
-                    });
+                    const newAttribute: AttributeInput = new Primatives.Attribute(
+                        {
+                            datatype: Datatypes.STRING,
+                            identifiers: new Primatives.TokenCasing({
+                                title: "",
+                            }),
+                            addons: props.addons,
+                        },
+                    );
+                    setAttributeInput(newAttribute);
                 }}
             />
             {/* Renders AttributeFormModal */}
@@ -321,25 +298,28 @@ export function AttributeEditor(props: AttributeEditorProps) {
             {props.attributes.length === 0 && (
                 <AttributeListEmpty
                     onClick={() => {
-                        setAttributeInput({ ...DEFAULT_ATTRIBUTE });
+                        const newAttribute: AttributeInput = new Primatives.Attribute(
+                            {
+                                identifiers: new Primatives.TokenCasing({
+                                    title: "",
+                                }),
+                            },
+                        );
+                        setAttributeInput(newAttribute);
                     }}
                 />
             )}
             <Hotkey
                 keyName="shift+a"
                 onKeyDown={() => {
-                    setAttributeInput({
-                        id: DEFAULT_ATTRIBUTE.id,
-                        datatype: DEFAULT_ATTRIBUTE.datatype,
-                        defaultValue: DEFAULT_ATTRIBUTE.datatype,
-                        identifiers: buildTokenCasing(
-                            DEFAULT_ATTRIBUTE.identifiers.label,
-                        ),
-                        internalNote: DEFAULT_ATTRIBUTE.internalNote,
-                        locked: DEFAULT_ATTRIBUTE.locked,
-                        source: SchemaSource.USER,
-                        addons: {},
-                    });
+                    const newAttribute: AttributeInput = new Primatives.Attribute(
+                        {
+                            identifiers: new Primatives.TokenCasing({
+                                title: "",
+                            }),
+                        },
+                    );
+                    setAttributeInput(newAttribute);
                 }}
             />
         </div>

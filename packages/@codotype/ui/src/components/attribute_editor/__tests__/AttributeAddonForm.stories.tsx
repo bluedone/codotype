@@ -32,19 +32,19 @@ storiesOf("ProjectEditor/AttributeEditor/AttributeAddonForm", module).add(
                     addons={[
                         {
                             ...ATTRIBUTE_ADDON_NULLABLE,
-                            supportedDatatypes: [Datatype.BOOLEAN],
+                            supportedDatatypes: [Datatypes.BOOLEAN],
                         },
                         {
                             ...ATTRIBUTE_ADDON_PRIMARY_KEY,
-                            supportedDatatypes: [Datatype.BOOLEAN],
+                            supportedDatatypes: [Datatypes.BOOLEAN],
                         },
                         {
                             ...ATTRIBUTE_ADDON_REQUIRED,
-                            supportedDatatypes: [Datatype.BOOLEAN],
+                            supportedDatatypes: [Datatypes.BOOLEAN],
                         },
                         {
                             ...ATTRIBUTE_ADDON_UNIQUE,
-                            supportedDatatypes: [Datatype.BOOLEAN],
+                            supportedDatatypes: [Datatypes.BOOLEAN],
                         },
                     ]}
                     attributeCollection={[
@@ -57,7 +57,7 @@ storiesOf("ProjectEditor/AttributeEditor/AttributeAddonForm", module).add(
                     ]}
                     attributeInput={{
                         ...testState.emailAttribute,
-                        datatype: Datatype.BOOLEAN,
+                        datatype: Datatypes.BOOLEAN,
                         id: "",
                     }}
                     value={value}
