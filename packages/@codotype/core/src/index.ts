@@ -1,6 +1,5 @@
 export * from "./attribute";
 export * from "./runtime";
-export * from "./attribute-addon";
 export * from "./configuration-option-types";
 export * from "./datatype-meta";
 export * from "./datatype";
@@ -17,6 +16,8 @@ export * from "./uuid";
 export * from "./util";
 export * from "./primatives";
 export * from "./property-transformation";
+export * from "./schema-editor";
+export * from "./schema-editor-addon";
 export * from "./property-validation";
 export * from "./property-preview";
 

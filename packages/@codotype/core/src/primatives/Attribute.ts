@@ -1,6 +1,8 @@
 import { v4 as uuidv4 } from "uuid";
-import { TokenCasing, Datatype, SchemaCreators, AttributeAddonValue } from "..";
+import { TokenCasing, Datatype, SchemaCreators, AddonsValue } from "..";
 import { Attribute } from "../attribute";
+
+// // // //
 
 interface AttributeBuilderParams {
     id?: string;
@@ -10,7 +12,7 @@ interface AttributeBuilderParams {
     internalNote?: string;
     source?: SchemaCreators;
     locked?: boolean;
-    addons?: AttributeAddonValue;
+    addons?: AddonsValue;
 }
 
 export class AttributeBuilder implements Attribute {
@@ -21,7 +23,7 @@ export class AttributeBuilder implements Attribute {
     internalNote: string = "";
     source: SchemaCreators = SchemaCreators.user;
     locked: boolean = false;
-    addons: AttributeAddonValue = {};
+    addons: AddonsValue = {};
 
     constructor(params: AttributeBuilderParams) {
         this.identifiers = params.identifiers;

@@ -3,7 +3,7 @@ import {
     SchemaEditorConfiguration,
     ExperienceRecommendation,
     ExperienceRecommendations,
-    PluginCreator,
+    PluginAuthor,
     ConfigurationGroup,
 } from "..";
 import { SchemaEditorBuilder } from "./SchemaEditor";
@@ -29,7 +29,7 @@ interface PluginBuilderParams {
     experience?: ExperienceRecommendation;
     configurationGroups?: ConfigurationGroup[];
     schemaEditorConfiguration?: SchemaEditorConfiguration;
-    createdBy?: PluginCreator;
+    createdBy?: PluginAuthor;
     exampleProjects?: ProjectInput[];
 }
 
@@ -56,7 +56,7 @@ export class PluginBuilder implements PluginMetadata {
             supportedRelations: [],
         },
     );
-    createdBy: PluginCreator = {
+    createdBy: PluginAuthor = {
         name: "",
         contact: {},
     };

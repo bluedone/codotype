@@ -38,6 +38,7 @@ export function reorder<T>(
 /**
  * buildDefaultAddonValue
  * Builds the default value for attribute.addons
+ * TODO - replace with compatible function from @codotype/core
  * @param addons
  */
 export function buildDefaultAddonValue(

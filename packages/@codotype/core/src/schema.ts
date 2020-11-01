@@ -8,6 +8,7 @@ import { TokenPluralization } from "./token";
 
 /**
  * SchemaCreator
+ * TODO - rename to SchemaCreatedBy
  * Used to differentiate between SchemaInput created by a User or a Plugin
  * Determines whether or not a SchemaInput may be removed from ProjectInput.schemas in @codotype/ui
  */

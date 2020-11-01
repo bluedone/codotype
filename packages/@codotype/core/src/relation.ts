@@ -1,6 +1,7 @@
 import { UUID } from "./uuid";
 import { TokenPluralization } from "./token";
 import { SchemaCreators } from "./schema";
+import { AddonsValue } from "./schema-editor-addon";
 
 // // // //
 
@@ -40,7 +41,6 @@ export enum RelationTypes {
 /**
  * RelationInput
  * Defines the RelationInput interface
- * TODO - add support for addons here -> see AttributeAddon for context
  */
 export interface RelationInput {
     id: UUID;
@@ -49,9 +49,9 @@ export interface RelationInput {
     internalNote: string;
     sourceSchemaID: UUID;
     destinationSchemaID: UUID;
-    sourceSchemaAlias: string; // TODO - make this TokenPluralization?
-    destinationSchemaAlias: string; // TODO - make this TokenPluralization?
-    // TODO - add addons here
+    addons: AddonsValue;
+    sourceSchemaAlias: string;
+    destinationSchemaAlias: string;
 }
 
 // // // //
@@ -67,7 +67,7 @@ export interface Relation {
     sourceRelationId: UUID;
     sourceSchemaId: UUID;
     destinationSchemaId: UUID;
-    // TODO - add addons here
+    addons: AddonsValue;
     identifiers: {
         source: {
             canonical: TokenPluralization;

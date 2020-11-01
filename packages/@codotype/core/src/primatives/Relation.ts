@@ -1,6 +1,9 @@
 import { v4 as uuidv4 } from "uuid";
 import { RelationTypes, RelationInput } from "../relation";
 import { SchemaCreators } from "../schema";
+import { AddonsValue } from "../schema-editor-addon";
+
+// // // //
 
 interface RelationBuilderParams {
     id?: string;
@@ -12,6 +15,7 @@ interface RelationBuilderParams {
     sourceSchemaAlias?: string;
     destinationSchemaAlias?: string;
     internalNote?: string;
+    addons?: AddonsValue;
 }
 
 export class RelationBuilder implements RelationInput {
@@ -24,6 +28,7 @@ export class RelationBuilder implements RelationInput {
     source: SchemaCreators = SchemaCreators.user;
     sourceSchemaAlias: string = "";
     destinationSchemaAlias: string = "";
+    addons: AddonsValue = {};
 
     constructor(params: RelationBuilderParams) {
         this.type = params.type;
@@ -34,6 +39,7 @@ export class RelationBuilder implements RelationInput {
         this.id = params.id || this.id;
         this.required = params.required || this.required;
         this.source = params.source || this.source;
+        this.addons = params.addons || this.addons;
         this.sourceSchemaAlias =
             params.sourceSchemaAlias || this.sourceSchemaAlias;
         this.destinationSchemaAlias =

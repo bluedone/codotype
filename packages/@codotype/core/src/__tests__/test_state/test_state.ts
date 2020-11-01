@@ -33,12 +33,14 @@ import {
     chartjsApiOption,
 } from "./configuration-properties";
 import { syntaxHighlighting } from "./documentation";
-import { ATTRIBUTE_ADDON_PRIMARY_KEY } from "../../attribute-addon";
+import { attributeAddons } from "./addon-property";
 import { PropertyPreviewLayoutVariant } from "../../property-preview";
 import { PropertyLayoutVariants } from "../../configuration-property";
 
 // // // //
 
+// TODO - clean up test state module, growing impossible to work with
+// TODO - clean up test state module, growing impossible to work with
 // TODO - clean up test state module, growing impossible to work with
 
 export const ComponentBuilderConfigurationProperty: ConfigurationProperty = {
@@ -791,7 +793,7 @@ export const dummyGeneratorMeta: PluginMetadata = {
                     kebab: "id",
                 },
                 addons: {
-                    [ATTRIBUTE_ADDON_PRIMARY_KEY.identifier]: true,
+                    [attributeAddons.primaryKey.property.identifier]: true,
                 },
                 datatype: Datatypes.UUID,
                 locked: true,

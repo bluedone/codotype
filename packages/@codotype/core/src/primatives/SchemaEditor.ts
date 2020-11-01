@@ -1,10 +1,12 @@
 import { SchemaEditorConfiguration } from "..";
 import { Datatype } from "../datatype";
 import { RelationTypes, RelationInput } from "../relation";
-import { AttributeAddon } from "../attribute-addon";
+import { AttributeAddon, RelationAddon } from "../schema-editor-addon";
 import { SchemaInput } from "../schema";
 import { Attribute } from "../attribute";
 import { ConfigurationGroup } from "../configuration-option-types";
+
+// // // //
 
 interface SchemaEditorBuilderParams {
     supportedDatatypes: Datatype[];
