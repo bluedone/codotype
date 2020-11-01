@@ -15,8 +15,8 @@ storiesOf("Pages/www/HomePage", module).add("renders", () => {
             <AppNavbar />
             <HomePage
                 generators={[
-                    testState.cdkGeneratorMeta,
-                    testState.dummyGeneratorMeta,
+                    testState.cdkPluginMetadata,
+                    testState.dummyPluginMetadata,
                 ]}
                 // https://res.cloudinary.com/codotype/image/upload/v1560045410/product-images/codotype-dashboard-02.png
                 infoBullets={[

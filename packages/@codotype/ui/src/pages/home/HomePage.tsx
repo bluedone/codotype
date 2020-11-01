@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Jumbotron } from "./Jumbotron";
-import { GeneratorMeta } from "@codotype/core";
+import { PluginMetadata } from "@codotype/core";
 import { InfoBullets, InfoBullet } from "./InfoBullets";
 import { GitHubStar } from "../../components/GitHubStar";
 import { Shapes } from "./Shapes";
@@ -11,7 +11,7 @@ import { Shapes } from "./Shapes";
  * HomePage
  */
 export function HomePage(props: {
-    generators: GeneratorMeta[];
+    generators: PluginMetadata[];
     infoBullets: InfoBullet[];
 }) {
     return (

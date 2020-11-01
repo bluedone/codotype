@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { GeneratorCard } from "../../components/generator_card";
-import { GeneratorMeta } from "@codotype/core";
+import { PluginMetadata } from "@codotype/core";
 import { GitHubStar } from "../../components/GitHubStar";
 
 // // // //
@@ -34,7 +34,7 @@ export function Jumbotron(props: {
     title: string;
     subtitle: string;
     body: string;
-    generators: GeneratorMeta[];
+    generators: PluginMetadata[];
     children: React.ReactNode;
 }) {
     const { title, subtitle, body, generators } = props;
