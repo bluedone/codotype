@@ -1,10 +1,13 @@
+# DEPRECATED - this is scheduled to be removed.
+
 # codotype-generator
+
 Codebase generators that power [codotype.io](http://codotype.io).
 
 ## System Requirements
-- [Git](https://git-scm.com/)
-- [Node.js](https://nodejs.org/en/)
 
+-   [Git](https://git-scm.com/)
+-   [Node.js](https://nodejs.org/en/)
 
 ## Local Development Setup
 
@@ -81,13 +84,12 @@ git push origin dev
 
 3. Your pull request will be reviewed.
 
-
 ## Built With
 
-- [ejs](http://ejs.co/)
+-   [ejs](http://ejs.co/)
 
-- [fs-extra](https://github.com/jprichardson/node-fs-extra)
+-   [fs-extra](https://github.com/jprichardson/node-fs-extra)
 
-- [lodash](lodash.com/docs/4.17.4)
+-   [lodash](lodash.com/docs/4.17.4)
 
-- [underscore.string](http://gabceb.github.io/underscore.string.site/)
+-   [underscore.string](http://gabceb.github.io/underscore.string.site/)

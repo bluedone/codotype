@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ensureDir method should properly define NodeRuntime._mocks_.ensuredDir 1`] = `Object {}`;
+
+exports[`renderComponent renders 1`] = `Object {}`;

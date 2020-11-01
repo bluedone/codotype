@@ -1,0 +1,17 @@
+{
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "export": "next export"
+  },
+  "dependencies": {
+    "@codotype/ui": "^0.8.0-canary.40",
+    "bootstrap": "^4.4.1",
+    "next": "^9.5.3",
+    "react": "^16.5.1",
+    "react-dom": "^16.5.1",
+    "react-markdown": "^4.3.1",
+    "sass": "^1.26.5"
+  }
+}

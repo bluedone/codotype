@@ -1,0 +1,1 @@
+export { serveCommand } from "./command";

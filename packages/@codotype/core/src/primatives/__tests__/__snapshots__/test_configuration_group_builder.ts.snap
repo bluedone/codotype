@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`factory works 1`] = `
+ConfigurationGroupBuilder {
+  "allowDisable": false,
+  "content": Object {
+    "description": "Turn API Examples on/off",
+    "documentation": "",
+    "icon": "",
+    "label": "API Examples",
+  },
+  "enabledByDefault": true,
+  "identifier": "api_examples",
+  "layoutVariant": "LIST",
+  "properties": Array [],
+  "sections": Array [],
+}
+`;

@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`factory works 1`] = `
+RelationBuilder {
+  "addons": Object {},
+  "createdBy": "user",
+  "destinationSchemaAlias": "",
+  "destinationSchemaID": "SCHEMA_02",
+  "id": "1234-5678-1234-5678",
+  "internalNote": undefined,
+  "locked": false,
+  "sourceSchemaAlias": "",
+  "sourceSchemaID": "SCHEMA_01",
+  "type": "BELONGS_TO",
+}
+`;

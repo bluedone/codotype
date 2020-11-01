@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Primatives.TokenPluralization works 1`] = `
+TokenPluralizationBuilder {
+  "plural": Object {
+    "camel": "",
+    "kebab": "",
+    "pascal": "",
+    "snake": "",
+    "title": "",
+  },
+  "singular": Object {
+    "camel": "",
+    "kebab": "",
+    "pascal": "",
+    "snake": "",
+    "title": "",
+  },
+}
+`;

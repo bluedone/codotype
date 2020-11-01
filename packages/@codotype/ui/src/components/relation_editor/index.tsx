@@ -1,0 +1,1 @@
+export { RelationEditor } from "./component";

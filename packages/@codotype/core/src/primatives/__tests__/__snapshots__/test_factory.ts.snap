@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`factory works 1`] = `
+ConfigurationPropertyBuilder {
+  "allowDisable": false,
+  "content": Object {
+    "description": "",
+    "documentation": "",
+    "icon": "",
+    "label": "meh",
+  },
+  "defaultValue": null,
+  "dropdownOptions": Array [],
+  "enabledByDefault": true,
+  "id": "1234-5678-1234-5678",
+  "identifier": "meh_value",
+  "layoutVariant": "CARD_COL_12",
+  "preview": Object {
+    "rules": Array [],
+    "variant": "CODE_DARK",
+  },
+  "properties": Array [],
+  "required": false,
+  "transformations": Array [],
+  "type": "BOOLEAN",
+  "unique": false,
+  "validations": Array [],
+}
+`;
