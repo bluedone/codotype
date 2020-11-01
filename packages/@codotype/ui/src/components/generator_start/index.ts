@@ -1,1 +1,1 @@
-export { GeneratorStart } from "./component";
+export { PluginStart } from "./component";

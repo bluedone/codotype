@@ -1,10 +1,10 @@
 import * as React from "react";
 import { PluginMetadata } from "@codotype/core";
-import { GeneratorTypeTag } from "./GeneratorTypeTag";
-import { GeneratorVersionTag } from "./GeneratorVersionTag";
-import { GeneratorExperienceTag } from "./GeneratorExperienceTag";
-import { GeneratorGithubLink } from "./GeneratorGithubLink";
-import { GeneratorTechTag } from "./GeneratorTechTag";
+import { PluginTypeTag } from "./PluginTypeTag";
+import { PluginsVersionTag } from "./PluginVersionTag";
+import { PluginExperienceTag } from "./PluginExperienceTag";
+import { PluginGithubLink } from "./PluginGithubLink";
+import { PluginTechTag } from "./PluginTechTag";
 
 // // // //
 
@@ -22,7 +22,7 @@ export function PluginListItem(props: { plugin: PluginMetadata }) {
                         />
                         {plugin.content.label}
 
-                        <GeneratorGithubLink plugin={plugin} />
+                        <PluginGithubLink plugin={plugin} />
                     </p>
                 </div>
                 <div className="col-lg-12 mt-2">
@@ -33,18 +33,18 @@ export function PluginListItem(props: { plugin: PluginMetadata }) {
                 <div className="col-lg-12 d-flex justify-content-between align-items-center">
                     <span className="d-flex">
                         {plugin.typeTags.map((tag: string) => (
-                            <GeneratorTypeTag tag={tag} key={tag} />
+                            <PluginTypeTag tag={tag} key={tag} />
                         ))}
                         {plugin.techTags.map((tag: string) => (
-                            <GeneratorTechTag tag={tag} key={tag} />
+                            <PluginTechTag tag={tag} key={tag} />
                         ))}
                     </span>
 
                     <span className="d-flex">
-                        <GeneratorExperienceTag
+                        <PluginExperienceTag
                             experience={plugin.experience}
                         />
-                        <GeneratorVersionTag version={plugin.version} />
+                        <PluginsVersionTag version={plugin.version} />
                     </span>
                 </div>
             </div>

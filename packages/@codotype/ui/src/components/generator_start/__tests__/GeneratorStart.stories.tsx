@@ -1,30 +1,30 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
-import { GeneratorStart } from "../component";
+import { PluginStart } from "../component";
 import { Story } from "../../dev";
 import { dummyPluginMetadata } from "../../project_editor/__tests__/test_state";
 
 // // // //
 
-storiesOf("Components/GeneratorStart", module).add("renders in card", () => {
+storiesOf("Components/PluginStart", module).add("renders in card", () => {
     return (
         <Story>
             <div className="card card-body">
-                <GeneratorStart
+                <PluginStart
                     externalLink={"https://google.com"}
-                    generator={dummyPluginMetadata}
+                    plugin={dummyPluginMetadata}
                 />
             </div>
         </Story>
     );
 });
 
-storiesOf("Components/GeneratorStart", module).add("renders", () => {
+storiesOf("Components/PluginStart", module).add("renders", () => {
     return (
         <Story>
-            <GeneratorStart
+            <PluginStart
                 buildLink={"https://google.com"}
-                generator={dummyPluginMetadata}
+                plugin={dummyPluginMetadata}
             />
         </Story>
     );

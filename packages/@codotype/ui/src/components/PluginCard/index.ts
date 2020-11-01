@@ -1,2 +1,2 @@
-export * from "./GeneratorCard";
-export * from "./GeneratorListItem";
+export * from "./PluginsCard";
+export * from "./PluginListItem";

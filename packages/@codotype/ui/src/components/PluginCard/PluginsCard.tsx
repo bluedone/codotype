@@ -13,7 +13,7 @@ export function PluginCard(props: { plugin: PluginMetadata }) {
                     <div className="col-lg-12 d-flex justify-content-center">
                         <p className="lead mb-0">
                             <a
-                                href={`/generators/${plugin.identifier}/build`}
+                                href={`/plugins/${plugin.identifier}/build`}
                                 className="btn btn-link d-flex align-items-center flex-column"
                                 style={{ textDecoration: "none" }}
                             >

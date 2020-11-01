@@ -1,7 +1,7 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
-import { PluginCard } from "../GeneratorCard";
-import { PluginListItem } from "../GeneratorListItem";
+import { PluginCard } from "../PluginsCard";
+import { PluginListItem } from "../PluginListItem";
 import { PluginMetadata, testState } from "@codotype/core";
 import { Story } from "../../dev";
 const { cdkPluginMeta, dummyPluginMetadata } = testState;
@@ -15,7 +15,7 @@ const stories: [string, PluginMetadata][] = [
 
 // // // //
 
-const storyCollection = storiesOf("Components/GeneratorCard", module);
+const storyCollection = storiesOf("Components/PluginCard", module);
 
 stories.forEach(story => {
     storyCollection.add(story[0], () => {

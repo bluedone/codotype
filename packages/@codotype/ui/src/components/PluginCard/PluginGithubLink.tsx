@@ -5,7 +5,7 @@ import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 // // // //
 
-export function GeneratorGithubLink(props: { plugin: PluginMetadata }) {
+export function PluginGithubLink(props: { plugin: PluginMetadata }) {
     const { plugin } = props;
     return (
         <small className="d-flex flex-row align-items-center text-muted mt-2">

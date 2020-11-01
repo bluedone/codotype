@@ -2,17 +2,17 @@ import * as React from "react";
 import { PluginMetadata } from "@codotype/core";
 import { ChevronAnimation } from "../chevron_animation/component";
 import { MarkdownRenderer } from "../markdown_renderer";
-import { GeneratorTypeTag } from "../generator_card/GeneratorTypeTag";
-import { GeneratorTechTag } from "../generator_card/GeneratorTechTag";
-import { GeneratorExperienceTag } from "../generator_card/GeneratorExperienceTag";
-import { GeneratorVersionTag } from "../generator_card/GeneratorVersionTag";
-import { GeneratorGithubLink } from "../generator_card/GeneratorGithubLink";
+import { PluginTypeTag } from "../PluginCard/PluginTypeTag";
+import { PluginTechTag } from "../PluginCard/PluginTechTag";
+import { PluginExperienceTag } from "../PluginCard/PluginExperienceTag";
+import { PluginsVersionTag } from "../PluginCard/PluginVersionTag";
+import { PluginGithubLink } from "../PluginCard/PluginGithubLink";
 import { GitHubStar } from "../GitHubStar";
 
 // // // //
 
 interface GeneratorStartProps {
-    generator: PluginMetadata;
+    plugin: PluginMetadata;
     externalLink?: string;
     buildLink?: string;
 }
@@ -22,7 +22,7 @@ interface GeneratorStartProps {
  * Renders the card-header for AttributeEditor and RelationEditor
  * @param props - see `GeneratorStartProps`
  */
-export function GeneratorStart(props: GeneratorStartProps) {
+export function PluginStart(props: GeneratorStartProps) {
     return (
         <div className="row h-100 align-items-center">
             <div className="col-lg-12">
@@ -30,10 +30,10 @@ export function GeneratorStart(props: GeneratorStartProps) {
                     <div className="col-lg-12 text-center">
                         <img
                             style={{ maxWidth: "4rem !important" }}
-                            src={props.generator.icon}
+                            src={props.plugin.content.icon}
                         />
                         <h3 className="display-4 mt-3">
-                            {props.generator.label}
+                            {props.plugin.content.label}
                         </h3>
                         <p className="lead text-muted">
                             powered by{" "}
@@ -50,7 +50,9 @@ export function GeneratorStart(props: GeneratorStartProps) {
 
                 <div className="row mt-3">
                     <div className="col-lg-12 text-center">
-                        <p className="lead">{props.generator.description}</p>
+                        <p className="lead">
+                            {props.plugin.content.description}
+                        </p>
                     </div>
                 </div>
 
@@ -78,22 +80,20 @@ export function GeneratorStart(props: GeneratorStartProps) {
 
                 <div className="row d-flex flex-row justify-content-center mt-3">
                     <div className="col-lg-12 d-flex justify-content-center align-items-center">
-                        {props.generator.techTags.map(tag => (
-                            <GeneratorTechTag key={tag} tag={tag} />
+                        {props.plugin.techTags.map(tag => (
+                            <PluginTechTag key={tag} tag={tag} />
                         ))}
                     </div>
 
                     <div className="col-lg-12 d-flex justify-content-center align-items-center flex-wrap mt-2">
-                        {props.generator.typeTags.map(tag => (
-                            <GeneratorTypeTag key={tag} tag={tag} />
+                        {props.plugin.typeTags.map(tag => (
+                            <PluginTypeTag key={tag} tag={tag} />
                         ))}
-                        <GeneratorExperienceTag
-                            experience={props.generator.experience}
+                        <PluginExperienceTag
+                            experience={props.plugin.experience}
                         />
-                        <GeneratorVersionTag
-                            version={props.generator.version}
-                        />
-                        <GeneratorGithubLink generator={props.generator} />
+                        <PluginsVersionTag version={props.plugin.version} />
+                        <PluginGithubLink plugin={props.plugin} />
                     </div>
                 </div>
 
@@ -106,7 +106,7 @@ export function GeneratorStart(props: GeneratorStartProps) {
                 <div className="row d-flex justify-content-center">
                     <div className="col-lg-10">
                         <MarkdownRenderer
-                            source={props.generator.documentation}
+                            source={props.plugin.content.documentation}
                         />
                     </div>
                 </div>
