@@ -7,7 +7,7 @@ import {
     PropertyType,
     ExperienceRecommendations,
     PluginMetadata,
-    SchemaCreators,
+    CreatedByValues,
     SchemaInput,
     Attribute,
 } from "../../index";
@@ -614,15 +614,17 @@ export const cdkGeneratorMeta: PluginMetadata = {
     experience: ExperienceRecommendations.beginner, // an optional tag detailing the level of experience required to use the code produced by the generator
     project_path: "output", // the name of the directory for the generator's output
     schemaEditorConfiguration: {
-        documentation: "",
         configurationGroups: [],
         supportedDatatypes: [], // The datatypes supported by this generator.Only an array of DATATYPE_ * identifiers that correspond to values defined in @codotype/core are accepted.
-        supportedRelations: [], // The relation types supported by this generator.Only an array of RELATION_TYPE_ * identifiers that correspond to values defined in @codotype/core are accepted.
+        supportedRelationTypes: [], // The relation types supported by this generator.Only an array of RELATION_TYPE_ * identifiers that correspond to values defined in @codotype/core are accepted.
         defaultSchemas: [],
-        defaultAttributes: [],
+        newSchemaDefaults: {
+            attributes: [],
+            relations: [],
+        },
         defaultRelations: [],
         attributeAddons: [],
-        enableAttributeDefaultValue: false,
+        relationAddons: [],
     },
     configurationGroups: [
         LambdaBuilderConfigurationGroup,
@@ -665,8 +667,7 @@ export const userSchema: SchemaInput = {
     // relations: [],
     internalNote: "",
     locked: false,
-    removable: false,
-    source: SchemaCreators.user,
+    createdBy: CreatedByValues.user,
     configuration: {},
 };
 
@@ -683,7 +684,7 @@ export const emailAttribute: Attribute = {
     },
     internalNote: "the email of the user",
     locked: false,
-    source: SchemaCreators.user,
+    createdBy: CreatedByValues.user,
     addons: {
         required: true,
     },
@@ -722,7 +723,7 @@ export const movieSchema: SchemaInput = {
             },
             internalNote: "the name of the user",
             locked: false,
-            source: SchemaCreators.user,
+            createdBy: CreatedByValues.user,
             addons: {
                 required: true,
             },
@@ -743,10 +744,10 @@ export const movieSchema: SchemaInput = {
     //     },
     // ],
     locked: false,
-    removable: false,
-    source: SchemaCreators.user,
+    createdBy: CreatedByValues.user,
     configuration: {},
 };
+CreatedByValues;
 
 // // // // // //
 
@@ -773,7 +774,6 @@ export const dummyGeneratorMeta: PluginMetadata = {
     exampleProjects: [],
     schemaEditorConfiguration: {
         configurationGroups: [],
-        documentation: "",
         defaultSchemas: [],
         supportedDatatypes: [
             Datatypes.STRING,
@@ -781,30 +781,33 @@ export const dummyGeneratorMeta: PluginMetadata = {
             Datatypes.NUMERIC,
             Datatypes.TIMESTAMP,
         ], // The datatypes supported by this generator.Only an array of DATATYPE_ * identifiers that correspond to values defined in @codotype/core are accepted.
-        supportedRelations: [RelationTypes.TO_ONE, RelationTypes.TO_MANY], // The relation types supported by this generator.Only an array of RELATION_TYPE_ * identifiers that correspond to values defined in @codotype/core are accepted.
-        defaultAttributes: [
-            {
-                id: "UUID-Attribute",
-                identifiers: {
-                    title: "ID",
-                    snake: "id",
-                    camel: "id",
-                    pascal: "Id",
-                    kebab: "id",
+        supportedRelationTypes: [RelationTypes.TO_ONE, RelationTypes.TO_MANY], // The relation types supported by this generator.Only an array of RELATION_TYPE_ * identifiers that correspond to values defined in @codotype/core are accepted.
+        newSchemaDefaults: {
+            attributes: [
+                {
+                    id: "UUID-Attribute",
+                    identifiers: {
+                        title: "ID",
+                        snake: "id",
+                        camel: "id",
+                        pascal: "Id",
+                        kebab: "id",
+                    },
+                    addons: {
+                        [attributeAddons.primaryKey.property.identifier]: true,
+                    },
+                    datatype: Datatypes.UUID,
+                    locked: true,
+                    createdBy: CreatedByValues.plugin,
+                    internalNote: "",
+                    defaultValue: "",
                 },
-                addons: {
-                    [attributeAddons.primaryKey.property.identifier]: true,
-                },
-                datatype: Datatypes.UUID,
-                locked: true,
-                source: SchemaCreators.plugin,
-                internalNote: "",
-                defaultValue: null,
-            },
-        ],
+            ],
+            relations: [],
+        },
         defaultRelations: [],
         attributeAddons: [],
-        enableAttributeDefaultValue: true,
+        relationAddons: [],
     },
     configurationGroups: [
         {

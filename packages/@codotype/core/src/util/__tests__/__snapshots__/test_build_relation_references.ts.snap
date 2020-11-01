@@ -4,6 +4,7 @@ exports[`/lib/inflateSchema.js basic schemas 1`] = `
 Object {
   "attributes": Array [],
   "configuration": Object {},
+  "createdBy": "user",
   "id": "12345",
   "identifiers": Object {
     "plural": Object {
@@ -21,7 +22,8 @@ Object {
       "title": "User",
     },
   },
-  "references": Array [],
+  "locked": false,
+  "referencedBy": Array [],
   "relations": Array [],
 }
 `;
@@ -31,6 +33,7 @@ Array [
   Object {
     "attributes": Array [],
     "configuration": Object {},
+    "createdBy": "user",
     "id": "12345",
     "identifiers": Object {
       "plural": Object {
@@ -48,7 +51,8 @@ Array [
         "title": "User",
       },
     },
-    "references": Array [],
+    "locked": false,
+    "referencedBy": Array [],
     "relations": Array [],
   },
   Object {
@@ -57,6 +61,7 @@ Array [
         "addons": Object {
           "required": true,
         },
+        "createdBy": "user",
         "datatype": "STRING",
         "defaultValue": null,
         "id": "name-attr",
@@ -69,12 +74,12 @@ Array [
         },
         "internalNote": "the name of the user",
         "locked": false,
-        "source": "user",
       },
       Object {
         "addons": Object {
           "required": true,
         },
+        "createdBy": "user",
         "datatype": "STRING",
         "defaultValue": null,
         "id": "email-attr",
@@ -87,10 +92,10 @@ Array [
         },
         "internalNote": "the email of the user",
         "locked": false,
-        "source": "user",
       },
     ],
     "configuration": Object {},
+    "createdBy": "user",
     "id": "45678",
     "identifiers": Object {
       "plural": Object {
@@ -108,7 +113,8 @@ Array [
         "title": "Movie",
       },
     },
-    "references": Array [],
+    "locked": false,
+    "referencedBy": Array [],
     "relations": Array [],
   },
 ]

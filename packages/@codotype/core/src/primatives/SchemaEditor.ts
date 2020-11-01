@@ -1,9 +1,8 @@
-import { SchemaEditorConfiguration } from "..";
+import { AttributeInput, SchemaEditorConfiguration } from "..";
 import { Datatype } from "../datatype";
 import { RelationTypes, RelationInput } from "../relation";
 import { AttributeAddon, RelationAddon } from "../schema-editor-addon";
 import { SchemaInput } from "../schema";
-import { Attribute } from "../attribute";
 import { ConfigurationGroup } from "../configuration-option-types";
 
 // // // //
@@ -11,43 +10,55 @@ import { ConfigurationGroup } from "../configuration-option-types";
 interface SchemaEditorBuilderParams {
     supportedDatatypes: Datatype[];
     supportedRelations: RelationTypes[];
-    enableAttributeDefaultValue?: boolean;
-    documentation?: string;
     defaultSchemas?: SchemaInput[];
     attributeAddons?: AttributeAddon[];
-    defaultAttributes?: Attribute[];
+    relationAddons?: RelationAddon[];
     defaultRelations?: RelationInput[];
     configurationGroups?: ConfigurationGroup[];
+    newSchemaDefaints?: ConfigurationGroup[];
+    newSchemaInputDefaults?: {
+        attributes: AttributeInput[];
+        relations: RelationInput[];
+    };
 }
+
+const defaultSchemaInputDefaults = {
+    attributes: [],
+    relations: [],
+};
 
 export class SchemaEditorBuilder implements SchemaEditorConfiguration {
     supportedDatatypes: Datatype[];
-    supportedRelations: RelationTypes[];
-
-    enableAttributeDefaultValue: boolean = false;
-    documentation: string = "";
+    supportedRelationTypes: RelationTypes[];
     defaultSchemas: SchemaInput[] = [];
     attributeAddons: AttributeAddon[] = [];
-    defaultAttributes: Attribute[] = [];
+    relationAddons: RelationAddon[] = [];
     defaultRelations: RelationInput[] = [];
     configurationGroups: ConfigurationGroup[] = [];
+    newSchemaDefaults: {
+        attributes: AttributeInput[];
+        relations: RelationInput[];
+    } = {
+        ...defaultSchemaInputDefaults,
+    };
 
     constructor(params: SchemaEditorBuilderParams) {
         this.supportedDatatypes = params.supportedDatatypes;
-        this.supportedRelations = params.supportedRelations;
+        this.supportedRelationTypes = params.supportedRelations;
 
-        this.enableAttributeDefaultValue =
-            params.enableAttributeDefaultValue !== undefined
-                ? params.enableAttributeDefaultValue
-                : this.enableAttributeDefaultValue;
-        this.documentation = params.documentation || this.documentation;
         this.defaultSchemas = params.defaultSchemas || this.defaultSchemas;
         this.attributeAddons = params.attributeAddons || this.attributeAddons;
-        this.defaultAttributes =
-            params.defaultAttributes || this.defaultAttributes;
+        this.relationAddons = params.relationAddons || this.relationAddons;
         this.defaultRelations =
             params.defaultRelations || this.defaultRelations;
         this.configurationGroups =
             params.configurationGroups || this.configurationGroups;
+
+        if (params.newSchemaInputDefaults !== undefined) {
+            this.newSchemaDefaults = {
+                attributes: this.newSchemaDefaults.attributes,
+                relations: this.newSchemaDefaults.relations,
+            };
+        }
     }
 }

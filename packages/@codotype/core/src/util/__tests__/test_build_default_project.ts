@@ -3,7 +3,7 @@ import {
     testState,
     PluginMetadata,
     ProjectInput,
-    SchemaCreators,
+    CreatedByValues,
 } from "../../";
 
 // // // //
@@ -21,7 +21,7 @@ const testCases: [string, PluginMetadata][] = [
                     {
                         ...testState.userSchema,
                         locked: true,
-                        source: SchemaCreators.plugin,
+                        createdBy: CreatedByValues.plugin,
                     },
                 ],
                 configurationGroups: [],
@@ -38,7 +38,7 @@ const testCases: [string, PluginMetadata][] = [
                     {
                         ...testState.userSchema,
                         locked: true,
-                        source: SchemaCreators.plugin,
+                        createdBy: CreatedByValues.plugin,
                     },
                 ],
                 configurationGroups: [testState.ApiExamplesConfigurationGroup],

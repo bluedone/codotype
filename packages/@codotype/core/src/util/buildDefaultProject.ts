@@ -183,29 +183,6 @@ export function buildDefaultConfiguration(
 }
 
 /**
- * buildDefaultSchemas
- * Builds the default value for Project.schemas
- */
-export function buildDefaultSchemas(
-    pluginMetadata: PluginMetadata,
-): SchemaInput[] {
-    if (pluginMetadata.schemaEditorConfiguration.defaultSchemas) {
-        return pluginMetadata.schemaEditorConfiguration.defaultSchemas.map(
-            (s) => {
-                return {
-                    ...s,
-                    configuration: buildDefaultConfiguration(
-                        pluginMetadata.schemaEditorConfiguration
-                            .configurationGroups,
-                    ),
-                };
-            },
-        );
-    }
-    return [];
-}
-
-/**
  * buildDefaultProject
  * Builds an empty Project
  * @param pluginMetadata - the PluginMetadata for-which the ProjectInput is being constructed
@@ -217,9 +194,6 @@ export function buildDefaultProjectInput(
     const PluginConfiguration: PluginConfiguration = buildDefaultConfiguration(
         pluginMetadata.configurationGroups,
     );
-
-    // Defines default value for Project.schemas
-    const defaultSchemas: SchemaInput[] = buildDefaultSchemas(pluginMetadata);
 
     // Returns ConfigurationGroupValue
     const projectInput: ProjectInput = {
@@ -233,8 +207,10 @@ export function buildDefaultProjectInput(
         },
         pluginID: pluginMetadata.id,
         pluginVersion: pluginMetadata.version,
-        schemas: [...defaultSchemas],
-        relations: [], // TODO - add EDITOR default relations here (not NEW default relations)
+        schemas: [...pluginMetadata.schemaEditorConfiguration.defaultSchemas],
+        relations: [
+            ...pluginMetadata.schemaEditorConfiguration.defaultRelations,
+        ],
         configuration: PluginConfiguration,
     };
 

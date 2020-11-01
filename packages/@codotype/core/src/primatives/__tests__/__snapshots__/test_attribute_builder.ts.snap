@@ -3,6 +3,7 @@
 exports[`AttributeBuilder works 1`] = `
 AttributeBuilder {
   "addons": Object {},
+  "createdBy": "user",
   "datatype": "STRING",
   "defaultValue": null,
   "id": "1234-5678-1234-5678",
@@ -15,6 +16,5 @@ AttributeBuilder {
   },
   "internalNote": "",
   "locked": false,
-  "source": "user",
 }
 `;

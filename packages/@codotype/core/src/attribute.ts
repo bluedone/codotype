@@ -1,7 +1,7 @@
 import { Datatype } from "./datatype";
 import { UUID } from "./uuid";
 import { TokenCasing } from "./token";
-import { SchemaCreators } from "./schema";
+import { CreatedBy } from "./created-by";
 import { AddonsValue } from "./schema-editor-addon";
 
 // // // //
@@ -12,7 +12,7 @@ export interface AttributeInput {
     defaultValue: null | string | boolean | number;
     identifiers: TokenCasing; // Keep this, maybe allow users to edit later
     internalNote: string; // Good place to store data relevant to the person editing the Codotype project
-    source: SchemaCreators;
+    createdBy: CreatedBy;
     locked: boolean;
     addons: AddonsValue;
 }
@@ -23,7 +23,7 @@ export interface Attribute {
     defaultValue: null | string | boolean | number;
     identifiers: TokenCasing;
     internalNote: string; // Good place to store data relevant to the person editing the Codotype project
-    source: SchemaCreators;
+    createdBy: CreatedBy;
     locked: boolean;
     addons: AddonsValue;
 }

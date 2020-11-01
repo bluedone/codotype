@@ -4,15 +4,17 @@ exports[`factory works 1`] = `
 SchemaEditorBuilder {
   "attributeAddons": Array [],
   "configurationGroups": Array [],
-  "defaultAttributes": Array [],
   "defaultRelations": Array [],
   "defaultSchemas": Array [],
-  "documentation": "",
-  "enableAttributeDefaultValue": false,
+  "newSchemaDefaults": Object {
+    "attributes": Array [],
+    "relations": Array [],
+  },
+  "relationAddons": Array [],
   "supportedDatatypes": Array [
     "STRING",
   ],
-  "supportedRelations": Array [
+  "supportedRelationTypes": Array [
     "TO_ONE",
   ],
 }

@@ -3,20 +3,9 @@ import { PluginConfiguration } from "./plugin";
 import { Attribute } from "./attribute";
 import { Relation } from "./relation";
 import { TokenPluralization } from "./token";
+import { CreatedBy } from "./created-by";
 
 // // // //
-
-/**
- * SchemaCreator
- * TODO - rename to SchemaCreatedBy
- * Used to differentiate between SchemaInput created by a User or a Plugin
- * Determines whether or not a SchemaInput may be removed from ProjectInput.schemas in @codotype/ui
- */
-export type SchemaCreator = "user" | "plugin";
-export enum SchemaCreators {
-    user = "user",
-    plugin = "plugin",
-}
 
 /**
  * SchemaInput
@@ -24,9 +13,8 @@ export enum SchemaCreators {
  */
 export interface SchemaInput {
     id: UUID;
-    source: SchemaCreator;
+    createdBy: CreatedBy;
     locked: boolean;
-    removable: boolean;
     attributes: Attribute[];
     identifiers: TokenPluralization;
     internalNote: string;
@@ -39,9 +27,11 @@ export interface SchemaInput {
  */
 export interface Schema {
     id: UUID;
+    createdBy: CreatedBy;
+    locked: boolean;
     attributes: Attribute[];
     relations: Relation[];
-    references: Relation[];
+    referencedBy: Relation[];
     identifiers: TokenPluralization;
     configuration: PluginConfiguration;
 }

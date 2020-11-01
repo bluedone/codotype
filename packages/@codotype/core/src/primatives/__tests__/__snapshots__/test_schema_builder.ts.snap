@@ -4,6 +4,7 @@ exports[`factory works 1`] = `
 SchemaBuilder {
   "attributes": Array [],
   "configuration": Object {},
+  "createdBy": "user",
   "id": "1234-5678-1234-5678",
   "identifiers": Object {
     "plural": Object {
@@ -24,7 +25,5 @@ SchemaBuilder {
   "internalNote": "",
   "locked": false,
   "relations": Array [],
-  "removable": true,
-  "source": "user",
 }
 `;

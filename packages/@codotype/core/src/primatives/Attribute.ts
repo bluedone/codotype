@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
-import { TokenCasing, Datatype, SchemaCreators, AddonsValue } from "..";
+import { TokenCasing, Datatype, AddonsValue } from "..";
+import { CreatedBy, CreatedByValues } from "../created-by";
 import { Attribute } from "../attribute";
 
 // // // //
@@ -10,7 +11,7 @@ interface AttributeBuilderParams {
     datatype: Datatype;
     defaultValue?: null | string | boolean | number;
     internalNote?: string;
-    source?: SchemaCreators;
+    source?: CreatedBy;
     locked?: boolean;
     addons?: AddonsValue;
 }
@@ -21,7 +22,7 @@ export class AttributeBuilder implements Attribute {
     datatype: Datatype;
     defaultValue: string | number | boolean = null;
     internalNote: string = "";
-    source: SchemaCreators = SchemaCreators.user;
+    createdBy: CreatedBy = CreatedByValues.user;
     locked: boolean = false;
     addons: AddonsValue = {};
 
@@ -32,7 +33,7 @@ export class AttributeBuilder implements Attribute {
         this.id = params.id || this.id;
         this.defaultValue = params.defaultValue || this.defaultValue;
         this.internalNote = params.internalNote || this.internalNote;
-        this.source = params.source || this.source;
+        this.createdBy = params.source || this.createdBy;
         this.locked = params.locked || this.locked;
         this.addons = params.addons || this.addons;
     }

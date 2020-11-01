@@ -1,6 +1,6 @@
 import { UUID } from "./uuid";
 import { TokenPluralization } from "./token";
-import { SchemaCreators } from "./schema";
+import { CreatedBy } from "./created-by";
 import { AddonsValue } from "./schema-editor-addon";
 
 // // // //
@@ -18,7 +18,7 @@ export type RelationType =
     | "HAS_AND_BELONGS_TO_MANY"
     | "EMBEDS_ONE"
     | "EMBEDS_MANY";
-// TODO - update enum casing to:
+// TODO - update enum casing?
 // RelationTypes.belongsTo
 // RelationTypes.hasOne
 // RelationTypes.hasMany
@@ -45,7 +45,8 @@ export enum RelationTypes {
 export interface RelationInput {
     id: UUID;
     type: RelationType;
-    source: SchemaCreators;
+    createdBy: CreatedBy;
+    locked: boolean;
     internalNote: string;
     sourceSchemaID: UUID;
     destinationSchemaID: UUID;
@@ -64,9 +65,11 @@ export interface Relation {
     id: UUID;
     type: RelationType;
     internalNote: string;
-    sourceRelationId: UUID;
-    sourceSchemaId: UUID;
-    destinationSchemaId: UUID;
+    createdBy: CreatedBy;
+    locked: boolean;
+    sourceRelationInputID: UUID;
+    sourceSchemaID: UUID;
+    destinationSchemaID: UUID;
     addons: AddonsValue;
     identifiers: {
         source: {

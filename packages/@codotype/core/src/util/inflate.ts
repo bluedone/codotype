@@ -22,9 +22,11 @@ export function buildRelation(params: {
         id: makeUniqueId(),
         type: relationInput.type,
         internalNote: relationInput.internalNote,
-        sourceSchemaId: sourceSchema.id,
-        destinationSchemaId: destinationSchema.id,
-        sourceRelationId: relationInput.id,
+        createdBy: relationInput.createdBy,
+        locked: relationInput.locked,
+        sourceSchemaID: sourceSchema.id,
+        destinationSchemaID: destinationSchema.id,
+        sourceRelationInputID: relationInput.id,
         addons: relationInput.addons,
         identifiers: {
             source: {
@@ -89,10 +91,12 @@ export function inflateSchema(params: {
         identifiers: {
             ...schemaInput.identifiers,
         },
+        locked: schemaInput.locked,
+        createdBy: schemaInput.createdBy,
         configuration: schemaInput.configuration,
-        relations: relations.filter((r) => r.sourceSchemaId === schemaInput.id),
-        references: relations.filter(
-            (r) => r.destinationSchemaId === schemaInput.id,
+        relations: relations.filter((r) => r.sourceSchemaID === schemaInput.id),
+        referencedBy: relations.filter(
+            (r) => r.destinationSchemaID === schemaInput.id,
         ),
     };
 }

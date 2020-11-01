@@ -2,22 +2,41 @@ import { ConfigurationGroup } from "./configuration-option-types";
 import { Datatype } from "./datatype";
 import { RelationTypes, RelationInput } from "./relation";
 import { SchemaInput } from "./schema";
-import { Attribute } from "./attribute";
+import { AttributeInput } from "./attribute";
 import { AttributeAddon, RelationAddon } from "./schema-editor-addon";
 
 // // // //
 
-// TODO - split up into better separation of concerns
-// i.e. AttributeEditorConfiguration, SchemaEditorConfiguration, RelationEditorConfiguration
+/**
+ * SchemaEditorConfiguration
+ * Defines a Plugin's configuration for the SchemaEditor React Component
+ * Determines:
+ * - which Datatypes + RelationTypes are available
+ * - when to apply an AddonProperty to an AttributeInput or RelationInput
+ * - the ConfigurationGroups scoped to each SchemaInput
+ * - the behavior when creating a new SchemaInput
+ * - the default
+ */
 export interface SchemaEditorConfiguration {
-    documentation: string; // Any documentation for the SchemaEditor
     configurationGroups: ConfigurationGroup[]; // ConfigurationGroups scoped to each schema
-    defaultSchemas: SchemaInput[]; // The default schemas included in a new project
-    defaultRelations: RelationInput[]; // The default relations included in a new project
-    supportedDatatypes: Datatype[]; // The datatypes supported by this generator
-    supportedRelations: RelationTypes[]; // The relation types supported by this generator
-    defaultAttributes: Attribute[]; // Default attributes applied to _every_ new Attribute - QUESTION - how do we enforce Addon value for any Attributes defined here?
-    attributeAddons: AttributeAddon[]; // Addons made available to the AttributeEditor
-    enableAttributeDefaultValue: boolean; // Whether or not to enable the `Default Value` input in the AttributeEditor
-    // TODO - add RelationAddon here
+
+    // The default SchemaInput data included in a new Project
+    defaultSchemas: SchemaInput[];
+
+    // The default RelationInput data included in a new Project
+    defaultRelations: RelationInput[];
+
+    // Configures the behavior when adding a new SchemaInput to a Project
+    newSchemaDefaults: {
+        attributes: AttributeInput[]; // Default Attribute[] added to _every_ new SchemaInput
+        relations: RelationInput[]; // Default Relation[] added to _every_ new SchemaInput
+    };
+
+    // The Datatypes + RelationTypes supported by the Plugin
+    supportedDatatypes: Datatype[];
+    supportedRelationTypes: RelationTypes[];
+
+    // Addons made available to the AttributeEditor + RelationEditor
+    attributeAddons: AttributeAddon[];
+    relationAddons: RelationAddon[];
 }

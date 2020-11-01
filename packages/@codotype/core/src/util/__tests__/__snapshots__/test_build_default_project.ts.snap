@@ -191,11 +191,8 @@ Object {
   "schemas": Array [
     Object {
       "attributes": Array [],
-      "configuration": Object {
-        "api_examples": Object {
-          "twitter": false,
-        },
-      },
+      "configuration": Object {},
+      "createdBy": "plugin",
       "id": "12345",
       "identifiers": Object {
         "plural": Object {
@@ -215,8 +212,6 @@ Object {
       },
       "internalNote": "",
       "locked": true,
-      "removable": false,
-      "source": "plugin",
     },
   ],
 }
@@ -290,6 +285,7 @@ Object {
     Object {
       "attributes": Array [],
       "configuration": Object {},
+      "createdBy": "plugin",
       "id": "12345",
       "identifiers": Object {
         "plural": Object {
@@ -309,8 +305,6 @@ Object {
       },
       "internalNote": "",
       "locked": true,
-      "removable": false,
-      "source": "plugin",
     },
   ],
 }
