@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Modal } from "react-bootstrap";
-import { PluginMetadata, Project } from "@codotype/core";
+import { PluginMetadata, ProjectInput } from "@codotype/core";
 import useAxios from "axios-hooks";
 import { BuildFinished } from "../../components/build_finished/component";
 import { LoadingBuild } from "../../components/loading_build";
@@ -8,7 +8,7 @@ import { LoadingBuild } from "../../components/loading_build";
 // // // //
 
 interface GenerateCodeProps {
-    project: Project;
+    projectInput: ProjectInput;
 }
 
 interface PluginRunnerProps {

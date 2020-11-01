@@ -16,14 +16,14 @@ export function LocalRuntime() {
             {({ generators }) => (
                 <PluginRunner generator={generators[0]}>
                     {({ generateCode }) => (
-                        <LocalStorageProvider generator={generators[0]}>
-                            {({ project, clearProject, setProject }) => (
+                        <LocalStorageProvider plugin={generators[0]}>
+                            {({ projectInput, clearProject, setProject }) => (
                                 <ProjectEditor
                                     generator={generators[0]}
-                                    project={project}
+                                    project={projectInput}
                                     onClickGenerate={() => {
                                         generateCode({
-                                            project,
+                                            projectInput,
                                         });
                                     }}
                                     onResetProject={clearProject}

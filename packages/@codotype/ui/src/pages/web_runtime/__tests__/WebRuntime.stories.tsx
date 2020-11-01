@@ -16,7 +16,7 @@ import {
     // ATTRIBUTE_ADDON_NULLABLE,
     // ATTRIBUTE_ADDON_PRIMARY_KEY,
     RelationType,
-    OptionType,
+    PropertyType,
     Primatives,
     GroupLayoutVariant,
     PropertyLayoutVariant,
@@ -37,7 +37,7 @@ const { cdkPluginMetadata, dummyPluginMetadata } = testState;
 const ApiActionsProperty = new Primatives.ConfigurationProperty({
     label: "Actions",
     identifier: "actions",
-    type: OptionType.COLLECTION,
+    type: PropertyTypes.COLLECTION,
     dataPreview: {
         rules: [
             {
@@ -95,7 +95,7 @@ const ApiActionsProperty = new Primatives.ConfigurationProperty({
             identifier: "verb",
             description: "Verify",
             defaultValue: "GET",
-            type: OptionType.DROPDOWN,
+            type: PropertyTypes.DROPDOWN,
             layoutVariant: PropertyLayoutVariant.COL_6,
             dropdownOptions: [
                 { value: "GET", label: "GET" },
@@ -109,7 +109,7 @@ const ApiActionsProperty = new Primatives.ConfigurationProperty({
             identifier: "route",
             description: "Route",
             defaultValue: "verify",
-            type: OptionType.STRING,
+            type: PropertyTypes.STRING,
             layoutVariant: PropertyLayoutVariant.COL_6,
             filters: [
                 StringValueFilter.nonumbers,
@@ -123,7 +123,7 @@ const ApiActionsProperty = new Primatives.ConfigurationProperty({
             description: "function_name",
             defaultValue: "verify",
             layoutVariant: PropertyLayoutVariant.COL_6,
-            type: OptionType.STRING,
+            type: PropertyTypes.STRING,
             filters: [
                 StringValueFilter.camelcase,
                 StringValueFilter.nonumbers,
@@ -137,7 +137,7 @@ const ApiActionsProperty = new Primatives.ConfigurationProperty({
             description: "scope",
             defaultValue: "COLLECTION",
             layoutVariant: PropertyLayoutVariant.COL_6,
-            type: OptionType.DROPDOWN,
+            type: PropertyTypes.DROPDOWN,
             dropdownOptions: [
                 { value: "COLLECTION", label: "Collection" },
                 { value: "MODEL", label: "Model" },
@@ -367,7 +367,7 @@ const stories: [string, PluginMetadata][] = [
                                     "Write an internal note describing this schema",
                                 defaultValue: "",
                                 layoutVariant: PropertyLayoutVariant.COL_12,
-                                type: OptionType.STRING,
+                                type: PropertyTypes.STRING,
                             }),
                         ],
                     }),
@@ -388,7 +388,7 @@ const stories: [string, PluginMetadata][] = [
                         layoutVariant: GroupLayoutVariant.LIST,
                         properties: [
                             new Primatives.ConfigurationProperty({
-                                type: OptionType.BOOLEAN,
+                                type: PropertyTypes.BOOLEAN,
                                 defaultValue: true,
                                 identifier: "generate_crud_api",
                                 label: "Generate CRUD API",
@@ -403,7 +403,7 @@ const stories: [string, PluginMetadata][] = [
                                 description:
                                     "Define the name of the DynamoDB table for this",
                                 defaultValue: "",
-                                type: OptionType.STRING,
+                                type: PropertyTypes.STRING,
                                 layoutVariant:
                                     PropertyLayoutVariant.CARD_COL_12,
                             }),
@@ -432,7 +432,7 @@ const stories: [string, PluginMetadata][] = [
                     //     identifier: "mock_data_type",
                     //     description:
                     //         "Type of Mockaroo mock data to use for this field",
-                    //     propertyType: OptionType.DROPDOWN,
+                    //     propertyType: PropertyTypes.DROPDOWN,
                     //     dropdownOptions: [
                     //         {
                     //             value: "name",
