@@ -1,7 +1,7 @@
 import {
     SchemaInput,
     ProjectInput,
-    OptionType,
+    PropertyType,
     OptionValue,
     PluginConfiguration,
     OptionValueInstance,
@@ -21,27 +21,27 @@ import {
 export function buildConfigurationPropertyValue(
     property: ConfigurationProperty,
 ): OptionValue {
-    if (property.type === OptionType.STRING) {
+    if (property.type === PropertyType.STRING) {
         return property.defaultValue || "";
     }
-    if (property.type === OptionType.BOOLEAN) {
+    if (property.type === PropertyType.BOOLEAN) {
         return property.defaultValue || false;
     }
-    if (property.type === OptionType.DROPDOWN) {
+    if (property.type === PropertyType.DROPDOWN) {
         return property.defaultValue
             ? property.defaultValue
             : property.dropdownOptions.length > 0
             ? property.dropdownOptions[0].value
             : "";
     }
-    if (property.type === OptionType.COLLECTION) {
+    if (property.type === PropertyType.COLLECTION) {
         if (Array.isArray(property.defaultValue)) {
             return property.defaultValue;
         }
         // Return empty array as default
         return [];
     }
-    if (property.type === OptionType.INSTANCE) {
+    if (property.type === PropertyType.INSTANCE) {
         return buildValueFromProperties(property.properties);
     }
     return "";

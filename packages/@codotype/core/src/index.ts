@@ -18,7 +18,7 @@ export * from "./util";
 export * from "./primatives";
 export * from "./property-transformation";
 export * from "./property-validation";
-export * from "./data-preview";
+export * from "./property-preview";
 
 // Exports test_state
 export { testState } from "./__tests__/test_state";

@@ -1,6 +1,6 @@
 import { Datatype } from "./datatype";
 import { UUID } from "./uuid";
-import { OptionType, DropdownOption } from "./configuration-property";
+import { PropertyType, DropdownOption } from "./configuration-property";
 import { PropertyTransformation } from "./property-transformation";
 import { PropertyValidation } from "./property-validation";
 import { Content } from "./content";
@@ -23,10 +23,10 @@ export interface AttributeAddon {
     exclusive: boolean; // False - one schema can have multiple unique properties
     required: boolean; // Does this need to be populated?
     propertyType:
-        | OptionType.BOOLEAN
-        | OptionType.DROPDOWN
-        | OptionType.STRING
-        | OptionType.NUMBER; // Only stores primative data
+        | PropertyType.BOOLEAN
+        | PropertyType.DROPDOWN
+        | PropertyType.STRING
+        | PropertyType.NUMBER; // Only stores primative data
     dropdownOptions: DropdownOption[]; // Only used when datatype: OptionType.DROPDOWN;
     defaultValue: null | boolean | string | number;
     validations: PropertyValidation[];
@@ -54,7 +54,7 @@ export const ATTRIBUTE_ADDON_INDEX: AttributeAddon = {
     ],
     exclusive: false,
     required: false,
-    propertyType: OptionType.BOOLEAN,
+    propertyType: PropertyType.BOOLEAN,
     dropdownOptions: [],
     defaultValue: false,
     validations: [],
@@ -79,7 +79,7 @@ export const ATTRIBUTE_ADDON_UNIQUE: AttributeAddon = {
     ],
     exclusive: false,
     required: false,
-    propertyType: OptionType.BOOLEAN,
+    propertyType: PropertyType.BOOLEAN,
     dropdownOptions: [],
     defaultValue: false,
     validations: [],
@@ -104,7 +104,7 @@ export const ATTRIBUTE_ADDON_REQUIRED: AttributeAddon = {
     ],
     exclusive: false,
     required: false,
-    propertyType: OptionType.BOOLEAN,
+    propertyType: PropertyType.BOOLEAN,
     dropdownOptions: [],
     defaultValue: false,
     validations: [],
@@ -129,7 +129,7 @@ export const ATTRIBUTE_ADDON_NULLABLE: AttributeAddon = {
     ],
     exclusive: false,
     required: false,
-    propertyType: OptionType.BOOLEAN,
+    propertyType: PropertyType.BOOLEAN,
     dropdownOptions: [],
     defaultValue: false,
     validations: [],
@@ -155,7 +155,7 @@ export const ATTRIBUTE_ADDON_PRIMARY_KEY: AttributeAddon = {
     ],
     exclusive: true,
     required: false,
-    propertyType: OptionType.BOOLEAN,
+    propertyType: PropertyType.BOOLEAN,
     dropdownOptions: [],
     defaultValue: false,
     validations: [],
@@ -181,7 +181,7 @@ export const ATTRIBUTE_ADDON_SELECT: AttributeAddon = {
     ],
     exclusive: false,
     required: false,
-    propertyType: OptionType.BOOLEAN,
+    propertyType: PropertyType.BOOLEAN,
     dropdownOptions: [],
     defaultValue: false,
     validations: [],

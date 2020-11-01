@@ -3,7 +3,7 @@ import {
     DataPreviewConstraintTypes,
     DataPreviewConstraint,
     DataPreviewAction,
-} from "../../data-preview";
+} from "../../property-preview";
 
 // // // //
 

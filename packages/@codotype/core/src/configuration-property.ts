@@ -1,19 +1,17 @@
 import { PropertyTransformation } from "./property-transformation";
 import { PropertyValidation } from "./property-validation";
-import { DataPreview } from "./data-preview";
+import { DataPreview } from "./property-preview";
 import { Content } from "./content";
 
 // // // //
 
-// TODO - split this file up a bit?
-
-// TODO - what other types need to be supported here?
-// RADIO_GROUP (nice, but not necessary - use DROPDOWN)
-// CHECKBOXES - nice, but functionally the same as a MULTI_DROPDOWN
-// DATE
-// TIME
-// DATETIME
-// JSON - low-priority, not really necessary
+// Feature - what other types need to be supported here?
+// - RADIO_GROUP (nice, but not necessary - use DROPDOWN)
+// - CHECKBOXES - nice, but functionally the same as a MULTI_DROPDOWN
+// - DATE
+// - TIME
+// - DATETIME
+// - JSON - low-priority, not really necessary
 // QUESTION - how can this reference Schema Metadata?
 //          - Support SCHEMA / ATTRIBUTE / RELATION types here?
 //          - Schema -> Stores SchemaID
@@ -26,7 +24,7 @@ import { Content } from "./content";
 //              in another COLLECTION. Makes sense - powerful.
 //          - It should be limited to COLLECTION - the property.type can be "COLLECTION_REFERENCE"
 //          - We'll also need to store the ID of the associated COLLECTION property - where should that be done?
-export enum OptionType {
+export enum PropertyType {
     STRING = "STRING",
     NUMBER = "NUMBER",
     BOOLEAN = "BOOLEAN",
@@ -38,7 +36,7 @@ export enum OptionType {
 
 /**
  * PropertyLayoutVariant
- * Dictates the layout styles for a ConfigurationProperty
+ * Defines different layout styles for a ConfigurationProperty
  */
 type PropertyLayoutVariant =
     | "COL_3"
@@ -130,7 +128,7 @@ export interface ConfigurationProperty {
 
     // Functional
     identifier: string; // NOTE - this is "identifier" so if its ever stored in a database, the "id" column will be available
-    type: OptionType;
+    type: PropertyType;
     defaultValue: OptionValue;
     dropdownOptions: DropdownOption[];
     properties: ConfigurationProperty[];

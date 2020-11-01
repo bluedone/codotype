@@ -2,13 +2,13 @@ import { v4 as uuidv4 } from "uuid";
 import {
     ConfigurationProperty,
     DropdownOption,
-    OptionType,
+    PropertyType,
     OptionValue,
     PropertyLayoutVariants,
 } from "../configuration-property";
 import { PropertyTransformation } from "../property-transformation";
 import { PropertyValidation } from "../property-validation";
-import { DataPreviewLayoutVariant, DataPreview } from "../data-preview";
+import { DataPreviewLayoutVariant, DataPreview } from "../property-preview";
 import { Content } from "../content";
 
 // // // //
@@ -22,7 +22,7 @@ interface ConfigurationPropertyBuilderParams {
         documentation?: string;
         icon?: string;
     };
-    type: OptionType;
+    type: PropertyType;
     dropdownOptions?: DropdownOption[];
     defaultValue?: OptionValue;
     required?: boolean;
@@ -44,7 +44,7 @@ export class ConfigurationPropertyBuilder implements ConfigurationProperty {
         documentation: "",
         icon: "",
     };
-    type: OptionType;
+    type: PropertyType;
     defaultValue: OptionValue = null;
     required: boolean = false;
     unique: boolean = false;

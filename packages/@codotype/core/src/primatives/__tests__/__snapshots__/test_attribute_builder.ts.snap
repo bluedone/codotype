@@ -9,9 +9,9 @@ AttributeBuilder {
   "identifiers": Object {
     "camel": "myString",
     "kebab": "my-string",
-    "label": "My String",
     "pascal": "MyString",
     "snake": "my_string",
+    "title": "My String",
   },
   "internalNote": "",
   "locked": false,

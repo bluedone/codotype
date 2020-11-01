@@ -5,7 +5,7 @@ import {
     DataPreviewRule,
     DataPreviewConstraint,
     DataPreviewAction,
-} from "../data-preview";
+} from "../property-preview";
 import { OptionValueInstance } from "../configuration-property";
 
 // // // //
@@ -15,6 +15,7 @@ import { OptionValueInstance } from "../configuration-property";
  * Returns a boolean indicating whether or not a specific DataPreviewRule should be applied against props.data
  * @param props.data - The data that's being evaluated by the DataPreviewRule
  * @param props.rule - The DataPreviewRule being evaluated
+ * TODO - write tests for this
  * TODO - write tests for this
  */
 export function shouldApplyDataPreviewRule(props: {

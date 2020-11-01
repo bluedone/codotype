@@ -3,7 +3,7 @@ import {
     DataPreviewRule,
     DataPreviewConstraint,
     DataPreviewConstraintTypes,
-} from "../../data-preview";
+} from "../../property-preview";
 import {
     testDataPreviewConstraint01,
     testDataPreviewConstraint02,
