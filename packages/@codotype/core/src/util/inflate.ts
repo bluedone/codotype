@@ -11,29 +11,6 @@ import {
 
 // // // //
 
-/**
- * buildDefaultAddonValue
- * Builds the default value for attribute.addons
- * TODO - move into UTIL
- * TODO - move into UTIL
- * TODO - move into UTIL
- * @param addons
- */
-// export function buildDefaultAddonValue(
-//     addons: AttributeAddon[],
-// ): AttributeAddonValue {
-//     const addonValue: AttributeAddonValue = addons.reduce(
-//         (av: AttributeAddonValue, addon: AttributeAddon) => {
-//             return {
-//                 ...av,
-//                 [addon.identifier]: addon.defaultValue,
-//             };
-//         },
-//         {},
-//     );
-//     return addonValue;
-// }
-
 export function buildRelation(params: {
     relationInput: RelationInput;
     sourceSchema: SchemaInput;
@@ -48,7 +25,7 @@ export function buildRelation(params: {
         sourceSchemaId: sourceSchema.id,
         destinationSchemaId: destinationSchema.id,
         sourceRelationId: relationInput.id,
-        addons: {}, // TODO - populate this with bulidDefaultAddonValue
+        addons: relationInput.addons,
         identifiers: {
             source: {
                 canonical: { ...sourceSchema.identifiers },

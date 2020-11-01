@@ -234,7 +234,7 @@ export function buildDefaultProjectInput(
         pluginID: pluginMetadata.id,
         pluginVersion: pluginMetadata.version,
         schemas: [...defaultSchemas],
-        relations: [],
+        relations: [], // TODO - add EDITOR default relations here (not NEW default relations)
         configuration: PluginConfiguration,
     };
 
