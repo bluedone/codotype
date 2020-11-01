@@ -8,11 +8,11 @@ import {
 // // // //
 
 /**
- * DataPreviewRenderer
+ * PropertyPreviewRenderer
  * @param props.data - the data being rendered by DataPreview
  * @param props.dataPreview - The DataPreview object
  */
-export function DataPreviewRenderer(props: {
+export function PropertyPreviewRenderer(props: {
     data: any;
     propertyPreview: PropertyPreview;
 }) {
