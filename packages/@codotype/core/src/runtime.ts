@@ -98,23 +98,23 @@ export interface PluginRegistration {
 /**
  * RuntimeProxy
  * Defines slimmed-down Runtime passed into each generator, fascade/proxy
- * @param ensureDir - TODO - this should be removed
+ * @param ensureDir - TODO - this should be removed from RuntimeProxy and handled automatically in Runtime
  * @param writeFile - write a string to a file in OUTPUT_DIRECTORY/my_project
- * @param copyDir - TODO - annotate this
- * @param renderComponent - TODO - annotate this
- * @param templatePath - TODO - annotate this
- * @param destinationPath - TODO - annotate this
- * @param composeWith - TODO - annotate this
+ * @param copyDir - See CopyDirFunction
+ * @param renderComponent - See RenderComponentFunction
+ * @param composeWith - See ComposeWithFunction
+ * @param templatePath - TODO - these might not need to be exposed at all
+ * @param destinationPath - TODO - these might not need to be exposed at all
  */
 export interface RuntimeProxy {
-    ensureDir: EnsureDirFunction; // TODO - this should be removed from RuntimeProxy and handled automatically in Runtime
+    ensureDir: EnsureDirFunction;
     writeFile: WriteFileFunction;
     copyDir: CopyDirFunction;
     renderComponent: RenderComponentFunction;
     copyTemplate: (src: string, dest: string, options: object) => Promise<any>;
+    composeWith: ComposeWithFunction;
     templatePath: (template_path: string) => string;
     destinationPath: (destination_path: string) => string;
-    composeWith: ComposeWithFunction;
 }
 
 /**
@@ -129,23 +129,10 @@ export interface ComposeWithOptions {
     outputDirectoryScope?: string;
 }
 
-// TODO - rename this to
-// - GeneratorAgent?
-// - GeneratorInitiator?
-// - GeneratorInvoker? -> It ALSO exposes a RuntimeAdaptor
-// - GeneratorLauncher?
-// - GeneratorLoader?
-// - GeneratorRunner?
-// - GeneratorStarter?
-// - GeneratorWrapper?
-// - RuntimeAdaptorInjector?
-// - RuntimeAgent?
-// - RuntimeBroker?
-// - RuntimeConnector?
-// - RuntimeDelegate?
-// - RuntimeInjector?
-// - RuntimeInvoker?
-// - RuntimeMediator?
+/**
+ * RuntimeAdaptor
+ * TODO - annotate this
+ */
 export interface RuntimeAdaptor {
     runtimeProxy: RuntimeProxy;
     options: RuntimeInjectorProps;
@@ -182,6 +169,10 @@ export type WriteFileFunction = (
     compiledTemplate: string,
 ) => Promise<boolean>;
 
+/**
+ * RenderComponentFunction
+ * Renders a template located at params.src, compiled it with params.data, and writes it to params.dest
+ */
 export type RenderComponentFunction = (params: {
     src: string;
     dest: string;
@@ -201,23 +192,25 @@ export type ForEachSchemaFunction = (params: {
 
 export type ForEachRelationFunction = (params: {
     schema: Schema;
-    relation: Relation; // TODO - rename to "Relation"
+    relation: Relation;
     project: Project;
     runtime: RuntimeProxy;
 }) => Promise<void>;
 
 export type ForEachReverseRelationFunction = (params: {
     schema: Schema;
-    relation: Relation; // TODO - rename to "Relation"
+    relation: Relation;
     project: Project;
     runtime: RuntimeProxy;
 }) => Promise<void>;
 
 /**
  * ComposeWithFunction
+ * Exposed by the RuntimeProxy to allow a Generator to "compose" another generator module
+ * TODO - should this use the modulePath / relativePath / absolutePath pattern? or should that pattern be updated?
  */
 export type ComposeWithFunction = (
-    generatorModule: string, // TODO - should this use the modulePath / relativePath / absolutePath pattern?
+    generatorModule: string,
     options?: ComposeWithOptions,
 ) => Promise<void>;
 
@@ -250,7 +243,7 @@ export interface Runtime {
     ensureDir: (dirPath: string) => Promise<boolean>;
     copyDir: CopyDirFunction;
     renderTemplate: (
-        generatorInstance: RuntimeAdaptor,
+        runtimeAdaptor: RuntimeAdaptor,
         src: string,
         options: any,
     ) => Promise<string>;

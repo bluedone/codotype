@@ -39,7 +39,7 @@ import { PropertyLayoutVariants } from "../../configuration-property";
 
 // // // //
 
-// TODO - clean up test state module, growing impossible to work with
+// CHORE - clean up test state module, growing impossible to work with
 
 export const ComponentBuilderConfigurationProperty: ConfigurationProperty = {
     identifier: "components",
