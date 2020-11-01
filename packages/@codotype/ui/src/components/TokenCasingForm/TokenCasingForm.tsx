@@ -1,6 +1,6 @@
 import * as React from "react";
 import { FormGroup } from "../attribute_editor/FormGroup";
-import { buildTokenCasing, sanitizeLabel, TokenCasing } from "@codotype/core";
+import { buildTokenCasing, sanitizeTitle, TokenCasing } from "@codotype/core";
 
 // // // //
 
@@ -23,7 +23,7 @@ export function MetaPreview(props: MetaPreviewProps) {
         <tbody>
             <tr>
                 <td>Label</td>
-                <td>{tokens.label}</td>
+                <td>{tokens.title}</td>
             </tr>
             <tr>
                 <td>Snake Case</td>
@@ -94,7 +94,7 @@ export function TokenCasingForm(props: TokenCasingFormProps) {
                                     value={label}
                                     onChange={e => {
                                         setLabel(
-                                            sanitizeLabel(
+                                            sanitizeTitle(
                                                 e.currentTarget.value,
                                             ),
                                         );

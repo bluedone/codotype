@@ -1,8 +1,8 @@
 import * as React from "react";
 import {
-    applyDataPreview,
-    DataPreview,
-    DataPreviewLayoutVariant,
+    applyPropertyPreview,
+    PropertyPreview,
+    PropertyPreviewLayoutVariant,
 } from "@codotype/core";
 
 // // // //
@@ -14,18 +14,18 @@ import {
  */
 export function DataPreviewRenderer(props: {
     data: any;
-    dataPreview: DataPreview;
+    propertyPreview: PropertyPreview;
 }) {
-    const { dataPreview } = props;
-    const { variant } = dataPreview;
-    const compiledTemplate = applyDataPreview(props);
+    const { propertyPreview } = props;
+    const { variant } = propertyPreview;
+    const compiledTemplate = applyPropertyPreview(props);
 
     if (compiledTemplate === "") {
         return null;
     }
 
     // Handle CollectionTemplateVariant
-    if (variant === DataPreviewLayoutVariant.CODE_DARK) {
+    if (variant === PropertyPreviewLayoutVariant.CODE_DARK) {
         return (
             <pre className="mb-0 py-1 px-2 bg-dark text-light rounded">
                 {compiledTemplate}
@@ -33,7 +33,7 @@ export function DataPreviewRenderer(props: {
         );
     }
 
-    if (variant === DataPreviewLayoutVariant.CODE_LIGHT) {
+    if (variant === PropertyPreviewLayoutVariant.CODE_LIGHT) {
         return (
             <pre className="mb-0 py-1 px-2 bg-light border-dark text-dark rounded border border-dark">
                 {compiledTemplate}
@@ -41,7 +41,7 @@ export function DataPreviewRenderer(props: {
         );
     }
 
-    if (variant === DataPreviewLayoutVariant.BADGE_DARK) {
+    if (variant === PropertyPreviewLayoutVariant.BADGE_DARK) {
         return (
             <span className="px-2 py-1 bg-dark text-light rounded">
                 {compiledTemplate}
@@ -49,7 +49,7 @@ export function DataPreviewRenderer(props: {
         );
     }
 
-    if (variant === DataPreviewLayoutVariant.BADGE_LIGHT) {
+    if (variant === PropertyPreviewLayoutVariant.BADGE_LIGHT) {
         return (
             <span className="px-2 py-1 bg-light text-dark rounded border border-dark">
                 {compiledTemplate}

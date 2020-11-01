@@ -2,12 +2,12 @@ import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { RuntimeProvider } from "../component";
 import { Story } from "../../dev";
-import { dummyGeneratorMeta } from "../../project_editor/__tests__/test_state";
+import { dummyPluginMetadata } from "../../project_editor/__tests__/test_state";
 import { buildDefaultProject } from "@codotype/core";
 
 // // // //
 
-const dummyProject = buildDefaultProject(dummyGeneratorMeta);
+const dummyProject = buildDefaultProject(dummyPluginMetadata);
 
 // // // //
 
@@ -23,7 +23,7 @@ storiesOf("Util/RuntimeProvider", module).add("active = true", () => {
                                 disabled={loading}
                                 onClick={() => {
                                     generateCode({
-                                        generator: dummyGeneratorMeta,
+                                        generator: dummyPluginMetadata,
                                         project: dummyProject,
                                     });
                                 }}

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Modal } from "react-bootstrap";
-import { Project, GeneratorMeta } from "@codotype/core";
+import { Project, PluginMetadata } from "@codotype/core";
 import { BuildFinished } from "../build_finished/component";
 import { LoadingBuild } from "../loading_build";
 
@@ -8,7 +8,7 @@ import { LoadingBuild } from "../loading_build";
 
 interface GenerateCodeProps {
     project: Project;
-    generator: GeneratorMeta;
+    generator: PluginMetadata;
 }
 
 interface RuntimeProviderProps {
