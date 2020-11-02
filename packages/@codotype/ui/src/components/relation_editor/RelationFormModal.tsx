@@ -1,16 +1,11 @@
 import * as React from "react";
-import { RelationType, Relation } from "@codotype/core";
+import { RelationInput } from "@codotype/core";
 import { Modal } from "react-bootstrap";
 
 // // // //
 
-export type RelationInput = Relation;
-
 /**
  * RelationFormModal
- * @param props.show
- * @param props.children
- * @param props.onCancel
  */
 export function RelationFormModal(props: {
     show: boolean;

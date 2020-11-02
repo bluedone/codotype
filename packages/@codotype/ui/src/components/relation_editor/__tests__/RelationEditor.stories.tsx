@@ -3,51 +3,58 @@ import { storiesOf } from "@storybook/react";
 import { Story } from "../../dev";
 import {
     Relation,
-    RelationType,
-    Schema,
-    CreatedByValues,
+    testState,
+    SchemaInput,
     inflateSchema,
+    RelationInput,
 } from "@codotype/core";
 import { RelationEditor } from "../component";
 import {
     relationExample01,
     supportedRelationTypes,
-    userSchema,
 } from "./test_state";
+
+const { userSchema } = testState;
 
 // // // //
 
 storiesOf("ProjectEditor/RelationEditor/Layout", module).add(
     "populated",
     () => {
-        const [relations, setRelations] = React.useState<Relation[]>([
+        const [relations, setRelations] = React.useState<RelationInput[]>([
             relationExample01,
         ]);
-        const schema: Schema = {
+        const schemaInput: SchemaInput = {
             ...userSchema,
-            relations: [
-                {
-                    id: "dummy-relation",
-                    type: RelationType.HAS_ONE,
-                    required: false,
-                    source: CreatedByValues.user,
-                    destinationSchemaId: userSchema.id,
-                    sourceSchemaAlias: "",
-                    destinationSchemaAlias: "Parent",
-                },
-            ],
+            internalNote: "", // TODO - fix this...
         };
+
+        // TODO - fix this...
+        // const relationsInputs: RelationInput = [
+        //     {
+        //         id: "dummy-relation",
+        //         type: RelationTypes.HAS_ONE,
+        //         createdBy: CreatedByValues.user,
+        //         destinationSchemaID: userSchema.id,
+        //         sourceSchemaID: userSchema.id,
+        //         sourceSchemaAlias: "",
+        //         destinationSchemaAlias: "Parent",
+        //         addons: {},
+        //         locked: false,
+        //     },
+        // ]
+
         return (
             <Story>
                 <RelationEditor
                     relations={relations}
                     relationReferences={
-                        inflateSchema({ schema, schemas: [schema] }).relations
+                        inflateSchema({ schemaInput, relations: [] }).relations
                     }
-                    selectedSchema={schema}
-                    schemas={[schema]}
+                    selectedSchema={schemaInput}
+                    schemas={[schemaInput]}
                     supportedRelationTypes={supportedRelationTypes}
-                    onChange={(updatedRelations: Relation[]) => {
+                    onChange={(updatedRelations: RelationInput[]) => {
                         console.log("RelationEditor - onChange");
                         console.log(updatedRelations);
                         setRelations(updatedRelations);
@@ -64,19 +71,19 @@ storiesOf("ProjectEditor/RelationEditor/Layout", module).add(
 );
 
 storiesOf("ProjectEditor/RelationEditor/Layout", module).add("empty", () => {
-    const [relations, setRelations] = React.useState<Relation[]>([]);
+    const [relations, setRelations] = React.useState<RelationInput[]>([]);
     return (
         <Story>
             <RelationEditor
                 relations={relations}
                 selectedSchema={userSchema}
                 relationReferences={
-                    inflateSchema({ schema: userSchema, schemas: [userSchema] })
+                    inflateSchema({ schemaInput: userSchema, relations: [] }) // TODO - add relations here
                         .relations
                 }
-                schemas={[userSchema]}
+                schemas={[{ ...userSchema, internalNote: "" }]}
                 supportedRelationTypes={supportedRelationTypes}
-                onChange={(updatedRelations: Relation[]) => {
+                onChange={(updatedRelations: RelationInput[]) => {
                     console.log("RelationEditor - onChange");
                     console.log(updatedRelations);
                     setRelations(updatedRelations);

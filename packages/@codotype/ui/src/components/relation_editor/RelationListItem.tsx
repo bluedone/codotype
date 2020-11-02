@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Relation, Schema } from "@codotype/core";
+import { Relation, SchemaInput } from "@codotype/core";
 import { Draggable } from "react-beautiful-dnd";
 import { Dropdown } from "react-bootstrap";
 import { RelationBadge } from "./RelationBadge";
@@ -45,8 +45,8 @@ const StyledListItem = styled.li`
 export function RelationListItem(props: {
     relation: Relation;
     index: number;
-    selectedSchema: Schema;
-    schemas: Schema[];
+    selectedSchema: SchemaInput;
+    schemas: SchemaInput[];
     onClickEdit: (relationToBeEdited: Relation) => void;
     onClickDelete: (relationToDelete: Relation) => void;
 }) {

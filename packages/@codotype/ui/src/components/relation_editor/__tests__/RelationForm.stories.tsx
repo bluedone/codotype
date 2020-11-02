@@ -2,8 +2,7 @@ import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { RelationPropertiesForm } from "../RelationPropertiesForm";
 import { Story } from "../../dev";
-import { RelationInput } from "../RelationFormModal";
-import { testState, RelationType, CreatedByValues } from "@codotype/core";
+import { testState, RelationInput, RelationTypes, CreatedByValues } from "@codotype/core";
 const { userSchema, movieSchema } = testState;
 
 // // // //
@@ -13,12 +12,15 @@ const testCases: [string, RelationInput][] = [
         "renders",
         {
             id: "test-01",
-            type: RelationType.TO_ONE,
-            required: false,
-            source: CreatedByValues.user,
-            destinationSchemaId: userSchema.id,
+            internalNote: "",
+            type: RelationTypes.TO_ONE,
+            createdBy: CreatedByValues.user,
+            locked: false,
+            sourceSchemaID: userSchema.id,
+            destinationSchemaID: userSchema.id,
             sourceSchemaAlias: "Directed Movie",
             destinationSchemaAlias: "Director",
+            addons: {}
         },
     ],
 ];
@@ -43,12 +45,12 @@ testCases.forEach(testCase => {
                                         relationInput={relationInput}
                                         onChange={setRelationInput}
                                         supportedRelationTypes={[
-                                            RelationType.BELONGS_TO,
-                                            RelationType.HAS_AND_BELONGS_TO_MANY,
-                                            RelationType.HAS_MANY,
-                                            RelationType.HAS_ONE,
-                                            RelationType.TO_ONE,
-                                            RelationType.TO_MANY,
+                                            RelationTypes.BELONGS_TO,
+                                            RelationTypes.HAS_AND_BELONGS_TO_MANY,
+                                            RelationTypes.HAS_MANY,
+                                            RelationTypes.HAS_ONE,
+                                            RelationTypes.TO_ONE,
+                                            RelationTypes.TO_MANY,
                                         ]}
                                     />
                                 </div>

@@ -1,53 +1,24 @@
-import {
-    Relation,
-    Schema,
-    SchemaSource,
-    RelationType,
-    testState,
-} from "@codotype/core";
+import { RelationInput, RelationTypes, CreatedByValues } from "@codotype/core";
 
 // // // //
 
-export const relationExample01: Relation = {
+export const relationExample01: RelationInput = {
     id: "relation-id-attr",
-    type: RelationType.TO_ONE,
-    source: SchemaSource.USER,
-    required: false,
-    destinationSchemaId: "12345",
+    locked: false,
+    internalNote: "",
+    type: RelationTypes.TO_ONE,
+    createdBy: CreatedByValues.user,
+    sourceSchemaID: "1111",
+    destinationSchemaID: "12345",
     sourceSchemaAlias: "Employer",
     destinationSchemaAlias: "Employee",
+    addons: {},
 };
 
-export const supportedRelationTypes: RelationType[] = [
-    RelationType.TO_ONE,
-    RelationType.TO_MANY,
-    RelationType.HAS_ONE,
-    RelationType.HAS_MANY,
-    RelationType.HAS_AND_BELONGS_TO_MANY,
+export const supportedRelationTypes: RelationTypes[] = [
+    RelationTypes.TO_ONE,
+    RelationTypes.TO_MANY,
+    RelationTypes.HAS_ONE,
+    RelationTypes.HAS_MANY,
+    RelationTypes.HAS_AND_BELONGS_TO_MANY,
 ];
-
-export const userSchema: Schema = {
-    id: "12345",
-    identifiers: {
-        singular: {
-            label: "User",
-            snake: "user",
-            camel: "user",
-            pascal: "User",
-            kebab: "user",
-        },
-        plural: {
-            label: "Users",
-            snake: "users",
-            camel: "users",
-            pascal: "Users",
-            kebab: "users",
-        },
-    },
-    attributes: [{ ...testState.emailAttribute }],
-    relations: [],
-    locked: false,
-    removable: false,
-    source: SchemaSource.USER,
-    configuration: {},
-};

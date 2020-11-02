@@ -1,7 +1,6 @@
 import { RelationPropertiesForm } from "./RelationPropertiesForm";
-import { Relation, RelationType, Schema } from "@codotype/core";
+import { RelationInput, RelationType, SchemaInput } from "@codotype/core";
 import * as React from "react";
-import { RelationInput } from "./RelationFormModal";
 
 // // // //
 
@@ -11,10 +10,10 @@ import { RelationInput } from "./RelationFormModal";
  * `supportedRelationTypes` - the unique IDs of supported datatypes made available in the form
  */
 interface RelationFormProps {
-    selectedSchema: Schema;
-    schema: Schema;
-    schemas: Schema[];
-    relations: Relation[];
+    selectedSchema: SchemaInput;
+    schema: SchemaInput;
+    schemas: SchemaInput[];
+    relations: RelationInput[];
     relationInput: RelationInput;
     supportedRelationTypes: RelationType[];
     onChange: (updatedRelationInput: RelationInput) => void;

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { RelationDatatypeForm } from "./RelationDatatypeForm";
 import {
-    Schema,
+    SchemaInput,
     RelationType,
     RELATION_META,
     sanitizeTitle,
@@ -17,8 +17,8 @@ import { RelationBadge } from "./RelationBadge";
  * TODO - annotate remaining props
  */
 interface RelationPropertiesFormProps {
-    schema: Schema;
-    schemas: Schema[];
+    schema: SchemaInput;
+    schemas: SchemaInput[];
     relationInput: RelationInput;
     onChange: (updatedRelationInput: RelationInput) => void;
     supportedRelationTypes: RelationType[];
@@ -172,7 +172,6 @@ export function RelationPropertiesForm(props: RelationPropertiesFormProps) {
                         <RelationBadge
                             direction="out"
                             relation={buildRelation({
-                                // TODO - fix this
                                 sourceSchema: props.schema,
                                 relationInput: relationInput,
                                 destinationSchema: destinationSchema,
