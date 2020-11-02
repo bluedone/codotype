@@ -61,7 +61,6 @@ export function BuildFinished(props: {
                         </small>
                         <p className="lead mb-0">
                             {/* TODO - add tooltip */}
-                            {/* v-b-tooltip.hover.bottom="'Copy to clipboard'" */}
                             {/* TODO - set up copy-to-clipboard */}
                             {/* https://github.com/nkbt/react-copy-to-clipboard */}
                             <button className="btn btn-sm btn-dark">

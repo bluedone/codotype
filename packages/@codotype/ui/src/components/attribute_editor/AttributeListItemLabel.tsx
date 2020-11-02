@@ -39,11 +39,9 @@ export function AttributeListItemLabel(props: AttributeListItemLabelProps) {
             )}
 
             {/* <b-badge
-                v-if="index === 0"
                 className='ml-2'
                 variant="light"
                 title="Title Attribute"
-                v-b-tooltip.hover.right
             >
               <i class="fa text-primary fa-tag" />
             </b-badge> */}

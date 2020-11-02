@@ -95,7 +95,6 @@ export function AttributeListItem(props: {
                         {attribute.locked && (
                             <div
                                 className="col-sm-2 text-right controls justify-content-end"
-                                v-if="item.locked"
                             >
                                 <span
                                     className=" badge badge-secondary"

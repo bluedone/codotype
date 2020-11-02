@@ -67,7 +67,6 @@ export function PluginStart(props: PluginStartProps) {
 
                         {props.externalLink && (
                             <button
-                                // v-if="externalLink"
                                 // :href="externalLink"
                                 className="btn btn-block btn-primary btn-lg rounded-pill"
                             >
