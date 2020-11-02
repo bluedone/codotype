@@ -1,12 +1,12 @@
-import { FileSystemAdaptor } from "@codotype/core";
+import { FileSystemAdapter } from "@codotype/core";
 
 // // // //
 
 /**
- * InMemoryFileSystemAdaptor
- * FileSystemAdaptor for writing to the local file system
+ * InMemoryFileSystemAdapter
+ * FileSystemAdapter for writing to the local file system
  */
-export class InMemoryFileSystemAdaptor implements FileSystemAdaptor {
+export class InMemoryFileSystemAdapter implements FileSystemAdapter {
     files: { [key: string]: string };
     constructor() {
         this.files = {};

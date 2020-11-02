@@ -1,5 +1,5 @@
 import { NodeRuntime } from "../node-runtime";
-import { RuntimeProxyAdaptor } from "../utils/runtimeProxyAdaptor";
+import { RuntimeProxyAdapter } from "../utils/runtimeProxyAdapter";
 import {
     project,
     baseGeneratorOptions,
@@ -11,7 +11,7 @@ import {
     FileOverwriteBehaviors,
     RuntimeConstructorParams,
 } from "@codotype/core";
-import { InMemoryFileSystemAdaptor } from "../InMemoryFileSystemAdaptor";
+import { InMemoryFileSystemAdapter } from "../InMemoryFileSystemAdapter";
 import { runGenerator } from "../utils/runGenerator";
 
 // // // //
@@ -22,12 +22,12 @@ describe("templatePath method", () => {
         const template = "template.json";
         const resolved = "my/resolved/path";
 
-        const fileSystemAdaptor = new InMemoryFileSystemAdaptor();
+        const fileSystemAdapter = new InMemoryFileSystemAdapter();
         const runtimeConstructorOptions: RuntimeConstructorParams = {
             cwd: "/test-cwd/",
             logLevel: RuntimeLogLevels.verbose,
             fileOverwriteBehavior: FileOverwriteBehaviors.force,
-            fileSystemAdaptor,
+            fileSystemAdapter,
         };
         const runtime = new NodeRuntime(runtimeConstructorOptions);
 
@@ -37,7 +37,7 @@ describe("templatePath method", () => {
             dest,
             resolved,
         };
-        const generatorInstance = new RuntimeProxyAdaptor(
+        const generatorInstance = new RuntimeProxyAdapter(
             generatorPrototype,
             generatorOptions,
         );
@@ -52,12 +52,12 @@ describe("destinationPath method", () => {
         const dest = "destination";
         const dirName = "testyMcTestface";
 
-        const fileSystemAdaptor = new InMemoryFileSystemAdaptor();
+        const fileSystemAdapter = new InMemoryFileSystemAdapter();
         const runtimeConstructorOptions: RuntimeConstructorParams = {
             cwd: "/test-cwd/",
             logLevel: RuntimeLogLevels.verbose,
             fileOverwriteBehavior: FileOverwriteBehaviors.force,
-            fileSystemAdaptor,
+            fileSystemAdapter,
         };
         const runtime = new NodeRuntime(runtimeConstructorOptions);
 
@@ -68,7 +68,7 @@ describe("destinationPath method", () => {
             resolved: __dirname,
         };
 
-        const generatorInstance = new RuntimeProxyAdaptor(
+        const generatorInstance = new RuntimeProxyAdapter(
             generatorPrototype,
             generatorOptions,
         );
@@ -83,12 +83,12 @@ describe("ensureDir method", () => {
         const dest = "destination";
         const dirName = "testyMcTestface";
 
-        const fileSystemAdaptor = new InMemoryFileSystemAdaptor();
+        const fileSystemAdapter = new InMemoryFileSystemAdapter();
         const runtimeConstructorOptions: RuntimeConstructorParams = {
             cwd: "/test-cwd/",
             logLevel: RuntimeLogLevels.verbose,
             fileOverwriteBehavior: FileOverwriteBehaviors.force,
-            fileSystemAdaptor,
+            fileSystemAdapter,
         };
         const runtime = new NodeRuntime(runtimeConstructorOptions);
 
@@ -98,13 +98,13 @@ describe("ensureDir method", () => {
             dest,
             resolved: __dirname,
         };
-        const generatorInstance = new RuntimeProxyAdaptor(
+        const generatorInstance = new RuntimeProxyAdapter(
             generatorPrototype,
             generatorOptions,
         );
 
         generatorInstance.ensureDir(dirName).then(() => {
-            expect(fileSystemAdaptor.files).toMatchSnapshot();
+            expect(fileSystemAdapter.files).toMatchSnapshot();
         });
     });
 });
@@ -113,17 +113,17 @@ describe("renderComponent", () => {
     test("renders", async () => {
         const dest = "destination";
 
-        const fileSystemAdaptor = new InMemoryFileSystemAdaptor();
+        const fileSystemAdapter = new InMemoryFileSystemAdapter();
         const runtimeConstructorOptions: RuntimeConstructorParams = {
             cwd: "/test-cwd/",
             logLevel: RuntimeLogLevels.verbose,
             fileOverwriteBehavior: FileOverwriteBehaviors.force,
-            fileSystemAdaptor,
+            fileSystemAdapter,
         };
         const runtime = new NodeRuntime(runtimeConstructorOptions);
 
         // // // //
-        // NOTE - all of this is handled by the runtime -> should this be handled inside the RuntimeGeneratorAdaptor?
+        // NOTE - all of this is handled by the runtime -> should this be handled inside the RuntimeGeneratorAdapter?
         const generatorOptions = {
             ...baseGeneratorOptions,
             runtime,
@@ -131,16 +131,16 @@ describe("renderComponent", () => {
             resolved: __dirname, // NOTE - need to use __dirname here beacuse the `templates` directory sits next to this test
         };
 
-        const runtimeProxyAdaptor = new RuntimeProxyAdaptor(
+        const runtimeProxyAdapter = new RuntimeProxyAdapter(
             generatorPrototype01,
             generatorOptions,
         );
 
         runGenerator({
             project,
-            runtimeProxyAdaptor,
+            runtimeProxyAdapter,
         });
 
-        expect(fileSystemAdaptor.files).toMatchSnapshot();
+        expect(fileSystemAdapter.files).toMatchSnapshot();
     });
 });

@@ -119,7 +119,7 @@ export interface RuntimeProxy {
 
 /**
  * ComposeWithOptions
- * Optional parameters accepted by RuntimeAdaptor.composeWith()
+ * Optional parameters accepted by RuntimeAdapter.composeWith()
  * Used when composing one generator inside another
  * @param outputDirectoryScope - dictates the output directory of the composed generator.
  *      Helpful when working with generators (i.e. located in NPM an package) that writes to the root of OUTPUT_DIRECTORY/my_project.
@@ -130,10 +130,10 @@ export interface ComposeWithOptions {
 }
 
 /**
- * RuntimeAdaptor
+ * RuntimeAdapter
  * TODO - annotate this
  */
-export interface RuntimeAdaptor {
+export interface RuntimeAdapter {
     runtimeProxy: RuntimeProxy;
     options: RuntimeInjectorProps;
     write: WriteFunction;
@@ -243,7 +243,7 @@ export interface Runtime {
     ensureDir: (dirPath: string) => Promise<boolean>;
     copyDir: CopyDirFunction;
     renderTemplate: (
-        runtimeAdaptor: RuntimeAdaptor,
+        runtimeAdapter: RuntimeAdapter,
         src: string,
         options: any,
     ) => Promise<string>;
@@ -261,7 +261,7 @@ export interface Runtime {
     }) => Promise<PluginRegistration | null>;
     execute: (props: { build: ProjectBuild }) => Promise<void>;
     composeWith: (
-        parentRuntimeAdaptor: RuntimeAdaptor,
+        parentRuntimeAdapter: RuntimeAdapter,
         generatorModulePath: string,
         options: ComposeWithOptions,
     ) => Promise<void>;

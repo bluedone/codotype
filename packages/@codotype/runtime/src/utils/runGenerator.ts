@@ -1,27 +1,27 @@
-import { Project, Schema, RuntimeAdaptor, Relation } from "@codotype/core";
+import { Project, Schema, RuntimeAdapter, Relation } from "@codotype/core";
 
 // // // //
 
 /**
  * runGenerator
  * TODO - rename this
- * Accepts a project and runtimeAdaptor -> invokes each method passed in with GeneratorConstructorOptions
+ * Accepts a project and runtimeAdapter -> invokes each method passed in with GeneratorConstructorOptions
  * @param project - the Project being run against params.generatorInstance
- * @param generatorInstance - (TODO: RENAME) the RuntimeAdaptor being passed into each function on GeneratorConstructorOptions
+ * @param generatorInstance - (TODO: RENAME) the RuntimeAdapter being passed into each function on GeneratorConstructorOptions
  */
 export async function runGenerator(params: {
     project: Project;
-    runtimeProxyAdaptor: RuntimeAdaptor;
+    runtimeProxyAdapter: RuntimeAdapter;
 }): Promise<void> {
-    const { project, runtimeProxyAdaptor } = params;
+    const { project, runtimeProxyAdapter } = params;
 
     // Invokes `generator.forEachSchema` once for each in project.schemas
     await Promise.all(
         project.schemas.map((schema: Schema) =>
-            runtimeProxyAdaptor.forEachSchema({
+            runtimeProxyAdapter.forEachSchema({
                 schema,
                 project,
-                runtime: runtimeProxyAdaptor, // TODO - rename all the stuff like this
+                runtime: runtimeProxyAdapter, // TODO - rename all the stuff like this
             }),
         ),
     );
@@ -31,11 +31,11 @@ export async function runGenerator(params: {
         project.schemas.map((schema: Schema) => {
             return Promise.all(
                 schema.relations.map((relation: Relation) => {
-                    return runtimeProxyAdaptor.forEachRelation({
+                    return runtimeProxyAdapter.forEachRelation({
                         schema: schema,
                         relation,
                         project,
-                        runtime: runtimeProxyAdaptor.runtimeProxy,
+                        runtime: runtimeProxyAdapter.runtimeProxy,
                     });
                 }),
             );
@@ -47,11 +47,11 @@ export async function runGenerator(params: {
         project.schemas.map((schema: Schema) => {
             return Promise.all(
                 schema.references.map((relation: Relation) => {
-                    return runtimeProxyAdaptor.forEachReverseRelation({
+                    return runtimeProxyAdapter.forEachReverseRelation({
                         schema: schema,
                         relation,
                         project,
-                        runtime: runtimeProxyAdaptor.runtimeProxy,
+                        runtime: runtimeProxyAdapter.runtimeProxy,
                     });
                 }),
             );
@@ -59,11 +59,11 @@ export async function runGenerator(params: {
     );
 
     // Invokes `generator.write()` once
-    await runtimeProxyAdaptor.write({
+    await runtimeProxyAdapter.write({
         project,
-        runtime: runtimeProxyAdaptor,
+        runtime: runtimeProxyAdapter,
     });
 
     // Invokes generator.compileTemplatesInPlace()
-    await runtimeProxyAdaptor.compileTemplatesInPlace();
+    await runtimeProxyAdapter.compileTemplatesInPlace();
 }

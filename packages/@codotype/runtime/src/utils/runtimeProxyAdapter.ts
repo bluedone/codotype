@@ -4,7 +4,7 @@ import {
     Schema,
     GeneratorConstructorParams,
     RuntimeInjectorProps,
-    RuntimeAdaptor,
+    RuntimeAdapter,
     RuntimeProxy,
     Runtime,
     ComposeWithOptions,
@@ -13,13 +13,13 @@ import {
 // // // //
 
 /**
- * RuntimeAdaptor?
- * RuntimeProxyAdaptor?
- * TODO - rename this to RuntimeAdaptor?
- * Implements an adaptor between the RuntimeProxy and the Runtime
+ * RuntimeAdapter?
+ * RuntimeProxyAdapter?
+ * TODO - rename this to RuntimeAdapter?
+ * Implements an adapter between the RuntimeProxy and the Runtime
  * Allows a generator to safely access and invoke simplified Runtime methods for abstract filesystem manipulation
  */
-export class RuntimeProxyAdaptor implements RuntimeAdaptor {
+export class RuntimeProxyAdapter implements RuntimeAdapter {
     private runtime: Runtime;
     compileInPlace: string[];
     options: RuntimeInjectorProps;

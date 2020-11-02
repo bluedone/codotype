@@ -1,14 +1,14 @@
 import * as fsExtra from "fs-extra";
 import * as fs from "fs";
-import { FileSystemAdaptor } from "@codotype/core";
+import { FileSystemAdapter } from "@codotype/core";
 
 // // // //
 
 /**
- * LocalFileSystemAdaptor
- * FileSystemAdaptor for writing to the local file system
+ * LocalFileSystemAdapter
+ * FileSystemAdapter for writing to the local file system
  */
-export class LocalFileSystemAdaptor implements FileSystemAdaptor {
+export class LocalFileSystemAdapter implements FileSystemAdapter {
     ensureDir(dir: string): Promise<boolean> {
         return new Promise((resolve, reject) => {
             fsExtra.ensureDir(dir).then(() => {

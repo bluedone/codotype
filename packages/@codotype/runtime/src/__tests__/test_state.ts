@@ -1,4 +1,4 @@
-import { RuntimeProxyAdaptor } from "../utils/runtimeProxyAdaptor";
+import { RuntimeProxyAdapter } from "../utils/runtimeProxyAdapter";
 import {
     testState,
     RuntimeLogLevels,
@@ -9,31 +9,12 @@ import {
     RuntimeInjectorProps,
     GeneratorConstructorParams,
     buildTokenCasing,
-    Primatives,
 } from "@codotype/core";
-// import { LocalFileSystemAdaptor } from "../LocalFileSystemAdaptor";
-import { InMemoryFileSystemAdaptor } from "../InMemoryFileSystemAdaptor";
+// import { LocalFileSystemAdapter } from "../LocalFileSystemAdapter";
+import { InMemoryFileSystemAdapter } from "../InMemoryFileSystemAdapter";
 import { NodeRuntime } from "../node-runtime";
 
 // // // //
-
-// const x = new Primatives.Plugin({
-//     id: "my-plugin",
-//     label: "My Plugin",
-//     description: "",
-//     project_path: "plugin-output",
-//     schemaEditorConfiguration: {
-//         defaultRelations: [],
-//         defaultSchemas: [],
-//         defaultAttributes: [],
-//         configurationGroups: [],
-//         documentation: "",
-//         supportedDatatypes: [],
-//         supportedRelations: [],
-//         attributeAddons: [],
-//         enableAttributeDefaultValue: false,
-//     },
-// });
 
 export const project: Project = normalizeProjectInput({
     projectInput: {
@@ -51,14 +32,14 @@ export const runtimeConstructorOptions: RuntimeConstructorParams = {
     cwd: "/test-cwd/",
     logLevel: RuntimeLogLevels.verbose,
     fileOverwriteBehavior: FileOverwriteBehaviors.force,
-    fileSystemAdaptor: new InMemoryFileSystemAdaptor(),
+    fileSystemAdapter: new InMemoryFileSystemAdapter(),
 };
 
 export const baseGeneratorOptions: RuntimeInjectorProps = {
     dest: "destination",
     resolved: "my/resolved/path",
     project,
-    plugin: testState.cdkGeneratorMeta,
+    plugin: testState.cdkPluginMeta,
     runtime: new NodeRuntime(runtimeConstructorOptions),
 };
 
@@ -84,7 +65,7 @@ export const generatorPrototype01: GeneratorConstructorParams = {
         // Ensures module components directory
         await runtime.ensureDir(moduleComponentsDest);
 
-        // TODO - ensure page here
+        // WRites the page.tsx.ejs template
         await runtime.renderComponent({
             src: "page.tsx.ejs",
             dest: `pages/${schema.identifiers.plural.snake}.tsx`,
@@ -96,7 +77,7 @@ export const generatorPrototype01: GeneratorConstructorParams = {
 // // Defines typed generator constant
 export const generatorPrototype02: GeneratorConstructorParams = {
     name: "Fullstack TypeScript Generator",
-    async write(this: RuntimeProxyAdaptor) {
+    async write(this: RuntimeProxyAdapter) {
         await this.composeWith("./base");
         await this.composeWith("./rest-api");
         await this.composeWith("./react-components");

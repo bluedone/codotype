@@ -16,13 +16,13 @@ import {
     PluginMetadata,
     PluginRegistration,
     RuntimeConstructorParams,
-    RuntimeAdaptor,
+    RuntimeAdapter,
     Runtime,
     ProjectBuild,
     RuntimeInjectorProps,
     GeneratorConstructorParams,
 } from "@codotype/core";
-import { RuntimeProxyAdaptor } from "./utils/runtimeProxyAdaptor";
+import { RuntimeProxyAdapter } from "./utils/runtimeProxyAdapter";
 import { runGenerator } from "./utils/runGenerator";
 import { prettify } from "./utils/prettify";
 import {
@@ -43,7 +43,7 @@ function getAllFiles(dirPath: string, arrayOfFiles: string[]): string[] {
 
     arrayOfFiles = arrayOfFiles || [];
 
-    files.forEach(function(file) {
+    files.forEach(function (file) {
         if (fs.statSync(dirPath + "/" + file).isDirectory()) {
             arrayOfFiles = getAllFiles(dirPath + "/" + file, arrayOfFiles);
         } else {
@@ -200,7 +200,7 @@ export class NodeRuntime implements Runtime {
      * @param dir - the directory whose existance is being ensured
      */
     ensureDir(dir: string): Promise<boolean> {
-        return this.options.fileSystemAdaptor.ensureDir(dir);
+        return this.options.fileSystemAdapter.ensureDir(dir);
     }
 
     /**
@@ -254,7 +254,7 @@ export class NodeRuntime implements Runtime {
         // Finds the pluginRegistration associated with the ProjectBuild
         // TODO - check version here, use semver if possible
         const pluginRegistration: PluginRegistration | undefined = plugins.find(
-            g => g.id === project.pluginID,
+            (g) => g.id === project.pluginID,
         );
         //
         // // // //
@@ -293,7 +293,7 @@ export class NodeRuntime implements Runtime {
             const resolved: string = require.resolve(pluginDynamicImportPath);
 
             // Defines options for generator instance
-            const runtimeProxyAdaptorProps: RuntimeInjectorProps = {
+            const runtimeProxyAdapterProps: RuntimeInjectorProps = {
                 project,
                 dest,
                 resolved,
@@ -306,16 +306,16 @@ export class NodeRuntime implements Runtime {
                 level: RuntimeLogLevels.verbose,
             });
 
-            // Creates RuntimeProxyAdaptor instance
-            const runtimeProxyAdaptor = new RuntimeProxyAdaptor(
+            // Creates RuntimeProxyAdapter instance
+            const runtimeProxyAdapter = new RuntimeProxyAdapter(
                 generator,
-                runtimeProxyAdaptorProps,
+                runtimeProxyAdapterProps,
             );
 
-            // Invokes runGenerator w/ Project + RuntimeProxyAdaptor
+            // Invokes runGenerator w/ Project + RuntimeProxyAdapter
             await runGenerator({
                 project,
-                runtimeProxyAdaptor,
+                runtimeProxyAdapter,
             });
 
             // Logs which generator is being run
@@ -363,7 +363,7 @@ export class NodeRuntime implements Runtime {
      * @param options
      */
     renderTemplate(
-        generatorInstance: RuntimeAdaptor,
+        generatorInstance: RuntimeAdapter,
         src: string,
         options: any = {}, // TODO - add type for options here, build in proper support for prettify
     ): Promise<string> {
@@ -416,7 +416,7 @@ export class NodeRuntime implements Runtime {
      * @param filepath - string
      */
     fileExists(filepath: string): Promise<boolean> {
-        return this.options.fileSystemAdaptor.fileExists(filepath);
+        return this.options.fileSystemAdapter.fileExists(filepath);
     }
 
     /**
@@ -432,7 +432,7 @@ export class NodeRuntime implements Runtime {
         // Reads the file from FS
         const existingFile:
             | string
-            | null = await this.options.fileSystemAdaptor.readFile(
+            | null = await this.options.fileSystemAdapter.readFile(
             destinationFilepath,
         );
 
@@ -450,7 +450,7 @@ export class NodeRuntime implements Runtime {
      * @param compiledTemplate - the text being written inside `dest`
      */
     writeFile(dest: string, compiledTemplate: string): Promise<boolean> {
-        return this.options.fileSystemAdaptor.writeFile(dest, compiledTemplate);
+        return this.options.fileSystemAdapter.writeFile(dest, compiledTemplate);
     }
 
     /**
@@ -481,7 +481,7 @@ export class NodeRuntime implements Runtime {
             // TODO - wrap in try/catch
             const contents: string = fs.readFileSync(sourcePath, "utf8");
 
-            await this.options.fileSystemAdaptor.writeFile(destPath, contents);
+            await this.options.fileSystemAdapter.writeFile(destPath, contents);
         }
 
         return Promise.resolve(true);
@@ -507,12 +507,12 @@ export class NodeRuntime implements Runtime {
     /**
      * composeWith
      * Enables one generator to fire off several child generators
-     * @param parentRuntimeAdaptor
+     * @param parentRuntimeAdapter
      * @param generatorModulePath
      * @param options - @see ComposeWithOptions
      */
     async composeWith(
-        parentRuntimeAdaptor: RuntimeAdaptor,
+        parentRuntimeAdapter: RuntimeAdapter,
         generatorModulePath: string,
         options: ComposeWithOptions = {},
     ): Promise<void> {
@@ -530,7 +530,7 @@ export class NodeRuntime implements Runtime {
         // Finds the currently active plugin
         const plugins = await this.getPlugins();
         const activePlugin = plugins.find(
-            p => p.id === parentRuntimeAdaptor.options.plugin.id,
+            (p) => p.id === parentRuntimeAdapter.options.plugin.id,
         );
 
         if (activePlugin === undefined) {
@@ -552,15 +552,15 @@ export class NodeRuntime implements Runtime {
 
             // TODO - abstract into helper function?
             const stats = fsExtra.statSync(
-                parentRuntimeAdaptor.options.resolved,
+                parentRuntimeAdapter.options.resolved,
             );
 
             // TODO - document
             // TODO - document
             if (stats.isDirectory()) {
-                base = parentRuntimeAdaptor.options.resolved;
+                base = parentRuntimeAdapter.options.resolved;
             } else {
-                base = path.dirname(parentRuntimeAdaptor.options.resolved);
+                base = path.dirname(parentRuntimeAdapter.options.resolved);
             }
 
             // TODO - document
@@ -597,14 +597,14 @@ export class NodeRuntime implements Runtime {
 
             // // // //
             // TODO - move into independent function, `resolveDestination`, perhaps
-            let resolvedDestination = parentRuntimeAdaptor.options.dest;
+            let resolvedDestination = parentRuntimeAdapter.options.dest;
 
             // Handle ComposeWithOptions.outputDirectoryScope
             // Scope the output of the composed Generator inside a different directory within OUTPUT_DIRECTORY/my_project
             if (options.outputDirectoryScope) {
                 // Updates resolvedDestination to include the additional outputDirectoryScope
                 resolvedDestination = path.resolve(
-                    parentRuntimeAdaptor.options.dest,
+                    parentRuntimeAdapter.options.dest,
                     options.outputDirectoryScope,
                 );
             }
@@ -617,12 +617,12 @@ export class NodeRuntime implements Runtime {
                 { level: RuntimeLogLevels.verbose },
             );
 
-            // Gets project from parentRuntimeAdaptor.options
-            const project = parentRuntimeAdaptor.options.project;
+            // Gets project from parentRuntimeAdapter.options
+            const project = parentRuntimeAdapter.options.project;
 
             // Creates new CodotypeGenerator
-            const runtimeProxyAdaptor = new RuntimeProxyAdaptor(generator, {
-                ...parentRuntimeAdaptor.options,
+            const runtimeProxyAdapter = new RuntimeProxyAdapter(generator, {
+                ...parentRuntimeAdapter.options,
                 dest: resolvedDestination,
                 resolved: resolvedGeneratorPath,
             });
@@ -630,7 +630,7 @@ export class NodeRuntime implements Runtime {
             // Invokes runGenerator w/ generatorInstance + project
             await runGenerator({
                 project,
-                runtimeProxyAdaptor,
+                runtimeProxyAdapter,
             });
 
             // Logs output

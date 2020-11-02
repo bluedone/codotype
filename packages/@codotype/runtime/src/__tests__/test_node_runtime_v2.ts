@@ -7,7 +7,7 @@ import {
     RuntimeLogLevels,
 } from "@codotype/core";
 import { resolve } from "path";
-import { LocalFileSystemAdaptor } from "../LocalFileSystemAdaptor";
+import { LocalFileSystemAdapter } from "../LocalFileSystemAdapter";
 
 // // // //
 
@@ -53,7 +53,7 @@ describe("testing @codotype/runtime v2", () => {
             cwd,
             logLevel: RuntimeLogLevels.suppress,
             fileOverwriteBehavior: "force",
-            fileSystemAdaptor: new LocalFileSystemAdaptor(),
+            fileSystemAdapter: new LocalFileSystemAdapter(),
         });
 
         // Registers the mock_plugin
