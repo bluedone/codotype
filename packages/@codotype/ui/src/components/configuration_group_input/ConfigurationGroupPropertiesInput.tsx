@@ -1,8 +1,8 @@
 import * as React from "react";
 import {
     ConfigurationGroup,
-    ConfigurationGroupProperty,
-    OptionType,
+    ConfigurationProperty,
+    PropertyTypes,
     OptionValue,
     OptionValueInstance,
     EMPTY_TOKEN_CASING,
@@ -20,22 +20,22 @@ import { ConfigurationCollectionInput } from "./ConfigurationCollectionInput";
  */
 export function ConfigurationGroupPropertiesInput(props: {
     configurationGroup?: ConfigurationGroup;
-    properties?: ConfigurationGroupProperty[];
+    properties?: ConfigurationProperty[];
     value: OptionValueInstance;
     onChange: (updatedVal: OptionValueInstance) => void;
 }) {
     const { configurationGroup } = props;
 
     // @ts-ignore
-    const properties: ConfigurationGroupProperty[] =
+    const properties: ConfigurationProperty[] =
         // @ts-ignore
         props.properties || configurationGroup.properties;
 
     return (
         <div className="row">
-            {properties.map((property: ConfigurationGroupProperty) => {
-                // Handle OptionType.COLLECTION
-                if (property.type === OptionType.COLLECTION) {
+            {properties.map((property: ConfigurationProperty) => {
+                // Handle PropertyTypes.COLLECTION
+                if (property.type === PropertyTypes.COLLECTION) {
                     const val =
                         // @ts-ignore
                         props.value[property.identifier];
@@ -55,9 +55,9 @@ export function ConfigurationGroupPropertiesInput(props: {
                             }}
                         >
                             <ConfigurationCollectionInput
-                                identifiers={buildTokenPluralization("Item")} // TODO - replace with option taken from ConfigurationGroupProperty
+                                identifiers={buildTokenPluralization("Item")} // TODO - replace with option taken from ConfigurationProperty
                                 properties={property.properties}
-                                dataPreview={property.dataPreview}
+                                propertyPreview={property.preview}
                                 onChange={(updatedVal: OptionValue) => {
                                     props.onChange({
                                         ...props.value,
@@ -71,7 +71,7 @@ export function ConfigurationGroupPropertiesInput(props: {
                 }
 
                 // Handle instance input
-                if (property.type === OptionType.INSTANCE) {
+                if (property.type === PropertyTypes.INSTANCE) {
                     const val =
                         // @ts-ignore
                         props.value[property.identifier];
@@ -114,7 +114,7 @@ export function ConfigurationGroupPropertiesInput(props: {
                     );
                 }
 
-                // Handle OptionType.STRING + OptionType.NUMBER + OptionType.BOOLEAN + OptionType.BOOLEAN
+                // Handle PropertyTypes.STRING + PropertyTypes.NUMBER + PropertyTypes.BOOLEAN + PropertyTypes.BOOLEAN
                 // @ts-ignore
                 const value = props.value[property.identifier];
                 return (

@@ -1,11 +1,11 @@
 import * as React from "react";
 import {
-    OptionType,
+    PropertyTypes,
     OptionValue,
     DropdownOption,
-    ConfigurationGroupProperty,
-    applyStringPropertyFilters,
-    applyNumberPropertyFilters,
+    ConfigurationProperty,
+    applyStringPropertyTransformations,
+    applyNumberPropertyTransformations,
 } from "@codotype/core";
 import Switch from "react-switch";
 
@@ -13,7 +13,7 @@ import Switch from "react-switch";
 
 interface ConfigurationInputChildProps {
     value: any; // TODO - remove any here
-    property: ConfigurationGroupProperty;
+    property: ConfigurationProperty;
     onChange: (updatedValue: OptionValue) => void;
 }
 
@@ -42,15 +42,15 @@ export function ConfigurationInputChild(props: ConfigurationInputChildProps) {
 
     // // // //
 
-    // Handle OptionType.STRING
-    if (property.type === OptionType.STRING) {
+    // Handle PropertyTypes.STRING
+    if (property.type === PropertyTypes.STRING) {
         return (
             <input
                 className="form-control"
                 type="text"
                 name={property.identifier}
                 required={property.required}
-                placeholder={property.label}
+                placeholder={property.content.label}
                 autoComplete="none"
                 value={value}
                 onChange={e => {
@@ -59,12 +59,14 @@ export function ConfigurationInputChild(props: ConfigurationInputChildProps) {
                 onBlur={e => {
                     const value = e.currentTarget.value;
 
-                    // Applies PropertyFilters from ConfigurationGroupProperty
-                    const filteredValue: string = applyStringPropertyFilters({
-                        value,
-                        // @ts-ignore
-                        filters: property.filters,
-                    });
+                    // Applies PropertyFilters from ConfigurationProperty
+                    const filteredValue: string = applyStringPropertyTransformations(
+                        {
+                            value,
+                            // @ts-ignore
+                            filters: property.filters,
+                        },
+                    );
 
                     // Sets value with filtered version on blur
                     setValue(filteredValue);
@@ -73,13 +75,13 @@ export function ConfigurationInputChild(props: ConfigurationInputChildProps) {
         );
     }
 
-    // Handle OptionType.NUMBER
-    if (property.type === OptionType.NUMBER) {
+    // Handle PropertyTypes.NUMBER
+    if (property.type === PropertyTypes.NUMBER) {
         return (
             <input
                 className="form-control"
                 type="number"
-                placeholder={property.label}
+                placeholder={property.content.label}
                 value={value}
                 required={property.required}
                 onChange={e => {
@@ -93,12 +95,14 @@ export function ConfigurationInputChild(props: ConfigurationInputChildProps) {
                         return;
                     }
 
-                    // Applies PropertyFilters from ConfigurationGroupProperty
-                    const filteredValue: number = applyNumberPropertyFilters({
-                        value,
-                        // @ts-ignore
-                        filters: property.filters,
-                    });
+                    // Applies PropertyFilters from ConfigurationProperty
+                    const filteredValue: number = applyNumberPropertyTransformations(
+                        {
+                            value,
+                            // @ts-ignore
+                            filters: property.filters,
+                        },
+                    );
 
                     // Sets value with filtered version on blur
                     setValue(filteredValue);
@@ -107,8 +111,8 @@ export function ConfigurationInputChild(props: ConfigurationInputChildProps) {
         );
     }
 
-    // Handle OptionType.BOOLEAN
-    if (property.type === OptionType.BOOLEAN) {
+    // Handle PropertyTypes.BOOLEAN
+    if (property.type === PropertyTypes.BOOLEAN) {
         return (
             <Switch
                 height={22}
@@ -127,8 +131,8 @@ export function ConfigurationInputChild(props: ConfigurationInputChildProps) {
         );
     }
 
-    // Handle OptionType.DROPDOWN
-    if (property.type === OptionType.DROPDOWN) {
+    // Handle PropertyTypes.DROPDOWN
+    if (property.type === PropertyTypes.DROPDOWN) {
         return (
             <select
                 className="form-control"
@@ -138,7 +142,7 @@ export function ConfigurationInputChild(props: ConfigurationInputChildProps) {
                 }}
             >
                 {property.required && (
-                    <option value="">{property.label}</option>
+                    <option value="">{property.content.label}</option>
                 )}
                 {property.dropdownOptions.map((d: DropdownOption) => {
                     return (

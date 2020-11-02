@@ -5,15 +5,15 @@ import {
     testState,
     ConfigurationGroup,
     OptionValue,
-    buildConfigurationGroupPropertyValue,
+    buildConfigurationPropertyValue,
     buildTokenPluralization,
-    Codotype,
-    OptionType,
-    PropertyLayoutVariant,
-    StringValueFilter,
-    DataPreviewLayoutVariant,
-    DataPreviewActionType,
-    DataPreviewConstraintType,
+    PropertyTypes,
+    PropertyLayoutVariants,
+    StringPropertyTransformations,
+    PropertyPreviewLayoutVariant,
+    PropertyPreviewActionTypes,
+    PropertyPreviewConstraintTypes,
+    Primatives,
 } from "@codotype/core";
 const { LambdaBuilderConfigurationGroup } = testState;
 import { Story } from "../../dev";
@@ -22,49 +22,53 @@ import { ConfigurationInputFormGroup } from "../ConfigurationInputFormGroup";
 // // // //
 
 // TODO - move into `test_data`
-// TODO - export StringValueFilter + NumberValueFilter + Validations from @codotype/type (and include constructors as well!)
-const ApiActionConfigurationGroup: ConfigurationGroup = new Codotype.ConfigurationGroup(
+// TODO - export StringPropertyTransformations + NumberValueFilter + Validations from @codotype/type (and include constructors as well!)
+const ApiActionConfigurationGroup: ConfigurationGroup = new Primatives.ConfigurationGroup(
     {
-        label: "API Actions",
+        content: {
+            label: "API Actions",
+            description: "Define individual REST API actions for your API",
+        },
         identifier: "api_actions",
-        description: "Define individual REST API actions for your API",
         properties: [
-            new Codotype.ConfigurationGroupProperty({
-                label: "Actions",
+            new Primatives.ConfigurationProperty({
+                content: {
+                    label: "Actions",
+                },
                 identifier: "actions",
-                type: OptionType.COLLECTION,
-                dataPreview: {
+                type: PropertyTypes.COLLECTION,
+                preview: {
                     rules: [
                         {
                             constraint: {
                                 dataProperty: "function_name",
-                                type: DataPreviewConstraintType.equals,
+                                type: PropertyPreviewConstraintTypes.equals,
                                 value: "",
                             },
                             action: {
-                                type: DataPreviewActionType.literal,
+                                type: PropertyPreviewActionTypes.literal,
                                 template: "",
                             },
                         },
                         {
                             constraint: {
                                 dataProperty: "route",
-                                type: DataPreviewConstraintType.equals,
+                                type: PropertyPreviewConstraintTypes.equals,
                                 value: "",
                             },
                             action: {
-                                type: DataPreviewActionType.literal,
+                                type: PropertyPreviewActionTypes.literal,
                                 template: "",
                             },
                         },
                         {
                             constraint: {
                                 dataProperty: "scope",
-                                type: DataPreviewConstraintType.equals,
+                                type: PropertyPreviewConstraintTypes.equals,
                                 value: "COLLECTION",
                             },
                             action: {
-                                type: DataPreviewActionType.stringTemplate,
+                                type: PropertyPreviewActionTypes.stringTemplate,
                                 template:
                                     "{{data.verb}} /api/schema-scope/{{data.route}} -> {{data.function_name}}",
                             },
@@ -72,26 +76,28 @@ const ApiActionConfigurationGroup: ConfigurationGroup = new Codotype.Configurati
                         {
                             constraint: {
                                 dataProperty: "scope",
-                                type: DataPreviewConstraintType.equals,
+                                type: PropertyPreviewConstraintTypes.equals,
                                 value: "MODEL",
                             },
                             action: {
-                                type: DataPreviewActionType.stringTemplate,
+                                type: PropertyPreviewActionTypes.stringTemplate,
                                 template:
                                     "{{data.verb}} /api/schema-scope/:id/{{data.route}} -> {{data.function_name}}",
                             },
                         },
                     ],
-                    variant: DataPreviewLayoutVariant.CODE_DARK,
+                    variant: PropertyPreviewLayoutVariant.CODE_DARK,
                 },
                 properties: [
-                    new Codotype.ConfigurationGroupProperty({
-                        label: "Verb",
+                    new Primatives.ConfigurationProperty({
+                        content: {
+                            label: "Verb",
+                            description: "Verify",
+                        },
                         identifier: "verb",
-                        description: "Verify",
                         defaultValue: "GET",
-                        type: OptionType.DROPDOWN,
-                        layoutVariant: PropertyLayoutVariant.COL_6,
+                        type: PropertyTypes.DROPDOWN,
+                        layoutVariant: PropertyLayoutVariants.COL_6,
                         dropdownOptions: [
                             { value: "GET", label: "GET" },
                             { value: "POST", label: "POST" },
@@ -99,41 +105,47 @@ const ApiActionConfigurationGroup: ConfigurationGroup = new Codotype.Configurati
                             { value: "DELETE", label: "DELETE" },
                         ],
                     }),
-                    new Codotype.ConfigurationGroupProperty({
-                        label: "Route",
+                    new Primatives.ConfigurationProperty({
+                        content: {
+                            label: "Route",
+                            description: "Route",
+                        },
                         identifier: "route",
-                        description: "Route",
                         defaultValue: "verify",
-                        type: OptionType.STRING,
-                        layoutVariant: PropertyLayoutVariant.COL_6,
-                        filters: [
-                            StringValueFilter.nonumbers,
-                            StringValueFilter.trimwhitespace,
-                            StringValueFilter.removewhitespace,
+                        type: PropertyTypes.STRING,
+                        layoutVariant: PropertyLayoutVariants.COL_6,
+                        transformations: [
+                            StringPropertyTransformations.nonumbers,
+                            StringPropertyTransformations.trimwhitespace,
+                            StringPropertyTransformations.removewhitespace,
                         ],
                     }),
-                    new Codotype.ConfigurationGroupProperty({
-                        label: "Function Name",
+                    new Primatives.ConfigurationProperty({
+                        content: {
+                            label: "Function Name",
+                            description: "function_name",
+                        },
                         identifier: "function_name",
-                        description: "function_name",
                         defaultValue: "verify",
-                        layoutVariant: PropertyLayoutVariant.COL_6,
-                        type: OptionType.STRING,
-                        filters: [
-                            StringValueFilter.camelcase,
-                            StringValueFilter.nonumbers,
-                            StringValueFilter.nosymbols,
-                            StringValueFilter.trimwhitespace,
-                            StringValueFilter.removewhitespace,
+                        layoutVariant: PropertyLayoutVariants.COL_6,
+                        type: PropertyTypes.STRING,
+                        transformations: [
+                            StringPropertyTransformations.camelcase,
+                            StringPropertyTransformations.nonumbers,
+                            StringPropertyTransformations.nosymbols,
+                            StringPropertyTransformations.trimwhitespace,
+                            StringPropertyTransformations.removewhitespace,
                         ],
                     }),
-                    new Codotype.ConfigurationGroupProperty({
-                        label: "Scope",
+                    new Primatives.ConfigurationProperty({
+                        content: {
+                            label: "Scope",
+                            description: "scope",
+                        },
                         identifier: "scope",
-                        description: "scope",
                         defaultValue: "COLLECTION",
-                        layoutVariant: PropertyLayoutVariant.COL_6,
-                        type: OptionType.DROPDOWN,
+                        layoutVariant: PropertyLayoutVariants.COL_6,
+                        type: PropertyTypes.DROPDOWN,
                         dropdownOptions: [
                             { value: "COLLECTION", label: "Collection" },
                             { value: "MODEL", label: "Model" },
@@ -149,7 +161,7 @@ const stories: [string, ConfigurationGroup, OptionValue][] = [
     [
         "render",
         LambdaBuilderConfigurationGroup,
-        buildConfigurationGroupPropertyValue(
+        buildConfigurationPropertyValue(
             LambdaBuilderConfigurationGroup.properties[0],
         ),
     ],
@@ -174,9 +186,7 @@ stories.forEach(story => {
 
         // TODO - fix this, including extra value by default
         console.log("DEFAULT VALUE");
-        console.log(
-            buildConfigurationGroupPropertyValue(story[1].properties[0]),
-        );
+        console.log(buildConfigurationPropertyValue(story[1].properties[0]));
 
         return (
             <Story>
@@ -184,7 +194,7 @@ stories.forEach(story => {
                     <ConfigurationCollectionInput
                         identifiers={buildTokenPluralization("Lambda")}
                         properties={story[1].properties[0].properties}
-                        dataPreview={story[1].properties[0].dataPreview}
+                        propertyPreview={story[1].properties[0].preview}
                         value={value}
                         onChange={(updatedVal: OptionValue) => {
                             setValue(updatedVal);

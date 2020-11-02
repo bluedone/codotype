@@ -1,7 +1,7 @@
 import * as React from "react";
 import {
     ConfigurationGroup,
-    GroupLayoutVariant,
+    GroupLayoutVariants,
     OptionValueInstance,
 } from "@codotype/core";
 import { MarkdownRenderer } from "../markdown_renderer";
@@ -11,7 +11,7 @@ import { ConfigurationGroupPropertiesInput } from "./ConfigurationGroupPropertie
 
 /**
  * ConfigurationGroupPropertiesDocs
- * Handle DOCS_3x9 + DOCS_4x8 + DOCS_6x6 GroupLayoutVariant values
+ * Handle DOCS_3x9 + DOCS_4x8 + DOCS_6x6 GroupLayoutVariants values
  * @param props.configurationGroup
  */
 export function ConfigurationGroupPropertiesDocs(props: {
@@ -25,10 +25,10 @@ export function ConfigurationGroupPropertiesDocs(props: {
     // Get column spans based on `ConfigurationGroup.layoutVariant`
     let docsColumn: number = 3;
     let inputsColumn: number = 9;
-    if (layoutVariant === GroupLayoutVariant.DOCS_4x8) {
+    if (layoutVariant === GroupLayoutVariants.DOCS_4x8) {
         docsColumn = 4;
         inputsColumn = 8;
-    } else if (layoutVariant === GroupLayoutVariant.DOCS_6x6) {
+    } else if (layoutVariant === GroupLayoutVariants.DOCS_6x6) {
         docsColumn = 6;
         inputsColumn = 6;
     }
@@ -36,7 +36,9 @@ export function ConfigurationGroupPropertiesDocs(props: {
     return (
         <div className="row">
             <div className={`col-lg-${docsColumn} border-right`}>
-                <MarkdownRenderer source={configurationGroup.documentation} />
+                <MarkdownRenderer
+                    source={configurationGroup.content.documentation}
+                />
             </div>
             <div className={`col-lg-${inputsColumn}`}>
                 <div className="row">

@@ -1,8 +1,8 @@
 import * as React from "react";
 import {
     ConfigurationGroup,
-    GroupLayoutVariant,
-    ConfigurationGroupProperty,
+    GroupLayoutVariants,
+    ConfigurationProperty,
 } from "@codotype/core";
 import { ConfigurationInputFormGroup } from "./ConfigurationInputFormGroup";
 import { ConfigurationInputChild } from "./ConfigurationInputChild";
@@ -19,7 +19,7 @@ export function ConfigurationGroupPropertiesDetail(props: {
     const { configurationGroup } = props;
 
     // Sets selectedPropertyID
-    const firstProperty: ConfigurationGroupProperty | undefined =
+    const firstProperty: ConfigurationProperty | undefined =
         configurationGroup.properties[0];
 
     // Return null if firstProperty is undefined
@@ -34,7 +34,7 @@ export function ConfigurationGroupPropertiesDetail(props: {
 
     // Finds selectedProperty
     const selectedProperty:
-        | ConfigurationGroupProperty
+        | ConfigurationProperty
         | undefined = configurationGroup.properties.find(
         p => p.identifier === selectedPropertyID,
     );
@@ -47,11 +47,11 @@ export function ConfigurationGroupPropertiesDetail(props: {
     // Get column spans based on `ConfigurationGroup.layoutVariant`
     let selectorColumn: number = 3;
     let detailColumn: number = 9;
-    if (configurationGroup.layoutVariant === GroupLayoutVariant.DETAIL_4x8) {
+    if (configurationGroup.layoutVariant === GroupLayoutVariants.DETAIL_4x8) {
         selectorColumn = 4;
         detailColumn = 8;
     } else if (
-        configurationGroup.layoutVariant === GroupLayoutVariant.DETAIL_6x6
+        configurationGroup.layoutVariant === GroupLayoutVariants.DETAIL_6x6
     ) {
         selectorColumn = 6;
         detailColumn = 6;
@@ -82,7 +82,7 @@ export function ConfigurationGroupPropertiesDetail(props: {
                                         );
                                     }}
                                 >
-                                    {property.label}
+                                    {property.content.label}
                                 </a>
                             </li>
                         );

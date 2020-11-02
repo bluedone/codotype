@@ -4,14 +4,14 @@ import { ConfigurationInputFormGroup } from "../ConfigurationInputFormGroup";
 import { ConfigurationInputChild } from "../ConfigurationInputChild";
 import {
     OptionValue,
-    ConfigurationGroupProperty,
-    PropertyLayoutVariant,
+    ConfigurationProperty,
+    PropertyLayoutVariants,
     testState,
 } from "@codotype/core";
 const {
-    ComponentBuilderConfigurationGroupPropertySingleDropdown,
-    ComponentBuilderConfigurationGroupPropertySingleNumber,
-    ComponentBuilderConfigurationGroupPropertySingleText,
+    ComponentBuilderConfigurationPropertySingleDropdown,
+    ComponentBuilderConfigurationPropertySingleNumber,
+    ComponentBuilderConfigurationPropertySingleText,
     twitterApiOption,
 } = testState;
 
@@ -19,16 +19,16 @@ import { Story } from "../../dev";
 
 // // // //
 
-const stories: Array<[string, ConfigurationGroupProperty, OptionValue]> = [
+const stories: Array<[string, ConfigurationProperty, OptionValue]> = [
     [
         "dropdown",
-        ComponentBuilderConfigurationGroupPropertySingleDropdown,
+        ComponentBuilderConfigurationPropertySingleDropdown,
         "OPTION_01",
     ],
     [
         "dropdown (allowDisable, enabled = true)",
         {
-            ...ComponentBuilderConfigurationGroupPropertySingleDropdown,
+            ...ComponentBuilderConfigurationPropertySingleDropdown,
             allowDisable: true,
         },
         {
@@ -39,7 +39,7 @@ const stories: Array<[string, ConfigurationGroupProperty, OptionValue]> = [
     [
         "dropdown (allowDisable, enabled = false)",
         {
-            ...ComponentBuilderConfigurationGroupPropertySingleDropdown,
+            ...ComponentBuilderConfigurationPropertySingleDropdown,
             allowDisable: true,
         },
         {
@@ -47,90 +47,90 @@ const stories: Array<[string, ConfigurationGroupProperty, OptionValue]> = [
             value: "OPTION_01",
         },
     ],
-    ["number", ComponentBuilderConfigurationGroupPropertySingleNumber, 10],
-    ["string", ComponentBuilderConfigurationGroupPropertySingleText, "foobar"],
+    ["number", ComponentBuilderConfigurationPropertySingleNumber, 10],
+    ["string", ComponentBuilderConfigurationPropertySingleText, "foobar"],
     ["boolean", twitterApiOption, true],
     // PropertyLayoutVariant Stories
     [
-        "PropertyLayoutVariant.COL_3",
+        "PropertyLayoutVariants.COL_3",
         {
-            ...ComponentBuilderConfigurationGroupPropertySingleText,
-            layoutVariant: PropertyLayoutVariant.COL_3,
+            ...ComponentBuilderConfigurationPropertySingleText,
+            layoutVariant: PropertyLayoutVariants.COL_3,
         },
         "foobar",
     ],
     [
-        "PropertyLayoutVariant.CARD_COL_3",
+        "PropertyLayoutVariants.CARD_COL_3",
         {
-            ...ComponentBuilderConfigurationGroupPropertySingleText,
-            layoutVariant: PropertyLayoutVariant.CARD_COL_3,
+            ...ComponentBuilderConfigurationPropertySingleText,
+            layoutVariant: PropertyLayoutVariants.CARD_COL_3,
         },
         "foobar",
     ],
     [
-        "PropertyLayoutVariant.COL_4",
+        "PropertyLayoutVariants.COL_4",
         {
-            ...ComponentBuilderConfigurationGroupPropertySingleText,
-            layoutVariant: PropertyLayoutVariant.COL_4,
+            ...ComponentBuilderConfigurationPropertySingleText,
+            layoutVariant: PropertyLayoutVariants.COL_4,
         },
         "foobar",
     ],
     [
-        "PropertyLayoutVariant.CARD_COL_4",
+        "PropertyLayoutVariants.CARD_COL_4",
         {
-            ...ComponentBuilderConfigurationGroupPropertySingleText,
-            layoutVariant: PropertyLayoutVariant.CARD_COL_4,
-        },
-        "foobar",
-    ],
-
-    [
-        "PropertyLayoutVariant.COL_6",
-        {
-            ...ComponentBuilderConfigurationGroupPropertySingleText,
-            layoutVariant: PropertyLayoutVariant.COL_6,
-        },
-        "foobar",
-    ],
-    [
-        "PropertyLayoutVariant.CARD_COL_6",
-        {
-            ...ComponentBuilderConfigurationGroupPropertySingleText,
-            layoutVariant: PropertyLayoutVariant.CARD_COL_6,
+            ...ComponentBuilderConfigurationPropertySingleText,
+            layoutVariant: PropertyLayoutVariants.CARD_COL_4,
         },
         "foobar",
     ],
 
     [
-        "PropertyLayoutVariant.COL_8",
+        "PropertyLayoutVariants.COL_6",
         {
-            ...ComponentBuilderConfigurationGroupPropertySingleText,
-            layoutVariant: PropertyLayoutVariant.COL_8,
+            ...ComponentBuilderConfigurationPropertySingleText,
+            layoutVariant: PropertyLayoutVariants.COL_6,
         },
         "foobar",
     ],
     [
-        "PropertyLayoutVariant.CARD_COL_8",
+        "PropertyLayoutVariants.CARD_COL_6",
         {
-            ...ComponentBuilderConfigurationGroupPropertySingleText,
-            layoutVariant: PropertyLayoutVariant.CARD_COL_8,
+            ...ComponentBuilderConfigurationPropertySingleText,
+            layoutVariant: PropertyLayoutVariants.CARD_COL_6,
         },
         "foobar",
     ],
 
     [
-        "PropertyLayoutVariant.COL_12",
+        "PropertyLayoutVariants.COL_8",
         {
-            ...ComponentBuilderConfigurationGroupPropertySingleText,
-            layoutVariant: PropertyLayoutVariant.COL_12,
+            ...ComponentBuilderConfigurationPropertySingleText,
+            layoutVariant: PropertyLayoutVariants.COL_8,
         },
         "foobar",
     ],
     [
-        "PropertyLayoutVariant.CARD_COL_12",
+        "PropertyLayoutVariants.CARD_COL_8",
         {
-            ...ComponentBuilderConfigurationGroupPropertySingleText,
-            layoutVariant: PropertyLayoutVariant.CARD_COL_12,
+            ...ComponentBuilderConfigurationPropertySingleText,
+            layoutVariant: PropertyLayoutVariants.CARD_COL_8,
+        },
+        "foobar",
+    ],
+
+    [
+        "PropertyLayoutVariants.COL_12",
+        {
+            ...ComponentBuilderConfigurationPropertySingleText,
+            layoutVariant: PropertyLayoutVariants.COL_12,
+        },
+        "foobar",
+    ],
+    [
+        "PropertyLayoutVariants.CARD_COL_12",
+        {
+            ...ComponentBuilderConfigurationPropertySingleText,
+            layoutVariant: PropertyLayoutVariants.CARD_COL_12,
         },
         "foobar",
     ],

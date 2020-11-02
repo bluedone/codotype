@@ -2,30 +2,30 @@ import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { ConfigurationInputChild } from "../ConfigurationInputChild";
 import {
-    ConfigurationGroupProperty,
+    ConfigurationProperty,
     OptionValue,
     testState,
-    StringValueFilter,
-    NumberValueFilter,
+    StringPropertyTransformations,
+    NumberPropertyTransformations,
 } from "@codotype/core";
 const {
-    ComponentBuilderConfigurationGroupPropertySingleDropdown,
-    ComponentBuilderConfigurationGroupPropertySingleNumber,
-    ComponentBuilderConfigurationGroupPropertySingleText,
+    ComponentBuilderConfigurationPropertySingleDropdown,
+    ComponentBuilderConfigurationPropertySingleNumber,
+    ComponentBuilderConfigurationPropertySingleText,
     twitterApiOption,
 } = testState;
 import { Story } from "../../dev";
 
 // // // //
 
-const stories: Array<[string, ConfigurationGroupProperty, OptionValue]> = [
+const stories: Array<[string, ConfigurationProperty, OptionValue]> = [
     [
         "dropdown",
-        ComponentBuilderConfigurationGroupPropertySingleDropdown,
+        ComponentBuilderConfigurationPropertySingleDropdown,
         "OPTION_01",
     ],
-    ["number", ComponentBuilderConfigurationGroupPropertySingleNumber, 10],
-    ["string", ComponentBuilderConfigurationGroupPropertySingleText, "foobar"],
+    ["number", ComponentBuilderConfigurationPropertySingleNumber, 10],
+    ["string", ComponentBuilderConfigurationPropertySingleText, "foobar"],
     ["boolean", twitterApiOption, true],
 ];
 
@@ -61,25 +61,25 @@ const numberPropertyFilterStories = storiesOf(
 );
 
 [
-    [StringValueFilter.lowercase],
-    [StringValueFilter.uppercase],
-    [StringValueFilter.titlecase],
-    [StringValueFilter.camelcase],
-    [StringValueFilter.snakecase],
-    [StringValueFilter.pascalcase],
-    [StringValueFilter.kebabcase],
-    [StringValueFilter.nonumbers],
-    [StringValueFilter.nosymbols],
-    [StringValueFilter.trimwhitespace],
-    [StringValueFilter.removewhitespace],
-    [StringValueFilter.nosymbols, StringValueFilter.snakecase],
-    [StringValueFilter.nosymbols, StringValueFilter.pascalcase],
+    [StringPropertyTransformations.lowercase],
+    [StringPropertyTransformations.uppercase],
+    [StringPropertyTransformations.titlecase],
+    [StringPropertyTransformations.camelcase],
+    [StringPropertyTransformations.snakecase],
+    [StringPropertyTransformations.pascalcase],
+    [StringPropertyTransformations.kebabcase],
+    [StringPropertyTransformations.nonumbers],
+    [StringPropertyTransformations.nosymbols],
+    [StringPropertyTransformations.trimwhitespace],
+    [StringPropertyTransformations.removewhitespace],
+    [StringPropertyTransformations.nosymbols, StringPropertyTransformations.snakecase],
+    [StringPropertyTransformations.nosymbols, StringPropertyTransformations.pascalcase],
     [
-        StringValueFilter.nosymbols,
-        StringValueFilter.nonumbers,
-        StringValueFilter.titlecase,
-        StringValueFilter.titlecase,
-        StringValueFilter.removewhitespace,
+        StringPropertyTransformations.nosymbols,
+        StringPropertyTransformations.nonumbers,
+        StringPropertyTransformations.titlecase,
+        StringPropertyTransformations.titlecase,
+        StringPropertyTransformations.removewhitespace,
     ],
 ].forEach(propertyFilters => {
     numberPropertyFilterStories.add(propertyFilters.join(" + "), () => {
@@ -89,8 +89,8 @@ const numberPropertyFilterStories = storiesOf(
                 <pre>{propertyFilters.join(" + ")}</pre>
                 <ConfigurationInputChild
                     property={{
-                        ...ComponentBuilderConfigurationGroupPropertySingleText,
-                        filters: [...propertyFilters],
+                        ...ComponentBuilderConfigurationPropertySingleText,
+                        transformations: [...propertyFilters],
                     }}
                     value={value}
                     onChange={(updatedValue: OptionValue) => {
@@ -110,10 +110,10 @@ const stringPropertyFilterStories = storiesOf(
 );
 
 [
-    [NumberValueFilter.integerValue],
-    [NumberValueFilter.negativeValue],
-    [NumberValueFilter.positiveValue],
-    [NumberValueFilter.positiveValue, NumberValueFilter.integerValue],
+    [NumberPropertyTransformations.integerValue],
+    [NumberPropertyTransformations.negativeValue],
+    [NumberPropertyTransformations.positiveValue],
+    [NumberPropertyTransformations.positiveValue, NumberPropertyTransformations.integerValue],
 ].forEach(propertyFilters => {
     stringPropertyFilterStories.add(propertyFilters.join(" + "), () => {
         const [value, setValue] = React.useState<OptionValue>("");
@@ -122,8 +122,8 @@ const stringPropertyFilterStories = storiesOf(
                 <pre>{propertyFilters.join(" + ")}</pre>
                 <ConfigurationInputChild
                     property={{
-                        ...ComponentBuilderConfigurationGroupPropertySingleNumber,
-                        filters: [...propertyFilters],
+                        ...ComponentBuilderConfigurationPropertySingleNumber,
+                        transformations: [...propertyFilters],
                     }}
                     value={value}
                     onChange={(updatedValue: OptionValue) => {

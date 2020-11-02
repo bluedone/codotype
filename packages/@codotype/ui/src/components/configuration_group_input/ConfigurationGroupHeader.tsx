@@ -2,7 +2,7 @@ import * as React from "react";
 import {
     OptionValueInstance,
     ConfigurationGroup,
-    GroupLayoutVariant,
+    GroupLayoutVariants,
 } from "@codotype/core";
 import { DocumentationModal } from "../DocumentationModal";
 
@@ -17,19 +17,19 @@ import { DocumentationModal } from "../DocumentationModal";
 export function shouldRenderDocumentationModal(
     configurationGroup: ConfigurationGroup,
 ): boolean {
-    const { layoutVariant, documentation } = configurationGroup;
+    const { layoutVariant, content } = configurationGroup;
 
     // Return false if documentation is not defined
-    if (!documentation) {
+    if (!content.documentation) {
         return false;
     }
 
     // Return false for DOCS_* layout variants
     if (
         [
-            GroupLayoutVariant.DOCS_3x9,
-            GroupLayoutVariant.DOCS_4x8,
-            GroupLayoutVariant.DOCS_6x6,
+            GroupLayoutVariants.DOCS_3x9,
+            GroupLayoutVariants.DOCS_4x8,
+            GroupLayoutVariants.DOCS_6x6,
         ].includes(layoutVariant)
     ) {
         return false;
@@ -62,19 +62,19 @@ export function ConfigurationGroupHeader(props: {
             <div className="col-sm-12">
                 <span className="d-flex align-items-center">
                     <h4 className="mb-0 mr-2">
-                        {props.configurationGroup.label}
+                        {props.configurationGroup.content.label}
                     </h4>
                     {enableDocumentationModal && (
                         <DocumentationModal
-                            header={props.configurationGroup.label}
+                            header={props.configurationGroup.content.label}
                             documentation={
-                                props.configurationGroup.documentation
+                                props.configurationGroup.content.documentation
                             }
                         />
                     )}
                     {/* <br className="d-none d-sm-block d-md-none" /> */}
                     <p className="ml-2 text-muted mb-0">
-                        {props.configurationGroup.description}
+                        {props.configurationGroup.content.description}
                     </p>
 
                     {configurationGroup.allowDisable && (

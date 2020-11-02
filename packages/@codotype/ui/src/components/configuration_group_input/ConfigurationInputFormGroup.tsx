@@ -1,57 +1,57 @@
 import * as React from "react";
 import {
-    OptionType,
-    ConfigurationGroupProperty,
+    PropertyTypes,
     PropertyLayoutVariant,
+    ConfigurationProperty,
+    PropertyLayoutVariants,
 } from "@codotype/core";
 import classnames from "classnames";
 import { DocumentationModal } from "../DocumentationModal";
 
 // // // //
+const col_12_variants: PropertyLayoutVariant[] = [
+    PropertyLayoutVariants.CARD_COL_12,
+    PropertyLayoutVariants.COL_12,
+];
+
+const col_8_variants: PropertyLayoutVariant[] = [
+    PropertyLayoutVariants.CARD_COL_8,
+    PropertyLayoutVariants.COL_8,
+];
+
+const col_6_variants: PropertyLayoutVariant[] = [
+    PropertyLayoutVariants.CARD_COL_6,
+    PropertyLayoutVariants.COL_6,
+];
+
+const col_4_variants: PropertyLayoutVariant[] = [
+    PropertyLayoutVariants.CARD_COL_4,
+    PropertyLayoutVariants.COL_4,
+];
+
+const col_3_variants: PropertyLayoutVariant[] = [
+    PropertyLayoutVariants.CARD_COL_3,
+    PropertyLayoutVariants.COL_3,
+];
 
 /**
- * Gets the column span for a specific PropertyLayoutVariant
+ * Gets the column span for a specific PropertyLayoutVariants
  * @param layoutVariant
  */
 function getColSpan(layoutVariant: PropertyLayoutVariant): number {
-    if (
-        [
-            PropertyLayoutVariant.CARD_COL_12,
-            PropertyLayoutVariant.COL_12,
-        ].includes(layoutVariant)
-    ) {
+    if (col_12_variants.includes(layoutVariant)) {
         return 12;
     }
-    if (
-        [
-            PropertyLayoutVariant.CARD_COL_8,
-            PropertyLayoutVariant.COL_8,
-        ].includes(layoutVariant)
-    ) {
+    if (col_8_variants.includes(layoutVariant)) {
         return 8;
     }
-    if (
-        [
-            PropertyLayoutVariant.CARD_COL_6,
-            PropertyLayoutVariant.COL_6,
-        ].includes(layoutVariant)
-    ) {
+    if (col_6_variants.includes(layoutVariant)) {
         return 6;
     }
-    if (
-        [
-            PropertyLayoutVariant.CARD_COL_4,
-            PropertyLayoutVariant.COL_4,
-        ].includes(layoutVariant)
-    ) {
+    if (col_4_variants.includes(layoutVariant)) {
         return 4;
     }
-    if (
-        [
-            PropertyLayoutVariant.CARD_COL_3,
-            PropertyLayoutVariant.COL_3,
-        ].includes(layoutVariant)
-    ) {
+    if (col_3_variants.includes(layoutVariant)) {
         return 3;
     }
     return 12; // Default
@@ -60,7 +60,7 @@ function getColSpan(layoutVariant: PropertyLayoutVariant): number {
 // // // //
 
 interface ConfigurationInputFormGroupProps {
-    property: ConfigurationGroupProperty;
+    property: ConfigurationProperty;
     className?: string;
     enabled?: boolean;
     onChangeEnabled?: (updatedEnabled: boolean) => void;
@@ -71,20 +71,22 @@ export function ConfigurationInputFormGroup(
     props: ConfigurationInputFormGroupProps,
 ) {
     const { property, className = "" } = props;
-    const { enabled = property.enabled } = props;
+    const { enabled = property.enabledByDefault } = props;
 
-    const renderDocumentationModal: boolean = property.documentation !== "";
+    const renderDocumentationModal: boolean =
+        property.content.documentation !== "";
 
-    const { layoutVariant = PropertyLayoutVariant.CARD_COL_12 } = property;
+    const { layoutVariant } = property;
 
     // Handle rendering the property inside a card
-    const renderInCard: boolean = [
-        PropertyLayoutVariant.CARD_COL_3,
-        PropertyLayoutVariant.CARD_COL_4,
-        PropertyLayoutVariant.CARD_COL_6,
-        PropertyLayoutVariant.CARD_COL_8,
-        PropertyLayoutVariant.CARD_COL_12,
-    ].includes(layoutVariant);
+    const cardVariants: PropertyLayoutVariant[] = [
+        PropertyLayoutVariants.CARD_COL_3,
+        PropertyLayoutVariants.CARD_COL_4,
+        PropertyLayoutVariants.CARD_COL_6,
+        PropertyLayoutVariants.CARD_COL_8,
+        PropertyLayoutVariants.CARD_COL_12,
+    ];
+    const renderInCard: boolean = cardVariants.includes(layoutVariant);
 
     // Handle column span
     const colSpan: number = getColSpan(layoutVariant);
@@ -104,19 +106,19 @@ export function ConfigurationInputFormGroup(
 
     const formGroupHeader = (
         <div className="d-flex align-items-center">
-            {property.icon && (
+            {property.content.icon && (
                 <img
-                    src={property.icon}
+                    src={property.content.icon}
                     style={{ maxWidth: "2rem" }}
                     className="mr-2"
                 />
             )}
-            <label className="mb-0">{property.label}</label>
+            <label className="mb-0">{property.content.label}</label>
             {renderDocumentationModal && (
                 <small className="mx-3">
                     <DocumentationModal
-                        header={property.label}
-                        documentation={property.description} // TODO - update this to use property.documentation
+                        header={property.content.label}
+                        documentation={property.content.description} // TODO - update this to use property.documentation
                     />
                 </small>
             )}
@@ -126,14 +128,14 @@ export function ConfigurationInputFormGroup(
     const formGroupDescription = (
         <React.Fragment>
             {/* Render description IFF not empty */}
-            {property.description !== "" && (
+            {property.content.description !== "" && (
                 <small className="d-block mt-2 text-muted">
-                    {property.description}
+                    {property.content.description}
                 </small>
             )}
 
             {/* Render empty description warning */}
-            {property.description === "" && (
+            {property.content.description === "" && (
                 <small className="d-block mt-2 mb-2 text-danger">
                     Warning - this input needs a description
                 </small>
@@ -151,7 +153,7 @@ export function ConfigurationInputFormGroup(
                 {/* TODO - replace this with modified ConfigurationGroupHeader? */}
                 <div className="d-flex align-items-center">
                     {formGroupHeader}
-                    {property.type === OptionType.BOOLEAN && (
+                    {property.type === PropertyTypes.BOOLEAN && (
                         <div
                             className={classnames("d-flex align-items-center", {
                                 "ml-3": !renderDocumentationModal,
@@ -169,7 +171,7 @@ export function ConfigurationInputFormGroup(
             {formGroupDescription}
 
             {/* Renders props.children */}
-            {property.type !== OptionType.BOOLEAN && (
+            {property.type !== PropertyTypes.BOOLEAN && (
                 <React.Fragment>{props.children}</React.Fragment>
             )}
         </div>
@@ -193,9 +195,9 @@ export function ConfigurationInputFormGroup(
             {/* Renders message to turn this feature on */}
             <div className="mt-2 px-2 py-2 d-flex justify-content-center bg-dark text-white rounded">
                 <div className="d-flex flex-column align-items-center">
-                    <p className="lead mb-0">Enable {property.label}</p>
+                    <p className="lead mb-0">Enable {property.content.label}</p>
                     <p className="mb-0">
-                        Click to enable the {property.label} property.
+                        Click to enable the {property.content.label} property.
                     </p>
                     <span className="mt-2">{toggleEnabledCheckbox}</span>
                 </div>

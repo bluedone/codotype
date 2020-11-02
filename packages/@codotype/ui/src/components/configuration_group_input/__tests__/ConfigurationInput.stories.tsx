@@ -5,15 +5,15 @@ import {
     buildConfigurationGroupValue,
     OptionValueInstance,
     testState,
-    GroupLayoutVariant,
+    GroupLayoutVariants,
     ConfigurationGroup,
 } from "@codotype/core";
 const {
     ComponentBuilderConfigurationGroup,
     ApiExamplesConfigurationGroup,
-    ComponentBuilderConfigurationGroupPropertySingleDropdown,
-    ComponentBuilderConfigurationGroupPropertyWithInstance,
-    ComponentBuilderConfigurationGroupPropertyWithInstance01,
+    ComponentBuilderConfigurationPropertySingleDropdown,
+    ComponentBuilderConfigurationPropertyWithInstance,
+    ComponentBuilderConfigurationPropertyWithInstance01,
 } = testState;
 import { Story } from "../../dev";
 
@@ -53,9 +53,9 @@ storyCollection.add("single dropdown", () => {
     >(
         buildConfigurationGroupValue({
             ...ComponentBuilderConfigurationGroup,
-            layoutVariant: GroupLayoutVariant.LIST,
+            layoutVariant: GroupLayoutVariants.LIST,
             properties: [
-                ComponentBuilderConfigurationGroupPropertySingleDropdown,
+                ComponentBuilderConfigurationPropertySingleDropdown,
             ],
         }),
     );
@@ -65,9 +65,9 @@ storyCollection.add("single dropdown", () => {
             <ConfigurationInput
                 configurationGroup={{
                     ...ComponentBuilderConfigurationGroup,
-                    layoutVariant: GroupLayoutVariant.LIST,
+                    layoutVariant: GroupLayoutVariants.LIST,
                     properties: [
-                        ComponentBuilderConfigurationGroupPropertySingleDropdown,
+                        ComponentBuilderConfigurationPropertySingleDropdown,
                     ],
                 }}
                 value={configurationOptionValue}
@@ -90,7 +90,7 @@ storyCollection.add("nested instance", () => {
         buildConfigurationGroupValue({
             ...ComponentBuilderConfigurationGroup,
             properties: [
-                ComponentBuilderConfigurationGroupPropertyWithInstance,
+                ComponentBuilderConfigurationPropertyWithInstance,
             ],
         }),
     );
@@ -101,7 +101,7 @@ storyCollection.add("nested instance", () => {
                 configurationGroup={{
                     ...ComponentBuilderConfigurationGroup,
                     properties: [
-                        ComponentBuilderConfigurationGroupPropertyWithInstance,
+                        ComponentBuilderConfigurationPropertyWithInstance,
                     ],
                 }}
                 value={configurationOptionValue}
@@ -124,7 +124,7 @@ storyCollection.add("instance", () => {
         buildConfigurationGroupValue({
             ...ComponentBuilderConfigurationGroup,
             properties: [
-                ComponentBuilderConfigurationGroupPropertyWithInstance01,
+                ComponentBuilderConfigurationPropertyWithInstance01,
             ],
         }),
     );
@@ -135,7 +135,7 @@ storyCollection.add("instance", () => {
                 configurationGroup={{
                     ...ComponentBuilderConfigurationGroup,
                     properties: [
-                        ComponentBuilderConfigurationGroupPropertyWithInstance01,
+                        ComponentBuilderConfigurationPropertyWithInstance01,
                     ],
                 }}
                 value={configurationOptionValue}
@@ -155,20 +155,20 @@ storyCollection.add("instance", () => {
 const allowDisableOptions = [false, true];
 
 const groupVariants = [
-    GroupLayoutVariant.TABS,
-    GroupLayoutVariant.LIST,
-    GroupLayoutVariant.DOCS_3x9,
-    GroupLayoutVariant.DOCS_4x8,
-    GroupLayoutVariant.DOCS_6x6,
-    GroupLayoutVariant.DETAIL_3x9,
-    GroupLayoutVariant.DETAIL_4x8,
-    GroupLayoutVariant.DETAIL_6x6,
+    GroupLayoutVariants.TABS,
+    GroupLayoutVariants.LIST,
+    GroupLayoutVariants.DOCS_3x9,
+    GroupLayoutVariants.DOCS_4x8,
+    GroupLayoutVariants.DOCS_6x6,
+    GroupLayoutVariants.DETAIL_3x9,
+    GroupLayoutVariants.DETAIL_4x8,
+    GroupLayoutVariants.DETAIL_6x6,
 ];
 
 const layoutVariantStories: [
     string, // Story Collection name
     string, // Story name
-    GroupLayoutVariant,
+    GroupLayoutVariants,
     boolean,
 ][] = [];
 
@@ -189,7 +189,10 @@ layoutVariantStories.forEach(testCase => {
     // Defines configurationGroup from test case
     const configurationGroup: ConfigurationGroup = {
         ...ComponentBuilderConfigurationGroup,
-        documentation: ApiExamplesConfigurationGroup.documentation,
+        content: {
+            ...ComponentBuilderConfigurationGroup.content,
+            documentation: ApiExamplesConfigurationGroup.content.documentation,
+        },
         layoutVariant: testCase[2],
         allowDisable: testCase[3],
     };

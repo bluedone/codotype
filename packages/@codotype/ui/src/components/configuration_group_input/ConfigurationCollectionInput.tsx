@@ -1,17 +1,17 @@
 import * as React from "react";
 import {
     OptionValue,
-    ConfigurationGroupProperty,
+    ConfigurationProperty,
     TokenPluralization,
-    buildConfigurationGroupPropertyValue,
+    buildConfigurationPropertyValue,
     makeUniqueId,
-    DataPreview,
+    PropertyPreview,
 } from "@codotype/core";
 import classnames from "classnames";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 import { ConfigurationGroupPropertiesInput } from "./ConfigurationGroupPropertiesInput";
-import { DataPreviewRenderer } from "../DataPreviewRenderer";
+import { PropertyPreviewRenderer } from "../PropertyPreviewRenderer";
 
 // // // //
 
@@ -23,9 +23,9 @@ interface CollectionItem {
 // // // //
 
 function CollectionItemForm(props: {
-    properties: ConfigurationGroupProperty[];
+    properties: ConfigurationProperty[];
     value: CollectionItem;
-    dataPreview: DataPreview;
+    dataPreview: PropertyPreview;
     onSubmit: (updatedCollectionItem: CollectionItem) => void;
     onCancel: () => void;
 }) {
@@ -56,9 +56,9 @@ function CollectionItemForm(props: {
             />
 
             <hr />
-            <DataPreviewRenderer
+            <PropertyPreviewRenderer
                 data={formValues}
-                dataPreview={props.dataPreview}
+                propertyPreview={props.dataPreview}
             />
             <hr />
 
@@ -88,11 +88,11 @@ function CollectionItemForm(props: {
 // // // //
 
 interface ConfigurationCollectionInputProps {
-    properties: ConfigurationGroupProperty[];
+    properties: ConfigurationProperty[];
     // label: string;
     value: OptionValue;
     identifiers: TokenPluralization;
-    dataPreview: DataPreview;
+    propertyPreview: PropertyPreview;
     onChange: (updatedVal: OptionValue) => void;
 }
 
@@ -135,7 +135,7 @@ export function ConfigurationCollectionInput(
             (val, property) => {
                 return {
                     ...val,
-                    [property.identifier]: buildConfigurationGroupPropertyValue(
+                    [property.identifier]: buildConfigurationPropertyValue(
                         property,
                     ),
                 };
@@ -161,7 +161,7 @@ export function ConfigurationCollectionInput(
                                     );
                                 }}
                             >
-                                New {identifiers.singular.label}
+                                New {identifiers.singular.title}
                             </button>
 
                             <ul className="list-group mt-3">
@@ -178,9 +178,9 @@ export function ConfigurationCollectionInput(
                                                     {
                                                         active:
                                                             editCollectionItem !==
-                                                                null &&
+                                                            null &&
                                                             collectionItem.id ===
-                                                                editCollectionItem.id,
+                                                            editCollectionItem.id,
                                                     },
                                                 )}
                                                 onClick={() => {
@@ -191,10 +191,10 @@ export function ConfigurationCollectionInput(
                                                 }}
                                             >
                                                 <div className="d-flex justify-content-between">
-                                                    <DataPreviewRenderer
+                                                    <PropertyPreviewRenderer
                                                         data={collectionItem}
-                                                        dataPreview={
-                                                            props.dataPreview
+                                                        propertyPreview={
+                                                            props.propertyPreview
                                                         }
                                                     />
                                                     <button
@@ -226,7 +226,7 @@ export function ConfigurationCollectionInput(
 
                                 {collectionValue.length === 0 && (
                                     <li className="list-group-item">
-                                        No {identifiers.plural.label} defined
+                                        No {identifiers.plural.title} defined
                                     </li>
                                 )}
                             </ul>
@@ -237,7 +237,7 @@ export function ConfigurationCollectionInput(
                             <CollectionItemForm
                                 value={newCollectionItem}
                                 properties={props.properties}
-                                dataPreview={props.dataPreview}
+                                dataPreview={props.propertyPreview}
                                 onSubmit={updatedCollectionItem => {
                                     // Updates collectionValue
                                     setCollectionValue([
@@ -261,7 +261,7 @@ export function ConfigurationCollectionInput(
                             <CollectionItemForm
                                 value={editCollectionItem}
                                 properties={props.properties}
-                                dataPreview={props.dataPreview}
+                                dataPreview={props.propertyPreview}
                                 onSubmit={updatedCollectionItem => {
                                     // Updates collectionValue
                                     setCollectionValue(

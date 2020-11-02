@@ -18,10 +18,12 @@ function ToggleEnabled(props: {
     return (
         <div className="mt-2 px-2 py-2 d-flex justify-content-center bg-dark text-white rounded">
             <div className="d-flex flex-column align-items-center">
-                <p className="lead mb-0">Enable {configurationGroup.label}</p>
+                <p className="lead mb-0">
+                    Enable {configurationGroup.content.label}
+                </p>
                 <p className="mb-0">
-                    Click to enable the {configurationGroup.label} configuration
-                    group.
+                    Click to enable the {configurationGroup.content.label}{" "}
+                    configuration group.
                 </p>
                 <span className="mt-2">
                     <input

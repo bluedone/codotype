@@ -1,7 +1,7 @@
 import * as React from "react";
 import {
     ConfigurationGroup,
-    ConfigurationGroupProperty,
+    ConfigurationProperty,
     OptionValueInstance,
 } from "@codotype/core";
 import { ConfigurationGroupPropertiesInput } from "./ConfigurationGroupPropertiesInput";
@@ -25,7 +25,7 @@ export function ConfigurationGroupPropertiesTabs(props: {
     );
 
     // Sets selectedPropertyID
-    const firstProperty: ConfigurationGroupProperty | undefined =
+    const firstProperty: ConfigurationProperty | undefined =
         configurationGroup.properties[0];
 
     // Return null if firstProperty is undefined
@@ -41,10 +41,10 @@ export function ConfigurationGroupPropertiesTabs(props: {
 
     // Finds selectedProperty
     const selectedProperty:
-        | ConfigurationGroupProperty
+        | ConfigurationProperty
         | undefined = configurationGroup.properties.find(
-            p => p.identifier === selectedPropertyID,
-        );
+        p => p.identifier === selectedPropertyID,
+    );
 
     // Return null if selectedProperty is undefined
     if (selectedProperty === undefined) {
@@ -72,7 +72,7 @@ export function ConfigurationGroupPropertiesTabs(props: {
                                     setSelectedPropertyID(property.identifier);
                                 }}
                             >
-                                {property.label}
+                                {property.content.label}
                             </a>
                         </li>
                     );
