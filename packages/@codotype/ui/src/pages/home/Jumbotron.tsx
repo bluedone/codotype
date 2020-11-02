@@ -2,7 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { GeneratorCard } from "../../components/generator_card";
+import { PluginCard } from "../../components/PluginCard";
 import { PluginMetadata } from "@codotype/core";
 import { GitHubStar } from "../../components/GitHubStar";
 
@@ -63,7 +63,7 @@ export function Jumbotron(props: {
                     <div className="col-12 col-md-7 my-3 my-md-5 py-md-4">
                         <div className="card-deck">
                             {generators.map(g => (
-                                <GeneratorCard key={g.id} generator={g} />
+                                <PluginCard key={g.identifier} plugin={g} />
                             ))}
                         </div>
 
