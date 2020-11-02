@@ -1,7 +1,7 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { ImageLoader } from "../component";
-import { Story } from "../../dev";
+import { Story } from "../../Story";
 
 // // // //
 

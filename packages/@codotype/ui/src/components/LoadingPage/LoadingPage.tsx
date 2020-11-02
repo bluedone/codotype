@@ -1,5 +1,5 @@
 import * as React from "react";
-import { LoadingSpinner } from "../loading_spinner";
+import { LoadingSpinner } from "../LoadingSpinner";
 
 // // // //
 

@@ -2,7 +2,7 @@ import * as React from "react";
 import { PluginFetcher } from "./GeneratorFetcher";
 import { LocalStorageProvider } from "./LocalStorageProvider";
 import { PluginRunner } from "./GeneratorRunner";
-import { ProjectEditor } from "../../components/project_editor";
+import { ProjectEditor } from "../../components/ProjectEditor";
 
 // // // //
 

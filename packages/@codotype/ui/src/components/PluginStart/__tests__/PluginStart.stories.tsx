@@ -1,8 +1,8 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { PluginStart } from "../component";
-import { Story } from "../../dev";
-import { dummyPluginMetadata } from "../../project_editor/__tests__/test_state";
+import { Story } from "../../Story";
+import { dummyPluginMetadata } from "../../ProjectEditor/__tests__/test_state";
 
 // // // //
 

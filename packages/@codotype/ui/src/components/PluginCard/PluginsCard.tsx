@@ -1,6 +1,6 @@
 import * as React from "react";
 import { PluginMetadata } from "@codotype/core";
-import { ChevronAnimation } from "../chevron_animation";
+import { ChevronAnimation } from "../ChevronAnimation";
 
 // // // //
 

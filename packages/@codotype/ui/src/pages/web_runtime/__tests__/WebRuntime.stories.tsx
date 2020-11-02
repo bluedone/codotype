@@ -1,9 +1,9 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { WebRuntime } from "../component";
-import { Story } from "../../../components/dev";
-import { RuntimeProvider } from "../../../components/runtime_provider";
-import { ProjectEditor } from "../../../components/project_editor";
+import { Story } from "../../../components/Story";
+import { RuntimeProvider } from "../../../components/RuntimeProvider";
+import { ProjectEditor } from "../../../components/ProjectEditor";
 import {
     Project,
     ProjectInput,
@@ -30,7 +30,7 @@ import {
     buildTokenPluralization,
     buildDefaultConfiguration,
 } from "@codotype/core";
-import { generatorReadme } from "../../../components/markdown_renderer/__tests__/test_state";
+import { generatorReadme } from "../../../components/MarkdownRenderer/__tests__/test_state";
 const { cdkPluginMeta, dummyPluginMetadata } = testState;
 
 // // // //
@@ -608,29 +608,29 @@ stories.forEach(story => {
                         setProject,
                         clearProject,
                     }) => (
-                        <RuntimeProvider>
-                            {({ generateCode }) => (
-                                <React.Fragment>
-                                    <ProjectEditor
-                                        generator={generator}
-                                        projectInput={projectInput}
-                                        onClickGenerate={() => {
-                                            generateCode({
-                                                projectInput,
-                                                generator,
-                                            });
-                                        }}
-                                        onResetProject={clearProject}
-                                        onChange={(
-                                            updatedProject: ProjectInput,
-                                        ) => {
-                                            setProject(updatedProject);
-                                        }}
-                                    />
-                                </React.Fragment>
-                            )}
-                        </RuntimeProvider>
-                    )}
+                            <RuntimeProvider>
+                                {({ generateCode }) => (
+                                    <React.Fragment>
+                                        <ProjectEditor
+                                            generator={generator}
+                                            projectInput={projectInput}
+                                            onClickGenerate={() => {
+                                                generateCode({
+                                                    projectInput,
+                                                    generator,
+                                                });
+                                            }}
+                                            onResetProject={clearProject}
+                                            onChange={(
+                                                updatedProject: ProjectInput,
+                                            ) => {
+                                                setProject(updatedProject);
+                                            }}
+                                        />
+                                    </React.Fragment>
+                                )}
+                            </RuntimeProvider>
+                        )}
                 </WebRuntime>
             </Story>
         );

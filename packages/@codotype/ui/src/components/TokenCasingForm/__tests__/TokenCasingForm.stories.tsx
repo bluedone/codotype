@@ -1,6 +1,6 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
-import { Story } from "../../dev";
+import { Story } from "../../Story";
 import { TokenCasingForm } from "../TokenCasingForm";
 import { EMPTY_TOKEN_CASING } from "@codotype/core";
 

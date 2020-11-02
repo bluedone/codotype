@@ -3,7 +3,7 @@ import { storiesOf } from "@storybook/react";
 import { PluginCard } from "../PluginsCard";
 import { PluginListItem } from "../PluginListItem";
 import { PluginMetadata, testState } from "@codotype/core";
-import { Story } from "../../dev";
+import { Story } from "../../Story";
 const { cdkPluginMeta, dummyPluginMetadata } = testState;
 
 // // // //

@@ -2,7 +2,7 @@ import * as React from "react";
 import { Modal } from "react-bootstrap";
 import { faBook } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { MarkdownRenderer } from "../markdown_renderer";
+import { MarkdownRenderer } from "../MarkdownRenderer";
 
 // // // //
 

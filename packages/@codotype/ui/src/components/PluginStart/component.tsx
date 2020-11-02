@@ -1,7 +1,7 @@
 import * as React from "react";
 import { PluginMetadata } from "@codotype/core";
-import { ChevronAnimation } from "../chevron_animation/component";
-import { MarkdownRenderer } from "../markdown_renderer";
+import { ChevronAnimation } from "../ChevronAnimation/component";
+import { MarkdownRenderer } from "../MarkdownRenderer";
 import { PluginTypeTag } from "../PluginCard/PluginTypeTag";
 import { PluginTechTag } from "../PluginCard/PluginTechTag";
 import { PluginExperienceTag } from "../PluginCard/PluginExperienceTag";
