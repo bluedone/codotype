@@ -365,7 +365,7 @@ export class NodeRuntime implements Runtime {
     renderTemplate(
         generatorInstance: RuntimeAdaptor,
         src: string,
-        options: any = {},
+        options: any = {}, // TODO - add type for options here, build in proper support for prettify
     ): Promise<string> {
         return new Promise((resolve, reject) => {
             // default options padded into the renderFile
