@@ -41,7 +41,7 @@ const testCases: [string, Datatype][] = [
 ];
 
 const storyCollection = storiesOf(
-    "ProjectEditor/AttributeEditor/DatatypeIcon",
+    "Components/ProjectEditor/AttributeEditor/DatatypeIcon",
     module,
 );
 storyCollection.add("all variants", () => {

@@ -137,7 +137,7 @@ const stories: Array<[string, ConfigurationProperty, OptionValue]> = [
 ];
 
 const storyCollection = storiesOf(
-    "ProjectEditor/ConfigurationEditor/ConfigurationInputFormGroup",
+    "Components/ProjectEditor/ConfigurationEditor/ConfigurationInputFormGroup",
     module,
 );
 

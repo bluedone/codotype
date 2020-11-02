@@ -31,7 +31,7 @@ const testCases: [string, RelationInput][] = [
 ];
 
 const storyCollection = storiesOf(
-    "ProjectEditor/RelationEditor/RelationPropertiesForm",
+    "Components/ProjectEditor/RelationEditor/RelationPropertiesForm",
     module,
 );
 testCases.forEach(testCase => {

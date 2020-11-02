@@ -32,7 +32,7 @@ const stories: Array<[string, ConfigurationProperty, OptionValue]> = [
 // // // //
 
 const storyCollection = storiesOf(
-    "ProjectEditor/ConfigurationEditor/ConfigurationInputChild",
+    "Components/ProjectEditor/ConfigurationEditor/ConfigurationInputChild",
     module,
 );
 
@@ -56,7 +56,7 @@ stories.forEach(story => {
 // // // //
 
 const numberPropertyFilterStories = storiesOf(
-    "ProjectEditor/ConfigurationEditor/ConfigurationInputChild/StringPropertyFilter",
+    "Components/ProjectEditor/ConfigurationEditor/ConfigurationInputChild/StringPropertyFilter",
     module,
 );
 
@@ -111,7 +111,7 @@ const numberPropertyFilterStories = storiesOf(
 // // // //
 
 const stringPropertyFilterStories = storiesOf(
-    "ProjectEditor/ConfigurationEditor/ConfigurationInputChild/NumberPropertyFilter",
+    "Components/ProjectEditor/ConfigurationEditor/ConfigurationInputChild/NumberPropertyFilter",
     module,
 );
 

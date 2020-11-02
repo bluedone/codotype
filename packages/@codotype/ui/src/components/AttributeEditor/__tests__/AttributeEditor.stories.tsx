@@ -11,7 +11,7 @@ import {
 
 // // // //
 
-storiesOf("ProjectEditor/AttributeEditor/Layout", module).add(
+storiesOf("Components/ProjectEditor/AttributeEditor/Layout", module).add(
     "populated",
     () => {
         const [attributes, setAttributes] = React.useState<AttributeInput[]>([
@@ -38,7 +38,7 @@ storiesOf("ProjectEditor/AttributeEditor/Layout", module).add(
     },
 );
 
-storiesOf("ProjectEditor/AttributeEditor/Layout", module).add("empty", () => {
+storiesOf("Components/ProjectEditor/AttributeEditor/Layout", module).add("empty", () => {
     const [attributes, setAttributes] = React.useState<AttributeInput[]>([]);
     return (
         <Story>

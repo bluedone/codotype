@@ -6,7 +6,7 @@
 
 // // // // //
 
-// storiesOf("ProjectEditor/RelationEditor/RelationPropertiesForm", module).add(
+// storiesOf("Components/ProjectEditor/RelationEditor/RelationPropertiesForm", module).add(
 //     "renders",
 //     () => {
 //         return (

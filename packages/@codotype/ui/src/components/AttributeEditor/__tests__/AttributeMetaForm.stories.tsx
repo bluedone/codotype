@@ -5,7 +5,7 @@ import { AttributeMetaForm } from "../AttributeMetaForm";
 
 // // // //
 
-storiesOf("ProjectEditor/AttributeEditor/AttributeMetaForm", module).add(
+storiesOf("Components/ProjectEditor/AttributeEditor/AttributeMetaForm", module).add(
     "renders",
     () => {
         const [description, setDescription] = React.useState("");

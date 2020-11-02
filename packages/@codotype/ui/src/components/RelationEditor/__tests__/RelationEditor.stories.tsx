@@ -15,7 +15,7 @@ const { userSchema } = testState;
 
 // // // //
 
-storiesOf("ProjectEditor/RelationEditor/Layout", module).add(
+storiesOf("Components/ProjectEditor/RelationEditor/Layout", module).add(
     "populated",
     () => {
         const [relations, setRelations] = React.useState<RelationInput[]>([
@@ -67,7 +67,7 @@ storiesOf("ProjectEditor/RelationEditor/Layout", module).add(
     },
 );
 
-storiesOf("ProjectEditor/RelationEditor/Layout", module).add("empty", () => {
+storiesOf("Components/ProjectEditor/RelationEditor/Layout", module).add("empty", () => {
     const [relations, setRelations] = React.useState<RelationInput[]>([]);
     return (
         <Story>

@@ -7,7 +7,7 @@ const { cdkPluginMeta } = testState;
 
 // // // //
 
-storiesOf("ProjectEditor/SchemaEditor", module).add("renders", () => {
+storiesOf("Components/ProjectEditor/SchemaEditor", module).add("renders", () => {
     return (
         <Story>
             <SchemaEditorLayout

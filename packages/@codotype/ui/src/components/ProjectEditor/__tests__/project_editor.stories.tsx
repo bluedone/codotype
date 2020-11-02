@@ -19,7 +19,7 @@ const dummyProject: ProjectInput = buildDefaultProjectInput(
 // dummyProject.schemas.push(testState.movieSchema);
 // dummyProject.schemas.push(testState.userSchema);
 
-storiesOf("ProjectEditor/Layout", module).add("renders", () => {
+storiesOf("Components/ProjectEditor/Layout", module).add("renders", () => {
     const [project, setProject] = React.useState<ProjectInput>(dummyProject);
     return (
         <Story>

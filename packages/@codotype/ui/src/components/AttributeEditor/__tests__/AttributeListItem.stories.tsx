@@ -14,7 +14,7 @@ const testCases: [string, AttributeInput][] = [
 ];
 
 const storyCollection = storiesOf(
-    "ProjectEditor/AttributeEditor/AttributeListItem",
+    "Components/ProjectEditor/AttributeEditor/AttributeListItem",
     module,
 );
 

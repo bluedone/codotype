@@ -15,7 +15,7 @@ import {
 
 // // // //
 
-storiesOf("ProjectEditor/AttributeEditor/AttributeAddonForm", module).add(
+storiesOf("Components/ProjectEditor/AttributeEditor/AttributeAddonForm", module).add(
     "renders",
     () => {
         const [value, setValue] = React.useState<AddonsValue>(

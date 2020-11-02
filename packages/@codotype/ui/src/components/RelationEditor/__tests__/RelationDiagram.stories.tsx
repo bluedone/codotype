@@ -126,7 +126,7 @@ const testCases: [string, RelationDiagramProps][] = [
 ];
 
 const storyCollection = storiesOf(
-    "ProjectEditor/RelationEditor/RelationDiagram",
+    "Components/ProjectEditor/RelationEditor/RelationDiagram",
     module,
 );
 storyCollection.add("all variants", () => {

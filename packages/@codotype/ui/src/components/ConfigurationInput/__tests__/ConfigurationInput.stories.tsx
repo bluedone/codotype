@@ -20,7 +20,7 @@ import { Story } from "../../Story";
 // // // //
 
 const storyCollection = storiesOf(
-    "ProjectEditor/ConfigurationEditor/ConfigurationInput",
+    "Components/ProjectEditor/ConfigurationEditor/ConfigurationInput",
     module,
 );
 
@@ -169,7 +169,7 @@ const layoutVariantStories: [
 allowDisableOptions.forEach(allowDisable => {
     groupVariants.forEach(layoutVariant => {
         layoutVariantStories.push([
-            `ProjectEditor/ConfigurationEditor/ConfigurationInput/${layoutVariant}`,
+            `Components/ProjectEditor/ConfigurationEditor/ConfigurationInput/${layoutVariant}`,
             `allowDisable: ${allowDisable}`,
             layoutVariant,
             allowDisable,
