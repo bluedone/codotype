@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Modal } from "react-bootstrap";
-import { Project } from "@codotype/core";
+import { ProjectInput } from "@codotype/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 const download = require("downloadjs");
@@ -11,14 +11,14 @@ const download = require("downloadjs");
  * downloadProject
  * Donwloads the Project as a JSON file
  */
-function downloadProject(project: Project) {
+function downloadProject(projectInput: ProjectInput) {
     // Defines filename
     const filename = `codotype-project-${
-        project.identifiers.snake
-        }-${Date.now()}.json`;
+        projectInput.identifiers.snake
+    }-${Date.now()}.json`;
 
     // Defines JSON string
-    const jsonString: string = JSON.stringify(project, null, 4);
+    const jsonString: string = JSON.stringify(projectInput, null, 4);
 
     // Downloads file
     download(jsonString, filename, "application/json");
@@ -29,15 +29,15 @@ function downloadProject(project: Project) {
 /**
  * ProjectExportModal
  * @param props.show
- * @param props.project
+ * @param props.projectInput
  * @param props.onHide
  */
 export function ProjectExportModal(props: {
     show: boolean;
-    project: Project;
+    projectInput: ProjectInput;
     onHide: () => void;
 }) {
-    const { project } = props;
+    const { projectInput } = props;
 
     return (
         <Modal show={props.show} onHide={props.onHide}>
@@ -67,7 +67,7 @@ export function ProjectExportModal(props: {
                 <button
                     className="btn btn-success"
                     onClick={() => {
-                        downloadProject(project);
+                        downloadProject(projectInput);
                         props.onHide();
                     }}
                 >

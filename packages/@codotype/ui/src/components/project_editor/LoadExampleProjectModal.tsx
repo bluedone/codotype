@@ -1,31 +1,29 @@
 import * as React from "react";
 import { Modal } from "react-bootstrap";
-import { Project } from "@codotype/core";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import { ProjectInput } from "@codotype/core";
 
 // // // //
 
 /**
  * LoadExampleProjectModal
  * @param props.show
- * @param props.project
+ * @param props.projectInput
  * @param props.onConfirm
  * @param props.onHide
  */
 export function LoadExampleProjectModal(props: {
     show: boolean;
-    project: Project;
+    projectInput: ProjectInput;
     onHide: () => void;
     onConfirm: () => void;
 }) {
-    const { project } = props;
+    const { projectInput } = props;
 
     return (
         <Modal show={props.show} onHide={props.onHide}>
             <Modal.Header closeButton>
                 <Modal.Title>
-                    Load {project.identifiers.label} Project
+                    Load {projectInput.identifiers.title} Project
                 </Modal.Title>
             </Modal.Header>
 

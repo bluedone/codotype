@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Dropdown } from "react-bootstrap";
-import { Project } from "@codotype/core";
+import { ProjectInput } from "@codotype/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
 import { ResetProjectButton } from "./ResetProjectButton";
@@ -18,7 +18,7 @@ const StyledDiv = styled.div`
 `;
 
 export function ProjectDropdown(props: {
-    project: Project;
+    projectInput: ProjectInput;
     onConfirmReset: () => void;
 }) {
     const [showingExportModal, showExportModal] = React.useState<boolean>(
@@ -59,7 +59,7 @@ export function ProjectDropdown(props: {
             </Dropdown>
 
             <ProjectExportModal
-                project={props.project}
+                projectInput={props.projectInput}
                 show={showingExportModal}
                 onHide={() => {
                     showExportModal(false);

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { ProjectEditor } from "../component";
-import { Project, testState, buildDefaultProject } from "@codotype/core";
+import { buildDefaultProjectInput, ProjectInput } from "@codotype/core";
 import { Story } from "../../dev";
 import { dummyPluginMetadata } from "./test_state";
 
@@ -13,17 +13,17 @@ const chromeExtensionPlugin = {
         "https://res.cloudinary.com/codotype/image/upload/v1553197653/tech-logos/nodejs.png",
 };
 
-const dummyProject: Project = buildDefaultProject(chromeExtensionPlugin);
-dummyProject.schemas.push(testState.movieSchema);
-dummyProject.schemas.push(testState.userSchema);
+const dummyProject: ProjectInput = buildDefaultProjectInput(chromeExtensionPlugin);
+// dummyProject.schemas.push(testState.movieSchema);
+// dummyProject.schemas.push(testState.userSchema);
 
 storiesOf("ProjectEditor/Layout", module).add("renders", () => {
-    const [project, setProject] = React.useState<Project>(dummyProject);
+    const [project, setProject] = React.useState<ProjectInput>(dummyProject);
     return (
         <Story>
             <ProjectEditor
                 generator={chromeExtensionPlugin}
-                project={project}
+                projectInput={project}
                 onClickGenerate={() => {
                     console.log("Generate Project!");
                     console.log(project);
@@ -32,7 +32,7 @@ storiesOf("ProjectEditor/Layout", module).add("renders", () => {
                     console.log("RESET PROJECT");
                     console.log(project);
                 }}
-                onChange={(updatedProject: Project) => {
+                onChange={(updatedProject: ProjectInput) => {
                     console.log("onChange!");
                     console.log(updatedProject);
                     setProject(updatedProject);

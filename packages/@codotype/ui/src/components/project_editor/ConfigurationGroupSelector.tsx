@@ -2,13 +2,14 @@ import * as React from "react";
 import { ConfigurationInput } from "../configuration_group_input";
 import { SchemaEditorLayout } from "../schema_editor";
 import {
-    Project,
+    ProjectInput,
     Schema,
     PluginMetadata,
     ConfigurationGroup,
     OptionValueInstance,
+    SchemaInput,
 } from "@codotype/core";
-import { GeneratorStart } from "../generator_start";
+import { PluginStart } from "../PluginStart";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFlag } from "@fortawesome/free-solid-svg-icons";
 
@@ -52,19 +53,19 @@ export function ConfigurationGroupTab(props: {
 
 /**
  * ConfigurationGroupSelector
- * @param props.project
- * @param props.PluginMetadata
+ * @param props.projectInput
+ * @param props.pluginMetadata
  * @param props.onChange
  */
 export function ConfigurationGroupSelector(props: {
-    project: Project;
-    PluginMetadata: PluginMetadata;
-    onChange: (updatedProject: Project) => void;
+    projectInput: ProjectInput;
+    pluginMetadata: PluginMetadata;
+    onChange: (updatedProject: ProjectInput) => void;
 }) {
-    const { PluginMetadata } = props;
+    const { pluginMetadata } = props;
     // Gets default ConfigurationGroup to render
     const defaultConfigurationGroup: ConfigurationGroup | undefined =
-        PluginMetadata.configurationGroups[0];
+        pluginMetadata.configurationGroups[0];
 
     // If there is no default ConfigurationGroup, return null
     if (!defaultConfigurationGroup) {
@@ -82,12 +83,12 @@ export function ConfigurationGroupSelector(props: {
     const {
         configurationGroups,
         supportedDatatypes,
-        supportedRelations,
-    } = PluginMetadata.schemaEditorConfiguration;
+        supportedRelationTypes,
+    } = pluginMetadata.schemaEditorConfiguration;
     const enableSchemaEditor: boolean =
         configurationGroups.length > 0 ||
         supportedDatatypes.length > 0 ||
-        supportedRelations.length > 0;
+        supportedRelationTypes.length > 0;
 
     // NOTE - enable/disable this if schemas aren't supported
     const [viewingSchemas, setViewingSchemas] = React.useState<boolean>(
@@ -109,7 +110,7 @@ export function ConfigurationGroupSelector(props: {
                         }}
                         active={viewingReadme}
                         label={"Start"}
-                        // label={"README.md"}
+                    // label={"README.md"}
                     />
 
                     {enableSchemaEditor && (
@@ -124,7 +125,7 @@ export function ConfigurationGroupSelector(props: {
                     )}
 
                     {/* Renders the navigation for selecting a ConfigurationGroup */}
-                    {PluginMetadata.configurationGroups.map(
+                    {pluginMetadata.configurationGroups.map(
                         (configurationGroup: ConfigurationGroup) => {
                             return (
                                 <ConfigurationGroupTab
@@ -138,11 +139,11 @@ export function ConfigurationGroupSelector(props: {
                                     }}
                                     active={
                                         configurationGroup.identifier ===
-                                            selectedConfigurationGroup.identifier &&
+                                        selectedConfigurationGroup.identifier &&
                                         !viewingSchemas &&
                                         !viewingReadme
                                     }
-                                    label={configurationGroup.label}
+                                    label={configurationGroup.content.label}
                                 />
                             );
                         },
@@ -155,16 +156,16 @@ export function ConfigurationGroupSelector(props: {
                     <ConfigurationInput
                         configurationGroup={selectedConfigurationGroup}
                         value={
-                            props.project.configuration[
-                                selectedConfigurationGroup.identifier
+                            props.projectInput.configuration[
+                            selectedConfigurationGroup.identifier
                             ]
                         }
                         onChange={(updatedVal: OptionValueInstance) => {
                             // Defines updatd project with latest configuration value
-                            const updatedProject: Project = {
-                                ...props.project,
+                            const updatedProject: ProjectInput = {
+                                ...props.projectInput,
                                 configuration: {
-                                    ...props.project.configuration,
+                                    ...props.projectInput.configuration,
                                     [selectedConfigurationGroup.identifier]: updatedVal,
                                 },
                             };
@@ -179,7 +180,7 @@ export function ConfigurationGroupSelector(props: {
                 {viewingReadme && (
                     <div className="mt-4">
                         <div className="card card-body">
-                            <GeneratorStart generator={props.PluginMetadata} />
+                            <PluginStart plugin={props.pluginMetadata} />
                         </div>
                     </div>
                 )}
@@ -187,15 +188,15 @@ export function ConfigurationGroupSelector(props: {
                 {/* Render SchemaEditorLayout */}
                 {viewingSchemas && enableSchemaEditor && (
                     <SchemaEditorLayout
-                        schemas={props.project.schemas}
-                        PluginMetadata={PluginMetadata}
-                        onChange={(updatedSchemas: Schema[]) => {
+                        schemas={props.projectInput.schemas}
+                        pluginMetadata={pluginMetadata}
+                        onChange={(updatedSchemas: SchemaInput[]) => {
                             console.log("Updated Schemas");
                             console.log(updatedSchemas);
                             // Defines updated project
                             // TODO - update configuation after schemas update?
-                            const updatedProject: Project = {
-                                ...props.project,
+                            const updatedProject: ProjectInput = {
+                                ...props.projectInput,
                                 schemas: [...updatedSchemas],
                             };
 

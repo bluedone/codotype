@@ -4,9 +4,9 @@ import { ProjectEditButton } from "./ProjectEditButton";
 import { ProjectFormModal } from "./ProjectFormModal";
 import { ProjectForm } from "./ProjectForm";
 import {
-    sanitizeLabel,
+    sanitizeTitle,
     buildTokenCasing,
-    Project,
+    ProjectInput,
     PluginMetadata,
 } from "@codotype/core";
 import { ProjectDropdown } from "./ProjectDropdown";
@@ -16,36 +16,36 @@ import { ExampleProjectDropdown } from "./ExampleProjectDropdown";
 
 export function ProjectEditorHeader(props: {
     PluginMetadata: PluginMetadata;
-    project: Project;
-    onChange: (updatedProject: Project) => void;
+    projectInput: ProjectInput;
+    onChange: (updatedProject: ProjectInput) => void;
     onClickGenerate: () => void;
     onConfirmReset: () => void;
 }) {
     const { PluginMetadata } = props;
     const [showingModal, showModal] = React.useState<boolean>(false);
     const [labelValue, setLabelValue] = React.useState<string>(
-        props.project.identifiers.label,
+        props.projectInput.identifiers.title,
     );
     return (
         <div className="row d-flex align-items-end">
             <div className="col-sm-12 col-md-6">
                 <span className="d-flex align-items-center">
                     <h2 className="mb-0 mr-2 d-flex">
-                        {props.project.identifiers.label}
+                        {props.projectInput.identifiers.title}
                     </h2>
                     <ProjectEditButton onClick={() => showModal(true)} />
                     <ProjectFormModal
                         show={showingModal}
                         handleClose={() => {
-                            setLabelValue(props.project.identifiers.label);
+                            setLabelValue(props.projectInput.identifiers.title);
                             showModal(false);
                         }}
                         onSubmit={() => {
-                            const sanitizedLabel: string = sanitizeLabel(
+                            const sanitizedLabel: string = sanitizeTitle(
                                 labelValue,
                             );
                             props.onChange({
-                                ...props.project,
+                                ...props.projectInput,
                                 identifiers: buildTokenCasing(sanitizedLabel),
                             });
                             showModal(false);
@@ -54,7 +54,7 @@ export function ProjectEditorHeader(props: {
                         <ProjectForm
                             value={labelValue}
                             onChange={(updatedLabel: string) => {
-                                const sanitizedLabel: string = sanitizeLabel(
+                                const sanitizedLabel: string = sanitizeTitle(
                                     updatedLabel,
                                 );
                                 setLabelValue(sanitizedLabel);
@@ -77,7 +77,7 @@ export function ProjectEditorHeader(props: {
                 />
 
                 <ProjectDropdown
-                    project={props.project}
+                    projectInput={props.projectInput}
                     onConfirmReset={props.onConfirmReset}
                 />
                 {/* <ResetProjectButton onConfirmReset={props.onConfirmReset} /> */}

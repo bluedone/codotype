@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Dropdown } from "react-bootstrap";
-import { PluginMetadata, Project } from "@codotype/core";
+import { PluginMetadata, ProjectInput } from "@codotype/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFolderOpen } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
@@ -18,13 +18,13 @@ const StyledDiv = styled.div`
 
 export function ExampleProjectDropdown(props: {
     plugin: PluginMetadata;
-    loadExampleProject: (exampleProject: Project) => void;
+    loadExampleProject: (exampleProjectInput: ProjectInput) => void;
 }) {
     const { exampleProjects = [] } = props.plugin;
     const [
         selectedProject,
         setSelectedProject,
-    ] = React.useState<Project | null>(null);
+    ] = React.useState<ProjectInput | null>(null);
 
     // Return null if there are no projects
     if (exampleProjects.length === 0) {
@@ -51,13 +51,13 @@ export function ExampleProjectDropdown(props: {
                         <span className="text-primary">Example Projects</span>
                     </Dropdown.Header>
                     <Dropdown.Divider />
-                    {exampleProjects.map((project: Project) => (
+                    {exampleProjects.map((projectInput: ProjectInput) => (
                         <Dropdown.Item
                             onClick={() => {
-                                setSelectedProject(project);
+                                setSelectedProject(projectInput);
                             }}
                         >
-                            {project.identifiers.label}
+                            {projectInput.identifiers.title}
                         </Dropdown.Item>
                     ))}
                 </Dropdown.Menu>
@@ -65,7 +65,7 @@ export function ExampleProjectDropdown(props: {
 
             {selectedProject && (
                 <LoadExampleProjectModal
-                    project={selectedProject}
+                    projectInput={selectedProject}
                     show={selectedProject !== null}
                     onHide={() => {
                         setSelectedProject(null);

@@ -1,14 +1,14 @@
 import * as React from "react";
 import { ConfigurationGroupSelector } from "./ConfigurationGroupSelector";
 import { ProjectEditorHeader } from "./ProjectEditorHeader";
-import { PluginMetadata, Project } from "@codotype/core";
+import { PluginMetadata, ProjectInput } from "@codotype/core";
 
 // // // //
 
 interface ProjectEditorProps {
     generator: PluginMetadata;
-    project: Project;
-    onChange: (updatedProject: Project) => void;
+    projectInput: ProjectInput;
+    onChange: (updatedProject: ProjectInput) => void;
     onClickGenerate: () => void;
     onResetProject: () => void;
     // enableImport?: boolean;
@@ -16,15 +16,14 @@ interface ProjectEditorProps {
 }
 
 export function ProjectEditor(props: ProjectEditorProps) {
-    const { generator, project } = props;
+    const { generator, projectInput } = props;
     return (
-        // <div className="card card-body shadow-sm">
         <div className="row">
             <div className="col-sm-12">
                 {/* Render ProjectEditorHeader */}
                 <ProjectEditorHeader
                     PluginMetadata={generator}
-                    project={project}
+                    projectInput={projectInput}
                     onChange={props.onChange}
                     onClickGenerate={props.onClickGenerate}
                     onConfirmReset={props.onResetProject}
@@ -36,9 +35,9 @@ export function ProjectEditor(props: ProjectEditorProps) {
 
                 {/* Render ConfigurationGroupSelector */}
                 <ConfigurationGroupSelector
-                    project={project}
-                    PluginMetadata={generator}
-                    onChange={(updatedProject: Project) => {
+                    projectInput={projectInput}
+                    pluginMetadata={generator}
+                    onChange={(updatedProject: ProjectInput) => {
                         // Invokes props.onChange with the updated project
                         console.log("UPDATED PROJECT");
 
@@ -47,6 +46,5 @@ export function ProjectEditor(props: ProjectEditorProps) {
                 />
             </div>
         </div>
-        // </div>
     );
 }
