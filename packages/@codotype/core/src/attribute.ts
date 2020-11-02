@@ -12,9 +12,8 @@ import { AddonsValue } from "./schema-editor-addon";
  * The `AttributeInput` is goes through additional processing before being passed into a Plugin as a `Attribute`
  */
 export interface AttributeInput {
-    id: UUID | null; // TODO - rename to identifier, rename token to tokens?
+    id: UUID | null;
     datatype: Datatype | null;
-    defaultValue: null | string | boolean | number;
     identifiers: TokenCasing; // Keep this, maybe allow users to edit later
     internalNote: string; // Good place to store data relevant to the person editing the Codotype project
     createdBy: CreatedBy;
@@ -28,9 +27,8 @@ export interface AttributeInput {
  * Used by a Plugin to generate the code required to successfully describe that Schema property in generated code
  */
 export interface Attribute {
-    id: UUID; // TODO - rename to identifier?
+    id: UUID;
     datatype: Datatype;
-    defaultValue: null | string | boolean | number;
     identifiers: TokenCasing;
     internalNote: string; // Good place to store data relevant to the person editing the Codotype project
     createdBy: CreatedBy;

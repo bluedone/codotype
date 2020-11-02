@@ -191,7 +191,11 @@ Object {
   "schemas": Array [
     Object {
       "attributes": Array [],
-      "configuration": Object {},
+      "configuration": Object {
+        "api_examples": Object {
+          "twitter": false,
+        },
+      },
       "createdBy": "plugin",
       "id": "12345",
       "identifiers": Object {

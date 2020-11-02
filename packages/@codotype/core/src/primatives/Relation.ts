@@ -21,8 +21,8 @@ interface RelationBuilderParams {
 export class RelationBuilder implements RelationInput {
     id: string = uuidv4();
     type: RelationType;
-    sourceSchemaID: string;
-    destinationSchemaID: string;
+    sourceSchemaID: string = "";
+    destinationSchemaID: string = "";
     internalNote: string = "";
     locked: boolean = false;
     createdBy: CreatedBy = CreatedByValues.user;
@@ -32,11 +32,12 @@ export class RelationBuilder implements RelationInput {
 
     constructor(params: RelationBuilderParams) {
         this.type = params.type;
-        this.sourceSchemaID = params.sourceSchemaID;
-        this.destinationSchemaID = params.destinationSchemaID;
-        this.internalNote = params.internalNote;
+        this.sourceSchemaID = params.sourceSchemaID || this.sourceSchemaID;
+        this.destinationSchemaID =
+            params.destinationSchemaID || this.destinationSchemaID;
+        this.internalNote = params.internalNote || this.internalNote;
 
-        this.id = params.id || this.id;
+        this.id = params.id === "" ? params.id : this.id;
         this.createdBy = params.createdBy || this.createdBy;
         this.locked = params.locked || this.locked;
         this.addons = params.addons || this.addons;

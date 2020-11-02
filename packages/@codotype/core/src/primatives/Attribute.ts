@@ -26,7 +26,7 @@ export class AttributeInputBuilder implements AttributeInput {
     addons: AddonsValue = {};
 
     constructor(params: AttributeBuilderParams) {
-        this.id = params.id || this.id;
+        this.id = params.id === "" ? params.id : this.id;
         this.identifiers = params.identifiers || this.identifiers;
         this.datatype = params.datatype || this.datatype;
         this.internalNote = params.internalNote || this.internalNote;

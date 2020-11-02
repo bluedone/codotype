@@ -1,7 +1,7 @@
 import {
     SchemaInput,
     ProjectInput,
-    PropertyType,
+    PropertyTypes,
     OptionValue,
     ConfigurationValue,
     OptionValueInstance,
@@ -21,27 +21,27 @@ import {
 export function buildConfigurationPropertyValue(
     property: ConfigurationProperty,
 ): OptionValue {
-    if (property.type === PropertyType.STRING) {
+    if (property.type === PropertyTypes.STRING) {
         return property.defaultValue || "";
     }
-    if (property.type === PropertyType.BOOLEAN) {
+    if (property.type === PropertyTypes.BOOLEAN) {
         return property.defaultValue || false;
     }
-    if (property.type === PropertyType.DROPDOWN) {
+    if (property.type === PropertyTypes.DROPDOWN) {
         return property.defaultValue
             ? property.defaultValue
             : property.dropdownOptions.length > 0
             ? property.dropdownOptions[0].value
             : "";
     }
-    if (property.type === PropertyType.COLLECTION) {
+    if (property.type === PropertyTypes.COLLECTION) {
         if (Array.isArray(property.defaultValue)) {
             return property.defaultValue;
         }
         // Return empty array as default
         return [];
     }
-    if (property.type === PropertyType.INSTANCE) {
+    if (property.type === PropertyTypes.INSTANCE) {
         return buildValueFromProperties(property.properties);
     }
     return "";
@@ -179,6 +179,29 @@ export function buildDefaultConfiguration(
     return configurationValue;
 }
 
+export function verifyDefaultSchemas(params: {
+    schemas: SchemaInput[];
+    configurationGroups: ConfigurationGroup[];
+}): SchemaInput[] {
+    return params.schemas.map((s) => {
+        // Builds value for s.configuration
+        const configuration: ConfigurationValue = buildDefaultConfiguration(
+            params.configurationGroups,
+        );
+
+        // If s.configuration doesn't match configuration -> return new configuration value
+        if (Object.keys(s.configuration) !== Object.keys(configuration)) {
+            return {
+                ...s,
+                configuration,
+            };
+        }
+
+        // Otherwise, return s
+        return s;
+    });
+}
+
 /**
  * buildDefaultProject
  * Builds an empty Project
@@ -204,7 +227,13 @@ export function buildDefaultProjectInput(
         },
         pluginID: pluginMetadata.identifier,
         pluginVersion: pluginMetadata.version,
-        schemas: [...pluginMetadata.schemaEditorConfiguration.defaultSchemas],
+        schemas: verifyDefaultSchemas({
+            schemas: [
+                ...pluginMetadata.schemaEditorConfiguration.defaultSchemas,
+            ],
+            configurationGroups:
+                pluginMetadata.schemaEditorConfiguration.configurationGroups,
+        }),
         relations: [
             ...pluginMetadata.schemaEditorConfiguration.defaultRelations,
         ],

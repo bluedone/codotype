@@ -24,7 +24,15 @@ import { Content } from "./content";
 //              in another COLLECTION. Makes sense - powerful.
 //          - It should be limited to COLLECTION - the property.type can be "COLLECTION_REFERENCE"
 //          - We'll also need to store the ID of the associated COLLECTION property - where should that be done?
-export enum PropertyType {
+export type PropertyType =
+    | "STRING"
+    | "NUMBER"
+    | "BOOLEAN"
+    | "DROPDOWN"
+    | "MULTI_DROPDOWN"
+    | "COLLECTION"
+    | "INSTANCE";
+export enum PropertyTypes {
     STRING = "STRING",
     NUMBER = "NUMBER",
     BOOLEAN = "BOOLEAN",
@@ -38,7 +46,7 @@ export enum PropertyType {
  * PropertyLayoutVariant
  * Defines different layout styles for a ConfigurationProperty
  */
-type PropertyLayoutVariant =
+export type PropertyLayoutVariant =
     | "COL_3"
     | "COL_4"
     | "COL_6"
@@ -128,7 +136,7 @@ export interface ConfigurationProperty {
 
     // Functional
     identifier: string; // NOTE - this is "identifier" so if its ever stored in a database, the "id" column will be available
-    type: PropertyType;
+    type: PropertyTypes;
     defaultValue: OptionValue;
     dropdownOptions: DropdownOption[];
     properties: ConfigurationProperty[];

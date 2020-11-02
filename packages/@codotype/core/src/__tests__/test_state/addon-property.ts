@@ -1,4 +1,4 @@
-import { PropertyType } from "../../configuration-property";
+import { PropertyTypes } from "../../configuration-property";
 import { Datatypes } from "../../datatype";
 import { RelationTypes } from "../../relation";
 import {
@@ -21,7 +21,7 @@ const indexAddonProperty: AddonProperty = {
     },
     exclusive: false,
     required: false,
-    propertyType: PropertyType.BOOLEAN,
+    propertyType: PropertyTypes.BOOLEAN,
     dropdownOptions: [],
     defaultValue: false,
     validations: [],
@@ -39,7 +39,7 @@ const uniqueAddonProperty: AddonProperty = {
     identifier: "unique",
     exclusive: false,
     required: false,
-    propertyType: PropertyType.BOOLEAN,
+    propertyType: PropertyTypes.BOOLEAN,
     dropdownOptions: [],
     defaultValue: false,
     validations: [],
@@ -57,7 +57,7 @@ const requiredAddonProperty: AddonProperty = {
     inlineIcon: AddonPropertyInlineIcons.asterisk,
     exclusive: false,
     required: false,
-    propertyType: PropertyType.BOOLEAN,
+    propertyType: PropertyTypes.BOOLEAN,
     dropdownOptions: [],
     defaultValue: false,
     validations: [],
@@ -75,7 +75,7 @@ const nullableAddonProperty: AddonProperty = {
     identifier: "primaryKey",
     exclusive: true,
     required: false,
-    propertyType: PropertyType.BOOLEAN,
+    propertyType: PropertyTypes.BOOLEAN,
     dropdownOptions: [],
     defaultValue: false,
     validations: [],
@@ -94,7 +94,7 @@ const primaryKeyAddonProperty: AddonProperty = {
     identifier: "primaryKey",
     exclusive: true,
     required: false,
-    propertyType: PropertyType.BOOLEAN,
+    propertyType: PropertyTypes.BOOLEAN,
     dropdownOptions: [],
     defaultValue: false,
     validations: [],
@@ -113,7 +113,7 @@ const selectAddonProperty: AddonProperty = {
     inlineIcon: AddonPropertyInlineIcons.check,
     exclusive: false,
     required: false,
-    propertyType: PropertyType.BOOLEAN,
+    propertyType: PropertyTypes.BOOLEAN,
     dropdownOptions: [],
     defaultValue: true,
     validations: [],

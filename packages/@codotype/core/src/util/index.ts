@@ -15,3 +15,4 @@ export * from "./buildTokenPluralization";
 export * from "./schemaRenderer";
 export * from "./applyPropertyTransformations";
 export * from "./applyPropertyPreview";
+export * from "./buildDefaultAddonsValue";

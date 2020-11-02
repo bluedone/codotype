@@ -7,7 +7,7 @@ RelationBuilder {
   "destinationSchemaAlias": "",
   "destinationSchemaID": "SCHEMA_02",
   "id": "1234-5678-1234-5678",
-  "internalNote": undefined,
+  "internalNote": "",
   "locked": false,
   "sourceSchemaAlias": "",
   "sourceSchemaID": "SCHEMA_01",

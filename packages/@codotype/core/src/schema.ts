@@ -32,6 +32,7 @@ export interface Schema {
     attributes: Attribute[];
     relations: Relation[];
     referencedBy: Relation[];
+    internalNote: string;
     identifiers: TokenPluralization;
     configuration: ConfigurationValue;
 }
