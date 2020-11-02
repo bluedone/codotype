@@ -1,7 +1,7 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { Story } from "../../dev";
-import { Attribute } from "@codotype/core";
+import { Attribute, AttributeInput } from "@codotype/core";
 import { AttributeEditor } from "../component";
 import {
     attributeExample01,
@@ -14,7 +14,7 @@ import {
 storiesOf("ProjectEditor/AttributeEditor/Layout", module).add(
     "populated",
     () => {
-        const [attributes, setAttributes] = React.useState<Attribute[]>([
+        const [attributes, setAttributes] = React.useState<AttributeInput[]>([
             attributeExample01,
             attributeExample02,
         ]);
@@ -24,7 +24,7 @@ storiesOf("ProjectEditor/AttributeEditor/Layout", module).add(
                     attributes={attributes}
                     addons={[]}
                     supportedDatatypes={supportedDatatypes}
-                    onChange={(updatedAttributes: Attribute[]) => {
+                    onChange={(updatedAttributes: AttributeInput[]) => {
                         console.log("AttributeEditor - onChange");
                         console.log(updatedAttributes);
                         setAttributes(updatedAttributes);
@@ -41,14 +41,14 @@ storiesOf("ProjectEditor/AttributeEditor/Layout", module).add(
 );
 
 storiesOf("ProjectEditor/AttributeEditor/Layout", module).add("empty", () => {
-    const [attributes, setAttributes] = React.useState<Attribute[]>([]);
+    const [attributes, setAttributes] = React.useState<AttributeInput[]>([]);
     return (
         <Story>
             <AttributeEditor
                 attributes={attributes}
                 addons={[]}
                 supportedDatatypes={supportedDatatypes}
-                onChange={(updatedAttributes: Attribute[]) => {
+                onChange={(updatedAttributes: AttributeInput[]) => {
                     console.log("AttributeEditor - onChange");
                     console.log(updatedAttributes);
                     setAttributes(updatedAttributes);

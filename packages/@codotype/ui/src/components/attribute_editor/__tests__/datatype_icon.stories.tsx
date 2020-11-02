@@ -2,14 +2,15 @@ import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { DatatypeIcon } from "../DatatypeIcon";
 import { Story } from "../../dev";
-import { Datatype } from "@codotype/core";
+import { Datatype, Datatypes } from "@codotype/core";
 
 // // // //
 
 const testCases: [string, Datatype][] = [
+    // TODO - add ID / UUID / AUTO_INCREMENTING_ID + associated array tyupes here
     ["Datatypes.STRING", Datatypes.STRING],
     ["Datatypes.TEXT", Datatypes.TEXT],
-    ["Datatypes.INTEGER", Datatypes.INTEGER],
+    ["Datatypes.INT", Datatypes.INT],
     ["Datatypes.BIGINT", Datatypes.BIGINT],
     ["Datatypes.FLOAT", Datatypes.FLOAT],
     ["Datatypes.DECIMAL", Datatypes.DECIMAL],
@@ -25,7 +26,7 @@ const testCases: [string, Datatype][] = [
     ["Datatypes.OBJECT", Datatypes.OBJECT],
     ["Datatypes.STRING_ARRAY", Datatypes.STRING_ARRAY],
     ["Datatypes.TEXT_ARRAY", Datatypes.TEXT_ARRAY],
-    ["Datatypes.INTEGER_ARRAY", Datatypes.INTEGER_ARRAY],
+    ["Datatypes.INT_ARRAY", Datatypes.INT_ARRAY],
     ["Datatypes.BIGINT_ARRAY", Datatypes.BIGINT_ARRAY],
     ["Datatypes.FLOAT_ARRAY", Datatypes.FLOAT_ARRAY],
     ["Datatypes.DECIMAL_ARRAY", Datatypes.DECIMAL_ARRAY],

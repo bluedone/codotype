@@ -1,14 +1,14 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { Story } from "../../dev";
-import { Attribute } from "@codotype/core";
+import { AttributeInput } from "@codotype/core";
 import { Droppable, DragDropContext } from "react-beautiful-dnd";
 import { AttributeListItem } from "../AttributeListItem";
 import { attributeExample01, attributeExample02 } from "./test_state";
 
 // // // //
 
-const testCases: [string, Attribute][] = [
+const testCases: [string, AttributeInput][] = [
     ["Name", attributeExample01],
     ["Email", attributeExample02],
 ];
@@ -45,13 +45,13 @@ testCases.forEach(testCase => {
                                         attribute={testCase[1]}
                                         index={0}
                                         onClickEdit={(
-                                            attributeToBeEdited: Attribute,
+                                            attributeToBeEdited: AttributeInput,
                                         ) => {
                                             console.log("onClickEdit");
                                             console.log(attributeToBeEdited);
                                         }}
                                         onClickDelete={(
-                                            attributeToBeDelete: Attribute,
+                                            attributeToBeDelete: AttributeInput,
                                         ) => {
                                             console.log("onClickDelete");
                                             console.log(attributeToBeDelete);

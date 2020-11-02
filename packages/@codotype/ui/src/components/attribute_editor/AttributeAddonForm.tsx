@@ -2,23 +2,23 @@ import * as React from "react";
 import Switch from "react-switch";
 import { FormGroup } from "./FormGroup";
 import {
-    AttributeAddonValue,
-    AttributeAddon,
-    Attribute,
-    OptionType,
-    Datatype,
+    AddonsValue,
+    AddonProperty,
+    PropertyTypes,
+    AttributeInput,
     DropdownOption,
+    AttributeAddon,
 } from "@codotype/core";
-import { AttributeInput } from "./AttributeFormModal";
 
 // // // //
 
-export function AttributeAddonForm(props: {
-    attributeCollection: Attribute[];
+// TODO - this is broken and must be fixed + updated to support RelationAddon as well (split into two separate components)
+export function AddonPropertyForm(props: {
+    attributeCollection: AttributeInput[];
     addons: AttributeAddon[];
-    value: AttributeAddonValue;
+    value: AddonsValue;
     attributeInput: AttributeInput;
-    onChange: (updatedValue: AttributeAddonValue) => void;
+    onChange: (updatedValue: AddonsValue) => void;
 }) {
     const { attributeCollection, attributeInput, addons } = props;
     const { datatype } = attributeInput;
@@ -40,9 +40,9 @@ export function AttributeAddonForm(props: {
 
     return (
         <div className="row mt-3">
-            {addons.map((a: AttributeAddon) => {
+            {addons.map(a => a.property).map((a: AddonProperty) => {
                 // Return null if datatype is not supported
-                if (!a.supportedDatatypes.includes(datatype)) {
+                if (!addons.some(a => a.supportedDatatypes.includes(datatype))) {
                     return null;
                 }
 
@@ -70,7 +70,7 @@ export function AttributeAddonForm(props: {
                     disableInput = true;
                 }
 
-                if (a.propertyType === OptionType.BOOLEAN) {
+                if (a.propertyType === PropertyTypes.BOOLEAN) {
                     // Form for boolean addon
                     const addonValue: boolean = new Boolean(
                         props.value[a.identifier],
@@ -78,7 +78,10 @@ export function AttributeAddonForm(props: {
 
                     return (
                         <div className="col-lg-6 col-sm-12">
-                            <FormGroup label={a.label} help={a.description}>
+                            <FormGroup
+                                label={a.content.label}
+                                help={a.content.description}
+                            >
                                 <Switch
                                     height={22}
                                     width={50}
@@ -103,13 +106,16 @@ export function AttributeAddonForm(props: {
                 }
 
                 // Dropdown
-                if (a.propertyType === OptionType.DROPDOWN) {
+                if (a.propertyType === PropertyTypes.DROPDOWN) {
                     // Form for boolean addon
                     const addonValue = String(props.value[a.identifier]);
 
                     return (
                         <div className="col-lg-6 col-sm-12">
-                            <FormGroup label={a.label} help={a.description}>
+                            <FormGroup
+                                label={a.content.label}
+                                help={a.content.description}
+                            >
                                 <select
                                     className="form-control"
                                     value={addonValue}

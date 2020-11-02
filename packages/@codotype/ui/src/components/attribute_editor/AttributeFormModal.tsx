@@ -1,12 +1,8 @@
 import * as React from "react";
-import { Datatype, Attribute } from "@codotype/core";
+import { AttributeInput } from "@codotype/core";
 import { Modal } from "react-bootstrap";
 
 // // // //
-
-export interface AttributeInput extends Attribute {
-    datatype: Datatype | null;
-}
 
 /**
  * AttributeFormModal

@@ -1,4 +1,4 @@
-import { DatatypeMeta, Attribute } from "@codotype/core";
+import { DatatypeMeta, AttributeInput } from "@codotype/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSnowflake } from "@fortawesome/free-solid-svg-icons";
 import * as React from "react";
@@ -8,7 +8,7 @@ import { OverlayTrigger, Tooltip } from "react-bootstrap";
 // // // //
 
 interface AttributeListItemLabelProps {
-    attribute: Attribute;
+    attribute: AttributeInput;
     datatype: DatatypeMeta;
 }
 
@@ -30,8 +30,8 @@ export function AttributeListItemLabel(props: AttributeListItemLabelProps) {
                 </span>
             </OverlayTrigger>
 
-            {/* Attribute label */}
-            <span className="ml-2">{attribute.identifiers.label}</span>
+            {/* Attribute title */}
+            <span className="ml-2">{attribute.identifiers.title}</span>
 
             {/* Required badge */}
             {attribute.addons.required && (

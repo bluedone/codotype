@@ -6,7 +6,6 @@ import {
     AttributeAddon,
     AttributeInput,
     Primatives,
-    Datatypes,
 } from "@codotype/core";
 import { Droppable, DragDropContext } from "react-beautiful-dnd";
 import { AttributeFormModal } from "./AttributeFormModal";
@@ -39,7 +38,7 @@ export function reorder<T>(
  */
 export function disableSubmit(params: {
     attributeInput: AttributeInput;
-    attributeCollection: Attribute[];
+    attributeCollection: AttributeInput[];
 }): boolean {
     return validateAttribute(params).length > 0;
 }
@@ -66,15 +65,15 @@ export function disableSubmit(params: {
 // // // //
 
 interface AttributeEditorState {
-    attributes: Attribute[];
+    attributes: AttributeInput[];
     lastUpdatedAt: null | number;
 }
 
 interface AttributeEditorProps {
-    attributes: Attribute[];
+    attributes: AttributeInput[];
     addons: AttributeAddon[];
     supportedDatatypes: Datatype[];
-    onChange: (updatedAttributes: Attribute[]) => void;
+    onChange: (updatedAttributes: AttributeInput[]) => void;
 }
 
 export function AttributeEditor(props: AttributeEditorProps) {
@@ -89,7 +88,7 @@ export function AttributeEditor(props: AttributeEditorProps) {
     const [
         showingDeleteModal,
         showDeleteModal,
-    ] = React.useState<Attribute | null>(null);
+    ] = React.useState<AttributeInput | null>(null);
 
     // Sets props.attributes when props.attributes changes
     React.useEffect(() => {
@@ -103,20 +102,17 @@ export function AttributeEditor(props: AttributeEditorProps) {
 
     // // // //
     // Defines saveAttribute function
-    function saveAttribute(params: { attributeInput: AttributeInput }) {
+    function saveAttribute(params: { newAttributeData: Attribute }) {
         // Insert new Attribute
-        if (params.attributeInput.id === "") {
-            const newAttribute: AttributeInput = new Primatives.Attribute({
-                ...params.attributeInput,
+        if (params.newAttributeData.id === "") {
+            const newAttribute: AttributeInput = new Primatives.AttributeInput({
+                ...params.newAttributeData,
+                addons: {
+                    // ...buildDefaultAddonValue(props.addons), // TODO - reintegrate this
+                    ...params.newAttributeData.addons,
+                },
             });
-            //  = {
-            //     addons: {
-            //         ...buildDefaultAddonValue(props.addons),
-            //         ...params.attributeInput.addons,
-            //     },
-            //     // TODO - replace with UUID function from @codotype/core
-            //     id: Math.random().toString(),
-            // };
+
             setState({
                 lastUpdatedAt: Date.now(),
                 attributes: [...props.attributes, newAttribute],
@@ -128,9 +124,9 @@ export function AttributeEditor(props: AttributeEditorProps) {
         // Update existing attribute
         setState({
             lastUpdatedAt: Date.now(),
-            attributes: props.attributes.map((a: Attribute) => {
-                if (a.id === params.attributeInput.id) {
-                    return params.attributeInput;
+            attributes: props.attributes.map((a: AttributeInput) => {
+                if (a.id === params.newAttributeData.id) {
+                    return params.newAttributeData;
                 }
                 return a;
             }),
@@ -153,14 +149,8 @@ export function AttributeEditor(props: AttributeEditorProps) {
                 label="Attributes"
                 tooltip="shift+a"
                 onClick={() => {
-                    const newAttribute: AttributeInput = new Primatives.Attribute(
-                        {
-                            datatype: Datatypes.STRING,
-                            identifiers: new Primatives.TokenCasing({
-                                title: "",
-                            }),
-                            addons: props.addons,
-                        },
+                    const newAttribute: AttributeInput = new Primatives.AttributeInput(
+                        {},
                     );
                     setAttributeInput(newAttribute);
                 }}
@@ -182,6 +172,8 @@ export function AttributeEditor(props: AttributeEditorProps) {
                         setAttributeInput(null);
                     }}
                     onSubmit={() => {
+                        // TODO - fix this
+                        // @ts-ignore
                         saveAttribute({ attributeInput });
                     }}
                 >
@@ -201,6 +193,8 @@ export function AttributeEditor(props: AttributeEditorProps) {
                                 return;
                             }
                             // Save attribute on keydown "Enter"
+                            // TODO - fix this
+                            // @ts-ignore
                             saveAttribute({ attributeInput });
                         }}
                         addons={props.addons}
@@ -217,7 +211,7 @@ export function AttributeEditor(props: AttributeEditorProps) {
                             if (showingDeleteModal !== null) {
                                 setState({
                                     attributes: props.attributes.filter(
-                                        (a: Attribute) => {
+                                        (a: AttributeInput) => {
                                             return (
                                                 a.id !== showingDeleteModal.id
                                             );
@@ -243,7 +237,7 @@ export function AttributeEditor(props: AttributeEditorProps) {
                                 return;
                             }
 
-                            const updatedAttributes = reorder<Attribute>(
+                            const updatedAttributes = reorder<AttributeInput>(
                                 props.attributes,
                                 result.source.index,
                                 result.destination.index,
@@ -262,21 +256,24 @@ export function AttributeEditor(props: AttributeEditorProps) {
                                         {...provided.droppableProps}
                                     >
                                         {props.attributes.map(
-                                            (a: Attribute, index: number) => {
+                                            (
+                                                a: AttributeInput,
+                                                index: number,
+                                            ) => {
                                                 return (
                                                     <AttributeListItem
                                                         key={a.id}
                                                         attribute={a}
                                                         index={index}
                                                         onClickEdit={(
-                                                            attributeToBeEdited: Attribute,
+                                                            attributeToBeEdited: AttributeInput,
                                                         ) => {
                                                             setAttributeInput({
                                                                 ...attributeToBeEdited,
                                                             });
                                                         }}
                                                         onClickDelete={(
-                                                            attributeToDelete: Attribute,
+                                                            attributeToDelete: AttributeInput,
                                                         ) => {
                                                             showDeleteModal(
                                                                 attributeToDelete,
@@ -298,12 +295,8 @@ export function AttributeEditor(props: AttributeEditorProps) {
             {props.attributes.length === 0 && (
                 <AttributeListEmpty
                     onClick={() => {
-                        const newAttribute: AttributeInput = new Primatives.Attribute(
-                            {
-                                identifiers: new Primatives.TokenCasing({
-                                    title: "",
-                                }),
-                            },
+                        const newAttribute: AttributeInput = new Primatives.AttributeInput(
+                            {},
                         );
                         setAttributeInput(newAttribute);
                     }}
@@ -312,12 +305,8 @@ export function AttributeEditor(props: AttributeEditorProps) {
             <Hotkey
                 keyName="shift+a"
                 onKeyDown={() => {
-                    const newAttribute: AttributeInput = new Primatives.Attribute(
-                        {
-                            identifiers: new Primatives.TokenCasing({
-                                title: "",
-                            }),
-                        },
+                    const newAttribute: AttributeInput = new Primatives.AttributeInput(
+                        {},
                     );
                     setAttributeInput(newAttribute);
                 }}

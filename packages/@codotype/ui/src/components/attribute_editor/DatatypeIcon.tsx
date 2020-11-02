@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Datatypes } from "@codotype/core";
+import { Datatype, Datatypes } from "@codotype/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faQuoteRight,
@@ -56,7 +56,7 @@ const mapDatatypeToIcon: { [key in Datatypes]: IconDefinition } = {
 };
 
 export function DatatypeIcon(props: {
-    datatype: Datatypes | null; // NOTE - only here because Attribute.datatype can be null, should be fixed
+    datatype: Datatype | null; // NOTE - only here because Attribute.datatype can be null, should be fixed
     className?: string;
     size?: "xs";
 }) {

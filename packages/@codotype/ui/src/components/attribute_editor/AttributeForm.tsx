@@ -5,12 +5,12 @@ import {
     Attribute,
     Datatype,
     AttributeAddon,
-    AttributeAddonValue,
+    AttributeInput,
+    AddonsValue,
     TokenCasing,
 } from "@codotype/core";
 import * as React from "react";
-import { AttributeInput } from "./AttributeFormModal";
-import { AttributeAddonForm } from "./AttributeAddonForm";
+import { AddonPropertyForm } from "./AttributeAddonForm";
 
 // // // //
 
@@ -109,7 +109,7 @@ export function AttributeFormSelector(props: {
  * `supportedDatatypes` - the unique IDs of supported datatypes made available in the form
  */
 interface AttributeFormProps {
-    attributes: Attribute[];
+    attributes: AttributeInput[];
     addons: AttributeAddon[];
     attributeInput: AttributeInput;
     supportedDatatypes: Datatype[];
@@ -169,7 +169,7 @@ export function AttributeForm(props: AttributeFormProps) {
 
                                         {/* Null-check for attributeInput.datatype */}
                                         {attributeInput.datatype && (
-                                            <AttributeAddonForm
+                                            <AddonPropertyForm
                                                 addons={props.addons}
                                                 attributeCollection={
                                                     props.attributes
@@ -177,7 +177,7 @@ export function AttributeForm(props: AttributeFormProps) {
                                                 attributeInput={attributeInput}
                                                 value={attributeInput.addons}
                                                 onChange={(
-                                                    updatedAttributeAddons: AttributeAddonValue,
+                                                    updatedAttributeAddons: AddonsValue,
                                                 ) => {
                                                     props.onChange({
                                                         ...attributeInput,

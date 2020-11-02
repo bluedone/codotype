@@ -1,5 +1,4 @@
-import { Attribute } from "@codotype/core";
-import { AttributeInput } from "./AttributeFormModal";
+import { AttributeInput } from "@codotype/core";
 
 // // // //
 
@@ -16,7 +15,7 @@ export enum ATTRIBUTE_ERROR_MESSAGE {
  */
 export function validateAttribute(params: {
     attributeInput: AttributeInput;
-    attributeCollection: Attribute[];
+    attributeCollection: AttributeInput[];
 }): string[] {
     const errors: string[] = [];
     const { attributeInput, attributeCollection } = params;
@@ -26,15 +25,15 @@ export function validateAttribute(params: {
     }
 
     // Ensure Attribute label is defined
-    if (attributeInput.identifiers.label === "") {
+    if (attributeInput.identifiers.title === "") {
         errors.push(ATTRIBUTE_ERROR_MESSAGE.emptyLabel);
     }
 
-    // Ensure Attribute label is unique
+    // Ensure Attribute title is unique
     if (
         attributeCollection.some(
             a =>
-                a.identifiers.label === attributeInput.identifiers.label &&
+                a.identifiers.title === attributeInput.identifiers.title &&
                 a.id !== attributeInput.id,
         )
     ) {

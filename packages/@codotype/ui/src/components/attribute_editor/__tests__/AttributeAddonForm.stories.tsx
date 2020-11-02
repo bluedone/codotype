@@ -1,16 +1,16 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { Story } from "../../dev";
-import { AttributeAddonForm } from "../AttributeAddonForm";
-import { buildDefaultAddonValue } from "../component";
+import { AddonPropertyForm } from "../AttributeAddonForm";
 import {
     testState,
-    Datatype,
-    ATTRIBUTE_ADDON_UNIQUE,
-    ATTRIBUTE_ADDON_REQUIRED,
-    ATTRIBUTE_ADDON_NULLABLE,
-    AttributeAddonValue,
-    ATTRIBUTE_ADDON_PRIMARY_KEY,
+    Datatypes,
+    buildDefaultAddonsValue,
+    AddonsValue,
+    // ATTRIBUTE_ADDON_UNIQUE,
+    // ATTRIBUTE_ADDON_REQUIRED,
+    // ATTRIBUTE_ADDON_NULLABLE,
+    // ATTRIBUTE_ADDON_PRIMARY_KEY,
 } from "@codotype/core";
 
 // // // //
@@ -18,32 +18,31 @@ import {
 storiesOf("ProjectEditor/AttributeEditor/AttributeAddonForm", module).add(
     "renders",
     () => {
-        const [value, setValue] = React.useState<AttributeAddonValue>(
-            buildDefaultAddonValue([
-                ATTRIBUTE_ADDON_NULLABLE,
-                ATTRIBUTE_ADDON_PRIMARY_KEY,
-                ATTRIBUTE_ADDON_REQUIRED,
-                ATTRIBUTE_ADDON_UNIQUE,
-            ]),
+        const [value, setValue] = React.useState<AddonsValue>(
+            buildDefaultAddonsValue({
+                properties: [
+                    ...Object.values(testState.addonProperties)
+                ]
+            }),
         );
         return (
             <Story>
-                <AttributeAddonForm
+                <AddonPropertyForm
                     addons={[
                         {
-                            ...ATTRIBUTE_ADDON_NULLABLE,
+                            property: testState.addonProperties.nullable,
                             supportedDatatypes: [Datatypes.BOOLEAN],
                         },
                         {
-                            ...ATTRIBUTE_ADDON_PRIMARY_KEY,
+                            property: testState.addonProperties.primaryKey,
                             supportedDatatypes: [Datatypes.BOOLEAN],
                         },
                         {
-                            ...ATTRIBUTE_ADDON_REQUIRED,
+                            property: testState.addonProperties.required,
                             supportedDatatypes: [Datatypes.BOOLEAN],
                         },
                         {
-                            ...ATTRIBUTE_ADDON_UNIQUE,
+                            property: testState.addonProperties.unique,
                             supportedDatatypes: [Datatypes.BOOLEAN],
                         },
                     ]}
@@ -51,7 +50,7 @@ storiesOf("ProjectEditor/AttributeEditor/AttributeAddonForm", module).add(
                         {
                             ...testState.emailAttribute,
                             addons: {
-                                [ATTRIBUTE_ADDON_PRIMARY_KEY.identifier]: false,
+                                [testState.addonProperties.unique.identifier]: false,
                             },
                         },
                     ]}
@@ -61,7 +60,7 @@ storiesOf("ProjectEditor/AttributeEditor/AttributeAddonForm", module).add(
                         id: "",
                     }}
                     value={value}
-                    onChange={(updatedValue: AttributeAddonValue) => {
+                    onChange={(updatedValue: AddonsValue) => {
                         setValue(updatedValue);
                     }}
                 />
