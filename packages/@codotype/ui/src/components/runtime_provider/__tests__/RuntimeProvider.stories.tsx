@@ -3,11 +3,11 @@ import { storiesOf } from "@storybook/react";
 import { RuntimeProvider } from "../component";
 import { Story } from "../../dev";
 import { dummyPluginMetadata } from "../../project_editor/__tests__/test_state";
-import { buildDefaultProject } from "@codotype/core";
+import { buildDefaultProjectInput } from "@codotype/core";
 
 // // // //
 
-const dummyProject = buildDefaultProject(dummyPluginMetadata);
+const dummyProjectInput = buildDefaultProjectInput(dummyPluginMetadata);
 
 // // // //
 
@@ -24,7 +24,7 @@ storiesOf("Util/RuntimeProvider", module).add("active = true", () => {
                                 onClick={() => {
                                     generateCode({
                                         generator: dummyPluginMetadata,
-                                        project: dummyProject,
+                                        projectInput: dummyProjectInput,
                                     });
                                 }}
                             >

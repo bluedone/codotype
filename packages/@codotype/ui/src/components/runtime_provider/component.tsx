@@ -1,13 +1,13 @@
 import * as React from "react";
 import { Modal } from "react-bootstrap";
-import { Project, PluginMetadata } from "@codotype/core";
+import { ProjectInput, PluginMetadata } from "@codotype/core";
 import { BuildFinished } from "../build_finished/component";
 import { LoadingBuild } from "../loading_build";
 
 // // // //
 
 interface GenerateCodeProps {
-    project: Project;
+    projectInput: ProjectInput;
     generator: PluginMetadata;
 }
 
@@ -30,7 +30,7 @@ export function RuntimeProvider(props: RuntimeProviderProps) {
     const [finished, setFinished] = React.useState<boolean>(false);
 
     // TODO - update this to be passed in through `props.runtimeAdaptor`
-    function generateCode({ project, generator }: GenerateCodeProps) {
+    function generateCode({ projectInput, generator }: GenerateCodeProps) {
         setLoading(true);
 
         // Mock the loading

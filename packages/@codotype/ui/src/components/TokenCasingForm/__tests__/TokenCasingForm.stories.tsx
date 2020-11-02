@@ -13,7 +13,7 @@ storiesOf("Components/TokenCasingForm", module).add("renders", () => {
     return (
         <Story>
             <TokenCasingForm
-                label={tokenCasing.label}
+                label={tokenCasing.title}
                 onChange={setTokenCasing}
                 onKeydownEnter={() => {
                     console.log("onKeydownEnter");

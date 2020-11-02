@@ -9,8 +9,8 @@ import {
 
 /**
  * PropertyPreviewRenderer
- * @param props.data - the data being rendered by DataPreview
- * @param props.dataPreview - The DataPreview object
+ * @param props.data - the data being rendered by PropertyPreview
+ * @param props.propertyPreview - The PropertyPreview object
  */
 export function PropertyPreviewRenderer(props: {
     data: any;
