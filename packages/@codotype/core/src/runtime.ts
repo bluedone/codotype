@@ -139,7 +139,7 @@ export interface RuntimeAdapter {
     write: WriteFunction;
     forEachSchema: ForEachSchemaFunction;
     forEachRelation: ForEachRelationFunction;
-    forEachReverseRelation: ForEachReverseRelationFunction;
+    forEachReferencedBy: forEachReferencedByFunction;
     ensureDir: EnsureDirFunction;
     writeFile: WriteFileFunction;
     copyDir: CopyDirFunction;
@@ -197,7 +197,7 @@ export type ForEachRelationFunction = (params: {
     runtime: RuntimeProxy;
 }) => Promise<void>;
 
-export type ForEachReverseRelationFunction = (params: {
+export type forEachReferencedByFunction = (params: {
     schema: Schema;
     relation: Relation;
     project: Project;

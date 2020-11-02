@@ -9,7 +9,7 @@ export class GeneratorBuilder implements GeneratorConstructorParams {
         // this.write = params.write || this.write;
         // this.write = parmas.write;
         // this.forEachRelation = parmas.forEachRelation;
-        // this.forEachReverseRelation = parmas.forEachReverseRelation;
+        // this.forEachReferencedBy = parmas.forEachReferencedBy;
         // this.forEachSchema = parmas.forEachSchema;
     }
 }

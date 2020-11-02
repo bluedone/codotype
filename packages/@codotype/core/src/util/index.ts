@@ -16,3 +16,5 @@ export * from "./schemaRenderer";
 export * from "./applyPropertyTransformations";
 export * from "./applyPropertyPreview";
 export * from "./buildDefaultAddonsValue";
+export * from "./validateSchema";
+export * from "./transformJsonProjectInput";

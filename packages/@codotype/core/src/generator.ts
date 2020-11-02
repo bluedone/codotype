@@ -1,7 +1,7 @@
 import {
     WriteFunction,
     ForEachRelationFunction,
-    ForEachReverseRelationFunction,
+    forEachReferencedByFunction,
     ForEachSchemaFunction,
 } from "./runtime";
 
@@ -16,6 +16,6 @@ export interface GeneratorConstructorParams {
     compileInPlace?: string[];
     write?: WriteFunction;
     forEachRelation?: ForEachRelationFunction;
-    forEachReverseRelation?: ForEachReverseRelationFunction;
+    forEachReferencedBy?: forEachReferencedByFunction;
     forEachSchema?: ForEachSchemaFunction;
 }
