@@ -6,7 +6,6 @@ import { DragDropContext } from "react-beautiful-dnd";
 import { SchemaFormModal } from "./SchemaFormModal";
 import { SchemaForm } from "./SchemaForm";
 import {
-    Schema,
     TokenPluralization,
     UUID,
     CreatedByValues,
@@ -16,9 +15,9 @@ import {
     Primatives,
     ProjectInput,
     RelationInput,
+    validateSchema,
 } from "@codotype/core";
 import { reorder } from "../AttributeEditor/component";
-import { validateSchema } from "./validateSchema";
 
 // // // //
 
