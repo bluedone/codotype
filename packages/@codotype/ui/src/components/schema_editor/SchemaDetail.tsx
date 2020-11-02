@@ -1,5 +1,5 @@
 import * as React from "react";
-// import { SchemaPreview } from "./SchemaPreview";
+import { SchemaPreview } from "./SchemaPreview";
 import { AttributeEditor } from "../attribute_editor";
 // import { RelationEditor } from "../relation_editor";
 import { SchemaDetailHeader } from "./SchemaDetailHeader";
@@ -11,6 +11,7 @@ import {
     SchemaInput,
     AttributeInput,
     ConfigurationValue,
+    ProjectInput,
 } from "@codotype/core";
 import { ConfigurationGroupSelector } from "./ConfigurationGroupSelector";
 import { SchemaIncomingRelations } from "./SchemaIncomingRelations";
@@ -20,6 +21,7 @@ import { SchemaIncomingRelations } from "./SchemaIncomingRelations";
 interface SchemaDetailProps {
     schema: SchemaInput;
     schemas: SchemaInput[];
+    projectInput: ProjectInput;
     PluginMetadata: PluginMetadata;
     onChange: (updatedSchema: SchemaInput) => void;
     onClickEdit: () => void;
@@ -76,6 +78,10 @@ export function SchemaDetail(props: SchemaDetailProps) {
                                 onChange={(
                                     updatedAttributes: AttributeInput[],
                                 ) => {
+
+                                    console.log("updatedAttributes");
+                                    console.log(updatedAttributes);
+
                                     // Defines updated schema
                                     const updatedSchema: SchemaInput = {
                                         ...props.schema,
@@ -108,10 +114,10 @@ export function SchemaDetail(props: SchemaDetailProps) {
                             /> */}
                         </div>
                         <div className="pl-md-0 col-sm-6 mt-3 mt-lg-0">
-                            {/* <SchemaPreview
+                            <SchemaPreview
                                 schemaInput={props.schema}
-                                schemas={props.schemas}
-                            /> */}
+                                projectInput={props.projectInput}
+                            />
                             <hr />
                             <SchemaIncomingRelations
                                 inflatedSchema={inflatedSchema}

@@ -14,6 +14,7 @@ import {
     buildDefaultConfiguration,
     SchemaInput,
     Primatives,
+    ProjectInput,
 } from "@codotype/core";
 import { reorder } from "../attribute_editor/component";
 import { validateSchema } from "./validateSchema";
@@ -27,10 +28,13 @@ interface EditorState {
 
 /**
  * SchemaEditorLayout
+ * @param props.projectInput
  * @param props.schemas
+ * @param props.pluginMetadata
  * @param props.onChange
  */
 export function SchemaEditorLayout(props: {
+    projectInput: ProjectInput;
     schemas: SchemaInput[];
     pluginMetadata: PluginMetadata;
     onChange: (updatedSchemas: SchemaInput[]) => void;
@@ -280,6 +284,7 @@ export function SchemaEditorLayout(props: {
             <div className="col-lg-8 pl-3 pl-lg-0 mt-4 mt-lg-0">
                 <div className="card card-body shadow-sm">
                     <SchemaDetail
+                        projectInput={props.projectInput}
                         schema={selectedSchema}
                         schemas={state.schemas}
                         PluginMetadata={props.pluginMetadata}

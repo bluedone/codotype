@@ -2,7 +2,7 @@ import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { SchemaEditorLayout } from "../component";
 import { Story } from "../../dev";
-import { testState } from "@codotype/core";
+import { buildDefaultProjectInput, testState } from "@codotype/core";
 const { cdkPluginMeta } = testState;
 
 // // // //
@@ -12,6 +12,7 @@ storiesOf("ProjectEditor/SchemaEditor", module).add("renders", () => {
         <Story>
             <SchemaEditorLayout
                 schemas={[]}
+                projectInput={buildDefaultProjectInput(cdkPluginMeta)}
                 pluginMetadata={cdkPluginMeta}
                 onChange={updatedSchemas => {
                     console.log("Updated Schemas");
