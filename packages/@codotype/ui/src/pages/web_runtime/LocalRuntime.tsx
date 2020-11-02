@@ -20,7 +20,7 @@ export function LocalRuntime() {
                             {({ projectInput, clearProject, setProject }) => (
                                 <ProjectEditor
                                     generator={generators[0]}
-                                    project={projectInput}
+                                    projectInput={projectInput}
                                     onClickGenerate={() => {
                                         generateCode({
                                             projectInput,

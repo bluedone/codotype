@@ -6,6 +6,7 @@ import { RuntimeProvider } from "../../../components/runtime_provider";
 import { ProjectEditor } from "../../../components/project_editor";
 import {
     Project,
+    ProjectInput,
     Datatypes,
     CreatedByValues,
     PluginMetadata,
@@ -15,61 +16,63 @@ import {
     // ATTRIBUTE_ADDON_REQUIRED,
     // ATTRIBUTE_ADDON_NULLABLE,
     // ATTRIBUTE_ADDON_PRIMARY_KEY,
-    RelationType,
-    PropertyType,
+    RelationTypes,
+    PropertyTypes,
     Primatives,
-    GroupLayoutVariant,
-    PropertyLayoutVariant,
-    StringValueFilter,
-    DataPreviewLayoutVariant,
-    DataPreviewActionType,
-    DataPreviewConstraintType,
-    buildDefaultProject,
+    GroupLayoutVariants,
+    PropertyLayoutVariants,
+    StringPropertyTransformations,
+    PropertyPreviewLayoutVariant,
+    PropertyPreviewActionTypes,
+    PropertyPreviewConstraintTypes,
+    buildDefaultProjectInput,
     buildTokenCasing,
     buildTokenPluralization,
     buildDefaultConfiguration,
 } from "@codotype/core";
 import { generatorReadme } from "../../../components/markdown_renderer/__tests__/test_state";
-const { cdkPluginMetadata, dummyPluginMetadata } = testState;
+const { cdkPluginMeta, dummyPluginMetadata } = testState;
 
 // // // //
 
 const ApiActionsProperty = new Primatives.ConfigurationProperty({
-    label: "Actions",
     identifier: "actions",
+    content: {
+        label: "Actions",
+    },
     type: PropertyTypes.COLLECTION,
-    dataPreview: {
+    preview: {
         rules: [
             {
                 constraint: {
                     dataProperty: "function_name",
-                    type: DataPreviewConstraintType.equals,
+                    type: PropertyPreviewConstraintTypes.equals,
                     value: "",
                 },
                 action: {
-                    type: DataPreviewActionType.literal,
+                    type: PropertyPreviewActionTypes.literal,
                     template: "",
                 },
             },
             {
                 constraint: {
                     dataProperty: "route",
-                    type: DataPreviewConstraintType.equals,
+                    type: PropertyPreviewConstraintTypes.equals,
                     value: "",
                 },
                 action: {
-                    type: DataPreviewActionType.literal,
+                    type: PropertyPreviewActionTypes.literal,
                     template: "",
                 },
             },
             {
                 constraint: {
                     dataProperty: "scope",
-                    type: DataPreviewConstraintType.equals,
+                    type: PropertyPreviewConstraintTypes.equals,
                     value: "COLLECTION",
                 },
                 action: {
-                    type: DataPreviewActionType.stringTemplate,
+                    type: PropertyPreviewActionTypes.stringTemplate,
                     template:
                         "{{data.verb}} /api/schema-scope/{{data.route}} -> {{data.function_name}}",
                 },
@@ -77,26 +80,28 @@ const ApiActionsProperty = new Primatives.ConfigurationProperty({
             {
                 constraint: {
                     dataProperty: "scope",
-                    type: DataPreviewConstraintType.equals,
+                    type: PropertyPreviewConstraintTypes.equals,
                     value: "MODEL",
                 },
                 action: {
-                    type: DataPreviewActionType.stringTemplate,
+                    type: PropertyPreviewActionTypes.stringTemplate,
                     template:
                         "{{data.verb}} /api/schema-scope/:id/{{data.route}} -> {{data.function_name}}",
                 },
             },
         ],
-        variant: DataPreviewLayoutVariant.CODE_DARK,
+        variant: PropertyPreviewLayoutVariant.CODE_DARK,
     },
     properties: [
         new Primatives.ConfigurationProperty({
-            label: "Verb",
+            content: {
+                label: "Verb",
+                description: "Verify",
+            },
             identifier: "verb",
-            description: "Verify",
             defaultValue: "GET",
             type: PropertyTypes.DROPDOWN,
-            layoutVariant: PropertyLayoutVariant.COL_6,
+            layoutVariant: PropertyLayoutVariants.COL_6,
             dropdownOptions: [
                 { value: "GET", label: "GET" },
                 { value: "POST", label: "POST" },
@@ -105,38 +110,44 @@ const ApiActionsProperty = new Primatives.ConfigurationProperty({
             ],
         }),
         new Primatives.ConfigurationProperty({
-            label: "Route",
+            content: {
+                label: "Route",
+                description: "Route",
+            },
             identifier: "route",
-            description: "Route",
             defaultValue: "verify",
             type: PropertyTypes.STRING,
-            layoutVariant: PropertyLayoutVariant.COL_6,
-            filters: [
-                StringValueFilter.nonumbers,
-                StringValueFilter.trimwhitespace,
-                StringValueFilter.removewhitespace,
+            layoutVariant: PropertyLayoutVariants.COL_6,
+            transformations: [
+                StringPropertyTransformations.nonumbers,
+                StringPropertyTransformations.trimwhitespace,
+                StringPropertyTransformations.removewhitespace,
             ],
         }),
         new Primatives.ConfigurationProperty({
-            label: "Function Name",
+            content: {
+                label: "Function Name",
+                description: "function_name",
+            },
             identifier: "function_name",
-            description: "function_name",
             defaultValue: "verify",
-            layoutVariant: PropertyLayoutVariant.COL_6,
+            layoutVariant: PropertyLayoutVariants.COL_6,
             type: PropertyTypes.STRING,
-            filters: [
-                StringValueFilter.camelcase,
-                StringValueFilter.nonumbers,
-                StringValueFilter.nosymbols,
-                StringValueFilter.trimwhitespace,
+            transformations: [
+                StringPropertyTransformations.camelcase,
+                StringPropertyTransformations.nonumbers,
+                StringPropertyTransformations.nosymbols,
+                StringPropertyTransformations.trimwhitespace,
             ],
         }),
         new Primatives.ConfigurationProperty({
-            label: "Scope",
+            content: {
+                label: "Scope",
+                description: "scope",
+            },
             identifier: "scope",
-            description: "scope",
             defaultValue: "COLLECTION",
-            layoutVariant: PropertyLayoutVariant.COL_6,
+            layoutVariant: PropertyLayoutVariants.COL_6,
             type: PropertyTypes.DROPDOWN,
             dropdownOptions: [
                 { value: "COLLECTION", label: "Collection" },
@@ -153,14 +164,14 @@ const NestedCollectionProperty = {
         ...ApiActionsProperty.properties,
         {
             ...ApiActionsProperty,
-            layoutVariant: PropertyLayoutVariant.CARD_COL_12,
+            layoutVariant: PropertyLayoutVariants.CARD_COL_12,
         },
     ],
 };
 
 const pluginExample01: PluginMetadata = {
     ...dummyPluginMetadata,
-    id: "chrome_extension_generator_03", // unique ID for the generator
+    identifier: "chrome_extension_generator_03", // unique ID for the generator
     schemaEditorConfiguration: {
         ...dummyPluginMetadata.schemaEditorConfiguration,
         attributeAddons: [
@@ -172,37 +183,36 @@ const pluginExample01: PluginMetadata = {
         configurationGroups: [
             {
                 ...dummyPluginMetadata.configurationGroups[0],
-                layoutVariant: GroupLayoutVariant.LIST,
+                layoutVariant: GroupLayoutVariants.LIST,
             },
         ],
     },
 };
 
-const projectExample01: Project = {
-    ...buildDefaultProject(pluginExample01),
+const projectExample01: ProjectInput = {
+    ...buildDefaultProjectInput(pluginExample01),
     identifiers: buildTokenCasing("Movie Reviews"),
     schemas: [
         new Primatives.Schema({
             identifiers: buildTokenPluralization("User"),
             attributes: [
-                new Primatives.Attribute({
+                new Primatives.AttributeInput({
                     identifiers: buildTokenCasing("ID"),
                     datatype: Datatypes.UUID,
                 }),
-                new Primatives.Attribute({
+                new Primatives.AttributeInput({
                     identifiers: buildTokenCasing("Email"),
                     datatype: Datatypes.STRING,
                 }),
-                new Primatives.Attribute({
+                new Primatives.AttributeInput({
                     identifiers: buildTokenCasing("First Name"),
                     datatype: Datatypes.STRING,
                 }),
-                new Primatives.Attribute({
+                new Primatives.AttributeInput({
                     identifiers: buildTokenCasing("Last Name"),
                     datatype: Datatypes.STRING,
                 }),
             ],
-            relations: [],
             configuration: buildDefaultConfiguration(
                 pluginExample01.schemaEditorConfiguration.configurationGroups,
             ),
@@ -210,20 +220,19 @@ const projectExample01: Project = {
         new Primatives.Schema({
             identifiers: buildTokenPluralization("Director"),
             attributes: [
-                new Primatives.Attribute({
+                new Primatives.AttributeInput({
                     identifiers: buildTokenCasing("ID"),
                     datatype: Datatypes.UUID,
                 }),
-                new Primatives.Attribute({
+                new Primatives.AttributeInput({
                     identifiers: buildTokenCasing("First Name"),
                     datatype: Datatypes.STRING,
                 }),
-                new Primatives.Attribute({
+                new Primatives.AttributeInput({
                     identifiers: buildTokenCasing("Last Name"),
                     datatype: Datatypes.STRING,
                 }),
             ],
-            relations: [],
             configuration: buildDefaultConfiguration(
                 pluginExample01.schemaEditorConfiguration.configurationGroups,
             ),
@@ -231,16 +240,15 @@ const projectExample01: Project = {
         new Primatives.Schema({
             identifiers: buildTokenPluralization("Movie"),
             attributes: [
-                new Primatives.Attribute({
+                new Primatives.AttributeInput({
                     identifiers: buildTokenCasing("ID"),
                     datatype: Datatypes.UUID,
                 }),
-                new Primatives.Attribute({
+                new Primatives.AttributeInput({
                     identifiers: buildTokenCasing("Title"),
                     datatype: Datatypes.STRING,
                 }),
             ],
-            relations: [],
             configuration: buildDefaultConfiguration(
                 pluginExample01.schemaEditorConfiguration.configurationGroups,
             ),
@@ -254,7 +262,7 @@ const stories: [string, PluginMetadata][] = [
         "w/ schemas + schema configuration groups",
         {
             ...dummyPluginMetadata,
-            id: "chrome_extension_generator_03", // unique ID for the generator
+            identifier: "chrome_extension_generator_03", // unique ID for the generator
             schemaEditorConfiguration: {
                 ...dummyPluginMetadata.schemaEditorConfiguration,
                 attributeAddons: [
@@ -266,7 +274,7 @@ const stories: [string, PluginMetadata][] = [
                 configurationGroups: [
                     {
                         ...dummyPluginMetadata.configurationGroups[0],
-                        layoutVariant: GroupLayoutVariant.LIST,
+                        layoutVariant: GroupLayoutVariants.LIST,
                     },
                 ],
             },
@@ -283,7 +291,7 @@ const stories: [string, PluginMetadata][] = [
         "w/ schemas + default attributes",
         {
             ...dummyPluginMetadata,
-            id: "chrome_extension_generator_04", // unique ID for the generator
+            identifier: "chrome_extension_generator_04", // unique ID for the generator
             schemaEditorConfiguration: {
                 ...dummyPluginMetadata.schemaEditorConfiguration,
                 attributeAddons: [
@@ -292,120 +300,141 @@ const stories: [string, PluginMetadata][] = [
                     // ATTRIBUTE_ADDON_NULLABLE,
                     // ATTRIBUTE_ADDON_PRIMARY_KEY,
                 ],
-                defaultAttributes: [
-                    {
-                        id: "UUID-Attribute",
-                        identifiers: {
-                            label: "ID",
-                            snake: "id",
-                            camel: "id",
-                            pascal: "Id",
-                            kebab: "id",
+                newSchemaDefaults: {
+                    relations: [],
+                    attributes: [
+                        {
+                            id: "UUID-Attribute",
+                            identifiers: {
+                                title: "ID",
+                                snake: "id",
+                                camel: "id",
+                                pascal: "Id",
+                                kebab: "id",
+                            },
+                            addons: {
+                                // [ATTRIBUTE_ADDON_PRIMARY_KEY.identifier]: true,
+                            },
+                            datatype: Datatypes.UUID,
+                            locked: true,
+                            createdBy: CreatedByValues.plugin,
+                            internalNote: "",
                         },
-                        addons: {
-                            // [ATTRIBUTE_ADDON_PRIMARY_KEY.identifier]: true,
-                        },
-                        datatype: Datatypes.UUID,
-                        locked: true,
-                        source: CreatedByValues.plugin,
-                        internalNote: "",
-                        defaultValue: null,
-                    },
-                ],
+                    ],
+                }
             },
         },
     ],
     [
         "AWS CDK Starter",
         {
-            ...cdkPluginMetadata,
+            ...cdkPluginMeta,
+            content: {
+                ...cdkPluginMeta.content,
+                documentation: generatorReadme,
+            },
             configurationGroups: [
                 {
                     ...testState.ComponentBuilderConfigurationGroup,
-                    layoutVariant: GroupLayoutVariant.LIST,
+                    layoutVariant: GroupLayoutVariants.LIST,
                 },
                 testState.SideBySideConfigurationGroup,
                 {
                     ...testState.SideBySideConfigurationGroup,
-                    label: "API Actions",
+                    content: {
+                        ...testState.SideBySideConfigurationGroup.content,
+                        label: "API Actions",
+                    },
                     identifier: "api_actions",
                     properties: [ApiActionsProperty],
                 },
                 {
                     ...testState.SideBySideConfigurationGroup,
-                    label: "Nested API Actions",
+                    content: {
+                        ...testState.SideBySideConfigurationGroup.content,
+                        label: "Nested API Actions",
+                    },
                     identifier: "nested_api_actions",
                     properties: [NestedCollectionProperty],
                 },
             ],
-            id: "chrome_extension_generator_05", // unique ID for the generator
-            documentation: generatorReadme,
+            identifier: "chrome_extension_generator_05", // unique ID for the generator
             schemaEditorConfiguration: {
-                enableAttributeDefaultValue: true,
-                documentation: "",
-                supportedRelations: [RelationType.TO_ONE, RelationType.TO_MANY],
+                supportedRelationTypes: [RelationTypes.TO_ONE, RelationTypes.TO_MANY],
                 supportedDatatypes: [
                     Datatypes.STRING,
                     Datatypes.DATE,
                     Datatypes.DATETIME,
-                    Datatypes.INTEGER,
+                    Datatypes.INT,
                     Datatypes.FLOAT,
                     Datatypes.STRING_ARRAY,
                 ],
                 configurationGroups: [
                     new Primatives.ConfigurationGroup({
-                        label: "Meta",
+                        content: {
+                            label: "Meta",
+                            description:
+                                "Define additional metadata for this Schema",
+                        },
                         identifier: "meta",
-                        description:
-                            "Define additional metadata for this Schema",
-                        layoutVariant: GroupLayoutVariant.LIST,
+                        layoutVariant: GroupLayoutVariants.LIST,
                         properties: [
                             new Primatives.ConfigurationProperty({
-                                label: "Internal Note",
+                                content: {
+                                    label: "Internal Note",
+                                    description:
+                                        "Write an internal note describing this schema",
+                                },
                                 identifier: "internal_note",
-                                description:
-                                    "Write an internal note describing this schema",
                                 defaultValue: "",
-                                layoutVariant: PropertyLayoutVariant.COL_12,
+                                layoutVariant: PropertyLayoutVariants.COL_12,
                                 type: PropertyTypes.STRING,
                             }),
                         ],
                     }),
                     new Primatives.ConfigurationGroup({
-                        label: "API Actions",
+                        content: {
+                            label: "API Actions",
+                            description: "Define individual REST api actions.",
+                            documentation:
+                                "This is documentation for the API Actions configuration group",
+                        },
                         identifier: "api_actions",
-                        description: "Define individual REST api actions.",
-                        documentation:
-                            "This is documentation for the API Actions configuration group",
-                        layoutVariant: GroupLayoutVariant.LIST,
+                        layoutVariant: GroupLayoutVariants.LIST,
                         properties: [ApiActionsProperty],
                     }),
                     new Primatives.ConfigurationGroup({
-                        label: "GraphQL API",
+                        content: {
+                            label: "GraphQL API",
+                            description:
+                                "Configure the GraphQL API for this Schema",
+                        },
                         identifier: "graphql_api",
-                        description:
-                            "Configure the GraphQL API for this Schema",
-                        layoutVariant: GroupLayoutVariant.LIST,
+                        layoutVariant: GroupLayoutVariants.LIST,
                         properties: [
                             new Primatives.ConfigurationProperty({
                                 type: PropertyTypes.BOOLEAN,
                                 defaultValue: true,
                                 identifier: "generate_crud_api",
-                                label: "Generate CRUD API",
-                                description:
-                                    "Generate a CRUD API with GraphQL for this resource",
+                                content: {
+                                    label: "Generate CRUD API",
+                                    description:
+                                        "Generate a CRUD API with GraphQL for this resource",
+                                },
                                 layoutVariant:
-                                    PropertyLayoutVariant.CARD_COL_12,
+                                    PropertyLayoutVariants.CARD_COL_12,
                             }),
                             new Primatives.ConfigurationProperty({
-                                label: "DynamoDB table name",
+                                content: {
+                                    label: "DynamoDB table name",
+                                    description:
+                                        "Define the name of the DynamoDB table for this",
+                                },
                                 identifier: "dynamodb_table_name",
-                                description:
-                                    "Define the name of the DynamoDB table for this",
                                 defaultValue: "",
                                 type: PropertyTypes.STRING,
                                 layoutVariant:
-                                    PropertyLayoutVariant.CARD_COL_12,
+                                    PropertyLayoutVariants.CARD_COL_12,
                             }),
                             ApiActionsProperty,
                         ],
@@ -421,7 +450,7 @@ const stories: [string, PluginMetadata][] = [
                     //         Datatypes.STRING,
                     //         Datatypes.DATE,
                     //         Datatypes.DATETIME,
-                    //         Datatypes.INTEGER,
+                    //         Datatypes.INT,
                     //         Datatypes.FLOAT,
                     //         Datatypes.STRING_ARRAY,
                     //     ],
@@ -449,56 +478,62 @@ const stories: [string, PluginMetadata][] = [
                     //         Datatypes.STRING,
                     //         Datatypes.DATE,
                     //         Datatypes.DATETIME,
-                    //         Datatypes.INTEGER,
+                    //         Datatypes.INT,
                     //         Datatypes.FLOAT,
                     //         Datatypes.STRING_ARRAY,
                     //     ],
                     // },
                 ],
-                defaultRelations: [
-                    {
-                        id: "USER-RELATION-ID",
-                        required: true,
-                        type: RelationType.TO_ONE,
-                        destinationSchemaAlias: "Creator",
-                        sourceSchemaAlias: "",
-                        source: CreatedByValues.plugin,
-                        destinationSchemaId: "USER_SCHEMA",
-                    },
-                ],
-                defaultAttributes: [
-                    {
-                        id: "UUID-Attribute",
-                        identifiers: {
-                            label: "ID",
-                            snake: "id",
-                            camel: "id",
-                            pascal: "Id",
-                            kebab: "id",
+                relationAddons: [],
+                newSchemaDefaults: {
+                    relations: [
+                        {
+                            id: "USER-RELATION-ID",
+                            type: RelationTypes.TO_ONE,
+                            destinationSchemaAlias: "Creator",
+                            sourceSchemaAlias: "",
+                            createdBy: CreatedByValues.plugin,
+                            sourceSchemaID: "USER_SCHEMA",
+                            destinationSchemaID: "USER_SCHEMA",
+                            locked: true,
+                            internalNote: "",
+                            addons: {},
                         },
-                        addons: {
-                            // [ATTRIBUTE_ADDON_PRIMARY_KEY.identifier]: true,
+                    ],
+                    attributes: [
+                        {
+                            id: "UUID-Attribute",
+                            identifiers: {
+                                title: "ID",
+                                snake: "id",
+                                camel: "id",
+                                pascal: "Id",
+                                kebab: "id",
+                            },
+                            addons: {
+                                // [ATTRIBUTE_ADDON_PRIMARY_KEY.identifier]: true,
+                            },
+                            datatype: Datatypes.UUID,
+                            locked: true,
+                            createdBy: CreatedByValues.plugin,
+                            internalNote: "",
                         },
-                        datatype: Datatypes.UUID,
-                        locked: true,
-                        source: CreatedByValues.plugin,
-                        internalNote: "",
-                        defaultValue: null,
-                    },
-                ],
+                    ]
+                },
+                defaultRelations: [],
                 defaultSchemas: [
                     {
                         id: "USER_SCHEMA",
                         identifiers: {
                             singular: {
-                                label: "User",
+                                title: "User",
                                 snake: "user",
                                 camel: "user",
                                 pascal: "User",
                                 kebab: "user",
                             },
                             plural: {
-                                label: "Users",
+                                title: "Users",
                                 snake: "users",
                                 camel: "users",
                                 pascal: "Users",
@@ -506,14 +541,13 @@ const stories: [string, PluginMetadata][] = [
                             },
                         },
                         locked: true,
-                        removable: false,
-                        source: CreatedByValues.plugin,
+                        createdBy: CreatedByValues.plugin,
                         internalNote: "",
                         attributes: [
                             {
                                 id: "UUID-Attribute",
                                 identifiers: {
-                                    label: "ID",
+                                    title: "ID",
                                     snake: "id",
                                     camel: "id",
                                     pascal: "Id",
@@ -526,14 +560,13 @@ const stories: [string, PluginMetadata][] = [
                                 },
                                 datatype: Datatypes.STRING,
                                 locked: true,
-                                source: CreatedByValues.plugin,
+                                createdBy: CreatedByValues.plugin,
                                 internalNote: "The uniqie ID of the user",
-                                defaultValue: null,
                             },
                             {
                                 id: "Email-Attribute",
                                 identifiers: {
-                                    label: "Email",
+                                    title: "Email",
                                     snake: "email",
                                     camel: "email",
                                     pascal: "Email",
@@ -545,12 +578,10 @@ const stories: [string, PluginMetadata][] = [
                                 },
                                 datatype: Datatypes.STRING,
                                 locked: true,
-                                source: CreatedByValues.plugin,
+                                createdBy: CreatedByValues.plugin,
                                 internalNote: "The email of the user",
-                                defaultValue: null,
                             },
                         ],
-                        relations: [],
                         configuration: {},
                     },
                 ],
@@ -568,21 +599,21 @@ stories.forEach(story => {
         return (
             <Story>
                 <WebRuntime generator={story[1]}>
-                    {({ generator, project, setProject, clearProject }) => (
+                    {({ generator, projectInput, setProject, clearProject }) => (
                         <RuntimeProvider>
                             {({ generateCode }) => (
                                 <React.Fragment>
                                     <ProjectEditor
                                         generator={generator}
-                                        project={project}
+                                        projectInput={projectInput}
                                         onClickGenerate={() => {
                                             generateCode({
-                                                project,
+                                                projectInput,
                                                 generator,
                                             });
                                         }}
                                         onResetProject={clearProject}
-                                        onChange={(updatedProject: Project) => {
+                                        onChange={(updatedProject: ProjectInput) => {
                                             setProject(updatedProject);
                                         }}
                                     />

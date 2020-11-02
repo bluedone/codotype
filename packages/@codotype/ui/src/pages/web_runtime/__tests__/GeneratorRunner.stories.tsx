@@ -2,23 +2,23 @@ import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { Story } from "../../../components/dev";
 import { PluginRunner } from "../GeneratorRunner";
-import { buildDefaultProject, testState } from "@codotype/core";
-const { cdkPluginMetadata } = testState;
+import { buildDefaultProjectInput, testState } from "@codotype/core";
+const { cdkPluginMeta } = testState;
 
 // // // //
 
 storiesOf("Util/GeneratorRunner", module).add("loads", () => {
-    const project = buildDefaultProject(cdkPluginMetadata);
+    const projectInput = buildDefaultProjectInput(cdkPluginMeta);
     return (
         <Story>
-            <PluginRunner generator={cdkPluginMetadata}>
+            <PluginRunner generator={cdkPluginMeta}>
                 {({ generateCode }) => {
                     return (
                         <div className="card card-body">
                             <button
                                 onClick={() => {
                                     generateCode({
-                                        project,
+                                        projectInput,
                                     });
                                 }}
                             >
