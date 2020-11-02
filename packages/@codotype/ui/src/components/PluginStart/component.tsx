@@ -11,18 +11,18 @@ import { GitHubStar } from "../GitHubStar";
 
 // // // //
 
-interface GeneratorStartProps {
+interface PluginStartProps {
     plugin: PluginMetadata;
     externalLink?: string;
     buildLink?: string;
 }
 
 /**
- * GeneratorStart
+ * PluginStart
  * Renders the card-header for AttributeEditor and RelationEditor
- * @param props - see `GeneratorStartProps`
+ * @param props - see `PluginStartProps`
  */
-export function PluginStart(props: GeneratorStartProps) {
+export function PluginStart(props: PluginStartProps) {
     return (
         <div className="row h-100 align-items-center">
             <div className="col-lg-12">
