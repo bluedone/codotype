@@ -25,8 +25,6 @@ storiesOf("ProjectEditor/AttributeEditor/Layout", module).add(
                     addons={[]}
                     supportedDatatypes={supportedDatatypes}
                     onChange={(updatedAttributes: AttributeInput[]) => {
-                        console.log("AttributeEditor - onChange");
-                        console.log(updatedAttributes);
                         setAttributes(updatedAttributes);
                     }}
                 />
@@ -49,8 +47,6 @@ storiesOf("ProjectEditor/AttributeEditor/Layout", module).add("empty", () => {
                 addons={[]}
                 supportedDatatypes={supportedDatatypes}
                 onChange={(updatedAttributes: AttributeInput[]) => {
-                    console.log("AttributeEditor - onChange");
-                    console.log(updatedAttributes);
                     setAttributes(updatedAttributes);
                 }}
             />

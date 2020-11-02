@@ -3,11 +3,11 @@ import { ConfigurationInput } from "../configuration_group_input";
 import { SchemaEditorLayout } from "../schema_editor";
 import {
     ProjectInput,
-    Schema,
     PluginMetadata,
     ConfigurationGroup,
     OptionValueInstance,
     SchemaInput,
+    RelationInput,
 } from "@codotype/core";
 import { PluginStart } from "../PluginStart";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -188,17 +188,25 @@ export function ConfigurationGroupSelector(props: {
                 {/* Render SchemaEditorLayout */}
                 {viewingSchemas && enableSchemaEditor && (
                     <SchemaEditorLayout
+                        projectInput={props.projectInput}
                         schemas={props.projectInput.schemas}
                         pluginMetadata={pluginMetadata}
                         onChange={(updatedSchemas: SchemaInput[]) => {
-                            console.log("Updated Schemas");
-                            console.log(updatedSchemas);
-                            // Defines updated project
-                            // TODO - update configuation after schemas update?
+                            // Defines updated project w/ latest schemas
                             const updatedProject: ProjectInput = {
                                 ...props.projectInput,
                                 schemas: [...updatedSchemas],
                             };
+
+                            // Invokes props.onChange with updated project
+                            props.onChange(updatedProject);
+                        }}
+                        onChangeRelations={(updatedRelations: RelationInput[]) => {
+                            // Defines updated project w/ latest relations
+                            const updatedProject: ProjectInput = {
+                                ...props.projectInput,
+                                relations: updatedRelations
+                            }
 
                             // Invokes props.onChange with updated project
                             props.onChange(updatedProject);

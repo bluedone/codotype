@@ -78,6 +78,8 @@ export function RelationEditor(props: RelationEditorProps) {
 
     // // // //
 
+    const showEmptyState: boolean = props.relations.filter((r) => r.sourceSchemaID === props.selectedSchema.id).length === 0;
+
     return (
         <div
             className="card"
@@ -89,7 +91,7 @@ export function RelationEditor(props: RelationEditorProps) {
             <Hotkey
                 keyName="shift+r"
                 onKeyDown={() => {
-                    setRelationInput(new Primatives.Relation({}));
+                    setRelationInput(new Primatives.Relation({ id: "" }));
                 }}
             />
 
@@ -97,7 +99,7 @@ export function RelationEditor(props: RelationEditorProps) {
                 tooltip={"shift+r"}
                 label="Relations"
                 onClick={() => {
-                    setRelationInput(new Primatives.Relation({}));
+                    setRelationInput(new Primatives.Relation({ id: "", sourceSchemaID: props.selectedSchema.id }));
                 }}
                 rounded={false}
             />
@@ -120,7 +122,6 @@ export function RelationEditor(props: RelationEditorProps) {
                         ) {
                             const newRelation: RelationInput = new Primatives.Relation(
                                 {
-                                    id: relationInput.id,
                                     sourceSchemaID:
                                         relationInput.sourceSchemaID,
                                     destinationSchemaID:
@@ -170,7 +171,7 @@ export function RelationEditor(props: RelationEditorProps) {
                 </RelationFormModal>
             )}
 
-            {props.relations.length > 0 && (
+            {!showEmptyState && (
                 <React.Fragment>
                     <RelationDeleteModal
                         show={showingDeleteModal !== null}
@@ -205,14 +206,14 @@ export function RelationEditor(props: RelationEditorProps) {
                                 return;
                             }
 
-                            const updatedAttributes = reorder<RelationInput>(
+                            const updatedRelations = reorder<RelationInput>(
                                 props.relations,
                                 result.source.index,
                                 result.destination.index,
                             );
 
                             // Invoke props.onChange directly, prevents multiple re-renders
-                            props.onChange(updatedAttributes);
+                            props.onChange(updatedRelations);
                         }}
                     >
                         <Droppable droppableId="relation-list">
@@ -240,10 +241,10 @@ export function RelationEditor(props: RelationEditorProps) {
                                                             const relation:
                                                                 | RelationInput
                                                                 | undefined = props.relations.find(
-                                                                r =>
-                                                                    r.id ===
-                                                                    relationToBeEdited.sourceRelationInputID,
-                                                            );
+                                                                    r =>
+                                                                        r.id ===
+                                                                        relationToBeEdited.sourceRelationInputID,
+                                                                );
                                                             if (
                                                                 relation ===
                                                                 undefined
@@ -260,10 +261,10 @@ export function RelationEditor(props: RelationEditorProps) {
                                                             const relation:
                                                                 | RelationInput
                                                                 | undefined = props.relations.find(
-                                                                r =>
-                                                                    r.id ===
-                                                                    relationToDelete.sourceRelationInputID,
-                                                            );
+                                                                    r =>
+                                                                        r.id ===
+                                                                        relationToDelete.sourceRelationInputID,
+                                                                );
                                                             if (
                                                                 relation ===
                                                                 undefined
@@ -288,10 +289,10 @@ export function RelationEditor(props: RelationEditorProps) {
             )}
 
             {/* Render empty state */}
-            {props.relations.length === 0 && (
+            {showEmptyState && (
                 <RelationListEmpty
                     onClick={() => {
-                        setRelationInput(new Primatives.Relation({}));
+                        setRelationInput(new Primatives.Relation({ id: "" }));
                     }}
                 />
             )}

@@ -15,8 +15,12 @@ storiesOf("ProjectEditor/SchemaEditor", module).add("renders", () => {
                 projectInput={buildDefaultProjectInput(cdkPluginMeta)}
                 pluginMetadata={cdkPluginMeta}
                 onChange={updatedSchemas => {
-                    console.log("Updated Schemas");
+                    console.log("onChange");
                     console.log(updatedSchemas);
+                }}
+                onChangeRelations={(updatedRelations) => {
+                    console.log('onChangeRelations');
+                    console.log(updatedRelations);
                 }}
             />
         </Story>

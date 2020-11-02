@@ -58,7 +58,6 @@ export function RelationPropertiesForm(props: RelationPropertiesFormProps) {
                         <input
                             type="text"
                             className="form-control border-primary text-primary"
-                            disabled
                             value={schema.identifiers.singular.title}
                         />
                     </div>
@@ -107,10 +106,8 @@ export function RelationPropertiesForm(props: RelationPropertiesFormProps) {
                         </small>
                         <select
                             className="form-control border-info text-info"
-                            v-model="model.related_schema_id"
                             value={relationInput.destinationSchemaID}
                             onChange={e => {
-                                console.log("onChange related schema");
                                 props.onChange({
                                     ...relationInput,
                                     destinationSchemaID: e.currentTarget.value,

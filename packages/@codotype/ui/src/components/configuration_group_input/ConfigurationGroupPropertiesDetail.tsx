@@ -11,6 +11,7 @@ import { ConfigurationInputChild } from "./ConfigurationInputChild";
 
 /**
  * ConfigurationGroupPropertiesDetail
+ * TODO - add additional props
  * @param props.configurationGroup
  */
 export function ConfigurationGroupPropertiesDetail(props: {
@@ -36,8 +37,8 @@ export function ConfigurationGroupPropertiesDetail(props: {
     const selectedProperty:
         | ConfigurationProperty
         | undefined = configurationGroup.properties.find(
-        p => p.identifier === selectedPropertyID,
-    );
+            p => p.identifier === selectedPropertyID,
+        );
 
     // Return null if selectedProperty is undefined
     if (selectedProperty === undefined) {
@@ -99,6 +100,9 @@ export function ConfigurationGroupPropertiesDetail(props: {
                                 property={selectedProperty}
                                 value={true}
                                 onChange={() => {
+                                    // TODO - write this up, must be finished
+                                    // TODO - write this up, must be finished
+                                    // TODO - write this up, must be finished
                                     console.log("changed");
                                 }}
                             />

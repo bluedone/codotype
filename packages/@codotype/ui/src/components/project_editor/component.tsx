@@ -39,8 +39,6 @@ export function ProjectEditor(props: ProjectEditorProps) {
                     pluginMetadata={generator}
                     onChange={(updatedProject: ProjectInput) => {
                         // Invokes props.onChange with the updated project
-                        console.log("UPDATED PROJECT");
-
                         props.onChange(updatedProject);
                     }}
                 />

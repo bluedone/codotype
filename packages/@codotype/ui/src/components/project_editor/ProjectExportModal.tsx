@@ -13,9 +13,8 @@ const download = require("downloadjs");
  */
 function downloadProject(projectInput: ProjectInput) {
     // Defines filename
-    const filename = `codotype-project-${
-        projectInput.identifiers.snake
-    }-${Date.now()}.json`;
+    const filename = `codotype-project-${projectInput.identifiers.snake
+        }-${Date.now()}.json`;
 
     // Defines JSON string
     const jsonString: string = JSON.stringify(projectInput, null, 4);
@@ -47,7 +46,7 @@ export function ProjectExportModal(props: {
 
             <Modal.Body>
                 <p className="form-text text-muted mb-2">
-                    Export a Codotype Blueprint stored as a .JSON file
+                    Export a Codotype Project stored as a .JSON file
                 </p>
 
                 <small className="text-muted">

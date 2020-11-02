@@ -15,6 +15,7 @@ import {
     SchemaInput,
     Primatives,
     ProjectInput,
+    RelationInput,
 } from "@codotype/core";
 import { reorder } from "../attribute_editor/component";
 import { validateSchema } from "./validateSchema";
@@ -23,6 +24,7 @@ import { validateSchema } from "./validateSchema";
 
 interface EditorState {
     schemas: SchemaInput[];
+    relations: RelationInput[];
     lastUpdatedAt: null | number;
 }
 
@@ -38,6 +40,7 @@ export function SchemaEditorLayout(props: {
     schemas: SchemaInput[];
     pluginMetadata: PluginMetadata;
     onChange: (updatedSchemas: SchemaInput[]) => void;
+    onChangeRelations: (updatedRelations: RelationInput[]) => void;
 }) {
     const [showModal, setShowModal] = React.useState(false);
     const [showEditModal, setShowEditModal] = React.useState(false);
@@ -47,6 +50,7 @@ export function SchemaEditorLayout(props: {
     ] = React.useState<TokenPluralization | null>(null);
     const [state, setState] = React.useState<EditorState>({
         schemas: props.schemas,
+        relations: props.projectInput.relations,
         lastUpdatedAt: null,
     });
     const [selectedSchemaId, setSelectedSchemaId] = React.useState<UUID | null>(
@@ -60,7 +64,7 @@ export function SchemaEditorLayout(props: {
 
     // Invoke props.onChange when state.schemas has updated
     React.useEffect(() => {
-        props.onChange(state.schemas);
+        props.onChange(state.schemas)
     }, [state.lastUpdatedAt]);
 
     // Sets selectedSchemaId if none is defined
@@ -103,13 +107,12 @@ export function SchemaEditorLayout(props: {
         // TODO - add a mechanism here to update ProjectInput.relations with a new default RelationInput pulled from PluginMetadata.schema
         // TODO - add a mechanism here to update ProjectInput.relations with a new default RelationInput pulled from PluginMetadata.schema
 
-        console.log(newSchema);
-
         // Defines updated schemas, including NEW schema
         const updatedSchemas: SchemaInput[] = [...state.schemas, newSchema];
 
         // Updates state.schemas with the latest schemas
         setState({
+            ...state,
             lastUpdatedAt: Date.now(),
             schemas: updatedSchemas,
         });
@@ -151,6 +154,7 @@ export function SchemaEditorLayout(props: {
 
         // Updates state.schemas with the latest schemas
         setState({
+            ...state,
             lastUpdatedAt: Date.now(),
             schemas: updatedSchemas,
         });
@@ -284,12 +288,14 @@ export function SchemaEditorLayout(props: {
             <div className="col-lg-8 pl-3 pl-lg-0 mt-4 mt-lg-0">
                 <div className="card card-body shadow-sm">
                     <SchemaDetail
-                        projectInput={props.projectInput}
                         schema={selectedSchema}
-                        schemas={state.schemas}
-                        PluginMetadata={props.pluginMetadata}
+                        projectInput={props.projectInput}
+                        pluginMetadata={props.pluginMetadata}
                         onSelectSchema={(nextSelectedSchemaId: UUID) => {
                             setSelectedSchemaId(nextSelectedSchemaId);
+                        }}
+                        onChangeRelations={(updatedRelations: RelationInput[]) => {
+                            props.onChangeRelations(updatedRelations)
                         }}
                         onChange={(updatedSchema: SchemaInput) => {
                             // Defines updatedSchemas to include `updatedSchema`
@@ -304,6 +310,7 @@ export function SchemaEditorLayout(props: {
 
                             // Updates local state
                             setState({
+                                ...state,
                                 lastUpdatedAt: Date.now(),
                                 schemas: updatedSchemas,
                             });
@@ -321,6 +328,7 @@ export function SchemaEditorLayout(props: {
 
                             // Updates local state
                             setState({
+                                ...state,
                                 lastUpdatedAt: Date.now(),
                                 schemas: updatedSchemas,
                             });
