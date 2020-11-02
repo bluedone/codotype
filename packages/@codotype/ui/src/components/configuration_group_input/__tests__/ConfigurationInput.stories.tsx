@@ -54,9 +54,7 @@ storyCollection.add("single dropdown", () => {
         buildConfigurationGroupValue({
             ...ComponentBuilderConfigurationGroup,
             layoutVariant: GroupLayoutVariants.LIST,
-            properties: [
-                ComponentBuilderConfigurationPropertySingleDropdown,
-            ],
+            properties: [ComponentBuilderConfigurationPropertySingleDropdown],
         }),
     );
 
@@ -89,9 +87,7 @@ storyCollection.add("nested instance", () => {
     >(
         buildConfigurationGroupValue({
             ...ComponentBuilderConfigurationGroup,
-            properties: [
-                ComponentBuilderConfigurationPropertyWithInstance,
-            ],
+            properties: [ComponentBuilderConfigurationPropertyWithInstance],
         }),
     );
 
@@ -123,9 +119,7 @@ storyCollection.add("instance", () => {
     >(
         buildConfigurationGroupValue({
             ...ComponentBuilderConfigurationGroup,
-            properties: [
-                ComponentBuilderConfigurationPropertyWithInstance01,
-            ],
+            properties: [ComponentBuilderConfigurationPropertyWithInstance01],
         }),
     );
 

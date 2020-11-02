@@ -20,9 +20,7 @@ storiesOf("ProjectEditor/AttributeEditor/AttributeAddonForm", module).add(
     () => {
         const [value, setValue] = React.useState<AddonsValue>(
             buildDefaultAddonsValue({
-                properties: [
-                    ...Object.values(testState.addonProperties)
-                ]
+                properties: [...Object.values(testState.addonProperties)],
             }),
         );
         return (
@@ -50,7 +48,8 @@ storiesOf("ProjectEditor/AttributeEditor/AttributeAddonForm", module).add(
                         {
                             ...testState.emailAttribute,
                             addons: {
-                                [testState.addonProperties.unique.identifier]: false,
+                                [testState.addonProperties.unique
+                                    .identifier]: false,
                             },
                         },
                     ]}

@@ -321,7 +321,7 @@ const stories: [string, PluginMetadata][] = [
                             internalNote: "",
                         },
                     ],
-                }
+                },
             },
         },
     ],
@@ -360,7 +360,10 @@ const stories: [string, PluginMetadata][] = [
             ],
             identifier: "chrome_extension_generator_05", // unique ID for the generator
             schemaEditorConfiguration: {
-                supportedRelationTypes: [RelationTypes.TO_ONE, RelationTypes.TO_MANY],
+                supportedRelationTypes: [
+                    RelationTypes.TO_ONE,
+                    RelationTypes.TO_MANY,
+                ],
                 supportedDatatypes: [
                     Datatypes.STRING,
                     Datatypes.DATE,
@@ -518,7 +521,7 @@ const stories: [string, PluginMetadata][] = [
                             createdBy: CreatedByValues.plugin,
                             internalNote: "",
                         },
-                    ]
+                    ],
                 },
                 defaultRelations: [],
                 defaultSchemas: [
@@ -599,7 +602,12 @@ stories.forEach(story => {
         return (
             <Story>
                 <WebRuntime generator={story[1]}>
-                    {({ generator, projectInput, setProject, clearProject }) => (
+                    {({
+                        generator,
+                        projectInput,
+                        setProject,
+                        clearProject,
+                    }) => (
                         <RuntimeProvider>
                             {({ generateCode }) => (
                                 <React.Fragment>
@@ -613,7 +621,9 @@ stories.forEach(story => {
                                             });
                                         }}
                                         onResetProject={clearProject}
-                                        onChange={(updatedProject: ProjectInput) => {
+                                        onChange={(
+                                            updatedProject: ProjectInput,
+                                        ) => {
                                             setProject(updatedProject);
                                         }}
                                     />

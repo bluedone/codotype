@@ -85,8 +85,10 @@ export function AttributeEditor(props: AttributeEditorProps) {
     // Defines saveAttribute function
     function saveAttribute(params: { newAttributeData: AttributeInput }) {
         // Insert new Attribute
-        if (params.newAttributeData.id === "" || params.newAttributeData.id === null) {
-
+        if (
+            params.newAttributeData.id === "" ||
+            params.newAttributeData.id === null
+        ) {
             if (params.newAttributeData.datatype === null) {
                 return;
             }
@@ -99,9 +101,11 @@ export function AttributeEditor(props: AttributeEditorProps) {
                     // ...buildDefaultAddonValue(props.addons), // TODO - reintegrate this
                     ...params.newAttributeData.addons,
                 },
-            }
+            };
 
-            const newAttribute: AttributeInput = new Primatives.AttributeInput(newAttributeParams);
+            const newAttribute: AttributeInput = new Primatives.AttributeInput(
+                newAttributeParams,
+            );
 
             setState({
                 lastUpdatedAt: Date.now(),
@@ -164,8 +168,8 @@ export function AttributeEditor(props: AttributeEditorProps) {
                     onSubmit={() => {
                         saveAttribute({
                             newAttributeData: {
-                                ...attributeInput
-                            }
+                                ...attributeInput,
+                            },
                         });
                     }}
                 >

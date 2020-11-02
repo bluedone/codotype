@@ -9,10 +9,7 @@ import {
     RelationInput,
 } from "@codotype/core";
 import { RelationEditor } from "../component";
-import {
-    relationExample01,
-    supportedRelationTypes,
-} from "./test_state";
+import { relationExample01, supportedRelationTypes } from "./test_state";
 
 const { userSchema } = testState;
 

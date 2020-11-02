@@ -178,9 +178,9 @@ export function ConfigurationCollectionInput(
                                                     {
                                                         active:
                                                             editCollectionItem !==
-                                                            null &&
+                                                                null &&
                                                             collectionItem.id ===
-                                                            editCollectionItem.id,
+                                                                editCollectionItem.id,
                                                     },
                                                 )}
                                                 onClick={() => {

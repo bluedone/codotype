@@ -2,7 +2,7 @@ import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { SchemaPreview } from "../SchemaPreview";
 import { Story } from "../../dev";
-import { buildDefaultProjectInput, testState } from "@codotype/core"
+import { buildDefaultProjectInput, testState } from "@codotype/core";
 const { userSchema } = testState;
 
 // // // //
@@ -10,7 +10,10 @@ const { userSchema } = testState;
 storiesOf("Components/SchemaPreview", module).add("renders", () => {
     return (
         <Story>
-            <SchemaPreview schemaInput={userSchema} projectInput={buildDefaultProjectInput(testState.cdkPluginMeta)} />
+            <SchemaPreview
+                schemaInput={userSchema}
+                projectInput={buildDefaultProjectInput(testState.cdkPluginMeta)}
+            />
         </Story>
     );
 });

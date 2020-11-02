@@ -110,7 +110,7 @@ export function ConfigurationGroupSelector(props: {
                         }}
                         active={viewingReadme}
                         label={"Start"}
-                    // label={"README.md"}
+                        // label={"README.md"}
                     />
 
                     {enableSchemaEditor && (
@@ -139,7 +139,7 @@ export function ConfigurationGroupSelector(props: {
                                     }}
                                     active={
                                         configurationGroup.identifier ===
-                                        selectedConfigurationGroup.identifier &&
+                                            selectedConfigurationGroup.identifier &&
                                         !viewingSchemas &&
                                         !viewingReadme
                                     }
@@ -157,7 +157,7 @@ export function ConfigurationGroupSelector(props: {
                         configurationGroup={selectedConfigurationGroup}
                         value={
                             props.projectInput.configuration[
-                            selectedConfigurationGroup.identifier
+                                selectedConfigurationGroup.identifier
                             ]
                         }
                         onChange={(updatedVal: OptionValueInstance) => {
@@ -201,12 +201,14 @@ export function ConfigurationGroupSelector(props: {
                             // Invokes props.onChange with updated project
                             props.onChange(updatedProject);
                         }}
-                        onChangeRelations={(updatedRelations: RelationInput[]) => {
+                        onChangeRelations={(
+                            updatedRelations: RelationInput[],
+                        ) => {
                             // Defines updated project w/ latest relations
                             const updatedProject: ProjectInput = {
                                 ...props.projectInput,
-                                relations: updatedRelations
-                            }
+                                relations: updatedRelations,
+                            };
 
                             // Invokes props.onChange with updated project
                             props.onChange(updatedProject);

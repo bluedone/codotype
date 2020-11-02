@@ -49,8 +49,8 @@ export function ConfigurationGroupPropertiesVariant(props: {
                 GroupLayoutVariants.DOCS_4x8,
                 GroupLayoutVariants.DOCS_6x6,
             ].includes(layoutVariant) && (
-                    <ConfigurationGroupPropertiesDocs {...props} />
-                )}
+                <ConfigurationGroupPropertiesDocs {...props} />
+            )}
 
             {/* Handle DETAIL_3x9 + DETAIL_4x8 + DETAIL_6x6 */}
             {/* TODO - wire up additional props */}
@@ -59,10 +59,10 @@ export function ConfigurationGroupPropertiesVariant(props: {
                 GroupLayoutVariants.DETAIL_4x8,
                 GroupLayoutVariants.DETAIL_6x6,
             ].includes(layoutVariant) && (
-                    <ConfigurationGroupPropertiesDetail
-                        configurationGroup={configurationGroup}
-                    />
-                )}
+                <ConfigurationGroupPropertiesDetail
+                    configurationGroup={configurationGroup}
+                />
+            )}
         </React.Fragment>
     );
 }

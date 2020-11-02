@@ -64,7 +64,7 @@ export function SchemaEditorLayout(props: {
 
     // Invoke props.onChange when state.schemas has updated
     React.useEffect(() => {
-        props.onChange(state.schemas)
+        props.onChange(state.schemas);
     }, [state.lastUpdatedAt]);
 
     // Sets selectedSchemaId if none is defined
@@ -294,8 +294,10 @@ export function SchemaEditorLayout(props: {
                         onSelectSchema={(nextSelectedSchemaId: UUID) => {
                             setSelectedSchemaId(nextSelectedSchemaId);
                         }}
-                        onChangeRelations={(updatedRelations: RelationInput[]) => {
-                            props.onChangeRelations(updatedRelations)
+                        onChangeRelations={(
+                            updatedRelations: RelationInput[],
+                        ) => {
+                            props.onChangeRelations(updatedRelations);
                         }}
                         onChange={(updatedSchema: SchemaInput) => {
                             // Defines updatedSchemas to include `updatedSchema`

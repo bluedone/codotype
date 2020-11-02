@@ -18,8 +18,8 @@ storiesOf("ProjectEditor/SchemaEditor", module).add("renders", () => {
                     console.log("onChange");
                     console.log(updatedSchemas);
                 }}
-                onChangeRelations={(updatedRelations) => {
-                    console.log('onChangeRelations');
+                onChangeRelations={updatedRelations => {
+                    console.log("onChangeRelations");
                     console.log(updatedRelations);
                 }}
             />

@@ -2,7 +2,12 @@ import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { RelationPropertiesForm } from "../RelationPropertiesForm";
 import { Story } from "../../dev";
-import { testState, RelationInput, RelationTypes, CreatedByValues } from "@codotype/core";
+import {
+    testState,
+    RelationInput,
+    RelationTypes,
+    CreatedByValues,
+} from "@codotype/core";
 const { userSchema, movieSchema } = testState;
 
 // // // //
@@ -20,7 +25,7 @@ const testCases: [string, RelationInput][] = [
             destinationSchemaID: userSchema.id,
             sourceSchemaAlias: "Directed Movie",
             destinationSchemaAlias: "Director",
-            addons: {}
+            addons: {},
         },
     ],
 ];

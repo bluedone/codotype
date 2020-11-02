@@ -78,7 +78,10 @@ export function RelationEditor(props: RelationEditorProps) {
 
     // // // //
 
-    const showEmptyState: boolean = props.relations.filter((r) => r.sourceSchemaID === props.selectedSchema.id).length === 0;
+    const showEmptyState: boolean =
+        props.relations.filter(
+            r => r.sourceSchemaID === props.selectedSchema.id,
+        ).length === 0;
 
     return (
         <div
@@ -99,7 +102,12 @@ export function RelationEditor(props: RelationEditorProps) {
                 tooltip={"shift+r"}
                 label="Relations"
                 onClick={() => {
-                    setRelationInput(new Primatives.Relation({ id: "", sourceSchemaID: props.selectedSchema.id }));
+                    setRelationInput(
+                        new Primatives.Relation({
+                            id: "",
+                            sourceSchemaID: props.selectedSchema.id,
+                        }),
+                    );
                 }}
                 rounded={false}
             />
@@ -241,10 +249,10 @@ export function RelationEditor(props: RelationEditorProps) {
                                                             const relation:
                                                                 | RelationInput
                                                                 | undefined = props.relations.find(
-                                                                    r =>
-                                                                        r.id ===
-                                                                        relationToBeEdited.sourceRelationInputID,
-                                                                );
+                                                                r =>
+                                                                    r.id ===
+                                                                    relationToBeEdited.sourceRelationInputID,
+                                                            );
                                                             if (
                                                                 relation ===
                                                                 undefined
@@ -261,10 +269,10 @@ export function RelationEditor(props: RelationEditorProps) {
                                                             const relation:
                                                                 | RelationInput
                                                                 | undefined = props.relations.find(
-                                                                    r =>
-                                                                        r.id ===
-                                                                        relationToDelete.sourceRelationInputID,
-                                                                );
+                                                                r =>
+                                                                    r.id ===
+                                                                    relationToDelete.sourceRelationInputID,
+                                                            );
                                                             if (
                                                                 relation ===
                                                                 undefined

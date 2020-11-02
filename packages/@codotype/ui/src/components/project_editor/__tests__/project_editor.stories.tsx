@@ -13,7 +13,9 @@ const chromeExtensionPlugin = {
         "https://res.cloudinary.com/codotype/image/upload/v1553197653/tech-logos/nodejs.png",
 };
 
-const dummyProject: ProjectInput = buildDefaultProjectInput(chromeExtensionPlugin);
+const dummyProject: ProjectInput = buildDefaultProjectInput(
+    chromeExtensionPlugin,
+);
 // dummyProject.schemas.push(testState.movieSchema);
 // dummyProject.schemas.push(testState.userSchema);
 

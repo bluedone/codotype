@@ -41,9 +41,7 @@ export function PluginListItem(props: { plugin: PluginMetadata }) {
                     </span>
 
                     <span className="d-flex">
-                        <PluginExperienceTag
-                            experience={plugin.experience}
-                        />
+                        <PluginExperienceTag experience={plugin.experience} />
                         <PluginsVersionTag version={plugin.version} />
                     </span>
                 </div>

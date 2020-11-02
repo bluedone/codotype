@@ -41,7 +41,7 @@ export function SchemaDetail(props: SchemaDetailProps) {
         relations: buildRelations({
             schemaInputs: props.projectInput.schemas,
             relationInputs: props.projectInput.relations,
-        })
+        }),
     });
 
     const { schemaEditorConfiguration } = props.pluginMetadata;
@@ -100,10 +100,14 @@ export function SchemaDetail(props: SchemaDetailProps) {
                                 schemas={props.projectInput.schemas}
                                 relations={props.projectInput.relations}
                                 supportedRelationTypes={
-                                    props.pluginMetadata.schemaEditorConfiguration.supportedRelationTypes
+                                    props.pluginMetadata
+                                        .schemaEditorConfiguration
+                                        .supportedRelationTypes
                                 }
-                                onChange={(updatedRelations: RelationInput[]) => {
-                                    props.onChangeRelations(updatedRelations)
+                                onChange={(
+                                    updatedRelations: RelationInput[],
+                                ) => {
+                                    props.onChangeRelations(updatedRelations);
                                 }}
                             />
                         </div>

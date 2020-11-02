@@ -72,8 +72,14 @@ const numberPropertyFilterStories = storiesOf(
     [StringPropertyTransformations.nosymbols],
     [StringPropertyTransformations.trimwhitespace],
     [StringPropertyTransformations.removewhitespace],
-    [StringPropertyTransformations.nosymbols, StringPropertyTransformations.snakecase],
-    [StringPropertyTransformations.nosymbols, StringPropertyTransformations.pascalcase],
+    [
+        StringPropertyTransformations.nosymbols,
+        StringPropertyTransformations.snakecase,
+    ],
+    [
+        StringPropertyTransformations.nosymbols,
+        StringPropertyTransformations.pascalcase,
+    ],
     [
         StringPropertyTransformations.nosymbols,
         StringPropertyTransformations.nonumbers,
@@ -113,7 +119,10 @@ const stringPropertyFilterStories = storiesOf(
     [NumberPropertyTransformations.integerValue],
     [NumberPropertyTransformations.negativeValue],
     [NumberPropertyTransformations.positiveValue],
-    [NumberPropertyTransformations.positiveValue, NumberPropertyTransformations.integerValue],
+    [
+        NumberPropertyTransformations.positiveValue,
+        NumberPropertyTransformations.integerValue,
+    ],
 ].forEach(propertyFilters => {
     stringPropertyFilterStories.add(propertyFilters.join(" + "), () => {
         const [value, setValue] = React.useState<OptionValue>("");
