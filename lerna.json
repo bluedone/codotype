@@ -1,6 +1,7 @@
 {
     "packages": [
         "packages/@codotype/core",
+        "packages/@codotype/cli",
         "packages/@codotype/runtime",
         "packages/@codotype/ui"
     ],
