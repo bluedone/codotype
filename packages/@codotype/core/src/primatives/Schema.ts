@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
-import { SchemaInput, Attribute, RelationInput } from "..";
+import { SchemaInput, AttributeInput, RelationInput } from "..";
 import { CreatedBy, CreatedByValues } from "../created-by";
 import { TokenPluralization } from "../token";
 import { ConfigurationValue } from "../configuration-value";
@@ -8,10 +8,9 @@ import { ConfigurationValue } from "../configuration-value";
 
 interface SchemaBuilderParams {
     id?: string;
-    attributes: Attribute[];
-    relations: RelationInput[];
+    attributes: AttributeInput[];
     identifiers: TokenPluralization;
-    source?: CreatedBy;
+    createdBy?: CreatedBy;
     locked?: boolean;
     configuration?: ConfigurationValue;
     internalNote?: string;
@@ -19,8 +18,7 @@ interface SchemaBuilderParams {
 
 export class SchemaBuilder implements SchemaInput {
     id: string = uuidv4();
-    attributes: Attribute[];
-    relations: RelationInput[];
+    attributes: AttributeInput[];
     identifiers: TokenPluralization;
     createdBy: CreatedBy = CreatedByValues.user;
     locked: boolean = false;
@@ -29,11 +27,10 @@ export class SchemaBuilder implements SchemaInput {
 
     constructor(params: SchemaBuilderParams) {
         this.attributes = params.attributes;
-        this.relations = params.relations;
         this.identifiers = params.identifiers;
 
         this.id = params.id || this.id;
-        this.createdBy = params.source || this.createdBy;
+        this.createdBy = params.createdBy || this.createdBy;
         this.locked = params.locked !== undefined ? params.locked : this.locked;
         this.configuration = params.configuration || this.configuration;
         this.internalNote = params.internalNote || this.internalNote;

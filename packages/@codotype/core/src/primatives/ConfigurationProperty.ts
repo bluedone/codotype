@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from "uuid";
 import {
     ConfigurationProperty,
     DropdownOption,
-    PropertyType,
+    PropertyTypes,
     OptionValue,
     PropertyLayoutVariants,
 } from "../configuration-property";
@@ -25,7 +25,7 @@ interface ConfigurationPropertyBuilderParams {
         documentation?: string;
         icon?: string;
     };
-    type: PropertyType;
+    type: PropertyTypes;
     dropdownOptions?: DropdownOption[];
     defaultValue?: OptionValue;
     required?: boolean;
@@ -47,7 +47,7 @@ export class ConfigurationPropertyBuilder implements ConfigurationProperty {
         documentation: "",
         icon: "",
     };
-    type: PropertyType;
+    type: PropertyTypes;
     defaultValue: OptionValue = null;
     required: boolean = false;
     unique: boolean = false;
