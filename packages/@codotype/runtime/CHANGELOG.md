@@ -1,3 +1,8 @@
+### 0.8.0 (UNPUBLISHED)
+* Adds `Preview` runtime to return compiled templates as a `{ filepath: contents }` object
+
+---
+
 ### 0.7.0
 * Runtime supports `forEachRelation` and `forEachReverseRelation` Generator methods
 

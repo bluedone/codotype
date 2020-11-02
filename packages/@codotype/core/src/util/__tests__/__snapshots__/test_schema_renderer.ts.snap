@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`/src/schemaRenderer renders JSON representation correctly 1`] = `
+"{
+  \\"movie\\": \\"Movie ID\\"
+}"
+`;

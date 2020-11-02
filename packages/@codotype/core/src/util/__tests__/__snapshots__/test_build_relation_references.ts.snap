@@ -1,0 +1,122 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`/lib/inflateSchema.js basic schemas 1`] = `
+Object {
+  "attributes": Array [],
+  "configuration": Object {},
+  "createdBy": "user",
+  "id": "12345",
+  "identifiers": Object {
+    "plural": Object {
+      "camel": "users",
+      "kebab": "users",
+      "pascal": "Users",
+      "snake": "users",
+      "title": "Users",
+    },
+    "singular": Object {
+      "camel": "user",
+      "kebab": "user",
+      "pascal": "User",
+      "snake": "user",
+      "title": "User",
+    },
+  },
+  "internalNote": "",
+  "locked": false,
+  "referencedBy": Array [],
+  "relations": Array [],
+}
+`;
+
+exports[`/lib/inflateSchemas.js basic schemas 1`] = `
+Array [
+  Object {
+    "attributes": Array [],
+    "configuration": Object {},
+    "createdBy": "user",
+    "id": "12345",
+    "identifiers": Object {
+      "plural": Object {
+        "camel": "users",
+        "kebab": "users",
+        "pascal": "Users",
+        "snake": "users",
+        "title": "Users",
+      },
+      "singular": Object {
+        "camel": "user",
+        "kebab": "user",
+        "pascal": "User",
+        "snake": "user",
+        "title": "User",
+      },
+    },
+    "internalNote": "",
+    "locked": false,
+    "referencedBy": Array [],
+    "relations": Array [],
+  },
+  Object {
+    "attributes": Array [
+      Object {
+        "addons": Object {
+          "required": true,
+        },
+        "createdBy": "user",
+        "datatype": "STRING",
+        "id": "name-attr",
+        "identifiers": Object {
+          "camel": "name",
+          "kebab": "name",
+          "pascal": "Name",
+          "snake": "name",
+          "title": "Name",
+        },
+        "internalNote": "the name of the user",
+        "locked": false,
+      },
+      Object {
+        "addons": Object {
+          "required": true,
+        },
+        "createdBy": "user",
+        "datatype": "STRING",
+        "id": "email-attr",
+        "identifiers": Object {
+          "camel": "email",
+          "kebab": "email",
+          "pascal": "Email",
+          "snake": "email",
+          "title": "Email",
+        },
+        "internalNote": "the email of the user",
+        "locked": false,
+      },
+    ],
+    "configuration": Object {},
+    "createdBy": "user",
+    "id": "45678",
+    "identifiers": Object {
+      "plural": Object {
+        "camel": "movies",
+        "kebab": "movies",
+        "pascal": "Movies",
+        "snake": "movies",
+        "title": "Movies",
+      },
+      "singular": Object {
+        "camel": "movie",
+        "kebab": "movie",
+        "pascal": "Movie",
+        "snake": "movie",
+        "title": "Movie",
+      },
+    },
+    "internalNote": "",
+    "locked": false,
+    "referencedBy": Array [],
+    "relations": Array [],
+  },
+]
+`;

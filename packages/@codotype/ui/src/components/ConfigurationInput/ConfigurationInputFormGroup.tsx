@@ -1,0 +1,233 @@
+import * as React from "react";
+import {
+    PropertyTypes,
+    PropertyLayoutVariant,
+    ConfigurationProperty,
+    PropertyLayoutVariants,
+} from "@codotype/core";
+import classnames from "classnames";
+import { DocumentationModal } from "../DocumentationModal";
+
+// // // //
+const col_12_variants: PropertyLayoutVariant[] = [
+    PropertyLayoutVariants.CARD_COL_12,
+    PropertyLayoutVariants.COL_12,
+];
+
+const col_8_variants: PropertyLayoutVariant[] = [
+    PropertyLayoutVariants.CARD_COL_8,
+    PropertyLayoutVariants.COL_8,
+];
+
+const col_6_variants: PropertyLayoutVariant[] = [
+    PropertyLayoutVariants.CARD_COL_6,
+    PropertyLayoutVariants.COL_6,
+];
+
+const col_4_variants: PropertyLayoutVariant[] = [
+    PropertyLayoutVariants.CARD_COL_4,
+    PropertyLayoutVariants.COL_4,
+];
+
+const col_3_variants: PropertyLayoutVariant[] = [
+    PropertyLayoutVariants.CARD_COL_3,
+    PropertyLayoutVariants.COL_3,
+];
+
+/**
+ * Gets the column span for a specific PropertyLayoutVariants
+ * @param layoutVariant
+ */
+function getColSpan(layoutVariant: PropertyLayoutVariant): number {
+    if (col_12_variants.includes(layoutVariant)) {
+        return 12;
+    }
+    if (col_8_variants.includes(layoutVariant)) {
+        return 8;
+    }
+    if (col_6_variants.includes(layoutVariant)) {
+        return 6;
+    }
+    if (col_4_variants.includes(layoutVariant)) {
+        return 4;
+    }
+    if (col_3_variants.includes(layoutVariant)) {
+        return 3;
+    }
+    return 12; // Default
+}
+
+// // // //
+
+interface ConfigurationInputFormGroupProps {
+    property: ConfigurationProperty;
+    className?: string;
+    enabled?: boolean;
+    onChangeEnabled?: (updatedEnabled: boolean) => void;
+    children: React.ReactNode;
+}
+
+export function ConfigurationInputFormGroup(
+    props: ConfigurationInputFormGroupProps,
+) {
+    const { property, className = "" } = props;
+    const { enabled = property.enabledByDefault } = props;
+
+    const renderDocumentationModal: boolean =
+        property.content.documentation !== "";
+
+    const { layoutVariant } = property;
+
+    // Handle rendering the property inside a card
+    const cardVariants: PropertyLayoutVariant[] = [
+        PropertyLayoutVariants.CARD_COL_3,
+        PropertyLayoutVariants.CARD_COL_4,
+        PropertyLayoutVariants.CARD_COL_6,
+        PropertyLayoutVariants.CARD_COL_8,
+        PropertyLayoutVariants.CARD_COL_12,
+    ];
+    const renderInCard: boolean = cardVariants.includes(layoutVariant);
+
+    // Handle column span
+    const colSpan: number = getColSpan(layoutVariant);
+
+    // Defines checkbox to enable/disable
+    const toggleEnabledCheckbox = (
+        <input
+            type="checkbox"
+            checked={enabled}
+            onChange={e => {
+                if (props.onChangeEnabled) {
+                    props.onChangeEnabled(e.currentTarget.checked);
+                }
+            }}
+        />
+    );
+
+    const formGroupHeader = (
+        <div className="d-flex align-items-center">
+            {property.content.icon && (
+                <img
+                    src={property.content.icon}
+                    style={{ maxWidth: "2rem" }}
+                    className="mr-2"
+                />
+            )}
+            <label className="mb-0">{property.content.label}</label>
+            {renderDocumentationModal && (
+                <small className="mx-3">
+                    <DocumentationModal
+                        header={property.content.label}
+                        documentation={property.content.description} // TODO - update this to use property.documentation
+                    />
+                </small>
+            )}
+        </div>
+    );
+
+    const formGroupDescription = (
+        <React.Fragment>
+            {/* Render description IFF not empty */}
+            {property.content.description !== "" && (
+                <small className="d-block mt-2 text-muted">
+                    {property.content.description}
+                </small>
+            )}
+
+            {/* Render empty description warning */}
+            {property.content.description === "" && (
+                <small className="d-block mt-2 mb-2 text-danger">
+                    Warning - this input needs a description
+                </small>
+            )}
+        </React.Fragment>
+    );
+
+    const formGroup = (
+        <div
+            className={classnames("form-group", {
+                [className]: className !== "",
+            })}
+        >
+            <div className="d-flex align-items-center justify-content-between">
+                {/* TODO - replace this with modified ConfigurationGroupHeader? */}
+                <div className="d-flex align-items-center">
+                    {formGroupHeader}
+                    {property.type === PropertyTypes.BOOLEAN && (
+                        <div
+                            className={classnames("d-flex align-items-center", {
+                                "ml-3": !renderDocumentationModal,
+                            })}
+                        >
+                            {props.children}
+                        </div>
+                    )}
+                </div>
+
+                {/* Render toggleEnabledCheckbox */}
+                {property.allowDisable && toggleEnabledCheckbox}
+            </div>
+
+            {formGroupDescription}
+
+            {/* Renders props.children */}
+            {property.type !== PropertyTypes.BOOLEAN && (
+                <React.Fragment>{props.children}</React.Fragment>
+            )}
+        </div>
+    );
+
+    const disabledFormGroup = (
+        <div
+            className={classnames("form-group", {
+                [className]: className !== "",
+            })}
+        >
+            <div className="d-flex align-items-center justify-content-between">
+                {/* TODO - replace this with modified ConfigurationGroupHeader? */}
+                <div className="d-flex align-items-center">
+                    {formGroupHeader}
+                </div>
+            </div>
+
+            {formGroupDescription}
+
+            {/* Renders message to turn this feature on */}
+            <div className="mt-2 px-2 py-2 d-flex justify-content-center bg-dark text-white rounded">
+                <div className="d-flex flex-column align-items-center">
+                    <p className="lead mb-0">Enable {property.content.label}</p>
+                    <p className="mb-0">
+                        Click to enable the {property.content.label} property.
+                    </p>
+                    <span className="mt-2">{toggleEnabledCheckbox}</span>
+                </div>
+            </div>
+        </div>
+    );
+
+    // Handle property.allowDisable
+    if (property.allowDisable && !enabled && !renderInCard) {
+        return <div className={`col-lg-${colSpan}`}>{disabledFormGroup}</div>;
+    }
+    if (property.allowDisable && !enabled && renderInCard) {
+        return (
+            <div className={`col-lg-${colSpan}`}>
+                <div className="card shadow-sm my-2 py-3 px-3">
+                    {disabledFormGroup}
+                </div>
+            </div>
+        );
+    }
+
+    // Return standard if NOT renderInCard
+    if (!renderInCard) {
+        return <div className={`col-lg-${colSpan}`}>{formGroup}</div>;
+    }
+
+    // Handle renderInCard
+    return (
+        <div className={`col-lg-${colSpan}`}>
+            <div className="card shadow-sm my-2 py-3 px-3">{formGroup}</div>
+        </div>
+    );
+}

@@ -1,0 +1,1 @@
+export { ProjectEditor } from "./component";

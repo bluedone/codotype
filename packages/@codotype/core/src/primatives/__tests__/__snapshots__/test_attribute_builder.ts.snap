@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AttributeBuilder works 1`] = `
+AttributeInputBuilder {
+  "addons": Object {},
+  "createdBy": "user",
+  "datatype": "STRING",
+  "id": "1234-5678-1234-5678",
+  "identifiers": Object {
+    "camel": "myString",
+    "kebab": "my-string",
+    "pascal": "MyString",
+    "snake": "my_string",
+    "title": "My String",
+  },
+  "internalNote": "",
+  "locked": false,
+}
+`;
