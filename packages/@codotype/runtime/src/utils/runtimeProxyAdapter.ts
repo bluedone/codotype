@@ -51,10 +51,10 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
             !generatorConfiguration.compileInPlace &&
             !generatorConfiguration.forEachSchema &&
             !generatorConfiguration.forEachRelation &&
-            !generatorConfiguration.forEachReverseRelation
+            !generatorConfiguration.forEachReferencedBy
         ) {
             throw Error(
-                "GeneratorConfiguration requires either write, forEachSchema, forEachRelation, forEachReverseRelation, or compileInPlace properties",
+                "GeneratorConfiguration requires either write, forEachSchema, forEachRelation, forEachReferencedBy, or compileInPlace properties",
             );
         }
 
@@ -68,9 +68,9 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
             generatorConfiguration.forEachSchema || this.forEachSchema;
         this.forEachRelation =
             generatorConfiguration.forEachRelation || this.forEachRelation;
-        this.forEachReverseRelation =
-            generatorConfiguration.forEachReverseRelation ||
-            this.forEachReverseRelation;
+        this.forEachReferencedBy =
+            generatorConfiguration.forEachReferencedBy ||
+            this.forEachReferencedBy;
         this.compileInPlace = generatorConfiguration.compileInPlace || [];
 
         // Assigns this.options
@@ -150,11 +150,11 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
     }
 
     /**
-     * forEachReverseRelation
+     * forEachReferencedBy
      * TODO - rename this function to forEachRelation
      * @param - see `WriteFunctionProps`
      */
-    async forEachReverseRelation({
+    async forEachReferencedBy({
         schema,
         relation,
         project,

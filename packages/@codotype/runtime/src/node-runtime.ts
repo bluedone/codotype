@@ -21,6 +21,7 @@ import {
     ProjectBuild,
     RuntimeInjectorProps,
     GeneratorConstructorParams,
+    Datatypes,
 } from "@codotype/core";
 import { RuntimeProxyAdapter } from "./utils/runtimeProxyAdapter";
 import { runGenerator } from "./utils/runGenerator";
@@ -168,7 +169,7 @@ export class NodeRuntime implements Runtime {
             if (pluginDynamicImport && pluginMetadata) {
                 // Defines the new PluginRegistration
                 const newPluginRegistration: PluginRegistration = {
-                    id: pluginMetadata.id,
+                    id: pluginMetadata.identifier,
                     pluginPath,
                     pluginMetadata,
                     pluginDynamicImportPath,
@@ -178,9 +179,12 @@ export class NodeRuntime implements Runtime {
                 this.plugins.push(newPluginRegistration);
 
                 // Logs successful registration message
-                this.log(`Registered ${pluginMetadata.label} Codotype Plugin`, {
-                    level: RuntimeLogLevels.verbose,
-                });
+                this.log(
+                    `Registered ${pluginMetadata.content.label} Codotype Plugin`,
+                    {
+                        level: RuntimeLogLevels.verbose,
+                    },
+                );
 
                 // Resolves the promise with the newPluginRegistration
                 return Promise.resolve(newPluginRegistration);
@@ -385,11 +389,11 @@ export class NodeRuntime implements Runtime {
                     // forEachSchema helper function?
                     // forEachAttribute helper function?
                     // forEachRelation helper function?
-                    // forEachReverseRelation helper function?
+                    // forEachReferencedBy helper function?
                     // forEachReference helper function?
                 },
                 RelationTypes,
-                Datatype,
+                Datatypes,
                 ...options, // QUESTION - are options ever used here?
             };
             // // // //
@@ -530,7 +534,7 @@ export class NodeRuntime implements Runtime {
         // Finds the currently active plugin
         const plugins = await this.getPlugins();
         const activePlugin = plugins.find(
-            (p) => p.id === parentRuntimeAdapter.options.plugin.id,
+            (p) => p.id === parentRuntimeAdapter.options.plugin.identifier,
         );
 
         if (activePlugin === undefined) {

@@ -49,7 +49,7 @@ export const generatorPrototype: GeneratorConstructorParams = {
     compileInPlace: [],
     forEachSchema: jest.fn(),
     forEachRelation: jest.fn(),
-    forEachReverseRelation: jest.fn(),
+    forEachReferencedBy: jest.fn(),
 };
 
 export const generatorPrototype01: GeneratorConstructorParams = {

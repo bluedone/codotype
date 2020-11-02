@@ -42,12 +42,12 @@ export async function runGenerator(params: {
         }),
     );
 
-    // Invokes `generator.forEachReverseRelation` once for each in project.schemas
+    // Invokes `generator.forEachReferencedBy` once for each in project.schemas
     await Promise.all(
         project.schemas.map((schema: Schema) => {
             return Promise.all(
-                schema.references.map((relation: Relation) => {
-                    return runtimeProxyAdapter.forEachReverseRelation({
+                schema.referencedBy.map((relation: Relation) => {
+                    return runtimeProxyAdapter.forEachReferencedBy({
                         schema: schema,
                         relation,
                         project,
