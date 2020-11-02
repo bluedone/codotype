@@ -1,47 +1,15 @@
 import * as path from "path";
-import { CodotypeNodeRuntime, CodotypeBuildJob } from "@codotype/runtime";
+import { LocalFileSystemAdapter, NodeRuntime } from "@codotype/runtime";
 import { CommandOptions } from "../types";
-import { Project } from "@codotype/core";
+import {
+    ProjectInput,
+    ProjectBuild,
+    transformJsonProjectInput,
+    RuntimeLogLevels,
+} from "@codotype/core";
 
-// TODO - implement `inquirer` for basic build
+// TODO - implement `inquirer` for when RuntimeConstructor overwrite behavior is "ask"
 // import inquirer from "inquirer";
-
-// // // //
-
-// TODO - move project validator into @codotype/core
-// Validates Project instance against a Generator
-// const validateProject = (project, generator) => {
-//   return true;
-// };
-
-// // // //
-
-/**
- * transformJsonProject
- * TODO - move this into @codotype/core
- * @param jsonProject - Codotype Project parsed from codotype-project.json
- */
-export function transformJsonProject(jsonProject: any): Project {
-  // Defines the project instance
-  // TODO - ProjectConfiguation should have a separate validation/transformation function
-  const projectInstance: Project = {
-    id: Math.random().toString(), // TODO - use `UUID` function from `@codotype/core`
-    identifiers: {
-      label: String(jsonProject.identifiers.label),
-      snake: String(jsonProject.identifiers.snake),
-      camel: String(jsonProject.identifiers.camel),
-      pascal: String(jsonProject.identifiers.pascal),
-      kebab: String(jsonProject.identifiers.kebab)
-    },
-    generatorId: String(jsonProject.generatorId),
-    generatorVersion: String(jsonProject.generatorVersion),
-    configuration: jsonProject.configuration || {},
-    schemas: jsonProject.schemas
-  };
-
-  // Returns the Project instance
-  return projectInstance;
-}
 
 // // // //
 
@@ -52,51 +20,52 @@ export function transformJsonProject(jsonProject: any): Project {
  * @param options
  */
 async function runGenerator(projectPath: string, options: CommandOptions) {
-  // Pulls in requisite paths for codotype runtime
-  const projectRequirePath = path.resolve(process.cwd(), projectPath);
+    // Pulls in requisite paths for codotype runtime
+    const projectRequirePath = path.resolve(process.cwd(), projectPath);
 
-  // Validates project data
-  // const result = validateProject(project);
-  // if (!result) {
-  //   console.error(chalk.red(`Invalid project path: "${project}"`));
-  //   process.exit(1);
-  // }
+    // Validates project data
+    // TODO - add better validation for ProjectInput
 
-  // Pulls in projectJSON using the `projectRequirePath` and a dynamic import statement
-  // TODO - define a function that takes the project JSON and transforms it into a type-safe Project instance
-  const projectJSON: any = require(projectRequirePath);
+    // Pulls in projectJSON using the `projectRequirePath` and a dynamic import statement
+    // TODO - define a function that takes the project JSON and transforms it into a type-safe Project instance
+    const projectJSON: any = require(projectRequirePath);
 
-  // Transforms project JSON into projectInstance
-  const projectInstance: Project = transformJsonProject(projectJSON);
+    // Transforms project JSON into projectInstance
+    const projectInput: ProjectInput = transformJsonProjectInput(projectJSON);
 
-  // Assembles build job for codotype runtime
-  // NOTE - build.id is an empty string when building locally
-  const build: CodotypeBuildJob = {
-    id: "",
-    project: projectInstance
-  };
+    // Assembles build job for codotype runtime
+    // NOTE - build.id is an empty string when building locally
+    const build: ProjectBuild = {
+        id: "",
+        projectInput,
+    };
 
-  // Invoke runtime directly with parameters
-  const runtime = new CodotypeNodeRuntime();
+    // Invoke runtime directly with parameters
+    const runtime = new NodeRuntime({
+        cwd: process.cwd(),
+        logLevel: RuntimeLogLevels.info,
+        fileOverwriteBehavior: "force", // TODO - add option for "ask" in CLI
+        fileSystemAdapter: new LocalFileSystemAdapter(),
+    });
 
-  // Registers this generator via relative path
-  runtime.registerGenerator({
-    absolute_path: process.cwd()
-  });
+    // Registers this generator via relative path
+    runtime.registerPlugin({
+        absolutePath: process.cwd(),
+    });
 
-  // Executes the build
-  await runtime.execute({ build });
+    // Executes the build
+    await runtime.execute({ build });
 }
 
 // // // //
 
 export const runCommand = (projectPath: string, options: CommandOptions) => {
-  return runGenerator(projectPath, options).catch(err => {
-    // TODO - implement better error handling
-    console.log("CODOTYPE CLI ERROR!!");
-    console.log(err);
-    if (!process.env.CODOTYPE_CLI_TEST) {
-      process.exit(1);
-    }
-  });
+    return runGenerator(projectPath, options).catch((err) => {
+        // FEATURE - implement better error handling
+        console.log("CODOTYPE CLI ERROR!!");
+        console.log(err);
+        if (!process.env.CODOTYPE_CLI_TEST) {
+            process.exit(1);
+        }
+    });
 };

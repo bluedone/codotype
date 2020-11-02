@@ -1,7 +1,8 @@
 import chalk from "chalk";
 import * as open from "open";
 import { server } from "./server";
-import { CodotypeNodeRuntime } from "@codotype/runtime";
+import { LocalFileSystemAdapter, NodeRuntime } from "@codotype/runtime";
+import { RuntimeLogLevels } from "@codotype/core";
 
 // // // //
 
@@ -10,16 +11,20 @@ async function serve(options: any) {
     console.log(`\nStarting ${chalk.blue(`codotype serve`)}...`);
 
     // Invoke runtime directly with parameters
-    const runtime = new CodotypeNodeRuntime();
+    const runtime = new NodeRuntime({
+        cwd: process.cwd(),
+        logLevel: RuntimeLogLevels.info,
+        fileOverwriteBehavior: "force", // TODO - add option for "ask" in CLI
+        fileSystemAdapter: new LocalFileSystemAdapter(),
+    });
 
     // Registers this generator via relative path
     try {
-        runtime.registerGenerator({
-            absolute_path: process.cwd(),
+        runtime.registerPlugin({
+            absolutePath: process.cwd(),
         });
     } catch (err) {
         throw err;
-        return;
     }
 
     // // // //
@@ -47,7 +52,8 @@ async function serve(options: any) {
 
 // Exports `serve` command
 export const serveCommand = (...args) => {
-    return serve({ ...args }).catch(err => {
+    return serve({ ...args }).catch((err) => {
+        // FEATURE - add better error handling
         console.log(chalk.red("codotype cli error"));
         console.log(chalk.yellow("generator not found in local directory"));
         console.log(err);
