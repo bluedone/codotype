@@ -2,7 +2,6 @@ import { AttributePropertiesForm } from "./AttributePropertiesForm";
 import { AttributeDatatypeForm } from "./AttributeDatatypeForm";
 import { AttributeMetaForm } from "./AttributeMetaForm";
 import {
-    Attribute,
     Datatype,
     AttributeAddon,
     AttributeInput,

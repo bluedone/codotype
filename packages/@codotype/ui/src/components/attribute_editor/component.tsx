@@ -1,11 +1,11 @@
 import * as React from "react";
 import { SortableListHeader } from "../sortable_list_header";
 import {
-    Attribute,
     Datatype,
     AttributeAddon,
     AttributeInput,
     Primatives,
+    makeUniqueId,
 } from "@codotype/core";
 import { Droppable, DragDropContext } from "react-beautiful-dnd";
 import { AttributeFormModal } from "./AttributeFormModal";
@@ -42,25 +42,6 @@ export function disableSubmit(params: {
 }): boolean {
     return validateAttribute(params).length > 0;
 }
-
-/**
- * validateAttribute
- * @param params
- */
-// export function validateAttribute(params: {
-//     attributeInput: AttributeInput;
-//     attributeCollection: Attribute[];
-// }): boolean {
-//     const { attributeInput, attributeCollection } = params;
-//     return (
-//         attributeInput.identifiers.label !== "" &&
-//         attributeInput.identifiers.snake !== "" &&
-//         attributeInput.datatype !== null &&
-//         !attributeCollection.some(
-//             a => a.identifiers.label === attributeInput.identifiers.label,
-//         )
-//     );
-// }
 
 // // // //
 
@@ -102,16 +83,25 @@ export function AttributeEditor(props: AttributeEditorProps) {
 
     // // // //
     // Defines saveAttribute function
-    function saveAttribute(params: { newAttributeData: Attribute }) {
+    function saveAttribute(params: { newAttributeData: AttributeInput }) {
         // Insert new Attribute
-        if (params.newAttributeData.id === "") {
-            const newAttribute: AttributeInput = new Primatives.AttributeInput({
+        if (params.newAttributeData.id === "" || params.newAttributeData.id === null) {
+
+            if (params.newAttributeData.datatype === null) {
+                return;
+            }
+
+            const newAttributeParams = {
                 ...params.newAttributeData,
+                id: makeUniqueId(),
+                datatype: params.newAttributeData.datatype,
                 addons: {
                     // ...buildDefaultAddonValue(props.addons), // TODO - reintegrate this
                     ...params.newAttributeData.addons,
                 },
-            });
+            }
+
+            const newAttribute: AttributeInput = new Primatives.AttributeInput(newAttributeParams);
 
             setState({
                 lastUpdatedAt: Date.now(),
@@ -150,7 +140,7 @@ export function AttributeEditor(props: AttributeEditorProps) {
                 tooltip="shift+a"
                 onClick={() => {
                     const newAttribute: AttributeInput = new Primatives.AttributeInput(
-                        {},
+                        { id: "" },
                     );
                     setAttributeInput(newAttribute);
                 }}
@@ -172,9 +162,11 @@ export function AttributeEditor(props: AttributeEditorProps) {
                         setAttributeInput(null);
                     }}
                     onSubmit={() => {
-                        // TODO - fix this
-                        // @ts-ignore
-                        saveAttribute({ attributeInput });
+                        saveAttribute({
+                            newAttributeData: {
+                                ...attributeInput
+                            }
+                        });
                     }}
                 >
                     <AttributeForm
@@ -193,9 +185,7 @@ export function AttributeEditor(props: AttributeEditorProps) {
                                 return;
                             }
                             // Save attribute on keydown "Enter"
-                            // TODO - fix this
-                            // @ts-ignore
-                            saveAttribute({ attributeInput });
+                            saveAttribute({ newAttributeData: attributeInput });
                         }}
                         addons={props.addons}
                         supportedDatatypes={props.supportedDatatypes}
@@ -296,7 +286,7 @@ export function AttributeEditor(props: AttributeEditorProps) {
                 <AttributeListEmpty
                     onClick={() => {
                         const newAttribute: AttributeInput = new Primatives.AttributeInput(
-                            {},
+                            { id: "" },
                         );
                         setAttributeInput(newAttribute);
                     }}
@@ -306,7 +296,7 @@ export function AttributeEditor(props: AttributeEditorProps) {
                 keyName="shift+a"
                 onKeyDown={() => {
                     const newAttribute: AttributeInput = new Primatives.AttributeInput(
-                        {},
+                        { id: "" },
                     );
                     setAttributeInput(newAttribute);
                 }}
