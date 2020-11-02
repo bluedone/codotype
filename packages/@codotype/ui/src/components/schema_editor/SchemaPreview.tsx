@@ -2,12 +2,13 @@ import * as React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CopyToClipboard } from "../copy_to_clipboard";
 import { faCopy } from "@fortawesome/free-solid-svg-icons";
-import { InfoTooltip } from "../info_tooltip";
 import {
     Schema,
+    SchemaInput,
     renderSchemaJson,
     renderSchemaGrapqhQL,
     renderSchemaTypeScript,
+    ProjectInput,
 } from "@codotype/core";
 import { faCheckCircle } from "@fortawesome/free-regular-svg-icons";
 
@@ -19,22 +20,22 @@ import { faCheckCircle } from "@fortawesome/free-regular-svg-icons";
 type RenderType = "json" | "typescript" | "graphql";
 
 export function schemaPreviewContent(props: {
-    schema: Schema;
-    schemas: Schema[];
+    schemaInput: SchemaInput;
+    projectInput: ProjectInput;
     renderType: RenderType;
 }) {
-    const { schema, schemas, renderType } = props;
+    const { schemaInput, projectInput, renderType } = props;
 
     if (renderType === "json") {
-        return renderSchemaJson({ schema, schemas });
+        return renderSchemaJson({ schemaInput, projectInput });
     }
 
     if (renderType === "typescript") {
-        return renderSchemaTypeScript({ schema, schemas });
+        return renderSchemaTypeScript({ schemaInput, projectInput });
     }
 
     if (renderType === "graphql") {
-        return renderSchemaGrapqhQL({ schema, schemas });
+        return renderSchemaGrapqhQL({ schemaInput, projectInput });
     }
 
     // Return null if no match
@@ -49,8 +50,11 @@ export function schemaPreviewContent(props: {
  * TODO - when clicking a relation it should jump to the corresponding schema
  * QUESTION - should generators be able to configure which is the default preview type?
  */
-export function SchemaPreview(props: { schema: Schema; schemas: Schema[] }) {
-    const { schema, schemas } = props;
+export function SchemaPreview(props: {
+    schemaInput: SchemaInput;
+    projectInput: ProjectInput;
+}) {
+    const { schemaInput, projectInput } = props;
 
     const [renderType, setRenderType] = React.useState<RenderType>(
         "typescript",
@@ -70,8 +74,8 @@ export function SchemaPreview(props: { schema: Schema; schemas: Schema[] }) {
 
     const content: string =
         schemaPreviewContent({
-            schema,
-            schemas,
+            schemaInput,
+            projectInput,
             renderType,
         }) || "";
 

@@ -27,14 +27,14 @@ export function SchemaIncomingRelations(props: SchemaIncomingRelationsProps) {
                         <InfoTooltip
                             id="schema-incoming-relations"
                             placement="left"
-                            message={`Relations which reference the ${inflatedSchema.identifiers.singular.label} Schema`}
+                            message={`Relations which reference the ${inflatedSchema.identifiers.singular.title} Schema`}
                         />
                     </span>
                 </p>
             </div>
             <div className="col-lg-12">
                 <ul className="list-group">
-                    {inflatedSchema.references.length === 0 && (
+                    {inflatedSchema.referencedBy.length === 0 && (
                         <li className="list-group-item">
                             <strong className="mb-0 mt-1 text-muted">
                                 No Incoming Relations
@@ -42,12 +42,12 @@ export function SchemaIncomingRelations(props: SchemaIncomingRelationsProps) {
                             <br />
                             <p className="text-muted mb-0">
                                 Relations which reference the{" "}
-                                {inflatedSchema.identifiers.singular.label}{" "}
+                                {inflatedSchema.identifiers.singular.title}{" "}
                                 Schema
                             </p>
                         </li>
                     )}
-                    {inflatedSchema.references.map(r => {
+                    {inflatedSchema.referencedBy.map(r => {
                         return (
                             <OverlayTrigger
                                 key={r.id}
@@ -56,7 +56,7 @@ export function SchemaIncomingRelations(props: SchemaIncomingRelationsProps) {
                                     <Tooltip id="attribute-editor-header">
                                         {"Jump to " +
                                             r.identifiers.source.canonical
-                                                .singular.label +
+                                                .singular.title +
                                             " schema"}
                                     </Tooltip>
                                 }
@@ -66,7 +66,7 @@ export function SchemaIncomingRelations(props: SchemaIncomingRelationsProps) {
                                     style={{ cursor: "pointer" }}
                                     key={r.id}
                                     onClick={() => {
-                                        props.onSelectSchema(r.sourceSchemaId);
+                                        props.onSelectSchema(r.sourceSchemaID);
                                     }}
                                 >
                                     <RelationBadge

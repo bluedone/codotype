@@ -1,17 +1,16 @@
 import * as React from "react";
-import { SchemaPreview } from "./SchemaPreview";
+// import { SchemaPreview } from "./SchemaPreview";
 import { AttributeEditor } from "../attribute_editor";
-import { RelationEditor } from "../relation_editor";
+// import { RelationEditor } from "../relation_editor";
 import { SchemaDetailHeader } from "./SchemaDetailHeader";
 import {
     inflateSchema,
-    PluginConfiguration,
-    Schema,
-    Attribute,
-    Relation,
     Schema,
     PluginMetadata,
     UUID,
+    SchemaInput,
+    AttributeInput,
+    ConfigurationValue,
 } from "@codotype/core";
 import { ConfigurationGroupSelector } from "./ConfigurationGroupSelector";
 import { SchemaIncomingRelations } from "./SchemaIncomingRelations";
@@ -19,10 +18,10 @@ import { SchemaIncomingRelations } from "./SchemaIncomingRelations";
 // // // //
 
 interface SchemaDetailProps {
-    schema: Schema;
-    schemas: Schema[];
+    schema: SchemaInput;
+    schemas: SchemaInput[];
     PluginMetadata: PluginMetadata;
-    onChange: (updatedSchema: Schema) => void;
+    onChange: (updatedSchema: SchemaInput) => void;
     onClickEdit: () => void;
     onConfirmDelete: () => void;
     onSelectSchema: (nextSelectedSchemaId: UUID) => void;
@@ -34,8 +33,8 @@ interface SchemaDetailProps {
  */
 export function SchemaDetail(props: SchemaDetailProps) {
     const inflatedSchema: Schema = inflateSchema({
-        schema: props.schema,
-        schemas: props.schemas,
+        schemaInput: props.schema,
+        relations: [], // TODO - pass relations here
     });
 
     const { schemaEditorConfiguration } = props.PluginMetadata;
@@ -44,7 +43,7 @@ export function SchemaDetail(props: SchemaDetailProps) {
         <div className="row">
             <div className="col-sm-12">
                 <SchemaDetailHeader
-                    schema={props.schema}
+                    schemaInput={props.schema}
                     schemas={props.schemas}
                     onClickEdit={props.onClickEdit}
                     onConfirmDelete={props.onConfirmDelete}
@@ -57,7 +56,7 @@ export function SchemaDetail(props: SchemaDetailProps) {
                     configurationGroups={
                         schemaEditorConfiguration.configurationGroups
                     }
-                    onChange={(updatedConfiguration: PluginConfiguration) => {
+                    onChange={(updatedConfiguration: ConfigurationValue) => {
                         props.onChange({
                             ...props.schema,
                             configuration: updatedConfiguration,
@@ -74,9 +73,11 @@ export function SchemaDetail(props: SchemaDetailProps) {
                                 addons={
                                     schemaEditorConfiguration.attributeAddons
                                 }
-                                onChange={(updatedAttributes: Attribute[]) => {
+                                onChange={(
+                                    updatedAttributes: AttributeInput[],
+                                ) => {
                                     // Defines updated schema
-                                    const updatedSchema: Schema = {
+                                    const updatedSchema: SchemaInput = {
                                         ...props.schema,
                                         attributes: updatedAttributes,
                                     };
@@ -86,7 +87,7 @@ export function SchemaDetail(props: SchemaDetailProps) {
                                 }}
                             />
                             {/* <hr /> */}
-                            <RelationEditor
+                            {/* <RelationEditor
                                 selectedSchema={props.schema}
                                 relationReferences={inflatedSchema.relations}
                                 schemas={props.schemas}
@@ -104,13 +105,13 @@ export function SchemaDetail(props: SchemaDetailProps) {
                                     // Passes into `props.onChange`
                                     props.onChange(updatedSchema);
                                 }}
-                            />
+                            /> */}
                         </div>
                         <div className="pl-md-0 col-sm-6 mt-3 mt-lg-0">
-                            <SchemaPreview
-                                schema={props.schema}
+                            {/* <SchemaPreview
+                                schemaInput={props.schema}
                                 schemas={props.schemas}
-                            />
+                            /> */}
                             <hr />
                             <SchemaIncomingRelations
                                 inflatedSchema={inflatedSchema}

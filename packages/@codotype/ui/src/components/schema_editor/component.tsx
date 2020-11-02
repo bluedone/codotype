@@ -21,7 +21,7 @@ import { validateSchema } from "./validateSchema";
 // // // //
 
 interface EditorState {
-    schemas: Schema[];
+    schemas: SchemaInput[];
     lastUpdatedAt: null | number;
 }
 
@@ -31,9 +31,9 @@ interface EditorState {
  * @param props.onChange
  */
 export function SchemaEditorLayout(props: {
-    schemas: Schema[];
+    schemas: SchemaInput[];
     pluginMetadata: PluginMetadata;
-    onChange: (updatedSchemas: Schema[]) => void;
+    onChange: (updatedSchemas: SchemaInput[]) => void;
 }) {
     const [showModal, setShowModal] = React.useState(false);
     const [showEditModal, setShowEditModal] = React.useState(false);
@@ -66,8 +66,8 @@ export function SchemaEditorLayout(props: {
     }
 
     // Defines selectedSchema
-    const selectedSchema: Schema | undefined = state.schemas.find(
-        (s: Schema) => {
+    const selectedSchema: SchemaInput | undefined = state.schemas.find(
+        (s: SchemaInput) => {
             return s.id === selectedSchemaId;
         },
     );
@@ -86,9 +86,8 @@ export function SchemaEditorLayout(props: {
                 ...props.pluginMetadata.schemaEditorConfiguration
                     .newSchemaDefaults.attributes,
             ],
-            removable: true,
             locked: false,
-            source: CreatedByValues.user,
+            createdBy: CreatedByValues.user,
             identifiers: newTokenPluralization,
             configuration: buildDefaultConfiguration(
                 props.pluginMetadata.schemaEditorConfiguration
@@ -97,11 +96,13 @@ export function SchemaEditorLayout(props: {
         });
 
         // TODO - add a mechanism here to update ProjectInput.relations with a new default RelationInput pulled from PluginMetadata.schema
+        // TODO - add a mechanism here to update ProjectInput.relations with a new default RelationInput pulled from PluginMetadata.schema
+        // TODO - add a mechanism here to update ProjectInput.relations with a new default RelationInput pulled from PluginMetadata.schema
 
         console.log(newSchema);
 
         // Defines updated schemas, including NEW schema
-        const updatedSchemas: Schema[] = [...state.schemas, newSchema];
+        const updatedSchemas: SchemaInput[] = [...state.schemas, newSchema];
 
         // Updates state.schemas with the latest schemas
         setState({
@@ -129,18 +130,20 @@ export function SchemaEditorLayout(props: {
         }
 
         // Defines updatedSchema
-        const updatedSchema: Schema = {
+        const updatedSchema: SchemaInput = {
             ...selectedSchema,
             identifiers: newTokenPluralization,
         };
 
         // Defines updated schemas, including NEW schema
-        const updatedSchemas: Schema[] = state.schemas.map((s: Schema) => {
-            if (s.id === updatedSchema.id) {
-                return updatedSchema;
-            }
-            return s;
-        });
+        const updatedSchemas: SchemaInput[] = state.schemas.map(
+            (s: SchemaInput) => {
+                if (s.id === updatedSchema.id) {
+                    return updatedSchema;
+                }
+                return s;
+            },
+        );
 
         // Updates state.schemas with the latest schemas
         setState({
@@ -188,7 +191,7 @@ export function SchemaEditorLayout(props: {
                                 className="btn btn-primary"
                                 disabled={
                                     newTokenPluralization === null ||
-                                    newTokenPluralization.singular.label === ""
+                                    newTokenPluralization.singular.title === ""
                                 }
                                 onClick={() => {
                                     createNewSchema();
@@ -213,7 +216,7 @@ export function SchemaEditorLayout(props: {
             return;
         }
 
-        const updatedSchemas = reorder<Schema>(
+        const updatedSchemas = reorder<SchemaInput>(
             state.schemas,
             result.source.index,
             result.destination.index,
@@ -268,7 +271,7 @@ export function SchemaEditorLayout(props: {
                     <SchemaSelector
                         schemas={state.schemas}
                         selectedSchemaId={String(selectedSchemaId)}
-                        onChange={(updatedSelectedSchema: Schema) => {
+                        onChange={(updatedSelectedSchema: SchemaInput) => {
                             setSelectedSchemaId(updatedSelectedSchema.id);
                         }}
                     />
@@ -283,10 +286,10 @@ export function SchemaEditorLayout(props: {
                         onSelectSchema={(nextSelectedSchemaId: UUID) => {
                             setSelectedSchemaId(nextSelectedSchemaId);
                         }}
-                        onChange={(updatedSchema: Schema) => {
+                        onChange={(updatedSchema: SchemaInput) => {
                             // Defines updatedSchemas to include `updatedSchema`
-                            const updatedSchemas: Schema[] = state.schemas.map(
-                                (s: Schema) => {
+                            const updatedSchemas: SchemaInput[] = state.schemas.map(
+                                (s: SchemaInput) => {
                                     if (s.id === selectedSchemaId) {
                                         return updatedSchema;
                                     }
@@ -305,8 +308,8 @@ export function SchemaEditorLayout(props: {
                         }}
                         onConfirmDelete={() => {
                             // Defines updatedSchemas without `selectedSchema`
-                            const updatedSchemas: Schema[] = state.schemas.filter(
-                                (s: Schema) => {
+                            const updatedSchemas: SchemaInput[] = state.schemas.filter(
+                                (s: SchemaInput) => {
                                     return s.id !== selectedSchemaId;
                                 },
                             );
@@ -338,7 +341,7 @@ export function SchemaEditorLayout(props: {
                     })}
                 >
                     <SchemaForm
-                        label={selectedSchema.identifiers.singular.label}
+                        label={selectedSchema.identifiers.singular.title}
                         onChange={updatedTokens => {
                             setNewTokenPluralization(updatedTokens);
                         }}

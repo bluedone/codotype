@@ -1,17 +1,17 @@
 import * as React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
-import { Schema, CreatedByValues } from "@codotype/core";
+import { SchemaInput, CreatedByValues } from "@codotype/core";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 // // // //
 
 export function SchemaEditButton(props: {
-    schema: Schema;
+    schema: SchemaInput;
     onClick: () => void;
 }) {
     const { schema } = props;
-    if (schema.source === CreatedByValues.plugin && schema.locked) {
+    if (schema.createdBy === CreatedByValues.plugin && schema.locked) {
         return null;
     }
 
@@ -21,7 +21,7 @@ export function SchemaEditButton(props: {
             overlay={
                 <Tooltip id="edit-button-tooltip">
                     Edit the{" "}
-                    <strong>{schema.identifiers.singular.label}</strong> Schema
+                    <strong>{schema.identifiers.singular.title}</strong> Schema
                 </Tooltip>
             }
         >

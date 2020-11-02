@@ -4,7 +4,12 @@ import { faTrashAlt, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import styled from "styled-components";
 import classnames from "classnames";
-import { Schema, CreatedByValues, inflateSchema } from "@codotype/core";
+import {
+    Schema,
+    CreatedByValues,
+    inflateSchema,
+    SchemaInput,
+} from "@codotype/core";
 
 // // // //
 
@@ -39,26 +44,36 @@ const StyledButtonDisabled = styled.button``;
  * @param props.onClick
  */
 export function SchemaDeleteButton(props: {
-    schema: Schema;
-    schemas: Schema[];
+    schemaInput: SchemaInput;
+    schemas: SchemaInput[];
     onClick: () => void;
 }) {
-    const { schema, schemas } = props;
+    const { schemaInput, schemas } = props;
 
-    const inflatedSchema = inflateSchema({ schema, schemas });
+    const inflatedSchema: Schema = inflateSchema({
+        schemaInput,
+        relations: [],
+    }); // TODO - pass relation here
 
     // Defines boolean indicating whether or not the schema can be removed
     const disableSubmit: boolean =
-        inflatedSchema.references.filter(r => r.sourceSchemaId !== schema.id)
-            .length > 0;
+        inflatedSchema.referencedBy.filter(
+            r => r.sourceSchemaID !== schemaInput.id,
+        ).length > 0;
 
-    if (schema.source === CreatedByValues.plugin && schema.locked) {
+    if (
+        schemaInput.createdBy === CreatedByValues.plugin &&
+        schemaInput.locked
+    ) {
         return (
             <OverlayTrigger
                 placement="left"
                 overlay={
                     <Tooltip id="auto-generated-schema-tooltip">
-                        The <strong>{schema.identifiers.singular.label}</strong>{" "}
+                        The{" "}
+                        <strong>
+                            {schemaInput.identifiers.singular.title}
+                        </strong>{" "}
                         Schema is auto-generated and may not be edited.
                     </Tooltip>
                 }
@@ -76,7 +91,7 @@ export function SchemaDeleteButton(props: {
 
     let tooltipContent = (
         <React.Fragment>
-            Remove the <strong>{schema.identifiers.singular.label}</strong>{" "}
+            Remove the <strong>{schemaInput.identifiers.singular.title}</strong>{" "}
             Schema.
         </React.Fragment>
     );
@@ -85,7 +100,7 @@ export function SchemaDeleteButton(props: {
         tooltipContent = (
             <React.Fragment>
                 You cannot remove the{" "}
-                <strong>{schema.identifiers.singular.label}</strong> Schema
+                <strong>{schemaInput.identifiers.singular.title}</strong> Schema
                 because it is referenced by a relation on another Schema.
             </React.Fragment>
         );
@@ -96,7 +111,7 @@ export function SchemaDeleteButton(props: {
         <OverlayTrigger
             placement="left"
             overlay={
-                <Tooltip id={`delete-button-tooltip-${schema.id}`}>
+                <Tooltip id={`delete-button-tooltip-${schemaInput.id}`}>
                     {tooltipContent}
                 </Tooltip>
             }

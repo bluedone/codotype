@@ -2,14 +2,15 @@ import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { SchemaPreview } from "../SchemaPreview";
 import { Story } from "../../dev";
-import { userSchema } from "../../relation_editor/__tests__/test_state";
+import { buildDefaultProjectInput, testState } from "@codotype/core"
+const { userSchema } = testState;
 
 // // // //
 
 storiesOf("Components/SchemaPreview", module).add("renders", () => {
     return (
         <Story>
-            <SchemaPreview schema={userSchema} schemas={[]} />
+            <SchemaPreview schemaInput={userSchema} projectInput={buildDefaultProjectInput(testState.cdkPluginMeta)} />
         </Story>
     );
 });

@@ -25,7 +25,7 @@ export function validateSchema(params: {
     }
 
     // Ensure Schema label is defined
-    if (tokenPluralization.singular.label === "") {
+    if (tokenPluralization.singular.title === "") {
         errors.push(SCHEMA_ERROR_MESSAGE.emptyLabel);
     }
 
@@ -33,8 +33,8 @@ export function validateSchema(params: {
     if (
         schemaCollection.some(
             s =>
-                s.identifiers.singular.label ===
-                tokenPluralization.singular.label,
+                s.identifiers.singular.title ===
+                tokenPluralization.singular.title,
         )
     ) {
         errors.push(SCHEMA_ERROR_MESSAGE.duplicateLabel);

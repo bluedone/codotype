@@ -2,7 +2,7 @@ import * as React from "react";
 import {
     buildTokenPluralization,
     validateTokenPluralization,
-    sanitizeLabel,
+    sanitizeTitle,
     TokenPluralization,
 } from "@codotype/core";
 import classnames from "classnames";
@@ -83,8 +83,8 @@ export function MetaPreview(props: MetaPreviewProps) {
                 <td>Label</td>
                 <TokenCell
                     token="label"
-                    value={tokens.singular.label}
-                    valuePlural={tokens.plural.label}
+                    value={tokens.singular.title}
+                    valuePlural={tokens.plural.title}
                     validationFailures={validationFailures}
                 />
             </tr>
@@ -216,7 +216,7 @@ export function SchemaForm(props: SchemaFormProps) {
                             placeholder="Label"
                             value={label}
                             onChange={e => {
-                                setLabel(sanitizeLabel(e.currentTarget.value));
+                                setLabel(sanitizeTitle(e.currentTarget.value));
                             }}
                             onKeyDown={e => {
                                 if (e.keyCode === 13) {

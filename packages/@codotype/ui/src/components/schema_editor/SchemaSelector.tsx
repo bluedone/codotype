@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Schema } from "@codotype/core";
+import { SchemaInput } from "@codotype/core";
 import classnames from "classnames";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -30,10 +30,10 @@ const StyledListItem = styled.li`
 // `;
 
 export function SchemaSelectorItem(props: {
-    schema: Schema;
+    schema: SchemaInput;
     selected: boolean;
     index: number;
-    onClick: (selectedSchema: Schema) => void;
+    onClick: (selectedSchema: SchemaInput) => void;
 }) {
     return (
         <Draggable draggableId={String(props.schema.id)} index={props.index}>
@@ -55,30 +55,31 @@ export function SchemaSelectorItem(props: {
                 >
                     <div className="row align-items-center d-flex flex-row justify-content-between">
                         <span className="d-flex ml-2">
-                            {props.schema.identifiers.singular.label}
+                            {props.schema.identifiers.singular.title}
                         </span>
 
                         {/* Renders warning tooltip */}
-                        {!props.schema.attributes.length &&
-                            !props.schema.relations.length && (
-                                <OverlayTrigger
-                                    placement="right"
-                                    overlay={
-                                        <Tooltip
-                                            id={`empty-schema-warning-tooltip-${props.schema.id}`}
-                                        >
-                                            Schema requires at least one
-                                            attribute or relation - empty
-                                            schemas will be ignored
-                                        </Tooltip>
-                                    }
-                                >
-                                    <FontAwesomeIcon
-                                        className="mr-1 text-warning"
-                                        icon={faExclamationCircle}
-                                    />
-                                </OverlayTrigger>
-                            )}
+                        {/* TODO - update this to check relations */}
+                        {/* !props.schema.relations.length &&  */}
+                        {!props.schema.attributes.length && (
+                            <OverlayTrigger
+                                placement="right"
+                                overlay={
+                                    <Tooltip
+                                        id={`empty-schema-warning-tooltip-${props.schema.id}`}
+                                    >
+                                        Schema requires at least one attribute
+                                        or relation - empty schemas will be
+                                        ignored
+                                    </Tooltip>
+                                }
+                            >
+                                <FontAwesomeIcon
+                                    className="mr-1 text-warning"
+                                    icon={faExclamationCircle}
+                                />
+                            </OverlayTrigger>
+                        )}
                     </div>
                 </StyledListItem>
             )}
@@ -87,9 +88,9 @@ export function SchemaSelectorItem(props: {
 }
 
 export function SchemaSelector(props: {
-    schemas: Schema[];
+    schemas: SchemaInput[];
     selectedSchemaId: string;
-    onChange: (selectedSchema: Schema) => void;
+    onChange: (selectedSchema: SchemaInput) => void;
 }) {
     return (
         <div className="card shadow-sm">
@@ -104,19 +105,21 @@ export function SchemaSelector(props: {
                             ref={provided.innerRef}
                             {...provided.droppableProps}
                         >
-                            {props.schemas.map((s: Schema, index: number) => {
-                                return (
-                                    <SchemaSelectorItem
-                                        index={index}
-                                        key={s.id}
-                                        schema={s}
-                                        selected={
-                                            s.id === props.selectedSchemaId
-                                        }
-                                        onClick={props.onChange}
-                                    />
-                                );
-                            })}
+                            {props.schemas.map(
+                                (s: SchemaInput, index: number) => {
+                                    return (
+                                        <SchemaSelectorItem
+                                            index={index}
+                                            key={s.id}
+                                            schema={s}
+                                            selected={
+                                                s.id === props.selectedSchemaId
+                                            }
+                                            onClick={props.onChange}
+                                        />
+                                    );
+                                },
+                            )}
                             {provided.placeholder}
                         </ul>
                     );

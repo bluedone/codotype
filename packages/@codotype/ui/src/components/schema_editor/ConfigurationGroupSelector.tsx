@@ -3,7 +3,7 @@ import { ConfigurationInput } from "../configuration_group_input";
 import {
     ConfigurationGroup,
     OptionValueInstance,
-    PluginConfiguration,
+    ConfigurationValue,
 } from "@codotype/core";
 
 // // // //
@@ -43,10 +43,10 @@ export function ConfigurationGroupTab(props: {
  * @param props.onChange
  */
 export function ConfigurationGroupSelector(props: {
-    configuration: PluginConfiguration;
+    configuration: ConfigurationValue;
     configurationGroups: ConfigurationGroup[];
     children: React.ReactNode;
-    onChange: (updatedPluginConfiguration: PluginConfiguration) => void;
+    onChange: (updatedPluginConfiguration: ConfigurationValue) => void;
 }) {
     const { configurationGroups } = props;
 
@@ -97,7 +97,7 @@ export function ConfigurationGroupSelector(props: {
                                             selectedConfigurationGroup.identifier &&
                                         !viewingSchemas
                                     }
-                                    label={configurationGroup.label}
+                                    label={configurationGroup.content.label}
                                 />
                             );
                         },
@@ -116,7 +116,7 @@ export function ConfigurationGroupSelector(props: {
                         }
                         onChange={(updatedVal: OptionValueInstance) => {
                             // Defines updatd project with latest configuration value
-                            const updatedPluginConfiguration: PluginConfiguration = {
+                            const updatedPluginConfiguration: ConfigurationValue = {
                                 ...props.configuration,
                                 [selectedConfigurationGroup.identifier]: updatedVal,
                             };

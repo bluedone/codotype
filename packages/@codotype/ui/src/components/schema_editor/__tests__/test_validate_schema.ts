@@ -1,16 +1,14 @@
 import { validateSchema, SCHEMA_ERROR_MESSAGE } from "../validateSchema";
 import {
-    Schema,
+    SchemaInput,
     testState,
     TokenPluralization,
     EMPTY_TOKEN_CASING,
 } from "@codotype/core";
-// schemas.push(testState.movieSchema);
-// schemas.push(testState.userSchema);
 
 // // // //
 
-const testCases: [string, TokenPluralization, Schema[], string[]][] = [
+const testCases: [string, TokenPluralization, SchemaInput[], string[]][] = [
     [
         "valid schema (empty collection)",
         { ...testState.movieSchema.identifiers },
