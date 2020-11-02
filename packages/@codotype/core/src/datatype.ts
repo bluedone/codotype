@@ -1,5 +1,3 @@
-// TODO - add ID_ARRAY
-// TODO - add AUTO_INCREMENTED_ID_ARRAY
 export type Datatype =
     // Standard datatypes
     | "STRING"
@@ -36,7 +34,9 @@ export type Datatype =
     | "TIME_ARRAY"
     | "DATETIME_ARRAY"
     | "TIMESTAMP_ARRAY"
+    | "ID_ARRAY"
     | "UUID_ARRAY"
+    | "AUTO_INCREMENTED_ID_ARRAY"
     | "OBJECT_ID_ARRAY"
 
     // Special Datatypes
@@ -81,7 +81,9 @@ export enum Datatypes {
     TIME_ARRAY = "TIME_ARRAY", // Postgres
     DATETIME_ARRAY = "DATETIME_ARRAY", // Postgres
     TIMESTAMP_ARRAY = "TIMESTAMP_ARRAY", // MongoDB
+    ID_ARRAY = "ID_ARRAY", // Postgres, MongoDB
     UUID_ARRAY = "UUID_ARRAY", // Postgres
+    AUTO_INCREMENTED_ID_ARRAY = "AUTO_INCREMENTED_ID_ARRAY", // Postgres
     OBJECT_ID_ARRAY = "OBJECT_ID_ARRAY", // MongoDB
 
     // Special Datatypes
