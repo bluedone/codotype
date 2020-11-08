@@ -28,7 +28,7 @@ async function doctor() {
     const runtime = new NodeRuntime({
         cwd: process.cwd(),
         logLevel: RuntimeLogLevels.info,
-        fileOverwriteBehavior: "force", // TODO - add option for "ask" in CLI
+        fileOverwriteBehavior: "force", // FEATURE - add option for "ask" in CLI
         fileSystemAdapter: new LocalFileSystemAdapter(),
     });
 
@@ -49,7 +49,6 @@ async function doctor() {
     const validations = validatePlugin({ plugin: generatorMeta });
 
     // Logs validation of properties
-    // TODO - should be part of @codotype/core
     console.log(`the doctor is ${chalk.blue(`validating the generator:`)}`);
     validations.forEach((v) => {
         if (v.valid) {

@@ -14,7 +14,7 @@ async function serve(options: any) {
     const runtime = new NodeRuntime({
         cwd: process.cwd(),
         logLevel: RuntimeLogLevels.info,
-        fileOverwriteBehavior: "force", // TODO - add option for "ask" in CLI
+        fileOverwriteBehavior: "force", // FEATURE - add option for "ask" in CLI
         fileSystemAdapter: new LocalFileSystemAdapter(),
     });
 

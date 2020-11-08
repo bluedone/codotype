@@ -8,7 +8,7 @@ import {
     RuntimeLogLevels,
 } from "@codotype/core";
 
-// TODO - implement `inquirer` for when RuntimeConstructor overwrite behavior is "ask"
+// FEATURE - implement `inquirer` for when RuntimeConstructor overwrite behavior is "ask"
 // import inquirer from "inquirer";
 
 // // // //
@@ -23,11 +23,8 @@ async function runGenerator(projectPath: string, options: CommandOptions) {
     // Pulls in requisite paths for codotype runtime
     const projectRequirePath = path.resolve(process.cwd(), projectPath);
 
-    // Validates project data
-    // TODO - add better validation for ProjectInput
-
     // Pulls in projectJSON using the `projectRequirePath` and a dynamic import statement
-    // TODO - define a function that takes the project JSON and transforms it into a type-safe Project instance
+    // CHORE - wrap this in try/catch
     const projectJSON: any = require(projectRequirePath);
 
     // Transforms project JSON into projectInstance
@@ -44,7 +41,7 @@ async function runGenerator(projectPath: string, options: CommandOptions) {
     const runtime = new NodeRuntime({
         cwd: process.cwd(),
         logLevel: RuntimeLogLevels.info,
-        fileOverwriteBehavior: "force", // TODO - add option for "ask" in CLI
+        fileOverwriteBehavior: "force", // FEATURE - add option for "ask" in CLI
         fileSystemAdapter: new LocalFileSystemAdapter(),
     });
 
