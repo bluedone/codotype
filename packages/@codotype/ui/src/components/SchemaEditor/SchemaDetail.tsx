@@ -50,6 +50,7 @@ export function SchemaDetail(props: SchemaDetailProps) {
         <div className="row">
             <div className="col-sm-12">
                 <SchemaDetailHeader
+                    projectInput={props.projectInput}
                     schemaInput={props.schema}
                     schemas={props.projectInput.schemas}
                     onClickEdit={props.onClickEdit}

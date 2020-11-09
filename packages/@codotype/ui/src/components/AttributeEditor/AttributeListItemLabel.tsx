@@ -31,22 +31,17 @@ export function AttributeListItemLabel(props: AttributeListItemLabelProps) {
             </OverlayTrigger>
 
             {/* Attribute title */}
+            {/* TODO - update this to use icons from ADDONS */}
             <span className="ml-2">{attribute.identifiers.title}</span>
 
             {/* Required badge */}
+            {/* TODO - update this to use icons from ADDONS */}
             {attribute.addons.required && (
                 <span className="ml-1 text-danger">*</span>
             )}
 
-            {/* <b-badge
-                className='ml-2'
-                variant="light"
-                title="Title Attribute"
-            >
-              <i class="fa text-primary fa-tag" />
-            </b-badge> */}
-
             {/* Unique badge + tooltip */}
+            {/* TODO - update this to use icons from ADDONS */}
             {attribute.addons.unique && (
                 <OverlayTrigger
                     placement="right"

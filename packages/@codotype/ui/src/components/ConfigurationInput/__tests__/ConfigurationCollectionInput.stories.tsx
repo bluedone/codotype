@@ -21,8 +21,7 @@ import { ConfigurationInputFormGroup } from "../ConfigurationInputFormGroup";
 
 // // // //
 
-// TODO - move into `test_data`
-// TODO - export StringPropertyTransformations + NumberValueFilter + Validations from @codotype/type (and include constructors as well!)
+// CHORE - move into `test_data`
 const ApiActionConfigurationGroup: ConfigurationGroup = new Primatives.ConfigurationGroup(
     {
         content: {

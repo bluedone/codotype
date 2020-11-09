@@ -9,6 +9,8 @@ import {
     CreatedByValues,
     inflateSchema,
     SchemaInput,
+    ProjectInput,
+    buildRelations,
 } from "@codotype/core";
 
 // // // //
@@ -45,15 +47,18 @@ const StyledButtonDisabled = styled.button``;
  */
 export function SchemaDeleteButton(props: {
     schemaInput: SchemaInput;
-    schemas: SchemaInput[];
+    projectInput: ProjectInput;
     onClick: () => void;
 }) {
-    const { schemaInput, schemas } = props;
+    const { schemaInput, projectInput } = props;
 
     const inflatedSchema: Schema = inflateSchema({
         schemaInput,
-        relations: [],
-    }); // TODO - pass relation here
+        relations: buildRelations({
+            schemaInputs: projectInput.schemas,
+            relationInputs: projectInput.relations,
+        })
+    });
 
     // Defines boolean indicating whether or not the schema can be removed
     const disableSubmit: boolean =

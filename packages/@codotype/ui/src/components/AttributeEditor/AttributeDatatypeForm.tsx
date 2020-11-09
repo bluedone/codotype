@@ -36,7 +36,7 @@ export function DatatypeOption(props: DatatypeOptionProps) {
 
 /**
  * AttributeDatatypeFormProps
- * TODO - annotate remaining props
+ * CHORE - annotate remaining props
  */
 interface AttributeDatatypeFormProps {
     datatype: Datatype | null;

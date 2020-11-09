@@ -17,7 +17,7 @@ import {
     RelationInput,
     validateSchema,
 } from "@codotype/core";
-import { reorder } from "../AttributeEditor/component";
+import { reorder } from "../AttributeEditor/reorder";
 
 // // // //
 

@@ -13,17 +13,8 @@ import { RelationDeleteModal } from "./RelationDeleteModal";
 import { RelationListItem } from "./RelationListItem";
 import { RelationForm } from "./RelationForm";
 import { RelationListEmpty } from "./RelationListEmpty";
+import { reorder } from "../AttributeEditor/reorder";
 import { Hotkey } from "../Hotkey";
-
-// // // //
-
-// TODO - abstract this into a separate module
-function reorder<T>(list: T[], startIndex: number, endIndex: number): T[] {
-    const result = Array.from(list);
-    const [removed] = result.splice(startIndex, 1);
-    result.splice(endIndex, 0, removed);
-    return result;
-}
 
 // // // //
 

@@ -11,4 +11,3 @@ export { SchemaNewButton } from "./SchemaNewButton";
 export { SchemaPreview } from "./SchemaPreview";
 export { ConfigurationGroupSelector } from "./ConfigurationGroupSelector";
 export { SchemaSelector } from "./SchemaSelector";
-export { validateSchema } from "./validateSchema";

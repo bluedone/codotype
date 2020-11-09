@@ -2,22 +2,23 @@ import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { Story } from "../../Story";
 import { AttributePropertiesForm } from "../AttributePropertiesForm";
-import { EMPTY_TOKEN_CASING } from "@codotype/core";
+import { AttributeInput, EMPTY_TOKEN_CASING, Primatives } from "@codotype/core";
 
 // // // //
 
 storiesOf("Components/ProjectEditor/AttributeEditor/AttributePropertiesForm", module).add(
     "renders",
     () => {
+        const [attributeInput, setAttributeInput] = React.useState<AttributeInput>(new Primatives.AttributeInput({}))
         return (
             <Story>
                 <AttributePropertiesForm
-                    tokenCasing={{ ...EMPTY_TOKEN_CASING }}
+                    attributeInput={attributeInput}
+                    onChange={updatedAttributeInput => {
+                        setAttributeInput(updatedAttributeInput)
+                    }}
                     onKeydownEnter={() => {
                         console.log("On keydown enter");
-                    }}
-                    onChange={updatedTokenCasing => {
-                        console.log(updatedTokenCasing);
                     }}
                 />
             </Story>

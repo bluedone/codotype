@@ -76,8 +76,9 @@ export function TokenCasingForm(props: TokenCasingFormProps) {
         });
     }, [label]);
 
+    // <div className="card card-body shadow-sm">
     return (
-        <div className="card card-body shadow-sm">
+        <React.Fragment>
             <div className="row">
                 <div className="col-sm-12 col-lg-6 d-flex flex-column border-right justify-content-center">
                     <div className="row">
@@ -117,7 +118,7 @@ export function TokenCasingForm(props: TokenCasingFormProps) {
                     </table>
                 </div>
             </div>
-        </div>
+        </React.Fragment>
     );
 }
 

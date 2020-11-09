@@ -37,8 +37,8 @@ export function ConfigurationGroupPropertiesDetail(props: {
     const selectedProperty:
         | ConfigurationProperty
         | undefined = configurationGroup.properties.find(
-        p => p.identifier === selectedPropertyID,
-    );
+            p => p.identifier === selectedPropertyID,
+        );
 
     // Return null if selectedProperty is undefined
     if (selectedProperty === undefined) {
@@ -100,9 +100,9 @@ export function ConfigurationGroupPropertiesDetail(props: {
                                 property={selectedProperty}
                                 value={true}
                                 onChange={() => {
-                                    // TODO - write this up, must be finished
-                                    // TODO - write this up, must be finished
-                                    // TODO - write this up, must be finished
+                                    // TODO - wire this up, must be finished
+                                    // TODO - wire this up, must be finished
+                                    // TODO - wire this up, must be finished
                                     console.log("changed");
                                 }}
                             />

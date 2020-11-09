@@ -6,6 +6,7 @@ import {
     AttributeInput,
     Primatives,
     makeUniqueId,
+    buildDefaultAddonsValue,
 } from "@codotype/core";
 import { Droppable, DragDropContext } from "react-beautiful-dnd";
 import { AttributeFormModal } from "./AttributeFormModal";
@@ -15,20 +16,7 @@ import { AttributeForm } from "./AttributeForm";
 import { AttributeListEmpty } from "./AttributeListEmpty";
 import { validateAttribute } from "./validateAttribute";
 import { Hotkey } from "../Hotkey";
-
-// // // //
-
-// TODO - abstract this into a separate module
-export function reorder<T>(
-    list: T[],
-    startIndex: number,
-    endIndex: number,
-): T[] {
-    const result = Array.from(list);
-    const [removed] = result.splice(startIndex, 1);
-    result.splice(endIndex, 0, removed);
-    return result;
-}
+import { reorder } from "./reorder";
 
 // // // //
 
@@ -98,7 +86,7 @@ export function AttributeEditor(props: AttributeEditorProps) {
                 id: makeUniqueId(),
                 datatype: params.newAttributeData.datatype,
                 addons: {
-                    // ...buildDefaultAddonValue(props.addons), // TODO - reintegrate this
+                    ...buildDefaultAddonsValue({ properties: props.addons.map(a => a.property) }),
                     ...params.newAttributeData.addons,
                 },
             };

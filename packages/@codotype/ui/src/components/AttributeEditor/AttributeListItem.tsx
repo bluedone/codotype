@@ -1,14 +1,11 @@
 import * as React from "react";
 import classnames from "classnames";
 import { Draggable } from "react-beautiful-dnd";
-import { Dropdown } from "react-bootstrap";
 import { AttributeListItemLabel } from "./AttributeListItemLabel";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { DATATYPE_META, AttributeInput, CreatedByValues } from "@codotype/core";
 import {
     faTrashAlt,
-    faPencilAlt,
-    faEllipsisH,
     faLock,
 } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
@@ -77,6 +74,13 @@ export function AttributeListItem(props: {
                                 attribute.createdBy === CreatedByValues.plugin,
                         },
                     )}
+                    onClick={() => {
+                        // Don't allow editing if Attribute.locked is true
+                        if (attribute.locked) {
+                            return;
+                        }
+                        props.onClickEdit(attribute);
+                    }}
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
@@ -108,41 +112,18 @@ export function AttributeListItem(props: {
 
                         {!attribute.locked && (
                             <div className="col-sm-2 text-right controls">
-                                <Dropdown alignRight>
-                                    <Dropdown.Toggle
-                                        variant="light"
-                                        size="sm"
-                                        className="rounded px-0 py-0 d-flex"
-                                        id={`attribute-${attribute.id}-list-item`}
-                                    >
-                                        <FontAwesomeIcon icon={faEllipsisH} />
-                                    </Dropdown.Toggle>
-
-                                    <Dropdown.Menu>
-                                        <Dropdown.Item
-                                            onClick={() => {
-                                                props.onClickEdit(attribute);
-                                            }}
-                                        >
-                                            <FontAwesomeIcon
-                                                className="mr-2"
-                                                icon={faPencilAlt}
-                                            />
-                                            Edit
-                                        </Dropdown.Item>
-                                        <Dropdown.Item
-                                            onClick={() => {
-                                                props.onClickDelete(attribute);
-                                            }}
-                                        >
-                                            <FontAwesomeIcon
-                                                className="mr-2"
-                                                icon={faTrashAlt}
-                                            />
-                                            Delete
-                                        </Dropdown.Item>
-                                    </Dropdown.Menu>
-                                </Dropdown>
+                                <button
+                                    className="btn btn-sm btn-outline-danger px-0 py-0"
+                                    onClick={(e) => {
+                                        e.stopPropagation()
+                                        e.preventDefault()
+                                        props.onClickDelete(attribute);
+                                    }}>
+                                    <FontAwesomeIcon
+                                        className="mx-2"
+                                        icon={faTrashAlt}
+                                    />
+                                </button>
                             </div>
                         )}
                     </div>

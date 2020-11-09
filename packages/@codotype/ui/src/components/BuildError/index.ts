@@ -1,4 +1,4 @@
-// TODO - migrate the following to React:
+// CHORE - migrate the following to React:
 
 // <template>
 //   <div class="row d-flex align-items-center h-100 justify-content-center">

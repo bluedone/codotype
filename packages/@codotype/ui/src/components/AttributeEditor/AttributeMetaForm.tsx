@@ -5,7 +5,7 @@ import { FormGroup } from "./FormGroup";
 
 /**
  * AttributeMetaFormProps
- * TODO - annotate remaining props
+ * CHORE - annotate remaining props
  */
 interface AttributeMetaFormProps {
     description: string;

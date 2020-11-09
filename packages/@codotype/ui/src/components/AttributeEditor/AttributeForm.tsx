@@ -150,18 +150,18 @@ export function AttributeForm(props: AttributeFormProps) {
                                 return (
                                     <React.Fragment>
                                         <AttributePropertiesForm
-                                            tokenCasing={
-                                                attributeInput.identifiers
+                                            attributeInput={
+                                                attributeInput
                                             }
                                             onKeydownEnter={
                                                 props.onKeydownEnter
                                             }
                                             onChange={(
-                                                updatedTokenCasing: TokenCasing,
+                                                updatedAttributeInput: AttributeInput,
                                             ) => {
                                                 props.onChange({
                                                     ...attributeInput,
-                                                    identifiers: updatedTokenCasing,
+                                                    ...updatedAttributeInput,
                                                 });
                                             }}
                                         />

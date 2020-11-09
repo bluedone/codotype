@@ -2,12 +2,13 @@ import * as React from "react";
 import { SchemaEditButton } from "./SchemaEditButton";
 import { SchemaDeleteButton } from "./SchemaDeleteButton";
 import { SchemaDeleteModal } from "./SchemaDeleteModal";
-import { SchemaInput, Schema } from "@codotype/core";
+import { SchemaInput, ProjectInput } from "@codotype/core";
 
 // // // //
 
 export function SchemaDetailHeader(props: {
     schemaInput: SchemaInput;
+    projectInput: ProjectInput;
     schemas: SchemaInput[];
     onClickEdit: () => void;
     onConfirmDelete: () => void;
@@ -30,8 +31,8 @@ export function SchemaDetailHeader(props: {
                 </div>
                 <div className="col-lg-2 d-flex justify-content-end">
                     <SchemaDeleteButton
+                        projectInput={props.projectInput}
                         schemaInput={props.schemaInput}
-                        schemas={props.schemas}
                         onClick={() => showModal(true)}
                     />
 

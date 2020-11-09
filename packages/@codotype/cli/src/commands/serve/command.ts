@@ -8,7 +8,7 @@ import { RuntimeLogLevels } from "@codotype/core";
 
 async function serve(options: any) {
     // Logs command start message
-    console.log(`\nStarting ${chalk.blue(`codotype serve`)}...`);
+    console.log(`\nStarting ${chalk.blue(`codotype plugin-serve`)}...`);
 
     // Invoke runtime directly with parameters
     const runtime = new NodeRuntime({

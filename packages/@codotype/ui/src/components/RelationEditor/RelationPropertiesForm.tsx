@@ -14,7 +14,7 @@ import { RelationBadge } from "./RelationBadge";
 
 /**
  * RelationPropertiesFormProps
- * TODO - annotate remaining props
+ * CHORE - annotate remaining props
  */
 interface RelationPropertiesFormProps {
     schema: SchemaInput;
