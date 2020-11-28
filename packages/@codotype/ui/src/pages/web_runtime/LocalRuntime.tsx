@@ -13,13 +13,13 @@ import { ProjectEditor } from "../../components/ProjectEditor";
 export function LocalRuntime() {
     return (
         <PluginFetcher>
-            {({ generators }) => (
-                <PluginRunner generator={generators[0]}>
+            {({ plugins }) => (
+                <PluginRunner plugin={plugins[0]}>
                     {({ generateCode }) => (
-                        <LocalStorageProvider plugin={generators[0]}>
+                        <LocalStorageProvider plugin={plugins[0]}>
                             {({ projectInput, clearProject, setProject }) => (
                                 <ProjectEditor
-                                    generator={generators[0]}
+                                    plugin={plugins[0]}
                                     projectInput={projectInput}
                                     onClickGenerate={() => {
                                         generateCode({

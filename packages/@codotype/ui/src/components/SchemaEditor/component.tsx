@@ -276,7 +276,7 @@ export function SchemaEditorLayout(props: {
 
                 <DragDropContext onDragEnd={onDragEnd}>
                     <SchemaSelector
-                        schemas={state.schemas}
+                        schemaInputs={state.schemas}
                         selectedSchemaId={String(selectedSchemaId)}
                         onChange={(updatedSelectedSchema: SchemaInput) => {
                             setSelectedSchemaId(updatedSelectedSchema.id);

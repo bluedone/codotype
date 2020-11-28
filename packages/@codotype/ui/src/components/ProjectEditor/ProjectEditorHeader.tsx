@@ -15,13 +15,13 @@ import { ExampleProjectDropdown } from "./ExampleProjectDropdown";
 // // // //
 
 export function ProjectEditorHeader(props: {
-    PluginMetadata: PluginMetadata;
+    pluginMetadata: PluginMetadata;
     projectInput: ProjectInput;
     onChange: (updatedProject: ProjectInput) => void;
     onClickGenerate: () => void;
     onConfirmReset: () => void;
 }) {
-    const { PluginMetadata } = props;
+    const { pluginMetadata: PluginMetadata } = props;
     const [showingModal, showModal] = React.useState<boolean>(false);
     const [labelValue, setLabelValue] = React.useState<string>(
         props.projectInput.identifiers.title,

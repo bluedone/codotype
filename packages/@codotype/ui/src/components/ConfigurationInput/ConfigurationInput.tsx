@@ -47,7 +47,6 @@ interface ConfigurationInputProps {
     onChange: (updatedVal: OptionValueInstance) => void;
 }
 // TODO - add prop here to adjust styles when rendered for a schema instead of a project..?
-// TODO - rename this file to `ConfigurationInput.tsx`
 export function ConfigurationInput(props: ConfigurationInputProps) {
     const { configurationGroup, value, onChange } = props;
     // @ts-ignore

@@ -24,7 +24,7 @@ storiesOf("Components/ProjectEditor/Layout", module).add("renders", () => {
     return (
         <Story>
             <ProjectEditor
-                generator={chromeExtensionPlugin}
+                plugin={chromeExtensionPlugin}
                 projectInput={project}
                 onClickGenerate={() => {
                     console.log("Generate Project!");

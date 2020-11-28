@@ -9,8 +9,8 @@ storiesOf("Util/GeneratorFetcher", module).add("loads", () => {
     return (
         <Story>
             <PluginFetcher>
-                {({ generators }) => {
-                    return <pre>{JSON.stringify(generators, null, 4)}</pre>;
+                {({ plugins }) => {
+                    return <pre>{JSON.stringify(plugins, null, 4)}</pre>;
                 }}
             </PluginFetcher>
         </Story>

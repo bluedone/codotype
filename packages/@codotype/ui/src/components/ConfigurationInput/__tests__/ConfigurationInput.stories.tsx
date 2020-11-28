@@ -1,6 +1,6 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
-import { ConfigurationInput } from "../component";
+import { ConfigurationInput } from "../ConfigurationInput";
 import {
     buildConfigurationGroupValue,
     OptionValueInstance,

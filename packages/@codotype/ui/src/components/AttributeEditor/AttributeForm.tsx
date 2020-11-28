@@ -28,13 +28,9 @@ function FormGroupTab(props: {
     return (
         <li className="nav-item d-flex flex-grow-1">
             <button
-                // href="#"
-                // TODO - fix styles here, replace with <button>
+                // TODO - fix styles here
                 className={btnClassName.join(" ")}
                 disabled={props.disabled}
-                style={{
-                    cursor: "pointer",
-                }}
                 onClick={props.onClick}
             >
                 {label}

@@ -11,7 +11,7 @@ storiesOf("Util/GeneratorRunner", module).add("loads", () => {
     const projectInput = buildDefaultProjectInput(cdkPluginMeta);
     return (
         <Story>
-            <PluginRunner generator={cdkPluginMeta}>
+            <PluginRunner plugin={cdkPluginMeta}>
                 {({ generateCode }) => {
                     return (
                         <div className="card card-body">

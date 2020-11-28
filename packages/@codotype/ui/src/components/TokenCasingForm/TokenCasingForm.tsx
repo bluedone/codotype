@@ -13,9 +13,8 @@ interface MetaPreviewProps {
 
 /**
  * MetaPreview
+ * TODO - validation errors + tokens should be passed down into this
  */
-// TODO - validation errors + tokens should be passed down into this
-// TODO - validation errors + tokens should be passed down into this
 export function MetaPreview(props: MetaPreviewProps) {
     const tokens: TokenCasing = buildTokenCasing(props.label);
 
@@ -121,23 +120,3 @@ export function TokenCasingForm(props: TokenCasingFormProps) {
         </React.Fragment>
     );
 }
-
-// // // //
-
-// <style type="text/css" scoped>
-// .table-sm {
-//   font - size: 80%;
-// }
-
-// p.small {
-//   font - size: 85%;
-// }
-
-// .text-purple {
-//   color: purple !important;
-// }
-
-// td.infoCol {
-//   width: 1rem;
-// }
-// </style>

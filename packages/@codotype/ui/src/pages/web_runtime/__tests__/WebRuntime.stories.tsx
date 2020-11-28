@@ -612,7 +612,7 @@ stories.forEach(story => {
                                 {({ generateCode }) => (
                                     <React.Fragment>
                                         <ProjectEditor
-                                            generator={generator}
+                                            plugin={generator}
                                             projectInput={projectInput}
                                             onClickGenerate={() => {
                                                 generateCode({

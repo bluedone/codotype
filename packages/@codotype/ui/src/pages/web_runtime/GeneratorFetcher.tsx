@@ -2,11 +2,12 @@ import * as React from "react";
 import { PluginMetadata } from "@codotype/core";
 import useAxios from "axios-hooks";
 import { LoadingPage } from "../../components/LoadingPage";
+import { PageNotFound } from "../../components/PageNotFound";
 
 // // // //
 
 interface PluginFetcherProps {
-    children: (childProps: { generators: PluginMetadata[] }) => React.ReactNode;
+    children: (childProps: { plugins: PluginMetadata[] }) => React.ReactNode;
 }
 
 /**
@@ -22,10 +23,10 @@ export function PluginFetcher(props: PluginFetcherProps) {
         return <LoadingPage />;
     }
 
-    // TODO - add better error handling here
-    if (error) return <p>Error!</p>;
-
     return (
-        <React.Fragment>{props.children({ generators: data })}</React.Fragment>
+        <React.Fragment>
+            {error && (<PageNotFound />)}
+            {props.children({ plugins: data || [] })}
+        </React.Fragment>
     );
 }

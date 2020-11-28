@@ -14,11 +14,10 @@ import { faCheckCircle } from "@fortawesome/free-regular-svg-icons";
 
 // // // //
 
-// TODO - move this into @codotype/core
-// TODO - define this as a enum + meta object that includes label + description for each export type
-// TODO - update this to include optional headers? i.e. import statements when exporting JS
+// TODO - import RenderTypes enum from @codotype/core (already migrated)
 type RenderType = "json" | "typescript" | "graphql";
 
+// TODO - import this from @codotype/core (already migrated)
 export function schemaPreviewContent(props: {
     schemaInput: SchemaInput;
     projectInput: ProjectInput;

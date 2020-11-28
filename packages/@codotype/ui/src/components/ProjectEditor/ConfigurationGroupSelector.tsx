@@ -33,9 +33,8 @@ export function ConfigurationGroupTab(props: {
 
     return (
         <li className="nav-item">
-            <a
-                // href="#"
-                // TODO - fix styles here, replace with <button>
+            <button
+                // TODO - fix styles here
                 className={btnClassName.join(" ")}
                 style={{
                     cursor: "pointer",
@@ -46,7 +45,7 @@ export function ConfigurationGroupTab(props: {
                     <FontAwesomeIcon icon={faFlag} className="mr-2" />
                 )}
                 {label}
-            </a>
+            </button>
         </li>
     );
 }

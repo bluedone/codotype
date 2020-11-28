@@ -6,7 +6,7 @@ import { PluginMetadata, ProjectInput } from "@codotype/core";
 // // // //
 
 interface ProjectEditorProps {
-    generator: PluginMetadata;
+    plugin: PluginMetadata;
     projectInput: ProjectInput;
     onChange: (updatedProject: ProjectInput) => void;
     onClickGenerate: () => void;
@@ -16,13 +16,13 @@ interface ProjectEditorProps {
 }
 
 export function ProjectEditor(props: ProjectEditorProps) {
-    const { generator, projectInput } = props;
+    const { plugin: generator, projectInput } = props;
     return (
         <div className="row">
             <div className="col-sm-12">
                 {/* Render ProjectEditorHeader */}
                 <ProjectEditorHeader
-                    PluginMetadata={generator}
+                    pluginMetadata={generator}
                     projectInput={projectInput}
                     onChange={props.onChange}
                     onClickGenerate={props.onClickGenerate}

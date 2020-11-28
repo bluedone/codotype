@@ -21,17 +21,18 @@ export function ConfigurationGroupTab(props: {
 
     return (
         <li className="nav-item">
-            <a
-                // href="#"
-                // TODO - fix styles here, replace with <button>
+            <button
+                // TODO - fix styles here
                 className={btnClassName.join(" ")}
                 style={{
                     cursor: "pointer",
                 }}
-                onClick={props.onClick}
+                onClick={() => {
+                    props.onClick
+                }}
             >
                 {label}
-            </a>
+            </button>
         </li>
     );
 }

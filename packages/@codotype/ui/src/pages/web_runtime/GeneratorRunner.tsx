@@ -12,7 +12,7 @@ interface GenerateCodeProps {
 }
 
 interface PluginRunnerProps {
-    generator: PluginMetadata;
+    plugin: PluginMetadata;
     children: (childProps: {
         generateCode: (params: GenerateCodeProps) => void;
     }) => React.ReactNode;
@@ -39,9 +39,6 @@ export function PluginRunner(props: PluginRunnerProps) {
         { manual: true },
     );
 
-    // TOOD - add error handler here
-    if (error) return <p>Error!</p>;
-
     // Defines helper function to pass to props.children as generateCode
     // Fires off the executePostRequest from axios
     function generateCode(params: GenerateCodeProps) {
@@ -53,6 +50,7 @@ export function PluginRunner(props: PluginRunnerProps) {
     // Passes generateCode function to props.children
     return (
         <React.Fragment>
+            {error && (<p>Error!</p>)}
             {props.children({ generateCode })}
             {/* Handle Loading */}
             {(loading || finished) && (

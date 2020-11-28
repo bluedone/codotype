@@ -115,6 +115,7 @@ export function RelationPropertiesForm(props: RelationPropertiesFormProps) {
                             }}
                         >
                             {/* TODO - use correct pluralization here depending on relationInput.type */}
+                            {/* TODO - use correct pluralization here depending on relationInput.type */}
                             {schemas.map(s => (
                                 <option key={s.id} value={s.id}>
                                     {s.identifiers.plural.title}
