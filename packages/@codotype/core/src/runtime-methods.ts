@@ -12,22 +12,20 @@ export type PrettifyParser =
     | "babel-ts"
     | "flow"
     | "typescript"
-    | "espree"
-    | "meriyah"
     | "css"
-    | "scss"
     | "less"
+    | "scss"
     | "json"
     | "json5"
     | "json-stringify"
     | "graphql"
     | "markdown"
-    | "mdx"
-    | "html"
     | "vue"
+    | "html"
     | "angular"
-    | "lwc"
-    | "yaml";
+    | "mdx"
+    | "yaml"
+    | "lwc";
 
 export enum PrettifyParsers {
     babel = "babel",
@@ -35,22 +33,20 @@ export enum PrettifyParsers {
     babelTs = "babel-ts",
     flow = "flow",
     typescript = "typescript",
-    espree = "espree",
-    meriyah = "meriyah",
     css = "css",
-    scss = "scss",
     less = "less",
+    scss = "scss",
     json = "json",
     json5 = "json5",
     jsonStringify = "json-stringify",
     graphql = "graphql",
     markdown = "markdown",
-    mdx = "mdx",
-    html = "html",
     vue = "vue",
+    html = "html",
     angular = "angular",
-    lwc = "lwc",
+    mdx = "mdx",
     yaml = "yaml",
+    lwc = "lwc",
 }
 
 /**

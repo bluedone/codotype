@@ -19,7 +19,7 @@ import {
     Runtime,
     ProjectBuild,
     RuntimeInjectorProps,
-    GeneratorConstructorParams,
+    GeneratorConstructorParams as GeneratorProps,
     Datatypes,
     PrettifyOptions,
 } from "@codotype/core";
@@ -45,7 +45,7 @@ function getAllFiles(dirPath: string, arrayOfFiles: string[]): string[] {
 
     arrayOfFiles = arrayOfFiles || [];
 
-    files.forEach(function (file) {
+    files.forEach(function(file) {
         if (fs.statSync(dirPath + "/" + file).isDirectory()) {
             arrayOfFiles = getAllFiles(dirPath + "/" + file, arrayOfFiles);
         } else {
@@ -205,6 +205,7 @@ export class NodeRuntime implements Runtime {
      * Ensures presence of directory for template compilation
      * @param dir - the directory whose existance is being ensured
      */
+    // TODO - remove ensureDir from `Runtime`? Or rename to mkdir?
     ensureDir(dir: string): Promise<boolean> {
         return this.options.fileSystemAdapter.ensureDir(dir);
     }
@@ -260,7 +261,7 @@ export class NodeRuntime implements Runtime {
         // Finds the pluginRegistration associated with the ProjectBuild
         // TODO - check version here, use semver if possible
         const pluginRegistration: PluginRegistration | undefined = plugins.find(
-            (g) => g.id === project.pluginID,
+            g => g.id === project.pluginID,
         );
         //
         // // // //
@@ -295,7 +296,7 @@ export class NodeRuntime implements Runtime {
         // Attempt to load the Generator from pluginDynamicImportPath, handle error
         try {
             // Defines generator and it's associated absolute filepath for module resolution
-            const generator: GeneratorConstructorParams = require(pluginDynamicImportPath); // eslint-disable-line import/no-dynamic-require
+            const generator: GeneratorProps = require(pluginDynamicImportPath); // eslint-disable-line import/no-dynamic-require
             const resolved: string = require.resolve(pluginDynamicImportPath);
 
             // Defines options for generator instance
@@ -571,7 +572,7 @@ export class NodeRuntime implements Runtime {
         // Finds the currently active plugin
         const plugins = await this.getPlugins();
         const activePlugin = plugins.find(
-            (p) => p.id === parentRuntimeAdapter.options.plugin.identifier,
+            p => p.id === parentRuntimeAdapter.options.plugin.identifier,
         );
 
         if (activePlugin === undefined) {
@@ -626,7 +627,7 @@ export class NodeRuntime implements Runtime {
         // Attempt to load the Generator from pluginDynamicImportPath, handle error
         try {
             // Defines generator and it's associated absolute filepath for module resolution
-            const generator: GeneratorConstructorParams = require(modulePath); // eslint-disable-line import/no-dynamic-require
+            const generator: GeneratorProps = require(modulePath); // eslint-disable-line import/no-dynamic-require
             const resolved: string = require.resolve(modulePath);
 
             // TODO - document this, clean it all up
