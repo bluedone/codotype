@@ -99,7 +99,6 @@ export function buildConfigurationGroupValue(
         const configurationGroupValue: OptionValueInstance = configurationGroup.properties.reduce(
             (val, property: ConfigurationProperty) => {
                 // Updates val with data for ConfigurationProperty
-                // TODO - remove this?? - the UI should only care if the property can allow disable or not
                 if (property.allowDisable && !property.required) {
                     val[property.identifier] = {
                         enabled: property.enabledByDefault,

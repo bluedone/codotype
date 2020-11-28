@@ -4,7 +4,7 @@ import { Project, Schema, RuntimeAdapter, Relation } from "@codotype/core";
 
 /**
  * runGenerator
- * TODO - rename this
+ * TODO - rename this? Or rename runtimeProxyAdaptor to something else? GeneratorRunner?
  * Accepts a project and runtimeAdapter -> invokes each method passed in with GeneratorConstructorOptions
  * @param project - the Project being run against params.generatorInstance
  * @param generatorInstance - (TODO: RENAME) the RuntimeAdapter being passed into each function on GeneratorConstructorOptions

@@ -662,7 +662,6 @@ export const userSchema: SchemaInput = {
         },
     },
     attributes: [],
-    // relations: [],
     internalNote: "",
     locked: false,
     createdBy: CreatedByValues.user,

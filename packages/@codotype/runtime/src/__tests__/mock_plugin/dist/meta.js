@@ -4,14 +4,16 @@ exports.BasicConfigurationGroup = void 0;
 const types_1 = require("@codotype/core");
 // // // //
 const BASE_CONFIGURATION_GROUP_PROPERTY = {
-    label: "BASE_PROPERTY",
     identifier: "BASE_PROPERTY",
-    type: types_1.OptionType.STRING,
-    description: "",
-    documentation: "",
-    layoutVariant: types_1.PropertyLayoutVariant.HIDDEN,
+    content: {
+        label: "BASE_PROPERTY",
+        description: "",
+        documentation: "",
+        icon: "",
+    },
+    type: types_1.PropertyTypes.STRING,
+    layoutVariant: types_1.PropertyLayoutVariants.HIDDEN,
     defaultValue: false,
-    icon: "",
     enabled: true,
     required: false,
     allowDisable: false,
@@ -21,13 +23,16 @@ const BASE_CONFIGURATION_GROUP_PROPERTY = {
     validations: [],
 };
 const BASE_CONFIGURATION_GROUP = {
-    label: "BASE_CONFIGURATION_GROUP",
+    content: {
+        label: "BASE_CONFIGURATION_GROUP",
+        description: "BASE_CONFIGURATION_GROUP DESC.",
+        documentation: "",
+        icon: "",
+    },
     identifier: "base_configuration_group",
-    description: "BASE_CONFIGURATION_GROUP DESC.",
-    documentation: "",
     enabled: true,
     allowDisable: false,
-    layoutVariant: types_1.GroupLayoutVariant.TABS,
+    layoutVariant: types_1.GroupLayoutVariants.TABS,
     sections: [],
     properties: [],
 };
@@ -39,7 +44,7 @@ const StringProperty = Object.assign(
         label: "String",
         identifier: "string",
         description: "Standard string input",
-        type: types_1.OptionType.STRING,
+        type: types_1.PropertyTypes.STRING,
         defaultValue: "",
     },
 );
@@ -49,7 +54,7 @@ const NumberProperty = Object.assign(
         label: "Number",
         identifier: "number",
         description: "Standard Number input",
-        type: types_1.OptionType.NUMBER,
+        type: types_1.PropertyTypes.NUMBER,
         defaultValue: "",
     },
 );
@@ -59,7 +64,7 @@ const BooleanProperty = Object.assign(
         label: "Boolean",
         identifier: "boolean",
         description: "Standard Boolean input",
-        type: types_1.OptionType.BOOLEAN,
+        type: types_1.PropertyTypes.BOOLEAN,
         defaultValue: false,
     },
 );
@@ -69,7 +74,7 @@ const DropdownProperty = Object.assign(
         label: "Dropdown",
         identifier: "dropdown",
         description: "Standard Dropdown input",
-        type: types_1.OptionType.DROPDOWN,
+        type: types_1.PropertyTypes.DROPDOWN,
         defaultValue: "one",
         dropdownOptions: [
             { value: "one", label: "Option One" },
@@ -93,14 +98,13 @@ exports.BasicConfigurationGroup = Object.assign(
         ],
     },
 );
+
 // // // //
 const FullStackTypescriptGenerator = {
     id: "full-stack-typescript-generator",
-    label: "Full Stack Typescript Generator",
     homepage: "https://github.com/codotype/codotype",
     codotypeVersion: "0.8.0",
-    experience: types_1.ExperienceRecommendation.BEGINNER,
-    documentation: "",
+    experience: types_1.ExperienceRecommendations.BEGINNER,
     createdBy: {
         name: "Alexander Schwartzberg",
         contact: {
@@ -108,10 +112,14 @@ const FullStackTypescriptGenerator = {
             twitter: "https://twitter.com/aeksco",
         },
     },
-    icon:
-        "https://res.cloudinary.com/codotype/image/upload/v1560045005/tech-logos/codotype.png",
-    description:
-        "Generate full-stack web applications with Typescript, React, Express, SQL, and TypeORM.",
+    content: {
+        label: "Full Stack Typescript Generator",
+        documentation: "",
+        icon:
+            "https://res.cloudinary.com/codotype/image/upload/v1560045005/tech-logos/codotype.png",
+        description:
+            "Generate full-stack web applications with Typescript, React, Express, SQL, and TypeORM.",
+    },
     techTags: ["TypeScript", "Node", "TypeOrm", "React"],
     typeTags: ["Full-Stack", "Web Application"],
     project_path: "full_stack_typescript_generator",
@@ -124,7 +132,7 @@ const FullStackTypescriptGenerator = {
         defaultAttributes: [
             {
                 id: "ID-ATTRIBUTE",
-                datatype: types_1.Datatype.UUID,
+                datatype: types_1.Datatypes.UUID,
                 identifiers: {
                     label: "ID",
                     snake: "id",
@@ -134,7 +142,7 @@ const FullStackTypescriptGenerator = {
                 },
                 defaultValue: "",
                 internalNote: "",
-                source: types_1.SchemaCreators.plugin,
+                source: types_1.CreatedByValues.plugin,
                 locked: true,
                 addons: {},
             },
@@ -142,10 +150,10 @@ const FullStackTypescriptGenerator = {
         defaultRelations: [],
         configurationGroups: [],
         supportedDatatypes: [
-            types_1.Datatype.STRING,
-            types_1.Datatype.NUMERIC,
-            types_1.Datatype.BOOLEAN,
-            types_1.Datatype.DATE,
+            types_1.Datatypes.STRING,
+            types_1.Datatypes.NUMERIC,
+            types_1.Datatypes.BOOLEAN,
+            types_1.Datatypes.DATE,
         ],
         supportedRelations: [types_1.RelationTypes.TO_ONE],
     },

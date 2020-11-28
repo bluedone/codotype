@@ -2,12 +2,13 @@ import {
     Relation,
     Project,
     Schema,
-    GeneratorConstructorParams,
+    GeneratorConstructorParams as GeneratorProps,
     RuntimeInjectorProps,
     RuntimeAdapter,
     RuntimeProxy,
     Runtime,
     ComposeWithOptions,
+    PrettifyOptions,
 } from "@codotype/core";
 
 // // // //
@@ -30,10 +31,7 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
      * constructor
      * Handles build options
      */
-    constructor(
-        generatorConfiguration: GeneratorConstructorParams,
-        options: RuntimeInjectorProps,
-    ) {
+    constructor(generatorProps: GeneratorProps, options: RuntimeInjectorProps) {
         // Throw error if options.runtime isn't defined
         if (!options.runtime) {
             throw Error("CodotypeGenerator options requires options.runtime");
@@ -47,11 +45,11 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
 
         // Validates GeneratorConfiguration
         if (
-            !generatorConfiguration.write &&
-            !generatorConfiguration.compileInPlace &&
-            !generatorConfiguration.forEachSchema &&
-            !generatorConfiguration.forEachRelation &&
-            !generatorConfiguration.forEachReferencedBy
+            !generatorProps.write &&
+            !generatorProps.compileInPlace &&
+            !generatorProps.forEachSchema &&
+            !generatorProps.forEachRelation &&
+            !generatorProps.forEachReferencedBy
         ) {
             throw Error(
                 "GeneratorConfiguration requires either write, forEachSchema, forEachRelation, forEachReferencedBy, or compileInPlace properties",
@@ -63,15 +61,13 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
         this.runtime = options.runtime;
 
         // Assigns generatorConfiguration
-        this.write = generatorConfiguration.write || this.write;
-        this.forEachSchema =
-            generatorConfiguration.forEachSchema || this.forEachSchema;
+        this.write = generatorProps.write || this.write;
+        this.forEachSchema = generatorProps.forEachSchema || this.forEachSchema;
         this.forEachRelation =
-            generatorConfiguration.forEachRelation || this.forEachRelation;
+            generatorProps.forEachRelation || this.forEachRelation;
         this.forEachReferencedBy =
-            generatorConfiguration.forEachReferencedBy ||
-            this.forEachReferencedBy;
-        this.compileInPlace = generatorConfiguration.compileInPlace || [];
+            generatorProps.forEachReferencedBy || this.forEachReferencedBy;
+        this.compileInPlace = generatorProps.compileInPlace || [];
 
         // Assigns this.options
         this.options = options;
@@ -127,7 +123,6 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
         project: Project;
         runtime: RuntimeProxy;
     }): Promise<void> {
-        // console.log('NOTHING TO WRITE - this should be overwritten by a subclassed generator.')
         return Promise.resolve();
     }
 
@@ -145,7 +140,6 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
         project: Project;
         runtime: RuntimeProxy;
     }): Promise<void> {
-        // console.log('NOTHING TO WRITE - this should be overwritten by a subclassed generator.')
         return Promise.resolve();
     }
 
@@ -163,7 +157,6 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
         relation: Relation;
         project: Project;
     }): Promise<void> {
-        // console.log('NOTHING TO WRITE - this should be overwritten by a subclassed generator.')
         return Promise.resolve();
     }
 
@@ -204,21 +197,23 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
     /**
      * renderComponent
      * Compiles and writes each template defined in the `compileInPlace` property
-     * @param - TODO
      */
     renderComponent({
         src,
         dest,
         data = {},
+        options,
     }: {
         src: string;
         dest: string;
         data: { [key: string]: any };
+        options?: { prettify?: PrettifyOptions };
     }) {
         return this.copyTemplate(
             this.templatePath(src),
             this.destinationPath(dest),
             data,
+            options,
         );
     }
 
@@ -233,6 +228,7 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
     copyTemplate(
         src: string,
         dest: string,
+        data: object = {},
         options: object = {},
     ): Promise<boolean> {
         // DEBUG
@@ -246,15 +242,20 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
             const compiledTemplate: string = await this.runtime.renderTemplate(
                 this,
                 src,
+                data,
                 options,
             );
+
+            // Prettify compiledTemplate
+            // TODO - should this be done here?
+            // if ()
 
             // DEBUG
             // this.runtime.log('Rendered:' + dest)
 
             // TODO - DOCUMENT!!!
             // Does the destination already exist?
-            const exists = this.runtime.fileExists(dest);
+            const exists = await this.runtime.fileExists(dest);
 
             // TODO - DOCUMENT!!!
             // If it doesn't exist, OKAY TO WRITE
@@ -269,7 +270,7 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
             }
 
             // Writes the compiled template to the dest location
-            this.runtime.writeFile(dest, compiledTemplate).then(() => {
+            return this.runtime.writeFile(dest, compiledTemplate).then(() => {
                 return resolve();
             });
         });
@@ -302,8 +303,18 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
      * @param destinationPath
      * @param compiledTemplate
      */
-    writeFile(destinationPath: string, compiledTemplate: string) {
-        return this.runtime.writeFile(destinationPath, compiledTemplate);
+    writeFile(
+        destinationPath: string,
+        compiledTemplate: string,
+        options?: {
+            prettify?: PrettifyOptions;
+        },
+    ) {
+        return this.runtime.writeFile(
+            destinationPath,
+            compiledTemplate,
+            options,
+        );
     }
 
     /**

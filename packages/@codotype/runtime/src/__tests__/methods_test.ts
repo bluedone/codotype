@@ -136,7 +136,7 @@ describe("renderComponent", () => {
             generatorOptions,
         );
 
-        runGenerator({
+        await runGenerator({
             project,
             runtimeProxyAdapter,
         });

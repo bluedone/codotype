@@ -8,7 +8,6 @@ import {
     ComposeWithOptions,
     trailingComma,
     normalizeProjectInput,
-    Datatype,
     Project,
     RelationTypes,
     RuntimeLogLevel,
@@ -22,6 +21,7 @@ import {
     RuntimeInjectorProps,
     GeneratorConstructorParams,
     Datatypes,
+    PrettifyOptions,
 } from "@codotype/core";
 import { RuntimeProxyAdapter } from "./utils/runtimeProxyAdapter";
 import { runGenerator } from "./utils/runGenerator";
@@ -35,6 +35,7 @@ import {
 import { getPluginPath } from "./utils/getPluginPath";
 import { prepareProjectBuildDestination } from "./utils/prepareProjectBuildDestination";
 import { logger } from "./utils/logger";
+import { project } from "./__tests__/test_state";
 
 // // // //
 // TODO - cleanup + simplify error handling
@@ -80,8 +81,9 @@ function handleExecuteImportError(error: any): Promise<void> {
 
 /**
  * NodeRuntime
- * TODO - rename this to Runtime
  * Runtime for running Codotype plugins through Node.js
+ * NOTE - this is called `NodeRuntime` because we may support a non-Node.js runtime
+ * in the future (i.e. DenoRuntime, BrowserRuntime, etc.)
  */
 export class NodeRuntime implements Runtime {
     private options: RuntimeConstructorParams;
@@ -369,17 +371,22 @@ export class NodeRuntime implements Runtime {
     renderTemplate(
         generatorInstance: RuntimeAdapter,
         src: string,
-        options: any = {}, // TODO - add type for options here, build in proper support for prettify
+        data?: { [key: string]: any }, // TODO - add type for data here, build in proper support for prettify
+        options?: { prettify?: PrettifyOptions },
     ): Promise<string> {
         return new Promise((resolve, reject) => {
             // default options padded into the renderFile
             let renderOptions = {};
 
+            // Defines data + options objects if none are passed in
+            const dataObj: { [key: string]: any } = data || {};
+            const optionsObj: { prettify?: PrettifyOptions } = options || {};
+
             // // // //
             // TODO - type this object - TemplateProps interface
             // TODO - should be abstracted into a separate function?
             // The `data` object is passed into each file that gets rendered
-            const data = {
+            const templateData = {
                 project: generatorInstance.options.project,
                 plugin: generatorInstance.options.plugin,
                 configuration: generatorInstance.options.project.configuration,
@@ -391,26 +398,38 @@ export class NodeRuntime implements Runtime {
                     // forEachRelation helper function?
                     // forEachReferencedBy helper function?
                     // forEachReference helper function?
+                    // forEachSchema: (func: (schema: Schema) => void) => {
+                    //     project.schemas.forEach((schema) => func(schema));
+                    // },
                 },
                 RelationTypes,
                 Datatypes,
-                ...options, // QUESTION - are options ever used here?
+                ...dataObj, // QUESTION - are options ever used here?
             };
             // // // //
 
             // Compiles EJS template
-            return ejs.renderFile(src, data, renderOptions, (err, str) => {
-                // Handles template compilation error
-                if (err) return reject(err);
+            return ejs.renderFile(
+                src,
+                templateData,
+                renderOptions,
+                (err, str) => {
+                    // Handles template compilation error
+                    if (err) return reject(err);
 
-                // Prettify if desired
-                if (options.prettify) {
-                    str = prettify({ source: str });
-                }
+                    // Prettify if desired
+                    if (optionsObj.prettify !== undefined) {
+                        str = prettify({
+                            source: str,
+                            parser: optionsObj.prettify.parser,
+                            semi: optionsObj.prettify.semi,
+                        });
+                    }
 
-                // Resolves with compiled template
-                return resolve(str);
-            });
+                    // Resolves with compiled template
+                    return resolve(str);
+                },
+            );
         });
     }
 
@@ -452,9 +471,27 @@ export class NodeRuntime implements Runtime {
      * Writes a compiled template to a file
      * @param dest - the destination where the compiledTemplate is being written
      * @param compiledTemplate - the text being written inside `dest`
+     * TODO - add WriteFileFunction type alias
      */
-    writeFile(dest: string, compiledTemplate: string): Promise<boolean> {
-        return this.options.fileSystemAdapter.writeFile(dest, compiledTemplate);
+    writeFile(
+        dest: string,
+        compiledTemplate: string,
+        options?: {
+            prettify?: PrettifyOptions;
+        },
+    ): Promise<boolean> {
+        let fileContents: string = compiledTemplate;
+
+        // TODO - simplify prettier props here, add function to quickly grab defaults for prettier
+        if (options && options.prettify) {
+            fileContents = prettify({
+                source: compiledTemplate,
+                semi: options.prettify.semi,
+                parser: options.prettify.parser,
+            });
+        }
+
+        return this.options.fileSystemAdapter.writeFile(dest, fileContents);
     }
 
     /**

@@ -7,7 +7,7 @@ import {
     FileOverwriteBehaviors,
     Project,
     RuntimeInjectorProps,
-    GeneratorConstructorParams,
+    GeneratorConstructorParams as GeneratorProps,
     buildTokenCasing,
 } from "@codotype/core";
 // import { LocalFileSystemAdapter } from "../LocalFileSystemAdapter";
@@ -43,7 +43,7 @@ export const baseGeneratorOptions: RuntimeInjectorProps = {
     runtime: new NodeRuntime(runtimeConstructorOptions),
 };
 
-export const generatorPrototype: GeneratorConstructorParams = {
+export const generatorPrototype: GeneratorProps = {
     name: "Prototype Generator",
     write: jest.fn(),
     compileInPlace: [],
@@ -52,10 +52,60 @@ export const generatorPrototype: GeneratorConstructorParams = {
     forEachReferencedBy: jest.fn(),
 };
 
-export const generatorPrototype01: GeneratorConstructorParams = {
+// // // //
+
+const jsonFileContents: string =
+    '{name: "project", "main": "dist/index","types": "dist/index","files": ["dist"],"repository": {"type": "git","url": "git+https://github.com/codotype/codotype-runtime.git"},"author": "Alexander Schwartzberg","license": "MIT"}';
+
+const htmlFileContents: string =
+    "<html><head><title>Page Title</title></head><body><h1>Hello, HTML!</h1></body></html>";
+
+export const generatorPrototype01: GeneratorProps = {
     name: "ModuleComponents",
     async write({ runtime }) {
-        runtime.writeFile("", '{\nname: "project"\n}');
+        // JSON
+        await runtime.writeFile("package.json", jsonFileContents, {
+            prettify: {
+                parser: "json",
+            },
+        });
+        await runtime.writeFile("package-no-prettify.json", jsonFileContents);
+
+        // HTML
+        await runtime.writeFile("index.html", htmlFileContents, {
+            prettify: {
+                parser: "json",
+            },
+        });
+        await runtime.writeFile("index-no-prettify.html", htmlFileContents);
+
+        await runtime.writeFile("README.md", "# Your New Project");
+
+        // Writes the prettify.js.ejs template w/ prettify.semi = true option
+        await runtime.renderComponent({
+            src: "prettify-test.js.ejs",
+            dest: `prettify-test.js`,
+            data: {},
+            options: {
+                prettify: {
+                    parser: "babel",
+                    semi: true,
+                },
+            },
+        });
+
+        // Writes the prettify.js.ejs template w/ prettify.semi = false
+        await runtime.renderComponent({
+            src: "prettify-test.js.ejs",
+            dest: `prettify-test-no-semi.js`,
+            data: {},
+            options: {
+                prettify: {
+                    parser: "babel",
+                    semi: false,
+                },
+            },
+        });
     },
     async forEachSchema({ schema, runtime }) {
         // Destination for module / components directory
@@ -65,7 +115,7 @@ export const generatorPrototype01: GeneratorConstructorParams = {
         // Ensures module components directory
         await runtime.ensureDir(moduleComponentsDest);
 
-        // WRites the page.tsx.ejs template
+        // Writes the page.tsx.ejs template
         await runtime.renderComponent({
             src: "page.tsx.ejs",
             dest: `pages/${schema.identifiers.plural.snake}.tsx`,
@@ -75,7 +125,7 @@ export const generatorPrototype01: GeneratorConstructorParams = {
 };
 
 // // Defines typed generator constant
-export const generatorPrototype02: GeneratorConstructorParams = {
+export const generatorPrototype02: GeneratorProps = {
     name: "Fullstack TypeScript Generator",
     async write(this: RuntimeProxyAdapter) {
         await this.composeWith("./base");

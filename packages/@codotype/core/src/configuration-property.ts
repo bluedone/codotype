@@ -75,7 +75,7 @@ export enum PropertyLayoutVariants {
 }
 
 // Feature: update this to store a value that references an instance in a collection defined in another ConfigurationProperty( i.e. { enabled: boolean; value: { collectionSource: UUID, collectionValue: UUID }})
-// TODO - rename to ConfigurationPropertyValue
+// TODO - rename to ConfigurationPropertyValuePrimative
 export type OptionValue =
     | string
     | string[]
@@ -88,8 +88,8 @@ export type OptionValue =
 
 // TODO - rename this to ConfigurationPropertyValue
 export type OptionValueInstance =
-    | OptionValueInstanceStandard
-    | OptionValueInstanceAllowDisable;
+    | ConfigurationPropertyDict
+    | ConfigurationPropertyAllowDisable;
 
 // TODO - should be:
 // export interface OptionValueInstance {
@@ -99,18 +99,16 @@ export type OptionValueInstance =
 //     };
 // }
 
-interface OptionValueInstanceStandard {
+interface ConfigurationPropertyDict {
     [key: string]: OptionValue;
 }
 
 // NOTE - this distinction is confusing
 // it should always include he enabled + value pair
 // When we inflate the metadata to be used in the Plugin, we can simplify based on the allowDisable property
-interface OptionValueInstanceAllowDisable {
+interface ConfigurationPropertyAllowDisable {
     enabled: boolean;
-    value: {
-        [key: string]: OptionValue;
-    };
+    value: ConfigurationPropertyDict; // TODO - should this be OptionValue | ConfigurationPropertyDict?
 }
 
 /**
