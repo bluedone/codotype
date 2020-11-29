@@ -79,7 +79,6 @@ describe("testing @codotype/runtime v2", () => {
             projectInput,
             startTime: new Date().toISOString(),
             endTime: new Date().toISOString(),
-            logs: [],
         };
 
         // Execute the build via nodeRuntime

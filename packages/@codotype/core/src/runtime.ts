@@ -23,7 +23,7 @@ import { PrettifyOptions } from ".";
 export type RuntimeErrorCode = "MODULE_NOT_FOUND" | "UNKNOWN";
 export enum RuntimeErrorCodes {
     moduleNotFound = "MODULE_NOT_FOUND",
-    unknownd = "UNKNOWN",
+    unknown = "UNKNOWN",
 }
 
 /**
@@ -47,8 +47,9 @@ export enum FileOverwriteBehaviors {
  *              Used by the CodotypeRuntime to determine where a a ProjectBuild output should belong
  * @param logLevel - The level of logging permitted by the Runtime's `log` function. See `RuntimeLogLevel`
  * @param fileOverwriteBehavior - Sets FileOverwriteBehavior for the Runtime. @see FileOverwriteBehavior
+ * @param fileSystemAdapter - The FileSystemAdaptor @see FileSystemAdapter
  */
-export interface RuntimeConstructorParams {
+export interface RuntimeProps {
     cwd: string;
     logLevel: RuntimeLogLevel;
     fileOverwriteBehavior: FileOverwriteBehavior;
@@ -70,7 +71,6 @@ export interface ProjectBuild {
     projectInput: ProjectInput;
     startTime: string;
     endTime: string;
-    logs: string[];
 }
 
 /**
@@ -88,6 +88,10 @@ export interface PluginRegistration {
     pluginMetadata: PluginMetadata;
 }
 
+// // // //
+// // // //
+// TODO - finalize separation between Runtime + RuntimeAdapter + RuntimeProxy
+
 /**
  * RuntimeAdapter
  * TODO - annotate this
@@ -96,7 +100,7 @@ export interface PluginRegistration {
  */
 export interface RuntimeAdapter {
     runtimeProxy: RuntimeProxy;
-    options: RuntimeInjectorProps;
+    options: RuntimeAdapterProps;
     write: WriteFunction;
     forEachSchema: ForEachSchemaFunction;
     forEachRelation: ForEachRelationFunction;
@@ -106,17 +110,14 @@ export interface RuntimeAdapter {
     copyDir: CopyDirFunction;
     compileTemplatesInPlace: () => Promise<Array<unknown>>;
     renderComponent: RenderComponentFunction;
-    copyTemplate: (src: string, dest: string, options: object) => Promise<any>;
-    templatePath: (template_path: string) => string;
-    destinationPath: (destination_path: string) => string;
     composeWith: ComposeWithFunction;
 }
 
 // TODO - RENAME THIS
 // CONTEXT - these are passed into the "CodotypeGeneratorRunner" component
 // WHAT DO THEY DO - provide runtime + plugin + project + filepath + destination
-export interface RuntimeInjectorProps {
-    resolved: string; // What's this?
+export interface RuntimeAdapterProps {
+    generatorResolvedPath: string; // What's this?
     project: Project;
     dest: string; // What's this?
     plugin: PluginMetadata;
@@ -124,17 +125,26 @@ export interface RuntimeInjectorProps {
 }
 
 // // // //
+// // // //
 
 /**
  * Runtime
- * TODO - clarify the distinction between Runtime + RuntimeProxy + RuntimeAdaptor + FileSystemAdapter
+ * TODO - clarify the distinction between Runtime + RuntimeProxy + RuntimeAdapter + FileSystemAdapter
  * TODO - clean this up a bit more - how many of these methods are needed / need to be exposed?
  * TODO - annotate
  * TODO - rename some of these functions
+ * @function getTemplatePath Gets the path to the template, relative to the RuntimeProxyAdaptor (RENAME PENDING)
+ * @function getDestinationPath Gets the path to the template, relative to the RuntimeProxyAdaptor (RENAME PENDING)
  */
 export interface Runtime {
-    templatePath: (resolvedPath: string, templatePath: string) => string;
-    destinationPath: (destination: string, filename: string) => string;
+    getTemplatePath: (
+        generatorResolvedPath: string,
+        templateRelativePath: string,
+    ) => string;
+    getDestinationPath: (
+        outputDirAbsolutePath: string,
+        destinationRelativePath: string,
+    ) => string;
     ensureDir: (dirPath: string) => Promise<boolean>;
     copyDir: CopyDirFunction;
     renderTemplate: (
@@ -143,7 +153,6 @@ export interface Runtime {
         data?: { [key: string]: any },
         options?: { prettify?: PrettifyOptions },
     ) => Promise<string>;
-    fileExists: (filepath: string) => Promise<boolean>;
     compareFile: (
         destinationPath: string,
         compiledTemplate: string,
@@ -161,6 +170,14 @@ export interface Runtime {
         generatorModulePath: string,
         options: ComposeWithOptions,
     ) => Promise<void>;
+    //////////
+    writeTemplateToFile: (
+        runtimeAdapter: RuntimeAdapter,
+        src: string,
+        dest: string,
+        data?: { [key: string]: any },
+        options?: { prettify?: PrettifyOptions },
+    ) => Promise<boolean>;
 }
 
 // // // //

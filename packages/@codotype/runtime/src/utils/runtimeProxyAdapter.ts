@@ -2,8 +2,8 @@ import {
     Relation,
     Project,
     Schema,
-    GeneratorConstructorParams as GeneratorProps,
-    RuntimeInjectorProps,
+    GeneratorProps,
+    RuntimeAdapterProps,
     RuntimeAdapter,
     RuntimeProxy,
     Runtime,
@@ -17,21 +17,27 @@ import {
  * RuntimeAdapter?
  * RuntimeProxyAdapter?
  * TODO - rename this to RuntimeAdapter?
+ * *******
+ * UPDATED ANNOTATION
+ * Must be renamed.
+ * SO - what this is REALLY DOING -> it's providing an interface between a Generator and the Runtime configured to work around that generator's location on the FileSystem
+ * This layer of abstraction allows easy-to-use relative path declarations for source templates + file destinations, without the burden of needing to pass around references to the current directory in the Generator definitions
+ * *******
  * Implements an adapter between the RuntimeProxy and the Runtime
  * Allows a generator to safely access and invoke simplified Runtime methods for abstract filesystem manipulation
  */
 export class RuntimeProxyAdapter implements RuntimeAdapter {
     private runtime: Runtime;
+    runtimeProxy: RuntimeProxy; // TODO - should this be private as well?
     compileInPlace: string[];
-    options: RuntimeInjectorProps;
-    resolved: string;
-    runtimeProxy: RuntimeProxy;
+    options: RuntimeAdapterProps;
+    generatorResolvedPath: string;
 
     /**
      * constructor
      * Handles build options
      */
-    constructor(generatorProps: GeneratorProps, options: RuntimeInjectorProps) {
+    constructor(generatorProps: GeneratorProps, options: RuntimeAdapterProps) {
         // Throw error if options.runtime isn't defined
         if (!options.runtime) {
             throw Error("CodotypeGenerator options requires options.runtime");
@@ -39,8 +45,10 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
         }
 
         // Throw error if options.resolved isn't defined
-        if (!options.resolved) {
-            throw Error("CodotypeGenerator options requires options.resolved");
+        if (!options.generatorResolvedPath) {
+            throw Error(
+                "CodotypeGenerator options requires options.generatorResolvedPath",
+            );
         }
 
         // Validates GeneratorConfiguration
@@ -72,8 +80,8 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
         // Assigns this.options
         this.options = options;
 
-        // PASS this.options.resolved in from @codotype/runtime
-        this.resolved = this.options.resolved;
+        // PASS this.options.generatorResolvedPath in from @codotype/runtime
+        this.generatorResolvedPath = this.options.generatorResolvedPath;
 
         // Defuines this.runtimeProxy
         this.runtimeProxy = {
@@ -81,9 +89,6 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
             writeFile: this.writeFile,
             copyDir: this.copyDir,
             renderComponent: this.renderComponent,
-            copyTemplate: this.copyTemplate,
-            templatePath: this.templatePath,
-            destinationPath: this.destinationPath,
             composeWith: this.composeWith,
         };
 
@@ -95,10 +100,7 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
      * write
      * Method to write files to the filesystem
      */
-    async write({
-        project,
-        runtime,
-    }: {
+    async write(params: {
         project: Project;
         runtime: RuntimeProxy;
     }): Promise<void> {
@@ -114,11 +116,7 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
      * Method to write files to the filesystem for each schema in blueprints.schemas
      * @param - see `WriteFunctionProps`
      */
-    async forEachSchema({
-        schema,
-        project,
-        runtime,
-    }: {
+    async forEachSchema(params: {
         schema: Schema;
         project: Project;
         runtime: RuntimeProxy;
@@ -130,11 +128,7 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
      * forEachRelation
      * @param - see `WriteFunctionProps`
      */
-    async forEachRelation({
-        schema,
-        relation,
-        project,
-    }: {
+    async forEachRelation(params: {
         schema: Schema;
         relation: Relation;
         project: Project;
@@ -145,14 +139,9 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
 
     /**
      * forEachReferencedBy
-     * TODO - rename this function to forEachRelation
      * @param - see `WriteFunctionProps`
      */
-    async forEachReferencedBy({
-        schema,
-        relation,
-        project,
-    }: {
+    async forEachReferencedBy(params: {
         schema: Schema;
         relation: Relation;
         project: Project;
@@ -163,7 +152,9 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
     // ensureDir
     // Ensures presence of directory for template compilation
     ensureDir(dir: string) {
-        return this.runtime.ensureDir(this.destinationPath(dir));
+        return this.runtime.ensureDir(
+            this.runtime.getDestinationPath(this.options.dest, dir),
+        );
     }
 
     /**
@@ -173,8 +164,8 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
     copyDir(params: { src: string; dest: string }) {
         const { src, dest } = params;
         return this.runtime.copyDir({
-            src: this.templatePath(src),
-            dest: this.destinationPath(dest),
+            src: this.runtime.getTemplatePath(this.generatorResolvedPath, src),
+            dest: this.runtime.getDestinationPath(this.options.dest, dest),
         });
     }
 
@@ -182,13 +173,22 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
      * compileTemplatesInPlace
      * Compiles and writes each template defined in the `compileInPlace` property
      */
-    compileTemplatesInPlace() {
+    compileTemplatesInPlace(): Promise<boolean[]> {
         // For each inPlaceTemplate, compile and write
         return Promise.all(
             this.compileInPlace.map((template: string) => {
-                return this.copyTemplate(
-                    this.templatePath(template),
-                    this.destinationPath(template),
+                return this.runtime.writeTemplateToFile(
+                    this,
+                    this.runtime.getTemplatePath(
+                        this.generatorResolvedPath,
+                        template,
+                    ),
+                    this.runtime.getDestinationPath(
+                        this.options.dest,
+                        template,
+                    ),
+                    {},
+                    {},
                 );
             }),
         );
@@ -208,92 +208,15 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
         dest: string;
         data: { [key: string]: any };
         options?: { prettify?: PrettifyOptions };
-    }) {
-        return this.copyTemplate(
-            this.templatePath(src),
-            this.destinationPath(dest),
+    }): Promise<boolean> {
+        console.log("renderComponent - this");
+        console.log(this);
+        return this.runtime.writeTemplateToFile(
+            this,
+            this.runtime.getTemplatePath(this.generatorResolvedPath, src),
+            this.runtime.getDestinationPath(this.options.dest, dest),
             data,
             options,
-        );
-    }
-
-    /**
-     * copyTemplate
-     * Compiles a template and writes to the dest location
-     * TODO - split this up to rely on runtime methods instead of referencing FS directly
-     * @param src
-     * @param dest
-     * @param options
-     */
-    copyTemplate(
-        src: string,
-        dest: string,
-        data: object = {},
-        options: object = {},
-    ): Promise<boolean> {
-        // DEBUG
-        // console.log('Copying:' + dest)
-
-        return new Promise(async (resolve, reject) => {
-            // DEBUG
-            // this.runtime.log('Rendering:' + dest)
-
-            // Compiles the template through CodotypeRuntime.renderTemplate
-            const compiledTemplate: string = await this.runtime.renderTemplate(
-                this,
-                src,
-                data,
-                options,
-            );
-
-            // Prettify compiledTemplate
-            // TODO - should this be done here?
-            // if ()
-
-            // DEBUG
-            // this.runtime.log('Rendered:' + dest)
-
-            // TODO - DOCUMENT!!!
-            // Does the destination already exist?
-            const exists = await this.runtime.fileExists(dest);
-
-            // TODO - DOCUMENT!!!
-            // If it doesn't exist, OKAY TO WRITE
-            if (exists) {
-                if (this.runtime.compareFile(dest, compiledTemplate)) {
-                    return resolve();
-                } else {
-                    // TODO - this needs a GitHub issue
-                    // If exists, and it's different, WRITE (add PROMPT option later, for safety)
-                    // TODO - this should happen inside the runtime, as input checking will vary depending on environment
-                }
-            }
-
-            // Writes the compiled template to the dest location
-            return this.runtime.writeFile(dest, compiledTemplate).then(() => {
-                return resolve();
-            });
-        });
-    }
-
-    /**
-     * templatePath
-     * Generates the full path to a specific template in the `./templates` directory relative to the generator
-     * @param {string} template_path
-     */
-    templatePath(template_path: string = "./") {
-        return this.runtime.templatePath(this.resolved, template_path);
-    }
-
-    /**
-     * destinationPath
-     * Gets the full destination path from the CodotypeRuntime
-     * @param destination_path
-     */
-    destinationPath(destination_path: string = "./") {
-        return this.runtime.destinationPath(
-            this.options.dest,
-            destination_path,
         );
     }
 
@@ -311,7 +234,7 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
         },
     ) {
         return this.runtime.writeFile(
-            destinationPath,
+            this.runtime.getDestinationPath(this.options.dest, destinationPath),
             compiledTemplate,
             options,
         );

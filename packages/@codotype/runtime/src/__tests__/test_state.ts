@@ -3,11 +3,11 @@ import {
     testState,
     RuntimeLogLevels,
     normalizeProjectInput,
-    RuntimeConstructorParams,
+    RuntimeProps,
     FileOverwriteBehaviors,
     Project,
-    RuntimeInjectorProps,
-    GeneratorConstructorParams as GeneratorProps,
+    RuntimeAdapterProps,
+    GeneratorProps,
     buildTokenCasing,
 } from "@codotype/core";
 // import { LocalFileSystemAdapter } from "../LocalFileSystemAdapter";
@@ -28,19 +28,19 @@ export const project: Project = normalizeProjectInput({
     },
 });
 
-export const runtimeConstructorOptions: RuntimeConstructorParams = {
+export const runtimeProps: RuntimeProps = {
     cwd: "/test-cwd/",
     logLevel: RuntimeLogLevels.verbose,
     fileOverwriteBehavior: FileOverwriteBehaviors.force,
     fileSystemAdapter: new InMemoryFileSystemAdapter(),
 };
 
-export const baseGeneratorOptions: RuntimeInjectorProps = {
+export const baseRuntimeAdapterProps: RuntimeAdapterProps = {
     dest: "destination",
-    resolved: "my/resolved/path",
+    generatorResolvedPath: "my/resolved/path",
     project,
     plugin: testState.cdkPluginMeta,
-    runtime: new NodeRuntime(runtimeConstructorOptions),
+    runtime: new NodeRuntime(runtimeProps),
 };
 
 export const generatorPrototype: GeneratorProps = {
@@ -108,13 +108,7 @@ export const generatorPrototype01: GeneratorProps = {
         });
     },
     async forEachSchema({ schema, runtime }) {
-        // Destination for module / components directory
-        const moduleComponentsDest =
-            "components/" + schema.identifiers.singular.snake + "_editor/";
-
-        // Ensures module components directory
-        await runtime.ensureDir(moduleComponentsDest);
-
+        console.log("forEachSchema");
         // Writes the page.tsx.ejs template
         await runtime.renderComponent({
             src: "page.tsx.ejs",
@@ -125,6 +119,9 @@ export const generatorPrototype01: GeneratorProps = {
 };
 
 // // Defines typed generator constant
+// TODO - test `composeWith`
+// TODO - test `composeWith`
+// TODO - test `composeWith`
 export const generatorPrototype02: GeneratorProps = {
     name: "Fullstack TypeScript Generator",
     async write(this: RuntimeProxyAdapter) {

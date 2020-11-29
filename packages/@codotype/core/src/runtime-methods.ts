@@ -61,9 +61,23 @@ export interface ComposeWithOptions {
     outputDirectoryScope?: string;
 }
 
+/**
+ * PrettifyOptions
+ * Supported options for Prettier integration
+ * Doc: https://prettier.io/docs/en/options.html
+ */
 export interface PrettifyOptions {
-    semi?: boolean;
     parser: PrettifyParser;
+    semi?: boolean;
+    printWidth?: number;
+    tabWidth?: number;
+    useTabs?: boolean;
+    singleQuote?: boolean;
+    jsxSingleQuote?: boolean;
+    trailingComma?: "es5" | "none" | "all";
+    bracketSpacing?: boolean;
+    arrowParens?: "always" | "avoid";
+    endOfLine?: "lf" | "crlf" | "cr" | "auto";
 }
 
 // // // //
@@ -126,7 +140,6 @@ export type ComposeWithFunction = (
 /**
  * EnsureDirFunction
  * Used by the Runtime to ensure the presence of a directory
- * NOTE - we SHOULD remove this from RuntimeProxy and just have the Runtime handle this part entirely
  */
 export type EnsureDirFunction = (dir: string) => Promise<boolean>;
 

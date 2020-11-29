@@ -8,11 +8,10 @@ import {
 // // // //
 
 /**
- * GeneratorConstructorParams
- * TODO - rename to `GeneratorConstructorProps` or just `GeneratorProps`
+ * GeneratorProps
  * Parameters used to define a single generator inside a Plugin
  */
-export interface GeneratorConstructorParams {
+export interface GeneratorProps {
     name: string;
     compileInPlace?: string[]; // TODO - rename `compileInPlace` -> `renderInPlace`?
     write?: WriteFunction;

@@ -2,78 +2,90 @@ import { NodeRuntime } from "../node-runtime";
 import { RuntimeProxyAdapter } from "../utils/runtimeProxyAdapter";
 import {
     project,
-    baseGeneratorOptions,
+    baseRuntimeAdapterProps,
     generatorPrototype,
     generatorPrototype01,
 } from "./test_state";
 import {
     RuntimeLogLevels,
     FileOverwriteBehaviors,
-    RuntimeConstructorParams,
+    RuntimeProps,
+    RuntimeAdapterProps,
 } from "@codotype/core";
 import { InMemoryFileSystemAdapter } from "../InMemoryFileSystemAdapter";
 import { runGenerator } from "../utils/runGenerator";
 
 // // // //
+// TODO - clean up these dang tests!
+// TODO - clean up these dang tests!
+// TODO - clean up these dang tests!
+// TODO - clean up these dang tests!
+// TODO - clean up these dang tests!
 
-describe("templatePath method", () => {
+describe("getTemplatePath method", () => {
     it("should define correct template path", () => {
         const dest = "destination";
-        const template = "template.json";
-        const resolved = "my/resolved/path";
+        const templateRelativePath = "template.json";
+        const generatorResolvedPath = "my/resolved/path";
 
         const fileSystemAdapter = new InMemoryFileSystemAdapter();
-        const runtimeConstructorOptions: RuntimeConstructorParams = {
+        const runtimeProps: RuntimeProps = {
             cwd: "/test-cwd/",
             logLevel: RuntimeLogLevels.verbose,
             fileOverwriteBehavior: FileOverwriteBehaviors.force,
             fileSystemAdapter,
         };
-        const runtime = new NodeRuntime(runtimeConstructorOptions);
+        const runtime = new NodeRuntime(runtimeProps);
 
-        const generatorOptions = {
-            ...baseGeneratorOptions,
+        const runtimeAdapterProps: RuntimeAdapterProps = {
+            ...baseRuntimeAdapterProps,
             runtime,
             dest,
-            resolved,
+            generatorResolvedPath,
         };
         const generatorInstance = new RuntimeProxyAdapter(
             generatorPrototype,
-            generatorOptions,
+            runtimeAdapterProps,
         );
 
-        const templatePath = generatorInstance.templatePath(template);
-        expect(templatePath).toBe(`${resolved}/templates/${template}`);
+        // Ensures absolute path to template to be correct
+        const templateFullPath = runtime.getTemplatePath(
+            generatorInstance.generatorResolvedPath,
+            templateRelativePath,
+        );
+        expect(templateFullPath).toBe(
+            `${generatorResolvedPath}/templates/${templateRelativePath}`,
+        );
     });
 });
 
-describe("destinationPath method", () => {
+describe("getDestinationPath method", () => {
     it("should define correct destination path", () => {
         const dest = "destination";
         const dirName = "testyMcTestface";
 
         const fileSystemAdapter = new InMemoryFileSystemAdapter();
-        const runtimeConstructorOptions: RuntimeConstructorParams = {
+        const runtimeProps: RuntimeProps = {
             cwd: "/test-cwd/",
             logLevel: RuntimeLogLevels.verbose,
             fileOverwriteBehavior: FileOverwriteBehaviors.force,
             fileSystemAdapter,
         };
-        const runtime = new NodeRuntime(runtimeConstructorOptions);
+        const runtime = new NodeRuntime(runtimeProps);
 
-        const generatorOptions = {
-            ...baseGeneratorOptions,
+        const runtimeAdapterProps: RuntimeAdapterProps = {
+            ...baseRuntimeAdapterProps,
             runtime,
             dest,
-            resolved: __dirname,
+            generatorResolvedPath: __dirname,
         };
 
         const generatorInstance = new RuntimeProxyAdapter(
             generatorPrototype,
-            generatorOptions,
+            runtimeAdapterProps,
         );
 
-        const destinationPath = generatorInstance.destinationPath(dirName);
+        const destinationPath = runtime.getDestinationPath(dest, dirName);
         expect(destinationPath).toBe(`${dest}/${dirName}`);
     });
 });
@@ -84,23 +96,23 @@ describe("ensureDir method", () => {
         const dirName = "testyMcTestface";
 
         const fileSystemAdapter = new InMemoryFileSystemAdapter();
-        const runtimeConstructorOptions: RuntimeConstructorParams = {
+        const runtimeProps: RuntimeProps = {
             cwd: "/test-cwd/",
             logLevel: RuntimeLogLevels.verbose,
             fileOverwriteBehavior: FileOverwriteBehaviors.force,
             fileSystemAdapter,
         };
-        const runtime = new NodeRuntime(runtimeConstructorOptions);
+        const runtime = new NodeRuntime(runtimeProps);
 
-        const generatorOptions = {
-            ...baseGeneratorOptions,
+        const runtimeAdapterProps: RuntimeAdapterProps = {
+            ...baseRuntimeAdapterProps,
             runtime,
             dest,
-            resolved: __dirname,
+            generatorResolvedPath: __dirname,
         };
         const generatorInstance = new RuntimeProxyAdapter(
             generatorPrototype,
-            generatorOptions,
+            runtimeAdapterProps,
         );
 
         generatorInstance.ensureDir(dirName).then(() => {
@@ -114,31 +126,30 @@ describe("renderComponent", () => {
         const dest = "destination";
 
         const fileSystemAdapter = new InMemoryFileSystemAdapter();
-        const runtimeConstructorOptions: RuntimeConstructorParams = {
+        const runtimeProps: RuntimeProps = {
             cwd: "/test-cwd/",
             logLevel: RuntimeLogLevels.verbose,
             fileOverwriteBehavior: FileOverwriteBehaviors.force,
             fileSystemAdapter,
         };
-        const runtime = new NodeRuntime(runtimeConstructorOptions);
+        const runtime = new NodeRuntime(runtimeProps);
 
         // // // //
         // NOTE - all of this is handled by the runtime -> should this be handled inside the RuntimeGeneratorAdapter?
-        const generatorOptions = {
-            ...baseGeneratorOptions,
+        const runtimeAdapterProps: RuntimeAdapterProps = {
+            ...baseRuntimeAdapterProps,
             runtime,
             dest,
-            resolved: __dirname, // NOTE - need to use __dirname here beacuse the `templates` directory sits next to this test
+            generatorResolvedPath: __dirname, // NOTE - need to use __dirname here beacuse the `templates` directory sits next to this test
         };
 
-        const runtimeProxyAdapter = new RuntimeProxyAdapter(
-            generatorPrototype01,
-            generatorOptions,
-        );
-
+        // Runs the generator
         await runGenerator({
             project,
-            runtimeProxyAdapter,
+            runtimeAdapter: new RuntimeProxyAdapter(
+                generatorPrototype01,
+                runtimeAdapterProps,
+            ),
         });
 
         expect(fileSystemAdapter.files).toMatchSnapshot();

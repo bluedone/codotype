@@ -14,12 +14,12 @@ import {
     RuntimeLogLevels,
     PluginMetadata,
     PluginRegistration,
-    RuntimeConstructorParams,
+    RuntimeProps,
     RuntimeAdapter,
     Runtime,
     ProjectBuild,
-    RuntimeInjectorProps,
-    GeneratorConstructorParams as GeneratorProps,
+    RuntimeAdapterProps,
+    GeneratorProps,
     Datatypes,
     PrettifyOptions,
 } from "@codotype/core";
@@ -35,7 +35,6 @@ import {
 import { getPluginPath } from "./utils/getPluginPath";
 import { prepareProjectBuildDestination } from "./utils/prepareProjectBuildDestination";
 import { logger } from "./utils/logger";
-import { project } from "./__tests__/test_state";
 
 // // // //
 // TODO - cleanup + simplify error handling
@@ -45,7 +44,7 @@ function getAllFiles(dirPath: string, arrayOfFiles: string[]): string[] {
 
     arrayOfFiles = arrayOfFiles || [];
 
-    files.forEach(function(file) {
+    files.forEach(function (file) {
         if (fs.statSync(dirPath + "/" + file).isDirectory()) {
             arrayOfFiles = getAllFiles(dirPath + "/" + file, arrayOfFiles);
         } else {
@@ -72,6 +71,7 @@ function handleExecuteImportError(error: any): Promise<void> {
         console.log("RUNTIME ERROR - GENERATOR NOT FOUND");
     } else {
         console.log("RUNTIME ERROR - OTHER");
+        console.log(error);
     }
     // Resolves with Promise<void>
     return Promise.resolve();
@@ -86,15 +86,15 @@ function handleExecuteImportError(error: any): Promise<void> {
  * in the future (i.e. DenoRuntime, BrowserRuntime, etc.)
  */
 export class NodeRuntime implements Runtime {
-    private options: RuntimeConstructorParams;
+    private options: RuntimeProps;
     private plugins: PluginRegistration[];
 
     /**
      * constructor
      * Instantiates a new NodeRuntime and returns it
-     * @param options - see `RuntimeConstructorParams`
+     * @param options - see `RuntimeProps`
      */
-    constructor(options: RuntimeConstructorParams) {
+    constructor(options: RuntimeProps) {
         // Assigns this.options + default values
         this.options = {
             ...options,
@@ -205,7 +205,6 @@ export class NodeRuntime implements Runtime {
      * Ensures presence of directory for template compilation
      * @param dir - the directory whose existance is being ensured
      */
-    // TODO - remove ensureDir from `Runtime`? Or rename to mkdir?
     ensureDir(dir: string): Promise<boolean> {
         return this.options.fileSystemAdapter.ensureDir(dir);
     }
@@ -261,7 +260,7 @@ export class NodeRuntime implements Runtime {
         // Finds the pluginRegistration associated with the ProjectBuild
         // TODO - check version here, use semver if possible
         const pluginRegistration: PluginRegistration | undefined = plugins.find(
-            g => g.id === project.pluginID,
+            (g) => g.id === project.pluginID,
         );
         //
         // // // //
@@ -297,13 +296,15 @@ export class NodeRuntime implements Runtime {
         try {
             // Defines generator and it's associated absolute filepath for module resolution
             const generator: GeneratorProps = require(pluginDynamicImportPath); // eslint-disable-line import/no-dynamic-require
-            const resolved: string = require.resolve(pluginDynamicImportPath);
+            const generatorResolvedPath: string = require.resolve(
+                pluginDynamicImportPath,
+            );
 
             // Defines options for generator instance
-            const runtimeProxyAdapterProps: RuntimeInjectorProps = {
+            const runtimeAdapterProps: RuntimeAdapterProps = {
                 project,
                 dest,
-                resolved,
+                generatorResolvedPath,
                 plugin: pluginRegistration.pluginMetadata,
                 runtime: this,
             };
@@ -316,13 +317,13 @@ export class NodeRuntime implements Runtime {
             // Creates RuntimeProxyAdapter instance
             const runtimeProxyAdapter = new RuntimeProxyAdapter(
                 generator,
-                runtimeProxyAdapterProps,
+                runtimeAdapterProps,
             );
 
             // Invokes runGenerator w/ Project + RuntimeProxyAdapter
             await runGenerator({
                 project,
-                runtimeProxyAdapter,
+                runtimeAdapter: runtimeProxyAdapter,
             });
 
             // Logs which generator is being run
@@ -341,25 +342,31 @@ export class NodeRuntime implements Runtime {
     }
 
     /**
-     * templatePath
+     * getTemplatePath
      * Generates the full path to a specific template file, relative to the filepath of the generator in-which the template is compiled
      * @param {string} generatorResolved
      * @param {string} template_path
      */
-    templatePath(generatorResolved: string, template_path = "./"): string {
+    getTemplatePath(
+        generatorResolvedPath: string,
+        templateRelativePath: string,
+    ): string {
         return path.join(
-            generatorResolved,
+            generatorResolvedPath,
             TEMPLATES_DIRECTORY_NAME,
-            template_path,
+            templateRelativePath,
         );
     }
 
     /**
-     * destinationPath
+     * getDestinationPath
      * Takes the destination name for a template and Generates
      */
-    destinationPath(destPath: string, dest = "./"): string {
-        return path.join(destPath, dest);
+    getDestinationPath(
+        outputDirAbsolutePath: string,
+        destinationRelativePath: string,
+    ): string {
+        return path.join(outputDirAbsolutePath, destinationRelativePath);
     }
 
     /**
@@ -432,15 +439,6 @@ export class NodeRuntime implements Runtime {
                 },
             );
         });
-    }
-
-    /**
-     * fileExists
-     * Checks to see if a file exists at the destination in the filesystem
-     * @param filepath - string
-     */
-    fileExists(filepath: string): Promise<boolean> {
-        return this.options.fileSystemAdapter.fileExists(filepath);
     }
 
     /**
@@ -572,7 +570,7 @@ export class NodeRuntime implements Runtime {
         // Finds the currently active plugin
         const plugins = await this.getPlugins();
         const activePlugin = plugins.find(
-            p => p.id === parentRuntimeAdapter.options.plugin.identifier,
+            (p) => p.id === parentRuntimeAdapter.options.plugin.identifier,
         );
 
         if (activePlugin === undefined) {
@@ -594,15 +592,21 @@ export class NodeRuntime implements Runtime {
 
             // TODO - abstract into helper function?
             const stats = fsExtra.statSync(
-                parentRuntimeAdapter.options.resolved,
+                parentRuntimeAdapter.options.generatorResolvedPath,
             );
 
             // TODO - document
             // TODO - document
+            // TODO - TEST THIS
+            // console.log("GET STATS");
+            // console.log(generatorModulePath);
+            // console.log(stats.isDirectory());
             if (stats.isDirectory()) {
-                base = parentRuntimeAdapter.options.resolved;
+                base = parentRuntimeAdapter.options.generatorResolvedPath;
             } else {
-                base = path.dirname(parentRuntimeAdapter.options.resolved);
+                base = path.dirname(
+                    parentRuntimeAdapter.options.generatorResolvedPath,
+                );
             }
 
             // TODO - document
@@ -629,6 +633,8 @@ export class NodeRuntime implements Runtime {
             // Defines generator and it's associated absolute filepath for module resolution
             const generator: GeneratorProps = require(modulePath); // eslint-disable-line import/no-dynamic-require
             const resolved: string = require.resolve(modulePath);
+            console.log("resolved");
+            console.log(resolved);
 
             // TODO - document this, clean it all up
             // TODO - move into independent function, `getResolvedGeneratorPath`, perhaps
@@ -636,6 +642,9 @@ export class NodeRuntime implements Runtime {
             let resolvedGeneratorPathParts = resolvedGeneratorPath.split("/");
             resolvedGeneratorPathParts.pop();
             resolvedGeneratorPath = resolvedGeneratorPathParts.join("/");
+
+            console.log("resolvedGeneratorPath");
+            console.log(resolvedGeneratorPath);
 
             // // // //
             // TODO - move into independent function, `resolveDestination`, perhaps
@@ -666,13 +675,13 @@ export class NodeRuntime implements Runtime {
             const runtimeProxyAdapter = new RuntimeProxyAdapter(generator, {
                 ...parentRuntimeAdapter.options,
                 dest: resolvedDestination,
-                resolved: resolvedGeneratorPath,
+                generatorResolvedPath: resolvedGeneratorPath,
             });
 
             // Invokes runGenerator w/ generatorInstance + project
             await runGenerator({
                 project,
-                runtimeProxyAdapter,
+                runtimeAdapter: runtimeProxyAdapter,
             });
 
             // Logs output
@@ -685,4 +694,74 @@ export class NodeRuntime implements Runtime {
             return handleExecuteImportError(err);
         }
     }
+
+    //////////
+    //////////
+    //////////
+
+    /**
+     * writeTemplateToFile
+     * Compiles a template and writes to the dest location
+     * TODO - split this up to rely on runtime methods instead of referencing FS directly
+     * @param src
+     * @param dest
+     * @param options
+     */
+    writeTemplateToFile(
+        generatorInstance: RuntimeAdapter,
+        src: string,
+        dest: string,
+        data: object = {},
+        options: object = {},
+    ): Promise<boolean> {
+        // DEBUG
+        // console.log('Copying:' + dest)
+
+        return new Promise(async (resolve, reject) => {
+            // DEBUG
+            // this.log('Rendering:' + dest)
+
+            // Compiles the template through CodotypeRuntime.renderTemplate
+            const compiledTemplate: string = await this.renderTemplate(
+                generatorInstance,
+                src,
+                data,
+                options,
+            );
+
+            // DEBUG
+            // this.log('Rendered:' + dest)
+
+            // // // //
+            // TODO - re-introduce based on FileOverwriteBehavior
+            // TODO - DOCUMENT!!!
+            // Does the destination already exist?
+            // const exists = await this.options.fileSystemAdapter.fileExists(
+            //     dest,
+            // );
+
+            // // TODO - DOCUMENT!!!
+            // // If it doesn't exist, OKAY TO WRITE
+            // if (exists) {
+            //     console.log("EXISTS");
+            //     if (this.compareFile(dest, compiledTemplate)) {
+            //         return resolve();
+            //     } else {
+            //         // TODO - this needs a GitHub issue
+            //         // If exists, and it's different, WRITE (add PROMPT option later, for safety)
+            //         // TODO - this should happen inside the runtime, as input checking will vary depending on environment
+            //     }
+            // }
+            // // // //
+
+            // Writes the compiled template to the dest location
+            return this.writeFile(dest, compiledTemplate).then(() => {
+                return resolve();
+            });
+        });
+    }
+
+    //////////
+    //////////
+    //////////
 }

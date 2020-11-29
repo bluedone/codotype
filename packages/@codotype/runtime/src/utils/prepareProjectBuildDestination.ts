@@ -9,7 +9,7 @@ import { OUTPUT_DIRECTORY, CODOTYPE_MANIFEST_DIRECTORY } from "../constants";
  * Provisions the output directory and writes the Codotype Project JSON to the output directory
  * TODO - move into ./util directory
  * @param param.runtime - see CodotypeRuntime
- * @param param.cwd - see RuntimeConstructorOptions.cwd
+ * @param param.cwd - see RuntimeProps.cwd
  * @param param.build - see ProjectBuild
  */
 export async function prepareProjectBuildDestination(params: {

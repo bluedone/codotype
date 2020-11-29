@@ -8,24 +8,22 @@ import {
 
 /**
  * RuntimeProxy
- * TODO - rename this to runtime adaptor?
+ * TODO - rename this to RuntimeAdaptor instead?
+ * TODO - rename this to RuntimeAdaptor instead?
+ * TODO - rename this to RuntimeAdaptor instead?
+ * TODO - rename this to RuntimeAdaptor instead?
  * Defines slimmed-down Runtime passed into each generator, fascade/proxy
- * @param ensureDir - TODO - this should be removed from RuntimeProxy and handled automatically in Runtime
- * @param writeFile - write a string to a file in OUTPUT_DIRECTORY/my_project
- * @param copyDir - See CopyDirFunction
- * @param renderComponent - See RenderComponentFunction
- * @param composeWith - See ComposeWithFunction
- * @param templatePath - TODO - these might not need to be exposed at all
- * @param destinationPath - TODO - these might not need to be exposed at all
+ * @param writeFile - @see WriteFileFunction
+ * @param copyDir - @see CopyDirFunction
+ * @param ensureDir - @see EnsureDirFunction
+ * @param renderComponent - @see RenderComponentFunction
+ * @param composeWith - @see ComposeWithFunction
  */
 
 export interface RuntimeProxy {
-    ensureDir: EnsureDirFunction;
     writeFile: WriteFileFunction;
     copyDir: CopyDirFunction;
+    ensureDir: EnsureDirFunction;
     renderComponent: RenderComponentFunction;
-    copyTemplate: (src: string, dest: string, options: object) => Promise<any>;
     composeWith: ComposeWithFunction;
-    templatePath: (template_path: string) => string;
-    destinationPath: (destination_path: string) => string;
 }
