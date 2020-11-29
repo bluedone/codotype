@@ -41,10 +41,10 @@ export interface RuntimeAdapter {
     forEachReferencedBy: ForEachReferencedByFunction;
     compileTemplatesInPlace: () => Promise<Array<unknown>>;
 }
+
 // TODO - RENAME THIS
 // CONTEXT - these are passed into the "CodotypeGeneratorRunner" component
-// WHAT DO THEY DO - provide runtime + plugin + project + filepath + destination
-
+// WHAT DO THEY DO - provide runtime + plugin + project + filepath + destination TO the RuntimeAdaptor
 export interface RuntimeAdapterProps {
     generatorResolvedPath: string; // What's this?
     project: Project;

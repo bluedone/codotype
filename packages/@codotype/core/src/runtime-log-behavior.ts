@@ -1,4 +1,3 @@
-// // // //
 /**
  * RuntimeLogBehavior
  * Designates different logging behaviors for a Codotype Runtime.
