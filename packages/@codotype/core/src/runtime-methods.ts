@@ -5,7 +5,10 @@ import { RuntimeProxy } from "./runtime-proxy";
 
 // // // //
 
-// TODO - move these into @codotype/core
+/**
+ * PrettifyParser
+ * Defines the type of available parsers for PrettifyOptions
+ */
 export type PrettifyParser =
     | "babel"
     | "babel-flow"
@@ -26,7 +29,6 @@ export type PrettifyParser =
     | "mdx"
     | "yaml"
     | "lwc";
-
 export enum PrettifyParsers {
     babel = "babel",
     babelFlow = "babel-flow",
@@ -48,19 +50,6 @@ export enum PrettifyParsers {
     yaml = "yaml",
     lwc = "lwc",
 }
-
-/**
- * ComposeWithOptions
- * Optional parameters accepted by RuntimeAdapter.composeWith()
- * Used when composing one generator inside another
- * @param outputDirectoryScope - dictates the output directory of the composed generator.
- *      Helpful when working with generators (i.e. located in NPM an package) that writes to the root of OUTPUT_DIRECTORY/my_project.
- *      Allows Plugin authors to render the output of another plugin in a different subdirectory.
- */
-export interface ComposeWithOptions {
-    outputDirectoryScope?: string;
-}
-
 /**
  * PrettifyOptions
  * Supported options for Prettier integration
@@ -81,12 +70,32 @@ export interface PrettifyOptions {
 }
 
 // // // //
-// Runtime function types
+// RuntimeProxy Methods
+
+/**
+ * WriteFileFunction
+ * Writes a single file to the destination directory
+ */
 export type WriteFileFunction = (
     destinationPath: string,
     compiledTemplate: string,
     options?: { prettify?: PrettifyOptions },
 ) => Promise<boolean>;
+
+/**
+ * CopyDirFunction
+ * Used by the Runtime to copy a directory of files from src to dest
+ */
+export type CopyDirFunction = (params: {
+    src: string;
+    dest: string;
+}) => Promise<boolean>;
+
+/**
+ * EnsureDirFunction
+ * Used by the Runtime to ensure the presence of a directory
+ */
+export type EnsureDirFunction = (dir: string) => Promise<boolean>;
 
 /**
  * RenderComponentFunction
@@ -101,6 +110,31 @@ export type RenderComponentFunction = (params: {
         prettify?: PrettifyOptions;
     };
 }) => Promise<boolean>;
+
+/**
+ * ComposeWithOptions
+ * Optional parameters accepted by RuntimeAdapter.composeWith()
+ * Used when composing one generator inside another
+ * @param outputDirectoryScope - dictates the output directory of the composed generator.
+ *      Helpful when working with generators (i.e. located in NPM an package) that writes to the root of OUTPUT_DIRECTORY/my_project.
+ *      Allows Plugin authors to render the output of another plugin in a different subdirectory.
+ */
+export interface ComposeWithOptions {
+    outputDirectoryScope?: string;
+}
+
+/**
+ * ComposeWithFunction
+ * Exposed by the RuntimeProxy to allow a Generator to "compose" another generator module
+ * TODO - should this use the modulePath / relativePath / absolutePath pattern? or should that pattern be updated?
+ */
+export type ComposeWithFunction = (
+    generatorModule: string,
+    options?: ComposeWithOptions,
+) => Promise<void>;
+
+// // // //
+// RuntimeAdapter + GeneratorProps Methods
 
 export type WriteFunction = (params: {
     project: Project;
@@ -126,28 +160,3 @@ export type ForEachReferencedByFunction = (params: {
     project: Project;
     runtime: RuntimeProxy;
 }) => Promise<void>;
-
-/**
- * ComposeWithFunction
- * Exposed by the RuntimeProxy to allow a Generator to "compose" another generator module
- * TODO - should this use the modulePath / relativePath / absolutePath pattern? or should that pattern be updated?
- */
-export type ComposeWithFunction = (
-    generatorModule: string,
-    options?: ComposeWithOptions,
-) => Promise<void>;
-
-/**
- * EnsureDirFunction
- * Used by the Runtime to ensure the presence of a directory
- */
-export type EnsureDirFunction = (dir: string) => Promise<boolean>;
-
-/**
- * CopyDirFunction
- * Used by the Runtime to copy a directory of files from src to dest
- */
-export type CopyDirFunction = (params: {
-    src: string;
-    dest: string;
-}) => Promise<boolean>;

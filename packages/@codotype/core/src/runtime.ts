@@ -1,20 +1,13 @@
 import { PluginMetadata } from "./plugin";
-import { Project, ProjectInput } from "./project";
-import { RuntimeProxy } from "./runtime-proxy";
+import { ProjectInput } from "./project";
 import { RuntimeLogLevel } from "./runtime-log-level";
 import {
     WriteFileFunction,
-    RenderComponentFunction,
-    WriteFunction,
-    ForEachSchemaFunction,
-    ForEachRelationFunction,
-    ForEachReferencedByFunction,
-    ComposeWithFunction,
-    EnsureDirFunction,
     CopyDirFunction,
     ComposeWithOptions,
 } from "./runtime-methods";
 import { PrettifyOptions } from ".";
+import { RuntimeAdapter } from "./runtime-adapter";
 
 /**
  * RuntimeErrorCode
@@ -38,6 +31,18 @@ export enum FileOverwriteBehaviors {
     force = "force",
     skip = "skip",
     ask = "ask",
+}
+
+/**
+ * FileSystemAdapter
+ * Defines an interface between the Runtime and the FileSystem
+ * Allows the Runtime to write Plugin output to local filesystem, in-memory cache, or alterative output destination like an S3 bucket
+ */
+export interface FileSystemAdapter {
+    writeFile: WriteFileFunction;
+    ensureDir: (dirPath: string) => Promise<boolean>;
+    fileExists: (filepath: string) => Promise<boolean>;
+    readFile: (filepath: string) => Promise<string | null>;
 }
 
 /**
@@ -88,45 +93,6 @@ export interface PluginRegistration {
     pluginMetadata: PluginMetadata;
 }
 
-// // // //
-// // // //
-// TODO - finalize separation between Runtime + RuntimeAdapter + RuntimeProxy
-
-/**
- * RuntimeAdapter
- * TODO - annotate this
- * TODO - rename some of these functions
- * RuntimeProxyAdapter -> what is this implementation in @codotype/runtime package?
- */
-export interface RuntimeAdapter {
-    runtimeProxy: RuntimeProxy;
-    options: RuntimeAdapterProps;
-    write: WriteFunction;
-    forEachSchema: ForEachSchemaFunction;
-    forEachRelation: ForEachRelationFunction;
-    forEachReferencedBy: ForEachReferencedByFunction;
-    ensureDir: EnsureDirFunction;
-    writeFile: WriteFileFunction;
-    copyDir: CopyDirFunction;
-    compileTemplatesInPlace: () => Promise<Array<unknown>>;
-    renderComponent: RenderComponentFunction;
-    composeWith: ComposeWithFunction;
-}
-
-// TODO - RENAME THIS
-// CONTEXT - these are passed into the "CodotypeGeneratorRunner" component
-// WHAT DO THEY DO - provide runtime + plugin + project + filepath + destination
-export interface RuntimeAdapterProps {
-    generatorResolvedPath: string; // What's this?
-    project: Project;
-    dest: string; // What's this?
-    plugin: PluginMetadata;
-    runtime: Runtime;
-}
-
-// // // //
-// // // //
-
 /**
  * Runtime
  * TODO - clarify the distinction between Runtime + RuntimeProxy + RuntimeAdapter + FileSystemAdapter
@@ -145,32 +111,31 @@ export interface Runtime {
         outputDirAbsolutePath: string,
         destinationRelativePath: string,
     ) => string;
-    ensureDir: (dirPath: string) => Promise<boolean>;
     copyDir: CopyDirFunction;
-    renderTemplate: (
-        runtimeAdapter: RuntimeAdapter,
-        src: string,
-        data?: { [key: string]: any },
-        options?: { prettify?: PrettifyOptions },
-    ) => Promise<string>;
-    compareFile: (
-        destinationPath: string,
-        compiledTemplate: string,
-    ) => Promise<boolean>;
-    writeFile: WriteFileFunction;
+    ensureDir: (dirPath: string) => Promise<boolean>;
     log: (message: any, options: { level: RuntimeLogLevel }) => void;
     registerPlugin: (props: {
         modulePath?: string;
         relativePath?: string;
         absolutePath?: string;
     }) => Promise<PluginRegistration | null>;
+    compareFile: (
+        destinationPath: string,
+        compiledTemplate: string,
+    ) => Promise<boolean>;
     execute: (props: { build: ProjectBuild }) => Promise<void>;
+    writeFile: WriteFileFunction;
     composeWith: (
         parentRuntimeAdapter: RuntimeAdapter,
         generatorModulePath: string,
         options: ComposeWithOptions,
     ) => Promise<void>;
-    //////////
+    renderTemplate: (
+        runtimeAdapter: RuntimeAdapter,
+        src: string,
+        data?: { [key: string]: any },
+        options?: { prettify?: PrettifyOptions },
+    ) => Promise<string>;
     writeTemplateToFile: (
         runtimeAdapter: RuntimeAdapter,
         src: string,
@@ -179,32 +144,3 @@ export interface Runtime {
         options?: { prettify?: PrettifyOptions },
     ) => Promise<boolean>;
 }
-
-// // // //
-
-/**
- * FileSystemAdapter
- * Defines an interface between the Runtime and the FileSystem
- * Allows the Runtime to write Plugin output to local filesystem, in-memory cache, or alterative output destination like an S3 bucket
- */
-export interface FileSystemAdapter {
-    writeFile: WriteFileFunction;
-    ensureDir: (dirPath: string) => Promise<boolean>;
-    fileExists: (filepath: string) => Promise<boolean>;
-    readFile: (filepath: string) => Promise<string | null>;
-}
-
-// // // //
-// CHORE - add examples to test_data module
-
-// const myOpts: CodotypeRuntimeConstructorOptions = {
-//     cwd: "string",
-//     logLevel: RuntimeLogLevels.verbose,
-//     fileOverwriteBehavior: FileOverwriteBehaviors.skip,
-// };
-
-// const myOpts2: CodotypeRuntimeConstructorOptions = {
-//     cwd: "string",
-//     logLevel: "verbose",
-//     fileOverwriteBehavior: "skip",
-// };

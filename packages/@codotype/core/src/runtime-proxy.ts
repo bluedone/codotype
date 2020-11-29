@@ -6,13 +6,11 @@ import {
     ComposeWithFunction,
 } from "./runtime-methods";
 
+// // // //
+
 /**
  * RuntimeProxy
- * TODO - rename this to RuntimeAdaptor instead?
- * TODO - rename this to RuntimeAdaptor instead?
- * TODO - rename this to RuntimeAdaptor instead?
- * TODO - rename this to RuntimeAdaptor instead?
- * Defines slimmed-down Runtime passed into each generator, fascade/proxy
+ * Defines slimmed-down + simplified Runtime methods to pass into functions defined on GeneratorProps
  * @param writeFile - @see WriteFileFunction
  * @param copyDir - @see CopyDirFunction
  * @param ensureDir - @see EnsureDirFunction

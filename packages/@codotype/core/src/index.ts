@@ -20,6 +20,7 @@ export * from "./primatives";
 export * from "./runtime-log-level";
 export * from "./runtime-methods";
 export * from "./runtime-proxy";
+export * from "./runtime-adapter";
 export * from "./property-transformation";
 export * from "./schema-editor";
 export * from "./schema-editor-addon";
