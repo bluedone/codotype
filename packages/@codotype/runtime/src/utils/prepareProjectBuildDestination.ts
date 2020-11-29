@@ -7,14 +7,13 @@ import { OUTPUT_DIRECTORY, CODOTYPE_MANIFEST_DIRECTORY } from "../constants";
 /**
  * prepareProjectBuildDestination
  * Provisions the output directory and writes the Codotype Project JSON to the output directory
- * TODO - move into ./util directory
- * @param param.runtime - see CodotypeRuntime
- * @param param.cwd - see RuntimeProps.cwd
- * @param param.build - see ProjectBuild
+ * @param param.cwd - @see RuntimeProps.cwd
+ * @param param.runtime - @see CodotypeRuntime
+ * @param param.build - @see ProjectBuild
  */
 export async function prepareProjectBuildDestination(params: {
-    runtime: Runtime;
     cwd: string;
+    runtime: Runtime;
     build: ProjectBuild;
 }): Promise<void> {
     const { runtime, cwd, build } = params;
@@ -46,12 +45,12 @@ export async function prepareProjectBuildDestination(params: {
 
     // Writes two source files into the `.codotype` directory
     return new Promise<void>((resolve) => {
-        // Writes Project JSON to output directory
+        // Constructs filename for ProjectInput JSON
+        const projectFilename = `${build.projectInput.identifiers.kebab}-codotype-project.json`;
+
+        // Writes ProjectInput JSON to output directory
         runtime.writeFile(
-            path.join(
-                manifestDest +
-                    `/${build.projectInput.identifiers.kebab}-codotype-project.json`, // TODO - use a constant here
-            ),
+            path.join(`${manifestDest}/${projectFilename}`),
             JSON.stringify(build.projectInput, null, 2),
         );
 

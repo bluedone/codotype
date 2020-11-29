@@ -9,24 +9,33 @@ import {
     RuntimeAdapterProps,
     GeneratorProps,
     buildTokenCasing,
+    ProjectInput,
+    ProjectBuild,
 } from "@codotype/core";
-// import { LocalFileSystemAdapter } from "../LocalFileSystemAdapter";
 import { InMemoryFileSystemAdapter } from "../InMemoryFileSystemAdapter";
 import { NodeRuntime } from "../node-runtime";
 
 // // // //
 
+export const projectInput: ProjectInput = {
+    schemas: [testState.userSchema, testState.movieSchema],
+    relations: [],
+    configuration: {},
+    pluginID: "123",
+    pluginVersion: "0.1.1",
+    id: "project-id",
+    identifiers: buildTokenCasing("My Project"),
+};
+
 export const project: Project = normalizeProjectInput({
-    projectInput: {
-        schemas: [testState.userSchema, testState.movieSchema],
-        relations: [],
-        configuration: {},
-        pluginID: "123",
-        pluginVersion: "0.1.1",
-        id: "project-id",
-        identifiers: buildTokenCasing("My Project"),
-    },
+    projectInput,
 });
+
+export const build: ProjectBuild = {
+    projectInput,
+    startTime: new Date().toISOString(),
+    endTime: new Date().toISOString(),
+};
 
 export const runtimeProps: RuntimeProps = {
     cwd: "/test-cwd/",
@@ -108,26 +117,11 @@ export const generatorPrototype01: GeneratorProps = {
         });
     },
     async forEachSchema({ schema, runtime }) {
-        console.log("forEachSchema");
         // Writes the page.tsx.ejs template
         await runtime.renderComponent({
             src: "page.tsx.ejs",
             dest: `pages/${schema.identifiers.plural.snake}.tsx`,
             data: { schema },
         });
-    },
-};
-
-// // Defines typed generator constant
-// TODO - test `composeWith`
-// TODO - test `composeWith`
-// TODO - test `composeWith`
-export const generatorPrototype02: GeneratorProps = {
-    name: "Fullstack TypeScript Generator",
-    async write(this: RuntimeProxyAdapter) {
-        await this.composeWith("./base");
-        await this.composeWith("./rest-api");
-        await this.composeWith("./react-components");
-        await this.composeWith("./react-components/form");
     },
 };

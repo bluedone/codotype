@@ -28,7 +28,7 @@ import {
  */
 export class RuntimeProxyAdapter implements RuntimeAdapter {
     private runtime: Runtime;
-    runtimeProxy: RuntimeProxy; // TODO - should this be private as well?
+    runtimeProxy: RuntimeProxy;
     compileInPlace: string[];
     options: RuntimeAdapterProps;
     generatorResolvedPath: string;
@@ -51,7 +51,8 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
             );
         }
 
-        // Validates GeneratorConfiguration
+        // Validates GeneratorProps
+        // TODO - should this be abstracted into @codotype/core?
         if (
             !generatorProps.write &&
             !generatorProps.compileInPlace &&
@@ -60,7 +61,7 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
             !generatorProps.forEachReferencedBy
         ) {
             throw Error(
-                "GeneratorConfiguration requires either write, forEachSchema, forEachRelation, forEachReferencedBy, or compileInPlace properties",
+                "GeneratorProps requires either write, forEachSchema, forEachRelation, forEachReferencedBy, or compileInPlace properties",
             );
         }
 
@@ -68,7 +69,7 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
         // this.runtime must be a compatible CodotypeRuntime class instance
         this.runtime = options.runtime;
 
-        // Assigns generatorConfiguration
+        // Assigns methods from GeneratorProps
         this.write = generatorProps.write || this.write;
         this.forEachSchema = generatorProps.forEachSchema || this.forEachSchema;
         this.forEachRelation =
@@ -96,25 +97,23 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
         return this;
     }
 
+    // // // //
+    // GeneratorProps methods
+
     /**
      * write
-     * Method to write files to the filesystem
+     * @see WriteFunction
      */
     async write(params: {
         project: Project;
         runtime: RuntimeProxy;
     }): Promise<void> {
-        // Display warning if generator doesn't implement its own write method?
-        // console.warn(
-        //   "NOTHING TO WRITE - this should be overwritten by a subclassed generator."
-        // );
         return Promise.resolve();
     }
 
     /**
      * forEachSchema
-     * Method to write files to the filesystem for each schema in blueprints.schemas
-     * @param - see `WriteFunctionProps`
+     * @see ForEachSchemaFunction
      */
     async forEachSchema(params: {
         schema: Schema;
@@ -126,7 +125,7 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
 
     /**
      * forEachRelation
-     * @param - see `WriteFunctionProps`
+     * @see ForEachRelationFunction
      */
     async forEachRelation(params: {
         schema: Schema;
@@ -139,7 +138,7 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
 
     /**
      * forEachReferencedBy
-     * @param - see `WriteFunctionProps`
+     * @see ForEachReferencedByFunction
      */
     async forEachReferencedBy(params: {
         schema: Schema;
@@ -149,8 +148,31 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
         return Promise.resolve();
     }
 
-    // ensureDir
-    // Ensures presence of directory for template compilation
+    // // // //
+    // Runtime Methods
+
+    /**
+     * writeFile
+     * @see WriteFileFunction
+     */
+    writeFile(
+        destinationPath: string,
+        compiledTemplate: string,
+        options?: {
+            prettify?: PrettifyOptions;
+        },
+    ) {
+        return this.runtime.writeFile(
+            this.runtime.getDestinationPath(this.options.dest, destinationPath),
+            compiledTemplate,
+            options,
+        );
+    }
+
+    /**
+     * ensureDir
+     * @see EnsureDirFunction
+     */
     ensureDir(dir: string) {
         return this.runtime.ensureDir(
             this.runtime.getDestinationPath(this.options.dest, dir),
@@ -159,7 +181,7 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
 
     /**
      * copDir
-     * copy a directory from src to dest'copy a directory from src to dest
+     * @see CopyDirFunction
      */
     copyDir(params: { src: string; dest: string }) {
         const { src, dest } = params;
@@ -171,7 +193,7 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
 
     /**
      * compileTemplatesInPlace
-     * Compiles and writes each template defined in the `compileInPlace` property
+     * @see GeneratorProps.compileInPlace
      */
     compileTemplatesInPlace(): Promise<boolean[]> {
         // For each inPlaceTemplate, compile and write
@@ -196,7 +218,7 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
 
     /**
      * renderComponent
-     * Compiles and writes each template defined in the `compileInPlace` property
+     * @see RenderComponentFunction
      */
     renderComponent({
         src,
@@ -209,8 +231,6 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
         data: { [key: string]: any };
         options?: { prettify?: PrettifyOptions };
     }): Promise<boolean> {
-        console.log("renderComponent - this");
-        console.log(this);
         return this.runtime.writeTemplateToFile(
             this,
             this.runtime.getTemplatePath(this.generatorResolvedPath, src),
@@ -221,35 +241,17 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
     }
 
     /**
-     * writeFile
-     * TODO - annotate this
-     * @param destinationPath
-     * @param compiledTemplate
-     */
-    writeFile(
-        destinationPath: string,
-        compiledTemplate: string,
-        options?: {
-            prettify?: PrettifyOptions;
-        },
-    ) {
-        return this.runtime.writeFile(
-            this.runtime.getDestinationPath(this.options.dest, destinationPath),
-            compiledTemplate,
-            options,
-        );
-    }
-
-    /**
      * composeWith
-     * Enables one generator to fire off several child generators
-     * @param generatorModule
-     * @param options - TODO - add type for ComposeWithOptions -> WHAT ARE THEY????
+     * @see ComposeWithFunction
      */
     composeWith(
-        generatorModule: string,
-        options?: ComposeWithOptions,
+        generatorModulePath: string,
+        composeWithOptions?: ComposeWithOptions,
     ): Promise<void> {
-        return this.runtime.composeWith(this, generatorModule, options || {});
+        return this.runtime.composeWith(
+            this,
+            generatorModulePath,
+            composeWithOptions || {},
+        );
     }
 }

@@ -37,7 +37,7 @@ import { prepareProjectBuildDestination } from "./utils/prepareProjectBuildDesti
 import { logger } from "./utils/logger";
 
 // // // //
-// TODO - cleanup + simplify error handling
+// TODO - cleanup + simplify + improve error handling
 
 function getAllFiles(dirPath: string, arrayOfFiles: string[]): string[] {
     const files = fs.readdirSync(dirPath);
@@ -633,8 +633,6 @@ export class NodeRuntime implements Runtime {
             // Defines generator and it's associated absolute filepath for module resolution
             const generator: GeneratorProps = require(modulePath); // eslint-disable-line import/no-dynamic-require
             const resolved: string = require.resolve(modulePath);
-            console.log("resolved");
-            console.log(resolved);
 
             // TODO - document this, clean it all up
             // TODO - move into independent function, `getResolvedGeneratorPath`, perhaps
@@ -642,9 +640,6 @@ export class NodeRuntime implements Runtime {
             let resolvedGeneratorPathParts = resolvedGeneratorPath.split("/");
             resolvedGeneratorPathParts.pop();
             resolvedGeneratorPath = resolvedGeneratorPathParts.join("/");
-
-            console.log("resolvedGeneratorPath");
-            console.log(resolvedGeneratorPath);
 
             // // // //
             // TODO - move into independent function, `resolveDestination`, perhaps
@@ -667,6 +662,13 @@ export class NodeRuntime implements Runtime {
                 `Runtime.composeWith - resolvedDestination: ${resolvedDestination}`,
                 { level: RuntimeLogLevels.verbose },
             );
+
+            this.log(
+                `Runtime.composeWith - resolvedGeneratorPath: ${resolvedGeneratorPath}`,
+                { level: RuntimeLogLevels.verbose },
+            );
+
+            // // // //
 
             // Gets project from parentRuntimeAdapter.options
             const project = parentRuntimeAdapter.options.project;
@@ -694,10 +696,6 @@ export class NodeRuntime implements Runtime {
             return handleExecuteImportError(err);
         }
     }
-
-    //////////
-    //////////
-    //////////
 
     /**
      * writeTemplateToFile
@@ -760,8 +758,4 @@ export class NodeRuntime implements Runtime {
             });
         });
     }
-
-    //////////
-    //////////
-    //////////
 }

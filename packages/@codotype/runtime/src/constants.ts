@@ -12,6 +12,9 @@ export const OUTPUT_DIRECTORY: string = ".codotype-out";
 
 /**
  * CODOTYPE_MANIFEST_DIRECTORY
+ * TODO - rename this
+ * TODO - rename this
+ * TODO - rename this
  * The directory inside the a Project's output that stores the codotype-project.json file
  */
 export const CODOTYPE_MANIFEST_DIRECTORY: string = ".codotype";
