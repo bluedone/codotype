@@ -300,8 +300,8 @@ export class NodeRuntime implements Runtime {
         // NOTE - if `build.id` is an empty string, the project is placed directly inside OUTPUT_DIRECTORY
         const buildOutputDirectory: string = id || "";
 
-        // Assigns `dest` option for project output
-        const dest: string = path.join(
+        // Constructs RuntimeAdapterProps.destinationPath
+        const destinationPath: string = path.join(
             this.options.cwd,
             OUTPUT_DIRECTORY,
             buildOutputDirectory,
@@ -319,7 +319,7 @@ export class NodeRuntime implements Runtime {
             // Defines options for generator instance
             const runtimeAdapterProps: RuntimeAdapterProps = {
                 project,
-                dest,
+                destinationPath,
                 generatorResolvedPath,
                 plugin: pluginRegistration.pluginMetadata,
                 runtime: this,
@@ -411,9 +411,9 @@ export class NodeRuntime implements Runtime {
             // TODO - should be abstracted into a separate function?
             // The `data` object is passed into each file that gets rendered
             const templateData = {
-                project: generatorInstance.options.project,
-                plugin: generatorInstance.options.plugin,
-                configuration: generatorInstance.options.project.configuration,
+                project: generatorInstance.props.project,
+                plugin: generatorInstance.props.plugin,
+                configuration: generatorInstance.props.project.configuration,
                 helpers: {
                     indent,
                     trailingComma,
@@ -582,7 +582,7 @@ export class NodeRuntime implements Runtime {
 
         // Looks up actively-used Plugin
         const activePlugin = await this.findPlugin(
-            parentRuntimeAdapter.options.plugin.identifier,
+            parentRuntimeAdapter.props.plugin.identifier,
         );
 
         if (activePlugin === undefined) {
@@ -603,7 +603,7 @@ export class NodeRuntime implements Runtime {
 
             // TODO - abstract into helper function?
             const stats = fsExtra.statSync(
-                parentRuntimeAdapter.options.generatorResolvedPath,
+                parentRuntimeAdapter.props.generatorResolvedPath,
             );
 
             // TODO - document
@@ -613,10 +613,10 @@ export class NodeRuntime implements Runtime {
             // console.log(stats.isDirectory());
             // If the parent RuntimeAdaptor is an `index.js` file (thus making it the default module resolved by the `composeWith` function call), we do...
             if (stats.isDirectory()) {
-                base = parentRuntimeAdapter.options.generatorResolvedPath;
+                base = parentRuntimeAdapter.props.generatorResolvedPath;
             } else {
                 base = path.dirname(
-                    parentRuntimeAdapter.options.generatorResolvedPath,
+                    parentRuntimeAdapter.props.generatorResolvedPath,
                 );
             }
 
@@ -654,14 +654,15 @@ export class NodeRuntime implements Runtime {
 
             // // // //
             // TODO - move into independent function, `resolveDestination`, perhaps
-            let resolvedDestination = parentRuntimeAdapter.options.dest;
+            let resolvedDestination =
+                parentRuntimeAdapter.props.destinationPath;
 
             // Handle ComposeWithOptions.outputDirectoryScope
             // Scope the output of the composed Generator inside a different directory within OUTPUT_DIRECTORY/my_project
             if (options.outputDirectoryScope) {
                 // Updates resolvedDestination to include the additional outputDirectoryScope
                 resolvedDestination = path.resolve(
-                    parentRuntimeAdapter.options.dest,
+                    parentRuntimeAdapter.props.destinationPath,
                     options.outputDirectoryScope,
                 );
             }
@@ -682,12 +683,12 @@ export class NodeRuntime implements Runtime {
             // // // //
 
             // Gets project from parentRuntimeAdapter.options
-            const project = parentRuntimeAdapter.options.project;
+            const project = parentRuntimeAdapter.props.project;
 
             // Creates new CodotypeGenerator
             const runtimeProxyAdapter = new RuntimeProxyAdapter(generator, {
-                ...parentRuntimeAdapter.options,
-                dest: resolvedDestination,
+                ...parentRuntimeAdapter.props,
+                destinationPath: resolvedDestination,
                 generatorResolvedPath: resolvedGeneratorPath,
             });
 

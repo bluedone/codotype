@@ -15,7 +15,6 @@ import {
 
 /**
  * RuntimeProxyAdapter
- * TODO - rename this to RuntimeAdapter?
  * TODO - this MUST be renamed from RuntimeProxyAdaptor to SOMETHING ELSE.
  * Creates an interface between a Generator and Runtime configured to work around that Generator's module location on the file system
  * This layer of abstraction allows easy-to-use relative path declarations for source templates + file destinations,
@@ -25,24 +24,24 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
     private runtime: Runtime;
     runtimeProxy: RuntimeProxy;
     compileInPlace: string[];
-    options: RuntimeAdapterProps;
+    props: RuntimeAdapterProps;
     generatorResolvedPath: string;
 
     /**
      * constructor
      * Handles build options
      */
-    constructor(generatorProps: GeneratorProps, options: RuntimeAdapterProps) {
-        // Throw error if options.runtime isn't defined
-        if (!options.runtime) {
-            throw Error("CodotypeGenerator options requires options.runtime");
+    constructor(generatorProps: GeneratorProps, props: RuntimeAdapterProps) {
+        // Throw error if props.runtime isn't defined
+        if (!props.runtime) {
+            throw Error("CodotypeGenerator options requires props.runtime");
             return;
         }
 
-        // Throw error if options.resolved isn't defined
-        if (!options.generatorResolvedPath) {
+        // Throw error if props.resolved isn't defined
+        if (!props.generatorResolvedPath) {
             throw Error(
-                "CodotypeGenerator options requires options.generatorResolvedPath",
+                "CodotypeGenerator options requires props.generatorResolvedPath",
             );
         }
 
@@ -62,7 +61,7 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
 
         // Assigns this.runtime
         // this.runtime must be a compatible CodotypeRuntime class instance
-        this.runtime = options.runtime;
+        this.runtime = props.runtime;
 
         // Assigns methods from GeneratorProps
         this.write = generatorProps.write || this.write;
@@ -73,11 +72,11 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
             generatorProps.forEachReferencedBy || this.forEachReferencedBy;
         this.compileInPlace = generatorProps.compileInPlace || [];
 
-        // Assigns this.options
-        this.options = options;
+        // Assigns this.props
+        this.props = props;
 
-        // PASS this.options.generatorResolvedPath in from @codotype/runtime
-        this.generatorResolvedPath = this.options.generatorResolvedPath;
+        // PASS this.props.generatorResolvedPath in from @codotype/runtime
+        this.generatorResolvedPath = this.props.generatorResolvedPath;
 
         // Defuines this.runtimeProxy
         this.runtimeProxy = {
@@ -158,7 +157,10 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
         },
     ) {
         return this.runtime.writeFile(
-            this.runtime.getDestinationPath(this.options.dest, destinationPath),
+            this.runtime.getDestinationPath(
+                this.props.destinationPath,
+                destinationPath,
+            ),
             compiledTemplate,
             options,
         );
@@ -170,7 +172,7 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
      */
     ensureDir(dir: string) {
         return this.runtime.ensureDir(
-            this.runtime.getDestinationPath(this.options.dest, dir),
+            this.runtime.getDestinationPath(this.props.destinationPath, dir),
         );
     }
 
@@ -182,7 +184,10 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
         const { src, dest } = params;
         return this.runtime.copyDir({
             src: this.runtime.getTemplatePath(this.generatorResolvedPath, src),
-            dest: this.runtime.getDestinationPath(this.options.dest, dest),
+            dest: this.runtime.getDestinationPath(
+                this.props.destinationPath,
+                dest,
+            ),
         });
     }
 
@@ -201,7 +206,7 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
                         template,
                     ),
                     this.runtime.getDestinationPath(
-                        this.options.dest,
+                        this.props.destinationPath,
                         template,
                     ),
                     {},
@@ -229,7 +234,7 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
         return this.runtime.writeTemplateToFile(
             this,
             this.runtime.getTemplatePath(this.generatorResolvedPath, src),
-            this.runtime.getDestinationPath(this.options.dest, dest),
+            this.runtime.getDestinationPath(this.props.destinationPath, dest),
             data,
             options,
         );

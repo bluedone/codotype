@@ -15,17 +15,17 @@ import {
 import { Runtime } from "./runtime";
 
 // // // //
-// TODO - finalize separation between Runtime + RuntimeAdapter + RuntimeProxy
 
 /**
  * RuntimeAdapter
- * TODO - annotate this
  * TODO - rename some of these functions
- * RuntimeProxyAdapter -> what is this implementation in @codotype/runtime package?
+ * Used to create an interface between a Generator and Runtime configured to work around that Generator's module location on the file system
+ * This layer of abstraction allows easy-to-use relative path declarations for source templates + file destinations,
+ * without the burden of needing to pass around references to the current directory in the Generator definitions
  */
 export interface RuntimeAdapter {
     // RuntimeAdaptorProps
-    options: RuntimeAdapterProps; // TODO - rename as "props"
+    props: RuntimeAdapterProps;
     // RuntimeProxy state
     runtimeProxy: RuntimeProxy;
     // RuntimeProxy Methods
@@ -46,9 +46,9 @@ export interface RuntimeAdapter {
 // CONTEXT - these are passed into the "CodotypeGeneratorRunner" component
 // WHAT DO THEY DO - provide runtime + plugin + project + filepath + destination TO the RuntimeAdaptor
 export interface RuntimeAdapterProps {
-    generatorResolvedPath: string; // What's this?
     project: Project;
-    dest: string; // What's this?
-    plugin: PluginMetadata;
     runtime: Runtime;
+    plugin: PluginMetadata;
+    destinationPath: string;
+    generatorResolvedPath: string;
 }

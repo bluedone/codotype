@@ -91,24 +91,15 @@ export type OptionValueInstance =
     | ConfigurationPropertyDict
     | ConfigurationPropertyAllowDisable;
 
-// TODO - should be:
-// export interface OptionValueInstance {
-//     enabled: boolean;
-//     value: {
-//         [key: string]: OptionValue;
-//     };
-// }
-
 interface ConfigurationPropertyDict {
     [key: string]: OptionValue;
 }
 
 // NOTE - this distinction is confusing
-// it should always include he enabled + value pair
 // When we inflate the metadata to be used in the Plugin, we can simplify based on the allowDisable property
 interface ConfigurationPropertyAllowDisable {
     enabled: boolean;
-    value: ConfigurationPropertyDict; // TODO - should this be OptionValue | ConfigurationPropertyDict?
+    value: OptionValue;
 }
 
 /**

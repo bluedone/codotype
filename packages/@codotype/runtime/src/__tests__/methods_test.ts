@@ -18,7 +18,7 @@ import { runGenerator } from "../utils/runGenerator";
 
 // // // //
 
-const dest = "destination";
+const destinationPath = "destination";
 
 function getTestRuntime(): {
     runtime: Runtime;
@@ -46,7 +46,7 @@ describe("getTemplatePath method", () => {
         const runtimeAdapterProps: RuntimeAdapterProps = {
             ...baseRuntimeAdapterProps,
             runtime,
-            dest,
+            destinationPath,
             generatorResolvedPath,
         };
         const generatorInstance = new RuntimeProxyAdapter(
@@ -73,7 +73,7 @@ describe("getDestinationPath method", () => {
         const runtimeAdapterProps: RuntimeAdapterProps = {
             ...baseRuntimeAdapterProps,
             runtime,
-            dest,
+            destinationPath,
             generatorResolvedPath: __dirname,
         };
 
@@ -82,8 +82,8 @@ describe("getDestinationPath method", () => {
             runtimeAdapterProps,
         );
 
-        const destinationPath = runtime.getDestinationPath(dest, dirName);
-        expect(destinationPath).toBe(`${dest}/${dirName}`);
+        const destPath = runtime.getDestinationPath(destinationPath, dirName);
+        expect(destPath).toBe(`${destinationPath}/${dirName}`);
     });
 });
 
@@ -95,7 +95,7 @@ describe("ensureDir method", () => {
         const runtimeAdapterProps: RuntimeAdapterProps = {
             ...baseRuntimeAdapterProps,
             runtime,
-            dest,
+            destinationPath,
             generatorResolvedPath: __dirname,
         };
         const generatorInstance = new RuntimeProxyAdapter(
@@ -118,7 +118,7 @@ describe("renderComponent", () => {
         const runtimeAdapterProps: RuntimeAdapterProps = {
             ...baseRuntimeAdapterProps,
             runtime,
-            dest,
+            destinationPath,
             generatorResolvedPath: __dirname, // NOTE - need to use __dirname here beacuse the `templates` directory sits next to this test
         };
 

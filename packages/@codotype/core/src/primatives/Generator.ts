@@ -1,16 +1,27 @@
+import {
+    ForEachReferencedByFunction,
+    ForEachRelationFunction,
+    ForEachSchemaFunction,
+    WriteFunction,
+} from "..";
 import { GeneratorProps } from "../generator";
+
+// // // //
 
 export class GeneratorBuilder implements GeneratorProps {
     name: string;
     compileInPlace: string[] = [];
+    write?: WriteFunction = undefined;
+    forEachSchema?: ForEachSchemaFunction = undefined;
+    forEachRelation?: ForEachRelationFunction = undefined;
+    forEachReferencedBy?: ForEachReferencedByFunction = undefined;
     constructor(params: GeneratorProps) {
         this.name = params.name;
+        this.write = params.write || this.write;
+        this.forEachSchema = params.forEachSchema || this.forEachSchema;
+        this.forEachRelation = params.forEachRelation || this.forEachRelation;
+        this.forEachReferencedBy =
+            params.forEachReferencedBy || this.forEachReferencedBy;
         this.compileInPlace = params.compileInPlace || this.compileInPlace;
-        // TODO - finish this up
-        // this.write = params.write || this.write;
-        // this.write = parmas.write;
-        // this.forEachRelation = parmas.forEachRelation;
-        // this.forEachReferencedBy = parmas.forEachReferencedBy;
-        // this.forEachSchema = parmas.forEachSchema;
     }
 }

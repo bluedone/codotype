@@ -43,7 +43,7 @@ export const runtimeProps: RuntimeProps = {
 };
 
 export const baseRuntimeAdapterProps: RuntimeAdapterProps = {
-    dest: "destination",
+    destinationPath: "destination",
     generatorResolvedPath: "my/resolved/path",
     project,
     plugin: testState.cdkPluginMeta,
