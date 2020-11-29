@@ -18,6 +18,7 @@ export * from "./uuid";
 export * from "./util";
 export * from "./primatives";
 export * from "./runtime-log-level";
+export * from "./runtime-log-behavior";
 export * from "./runtime-methods";
 export * from "./runtime-proxy";
 export * from "./runtime-adapter";

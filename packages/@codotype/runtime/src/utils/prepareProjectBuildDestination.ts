@@ -1,6 +1,6 @@
 import * as path from "path";
 import { Runtime, ProjectBuild, RuntimeLogLevels } from "@codotype/core";
-import { OUTPUT_DIRECTORY, CODOTYPE_MANIFEST_DIRECTORY } from "../constants";
+import { OUTPUT_DIRECTORY, CODOTYPE_ARTIFACTS_DIRECTORY } from "../constants";
 
 // // // //
 
@@ -38,7 +38,7 @@ export async function prepareProjectBuildDestination(params: {
     await runtime.ensureDir(destRoot);
 
     // Defines destination directory for codotype-project.json (.codotype/ by default)
-    const manifestDest = path.join(destRoot, CODOTYPE_MANIFEST_DIRECTORY);
+    const manifestDest = path.join(destRoot, CODOTYPE_ARTIFACTS_DIRECTORY);
 
     // Ensures presence of the manifestDest directory
     await runtime.ensureDir(manifestDest);

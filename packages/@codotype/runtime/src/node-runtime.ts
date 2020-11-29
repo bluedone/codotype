@@ -22,6 +22,11 @@ import {
     GeneratorProps,
     Datatypes,
     PrettifyOptions,
+    RuntimeLogBehaviors,
+    FileOverwriteBehaviors,
+    FileSystemAdapter,
+    RuntimeLogBehavior,
+    FileOverwriteBehavior,
 } from "@codotype/core";
 import { RuntimeProxyAdapter } from "./utils/runtimeProxyAdapter";
 import { runGenerator } from "./utils/runGenerator";
@@ -86,8 +91,13 @@ function handleExecuteImportError(error: any): Promise<void> {
  * in the future (i.e. DenoRuntime, BrowserRuntime, etc.)
  */
 export class NodeRuntime implements Runtime {
-    private options: RuntimeProps;
     private plugins: PluginRegistration[];
+    private options: {
+        cwd: string;
+        fileSystemAdapter: FileSystemAdapter;
+        logBehavior: RuntimeLogBehavior;
+        fileOverwriteBehavior: FileOverwriteBehavior;
+    };
 
     /**
      * constructor
@@ -98,7 +108,9 @@ export class NodeRuntime implements Runtime {
         // Assigns this.options + default values
         this.options = {
             ...options,
-            logLevel: options.logLevel || RuntimeLogLevels.verbose,
+            fileOverwriteBehavior:
+                options.fileOverwriteBehavior || FileOverwriteBehaviors.force,
+            logBehavior: options.logBehavior || RuntimeLogBehaviors.verbose,
         };
 
         // Assigns this.plugins
@@ -181,6 +193,7 @@ export class NodeRuntime implements Runtime {
                 this.plugins.push(newPluginRegistration);
 
                 // Logs successful registration message
+                // Logs successful registration message
                 this.log(
                     `Registered ${pluginMetadata.content.label} Codotype Plugin`,
                     {
@@ -220,9 +233,23 @@ export class NodeRuntime implements Runtime {
     /**
      * findPlugin
      * Finds a PluginRegistration based on PluginRegistration.id
-     * TODO - finish implementing this, replace duplicate code throughout the
+     * @param pluginID - the ID of the Plugin that's being looked-up
      */
-    // findPlugin(pluginID: string): Promise<PluginRegistration|null> {}
+    async findPlugin(
+        pluginID: string,
+    ): Promise<PluginRegistration | undefined> {
+        // Gets array of PluginRegistrations from this.getPlugins()
+        const plugins = await this.getPlugins();
+
+        // Finds the pluginRegistration associated with the ProjectBuild
+        // FEATURE - check version here, use semver if possible
+        const pluginRegistration: PluginRegistration | undefined = plugins.find(
+            (g) => g.id === pluginID,
+        );
+
+        // Returns Promise<PluginRegistration | undefined>
+        return Promise.resolve(pluginRegistration);
+    }
 
     /**
      * execute
@@ -251,19 +278,8 @@ export class NodeRuntime implements Runtime {
             cwd: this.options.cwd,
         });
 
-        // // // //
-        // TODO - abstract into findPlugin()
-        //
-        // Gets array of PluginRegistrations from this.getPlugins()
-        const plugins = await this.getPlugins();
-
-        // Finds the pluginRegistration associated with the ProjectBuild
-        // TODO - check version here, use semver if possible
-        const pluginRegistration: PluginRegistration | undefined = plugins.find(
-            (g) => g.id === project.pluginID,
-        );
-        //
-        // // // //
+        // Performs lookup to gind Plugin based on ProjectInput.pluginID
+        const pluginRegistration = await this.findPlugin(project.pluginID);
 
         // If pluginRegistration is not found -> log error message and short-circuit execution
         if (pluginRegistration === undefined) {
@@ -541,7 +557,7 @@ export class NodeRuntime implements Runtime {
      * @param args - see logger.ts
      */
     log(args: any, options: { level: RuntimeLogLevel }) {
-        logger(args, options, this.options.logLevel);
+        logger(args, options, this.options.logBehavior);
     }
 
     /**
@@ -564,21 +580,15 @@ export class NodeRuntime implements Runtime {
         // Defines module path
         let modulePath: string = "";
 
-        // // // //
-        // TODO - abstract this into a separate function, we're using this in a few different places
-        //
-        // Finds the currently active plugin
-        const plugins = await this.getPlugins();
-        const activePlugin = plugins.find(
-            (p) => p.id === parentRuntimeAdapter.options.plugin.identifier,
+        // Looks up actively-used Plugin
+        const activePlugin = await this.findPlugin(
+            parentRuntimeAdapter.options.plugin.identifier,
         );
 
         if (activePlugin === undefined) {
             console.log("MODULE NOT FOUND");
             throw new Error("NodeRuntime - composeWith - plugin not found");
         }
-        //
-        // // // //
 
         // // // //
         // TODO - move this into a function ( `getModulePath`, perhaps )
@@ -588,6 +598,7 @@ export class NodeRuntime implements Runtime {
             generatorModulePath.startsWith("../")
         ) {
             // TODO - document
+            // TODO - rename this
             let base: string = "";
 
             // TODO - abstract into helper function?
@@ -601,6 +612,7 @@ export class NodeRuntime implements Runtime {
             // console.log("GET STATS");
             // console.log(generatorModulePath);
             // console.log(stats.isDirectory());
+            // If the parent RuntimeAdaptor is an `index.js` file (thus making it the default module resolved by the `composeWith` function call), we do...
             if (stats.isDirectory()) {
                 base = parentRuntimeAdapter.options.generatorResolvedPath;
             } else {
@@ -701,12 +713,13 @@ export class NodeRuntime implements Runtime {
      * writeTemplateToFile
      * Compiles a template and writes to the dest location
      * TODO - split this up to rely on runtime methods instead of referencing FS directly
+     * @param generatorInstance
      * @param src
      * @param dest
      * @param options
      */
     writeTemplateToFile(
-        generatorInstance: RuntimeAdapter,
+        generatorInstance: RuntimeAdapter, // TODO - rename this to SOMETHING ELSE...?
         src: string,
         dest: string,
         data: object = {},

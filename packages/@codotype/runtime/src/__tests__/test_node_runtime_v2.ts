@@ -51,7 +51,6 @@ describe("testing @codotype/runtime v2", () => {
         // Instantiates new CodotypeRuntime w/ verbose LogLevel
         const nodeRuntime: Runtime = new NodeRuntime({
             cwd,
-            logLevel: RuntimeLogLevels.suppress,
             fileOverwriteBehavior: "force",
             fileSystemAdapter: new LocalFileSystemAdapter(),
         });

@@ -1,12 +1,14 @@
 import { PluginMetadata } from "./plugin";
 import { ProjectInput } from "./project";
 import { RuntimeLogLevel } from "./runtime-log-level";
+import { RuntimeLogBehavior } from "./runtime-log-behavior";
 import {
     WriteFileFunction,
     CopyDirFunction,
     ComposeWithOptions,
+    EnsureDirFunction,
+    PrettifyOptions,
 } from "./runtime-methods";
-import { PrettifyOptions } from ".";
 import { RuntimeAdapter } from "./runtime-adapter";
 
 /**
@@ -50,15 +52,15 @@ export interface FileSystemAdapter {
  * Options accepted when constructing a new CodotypeRuntime
  * @param cwd - The absolute path representing the "current working directory" (i.e. `/path/to/dir`), usually value from `process.cwd()`.
  *              Used by the CodotypeRuntime to determine where a a ProjectBuild output should belong
- * @param logLevel - The level of logging permitted by the Runtime's `log` function. See `RuntimeLogLevel`
+ * @param fileSystemAdapter - @see FileSystemAdapter
+ * @param logBehavior - The level of logging permitted by the Runtime's `log` function. See `RuntimeLogBehavior`
  * @param fileOverwriteBehavior - Sets FileOverwriteBehavior for the Runtime. @see FileOverwriteBehavior
- * @param fileSystemAdapter - The FileSystemAdaptor @see FileSystemAdapter
  */
 export interface RuntimeProps {
     cwd: string;
-    logLevel: RuntimeLogLevel;
-    fileOverwriteBehavior: FileOverwriteBehavior;
     fileSystemAdapter: FileSystemAdapter;
+    logBehavior?: RuntimeLogBehavior;
+    fileOverwriteBehavior?: FileOverwriteBehavior;
 }
 
 /**
@@ -112,13 +114,14 @@ export interface Runtime {
         destinationRelativePath: string,
     ) => string;
     copyDir: CopyDirFunction;
-    ensureDir: (dirPath: string) => Promise<boolean>;
+    ensureDir: EnsureDirFunction;
     log: (message: any, options: { level: RuntimeLogLevel }) => void;
     registerPlugin: (props: {
         modulePath?: string;
         relativePath?: string;
         absolutePath?: string;
     }) => Promise<PluginRegistration | null>;
+    findPlugin: (pluginID: string) => Promise<PluginRegistration | undefined>;
     compareFile: (
         destinationPath: string,
         compiledTemplate: string,

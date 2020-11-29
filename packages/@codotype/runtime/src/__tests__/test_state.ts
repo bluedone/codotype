@@ -39,8 +39,6 @@ export const build: ProjectBuild = {
 
 export const runtimeProps: RuntimeProps = {
     cwd: "/test-cwd/",
-    logLevel: RuntimeLogLevels.verbose,
-    fileOverwriteBehavior: FileOverwriteBehaviors.force,
     fileSystemAdapter: new InMemoryFileSystemAdapter(),
 };
 

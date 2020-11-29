@@ -9,7 +9,5 @@ module.exports = {
 
         // Test copyDir
         await runtime.copyDir({ src: "", dest: "" });
-
-        // TODO - add test to cover renderTemplate
     },
 };

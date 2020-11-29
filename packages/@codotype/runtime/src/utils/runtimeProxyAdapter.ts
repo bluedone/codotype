@@ -14,17 +14,12 @@ import {
 // // // //
 
 /**
- * RuntimeAdapter?
- * RuntimeProxyAdapter?
+ * RuntimeProxyAdapter
  * TODO - rename this to RuntimeAdapter?
- * *******
- * UPDATED ANNOTATION
- * Must be renamed.
- * SO - what this is REALLY DOING -> it's providing an interface between a Generator and the Runtime configured to work around that generator's location on the FileSystem
- * This layer of abstraction allows easy-to-use relative path declarations for source templates + file destinations, without the burden of needing to pass around references to the current directory in the Generator definitions
- * *******
- * Implements an adapter between the RuntimeProxy and the Runtime
- * Allows a generator to safely access and invoke simplified Runtime methods for abstract filesystem manipulation
+ * TODO - this MUST be renamed from RuntimeProxyAdaptor to SOMETHING ELSE.
+ * Creates an interface between a Generator and Runtime configured to work around that Generator's module location on the file system
+ * This layer of abstraction allows easy-to-use relative path declarations for source templates + file destinations,
+ * without the burden of needing to pass around references to the current directory in the Generator definitions
  */
 export class RuntimeProxyAdapter implements RuntimeAdapter {
     private runtime: Runtime;

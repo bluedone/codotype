@@ -13,7 +13,6 @@ describe("prepareProjectBuildDestination", () => {
         // Defines a new NodeRuntime w/ fileSystemAdapter
         const runtime = new NodeRuntime({
             cwd: "/test-cwd/",
-            logLevel: RuntimeLogLevels.verbose,
             fileOverwriteBehavior: FileOverwriteBehaviors.force,
             fileSystemAdapter,
         });

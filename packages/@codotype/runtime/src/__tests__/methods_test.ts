@@ -7,35 +7,41 @@ import {
     generatorPrototype01,
 } from "./test_state";
 import {
-    RuntimeLogLevels,
     FileOverwriteBehaviors,
     RuntimeProps,
     RuntimeAdapterProps,
+    Runtime,
+    RuntimeLogBehaviors,
 } from "@codotype/core";
 import { InMemoryFileSystemAdapter } from "../InMemoryFileSystemAdapter";
 import { runGenerator } from "../utils/runGenerator";
 
 // // // //
-// TODO - clean up these dang tests!
-// TODO - clean up these dang tests!
-// TODO - clean up these dang tests!
-// TODO - clean up these dang tests!
-// TODO - clean up these dang tests!
+
+const dest = "destination";
+
+function getTestRuntime(): {
+    runtime: Runtime;
+    fileSystemAdapter: InMemoryFileSystemAdapter;
+} {
+    const fileSystemAdapter = new InMemoryFileSystemAdapter();
+    const runtimeProps: RuntimeProps = {
+        cwd: "/test-cwd/",
+        logBehavior: RuntimeLogBehaviors.suppress,
+        fileOverwriteBehavior: FileOverwriteBehaviors.force,
+        fileSystemAdapter,
+    };
+    const runtime = new NodeRuntime(runtimeProps);
+    return { runtime, fileSystemAdapter };
+}
+
+// // // //
 
 describe("getTemplatePath method", () => {
     it("should define correct template path", () => {
-        const dest = "destination";
         const templateRelativePath = "template.json";
         const generatorResolvedPath = "my/resolved/path";
-
-        const fileSystemAdapter = new InMemoryFileSystemAdapter();
-        const runtimeProps: RuntimeProps = {
-            cwd: "/test-cwd/",
-            logLevel: RuntimeLogLevels.verbose,
-            fileOverwriteBehavior: FileOverwriteBehaviors.force,
-            fileSystemAdapter,
-        };
-        const runtime = new NodeRuntime(runtimeProps);
+        const { runtime } = getTestRuntime();
 
         const runtimeAdapterProps: RuntimeAdapterProps = {
             ...baseRuntimeAdapterProps,
@@ -61,17 +67,8 @@ describe("getTemplatePath method", () => {
 
 describe("getDestinationPath method", () => {
     it("should define correct destination path", () => {
-        const dest = "destination";
         const dirName = "testyMcTestface";
-
-        const fileSystemAdapter = new InMemoryFileSystemAdapter();
-        const runtimeProps: RuntimeProps = {
-            cwd: "/test-cwd/",
-            logLevel: RuntimeLogLevels.verbose,
-            fileOverwriteBehavior: FileOverwriteBehaviors.force,
-            fileSystemAdapter,
-        };
-        const runtime = new NodeRuntime(runtimeProps);
+        const { runtime } = getTestRuntime();
 
         const runtimeAdapterProps: RuntimeAdapterProps = {
             ...baseRuntimeAdapterProps,
@@ -92,17 +89,8 @@ describe("getDestinationPath method", () => {
 
 describe("ensureDir method", () => {
     it("should properly define NodeRuntime._mocks_.ensuredDir", () => {
-        const dest = "destination";
         const dirName = "testyMcTestface";
-
-        const fileSystemAdapter = new InMemoryFileSystemAdapter();
-        const runtimeProps: RuntimeProps = {
-            cwd: "/test-cwd/",
-            logLevel: RuntimeLogLevels.verbose,
-            fileOverwriteBehavior: FileOverwriteBehaviors.force,
-            fileSystemAdapter,
-        };
-        const runtime = new NodeRuntime(runtimeProps);
+        const { runtime, fileSystemAdapter } = getTestRuntime();
 
         const runtimeAdapterProps: RuntimeAdapterProps = {
             ...baseRuntimeAdapterProps,
@@ -123,16 +111,7 @@ describe("ensureDir method", () => {
 
 describe("renderComponent", () => {
     test("renders", async () => {
-        const dest = "destination";
-
-        const fileSystemAdapter = new InMemoryFileSystemAdapter();
-        const runtimeProps: RuntimeProps = {
-            cwd: "/test-cwd/",
-            logLevel: RuntimeLogLevels.verbose,
-            fileOverwriteBehavior: FileOverwriteBehaviors.force,
-            fileSystemAdapter,
-        };
-        const runtime = new NodeRuntime(runtimeProps);
+        const { runtime, fileSystemAdapter } = getTestRuntime();
 
         // // // //
         // NOTE - all of this is handled by the runtime -> should this be handled inside the RuntimeGeneratorAdapter?
