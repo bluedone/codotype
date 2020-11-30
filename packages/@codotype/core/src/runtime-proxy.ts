@@ -2,7 +2,7 @@ import {
     EnsureDirFunction,
     WriteFileFunction,
     CopyDirFunction,
-    RenderComponentFunction,
+    RenderTemplateFunction,
     ComposeWithFunction,
 } from "./runtime-methods";
 
@@ -14,7 +14,7 @@ import {
  * @param writeFile - @see WriteFileFunction
  * @param copyDir - @see CopyDirFunction
  * @param ensureDir - @see EnsureDirFunction
- * @param renderComponent - @see RenderComponentFunction
+ * @param renderTemplate - @see RenderTemplateFunction
  * @param composeWith - @see ComposeWithFunction
  */
 
@@ -22,6 +22,6 @@ export interface RuntimeProxy {
     writeFile: WriteFileFunction;
     copyDir: CopyDirFunction;
     ensureDir: EnsureDirFunction;
-    renderComponent: RenderComponentFunction;
+    renderTemplate: RenderTemplateFunction;
     composeWith: ComposeWithFunction;
 }

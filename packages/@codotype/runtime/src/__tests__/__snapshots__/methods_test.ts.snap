@@ -2,7 +2,7 @@
 
 exports[`ensureDir method should properly define NodeRuntime._mocks_.ensuredDir 1`] = `Object {}`;
 
-exports[`renderComponent renders 1`] = `
+exports[`renderTemplate renders 1`] = `
 Object {
   "destination/README.md": "# Your New Project",
   "destination/index-no-prettify.html": "<html><head><title>Page Title</title></head><body><h1>Hello, HTML!</h1></body></html>",

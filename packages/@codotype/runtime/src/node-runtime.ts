@@ -1,6 +1,4 @@
 import * as fs from "fs";
-// @ts-ignore
-import * as fsExtra from "fs-extra";
 import * as path from "path";
 import * as ejs from "ejs";
 import {
@@ -20,6 +18,7 @@ import {
     ProjectBuild,
     RuntimeAdapterProps,
     GeneratorProps,
+    Schema,
     Datatypes,
     PrettifyOptions,
     RuntimeLogBehaviors,
@@ -41,59 +40,27 @@ import {
 import { getPluginPath } from "./utils/getPluginPath";
 import { prepareProjectBuildDestination } from "./utils/prepareProjectBuildDestination";
 import { logger } from "./utils/logger";
+import { getAllFiles } from "./utils/getAllFiles";
+import {
+    handlePluginImportError,
+    handleExecuteImportError,
+} from "./utils/handleErrors";
+import { getComposeWithModulePath } from "./utils/getComposeWithModulePath";
 
 // // // //
-// TODO - cleanup + simplify + improve error handling
 
 interface TemplateData {
     plugin: PluginMetadata;
     project: Project;
     configuration: ConfigurationValue;
-    RelationTypes: { [key: string]: string };
-    Datatypes: { [key: string]: string };
-    helpers: any; // TODO
+    RelationTypes: typeof RelationTypes;
+    Datatypes: typeof Datatypes;
+    helpers: {
+        indent: (text: string, depth: number) => string;
+        trailingComma: (arr: any[], index: number) => string;
+    };
     [key: string]: any;
 }
-
-function getAllFiles(dirPath: string, arrayOfFiles: string[]): string[] {
-    const files = fs.readdirSync(dirPath);
-
-    arrayOfFiles = arrayOfFiles || [];
-
-    files.forEach(function (file) {
-        if (fs.statSync(dirPath + "/" + file).isDirectory()) {
-            arrayOfFiles = getAllFiles(dirPath + "/" + file, arrayOfFiles);
-        } else {
-            arrayOfFiles.push([dirPath, "/", file].join(""));
-        }
-    });
-
-    return arrayOfFiles;
-}
-
-function handlePluginImportError(error: any): Promise<null> {
-    console.log(error);
-    if (error.code === "MODULE_NOT_FOUND") {
-        console.log("REGISTRATION ERROR - PLUGIN NOT FOUND");
-        return Promise.resolve(null);
-    } else {
-        console.log("REGISTRATION ERROR - OTHER");
-        return Promise.resolve(null);
-    }
-}
-
-function handleExecuteImportError(error: any): Promise<void> {
-    if (error.code === "MODULE_NOT_FOUND") {
-        console.log("RUNTIME ERROR - GENERATOR NOT FOUND");
-    } else {
-        console.log("RUNTIME ERROR - OTHER");
-        console.log(error);
-    }
-    // Resolves with Promise<void>
-    return Promise.resolve();
-}
-
-// // // //
 
 /**
  * NodeRuntime
@@ -204,7 +171,6 @@ export class NodeRuntime implements Runtime {
                 this.plugins.push(newPluginRegistration);
 
                 // Logs successful registration message
-                // Logs successful registration message
                 this.log(
                     `Registered ${pluginMetadata.content.label} Codotype Plugin`,
                     {
@@ -217,7 +183,7 @@ export class NodeRuntime implements Runtime {
             }
         } catch (err) {
             // Invoke handlePluginImportError and return result
-            return handlePluginImportError(err);
+            return handlePluginImportError(err, this.options.logBehavior);
         }
 
         // Includes default Promise resolution to prevent invariant error
@@ -255,7 +221,7 @@ export class NodeRuntime implements Runtime {
         // Finds the pluginRegistration associated with the ProjectBuild
         // FEATURE - check version here, use semver if possible
         const pluginRegistration: PluginRegistration | undefined = plugins.find(
-            (g) => g.id === pluginID,
+            g => g.id === pluginID,
         );
 
         // Returns Promise<PluginRegistration | undefined>
@@ -352,10 +318,8 @@ export class NodeRuntime implements Runtime {
                 project,
                 runtimeAdapter: runtimeProxyAdapter,
             });
-
-            // Logs which generator is being run
         } catch (err) {
-            return handleExecuteImportError(err);
+            return handleExecuteImportError(err, this.options.logBehavior);
         }
 
         // Logs "Thank you" message
@@ -417,22 +381,17 @@ export class NodeRuntime implements Runtime {
             const dataObj: { [key: string]: any } = data || {};
             const optionsObj: { prettify?: PrettifyOptions } = options || {};
 
+            // Pulls references to plugin + project from generatorInstance.props
+            const { plugin, project } = generatorInstance.props;
+
             // Assembles the data object passed into each template file that that gets rendered
             const templateData: TemplateData = {
-                plugin: generatorInstance.props.plugin,
-                project: generatorInstance.props.project,
+                plugin,
+                project,
                 configuration: generatorInstance.props.project.configuration,
                 helpers: {
                     indent,
                     trailingComma,
-                    // forEachSchema helper function?
-                    // forEachAttribute helper function?
-                    // forEachRelation helper function?
-                    // forEachReferencedBy helper function?
-                    // forEachReference helper function?
-                    // forEachSchema: (func: (schema: Schema) => void) => {
-                    //     project.schemas.forEach((schema) => func(schema));
-                    // },
                 },
                 RelationTypes,
                 Datatypes,
@@ -493,7 +452,6 @@ export class NodeRuntime implements Runtime {
      * Writes a compiled template to a file
      * @param dest - the destination where the compiledTemplate is being written
      * @param compiledTemplate - the text being written inside `dest`
-     * TODO - add WriteFileFunction type alias
      */
     writeFile(
         dest: string,
@@ -504,7 +462,7 @@ export class NodeRuntime implements Runtime {
     ): Promise<boolean> {
         let fileContents: string = compiledTemplate;
 
-        // TODO - simplify prettier props here, add function to quickly grab defaults for prettier
+        // Run prettify against compiledTemplate
         if (options && options.prettify) {
             fileContents = prettify({
                 source: compiledTemplate,
@@ -593,9 +551,6 @@ export class NodeRuntime implements Runtime {
             level: RuntimeLogLevels.verbose,
         });
 
-        // Defines module path
-        let modulePath: string = "";
-
         // Looks up actively-used Plugin
         const activePlugin = await this.findPlugin(
             parentRuntimeAdapter.props.plugin.identifier,
@@ -606,54 +561,12 @@ export class NodeRuntime implements Runtime {
             throw new Error("NodeRuntime - composeWith - plugin not found");
         }
 
-        // // // //
-        // TODO - move this into a function ( `getModulePath`, perhaps )
-        // Handle relative paths
-        if (
-            generatorModulePath.startsWith("./") ||
-            generatorModulePath.startsWith("../")
-        ) {
-            // TODO - document
-            // TODO - rename this
-            let base: string = "";
-
-            // TODO - abstract into helper function?
-            const stats = fsExtra.statSync(
-                parentRuntimeAdapter.props.generatorResolvedPath,
-            );
-
-            // TODO - document
-            // TODO - TEST THIS
-            // console.log("GET STATS");
-            // console.log(generatorModulePath);
-            // console.log(stats.isDirectory());
-            // If the parent RuntimeAdaptor is an `index.js` file (thus making it the default module resolved by the `composeWith` function call), we do...
-            if (stats.isDirectory()) {
-                base = parentRuntimeAdapter.props.generatorResolvedPath;
-            } else {
-                base = path.dirname(
-                    parentRuntimeAdapter.props.generatorResolvedPath,
-                );
-            }
-
-            // TODO - document
-            modulePath = path.join(base, generatorModulePath);
-
-            // Handle absolute path
-            // } else if (generatorModulePath.absolutePath) {
-        } else if (generatorModulePath.startsWith("/")) {
-            modulePath = path.join(generatorModulePath);
-
-            // Handle module path
-        } else {
-            modulePath = path.join(
-                activePlugin.pluginDynamicImportPath, // TODO - ensure this is correct!!!
-                "node_modules",
-                generatorModulePath,
-            );
-        }
-        //
-        // // // //
+        // Gets path to generator module using getComposeWithModulePath function
+        const modulePath = getComposeWithModulePath(
+            generatorModulePath,
+            parentRuntimeAdapter,
+            activePlugin,
+        );
 
         // Attempt to load the Generator from pluginDynamicImportPath, handle error
         try {
@@ -661,15 +574,14 @@ export class NodeRuntime implements Runtime {
             const generator: GeneratorProps = require(modulePath); // eslint-disable-line import/no-dynamic-require
             const resolved: string = require.resolve(modulePath);
 
-            // TODO - document this, clean it all up
-            // TODO - move into independent function, `getResolvedGeneratorPath`, perhaps
+            // CHORE - document this, clean it all up
+            // CHORE - move into independent function, `getResolvedGeneratorPath`, perhaps
             let resolvedGeneratorPath = resolved;
             let resolvedGeneratorPathParts = resolvedGeneratorPath.split("/");
             resolvedGeneratorPathParts.pop();
             resolvedGeneratorPath = resolvedGeneratorPathParts.join("/");
 
-            // // // //
-            // TODO - move into independent function, `resolveDestination`, perhaps
+            // Resolve the absoluate path to the destination directory for this generator
             let resolvedDestination =
                 parentRuntimeAdapter.props.destinationPath;
 
@@ -682,8 +594,6 @@ export class NodeRuntime implements Runtime {
                     options.outputDirectoryScope,
                 );
             }
-            //
-            // // // //
 
             // Debug statements
             this.log(
@@ -718,24 +628,21 @@ export class NodeRuntime implements Runtime {
             this.log(`Generated ${generator.name}.\n`, {
                 level: RuntimeLogLevels.info,
             });
-
-            // Logs which generator is being run
         } catch (err) {
-            return handleExecuteImportError(err);
+            return handleExecuteImportError(err, this.options.logBehavior);
         }
     }
 
     /**
      * writeTemplateToFile
      * Compiles a template and writes to the dest location
-     * TODO - split this up to rely on runtime methods instead of referencing FS directly
      * @param generatorInstance
      * @param src
      * @param dest
      * @param options
      */
     writeTemplateToFile(
-        generatorInstance: RuntimeAdapter, // TODO - rename this to SOMETHING ELSE...?
+        generatorInstance: RuntimeAdapter, // CHORE - rename this to SOMETHING ELSE...?
         src: string,
         dest: string,
         data: object = {},

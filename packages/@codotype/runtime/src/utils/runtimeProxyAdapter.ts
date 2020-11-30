@@ -15,7 +15,7 @@ import {
 
 /**
  * RuntimeProxyAdapter
- * TODO - this MUST be renamed from RuntimeProxyAdaptor to SOMETHING ELSE.
+ * CHORE - this MUST be renamed from RuntimeProxyAdaptor to SOMETHING ELSE
  * Creates an interface between a Generator and Runtime configured to work around that Generator's module location on the file system
  * This layer of abstraction allows easy-to-use relative path declarations for source templates + file destinations,
  * without the burden of needing to pass around references to the current directory in the Generator definitions
@@ -46,7 +46,6 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
         }
 
         // Validates GeneratorProps
-        // TODO - should this be abstracted into @codotype/core?
         if (
             !generatorProps.write &&
             !generatorProps.compileInPlace &&
@@ -83,7 +82,7 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
             ensureDir: this.ensureDir,
             writeFile: this.writeFile,
             copyDir: this.copyDir,
-            renderComponent: this.renderComponent,
+            renderTemplate: this.renderTemplate,
             composeWith: this.composeWith,
         };
 
@@ -217,10 +216,10 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
     }
 
     /**
-     * renderComponent
-     * @see RenderComponentFunction
+     * renderTemplate
+     * @see RenderTemplateFunction
      */
-    renderComponent({
+    renderTemplate({
         src,
         dest,
         data = {},

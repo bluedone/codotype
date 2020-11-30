@@ -98,11 +98,10 @@ export type CopyDirFunction = (params: {
 export type EnsureDirFunction = (dir: string) => Promise<boolean>;
 
 /**
- * RenderComponentFunction
- * TODO - rename `renderComponent` -> rename to `renderTemplate`?
+ * RenderTemplateFunction
  * Renders a template located at params.src, compiled it with params.data, and writes it to params.dest
  */
-export type RenderComponentFunction = (params: {
+export type RenderTemplateFunction = (params: {
     src: string;
     dest: string;
     data: { [key: string]: any };

@@ -20,7 +20,7 @@ export async function runGenerator(params: {
             runtimeAdapter.forEachSchema({
                 schema,
                 project,
-                runtime: runtimeAdapter, // TODO - rename all the stuff like this
+                runtime: runtimeAdapter,
             }),
         ),
     );

@@ -109,7 +109,7 @@ describe("ensureDir method", () => {
     });
 });
 
-describe("renderComponent", () => {
+describe("renderTemplate", () => {
     test("renders", async () => {
         const { runtime, fileSystemAdapter } = getTestRuntime();
 

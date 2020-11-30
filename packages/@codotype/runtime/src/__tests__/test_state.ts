@@ -89,7 +89,7 @@ export const generatorPrototype01: GeneratorProps = {
         await runtime.writeFile("README.md", "# Your New Project");
 
         // Writes the prettify.js.ejs template w/ prettify.semi = true option
-        await runtime.renderComponent({
+        await runtime.renderTemplate({
             src: "prettify-test.js.ejs",
             dest: `prettify-test.js`,
             data: {},
@@ -102,7 +102,7 @@ export const generatorPrototype01: GeneratorProps = {
         });
 
         // Writes the prettify.js.ejs template w/ prettify.semi = false
-        await runtime.renderComponent({
+        await runtime.renderTemplate({
             src: "prettify-test.js.ejs",
             dest: `prettify-test-no-semi.js`,
             data: {},
@@ -116,7 +116,7 @@ export const generatorPrototype01: GeneratorProps = {
     },
     async forEachSchema({ schema, runtime }) {
         // Writes the page.tsx.ejs template
-        await runtime.renderComponent({
+        await runtime.renderTemplate({
             src: "page.tsx.ejs",
             dest: `pages/${schema.identifiers.plural.snake}.tsx`,
             data: { schema },

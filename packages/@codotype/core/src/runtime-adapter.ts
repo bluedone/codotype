@@ -3,7 +3,7 @@ import { Project } from "./project";
 import { RuntimeProxy } from "./runtime-proxy";
 import {
     WriteFileFunction,
-    RenderComponentFunction,
+    RenderTemplateFunction,
     WriteFunction,
     ForEachSchemaFunction,
     ForEachRelationFunction,
@@ -32,7 +32,7 @@ export interface RuntimeAdapter {
     ensureDir: EnsureDirFunction;
     writeFile: WriteFileFunction;
     copyDir: CopyDirFunction;
-    renderComponent: RenderComponentFunction;
+    renderTemplate: RenderTemplateFunction;
     composeWith: ComposeWithFunction;
     // Generator props methods
     write: WriteFunction;
