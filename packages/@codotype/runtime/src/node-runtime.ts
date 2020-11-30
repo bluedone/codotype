@@ -27,6 +27,7 @@ import {
     FileSystemAdapter,
     RuntimeLogBehavior,
     FileOverwriteBehavior,
+    ConfigurationValue,
 } from "@codotype/core";
 import { RuntimeProxyAdapter } from "./utils/runtimeProxyAdapter";
 import { runGenerator } from "./utils/runGenerator";
@@ -43,6 +44,16 @@ import { logger } from "./utils/logger";
 
 // // // //
 // TODO - cleanup + simplify + improve error handling
+
+interface TemplateData {
+    plugin: PluginMetadata;
+    project: Project;
+    configuration: ConfigurationValue;
+    RelationTypes: { [key: string]: string };
+    Datatypes: { [key: string]: string };
+    helpers: any; // TODO
+    [key: string]: any;
+}
 
 function getAllFiles(dirPath: string, arrayOfFiles: string[]): string[] {
     const files = fs.readdirSync(dirPath);
@@ -395,7 +406,7 @@ export class NodeRuntime implements Runtime {
     renderTemplate(
         generatorInstance: RuntimeAdapter,
         src: string,
-        data?: { [key: string]: any }, // TODO - add type for data here, build in proper support for prettify
+        data?: { [key: string]: any },
         options?: { prettify?: PrettifyOptions },
     ): Promise<string> {
         return new Promise((resolve, reject) => {
@@ -406,13 +417,10 @@ export class NodeRuntime implements Runtime {
             const dataObj: { [key: string]: any } = data || {};
             const optionsObj: { prettify?: PrettifyOptions } = options || {};
 
-            // // // //
-            // TODO - type this object - TemplateProps interface
-            // TODO - should be abstracted into a separate function?
-            // The `data` object is passed into each file that gets rendered
-            const templateData = {
-                project: generatorInstance.props.project,
+            // Assembles the data object passed into each template file that that gets rendered
+            const templateData: TemplateData = {
                 plugin: generatorInstance.props.plugin,
+                project: generatorInstance.props.project,
                 configuration: generatorInstance.props.project.configuration,
                 helpers: {
                     indent,
@@ -428,9 +436,8 @@ export class NodeRuntime implements Runtime {
                 },
                 RelationTypes,
                 Datatypes,
-                ...dataObj, // QUESTION - are options ever used here?
+                ...dataObj,
             };
-            // // // //
 
             // Compiles EJS template
             return ejs.renderFile(
@@ -512,13 +519,12 @@ export class NodeRuntime implements Runtime {
     /**
      * copyDir
      * Copy a directory from src to dest
-     * TODO - annotate this
      * @param src - the name of the directory being copied inside the `templates` directory relative to the Codotype Generator invoking this method
      * @param dest - the name of the destination directory
      */
     async copyDir(params: { src: string; dest: string }): Promise<boolean> {
         const { src, dest } = params;
-        // TODO - update allFiles to produce contents + destination pairs
+        // CHORE - update allFiles to produce contents + destination pairs
         const allFiles = getAllFiles(src, []);
         for (const i in allFiles) {
             const sourcePath = allFiles[i];
@@ -528,26 +534,36 @@ export class NodeRuntime implements Runtime {
                 .pop();
 
             if (destPath === undefined) {
-                console.log("Runtime Error - destination path not found!");
+                this.log("Runtime Error - destination path not found!", {
+                    level: RuntimeLogLevels.error,
+                });
                 continue;
             }
 
+            // Builds destination path
             destPath = path.resolve(dest, destPath);
 
-            // TODO - wrap in try/catch
-            const contents: string = fs.readFileSync(sourcePath, "utf8");
-
-            await this.options.fileSystemAdapter.writeFile(destPath, contents);
+            // Safely reads in
+            try {
+                const contents: string = fs.readFileSync(sourcePath, "utf8");
+                await this.options.fileSystemAdapter.writeFile(
+                    destPath,
+                    contents,
+                );
+            } catch (e) {
+                // Logs error message
+                this.log(
+                    `Runtime Error - copyDir file not found: ${sourcePath}`,
+                    {
+                        level: RuntimeLogLevels.error,
+                    },
+                );
+                continue;
+            }
         }
 
+        // Resolves true
         return Promise.resolve(true);
-        // console.log("allFiles");
-        // console.log(allFiles);
-        // console.log(this.options.cwd);
-        // return fsExtra.copy(src, dest, (err: any) => {
-        //     if (err) return reject(err);
-        //     return resolve(true);
-        // });
     }
 
     /**
@@ -744,23 +760,20 @@ export class NodeRuntime implements Runtime {
             // this.log('Rendered:' + dest)
 
             // // // //
-            // TODO - re-introduce based on FileOverwriteBehavior
-            // TODO - DOCUMENT!!!
-            // Does the destination already exist?
+            // FEATURE - re-introduce based on FileOverwriteBehavior
+            // // Does the destination already exist?
             // const exists = await this.options.fileSystemAdapter.fileExists(
             //     dest,
             // );
 
-            // // TODO - DOCUMENT!!!
             // // If it doesn't exist, OKAY TO WRITE
             // if (exists) {
             //     console.log("EXISTS");
             //     if (this.compareFile(dest, compiledTemplate)) {
             //         return resolve();
             //     } else {
-            //         // TODO - this needs a GitHub issue
+            //         // NOTE - input checking will vary depending on environment
             //         // If exists, and it's different, WRITE (add PROMPT option later, for safety)
-            //         // TODO - this should happen inside the runtime, as input checking will vary depending on environment
             //     }
             // }
             // // // //

@@ -11,7 +11,7 @@ import { LocalFileSystemAdapter } from "../LocalFileSystemAdapter";
 
 // // // //
 
-// TODO - test each method with NodeRuntime
+// CHORE - test each method with NodeRuntime
 describe("testing @codotype/runtime v2", () => {
     // test("testing @codotype/runtime v2", async () => {
     //     const mockRuntime: Runtime = new MockRuntime({
