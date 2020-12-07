@@ -5,7 +5,7 @@ import {
     ProjectInput,
     ProjectBuild,
     transformJsonProjectInput,
-    RuntimeLogLevels,
+    RuntimeLogBehaviors,
 } from "@codotype/core";
 
 // FEATURE - implement `inquirer` for when RuntimeConstructor overwrite behavior is "ask"
@@ -32,15 +32,18 @@ async function runGenerator(projectPath: string, options: CommandOptions) {
 
     // Assembles build job for codotype runtime
     // NOTE - build.id is an empty string when building locally
+    // TODO - add new ProjectBuild primative
     const build: ProjectBuild = {
         id: "",
         projectInput,
+        startTime: "", // TODO - set actual end time
+        endTime: "", // TODO - set actual end time
     };
 
     // Invoke runtime directly with parameters
     const runtime = new NodeRuntime({
         cwd: process.cwd(),
-        logLevel: RuntimeLogLevels.info,
+        logBehavior: RuntimeLogBehaviors.normal,
         fileOverwriteBehavior: "force", // FEATURE - add option for "ask" in CLI
         fileSystemAdapter: new LocalFileSystemAdapter(),
     });
@@ -57,7 +60,7 @@ async function runGenerator(projectPath: string, options: CommandOptions) {
 // // // //
 
 export const runCommand = (projectPath: string, options: CommandOptions) => {
-    return runGenerator(projectPath, options).catch((err) => {
+    return runGenerator(projectPath, options).catch(err => {
         // FEATURE - implement better error handling
         console.log("CODOTYPE CLI ERROR!!");
         console.log(err);

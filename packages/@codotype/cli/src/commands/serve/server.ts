@@ -3,7 +3,7 @@ import * as bodyParser from "body-parser";
 import * as path from "path";
 import { omit } from "lodash";
 import { ProjectBuild } from "@codotype/core";
-import { OUTPUT_DIRECTORY } from "@codotype/runtime/src/constants";
+import { OUTPUT_DIRECTORY } from "@codotype/runtime/dist/constants";
 
 // // // //
 
@@ -29,7 +29,7 @@ export function server({ runtime }): any {
         return res.send(
             runtime
                 .getGenerators()
-                .map((g) => omit(g, ["generator_path", "engine_path"])),
+                .map(g => omit(g, ["generator_path", "engine_path"])),
         );
     });
 
@@ -44,9 +44,12 @@ export function server({ runtime }): any {
 
         // Defines bodotype build
         // FEATURE - verify ProjectInput here here
+        // TODO - add new ProjectBuild primative to core
         const build: ProjectBuild = {
             id: "",
             projectInput: req.body.projectInput,
+            startTime: "",
+            endTime: "",
         };
 
         // Generates the application
