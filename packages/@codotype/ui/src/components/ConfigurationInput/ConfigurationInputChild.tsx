@@ -34,7 +34,6 @@ export function ConfigurationInputChild(props: ConfigurationInputChildProps) {
     }
 
     // Pulls value from props.value
-    // TODO - remove this after enabled/value obj is enforced everywhere
     let value = props.value;
     if (property.allowDisable) {
         value = props.value.value;

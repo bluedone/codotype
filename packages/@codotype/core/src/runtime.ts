@@ -97,10 +97,8 @@ export interface PluginRegistration {
 
 /**
  * Runtime
- * TODO - clarify the distinction between Runtime + RuntimeProxy + RuntimeAdapter + FileSystemAdapter
- * TODO - clean this up a bit more - how many of these methods are needed / need to be exposed?
- * TODO - annotate
  * TODO - rename some of these functions
+ * CHORE - annotate
  * @function getTemplatePath Gets the path to the template, relative to the RuntimeProxyAdaptor (RENAME PENDING)
  * @function getDestinationPath Gets the path to the template, relative to the RuntimeProxyAdaptor (RENAME PENDING)
  */

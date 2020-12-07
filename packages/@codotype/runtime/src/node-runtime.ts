@@ -636,13 +636,13 @@ export class NodeRuntime implements Runtime {
     /**
      * writeTemplateToFile
      * Compiles a template and writes to the dest location
-     * @param generatorInstance
+     * @param runtimeAdapter
      * @param src
      * @param dest
      * @param options
      */
     writeTemplateToFile(
-        generatorInstance: RuntimeAdapter, // CHORE - rename this to SOMETHING ELSE...?
+        runtimeAdapter: RuntimeAdapter,
         src: string,
         dest: string,
         data: object = {},
@@ -657,7 +657,7 @@ export class NodeRuntime implements Runtime {
 
             // Compiles the template through CodotypeRuntime.renderTemplate
             const compiledTemplate: string = await this.renderTemplate(
-                generatorInstance,
+                runtimeAdapter,
                 src,
                 data,
                 options,

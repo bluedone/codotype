@@ -2,9 +2,9 @@ import {
     SchemaInput,
     ProjectInput,
     PropertyTypes,
-    OptionValue,
+    ConfigurationPropertyValue,
     ConfigurationValue,
-    OptionValueInstance,
+    ConfigurationPropertyDict,
     ConfigurationGroup,
     ConfigurationGroupSection,
     PluginMetadata,
@@ -20,7 +20,7 @@ import {
  */
 export function buildConfigurationPropertyValue(
     property: ConfigurationProperty,
-): OptionValue {
+): ConfigurationPropertyValue {
     if (property.type === PropertyTypes.STRING) {
         return property.defaultValue || "";
     }
@@ -54,12 +54,12 @@ export function buildConfigurationPropertyValue(
  */
 export function buildValueFromProperties(
     properties: ConfigurationProperty[],
-): OptionValueInstance {
-    const initialValue: OptionValueInstance = {};
+): ConfigurationPropertyDict {
+    const initialValue: ConfigurationPropertyDict = {};
 
     // Defines empty ConfigurationGroupValue
     // Iterates over each property in the group and assigns values
-    const configurationGroupValue: OptionValueInstance = properties.reduce(
+    const configurationGroupValue: ConfigurationPropertyDict = properties.reduce(
         (val, property: ConfigurationProperty) => {
             // Updates val with data for ConfigurationProperty
             if (property.allowDisable && !property.required) {
@@ -89,14 +89,14 @@ export function buildValueFromProperties(
  */
 export function buildConfigurationGroupValue(
     configurationGroup: ConfigurationGroup,
-): OptionValueInstance {
-    const initialValue: OptionValueInstance = {};
+): ConfigurationPropertyDict {
+    const initialValue: ConfigurationPropertyDict = {};
 
     // Handle ConfigurationGroup w/ properties
     if (configurationGroup.properties) {
         // Defines empty ConfigurationGroupValue
         // Iterates over each property in the group and assigns values
-        const configurationGroupValue: OptionValueInstance = configurationGroup.properties.reduce(
+        const configurationGroupValue: ConfigurationPropertyDict = configurationGroup.properties.reduce(
             (val, property: ConfigurationProperty) => {
                 // Updates val with data for ConfigurationProperty
                 if (property.allowDisable && !property.required) {
@@ -122,13 +122,13 @@ export function buildConfigurationGroupValue(
     // Handle ConfigurationGroup w/ Sections
     if (configurationGroup.sections) {
         // Iterate over each section
-        const configurationGroupValue: OptionValueInstance = configurationGroup.sections.reduce(
+        const configurationGroupValue: ConfigurationPropertyDict = configurationGroup.sections.reduce(
             (val, section: ConfigurationGroupSection) => {
                 // Defines initial value for the ConfigurationGroupSection
-                const initialSectionValue: OptionValueInstance = {};
+                const initialSectionValue: ConfigurationPropertyDict = {};
 
                 // Iterates over each property in the ConfigurationGroupSection
-                const sectionValue: OptionValueInstance = section.properties.reduce(
+                const sectionValue: ConfigurationPropertyDict = section.properties.reduce(
                     (val, property: ConfigurationProperty) => {
                         // Sets value for ConfigurationGroupSection
                         val[property.identifier] = {
@@ -167,7 +167,7 @@ export function buildDefaultConfiguration(
     // Defines default ConfigurationValue
     const configurationValue: ConfigurationValue = configurationGroups.reduce(
         (val, configurationGroup: ConfigurationGroup) => {
-            const initialValue: OptionValueInstance = buildConfigurationGroupValue(
+            const initialValue: ConfigurationPropertyDict = buildConfigurationGroupValue(
                 configurationGroup,
             );
             return { ...val, [configurationGroup.identifier]: initialValue };
