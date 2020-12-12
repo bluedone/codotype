@@ -16,13 +16,13 @@ interface ProjectEditorProps {
 }
 
 export function ProjectEditor(props: ProjectEditorProps) {
-    const { plugin: generator, projectInput } = props;
+    const { plugin, projectInput } = props;
     return (
         <div className="row">
             <div className="col-sm-12">
                 {/* Render ProjectEditorHeader */}
                 <ProjectEditorHeader
-                    pluginMetadata={generator}
+                    pluginMetadata={plugin}
                     projectInput={projectInput}
                     onChange={props.onChange}
                     onClickGenerate={props.onClickGenerate}
@@ -36,7 +36,7 @@ export function ProjectEditor(props: ProjectEditorProps) {
                 {/* Render ConfigurationGroupSelector */}
                 <ConfigurationGroupSelector
                     projectInput={projectInput}
-                    pluginMetadata={generator}
+                    pluginMetadata={plugin}
                     onChange={(updatedProject: ProjectInput) => {
                         // Invokes props.onChange with the updated project
                         props.onChange(updatedProject);

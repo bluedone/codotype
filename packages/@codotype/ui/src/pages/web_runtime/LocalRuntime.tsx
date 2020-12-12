@@ -1,14 +1,14 @@
 import * as React from "react";
-import { PluginFetcher } from "./GeneratorFetcher";
+import { PluginFetcher } from "./PluginFetcher";
 import { LocalStorageProvider } from "./LocalStorageProvider";
-import { PluginRunner } from "./GeneratorRunner";
+import { PluginRunner } from "./PluginRunner";
 import { ProjectEditor } from "../../components/ProjectEditor";
 
 // // // //
 
 /**
  * LocalRuntime
- * Component designed to handle all the heavy lifting for running a generator locally using @codotype/cli
+ * Component designed to handle all the heavy lifting for running a plugin locally using @codotype/cli
  */
 export function LocalRuntime() {
     return (

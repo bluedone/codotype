@@ -1,6 +1,6 @@
 import * as React from "react";
 import {
-    OptionValueInstance,
+    ConfigurationPropertyDict,
     ConfigurationGroup,
     GroupLayoutVariants,
 } from "@codotype/core";
@@ -48,8 +48,8 @@ export function shouldRenderDocumentationModal(
  */
 export function ConfigurationGroupHeader(props: {
     configurationGroup: ConfigurationGroup;
-    value: OptionValueInstance;
-    onChange: (updatedVal: OptionValueInstance) => void;
+    value: ConfigurationPropertyDict;
+    onChange: (updatedVal: ConfigurationPropertyDict) => void;
 }) {
     const { configurationGroup, onChange, value } = props;
 

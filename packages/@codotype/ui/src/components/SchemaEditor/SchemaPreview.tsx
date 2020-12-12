@@ -47,7 +47,7 @@ export function schemaPreviewContent(props: {
  * SchemaPreview
  * TODO - when hovering over a relation, it should display a tooltip with a preview of the related Schema
  * TODO - when clicking a relation it should jump to the corresponding schema
- * QUESTION - should generators be able to configure which is the default preview type?
+ * QUESTION - should plugins be able to configure which is the default preview type?
  */
 export function SchemaPreview(props: {
     schemaInput: SchemaInput;

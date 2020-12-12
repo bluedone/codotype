@@ -5,7 +5,7 @@ import {
     ProjectInput,
     PluginMetadata,
     ConfigurationGroup,
-    OptionValueInstance,
+    ConfigurationPropertyDict,
     SchemaInput,
     RelationInput,
 } from "@codotype/core";
@@ -77,7 +77,7 @@ export function ConfigurationGroupSelector(props: {
         selectConfigurationGroup,
     ] = React.useState<ConfigurationGroup>(defaultConfigurationGroup);
 
-    // Defines a flag indicating whether or not the SchemaEditor is enabled for props.generator
+    // Defines a flag indicating whether or not the SchemaEditor is enabled for props.pluginMetadata
     // If false, schemas will not be selectable
     const {
         configurationGroups,
@@ -159,7 +159,7 @@ export function ConfigurationGroupSelector(props: {
                             selectedConfigurationGroup.identifier
                             ]
                         }
-                        onChange={(updatedVal: OptionValueInstance) => {
+                        onChange={(updatedVal: ConfigurationPropertyDict) => {
                             // Defines updatd project with latest configuration value
                             const updatedProject: ProjectInput = {
                                 ...props.projectInput,

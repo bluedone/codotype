@@ -117,17 +117,17 @@ export function PluginListPage(props: { plugins: PluginMetadata[] }) {
 
 // Animating items on remove
 // <style type="text/css">
-//   .generator-list-item {
+//   .plugin-list-item {
 //     transition: all 1s;
 //     display: inline-block;
 //     margin-right: 10px;
 //   }
 
-//   .generator-list-enter, .generator-list-leave-to {
+//   .plugin-list-enter, .plugin-list-leave-to {
 //     opacity: 0;
 //     transform: translateY(30px);
 //   }
-//   .generator-list-leave-active {
+//   .plugin-list-leave-active {
 //     position: absolute;
 //   }
 // </style>

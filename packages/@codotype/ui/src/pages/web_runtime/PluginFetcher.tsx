@@ -11,12 +11,12 @@ interface PluginFetcherProps {
 }
 
 /**
- * GeneratorFetcher
- * Fetches generator metadata from the API
+ * PluginFetcher
+ * Fetches plugin metadata from the API
  * @param props - see `PluginFetcherProps`
  */
 export function PluginFetcher(props: PluginFetcherProps) {
-    const [{ data, loading, error }] = useAxios("/api/generators");
+    const [{ data, loading, error }] = useAxios("/api/plugins");
 
     // Renders PageLoader component
     if (loading) {

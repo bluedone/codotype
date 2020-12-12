@@ -1,5 +1,5 @@
 import * as React from "react";
-import { OptionValueInstance, ConfigurationGroup } from "@codotype/core";
+import { ConfigurationPropertyDict, ConfigurationGroup } from "@codotype/core";
 import { ConfigurationGroupPropertiesVariant } from "./ConfigurationGroupPropertiesVariant";
 import { ConfigurationGroupHeader } from "./ConfigurationGroupHeader";
 
@@ -42,9 +42,9 @@ function ToggleEnabled(props: {
 // // // //
 
 interface ConfigurationInputProps {
-    value: OptionValueInstance;
+    value: ConfigurationPropertyDict;
     configurationGroup: ConfigurationGroup;
-    onChange: (updatedVal: OptionValueInstance) => void;
+    onChange: (updatedVal: ConfigurationPropertyDict) => void;
 }
 // TODO - add prop here to adjust styles when rendered for a schema instead of a project..?
 export function ConfigurationInput(props: ConfigurationInputProps) {

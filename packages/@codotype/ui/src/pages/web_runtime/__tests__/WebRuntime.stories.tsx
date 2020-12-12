@@ -30,7 +30,7 @@ import {
     buildTokenPluralization,
     buildDefaultConfiguration,
 } from "@codotype/core";
-import { generatorReadme } from "../../../components/MarkdownRenderer/__tests__/test_state";
+import { pluginReadme } from "../../../components/MarkdownRenderer/__tests__/test_state";
 const { cdkPluginMeta, dummyPluginMetadata } = testState;
 
 // // // //
@@ -171,7 +171,7 @@ const NestedCollectionProperty = {
 
 const pluginExample01: PluginMetadata = {
     ...dummyPluginMetadata,
-    identifier: "chrome_extension_generator_03", // unique ID for the generator
+    identifier: "chrome_extension_plugin_03", // unique ID for the plugin
     schemaEditorConfiguration: {
         ...dummyPluginMetadata.schemaEditorConfiguration,
         attributeAddons: [
@@ -262,7 +262,7 @@ const stories: [string, PluginMetadata][] = [
         "w/ schemas + schema configuration groups",
         {
             ...dummyPluginMetadata,
-            identifier: "chrome_extension_generator_03", // unique ID for the generator
+            identifier: "chrome_extension_plugin_03", // unique ID for the plugin
             schemaEditorConfiguration: {
                 ...dummyPluginMetadata.schemaEditorConfiguration,
                 attributeAddons: [
@@ -291,7 +291,7 @@ const stories: [string, PluginMetadata][] = [
         "w/ schemas + default attributes",
         {
             ...dummyPluginMetadata,
-            identifier: "chrome_extension_generator_04", // unique ID for the generator
+            identifier: "chrome_extension_plugin_04", // unique ID for the plugin
             schemaEditorConfiguration: {
                 ...dummyPluginMetadata.schemaEditorConfiguration,
                 attributeAddons: [
@@ -331,7 +331,7 @@ const stories: [string, PluginMetadata][] = [
             ...cdkPluginMeta,
             content: {
                 ...cdkPluginMeta.content,
-                documentation: generatorReadme,
+                documentation: pluginReadme,
             },
             configurationGroups: [
                 {
@@ -358,7 +358,7 @@ const stories: [string, PluginMetadata][] = [
                     properties: [NestedCollectionProperty],
                 },
             ],
-            identifier: "chrome_extension_generator_05", // unique ID for the generator
+            identifier: "chrome_extension_plugin_05", // unique ID for the plugin
             schemaEditorConfiguration: {
                 supportedRelationTypes: [
                     RelationTypes.TO_ONE,
@@ -601,9 +601,9 @@ stories.forEach(story => {
     storyCollection.add(story[0], () => {
         return (
             <Story>
-                <WebRuntime generator={story[1]}>
+                <WebRuntime plugin={story[1]}>
                     {({
-                        generator,
+                        plugin,
                         projectInput,
                         setProject,
                         clearProject,
@@ -612,12 +612,12 @@ stories.forEach(story => {
                                 {({ generateCode }) => (
                                     <React.Fragment>
                                         <ProjectEditor
-                                            plugin={generator}
+                                            plugin={plugin}
                                             projectInput={projectInput}
                                             onClickGenerate={() => {
                                                 generateCode({
                                                     projectInput,
-                                                    generator,
+                                                    plugin,
                                                 });
                                             }}
                                             onResetProject={clearProject}

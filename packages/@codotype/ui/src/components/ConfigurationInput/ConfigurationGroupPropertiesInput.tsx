@@ -3,10 +3,9 @@ import {
     ConfigurationGroup,
     ConfigurationProperty,
     PropertyTypes,
-    OptionValue,
-    OptionValueInstance,
-    EMPTY_TOKEN_CASING,
+    ConfigurationPropertyValue,
     buildTokenPluralization,
+    ConfigurationPropertyDict,
 } from "@codotype/core";
 import { ConfigurationInputChild } from "./ConfigurationInputChild";
 import { ConfigurationInputFormGroup } from "./ConfigurationInputFormGroup";
@@ -21,8 +20,8 @@ import { ConfigurationCollectionInput } from "./ConfigurationCollectionInput";
 export function ConfigurationGroupPropertiesInput(props: {
     configurationGroup?: ConfigurationGroup;
     properties?: ConfigurationProperty[];
-    value: OptionValueInstance;
-    onChange: (updatedVal: OptionValueInstance) => void;
+    value: ConfigurationPropertyDict;
+    onChange: (updatedVal: ConfigurationPropertyDict) => void;
 }) {
     const { configurationGroup } = props;
 
@@ -58,7 +57,7 @@ export function ConfigurationGroupPropertiesInput(props: {
                                 identifiers={buildTokenPluralization("Item")} // TODO - replace with option taken from ConfigurationProperty
                                 properties={property.properties}
                                 propertyPreview={property.preview}
-                                onChange={(updatedVal: OptionValue) => {
+                                onChange={(updatedVal: ConfigurationPropertyValue) => {
                                     props.onChange({
                                         ...props.value,
                                         [property.identifier]: updatedVal,
@@ -92,7 +91,7 @@ export function ConfigurationGroupPropertiesInput(props: {
                         >
                             <ConfigurationGroupPropertiesInput
                                 properties={property.properties}
-                                onChange={(updatedVal: OptionValueInstance) => {
+                                onChange={(updatedVal: ConfigurationPropertyValue) => {
                                     if (property.allowDisable) {
                                         props.onChange({
                                             ...props.value,
@@ -135,7 +134,7 @@ export function ConfigurationGroupPropertiesInput(props: {
                         <ConfigurationInputChild
                             value={value}
                             property={property}
-                            onChange={(updatedValue: OptionValue) => {
+                            onChange={(updatedValue: ConfigurationPropertyValue) => {
                                 props.onChange({
                                     ...props.value,
                                     [property.identifier]: updatedValue,

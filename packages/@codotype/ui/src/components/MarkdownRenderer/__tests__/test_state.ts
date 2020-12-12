@@ -73,7 +73,7 @@ print(foo)
 
 `;
 
-export const generatorReadme = `
+export const pluginReadme = `
 
 # AWS CDK Starter
 

@@ -3,7 +3,7 @@ import { storiesOf } from "@storybook/react";
 import { ConfigurationInputChild } from "../ConfigurationInputChild";
 import {
     ConfigurationProperty,
-    OptionValue,
+    ConfigurationPropertyValue,
     testState,
     StringPropertyTransformations,
     NumberPropertyTransformations,
@@ -18,7 +18,7 @@ import { Story } from "../../Story";
 
 // // // //
 
-const stories: Array<[string, ConfigurationProperty, OptionValue]> = [
+const stories: Array<[string, ConfigurationProperty, ConfigurationPropertyValue]> = [
     [
         "dropdown",
         ComponentBuilderConfigurationPropertySingleDropdown,
@@ -38,13 +38,13 @@ const storyCollection = storiesOf(
 
 stories.forEach(story => {
     storyCollection.add(story[0], () => {
-        const [value, setValue] = React.useState<OptionValue>(story[2]);
+        const [value, setValue] = React.useState<ConfigurationPropertyValue>(story[2]);
         return (
             <Story>
                 <ConfigurationInputChild
                     property={story[1]}
                     value={value}
-                    onChange={(updatedValue: OptionValue) => {
+                    onChange={(updatedValue: ConfigurationPropertyValue) => {
                         setValue(updatedValue);
                     }}
                 />
@@ -89,7 +89,7 @@ const numberPropertyFilterStories = storiesOf(
     ],
 ].forEach(propertyFilters => {
     numberPropertyFilterStories.add(propertyFilters.join(" + "), () => {
-        const [value, setValue] = React.useState<OptionValue>("");
+        const [value, setValue] = React.useState<ConfigurationPropertyValue>("");
         return (
             <Story>
                 <pre>{propertyFilters.join(" + ")}</pre>
@@ -99,7 +99,7 @@ const numberPropertyFilterStories = storiesOf(
                         transformations: [...propertyFilters],
                     }}
                     value={value}
-                    onChange={(updatedValue: OptionValue) => {
+                    onChange={(updatedValue: ConfigurationPropertyValue) => {
                         setValue(updatedValue);
                     }}
                 />
@@ -125,7 +125,7 @@ const stringPropertyFilterStories = storiesOf(
     ],
 ].forEach(propertyFilters => {
     stringPropertyFilterStories.add(propertyFilters.join(" + "), () => {
-        const [value, setValue] = React.useState<OptionValue>("");
+        const [value, setValue] = React.useState<ConfigurationPropertyValue>("");
         return (
             <Story>
                 <pre>{propertyFilters.join(" + ")}</pre>
@@ -135,7 +135,7 @@ const stringPropertyFilterStories = storiesOf(
                         transformations: [...propertyFilters],
                     }}
                     value={value}
-                    onChange={(updatedValue: OptionValue) => {
+                    onChange={(updatedValue: ConfigurationPropertyValue) => {
                         setValue(updatedValue);
                     }}
                 />

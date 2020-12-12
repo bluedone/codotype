@@ -2,7 +2,7 @@ import * as React from "react";
 import { ConfigurationInput } from "../ConfigurationInput";
 import {
     ConfigurationGroup,
-    OptionValueInstance,
+    ConfigurationPropertyDict,
     ConfigurationValue,
 } from "@codotype/core";
 
@@ -115,7 +115,7 @@ export function ConfigurationGroupSelector(props: {
                             selectedConfigurationGroup.identifier
                             ]
                         }
-                        onChange={(updatedVal: OptionValueInstance) => {
+                        onChange={(updatedVal: ConfigurationPropertyDict) => {
                             // Defines updatd project with latest configuration value
                             const updatedPluginConfiguration: ConfigurationValue = {
                                 ...props.configuration,

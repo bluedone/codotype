@@ -1,7 +1,7 @@
 import * as React from "react";
 import {
     PropertyTypes,
-    OptionValue,
+    ConfigurationPropertyValue,
     DropdownOption,
     ConfigurationProperty,
     applyStringPropertyTransformations,
@@ -14,7 +14,7 @@ import Switch from "react-switch";
 interface ConfigurationInputChildProps {
     value: any; // TODO - remove any here
     property: ConfigurationProperty;
-    onChange: (updatedValue: OptionValue) => void;
+    onChange: (updatedValue: ConfigurationPropertyValue) => void;
 }
 
 // TODO - rename `ConfigurationInputChild` to `ConfigurationInputPrimative`
@@ -22,7 +22,7 @@ export function ConfigurationInputChild(props: ConfigurationInputChildProps) {
     const { property } = props;
 
     // TODO - remove this after enabled/value obj is enforced everywhere
-    function setValue(updatedValue: OptionValue) {
+    function setValue(updatedValue: ConfigurationPropertyValue) {
         if (property.allowDisable) {
             props.onChange({
                 enabled: props.value.enabled,

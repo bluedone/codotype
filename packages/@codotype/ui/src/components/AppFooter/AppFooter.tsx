@@ -72,7 +72,7 @@ export function AppFooter() {
                     </div>
                     <div className="col-sm-2">
                         <ul className="list-unstyled ml-1">
-                            <FooterLink href="/generators" label="Generators" />
+                            <FooterLink href="/plugins" label="Plugins" />
                             <FooterLink
                                 openInNewTab
                                 href="https://codotype.org"

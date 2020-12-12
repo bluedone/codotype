@@ -4,7 +4,7 @@ import { ConfigurationCollectionInput } from "../ConfigurationCollectionInput";
 import {
     testState,
     ConfigurationGroup,
-    OptionValue,
+    ConfigurationPropertyValue,
     buildConfigurationPropertyValue,
     buildTokenPluralization,
     PropertyTypes,
@@ -156,7 +156,7 @@ const ApiActionConfigurationGroup: ConfigurationGroup = new Primatives.Configura
     },
 );
 
-const stories: [string, ConfigurationGroup, OptionValue][] = [
+const stories: [string, ConfigurationGroup, ConfigurationPropertyValue][] = [
     [
         "render",
         LambdaBuilderConfigurationGroup,
@@ -181,7 +181,7 @@ const storyCollection = storiesOf(
 
 stories.forEach(story => {
     storyCollection.add(story[0], () => {
-        const [value, setValue] = React.useState<OptionValue>(story[2]);
+        const [value, setValue] = React.useState<ConfigurationPropertyValue>(story[2]);
 
         // TODO - fix this, including extra value by default
         console.log("DEFAULT VALUE");
@@ -195,7 +195,7 @@ stories.forEach(story => {
                         properties={story[1].properties[0].properties}
                         propertyPreview={story[1].properties[0].preview}
                         value={value}
-                        onChange={(updatedVal: OptionValue) => {
+                        onChange={(updatedVal: ConfigurationPropertyValue) => {
                             setValue(updatedVal);
                         }}
                     />

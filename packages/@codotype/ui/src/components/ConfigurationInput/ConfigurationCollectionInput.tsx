@@ -1,6 +1,6 @@
 import * as React from "react";
 import {
-    OptionValue,
+    ConfigurationPropertyValue,
     ConfigurationProperty,
     TokenPluralization,
     buildConfigurationPropertyValue,
@@ -17,7 +17,7 @@ import { PropertyPreviewRenderer } from "../PropertyPreviewRenderer";
 
 interface CollectionItem {
     id: string;
-    [key: string]: OptionValue;
+    [key: string]: ConfigurationPropertyValue;
 }
 
 // // // //
@@ -89,11 +89,10 @@ function CollectionItemForm(props: {
 
 interface ConfigurationCollectionInputProps {
     properties: ConfigurationProperty[];
-    // label: string;
-    value: OptionValue;
+    value: ConfigurationPropertyValue;
     identifiers: TokenPluralization;
     propertyPreview: PropertyPreview;
-    onChange: (updatedVal: OptionValue) => void;
+    onChange: (updatedVal: ConfigurationPropertyValue) => void;
 }
 
 export function ConfigurationCollectionInput(
@@ -178,9 +177,9 @@ export function ConfigurationCollectionInput(
                                                     {
                                                         active:
                                                             editCollectionItem !==
-                                                                null &&
+                                                            null &&
                                                             collectionItem.id ===
-                                                                editCollectionItem.id,
+                                                            editCollectionItem.id,
                                                     },
                                                 )}
                                                 onClick={() => {

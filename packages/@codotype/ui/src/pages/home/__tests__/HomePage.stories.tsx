@@ -14,7 +14,7 @@ storiesOf("Pages/www/HomePage", module).add("renders", () => {
         <React.Fragment>
             <AppNavbar />
             <HomePage
-                generators={[
+                plugins={[
                     testState.cdkPluginMeta,
                     testState.dummyPluginMetadata,
                 ]}

@@ -34,10 +34,10 @@ export function Jumbotron(props: {
     title: string;
     subtitle: string;
     body: string;
-    generators: PluginMetadata[];
+    plugins: PluginMetadata[];
     children: React.ReactNode;
 }) {
-    const { title, subtitle, body, generators } = props;
+    const { title, subtitle, body, plugins } = props;
 
     return (
         <JumbotronSection>
@@ -62,7 +62,7 @@ export function Jumbotron(props: {
 
                     <div className="col-12 col-md-7 my-3 my-md-5 py-md-4">
                         <div className="card-deck">
-                            {generators.map(g => (
+                            {plugins.map(g => (
                                 <PluginCard key={g.identifier} plugin={g} />
                             ))}
                         </div>
@@ -70,14 +70,14 @@ export function Jumbotron(props: {
                         <div className="row mt-4 d-flex justify-content-center">
                             <div className="col-lg-6">
                                 <a
-                                    href="/generators"
+                                    href="/plugins"
                                     className="btn btn-block btn-lg btn-outline-primary rounded-pill"
                                 >
                                     <FontAwesomeIcon
                                         icon={faSearch}
                                         className="mr-1"
                                     />
-                                    Browse Generators
+                                    Browse Plugins
                                 </a>
                             </div>
                         </div>

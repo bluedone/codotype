@@ -2,7 +2,7 @@ import * as React from "react";
 import {
     ConfigurationGroup,
     GroupLayoutVariants,
-    OptionValueInstance,
+    ConfigurationPropertyDict,
 } from "@codotype/core";
 import { MarkdownRenderer } from "../MarkdownRenderer";
 import { ConfigurationGroupPropertiesInput } from "./ConfigurationGroupPropertiesInput";
@@ -16,8 +16,8 @@ import { ConfigurationGroupPropertiesInput } from "./ConfigurationGroupPropertie
  */
 export function ConfigurationGroupPropertiesDocs(props: {
     configurationGroup: ConfigurationGroup;
-    value: OptionValueInstance;
-    onChange: (updatedVal: OptionValueInstance) => void;
+    value: ConfigurationPropertyDict;
+    onChange: (updatedVal: ConfigurationPropertyDict) => void;
 }) {
     const { configurationGroup, value } = props;
     const { layoutVariant } = configurationGroup;

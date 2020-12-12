@@ -57,7 +57,7 @@ export function AttributeDatatypeForm(props: AttributeDatatypeFormProps) {
                     The <span className="text-success">Datatype </span>
                     describes the data represented by this&nbsp;
                     <strong>Attribute</strong> - this{" "}
-                    <strong>Codotype Generator</strong> supports{" "}
+                    <strong>Codotype Plugin</strong> supports{" "}
                     <strong>{props.supportedDatatypes.length} </strong>
                     <span className="text-success">Datatypes</span>
                 </small>

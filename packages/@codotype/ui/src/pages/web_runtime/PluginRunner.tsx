@@ -20,7 +20,7 @@ interface PluginRunnerProps {
 
 /**
  * PluginRunner
- * Runs the generator to produce output through the API
+ * Runs the Plugin to produce output through the API
  * @param props - see `PluginRunnerProps`
  */
 export function PluginRunner(props: PluginRunnerProps) {

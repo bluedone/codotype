@@ -1,13 +1,13 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { Story } from "../../../components/Story";
-import { PluginRunner } from "../GeneratorRunner";
+import { PluginRunner } from "../PluginRunner";
 import { buildDefaultProjectInput, testState } from "@codotype/core";
 const { cdkPluginMeta } = testState;
 
 // // // //
 
-storiesOf("Util/GeneratorRunner", module).add("loads", () => {
+storiesOf("Util/PluginRunner", module).add("loads", () => {
     const projectInput = buildDefaultProjectInput(cdkPluginMeta);
     return (
         <Story>

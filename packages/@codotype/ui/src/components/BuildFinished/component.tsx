@@ -52,7 +52,8 @@ export function BuildFinished(props: {
                 </div>
             </div>
 
-            {/* <!-- Local Generator --> */}
+            {/* <!-- Local Plugin --> */}
+            {/* TODO - use ResponseTypes enum from @codotype/core */}
             {props.filepath && props.responseType === "LOCAL_PATH" && (
                 <div className="row d-flex justify-content-center mt-3">
                     <div className="col-sm-12 text-center">
@@ -72,6 +73,7 @@ export function BuildFinished(props: {
             )}
 
             {/* <!-- S3 Zip Download --> */}
+            {/* TODO - use ResponseTypes enum from @codotype/core */}
             {props.responseType === "S3_DOWNLOAD" && props.downloadUrl && (
                 <div className="row d-flex justify-content-center mt-3">
                     <div className="col-lg-6">

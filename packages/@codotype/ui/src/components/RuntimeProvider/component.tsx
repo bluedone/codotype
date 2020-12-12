@@ -8,7 +8,7 @@ import { LoadingBuild } from "../LoadingBuild";
 
 interface GenerateCodeProps {
     projectInput: ProjectInput;
-    generator: PluginMetadata;
+    plugin: PluginMetadata;
 }
 
 interface RuntimeProviderProps {
@@ -30,7 +30,7 @@ export function RuntimeProvider(props: RuntimeProviderProps) {
     const [finished, setFinished] = React.useState<boolean>(false);
 
     // TODO - update this to be passed in through `props.runtimeAdaptor`
-    function generateCode({ projectInput, generator }: GenerateCodeProps) {
+    function generateCode({ projectInput, plugin }: GenerateCodeProps) {
         setLoading(true);
 
         // Mock the loading
@@ -42,7 +42,7 @@ export function RuntimeProvider(props: RuntimeProviderProps) {
 
         // Debugging
         // console.log(project);
-        // console.log(generator);
+        // console.log(plugin);
     }
 
     // // // //

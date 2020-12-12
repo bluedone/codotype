@@ -3,7 +3,7 @@ import { storiesOf } from "@storybook/react";
 import { ConfigurationInputFormGroup } from "../ConfigurationInputFormGroup";
 import { ConfigurationInputChild } from "../ConfigurationInputChild";
 import {
-    OptionValue,
+    ConfigurationPropertyValue,
     ConfigurationProperty,
     PropertyLayoutVariants,
     testState,
@@ -19,7 +19,7 @@ import { Story } from "../../Story";
 
 // // // //
 
-const stories: Array<[string, ConfigurationProperty, OptionValue]> = [
+const stories: Array<[string, ConfigurationProperty, ConfigurationPropertyValue]> = [
     [
         "dropdown",
         ComponentBuilderConfigurationPropertySingleDropdown,
@@ -145,7 +145,7 @@ const storyCollection = storiesOf(
 
 stories.forEach(story => {
     storyCollection.add(story[0], () => {
-        const [value, setValue] = React.useState<OptionValue>(story[2]);
+        const [value, setValue] = React.useState<ConfigurationPropertyValue>(story[2]);
         const property = story[1];
         let enabled = false;
         if (property.allowDisable && typeof value == "object") {
@@ -168,7 +168,7 @@ stories.forEach(story => {
                     <ConfigurationInputChild
                         property={property}
                         value={value}
-                        onChange={(updatedValue: OptionValue) => {
+                        onChange={(updatedValue: ConfigurationPropertyValue) => {
                             console.log(updatedValue);
                             setValue(updatedValue);
                         }}
