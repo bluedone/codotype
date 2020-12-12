@@ -7,15 +7,11 @@ import {
     buildDefaultProjectInput,
 } from "@codotype/core";
 
-// FEATURE - implement `inquirer` for when RuntimeConstructor overwrite behavior is "ask"
-// import inquirer from "inquirer";
-
 // // // //
 
 /**
  * testPlugin
- * Runs the Codotype generator in the current working directory
- * @param projectPath - path to the codotype-project.json file to generate
+ * Runs the Codotype plugin in the current working directory w/ default ProjectInput
  * @param options
  */
 async function testPlugin(options: CommandOptions) {
