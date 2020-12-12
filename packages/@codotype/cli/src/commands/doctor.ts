@@ -27,7 +27,7 @@ async function doctor() {
     // Invoke runtime directly with parameters
     const runtime = new NodeRuntime({
         cwd: process.cwd(),
-        logBehavior: RuntimeLogBehaviors.normal,
+        logBehavior: RuntimeLogBehaviors.verbose,
         fileOverwriteBehavior: "force", // FEATURE - add option for "ask" in CLI
         fileSystemAdapter: new LocalFileSystemAdapter(),
     });
@@ -46,6 +46,9 @@ async function doctor() {
     // Runs the generator through validatePlugin
     const generatorMeta = require(generatorMetaPath);
     const validations = validatePlugin({ plugin: generatorMeta });
+
+    console.log("validations");
+    console.log(validations);
 
     // Logs validation of properties
     console.log(`the doctor is ${chalk.blue(`validating the generator:`)}`);
@@ -81,11 +84,11 @@ async function doctor() {
     }
 
     // Logs success message if nothing blows up
-    console.log(
-        `\n${chalk.blue(`codotype doctor`) +
-            " says " +
-            chalk.yellow(`everything is splendid`)}\n`,
-    );
+    // console.log(
+    //     `\n${chalk.blue(`codotype doctor`) +
+    //         " says " +
+    //         chalk.yellow(`everything is splendid`)}\n`,
+    // );
     return;
 }
 

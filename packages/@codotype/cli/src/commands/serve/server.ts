@@ -2,13 +2,14 @@ import * as express from "express";
 import * as bodyParser from "body-parser";
 import * as path from "path";
 import { omit } from "lodash";
-import { ProjectBuild } from "@codotype/core";
+import { ProjectBuild, Runtime } from "@codotype/core";
 import { OUTPUT_DIRECTORY } from "@codotype/runtime/dist/constants";
+import { NodeRuntime } from "@codotype/runtime";
 
 // // // //
 
 // Exports a basic Express.js app
-export function server({ runtime }): any {
+export function server({ runtime }: { runtime: NodeRuntime }): any {
     // Defines Express.js app
     const app = express();
 
@@ -24,12 +25,20 @@ export function server({ runtime }): any {
         res.sendFile(path.join(__dirname, "../../client/index.html"));
     });
 
+    // TODO - remove this
     // List available generators
-    app.get("/api/generators", (req, res) => {
+    app.get("/api/generators", async (req, res) => {
+        const plugins = await runtime.getPlugins();
         return res.send(
-            runtime
-                .getGenerators()
-                .map(g => omit(g, ["generator_path", "engine_path"])),
+            plugins.map(p => omit(p, ["generator_path", "engine_path"])), // TODO - clean this up!
+        );
+    });
+
+    // List available plugins
+    app.get("/api/plugins", async (req, res) => {
+        const plugins = await runtime.getPlugins();
+        return res.send(
+            plugins.map(p => omit(p, ["generator_path", "engine_path"])), // TODO - clean this up!
         );
     });
 

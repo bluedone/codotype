@@ -7,6 +7,7 @@ import * as program from "commander";
 import chalk from "chalk";
 import { runCommand } from "../commands/run";
 import { serveCommand } from "../commands/serve";
+import { testCommand } from "../commands/test";
 import { doctorCommand } from "../commands/doctor";
 import { checkNodeVersion } from "../util/checkNodeVersion";
 import { cleanArgs } from "../util/cleanArgs";
@@ -26,7 +27,7 @@ program
     .description(
         "Validates the Plugin defined in the current working directory and surfaces any issues",
     )
-    .action((cmd) => {
+    .action(cmd => {
         const options = cleanArgs(cmd);
         doctorCommand(options);
     });
@@ -46,17 +47,29 @@ program
         runCommand(project, options);
     });
 
+// Setup `plugin-test` command
+program
+    .command("plugin-test")
+    .option(
+        "Runs the Plugin against a default (empty) project and outputs the generated code in ./codotype-out",
+    )
+    .description("run the Plugin in the current working directory")
+    .action(cmd => {
+        const options = cleanArgs(cmd);
+        testCommand(options);
+    });
+
 // Setup `plugin-serve` command
 program
     .command("plugin-serve")
     .description("Serves the Codotype UI locally for a single Codotype plugin")
-    .action((cmd) => {
+    .action(cmd => {
         const options = cleanArgs(cmd);
         serveCommand(options);
     });
 
 // output help information on unknown commands
-program.arguments("<command>").action((cmd) => {
+program.arguments("<command>").action(cmd => {
     program.outputHelp();
     console.log(`  ` + chalk.red(`Unknown command ${chalk.yellow(cmd)}.`));
     console.log();
@@ -74,7 +87,7 @@ program.on("--help", () => {
 });
 
 // Stub-out dedicated help command for each individual command
-program.commands.forEach((c) => c.on("--help", () => console.log()));
+program.commands.forEach(c => c.on("--help", () => console.log()));
 
 // Parse arguments into commander program
 program.parse(process.argv);
