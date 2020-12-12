@@ -227,7 +227,7 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
     }: {
         src: string;
         dest: string;
-        data: { [key: string]: any };
+        data?: { [key: string]: any };
         options?: { prettify?: PrettifyOptions };
     }): Promise<boolean> {
         return this.runtime.writeTemplateToFile(
