@@ -1,8 +1,7 @@
 import * as express from "express";
 import * as bodyParser from "body-parser";
 import * as path from "path";
-import { omit } from "lodash";
-import { ProjectBuild, Runtime } from "@codotype/core";
+import { ProjectBuild } from "@codotype/core";
 import { OUTPUT_DIRECTORY } from "@codotype/runtime/dist/constants";
 import { NodeRuntime } from "@codotype/runtime";
 
@@ -25,21 +24,10 @@ export function server({ runtime }: { runtime: NodeRuntime }): any {
         res.sendFile(path.join(__dirname, "../../client/index.html"));
     });
 
-    // TODO - remove this
-    // List available generators
-    app.get("/api/generators", async (req, res) => {
-        const plugins = await runtime.getPlugins();
-        return res.send(
-            plugins.map(p => omit(p, ["generator_path", "engine_path"])), // TODO - clean this up!
-        );
-    });
-
     // List available plugins
     app.get("/api/plugins", async (req, res) => {
         const plugins = await runtime.getPlugins();
-        return res.send(
-            plugins.map(p => omit(p, ["generator_path", "engine_path"])), // TODO - clean this up!
-        );
+        return res.send(plugins.map((p) => p.pluginMetadata));
     });
 
     // Run generator
