@@ -104,7 +104,7 @@ export type EnsureDirFunction = (dir: string) => Promise<boolean>;
 export type RenderTemplateFunction = (params: {
     src: string;
     dest: string;
-    data: { [key: string]: any };
+    data?: { [key: string]: any };
     options?: {
         prettify?: PrettifyOptions;
     };
