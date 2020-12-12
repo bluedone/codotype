@@ -1,6 +1,6 @@
 {
     "name": "@codotype/cli",
-    "version": "0.8.0-canary.18",
+    "version": "0.8.0-canary.19",
     "description": "CLI for development with codotype.io",
     "bin": {
         "codotype": "bin/codotype.js"
