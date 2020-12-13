@@ -256,7 +256,7 @@ const projectExample01: ProjectInput = {
     ],
 };
 
-const stories: [string, PluginMetadata][] = [
+const stories: Array<[string, PluginMetadata]> = [
     ["w/ schemas", dummyPluginMetadata],
     [
         "w/ schemas + schema configuration groups",
@@ -627,6 +627,7 @@ stories.forEach(story => {
                                                 setProject(updatedProject);
                                             }}
                                         />
+                                        <pre>{JSON.stringify(projectInput, null, 4)}</pre>
                                     </React.Fragment>
                                 )}
                             </RuntimeProvider>
