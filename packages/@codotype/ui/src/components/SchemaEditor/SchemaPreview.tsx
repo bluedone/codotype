@@ -5,48 +5,19 @@ import { faCopy } from "@fortawesome/free-solid-svg-icons";
 import {
     Schema,
     SchemaInput,
-    renderSchemaJson,
-    renderSchemaGrapqhQL,
-    renderSchemaTypeScript,
     ProjectInput,
+    PreviewOutputType,
+    schemaPreviewContent,
+    PreviewOutputTypes
 } from "@codotype/core";
 import { faCheckCircle } from "@fortawesome/free-regular-svg-icons";
 
 // // // //
 
-// TODO - import RenderTypes enum from @codotype/core (already migrated)
-type RenderType = "json" | "typescript" | "graphql";
-
-// TODO - import this from @codotype/core (already migrated)
-export function schemaPreviewContent(props: {
-    schemaInput: SchemaInput;
-    projectInput: ProjectInput;
-    renderType: RenderType;
-}) {
-    const { schemaInput, projectInput, renderType } = props;
-
-    if (renderType === "json") {
-        return renderSchemaJson({ schemaInput, projectInput });
-    }
-
-    if (renderType === "typescript") {
-        return renderSchemaTypeScript({ schemaInput, projectInput });
-    }
-
-    if (renderType === "graphql") {
-        return renderSchemaGrapqhQL({ schemaInput, projectInput });
-    }
-
-    // Return null if no match
-    return null;
-}
-
-// // // //
-
 /**
  * SchemaPreview
- * TODO - when hovering over a relation, it should display a tooltip with a preview of the related Schema
- * TODO - when clicking a relation it should jump to the corresponding schema
+ * FEATURE - when hovering over a relation, it should display a tooltip with a preview of the related Schema
+ * FEATURE - when clicking a relation it should jump to the corresponding schema
  * QUESTION - should plugins be able to configure which is the default preview type?
  */
 export function SchemaPreview(props: {
@@ -54,11 +25,7 @@ export function SchemaPreview(props: {
     projectInput: ProjectInput;
 }) {
     const { schemaInput, projectInput } = props;
-
-    const [renderType, setRenderType] = React.useState<RenderType>(
-        "typescript",
-    );
-
+    const [previewOutputType, setRenderType] = React.useState<PreviewOutputType>(PreviewOutputTypes.typescript);
     const [copyMessage, setCopyMessage] = React.useState<boolean>(false);
 
     React.useEffect(() => {
@@ -75,7 +42,7 @@ export function SchemaPreview(props: {
         schemaPreviewContent({
             schemaInput,
             projectInput,
-            renderType,
+            previewOutputType,
         }) || "";
 
     return (
@@ -109,19 +76,18 @@ export function SchemaPreview(props: {
                     >
                         <div className="d-flex flex-column flex-grow-1">
                             <select
-                                value={renderType}
+                                value={previewOutputType}
                                 onChange={e => {
-                                    // @ts-ignore
-                                    const value: RenderType =
-                                        e.currentTarget.value;
+                                    const value: PreviewOutputType =
+                                        e.currentTarget.value as PreviewOutputType;
                                     setRenderType(value);
                                 }}
                                 style={{ boxShadow: "none" }}
                                 className="form-control form-control-sm rounded-0 bg-dark text-light border-0"
                             >
-                                <option value={"typescript"}>TypeScript</option>
-                                <option value={"json"}>JSON</option>
-                                <option value={"graphql"}>GraphQL</option>
+                                <option value={PreviewOutputTypes.typescript}>TypeScript</option>
+                                <option value={PreviewOutputTypes.json}>JSON</option>
+                                <option value={PreviewOutputTypes.graphql}>GraphQL</option>
                             </select>
                         </div>
                         <div className="d-flex flex-column">
