@@ -43,8 +43,8 @@ export function ConfigurationGroupPropertiesTabs(props: {
     const selectedProperty:
         | ConfigurationProperty
         | undefined = configurationGroup.properties.find(
-            p => p.identifier === selectedPropertyID,
-        );
+        p => p.identifier === selectedPropertyID,
+    );
 
     // Return null if selectedProperty is undefined
     if (selectedProperty === undefined) {

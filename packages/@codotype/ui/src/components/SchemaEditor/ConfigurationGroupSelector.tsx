@@ -4,6 +4,7 @@ import {
     ConfigurationGroup,
     ConfigurationPropertyDict,
     ConfigurationValue,
+    SchemaInput,
 } from "@codotype/core";
 
 // // // //
@@ -43,6 +44,7 @@ export function ConfigurationGroupTab(props: {
  * @param props.onChange
  */
 export function ConfigurationGroupSelector(props: {
+    schemaInput: SchemaInput;
     configuration: ConfigurationValue;
     configurationGroups: ConfigurationGroup[];
     children: React.ReactNode;
@@ -109,6 +111,7 @@ export function ConfigurationGroupSelector(props: {
                 {!viewingSchemas && (
                     <ConfigurationInput
                         configurationGroup={selectedConfigurationGroup}
+                        schemaInput={props.schemaInput}
                         value={
                             props.configuration[
                             selectedConfigurationGroup.identifier

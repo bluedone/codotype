@@ -118,7 +118,7 @@ export function ConfigurationInputFormGroup(
                 <small className="mx-3">
                     <DocumentationModal
                         header={property.content.label}
-                        documentation={property.content.description} // TODO - update this to use property.documentation
+                        documentation={property.content.description}
                     />
                 </small>
             )}
@@ -150,7 +150,6 @@ export function ConfigurationInputFormGroup(
             })}
         >
             <div className="d-flex align-items-center justify-content-between">
-                {/* TODO - replace this with modified ConfigurationGroupHeader? */}
                 <div className="d-flex align-items-center">
                     {formGroupHeader}
                     {property.type === PropertyTypes.BOOLEAN && (
@@ -184,7 +183,6 @@ export function ConfigurationInputFormGroup(
             })}
         >
             <div className="d-flex align-items-center justify-content-between">
-                {/* TODO - replace this with modified ConfigurationGroupHeader? */}
                 <div className="d-flex align-items-center">
                     {formGroupHeader}
                 </div>

@@ -1,5 +1,9 @@
 import * as React from "react";
-import { ConfigurationPropertyDict, ConfigurationGroup } from "@codotype/core";
+import {
+    ConfigurationPropertyDict,
+    ConfigurationGroup,
+    SchemaInput,
+} from "@codotype/core";
 import { ConfigurationGroupPropertiesVariant } from "./ConfigurationGroupPropertiesVariant";
 import { ConfigurationGroupHeader } from "./ConfigurationGroupHeader";
 
@@ -43,6 +47,7 @@ function ToggleEnabled(props: {
 
 interface ConfigurationInputProps {
     value: ConfigurationPropertyDict;
+    schemaInput?: SchemaInput;
     configurationGroup: ConfigurationGroup;
     onChange: (updatedVal: ConfigurationPropertyDict) => void;
 }
@@ -71,6 +76,7 @@ export function ConfigurationInput(props: ConfigurationInputProps) {
                 <ConfigurationGroupHeader
                     value={value}
                     onChange={onChange}
+                    schemaInput={props.schemaInput}
                     configurationGroup={configurationGroup}
                 />
 

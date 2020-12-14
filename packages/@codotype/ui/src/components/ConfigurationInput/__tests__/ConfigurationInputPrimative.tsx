@@ -1,6 +1,6 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
-import { ConfigurationInputChild } from "../ConfigurationInputChild";
+import { ConfigurationInputPrimative } from "../ConfigurationInputPrimative";
 import {
     ConfigurationProperty,
     ConfigurationPropertyValue,
@@ -18,7 +18,11 @@ import { Story } from "../../Story";
 
 // // // //
 
-const stories: Array<[string, ConfigurationProperty, ConfigurationPropertyValue]> = [
+const stories: Array<[
+    string,
+    ConfigurationProperty,
+    ConfigurationPropertyValue,
+]> = [
     [
         "dropdown",
         ComponentBuilderConfigurationPropertySingleDropdown,
@@ -32,16 +36,18 @@ const stories: Array<[string, ConfigurationProperty, ConfigurationPropertyValue]
 // // // //
 
 const storyCollection = storiesOf(
-    "Components/ProjectEditor/ConfigurationEditor/ConfigurationInputChild",
+    "Components/ProjectEditor/ConfigurationEditor/ConfigurationInputPrimative",
     module,
 );
 
 stories.forEach(story => {
     storyCollection.add(story[0], () => {
-        const [value, setValue] = React.useState<ConfigurationPropertyValue>(story[2]);
+        const [value, setValue] = React.useState<ConfigurationPropertyValue>(
+            story[2],
+        );
         return (
             <Story>
-                <ConfigurationInputChild
+                <ConfigurationInputPrimative
                     property={story[1]}
                     value={value}
                     onChange={(updatedValue: ConfigurationPropertyValue) => {
@@ -56,7 +62,7 @@ stories.forEach(story => {
 // // // //
 
 const numberPropertyFilterStories = storiesOf(
-    "Components/ProjectEditor/ConfigurationEditor/ConfigurationInputChild/StringPropertyFilter",
+    "Components/ProjectEditor/ConfigurationEditor/ConfigurationInputPrimative/StringPropertyFilter",
     module,
 );
 
@@ -89,11 +95,13 @@ const numberPropertyFilterStories = storiesOf(
     ],
 ].forEach(propertyFilters => {
     numberPropertyFilterStories.add(propertyFilters.join(" + "), () => {
-        const [value, setValue] = React.useState<ConfigurationPropertyValue>("");
+        const [value, setValue] = React.useState<ConfigurationPropertyValue>(
+            "",
+        );
         return (
             <Story>
                 <pre>{propertyFilters.join(" + ")}</pre>
-                <ConfigurationInputChild
+                <ConfigurationInputPrimative
                     property={{
                         ...ComponentBuilderConfigurationPropertySingleText,
                         transformations: [...propertyFilters],
@@ -111,7 +119,7 @@ const numberPropertyFilterStories = storiesOf(
 // // // //
 
 const stringPropertyFilterStories = storiesOf(
-    "Components/ProjectEditor/ConfigurationEditor/ConfigurationInputChild/NumberPropertyFilter",
+    "Components/ProjectEditor/ConfigurationEditor/ConfigurationInputPrimative/NumberPropertyFilter",
     module,
 );
 
@@ -125,11 +133,13 @@ const stringPropertyFilterStories = storiesOf(
     ],
 ].forEach(propertyFilters => {
     stringPropertyFilterStories.add(propertyFilters.join(" + "), () => {
-        const [value, setValue] = React.useState<ConfigurationPropertyValue>("");
+        const [value, setValue] = React.useState<ConfigurationPropertyValue>(
+            "",
+        );
         return (
             <Story>
                 <pre>{propertyFilters.join(" + ")}</pre>
-                <ConfigurationInputChild
+                <ConfigurationInputPrimative
                     property={{
                         ...ComponentBuilderConfigurationPropertySingleNumber,
                         transformations: [...propertyFilters],

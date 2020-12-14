@@ -12,16 +12,16 @@ import Switch from "react-switch";
 // // // //
 
 interface ConfigurationInputChildProps {
-    value: any; // TODO - remove any here
+    value: any;
     property: ConfigurationProperty;
     onChange: (updatedValue: ConfigurationPropertyValue) => void;
 }
 
-// TODO - rename `ConfigurationInputChild` to `ConfigurationInputPrimative`
-export function ConfigurationInputChild(props: ConfigurationInputChildProps) {
+export function ConfigurationInputPrimative(
+    props: ConfigurationInputChildProps,
+) {
     const { property } = props;
 
-    // TODO - remove this after enabled/value obj is enforced everywhere
     function setValue(updatedValue: ConfigurationPropertyValue) {
         if (property.allowDisable) {
             props.onChange({
@@ -154,7 +154,6 @@ export function ConfigurationInputChild(props: ConfigurationInputChildProps) {
         );
     }
 
-    // TODO - throw error if OptionType dropdown is not handled
-    // TODO - add support for MULTI_DROPDOWN
+    // FEATURE - add support for MULTI_DROPDOWN
     return null;
 }

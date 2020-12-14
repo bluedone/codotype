@@ -7,7 +7,7 @@ import {
     buildTokenPluralization,
     ConfigurationPropertyDict,
 } from "@codotype/core";
-import { ConfigurationInputChild } from "./ConfigurationInputChild";
+import { ConfigurationInputPrimative } from "./ConfigurationInputPrimative";
 import { ConfigurationInputFormGroup } from "./ConfigurationInputFormGroup";
 import { ConfigurationCollectionInput } from "./ConfigurationCollectionInput";
 
@@ -57,7 +57,9 @@ export function ConfigurationGroupPropertiesInput(props: {
                                 identifiers={buildTokenPluralization("Item")} // TODO - replace with option taken from ConfigurationProperty
                                 properties={property.properties}
                                 propertyPreview={property.preview}
-                                onChange={(updatedVal: ConfigurationPropertyValue) => {
+                                onChange={(
+                                    updatedVal: ConfigurationPropertyValue,
+                                ) => {
                                     props.onChange({
                                         ...props.value,
                                         [property.identifier]: updatedVal,
@@ -91,7 +93,9 @@ export function ConfigurationGroupPropertiesInput(props: {
                         >
                             <ConfigurationGroupPropertiesInput
                                 properties={property.properties}
-                                onChange={(updatedVal: ConfigurationPropertyValue) => {
+                                onChange={(
+                                    updatedVal: ConfigurationPropertyValue,
+                                ) => {
                                     if (property.allowDisable) {
                                         props.onChange({
                                             ...props.value,
@@ -131,10 +135,12 @@ export function ConfigurationGroupPropertiesInput(props: {
                             });
                         }}
                     >
-                        <ConfigurationInputChild
+                        <ConfigurationInputPrimative
                             value={value}
                             property={property}
-                            onChange={(updatedValue: ConfigurationPropertyValue) => {
+                            onChange={(
+                                updatedValue: ConfigurationPropertyValue,
+                            ) => {
                                 props.onChange({
                                     ...props.value,
                                     [property.identifier]: updatedValue,

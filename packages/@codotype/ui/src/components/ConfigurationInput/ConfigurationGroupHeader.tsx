@@ -3,6 +3,7 @@ import {
     ConfigurationPropertyDict,
     ConfigurationGroup,
     GroupLayoutVariants,
+    SchemaInput,
 } from "@codotype/core";
 import { DocumentationModal } from "../DocumentationModal";
 
@@ -48,6 +49,7 @@ export function shouldRenderDocumentationModal(
  */
 export function ConfigurationGroupHeader(props: {
     configurationGroup: ConfigurationGroup;
+    schemaInput?: SchemaInput;
     value: ConfigurationPropertyDict;
     onChange: (updatedVal: ConfigurationPropertyDict) => void;
 }) {
@@ -57,18 +59,24 @@ export function ConfigurationGroupHeader(props: {
         configurationGroup,
     );
 
+    const renderSmaller: boolean = props.schemaInput !== undefined;
+
     return (
         <div className="row">
             <div className="col-sm-12">
                 <span className="d-flex align-items-center">
-                    {/* <h4 className="mb-0 mr-2"> */}
-                    {/* {props.configurationGroup.content.label} */}
-                    {/* </h4> */}
+                    {!renderSmaller && (
+                        <h4 className="mb-0 mr-2">
+                            {props.configurationGroup.content.label}
+                        </h4>
+                    )}
 
-                    {/* TODO - accept props.schema here? Render smaller text when props.schema is defined */}
-                    <p className="lead mb-0 mr-2">
-                        {props.configurationGroup.content.label}
-                    </p>
+                    {renderSmaller && (
+                        <p className="lead mb-0 mr-2">
+                            {props.configurationGroup.content.label}
+                        </p>
+                    )}
+
                     {enableDocumentationModal && (
                         <DocumentationModal
                             header={props.configurationGroup.content.label}
@@ -77,10 +85,20 @@ export function ConfigurationGroupHeader(props: {
                             }
                         />
                     )}
+
                     {/* <br className="d-none d-sm-block d-md-none" /> */}
-                    <p className="ml-2 text-muted mb-0">
-                        {props.configurationGroup.content.description}
-                    </p>
+
+                    {!renderSmaller && (
+                        <p className="lead ml-2 text-muted mb-0">
+                            {props.configurationGroup.content.description}
+                        </p>
+                    )}
+
+                    {renderSmaller && (
+                        <p className="ml-2 text-muted mb-0">
+                            {props.configurationGroup.content.description}
+                        </p>
+                    )}
 
                     {configurationGroup.allowDisable && (
                         <input

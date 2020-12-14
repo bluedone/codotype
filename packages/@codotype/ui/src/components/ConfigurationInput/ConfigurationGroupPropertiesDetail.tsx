@@ -5,7 +5,7 @@ import {
     ConfigurationProperty,
 } from "@codotype/core";
 import { ConfigurationInputFormGroup } from "./ConfigurationInputFormGroup";
-import { ConfigurationInputChild } from "./ConfigurationInputChild";
+import { ConfigurationInputPrimative } from "./ConfigurationInputPrimative";
 
 // // // //
 
@@ -37,8 +37,8 @@ export function ConfigurationGroupPropertiesDetail(props: {
     const selectedProperty:
         | ConfigurationProperty
         | undefined = configurationGroup.properties.find(
-            p => p.identifier === selectedPropertyID,
-        );
+        p => p.identifier === selectedPropertyID,
+    );
 
     // Return null if selectedProperty is undefined
     if (selectedProperty === undefined) {
@@ -96,7 +96,7 @@ export function ConfigurationGroupPropertiesDetail(props: {
                         <ConfigurationInputFormGroup
                             property={selectedProperty}
                         >
-                            <ConfigurationInputChild
+                            <ConfigurationInputPrimative
                                 property={selectedProperty}
                                 value={true}
                                 onChange={() => {

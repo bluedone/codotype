@@ -60,6 +60,7 @@ export function SchemaDetail(props: SchemaDetailProps) {
 
             <div className="col-sm-12">
                 <ConfigurationGroupSelector
+                    schemaInput={props.schema}
                     configuration={props.schema.configuration}
                     configurationGroups={
                         schemaEditorConfiguration.configurationGroups

@@ -181,7 +181,9 @@ const storyCollection = storiesOf(
 
 stories.forEach(story => {
     storyCollection.add(story[0], () => {
-        const [value, setValue] = React.useState<ConfigurationPropertyValue>(story[2]);
+        const [value, setValue] = React.useState<ConfigurationPropertyValue>(
+            story[2],
+        );
 
         // TODO - fix this, including extra value by default
         console.log("DEFAULT VALUE");
