@@ -18,6 +18,7 @@ const StyledNavbar = styled(Navbar)`
 
 // // // //
 
+// TODO - update this to use next/link component
 export function AppNavbar() {
     return (
         <StyledNavbar bg="light" fixed="top" expand="lg">
