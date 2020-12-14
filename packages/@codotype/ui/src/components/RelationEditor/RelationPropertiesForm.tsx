@@ -19,9 +19,9 @@ function getSourceLabel(props: {
 }): string {
     const { relationInput, schema } = props;
     if (relationInput.type === RelationTypes.HAS_AND_BELONGS_TO_MANY) {
-        return schema.identifiers.plural.title
+        return schema.identifiers.plural.title;
     }
-    return schema.identifiers.singular.title
+    return schema.identifiers.singular.title;
 }
 
 function getDestinationLabel(props: {
@@ -30,10 +30,16 @@ function getDestinationLabel(props: {
 }): string {
     const { relationInput, schema } = props;
     // @ts-ignore
-    if ([RelationTypes.HAS_AND_BELONGS_TO_MANY, RelationTypes.TO_MANY, RelationTypes.HAS_MANY].includes(relationInput.type)) {
-        return schema.identifiers.plural.title
+    if (
+        [
+            RelationTypes.HAS_AND_BELONGS_TO_MANY,
+            RelationTypes.TO_MANY,
+            RelationTypes.HAS_MANY,
+        ].includes(relationInput.type)
+    ) {
+        return schema.identifiers.plural.title;
     }
-    return schema.identifiers.singular.title
+    return schema.identifiers.singular.title;
 }
 
 // // // //
@@ -142,7 +148,10 @@ export function RelationPropertiesForm(props: RelationPropertiesFormProps) {
                         >
                             {schemas.map(s => (
                                 <option key={s.id} value={s.id}>
-                                    {getDestinationLabel({ schema: s, relationInput })}
+                                    {getDestinationLabel({
+                                        schema: s,
+                                        relationInput,
+                                    })}
                                 </option>
                             ))}
                         </select>

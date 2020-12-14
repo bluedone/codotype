@@ -57,7 +57,7 @@ export function SchemaDeleteButton(props: {
         relations: buildRelations({
             schemaInputs: projectInput.schemas,
             relationInputs: projectInput.relations,
-        })
+        }),
     });
 
     // Defines boolean indicating whether or not the schema can be removed

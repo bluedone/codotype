@@ -40,7 +40,7 @@ export function AttributePropertiesForm(props: AttributePropertiesFormProps) {
                     onChange={updatedTokenCasing => {
                         props.onChange({
                             ...attributeInput,
-                            identifiers: updatedTokenCasing
+                            identifiers: updatedTokenCasing,
                         });
                     }}
                 />
@@ -63,7 +63,7 @@ export function AttributePropertiesForm(props: AttributePropertiesFormProps) {
                         onChange={e => {
                             props.onChange({
                                 ...attributeInput,
-                                internalNote: e.currentTarget.value
+                                internalNote: e.currentTarget.value,
                             });
                         }}
                     />

@@ -4,10 +4,7 @@ import { Draggable } from "react-beautiful-dnd";
 import { AttributeListItemLabel } from "./AttributeListItemLabel";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { DATATYPE_META, AttributeInput, CreatedByValues } from "@codotype/core";
-import {
-    faTrashAlt,
-    faLock,
-} from "@fortawesome/free-solid-svg-icons";
+import { faTrashAlt, faLock } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 
 // // // //
@@ -97,9 +94,7 @@ export function AttributeListItem(props: {
                         </div>
 
                         {attribute.locked && (
-                            <div
-                                className="col-sm-2 text-right controls justify-content-end"
-                            >
+                            <div className="col-sm-2 text-right controls justify-content-end">
                                 <span
                                     className=" badge badge-secondary"
                                     title="This Attribute is auto-generated - it may not be edited or removed."
@@ -114,11 +109,12 @@ export function AttributeListItem(props: {
                             <div className="col-sm-2 text-right controls">
                                 <button
                                     className="btn btn-sm btn-outline-danger px-0 py-0"
-                                    onClick={(e) => {
-                                        e.stopPropagation()
-                                        e.preventDefault()
+                                    onClick={e => {
+                                        e.stopPropagation();
+                                        e.preventDefault();
                                         props.onClickDelete(attribute);
-                                    }}>
+                                    }}
+                                >
                                     <FontAwesomeIcon
                                         className="mx-2"
                                         icon={faTrashAlt}

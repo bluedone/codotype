@@ -19,8 +19,7 @@ interface SortableListHeaderProps {
  */
 export function SortableListHeader(props: SortableListHeaderProps) {
     const { tooltip = "", rounded = true } = props;
-    let styles = {
-    };
+    let styles = {};
     if (!rounded) {
         styles = {
             borderTopLeftRadius: "0px",
@@ -36,15 +35,11 @@ export function SortableListHeader(props: SortableListHeaderProps) {
     return (
         <OverlayTrigger
             placement="bottom"
-            overlay={
-                <Tooltip id="attribute-editor-header">
-                    {tooltip}
-                </Tooltip>
-            }
+            overlay={<Tooltip id="attribute-editor-header">{tooltip}</Tooltip>}
         >
             <button
                 className="btn btn-block btn-primary"
-                onClick={(e) => {
+                onClick={e => {
                     e.currentTarget.blur();
                     props.onClick();
                 }}

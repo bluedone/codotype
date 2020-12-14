@@ -62,7 +62,7 @@ export function SchemaEditorLayout(props: {
     React.useEffect(() => {
         props.onChange({
             ...props.projectInput,
-            schemas: state.projectInput.schemas
+            schemas: state.projectInput.schemas,
         });
     }, [state.lastUpdatedAt]);
 
@@ -73,11 +73,11 @@ export function SchemaEditorLayout(props: {
     }
 
     // Defines selectedSchema
-    const selectedSchema: SchemaInput | undefined = state.projectInput.schemas.find(
-        (s: SchemaInput) => {
-            return s.id === selectedSchemaId;
-        },
-    );
+    const selectedSchema:
+        | SchemaInput
+        | undefined = state.projectInput.schemas.find((s: SchemaInput) => {
+        return s.id === selectedSchemaId;
+    });
 
     // Defines handler for creating new schemas
     function createNewSchema() {
@@ -89,9 +89,9 @@ export function SchemaEditorLayout(props: {
         const errors = validateSchema({
             schemaCollection: schemas,
             tokenPluralization: newTokenPluralization,
-        })
+        });
 
-        // Short-circuit if 
+        // Short-circuit if
         if (errors.length > 0) {
             return;
         }
@@ -99,12 +99,13 @@ export function SchemaEditorLayout(props: {
         // Defines new schema
         const newSchema: SchemaInput = new Primatives.Schema({
             attributes: [
-                ...props.pluginMetadata.schemaEditorConfiguration
-                    .newSchemaDefaults.attributes.map((a) => {
+                ...props.pluginMetadata.schemaEditorConfiguration.newSchemaDefaults.attributes.map(
+                    a => {
                         return {
-                            ...a
-                        }
-                    }),
+                            ...a,
+                        };
+                    },
+                ),
             ],
             locked: false,
             createdBy: CreatedByValues.user,
@@ -116,28 +117,32 @@ export function SchemaEditorLayout(props: {
         });
 
         // ProjectInput.relations
-        const defaultRelations = props.pluginMetadata.schemaEditorConfiguration.defaultRelations;
+        const defaultRelations =
+            props.pluginMetadata.schemaEditorConfiguration.defaultRelations;
         const updatedRelations = [
             ...state.projectInput.relations,
-            ...defaultRelations.map((r) => {
+            ...defaultRelations.map(r => {
                 // Return new relation where destinationSchemaID is the newly created SchemaInput
                 if (r.destinationSchemaID === "") {
                     return {
                         ...r,
-                        destinationSchemaID: newSchema.id
-                    }
+                        destinationSchemaID: newSchema.id,
+                    };
                 }
 
                 // Return new relation where sourceSchemaID is the newly created SchemaInput
                 return {
                     ...r,
-                    sourceSchemaID: newSchema.id
-                }
-            })
-        ]
+                    sourceSchemaID: newSchema.id,
+                };
+            }),
+        ];
 
         // Defines updated schemas, including NEW schema
-        const updatedSchemas: SchemaInput[] = [...state.projectInput.schemas, newSchema];
+        const updatedSchemas: SchemaInput[] = [
+            ...state.projectInput.schemas,
+            newSchema,
+        ];
 
         // Updates state.projectInput.schemas with the latest schemas
         setState({
@@ -147,7 +152,7 @@ export function SchemaEditorLayout(props: {
                 ...state.projectInput,
                 schemas: updatedSchemas,
                 relations: updatedRelations,
-            }
+            },
         });
 
         // Select the newly created schema
@@ -178,9 +183,9 @@ export function SchemaEditorLayout(props: {
         const errors = validateSchema({
             schemaCollection: schemas,
             tokenPluralization: newTokenPluralization,
-        })
+        });
 
-        // Short-circuit if 
+        // Short-circuit if
         if (errors.length > 0) {
             return;
         }
@@ -202,7 +207,7 @@ export function SchemaEditorLayout(props: {
             projectInput: {
                 ...state.projectInput,
                 schemas: updatedSchemas,
-            }
+            },
         });
 
         // Closes edit modal
@@ -282,7 +287,7 @@ export function SchemaEditorLayout(props: {
             projectInput: {
                 ...state.projectInput,
                 schemas: updatedSchemas,
-            }
+            },
         });
     }
 
@@ -346,10 +351,9 @@ export function SchemaEditorLayout(props: {
                         onChangeRelations={(
                             updatedRelations: RelationInput[],
                         ) => {
-
                             props.onChange({
                                 ...props.projectInput,
-                                relations: updatedRelations
+                                relations: updatedRelations,
                             });
                         }}
                         onChange={(updatedSchema: SchemaInput) => {
@@ -370,7 +374,7 @@ export function SchemaEditorLayout(props: {
                                 projectInput: {
                                     ...state.projectInput,
                                     schemas: updatedSchemas,
-                                }
+                                },
                             });
                         }}
                         onClickEdit={() => {
@@ -391,7 +395,7 @@ export function SchemaEditorLayout(props: {
                                 projectInput: {
                                     ...state.projectInput,
                                     schemas: updatedSchemas,
-                                }
+                                },
                             });
 
                             // Sets selectedSchemaId to null

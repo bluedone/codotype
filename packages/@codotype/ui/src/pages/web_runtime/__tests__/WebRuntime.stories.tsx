@@ -602,36 +602,33 @@ stories.forEach(story => {
         return (
             <Story>
                 <WebRuntime plugin={story[1]}>
-                    {({
-                        plugin,
-                        projectInput,
-                        setProject,
-                        clearProject,
-                    }) => (
-                            <RuntimeProvider>
-                                {({ generateCode }) => (
-                                    <React.Fragment>
-                                        <ProjectEditor
-                                            plugin={plugin}
-                                            projectInput={projectInput}
-                                            onClickGenerate={() => {
-                                                generateCode({
-                                                    projectInput,
-                                                    plugin,
-                                                });
-                                            }}
-                                            onResetProject={clearProject}
-                                            onChange={(
-                                                updatedProject: ProjectInput,
-                                            ) => {
-                                                setProject(updatedProject);
-                                            }}
-                                        />
-                                        <pre>{JSON.stringify(projectInput, null, 4)}</pre>
-                                    </React.Fragment>
-                                )}
-                            </RuntimeProvider>
-                        )}
+                    {({ plugin, projectInput, setProject, clearProject }) => (
+                        <RuntimeProvider>
+                            {({ generateCode }) => (
+                                <React.Fragment>
+                                    <ProjectEditor
+                                        plugin={plugin}
+                                        projectInput={projectInput}
+                                        onClickGenerate={() => {
+                                            generateCode({
+                                                projectInput,
+                                                plugin,
+                                            });
+                                        }}
+                                        onResetProject={clearProject}
+                                        onChange={(
+                                            updatedProject: ProjectInput,
+                                        ) => {
+                                            setProject(updatedProject);
+                                        }}
+                                    />
+                                    <pre>
+                                        {JSON.stringify(projectInput, null, 4)}
+                                    </pre>
+                                </React.Fragment>
+                            )}
+                        </RuntimeProvider>
+                    )}
                 </WebRuntime>
             </Story>
         );

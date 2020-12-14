@@ -81,14 +81,19 @@ export function BuildFinished(props: {
                                 }}
                             >
                                 {({ copyToClipboard }) => (
-                                    <button className="btn btn-sm btn-dark" onClick={() => {
-                                        copyToClipboard()
-                                    }}>
+                                    <button
+                                        className="btn btn-sm btn-dark"
+                                        onClick={() => {
+                                            copyToClipboard();
+                                        }}
+                                    >
                                         {copyMessage && (
                                             <span>Copied to clipboard</span>
                                         )}
 
-                                        {!copyMessage && (<span>{props.filepath}</span>)}
+                                        {!copyMessage && (
+                                            <span>{props.filepath}</span>
+                                        )}
                                     </button>
                                 )}
                             </CopyToClipboard>

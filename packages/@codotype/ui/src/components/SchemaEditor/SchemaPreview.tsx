@@ -8,7 +8,7 @@ import {
     ProjectInput,
     PreviewOutputType,
     schemaPreviewContent,
-    PreviewOutputTypes
+    PreviewOutputTypes,
 } from "@codotype/core";
 import { faCheckCircle } from "@fortawesome/free-regular-svg-icons";
 
@@ -25,7 +25,9 @@ export function SchemaPreview(props: {
     projectInput: ProjectInput;
 }) {
     const { schemaInput, projectInput } = props;
-    const [previewOutputType, setRenderType] = React.useState<PreviewOutputType>(PreviewOutputTypes.typescript);
+    const [previewOutputType, setRenderType] = React.useState<
+        PreviewOutputType
+    >(PreviewOutputTypes.typescript);
     const [copyMessage, setCopyMessage] = React.useState<boolean>(false);
 
     React.useEffect(() => {
@@ -78,16 +80,23 @@ export function SchemaPreview(props: {
                             <select
                                 value={previewOutputType}
                                 onChange={e => {
-                                    const value: PreviewOutputType =
-                                        e.currentTarget.value as PreviewOutputType;
+                                    const value: PreviewOutputType = e
+                                        .currentTarget
+                                        .value as PreviewOutputType;
                                     setRenderType(value);
                                 }}
                                 style={{ boxShadow: "none" }}
                                 className="form-control form-control-sm rounded-0 bg-dark text-light border-0"
                             >
-                                <option value={PreviewOutputTypes.typescript}>TypeScript</option>
-                                <option value={PreviewOutputTypes.json}>JSON</option>
-                                <option value={PreviewOutputTypes.graphql}>GraphQL</option>
+                                <option value={PreviewOutputTypes.typescript}>
+                                    TypeScript
+                                </option>
+                                <option value={PreviewOutputTypes.json}>
+                                    JSON
+                                </option>
+                                <option value={PreviewOutputTypes.graphql}>
+                                    GraphQL
+                                </option>
                             </select>
                         </div>
                         <div className="d-flex flex-column">

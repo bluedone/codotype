@@ -29,7 +29,7 @@ export function PluginFetcher(props: PluginFetcherProps) {
 
     return (
         <React.Fragment>
-            {error && (<PageNotFound />)}
+            {error && <PageNotFound />}
             {props.children({ plugins: data || [] })}
         </React.Fragment>
     );

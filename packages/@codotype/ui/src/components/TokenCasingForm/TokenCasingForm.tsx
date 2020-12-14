@@ -92,9 +92,7 @@ export function TokenCasingForm(props: TokenCasingFormProps) {
                                 value={label}
                                 onChange={e => {
                                     setLabel(
-                                        sanitizeTitle(
-                                            e.currentTarget.value,
-                                        ),
+                                        sanitizeTitle(e.currentTarget.value),
                                     );
                                 }}
                                 onKeyDown={e => {

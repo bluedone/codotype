@@ -121,14 +121,23 @@ interface AttributeFormProps {
 export function AttributeForm(props: AttributeFormProps) {
     const { attributeInput, supportedDatatypes, addons } = props;
 
-    const renderAddonsTab: boolean = attributeInput.datatype !== null && addons.some(addon => addon.supportedDatatypes.includes(attributeInput.datatype as Datatype))
+    const renderAddonsTab: boolean =
+        attributeInput.datatype !== null &&
+        addons.some(addon =>
+            addon.supportedDatatypes.includes(
+                attributeInput.datatype as Datatype,
+            ),
+        );
 
     return (
         <div className="row">
             <div className="col-lg-12">
                 {/* {attributeInput.datatype && ( */}
                 <div className="mx-3">
-                    <AttributeFormSelector renderAddonsTab={renderAddonsTab} attributeInput={attributeInput}>
+                    <AttributeFormSelector
+                        renderAddonsTab={renderAddonsTab}
+                        attributeInput={attributeInput}
+                    >
                         {({ selectedForm, setSelectedForm }) => {
                             if (selectedForm === "DATATYPE") {
                                 return (
@@ -150,9 +159,7 @@ export function AttributeForm(props: AttributeFormProps) {
                                 return (
                                     <React.Fragment>
                                         <AttributePropertiesForm
-                                            attributeInput={
-                                                attributeInput
-                                            }
+                                            attributeInput={attributeInput}
                                             onKeydownEnter={
                                                 props.onKeydownEnter
                                             }
@@ -194,7 +201,9 @@ export function AttributeForm(props: AttributeFormProps) {
                             if (renderAddonsTab) {
                                 return (
                                     <AttributeMetaForm
-                                        description={attributeInput.internalNote}
+                                        description={
+                                            attributeInput.internalNote
+                                        }
                                         onDescriptionChange={(
                                             updatedDescription: string,
                                         ) => {
@@ -204,7 +213,7 @@ export function AttributeForm(props: AttributeFormProps) {
                                             });
                                         }}
                                     />
-                                )
+                                );
                             }
 
                             return null;

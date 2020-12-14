@@ -26,7 +26,7 @@ export function ConfigurationGroupTab(props: {
         <div className="d-flex mr-2">
             <button
                 className={btnClassName.join(" ")}
-                onClick={(e) => {
+                onClick={e => {
                     e.currentTarget.blur();
                     props.onClick();
                 }}
@@ -96,7 +96,7 @@ export function ConfigurationGroupSelector(props: {
                                     }}
                                     active={
                                         configurationGroup.identifier ===
-                                        selectedConfigurationGroup.identifier &&
+                                            selectedConfigurationGroup.identifier &&
                                         !viewingSchemas
                                     }
                                     label={configurationGroup.content.label}
@@ -114,7 +114,7 @@ export function ConfigurationGroupSelector(props: {
                         schemaInput={props.schemaInput}
                         value={
                             props.configuration[
-                            selectedConfigurationGroup.identifier
+                                selectedConfigurationGroup.identifier
                             ]
                         }
                         onChange={(updatedVal: ConfigurationPropertyDict) => {

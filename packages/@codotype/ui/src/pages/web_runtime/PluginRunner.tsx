@@ -50,7 +50,7 @@ export function PluginRunner(props: PluginRunnerProps) {
     // Passes generateCode function to props.children
     return (
         <React.Fragment>
-            {error && (<p>Error!</p>)}
+            {error && <p>Error!</p>}
             {props.children({ generateCode })}
             {/* Handle Loading */}
             {(loading || finished) && (

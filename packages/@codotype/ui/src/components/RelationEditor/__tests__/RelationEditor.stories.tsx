@@ -32,7 +32,7 @@ storiesOf("Components/ProjectEditor/RelationEditor/Layout", module).add(
                 destinationSchemaAlias: "Parent",
                 addons: {},
                 locked: false,
-                internalNote: ""
+                internalNote: "",
             },
         ]);
         const schemaInput: SchemaInput = {
@@ -43,7 +43,6 @@ storiesOf("Components/ProjectEditor/RelationEditor/Layout", module).add(
             schemaInputs: [schemaInput],
             relationInputs,
         });
-
 
         return (
             <Story>
@@ -71,30 +70,35 @@ storiesOf("Components/ProjectEditor/RelationEditor/Layout", module).add(
     },
 );
 
-storiesOf("Components/ProjectEditor/RelationEditor/Layout", module).add("empty", () => {
-    const [relations, setRelations] = React.useState<RelationInput[]>([]);
-    return (
-        <Story>
-            <RelationEditor
-                relations={relations}
-                selectedSchema={userSchema}
-                relationReferences={
-                    inflateSchema({ schemaInput: userSchema, relations: [] }) // CHORE - add relations here
-                        .relations
-                }
-                schemas={[{ ...userSchema, internalNote: "" }]}
-                supportedRelationTypes={supportedRelationTypes}
-                onChange={(updatedRelations: RelationInput[]) => {
-                    console.log("RelationEditor - onChange");
-                    console.log(updatedRelations);
-                    setRelations(updatedRelations);
-                }}
-            />
+storiesOf("Components/ProjectEditor/RelationEditor/Layout", module).add(
+    "empty",
+    () => {
+        const [relations, setRelations] = React.useState<RelationInput[]>([]);
+        return (
+            <Story>
+                <RelationEditor
+                    relations={relations}
+                    selectedSchema={userSchema}
+                    relationReferences={
+                        inflateSchema({
+                            schemaInput: userSchema,
+                            relations: [],
+                        }).relations // CHORE - add relations here
+                    }
+                    schemas={[{ ...userSchema, internalNote: "" }]}
+                    supportedRelationTypes={supportedRelationTypes}
+                    onChange={(updatedRelations: RelationInput[]) => {
+                        console.log("RelationEditor - onChange");
+                        console.log(updatedRelations);
+                        setRelations(updatedRelations);
+                    }}
+                />
 
-            <hr />
-            <pre className="bg-dark px-4 py-4 rounded mt-4 text-light">
-                {JSON.stringify(relations, null, 4)}
-            </pre>
-        </Story>
-    );
-});
+                <hr />
+                <pre className="bg-dark px-4 py-4 rounded mt-4 text-light">
+                    {JSON.stringify(relations, null, 4)}
+                </pre>
+            </Story>
+        );
+    },
+);

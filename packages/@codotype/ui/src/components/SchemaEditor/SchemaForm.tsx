@@ -1,8 +1,5 @@
 import * as React from "react";
-import {
-    buildTokenPluralization,
-    sanitizeTitle,
-} from "@codotype/core";
+import { buildTokenPluralization, sanitizeTitle } from "@codotype/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLightbulb } from "@fortawesome/free-regular-svg-icons";
 

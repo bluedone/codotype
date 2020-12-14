@@ -86,7 +86,9 @@ export function AttributeEditor(props: AttributeEditorProps) {
                 id: makeUniqueId(),
                 datatype: params.newAttributeData.datatype,
                 addons: {
-                    ...buildDefaultAddonsValue({ properties: props.addons.map(a => a.property) }),
+                    ...buildDefaultAddonsValue({
+                        properties: props.addons.map(a => a.property),
+                    }),
                     ...params.newAttributeData.addons,
                 },
             };

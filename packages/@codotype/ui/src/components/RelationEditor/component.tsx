@@ -114,9 +114,7 @@ export function RelationEditor(props: RelationEditorProps) {
                     }}
                     onSubmit={() => {
                         // Insert new Relation
-                        if (
-                            relationInput.id === ""
-                        ) {
+                        if (relationInput.id === "") {
                             const newRelation: RelationInput = new Primatives.Relation(
                                 {
                                     sourceSchemaID:
@@ -238,10 +236,10 @@ export function RelationEditor(props: RelationEditorProps) {
                                                             const relation:
                                                                 | RelationInput
                                                                 | undefined = props.relations.find(
-                                                                    r =>
-                                                                        r.id ===
-                                                                        relationToBeEdited.sourceRelationInputID,
-                                                                );
+                                                                r =>
+                                                                    r.id ===
+                                                                    relationToBeEdited.sourceRelationInputID,
+                                                            );
                                                             if (
                                                                 relation ===
                                                                 undefined
@@ -258,10 +256,10 @@ export function RelationEditor(props: RelationEditorProps) {
                                                             const relation:
                                                                 | RelationInput
                                                                 | undefined = props.relations.find(
-                                                                    r =>
-                                                                        r.id ===
-                                                                        relationToDelete.sourceRelationInputID,
-                                                                );
+                                                                r =>
+                                                                    r.id ===
+                                                                    relationToDelete.sourceRelationInputID,
+                                                            );
                                                             if (
                                                                 relation ===
                                                                 undefined
@@ -289,7 +287,12 @@ export function RelationEditor(props: RelationEditorProps) {
             {showEmptyState && (
                 <RelationListEmpty
                     onClick={() => {
-                        setRelationInput(new Primatives.Relation({ id: "", sourceSchemaID: props.selectedSchema.id }));
+                        setRelationInput(
+                            new Primatives.Relation({
+                                id: "",
+                                sourceSchemaID: props.selectedSchema.id,
+                            }),
+                        );
                     }}
                 />
             )}

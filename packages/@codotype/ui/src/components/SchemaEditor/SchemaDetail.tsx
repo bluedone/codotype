@@ -75,7 +75,8 @@ export function SchemaDetail(props: SchemaDetailProps) {
                     <div className="row">
                         <div className="col-sm-12 col-md-6 col-lg-6">
                             {/* Only render AttributeEditor if there are supported Datatypes */}
-                            {schemaEditorConfiguration.supportedDatatypes.length > 0 && (
+                            {schemaEditorConfiguration.supportedDatatypes
+                                .length > 0 && (
                                 <AttributeEditor
                                     attributes={props.schema.attributes}
                                     supportedDatatypes={
@@ -100,10 +101,13 @@ export function SchemaDetail(props: SchemaDetailProps) {
                             )}
 
                             {/* Only render RelationEditor if there are supported relations */}
-                            {schemaEditorConfiguration.supportedRelationTypes.length > 0 && (
+                            {schemaEditorConfiguration.supportedRelationTypes
+                                .length > 0 && (
                                 <RelationEditor
                                     selectedSchema={props.schema}
-                                    relationReferences={inflatedSchema.relations}
+                                    relationReferences={
+                                        inflatedSchema.relations
+                                    }
                                     schemas={props.projectInput.schemas}
                                     relations={props.projectInput.relations}
                                     supportedRelationTypes={
@@ -114,7 +118,9 @@ export function SchemaDetail(props: SchemaDetailProps) {
                                     onChange={(
                                         updatedRelations: RelationInput[],
                                     ) => {
-                                        props.onChangeRelations(updatedRelations);
+                                        props.onChangeRelations(
+                                            updatedRelations,
+                                        );
                                     }}
                                 />
                             )}

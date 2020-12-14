@@ -4,16 +4,16 @@ import { MoreInfoLink } from "../component";
 
 const testCases: Array<[string, string]> = [
     ["render org", "https://codotype.org"],
-]
+];
 
 describe("MoreInfoLink", () => {
-    testCases.forEach((testCase) => {
+    testCases.forEach(testCase => {
         const [testName, url] = testCase;
         test(testName, () => {
             const tree = TestRenderer.create(
-                <MoreInfoLink url={url} />
+                <MoreInfoLink url={url} />,
             ).toJSON();
             expect(tree).toMatchSnapshot();
         });
-    })
+    });
 });

@@ -54,10 +54,10 @@ export function SchemaIncomingRelations(props: SchemaIncomingRelationsProps) {
                                 placement="left"
                                 overlay={
                                     <Tooltip id="attribute-editor-header">
-                                        {"Jump to \"" +
+                                        {'Jump to "' +
                                             r.identifiers.source.canonical
                                                 .singular.title +
-                                            "\" schema"}
+                                            '" schema'}
                                     </Tooltip>
                                 }
                             >

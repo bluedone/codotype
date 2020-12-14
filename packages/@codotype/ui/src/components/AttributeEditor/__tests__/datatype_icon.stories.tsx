@@ -10,7 +10,10 @@ const testCases: [string, Datatype][] = [
     ["Datatypes.ID", Datatypes.ID],
     ["Datatypes.ID_ARRAY", Datatypes.ID_ARRAY],
     ["Datatypes.AUTO_INCREMENTED_ID", Datatypes.AUTO_INCREMENTED_ID],
-    ["Datatypes.AUTO_INCREMENTED_ID_ARRAY", Datatypes.AUTO_INCREMENTED_ID_ARRAY],
+    [
+        "Datatypes.AUTO_INCREMENTED_ID_ARRAY",
+        Datatypes.AUTO_INCREMENTED_ID_ARRAY,
+    ],
     ["Datatypes.UUID", Datatypes.UUID],
     ["Datatypes.UUID_ARRAY", Datatypes.UUID_ARRAY],
     ["Datatypes.STRING", Datatypes.STRING],

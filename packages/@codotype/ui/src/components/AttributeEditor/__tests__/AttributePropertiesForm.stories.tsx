@@ -6,22 +6,24 @@ import { AttributeInput, EMPTY_TOKEN_CASING, Primatives } from "@codotype/core";
 
 // // // //
 
-storiesOf("Components/ProjectEditor/AttributeEditor/AttributePropertiesForm", module).add(
-    "renders",
-    () => {
-        const [attributeInput, setAttributeInput] = React.useState<AttributeInput>(new Primatives.AttributeInput({}))
-        return (
-            <Story>
-                <AttributePropertiesForm
-                    attributeInput={attributeInput}
-                    onChange={updatedAttributeInput => {
-                        setAttributeInput(updatedAttributeInput)
-                    }}
-                    onKeydownEnter={() => {
-                        console.log("On keydown enter");
-                    }}
-                />
-            </Story>
-        );
-    },
-);
+storiesOf(
+    "Components/ProjectEditor/AttributeEditor/AttributePropertiesForm",
+    module,
+).add("renders", () => {
+    const [attributeInput, setAttributeInput] = React.useState<AttributeInput>(
+        new Primatives.AttributeInput({}),
+    );
+    return (
+        <Story>
+            <AttributePropertiesForm
+                attributeInput={attributeInput}
+                onChange={updatedAttributeInput => {
+                    setAttributeInput(updatedAttributeInput);
+                }}
+                onKeydownEnter={() => {
+                    console.log("On keydown enter");
+                }}
+            />
+        </Story>
+    );
+});

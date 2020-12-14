@@ -26,7 +26,10 @@ export function SchemaSelectorItem(props: {
     onClick: (selectedSchema: SchemaInput) => void;
 }) {
     return (
-        <Draggable draggableId={String(props.schemaInput.id)} index={props.index}>
+        <Draggable
+            draggableId={String(props.schemaInput.id)}
+            index={props.index}
+        >
             {provided => (
                 <StyledListItem
                     className={classnames(

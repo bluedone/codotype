@@ -33,7 +33,7 @@ export function ConfigurationGroupTab(props: {
         <div className="d-flex mr-2">
             <button
                 className={btnClassName.join(" ")}
-                onClick={(e) => {
+                onClick={e => {
                     e.currentTarget.blur();
                     props.onClick();
                 }}
@@ -134,7 +134,7 @@ export function ConfigurationGroupSelector(props: {
                                     }}
                                     active={
                                         configurationGroup.identifier ===
-                                        selectedConfigurationGroup.identifier &&
+                                            selectedConfigurationGroup.identifier &&
                                         !viewingSchemas &&
                                         !viewingReadme
                                     }
@@ -152,7 +152,7 @@ export function ConfigurationGroupSelector(props: {
                         configurationGroup={selectedConfigurationGroup}
                         value={
                             props.projectInput.configuration[
-                            selectedConfigurationGroup.identifier
+                                selectedConfigurationGroup.identifier
                             ]
                         }
                         onChange={(updatedVal: ConfigurationPropertyDict) => {

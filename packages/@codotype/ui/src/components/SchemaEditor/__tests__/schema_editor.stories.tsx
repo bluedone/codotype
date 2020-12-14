@@ -7,17 +7,20 @@ const { cdkPluginMeta } = testState;
 
 // // // //
 
-storiesOf("Components/ProjectEditor/SchemaEditor", module).add("renders", () => {
-    return (
-        <Story>
-            <SchemaEditorLayout
-                projectInput={buildDefaultProjectInput(cdkPluginMeta)}
-                pluginMetadata={cdkPluginMeta}
-                onChange={updatedProjectInput => {
-                    console.log("onChange");
-                    console.log(updatedProjectInput);
-                }}
-            />
-        </Story>
-    );
-});
+storiesOf("Components/ProjectEditor/SchemaEditor", module).add(
+    "renders",
+    () => {
+        return (
+            <Story>
+                <SchemaEditorLayout
+                    projectInput={buildDefaultProjectInput(cdkPluginMeta)}
+                    pluginMetadata={cdkPluginMeta}
+                    onChange={updatedProjectInput => {
+                        console.log("onChange");
+                        console.log(updatedProjectInput);
+                    }}
+                />
+            </Story>
+        );
+    },
+);

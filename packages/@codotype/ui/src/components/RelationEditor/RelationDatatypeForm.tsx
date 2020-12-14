@@ -45,7 +45,8 @@ export function RelationDatatypeForm({
 
     /** Choose either active or normal image for rel type. */
     const imgSrc = (relType: string) =>
-        `${REL_TYPE_ICON_ROOT_URL}/${relType.toLowerCase()}${relType === String(type) ? "_active.png" : ".png"
+        `${REL_TYPE_ICON_ROOT_URL}/${relType.toLowerCase()}${
+            relType === String(type) ? "_active.png" : ".png"
         }`;
 
     /** Create a button for a rel type that respects which one is active. */

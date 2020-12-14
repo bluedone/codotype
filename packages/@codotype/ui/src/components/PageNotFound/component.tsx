@@ -32,7 +32,9 @@ export function PageNotFound() {
 
                     <div className="col-lg-12 text-center">
                         <p className="lead">
-                            <a href="https://codotype.io">Click here to return home</a>
+                            <a href="https://codotype.io">
+                                Click here to return home
+                            </a>
                         </p>
                     </div>
                 </div>

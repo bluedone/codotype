@@ -78,11 +78,12 @@ export function RelationListItem(props: {
                         <div className="col-sm-2 text-right d-flex controls justify-content-end">
                             <button
                                 className="btn btn-sm btn-outline-danger px-0 py-0"
-                                onClick={(e) => {
-                                    e.stopPropagation()
-                                    e.preventDefault()
+                                onClick={e => {
+                                    e.stopPropagation();
+                                    e.preventDefault();
                                     props.onClickDelete(relation);
-                                }}>
+                                }}
+                            >
                                 <FontAwesomeIcon
                                     className="mx-2"
                                     icon={faTrashAlt}
