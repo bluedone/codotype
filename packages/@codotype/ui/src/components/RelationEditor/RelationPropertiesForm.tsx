@@ -29,12 +29,12 @@ function getDestinationLabel(props: {
     relationInput: RelationInput;
 }): string {
     const { relationInput, schema } = props;
-    // @ts-ignore
     if (
         [
             RelationTypes.HAS_AND_BELONGS_TO_MANY,
             RelationTypes.TO_MANY,
             RelationTypes.HAS_MANY,
+            // @ts-ignore
         ].includes(relationInput.type)
     ) {
         return schema.identifiers.plural.title;
