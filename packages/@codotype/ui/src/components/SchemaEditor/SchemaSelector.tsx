@@ -19,16 +19,6 @@ const StyledListItem = styled.li`
     }
 `;
 
-// ALT STYLE
-// const StyledListItem = styled.li`
-//     cursor: pointer;
-//     border-right: 6px solid #adb5bd !important;
-//     &.selected {
-//         border-right: 6px solid #4582ec !important;
-//         font-weight: bold;
-//     }
-// `;
-
 export function SchemaSelectorItem(props: {
     schemaInput: SchemaInput;
     selected: boolean;
@@ -59,8 +49,6 @@ export function SchemaSelectorItem(props: {
                         </span>
 
                         {/* Renders warning tooltip */}
-                        {/* TODO - update this to check relations */}
-                        {/* !props.projectInput.relations.length &&  */}
                         {!props.schemaInput.attributes.length && (
                             <OverlayTrigger
                                 placement="right"
@@ -69,8 +57,6 @@ export function SchemaSelectorItem(props: {
                                         id={`empty-schema-warning-tooltip-${props.schemaInput.id}`}
                                     >
                                         Schema requires at least one attribute
-                                        or relation - empty schemas will be
-                                        ignored
                                     </Tooltip>
                                 }
                             >

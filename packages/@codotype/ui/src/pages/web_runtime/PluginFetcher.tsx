@@ -18,6 +18,10 @@ interface PluginFetcherProps {
 export function PluginFetcher(props: PluginFetcherProps) {
     const [{ data, loading, error }] = useAxios("/api/plugins");
 
+    if (error) {
+        return <PageNotFound />;
+    }
+
     // Renders PageLoader component
     if (loading) {
         return <LoadingPage />;

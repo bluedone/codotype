@@ -28,7 +28,6 @@ function FormGroupTab(props: {
     return (
         <li className="nav-item d-flex flex-grow-1">
             <button
-                // TODO - fix styles here
                 className={btnClassName.join(" ")}
                 disabled={props.disabled}
                 onClick={props.onClick}

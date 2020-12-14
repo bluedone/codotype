@@ -11,16 +11,11 @@ storiesOf("Components/ProjectEditor/SchemaEditor", module).add("renders", () => 
     return (
         <Story>
             <SchemaEditorLayout
-                schemas={[]}
                 projectInput={buildDefaultProjectInput(cdkPluginMeta)}
                 pluginMetadata={cdkPluginMeta}
-                onChange={updatedSchemas => {
+                onChange={updatedProjectInput => {
                     console.log("onChange");
-                    console.log(updatedSchemas);
-                }}
-                onChangeRelations={updatedRelations => {
-                    console.log("onChangeRelations");
-                    console.log(updatedRelations);
+                    console.log(updatedProjectInput);
                 }}
             />
         </Story>

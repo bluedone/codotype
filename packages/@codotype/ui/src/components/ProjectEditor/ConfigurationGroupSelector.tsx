@@ -6,8 +6,6 @@ import {
     PluginMetadata,
     ConfigurationGroup,
     ConfigurationPropertyDict,
-    SchemaInput,
-    RelationInput,
 } from "@codotype/core";
 import { PluginStart } from "../PluginStart";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -108,7 +106,6 @@ export function ConfigurationGroupSelector(props: {
                         }}
                         active={viewingReadme}
                         label={"Start"}
-                    // label={"README.md"}
                     />
 
                     {enableSchemaEditor && (
@@ -187,35 +184,14 @@ export function ConfigurationGroupSelector(props: {
                 {viewingSchemas && enableSchemaEditor && (
                     <SchemaEditorLayout
                         projectInput={props.projectInput}
-                        schemas={props.projectInput.schemas}
                         pluginMetadata={pluginMetadata}
-                        onChange={(updatedSchemas: SchemaInput[]) => {
-                            // Defines updated project w/ latest schemas
-                            const updatedProject: ProjectInput = {
-                                ...props.projectInput,
-                                schemas: [...updatedSchemas],
-                            };
-
+                        onChange={(updatedProjectInput: ProjectInput) => {
                             // Invokes props.onChange with updated project
-                            props.onChange(updatedProject);
-                        }}
-                        onChangeRelations={(
-                            updatedRelations: RelationInput[],
-                        ) => {
-                            // Defines updated project w/ latest relations
-                            const updatedProject: ProjectInput = {
-                                ...props.projectInput,
-                                relations: updatedRelations,
-                            };
-
-                            // Invokes props.onChange with updated project
-                            props.onChange(updatedProject);
+                            props.onChange(updatedProjectInput);
                         }}
                     />
                 )}
             </div>
-            {/* <pre>{JSON.stringify(val, null, 4)}</pre> */}
-            {/* <pre>{JSON.stringify(props.configurationGroup, null, 4)}</pre> */}
         </div>
     );
 }

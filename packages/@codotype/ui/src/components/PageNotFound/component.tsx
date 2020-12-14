@@ -4,7 +4,6 @@ import * as React from "react";
 
 /**
  * PageNotFound
- * TODO - fix this page, add props.homeURL
  */
 export function PageNotFound() {
     return (
@@ -33,13 +32,7 @@ export function PageNotFound() {
 
                     <div className="col-lg-12 text-center">
                         <p className="lead">
-                            <a href="homeUrl">Click here to return home</a>
-                        </p>
-                    </div>
-
-                    <div className="col-lg-12 text-center">
-                        <p className="lead">
-                            We'll be redirecting you momentarily
+                            <a href="https://codotype.io">Click here to return home</a>
                         </p>
                     </div>
                 </div>

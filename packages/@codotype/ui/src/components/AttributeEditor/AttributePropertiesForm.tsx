@@ -23,7 +23,7 @@ export function AttributePropertiesForm(props: AttributePropertiesFormProps) {
     const { attributeInput } = props;
     return (
         <div className="row mt-3">
-            {/* <div className="col-lg-12">
+            <div className="col-lg-12">
                 <p className="lead mb-0">Tokens</p>
                 <small className="text-muted">
                     Define the <span className="text-success">Tokens</span> used
@@ -31,7 +31,7 @@ export function AttributePropertiesForm(props: AttributePropertiesFormProps) {
                     codebase.
                 </small>
                 <hr />
-            </div> */}
+            </div>
 
             <div className="col-sm-12">
                 <TokenCasingForm

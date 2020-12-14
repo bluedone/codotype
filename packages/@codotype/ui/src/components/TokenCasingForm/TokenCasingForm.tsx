@@ -75,48 +75,45 @@ export function TokenCasingForm(props: TokenCasingFormProps) {
         });
     }, [label]);
 
-    // <div className="card card-body shadow-sm">
     return (
-        <React.Fragment>
-            <div className="row">
-                <div className="col-sm-12 col-lg-6 d-flex flex-column border-right justify-content-center">
-                    <div className="row">
-                        <div className="col-sm-12">
-                            <FormGroup
-                                label="Tokens"
-                                help="Tokens used to identify this Attribute in the code you generate. The input field will enforce proper capitalization and spacing."
-                                required
-                            >
-                                <input
-                                    ref={labelInput}
-                                    className="form-control form-control-lg"
-                                    placeholder="Label"
-                                    value={label}
-                                    onChange={e => {
-                                        setLabel(
-                                            sanitizeTitle(
-                                                e.currentTarget.value,
-                                            ),
-                                        );
-                                    }}
-                                    onKeyDown={e => {
-                                        if (e.keyCode === 13) {
-                                            // ENTER KEY CODE
-                                            props.onKeydownEnter();
-                                        }
-                                    }}
-                                />
-                            </FormGroup>
-                        </div>
+        <div className="row">
+            <div className="col-sm-12 col-lg-6 d-flex flex-column border-right justify-content-center">
+                <div className="row">
+                    <div className="col-sm-12">
+                        <FormGroup
+                            label="Tokens"
+                            help="The input field will enforce proper capitalization and spacing"
+                            required
+                        >
+                            <input
+                                ref={labelInput}
+                                className="form-control form-control-lg"
+                                placeholder="Label"
+                                value={label}
+                                onChange={e => {
+                                    setLabel(
+                                        sanitizeTitle(
+                                            e.currentTarget.value,
+                                        ),
+                                    );
+                                }}
+                                onKeyDown={e => {
+                                    if (e.keyCode === 13) {
+                                        // ENTER KEY CODE
+                                        props.onKeydownEnter();
+                                    }
+                                }}
+                            />
+                        </FormGroup>
                     </div>
                 </div>
-
-                <div className="col-sm-12 col-lg-6 d-flex justify-content-center align-items-center flex-column">
-                    <table className="table table-sm mb-0 mt-2">
-                        <MetaPreview label={label} />
-                    </table>
-                </div>
             </div>
-        </React.Fragment>
+
+            <div className="col-sm-12 col-lg-6 d-flex justify-content-center align-items-center flex-column">
+                <table className="table table-sm mb-0 mt-2">
+                    <MetaPreview label={label} />
+                </table>
+            </div>
+        </div>
     );
 }
