@@ -44,12 +44,13 @@ function FormGroupTab(props: {
  */
 export function AttributeFormSelector(props: {
     attributeInput: AttributeInput;
+    renderAddonsTab: boolean;
     children: (childProps: {
         selectedForm: string;
         setSelectedForm: (updatedSelectedGroup: string) => void;
     }) => React.ReactNode;
 }) {
-    const { attributeInput } = props;
+    const { attributeInput, renderAddonsTab } = props;
     const defaultSelectedForm =
         attributeInput.datatype === null ? "DATATYPE" : "PROPERTIES";
 
@@ -79,14 +80,16 @@ export function AttributeFormSelector(props: {
                         label={"Tokens"}
                     />
 
-                    <FormGroupTab
-                        onClick={() => {
-                            setSelectedForm("DESCRIPTION");
-                        }}
-                        disabled={attributeInput.datatype === null}
-                        active={selectedForm === "DESCRIPTION"}
-                        label={"Internal Note"}
-                    />
+                    {renderAddonsTab && (
+                        <FormGroupTab
+                            onClick={() => {
+                                setSelectedForm("ADDONS");
+                            }}
+                            disabled={attributeInput.datatype === null}
+                            active={selectedForm === "ADDONS"}
+                            label={"Behavior"}
+                        />
+                    )}
                 </ul>
             </div>
             <div className="col-lg-12">
@@ -117,14 +120,16 @@ interface AttributeFormProps {
  * @param props - see `AttributeFormProps`
  */
 export function AttributeForm(props: AttributeFormProps) {
-    const { attributeInput, supportedDatatypes } = props;
+    const { attributeInput, supportedDatatypes, addons } = props;
+
+    const renderAddonsTab: boolean = attributeInput.datatype !== null && addons.some(addon => addon.supportedDatatypes.includes(attributeInput.datatype as Datatype))
 
     return (
         <div className="row">
             <div className="col-lg-12">
                 {/* {attributeInput.datatype && ( */}
                 <div className="mx-3">
-                    <AttributeFormSelector attributeInput={attributeInput}>
+                    <AttributeFormSelector renderAddonsTab={renderAddonsTab} attributeInput={attributeInput}>
                         {({ selectedForm, setSelectedForm }) => {
                             if (selectedForm === "DATATYPE") {
                                 return (
@@ -187,19 +192,23 @@ export function AttributeForm(props: AttributeFormProps) {
                                 );
                             }
 
-                            return (
-                                <AttributeMetaForm
-                                    description={attributeInput.internalNote}
-                                    onDescriptionChange={(
-                                        updatedDescription: string,
-                                    ) => {
-                                        props.onChange({
-                                            ...attributeInput,
-                                            internalNote: updatedDescription,
-                                        });
-                                    }}
-                                />
-                            );
+                            if (renderAddonsTab) {
+                                return (
+                                    <AttributeMetaForm
+                                        description={attributeInput.internalNote}
+                                        onDescriptionChange={(
+                                            updatedDescription: string,
+                                        ) => {
+                                            props.onChange({
+                                                ...attributeInput,
+                                                internalNote: updatedDescription,
+                                            });
+                                        }}
+                                    />
+                                )
+                            }
+
+                            return null;
                         }}
                     </AttributeFormSelector>
                 </div>

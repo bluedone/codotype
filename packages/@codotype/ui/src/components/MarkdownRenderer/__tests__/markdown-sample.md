@@ -32,7 +32,7 @@ _(Also see [remarkable][], the markdown parser created by the author of this che
     -   [Escaping with backslashes](#escaping-with-backslashes)
 -   [Non-standard features](#non-standard-features)
     -   [Strikethrough](#strikethrough)
-    -   [Todo List](#todo-list)
+    -   [List](#list)
     -   [Tables](#tables)
         -   [Aligning cells](#aligning-cells)
     -   [Footnotes](#footnotes)
@@ -671,7 +671,7 @@ Which renders to:
 <br>
 <br>
 
-### Todo List
+### List
 
 ```
 - [ ] Lorem ipsum dolor sit amet
@@ -685,7 +685,7 @@ Renders to:
 -   [ ] Consectetur adipiscing elit
 -   [ ] Integer molestie lorem at massa
 
-**Links in todo lists**
+**Links in lists**
 
 ```
 - [ ] [foo](#bar)
