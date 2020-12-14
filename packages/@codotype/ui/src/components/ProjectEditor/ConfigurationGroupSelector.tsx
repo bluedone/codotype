@@ -21,32 +21,31 @@ export function ConfigurationGroupTab(props: {
     pinned?: boolean;
     onClick: () => void;
 }) {
-    const { label, pinned = false } = props;
-    const btnClassName: string[] = ["nav-link"];
-    if (props.active) {
-        btnClassName.push("active");
-    }
-
+    const { label } = props;
+    const btnClassName: string[] = ["btn"];
     if (props.pinned) {
-        btnClassName.push("bg-dark mr-2 text-white");
+        btnClassName.push("btn-dark");
+    } else if (props.active) {
+        btnClassName.push("btn-primary");
+    } else {
+        btnClassName.push("btn-outline-primary");
     }
 
     return (
-        <li className="nav-item">
+        <div className="d-flex mr-2">
             <button
-                // TODO - fix styles here
                 className={btnClassName.join(" ")}
-                style={{
-                    cursor: "pointer",
+                onClick={(e) => {
+                    e.currentTarget.blur();
+                    props.onClick();
                 }}
-                onClick={props.onClick}
             >
                 {props.pinned && (
                     <FontAwesomeIcon icon={faFlag} className="mr-2" />
                 )}
                 {label}
             </button>
-        </li>
+        </div>
     );
 }
 

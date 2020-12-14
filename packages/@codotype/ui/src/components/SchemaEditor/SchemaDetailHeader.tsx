@@ -46,11 +46,6 @@ export function SchemaDetailHeader(props: {
                     />
                 </div>
             </div>
-            <div className="row mb-2">
-                <div className="col-lg-12">
-                    <hr />
-                </div>
-            </div>
         </React.Fragment>
     );
 }

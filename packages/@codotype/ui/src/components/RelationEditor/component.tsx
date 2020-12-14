@@ -85,7 +85,7 @@ export function RelationEditor(props: RelationEditorProps) {
             <Hotkey
                 keyName="shift+r"
                 onKeyDown={() => {
-                    setRelationInput(new Primatives.Relation({ id: "", sourceSchemaID: props.selectedSchema.id }));
+                    setRelationInput(new Primatives.Relation({ id: "" }));
                 }}
             />
 
@@ -291,7 +291,7 @@ export function RelationEditor(props: RelationEditorProps) {
             {showEmptyState && (
                 <RelationListEmpty
                     onClick={() => {
-                        setRelationInput(new Primatives.Relation({ id: "" }));
+                        setRelationInput(new Primatives.Relation({ id: "", sourceSchemaID: props.selectedSchema.id }));
                     }}
                 />
             )}

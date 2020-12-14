@@ -14,25 +14,25 @@ export function ConfigurationGroupTab(props: {
     onClick: () => void;
 }) {
     const { label } = props;
-    const btnClassName: string[] = ["nav-link"];
+    const btnClassName: string[] = ["btn"];
     if (props.active) {
-        btnClassName.push("active");
+        btnClassName.push("btn-light active");
+    } else {
+        btnClassName.push("btn-light");
     }
 
     return (
-        <li className="nav-item">
+        <div className="d-flex mr-2">
             <button
                 className={btnClassName.join(" ")}
-                style={{
-                    cursor: "pointer",
-                }}
-                onClick={() => {
-                    props.onClick()
+                onClick={(e) => {
+                    e.currentTarget.blur();
+                    props.onClick();
                 }}
             >
                 {label}
             </button>
-        </li>
+        </div>
     );
 }
 
@@ -71,7 +71,7 @@ export function ConfigurationGroupSelector(props: {
     return (
         <div className="row">
             <div className="col-lg-12">
-                <ul className="nav nav-tabs">
+                <div className="d-flex flex-row mt-3 mb-2">
                     <ConfigurationGroupTab
                         onClick={() => {
                             setViewingSchemas(true);
@@ -102,7 +102,7 @@ export function ConfigurationGroupSelector(props: {
                             );
                         },
                     )}
-                </ul>
+                </div>
             </div>
             <div className="col-lg-12">
                 {/* Renders the ConfigurationInput */}

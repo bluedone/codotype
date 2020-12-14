@@ -55,8 +55,15 @@ export function RelationListItem(props: {
         <Draggable draggableId={String(relation.id)} index={props.index}>
             {provided => (
                 <StyledListItem
-                    className="list-group-item list-group-item-action py-0 px-2"
+                    className="list-group-item list-group-item-action py-1 px-2"
                     ref={provided.innerRef}
+                    onClick={() => {
+                        // Don't allow editing if Attribute.locked is true
+                        if (relation.locked) {
+                            return;
+                        }
+                        props.onClickEdit(relation);
+                    }}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                 >
@@ -69,41 +76,18 @@ export function RelationListItem(props: {
                             />
                         </div>
                         <div className="col-sm-2 text-right d-flex controls justify-content-end">
-                            <Dropdown alignRight className="no-caret">
-                                <Dropdown.Toggle
-                                    variant="light"
-                                    size="sm"
-                                    className="rounded px-0 py-0 d-flex"
-                                    id={`relation-${props.relation.id}-list-item`}
-                                >
-                                    <FontAwesomeIcon icon={faEllipsisH} />
-                                </Dropdown.Toggle>
-
-                                <Dropdown.Menu>
-                                    <Dropdown.Item
-                                        onClick={() => {
-                                            props.onClickEdit(relation);
-                                        }}
-                                    >
-                                        <FontAwesomeIcon
-                                            className="mr-2"
-                                            icon={faPencilAlt}
-                                        />
-                                        Edit
-                                    </Dropdown.Item>
-                                    <Dropdown.Item
-                                        onClick={() => {
-                                            props.onClickDelete(relation);
-                                        }}
-                                    >
-                                        <FontAwesomeIcon
-                                            className="mr-2"
-                                            icon={faTrashAlt}
-                                        />
-                                        Delete
-                                    </Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
+                            <button
+                                className="btn btn-sm btn-outline-danger px-0 py-0"
+                                onClick={(e) => {
+                                    e.stopPropagation()
+                                    e.preventDefault()
+                                    props.onClickDelete(relation);
+                                }}>
+                                <FontAwesomeIcon
+                                    className="mx-2"
+                                    icon={faTrashAlt}
+                                />
+                            </button>
                         </div>
                     </div>
                 </StyledListItem>

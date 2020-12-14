@@ -54,15 +54,15 @@ export function SchemaIncomingRelations(props: SchemaIncomingRelationsProps) {
                                 placement="left"
                                 overlay={
                                     <Tooltip id="attribute-editor-header">
-                                        {"Jump to " +
+                                        {"Jump to \"" +
                                             r.identifiers.source.canonical
                                                 .singular.title +
-                                            " schema"}
+                                            "\" schema"}
                                     </Tooltip>
                                 }
                             >
                                 <li
-                                    className="list-group-item list-group-item-action py-0 px-2"
+                                    className="list-group-item list-group-item-action py-1 px-2"
                                     style={{ cursor: "pointer" }}
                                     key={r.id}
                                     onClick={() => {
