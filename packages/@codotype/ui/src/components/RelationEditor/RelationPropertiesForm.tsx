@@ -7,8 +7,34 @@ import {
     sanitizeTitle,
     buildRelation,
     RelationInput,
+    RelationTypes,
 } from "@codotype/core";
 import { RelationBadge } from "./RelationBadge";
+
+// // // //
+
+function getSourceLabel(props: {
+    schema: SchemaInput;
+    relationInput: RelationInput;
+}): string {
+    const { relationInput, schema } = props;
+    if (relationInput.type === RelationTypes.HAS_AND_BELONGS_TO_MANY) {
+        return schema.identifiers.plural.title
+    }
+    return schema.identifiers.singular.title
+}
+
+function getDestinationLabel(props: {
+    schema: SchemaInput;
+    relationInput: RelationInput;
+}): string {
+    const { relationInput, schema } = props;
+    // @ts-ignore
+    if ([RelationTypes.HAS_AND_BELONGS_TO_MANY, RelationTypes.TO_MANY, RelationTypes.HAS_MANY].includes(relationInput.type)) {
+        return schema.identifiers.plural.title
+    }
+    return schema.identifiers.singular.title
+}
 
 // // // //
 
@@ -40,7 +66,7 @@ export function RelationPropertiesForm(props: RelationPropertiesFormProps) {
     }
 
     // Locates destination schema
-    const destinationSchema = props.schemas.find(
+    const destinationSchema = schemas.find(
         s => s.id === relationInput.destinationSchemaID,
     );
 
@@ -58,7 +84,7 @@ export function RelationPropertiesForm(props: RelationPropertiesFormProps) {
                         <input
                             type="text"
                             className="form-control border-primary text-primary"
-                            value={schema.identifiers.singular.title}
+                            value={getSourceLabel({ schema, relationInput })}
                         />
                     </div>
                 </div>
@@ -114,11 +140,9 @@ export function RelationPropertiesForm(props: RelationPropertiesFormProps) {
                                 });
                             }}
                         >
-                            {/* TODO - use correct pluralization here depending on relationInput.type */}
-                            {/* TODO - use correct pluralization here depending on relationInput.type */}
                             {schemas.map(s => (
                                 <option key={s.id} value={s.id}>
-                                    {s.identifiers.plural.title}
+                                    {getDestinationLabel({ schema: s, relationInput })}
                                 </option>
                             ))}
                         </select>

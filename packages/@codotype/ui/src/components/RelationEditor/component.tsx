@@ -113,11 +113,9 @@ export function RelationEditor(props: RelationEditorProps) {
                         setRelationInput(null);
                     }}
                     onSubmit={() => {
-                        // Insert new Attribute
-                        // TODO - fix this null check, should be removed
+                        // Insert new Relation
                         if (
-                            relationInput.id === "" ||
-                            relationInput.id === null
+                            relationInput.id === ""
                         ) {
                             const newRelation: RelationInput = new Primatives.Relation(
                                 {
