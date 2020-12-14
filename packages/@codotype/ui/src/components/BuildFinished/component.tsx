@@ -8,6 +8,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import { faLaugh } from "@fortawesome/free-regular-svg-icons";
+import { CopyToClipboard } from "../CopyToClipboard";
 
 // // // //
 
@@ -17,6 +18,17 @@ export function BuildFinished(props: {
     filepath?: string;
     onClickBackToEditor: () => void;
 }) {
+    const [copyMessage, setCopyMessage] = React.useState<boolean>(false);
+    React.useEffect(() => {
+        if (copyMessage === false) {
+            return;
+        }
+
+        setTimeout(() => {
+            setCopyMessage(false);
+        }, 1000);
+    }, [copyMessage]);
+
     return (
         <div
             className="d-flex flex-column align-items-center h-100 justify-content-center"
@@ -62,11 +74,24 @@ export function BuildFinished(props: {
                         </small>
                         <p className="lead mb-0">
                             {/* TODO - add tooltip */}
-                            {/* TODO - set up copy-to-clipboard */}
-                            {/* https://github.com/nkbt/react-copy-to-clipboard */}
-                            <button className="btn btn-sm btn-dark">
-                                {props.filepath}
-                            </button>
+                            <CopyToClipboard
+                                text={props.filepath}
+                                onCopy={() => {
+                                    setCopyMessage(true);
+                                }}
+                            >
+                                {({ copyToClipboard }) => (
+                                    <button className="btn btn-sm btn-dark" onClick={() => {
+                                        copyToClipboard()
+                                    }}>
+                                        {copyMessage && (
+                                            <span>Copied to clipboard</span>
+                                        )}
+
+                                        {!copyMessage && (<span>{props.filepath}</span>)}
+                                    </button>
+                                )}
+                            </CopyToClipboard>
                         </p>
                     </div>
                 </div>
