@@ -73,7 +73,7 @@ export function ConfigurationGroupSelector(props: {
     return (
         <div className="row">
             <div className="col-lg-12">
-                <div className="d-flex flex-row mt-3 mb-2">
+                <div className="d-flex flex-row mt-1 mb-1">
                     <ConfigurationGroupTab
                         onClick={() => {
                             setViewingSchemas(true);
@@ -96,7 +96,7 @@ export function ConfigurationGroupSelector(props: {
                                     }}
                                     active={
                                         configurationGroup.identifier ===
-                                            selectedConfigurationGroup.identifier &&
+                                        selectedConfigurationGroup.identifier &&
                                         !viewingSchemas
                                     }
                                     label={configurationGroup.content.label}
@@ -114,7 +114,7 @@ export function ConfigurationGroupSelector(props: {
                         schemaInput={props.schemaInput}
                         value={
                             props.configuration[
-                                selectedConfigurationGroup.identifier
+                            selectedConfigurationGroup.identifier
                             ]
                         }
                         onChange={(updatedVal: ConfigurationPropertyDict) => {

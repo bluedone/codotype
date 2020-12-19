@@ -42,8 +42,9 @@ export function ExampleProjectDropdown(props: {
                 >
                     <FontAwesomeIcon
                         icon={faFolderOpen}
-                        className="text-primary"
+                        className="text-primary mr-1"
                     />
+                    <span className="text-primary">Example Projects</span>
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>

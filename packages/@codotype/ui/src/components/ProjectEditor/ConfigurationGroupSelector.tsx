@@ -9,7 +9,7 @@ import {
 } from "@codotype/core";
 import { PluginStart } from "../PluginStart";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFlag } from "@fortawesome/free-solid-svg-icons";
+import { faDiceOne, faFlag, faPlay, faRocket } from "@fortawesome/free-solid-svg-icons";
 
 // // // //
 
@@ -22,11 +22,11 @@ export function ConfigurationGroupTab(props: {
     const { label } = props;
     const btnClassName: string[] = ["btn"];
     if (props.pinned) {
-        btnClassName.push("btn-dark");
+        btnClassName.push("btn-success");
     } else if (props.active) {
         btnClassName.push("btn-primary");
     } else {
-        btnClassName.push("btn-outline-primary");
+        btnClassName.push("btn-outline-dark");
     }
 
     return (
@@ -38,8 +38,9 @@ export function ConfigurationGroupTab(props: {
                     props.onClick();
                 }}
             >
+                {/* <FontAwesomeIcon icon={faFlag} className="mr-2" /> */}
                 {props.pinned && (
-                    <FontAwesomeIcon icon={faFlag} className="mr-2" />
+                    <FontAwesomeIcon icon={faPlay} className="mr-2" />
                 )}
                 {label}
             </button>
@@ -134,7 +135,7 @@ export function ConfigurationGroupSelector(props: {
                                     }}
                                     active={
                                         configurationGroup.identifier ===
-                                            selectedConfigurationGroup.identifier &&
+                                        selectedConfigurationGroup.identifier &&
                                         !viewingSchemas &&
                                         !viewingReadme
                                     }
@@ -152,7 +153,7 @@ export function ConfigurationGroupSelector(props: {
                         configurationGroup={selectedConfigurationGroup}
                         value={
                             props.projectInput.configuration[
-                                selectedConfigurationGroup.identifier
+                            selectedConfigurationGroup.identifier
                             ]
                         }
                         onChange={(updatedVal: ConfigurationPropertyDict) => {

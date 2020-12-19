@@ -34,6 +34,12 @@ export function ProjectEditorHeader(props: {
                         {props.projectInput.identifiers.title}
                     </h2>
                     <ProjectEditButton onClick={() => showModal(true)} />
+                    <ExampleProjectDropdown
+                        plugin={PluginMetadata}
+                        loadExampleProject={exampleProject => {
+                            props.onChange(exampleProject);
+                        }}
+                    />
                     <ProjectFormModal
                         show={showingModal}
                         handleClose={() => {
@@ -68,13 +74,6 @@ export function ProjectEditorHeader(props: {
                 {/* <TourButton /> */}
                 {/* <ImportModal /> */}
                 {/* <ExportModal /> */}
-
-                <ExampleProjectDropdown
-                    plugin={PluginMetadata}
-                    loadExampleProject={exampleProject => {
-                        props.onChange(exampleProject);
-                    }}
-                />
 
                 <ProjectDropdown
                     projectInput={props.projectInput}
