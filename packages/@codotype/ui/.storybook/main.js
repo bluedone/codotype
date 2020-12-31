@@ -17,14 +17,11 @@ module.exports = {
         },
     ],
     webpack: async config => {
-        // config.module.rules.push({
-        //     test: /\.(ts|tsx)$/,
-        //     use: [
-        //         {
-        //             loader: require.resolve("ts-loader"),
-        //         },
-        //     ],
-        // });
+        // Defines Storybook-specific mock for next/link
+        config.resolve.alias["next/link"] = path.resolve(
+            __dirname,
+            "./mocked_modules/next-link.js",
+        );
 
         config.module.rules.push({
             exclude: /node_modules/,

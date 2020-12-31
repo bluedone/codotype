@@ -11,4 +11,5 @@ export * from "./components/LoadingBuild";
 export * from "./components/LoadingSpinner";
 export * from "./components/RuntimeProvider";
 export * from "./components/SchemaEditor";
+export * from "./components/Meta";
 export * from "./pages/web_runtime";
