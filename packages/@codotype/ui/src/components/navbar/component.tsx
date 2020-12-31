@@ -8,6 +8,7 @@ import {
     faDollarSign,
 } from "@fortawesome/free-solid-svg-icons";
 import { faTwitter, faGithub } from "@fortawesome/free-brands-svg-icons";
+import Link from "next/link";
 
 // // // //
 
@@ -19,8 +20,12 @@ const StyledNavbar = styled(Navbar)`
 
 // // // //
 
-// TODO - update this to use next/link component
-export function AppNavbar() {
+/**
+ * AppNavbar
+ * Navbar for the Codotype web app (not WWW)
+ */
+export function AppNavbar(props: { homeUrl?: string }) {
+    const { homeUrl = "/" } = props;
     return (
         <StyledNavbar bg="light" fixed="top" expand="lg">
             <div className="container">
@@ -37,9 +42,11 @@ export function AppNavbar() {
                             width: "1.5rem",
                         }}
                     />
-                    <Navbar.Brand href="#home">
-                        <h3 className="mb-0">codotype</h3>
-                    </Navbar.Brand>
+                    <Link href={homeUrl}>
+                        <Navbar.Brand>
+                            <h3 className="mb-0">codotype</h3>
+                        </Navbar.Brand>
+                    </Link>
                 </div>
 
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
