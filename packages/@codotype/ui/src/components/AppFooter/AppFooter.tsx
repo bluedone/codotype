@@ -1,5 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
+import Link from "next/link";
 
 // // // //
 
@@ -26,7 +27,6 @@ function FooterLink(props: {
 }) {
     const { label, href, openInNewTab = false } = props;
     const linkProps: any = {
-        href,
         label,
     };
     if (openInNewTab) {
@@ -34,7 +34,9 @@ function FooterLink(props: {
     }
     return (
         <FooterLinkLi>
-            <FooterLinkA {...linkProps}>{label}</FooterLinkA>
+            <Link href={href}>
+                <FooterLinkA {...linkProps}>{label}</FooterLinkA>
+            </Link>
         </FooterLinkLi>
     );
 }

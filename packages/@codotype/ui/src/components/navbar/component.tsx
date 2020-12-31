@@ -10,6 +10,7 @@ import {
 import { faTwitter, faGithub } from "@fortawesome/free-brands-svg-icons";
 
 // // // //
+
 const StyledNavbar = styled(Navbar)`
     font-family: "Product Sans", Helvetica, Arial, serif;
     padding: 0.4rem;
