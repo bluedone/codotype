@@ -1,17 +1,39 @@
 import * as React from "react";
-import { Relation, SchemaInput } from "@codotype/core";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import {
+    Relation,
+    AddonPropertyInlineIcons,
+    SchemaInput,
+    RelationAddon,
+    PropertyTypes,
+} from "@codotype/core";
 import { Draggable } from "react-beautiful-dnd";
-import { Dropdown } from "react-bootstrap";
 import { RelationBadge } from "./RelationBadge";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { IconDefinition } from "@fortawesome/fontawesome-common-types";
 import {
     faTrashAlt,
-    faPencilAlt,
-    faEllipsisH,
+    faSnowflake,
+    faAsterisk,
+    faStar,
+    faTag,
+    faCheck,
 } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 
 // // // //
+
+// Maps AddonPropertyInlineIcon to associated FontAwesome IconDefinition
+const mapAddonIconToFontAwesome: {
+    [key in AddonPropertyInlineIcons]: IconDefinition | null;
+} = {
+    [AddonPropertyInlineIcons.none]: null,
+    [AddonPropertyInlineIcons.snowflake]: faSnowflake,
+    [AddonPropertyInlineIcons.asterisk]: faAsterisk,
+    [AddonPropertyInlineIcons.star]: faStar,
+    [AddonPropertyInlineIcons.tag]: faTag,
+    [AddonPropertyInlineIcons.check]: faCheck,
+};
 
 // padding: 0.25rem 0.5rem
 const StyledListItem = styled.li`
@@ -47,6 +69,7 @@ export function RelationListItem(props: {
     index: number;
     selectedSchema: SchemaInput;
     schemas: SchemaInput[];
+    addons: RelationAddon[];
     onClickEdit: (relationToBeEdited: Relation) => void;
     onClickDelete: (relationToDelete: Relation) => void;
 }) {
@@ -74,6 +97,63 @@ export function RelationListItem(props: {
                                 direction="out"
                                 relation={relation}
                             />
+                            {/* Render Addon badges */}
+                            {props.addons
+                                .filter(
+                                    a =>
+                                        relation.type !== null &&
+                                        a.supportedRelationTypes.includes(
+                                            relation.type,
+                                        ),
+                                )
+                                .map(addon => {
+                                    const icon =
+                                        mapAddonIconToFontAwesome[
+                                            addon.property.inlineIcon
+                                        ];
+                                    if (icon === null) {
+                                        return null;
+                                    }
+
+                                    if (
+                                        relation.addons[
+                                            addon.property.identifier
+                                        ] === undefined
+                                    ) {
+                                        return null;
+                                    }
+
+                                    // Return null for boolean addon with falsey property
+                                    if (
+                                        addon.property.propertyType ===
+                                            PropertyTypes.BOOLEAN &&
+                                        relation.addons[
+                                            addon.property.identifier
+                                        ] === false
+                                    ) {
+                                        return null;
+                                    }
+
+                                    return (
+                                        <OverlayTrigger
+                                            placement="right"
+                                            overlay={
+                                                <Tooltip
+                                                    id={`badge-${relation.id}-${addon.property.identifier}`}
+                                                >
+                                                    {
+                                                        addon.property.content
+                                                            .label
+                                                    }
+                                                </Tooltip>
+                                            }
+                                        >
+                                            <span className="ml-2 badge badge-light">
+                                                <FontAwesomeIcon icon={icon} />
+                                            </span>
+                                        </OverlayTrigger>
+                                    );
+                                })}
                         </div>
                         <div className="col-sm-2 text-right d-flex controls justify-content-end">
                             <button

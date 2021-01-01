@@ -234,6 +234,9 @@ export function RelationEditor(props: RelationEditorProps) {
                                                     <RelationListItem
                                                         key={a.id}
                                                         relation={a}
+                                                        addons={
+                                                            props.relationAddons
+                                                        }
                                                         selectedSchema={
                                                             props.selectedSchema
                                                         }

@@ -3,6 +3,7 @@ import {
     AttributeAddon,
     AttributeInput,
     AddonPropertyInlineIcons,
+    PropertyTypes,
 } from "@codotype/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconDefinition } from "@fortawesome/fontawesome-common-types";
@@ -84,6 +85,14 @@ export function AttributeListItemLabel(props: AttributeListItemLabelProps) {
                     if (
                         attribute.addons[addon.property.identifier] ===
                         undefined
+                    ) {
+                        return null;
+                    }
+
+                    // Return null for boolean addon with falsey property
+                    if (
+                        addon.property.propertyType === PropertyTypes.BOOLEAN &&
+                        attribute.addons[addon.property.identifier] === false
                     ) {
                         return null;
                     }
