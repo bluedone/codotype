@@ -1,6 +1,18 @@
-import { DatatypeMeta, AttributeInput } from "@codotype/core";
+import {
+    DatatypeMeta,
+    AttributeAddon,
+    AttributeInput,
+    AddonPropertyInlineIcons,
+} from "@codotype/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSnowflake } from "@fortawesome/free-solid-svg-icons";
+import { IconDefinition } from "@fortawesome/fontawesome-common-types";
+import {
+    faSnowflake,
+    faAsterisk,
+    faStar,
+    faTag,
+    faCheck,
+} from "@fortawesome/free-solid-svg-icons";
 import * as React from "react";
 import { DatatypeIcon } from "./DatatypeIcon";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
@@ -10,10 +22,25 @@ import { OverlayTrigger, Tooltip } from "react-bootstrap";
 interface AttributeListItemLabelProps {
     attribute: AttributeInput;
     datatype: DatatypeMeta;
+    addons: AttributeAddon[];
 }
 
+// Maps AddonPropertyInlineIcon to associated FontAwesome IconDefinition
+const mapAddonIconToFontAwesome: {
+    [key in AddonPropertyInlineIcons]: IconDefinition | null;
+} = {
+    [AddonPropertyInlineIcons.none]: null,
+    [AddonPropertyInlineIcons.snowflake]: faSnowflake,
+    [AddonPropertyInlineIcons.asterisk]: faAsterisk,
+    [AddonPropertyInlineIcons.star]: faStar,
+    [AddonPropertyInlineIcons.tag]: faTag,
+    [AddonPropertyInlineIcons.check]: faCheck,
+};
+
+// AddonPropertyInlineIcons;
+
 export function AttributeListItemLabel(props: AttributeListItemLabelProps) {
-    const { attribute } = props;
+    const { attribute, addons } = props;
     return (
         <React.Fragment>
             {/* DatatypeIcon + Tooltip */}
@@ -36,26 +63,48 @@ export function AttributeListItemLabel(props: AttributeListItemLabelProps) {
 
             {/* Required badge */}
             {/* TODO - update this to use icons from ADDONS */}
-            {attribute.addons.required && (
+            {/* {attribute.addons.required && (
                 <span className="ml-1 text-danger">*</span>
-            )}
+            )} */}
 
-            {/* Unique badge + tooltip */}
-            {/* TODO - update this to use icons from ADDONS */}
-            {attribute.addons.unique && (
-                <OverlayTrigger
-                    placement="right"
-                    overlay={
-                        <Tooltip id={`unique-badge-${attribute.id}`}>
-                            Unique
-                        </Tooltip>
+            {/* Render Addon badges */}
+            {props.addons
+                .filter(
+                    a =>
+                        attribute.datatype !== null &&
+                        a.supportedDatatypes.includes(attribute.datatype),
+                )
+                .map(addon => {
+                    const icon =
+                        mapAddonIconToFontAwesome[addon.property.inlineIcon];
+                    if (icon === null) {
+                        return null;
                     }
-                >
-                    <span className="ml-2 badge badge-light">
-                        <FontAwesomeIcon icon={faSnowflake} />
-                    </span>
-                </OverlayTrigger>
-            )}
+
+                    if (
+                        attribute.addons[addon.property.identifier] ===
+                        undefined
+                    ) {
+                        return null;
+                    }
+
+                    return (
+                        <OverlayTrigger
+                            placement="right"
+                            overlay={
+                                <Tooltip
+                                    id={`unique-badge-${attribute.id}-${addon.property.identifier}`}
+                                >
+                                    {addon.property.content.label}
+                                </Tooltip>
+                            }
+                        >
+                            <span className="ml-2 badge badge-light">
+                                <FontAwesomeIcon icon={icon} />
+                            </span>
+                        </OverlayTrigger>
+                    );
+                })}
         </React.Fragment>
     );
 }

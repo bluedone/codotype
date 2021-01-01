@@ -9,13 +9,11 @@ storiesOf(
     "Components/ProjectEditor/AttributeEditor/AttributeMetaForm",
     module,
 ).add("renders", () => {
-    const [description, setDescription] = React.useState("");
     return (
         <Story>
-            <AttributeMetaForm
-                description={description}
-                onDescriptionChange={setDescription}
-            />
+            <AttributeMetaForm>
+                <p>Addon Form Goes Here</p>
+            </AttributeMetaForm>
         </Story>
     );
 });

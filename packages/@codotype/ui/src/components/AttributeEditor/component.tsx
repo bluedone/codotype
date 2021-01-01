@@ -249,6 +249,7 @@ export function AttributeEditor(props: AttributeEditorProps) {
                                                         key={a.id}
                                                         attribute={a}
                                                         index={index}
+                                                        addons={props.addons}
                                                         onClickEdit={(
                                                             attributeToBeEdited: AttributeInput,
                                                         ) => {

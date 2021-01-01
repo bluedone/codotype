@@ -3,7 +3,12 @@ import classnames from "classnames";
 import { Draggable } from "react-beautiful-dnd";
 import { AttributeListItemLabel } from "./AttributeListItemLabel";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { DATATYPE_META, AttributeInput, CreatedByValues } from "@codotype/core";
+import {
+    DATATYPE_META,
+    AttributeAddon,
+    AttributeInput,
+    CreatedByValues,
+} from "@codotype/core";
 import { faTrashAlt, faLock } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 
@@ -55,6 +60,7 @@ const StyledListItem = styled.li`
  */
 export function AttributeListItem(props: {
     attribute: AttributeInput;
+    addons: AttributeAddon[];
     index: number;
     onClickEdit: (attributeToBeEdited: AttributeInput) => void;
     onClickDelete: (attributeToDelete: AttributeInput) => void;
@@ -86,6 +92,7 @@ export function AttributeListItem(props: {
                         <div className="col-sm-10">
                             <AttributeListItemLabel
                                 attribute={attribute}
+                                addons={props.addons}
                                 datatype={
                                     // @ts-ignore
                                     DATATYPE_META[attribute.datatype]

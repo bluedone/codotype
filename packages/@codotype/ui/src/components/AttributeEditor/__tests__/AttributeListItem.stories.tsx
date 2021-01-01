@@ -44,6 +44,7 @@ testCases.forEach(testCase => {
                                     <AttributeListItem
                                         attribute={testCase[1]}
                                         index={0}
+                                        addons={[]} // TODO - populate this with sane defaults
                                         onClickEdit={(
                                             attributeToBeEdited: AttributeInput,
                                         ) => {
