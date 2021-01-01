@@ -108,6 +108,9 @@ export function SchemaDetail(props: SchemaDetailProps) {
                                     relationReferences={
                                         inflatedSchema.relations
                                     }
+                                    relationAddons={
+                                        schemaEditorConfiguration.relationAddons
+                                    }
                                     schemas={props.projectInput.schemas}
                                     relations={props.projectInput.relations}
                                     supportedRelationTypes={

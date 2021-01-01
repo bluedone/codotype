@@ -51,6 +51,7 @@ storiesOf("Components/ProjectEditor/RelationEditor/Layout", module).add(
                     relationReferences={
                         inflateSchema({ schemaInput, relations }).relations
                     }
+                    relationAddons={[]}
                     selectedSchema={schemaInput}
                     schemas={[schemaInput]}
                     supportedRelationTypes={supportedRelationTypes}
@@ -79,6 +80,7 @@ storiesOf("Components/ProjectEditor/RelationEditor/Layout", module).add(
                 <RelationEditor
                     relations={relations}
                     selectedSchema={userSchema}
+                    relationAddons={[]}
                     relationReferences={
                         inflateSchema({
                             schemaInput: userSchema,

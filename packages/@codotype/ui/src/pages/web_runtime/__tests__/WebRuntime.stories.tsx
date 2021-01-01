@@ -5,14 +5,12 @@ import { Story } from "../../../components/Story";
 import { RuntimeProvider } from "../../../components/RuntimeProvider";
 import { ProjectEditor } from "../../../components/ProjectEditor";
 import {
-    Project,
     ProjectInput,
     Datatypes,
     CreatedByValues,
     PluginMetadata,
     testState,
     // makeIdentifier,
-    // ATTRIBUTE_ADDON_UNIQUE,
     // ATTRIBUTE_ADDON_REQUIRED,
     // ATTRIBUTE_ADDON_NULLABLE,
     // ATTRIBUTE_ADDON_PRIMARY_KEY,
@@ -29,11 +27,41 @@ import {
     buildTokenCasing,
     buildTokenPluralization,
     buildDefaultConfiguration,
+    AttributeAddon,
+    AddonPropertyInlineIcons,
 } from "@codotype/core";
 import { pluginReadme } from "../../../components/MarkdownRenderer/__tests__/test_state";
 const { cdkPluginMeta, dummyPluginMetadata } = testState;
 
 // // // //
+
+const ATTRIBUTE_ADDON_UNIQUE: AttributeAddon = {
+    supportedDatatypes: [Datatypes.STRING],
+    property: {
+        content: {
+            label: "Unique",
+            icon: "",
+            description: "Whether or not the value is unique",
+            documentation: "",
+        },
+        identifier: "unique",
+        exclusive: false,
+        required: false,
+        inlineIcon: AddonPropertyInlineIcons.snowflake,
+        propertyType: PropertyTypes.BOOLEAN,
+        defaultValue: false,
+        dropdownOptions: [],
+        validations: [],
+        transformations: [],
+    },
+};
+
+const relationAddons = [
+    {
+        supportedRelationTypes: [RelationTypes.TO_ONE],
+        property: ATTRIBUTE_ADDON_UNIQUE.property,
+    },
+];
 
 const ApiActionsProperty = new Primatives.ConfigurationProperty({
     identifier: "actions",
@@ -175,11 +203,12 @@ const pluginExample01: PluginMetadata = {
     schemaEditorConfiguration: {
         ...dummyPluginMetadata.schemaEditorConfiguration,
         attributeAddons: [
-            // ATTRIBUTE_ADDON_UNIQUE,
+            ATTRIBUTE_ADDON_UNIQUE,
             // ATTRIBUTE_ADDON_REQUIRED,
             // ATTRIBUTE_ADDON_NULLABLE,
             // ATTRIBUTE_ADDON_PRIMARY_KEY,
         ],
+        relationAddons: [...relationAddons],
         configurationGroups: [
             {
                 ...dummyPluginMetadata.configurationGroups[0],
@@ -266,11 +295,12 @@ const stories: Array<[string, PluginMetadata]> = [
             schemaEditorConfiguration: {
                 ...dummyPluginMetadata.schemaEditorConfiguration,
                 attributeAddons: [
-                    // ATTRIBUTE_ADDON_UNIQUE,
+                    ATTRIBUTE_ADDON_UNIQUE,
                     // ATTRIBUTE_ADDON_REQUIRED,
                     // ATTRIBUTE_ADDON_NULLABLE,
                     // ATTRIBUTE_ADDON_PRIMARY_KEY,
                 ],
+                relationAddons: [...relationAddons],
                 configurationGroups: [
                     {
                         ...dummyPluginMetadata.configurationGroups[0],
@@ -295,11 +325,12 @@ const stories: Array<[string, PluginMetadata]> = [
             schemaEditorConfiguration: {
                 ...dummyPluginMetadata.schemaEditorConfiguration,
                 attributeAddons: [
-                    // ATTRIBUTE_ADDON_UNIQUE,
+                    ATTRIBUTE_ADDON_UNIQUE,
                     // ATTRIBUTE_ADDON_REQUIRED,
                     // ATTRIBUTE_ADDON_NULLABLE,
                     // ATTRIBUTE_ADDON_PRIMARY_KEY,
                 ],
+                relationAddons: [...relationAddons],
                 newSchemaDefaults: {
                     relations: [],
                     attributes: [
@@ -444,7 +475,7 @@ const stories: Array<[string, PluginMetadata]> = [
                     }),
                 ],
                 attributeAddons: [
-                    // ATTRIBUTE_ADDON_UNIQUE,
+                    ATTRIBUTE_ADDON_UNIQUE,
                     // ATTRIBUTE_ADDON_NULLABLE,
                     // ATTRIBUTE_ADDON_PRIMARY_KEY,
                     // {
@@ -487,7 +518,7 @@ const stories: Array<[string, PluginMetadata]> = [
                     //     ],
                     // },
                 ],
-                relationAddons: [],
+                relationAddons: [...relationAddons],
                 newSchemaDefaults: {
                     relations: [
                         {

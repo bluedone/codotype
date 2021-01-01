@@ -6,6 +6,7 @@ import {
     RelationInput,
     RelationType,
     Primatives,
+    RelationAddon,
 } from "@codotype/core";
 import { Droppable, DragDropContext } from "react-beautiful-dnd";
 import { RelationFormModal } from "./RelationFormModal";
@@ -38,12 +39,18 @@ interface RelationEditorProps {
     schemas: SchemaInput[];
     selectedSchema: SchemaInput;
     relationReferences: Relation[];
+    relationAddons: RelationAddon[];
     supportedRelationTypes: RelationType[];
     onChange: (updatedAttributes: RelationInput[]) => void;
 }
 
 export function RelationEditor(props: RelationEditorProps) {
-    const { selectedSchema, schemas, relationReferences } = props;
+    const {
+        selectedSchema,
+        relationAddons,
+        schemas,
+        relationReferences,
+    } = props;
     const [state, setState] = React.useState<RelationEditorState>({
         relations: props.relations,
         lastUpdatedAt: null,
@@ -89,6 +96,7 @@ export function RelationEditor(props: RelationEditorProps) {
                 }}
             />
 
+            {/* TODO - disable this if SchemaInput is locked */}
             <SortableListHeader
                 tooltip={"shift+r"}
                 label="Relations"
@@ -155,6 +163,7 @@ export function RelationEditor(props: RelationEditorProps) {
                     <RelationForm
                         relations={props.relations}
                         schema={selectedSchema}
+                        relationAddons={props.relationAddons}
                         schemas={schemas}
                         selectedSchema={selectedSchema}
                         relationInput={relationInput}

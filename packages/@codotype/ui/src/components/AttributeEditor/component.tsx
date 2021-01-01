@@ -129,6 +129,7 @@ export function AttributeEditor(props: AttributeEditorProps) {
                 borderBottomRightRadius: "0px",
             }}
         >
+            {/* TODO - disable this if SchemaInput is locked */}
             <SortableListHeader
                 label="Attributes"
                 tooltip="shift+a"

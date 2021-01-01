@@ -1,6 +1,12 @@
 import { RelationPropertiesForm } from "./RelationPropertiesForm";
-import { RelationInput, RelationType, SchemaInput } from "@codotype/core";
+import {
+    RelationInput,
+    RelationType,
+    SchemaInput,
+    RelationAddon,
+} from "@codotype/core";
 import * as React from "react";
+import { RelationAddonForm } from "./RelationAddonForm";
 
 // // // //
 
@@ -15,6 +21,7 @@ interface RelationFormProps {
     schemas: SchemaInput[];
     relations: RelationInput[];
     relationInput: RelationInput;
+    relationAddons: RelationAddon[];
     supportedRelationTypes: RelationType[];
     onChange: (updatedRelationInput: RelationInput) => void;
 }
@@ -31,6 +38,11 @@ export function RelationForm(props: RelationFormProps) {
         return null;
     }
 
+    const hasRelationAddons =
+        props.relationAddons.filter(a =>
+            a.supportedRelationTypes.includes(relationInput.type),
+        ).length > 0;
+
     return (
         <div className="row">
             <div className="col-lg-12">
@@ -43,10 +55,28 @@ export function RelationForm(props: RelationFormProps) {
                         props.onChange({
                             ...relationInput,
                             ...updatedRelationInput,
+                            addons: {}, // TODO - reset with valid default value, instead of just clearing the entire value
                         });
                     }}
                 />
             </div>
+            {hasRelationAddons && (
+                <div className="col-lg-12">
+                    <hr />
+                    <RelationAddonForm
+                        relationInput={relationInput}
+                        addons={props.relationAddons}
+                        value={relationInput.addons}
+                        relationCollection={props.relations}
+                        onChange={updatedAddonsValue => {
+                            props.onChange({
+                                ...relationInput,
+                                addons: updatedAddonsValue,
+                            });
+                        }}
+                    />
+                </div>
+            )}
         </div>
     );
 }
