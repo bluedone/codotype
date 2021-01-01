@@ -31,21 +31,21 @@ export function AttributeFormModal(props: {
                 <Modal.Title>{title}</Modal.Title>
             </Modal.Header>
             <Modal.Body>{props.children}</Modal.Body>
-            <Modal.Footer>
+            <Modal.Footer className="bg-light">
                 <div className="d-flex align-items-center justify-content-between flex-grow-1">
                     <div className="d-flex flex-grow-1">
                         <p className="mb-0 text-warning">{props.errors[0]}</p>
                     </div>
                     <div className="d-flex">
                         <button
-                            className="btn btn-primary"
+                            className="btn btn-lg btn-primary"
                             disabled={props.disableSubmit}
                             onClick={props.onSubmit}
                         >
                             {title}
                         </button>
                         <button
-                            className="btn btn-light ml-2"
+                            className="btn btn-lg btn-light ml-2"
                             onClick={props.onCancel}
                         >
                             Close

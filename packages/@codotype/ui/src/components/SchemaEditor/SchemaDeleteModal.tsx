@@ -22,15 +22,18 @@ export function SchemaDeleteModal(props: {
             <Modal.Body>
                 <p>Are you sure you want to delete this schema?</p>
             </Modal.Body>
-            <Modal.Footer>
-                <button onClick={props.onClose} className="btn btn-secondary">
-                    Close
-                </button>
+            <Modal.Footer className="bg-light">
                 <button
                     onClick={props.onConfirmDelete}
-                    className="btn btn-danger"
+                    className="btn btn-lg btn-danger"
                 >
                     Delete Schema
+                </button>
+                <button
+                    onClick={props.onClose}
+                    className="btn btn-lg btn-light"
+                >
+                    Close
                 </button>
             </Modal.Footer>
         </Modal>

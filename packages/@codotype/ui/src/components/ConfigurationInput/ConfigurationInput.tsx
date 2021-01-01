@@ -70,7 +70,7 @@ export function ConfigurationInput(props: ConfigurationInputProps) {
 
     // Handle ConfigurationGroup.allowDisable
     return (
-        <div className="row mt-3">
+        <div className="row mt-4">
             <div className="col-lg-12">
                 {/* ConfigurationGroupHeader */}
                 <ConfigurationGroupHeader

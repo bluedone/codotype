@@ -22,12 +22,18 @@ export function RelationDeleteModal(props: {
             <Modal.Body>
                 Are you sure you want to delete this Relation?
             </Modal.Body>
-            <Modal.Footer>
-                <button className="btn btn-secondary" onClick={props.onClose}>
-                    Close
-                </button>
-                <button className="btn btn-danger" onClick={props.onConfirm}>
+            <Modal.Footer className="bg-light">
+                <button
+                    className="btn btn-lg btn-danger"
+                    onClick={props.onConfirm}
+                >
                     Delete Relation
+                </button>
+                <button
+                    className="btn btn-lg btn-light ml-2"
+                    onClick={props.onClose}
+                >
+                    Close
                 </button>
             </Modal.Footer>
         </Modal>

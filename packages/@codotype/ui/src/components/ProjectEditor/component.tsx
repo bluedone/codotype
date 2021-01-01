@@ -27,9 +27,7 @@ export function ProjectEditor(props: ProjectEditorProps) {
                     onConfirmReset={props.onResetProject}
                 />
 
-                <div className="col-lg-12">
-                    <hr />
-                </div>
+                <hr />
 
                 {/* Render ConfigurationGroupSelector */}
                 <ConfigurationGroupSelector

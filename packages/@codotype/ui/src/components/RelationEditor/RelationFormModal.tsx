@@ -27,16 +27,19 @@ export function RelationFormModal(props: {
                 <Modal.Title>{title}</Modal.Title>
             </Modal.Header>
             <Modal.Body>{props.children}</Modal.Body>
-            <Modal.Footer>
-                <button className="btn btn-secondary" onClick={props.onCancel}>
-                    Close
-                </button>
+            <Modal.Footer className="bg-light">
                 <button
                     disabled={props.disableSubmit}
-                    className="btn btn-primary"
+                    className="btn btn-lg btn-primary"
                     onClick={props.onSubmit}
                 >
                     {title}
+                </button>
+                <button
+                    className="btn btn-lg btn-light"
+                    onClick={props.onCancel}
+                >
+                    Close
                 </button>
             </Modal.Footer>
         </Modal>

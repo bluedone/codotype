@@ -29,26 +29,26 @@ export function SchemaFormModal(props: {
     const disableSubmit: boolean = props.errors.length > 0;
 
     return (
-        <Modal show={props.show} onHide={props.handleClose}>
+        <Modal size="lg" show={props.show} onHide={props.handleClose}>
             <Modal.Header closeButton>
                 <Modal.Title>{title}</Modal.Title>
             </Modal.Header>
             <Modal.Body>{props.children}</Modal.Body>
-            <Modal.Footer>
+            <Modal.Footer className="bg-light">
                 <div className="d-flex align-items-center justify-content-between flex-grow-1">
                     <div className="d-flex flex-grow-1">
                         <p className="mb-0 text-warning">{props.errors[0]}</p>
                     </div>
                     <div className="d-flex">
                         <button
-                            className="btn btn-primary"
+                            className="btn btn-lg btn-primary"
                             disabled={disableSubmit}
                             onClick={props.onSubmit}
                         >
                             {submitLabel}
                         </button>
                         <button
-                            className="btn btn-light ml-2"
+                            className="btn btn-lg btn-light ml-2"
                             onClick={props.handleClose}
                         >
                             Close

@@ -31,7 +31,25 @@ import {
     AddonPropertyInlineIcons,
 } from "@codotype/core";
 import { pluginReadme } from "../../../components/MarkdownRenderer/__tests__/test_state";
-const { cdkPluginMeta, dummyPluginMetadata } = testState;
+const {
+    cdkPluginMeta,
+    dummyPluginMetadata: dummyPluginMetadataOriginal,
+} = testState;
+
+const dummyPluginMetadata: PluginMetadata = {
+    ...dummyPluginMetadataOriginal,
+    configurationGroups: [
+        ...dummyPluginMetadataOriginal.configurationGroups.map(c => {
+            if (c.content.label !== "API Examples") {
+                return c;
+            }
+            return {
+                ...c,
+                layoutVariant: GroupLayoutVariants.LIST,
+            };
+        }),
+    ],
+};
 
 // // // //
 

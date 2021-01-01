@@ -37,9 +37,9 @@ export function DocumentationModal(props: {
                 <Modal.Body>
                     <MarkdownRenderer source={props.documentation} />
                 </Modal.Body>
-                <Modal.Footer>
+                <Modal.Footer className="bg-light">
                     <button
-                        className="btn btn-secondary"
+                        className="btn btn-lg btn-light"
                         onClick={() => {
                             showModal(false);
                         }}

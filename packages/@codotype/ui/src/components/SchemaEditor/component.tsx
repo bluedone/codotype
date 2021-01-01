@@ -229,7 +229,7 @@ export function SchemaEditorLayout(props: {
         return (
             <div className="row d-flex px-4 py-4 justify-content-center align-items-center">
                 <div className="col-sm-8">
-                    <div className="card card-body">
+                    <div className="card card-body shadow-sm">
                         <div className="row align-items-center justify-content-center">
                             <div className="col-lg-12">
                                 <h4>New Schema</h4>
@@ -247,7 +247,7 @@ export function SchemaEditorLayout(props: {
                         </div>
                         <div className="col-lg-12 text-right mt-2">
                             <button
-                                className="btn btn-primary"
+                                className="btn btn-lg btn-primary"
                                 disabled={
                                     newTokenPluralization === null ||
                                     newTokenPluralization.singular.title === ""
@@ -293,7 +293,7 @@ export function SchemaEditorLayout(props: {
 
     // Render schema editor layout
     return (
-        <div className="row mt-3">
+        <div className="row mt-4">
             <div className="col-lg-4">
                 <SchemaNewButton
                     onClick={() => {

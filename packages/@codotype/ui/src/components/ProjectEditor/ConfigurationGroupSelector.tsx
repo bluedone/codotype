@@ -9,7 +9,7 @@ import {
 } from "@codotype/core";
 import { PluginStart } from "../PluginStart";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDiceOne, faFlag, faPlay, faRocket } from "@fortawesome/free-solid-svg-icons";
+import { faPlay } from "@fortawesome/free-solid-svg-icons";
 
 // // // //
 
@@ -20,31 +20,29 @@ export function ConfigurationGroupTab(props: {
     onClick: () => void;
 }) {
     const { label } = props;
-    const btnClassName: string[] = ["btn"];
-    if (props.pinned) {
-        btnClassName.push("btn-success");
-    } else if (props.active) {
+    const btnClassName: string[] = [
+        "d-flex flex-grow-1 justify-content-center btn mr-2 shadow-sm",
+    ];
+    // if (props.pinned) {
+    // btnClassName.push("btn-light");
+    // } else if (props.active) {
+    if (props.active) {
         btnClassName.push("btn-primary");
     } else {
-        btnClassName.push("btn-outline-dark");
+        btnClassName.push("btn-outline-primary");
     }
 
     return (
-        <div className="d-flex mr-2">
-            <button
-                className={btnClassName.join(" ")}
-                onClick={e => {
-                    e.currentTarget.blur();
-                    props.onClick();
-                }}
-            >
-                {/* <FontAwesomeIcon icon={faFlag} className="mr-2" /> */}
-                {props.pinned && (
-                    <FontAwesomeIcon icon={faPlay} className="mr-2" />
-                )}
-                {label}
-            </button>
-        </div>
+        <button
+            className={btnClassName.join(" ")}
+            onClick={e => {
+                e.currentTarget.blur();
+                props.onClick();
+            }}
+        >
+            {props.pinned && <FontAwesomeIcon icon={faPlay} className="mr-2" />}
+            {label}
+        </button>
     );
 }
 
@@ -98,7 +96,7 @@ export function ConfigurationGroupSelector(props: {
     return (
         <div className="row">
             <div className="col-lg-12">
-                <ul className="nav nav-pills">
+                <ul className="nav nav-pills mt-2">
                     <ConfigurationGroupTab
                         pinned
                         onClick={() => {
@@ -116,7 +114,7 @@ export function ConfigurationGroupSelector(props: {
                                 setViewingSchemas(true);
                             }}
                             active={viewingSchemas}
-                            label={"Schemas"}
+                            label={"Data Model"}
                         />
                     )}
 
@@ -135,7 +133,7 @@ export function ConfigurationGroupSelector(props: {
                                     }}
                                     active={
                                         configurationGroup.identifier ===
-                                        selectedConfigurationGroup.identifier &&
+                                            selectedConfigurationGroup.identifier &&
                                         !viewingSchemas &&
                                         !viewingReadme
                                     }
@@ -153,7 +151,7 @@ export function ConfigurationGroupSelector(props: {
                         configurationGroup={selectedConfigurationGroup}
                         value={
                             props.projectInput.configuration[
-                            selectedConfigurationGroup.identifier
+                                selectedConfigurationGroup.identifier
                             ]
                         }
                         onChange={(updatedVal: ConfigurationPropertyDict) => {
@@ -174,10 +172,8 @@ export function ConfigurationGroupSelector(props: {
 
                 {/* Render README tab */}
                 {viewingReadme && (
-                    <div className="mt-4">
-                        <div className="card card-body">
-                            <PluginStart plugin={props.pluginMetadata} />
-                        </div>
+                    <div className="mt-4 card card-body shadow-sm">
+                        <PluginStart plugin={props.pluginMetadata} />
                     </div>
                 )}
 
