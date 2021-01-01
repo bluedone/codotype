@@ -12,6 +12,7 @@ import { Modal } from "react-bootstrap";
 export function ProjectFormModal(props: {
     show: boolean;
     children: React.ReactNode;
+    disabled: boolean;
     handleClose: () => void;
     onSubmit: () => void;
 }) {
@@ -25,6 +26,7 @@ export function ProjectFormModal(props: {
                 <button
                     className="btn btn-lg btn-primary"
                     onClick={props.onSubmit}
+                    disabled={props.disabled}
                 >
                     Update Project
                 </button>

@@ -11,6 +11,7 @@ import { faLightbulb, faLaugh } from "@fortawesome/free-regular-svg-icons";
 export function ProjectForm(props: {
     value: string;
     onChange: (updatedProjectLabel: string) => void;
+    onSubmit: (updatedProjectLabel: string) => void;
 }) {
     return (
         <div className="row align-items-center justify-content-center">
@@ -34,6 +35,12 @@ export function ProjectForm(props: {
                     value={props.value}
                     onChange={e => {
                         props.onChange(e.currentTarget.value);
+                    }}
+                    onKeyDown={e => {
+                        if (e.keyCode === 13) {
+                            // ENTER KEY CODE
+                            props.onSubmit(e.currentTarget.value);
+                        }
                     }}
                 />
 

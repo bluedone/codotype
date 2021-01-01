@@ -46,6 +46,7 @@ export function ProjectEditorHeader(props: {
                             setLabelValue(projectInput.identifiers.title);
                             showModal(false);
                         }}
+                        disabled={labelValue.trim().length === 0}
                         onSubmit={() => {
                             const sanitizedLabel: string = sanitizeTitle(
                                 labelValue,
@@ -63,6 +64,15 @@ export function ProjectEditorHeader(props: {
                                 const sanitizedLabel: string = sanitizeTitle(
                                     updatedLabel,
                                 );
+                                setLabelValue(sanitizedLabel);
+                            }}
+                            onSubmit={updatedLabel => {
+                                const sanitizedLabel: string = sanitizeTitle(
+                                    updatedLabel,
+                                );
+                                if (sanitizedLabel.length === 0) {
+                                    return;
+                                }
                                 setLabelValue(sanitizedLabel);
                             }}
                         />
