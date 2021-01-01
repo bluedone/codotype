@@ -37,9 +37,6 @@ export function ProjectForm(props: {
                     }}
                 />
 
-                {/* <small className="text-muted">Identifier: {{ identifier || 'project_name'}}</small> */}
-                {/* <small className="text-muted">Identifier: 'project_name'</small> */}
-
                 <p className="mt-3 text-muted">
                     <strong>Codotype</strong> uses the{" "}
                     <span className="text-success">Project Name</span> for

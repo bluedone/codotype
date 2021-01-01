@@ -21,21 +21,21 @@ export function ProjectEditorHeader(props: {
     onClickGenerate: () => void;
     onConfirmReset: () => void;
 }) {
-    const { pluginMetadata: PluginMetadata } = props;
+    const { pluginMetadata, projectInput } = props;
     const [showingModal, showModal] = React.useState<boolean>(false);
     const [labelValue, setLabelValue] = React.useState<string>(
-        props.projectInput.identifiers.title,
+        projectInput.identifiers.title,
     );
     return (
         <div className="row d-flex align-items-end">
             <div className="col-sm-12 col-md-6">
-                <span className="d-flex align-items-center">
+                <div className="d-flex align-items-center">
                     <h2 className="mb-0 mr-2 d-flex">
-                        {props.projectInput.identifiers.title}
+                        {projectInput.identifiers.title}
                     </h2>
                     <ProjectEditButton onClick={() => showModal(true)} />
                     <ExampleProjectDropdown
-                        plugin={PluginMetadata}
+                        plugin={pluginMetadata}
                         loadExampleProject={exampleProject => {
                             props.onChange(exampleProject);
                         }}
@@ -43,7 +43,7 @@ export function ProjectEditorHeader(props: {
                     <ProjectFormModal
                         show={showingModal}
                         handleClose={() => {
-                            setLabelValue(props.projectInput.identifiers.title);
+                            setLabelValue(projectInput.identifiers.title);
                             showModal(false);
                         }}
                         onSubmit={() => {
@@ -51,7 +51,7 @@ export function ProjectEditorHeader(props: {
                                 labelValue,
                             );
                             props.onChange({
-                                ...props.projectInput,
+                                ...projectInput,
                                 identifiers: buildTokenCasing(sanitizedLabel),
                             });
                             showModal(false);
@@ -67,19 +67,13 @@ export function ProjectEditorHeader(props: {
                             }}
                         />
                     </ProjectFormModal>
-                </span>
+                </div>
             </div>
             <div className="col-sm-12 col-md-6 d-flex justify-content-end mt-2 mt-md-0">
-                {/* <HelpButton /> */}
-                {/* <TourButton /> */}
-                {/* <ImportModal /> */}
-                {/* <ExportModal /> */}
-
                 <ProjectDropdown
-                    projectInput={props.projectInput}
+                    projectInput={projectInput}
                     onConfirmReset={props.onConfirmReset}
                 />
-                {/* <ResetProjectButton onConfirmReset={props.onConfirmReset} /> */}
                 <GenerateCodeButton onClick={props.onClickGenerate} />
             </div>
         </div>

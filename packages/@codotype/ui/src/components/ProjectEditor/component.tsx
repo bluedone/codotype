@@ -11,8 +11,6 @@ interface ProjectEditorProps {
     onChange: (updatedProject: ProjectInput) => void;
     onClickGenerate: () => void;
     onResetProject: () => void;
-    // enableImport?: boolean;
-    // enableExport?: boolean;
 }
 
 export function ProjectEditor(props: ProjectEditorProps) {

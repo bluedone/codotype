@@ -15,11 +15,15 @@ export function ResetProjectButton(props: {
     onConfirmReset: () => void;
 }) {
     const [showModal, setShowModal] = React.useState<boolean>(false);
+    const [showConfirm, setShowConfirm] = React.useState<boolean>(false);
     return (
         <React.Fragment>
             <Dropdown.Item
                 disabled={props.disabled}
-                onClick={() => setShowModal(true)}
+                onClick={() => {
+                    setShowConfirm(false);
+                    setShowModal(true);
+                }}
             >
                 Reset Project
             </Dropdown.Item>
@@ -29,62 +33,47 @@ export function ResetProjectButton(props: {
                     <Modal.Title>Reset Project</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <p>Are you sure you want to reset your Project?</p>
+                    <p className="form-text text-muted mb-2">
+                        Are you sure you want to reset this Project?
+                    </p>
+
+                    <p className="form-text text-muted mb-2">
+                        <span className="text-danger">DANGER: </span>This will
+                        delete your current project - this action cannot be
+                        undone. Are you sure you want to continue?
+                    </p>
                 </Modal.Body>
-                <Modal.Footer>
+                <Modal.Footer className="bg-light">
+                    {showConfirm && (
+                        <button
+                            onClick={() => {
+                                setShowModal(false);
+                                // setShowConfirm(false);
+                                props.onConfirmReset();
+                            }}
+                            className="btn btn-lg btn-danger"
+                        >
+                            Are you really sure?
+                        </button>
+                    )}
+                    {!showConfirm && (
+                        <button
+                            onClick={() => {
+                                setShowConfirm(true);
+                            }}
+                            className="btn btn-lg btn-danger"
+                        >
+                            Reset Project
+                        </button>
+                    )}
                     <button
                         onClick={() => setShowModal(false)}
-                        className="btn btn-secondary"
+                        className="btn btn-lg btn-light"
                     >
                         Close
-                    </button>
-                    <button
-                        onClick={() => {
-                            setShowModal(false);
-                            props.onConfirmReset();
-                        }}
-                        className="btn btn-danger"
-                    >
-                        Reset Project
                     </button>
                 </Modal.Footer>
             </Modal>
         </React.Fragment>
     );
 }
-
-// // // //
-
-// /**
-//  * SchemaDeleteModal
-//  * @param showModal
-//  * @param props.onClose
-//  * @param props.onConfirmDelete
-//  */
-// export function SchemaDeleteModal(props: {
-//     show: boolean;
-//     onConfirmDelete: () => void;
-//     onClose: () => void;
-// }) {
-//     return (
-//         <Modal show={showModal} onHide={props.onClose}>
-//             <Modal.Header closeButton>
-//                 <Modal.Title>Delete Schema</Modal.Title>
-//             </Modal.Header>
-//             <Modal.Body>
-//                 <p>Are you sure you want to delete this schema?</p>
-//             </Modal.Body>
-//             <Modal.Footer>
-//                 <button onClick={props.onClose} className="btn btn-secondary">
-//                     Close
-//                 </button>
-//                 <button
-//                     onClick={props.onConfirmDelete}
-//                     className="btn btn-danger"
-//                 >
-//                     Delete Schema
-//                 </button>
-//             </Modal.Footer>
-//         </Modal>
-//     );
-// }
