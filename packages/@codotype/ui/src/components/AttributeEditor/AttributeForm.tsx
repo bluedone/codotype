@@ -25,7 +25,7 @@ function FormGroupTab(props: {
     }
 
     return (
-        <li className="nav-item d-flex flex-grow-1">
+        <li className="nav-item flex flex-grow-1">
             <button
                 className={btnClassName.join(" ")}
                 disabled={props.disabled}
@@ -59,7 +59,7 @@ export function AttributeFormSelector(props: {
     return (
         <div className="row">
             <div className="col-lg-12">
-                <ul className="nav nav-tabs w-100 d-flex">
+                <ul className="nav nav-tabs w-100 flex">
                     <FormGroupTab
                         onClick={() => {
                             setSelectedForm("DATATYPE");

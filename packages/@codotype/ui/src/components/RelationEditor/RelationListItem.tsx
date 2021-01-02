@@ -90,7 +90,7 @@ export function RelationListItem(props: {
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                 >
-                    <div className="row d-flex items-center">
+                    <div className="row flex items-center">
                         <div className="col-sm-10">
                             <RelationBadge
                                 slim
@@ -155,7 +155,7 @@ export function RelationListItem(props: {
                                     );
                                 })}
                         </div>
-                        <div className="col-sm-2 text-right d-flex controls justify-end">
+                        <div className="col-sm-2 text-right flex controls justify-end">
                             <button
                                 className="btn btn-sm btn-outline-danger px-0 py-0"
                                 onClick={e => {

@@ -65,7 +65,7 @@ storyCollection.add("all variants", () => {
                                     <div className="col-sm-9">
                                         <p className="mb-0">{testCase[0]}</p>
                                     </div>
-                                    <div className="col-sm-3 d-flex justify-end">
+                                    <div className="col-sm-3 flex justify-end">
                                         <DatatypeIcon datatype={testCase[1]} />
                                     </div>
                                 </div>

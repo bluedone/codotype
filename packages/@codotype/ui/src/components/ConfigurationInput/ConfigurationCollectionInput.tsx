@@ -62,7 +62,7 @@ function CollectionItemForm(props: {
             />
             <hr />
 
-            <div className="d-flex justify-end">
+            <div className="flex justify-end">
                 <button
                     className="btn btn-success"
                     onClick={() => {
@@ -189,7 +189,7 @@ export function ConfigurationCollectionInput(
                                                     );
                                                 }}
                                             >
-                                                <div className="d-flex justify-between">
+                                                <div className="flex justify-between">
                                                     <PropertyPreviewRenderer
                                                         data={collectionItem}
                                                         propertyPreview={

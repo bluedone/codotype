@@ -64,7 +64,7 @@ export function ConfigurationGroupHeader(props: {
     return (
         <div className="row">
             <div className="col-sm-12">
-                <span className="d-flex items-center">
+                <span className="flex items-center">
                     {!renderSmaller && (
                         <h4 className="mb-0 mr-2">
                             {props.configurationGroup.content.label}

@@ -29,7 +29,7 @@ export function AppNavbar(props: { homeUrl?: string }) {
     return (
         <StyledNavbar bg="light" fixed="top" expand="lg">
             <div className="container">
-                <div className="d-flex flew-row items-center">
+                <div className="flex flew-row items-center">
                     <img
                         src="https://res.cloudinary.com/codotype/image/upload/v1560045005/tech-logos/codotype.png"
                         alt="Codotype Logo"

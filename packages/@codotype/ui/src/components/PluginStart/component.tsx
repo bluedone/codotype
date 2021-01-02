@@ -43,7 +43,7 @@ export function PluginStart(props: PluginStartProps) {
                         </p>
                     </div>
 
-                    <div className="col-lg-12 d-flex justify-center">
+                    <div className="col-lg-12 flex justify-center">
                         <GitHubStar />
                     </div>
                 </div>
@@ -77,14 +77,14 @@ export function PluginStart(props: PluginStartProps) {
                     </div>
                 </div>
 
-                <div className="row d-flex flex-row justify-center mt-3">
-                    <div className="col-lg-12 d-flex justify-center items-center">
+                <div className="row flex flex-row justify-center mt-3">
+                    <div className="col-lg-12 flex justify-center items-center">
                         {props.plugin.techTags.map(tag => (
                             <PluginTechTag key={tag} tag={tag} />
                         ))}
                     </div>
 
-                    <div className="col-lg-12 d-flex justify-center items-center flex-wrap mt-2">
+                    <div className="col-lg-12 flex justify-center items-center flex-wrap mt-2">
                         {props.plugin.typeTags.map(tag => (
                             <PluginTypeTag key={tag} tag={tag} />
                         ))}
@@ -96,13 +96,13 @@ export function PluginStart(props: PluginStartProps) {
                     </div>
                 </div>
 
-                <div className="row d-flex justify-center my-3">
+                <div className="row flex justify-center my-3">
                     <div className="col-lg-8">
                         <hr />
                     </div>
                 </div>
 
-                <div className="row d-flex justify-center">
+                <div className="row flex justify-center">
                     <div className="col-lg-10">
                         <MarkdownRenderer
                             source={props.plugin.content.documentation}

@@ -15,7 +15,7 @@ export function AttributeListEmpty(props: AttributeListEmptyProps) {
             <p className="text-muted mt-2 mb-0">
                 Define properties on this Schema
             </p>
-            <div className="row d-flex justify-center mt-2">
+            <div className="row flex justify-center mt-2">
                 <div className="col-lg-12">
                     <button
                         className="btn btn-sm btn-outline-primary"

@@ -51,7 +51,7 @@ export function SchemaPreview(props: {
         <div className="row">
             {/* <div className="col-lg-12">
                 <p className="mb-0 text-muted">
-                    <span className="d-flex items-center justify-between mb-1">
+                    <span className="flex items-center justify-between mb-1">
                         <strong className="m-0">Preview</strong>
                         <InfoTooltip
                             id="schema-preview"
@@ -73,10 +73,10 @@ export function SchemaPreview(props: {
                     </pre>
 
                     <div
-                        className="d-flex flex-row items-center border-primary"
+                        className="flex flex-row items-center border-primary"
                         style={{ borderTop: "2px solid" }}
                     >
-                        <div className="d-flex flex-column flex-grow-1">
+                        <div className="flex flex-column flex-grow-1">
                             <select
                                 value={previewOutputType}
                                 onChange={e => {
@@ -99,7 +99,7 @@ export function SchemaPreview(props: {
                                 </option>
                             </select>
                         </div>
-                        <div className="d-flex flex-column">
+                        <div className="flex flex-column">
                             <CopyToClipboard
                                 text={content}
                                 onCopy={() => {

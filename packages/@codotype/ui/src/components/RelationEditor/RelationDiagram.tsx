@@ -112,7 +112,7 @@ export function RelationDiagram(props: RelationDiagramProps) {
     );
 
     return (
-        <div className="row d-flex flex-row items-center">
+        <div className="row flex flex-row items-center">
             <div className="col-lg-12">
                 {props.direction === "out" && source}
                 {props.direction === "in" && dest}

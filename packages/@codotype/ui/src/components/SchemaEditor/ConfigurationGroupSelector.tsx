@@ -23,7 +23,7 @@ export function ConfigurationGroupTab(props: {
     }
 
     return (
-        <div className="d-flex mr-2">
+        <div className="flex mr-2">
             <button
                 className={btnClassName.join(" ")}
                 onClick={e => {
@@ -73,7 +73,7 @@ export function ConfigurationGroupSelector(props: {
     return (
         <div className="row">
             <div className="col-lg-12">
-                <div className="d-flex flex-row mt-1 mb-1">
+                <div className="flex flex-row mt-1 mb-1">
                     <ConfigurationGroupTab
                         onClick={() => {
                             setViewingSchemas(true);

@@ -22,7 +22,7 @@ export function SchemaIncomingRelations(props: SchemaIncomingRelationsProps) {
         <div className="row mt-3">
             <div className="col-lg-12">
                 <p className="mb-0 text-muted">
-                    <span className="d-flex items-center justify-between mb-1">
+                    <span className="flex items-center justify-between mb-1">
                         <strong className="m-0">Incoming Relations</strong>
                         <InfoTooltip
                             id="schema-incoming-relations"

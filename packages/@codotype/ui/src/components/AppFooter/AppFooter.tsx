@@ -39,7 +39,7 @@ export function AppFooter() {
             <div className="container">
                 <div className="row">
                     <div className="col-sm-4">
-                        <span className="d-flex flex-row items-center">
+                        <span className="flex flex-row items-center">
                             <img
                                 src="https://res.cloudinary.com/codotype/image/upload/v1560045005/tech-logos/codotype.png"
                                 style={{

@@ -31,7 +31,7 @@ export function Jumbotron(props: {
                         <p className="text-gray-600 my-3 text-lg">{body}</p>
 
                         <div className="row py-2">
-                            <div className="col-lg-12 d-flex flex-column">
+                            <div className="col-lg-12 flex flex-column">
                                 {props.children}
                             </div>
                         </div>
@@ -44,7 +44,7 @@ export function Jumbotron(props: {
                             ))}
                         </div>
 
-                        <div className="row mt-4 d-flex justify-center">
+                        <div className="row mt-4 flex justify-center">
                             <div className="col-lg-6">
                                 <a
                                     href="/plugins"

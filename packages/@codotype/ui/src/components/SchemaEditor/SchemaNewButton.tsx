@@ -13,7 +13,7 @@ export function SchemaNewButton(props: { onClick: () => void }) {
             overlay={<Tooltip id="edit-button-tooltip">shift+s</Tooltip>}
         >
             <button
-                className="btn btn-lg btn-primary btn-block mb-3 shadow-sm"
+                className="btn btn-lg btn-primary w-full mb-3 shadow-sm"
                 onClick={props.onClick}
             >
                 <Hotkey keyName="shift+s" onKeyDown={props.onClick} />

@@ -15,9 +15,9 @@ export function SchemaDetailHeader(props: {
 }) {
     const [showDeleteModal, showModal] = React.useState(false);
     return (
-        <div className="row d-flex items-center mb-2">
+        <div className="row flex items-center mb-2">
             <div className="col-lg-10">
-                <div className="d-flex items-center">
+                <div className="flex items-center">
                     <h4 className="mb-0 text-2xl">
                         {props.schemaInput.identifiers.singular.title}
                         <span className="text-muted ml-2">Schema</span>
@@ -28,7 +28,7 @@ export function SchemaDetailHeader(props: {
                     />
                 </div>
             </div>
-            <div className="col-lg-2 d-flex justify-end">
+            <div className="col-lg-2 flex justify-end">
                 <SchemaDeleteButton
                     projectInput={props.projectInput}
                     schemaInput={props.schemaInput}

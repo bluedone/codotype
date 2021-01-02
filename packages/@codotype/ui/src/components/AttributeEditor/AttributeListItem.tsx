@@ -88,7 +88,7 @@ export function AttributeListItem(props: {
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                 >
-                    <div className="row d-flex items-center">
+                    <div className="row flex items-center">
                         <div className="col-sm-10">
                             <AttributeListItemLabel
                                 attribute={attribute}

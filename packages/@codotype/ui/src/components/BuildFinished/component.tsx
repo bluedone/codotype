@@ -31,7 +31,7 @@ export function BuildFinished(props: {
 
     return (
         <div
-            className="d-flex flex-column items-center h-100 justify-center"
+            className="flex flex-column items-center h-100 justify-center"
             style={{ minHeight: "26rem" }}
         >
             {/* Header */}
@@ -67,7 +67,7 @@ export function BuildFinished(props: {
             {/* <!-- Local Plugin --> */}
             {/* TODO - use ResponseTypes enum from @codotype/core */}
             {props.filepath && props.responseType === "LOCAL_PATH" && (
-                <div className="row d-flex justify-center mt-3">
+                <div className="row flex justify-center mt-3">
                     <div className="col-sm-12 text-center">
                         <small className="text-primary">
                             Your codebase is in the following local directory:
@@ -105,7 +105,7 @@ export function BuildFinished(props: {
             {/* <!-- S3 Zip Download --> */}
             {/* TODO - use ResponseTypes enum from @codotype/core */}
             {props.responseType === "S3_DOWNLOAD" && props.downloadUrl && (
-                <div className="row d-flex justify-center mt-3">
+                <div className="row flex justify-center mt-3">
                     <div className="col-lg-6">
                         <a
                             href={props.downloadUrl}
@@ -122,7 +122,7 @@ export function BuildFinished(props: {
                 </div>
             )}
 
-            <div className="row d-flex justify-center mt-3">
+            <div className="row flex justify-center mt-3">
                 <div className="col-sm-12 text-center">
                     <p className="mb-1">
                         <i className="far fa-lightbulb" />
@@ -150,7 +150,7 @@ export function BuildFinished(props: {
             <hr />
 
             {/* FOOTER */}
-            <div className="row d-flex justify-center">
+            <div className="row flex justify-center">
                 <div className="col-lg-12 text-center">
                     <p className="mb-0">Support Codotype</p>
                     <small className="text-muted">
