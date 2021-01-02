@@ -17,38 +17,94 @@ module.exports = {
         },
     ],
     webpack: async config => {
-        // Defines Storybook-specific mock for next/link
-        config.resolve.alias["next/link"] = path.resolve(
-            __dirname,
-            "./mocked_modules/next-link.js",
-        );
+        return {
+            ...config,
+            module: {
+                ...config.module,
+                rules: [
+                    {
+                        exclude: /node_modules/,
+                        test: /\.scss$/,
+                        use: [
+                            {
+                                loader: "style-loader", // Creates style nodes from JS strings
+                            },
+                            {
+                                loader: "css-loader", // Translates CSS into CommonJS
+                            },
+                            {
+                                loader: "sass-loader", // Compiles Sass to CSS
+                            },
+                        ],
+                    },
+                    ...config.module.rules.filter(
+                        rule => /\.css$/ !== rule.test,
+                    ),
+                    {
+                        test: /\.css1$/,
+                        exclude: [/\.module\.css$/, /@storybook/],
+                        use: [
+                            "style-loader",
+                            {
+                                loader: "css-loader",
+                                options: { importLoaders: 1, sourceMap: false },
+                            },
+                            {
+                                loader: "postcss-loader",
+                                options: {
+                                    ident: "postcss",
+                                    sourceMap: false,
+                                },
+                            },
+                        ],
+                    },
+                ],
+            },
+            resolve: {
+                ...config.resolve,
+                extensions: [".ts", ".tsx", ".js"],
+                alias: {
+                    ...config.resolve.alias,
+                    ["next/link"]: path.resolve(
+                        __dirname,
+                        "./mocked_modules/next-link.js",
+                    ),
+                },
+            },
+        };
 
-        config.module.rules.push({
-            exclude: /node_modules/,
-            test: /\.scss$/,
-            use: [
-                {
-                    loader: "style-loader", // Creates style nodes from JS strings
-                },
-                {
-                    loader: "css-loader", // Translates CSS into CommonJS
-                },
-                {
-                    loader: "sass-loader", // Compiles Sass to CSS
-                },
-            ],
-        });
+        // Defines Storybook-specific mock for next/link
+        // config.resolve.alias["next/link"] = path.resolve(
+        //     __dirname,
+        //     "./mocked_modules/next-link.js",
+        // );
+
+        // config.module.rules.push({
+        //     exclude: /node_modules/,
+        //     test: /\.scss$/,
+        //     use: [
+        //         {
+        //             loader: "style-loader", // Creates style nodes from JS strings
+        //         },
+        //         {
+        //             loader: "css-loader", // Translates CSS into CommonJS
+        //         },
+        //         {
+        //             loader: "sass-loader", // Compiles Sass to CSS
+        //         },
+        //     ],
+        // });
 
         // config.entry = {
         //     ...config.entry,
         //     src: path.join(__dirname, "../src/index.ts"),
         // };
 
-        config.resolve = {
-            ...config.resolve,
-            extensions: [".ts", ".tsx", ".js"],
-        };
+        // config.resolve = {
+        //     ...config.resolve,
+        //     extensions: [".ts", ".tsx", ".js"],
+        // };
 
-        return config;
+        // return config;
     },
 };
