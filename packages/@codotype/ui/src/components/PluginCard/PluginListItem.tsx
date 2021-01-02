@@ -13,8 +13,8 @@ export function PluginListItem(props: { plugin: PluginMetadata }) {
     return (
         <div className="card card-body border-light shadow-hover mb-2">
             <div className="row">
-                <div className="col-lg-12 d-flex justify-content-between align-items-center">
-                    <p className="lead mb-0 w-100 d-flex justify-content-between align-items-center">
+                <div className="col-lg-12 d-flex justify-content-between items-center">
+                    <p className="lead mb-0 w-100 d-flex justify-content-between items-center">
                         <img
                             className="mr-2"
                             style={{ maxWidth: "2rem" }}
@@ -30,7 +30,7 @@ export function PluginListItem(props: { plugin: PluginMetadata }) {
                         {plugin.content.description}
                     </p>
                 </div>
-                <div className="col-lg-12 d-flex justify-content-between align-items-center">
+                <div className="col-lg-12 d-flex justify-content-between items-center">
                     <span className="d-flex">
                         {plugin.typeTags.map((tag: string) => (
                             <PluginTypeTag tag={tag} key={tag} />

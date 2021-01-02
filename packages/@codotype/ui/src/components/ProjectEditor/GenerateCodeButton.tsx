@@ -16,7 +16,7 @@ export function GenerateCodeButton(props: {
 }) {
     return (
         <button
-            className="btn btn-lg btn-yellow d-flex align-items-center"
+            className="btn btn-lg bg-yellow-400 hover:bg-yellow-500 flex items-center"
             disabled={props.disabled}
             onClick={props.onClick}
         >

@@ -1,7 +1,7 @@
 // CHORE - migrate the following to React:
 
 // <template>
-//   <div class="row d-flex align-items-center h-100 justify-content-center">
+//   <div class="row d-flex items-center h-100 justify-content-center">
 //     <div class="col-sm-12 col-md-8 col-lg-6">
 //       <div class="card card-body shadow-sm">
 

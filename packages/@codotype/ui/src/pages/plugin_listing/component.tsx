@@ -33,7 +33,7 @@ export function PluginListPage(props: { plugins: PluginMetadata[] }) {
 
     return (
         <div className="row mt-3 mb-5">
-            <div className="col-lg-12 d-flex justify-content-between align-items-center">
+            <div className="col-lg-12 d-flex justify-content-between items-center">
                 <h2>Plugins</h2>
             </div>
             <div className="col-lg-12">

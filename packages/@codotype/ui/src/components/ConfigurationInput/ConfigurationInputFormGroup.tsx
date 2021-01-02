@@ -105,7 +105,7 @@ export function ConfigurationInputFormGroup(
     );
 
     const formGroupHeader = (
-        <div className="d-flex align-items-center">
+        <div className="d-flex items-center">
             {property.content.icon && (
                 <img
                     src={property.content.icon}
@@ -149,12 +149,12 @@ export function ConfigurationInputFormGroup(
                 [className]: className !== "",
             })}
         >
-            <div className="d-flex align-items-center justify-content-between">
-                <div className="d-flex align-items-center">
+            <div className="d-flex items-center justify-content-between">
+                <div className="d-flex items-center">
                     {formGroupHeader}
                     {property.type === PropertyTypes.BOOLEAN && (
                         <div
-                            className={classnames("d-flex align-items-center", {
+                            className={classnames("d-flex items-center", {
                                 "ml-3": !renderDocumentationModal,
                             })}
                         >
@@ -182,8 +182,8 @@ export function ConfigurationInputFormGroup(
                 [className]: className !== "",
             })}
         >
-            <div className="d-flex align-items-center justify-content-between">
-                <div className="d-flex align-items-center">
+            <div className="d-flex items-center justify-content-between">
+                <div className="d-flex items-center">
                     {formGroupHeader}
                 </div>
             </div>
@@ -192,7 +192,7 @@ export function ConfigurationInputFormGroup(
 
             {/* Renders message to turn this feature on */}
             <div className="mt-2 px-2 py-2 d-flex justify-content-center bg-dark text-white rounded">
-                <div className="d-flex flex-column align-items-center">
+                <div className="d-flex flex-column items-center">
                     <p className="lead mb-0">Enable {property.content.label}</p>
                     <p className="mb-0">
                         Click to enable the {property.content.label} property.

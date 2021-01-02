@@ -7,7 +7,7 @@ import * as React from "react";
  */
 export function PageNotFound() {
     return (
-        <div className="row h-100 align-items-center">
+        <div className="row h-100 items-center">
             <div className="col-lg-12">
                 <div className="row mt-2">
                     <div className="col-lg-12 text-center">

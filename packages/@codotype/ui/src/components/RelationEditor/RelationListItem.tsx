@@ -90,7 +90,7 @@ export function RelationListItem(props: {
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                 >
-                    <div className="row d-flex align-items-center">
+                    <div className="row d-flex items-center">
                         <div className="col-sm-10">
                             <RelationBadge
                                 slim
@@ -109,7 +109,7 @@ export function RelationListItem(props: {
                                 .map(addon => {
                                     const icon =
                                         mapAddonIconToFontAwesome[
-                                            addon.property.inlineIcon
+                                        addon.property.inlineIcon
                                         ];
                                     if (icon === null) {
                                         return null;
@@ -117,7 +117,7 @@ export function RelationListItem(props: {
 
                                     if (
                                         relation.addons[
-                                            addon.property.identifier
+                                        addon.property.identifier
                                         ] === undefined
                                     ) {
                                         return null;
@@ -126,9 +126,9 @@ export function RelationListItem(props: {
                                     // Return null for boolean addon with falsey property
                                     if (
                                         addon.property.propertyType ===
-                                            PropertyTypes.BOOLEAN &&
+                                        PropertyTypes.BOOLEAN &&
                                         relation.addons[
-                                            addon.property.identifier
+                                        addon.property.identifier
                                         ] === false
                                     ) {
                                         return null;

@@ -45,7 +45,7 @@ export function SortableListHeader(props: SortableListHeaderProps) {
                 }}
                 style={styles}
             >
-                <div className="d-flex align-items-center">
+                <div className="d-flex items-center">
                     <FontAwesomeIcon icon={faPlus} />
                     <p className="d-block mb-0 ml-2">{props.label}</p>
                 </div>

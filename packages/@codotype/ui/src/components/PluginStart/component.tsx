@@ -24,7 +24,7 @@ interface PluginStartProps {
  */
 export function PluginStart(props: PluginStartProps) {
     return (
-        <div className="row h-100 align-items-center">
+        <div className="row h-100 items-center">
             <div className="col-lg-12">
                 <div className="row">
                     <div className="col-lg-12 text-center">
@@ -78,13 +78,13 @@ export function PluginStart(props: PluginStartProps) {
                 </div>
 
                 <div className="row d-flex flex-row justify-content-center mt-3">
-                    <div className="col-lg-12 d-flex justify-content-center align-items-center">
+                    <div className="col-lg-12 d-flex justify-content-center items-center">
                         {props.plugin.techTags.map(tag => (
                             <PluginTechTag key={tag} tag={tag} />
                         ))}
                     </div>
 
-                    <div className="col-lg-12 d-flex justify-content-center align-items-center flex-wrap mt-2">
+                    <div className="col-lg-12 d-flex justify-content-center items-center flex-wrap mt-2">
                         {props.plugin.typeTags.map(tag => (
                             <PluginTypeTag key={tag} tag={tag} />
                         ))}

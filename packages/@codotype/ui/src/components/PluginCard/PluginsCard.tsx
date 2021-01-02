@@ -14,7 +14,7 @@ export function PluginCard(props: { plugin: PluginMetadata }) {
                         <p className="lead mb-0">
                             <a
                                 href={`/plugins/${plugin.identifier}/build`}
-                                className="btn btn-link d-flex align-items-center flex-column"
+                                className="btn btn-link d-flex items-center flex-column"
                                 style={{ textDecoration: "none" }}
                             >
                                 <img
@@ -40,7 +40,7 @@ export function PluginCard(props: { plugin: PluginMetadata }) {
                     href={`/plugins/${plugin.identifier}`}
                     className="btn btn-block btn-xl btn-primary rounded-pill"
                 >
-                    <span className="d-flex justify-content-center align-items-center">
+                    <span className="d-flex justify-content-center items-center">
                         Let's Go!
                         <ChevronAnimation active />
                     </span>

@@ -107,7 +107,7 @@ export function TokenCasingForm(props: TokenCasingFormProps) {
                 </div>
             </div>
 
-            <div className="col-sm-12 col-lg-6 d-flex justify-content-center align-items-center flex-column">
+            <div className="col-sm-12 col-lg-6 d-flex justify-content-center items-center flex-column">
                 <table className="table table-sm mb-0 mt-2">
                     <MetaPreview label={label} />
                 </table>

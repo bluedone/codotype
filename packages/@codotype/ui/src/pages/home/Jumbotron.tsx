@@ -22,7 +22,7 @@ export function Jumbotron(props: {
     return (
         <div>
             <div className="container">
-                <div className="row align-items-center">
+                <div className="row items-center">
                     <div className="col-12 col-md-5">
                         <h1 className="text-6xl">{title}</h1>
 

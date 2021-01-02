@@ -34,7 +34,7 @@ export function LoadingBuild(props: { quote?: [string, string] }) {
 
     return (
         <div
-            className="d-flex flex-column align-items-center h-100 justify-content-center"
+            className="d-flex flex-column items-center h-100 justify-content-center"
             style={{ minHeight: "26rem" }}
         >
             <h3>
