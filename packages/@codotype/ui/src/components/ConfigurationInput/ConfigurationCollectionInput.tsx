@@ -62,7 +62,7 @@ function CollectionItemForm(props: {
             />
             <hr />
 
-            <div className="d-flex justify-content-end">
+            <div className="d-flex justify-end">
                 <button
                     className="btn btn-success"
                     onClick={() => {
@@ -177,9 +177,9 @@ export function ConfigurationCollectionInput(
                                                     {
                                                         active:
                                                             editCollectionItem !==
-                                                                null &&
+                                                            null &&
                                                             collectionItem.id ===
-                                                                editCollectionItem.id,
+                                                            editCollectionItem.id,
                                                     },
                                                 )}
                                                 onClick={() => {

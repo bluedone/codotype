@@ -28,7 +28,7 @@ export function SchemaDetailHeader(props: {
                     />
                 </div>
             </div>
-            <div className="col-lg-2 d-flex justify-content-end">
+            <div className="col-lg-2 d-flex justify-end">
                 <SchemaDeleteButton
                     projectInput={props.projectInput}
                     schemaInput={props.schemaInput}

@@ -155,7 +155,7 @@ export function RelationListItem(props: {
                                     );
                                 })}
                         </div>
-                        <div className="col-sm-2 text-right d-flex controls justify-content-end">
+                        <div className="col-sm-2 text-right d-flex controls justify-end">
                             <button
                                 className="btn btn-sm btn-outline-danger px-0 py-0"
                                 onClick={e => {
