@@ -62,7 +62,7 @@ export function SchemaPreview(props: {
                 </p>
             </div> */}
             <div className="col-lg-12">
-                <div className="rounded bg-dark" style={{ overflow: "hidden" }}>
+                <div className="rounded bg-gray-800" style={{ overflow: "hidden" }}>
                     <pre
                         className="px-3 pt-3 pb-3 mb-0"
                         style={{ fontSize: "1rem" }}
@@ -86,7 +86,7 @@ export function SchemaPreview(props: {
                                     setRenderType(value);
                                 }}
                                 style={{ boxShadow: "none" }}
-                                className="form-control form-control-sm rounded-0 bg-dark text-light border-0"
+                                className="form-control form-control-sm rounded-0 bg-gray-800 text-light border-0"
                             >
                                 <option value={PreviewOutputTypes.typescript}>
                                     TypeScript

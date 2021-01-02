@@ -203,7 +203,7 @@ stories.forEach(story => {
                     />
                 </ConfigurationInputFormGroup>
                 <hr />
-                <pre className="bg-dark rounded p-2 text-light">
+                <pre className="bg-gray-800 rounded p-2 text-light">
                     {JSON.stringify({ value }, null, 4)}
                 </pre>
             </Story>

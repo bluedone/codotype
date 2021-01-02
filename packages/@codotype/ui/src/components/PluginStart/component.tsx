@@ -32,7 +32,7 @@ export function PluginStart(props: PluginStartProps) {
                             style={{ maxWidth: "4rem !important" }}
                             src={props.plugin.content.icon}
                         />
-                        <h3 className="display-4 mt-3">
+                        <h3 className="text-xl mt-3">
                             {props.plugin.content.label}
                         </h3>
                         <p className="lead text-muted">

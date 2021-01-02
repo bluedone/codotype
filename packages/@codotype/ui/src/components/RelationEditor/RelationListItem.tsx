@@ -148,7 +148,7 @@ export function RelationListItem(props: {
                                                 </Tooltip>
                                             }
                                         >
-                                            <span className="ml-2 badge badge-light">
+                                            <span className="ml-2 badge bg-gray-300">
                                                 <FontAwesomeIcon icon={icon} />
                                             </span>
                                         </OverlayTrigger>

@@ -84,7 +84,7 @@ export function SchemaDeleteButton(props: {
                 }
             >
                 <span
-                    className="badge badge-success ml-2"
+                    className="badge bg-green-500 ml-2"
                     style={{ cursor: "default" }}
                 >
                     <FontAwesomeIcon className="mr-2" icon={faInfoCircle} />

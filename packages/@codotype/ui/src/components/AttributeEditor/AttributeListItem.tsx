@@ -103,7 +103,7 @@ export function AttributeListItem(props: {
                         {attribute.locked && (
                             <div className="col-sm-2 text-right controls justify-end">
                                 <span
-                                    className=" badge badge-secondary"
+                                    className=" badge bg-gray-500"
                                     title="This Attribute is auto-generated - it may not be edited or removed."
                                 >
                                     {/* <i className="fa fa-fw fa-lock" /> */}

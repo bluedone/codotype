@@ -2,18 +2,6 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-/* .card-body {
-    @apply px-4;
-    @apply py-4;
-}
-
-.card {
-    @apply bg-white;
-    @apply rounded-xl;
-    @apply overflow-hidden;
-    @apply border;
-}
-
 /* Start updating things one component at a time */
 
 /* Modal Footer */
@@ -27,4 +15,56 @@
     @apply border-gray-300;
     @apply rounded-bl-lg;
     @apply rounded-br-lg;
+}
+
+.card {
+    @apply bg-white;
+    @apply rounded;
+    @apply overflow-hidden;
+    @apply border;
+    @apply relative;
+    @apply flex;
+    @apply flex-col;
+    @apply break-words;
+    @apply bg-clip-padding;
+    @apply border-gray-300;
+}
+
+.card-body {
+    @apply p-5;
+}
+
+code {
+    @apply text-orange-400;
+}
+
+/* NOTE - only used in one place, replace with updated CSS soon */
+small {
+    @apply text-sm;
+    @apply font-normal;
+}
+
+hr {
+    @apply border-t;
+    @apply border-gray-400;
+    margin-top: 0.2rem;
+    margin-bottom: 0.2rem;
+}
+
+.lead {
+    @apply text-lg;
+    @apply font-light;
+}
+
+.badge {
+    display: inline-block;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    @apply mx-2;
+    @apply py-1;
+    @apply text-sm;
+    @apply font-medium;
+    @apply rounded;
 }

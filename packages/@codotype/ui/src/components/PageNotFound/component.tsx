@@ -11,7 +11,7 @@ export function PageNotFound() {
             <div className="col-lg-12">
                 <div className="row mt-2">
                     <div className="col-lg-12 text-center">
-                        <h4 className="display-4">
+                        <h4 className="text-xl">
                             Oops, something went wrong.
                         </h4>
                     </div>

@@ -207,10 +207,10 @@ layoutVariantStories.forEach(testCase => {
                         increment();
                     }}
                 />
-                <pre className="p-4 bg-dark text-light rounded mt-4">
+                <pre className="p-4 bg-gray-800 text-light rounded mt-4">
                     {JSON.stringify(configurationOptionValue, null, 4)}
                 </pre>
-                <pre className="p-4 bg-dark text-light rounded mt-4">
+                <pre className="p-4 bg-gray-800 text-light rounded mt-4">
                     {JSON.stringify(configurationGroup, null, 4)}
                 </pre>
             </Story>

@@ -20,7 +20,7 @@ function ToggleEnabled(props: {
 }) {
     const { configurationGroup, enabled, onChange } = props;
     return (
-        <div className="mt-2 px-2 py-2 flex justify-center bg-dark text-white rounded">
+        <div className="mt-2 px-2 py-2 flex justify-center bg-gray-800 text-white rounded">
             <div className="flex flex-column items-center">
                 <p className="lead mb-0">
                     Enable {configurationGroup.content.label}

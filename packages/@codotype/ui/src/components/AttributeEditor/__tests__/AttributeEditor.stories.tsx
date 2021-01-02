@@ -30,7 +30,7 @@ storiesOf("Components/ProjectEditor/AttributeEditor/Layout", module).add(
                 />
 
                 <hr />
-                <pre className="bg-dark px-4 py-4 rounded mt-4 text-light">
+                <pre className="bg-gray-800 px-4 py-4 rounded mt-4 text-light">
                     {JSON.stringify(attributes, null, 4)}
                 </pre>
             </Story>
@@ -56,7 +56,7 @@ storiesOf("Components/ProjectEditor/AttributeEditor/Layout", module).add(
                 />
 
                 <hr />
-                <pre className="bg-dark px-4 py-4 rounded mt-4 text-light">
+                <pre className="bg-gray-800 px-4 py-4 rounded mt-4 text-light">
                     {JSON.stringify(attributes, null, 4)}
                 </pre>
             </Story>

@@ -15,7 +15,7 @@ export function AboutJumbotron() {
                     height="100px"
                     src="https://res.cloudinary.com/codotype/image/upload/v1560045005/tech-logos/codotype.png"
                 />
-                <h1 className="display-1">Codotype</h1>
+                <h1 className="text-xl">Codotype</h1>
             </div>
         </div>
     );
