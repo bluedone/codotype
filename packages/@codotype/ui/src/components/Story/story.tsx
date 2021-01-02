@@ -18,6 +18,7 @@ export function Story(props: StoryProps) {
                     paddingTop: "4.5rem",
                     paddingBottom: "4rem",
                     height: "100%",
+                    backgroundColor: "#f5f6f9"
                 }}
             >
                 <div className="row flex justify-center">

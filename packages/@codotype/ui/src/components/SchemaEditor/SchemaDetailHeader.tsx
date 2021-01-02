@@ -20,7 +20,9 @@ export function SchemaDetailHeader(props: {
                 <div className="flex items-center">
                     <h4 className="mb-0 text-2xl">
                         {props.schemaInput.identifiers.singular.title}
-                        <span className="text-muted ml-2">Schema</span>
+                        <span className="ml-1 text-gradient bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-500">
+                            Data Model
+                        </span>
                     </h4>
                     <SchemaEditButton
                         schema={props.schemaInput}

@@ -229,7 +229,7 @@ export function SchemaEditorLayout(props: {
         return (
             <div className="row flex px-4 py-4 justify-center items-center">
                 <div className="col-sm-8">
-                    <div className="card card-body shadow-sm">
+                    <div className="card card-body shadow-xl">
                         <div className="row items-center justify-center">
                             <div className="col-lg-12">
                                 <h4>New Schema</h4>
@@ -340,7 +340,7 @@ export function SchemaEditorLayout(props: {
                 </DragDropContext>
             </div>
             <div className="col-lg-8 pl-3 pl-lg-0 mt-4 mt-lg-0">
-                <div className="card card-body shadow-sm">
+                <div className="card card-body shadow-xl">
                     <SchemaDetail
                         schema={selectedSchema}
                         projectInput={props.projectInput}

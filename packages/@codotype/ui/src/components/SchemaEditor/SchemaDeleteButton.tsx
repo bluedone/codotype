@@ -2,8 +2,6 @@ import * as React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
-import styled from "styled-components";
-import classnames from "classnames";
 import {
     Schema,
     CreatedByValues,
@@ -14,32 +12,6 @@ import {
 } from "@codotype/core";
 
 // // // //
-
-const StyledButton = styled.button`
-    transition: color 0.25s ease-in-out;
-    cursor: pointer;
-    color: #adb5bd;
-    box-shadow: none;
-    color: #d9534f;
-    &.hasReverse {
-        &:hover {
-            color: #adb5bd !important;
-            cursor: not-allowed;
-        }
-    }
-    &:hover {
-        color: #d9534f;
-    }
-
-    &.disable-submit {
-        cursor: not-allowed !important;
-        &:hover {
-            color: #adb5bd;
-        }
-    }
-`;
-
-const StyledButtonDisabled = styled.button``;
 
 /**
  * SchemaDeleteButton
@@ -59,12 +31,6 @@ export function SchemaDeleteButton(props: {
             relationInputs: projectInput.relations,
         }),
     });
-
-    // Defines boolean indicating whether or not the schema can be removed
-    const disableSubmit: boolean =
-        inflatedSchema.referencedBy.filter(
-            r => r.sourceSchemaID !== schemaInput.id,
-        ).length > 0;
 
     if (
         schemaInput.createdBy === CreatedByValues.plugin &&
@@ -101,16 +67,6 @@ export function SchemaDeleteButton(props: {
         </React.Fragment>
     );
 
-    if (disableSubmit) {
-        tooltipContent = (
-            <React.Fragment>
-                You cannot remove the{" "}
-                <strong>{schemaInput.identifiers.singular.title}</strong> Schema
-                because it is referenced by a relation on another Schema.
-            </React.Fragment>
-        );
-    }
-
     // Render different layout + tooltip if disableSubmit
     return (
         <OverlayTrigger
@@ -121,19 +77,16 @@ export function SchemaDeleteButton(props: {
                 </Tooltip>
             }
         >
-            <StyledButton
-                className={classnames("btn btn-link ml-2 py-0", {
-                    "disable-submit": disableSubmit,
-                })}
+            <button
+                className={
+                    "ml-2 text-gray-500 hover:text-red-400 p-1 focus:outline-none transition-colors duration-150 ease-in-out"
+                }
                 onClick={() => {
-                    if (disableSubmit) {
-                        return;
-                    }
                     props.onClick();
                 }}
             >
                 <FontAwesomeIcon className="ml-1" icon={faTrashAlt} />
-            </StyledButton>
+            </button>
         </OverlayTrigger>
     );
 }

@@ -26,8 +26,7 @@ export function SchemaEditButton(props: {
             }
         >
             <button
-                className="btn btn-sm btn-link ml-2 py-0"
-                style={{ color: "#adb5bd" }}
+                className="btn-icon"
                 onClick={props.onClick}
             >
                 <FontAwesomeIcon className="ml-2" icon={faPencilAlt} />

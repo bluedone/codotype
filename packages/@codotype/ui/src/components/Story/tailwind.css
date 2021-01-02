@@ -146,3 +146,27 @@ hr {
       }
     } */
 }
+
+.btn-icon {
+    @apply ml-2;
+    @apply text-gray-500;
+    @apply p-1;
+    @apply transition-colors;
+    @apply duration-150;
+    @apply ease-in-out;
+}
+
+.btn-icon:hover {
+    @apply text-blue-400;
+}
+
+.btn-icon:focus {
+    @apply outline-none;
+}
+
+@layer utilities {
+    .text-gradient {
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+}
