@@ -19,10 +19,10 @@ export function TailwindStory(props: StoryProps) {
                     height: "100%",
                 }}
             >
-                <div className="row d-flex justify-content-center">
+                <div className="row flex justify-content-center">
                     <div className="col-sm-10">{props.children}</div>
                 </div>
-                {/* <div className="row d-flex justify-content-center">
+                {/* <div className="row flex justify-content-center">
                     <div className="col-lg-12">{props.children}</div>
                 </div> */}
             </div>
