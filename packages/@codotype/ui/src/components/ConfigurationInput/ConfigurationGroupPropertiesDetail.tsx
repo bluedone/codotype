@@ -37,8 +37,8 @@ export function ConfigurationGroupPropertiesDetail(props: {
     const selectedProperty:
         | ConfigurationProperty
         | undefined = configurationGroup.properties.find(
-        p => p.identifier === selectedPropertyID,
-    );
+            p => p.identifier === selectedPropertyID,
+        );
 
     // Return null if selectedProperty is undefined
     if (selectedProperty === undefined) {
@@ -67,7 +67,7 @@ export function ConfigurationGroupPropertiesDetail(props: {
                         // TODO - the bootstrap tabs + pills CSS isn't working correctly, should fix
                         const tabClassName: string[] = ["nav-link nav-item"];
                         if (property.identifier === selectedPropertyID) {
-                            tabClassName.push("active bg-primary text-white");
+                            tabClassName.push("active bg-blue-500 text-white");
                         }
 
                         return (

@@ -152,7 +152,7 @@ export function ConfigurationCollectionInput(
                     {showList && (
                         <div className="col-sm-12">
                             <button
-                                className="btn btn-block btn-primary"
+                                className="btn w-full btn-primary"
                                 onClick={() => {
                                     setEditCollectionItem(null);
                                     setNewCollectionItem(
@@ -163,7 +163,7 @@ export function ConfigurationCollectionInput(
                                 New {identifiers.singular.title}
                             </button>
 
-                            <ul className="list-group mt-3">
+                            <ul className="flex flex-col pl-0 mb-0 rounded mt-3">
                                 {collectionValue.map(
                                     (
                                         collectionItem: CollectionItem,

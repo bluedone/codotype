@@ -17,7 +17,7 @@ export function ProjectForm(props: {
         <div className="row items-center justify-center">
             <div className="col-sm-12">
                 <p className="mt-2 mb-3 text-muted">
-                    <span className="text-success">Project Name</span> must be{" "}
+                    <span className="text-green-500">Project Name</span> must be{" "}
                     <strong>alphabetic</strong> - no numbers or symbols, but
                     whitespace is allowed. The input field will enforce proper
                     capitalization and spacing.
@@ -46,7 +46,7 @@ export function ProjectForm(props: {
 
                 <p className="mt-3 text-muted">
                     <strong>Codotype</strong> uses the{" "}
-                    <span className="text-success">Project Name</span> for
+                    <span className="text-green-500">Project Name</span> for
                     naming things like <strong>files</strong>,{" "}
                     <strong>folders</strong>, <strong>namespaces</strong>, and{" "}
                     <strong>databases</strong>. No need to be picky, you can

@@ -45,7 +45,7 @@ export function SchemaForm(props: SchemaFormProps) {
                         </p>
 
                         <p className="mt-2 mb-3 text-muted">
-                            Its <span className="text-success">Label</span>{" "}
+                            Its <span className="text-green-500">Label</span>{" "}
                             should be a <strong>singular noun</strong> -
                             whitespace is allowed. The input field will enforce
                             proper capitalization and spacing.
@@ -79,7 +79,7 @@ export function SchemaForm(props: SchemaFormProps) {
 
                         <p className="mt-4 text-muted">
                             <strong>Codotype</strong> derives additional{" "}
-                            <span className="text-success">Tokens</span> to use
+                            <span className="text-green-500">Tokens</span> to use
                             for things like naming <strong>files</strong>,{" "}
                             <strong>folders</strong>, <strong>variables</strong>
                             , and <strong>database tables</strong>. You can

@@ -224,7 +224,7 @@ export function RelationEditor(props: RelationEditorProps) {
                             {(provided: any) => {
                                 return (
                                     <ul
-                                        className="list-group list-group-flush"
+                                        className="list-group rounded-none"
                                         ref={provided.innerRef}
                                         {...provided.droppableProps}
                                     >
@@ -248,10 +248,10 @@ export function RelationEditor(props: RelationEditorProps) {
                                                             const relation:
                                                                 | RelationInput
                                                                 | undefined = props.relations.find(
-                                                                r =>
-                                                                    r.id ===
-                                                                    relationToBeEdited.sourceRelationInputID,
-                                                            );
+                                                                    r =>
+                                                                        r.id ===
+                                                                        relationToBeEdited.sourceRelationInputID,
+                                                                );
                                                             if (
                                                                 relation ===
                                                                 undefined
@@ -268,10 +268,10 @@ export function RelationEditor(props: RelationEditorProps) {
                                                             const relation:
                                                                 | RelationInput
                                                                 | undefined = props.relations.find(
-                                                                r =>
-                                                                    r.id ===
-                                                                    relationToDelete.sourceRelationInputID,
-                                                            );
+                                                                    r =>
+                                                                        r.id ===
+                                                                        relationToDelete.sourceRelationInputID,
+                                                                );
                                                             if (
                                                                 relation ===
                                                                 undefined

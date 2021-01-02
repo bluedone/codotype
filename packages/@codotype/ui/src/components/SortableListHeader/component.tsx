@@ -38,7 +38,7 @@ export function SortableListHeader(props: SortableListHeaderProps) {
             overlay={<Tooltip id="attribute-editor-header">{tooltip}</Tooltip>}
         >
             <button
-                className="btn btn-block btn-primary"
+                className="btn w-full btn-primary"
                 onClick={e => {
                     e.currentTarget.blur();
                     props.onClick();

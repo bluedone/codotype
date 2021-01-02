@@ -136,7 +136,7 @@ export function ConfigurationInputFormGroup(
 
             {/* Render empty description warning */}
             {property.content.description === "" && (
-                <small className="d-block mt-2 mb-2 text-danger">
+                <small className="d-block mt-2 mb-2 text-red-500">
                     Warning - this input needs a description
                 </small>
             )}
@@ -145,7 +145,7 @@ export function ConfigurationInputFormGroup(
 
     const formGroup = (
         <div
-            className={classnames("form-group", {
+            className={classnames({
                 [className]: className !== "",
             })}
         >
@@ -178,7 +178,7 @@ export function ConfigurationInputFormGroup(
 
     const disabledFormGroup = (
         <div
-            className={classnames("form-group", {
+            className={classnames({
                 [className]: className !== "",
             })}
         >

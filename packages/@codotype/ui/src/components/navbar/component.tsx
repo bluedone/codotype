@@ -66,7 +66,7 @@ export function AppNavbar(props: { homeUrl?: string }) {
                         <Nav.Link href="https://codotype.org" target="_blank">
                             <FontAwesomeIcon
                                 icon={faBook}
-                                className="text-info mr-1"
+                                className="text-teal-500 mr-1"
                             />
                             Docs
                         </Nav.Link>
@@ -74,7 +74,7 @@ export function AppNavbar(props: { homeUrl?: string }) {
                         <Nav.Link href="https://codotype.org" target="_blank">
                             <FontAwesomeIcon
                                 icon={faDollarSign}
-                                className="text-success mr-1"
+                                className="text-green-500 mr-1"
                             />
                             Donate
                         </Nav.Link>
@@ -85,7 +85,7 @@ export function AppNavbar(props: { homeUrl?: string }) {
                         >
                             <FontAwesomeIcon
                                 icon={faTwitter}
-                                className="text-primary mr-1"
+                                className="text-blue-500 mr-1"
                             />
                             Twitter
                         </Nav.Link>

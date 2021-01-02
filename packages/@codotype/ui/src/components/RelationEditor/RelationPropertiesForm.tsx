@@ -80,16 +80,16 @@ export function RelationPropertiesForm(props: RelationPropertiesFormProps) {
         <React.Fragment>
             <div className="row">
                 <div className="col-lg-4">
-                    <div className="form-group text-primary text-center">
+                    <div className="mb-0 text-blue-500 text-center">
                         <label className="mb-0">
                             {schema.identifiers.singular.title}
                         </label>
-                        <small className="form-text text-primary">
+                        <small className="form-text text-blue-500">
                             Where the relational data is stored
                         </small>
                         <input
                             type="text"
-                            className="form-control border-primary text-primary"
+                            className="form-control border-blue-500 text-blue-500"
                             value={getSourceLabel({ schema, relationInput })}
                         />
                     </div>
@@ -98,7 +98,7 @@ export function RelationPropertiesForm(props: RelationPropertiesFormProps) {
                 <div className="col-lg-4">
                     <div className="row">
                         <div className="col-lg-12">
-                            <div className="form-group text-center mb-0">
+                            <div className="mb-0 text-center mb-0">
                                 <label className="mb-0">
                                     {RELATION_META[relationInput.type].label}
                                 </label>
@@ -131,13 +131,13 @@ export function RelationPropertiesForm(props: RelationPropertiesFormProps) {
                 </div>
 
                 <div className="col-lg-4">
-                    <div className="form-group text-center">
-                        <label className="mb-0 text-info">Related Schema</label>
-                        <small className="form-text text-info">
+                    <div className="mb-0 text-center">
+                        <label className="mb-0 text-teal-500">Related Schema</label>
+                        <small className="form-text text-teal-500">
                             Schema referenced by this relation
                         </small>
                         <select
-                            className="form-control border-info text-info"
+                            className="form-control border-teal-500 text-teal-500"
                             value={relationInput.destinationSchemaID}
                             onChange={e => {
                                 props.onChange({

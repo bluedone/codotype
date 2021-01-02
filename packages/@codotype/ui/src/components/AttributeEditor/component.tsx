@@ -236,7 +236,7 @@ export function AttributeEditor(props: AttributeEditorProps) {
                             {(provided: any) => {
                                 return (
                                     <ul
-                                        className="list-group list-group-flush"
+                                        className="flex flex-col pl-0 mb-0 rounded-none"
                                         ref={provided.innerRef}
                                         {...provided.droppableProps}
                                     >

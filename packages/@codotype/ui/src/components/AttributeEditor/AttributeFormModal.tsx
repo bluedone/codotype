@@ -32,8 +32,8 @@ export function AttributeFormModal(props: {
             </Modal.Header>
             <Modal.Body>{props.children}</Modal.Body>
             <div className="modal-footer-tw">
-                <div className="flex items-center justify-between flex-grow-1">
-                    <div className="flex flex-grow-1">
+                <div className="flex items-center justify-between flex-grow">
+                    <div className="flex flex-grow">
                         <p className="mb-0 text-warning">{props.errors[0]}</p>
                     </div>
                     <div className="flex">

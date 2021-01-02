@@ -38,18 +38,18 @@ export function RelationDiagram(props: RelationDiagramProps) {
     const destManyOrOne = destPlural ? "Many" : "One";
 
     const iconCss = classnames("mx-1", {
-        "text-primary": direction === "out",
-        "text-info": direction !== "out",
+        "text-blue-500": direction === "out",
+        "text-teal-500": direction !== "out",
     });
 
     const textColor = classnames({
-        "text-primary": direction === "out",
-        "text-info": direction !== "out",
+        "text-blue-500": direction === "out",
+        "text-teal-500": direction !== "out",
     });
 
     const oppositeTextColor = classnames({
-        "text-primary": direction !== "out",
-        "text-info": direction === "out",
+        "text-blue-500": direction !== "out",
+        "text-teal-500": direction === "out",
     });
 
     const icon = direction === "out" ? faArrowRight : faArrowLeft;

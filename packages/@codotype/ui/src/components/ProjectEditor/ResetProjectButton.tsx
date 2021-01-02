@@ -38,7 +38,7 @@ export function ResetProjectButton(props: {
                     </p>
 
                     <p className="form-text text-muted mb-2">
-                        <span className="text-danger">DANGER: </span>This will
+                        <span className="text-red-500">DANGER: </span>This will
                         delete your current project - this action cannot be
                         undone. Are you sure you want to continue?
                     </p>

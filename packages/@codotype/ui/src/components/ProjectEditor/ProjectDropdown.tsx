@@ -37,7 +37,7 @@ export function ProjectDropdown(props: {
                     <ProjectExportButton projectInput={props.projectInput} />
                     <Dropdown.Divider />
                     <Dropdown.Header>
-                        <span className="text-danger">Danger Zone</span>
+                        <span className="text-red-500">Danger Zone</span>
                     </Dropdown.Header>
                     <ResetProjectButton onConfirmReset={props.onConfirmReset} />
                 </Dropdown.Menu>

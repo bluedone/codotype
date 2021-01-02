@@ -42,14 +42,14 @@ export function ExampleProjectDropdown(props: {
                 >
                     <FontAwesomeIcon
                         icon={faFolderOpen}
-                        className="text-primary mr-1"
+                        className="text-blue-500 mr-1"
                     />
-                    <span className="text-primary">Example Projects</span>
+                    <span className="text-blue-500">Example Projects</span>
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
                     <Dropdown.Header>
-                        <span className="text-primary">Example Projects</span>
+                        <span className="text-blue-500">Example Projects</span>
                     </Dropdown.Header>
                     <Dropdown.Divider />
                     {exampleProjects.map((projectInput: ProjectInput) => (

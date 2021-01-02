@@ -24,7 +24,7 @@ interface PluginStartProps {
  */
 export function PluginStart(props: PluginStartProps) {
     return (
-        <div className="row h-100 items-center">
+        <div className="row h-full items-center">
             <div className="col-lg-12">
                 <div className="row">
                     <div className="col-lg-12 text-center">
@@ -59,7 +59,7 @@ export function PluginStart(props: PluginStartProps) {
                 <div className="row justify-center">
                     <div className="col-lg-4 col-md-6 col-sm-8 text-center">
                         {props.buildLink && (
-                            <button className="btn btn-block btn-primary btn-lg rounded-pill">
+                            <button className="btn w-full btn-primary btn-lg rounded-pill">
                                 Let's build something
                                 <ChevronAnimation active />
                             </button>
@@ -68,7 +68,7 @@ export function PluginStart(props: PluginStartProps) {
                         {props.externalLink && (
                             <button
                                 // :href="externalLink"
-                                className="btn btn-block btn-primary btn-lg rounded-pill"
+                                className="btn w-full btn-primary btn-lg rounded-pill"
                             >
                                 Let's build something
                                 <ChevronAnimation active />

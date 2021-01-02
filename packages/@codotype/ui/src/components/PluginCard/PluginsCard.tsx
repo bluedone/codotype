@@ -7,9 +7,9 @@ import { ChevronAnimation } from "../ChevronAnimation";
 export function PluginCard(props: { plugin: PluginMetadata }) {
     const { plugin } = props;
     return (
-        <div className="card col-lg-12 shadow border-light">
+        <div className="card col-lg-12 shadow">
             <div className="card-body">
-                <div className="row flex align-items-end flex-column">
+                <div className="row flex items-end flex-column">
                     <div className="col-lg-12 flex justify-center">
                         <p className="lead mb-0">
                             <a
@@ -38,7 +38,7 @@ export function PluginCard(props: { plugin: PluginMetadata }) {
             <div className="card-footer bg-white border-top-none">
                 <a
                     href={`/plugins/${plugin.identifier}`}
-                    className="btn btn-block btn-xl btn-primary rounded-pill"
+                    className="btn w-full btn-lg btn-primary rounded-pill"
                 >
                     <span className="flex justify-center items-center">
                         Let's Go!

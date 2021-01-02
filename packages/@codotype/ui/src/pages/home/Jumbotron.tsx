@@ -48,7 +48,7 @@ export function Jumbotron(props: {
                             <div className="col-lg-6">
                                 <a
                                     href="/plugins"
-                                    className="btn btn-block btn-lg btn-outline-primary rounded-pill"
+                                    className="btn w-full btn-lg btn-outline-primary rounded-pill"
                                 >
                                     <FontAwesomeIcon
                                         icon={faSearch}

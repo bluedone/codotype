@@ -33,7 +33,7 @@ export function LoadExampleProjectModal(props: {
                 </p>
 
                 <p className="form-text text-muted mb-2">
-                    <span className="text-danger">WARNING: </span>This will
+                    <span className="text-red-500">WARNING: </span>This will
                     delete your current project - are you sure you want to
                     continue?
                 </p>

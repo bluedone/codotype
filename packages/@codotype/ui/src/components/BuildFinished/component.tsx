@@ -31,7 +31,7 @@ export function BuildFinished(props: {
 
     return (
         <div
-            className="flex flex-column items-center h-100 justify-center"
+            className="flex flex-column items-center h-full justify-center"
             style={{ minHeight: "26rem" }}
         >
             {/* Header */}
@@ -48,12 +48,12 @@ export function BuildFinished(props: {
                         <FontAwesomeIcon
                             icon={faHeart}
                             size="lg"
-                            className="text-danger"
+                            className="text-red-500"
                         />
                     </p>
 
                     <small className="text-muted">
-                        Your <span className="text-success">Project</span> has
+                        Your <span className="text-green-500">Project</span> has
                         successfully been generated
                     </small>
                     <br />
@@ -69,7 +69,7 @@ export function BuildFinished(props: {
             {props.filepath && props.responseType === "LOCAL_PATH" && (
                 <div className="row flex justify-center mt-3">
                     <div className="col-sm-12 text-center">
-                        <small className="text-primary">
+                        <small className="text-blue-500">
                             Your codebase is in the following local directory:
                         </small>
                         <p className="lead mb-0">
@@ -110,7 +110,7 @@ export function BuildFinished(props: {
                         <a
                             href={props.downloadUrl}
                             target="_blank"
-                            className="btn btn-lg btn-block btn-success"
+                            className="btn btn-lg w-full btn-success"
                         >
                             <FontAwesomeIcon
                                 icon={faDownload}
@@ -138,7 +138,7 @@ export function BuildFinished(props: {
 
                 <div className="col-sm-12 col-md-4 mt-2">
                     <button
-                        className="btn btn-block btn-outline-primary"
+                        className="btn w-full btn-outline-primary"
                         onClick={props.onClickBackToEditor}
                     >
                         <FontAwesomeIcon icon={faReply} className="mr-2" />

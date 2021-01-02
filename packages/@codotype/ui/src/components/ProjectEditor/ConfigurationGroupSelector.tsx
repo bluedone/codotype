@@ -21,7 +21,7 @@ export function ConfigurationGroupTab(props: {
 }) {
     const { label } = props;
     const btnClassName: string[] = [
-        "flex flex-grow-1 justify-center btn mr-2 shadow-sm",
+        "flex flex-grow justify-center btn mr-2 shadow-sm",
     ];
     // if (props.pinned) {
     // btnClassName.push("btn-light");

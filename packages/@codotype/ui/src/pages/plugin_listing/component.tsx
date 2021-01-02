@@ -61,7 +61,7 @@ export function PluginListPage(props: { plugins: PluginMetadata[] }) {
 
                     <div className="col-lg-3 pl-0">
                         <button
-                            className="btn btn-lg btn-block btn-outline-warning"
+                            className="btn btn-lg w-full btn-outline-warning"
                             onClick={() => {
                                 setFilter("");
                             }}
@@ -80,9 +80,9 @@ export function PluginListPage(props: { plugins: PluginMetadata[] }) {
                     </div>
 
                     <div className="col-lg-12">
-                        <div className="card py-4 my-3 border-dark bg-transparent">
-                            <ul className="list-group list-group-flush">
-                                <li className="list-group-item text-center bg-transparent border-dark text-dark">
+                        <div className="card py-4 my-3 border-gray-800 bg-transparent">
+                            <ul className="list-group rounded-none">
+                                <li className="list-group-item text-center bg-transparent border-gray-800 text-gray-800">
                                     <FontAwesomeIcon
                                         size="2x"
                                         icon={faInfoCircle}

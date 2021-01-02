@@ -87,7 +87,7 @@ export function SchemaSelector(props: {
                 {(provided: any) => {
                     return (
                         <ul
-                            className="list-group list-group-flush"
+                            className="list-group rounded-none"
                             ref={provided.innerRef}
                             {...provided.droppableProps}
                         >

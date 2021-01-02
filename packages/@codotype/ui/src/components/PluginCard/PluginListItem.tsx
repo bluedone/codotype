@@ -11,10 +11,10 @@ import { PluginTechTag } from "./PluginTechTag";
 export function PluginListItem(props: { plugin: PluginMetadata }) {
     const { plugin } = props;
     return (
-        <div className="card card-body border-light shadow-hover mb-2">
+        <div className="card card-body shadow-hover mb-2">
             <div className="row">
                 <div className="col-lg-12 flex justify-between items-center">
-                    <p className="lead mb-0 w-100 flex justify-between items-center">
+                    <p className="lead mb-0 w-full flex justify-between items-center">
                         <img
                             className="mr-2"
                             style={{ maxWidth: "2rem" }}

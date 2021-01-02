@@ -21,7 +21,7 @@ export function AttributeMetaForm(props: AttributeMetaFormProps) {
                 <p className="lead mb-0">Behaviors</p>
                 <small className="form-text text-muted">
                     Provide a{" "}
-                    <span className="text-success">Internal Note</span> to
+                    <span className="text-green-500">Internal Note</span> to
                     annotate this <strong>Attribute</strong>.
                 </small>
                 <hr />

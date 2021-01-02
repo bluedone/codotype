@@ -19,13 +19,13 @@ function FormGroupTab(props: {
     onClick: () => void;
 }) {
     const { label } = props;
-    const btnClassName: string[] = ["btn btn-block nav-link w-100"];
+    const btnClassName: string[] = ["btn w-full nav-link w-full"];
     if (props.active) {
         btnClassName.push("active");
     }
 
     return (
-        <li className="nav-item flex flex-grow-1">
+        <li className="nav-item flex flex-grow">
             <button
                 className={btnClassName.join(" ")}
                 disabled={props.disabled}
@@ -59,7 +59,7 @@ export function AttributeFormSelector(props: {
     return (
         <div className="row">
             <div className="col-lg-12">
-                <ul className="nav nav-tabs w-100 flex">
+                <ul className="nav nav-tabs w-full flex">
                     <FormGroupTab
                         onClick={() => {
                             setSelectedForm("DATATYPE");

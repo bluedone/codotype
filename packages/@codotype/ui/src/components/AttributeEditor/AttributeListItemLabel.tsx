@@ -65,7 +65,7 @@ export function AttributeListItemLabel(props: AttributeListItemLabelProps) {
             {/* Required badge */}
             {/* TODO - update this to use icons from ADDONS */}
             {/* {attribute.addons.required && (
-                <span className="ml-1 text-danger">*</span>
+                <span className="ml-1 text-red-500">*</span>
             )} */}
 
             {/* Render Addon badges */}

@@ -26,7 +26,7 @@ export function AttributePropertiesForm(props: AttributePropertiesFormProps) {
             <div className="col-lg-12">
                 <p className="lead mb-0">Tokens</p>
                 <small className="text-muted">
-                    Define the <span className="text-success">Tokens</span> used
+                    Define the <span className="text-green-500">Tokens</span> used
                     to identify this <strong>Attribute</strong> throughout your
                     codebase.
                 </small>

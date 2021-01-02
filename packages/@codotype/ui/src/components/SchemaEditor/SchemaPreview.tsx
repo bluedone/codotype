@@ -73,10 +73,10 @@ export function SchemaPreview(props: {
                     </pre>
 
                     <div
-                        className="flex flex-row items-center border-primary"
+                        className="flex flex-row items-center border-blue-500"
                         style={{ borderTop: "2px solid" }}
                     >
-                        <div className="flex flex-column flex-grow-1">
+                        <div className="flex flex-column flex-grow">
                             <select
                                 value={previewOutputType}
                                 onChange={e => {
@@ -108,7 +108,7 @@ export function SchemaPreview(props: {
                             >
                                 {({ copyToClipboard }) => (
                                     <button
-                                        className="btn btn-sm btn-block btn-dark rounded-0"
+                                        className="btn btn-sm w-full btn-dark rounded-0"
                                         onClick={copyToClipboard}
                                         style={{
                                             boxShadow: "none",
@@ -119,7 +119,7 @@ export function SchemaPreview(props: {
                                             <span>
                                                 <FontAwesomeIcon
                                                     icon={faCheckCircle}
-                                                    className="mr-2 text-success"
+                                                    className="mr-2 text-green-500"
                                                 />
                                                 Copied
                                             </span>
