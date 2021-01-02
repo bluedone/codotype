@@ -76,8 +76,8 @@ export function SchemaEditorLayout(props: {
     const selectedSchema:
         | SchemaInput
         | undefined = state.projectInput.schemas.find((s: SchemaInput) => {
-        return s.id === selectedSchemaId;
-    });
+            return s.id === selectedSchemaId;
+        });
 
     // Defines handler for creating new schemas
     function createNewSchema() {

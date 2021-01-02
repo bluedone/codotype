@@ -31,7 +31,7 @@ export function AttributeFormModal(props: {
                 <Modal.Title>{title}</Modal.Title>
             </Modal.Header>
             <Modal.Body>{props.children}</Modal.Body>
-            <Modal.Footer className="bg-light">
+            <div className="modal-footer-tw">
                 <div className="d-flex align-items-center justify-content-between flex-grow-1">
                     <div className="d-flex flex-grow-1">
                         <p className="mb-0 text-warning">{props.errors[0]}</p>
@@ -52,7 +52,7 @@ export function AttributeFormModal(props: {
                         </button>
                     </div>
                 </div>
-            </Modal.Footer>
+            </div>
         </Modal>
     );
 }

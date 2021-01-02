@@ -37,7 +37,7 @@ export function DocumentationModal(props: {
                 <Modal.Body>
                     <MarkdownRenderer source={props.documentation} />
                 </Modal.Body>
-                <Modal.Footer className="bg-light">
+                <div className="modal-footer-tw">
                     <button
                         className="btn btn-lg btn-light"
                         onClick={() => {
@@ -46,7 +46,7 @@ export function DocumentationModal(props: {
                     >
                         Close
                     </button>
-                </Modal.Footer>
+                </div>
             </Modal>
         </React.Fragment>
     );

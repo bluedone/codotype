@@ -22,7 +22,7 @@ export function ProjectFormModal(props: {
                 <Modal.Title>Project Name</Modal.Title>
             </Modal.Header>
             <Modal.Body>{props.children}</Modal.Body>
-            <Modal.Footer className="bg-light">
+            <div className="modal-footer-tw">
                 <button
                     className="btn btn-lg btn-primary"
                     onClick={props.onSubmit}
@@ -36,7 +36,7 @@ export function ProjectFormModal(props: {
                 >
                     Close
                 </button>
-            </Modal.Footer>
+            </div>
         </Modal>
     );
 }

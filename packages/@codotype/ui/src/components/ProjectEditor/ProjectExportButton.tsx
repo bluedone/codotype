@@ -14,9 +14,8 @@ const download = require("downloadjs");
  */
 function downloadProject(projectInput: ProjectInput) {
     // Defines filename
-    const filename = `codotype-project-${
-        projectInput.identifiers.snake
-    }-${Date.now()}.json`;
+    const filename = `codotype-project-${projectInput.identifiers.snake
+        }-${Date.now()}.json`;
 
     // Defines JSON string
     const jsonString: string = JSON.stringify(projectInput, null, 4);
@@ -69,7 +68,7 @@ export function ProjectExportButton(props: { projectInput: ProjectInput }) {
                     </small>
                 </Modal.Body>
 
-                <Modal.Footer className="bg-light">
+                <div className="modal-footer-tw">
                     <button
                         className="btn btn-lg btn-success"
                         onClick={() => {
@@ -86,7 +85,7 @@ export function ProjectExportButton(props: { projectInput: ProjectInput }) {
                     >
                         Cancel
                     </button>
-                </Modal.Footer>
+                </div>
             </Modal>
         </React.Fragment>
     );

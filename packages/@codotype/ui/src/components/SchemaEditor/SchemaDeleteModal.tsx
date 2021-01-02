@@ -22,7 +22,7 @@ export function SchemaDeleteModal(props: {
             <Modal.Body>
                 <p>Are you sure you want to delete this schema?</p>
             </Modal.Body>
-            <Modal.Footer className="bg-light">
+            <div className="modal-footer-tw">
                 <button
                     onClick={props.onConfirmDelete}
                     className="btn btn-lg btn-danger"
@@ -35,7 +35,7 @@ export function SchemaDeleteModal(props: {
                 >
                     Close
                 </button>
-            </Modal.Footer>
+            </div>
         </Modal>
     );
 }

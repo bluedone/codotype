@@ -2,7 +2,7 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-.card-body {
+/* .card-body {
     @apply px-4;
     @apply py-4;
 }
@@ -14,6 +14,17 @@
     @apply border;
 }
 
-.modal-footer-bg {
+/* Start updating things one component at a time */
+
+/* Modal Footer */
+.modal-footer-tw {
+    @apply p-3;
+    @apply flex;
+    @apply justify-end;
+    @apply items-center;
+    @apply border-t;
     @apply bg-gray-200;
+    @apply border-gray-300;
+    @apply rounded-bl-lg;
+    @apply rounded-br-lg;
 }

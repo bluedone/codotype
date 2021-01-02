@@ -22,7 +22,7 @@ export function AttributeDeleteModal(props: {
             <Modal.Body>
                 Are you sure you want to delete this Attribute?
             </Modal.Body>
-            <Modal.Footer className="bg-light">
+            <div className="modal-footer-tw">
                 <button
                     className="btn btn-lg btn-danger"
                     onClick={props.onConfirm}
@@ -35,7 +35,7 @@ export function AttributeDeleteModal(props: {
                 >
                     Close
                 </button>
-            </Modal.Footer>
+            </div>
         </Modal>
     );
 }

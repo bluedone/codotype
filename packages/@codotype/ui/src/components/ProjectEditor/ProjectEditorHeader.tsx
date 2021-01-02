@@ -27,59 +27,59 @@ export function ProjectEditorHeader(props: {
         projectInput.identifiers.title,
     );
     return (
-        <div className="row d-flex align-items-end">
-            <div className="col-sm-12 col-md-6">
-                <div className="d-flex align-items-center">
-                    <h2 className="mb-0 mr-2 d-flex">
-                        {projectInput.identifiers.title}
-                    </h2>
-                    <ProjectEditButton onClick={() => showModal(true)} />
-                    <ExampleProjectDropdown
-                        plugin={pluginMetadata}
-                        loadExampleProject={exampleProject => {
-                            props.onChange(exampleProject);
+        <div className="flex items-center w-full items-end">
+            <div className="flex flex-grow items-center">
+                <h2 className="flex text-3xl">
+                    {projectInput.identifiers.title}
+                </h2>
+                <ExampleProjectDropdown
+                    plugin={pluginMetadata}
+                    loadExampleProject={exampleProject => {
+                        props.onChange(exampleProject);
+                    }}
+                />
+
+                {/* Combine these two into a single component */}
+                <ProjectEditButton onClick={() => showModal(true)} />
+                <ProjectFormModal
+                    show={showingModal}
+                    handleClose={() => {
+                        setLabelValue(projectInput.identifiers.title);
+                        showModal(false);
+                    }}
+                    disabled={labelValue.trim().length === 0}
+                    onSubmit={() => {
+                        const sanitizedLabel: string = sanitizeTitle(
+                            labelValue,
+                        );
+                        props.onChange({
+                            ...projectInput,
+                            identifiers: buildTokenCasing(sanitizedLabel),
+                        });
+                        showModal(false);
+                    }}
+                >
+                    <ProjectForm
+                        value={labelValue}
+                        onChange={(updatedLabel: string) => {
+                            const sanitizedLabel: string = sanitizeTitle(
+                                updatedLabel,
+                            );
+                            setLabelValue(sanitizedLabel);
+                        }}
+                        onSubmit={updatedLabel => {
+                            const sanitizedLabel: string = sanitizeTitle(
+                                updatedLabel,
+                            );
+                            if (sanitizedLabel.length === 0) {
+                                return;
+                            }
+                            setLabelValue(sanitizedLabel);
                         }}
                     />
-                    <ProjectFormModal
-                        show={showingModal}
-                        handleClose={() => {
-                            setLabelValue(projectInput.identifiers.title);
-                            showModal(false);
-                        }}
-                        disabled={labelValue.trim().length === 0}
-                        onSubmit={() => {
-                            const sanitizedLabel: string = sanitizeTitle(
-                                labelValue,
-                            );
-                            props.onChange({
-                                ...projectInput,
-                                identifiers: buildTokenCasing(sanitizedLabel),
-                            });
-                            showModal(false);
-                        }}
-                    >
-                        <ProjectForm
-                            value={labelValue}
-                            onChange={(updatedLabel: string) => {
-                                const sanitizedLabel: string = sanitizeTitle(
-                                    updatedLabel,
-                                );
-                                setLabelValue(sanitizedLabel);
-                            }}
-                            onSubmit={updatedLabel => {
-                                const sanitizedLabel: string = sanitizeTitle(
-                                    updatedLabel,
-                                );
-                                if (sanitizedLabel.length === 0) {
-                                    return;
-                                }
-                                setLabelValue(sanitizedLabel);
-                            }}
-                        />
-                    </ProjectFormModal>
-                </div>
+                </ProjectFormModal>
             </div>
-            <div className="col-sm-12 col-md-6 d-flex justify-content-end mt-2 mt-md-0">
+            <div className="flex justify-end">
                 <ProjectDropdown
                     projectInput={projectInput}
                     onConfirmReset={props.onConfirmReset}

@@ -39,7 +39,7 @@ export function LoadExampleProjectModal(props: {
                 </p>
             </Modal.Body>
 
-            <Modal.Footer className="bg-light">
+            <div className="modal-footer-tw">
                 <button
                     className="btn btn-lg btn-primary"
                     onClick={() => {
@@ -52,7 +52,7 @@ export function LoadExampleProjectModal(props: {
                 <button className="btn btn-lg btn-light" onClick={props.onHide}>
                     Cancel
                 </button>
-            </Modal.Footer>
+            </div>
         </Modal>
     );
 }

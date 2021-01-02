@@ -18,7 +18,7 @@ export function SchemaDetailHeader(props: {
         <div className="row d-flex align-items-center mb-2">
             <div className="col-lg-10">
                 <div className="d-flex align-items-center">
-                    <h4 className="mb-0">
+                    <h4 className="mb-0 text-2xl">
                         {props.schemaInput.identifiers.singular.title}
                         <span className="text-muted ml-2">Schema</span>
                     </h4>

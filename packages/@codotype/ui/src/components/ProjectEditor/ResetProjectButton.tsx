@@ -43,7 +43,7 @@ export function ResetProjectButton(props: {
                         undone. Are you sure you want to continue?
                     </p>
                 </Modal.Body>
-                <Modal.Footer className="bg-light">
+                <div className="modal-footer-tw">
                     {showConfirm && (
                         <button
                             onClick={() => {
@@ -72,7 +72,7 @@ export function ResetProjectButton(props: {
                     >
                         Close
                     </button>
-                </Modal.Footer>
+                </div>
             </Modal>
         </React.Fragment>
     );

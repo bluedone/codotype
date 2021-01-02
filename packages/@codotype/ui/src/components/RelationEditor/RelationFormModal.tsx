@@ -27,7 +27,7 @@ export function RelationFormModal(props: {
                 <Modal.Title>{title}</Modal.Title>
             </Modal.Header>
             <Modal.Body>{props.children}</Modal.Body>
-            <Modal.Footer className="bg-light">
+            <div className="modal-footer-tw">
                 <button
                     disabled={props.disableSubmit}
                     className="btn btn-lg btn-primary"
@@ -41,7 +41,7 @@ export function RelationFormModal(props: {
                 >
                     Close
                 </button>
-            </Modal.Footer>
+            </div>
         </Modal>
     );
 }
