@@ -44,7 +44,7 @@ export function Jumbotron(props: {
                             ))}
                         </div>
 
-                        <div className="row mt-4 d-flex justify-content-center">
+                        <div className="row mt-4 d-flex justify-center">
                             <div className="col-lg-6">
                                 <a
                                     href="/plugins"

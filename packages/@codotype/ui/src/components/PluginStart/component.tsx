@@ -43,7 +43,7 @@ export function PluginStart(props: PluginStartProps) {
                         </p>
                     </div>
 
-                    <div className="col-lg-12 d-flex justify-content-center">
+                    <div className="col-lg-12 d-flex justify-center">
                         <GitHubStar />
                     </div>
                 </div>
@@ -56,7 +56,7 @@ export function PluginStart(props: PluginStartProps) {
                     </div>
                 </div>
 
-                <div className="row justify-content-center">
+                <div className="row justify-center">
                     <div className="col-lg-4 col-md-6 col-sm-8 text-center">
                         {props.buildLink && (
                             <button className="btn btn-block btn-primary btn-lg rounded-pill">
@@ -77,14 +77,14 @@ export function PluginStart(props: PluginStartProps) {
                     </div>
                 </div>
 
-                <div className="row d-flex flex-row justify-content-center mt-3">
-                    <div className="col-lg-12 d-flex justify-content-center items-center">
+                <div className="row d-flex flex-row justify-center mt-3">
+                    <div className="col-lg-12 d-flex justify-center items-center">
                         {props.plugin.techTags.map(tag => (
                             <PluginTechTag key={tag} tag={tag} />
                         ))}
                     </div>
 
-                    <div className="col-lg-12 d-flex justify-content-center items-center flex-wrap mt-2">
+                    <div className="col-lg-12 d-flex justify-center items-center flex-wrap mt-2">
                         {props.plugin.typeTags.map(tag => (
                             <PluginTypeTag key={tag} tag={tag} />
                         ))}
@@ -96,13 +96,13 @@ export function PluginStart(props: PluginStartProps) {
                     </div>
                 </div>
 
-                <div className="row d-flex justify-content-center my-3">
+                <div className="row d-flex justify-center my-3">
                     <div className="col-lg-8">
                         <hr />
                     </div>
                 </div>
 
-                <div className="row d-flex justify-content-center">
+                <div className="row d-flex justify-center">
                     <div className="col-lg-10">
                         <MarkdownRenderer
                             source={props.plugin.content.documentation}

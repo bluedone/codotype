@@ -14,7 +14,7 @@ export function ProjectForm(props: {
     onSubmit: (updatedProjectLabel: string) => void;
 }) {
     return (
-        <div className="row items-center justify-content-center">
+        <div className="row items-center justify-center">
             <div className="col-sm-12">
                 <p className="mt-2 mb-3 text-muted">
                     <span className="text-success">Project Name</span> must be{" "}

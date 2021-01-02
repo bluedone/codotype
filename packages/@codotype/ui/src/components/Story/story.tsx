@@ -20,10 +20,10 @@ export function Story(props: StoryProps) {
                     height: "100%",
                 }}
             >
-                <div className="row flex justify-content-center">
+                <div className="row flex justify-center">
                     <div className="col-sm-10">{props.children}</div>
                 </div>
-                {/* <div className="row flex justify-content-center">
+                {/* <div className="row flex justify-center">
                     <div className="col-lg-12">{props.children}</div>
                 </div> */}
             </div>

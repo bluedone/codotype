@@ -21,7 +21,7 @@ export function ConfigurationGroupTab(props: {
 }) {
     const { label } = props;
     const btnClassName: string[] = [
-        "d-flex flex-grow-1 justify-content-center btn mr-2 shadow-sm",
+        "d-flex flex-grow-1 justify-center btn mr-2 shadow-sm",
     ];
     // if (props.pinned) {
     // btnClassName.push("btn-light");
@@ -133,7 +133,7 @@ export function ConfigurationGroupSelector(props: {
                                     }}
                                     active={
                                         configurationGroup.identifier ===
-                                            selectedConfigurationGroup.identifier &&
+                                        selectedConfigurationGroup.identifier &&
                                         !viewingSchemas &&
                                         !viewingReadme
                                     }
@@ -151,7 +151,7 @@ export function ConfigurationGroupSelector(props: {
                         configurationGroup={selectedConfigurationGroup}
                         value={
                             props.projectInput.configuration[
-                                selectedConfigurationGroup.identifier
+                            selectedConfigurationGroup.identifier
                             ]
                         }
                         onChange={(updatedVal: ConfigurationPropertyDict) => {

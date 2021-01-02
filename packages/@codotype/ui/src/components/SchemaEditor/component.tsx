@@ -227,10 +227,10 @@ export function SchemaEditorLayout(props: {
     if (selectedSchemaId === null || selectedSchema === undefined) {
         // return <SchemaEditorEmptyState />;
         return (
-            <div className="row d-flex px-4 py-4 justify-content-center items-center">
+            <div className="row d-flex px-4 py-4 justify-center items-center">
                 <div className="col-sm-8">
                     <div className="card card-body shadow-sm">
-                        <div className="row items-center justify-content-center">
+                        <div className="row items-center justify-center">
                             <div className="col-lg-12">
                                 <h4>New Schema</h4>
 

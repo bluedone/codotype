@@ -21,7 +21,7 @@ stories.forEach(story => {
     storyCollection.add(story[0], () => {
         return (
             <Story>
-                <div className="row d-flex justify-content-center">
+                <div className="row d-flex justify-center">
                     <div className="col-sm-4">
                         <PluginCard plugin={story[1]} />
                     </div>

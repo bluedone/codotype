@@ -34,7 +34,7 @@ export function LoadingBuild(props: { quote?: [string, string] }) {
 
     return (
         <div
-            className="d-flex flex-column items-center h-100 justify-content-center"
+            className="d-flex flex-column items-center h-100 justify-center"
             style={{ minHeight: "26rem" }}
         >
             <h3>
@@ -52,7 +52,7 @@ export function LoadingBuild(props: { quote?: [string, string] }) {
                 <i className="far fa-laugh" />
             </p>
             <div className="row my-4">
-                <div className="col-lg-12 text-center d-flex justify-content-center">
+                <div className="col-lg-12 text-center d-flex justify-center">
                     <div className="my-2">
                         <LoadingSpinner />
                     </div>

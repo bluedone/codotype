@@ -10,7 +10,7 @@ import { faHeart } from "@fortawesome/free-regular-svg-icons";
 export function AboutAttribution(props: { children: React.ReactNode }) {
     return (
         <div className="row">
-            <div className="col-lg-12 d-flex justify-content-center">
+            <div className="col-lg-12 d-flex justify-center">
                 <p className="lead mb-0 mt-4">
                     <span>Built with </span>
                     <FontAwesomeIcon icon={faHeart} className="text-danger" />
@@ -21,7 +21,7 @@ export function AboutAttribution(props: { children: React.ReactNode }) {
                 </p>
             </div>
 
-            <div className="col-lg-12 d-flex justify-content-center pt-3">
+            <div className="col-lg-12 d-flex justify-center pt-3">
                 {props.children}
             </div>
         </div>

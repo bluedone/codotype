@@ -191,7 +191,7 @@ export function ConfigurationInputFormGroup(
             {formGroupDescription}
 
             {/* Renders message to turn this feature on */}
-            <div className="mt-2 px-2 py-2 d-flex justify-content-center bg-dark text-white rounded">
+            <div className="mt-2 px-2 py-2 d-flex justify-center bg-dark text-white rounded">
                 <div className="d-flex flex-column items-center">
                     <p className="lead mb-0">Enable {property.content.label}</p>
                     <p className="mb-0">
