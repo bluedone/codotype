@@ -1,21 +1,7 @@
 import * as React from "react";
-import styled from "styled-components";
 import Link from "next/link";
 
 // // // //
-
-const FooterLinkLi = styled.li`
-    padding: 0.2em 0;
-`;
-
-const FooterLinkA = styled.a`
-    padding: 0.2em 0;
-    color: #868e96;
-    &:hover {
-        text-decoration: none;
-        color: #4e92fc;
-    }
-`;
 
 /**
  * FooterLink
@@ -33,11 +19,11 @@ function FooterLink(props: {
         linkProps.target = "_blank";
     }
     return (
-        <FooterLinkLi>
+        <li className="py-1">
             <Link href={href}>
-                <FooterLinkA {...linkProps}>{label}</FooterLinkA>
+                <a {...linkProps} className="py-1 px-0 hover:no-underline text-gray-500 hover:text-gray-600 cursor-pointer">{label}</a>
             </Link>
-        </FooterLinkLi>
+        </li>
     );
 }
 

@@ -1,119 +1,87 @@
-$white: #ffffff !default;
-$gray-100: #f8f9fa !default;
-$gray-200: #e9ecef !default;
-$gray-300: #dee2e6 !default;
-$gray-400: #ced4da !default;
-$gray-500: #adb5bd !default;
-$gray-600: #868e96 !default;
-$gray-700: #495057 !default;
-$gray-800: #333333 !default;
-$gray-900: #212529 !default;
-$black: #000000 !default;
+// $white: #ffffff !default;
+// $gray-100: #f8f9fa !default;
+// $gray-200: #e9ecef !default;
+// $gray-300: #dee2e6 !default;
+// $gray-400: #ced4da !default;
+// $gray-500: #adb5bd !default;
+// $gray-600: #868e96 !default;
+// $gray-700: #495057 !default;
+// $gray-800: #333333 !default;
+// $gray-900: #212529 !default;
+// $black: #000000 !default;
 
-$border-width: 1px !default;
+// $border-width: 1px !default;
 
-$blue: #4e92fc !default;
-$indigo: #6610f2 !default;
-$purple: #6f42c1 !default;
-$pink: #e83e8c !default;
-$red: #d9534f !default;
-$orange: #fd7e14 !default;
-$yellow: #f0ad4e !default;
-$green: #02b875 !default;
-$teal: #1fd3f2 !default;
-$cyan: #17a2b8 !default;
+// $blue: #4e92fc !default;
+// $indigo: #6610f2 !default;
+// $purple: #6f42c1 !default;
+// $pink: #e83e8c !default;
+// $red: #d9534f !default;
+// $orange: #fd7e14 !default;
+// $yellow: #f0ad4e !default;
+// $green: #02b875 !default;
+// $teal: #1fd3f2 !default;
+// $cyan: #17a2b8 !default;
 
 $body-bg: #f5f6f9 !default;
-$enable-shadows: true;
-$card-cap-bg: $gray-200;
+// $enable-shadows: true;
+// $card-cap-bg: $gray-200;
 
-html {
-    height: 100%;
-}
-
-body {
-    height: 100%;
-}
-
-#root {
-    height: 100%;
-}
-
-// // // //
-// Heading Font
-$heading-font: "Product Sans", Helvetica, Arial, serif;
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-family: $heading-font;
-    line-height: 1.5;
-}
-
-[class^="display"] {
-    font-family: $heading-font;
-    font-weight: 700 !important;
-}
-
-//   @media screen and (max-width: 768px)
-//     .router-container
-//       display: none
-
-//   #app
-//     height: 100%
-//     width: 100%
-
-// @import "./bootstrap.scss";
-
-// // // //
-// GenerateCodeButton Styles
-// @import "../../../../ui/src/sass/vendor.sass";
-
-// button.btn-yellow {
-//     @include button-variant(#ffd700, #ffd700);
+// html {
+//     height: 100%;
 // }
 
-// // // //
-// // // //
+// body {
+//     height: 100%;
+// }
 
-// Overrides
-$border-radius: 0.5rem !default;
-$border-radius-lg: 0.5rem !default;
-$border-radius-sm: 0.5rem !default;
-$card-cap-bg: $gray-200;
+// #root {
+//     height: 100%;
+// }
 
-$component-active-color: $gray-700 !default;
-$component-active-bg: lighten($blue, 20%) !default;
-// $component-active-bg: $blue !default;
+// // // // //
+// // Heading Font
+// $heading-font: "Product Sans", Helvetica, Arial, serif;
 
-a,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-li,
-span,
-small,
-strong {
-    letter-spacing: 0.025rem;
-}
+// h1,
+// h2,
+// h3,
+// h4,
+// h5,
+// h6 {
+//     font-family: $heading-font;
+//     line-height: 1.5;
+// }
 
-// // // //
-// Copied from @codotype/ui-deprecated
+// [class^="display"] {
+//     font-family: $heading-font;
+//     font-weight: 700 !important;
+// }
 
-// $heading-font: 'Product Sans', Helvetica, Arial, serif
-// $sans-serif-font: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif
+// // // // //
+// // // // //
 
-// // Section
-// .section
-//     padding-top: 3em
-//     padding-bottom: 3em
+// // Overrides
+// $border-radius: 0.5rem !default;
+// $border-radius-lg: 0.5rem !default;
+// $border-radius-sm: 0.5rem !default;
+// $card-cap-bg: $gray-200;
 
-// .section-title
-//     margin: 2em auto
+// $component-active-color: $gray-700 !default;
+// $component-active-bg: lighten($blue, 20%) !default;
+// // $component-active-bg: $blue !default;
+
+// a,
+// h1,
+// h2,
+// h3,
+// h4,
+// h5,
+// h6,
+// p,
+// li,
+// span,
+// small,
+// strong {
+//     letter-spacing: 0.025rem;
+// }

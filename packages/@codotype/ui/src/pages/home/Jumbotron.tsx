@@ -1,29 +1,9 @@
 import * as React from "react";
-import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { PluginCard } from "../../components/PluginCard";
 import { PluginMetadata } from "@codotype/core";
 import { GitHubStar } from "../../components/GitHubStar";
-
-// // // //
-
-const JumbotronSection = styled.div`
-    .jumbotron-splash {
-        padding: 2rem 0;
-        color: #3e396b;
-        .lead {
-            max-width: 500px;
-            margin: 0;
-        }
-    }
-`;
-
-const Subtitle = styled.h1`
-    font-size: 2rem;
-    font-weight: 300;
-    line-height: 1.5;
-`;
 
 // // // //
 
@@ -40,18 +20,15 @@ export function Jumbotron(props: {
     const { title, subtitle, body, plugins } = props;
 
     return (
-        <JumbotronSection>
+        <div>
             <div className="container">
                 <div className="row align-items-center">
                     <div className="col-12 col-md-5">
-                        <div className="row">
-                            <div className="col-lg-12">
-                                <h1 className="display-3">{title}</h1>
-                            </div>
-                        </div>
-                        <Subtitle>{subtitle}</Subtitle>
+                        <h1 className="text-6xl">{title}</h1>
 
-                        <p className="text-muted mb-3">{body}</p>
+                        <h1 className="text-3xl leading-6">{subtitle}</h1>
+
+                        <p className="text-gray-600 my-3 text-lg">{body}</p>
 
                         <div className="row py-2">
                             <div className="col-lg-12 d-flex flex-column">
@@ -98,7 +75,7 @@ export function Jumbotron(props: {
                     </div>
                 </div>
             </div>
-        </JumbotronSection>
+        </div>
     );
 }
 

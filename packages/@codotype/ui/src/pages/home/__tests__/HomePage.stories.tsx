@@ -2,7 +2,6 @@ import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { testState } from "@codotype/core";
 import { HomePage } from "../HomePage";
-import { Pricing } from "../Pricing";
 import { FeatureSections } from "../FeatureSection";
 import { AppNavbar } from "../../../components/navbar";
 import { AppFooter } from "../../../components/AppFooter";
@@ -62,7 +61,6 @@ storiesOf("Pages/www/HomePage", module).add("renders", () => {
                     },
                 ]}
             />
-            <Pricing />
             <AppFooter />
         </React.Fragment>
     );
