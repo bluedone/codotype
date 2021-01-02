@@ -149,7 +149,7 @@ export function ConfigurationInputFormGroup(
                 [className]: className !== "",
             })}
         >
-            <div className="d-flex items-center justify-content-between">
+            <div className="d-flex items-center justify-between">
                 <div className="d-flex items-center">
                     {formGroupHeader}
                     {property.type === PropertyTypes.BOOLEAN && (
@@ -182,7 +182,7 @@ export function ConfigurationInputFormGroup(
                 [className]: className !== "",
             })}
         >
-            <div className="d-flex items-center justify-content-between">
+            <div className="d-flex items-center justify-between">
                 <div className="d-flex items-center">
                     {formGroupHeader}
                 </div>

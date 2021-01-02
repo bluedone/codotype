@@ -46,7 +46,7 @@ export function SchemaSelectorItem(props: {
                         props.onClick(props.schemaInput);
                     }}
                 >
-                    <div className="row items-center d-flex flex-row justify-content-between">
+                    <div className="row items-center d-flex flex-row justify-between">
                         <span className="d-flex ml-2">
                             {props.schemaInput.identifiers.singular.title}
                         </span>

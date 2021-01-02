@@ -189,7 +189,7 @@ export function ConfigurationCollectionInput(
                                                     );
                                                 }}
                                             >
-                                                <div className="d-flex justify-content-between">
+                                                <div className="d-flex justify-between">
                                                     <PropertyPreviewRenderer
                                                         data={collectionItem}
                                                         propertyPreview={
