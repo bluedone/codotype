@@ -96,7 +96,7 @@ export function ConfigurationGroupSelector(props: {
     return (
         <div className="row">
             <div className="col-lg-12">
-                <ul className="nav nav-pills mt-2">
+                <div className="flex flex-row mt-1 mb-1">
                     <ConfigurationGroupTab
                         pinned
                         onClick={() => {
@@ -142,7 +142,7 @@ export function ConfigurationGroupSelector(props: {
                             );
                         },
                     )}
-                </ul>
+                </div>
             </div>
             <div className="col-lg-12">
                 {/* Renders the ConfigurationInput */}
