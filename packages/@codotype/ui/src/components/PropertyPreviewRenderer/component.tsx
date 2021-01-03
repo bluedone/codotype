@@ -27,7 +27,7 @@ export function PropertyPreviewRenderer(props: {
     // Handle CollectionTemplateVariant
     if (variant === PropertyPreviewLayoutVariant.CODE_DARK) {
         return (
-            <pre className="mb-0 py-1 px-2 bg-gray-800 text-light rounded">
+            <pre className="mb-0 py-1 px-2 bg-gray-800 text-gray-200 rounded">
                 {compiledTemplate}
             </pre>
         );
@@ -43,7 +43,7 @@ export function PropertyPreviewRenderer(props: {
 
     if (variant === PropertyPreviewLayoutVariant.BADGE_DARK) {
         return (
-            <span className="px-2 py-1 bg-gray-800 text-light rounded">
+            <span className="px-2 py-1 bg-gray-800 text-gray-200 rounded">
                 {compiledTemplate}
             </span>
         );

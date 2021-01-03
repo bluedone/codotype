@@ -1,7 +1,8 @@
 import * as React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import classnames from "classnames"
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Tooltip } from "../Tooltip";
 
 // // // //
 
@@ -19,37 +20,28 @@ interface SortableListHeaderProps {
  */
 export function SortableListHeader(props: SortableListHeaderProps) {
     const { tooltip = "", rounded = true } = props;
-    let styles = {};
-    if (!rounded) {
-        styles = {
-            borderTopLeftRadius: "0px",
-            borderTopRightRadius: "0px",
-            borderRadius: "0px",
-        };
-    } else {
-        styles = {
-            borderBottomLeftRadius: "0px",
-            borderBottomRightRadius: "0px",
-        };
-    }
+
     return (
-        <OverlayTrigger
-            placement="bottom"
-            overlay={<Tooltip id="attribute-editor-header">{tooltip}</Tooltip>}
+        <Tooltip
+            position="right"
+            tooltipContent={
+                <>{tooltip}</>
+            }
         >
             <button
-                className="btn w-full btn-primary"
+                className={classnames("bg-blue-500 hover:bg-blue-600 text-white px-3 py-2 text-lg w-full", {
+                    "rounded-tl-lg rounded-tr-lg": rounded
+                })}
                 onClick={e => {
                     e.currentTarget.blur();
                     props.onClick();
                 }}
-                style={styles}
             >
                 <div className="flex items-center">
                     <FontAwesomeIcon icon={faPlus} />
                     <p className="d-block mb-0 ml-2">{props.label}</p>
                 </div>
             </button>
-        </OverlayTrigger>
+        </Tooltip>
     );
 }

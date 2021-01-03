@@ -62,19 +62,18 @@ export function SchemaPreview(props: {
                 </p>
             </div> */}
             <div className="col-lg-12">
-                <div className="rounded bg-gray-800" style={{ overflow: "hidden" }}>
+                <div className="rounded-xl bg-gray-900" style={{ overflow: "hidden" }}>
                     <pre
                         className="px-3 pt-3 pb-3 mb-0"
                         style={{ fontSize: "1rem" }}
                     >
                         <small className="mb-0">
-                            <div className="text-light">{content}</div>
+                            <div className="text-gray-200">{content}</div>
                         </small>
                     </pre>
 
                     <div
-                        className="flex flex-row items-center border-blue-500"
-                        style={{ borderTop: "2px solid" }}
+                        className="flex flex-row items-center border-blue-500 border-t-2"
                     >
                         <div className="flex flex-column flex-grow">
                             <select
@@ -86,7 +85,7 @@ export function SchemaPreview(props: {
                                     setRenderType(value);
                                 }}
                                 style={{ boxShadow: "none" }}
-                                className="form-control form-control-sm rounded-0 bg-gray-800 text-light border-0"
+                                className="rounded-0 bg-gray-900 w-full text-gray-200 border-0 py-2 px-2"
                             >
                                 <option value={PreviewOutputTypes.typescript}>
                                     TypeScript
@@ -108,7 +107,7 @@ export function SchemaPreview(props: {
                             >
                                 {({ copyToClipboard }) => (
                                     <button
-                                        className="btn btn-sm w-full btn-dark rounded-0"
+                                        className="w-full rounded-0 text-gray-200 text-sm px-2 py-2 focus:outline-none"
                                         onClick={copyToClipboard}
                                         style={{
                                             boxShadow: "none",

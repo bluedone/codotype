@@ -7,7 +7,7 @@ import {
     faMask,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Tooltip } from "../Tooltip";
 
 // // // //
 
@@ -56,21 +56,22 @@ export function RelationDiagram(props: RelationDiagramProps) {
 
     const source = (
         <span className={textColor}>
-            {sourceManyOrOne} <strong>{sourceAlias}</strong>
+            {/* {sourceManyOrOne} <strong>{sourceAlias}</strong> */}
+            {sourceManyOrOne}
             {slim && sourceLabel !== sourceAlias && (
-                <OverlayTrigger
-                    placement="top"
-                    overlay={
-                        <Tooltip id={`edit-button-tooltip`}>
+                <Tooltip
+                    position="left"
+                    tooltipContent={
+                        <>
                             References <strong>{sourceLabel}</strong> Schema
-                        </Tooltip>
+                        </>
                     }
                 >
                     <FontAwesomeIcon
                         className={classnames("ml-1", textColor)}
                         icon={faMask}
                     />
-                </OverlayTrigger>
+                </Tooltip>
             )}
             {!slim && sourceLabel !== sourceAlias && (
                 <span className={classnames("ml-1", textColor)}>
@@ -87,19 +88,19 @@ export function RelationDiagram(props: RelationDiagramProps) {
             </span>
 
             {slim && destLabel !== destAlias && (
-                <OverlayTrigger
-                    placement="top"
-                    overlay={
-                        <Tooltip id={`edit-button-tooltip`}>
+                <Tooltip
+                    position="left"
+                    tooltipContent={
+                        <>
                             References <strong>{destLabel}</strong> Schema
-                        </Tooltip>
+                        </>
                     }
                 >
                     <FontAwesomeIcon
                         className={classnames("ml-1", oppositeTextColor)}
                         icon={faMask}
                     />
-                </OverlayTrigger>
+                </Tooltip>
             )}
 
             {!slim && destLabel !== destAlias && (

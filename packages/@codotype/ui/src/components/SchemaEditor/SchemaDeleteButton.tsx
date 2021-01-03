@@ -1,7 +1,7 @@
 import * as React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
-import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Tooltip } from "../Tooltip";
 import {
     Schema,
     CreatedByValues,
@@ -37,56 +37,48 @@ export function SchemaDeleteButton(props: {
         schemaInput.locked
     ) {
         return (
-            <OverlayTrigger
-                placement="left"
-                overlay={
-                    <Tooltip id="auto-generated-schema-tooltip">
-                        The{" "}
+            <Tooltip
+                position="left"
+                tooltipContent={
+                    <>
+                        The&nbsp;
                         <strong>
                             {schemaInput.identifiers.singular.title}
-                        </strong>{" "}
+                        </strong>&nbsp;
                         Schema is auto-generated and may not be edited.
-                    </Tooltip>
+                    </>
                 }
             >
                 <span
-                    className="badge bg-green-500 ml-2"
-                    style={{ cursor: "default" }}
+                    className="badge bg-green-500 cursor-default"
                 >
                     <FontAwesomeIcon className="mr-2" icon={faInfoCircle} />
                     Auto-Generated
                 </span>
-            </OverlayTrigger>
+            </Tooltip>
         );
     }
 
-    let tooltipContent = (
-        <React.Fragment>
-            Remove the <strong>{schemaInput.identifiers.singular.title}</strong>{" "}
-            Schema.
-        </React.Fragment>
-    );
-
     // Render different layout + tooltip if disableSubmit
     return (
-        <OverlayTrigger
-            placement="left"
-            overlay={
-                <Tooltip id={`delete-button-tooltip-${schemaInput.id}`}>
-                    {tooltipContent}
-                </Tooltip>
+        <Tooltip
+            position="left"
+            tooltipContent={
+                <React.Fragment>
+                    Remove the&nbsp;<strong>{schemaInput.identifiers.singular.title}</strong>&nbsp;Schema.
+            </React.Fragment>
             }
         >
             <button
                 className={
-                    "ml-2 text-gray-500 hover:text-red-400 p-1 focus:outline-none transition-colors duration-150 ease-in-out"
+                    "text-gray-500 hover:text-red-500 p-1 focus:outline-none transition-colors duration-150 ease-in-out"
                 }
                 onClick={() => {
                     props.onClick();
                 }}
             >
-                <FontAwesomeIcon className="ml-1" icon={faTrashAlt} />
+                <FontAwesomeIcon icon={faTrashAlt} />
             </button>
-        </OverlayTrigger>
+        </Tooltip>
     );
 }

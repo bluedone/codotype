@@ -164,6 +164,8 @@ hr {
     @apply outline-none;
 }
 
+/* Tailwind Utility for using gradients with text */
+/* https://gist.github.com/dillonchanis/7b76ae89d13b662eb44866f570da817b */
 @layer utilities {
     .text-gradient {
         background-clip: text;

@@ -2,9 +2,9 @@ import * as React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
 import { SchemaInput, CreatedByValues } from "@codotype/core";
-import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Tooltip } from "../Tooltip/component";
 
-// // // //
+// // // // 
 
 export function SchemaEditButton(props: {
     schema: SchemaInput;
@@ -16,13 +16,12 @@ export function SchemaEditButton(props: {
     }
 
     return (
-        <OverlayTrigger
-            placement="right"
-            overlay={
-                <Tooltip id="edit-button-tooltip">
-                    Edit the{" "}
-                    <strong>{schema.identifiers.singular.title}</strong> Schema
-                </Tooltip>
+        <Tooltip
+            position="right"
+            tooltipContent={
+                <>
+                    Edit the&nbsp;<strong>{schema.identifiers.singular.title}</strong>&nbsp;Schema
+                </>
             }
         >
             <button
@@ -31,6 +30,6 @@ export function SchemaEditButton(props: {
             >
                 <FontAwesomeIcon className="ml-2" icon={faPencilAlt} />
             </button>
-        </OverlayTrigger>
+        </Tooltip>
     );
 }

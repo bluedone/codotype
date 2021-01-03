@@ -64,7 +64,7 @@ storiesOf(
                     setValue(updatedValue);
                 }}
             />
-            <pre className="px-3 py-3 rounded bg-gray-800 text-light">
+            <pre className="px-3 py-3 rounded bg-gray-800 text-gray-200">
                 {JSON.stringify(value, null, 4)}
             </pre>
         </Story>

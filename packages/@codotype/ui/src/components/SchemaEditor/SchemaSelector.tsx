@@ -4,7 +4,7 @@ import classnames from "classnames";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
-import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Tooltip } from "../Tooltip";
 import styled from "styled-components";
 
 // // // //
@@ -53,21 +53,15 @@ export function SchemaSelectorItem(props: {
 
                         {/* Renders warning tooltip */}
                         {!props.schemaInput.attributes.length && (
-                            <OverlayTrigger
-                                placement="right"
-                                overlay={
-                                    <Tooltip
-                                        id={`empty-schema-warning-tooltip-${props.schemaInput.id}`}
-                                    >
-                                        Schema requires at least one attribute
-                                    </Tooltip>
-                                }
+                            <Tooltip
+                                position="right"
+                                tooltipContent={<>Schema requires at least one attribute</>}
                             >
                                 <FontAwesomeIcon
-                                    className="mr-1 text-warning"
+                                    className="text-warning"
                                     icon={faExclamationCircle}
                                 />
-                            </OverlayTrigger>
+                            </Tooltip>
                         )}
                     </div>
                 </StyledListItem>

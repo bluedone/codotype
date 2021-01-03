@@ -16,7 +16,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import * as React from "react";
 import { DatatypeIcon } from "./DatatypeIcon";
-import { OverlayTrigger, Tooltip } from "react-bootstrap";
+// import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Tooltip } from "../Tooltip";
 
 // // // //
 
@@ -45,28 +46,22 @@ export function AttributeListItemLabel(props: AttributeListItemLabelProps) {
     return (
         <React.Fragment>
             {/* DatatypeIcon + Tooltip */}
-            <OverlayTrigger
-                placement="left"
-                overlay={
-                    <Tooltip id={`datatype-icon-${attribute.id}`}>
+            <Tooltip
+                position="left"
+                tooltipContent={
+                    <>
                         {props.datatype.label}
-                    </Tooltip>
+                    </>
                 }
             >
                 <span className="px-1">
                     <DatatypeIcon size="xs" datatype={attribute.datatype} />
                 </span>
-            </OverlayTrigger>
+            </Tooltip>
 
             {/* Attribute title */}
             {/* TODO - update this to use icons from ADDONS */}
             <span className="ml-2">{attribute.identifiers.title}</span>
-
-            {/* Required badge */}
-            {/* TODO - update this to use icons from ADDONS */}
-            {/* {attribute.addons.required && (
-                <span className="ml-1 text-red-500">*</span>
-            )} */}
 
             {/* Render Addon badges */}
             {props.addons
@@ -78,6 +73,7 @@ export function AttributeListItemLabel(props: AttributeListItemLabelProps) {
                 .map(addon => {
                     const icon =
                         mapAddonIconToFontAwesome[addon.property.inlineIcon];
+
                     if (icon === null) {
                         return null;
                     }
@@ -98,20 +94,18 @@ export function AttributeListItemLabel(props: AttributeListItemLabelProps) {
                     }
 
                     return (
-                        <OverlayTrigger
-                            placement="right"
-                            overlay={
-                                <Tooltip
-                                    id={`unique-badge-${attribute.id}-${addon.property.identifier}`}
-                                >
+                        <Tooltip
+                            position="right"
+                            tooltipContent={
+                                <>
                                     {addon.property.content.label}
-                                </Tooltip>
+                                </>
                             }
                         >
                             <span className="ml-2 badge bg-gray-300">
                                 <FontAwesomeIcon icon={icon} />
                             </span>
-                        </OverlayTrigger>
+                        </Tooltip>
                     );
                 })}
         </React.Fragment>

@@ -35,6 +35,7 @@ interface RelationEditorState {
 }
 
 interface RelationEditorProps {
+    // TODO - update this to accept project + projectInput + pluginMetadata
     relations: RelationInput[];
     schemas: SchemaInput[];
     selectedSchema: SchemaInput;

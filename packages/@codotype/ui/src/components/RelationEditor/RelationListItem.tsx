@@ -1,5 +1,5 @@
 import * as React from "react";
-import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Tooltip } from "../Tooltip";
 import {
     Relation,
     AddonPropertyInlineIcons,
@@ -37,9 +37,6 @@ const mapAddonIconToFontAwesome: {
 
 // padding: 0.25rem 0.5rem
 const StyledListItem = styled.li`
-    cursor: grab;
-    border-left: 3px solid #adb5bd !important;
-
     &:hover {
         .controls {
             opacity: 1;
@@ -77,8 +74,8 @@ export function RelationListItem(props: {
     return (
         <Draggable draggableId={String(relation.id)} index={props.index}>
             {provided => (
-                <StyledListItem
-                    className="list-group-item list-group-item-action py-1 px-2"
+                <li
+                    className="bg-white hover:bg-gray-300 py-1 px-2 cursor-grab border-l-4 border-blue-500"
                     ref={provided.innerRef}
                     onClick={() => {
                         // Don't allow editing if Attribute.locked is true
@@ -135,23 +132,18 @@ export function RelationListItem(props: {
                                     }
 
                                     return (
-                                        <OverlayTrigger
-                                            placement="right"
-                                            overlay={
-                                                <Tooltip
-                                                    id={`badge-${relation.id}-${addon.property.identifier}`}
-                                                >
-                                                    {
-                                                        addon.property.content
-                                                            .label
-                                                    }
-                                                </Tooltip>
+                                        <Tooltip
+                                            position="right"
+                                            tooltipContent={
+                                                <>
+                                                    {addon.property.content.label}
+                                                </>
                                             }
                                         >
                                             <span className="ml-2 badge bg-gray-300">
                                                 <FontAwesomeIcon icon={icon} />
                                             </span>
-                                        </OverlayTrigger>
+                                        </Tooltip>
                                     );
                                 })}
                         </div>
@@ -171,7 +163,7 @@ export function RelationListItem(props: {
                             </button>
                         </div>
                     </div>
-                </StyledListItem>
+                </li>
             )}
         </Draggable>
     );

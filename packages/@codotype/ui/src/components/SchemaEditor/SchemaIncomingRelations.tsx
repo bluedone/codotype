@@ -2,7 +2,7 @@ import * as React from "react";
 import { Schema, UUID } from "@codotype/core";
 import { RelationBadge } from "../RelationEditor/RelationBadge";
 import { InfoTooltip } from "../InfoTooltip";
-import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Tooltip } from "../Tooltip";
 
 // // // //
 
@@ -49,33 +49,33 @@ export function SchemaIncomingRelations(props: SchemaIncomingRelationsProps) {
                     )}
                     {inflatedSchema.referencedBy.map(r => {
                         return (
-                            <OverlayTrigger
+                            <li
+                                className="list-group-item px-2 border border-gray-500"
+                                style={{ cursor: "pointer" }}
                                 key={r.id}
-                                placement="left"
-                                overlay={
-                                    <Tooltip id="attribute-editor-header">
-                                        {'Jump to "' +
-                                            r.identifiers.source.canonical
-                                                .singular.title +
-                                            '" schema'}
-                                    </Tooltip>
-                                }
+                                onClick={() => {
+                                    props.onSelectSchema(r.sourceSchemaID);
+                                }}
                             >
-                                <li
-                                    className="list-group-item list-group-item-action py-1 px-2"
-                                    style={{ cursor: "pointer" }}
+                                <Tooltip
                                     key={r.id}
-                                    onClick={() => {
-                                        props.onSelectSchema(r.sourceSchemaID);
-                                    }}
+                                    position="left"
+                                    tooltipContent={
+                                        <>
+                                            {'Jump to "' +
+                                                r.identifiers.source.canonical
+                                                    .singular.title +
+                                                '" schema'}
+                                        </>
+                                    }
                                 >
                                     <RelationBadge
                                         slim
                                         direction="in"
                                         relation={r}
                                     />
-                                </li>
-                            </OverlayTrigger>
+                                </Tooltip>
+                            </li>
                         );
                     })}
                 </ul>
