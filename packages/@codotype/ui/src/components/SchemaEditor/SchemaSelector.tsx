@@ -5,19 +5,8 @@ import { Droppable, Draggable } from "react-beautiful-dnd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
 import { Tooltip } from "../Tooltip";
-import styled from "styled-components";
 
 // // // //
-
-const StyledListItem = styled.li`
-    cursor: pointer;
-    border-left: 6px solid #adb5bd !important;
-
-    &.selected {
-        border-left: 6px solid #4582ec !important;
-        font-weight: bold;
-    }
-`;
 
 export function SchemaSelectorItem(props: {
     schemaInput: SchemaInput;
@@ -30,13 +19,14 @@ export function SchemaSelectorItem(props: {
             draggableId={String(props.schemaInput.id)}
             index={props.index}
         >
-            {provided => (
-                <StyledListItem
+            {(provided, snapshot) => (
+                <li
                     className={classnames(
-                        "list-group-item list-group-item-action",
+                        "cursor-pointer bg-white hover:bg-gray-200 border-l-4 py-4 px-4",
                         {
-                            selected: props.selected,
-                            "text-muted": !props.selected,
+                            "font-medium border-blue-500": props.selected,
+                            "text-muted border-gray-500": !props.selected,
+                            "rounded": snapshot.isDragging
                         },
                     )}
                     ref={provided.innerRef}
@@ -47,7 +37,7 @@ export function SchemaSelectorItem(props: {
                     }}
                 >
                     <div className="row items-center flex flex-row justify-between">
-                        <span className="flex ml-2">
+                        <span className="flex ml-4">
                             {props.schemaInput.identifiers.singular.title}
                         </span>
 
@@ -64,8 +54,9 @@ export function SchemaSelectorItem(props: {
                             </Tooltip>
                         )}
                     </div>
-                </StyledListItem>
-            )}
+                </li>
+            )
+            }
         </Draggable>
     );
 }
@@ -76,7 +67,7 @@ export function SchemaSelector(props: {
     onChange: (selectedSchema: SchemaInput) => void;
 }) {
     return (
-        <div className="card shadow-sm">
+        <div className="shadow rounded-2xl overflow-hidden">
             <Droppable droppableId="schema-list">
                 {(provided: any) => {
                     return (

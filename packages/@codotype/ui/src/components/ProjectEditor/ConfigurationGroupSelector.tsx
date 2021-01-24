@@ -21,15 +21,13 @@ export function ConfigurationGroupTab(props: {
 }) {
     const { label } = props;
     const btnClassName: string[] = [
-        "flex flex-grow justify-center btn mr-2 shadow-sm",
+        "flex flex-grow items-center justify-center mr-2 shadow-sm px-3 py-2 focus:outline-none rounded-full",
     ];
-    // if (props.pinned) {
-    // btnClassName.push("btn-light");
-    // } else if (props.active) {
+
     if (props.active) {
-        btnClassName.push("btn-primary");
+        btnClassName.push("bg-blue-600 text-white");
     } else {
-        btnClassName.push("btn-outline-primary");
+        btnClassName.push("border-blue-500 text-blue-500 bg-transparent border-blue-500 border");
     }
 
     return (

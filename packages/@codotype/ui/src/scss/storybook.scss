@@ -12,12 +12,9 @@ $body-bg: #f5f6f9 !default;
 @import "../../node_modules/bootstrap/scss/mixins";
 @import "../../node_modules/bootstrap/scss/root";
 @import "../../node_modules/bootstrap/scss/grid"; // Used everywhere
-@import "../../node_modules/bootstrap/scss/forms"; // Used by .form-control
-// @import "../../node_modules/bootstrap/scss/buttons"; // Used everywhere
+// @import "../../node_modules/bootstrap/scss/forms"; // Used by .form-control
+@import "../../node_modules/bootstrap/scss/buttons"; // Used everywhere
 @import "../../node_modules/bootstrap/scss/dropdown"; // Used in a few places
 @import "../../node_modules/bootstrap/scss/navbar"; // Used by App Navbar
 @import "../../node_modules/bootstrap/scss/close"; // Used in modals
 @import "../../node_modules/bootstrap/scss/modal"; // Used everywhere
-@import "../../node_modules/bootstrap/scss/tooltip"; // Used in a few spots
-@import "../../node_modules/bootstrap/scss/utilities/spacing";
-@import "../../node_modules/bootstrap/scss/utilities/text";

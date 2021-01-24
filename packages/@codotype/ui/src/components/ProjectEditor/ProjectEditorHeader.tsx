@@ -32,12 +32,6 @@ export function ProjectEditorHeader(props: {
                 <h2 className="flex text-3xl">
                     {projectInput.identifiers.title}
                 </h2>
-                <ExampleProjectDropdown
-                    plugin={pluginMetadata}
-                    loadExampleProject={exampleProject => {
-                        props.onChange(exampleProject);
-                    }}
-                />
 
                 {/* Combine these two into a single component */}
                 <ProjectEditButton onClick={() => showModal(true)} />
@@ -80,6 +74,12 @@ export function ProjectEditorHeader(props: {
                 </ProjectFormModal>
             </div>
             <div className="flex justify-end">
+                <ExampleProjectDropdown
+                    plugin={pluginMetadata}
+                    loadExampleProject={exampleProject => {
+                        props.onChange(exampleProject);
+                    }}
+                />
                 <ProjectDropdown
                     projectInput={projectInput}
                     onConfirmReset={props.onConfirmReset}

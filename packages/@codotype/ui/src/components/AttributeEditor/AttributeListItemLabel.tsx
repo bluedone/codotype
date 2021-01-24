@@ -44,10 +44,10 @@ const mapAddonIconToFontAwesome: {
 export function AttributeListItemLabel(props: AttributeListItemLabelProps) {
     const { attribute, addons } = props;
     return (
-        <React.Fragment>
+        <div className="d-flex items-center">
             {/* DatatypeIcon + Tooltip */}
             <Tooltip
-                position="left"
+                position="right"
                 tooltipContent={
                     <>
                         {props.datatype.label}
@@ -56,12 +56,12 @@ export function AttributeListItemLabel(props: AttributeListItemLabelProps) {
             >
                 <span className="px-1">
                     <DatatypeIcon size="xs" datatype={attribute.datatype} />
+                    <span className="ml-2">{attribute.identifiers.title}</span>
                 </span>
             </Tooltip>
 
             {/* Attribute title */}
             {/* TODO - update this to use icons from ADDONS */}
-            <span className="ml-2">{attribute.identifiers.title}</span>
 
             {/* Render Addon badges */}
             {props.addons
@@ -108,6 +108,6 @@ export function AttributeListItemLabel(props: AttributeListItemLabelProps) {
                         </Tooltip>
                     );
                 })}
-        </React.Fragment>
+        </div>
     );
 }
