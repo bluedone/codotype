@@ -9,7 +9,7 @@ import { dummyPluginMetadata } from "../../ProjectEditor/__tests__/test_state";
 storiesOf("Components/PluginStart", module).add("renders in card", () => {
     return (
         <Story>
-            <div className="card card-body">
+            <div className="card card-body shadow-lg">
                 <PluginStart
                     externalLink={"https://google.com"}
                     plugin={dummyPluginMetadata}

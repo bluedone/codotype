@@ -7,14 +7,14 @@ import { ChevronAnimation } from "../ChevronAnimation";
 export function PluginCard(props: { plugin: PluginMetadata }) {
     const { plugin } = props;
     return (
-        <div className="card col-lg-12 shadow">
+        <div className="card shadow">
             <div className="card-body">
-                <div className="row flex items-end flex-column">
-                    <div className="col-lg-12 flex justify-center">
+                <div className="flex flex-row items-end flex-col">
+                    <div className="flex flex-col justify-center">
                         <p className="lead mb-0">
                             <a
                                 href={`/plugins/${plugin.identifier}/build`}
-                                className="btn btn-link flex items-center flex-column"
+                                className="btn btn-link flex items-center flex-col"
                                 style={{ textDecoration: "none" }}
                             >
                                 <img
