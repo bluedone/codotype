@@ -15,14 +15,13 @@ export function SchemaDetailHeader(props: {
 }) {
     const [showDeleteModal, showModal] = React.useState(false);
     return (
-        <div className="row flex items-center mb-2">
-            <div className="col-lg-10">
+        <div className="grid grid-cols-2 mb-2">
+            <div className="">
                 <div className="flex items-center">
                     <h4 className="mb-0 text-2xl">
                         {props.schemaInput.identifiers.singular.title}
-                        <span className="ml-1 text-gradient bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-500">
-                            Data Model
-                        </span>
+                        {/* <span className="ml-1 text-gradient bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-500"> */}
+                        <span className="ml-1 text-indigo-500">Data Model</span>
                     </h4>
                     <SchemaEditButton
                         schema={props.schemaInput}
@@ -30,7 +29,7 @@ export function SchemaDetailHeader(props: {
                     />
                 </div>
             </div>
-            <div className="col-lg-2 flex justify-end">
+            <div className="flex justify-end">
                 <SchemaDeleteButton
                     projectInput={props.projectInput}
                     schemaInput={props.schemaInput}
