@@ -44,17 +44,15 @@ export function SchemaDeleteButton(props: {
                         The&nbsp;
                         <strong>
                             {schemaInput.identifiers.singular.title}
-                        </strong>&nbsp;
-                        Schema is auto-generated and may not be edited.
+                        </strong>
+                        &nbsp; Schema is auto-generated and may not be edited.
                     </>
                 }
             >
-                <span
-                    className="badge bg-green-500 cursor-default"
-                >
-                    <FontAwesomeIcon className="mr-2" icon={faInfoCircle} />
+                <div className="inline-flex items-center bg-green-500 text-white leading-none rounded-full py-3 px-2 h-6 shadow text-sm justify-center items-center">
+                    <FontAwesomeIcon className="mr-1" icon={faInfoCircle} />
                     Auto-Generated
-                </span>
+                </div>
             </Tooltip>
         );
     }
@@ -65,8 +63,10 @@ export function SchemaDeleteButton(props: {
             position="left"
             tooltipContent={
                 <React.Fragment>
-                    Remove the&nbsp;<strong>{schemaInput.identifiers.singular.title}</strong>&nbsp;Schema.
-            </React.Fragment>
+                    Remove the&nbsp;
+                    <strong>{schemaInput.identifiers.singular.title}</strong>
+                    &nbsp;Schema.
+                </React.Fragment>
             }
         >
             <button
