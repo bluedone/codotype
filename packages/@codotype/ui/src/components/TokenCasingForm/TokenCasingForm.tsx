@@ -77,7 +77,7 @@ export function TokenCasingForm(props: TokenCasingFormProps) {
 
     return (
         <div className="row">
-            <div className="col-sm-12 col-lg-6 flex flex-column border-right justify-center">
+            <div className="col-sm-12 col-lg-6 flex flex-col border-right justify-center">
                 <div className="row">
                     <div className="col-sm-12">
                         <FormGroup
@@ -107,7 +107,7 @@ export function TokenCasingForm(props: TokenCasingFormProps) {
                 </div>
             </div>
 
-            <div className="col-sm-12 col-lg-6 flex justify-center items-center flex-column">
+            <div className="col-sm-12 col-lg-6 flex justify-center items-center flex-col">
                 <table className="table table-sm mb-0 mt-2">
                     <MetaPreview label={label} />
                 </table>
