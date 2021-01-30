@@ -1,6 +1,6 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* Start updating things one component at a time */
 
@@ -33,9 +33,10 @@
     @apply p-5;
 }
 
+/*
 code {
     @apply text-orange-400;
-}
+} */
 
 /* NOTE - only used in one place, replace with updated CSS soon */
 small {

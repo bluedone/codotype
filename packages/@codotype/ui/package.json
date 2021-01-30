@@ -63,6 +63,7 @@
         "@types/styled-components": "^5.1.0",
         "@typescript-eslint/eslint-plugin": "^2.14.0",
         "@typescript-eslint/parser": "^2.14.0",
+        "autoprefixer": "^9.8.6",
         "awesome-typescript-loader": "^5.2.1",
         "babel-core": "^6.26.3",
         "babel-jest": "^24.9.0",
@@ -77,12 +78,12 @@
         "jest": "^24.9.0",
         "jest-css-modules": "^2.1.0",
         "node-sass": "^4.13.0",
-        "postcss-preset-env": "^6.7.0",
+        "postcss": "^7.0.35",
+        "postcss-loader": "^4.0.3",
         "prettier": "^1.19.1",
         "react-docgen-typescript-loader": "^3.7.2",
         "sass-loader": "^8.0.0",
         "style-loader": "^1.1.2",
-        "tailwindcss": "^1.8.10",
         "ts-jest": "^24.2.0",
         "ts-loader": "^6.2.1",
         "typescript": "^3.7.4",
@@ -117,6 +118,7 @@
         "react-switch": "^5.0.1",
         "react-syntax-highlighter": "^12.2.1",
         "react-test-renderer": "^16.13.1",
-        "styled-components": "^5.1.0"
+        "styled-components": "^5.1.0",
+        "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2"
     }
 }
