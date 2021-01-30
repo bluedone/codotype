@@ -21,29 +21,29 @@ module.exports = {
             ...config,
             module: {
                 ...config.module,
-                rules: [
-                    ...config.module.rules.filter(
-                        rule => /\.css$/ !== rule.test,
-                    ),
-                    {
-                        test: /\.css1$/,
-                        exclude: [/\.module\.css$/, /@storybook/],
-                        use: [
-                            "style-loader",
-                            {
-                                loader: "css-loader",
-                                options: { importLoaders: 1, sourceMap: false },
-                            },
-                            {
-                                loader: "postcss-loader",
-                                options: {
-                                    ident: "postcss",
-                                    sourceMap: false,
-                                },
-                            },
-                        ],
-                    },
-                ],
+                // rules: [
+                //     ...config.module.rules.filter(
+                //         rule => /\.css$/ !== rule.test,
+                //     ),
+                //     {
+                //         test: /\.css1$/,
+                //         exclude: [/\.module\.css$/, /@storybook/],
+                //         use: [
+                //             "style-loader",
+                //             {
+                //                 loader: "css-loader",
+                //                 options: { importLoaders: 1, sourceMap: false },
+                //             },
+                //             {
+                //                 loader: "postcss-loader",
+                //                 options: {
+                //                     ident: "postcss",
+                //                     sourceMap: false,
+                //                 },
+                //             },
+                //         ],
+                //     },
+                // ],
             },
             resolve: {
                 ...config.resolve,

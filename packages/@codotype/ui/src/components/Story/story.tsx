@@ -1,5 +1,6 @@
 import * as React from "react";
 import { AppNavbar } from "../navbar";
+import "./tailwind.css";
 
 // // // //
 
