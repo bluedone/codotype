@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Modal } from "react-bootstrap";
+import { Modal } from "../Modal";
 
 // // // //
 
@@ -29,11 +29,13 @@ export function SchemaFormModal(props: {
     const disableSubmit: boolean = props.errors.length > 0;
 
     return (
-        <Modal size="lg" show={props.show} onHide={props.handleClose}>
-            <Modal.Header closeButton>
-                <Modal.Title>{title}</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>{props.children}</Modal.Body>
+        <Modal
+            // size="lg"
+            show={props.show}
+            onHide={props.handleClose}
+        >
+            <h3>{title}</h3>
+            {props.children}
             <div className="modal-footer-tw">
                 <div className="flex items-center justify-between flex-grow">
                     <div className="flex flex-grow">
