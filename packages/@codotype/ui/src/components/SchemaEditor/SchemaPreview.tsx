@@ -62,7 +62,10 @@ export function SchemaPreview(props: {
                 </p>
             </div> */}
             <div className="col-lg-12">
-                <div className="rounded-xl bg-gray-900" style={{ overflow: "hidden" }}>
+                <div
+                    className="rounded-xl bg-gray-900"
+                    style={{ overflow: "hidden" }}
+                >
                     <pre
                         className="px-3 pt-3 pb-3 mb-0"
                         style={{ fontSize: "1rem" }}
@@ -72,10 +75,8 @@ export function SchemaPreview(props: {
                         </small>
                     </pre>
 
-                    <div
-                        className="flex flex-row items-center border-blue-500 border-t-2"
-                    >
-                        <div className="flex flex-column flex-grow">
+                    <div className="flex flex-row items-center border-blue-500 border-t-2">
+                        <div className="flex flex-col flex-grow">
                             <select
                                 value={previewOutputType}
                                 onChange={e => {
@@ -98,7 +99,7 @@ export function SchemaPreview(props: {
                                 </option>
                             </select>
                         </div>
-                        <div className="flex flex-column">
+                        <div className="flex flex-col">
                             <CopyToClipboard
                                 text={content}
                                 onCopy={() => {
