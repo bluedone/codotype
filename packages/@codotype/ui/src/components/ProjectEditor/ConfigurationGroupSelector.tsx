@@ -27,7 +27,9 @@ export function ConfigurationGroupTab(props: {
     if (props.active) {
         btnClassName.push("bg-blue-600 text-white");
     } else {
-        btnClassName.push("border-blue-500 text-blue-500 bg-transparent border-blue-500 border");
+        btnClassName.push(
+            "border-indigo-500 text-blue-500 bg-transparent border-indigo-500 border",
+        );
     }
 
     return (
@@ -131,7 +133,7 @@ export function ConfigurationGroupSelector(props: {
                                     }}
                                     active={
                                         configurationGroup.identifier ===
-                                        selectedConfigurationGroup.identifier &&
+                                            selectedConfigurationGroup.identifier &&
                                         !viewingSchemas &&
                                         !viewingReadme
                                     }
@@ -149,7 +151,7 @@ export function ConfigurationGroupSelector(props: {
                         configurationGroup={selectedConfigurationGroup}
                         value={
                             props.projectInput.configuration[
-                            selectedConfigurationGroup.identifier
+                                selectedConfigurationGroup.identifier
                             ]
                         }
                         onChange={(updatedVal: ConfigurationPropertyDict) => {

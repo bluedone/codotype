@@ -16,7 +16,7 @@ export function GenerateCodeButton(props: {
 }) {
     return (
         <button
-            className="bg-indigo-500 hover:bg-indigo-600 flex font-mono items-center px-4 py-3 text-lg font-medium w-full mb-3 hover:shadow-sm text-white focus:outline-none transition-colors duration-200 ease-in-out shadow-lg rounded-full"
+            className="bg-green-500 hover:bg-green-600 flex font-mono items-center px-4 py-3 text-lg font-medium w-full mb-3 hover:shadow-sm text-white focus:outline-none transition-colors duration-200 ease-in-out shadow-lg rounded-full"
             disabled={props.disabled}
             onClick={props.onClick}
         >
