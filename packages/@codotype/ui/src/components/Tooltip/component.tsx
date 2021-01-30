@@ -1,5 +1,5 @@
 import * as React from "react";
-import classnames from "classnames"
+import classnames from "classnames";
 
 // // // //
 
@@ -23,22 +23,28 @@ export function Tooltip(props: {
 
     // If not shown
     if (shown === false) {
-        return <div className="relative flex items-center"
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}>{children}</div>;
+        return (
+            <div
+                className="relative flex items-center"
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+            >
+                {children}
+            </div>
+        );
     }
 
     // Define styles for caret + wrapper
-    let wrapperStyle = {}
-    let caretStyle = {}
+    let wrapperStyle = {};
+    let caretStyle = {};
 
     // Handle props.position
     if (position === "left") {
-        wrapperStyle = { right: "100%", opacity: 1, marginRight: "15px" }
-        caretStyle = { right: "-6px", transform: "rotate(45deg)" }
+        wrapperStyle = { right: "100%", opacity: 1, marginRight: "15px" };
+        caretStyle = { right: "-6px", transform: "rotate(45deg)" };
     } else if (position === "right") {
-        wrapperStyle = { left: "100%", opacity: 1, marginLeft: "15px" }
-        caretStyle = { left: "-6px", transform: "rotate(45deg)" }
+        wrapperStyle = { left: "100%", opacity: 1, marginLeft: "15px" };
+        caretStyle = { left: "-6px", transform: "rotate(45deg)" };
     }
 
     const caret = (
@@ -49,7 +55,7 @@ export function Tooltip(props: {
             })}
             style={caretStyle}
         />
-    )
+    );
 
     return (
         <div
@@ -58,7 +64,7 @@ export function Tooltip(props: {
             onMouseLeave={handleMouseLeave}
         >
             <div
-                className="absolute whitespace-no-wrap bg-gray-800 text-white px-4 py-2 rounded-lg flex items-center transition-all duration-150 z-50"
+                className="absolute whitespace-no-wrap bg-gray-800 text-white px-4 py-2 rounded-lg flex items-center z-50"
                 style={wrapperStyle}
             >
                 {position === "right" && (
