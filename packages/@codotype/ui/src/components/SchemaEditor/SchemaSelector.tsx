@@ -24,7 +24,7 @@ export function SchemaSelectorItem(props: {
                     className={classnames(
                         "cursor-pointer bg-white hover:bg-gray-200 border-l-8 py-4 px-4",
                         {
-                            "text-gray-900 font-semibold border-blue-500":
+                            "text-gray-900 font-semibold border-indigo-500":
                                 props.selected,
                             "text-gray-600 font-light border-gray-500": !props.selected,
                             rounded: snapshot.isDragging,

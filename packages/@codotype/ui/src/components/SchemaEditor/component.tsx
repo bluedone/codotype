@@ -388,14 +388,25 @@ export function SchemaEditorLayout(props: {
                                 },
                             );
 
-                            // Updates local state
-                            setState({
-                                ...state,
-                                lastUpdatedAt: Date.now(),
-                                projectInput: {
-                                    ...state.projectInput,
-                                    schemas: updatedSchemas,
+                            // Removes any relations that reference the deleted schema
+                            const updatedRelations: RelationInput[] = state.projectInput.relations.filter(
+                                r => {
+                                    return (
+                                        r.destinationSchemaID !==
+                                            selectedSchemaId &&
+                                        r.sourceSchemaID !== selectedSchemaId
+                                    );
                                 },
+                            );
+
+                            console.log("updatedRelations");
+                            console.log(updatedRelations);
+
+                            // Updates state
+                            props.onChange({
+                                ...props.projectInput,
+                                schemas: updatedSchemas,
+                                relations: updatedRelations,
                             });
 
                             // Sets selectedSchemaId to null
