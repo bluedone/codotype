@@ -37,8 +37,8 @@ export function ConfigurationGroupPropertiesDetail(props: {
     const selectedProperty:
         | ConfigurationProperty
         | undefined = configurationGroup.properties.find(
-            p => p.identifier === selectedPropertyID,
-        );
+        p => p.identifier === selectedPropertyID,
+    );
 
     // Return null if selectedProperty is undefined
     if (selectedProperty === undefined) {
@@ -59,9 +59,9 @@ export function ConfigurationGroupPropertiesDetail(props: {
     }
 
     return (
-        <div className="row">
-            <div className={`col-lg-${selectorColumn} border-right`}>
-                <nav className="nav nav-pills flex-column">
+        <div className="grid grid-cols-12">
+            <div className={`col-span-${selectorColumn} border-right`}>
+                <nav className="nav nav-pills flex-col">
                     {configurationGroup.properties.map(property => {
                         // Defines className for tab
                         // TODO - the bootstrap tabs + pills CSS isn't working correctly, should fix
@@ -90,9 +90,9 @@ export function ConfigurationGroupPropertiesDetail(props: {
                     })}
                 </nav>
             </div>
-            <div className={`col-lg-${detailColumn}`}>
-                <div className="row">
-                    <div className="col-lg-12">
+            <div className={`col-span-${detailColumn}`}>
+                <div className="grid grid-cols-1">
+                    <div className="col-span-1">
                         <ConfigurationInputFormGroup
                             property={selectedProperty}
                         >

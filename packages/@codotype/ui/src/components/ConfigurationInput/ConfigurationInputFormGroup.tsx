@@ -110,7 +110,7 @@ export function ConfigurationInputFormGroup(
                 <img
                     src={property.content.icon}
                     style={{ maxWidth: "2rem" }}
-                    className="mr-2"
+                    className="mr-3"
                 />
             )}
             <label className="mb-0">{property.content.label}</label>
@@ -129,14 +129,14 @@ export function ConfigurationInputFormGroup(
         <React.Fragment>
             {/* Render description IFF not empty */}
             {property.content.description !== "" && (
-                <small className="d-block mt-2 text-muted">
+                <small className="d-block mt-3 text-muted">
                     {property.content.description}
                 </small>
             )}
 
             {/* Render empty description warning */}
             {property.content.description === "" && (
-                <small className="d-block mt-2 mb-2 text-red-500">
+                <small className="d-block mt-3 mb-3 text-red-500">
                     Warning - this input needs a description
                 </small>
             )}
@@ -183,21 +183,19 @@ export function ConfigurationInputFormGroup(
             })}
         >
             <div className="flex items-center justify-between">
-                <div className="flex items-center">
-                    {formGroupHeader}
-                </div>
+                <div className="flex items-center">{formGroupHeader}</div>
             </div>
 
             {formGroupDescription}
 
             {/* Renders message to turn this feature on */}
-            <div className="mt-2 px-2 py-2 flex justify-center bg-gray-800 text-white rounded">
-                <div className="flex flex-column items-center">
+            <div className="mt-3 px-3 py-3 flex justify-center bg-gray-800 text-white rounded">
+                <div className="flex flex-col items-center">
                     <p className="lead mb-0">Enable {property.content.label}</p>
                     <p className="mb-0">
                         Click to enable the {property.content.label} property.
                     </p>
-                    <span className="mt-2">{toggleEnabledCheckbox}</span>
+                    <span className="mt-3">{toggleEnabledCheckbox}</span>
                 </div>
             </div>
         </div>
@@ -205,12 +203,12 @@ export function ConfigurationInputFormGroup(
 
     // Handle property.allowDisable
     if (property.allowDisable && !enabled && !renderInCard) {
-        return <div className={`col-lg-${colSpan}`}>{disabledFormGroup}</div>;
+        return <div className={`col-span-${colSpan}`}>{disabledFormGroup}</div>;
     }
     if (property.allowDisable && !enabled && renderInCard) {
         return (
-            <div className={`col-lg-${colSpan}`}>
-                <div className="card shadow-sm my-2 py-3 px-3">
+            <div className={`col-span-${colSpan}`}>
+                <div className="card shadow-sm my-3 py-3 px-3">
                     {disabledFormGroup}
                 </div>
             </div>
@@ -219,13 +217,13 @@ export function ConfigurationInputFormGroup(
 
     // Return standard if NOT renderInCard
     if (!renderInCard) {
-        return <div className={`col-lg-${colSpan}`}>{formGroup}</div>;
+        return <div className={`col-span-${colSpan}`}>{formGroup}</div>;
     }
 
     // Handle renderInCard
     return (
-        <div className={`col-lg-${colSpan}`}>
-            <div className="card shadow-sm my-2 py-3 px-3">{formGroup}</div>
+        <div className={`col-span-${colSpan}`}>
+            <div className="card shadow-sm my-3 py-3 px-3">{formGroup}</div>
         </div>
     );
 }
