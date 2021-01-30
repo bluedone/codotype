@@ -61,8 +61,9 @@ hr {
     text-align: center;
     white-space: nowrap;
     vertical-align: baseline;
-    @apply mx-2;
+    @apply mx-1;
     @apply py-1;
+    @apply px-2;
     @apply text-sm;
     @apply font-medium;
     @apply rounded;
@@ -119,27 +120,27 @@ hr {
       color: $body-color;
       text-decoration: none;
     }
-  
+
     &:focus,
     &.focus {
       outline: 0;
       box-shadow: $btn-focus-box-shadow;
     }
-  
+
     // Disabled comes first so active can properly restyle
     &.disabled,
     &:disabled {
       opacity: $btn-disabled-opacity;
       @include box-shadow(none);
     }
-  
+
     &:not(:disabled):not(.disabled) {
       cursor: if($enable-pointer-cursor-for-buttons, pointer, null);
-  
+
       &:active,
       &.active {
         @include box-shadow($btn-active-box-shadow);
-  
+
         &:focus {
           @include box-shadow($btn-focus-box-shadow, $btn-active-box-shadow);
         }

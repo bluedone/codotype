@@ -15,11 +15,11 @@ export function Story(props: StoryProps) {
             <div
                 className="px-5 pb-5 pt-5 h-full"
                 style={{
-                    backgroundColor: "#f5f6f9"
+                    backgroundColor: "#f5f6f9",
                 }}
             >
-                <div className="row flex justify-center">
-                    <div className="col-sm-10">{props.children}</div>
+                <div className="grid grid-cols-1">
+                    <div className="col-span-1">{props.children}</div>
                 </div>
             </div>
         </React.Fragment>
