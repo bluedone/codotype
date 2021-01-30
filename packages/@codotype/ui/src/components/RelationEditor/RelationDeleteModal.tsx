@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Modal } from "react-bootstrap";
+import { Modal } from "../Modal";
 
 // // // //
 
@@ -16,12 +16,8 @@ export function RelationDeleteModal(props: {
 }) {
     return (
         <Modal show={props.show} onHide={props.onClose}>
-            <Modal.Header closeButton>
-                <Modal.Title>Delete Relation</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                Are you sure you want to delete this Relation?
-            </Modal.Body>
+            <h3>Delete Relation</h3>
+            Are you sure you want to delete this Relation?
             <div className="modal-footer-tw">
                 <button
                     className="btn btn-lg btn-danger"
