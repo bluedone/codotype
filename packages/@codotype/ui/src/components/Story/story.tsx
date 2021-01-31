@@ -13,7 +13,7 @@ export function Story(props: StoryProps) {
         <React.Fragment>
             <AppNavbar />
             <div
-                className="px-5 pb-5 pt-5 h-full"
+                className="px-32 pb-5 pt-5 h-full"
                 style={{
                     backgroundColor: "#f5f6f9",
                 }}

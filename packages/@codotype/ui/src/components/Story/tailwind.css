@@ -158,6 +158,13 @@ hr {
     @apply ease-in-out;
 }
 
+.btn-primary {
+    @apply rounded-2xl;
+    @apply text-white;
+    @apply bg-indigo-500;
+    @apply hover:bg-indigo-600;
+}
+
 .btn-icon:hover {
     @apply text-blue-400;
 }
