@@ -19,7 +19,7 @@ export function ProjectFormModal(props: {
     return (
         <Modal show={props.show} onHide={props.handleClose}>
             <div className="p-5">
-                <h3 className="text-2xl">Project Name</h3>
+                <h3 className="text-2xl select-none">Project Name</h3>
 
                 {props.children}
             </div>

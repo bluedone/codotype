@@ -34,11 +34,11 @@ export function SchemaFormModal(props: {
             show={props.show}
             onHide={props.handleClose}
         >
-            <div className="p-5">
+            <div className="p-5 select-none">
                 <h3 className="text-2xl">{title}</h3>
                 {props.children}
             </div>
-            <div className="modal-footer-tw">
+            <div className="modal-footer-tw select-none">
                 <div className="flex items-center justify-between flex-grow">
                     <div className="flex flex-grow">
                         <p className="mb-0 text-red-400">{props.errors[0]}</p>

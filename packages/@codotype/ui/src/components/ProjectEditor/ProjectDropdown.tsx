@@ -27,7 +27,7 @@ export function ProjectDropdown(props: {
                 <Dropdown.Toggle
                     variant="light"
                     size="lg"
-                    className="mr-2"
+                    className="mr-2 bg-white border-none rounded-lg"
                     id="project-editor-dropdown"
                 >
                     <FontAwesomeIcon icon={faEllipsisH} />

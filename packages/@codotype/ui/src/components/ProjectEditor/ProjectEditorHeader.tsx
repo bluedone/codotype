@@ -29,7 +29,7 @@ export function ProjectEditorHeader(props: {
     return (
         <div className="flex items-center w-full items-end">
             <div className="flex flex-grow items-center">
-                <h2 className="flex text-3xl">
+                <h2 className="flex text-3xl select-none">
                     {projectInput.identifiers.title}
                 </h2>
 

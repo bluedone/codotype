@@ -47,7 +47,7 @@ export function SchemaDetail(props: SchemaDetailProps) {
     const { schemaEditorConfiguration } = props.pluginMetadata;
 
     return (
-        <div className="grid grid-cols-1">
+        <div className="grid grid-cols-1 select-none">
             <div className="col-sm-12">
                 <SchemaDetailHeader
                     projectInput={props.projectInput}

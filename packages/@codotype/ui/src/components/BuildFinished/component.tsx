@@ -31,7 +31,7 @@ export function BuildFinished(props: {
 
     return (
         <div
-            className="flex flex-col items-center h-full justify-center p-5"
+            className="flex flex-col items-center h-full justify-center p-5 select-none"
             style={{ minHeight: "26rem" }}
         >
             {/* Header */}
