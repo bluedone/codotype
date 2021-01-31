@@ -30,15 +30,15 @@ export function ProjectForm(props: {
                 </small>
 
                 <input
-                    className="form-control form-control-lg"
+                    className="focus:ring-none focus:border-indigo-500 shadow-md flex-1 block w-full rounded-lg border-gray-400 p-4"
                     placeholder="Project Name"
                     value={props.value}
                     onChange={e => {
                         props.onChange(e.currentTarget.value);
                     }}
                     onKeyDown={e => {
+                        // ENTER KEY CODE
                         if (e.keyCode === 13) {
-                            // ENTER KEY CODE
                             props.onSubmit(e.currentTarget.value);
                         }
                     }}

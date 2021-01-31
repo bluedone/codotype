@@ -18,8 +18,11 @@ export function ProjectFormModal(props: {
 }) {
     return (
         <Modal show={props.show} onHide={props.handleClose}>
-            <h3>Project Name</h3>
-            {props.children}
+            <div className="p-5">
+                <h3 className="text-2xl">Project Name</h3>
+
+                {props.children}
+            </div>
             <div className="modal-footer-tw">
                 <button
                     className="btn btn-lg btn-primary"
