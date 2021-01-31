@@ -34,12 +34,14 @@ export function SchemaFormModal(props: {
             show={props.show}
             onHide={props.handleClose}
         >
-            <h3>{title}</h3>
-            {props.children}
+            <div className="p-5">
+                <h3 className="text-2xl">{title}</h3>
+                {props.children}
+            </div>
             <div className="modal-footer-tw">
                 <div className="flex items-center justify-between flex-grow">
                     <div className="flex flex-grow">
-                        <p className="mb-0 text-warning">{props.errors[0]}</p>
+                        <p className="mb-0 text-red-400">{props.errors[0]}</p>
                     </div>
                     <div className="flex">
                         <button
@@ -50,7 +52,7 @@ export function SchemaFormModal(props: {
                             {submitLabel}
                         </button>
                         <button
-                            className="btn btn-lg btn-light ml-2"
+                            className="btn btn-lg ml-2"
                             onClick={props.handleClose}
                         >
                             Close
