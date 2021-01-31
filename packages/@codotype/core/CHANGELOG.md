@@ -3,6 +3,9 @@
 -   Renamed `Schema` to `SchemaInput`
 -   Renamed `InflatedSchema` to `Schema`
 -   Added `Runtime` interfaces
+-   Add `RelationInput` + `AttributeInput` interfaces
+-   Add `Primatives` interface
+-   Lots of breaking changes
 
 ### 0.8.0-canary.7
 

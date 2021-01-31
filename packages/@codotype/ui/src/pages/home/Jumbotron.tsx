@@ -1,29 +1,9 @@
 import * as React from "react";
-import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { GeneratorCard } from "../../components/generator_card";
-import { GeneratorMeta } from "@codotype/core";
+import { PluginCard } from "../../components/PluginCard";
+import { PluginMetadata } from "@codotype/core";
 import { GitHubStar } from "../../components/GitHubStar";
-
-// // // //
-
-const JumbotronSection = styled.div`
-    .jumbotron-splash {
-        padding: 2rem 0;
-        color: #3e396b;
-        .lead {
-            max-width: 500px;
-            margin: 0;
-        }
-    }
-`;
-
-const Subtitle = styled.h1`
-    font-size: 2rem;
-    font-weight: 300;
-    line-height: 1.5;
-`;
 
 // // // //
 
@@ -34,27 +14,24 @@ export function Jumbotron(props: {
     title: string;
     subtitle: string;
     body: string;
-    generators: GeneratorMeta[];
+    plugins: PluginMetadata[];
     children: React.ReactNode;
 }) {
-    const { title, subtitle, body, generators } = props;
+    const { title, subtitle, body, plugins } = props;
 
     return (
-        <JumbotronSection>
+        <div>
             <div className="container">
-                <div className="row align-items-center">
+                <div className="row items-center">
                     <div className="col-12 col-md-5">
-                        <div className="row">
-                            <div className="col-lg-12">
-                                <h1 className="display-3">{title}</h1>
-                            </div>
-                        </div>
-                        <Subtitle>{subtitle}</Subtitle>
+                        <h1 className="text-6xl">{title}</h1>
 
-                        <p className="text-muted mb-3">{body}</p>
+                        <h1 className="text-3xl leading-6">{subtitle}</h1>
+
+                        <p className="text-gray-600 my-3 text-lg">{body}</p>
 
                         <div className="row py-2">
-                            <div className="col-lg-12 d-flex flex-column">
+                            <div className="col-lg-12 flex flex-col">
                                 {props.children}
                             </div>
                         </div>
@@ -62,22 +39,22 @@ export function Jumbotron(props: {
 
                     <div className="col-12 col-md-7 my-3 my-md-5 py-md-4">
                         <div className="card-deck">
-                            {generators.map(g => (
-                                <GeneratorCard key={g.id} generator={g} />
+                            {plugins.map(g => (
+                                <PluginCard key={g.identifier} plugin={g} />
                             ))}
                         </div>
 
-                        <div className="row mt-4 d-flex justify-content-center">
+                        <div className="row mt-4 flex justify-center">
                             <div className="col-lg-6">
                                 <a
-                                    href="/generators"
-                                    className="btn btn-block btn-lg btn-outline-primary rounded-pill"
+                                    href="/plugins"
+                                    className="btn w-full btn-lg btn-outline-primary rounded-pill"
                                 >
                                     <FontAwesomeIcon
                                         icon={faSearch}
                                         className="mr-1"
                                     />
-                                    Browse Generators
+                                    Browse Plugins
                                 </a>
                             </div>
                         </div>
@@ -98,7 +75,7 @@ export function Jumbotron(props: {
                     </div>
                 </div>
             </div>
-        </JumbotronSection>
+        </div>
     );
 }
 

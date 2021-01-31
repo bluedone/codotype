@@ -2,8 +2,8 @@ import { v4 as uuidv4 } from "uuid";
 import {
     ConfigurationProperty,
     DropdownOption,
-    PropertyType,
-    OptionValue,
+    PropertyTypes,
+    ConfigurationPropertyValue,
     PropertyLayoutVariants,
 } from "../configuration-property";
 import { PropertyTransformation } from "../property-transformation";
@@ -25,9 +25,9 @@ interface ConfigurationPropertyBuilderParams {
         documentation?: string;
         icon?: string;
     };
-    type: PropertyType;
+    type: PropertyTypes;
     dropdownOptions?: DropdownOption[];
-    defaultValue?: OptionValue;
+    defaultValue?: ConfigurationPropertyValue;
     required?: boolean;
     enabledByDefault?: boolean;
     allowDisable?: boolean;
@@ -47,8 +47,8 @@ export class ConfigurationPropertyBuilder implements ConfigurationProperty {
         documentation: "",
         icon: "",
     };
-    type: PropertyType;
-    defaultValue: OptionValue = null;
+    type: PropertyTypes;
+    defaultValue: ConfigurationPropertyValue = null;
     required: boolean = false;
     unique: boolean = false;
     enabledByDefault: boolean = true;

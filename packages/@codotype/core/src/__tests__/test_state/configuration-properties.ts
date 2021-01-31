@@ -2,7 +2,7 @@ import {
     ConfigurationGroup,
     GroupLayoutVariants,
     ConfigurationProperty,
-    PropertyType,
+    PropertyTypes,
 } from "../../index";
 import { syntaxHighlighting } from "./documentation";
 import { Primatives } from "../../primatives";
@@ -12,7 +12,7 @@ import { Primatives } from "../../primatives";
 export const gitHubApiOption: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "github",
-        type: PropertyType.BOOLEAN,
+        type: PropertyTypes.BOOLEAN,
         defaultValue: false,
         content: {
             label: "GitHub API",
@@ -24,7 +24,7 @@ export const gitHubApiOption: ConfigurationProperty = new Primatives.Configurati
 export const twitterApiOption: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "twitter",
-        type: PropertyType.BOOLEAN,
+        type: PropertyTypes.BOOLEAN,
         defaultValue: false,
         content: {
             label: "Twitter API",
@@ -38,7 +38,7 @@ export const twitterApiOption: ConfigurationProperty = new Primatives.Configurat
 export const facebookApiOption: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "facebook",
-        type: PropertyType.BOOLEAN,
+        type: PropertyTypes.BOOLEAN,
         defaultValue: false,
         content: {
             label: "Facebook API",
@@ -53,7 +53,7 @@ export const facebookApiOption: ConfigurationProperty = new Primatives.Configura
 export const foursquareApiOption: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "foursquare",
-        type: PropertyType.BOOLEAN,
+        type: PropertyTypes.BOOLEAN,
         defaultValue: false,
         content: {
             label: "Foursquare API",
@@ -68,7 +68,7 @@ export const foursquareApiOption: ConfigurationProperty = new Primatives.Configu
 export const instagramApiOption: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "instagram",
-        type: PropertyType.BOOLEAN,
+        type: PropertyTypes.BOOLEAN,
         defaultValue: false,
         content: {
             label: "Instagram API",
@@ -83,7 +83,7 @@ export const instagramApiOption: ConfigurationProperty = new Primatives.Configur
 export const last_fmApiOption: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "last_fm",
-        type: PropertyType.BOOLEAN,
+        type: PropertyTypes.BOOLEAN,
         defaultValue: true,
         content: {
             label: "Last.fm API",
@@ -98,7 +98,7 @@ export const last_fmApiOption: ConfigurationProperty = new Primatives.Configurat
 export const linkedinApiOption: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "linkedin",
-        type: PropertyType.BOOLEAN,
+        type: PropertyTypes.BOOLEAN,
         defaultValue: true,
         content: {
             label: "LinkedIn API",
@@ -113,7 +113,7 @@ export const linkedinApiOption: ConfigurationProperty = new Primatives.Configura
 export const steamApiOption: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "steam",
-        type: PropertyType.BOOLEAN,
+        type: PropertyTypes.BOOLEAN,
         defaultValue: false,
         content: {
             label: "Steam API",
@@ -128,7 +128,7 @@ export const steamApiOption: ConfigurationProperty = new Primatives.Configuratio
 export const stripeApiOption: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "stripe",
-        type: PropertyType.BOOLEAN,
+        type: PropertyTypes.BOOLEAN,
         defaultValue: false,
         content: {
             label: "Stripe API",
@@ -143,7 +143,7 @@ export const stripeApiOption: ConfigurationProperty = new Primatives.Configurati
 export const paypalApiOption: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "paypal",
-        type: PropertyType.BOOLEAN,
+        type: PropertyTypes.BOOLEAN,
         defaultValue: false,
         content: {
             label: "PayPal API",
@@ -158,7 +158,7 @@ export const paypalApiOption: ConfigurationProperty = new Primatives.Configurati
 export const twilioApiOption: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "twilio",
-        type: PropertyType.BOOLEAN,
+        type: PropertyTypes.BOOLEAN,
         defaultValue: false,
         content: {
             label: "Twilio API",
@@ -173,7 +173,7 @@ export const twilioApiOption: ConfigurationProperty = new Primatives.Configurati
 export const tumblrApiOption: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "tumblr",
-        type: PropertyType.BOOLEAN,
+        type: PropertyTypes.BOOLEAN,
         defaultValue: false,
         content: {
             label: "Tumblr API",
@@ -188,7 +188,7 @@ export const tumblrApiOption: ConfigurationProperty = new Primatives.Configurati
 export const web_scrapingApiOption: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "web_scraping",
-        type: PropertyType.BOOLEAN,
+        type: PropertyTypes.BOOLEAN,
         defaultValue: false,
         content: {
             label: "Web Scraping API",
@@ -203,7 +203,7 @@ export const web_scrapingApiOption: ConfigurationProperty = new Primatives.Confi
 export const clockwork_smsApiOption: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "clockwork_sms",
-        type: PropertyType.BOOLEAN,
+        type: PropertyTypes.BOOLEAN,
         defaultValue: false,
         content: {
             label: "Clockwork SMS API",
@@ -218,7 +218,7 @@ export const clockwork_smsApiOption: ConfigurationProperty = new Primatives.Conf
 export const aviaryApiOption: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "aviary",
-        type: PropertyType.BOOLEAN,
+        type: PropertyTypes.BOOLEAN,
         defaultValue: false,
         content: {
             label: "Aviary API",
@@ -233,7 +233,7 @@ export const aviaryApiOption: ConfigurationProperty = new Primatives.Configurati
 export const lobApiOption: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "lob",
-        type: PropertyType.BOOLEAN,
+        type: PropertyTypes.BOOLEAN,
         defaultValue: false,
         content: {
             label: "Lob API",
@@ -248,7 +248,7 @@ export const lobApiOption: ConfigurationProperty = new Primatives.ConfigurationP
 export const pinterestApiOption: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "pinterest",
-        type: PropertyType.BOOLEAN,
+        type: PropertyTypes.BOOLEAN,
         defaultValue: false,
         content: {
             label: "Pinterest API",
@@ -262,7 +262,7 @@ export const pinterestApiOption: ConfigurationProperty = new Primatives.Configur
 export const google_mapsApiOption: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "google_maps",
-        type: PropertyType.BOOLEAN,
+        type: PropertyTypes.BOOLEAN,
         defaultValue: false,
         content: {
             label: "Google Maps API",
@@ -277,7 +277,7 @@ export const google_mapsApiOption: ConfigurationProperty = new Primatives.Config
 export const chartjsApiOption: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "chartjs",
-        type: PropertyType.BOOLEAN,
+        type: PropertyTypes.BOOLEAN,
         defaultValue: false,
         content: {
             label: "Chart.js + Alpha Vantage",
@@ -294,7 +294,7 @@ export const chartjsApiOption: ConfigurationProperty = new Primatives.Configurat
 export const ComponentBuilderConfigurationProperty: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "components",
-        type: PropertyType.COLLECTION,
+        type: PropertyTypes.COLLECTION,
         defaultValue: [],
         required: false,
         allowDisable: false,
@@ -307,7 +307,7 @@ export const ComponentBuilderConfigurationProperty: ConfigurationProperty = new 
         properties: [
             new Primatives.ConfigurationProperty({
                 identifier: "componentName",
-                type: PropertyType.STRING,
+                type: PropertyTypes.STRING,
                 defaultValue: "",
                 content: {
                     label: "Component Name",
@@ -316,7 +316,7 @@ export const ComponentBuilderConfigurationProperty: ConfigurationProperty = new 
             }),
             new Primatives.ConfigurationProperty({
                 identifier: "componentSlug",
-                type: PropertyType.STRING,
+                type: PropertyTypes.STRING,
                 defaultValue: "",
                 content: {
                     label: "Component Slug",
@@ -326,7 +326,7 @@ export const ComponentBuilderConfigurationProperty: ConfigurationProperty = new 
             new Primatives.ConfigurationProperty({
                 identifier: "props",
                 dropdownOptions: [],
-                type: PropertyType.COLLECTION,
+                type: PropertyTypes.COLLECTION,
                 defaultValue: "",
                 content: {
                     label: "Props",
@@ -335,7 +335,7 @@ export const ComponentBuilderConfigurationProperty: ConfigurationProperty = new 
                 properties: [
                     new Primatives.ConfigurationProperty({
                         identifier: "type",
-                        type: PropertyType.DROPDOWN,
+                        type: PropertyTypes.DROPDOWN,
                         defaultValue: "",
                         dropdownOptions: [{ label: "String", value: "string" }],
                         content: {
@@ -345,7 +345,7 @@ export const ComponentBuilderConfigurationProperty: ConfigurationProperty = new 
                     }),
                     new Primatives.ConfigurationProperty({
                         identifier: "name",
-                        type: PropertyType.STRING,
+                        type: PropertyTypes.STRING,
                         defaultValue: "",
                         content: {
                             label: "Name",
@@ -354,7 +354,7 @@ export const ComponentBuilderConfigurationProperty: ConfigurationProperty = new 
                     }),
                     new Primatives.ConfigurationProperty({
                         identifier: "desc",
-                        type: PropertyType.STRING,
+                        type: PropertyTypes.STRING,
                         defaultValue: "",
                         content: {
                             label: "Desc",
@@ -365,7 +365,7 @@ export const ComponentBuilderConfigurationProperty: ConfigurationProperty = new 
             }),
             new Primatives.ConfigurationProperty({
                 identifier: "tests",
-                type: PropertyType.INSTANCE,
+                type: PropertyTypes.INSTANCE,
                 // enabledByDefault: true,
                 defaultValue: "",
                 required: false,
@@ -379,7 +379,7 @@ export const ComponentBuilderConfigurationProperty: ConfigurationProperty = new 
                 properties: [
                     new Primatives.ConfigurationProperty({
                         identifier: "testType",
-                        type: PropertyType.DROPDOWN,
+                        type: PropertyTypes.DROPDOWN,
                         defaultValue: "",
                         dropdownOptions: [
                             { value: "table", label: "Table Test" },
@@ -399,7 +399,7 @@ export const ComponentBuilderConfigurationProperty: ConfigurationProperty = new 
 export const ComponentBuilderConfigurationPropertySingleText: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "componentName",
-        type: PropertyType.STRING,
+        type: PropertyTypes.STRING,
         defaultValue: "",
         // enabledByDefault: true,
         required: false,
@@ -415,7 +415,7 @@ export const ComponentBuilderConfigurationPropertySingleText: ConfigurationPrope
 export const ComponentBuilderConfigurationPropertySingleDropdown: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "dropdownTest",
-        type: PropertyType.DROPDOWN,
+        type: PropertyTypes.DROPDOWN,
         defaultValue: "",
         dropdownOptions: [
             {
@@ -436,7 +436,7 @@ export const ComponentBuilderConfigurationPropertySingleDropdown: ConfigurationP
 export const ComponentBuilderConfigurationPropertySingleNumber: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "numberTest",
-        type: PropertyType.NUMBER,
+        type: PropertyTypes.NUMBER,
         defaultValue: "",
         dropdownOptions: [],
         content: {
@@ -450,7 +450,7 @@ export const ComponentBuilderConfigurationPropertySingleNumber: ConfigurationPro
 export const ComponentBuilderConfigurationPropertyWithInstance01: ConfigurationProperty = new Primatives.ConfigurationProperty(
     {
         identifier: "random_instance",
-        type: PropertyType.INSTANCE,
+        type: PropertyTypes.INSTANCE,
         defaultValue: "",
         // enabledByDefault: true,
         required: false,
@@ -473,7 +473,7 @@ export const ComponentBuilderConfigurationPropertyWithInstance: ConfigurationPro
             icon:
                 "https://res.cloudinary.com/codotype/image/upload/v1558931014/product-logos/twitter-512.png",
         },
-        type: PropertyType.INSTANCE,
+        type: PropertyTypes.INSTANCE,
         defaultValue: "",
         // enabledByDefault: true,
         required: false,
@@ -483,7 +483,7 @@ export const ComponentBuilderConfigurationPropertyWithInstance: ConfigurationPro
             ComponentBuilderConfigurationPropertySingleText,
             new Primatives.ConfigurationProperty({
                 identifier: "nested_instance",
-                type: PropertyType.INSTANCE,
+                type: PropertyTypes.INSTANCE,
                 defaultValue: "",
                 content: {
                     label: "Nested Instance",

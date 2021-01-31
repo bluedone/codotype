@@ -1,6 +1,6 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
-import { Story } from "../../dev";
+import { Story } from "../../Story";
 import { TokenCasingForm } from "../TokenCasingForm";
 import { EMPTY_TOKEN_CASING } from "@codotype/core";
 
@@ -13,7 +13,7 @@ storiesOf("Components/TokenCasingForm", module).add("renders", () => {
     return (
         <Story>
             <TokenCasingForm
-                label={tokenCasing.label}
+                label={tokenCasing.title}
                 onChange={setTokenCasing}
                 onKeydownEnter={() => {
                     console.log("onKeydownEnter");

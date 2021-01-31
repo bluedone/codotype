@@ -1,105 +1,125 @@
-import { RuntimeProxyAdaptor } from "../utils/runtimeProxyAdaptor";
+import { RuntimeProxyAdapter } from "../utils/runtimeProxyAdapter";
 import {
     testState,
     RuntimeLogLevels,
     normalizeProjectInput,
-    RuntimeConstructorParams,
+    RuntimeProps,
     FileOverwriteBehaviors,
     Project,
-    RuntimeInjectorProps,
-    GeneratorConstructorParams,
+    RuntimeAdapterProps,
+    GeneratorProps,
     buildTokenCasing,
-    Primatives,
+    ProjectInput,
+    ProjectBuild,
 } from "@codotype/core";
-// import { LocalFileSystemAdaptor } from "../LocalFileSystemAdaptor";
-import { InMemoryFileSystemAdaptor } from "../InMemoryFileSystemAdaptor";
+import { InMemoryFileSystemAdapter } from "../InMemoryFileSystemAdapter";
 import { NodeRuntime } from "../node-runtime";
 
 // // // //
 
-// const x = new Primatives.Plugin({
-//     id: "my-plugin",
-//     label: "My Plugin",
-//     description: "",
-//     project_path: "plugin-output",
-//     schemaEditorConfiguration: {
-//         defaultRelations: [],
-//         defaultSchemas: [],
-//         defaultAttributes: [],
-//         configurationGroups: [],
-//         documentation: "",
-//         supportedDatatypes: [],
-//         supportedRelations: [],
-//         attributeAddons: [],
-//         enableAttributeDefaultValue: false,
-//     },
-// });
+export const projectInput: ProjectInput = {
+    schemas: [testState.userSchema, testState.movieSchema],
+    relations: [],
+    configuration: {},
+    pluginID: "123",
+    pluginVersion: "0.1.1",
+    id: "project-id",
+    identifiers: buildTokenCasing("My Project"),
+};
 
 export const project: Project = normalizeProjectInput({
-    projectInput: {
-        schemas: [testState.userSchema, testState.movieSchema],
-        relations: [],
-        configuration: {},
-        pluginID: "123",
-        pluginVersion: "0.1.1",
-        id: "project-id",
-        identifiers: buildTokenCasing("My Project"),
-    },
+    projectInput,
 });
 
-export const runtimeConstructorOptions: RuntimeConstructorParams = {
+export const build: ProjectBuild = {
+    projectInput,
+    startTime: new Date().toISOString(),
+    endTime: new Date().toISOString(),
+};
+
+export const runtimeProps: RuntimeProps = {
     cwd: "/test-cwd/",
-    logLevel: RuntimeLogLevels.verbose,
-    fileOverwriteBehavior: FileOverwriteBehaviors.force,
-    fileSystemAdaptor: new InMemoryFileSystemAdaptor(),
+    fileSystemAdapter: new InMemoryFileSystemAdapter(),
 };
 
-export const baseGeneratorOptions: RuntimeInjectorProps = {
-    dest: "destination",
-    resolved: "my/resolved/path",
+export const baseRuntimeAdapterProps: RuntimeAdapterProps = {
+    destinationPath: "destination",
+    generatorResolvedPath: "my/resolved/path",
     project,
-    plugin: testState.cdkGeneratorMeta,
-    runtime: new NodeRuntime(runtimeConstructorOptions),
+    plugin: testState.cdkPluginMeta,
+    runtime: new NodeRuntime(runtimeProps),
 };
 
-export const generatorPrototype: GeneratorConstructorParams = {
+export const generatorPrototype: GeneratorProps = {
     name: "Prototype Generator",
     write: jest.fn(),
     compileInPlace: [],
     forEachSchema: jest.fn(),
     forEachRelation: jest.fn(),
-    forEachReverseRelation: jest.fn(),
+    forEachReferencedBy: jest.fn(),
 };
 
-export const generatorPrototype01: GeneratorConstructorParams = {
+// // // //
+
+const jsonFileContents: string =
+    '{name: "project", "main": "dist/index","types": "dist/index","files": ["dist"],"repository": {"type": "git","url": "git+https://github.com/codotype/codotype-runtime.git"},"author": "Alexander Schwartzberg","license": "MIT"}';
+
+const htmlFileContents: string =
+    "<html><head><title>Page Title</title></head><body><h1>Hello, HTML!</h1></body></html>";
+
+export const generatorPrototype01: GeneratorProps = {
     name: "ModuleComponents",
     async write({ runtime }) {
-        runtime.writeFile("", '{\nname: "project"\n}');
+        // JSON
+        await runtime.writeFile("package.json", jsonFileContents, {
+            prettify: {
+                parser: "json",
+            },
+        });
+        await runtime.writeFile("package-no-prettify.json", jsonFileContents);
+
+        // HTML
+        await runtime.writeFile("index.html", htmlFileContents, {
+            prettify: {
+                parser: "json",
+            },
+        });
+        await runtime.writeFile("index-no-prettify.html", htmlFileContents);
+
+        await runtime.writeFile("README.md", "# Your New Project");
+
+        // Writes the prettify.js.ejs template w/ prettify.semi = true option
+        await runtime.renderTemplate({
+            src: "prettify-test.js.ejs",
+            dest: `prettify-test.js`,
+            data: {},
+            options: {
+                prettify: {
+                    parser: "babel",
+                    semi: true,
+                },
+            },
+        });
+
+        // Writes the prettify.js.ejs template w/ prettify.semi = false
+        await runtime.renderTemplate({
+            src: "prettify-test.js.ejs",
+            dest: `prettify-test-no-semi.js`,
+            data: {},
+            options: {
+                prettify: {
+                    parser: "babel",
+                    semi: false,
+                },
+            },
+        });
     },
     async forEachSchema({ schema, runtime }) {
-        // Destination for module / components directory
-        const moduleComponentsDest =
-            "components/" + schema.identifiers.singular.snake + "_editor/";
-
-        // Ensures module components directory
-        await runtime.ensureDir(moduleComponentsDest);
-
-        // TODO - ensure page here
-        await runtime.renderComponent({
+        // Writes the page.tsx.ejs template
+        await runtime.renderTemplate({
             src: "page.tsx.ejs",
             dest: `pages/${schema.identifiers.plural.snake}.tsx`,
             data: { schema },
         });
-    },
-};
-
-// // Defines typed generator constant
-export const generatorPrototype02: GeneratorConstructorParams = {
-    name: "Fullstack TypeScript Generator",
-    async write(this: RuntimeProxyAdaptor) {
-        await this.composeWith("./base");
-        await this.composeWith("./rest-api");
-        await this.composeWith("./react-components");
-        await this.composeWith("./react-components/form");
     },
 };

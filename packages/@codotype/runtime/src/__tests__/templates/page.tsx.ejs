@@ -1,27 +1,27 @@
 # GraphQL Schema
 type <%= schema.identifiers.singular.pascal %> {
 <%_ schema.attributes.forEach((attr, index) => { _%>
-<%_ if (attr.datatype === Datatype.STRING) { _%>
+<%_ if (attr.datatype === Datatypes.STRING) { _%>
   <%= attr.identifiers.camel %>: String
-<%_ } else if (attr.datatype === Datatype.TEXT) { _%>
+<%_ } else if (attr.datatype === Datatypes.TEXT) { _%>
   <%= attr.identifiers.camel %>: String
-<%_ } else if (attr.datatype === Datatype.STRING_ARRAY) { _%>
+<%_ } else if (attr.datatype === Datatypes.STRING_ARRAY) { _%>
   <%= attr.identifiers.camel %>: [String]
-<%_ } else if (attr.datatype === Datatype.INTEGER) { _%>
+<%_ } else if (attr.datatype === Datatypes.INTEGER) { _%>
   <%= attr.identifiers.camel %>: Number
-<%_ } else if (attr.datatype === Datatype.FLOAT) { _%>
+<%_ } else if (attr.datatype === Datatypes.FLOAT) { _%>
   <%= attr.identifiers.camel %>: Number
-<%_ } else if (attr.datatype === Datatype.DOUBLE) { _%>
+<%_ } else if (attr.datatype === Datatypes.DOUBLE) { _%>
   <%= attr.identifiers.camel %>: Number
-<%_ } else if (attr.datatype === Datatype.BOOLEAN) { _%>
+<%_ } else if (attr.datatype === Datatypes.BOOLEAN) { _%>
   <%= attr.identifiers.camel %>: Boolean
-<%_ } else if (attr.datatype === Datatype.JSON) { _%>
+<%_ } else if (attr.datatype === Datatypes.JSON) { _%>
   <%= attr.identifiers.camel %>: Object,
-<%_ } else if (attr.datatype === Datatype.DATE) { _%>
+<%_ } else if (attr.datatype === Datatypes.DATE) { _%>
   <%= attr.identifiers.camel %>: Date,
-<%_ } else if (attr.datatype === Datatype.TIME) { _%>
+<%_ } else if (attr.datatype === Datatypes.TIME) { _%>
   <%= attr.identifiers.camel %>: Date
-<%_ } else if (attr.datatype === Datatype.DATETIME) { _%>
+<%_ } else if (attr.datatype === Datatypes.DATETIME) { _%>
   <%= attr.identifiers.camel %>: Date
 <%_ } _%>
 <%_ }) _%>

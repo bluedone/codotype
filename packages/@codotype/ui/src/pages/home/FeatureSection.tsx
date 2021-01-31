@@ -21,20 +21,12 @@ export function FeatureSections(props: { featureSections: FeatureSection[] }) {
                 {featureSections.map((f, index) => (
                     <div
                         key={f.title}
-                        className={`row align-items-center mt-5 ${
-                            index % 2 === 1 ? "flex-row-reverse" : ""
-                        }`}
+                        className={`row items-center mt-5 ${index % 2 === 1 ? "flex-row-reverse" : ""
+                            }`}
                     >
                         <div className="col-sm-4">
-                            <div className="media">
-                                <div className="media-body">
-                                    <div className="media-icon mb-3">
-                                        {/* <font-awesome-icon */}
-                                        {/* :icon="[f.fontAwesomePrefix, f.fontAwesomeIcon]" */}
-                                        {/* className="text-primary" */}
-                                        {/* size="2x" */}
-                                        {/* /> */}
-                                    </div>
+                            <div className="flex items-start">
+                                <div className="flex-1">
                                     <h3 className="mt-0">{f.title}</h3>
                                     <p>{f.body}</p>
                                 </div>

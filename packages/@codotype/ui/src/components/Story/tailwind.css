@@ -1,0 +1,238 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Start updating things one component at a time */
+
+/* Modal Footer */
+.modal-footer-tw {
+    @apply p-3;
+    @apply flex;
+    @apply justify-end;
+    @apply items-center;
+    @apply border-t;
+    @apply bg-gray-200;
+    @apply border-gray-300;
+    @apply rounded-bl-lg;
+    @apply rounded-br-lg;
+}
+
+.card {
+    @apply bg-white;
+    @apply rounded-2xl;
+    @apply border;
+    @apply relative;
+    @apply flex;
+    @apply flex-col;
+    @apply break-words;
+    @apply bg-clip-padding;
+    @apply border-gray-200;
+}
+
+.card-body {
+    @apply p-5;
+}
+
+/*
+code {
+    @apply text-orange-400;
+} */
+
+/* NOTE - only used in one place, replace with updated CSS soon */
+small {
+    @apply text-sm;
+    @apply font-normal;
+}
+
+hr {
+    @apply border-t;
+    @apply border-gray-400;
+    margin-top: 0.2rem;
+    margin-bottom: 0.2rem;
+}
+
+.lead {
+    @apply text-lg;
+    @apply font-light;
+}
+
+.badge {
+    display: inline-block;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    @apply mx-1;
+    @apply py-1;
+    @apply px-2;
+    @apply text-sm;
+    @apply font-medium;
+    @apply rounded;
+}
+
+.list-group-item {
+    @apply relative;
+    @apply block;
+    @apply px-2;
+    @apply py-2;
+    @apply text-gray-600;
+    @apply no-underline;
+    @apply bg-white;
+    @apply border;
+    @apply border-gray-400;
+    @apply border-t-0;
+}
+
+.list-group-item:first-child {
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+    @apply border-t;
+}
+
+.list-group-item:last-child {
+    border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;
+}
+
+.list-group-item.active {
+    z-index: 2;
+    @apply text-white;
+    @apply bg-blue-500;
+    @apply border-blue-400;
+}
+
+/* BTN */
+.btn {
+    display: inline-block;
+    @apply font-medium;
+    @apply text-gray-800;
+    @apply no-underline;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    background-color: transparent;
+    @apply border;
+    @apply py-2;
+    @apply px-2;
+    /* @include button-size($btn-padding-y, $btn-padding-x, $btn-font-size, $btn-line-height, $btn-border-radius); */
+    /* @include transition($btn-transition); */
+
+    /* @include hover() {
+      color: $body-color;
+      text-decoration: none;
+    }
+
+    &:focus,
+    &.focus {
+      outline: 0;
+      box-shadow: $btn-focus-box-shadow;
+    }
+
+    // Disabled comes first so active can properly restyle
+    &.disabled,
+    &:disabled {
+      opacity: $btn-disabled-opacity;
+      @include box-shadow(none);
+    }
+
+    &:not(:disabled):not(.disabled) {
+      cursor: if($enable-pointer-cursor-for-buttons, pointer, null);
+
+      &:active,
+      &.active {
+        @include box-shadow($btn-active-box-shadow);
+
+        &:focus {
+          @include box-shadow($btn-focus-box-shadow, $btn-active-box-shadow);
+        }
+      }
+    } */
+}
+
+.btn-icon {
+    @apply ml-2;
+    @apply text-gray-500;
+    @apply p-1;
+    @apply transition-colors;
+    @apply duration-150;
+    @apply ease-in-out;
+}
+
+.btn-primary {
+    @apply rounded-full;
+    @apply text-white;
+    @apply bg-indigo-500;
+    @apply hover:bg-indigo-600;
+    @apply px-4;
+}
+
+.btn-icon:hover {
+    @apply text-blue-400;
+}
+
+.btn-icon:focus {
+    @apply outline-none;
+}
+
+/* Tailwind Utility for using gradients with text */
+/* https://gist.github.com/dillonchanis/7b76ae89d13b662eb44866f570da817b */
+@layer utilities {
+    .text-gradient {
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+}
+
+/* Form Control */
+
+.form-control {
+    display: block;
+    width: 100%;
+    @apply px-2;
+    @apply py-5;
+    @apply h-3;
+    @apply font-light;
+    @apply text-gray-600;
+    @apply bg-white;
+    @apply border;
+    @apply border-gray-400;
+    @apply rounded-xl;
+    @apply shadow-md;
+    @apply transition-colors;
+    /* font-family: $input-font-family; */
+    background-clip: padding-box;
+
+    /* // Unstyle the caret on `<select>`s in IE10+.
+    &::-ms-expand {
+        background-color: transparent;
+        border: 0;
+    }
+
+    // Remove select outline from select box in FF
+    &:-moz-focusring {
+        color: transparent;
+        text-shadow: 0 0 0 $input-color;
+    }
+
+    // Customize the `:focus` state to imitate native WebKit styles.
+    @include form-control-focus($ignore-warning: true);
+
+    // Placeholder
+    &::placeholder {
+        color: $input-placeholder-color;
+        // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526.
+        opacity: 1;
+    }
+
+    // Disabled and read-only inputs
+    //
+    // HTML5 says that controls under a fieldset > legend:first-child won't be
+    // disabled if the fieldset is disabled. Due to implementation difficulty, we
+    // don't honor that edge case; we style them as disabled anyway.
+    &:disabled,
+    &[readonly] {
+        background-color: $input-disabled-bg;
+        // iOS fix for unreadable disabled content; see https://github.com/twbs/bootstrap/issues/11655.
+        opacity: 1;
+    } */
+}

@@ -13,7 +13,7 @@
         "jsx": "react",
         "moduleResolution": "node",
         "rootDir": "./",
-        "baseUrl": "./",
+        "baseUrl": "./src",
         "noImplicitReturns": true,
         "noImplicitThis": true,
         "noImplicitAny": true,

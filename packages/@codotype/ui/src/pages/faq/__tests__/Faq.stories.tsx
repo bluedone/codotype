@@ -1,6 +1,6 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
-import { Story } from "../../../components/dev";
+import { Story } from "../../../components/Story";
 import { FaqPage } from "../FaqPage";
 import { FaqItem, FaqItemCard } from "../FaqItemCard";
 

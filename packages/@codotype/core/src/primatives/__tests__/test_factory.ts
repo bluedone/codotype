@@ -1,4 +1,4 @@
-import { PropertyType } from "../../configuration-property";
+import { PropertyTypes } from "../../configuration-property";
 import { ConfigurationPropertyBuilder } from "../ConfigurationProperty";
 
 // Mocks UUID module
@@ -13,7 +13,7 @@ describe("factory", () => {
     test("works", () => {
         const configurationGroupProperty = new ConfigurationPropertyBuilder({
             identifier: "meh_value",
-            type: PropertyType.BOOLEAN,
+            type: PropertyTypes.BOOLEAN,
             content: {
                 label: "meh",
             },

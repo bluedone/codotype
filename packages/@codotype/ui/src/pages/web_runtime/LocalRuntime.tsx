@@ -1,29 +1,29 @@
 import * as React from "react";
-import { GeneratorFetcher } from "./GeneratorFetcher";
+import { PluginFetcher } from "./PluginFetcher";
 import { LocalStorageProvider } from "./LocalStorageProvider";
-import { GeneratorRunner } from "./GeneratorRunner";
-import { ProjectEditor } from "../../components/project_editor";
+import { PluginRunner } from "./PluginRunner";
+import { ProjectEditor } from "../../components/ProjectEditor";
 
 // // // //
 
 /**
  * LocalRuntime
- * Component designed to handle all the heavy lifting for running a generator locally using @codotype/cli
+ * Component designed to handle all the heavy lifting for running a plugin locally using @codotype/cli
  */
 export function LocalRuntime() {
     return (
-        <GeneratorFetcher>
-            {({ generators }) => (
-                <GeneratorRunner generator={generators[0]}>
+        <PluginFetcher>
+            {({ plugins }) => (
+                <PluginRunner plugin={plugins[0]}>
                     {({ generateCode }) => (
-                        <LocalStorageProvider generator={generators[0]}>
-                            {({ project, clearProject, setProject }) => (
+                        <LocalStorageProvider plugin={plugins[0]}>
+                            {({ projectInput, clearProject, setProject }) => (
                                 <ProjectEditor
-                                    generator={generators[0]}
-                                    project={project}
+                                    plugin={plugins[0]}
+                                    projectInput={projectInput}
                                     onClickGenerate={() => {
                                         generateCode({
-                                            project,
+                                            projectInput,
                                         });
                                     }}
                                     onResetProject={clearProject}
@@ -32,8 +32,8 @@ export function LocalRuntime() {
                             )}
                         </LocalStorageProvider>
                     )}
-                </GeneratorRunner>
+                </PluginRunner>
             )}
-        </GeneratorFetcher>
+        </PluginFetcher>
     );
 }

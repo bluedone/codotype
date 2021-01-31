@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`prepareProjectBuildDestination creates .codotype directory + codotype-project.json 1`] = `
+Object {
+  "/test-cwd/.codotype-out/my_project/.codotype/my-project-codotype-project.json": "{
+  \\"schemas\\": [
+    {
+      \\"id\\": \\"12345\\",
+      \\"identifiers\\": {
+        \\"singular\\": {
+          \\"title\\": \\"User\\",
+          \\"snake\\": \\"user\\",
+          \\"camel\\": \\"user\\",
+          \\"pascal\\": \\"User\\",
+          \\"kebab\\": \\"user\\"
+        },
+        \\"plural\\": {
+          \\"title\\": \\"Users\\",
+          \\"snake\\": \\"users\\",
+          \\"camel\\": \\"users\\",
+          \\"pascal\\": \\"Users\\",
+          \\"kebab\\": \\"users\\"
+        }
+      },
+      \\"attributes\\": [],
+      \\"internalNote\\": \\"\\",
+      \\"locked\\": false,
+      \\"createdBy\\": \\"user\\",
+      \\"configuration\\": {}
+    },
+    {
+      \\"id\\": \\"45678\\",
+      \\"identifiers\\": {
+        \\"singular\\": {
+          \\"title\\": \\"Movie\\",
+          \\"snake\\": \\"movie\\",
+          \\"camel\\": \\"movie\\",
+          \\"pascal\\": \\"Movie\\",
+          \\"kebab\\": \\"movie\\"
+        },
+        \\"plural\\": {
+          \\"title\\": \\"Movies\\",
+          \\"snake\\": \\"movies\\",
+          \\"camel\\": \\"movies\\",
+          \\"pascal\\": \\"Movies\\",
+          \\"kebab\\": \\"movies\\"
+        }
+      },
+      \\"internalNote\\": \\"\\",
+      \\"attributes\\": [
+        {
+          \\"id\\": \\"name-attr\\",
+          \\"datatype\\": \\"STRING\\",
+          \\"identifiers\\": {
+            \\"title\\": \\"Name\\",
+            \\"snake\\": \\"name\\",
+            \\"camel\\": \\"name\\",
+            \\"pascal\\": \\"Name\\",
+            \\"kebab\\": \\"name\\"
+          },
+          \\"internalNote\\": \\"the name of the user\\",
+          \\"locked\\": false,
+          \\"createdBy\\": \\"user\\",
+          \\"addons\\": {
+            \\"required\\": true
+          }
+        },
+        {
+          \\"id\\": \\"email-attr\\",
+          \\"datatype\\": \\"STRING\\",
+          \\"identifiers\\": {
+            \\"title\\": \\"Email\\",
+            \\"snake\\": \\"email\\",
+            \\"camel\\": \\"email\\",
+            \\"pascal\\": \\"Email\\",
+            \\"kebab\\": \\"email\\"
+          },
+          \\"internalNote\\": \\"the email of the user\\",
+          \\"locked\\": false,
+          \\"createdBy\\": \\"user\\",
+          \\"addons\\": {
+            \\"required\\": true
+          }
+        }
+      ],
+      \\"locked\\": false,
+      \\"createdBy\\": \\"user\\",
+      \\"configuration\\": {}
+    }
+  ],
+  \\"relations\\": [],
+  \\"configuration\\": {},
+  \\"pluginID\\": \\"123\\",
+  \\"pluginVersion\\": \\"0.1.1\\",
+  \\"id\\": \\"project-id\\",
+  \\"identifiers\\": {
+    \\"title\\": \\"My Project\\",
+    \\"snake\\": \\"my_project\\",
+    \\"camel\\": \\"myProject\\",
+    \\"pascal\\": \\"MyProject\\",
+    \\"kebab\\": \\"my-project\\"
+  }
+}",
+}
+`;
