@@ -159,10 +159,11 @@ hr {
 }
 
 .btn-primary {
-    @apply rounded-2xl;
+    @apply rounded-full;
     @apply text-white;
     @apply bg-indigo-500;
     @apply hover:bg-indigo-600;
+    @apply px-4;
 }
 
 .btn-icon:hover {

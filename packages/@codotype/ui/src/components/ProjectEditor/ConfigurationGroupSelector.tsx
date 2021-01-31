@@ -25,10 +25,10 @@ export function ConfigurationGroupTab(props: {
     ];
 
     if (props.active) {
-        btnClassName.push("bg-indigo-500 text-white");
+        btnClassName.push("bg-gray-500 text-white");
     } else {
         btnClassName.push(
-            "border-indigo-500 text-indigo-500 bg-transparent border-indigo-500 border",
+            "border-gray-500 text-gray-500 bg-transparent border-gray-500 border",
         );
     }
 
