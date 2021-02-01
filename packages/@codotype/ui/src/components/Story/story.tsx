@@ -10,7 +10,8 @@ interface StoryProps {
 }
 
 export function Story(props: StoryProps) {
-    const [dark, setDark] = React.useState(false);
+    // const [dark, setDark] = React.useState(false);
+    const [dark, setDark] = React.useState(true);
     return (
         <div
             className={classnames({

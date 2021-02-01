@@ -30,7 +30,7 @@ export function ProjectForm(props: {
                 </small>
 
                 <input
-                    className="focus:ring-none focus:border-indigo-500 shadow-md flex-1 block w-full rounded-lg border-gray-400 p-4"
+                    className="form-control rounded-lg py-8 font-2xl"
                     placeholder="Project Name"
                     value={props.value}
                     onChange={e => {
