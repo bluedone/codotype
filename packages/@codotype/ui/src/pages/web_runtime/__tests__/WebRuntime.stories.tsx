@@ -31,6 +31,7 @@ import {
     AddonPropertyInlineIcons,
 } from "@codotype/core";
 import { pluginReadme } from "../../../components/MarkdownRenderer/__tests__/test_state";
+import { NextJsWebsiteStarterPlugin } from "./test_state";
 const {
     cdkPluginMeta,
     dummyPluginMetadata: dummyPluginMetadataOriginal,
@@ -640,6 +641,7 @@ const stories: Array<[string, PluginMetadata]> = [
             },
         },
     ],
+    ["Concepts/Next.js Website Starter", NextJsWebsiteStarterPlugin],
 ];
 
 // // // //
