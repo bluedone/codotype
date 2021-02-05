@@ -107,11 +107,7 @@ export function ConfigurationInputFormGroup(
     const formGroupHeader = (
         <div className="flex items-center">
             {property.content.icon && (
-                <img
-                    src={property.content.icon}
-                    style={{ maxWidth: "2rem" }}
-                    className="mr-3"
-                />
+                <img src={property.content.icon} className="mr-3 max-h-8" />
             )}
             <label className="mb-0 text-lg">{property.content.label}</label>
             {renderDocumentationModal && (
