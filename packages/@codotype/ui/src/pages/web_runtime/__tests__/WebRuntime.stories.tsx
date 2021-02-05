@@ -32,6 +32,7 @@ import {
 } from "@codotype/core";
 import { pluginReadme } from "../../../components/MarkdownRenderer/__tests__/test_state";
 import { NextJsWebsiteStarterPlugin } from "./test_state";
+import { ConfigurationGroupHeader } from "../../../components/ConfigurationInput";
 const {
     cdkPluginMeta,
     dummyPluginMetadata: dummyPluginMetadataOriginal,
@@ -672,7 +673,59 @@ stories.forEach(story => {
                                         ) => {
                                             setProject(updatedProject);
                                         }}
-                                    />
+                                    >
+                                        {({
+                                            defaultComponent,
+                                            value,
+                                            selectedConfigurationGroup,
+                                            onChange,
+                                        }) => {
+                                            console.log(
+                                                selectedConfigurationGroup,
+                                            );
+
+                                            if (
+                                                selectedConfigurationGroup.identifier ===
+                                                "home"
+                                            ) {
+                                                return (
+                                                    <div className="grid grid-cols-12 mt-4">
+                                                        <div className="col-span-12">
+                                                            {/* ConfigurationGroupHeader */}
+                                                            <ConfigurationGroupHeader
+                                                                value={value}
+                                                                onChange={
+                                                                    onChange
+                                                                }
+                                                                configurationGroup={
+                                                                    selectedConfigurationGroup
+                                                                }
+                                                            />
+                                                            <div>
+                                                                <input
+                                                                    value={
+                                                                        value.string
+                                                                    }
+                                                                    onChange={e => {
+                                                                        onChange(
+                                                                            {
+                                                                                string:
+                                                                                    e
+                                                                                        .currentTarget
+                                                                                        .value,
+                                                                            },
+                                                                        );
+                                                                    }}
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                );
+                                            } else {
+                                                return defaultComponent;
+                                            }
+                                        }}
+                                    </ProjectEditor>
                                     <pre>
                                         {JSON.stringify(projectInput, null, 4)}
                                     </pre>
