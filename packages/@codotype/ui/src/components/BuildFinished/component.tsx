@@ -31,37 +31,32 @@ export function BuildFinished(props: {
 
     return (
         <div
-            className="flex flex-column items-center h-full justify-center"
+            className="flex flex-col items-center h-full justify-center p-5 select-none"
             style={{ minHeight: "26rem" }}
         >
             {/* Header */}
-            <div className="row">
-                <div className="col-lg-12 text-center">
-                    <p className="lead mb-1">
-                        Thank you for using{" "}
-                        <strong style={{ fontWeight: "bolder" }}>
-                            Codotype
-                        </strong>
-                    </p>
+            <div className="text-center">
+                <p className="lead mb-1">
+                    Thank you for using{" "}
+                    <strong style={{ fontWeight: "bolder" }}>Codotype</strong>
+                </p>
 
-                    <p className="lead mb-1">
-                        <FontAwesomeIcon
-                            icon={faHeart}
-                            size="lg"
-                            className="text-red-500"
-                        />
-                    </p>
+                <p className="lead mb-1">
+                    <FontAwesomeIcon
+                        icon={faHeart}
+                        size="lg"
+                        className="text-red-500"
+                    />
+                </p>
 
-                    <small className="text-muted">
-                        Your <span className="text-green-500">Project</span> has
-                        successfully been generated
-                    </small>
-                    <br />
-                    <small className="text-muted mt-3">
-                        Download and unzip the codebase and follow the
-                        instructions in <strong>README.md</strong>
-                    </small>
-                </div>
+                <small className="text-gray-600">
+                    Your project has successfully been generated - horay!
+                </small>
+                <br />
+                <small className="text-gray-600 mt-3">
+                    Download your starter code and follow the instructions in{" "}
+                    <span className="font-semibold">README.md</span>
+                </small>
             </div>
 
             {/* <!-- Local Plugin --> */}
@@ -106,19 +101,14 @@ export function BuildFinished(props: {
             {/* TODO - use ResponseTypes enum from @codotype/core */}
             {props.responseType === "S3_DOWNLOAD" && props.downloadUrl && (
                 <div className="row flex justify-center mt-3">
-                    <div className="col-lg-6">
-                        <a
-                            href={props.downloadUrl}
-                            target="_blank"
-                            className="btn btn-lg w-full btn-success"
-                        >
-                            <FontAwesomeIcon
-                                icon={faDownload}
-                                className="mr-2"
-                            />
-                            Download ZIP
-                        </a>
-                    </div>
+                    <a
+                        href={props.downloadUrl}
+                        target="_blank"
+                        className="btn w-full btn-success"
+                    >
+                        <FontAwesomeIcon icon={faDownload} className="mr-2" />
+                        Download ZIP
+                    </a>
                 </div>
             )}
 
@@ -129,7 +119,7 @@ export function BuildFinished(props: {
                         Remember, iteration is key
                     </p>
 
-                    <small className="text-muted">
+                    <small className="text-gray-600">
                         Make changes and <strong>re-generate</strong> your
                         Project as many times as you like{" "}
                         <FontAwesomeIcon icon={faLaugh} />
@@ -138,7 +128,7 @@ export function BuildFinished(props: {
 
                 <div className="col-sm-12 col-md-4 mt-2">
                     <button
-                        className="btn w-full btn-outline-primary"
+                        className="btn w-full"
                         onClick={props.onClickBackToEditor}
                     >
                         <FontAwesomeIcon icon={faReply} className="mr-2" />
@@ -153,21 +143,26 @@ export function BuildFinished(props: {
             <div className="row flex justify-center">
                 <div className="col-lg-12 text-center">
                     <p className="mb-0">Support Codotype</p>
-                    <small className="text-muted">
+                    <small className="text-gray-600">
                         Give us a{" "}
                         <FontAwesomeIcon
                             icon={faStar}
-                            className="mr-1 text-warning"
+                            className="mr-1 text-yellow-400"
                         />
                         on{" "}
                         <a
                             href="https://github.com/codotype/codotype"
                             target="_blank"
+                            className="text-blue-400"
                         >
                             GitHub
                         </a>{" "}
-                        or follow us on{" "}
-                        <a href="https://twitter.com/codotype" target="_blank">
+                        and follow us on{" "}
+                        <a
+                            href="https://twitter.com/codotype"
+                            target="_blank"
+                            className="text-blue-500"
+                        >
                             <FontAwesomeIcon
                                 icon={fab.faTwitter}
                                 className="mr-1"

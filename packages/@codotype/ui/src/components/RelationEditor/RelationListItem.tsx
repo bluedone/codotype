@@ -19,7 +19,6 @@ import {
     faTag,
     faCheck,
 } from "@fortawesome/free-solid-svg-icons";
-import styled from "styled-components";
 
 // // // //
 
@@ -34,25 +33,6 @@ const mapAddonIconToFontAwesome: {
     [AddonPropertyInlineIcons.tag]: faTag,
     [AddonPropertyInlineIcons.check]: faCheck,
 };
-
-// padding: 0.25rem 0.5rem
-const StyledListItem = styled.li`
-    &:hover {
-        .controls {
-            opacity: 1;
-        }
-    }
-
-    .controls {
-        transition: opacity 0.25s ease-in;
-        opacity: 0;
-        .dropdown-toggle.btn.btn-sm {
-            &:after {
-                display: none;
-            }
-        }
-    }
-`;
 
 /**
  * RelationListItem
@@ -75,7 +55,7 @@ export function RelationListItem(props: {
         <Draggable draggableId={String(relation.id)} index={props.index}>
             {provided => (
                 <li
-                    className="bg-white hover:bg-gray-300 py-1 px-2 cursor-grab border-l-4 border-blue-500"
+                    className="cursor-pointer flex justify-between group bg-white dark:bg-gray-900 dark:text-gray-200 hover:bg-gray-200 border-indigo-500 border-l-4 py-2 px-2 text-gray-900 font-light"
                     ref={provided.innerRef}
                     onClick={() => {
                         // Don't allow editing if Attribute.locked is true
@@ -87,81 +67,77 @@ export function RelationListItem(props: {
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                 >
-                    <div className="row flex items-center">
-                        <div className="col-sm-10">
-                            <RelationBadge
-                                slim
-                                direction="out"
-                                relation={relation}
-                            />
-                            {/* Render Addon badges */}
-                            {props.addons
-                                .filter(
-                                    a =>
-                                        relation.type !== null &&
-                                        a.supportedRelationTypes.includes(
-                                            relation.type,
-                                        ),
-                                )
-                                .map(addon => {
-                                    const icon =
-                                        mapAddonIconToFontAwesome[
+                    <div className="flex">
+                        <RelationBadge
+                            slim
+                            direction="out"
+                            relation={relation}
+                        />
+                        {/* Render Addon badges */}
+                        {props.addons
+                            .filter(
+                                a =>
+                                    relation.type !== null &&
+                                    a.supportedRelationTypes.includes(
+                                        relation.type,
+                                    ),
+                            )
+                            .map(addon => {
+                                const icon =
+                                    mapAddonIconToFontAwesome[
                                         addon.property.inlineIcon
-                                        ];
-                                    if (icon === null) {
-                                        return null;
-                                    }
+                                    ];
+                                if (icon === null) {
+                                    return null;
+                                }
 
-                                    if (
-                                        relation.addons[
+                                if (
+                                    relation.addons[
                                         addon.property.identifier
-                                        ] === undefined
-                                    ) {
-                                        return null;
-                                    }
+                                    ] === undefined
+                                ) {
+                                    return null;
+                                }
 
-                                    // Return null for boolean addon with falsey property
-                                    if (
-                                        addon.property.propertyType ===
+                                // Return null for boolean addon with falsey property
+                                if (
+                                    addon.property.propertyType ===
                                         PropertyTypes.BOOLEAN &&
-                                        relation.addons[
+                                    relation.addons[
                                         addon.property.identifier
-                                        ] === false
-                                    ) {
-                                        return null;
-                                    }
+                                    ] === false
+                                ) {
+                                    return null;
+                                }
 
-                                    return (
-                                        <Tooltip
-                                            position="right"
-                                            tooltipContent={
-                                                <>
-                                                    {addon.property.content.label}
-                                                </>
-                                            }
-                                        >
-                                            <span className="ml-2 badge bg-gray-300">
-                                                <FontAwesomeIcon icon={icon} />
-                                            </span>
-                                        </Tooltip>
-                                    );
-                                })}
-                        </div>
-                        <div className="col-sm-2 text-right flex controls justify-end">
-                            <button
-                                className="btn btn-sm btn-outline-danger px-0 py-0"
-                                onClick={e => {
-                                    e.stopPropagation();
-                                    e.preventDefault();
-                                    props.onClickDelete(relation);
-                                }}
-                            >
-                                <FontAwesomeIcon
-                                    className="mx-2"
-                                    icon={faTrashAlt}
-                                />
-                            </button>
-                        </div>
+                                return (
+                                    <Tooltip
+                                        position="right"
+                                        tooltipContent={
+                                            <>{addon.property.content.label}</>
+                                        }
+                                    >
+                                        <span className="ml-2 badge bg-gray-300">
+                                            <FontAwesomeIcon icon={icon} />
+                                        </span>
+                                    </Tooltip>
+                                );
+                            })}
+                    </div>
+                    <div className="opacity-0 group-hover:opacity-100">
+                        <button
+                            className="px-0 py-0 text-gray-500 hover:text-red-500 p-1 focus:outline-none transition-colors duration-150 ease-in-out"
+                            onClick={e => {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                props.onClickDelete(relation);
+                            }}
+                        >
+                            <FontAwesomeIcon
+                                className="mx-2"
+                                icon={faTrashAlt}
+                            />
+                        </button>
                     </div>
                 </li>
             )}

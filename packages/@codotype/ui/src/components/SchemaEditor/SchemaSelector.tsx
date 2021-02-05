@@ -22,11 +22,12 @@ export function SchemaSelectorItem(props: {
             {(provided, snapshot) => (
                 <li
                     className={classnames(
-                        "cursor-pointer bg-white hover:bg-gray-200 border-l-4 py-4 px-4",
+                        "cursor-pointer bg-white dark:bg-gray-900 dark:text-gray-200 select-none hover:bg-gray-200 border-l-8 py-4 px-4",
                         {
-                            "font-medium border-blue-500": props.selected,
-                            "text-muted border-gray-500": !props.selected,
-                            "rounded": snapshot.isDragging
+                            "text-gray-900 font-semibold border-indigo-500":
+                                props.selected,
+                            "text-gray-600 font-light border-gray-500": !props.selected,
+                            rounded: snapshot.isDragging,
                         },
                     )}
                     ref={provided.innerRef}
@@ -37,7 +38,7 @@ export function SchemaSelectorItem(props: {
                     }}
                 >
                     <div className="row items-center flex flex-row justify-between">
-                        <span className="flex ml-4">
+                        <span className="flex">
                             {props.schemaInput.identifiers.singular.title}
                         </span>
 
@@ -45,7 +46,9 @@ export function SchemaSelectorItem(props: {
                         {!props.schemaInput.attributes.length && (
                             <Tooltip
                                 position="right"
-                                tooltipContent={<>Schema requires at least one attribute</>}
+                                tooltipContent={
+                                    <>Schema requires at least one attribute</>
+                                }
                             >
                                 <FontAwesomeIcon
                                     className="text-warning"
@@ -55,8 +58,7 @@ export function SchemaSelectorItem(props: {
                         )}
                     </div>
                 </li>
-            )
-            }
+            )}
         </Draggable>
     );
 }

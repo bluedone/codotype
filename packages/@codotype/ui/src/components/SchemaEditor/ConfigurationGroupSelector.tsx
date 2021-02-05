@@ -15,25 +15,27 @@ export function ConfigurationGroupTab(props: {
     onClick: () => void;
 }) {
     const { label } = props;
-    const btnClassName: string[] = ["btn"];
-    if (props.active) {
-        btnClassName.push("btn-light active");
-    } else {
-        btnClassName.push("btn-light");
-    }
+    const btnClassName: string[] = [
+        "flex flex-grow items-center justify-center mr-2 shadow-sm px-3 py-2 focus:outline-none rounded-full",
+    ];
 
+    if (props.active) {
+        btnClassName.push("bg-gray-500 text-white");
+    } else {
+        btnClassName.push(
+            "border-gray-500 text-gray-400 bg-transparent border-gray-500 border",
+        );
+    }
     return (
-        <div className="flex mr-2">
-            <button
-                className={btnClassName.join(" ")}
-                onClick={e => {
-                    e.currentTarget.blur();
-                    props.onClick();
-                }}
-            >
-                {label}
-            </button>
-        </div>
+        <button
+            className={btnClassName.join(" ")}
+            onClick={e => {
+                e.currentTarget.blur();
+                props.onClick();
+            }}
+        >
+            {label}
+        </button>
     );
 }
 
@@ -96,7 +98,7 @@ export function ConfigurationGroupSelector(props: {
                                     }}
                                     active={
                                         configurationGroup.identifier ===
-                                        selectedConfigurationGroup.identifier &&
+                                            selectedConfigurationGroup.identifier &&
                                         !viewingSchemas
                                     }
                                     label={configurationGroup.content.label}
@@ -114,7 +116,7 @@ export function ConfigurationGroupSelector(props: {
                         schemaInput={props.schemaInput}
                         value={
                             props.configuration[
-                            selectedConfigurationGroup.identifier
+                                selectedConfigurationGroup.identifier
                             ]
                         }
                         onChange={(updatedVal: ConfigurationPropertyDict) => {

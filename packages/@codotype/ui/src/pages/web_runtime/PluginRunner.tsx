@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Modal } from "react-bootstrap";
+import { Modal } from "../../components/Modal";
 import { PluginMetadata, ProjectInput } from "@codotype/core";
 import useAxios from "axios-hooks";
 import { BuildFinished } from "../../components/BuildFinished/component";
@@ -55,7 +55,7 @@ export function PluginRunner(props: PluginRunnerProps) {
             {/* Handle Loading */}
             {(loading || finished) && (
                 <Modal
-                    size="lg"
+                    // size="lg"
                     show={loading || finished}
                     onHide={() => {
                         // Don't allow the modal to close while loading
@@ -71,16 +71,14 @@ export function PluginRunner(props: PluginRunnerProps) {
                     {/* {loading && <Modal.Title>Loading</Modal.Title>} */}
                     {/* {finished && <Modal.Title>Export Code</Modal.Title>} */}
                     {/* </Modal.Header> */}
-                    <Modal.Body>
-                        {loading && <LoadingBuild />}
-                        {finished && (
-                            <BuildFinished
-                                responseType="LOCAL_PATH"
-                                filepath={data.filepath}
-                                onClickBackToEditor={reset}
-                            />
-                        )}
-                    </Modal.Body>
+                    {loading && <LoadingBuild />}
+                    {finished && (
+                        <BuildFinished
+                            responseType="LOCAL_PATH"
+                            filepath={data.filepath}
+                            onClickBackToEditor={reset}
+                        />
+                    )}
                 </Modal>
             )}
         </React.Fragment>

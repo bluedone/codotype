@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Modal } from "react-bootstrap";
+import { Modal } from "../Modal";
 import { ProjectInput, PluginMetadata } from "@codotype/core";
 import { BuildFinished } from "../BuildFinished/component";
 import { LoadingBuild } from "../LoadingBuild";
@@ -80,7 +80,7 @@ export function RuntimeProvider(props: RuntimeProviderProps) {
             {/* Handle Loading */}
             {(loading || finished) && (
                 <Modal
-                    size="lg"
+                    // size="lg"
                     show={loading || finished}
                     onHide={() => {
                         // Don't allow the modal to close while loading
@@ -96,16 +96,14 @@ export function RuntimeProvider(props: RuntimeProviderProps) {
                     {/* {loading && <Modal.Title>Loading</Modal.Title>} */}
                     {/* {finished && <Modal.Title>Export Code</Modal.Title>} */}
                     {/* </Modal.Header> */}
-                    <Modal.Body>
-                        {loading && <LoadingBuild />}
-                        {finished && (
-                            <BuildFinished
-                                responseType="LOCAL_PATH"
-                                filepath="/home/aeksco/code"
-                                onClickBackToEditor={reset}
-                            />
-                        )}
-                    </Modal.Body>
+                    {loading && <LoadingBuild />}
+                    {finished && (
+                        <BuildFinished
+                            responseType="LOCAL_PATH"
+                            filepath="/home/aeksco/code"
+                            onClickBackToEditor={reset}
+                        />
+                    )}
                 </Modal>
             )}
         </React.Fragment>

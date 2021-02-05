@@ -1,6 +1,6 @@
 import * as React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import classnames from "classnames"
+import classnames from "classnames";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Tooltip } from "../Tooltip";
 
@@ -22,16 +22,14 @@ export function SortableListHeader(props: SortableListHeaderProps) {
     const { tooltip = "", rounded = true } = props;
 
     return (
-        <Tooltip
-            position="right"
-            tooltipContent={
-                <>{tooltip}</>
-            }
-        >
+        <Tooltip position="right" tooltipContent={<>{tooltip}</>}>
             <button
-                className={classnames("bg-blue-500 hover:bg-blue-600 text-white px-3 py-2 text-lg w-full", {
-                    "rounded-tl-lg rounded-tr-lg": rounded
-                })}
+                className={classnames(
+                    "bg-indigo-500 hover:bg-indigo-600 text-white px-3 py-2 text-lg w-full",
+                    {
+                        "rounded-tl-2xl rounded-tr-2xl": rounded,
+                    },
+                )}
                 onClick={e => {
                     e.currentTarget.blur();
                     props.onClick();

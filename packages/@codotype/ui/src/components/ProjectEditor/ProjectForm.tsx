@@ -14,11 +14,11 @@ export function ProjectForm(props: {
     onSubmit: (updatedProjectLabel: string) => void;
 }) {
     return (
-        <div className="row items-center justify-center">
+        <div className="row items-center justify-center select-none">
             <div className="col-sm-12">
                 <p className="mt-2 mb-3 text-muted">
-                    <span className="text-green-500">Project Name</span> must be{" "}
-                    <strong>alphabetic</strong> - no numbers or symbols, but
+                    <span className="text-indigo-500">Project Name</span> must
+                    be <strong>alphabetic</strong> - no numbers or symbols, but
                     whitespace is allowed. The input field will enforce proper
                     capitalization and spacing.
                 </p>
@@ -30,15 +30,15 @@ export function ProjectForm(props: {
                 </small>
 
                 <input
-                    className="form-control form-control-lg"
+                    className="form-control rounded-lg py-8 font-2xl"
                     placeholder="Project Name"
                     value={props.value}
                     onChange={e => {
                         props.onChange(e.currentTarget.value);
                     }}
                     onKeyDown={e => {
+                        // ENTER KEY CODE
                         if (e.keyCode === 13) {
-                            // ENTER KEY CODE
                             props.onSubmit(e.currentTarget.value);
                         }
                     }}
@@ -46,7 +46,7 @@ export function ProjectForm(props: {
 
                 <p className="mt-3 text-muted">
                     <strong>Codotype</strong> uses the{" "}
-                    <span className="text-green-500">Project Name</span> for
+                    <span className="text-indigo-500">Project Name</span> for
                     naming things like <strong>files</strong>,{" "}
                     <strong>folders</strong>, <strong>namespaces</strong>, and{" "}
                     <strong>databases</strong>. No need to be picky, you can

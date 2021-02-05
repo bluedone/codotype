@@ -1,6 +1,6 @@
 import * as React from "react";
 import { AttributeInput } from "@codotype/core";
-import { Modal } from "react-bootstrap";
+import { Modal } from "../Modal";
 
 // // // //
 
@@ -26,11 +26,13 @@ export function AttributeFormModal(props: {
     }
 
     return (
-        <Modal size="lg" show={props.show} onHide={props.onCancel}>
-            <Modal.Header closeButton>
-                <Modal.Title>{title}</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>{props.children}</Modal.Body>
+        <Modal
+            // size="lg"
+            show={props.show}
+            onHide={props.onCancel}
+        >
+            <h3>{title}</h3>
+            {props.children}
             <div className="modal-footer-tw">
                 <div className="flex items-center justify-between flex-grow">
                     <div className="flex flex-grow">

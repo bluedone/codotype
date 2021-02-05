@@ -21,7 +21,7 @@ function ToggleEnabled(props: {
     const { configurationGroup, enabled, onChange } = props;
     return (
         <div className="mt-2 px-2 py-2 flex justify-center bg-gray-800 text-white rounded">
-            <div className="flex flex-column items-center">
+            <div className="flex flex-col items-center">
                 <p className="lead mb-0">
                     Enable {configurationGroup.content.label}
                 </p>
@@ -70,8 +70,8 @@ export function ConfigurationInput(props: ConfigurationInputProps) {
 
     // Handle ConfigurationGroup.allowDisable
     return (
-        <div className="row mt-4">
-            <div className="col-lg-12">
+        <div className="grid grid-cols-12 mt-4">
+            <div className="col-span-12">
                 {/* ConfigurationGroupHeader */}
                 <ConfigurationGroupHeader
                     value={value}
@@ -83,9 +83,8 @@ export function ConfigurationInput(props: ConfigurationInputProps) {
                 {/* Renders message to turn this feature on */}
                 {configurationGroup.allowDisable && !value.enabled && (
                     <ToggleEnabled
+                        enabled={value.enabled as boolean}
                         configurationGroup={configurationGroup}
-                        // @ts-ignore
-                        checked={value.enabled}
                         onChange={updatedEnabled => {
                             const updatedValue = {
                                 ...value,

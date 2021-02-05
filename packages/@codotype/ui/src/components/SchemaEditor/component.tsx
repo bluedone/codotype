@@ -76,8 +76,8 @@ export function SchemaEditorLayout(props: {
     const selectedSchema:
         | SchemaInput
         | undefined = state.projectInput.schemas.find((s: SchemaInput) => {
-            return s.id === selectedSchemaId;
-        });
+        return s.id === selectedSchemaId;
+    });
 
     // Defines handler for creating new schemas
     function createNewSchema() {
@@ -227,7 +227,7 @@ export function SchemaEditorLayout(props: {
     if (selectedSchemaId === null || selectedSchema === undefined) {
         // return <SchemaEditorEmptyState />;
         return (
-            <div className="row flex px-4 py-4 justify-center items-center">
+            <div className="flex px-4 py-4 justify-center items-center">
                 <div className="col-sm-8">
                     <div className="card card-body shadow-xl">
                         <div className="row items-center justify-center">
@@ -293,8 +293,8 @@ export function SchemaEditorLayout(props: {
 
     // Render schema editor layout
     return (
-        <div className="row mt-4">
-            <div className="col-lg-4">
+        <div className="grid grid-cols-12 mt-4 gap-4">
+            <div className="col-span-4">
                 <SchemaNewButton
                     onClick={() => {
                         if (showModal === false) {
@@ -339,8 +339,8 @@ export function SchemaEditorLayout(props: {
                     />
                 </DragDropContext>
             </div>
-            <div className="col-lg-8 pl-3 pl-lg-0 mt-4 mt-lg-0">
-                <div className="card card-body shadow-xl">
+            <div className="col-span-8 pl-3 lg:pl-0 mt-4 lg:mt-0">
+                <div className="card card-body shadow">
                     <SchemaDetail
                         schema={selectedSchema}
                         projectInput={props.projectInput}
@@ -388,14 +388,22 @@ export function SchemaEditorLayout(props: {
                                 },
                             );
 
-                            // Updates local state
-                            setState({
-                                ...state,
-                                lastUpdatedAt: Date.now(),
-                                projectInput: {
-                                    ...state.projectInput,
-                                    schemas: updatedSchemas,
+                            // Removes any relations that reference the deleted schema
+                            const updatedRelations: RelationInput[] = state.projectInput.relations.filter(
+                                r => {
+                                    return (
+                                        r.destinationSchemaID !==
+                                            selectedSchemaId &&
+                                        r.sourceSchemaID !== selectedSchemaId
+                                    );
                                 },
+                            );
+
+                            // Updates state
+                            props.onChange({
+                                ...props.projectInput,
+                                schemas: updatedSchemas,
+                                relations: updatedRelations,
                             });
 
                             // Sets selectedSchemaId to null

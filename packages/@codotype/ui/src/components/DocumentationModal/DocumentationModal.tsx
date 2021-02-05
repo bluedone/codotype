@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Modal } from "react-bootstrap";
+import { Modal } from "../Modal";
 import { faBook } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { MarkdownRenderer } from "../MarkdownRenderer";
@@ -18,7 +18,7 @@ export function DocumentationModal(props: {
     return (
         <React.Fragment>
             <button
-                className="btn btn-link px-0 py-0"
+                className="px-0 py-0 text-indigo-500 hover:text-indigo-600 p-1 focus:outline-none transition-colors duration-150 ease-in-out"
                 onClick={() => {
                     showModal(true);
                 }}
@@ -27,19 +27,15 @@ export function DocumentationModal(props: {
             </button>
 
             <Modal
-                size="lg"
+                // size="lg"
                 show={showingModal}
                 onHide={() => showModal(false)}
             >
-                <Modal.Header closeButton>
-                    <Modal.Title>{props.header}</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <MarkdownRenderer source={props.documentation} />
-                </Modal.Body>
+                <h3>{props.header}</h3>
+                <MarkdownRenderer source={props.documentation} />
                 <div className="modal-footer-tw">
                     <button
-                        className="btn btn-lg btn-light"
+                        className="btn"
                         onClick={() => {
                             showModal(false);
                         }}

@@ -1,6 +1,8 @@
 import * as React from "react";
 import { LoadingSpinner } from "../LoadingSpinner";
-const sample = require("lodash.sample");
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLaugh } from "@fortawesome/free-regular-svg-icons";
+// const sample = require("lodash.sample");
 
 // // // //
 
@@ -28,40 +30,25 @@ export const quotes: [string, string][] = [
  * Renders a spinning Codotype Logo
  */
 export function LoadingBuild(props: { quote?: [string, string] }) {
-    const quote: [string, string] = props.quote || sample(quotes) || quotes[0];
-    const quoteBody = quote[0];
-    const quoteAuthor = quote[1];
+    // const quote: [string, string] = props.quote || sample(quotes) || quotes[0];
+    // const quoteBody = quote[0];
+    // const quoteAuthor = quote[1];
 
     return (
         <div
-            className="flex flex-column items-center h-full justify-center"
+            className="flex flex-col items-center h-full justify-center"
             style={{ minHeight: "26rem" }}
         >
-            <h3>
-                codotype{" "}
-                <span
-                    style={{
-                        fontWeight: "lighter",
-                    }}
-                >
-                    is generating your codebase
-                </span>
-            </h3>
-            <p className="text-muted mb-0">
+            <h3>We're exporting your codebase</h3>
+            <p className="text-gray-600 mb-0">
                 This should only take a few moments
-                <i className="far fa-laugh" />
+                <FontAwesomeIcon icon={faLaugh} className="ml-2" />
             </p>
-            <div className="row my-4">
-                <div className="col-lg-12 text-center flex justify-center">
-                    <div className="my-2">
-                        <LoadingSpinner />
-                    </div>
+            <div className="flex justify-center my-4">
+                <div className="my-2">
+                    <LoadingSpinner />
                 </div>
             </div>
-            <small className="text-muted">
-                {quoteBody}
-                <br />- <strong>{quoteAuthor}</strong>
-            </small>
         </div>
     );
 }

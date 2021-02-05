@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Dropdown } from "react-bootstrap";
-import { Modal } from "react-bootstrap";
+import { Modal } from "../Modal";
 
 // // // //
 
@@ -29,20 +29,16 @@ export function ResetProjectButton(props: {
             </Dropdown.Item>
 
             <Modal show={showModal} onHide={() => setShowModal(false)}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Reset Project</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <p className="form-text text-muted mb-2">
-                        Are you sure you want to reset this Project?
-                    </p>
+                <h3>Reset Project</h3>
+                <p className="form-text text-muted mb-2">
+                    Are you sure you want to reset this Project?
+                </p>
 
-                    <p className="form-text text-muted mb-2">
-                        <span className="text-red-500">DANGER: </span>This will
-                        delete your current project - this action cannot be
-                        undone. Are you sure you want to continue?
-                    </p>
-                </Modal.Body>
+                <p className="form-text text-muted mb-2">
+                    <span className="text-red-500">DANGER: </span>This will
+                    delete your current project - this action cannot be undone.
+                    Are you sure you want to continue?
+                </p>
                 <div className="modal-footer-tw">
                     {showConfirm && (
                         <button

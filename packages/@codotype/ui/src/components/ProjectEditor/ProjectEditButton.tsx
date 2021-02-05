@@ -13,7 +13,7 @@ export function ProjectEditButton(props: { onClick: () => void }) {
                 props.onClick();
             }}
         >
-            <FontAwesomeIcon icon={faPencilAlt} />
+            <FontAwesomeIcon size="lg" icon={faPencilAlt} />
         </button>
     );
 }

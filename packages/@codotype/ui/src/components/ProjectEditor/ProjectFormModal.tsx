@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Modal } from "react-bootstrap";
+import { Modal } from "../Modal";
 
 // // // //
 
@@ -18,10 +18,11 @@ export function ProjectFormModal(props: {
 }) {
     return (
         <Modal show={props.show} onHide={props.handleClose}>
-            <Modal.Header closeButton className="flex items-center">
-                <Modal.Title>Project Name</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>{props.children}</Modal.Body>
+            <div className="p-5">
+                <h3 className="text-2xl select-none">Project Name</h3>
+
+                {props.children}
+            </div>
             <div className="modal-footer-tw">
                 <button
                     className="btn btn-lg btn-primary"
