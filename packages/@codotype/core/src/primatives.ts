@@ -4,7 +4,7 @@ import { ConfigurationGroupBuilder } from "./primatives/ConfigurationGroup";
 import { ConfigurationGroupSectionBuilder } from "./primatives/ConfigurationGroupSection";
 import { SchemaEditorBuilder } from "./primatives/SchemaEditor";
 import { RelationBuilder } from "./primatives/Relation";
-import { AttributeBuilder } from "./primatives/Attribute";
+import { AttributeInputBuilder } from "./primatives/Attribute";
 import { PluginBuilder } from "./primatives/Plugin";
 import { TokenCasingBuilder } from "./primatives/TokenCasing";
 import { TokenPluralizationBuilder } from "./primatives/TokenPluralization";
@@ -18,7 +18,7 @@ import { TokenPluralizationBuilder } from "./primatives/TokenPluralization";
  */
 export interface CodotypePrimatives {
     Schema: typeof SchemaBuilder;
-    Attribute: typeof AttributeBuilder;
+    AttributeInput: typeof AttributeInputBuilder;
     Relation: typeof RelationBuilder;
     Plugin: typeof PluginBuilder;
     SchemaEditor: typeof SchemaEditorBuilder;
@@ -27,9 +27,9 @@ export interface CodotypePrimatives {
     ConfigurationProperty: typeof ConfigurationPropertyBuilder;
     TokenCasing: typeof TokenCasingBuilder;
     TokenPluralization: typeof TokenPluralizationBuilder;
-    // TODO - add AddonProperty
-    // TODO - add RelationAddon
-    // TODO - add AttributeAddon
+    // FEATURE - add AddonProperty
+    // FEATURE - add RelationAddon
+    // FEATURE - add AttributeAddon
 }
 
 /**
@@ -38,7 +38,7 @@ export interface CodotypePrimatives {
  */
 export const Primatives: CodotypePrimatives = {
     Schema: SchemaBuilder,
-    Attribute: AttributeBuilder,
+    AttributeInput: AttributeInputBuilder,
     Relation: RelationBuilder,
     Plugin: PluginBuilder,
     SchemaEditor: SchemaEditorBuilder,

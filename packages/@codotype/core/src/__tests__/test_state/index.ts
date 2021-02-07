@@ -44,6 +44,8 @@ import { ConfigurationGroup } from "../../configuration-option-types";
 import { ConfigurationProperty } from "../../configuration-property";
 import { PluginMetadata } from "../../plugin";
 import { Attribute } from "../../attribute";
+import { AddonProperty } from "../../schema-editor-addon";
+import { addonProperties } from "./addon-property";
 
 // // // //
 
@@ -84,6 +86,9 @@ interface TestState {
     pinterestApiOption: ConfigurationProperty;
     google_mapsApiOption: ConfigurationProperty;
     chartjsApiOption: ConfigurationProperty;
+
+    // New
+    addonProperties: { [key: string]: AddonProperty };
 }
 
 export const testState: TestState = {
@@ -123,4 +128,7 @@ export const testState: TestState = {
     pinterestApiOption,
     google_mapsApiOption,
     chartjsApiOption,
+
+    // New
+    addonProperties: addonProperties,
 };

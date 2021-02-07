@@ -1,146 +1,136 @@
 import { NodeRuntime } from "../node-runtime";
-import { RuntimeProxyAdaptor } from "../utils/runtimeProxyAdaptor";
+import { RuntimeProxyAdapter } from "../utils/runtimeProxyAdapter";
 import {
     project,
-    baseGeneratorOptions,
+    baseRuntimeAdapterProps,
     generatorPrototype,
     generatorPrototype01,
 } from "./test_state";
 import {
-    RuntimeLogLevels,
     FileOverwriteBehaviors,
-    RuntimeConstructorParams,
+    RuntimeProps,
+    RuntimeAdapterProps,
+    Runtime,
+    RuntimeLogBehaviors,
 } from "@codotype/core";
-import { InMemoryFileSystemAdaptor } from "../InMemoryFileSystemAdaptor";
+import { InMemoryFileSystemAdapter } from "../InMemoryFileSystemAdapter";
 import { runGenerator } from "../utils/runGenerator";
 
 // // // //
 
-describe("templatePath method", () => {
+const destinationPath = "destination";
+
+function getTestRuntime(): {
+    runtime: Runtime;
+    fileSystemAdapter: InMemoryFileSystemAdapter;
+} {
+    const fileSystemAdapter = new InMemoryFileSystemAdapter();
+    const runtimeProps: RuntimeProps = {
+        cwd: "/test-cwd/",
+        logBehavior: RuntimeLogBehaviors.suppress,
+        fileOverwriteBehavior: FileOverwriteBehaviors.force,
+        fileSystemAdapter,
+    };
+    const runtime = new NodeRuntime(runtimeProps);
+    return { runtime, fileSystemAdapter };
+}
+
+// // // //
+
+describe("getTemplatePath method", () => {
     it("should define correct template path", () => {
-        const dest = "destination";
-        const template = "template.json";
-        const resolved = "my/resolved/path";
+        const templateRelativePath = "template.json";
+        const generatorResolvedPath = "my/resolved/path";
+        const { runtime } = getTestRuntime();
 
-        const fileSystemAdaptor = new InMemoryFileSystemAdaptor();
-        const runtimeConstructorOptions: RuntimeConstructorParams = {
-            cwd: "/test-cwd/",
-            logLevel: RuntimeLogLevels.verbose,
-            fileOverwriteBehavior: FileOverwriteBehaviors.force,
-            fileSystemAdaptor,
-        };
-        const runtime = new NodeRuntime(runtimeConstructorOptions);
-
-        const generatorOptions = {
-            ...baseGeneratorOptions,
+        const runtimeAdapterProps: RuntimeAdapterProps = {
+            ...baseRuntimeAdapterProps,
             runtime,
-            dest,
-            resolved,
+            destinationPath,
+            generatorResolvedPath,
         };
-        const generatorInstance = new RuntimeProxyAdaptor(
+        const generatorInstance = new RuntimeProxyAdapter(
             generatorPrototype,
-            generatorOptions,
+            runtimeAdapterProps,
         );
 
-        const templatePath = generatorInstance.templatePath(template);
-        expect(templatePath).toBe(`${resolved}/templates/${template}`);
+        // Ensures absolute path to template to be correct
+        const templateFullPath = runtime.getTemplatePath(
+            generatorInstance.generatorResolvedPath,
+            templateRelativePath,
+        );
+        expect(templateFullPath).toBe(
+            `${generatorResolvedPath}/templates/${templateRelativePath}`,
+        );
     });
 });
 
-describe("destinationPath method", () => {
+describe("getDestinationPath method", () => {
     it("should define correct destination path", () => {
-        const dest = "destination";
         const dirName = "testyMcTestface";
+        const { runtime } = getTestRuntime();
 
-        const fileSystemAdaptor = new InMemoryFileSystemAdaptor();
-        const runtimeConstructorOptions: RuntimeConstructorParams = {
-            cwd: "/test-cwd/",
-            logLevel: RuntimeLogLevels.verbose,
-            fileOverwriteBehavior: FileOverwriteBehaviors.force,
-            fileSystemAdaptor,
-        };
-        const runtime = new NodeRuntime(runtimeConstructorOptions);
-
-        const generatorOptions = {
-            ...baseGeneratorOptions,
+        const runtimeAdapterProps: RuntimeAdapterProps = {
+            ...baseRuntimeAdapterProps,
             runtime,
-            dest,
-            resolved: __dirname,
+            destinationPath,
+            generatorResolvedPath: __dirname,
         };
 
-        const generatorInstance = new RuntimeProxyAdaptor(
+        const generatorInstance = new RuntimeProxyAdapter(
             generatorPrototype,
-            generatorOptions,
+            runtimeAdapterProps,
         );
 
-        const destinationPath = generatorInstance.destinationPath(dirName);
-        expect(destinationPath).toBe(`${dest}/${dirName}`);
+        const destPath = runtime.getDestinationPath(destinationPath, dirName);
+        expect(destPath).toBe(`${destinationPath}/${dirName}`);
     });
 });
 
 describe("ensureDir method", () => {
     it("should properly define NodeRuntime._mocks_.ensuredDir", () => {
-        const dest = "destination";
         const dirName = "testyMcTestface";
+        const { runtime, fileSystemAdapter } = getTestRuntime();
 
-        const fileSystemAdaptor = new InMemoryFileSystemAdaptor();
-        const runtimeConstructorOptions: RuntimeConstructorParams = {
-            cwd: "/test-cwd/",
-            logLevel: RuntimeLogLevels.verbose,
-            fileOverwriteBehavior: FileOverwriteBehaviors.force,
-            fileSystemAdaptor,
-        };
-        const runtime = new NodeRuntime(runtimeConstructorOptions);
-
-        const generatorOptions = {
-            ...baseGeneratorOptions,
+        const runtimeAdapterProps: RuntimeAdapterProps = {
+            ...baseRuntimeAdapterProps,
             runtime,
-            dest,
-            resolved: __dirname,
+            destinationPath,
+            generatorResolvedPath: __dirname,
         };
-        const generatorInstance = new RuntimeProxyAdaptor(
+        const generatorInstance = new RuntimeProxyAdapter(
             generatorPrototype,
-            generatorOptions,
+            runtimeAdapterProps,
         );
 
         generatorInstance.ensureDir(dirName).then(() => {
-            expect(fileSystemAdaptor.files).toMatchSnapshot();
+            expect(fileSystemAdapter.files).toMatchSnapshot();
         });
     });
 });
 
-describe("renderComponent", () => {
+describe("renderTemplate", () => {
     test("renders", async () => {
-        const dest = "destination";
-
-        const fileSystemAdaptor = new InMemoryFileSystemAdaptor();
-        const runtimeConstructorOptions: RuntimeConstructorParams = {
-            cwd: "/test-cwd/",
-            logLevel: RuntimeLogLevels.verbose,
-            fileOverwriteBehavior: FileOverwriteBehaviors.force,
-            fileSystemAdaptor,
-        };
-        const runtime = new NodeRuntime(runtimeConstructorOptions);
+        const { runtime, fileSystemAdapter } = getTestRuntime();
 
         // // // //
-        // NOTE - all of this is handled by the runtime -> should this be handled inside the RuntimeGeneratorAdaptor?
-        const generatorOptions = {
-            ...baseGeneratorOptions,
+        // NOTE - all of this is handled by the runtime -> should this be handled inside the RuntimeGeneratorAdapter?
+        const runtimeAdapterProps: RuntimeAdapterProps = {
+            ...baseRuntimeAdapterProps,
             runtime,
-            dest,
-            resolved: __dirname, // NOTE - need to use __dirname here beacuse the `templates` directory sits next to this test
+            destinationPath,
+            generatorResolvedPath: __dirname, // NOTE - need to use __dirname here beacuse the `templates` directory sits next to this test
         };
 
-        const runtimeProxyAdaptor = new RuntimeProxyAdaptor(
-            generatorPrototype01,
-            generatorOptions,
-        );
-
-        runGenerator({
+        // Runs the generator
+        await runGenerator({
             project,
-            runtimeProxyAdaptor,
+            runtimeAdapter: new RuntimeProxyAdapter(
+                generatorPrototype01,
+                runtimeAdapterProps,
+            ),
         });
 
-        expect(fileSystemAdaptor.files).toMatchSnapshot();
+        expect(fileSystemAdapter.files).toMatchSnapshot();
     });
 });

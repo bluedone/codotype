@@ -50,7 +50,6 @@ export interface ConfigurationGroupSection extends ConfigurationBase {
 
 // // // //
 
-// TODO - rename ConfigurationGroup?
 export interface ConfigurationGroup extends ConfigurationBase {
     layoutVariant: GroupLayoutVariants;
     sections: ConfigurationGroupSection[];

@@ -1,18 +1,18 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
-import { Story } from "../../../components/dev";
-import { GeneratorFetcher } from "../GeneratorFetcher";
+import { Story } from "../../../components/Story";
+import { PluginFetcher } from "../PluginFetcher";
 
 // // // //
 
-storiesOf("Util/GeneratorFetcher", module).add("loads", () => {
+storiesOf("Util/PluginFetcher", module).add("loads", () => {
     return (
         <Story>
-            <GeneratorFetcher>
-                {({ generators }) => {
-                    return <pre>{JSON.stringify(generators, null, 4)}</pre>;
+            <PluginFetcher>
+                {({ plugins }) => {
+                    return <pre>{JSON.stringify(plugins, null, 4)}</pre>;
                 }}
-            </GeneratorFetcher>
+            </PluginFetcher>
         </Story>
     );
 });

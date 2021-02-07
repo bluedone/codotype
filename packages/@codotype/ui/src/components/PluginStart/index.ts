@@ -1,0 +1,1 @@
+export { PluginStart } from "./component";

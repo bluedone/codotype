@@ -92,6 +92,7 @@ export function inflateSchema(params: {
             ...schemaInput.identifiers,
         },
         locked: schemaInput.locked,
+        internalNote: schemaInput.internalNote,
         createdBy: schemaInput.createdBy,
         configuration: schemaInput.configuration,
         relations: relations.filter((r) => r.sourceSchemaID === schemaInput.id),

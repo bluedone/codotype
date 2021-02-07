@@ -1,15 +1,15 @@
 import * as React from "react";
-import { GeneratorMeta, Project } from "@codotype/core";
+import { PluginMetadata, ProjectInput } from "@codotype/core";
 import { LocalStorageProvider } from "./LocalStorageProvider";
 
 // // // //
 
 interface WebRuntimeProps {
-    generator: GeneratorMeta;
+    plugin: PluginMetadata;
     children: (childProps: {
-        generator: GeneratorMeta;
-        project: Project;
-        setProject: (updatedProject: Project) => void;
+        plugin: PluginMetadata;
+        projectInput: ProjectInput;
+        setProject: (updatedProject: ProjectInput) => void;
         clearProject: () => void;
     }) => React.ReactNode;
 }
@@ -21,12 +21,12 @@ interface WebRuntimeProps {
  */
 export function WebRuntime(props: WebRuntimeProps) {
     return (
-        <LocalStorageProvider generator={props.generator}>
-            {({ project, setProject, clearProject }) => (
+        <LocalStorageProvider plugin={props.plugin}>
+            {({ projectInput, setProject, clearProject }) => (
                 <React.Fragment>
                     {props.children({
-                        generator: props.generator,
-                        project,
+                        plugin: props.plugin,
+                        projectInput,
                         setProject,
                         clearProject,
                     })}

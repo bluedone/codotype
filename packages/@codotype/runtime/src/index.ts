@@ -1,3 +1,3 @@
 export * from "./node-runtime";
-export * from "./LocalFileSystemAdaptor";
-export * from "./InMemoryFileSystemAdaptor";
+export * from "./LocalFileSystemAdapter";
+export * from "./InMemoryFileSystemAdapter";

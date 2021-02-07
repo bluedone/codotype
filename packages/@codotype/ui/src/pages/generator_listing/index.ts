@@ -1,1 +1,0 @@
-export { GeneratorListPage } from "./component";

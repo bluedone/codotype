@@ -1,52 +1,56 @@
 import * as React from "react";
-import { GeneratorMeta, Project, buildDefaultProject } from "@codotype/core";
+import {
+    PluginMetadata,
+    ProjectInput,
+    buildDefaultProjectInput,
+} from "@codotype/core";
 import { ErrorBoundary } from "react-error-boundary";
 import { FallbackComponent } from "./ErrorBoundary";
 
 // // // //
 
-function getLocalStorageKey(generator: GeneratorMeta): string {
-    return `${generator.id}-${generator.version}`;
+function getLocalStorageKey(plugin: PluginMetadata): string {
+    return `${plugin.identifier}-${plugin.version}`;
 }
 
 function writeProjectToLocalStorage(props: {
-    project: Project;
-    generator: GeneratorMeta;
+    project: ProjectInput;
+    plugin: PluginMetadata;
 }) {
     localStorage.setItem(
-        getLocalStorageKey(props.generator),
+        getLocalStorageKey(props.plugin),
         JSON.stringify(props.project),
     );
 }
 
-function clearLocalStorage(props: { generator: GeneratorMeta }) {
-    localStorage.removeItem(getLocalStorageKey(props.generator));
+function clearLocalStorage(props: { plugin: PluginMetadata }) {
+    localStorage.removeItem(getLocalStorageKey(props.plugin));
 }
 
 function readProjectFromLocalStorage(props: {
-    generator: GeneratorMeta;
-}): Project {
+    plugin: PluginMetadata;
+}): ProjectInput {
     try {
-        const localStorageKey = getLocalStorageKey(props.generator);
+        const localStorageKey = getLocalStorageKey(props.plugin);
         // @ts-ignore
         const localStorageValue: string = localStorage.getItem(localStorageKey);
         if (!localStorageValue) {
-            return buildDefaultProject(props.generator);
+            return buildDefaultProjectInput(props.plugin);
         }
-        const parsedProject: Project = JSON.parse(localStorageValue);
+        const parsedProject: ProjectInput = JSON.parse(localStorageValue);
         return parsedProject;
     } catch (e) {
-        return buildDefaultProject(props.generator);
+        return buildDefaultProjectInput(props.plugin);
     }
 }
 
 // // // //
 
 interface LocalStorageProviderProps {
-    generator: GeneratorMeta;
+    plugin: PluginMetadata;
     children: (childProps: {
-        project: Project;
-        setProject: (updatedProject: Project) => void;
+        projectInput: ProjectInput;
+        setProject: (updatedProjectInput: ProjectInput) => void;
         clearProject: () => void;
     }) => React.ReactNode;
 }
@@ -54,24 +58,24 @@ interface LocalStorageProviderProps {
 /**
  * LocalStorageProvider
  * Provides a mechanism to persisting a project to window.localStorage
- * @param props - see `LocalStorageProviderProps`
+ * @param props.plugin - The Codotype PluginMetadata forwhich the LocalStorageProvider is saving a ProjectInput
  */
 export function LocalStorageProvider(props: LocalStorageProviderProps) {
-    const [project, setProjectState] = React.useState<Project>(
-        readProjectFromLocalStorage({ generator: props.generator }),
+    const [projectInput, setProjectState] = React.useState<ProjectInput>(
+        readProjectFromLocalStorage({ plugin: props.plugin }),
     );
 
-    function setProject(updatedProject: Project) {
-        setProjectState(updatedProject);
+    function setProject(updatedProjectInput: ProjectInput) {
+        setProjectState(updatedProjectInput);
         writeProjectToLocalStorage({
-            generator: props.generator,
-            project: updatedProject,
+            plugin: props.plugin,
+            project: updatedProjectInput,
         });
     }
 
     function clearProject() {
-        clearLocalStorage({ generator: props.generator });
-        setProjectState(buildDefaultProject(props.generator));
+        clearLocalStorage({ plugin: props.plugin });
+        setProjectState(buildDefaultProjectInput(props.plugin));
     }
 
     return (
@@ -80,13 +84,13 @@ export function LocalStorageProvider(props: LocalStorageProviderProps) {
                 return <FallbackComponent {...errorBoundaryProps} />;
             }}
             onReset={() => {
-                clearLocalStorage({ generator: props.generator });
-                setProjectState(buildDefaultProject(props.generator));
+                clearLocalStorage({ plugin: props.plugin });
+                setProjectState(buildDefaultProjectInput(props.plugin));
             }}
         >
             <React.Fragment>
                 {props.children({
-                    project,
+                    projectInput,
                     setProject,
                     clearProject,
                 })}

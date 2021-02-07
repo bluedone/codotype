@@ -1,75 +1,126 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { WebRuntime } from "../component";
-import { Story } from "../../../components/dev";
-import { RuntimeProvider } from "../../../components/runtime_provider";
-import { ProjectEditor } from "../../../components/project_editor";
+import { Story } from "../../../components/Story";
+import { RuntimeProvider } from "../../../components/RuntimeProvider";
+import { ProjectEditor } from "../../../components/ProjectEditor";
 import {
-    Project,
-    Datatype,
-    SchemaSource,
-    GeneratorMeta,
+    ProjectInput,
+    Datatypes,
+    CreatedByValues,
+    PluginMetadata,
     testState,
-    ATTRIBUTE_ADDON_UNIQUE,
-    ATTRIBUTE_ADDON_REQUIRED,
-    ATTRIBUTE_ADDON_NULLABLE,
-    ATTRIBUTE_ADDON_PRIMARY_KEY,
-    RelationType,
-    OptionType,
-    Codotype,
-    GroupLayoutVariant,
-    PropertyLayoutVariant,
-    StringValueFilter,
-    DataPreviewLayoutVariant,
-    DataPreviewActionType,
-    DataPreviewConstraintType,
-    buildDefaultProject,
-    makeIdentifier,
+    // makeIdentifier,
+    // ATTRIBUTE_ADDON_REQUIRED,
+    // ATTRIBUTE_ADDON_NULLABLE,
+    // ATTRIBUTE_ADDON_PRIMARY_KEY,
+    RelationTypes,
+    PropertyTypes,
+    Primatives,
+    GroupLayoutVariants,
+    PropertyLayoutVariants,
+    StringPropertyTransformations,
+    PropertyPreviewLayoutVariant,
+    PropertyPreviewActionTypes,
+    PropertyPreviewConstraintTypes,
+    buildDefaultProjectInput,
     buildTokenCasing,
     buildTokenPluralization,
     buildDefaultConfiguration,
+    AttributeAddon,
+    AddonPropertyInlineIcons,
 } from "@codotype/core";
-import { generatorReadme } from "../../../components/markdown_renderer/__tests__/test_state";
-const { cdkGeneratorMeta, dummyGeneratorMeta } = testState;
+import { pluginReadme } from "../../../components/MarkdownRenderer/__tests__/test_state";
+import { NextJsWebsiteStarterPlugin } from "./test_state";
+import { ConfigurationGroupHeader } from "../../../components/ConfigurationInput";
+const {
+    cdkPluginMeta,
+    dummyPluginMetadata: dummyPluginMetadataOriginal,
+} = testState;
+
+const dummyPluginMetadata: PluginMetadata = {
+    ...dummyPluginMetadataOriginal,
+    configurationGroups: [
+        ...dummyPluginMetadataOriginal.configurationGroups.map(c => {
+            if (c.content.label !== "API Examples") {
+                return c;
+            }
+            return {
+                ...c,
+                layoutVariant: GroupLayoutVariants.LIST,
+            };
+        }),
+    ],
+};
 
 // // // //
 
-const ApiActionsProperty = new Codotype.ConfigurationGroupProperty({
-    label: "Actions",
+const ATTRIBUTE_ADDON_UNIQUE: AttributeAddon = {
+    supportedDatatypes: [Datatypes.STRING],
+    property: {
+        content: {
+            label: "Unique",
+            icon: "",
+            description: "Whether or not the value is unique",
+            documentation: "",
+        },
+        identifier: "unique",
+        exclusive: false,
+        required: false,
+        inlineIcon: AddonPropertyInlineIcons.snowflake,
+        propertyType: PropertyTypes.BOOLEAN,
+        defaultValue: false,
+        dropdownOptions: [],
+        validations: [],
+        transformations: [],
+    },
+};
+
+const relationAddons = [
+    {
+        supportedRelationTypes: [RelationTypes.TO_ONE],
+        property: ATTRIBUTE_ADDON_UNIQUE.property,
+    },
+];
+
+const ApiActionsProperty = new Primatives.ConfigurationProperty({
     identifier: "actions",
-    type: OptionType.COLLECTION,
-    dataPreview: {
+    content: {
+        label: "Actions",
+    },
+    type: PropertyTypes.COLLECTION,
+    preview: {
         rules: [
             {
                 constraint: {
                     dataProperty: "function_name",
-                    type: DataPreviewConstraintType.equals,
+                    type: PropertyPreviewConstraintTypes.equals,
                     value: "",
                 },
                 action: {
-                    type: DataPreviewActionType.literal,
+                    type: PropertyPreviewActionTypes.literal,
                     template: "",
                 },
             },
             {
                 constraint: {
                     dataProperty: "route",
-                    type: DataPreviewConstraintType.equals,
+                    type: PropertyPreviewConstraintTypes.equals,
                     value: "",
                 },
                 action: {
-                    type: DataPreviewActionType.literal,
+                    type: PropertyPreviewActionTypes.literal,
                     template: "",
                 },
             },
             {
                 constraint: {
                     dataProperty: "scope",
-                    type: DataPreviewConstraintType.equals,
+                    type: PropertyPreviewConstraintTypes.equals,
                     value: "COLLECTION",
                 },
                 action: {
-                    type: DataPreviewActionType.stringTemplate,
+                    type: PropertyPreviewActionTypes.stringTemplate,
                     template:
                         "{{data.verb}} /api/schema-scope/{{data.route}} -> {{data.function_name}}",
                 },
@@ -77,26 +128,28 @@ const ApiActionsProperty = new Codotype.ConfigurationGroupProperty({
             {
                 constraint: {
                     dataProperty: "scope",
-                    type: DataPreviewConstraintType.equals,
+                    type: PropertyPreviewConstraintTypes.equals,
                     value: "MODEL",
                 },
                 action: {
-                    type: DataPreviewActionType.stringTemplate,
+                    type: PropertyPreviewActionTypes.stringTemplate,
                     template:
                         "{{data.verb}} /api/schema-scope/:id/{{data.route}} -> {{data.function_name}}",
                 },
             },
         ],
-        variant: DataPreviewLayoutVariant.CODE_DARK,
+        variant: PropertyPreviewLayoutVariant.CODE_DARK,
     },
     properties: [
-        new Codotype.ConfigurationGroupProperty({
-            label: "Verb",
+        new Primatives.ConfigurationProperty({
+            content: {
+                label: "Verb",
+                description: "Verify",
+            },
             identifier: "verb",
-            description: "Verify",
             defaultValue: "GET",
-            type: OptionType.DROPDOWN,
-            layoutVariant: PropertyLayoutVariant.COL_6,
+            type: PropertyTypes.DROPDOWN,
+            layoutVariant: PropertyLayoutVariants.COL_6,
             dropdownOptions: [
                 { value: "GET", label: "GET" },
                 { value: "POST", label: "POST" },
@@ -104,40 +157,46 @@ const ApiActionsProperty = new Codotype.ConfigurationGroupProperty({
                 { value: "DELETE", label: "DELETE" },
             ],
         }),
-        new Codotype.ConfigurationGroupProperty({
-            label: "Route",
+        new Primatives.ConfigurationProperty({
+            content: {
+                label: "Route",
+                description: "Route",
+            },
             identifier: "route",
-            description: "Route",
             defaultValue: "verify",
-            type: OptionType.STRING,
-            layoutVariant: PropertyLayoutVariant.COL_6,
-            filters: [
-                StringValueFilter.nonumbers,
-                StringValueFilter.trimwhitespace,
-                StringValueFilter.removewhitespace,
+            type: PropertyTypes.STRING,
+            layoutVariant: PropertyLayoutVariants.COL_6,
+            transformations: [
+                StringPropertyTransformations.nonumbers,
+                StringPropertyTransformations.trimwhitespace,
+                StringPropertyTransformations.removewhitespace,
             ],
         }),
-        new Codotype.ConfigurationGroupProperty({
-            label: "Function Name",
+        new Primatives.ConfigurationProperty({
+            content: {
+                label: "Function Name",
+                description: "function_name",
+            },
             identifier: "function_name",
-            description: "function_name",
             defaultValue: "verify",
-            layoutVariant: PropertyLayoutVariant.COL_6,
-            type: OptionType.STRING,
-            filters: [
-                StringValueFilter.camelcase,
-                StringValueFilter.nonumbers,
-                StringValueFilter.nosymbols,
-                StringValueFilter.trimwhitespace,
+            layoutVariant: PropertyLayoutVariants.COL_6,
+            type: PropertyTypes.STRING,
+            transformations: [
+                StringPropertyTransformations.camelcase,
+                StringPropertyTransformations.nonumbers,
+                StringPropertyTransformations.nosymbols,
+                StringPropertyTransformations.trimwhitespace,
             ],
         }),
-        new Codotype.ConfigurationGroupProperty({
-            label: "Scope",
+        new Primatives.ConfigurationProperty({
+            content: {
+                label: "Scope",
+                description: "scope",
+            },
             identifier: "scope",
-            description: "scope",
             defaultValue: "COLLECTION",
-            layoutVariant: PropertyLayoutVariant.COL_6,
-            type: OptionType.DROPDOWN,
+            layoutVariant: PropertyLayoutVariants.COL_6,
+            type: PropertyTypes.DROPDOWN,
             dropdownOptions: [
                 { value: "COLLECTION", label: "Collection" },
                 { value: "MODEL", label: "Model" },
@@ -153,94 +212,92 @@ const NestedCollectionProperty = {
         ...ApiActionsProperty.properties,
         {
             ...ApiActionsProperty,
-            layoutVariant: PropertyLayoutVariant.CARD_COL_12,
+            layoutVariant: PropertyLayoutVariants.CARD_COL_12,
         },
     ],
 };
 
-const pluginExample01: GeneratorMeta = {
-    ...dummyGeneratorMeta,
-    id: "chrome_extension_generator_03", // unique ID for the generator
+const pluginExample01: PluginMetadata = {
+    ...dummyPluginMetadata,
+    identifier: "chrome_extension_plugin_03", // unique ID for the plugin
     schemaEditorConfiguration: {
-        ...dummyGeneratorMeta.schemaEditorConfiguration,
+        ...dummyPluginMetadata.schemaEditorConfiguration,
         attributeAddons: [
             ATTRIBUTE_ADDON_UNIQUE,
-            ATTRIBUTE_ADDON_REQUIRED,
-            ATTRIBUTE_ADDON_NULLABLE,
-            ATTRIBUTE_ADDON_PRIMARY_KEY,
+            // ATTRIBUTE_ADDON_REQUIRED,
+            // ATTRIBUTE_ADDON_NULLABLE,
+            // ATTRIBUTE_ADDON_PRIMARY_KEY,
         ],
+        relationAddons: [...relationAddons],
         configurationGroups: [
             {
-                ...dummyGeneratorMeta.configurationGroups[0],
-                layoutVariant: GroupLayoutVariant.LIST,
+                ...dummyPluginMetadata.configurationGroups[0],
+                layoutVariant: GroupLayoutVariants.LIST,
             },
         ],
     },
 };
 
-const projectExample01: Project = {
-    ...buildDefaultProject(pluginExample01),
+const projectExample01: ProjectInput = {
+    ...buildDefaultProjectInput(pluginExample01),
     identifiers: buildTokenCasing("Movie Reviews"),
     schemas: [
-        new Codotype.Schema({
+        new Primatives.Schema({
             identifiers: buildTokenPluralization("User"),
             attributes: [
-                new Codotype.Attribute({
+                new Primatives.AttributeInput({
                     identifiers: buildTokenCasing("ID"),
-                    datatype: Datatype.UUID,
+                    datatype: Datatypes.UUID,
                 }),
-                new Codotype.Attribute({
+                new Primatives.AttributeInput({
                     identifiers: buildTokenCasing("Email"),
-                    datatype: Datatype.STRING,
+                    datatype: Datatypes.STRING,
                 }),
-                new Codotype.Attribute({
+                new Primatives.AttributeInput({
                     identifiers: buildTokenCasing("First Name"),
-                    datatype: Datatype.STRING,
+                    datatype: Datatypes.STRING,
                 }),
-                new Codotype.Attribute({
+                new Primatives.AttributeInput({
                     identifiers: buildTokenCasing("Last Name"),
-                    datatype: Datatype.STRING,
+                    datatype: Datatypes.STRING,
                 }),
             ],
-            relations: [],
             configuration: buildDefaultConfiguration(
                 pluginExample01.schemaEditorConfiguration.configurationGroups,
             ),
         }),
-        new Codotype.Schema({
+        new Primatives.Schema({
             identifiers: buildTokenPluralization("Director"),
             attributes: [
-                new Codotype.Attribute({
+                new Primatives.AttributeInput({
                     identifiers: buildTokenCasing("ID"),
-                    datatype: Datatype.UUID,
+                    datatype: Datatypes.UUID,
                 }),
-                new Codotype.Attribute({
+                new Primatives.AttributeInput({
                     identifiers: buildTokenCasing("First Name"),
-                    datatype: Datatype.STRING,
+                    datatype: Datatypes.STRING,
                 }),
-                new Codotype.Attribute({
+                new Primatives.AttributeInput({
                     identifiers: buildTokenCasing("Last Name"),
-                    datatype: Datatype.STRING,
+                    datatype: Datatypes.STRING,
                 }),
             ],
-            relations: [],
             configuration: buildDefaultConfiguration(
                 pluginExample01.schemaEditorConfiguration.configurationGroups,
             ),
         }),
-        new Codotype.Schema({
+        new Primatives.Schema({
             identifiers: buildTokenPluralization("Movie"),
             attributes: [
-                new Codotype.Attribute({
+                new Primatives.AttributeInput({
                     identifiers: buildTokenCasing("ID"),
-                    datatype: Datatype.UUID,
+                    datatype: Datatypes.UUID,
                 }),
-                new Codotype.Attribute({
+                new Primatives.AttributeInput({
                     identifiers: buildTokenCasing("Title"),
-                    datatype: Datatype.STRING,
+                    datatype: Datatypes.STRING,
                 }),
             ],
-            relations: [],
             configuration: buildDefaultConfiguration(
                 pluginExample01.schemaEditorConfiguration.configurationGroups,
             ),
@@ -248,25 +305,26 @@ const projectExample01: Project = {
     ],
 };
 
-const stories: [string, GeneratorMeta][] = [
-    ["w/ schemas", dummyGeneratorMeta],
+const stories: Array<[string, PluginMetadata]> = [
+    ["w/ schemas", dummyPluginMetadata],
     [
         "w/ schemas + schema configuration groups",
         {
-            ...dummyGeneratorMeta,
-            id: "chrome_extension_generator_03", // unique ID for the generator
+            ...dummyPluginMetadata,
+            identifier: "chrome_extension_plugin_03", // unique ID for the plugin
             schemaEditorConfiguration: {
-                ...dummyGeneratorMeta.schemaEditorConfiguration,
+                ...dummyPluginMetadata.schemaEditorConfiguration,
                 attributeAddons: [
                     ATTRIBUTE_ADDON_UNIQUE,
-                    ATTRIBUTE_ADDON_REQUIRED,
-                    ATTRIBUTE_ADDON_NULLABLE,
-                    ATTRIBUTE_ADDON_PRIMARY_KEY,
+                    // ATTRIBUTE_ADDON_REQUIRED,
+                    // ATTRIBUTE_ADDON_NULLABLE,
+                    // ATTRIBUTE_ADDON_PRIMARY_KEY,
                 ],
+                relationAddons: [...relationAddons],
                 configurationGroups: [
                     {
-                        ...dummyGeneratorMeta.configurationGroups[0],
-                        layoutVariant: GroupLayoutVariant.LIST,
+                        ...dummyPluginMetadata.configurationGroups[0],
+                        layoutVariant: GroupLayoutVariants.LIST,
                     },
                 ],
             },
@@ -282,130 +340,155 @@ const stories: [string, GeneratorMeta][] = [
     [
         "w/ schemas + default attributes",
         {
-            ...dummyGeneratorMeta,
-            id: "chrome_extension_generator_04", // unique ID for the generator
+            ...dummyPluginMetadata,
+            identifier: "chrome_extension_plugin_04", // unique ID for the plugin
             schemaEditorConfiguration: {
-                ...dummyGeneratorMeta.schemaEditorConfiguration,
+                ...dummyPluginMetadata.schemaEditorConfiguration,
                 attributeAddons: [
                     ATTRIBUTE_ADDON_UNIQUE,
-                    ATTRIBUTE_ADDON_REQUIRED,
-                    ATTRIBUTE_ADDON_NULLABLE,
-                    ATTRIBUTE_ADDON_PRIMARY_KEY,
+                    // ATTRIBUTE_ADDON_REQUIRED,
+                    // ATTRIBUTE_ADDON_NULLABLE,
+                    // ATTRIBUTE_ADDON_PRIMARY_KEY,
                 ],
-                defaultAttributes: [
-                    {
-                        id: "UUID-Attribute",
-                        identifiers: {
-                            label: "ID",
-                            snake: "id",
-                            camel: "id",
-                            pascal: "Id",
-                            kebab: "id",
+                relationAddons: [...relationAddons],
+                newSchemaDefaults: {
+                    relations: [],
+                    attributes: [
+                        {
+                            id: "UUID-Attribute",
+                            identifiers: {
+                                title: "ID",
+                                snake: "id",
+                                camel: "id",
+                                pascal: "Id",
+                                kebab: "id",
+                            },
+                            addons: {
+                                // [ATTRIBUTE_ADDON_PRIMARY_KEY.identifier]: true,
+                            },
+                            datatype: Datatypes.UUID,
+                            locked: true,
+                            createdBy: CreatedByValues.plugin,
+                            internalNote: "",
                         },
-                        addons: {
-                            [ATTRIBUTE_ADDON_PRIMARY_KEY.identifier]: true,
-                        },
-                        datatype: Datatype.UUID,
-                        locked: true,
-                        source: SchemaSource.GENERATOR,
-                        internalNote: "",
-                        defaultValue: null,
-                    },
-                ],
+                    ],
+                },
             },
         },
     ],
     [
         "AWS CDK Starter",
         {
-            ...cdkGeneratorMeta,
+            ...cdkPluginMeta,
+            content: {
+                ...cdkPluginMeta.content,
+                documentation: pluginReadme,
+            },
             configurationGroups: [
                 {
                     ...testState.ComponentBuilderConfigurationGroup,
-                    layoutVariant: GroupLayoutVariant.LIST,
+                    layoutVariant: GroupLayoutVariants.LIST,
                 },
                 testState.SideBySideConfigurationGroup,
                 {
                     ...testState.SideBySideConfigurationGroup,
-                    label: "API Actions",
+                    content: {
+                        ...testState.SideBySideConfigurationGroup.content,
+                        label: "API Actions",
+                    },
                     identifier: "api_actions",
                     properties: [ApiActionsProperty],
                 },
                 {
                     ...testState.SideBySideConfigurationGroup,
-                    label: "Nested API Actions",
+                    content: {
+                        ...testState.SideBySideConfigurationGroup.content,
+                        label: "Nested API Actions",
+                    },
                     identifier: "nested_api_actions",
                     properties: [NestedCollectionProperty],
                 },
             ],
-            id: "chrome_extension_generator_05", // unique ID for the generator
-            documentation: generatorReadme,
+            identifier: "chrome_extension_plugin_05", // unique ID for the plugin
             schemaEditorConfiguration: {
-                enableAttributeDefaultValue: true,
-                documentation: "",
-                supportedRelations: [RelationType.TO_ONE, RelationType.TO_MANY],
+                supportedRelationTypes: [
+                    RelationTypes.TO_ONE,
+                    RelationTypes.TO_MANY,
+                ],
                 supportedDatatypes: [
-                    Datatype.STRING,
-                    Datatype.DATE,
-                    Datatype.DATETIME,
-                    Datatype.INTEGER,
-                    Datatype.FLOAT,
-                    Datatype.STRING_ARRAY,
+                    Datatypes.STRING,
+                    Datatypes.DATE,
+                    Datatypes.DATETIME,
+                    Datatypes.INT,
+                    Datatypes.FLOAT,
+                    Datatypes.STRING_ARRAY,
                 ],
                 configurationGroups: [
-                    new Codotype.ConfigurationGroup({
-                        label: "Meta",
+                    new Primatives.ConfigurationGroup({
+                        content: {
+                            label: "Meta",
+                            description:
+                                "Define additional metadata for this Schema",
+                        },
                         identifier: "meta",
-                        description:
-                            "Define additional metadata for this Schema",
-                        layoutVariant: GroupLayoutVariant.LIST,
+                        layoutVariant: GroupLayoutVariants.LIST,
                         properties: [
-                            new Codotype.ConfigurationGroupProperty({
-                                label: "Internal Note",
+                            new Primatives.ConfigurationProperty({
+                                content: {
+                                    label: "Internal Note",
+                                    description:
+                                        "Write an internal note describing this schema",
+                                },
                                 identifier: "internal_note",
-                                description:
-                                    "Write an internal note describing this schema",
                                 defaultValue: "",
-                                layoutVariant: PropertyLayoutVariant.COL_12,
-                                type: OptionType.STRING,
+                                layoutVariant: PropertyLayoutVariants.COL_12,
+                                type: PropertyTypes.STRING,
                             }),
                         ],
                     }),
-                    new Codotype.ConfigurationGroup({
-                        label: "API Actions",
+                    new Primatives.ConfigurationGroup({
+                        content: {
+                            label: "API Actions",
+                            description: "Define individual REST api actions.",
+                            documentation:
+                                "This is documentation for the API Actions configuration group",
+                        },
                         identifier: "api_actions",
-                        description: "Define individual REST api actions.",
-                        documentation:
-                            "This is documentation for the API Actions configuration group",
-                        layoutVariant: GroupLayoutVariant.LIST,
+                        layoutVariant: GroupLayoutVariants.LIST,
                         properties: [ApiActionsProperty],
                     }),
-                    new Codotype.ConfigurationGroup({
-                        label: "GraphQL API",
+                    new Primatives.ConfigurationGroup({
+                        content: {
+                            label: "GraphQL API",
+                            description:
+                                "Configure the GraphQL API for this Schema",
+                        },
                         identifier: "graphql_api",
-                        description:
-                            "Configure the GraphQL API for this Schema",
-                        layoutVariant: GroupLayoutVariant.LIST,
+                        layoutVariant: GroupLayoutVariants.LIST,
                         properties: [
-                            new Codotype.ConfigurationGroupProperty({
-                                type: OptionType.BOOLEAN,
+                            new Primatives.ConfigurationProperty({
+                                type: PropertyTypes.BOOLEAN,
                                 defaultValue: true,
                                 identifier: "generate_crud_api",
-                                label: "Generate CRUD API",
-                                description:
-                                    "Generate a CRUD API with GraphQL for this resource",
+                                content: {
+                                    label: "Generate CRUD API",
+                                    description:
+                                        "Generate a CRUD API with GraphQL for this resource",
+                                },
                                 layoutVariant:
-                                    PropertyLayoutVariant.CARD_COL_12,
+                                    PropertyLayoutVariants.CARD_COL_12,
                             }),
-                            new Codotype.ConfigurationGroupProperty({
-                                label: "DynamoDB table name",
+                            new Primatives.ConfigurationProperty({
+                                content: {
+                                    label: "DynamoDB table name",
+                                    description:
+                                        "Define the name of the DynamoDB table for this",
+                                },
                                 identifier: "dynamodb_table_name",
-                                description:
-                                    "Define the name of the DynamoDB table for this",
                                 defaultValue: "",
-                                type: OptionType.STRING,
+                                type: PropertyTypes.STRING,
                                 layoutVariant:
-                                    PropertyLayoutVariant.CARD_COL_12,
+                                    PropertyLayoutVariants.CARD_COL_12,
                             }),
                             ApiActionsProperty,
                         ],
@@ -413,92 +496,98 @@ const stories: [string, GeneratorMeta][] = [
                 ],
                 attributeAddons: [
                     ATTRIBUTE_ADDON_UNIQUE,
-                    ATTRIBUTE_ADDON_NULLABLE,
-                    ATTRIBUTE_ADDON_PRIMARY_KEY,
-                    {
-                        ...ATTRIBUTE_ADDON_REQUIRED,
-                        supportedDatatypes: [
-                            Datatype.STRING,
-                            Datatype.DATE,
-                            Datatype.DATETIME,
-                            Datatype.INTEGER,
-                            Datatype.FLOAT,
-                            Datatype.STRING_ARRAY,
-                        ],
-                    },
-                    {
-                        ...ATTRIBUTE_ADDON_REQUIRED,
-                        label: "Mock Data",
-                        identifier: "mock_data_type",
-                        description:
-                            "Type of Mockaroo mock data to use for this field",
-                        propertyType: OptionType.DROPDOWN,
-                        dropdownOptions: [
-                            {
-                                value: "name",
-                                label: "Name",
-                                description: "First + Last",
-                            },
-                            {
-                                value: "zipcode",
-                                label: "Zipcode",
-                                description: "Zipcode",
-                            },
-                        ],
-                        supportedDatatypes: [
-                            Datatype.STRING,
-                            Datatype.DATE,
-                            Datatype.DATETIME,
-                            Datatype.INTEGER,
-                            Datatype.FLOAT,
-                            Datatype.STRING_ARRAY,
-                        ],
-                    },
+                    // ATTRIBUTE_ADDON_NULLABLE,
+                    // ATTRIBUTE_ADDON_PRIMARY_KEY,
+                    // {
+                    //     ...ATTRIBUTE_ADDON_REQUIRED,
+                    //     supportedDatatypes: [
+                    //         Datatypes.STRING,
+                    //         Datatypes.DATE,
+                    //         Datatypes.DATETIME,
+                    //         Datatypes.INT,
+                    //         Datatypes.FLOAT,
+                    //         Datatypes.STRING_ARRAY,
+                    //     ],
+                    // },
+                    // {
+                    //     ...ATTRIBUTE_ADDON_REQUIRED,
+                    //     label: "Mock Data",
+                    //     identifier: "mock_data_type",
+                    //     description:
+                    //         "Type of Mockaroo mock data to use for this field",
+                    //     propertyType: PropertyTypes.DROPDOWN,
+                    //     dropdownOptions: [
+                    //         {
+                    //             value: "name",
+                    //             label: "Name",
+                    //             description: "First + Last",
+                    //         },
+                    //         {
+                    //             value: "zipcode",
+                    //             label: "Zipcode",
+                    //             description: "Zipcode",
+                    //         },
+                    //     ],
+                    //     supportedDatatypes: [
+                    //         Datatypes.STRING,
+                    //         Datatypes.DATE,
+                    //         Datatypes.DATETIME,
+                    //         Datatypes.INT,
+                    //         Datatypes.FLOAT,
+                    //         Datatypes.STRING_ARRAY,
+                    //     ],
+                    // },
                 ],
-                defaultRelations: [
-                    {
-                        id: "USER-RELATION-ID",
-                        required: true,
-                        type: RelationType.TO_ONE,
-                        destinationSchemaAlias: "Creator",
-                        sourceSchemaAlias: "",
-                        source: SchemaSource.GENERATOR,
-                        destinationSchemaId: "USER_SCHEMA",
-                    },
-                ],
-                defaultAttributes: [
-                    {
-                        id: "UUID-Attribute",
-                        identifiers: {
-                            label: "ID",
-                            snake: "id",
-                            camel: "id",
-                            pascal: "Id",
-                            kebab: "id",
+                relationAddons: [...relationAddons],
+                newSchemaDefaults: {
+                    relations: [
+                        {
+                            id: "USER-RELATION-ID",
+                            type: RelationTypes.TO_ONE,
+                            destinationSchemaAlias: "Creator",
+                            sourceSchemaAlias: "",
+                            createdBy: CreatedByValues.plugin,
+                            sourceSchemaID: "USER_SCHEMA",
+                            destinationSchemaID: "USER_SCHEMA",
+                            locked: true,
+                            internalNote: "",
+                            addons: {},
                         },
-                        addons: {
-                            [ATTRIBUTE_ADDON_PRIMARY_KEY.identifier]: true,
+                    ],
+                    attributes: [
+                        {
+                            id: "UUID-Attribute",
+                            identifiers: {
+                                title: "ID",
+                                snake: "id",
+                                camel: "id",
+                                pascal: "Id",
+                                kebab: "id",
+                            },
+                            addons: {
+                                // [ATTRIBUTE_ADDON_PRIMARY_KEY.identifier]: true,
+                            },
+                            datatype: Datatypes.UUID,
+                            locked: true,
+                            createdBy: CreatedByValues.plugin,
+                            internalNote: "",
                         },
-                        datatype: Datatype.UUID,
-                        locked: true,
-                        source: SchemaSource.GENERATOR,
-                        internalNote: "",
-                        defaultValue: null,
-                    },
-                ],
+                    ],
+                },
+                defaultRelations: [],
                 defaultSchemas: [
                     {
                         id: "USER_SCHEMA",
                         identifiers: {
                             singular: {
-                                label: "User",
+                                title: "User",
                                 snake: "user",
                                 camel: "user",
                                 pascal: "User",
                                 kebab: "user",
                             },
                             plural: {
-                                label: "Users",
+                                title: "Users",
                                 snake: "users",
                                 camel: "users",
                                 pascal: "Users",
@@ -506,57 +595,54 @@ const stories: [string, GeneratorMeta][] = [
                             },
                         },
                         locked: true,
-                        removable: false,
-                        source: SchemaSource.GENERATOR,
+                        createdBy: CreatedByValues.plugin,
                         internalNote: "",
                         attributes: [
                             {
                                 id: "UUID-Attribute",
                                 identifiers: {
-                                    label: "ID",
+                                    title: "ID",
                                     snake: "id",
                                     camel: "id",
                                     pascal: "Id",
                                     kebab: "id",
                                 },
                                 addons: {
-                                    [ATTRIBUTE_ADDON_REQUIRED.identifier]: true,
-                                    [ATTRIBUTE_ADDON_PRIMARY_KEY.identifier]: true,
-                                    [ATTRIBUTE_ADDON_UNIQUE.identifier]: true,
+                                    // [ATTRIBUTE_ADDON_REQUIRED.identifier]: true,
+                                    // [ATTRIBUTE_ADDON_PRIMARY_KEY.identifier]: true,
+                                    // [ATTRIBUTE_ADDON_UNIQUE.identifier]: true,
                                 },
-                                datatype: Datatype.STRING,
+                                datatype: Datatypes.STRING,
                                 locked: true,
-                                source: SchemaSource.GENERATOR,
+                                createdBy: CreatedByValues.plugin,
                                 internalNote: "The uniqie ID of the user",
-                                defaultValue: null,
                             },
                             {
                                 id: "Email-Attribute",
                                 identifiers: {
-                                    label: "Email",
+                                    title: "Email",
                                     snake: "email",
                                     camel: "email",
                                     pascal: "Email",
                                     kebab: "email",
                                 },
                                 addons: {
-                                    [ATTRIBUTE_ADDON_REQUIRED.identifier]: true,
-                                    [ATTRIBUTE_ADDON_UNIQUE.identifier]: true,
+                                    // [ATTRIBUTE_ADDON_REQUIRED.identifier]: true,
+                                    // [ATTRIBUTE_ADDON_UNIQUE.identifier]: true,
                                 },
-                                datatype: Datatype.STRING,
+                                datatype: Datatypes.STRING,
                                 locked: true,
-                                source: SchemaSource.GENERATOR,
+                                createdBy: CreatedByValues.plugin,
                                 internalNote: "The email of the user",
-                                defaultValue: null,
                             },
                         ],
-                        relations: [],
                         configuration: {},
                     },
                 ],
             },
         },
     ],
+    ["Concepts/Next.js Website Starter", NextJsWebsiteStarterPlugin],
 ];
 
 // // // //
@@ -567,25 +653,82 @@ stories.forEach(story => {
     storyCollection.add(story[0], () => {
         return (
             <Story>
-                <WebRuntime generator={story[1]}>
-                    {({ generator, project, setProject, clearProject }) => (
+                <WebRuntime plugin={story[1]}>
+                    {({ plugin, projectInput, setProject, clearProject }) => (
                         <RuntimeProvider>
                             {({ generateCode }) => (
                                 <React.Fragment>
                                     <ProjectEditor
-                                        generator={generator}
-                                        project={project}
+                                        plugin={plugin}
+                                        projectInput={projectInput}
                                         onClickGenerate={() => {
                                             generateCode({
-                                                project,
-                                                generator,
+                                                projectInput,
+                                                plugin,
                                             });
                                         }}
                                         onResetProject={clearProject}
-                                        onChange={(updatedProject: Project) => {
+                                        onChange={(
+                                            updatedProject: ProjectInput,
+                                        ) => {
                                             setProject(updatedProject);
                                         }}
-                                    />
+                                    >
+                                        {({
+                                            defaultComponent,
+                                            value,
+                                            selectedConfigurationGroup,
+                                            onChange,
+                                        }) => {
+                                            console.log(
+                                                selectedConfigurationGroup,
+                                            );
+
+                                            if (
+                                                selectedConfigurationGroup.identifier ===
+                                                "home"
+                                            ) {
+                                                return (
+                                                    <div className="grid grid-cols-12 mt-4">
+                                                        <div className="col-span-12">
+                                                            {/* ConfigurationGroupHeader */}
+                                                            <ConfigurationGroupHeader
+                                                                value={value}
+                                                                onChange={
+                                                                    onChange
+                                                                }
+                                                                configurationGroup={
+                                                                    selectedConfigurationGroup
+                                                                }
+                                                            />
+                                                            <div>
+                                                                <input
+                                                                    value={
+                                                                        value.string
+                                                                    }
+                                                                    onChange={e => {
+                                                                        onChange(
+                                                                            {
+                                                                                string:
+                                                                                    e
+                                                                                        .currentTarget
+                                                                                        .value,
+                                                                            },
+                                                                        );
+                                                                    }}
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                );
+                                            } else {
+                                                return defaultComponent;
+                                            }
+                                        }}
+                                    </ProjectEditor>
+                                    <pre>
+                                        {JSON.stringify(projectInput, null, 4)}
+                                    </pre>
                                 </React.Fragment>
                             )}
                         </RuntimeProvider>

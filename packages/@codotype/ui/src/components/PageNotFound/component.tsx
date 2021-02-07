@@ -7,11 +7,11 @@ import * as React from "react";
  */
 export function PageNotFound() {
     return (
-        <div className="row h-100 align-items-center">
+        <div className="row h-full items-center">
             <div className="col-lg-12">
                 <div className="row mt-2">
                     <div className="col-lg-12 text-center">
-                        <h4 className="display-4">
+                        <h4 className="text-xl">
                             Oops, something went wrong.
                         </h4>
                     </div>
@@ -30,15 +30,11 @@ export function PageNotFound() {
                         </p>
                     </div>
 
-                    <div className="col-lg-12 text-center" v-if="homeUrl">
+                    <div className="col-lg-12 text-center">
                         <p className="lead">
-                            <a href="homeUrl">Click here to return home</a>
-                        </p>
-                    </div>
-
-                    <div className="col-lg-12 text-center" v-if="redirectUrl">
-                        <p className="lead">
-                            We'll be redirecting you momentarily
+                            <a href="https://codotype.io">
+                                Click here to return home
+                            </a>
                         </p>
                     </div>
                 </div>

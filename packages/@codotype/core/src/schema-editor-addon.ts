@@ -1,5 +1,5 @@
 import { Datatype } from "./datatype";
-import { PropertyType, DropdownOption } from "./configuration-property";
+import { PropertyTypes, DropdownOption } from "./configuration-property";
 import { PropertyTransformation } from "./property-transformation";
 import { PropertyValidation } from "./property-validation";
 import { Content } from "./content";
@@ -50,10 +50,10 @@ export interface AddonProperty {
     required: boolean; // Does this need to be populated?
     inlineIcon: AddonPropertyInlineIcon; // See InlineIcons enum
     propertyType:
-        | PropertyType.BOOLEAN
-        | PropertyType.DROPDOWN
-        | PropertyType.STRING
-        | PropertyType.NUMBER; // Only stores primative data
+        | PropertyTypes.BOOLEAN
+        | PropertyTypes.DROPDOWN
+        | PropertyTypes.STRING
+        | PropertyTypes.NUMBER; // Only stores primative data
     defaultValue: null | boolean | string | number;
     dropdownOptions: DropdownOption[]; // Only used when datatype: OptionType.DROPDOWN;
     validations: PropertyValidation[];

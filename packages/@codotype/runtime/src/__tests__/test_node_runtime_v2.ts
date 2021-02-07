@@ -7,11 +7,11 @@ import {
     RuntimeLogLevels,
 } from "@codotype/core";
 import { resolve } from "path";
-import { LocalFileSystemAdaptor } from "../LocalFileSystemAdaptor";
+import { LocalFileSystemAdapter } from "../LocalFileSystemAdapter";
 
 // // // //
 
-// TODO - test each method with NodeRuntime
+// CHORE - test each method with NodeRuntime
 describe("testing @codotype/runtime v2", () => {
     // test("testing @codotype/runtime v2", async () => {
     //     const mockRuntime: Runtime = new MockRuntime({
@@ -51,9 +51,8 @@ describe("testing @codotype/runtime v2", () => {
         // Instantiates new CodotypeRuntime w/ verbose LogLevel
         const nodeRuntime: Runtime = new NodeRuntime({
             cwd,
-            logLevel: RuntimeLogLevels.suppress,
             fileOverwriteBehavior: "force",
-            fileSystemAdaptor: new LocalFileSystemAdaptor(),
+            fileSystemAdapter: new LocalFileSystemAdapter(),
         });
 
         // Registers the mock_plugin
@@ -77,6 +76,8 @@ describe("testing @codotype/runtime v2", () => {
         const build: ProjectBuild = {
             id: "test-project",
             projectInput,
+            startTime: new Date().toISOString(),
+            endTime: new Date().toISOString(),
         };
 
         // Execute the build via nodeRuntime

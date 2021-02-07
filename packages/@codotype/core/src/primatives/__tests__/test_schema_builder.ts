@@ -13,7 +13,6 @@ describe("factory", () => {
     test("works", () => {
         const schema = new SchemaBuilder({
             attributes: [],
-            relations: [],
             identifiers: {
                 singular: {
                     ...EMPTY_TOKEN_CASING,

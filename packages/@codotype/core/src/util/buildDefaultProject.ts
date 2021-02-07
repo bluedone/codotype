@@ -1,10 +1,10 @@
 import {
     SchemaInput,
     ProjectInput,
-    PropertyType,
-    OptionValue,
+    PropertyTypes,
+    ConfigurationPropertyValue,
     ConfigurationValue,
-    OptionValueInstance,
+    ConfigurationPropertyDict,
     ConfigurationGroup,
     ConfigurationGroupSection,
     PluginMetadata,
@@ -20,28 +20,28 @@ import {
  */
 export function buildConfigurationPropertyValue(
     property: ConfigurationProperty,
-): OptionValue {
-    if (property.type === PropertyType.STRING) {
+): ConfigurationPropertyValue {
+    if (property.type === PropertyTypes.STRING) {
         return property.defaultValue || "";
     }
-    if (property.type === PropertyType.BOOLEAN) {
+    if (property.type === PropertyTypes.BOOLEAN) {
         return property.defaultValue || false;
     }
-    if (property.type === PropertyType.DROPDOWN) {
+    if (property.type === PropertyTypes.DROPDOWN) {
         return property.defaultValue
             ? property.defaultValue
             : property.dropdownOptions.length > 0
             ? property.dropdownOptions[0].value
             : "";
     }
-    if (property.type === PropertyType.COLLECTION) {
+    if (property.type === PropertyTypes.COLLECTION) {
         if (Array.isArray(property.defaultValue)) {
             return property.defaultValue;
         }
         // Return empty array as default
         return [];
     }
-    if (property.type === PropertyType.INSTANCE) {
+    if (property.type === PropertyTypes.INSTANCE) {
         return buildValueFromProperties(property.properties);
     }
     return "";
@@ -54,12 +54,12 @@ export function buildConfigurationPropertyValue(
  */
 export function buildValueFromProperties(
     properties: ConfigurationProperty[],
-): OptionValueInstance {
-    const initialValue: OptionValueInstance = {};
+): ConfigurationPropertyDict {
+    const initialValue: ConfigurationPropertyDict = {};
 
     // Defines empty ConfigurationGroupValue
     // Iterates over each property in the group and assigns values
-    const configurationGroupValue: OptionValueInstance = properties.reduce(
+    const configurationGroupValue: ConfigurationPropertyDict = properties.reduce(
         (val, property: ConfigurationProperty) => {
             // Updates val with data for ConfigurationProperty
             if (property.allowDisable && !property.required) {
@@ -89,20 +89,16 @@ export function buildValueFromProperties(
  */
 export function buildConfigurationGroupValue(
     configurationGroup: ConfigurationGroup,
-): OptionValueInstance {
-    const initialValue: OptionValueInstance = {};
+): ConfigurationPropertyDict {
+    const initialValue: ConfigurationPropertyDict = {};
 
     // Handle ConfigurationGroup w/ properties
     if (configurationGroup.properties) {
         // Defines empty ConfigurationGroupValue
         // Iterates over each property in the group and assigns values
-        const configurationGroupValue: OptionValueInstance = configurationGroup.properties.reduce(
+        const configurationGroupValue: ConfigurationPropertyDict = configurationGroup.properties.reduce(
             (val, property: ConfigurationProperty) => {
                 // Updates val with data for ConfigurationProperty
-                // TODO - remove this - the UI should only care if the property can allow disable or not
-                // TODO - remove this - the UI should only care if the property can allow disable or not
-                // TODO - remove this - the UI should only care if the property can allow disable or not
-                // TODO - remove this - the UI should only care if the property can allow disable or not
                 if (property.allowDisable && !property.required) {
                     val[property.identifier] = {
                         enabled: property.enabledByDefault,
@@ -126,13 +122,13 @@ export function buildConfigurationGroupValue(
     // Handle ConfigurationGroup w/ Sections
     if (configurationGroup.sections) {
         // Iterate over each section
-        const configurationGroupValue: OptionValueInstance = configurationGroup.sections.reduce(
+        const configurationGroupValue: ConfigurationPropertyDict = configurationGroup.sections.reduce(
             (val, section: ConfigurationGroupSection) => {
                 // Defines initial value for the ConfigurationGroupSection
-                const initialSectionValue: OptionValueInstance = {};
+                const initialSectionValue: ConfigurationPropertyDict = {};
 
                 // Iterates over each property in the ConfigurationGroupSection
-                const sectionValue: OptionValueInstance = section.properties.reduce(
+                const sectionValue: ConfigurationPropertyDict = section.properties.reduce(
                     (val, property: ConfigurationProperty) => {
                         // Sets value for ConfigurationGroupSection
                         val[property.identifier] = {
@@ -171,7 +167,7 @@ export function buildDefaultConfiguration(
     // Defines default ConfigurationValue
     const configurationValue: ConfigurationValue = configurationGroups.reduce(
         (val, configurationGroup: ConfigurationGroup) => {
-            const initialValue: OptionValueInstance = buildConfigurationGroupValue(
+            const initialValue: ConfigurationPropertyDict = buildConfigurationGroupValue(
                 configurationGroup,
             );
             return { ...val, [configurationGroup.identifier]: initialValue };
@@ -180,6 +176,29 @@ export function buildDefaultConfiguration(
     );
 
     return configurationValue;
+}
+
+export function verifyDefaultSchemas(params: {
+    schemas: SchemaInput[];
+    configurationGroups: ConfigurationGroup[];
+}): SchemaInput[] {
+    return params.schemas.map((s) => {
+        // Builds value for s.configuration
+        const configuration: ConfigurationValue = buildDefaultConfiguration(
+            params.configurationGroups,
+        );
+
+        // If s.configuration doesn't match configuration -> return new configuration value
+        if (Object.keys(s.configuration) !== Object.keys(configuration)) {
+            return {
+                ...s,
+                configuration,
+            };
+        }
+
+        // Otherwise, return s
+        return s;
+    });
 }
 
 /**
@@ -207,7 +226,13 @@ export function buildDefaultProjectInput(
         },
         pluginID: pluginMetadata.identifier,
         pluginVersion: pluginMetadata.version,
-        schemas: [...pluginMetadata.schemaEditorConfiguration.defaultSchemas],
+        schemas: verifyDefaultSchemas({
+            schemas: [
+                ...pluginMetadata.schemaEditorConfiguration.defaultSchemas,
+            ],
+            configurationGroups:
+                pluginMetadata.schemaEditorConfiguration.configurationGroups,
+        }),
         relations: [
             ...pluginMetadata.schemaEditorConfiguration.defaultRelations,
         ],

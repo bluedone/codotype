@@ -151,6 +151,19 @@ export const DATATYPE_META: {
 
     // // // //
     // Array Datatypes
+    [Datatypes.ID_ARRAY]: {
+        value: Datatypes.ID_ARRAY,
+        label: "ID Array",
+        description: "An array of IDs",
+        icon: "fa fa-tags",
+    },
+
+    [Datatypes.AUTO_INCREMENTED_ID_ARRAY]: {
+        value: Datatypes.AUTO_INCREMENTED_ID_ARRAY,
+        label: "Auto Incremented ID Array",
+        description: "An array of Auto Incremented IDs",
+        icon: "fa fa-tags",
+    },
 
     [Datatypes.UUID_ARRAY]: {
         value: Datatypes.UUID_ARRAY,

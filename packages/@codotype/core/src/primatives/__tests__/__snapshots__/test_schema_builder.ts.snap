@@ -24,6 +24,5 @@ SchemaBuilder {
   },
   "internalNote": "",
   "locked": false,
-  "relations": Array [],
 }
 `;
