@@ -1,31 +1,9 @@
-import { pluginReadme } from "../../../components/MarkdownRenderer/__tests__/test_state";
+import { pluginReadme } from "../../../../components/MarkdownRenderer/__tests__/test_state";
 import {
-    ProjectInput,
-    Datatypes,
-    CreatedByValues,
     PluginMetadata,
-    testState,
-    // makeIdentifier,
-    // ATTRIBUTE_ADDON_REQUIRED,
-    // ATTRIBUTE_ADDON_NULLABLE,
-    // ATTRIBUTE_ADDON_PRIMARY_KEY,
-    RelationTypes,
     PropertyTypes,
     Primatives,
-    GroupLayoutVariants,
-    PropertyLayoutVariants,
-    StringPropertyTransformations,
-    PropertyPreviewLayoutVariant,
-    PropertyPreviewActionTypes,
-    PropertyPreviewConstraintTypes,
-    buildDefaultProjectInput,
-    buildTokenCasing,
-    buildTokenPluralization,
-    buildDefaultConfiguration,
-    AttributeAddon,
-    AddonPropertyInlineIcons,
     ConfigurationGroup,
-    ConfigurationProperty,
 } from "@codotype/core";
 
 // // // //
