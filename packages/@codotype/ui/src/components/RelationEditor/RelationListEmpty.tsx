@@ -11,14 +11,14 @@ interface RelationListEmptyProps {
 export function RelationListEmpty(props: RelationListEmptyProps) {
     return (
         <div className="card-body text-center">
-            <h5 className="mb-0 mt-1 text-muted">No Relations added yet</h5>
-            <p className="text-muted mt-2 mb-0">
+            <h5 className="mb-0 mt-1 text-gray-600 text-lg">No Relations added yet</h5>
+            <p className="text-gray-600 mt-2 mb-0">
                 Define references between Schemas
             </p>
             <div className="row flex justify-center mt-2">
                 <div className="col-lg-12">
                     <button
-                        className="btn btn-sm btn-outline-primary"
+                        className="btn btn-sm btn-primary"
                         onClick={props.onClick}
                     >
                         <FontAwesomeIcon className="mr-2" icon={faPlus} />
