@@ -11,6 +11,13 @@ import { ProjectInput } from "../project";
 
 // // // //
 
+export type PreviewOutputType = "json" | "typescript" | "graphql";
+export enum PreviewOutputTypes {
+    json = "json",
+    typescript = "typescript",
+    graphql = "graphql",
+}
+
 // CLEANUP - document this function, write better tests
 export const getDatatypeValueJson = ({
     datatype,
@@ -324,4 +331,31 @@ export function renderSchemaTypeScript({
 
     // Joins lines
     return output.join("\n");
+}
+
+// // // //
+// CLEANUP - document this function, write better tests
+
+// FEATURE - update this to include optional header text? i.e. import statements when exporting "typescript" preview
+export function schemaPreviewContent(props: {
+    schemaInput: SchemaInput;
+    projectInput: ProjectInput;
+    previewOutputType: PreviewOutputType;
+}) {
+    const { schemaInput, projectInput, previewOutputType } = props;
+
+    if (previewOutputType === PreviewOutputTypes.json) {
+        return renderSchemaJson({ schemaInput, projectInput });
+    }
+
+    if (previewOutputType === PreviewOutputTypes.typescript) {
+        return renderSchemaTypeScript({ schemaInput, projectInput });
+    }
+
+    if (previewOutputType === PreviewOutputTypes.graphql) {
+        return renderSchemaGrapqhQL({ schemaInput, projectInput });
+    }
+
+    // Return null if no match
+    return null;
 }

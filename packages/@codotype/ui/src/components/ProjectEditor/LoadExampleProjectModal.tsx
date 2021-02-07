@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Modal } from "react-bootstrap";
+import { Modal } from "../Modal";
 import { ProjectInput } from "@codotype/core";
 
 // // // //
@@ -21,27 +21,20 @@ export function LoadExampleProjectModal(props: {
 
     return (
         <Modal show={props.show} onHide={props.onHide}>
-            <Modal.Header closeButton>
-                <Modal.Title>
-                    Load {projectInput.identifiers.title} Project
-                </Modal.Title>
-            </Modal.Header>
+            <h3>Load {projectInput.identifiers.title} Project</h3>
 
-            <Modal.Body>
-                <p className="form-text text-muted mb-2">
-                    Load an example project for this Codotype Plugin.
-                </p>
+            <p className="form-text text-muted mb-2">
+                Load an example project for this Codotype Plugin.
+            </p>
 
-                <p className="form-text text-muted mb-2">
-                    <span className="text-danger">WARNING: </span>This will
-                    delete your current project - are you sure you want to
-                    continue?
-                </p>
-            </Modal.Body>
+            <p className="form-text text-muted mb-2">
+                <span className="text-red-500">WARNING: </span>This will delete
+                your current project - are you sure you want to continue?
+            </p>
 
-            <Modal.Footer>
+            <div className="modal-footer-tw">
                 <button
-                    className="btn btn-outline-primary"
+                    className="btn btn-lg btn-primary"
                     onClick={() => {
                         props.onConfirm();
                     }}
@@ -49,10 +42,10 @@ export function LoadExampleProjectModal(props: {
                     Load Example Project
                 </button>
 
-                <button className="btn btn-light" onClick={props.onHide}>
+                <button className="btn btn-lg btn-light" onClick={props.onHide}>
                     Cancel
                 </button>
-            </Modal.Footer>
+            </div>
         </Modal>
     );
 }

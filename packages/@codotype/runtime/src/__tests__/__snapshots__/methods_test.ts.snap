@@ -2,4 +2,46 @@
 
 exports[`ensureDir method should properly define NodeRuntime._mocks_.ensuredDir 1`] = `Object {}`;
 
-exports[`renderComponent renders 1`] = `Object {}`;
+exports[`renderTemplate renders 1`] = `
+Object {
+  "destination/README.md": "# Your New Project",
+  "destination/index-no-prettify.html": "<html><head><title>Page Title</title></head><body><h1>Hello, HTML!</h1></body></html>",
+  "destination/index.html": "(
+  <html>
+    <head>
+      <title>Page Title</title>
+    </head>
+    <body>
+      <h1>Hello, HTML!</h1>
+    </body>
+  </html>
+)
+",
+  "destination/package-no-prettify.json": "{name: \\"project\\", \\"main\\": \\"dist/index\\",\\"types\\": \\"dist/index\\",\\"files\\": [\\"dist\\"],\\"repository\\": {\\"type\\": \\"git\\",\\"url\\": \\"git+https://github.com/codotype/codotype-runtime.git\\"},\\"author\\": \\"Alexander Schwartzberg\\",\\"license\\": \\"MIT\\"}",
+  "destination/package.json": "{
+  \\"name\\": \\"project\\",
+  \\"main\\": \\"dist/index\\",
+  \\"types\\": \\"dist/index\\",
+  \\"files\\": [\\"dist\\"],
+  \\"repository\\": {
+    \\"type\\": \\"git\\",
+    \\"url\\": \\"git+https://github.com/codotype/codotype-runtime.git\\"
+  },
+  \\"author\\": \\"Alexander Schwartzberg\\",
+  \\"license\\": \\"MIT\\"
+}
+",
+  "destination/pages/movies.tsx": "# GraphQL Schema
+type Movie {
+  name: String
+  email: String
+}",
+  "destination/pages/users.tsx": "# GraphQL Schema
+type User {
+}",
+  "destination/prettify-test-no-semi.js": "foo()
+",
+  "destination/prettify-test.js": "foo();
+",
+}
+`;

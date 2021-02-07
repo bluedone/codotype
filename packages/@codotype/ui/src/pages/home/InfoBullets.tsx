@@ -25,7 +25,7 @@ export function InfoBullets(props: { infoSections: InfoBullet[] }) {
                                 <div className="media-body text-center">
                                     <div className="color-icon mb-3">
                                         <FontAwesomeIcon
-                                            className="text-primary"
+                                            className="text-blue-500"
                                             size="2x"
                                             icon={faOsi}
                                         />

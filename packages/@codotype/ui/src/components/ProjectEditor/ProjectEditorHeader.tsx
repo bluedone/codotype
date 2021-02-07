@@ -15,72 +15,75 @@ import { ExampleProjectDropdown } from "./ExampleProjectDropdown";
 // // // //
 
 export function ProjectEditorHeader(props: {
-    PluginMetadata: PluginMetadata;
+    pluginMetadata: PluginMetadata;
     projectInput: ProjectInput;
     onChange: (updatedProject: ProjectInput) => void;
     onClickGenerate: () => void;
     onConfirmReset: () => void;
 }) {
-    const { PluginMetadata } = props;
+    const { pluginMetadata, projectInput } = props;
     const [showingModal, showModal] = React.useState<boolean>(false);
     const [labelValue, setLabelValue] = React.useState<string>(
-        props.projectInput.identifiers.title,
+        projectInput.identifiers.title,
     );
     return (
-        <div className="row d-flex align-items-end">
-            <div className="col-sm-12 col-md-6">
-                <span className="d-flex align-items-center">
-                    <h2 className="mb-0 mr-2 d-flex">
-                        {props.projectInput.identifiers.title}
-                    </h2>
-                    <ProjectEditButton onClick={() => showModal(true)} />
-                    <ProjectFormModal
-                        show={showingModal}
-                        handleClose={() => {
-                            setLabelValue(props.projectInput.identifiers.title);
-                            showModal(false);
-                        }}
-                        onSubmit={() => {
-                            const sanitizedLabel: string = sanitizeTitle(
-                                labelValue,
-                            );
-                            props.onChange({
-                                ...props.projectInput,
-                                identifiers: buildTokenCasing(sanitizedLabel),
-                            });
-                            showModal(false);
-                        }}
-                    >
-                        <ProjectForm
-                            value={labelValue}
-                            onChange={(updatedLabel: string) => {
-                                const sanitizedLabel: string = sanitizeTitle(
-                                    updatedLabel,
-                                );
-                                setLabelValue(sanitizedLabel);
-                            }}
-                        />
-                    </ProjectFormModal>
-                </span>
-            </div>
-            <div className="col-sm-12 col-md-6 d-flex justify-content-end mt-2 mt-md-0">
-                {/* <HelpButton /> */}
-                {/* <TourButton /> */}
-                {/* <ImportModal /> */}
-                {/* <ExportModal /> */}
+        <div className="flex items-center w-full items-end">
+            <div className="flex flex-grow items-center">
+                <h2 className="flex text-3xl select-none">
+                    {projectInput.identifiers.title}
+                </h2>
 
+                {/* Combine these two into a single component */}
+                <ProjectEditButton onClick={() => showModal(true)} />
+                <ProjectFormModal
+                    show={showingModal}
+                    handleClose={() => {
+                        setLabelValue(projectInput.identifiers.title);
+                        showModal(false);
+                    }}
+                    disabled={labelValue.trim().length === 0}
+                    onSubmit={() => {
+                        const sanitizedLabel: string = sanitizeTitle(
+                            labelValue,
+                        );
+                        props.onChange({
+                            ...projectInput,
+                            identifiers: buildTokenCasing(sanitizedLabel),
+                        });
+                        showModal(false);
+                    }}
+                >
+                    <ProjectForm
+                        value={labelValue}
+                        onChange={(updatedLabel: string) => {
+                            const sanitizedLabel: string = sanitizeTitle(
+                                updatedLabel,
+                            );
+                            setLabelValue(sanitizedLabel);
+                        }}
+                        onSubmit={updatedLabel => {
+                            const sanitizedLabel: string = sanitizeTitle(
+                                updatedLabel,
+                            );
+                            if (sanitizedLabel.length === 0) {
+                                return;
+                            }
+                            setLabelValue(sanitizedLabel);
+                        }}
+                    />
+                </ProjectFormModal>
+            </div>
+            <div className="flex justify-end">
                 <ExampleProjectDropdown
-                    plugin={PluginMetadata}
+                    plugin={pluginMetadata}
                     loadExampleProject={exampleProject => {
                         props.onChange(exampleProject);
                     }}
                 />
-
                 <ProjectDropdown
-                    projectInput={props.projectInput}
+                    projectInput={projectInput}
                     onConfirmReset={props.onConfirmReset}
                 />
-                {/* <ResetProjectButton onConfirmReset={props.onConfirmReset} /> */}
                 <GenerateCodeButton onClick={props.onClickGenerate} />
             </div>
         </div>

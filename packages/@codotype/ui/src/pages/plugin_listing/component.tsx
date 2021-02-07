@@ -33,7 +33,7 @@ export function PluginListPage(props: { plugins: PluginMetadata[] }) {
 
     return (
         <div className="row mt-3 mb-5">
-            <div className="col-lg-12 d-flex justify-content-between align-items-center">
+            <div className="col-lg-12 flex justify-between items-center">
                 <h2>Plugins</h2>
             </div>
             <div className="col-lg-12">
@@ -61,7 +61,7 @@ export function PluginListPage(props: { plugins: PluginMetadata[] }) {
 
                     <div className="col-lg-3 pl-0">
                         <button
-                            className="btn btn-lg btn-block btn-outline-warning"
+                            className="btn btn-lg w-full btn-outline-warning"
                             onClick={() => {
                                 setFilter("");
                             }}
@@ -80,33 +80,26 @@ export function PluginListPage(props: { plugins: PluginMetadata[] }) {
                     </div>
 
                     <div className="col-lg-12">
-                        <div className="card py-4 my-3 border-dark bg-transparent">
-                            <ul className="list-group list-group-flush">
-                                <li className="list-group-item text-center bg-transparent border-dark text-dark">
-                                    <FontAwesomeIcon
-                                        size="2x"
-                                        icon={faInfoCircle}
-                                    />
-                                    <p className="lead mb-0 mt-2">
-                                        Looking for something we don't support?
-                                        <br />
-                                        Vote for&nbsp;
-                                        <a
-                                            href="https://github.com/codotype/feature-requests/issues"
-                                            target="_blank"
-                                        >
-                                            upcoming features
-                                        </a>
-                                        &nbsp;or open a&nbsp;
-                                        <a
-                                            href="https://github.com/codotype/feature-requests/issues/new"
-                                            target="_blank"
-                                        >
-                                            new request
-                                        </a>
-                                    </p>
-                                </li>
-                            </ul>
+                        <div className="card card-body">
+                            <FontAwesomeIcon size="2x" icon={faInfoCircle} />
+                            <p className="lead mb-0 mt-2">
+                                Looking for something we don't support?
+                                <br />
+                                Vote for&nbsp;
+                                <a
+                                    href="https://github.com/codotype/feature-requests/issues"
+                                    target="_blank"
+                                >
+                                    upcoming features
+                                </a>
+                                &nbsp;or open a&nbsp;
+                                <a
+                                    href="https://github.com/codotype/feature-requests/issues/new"
+                                    target="_blank"
+                                >
+                                    new request
+                                </a>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -114,20 +107,3 @@ export function PluginListPage(props: { plugins: PluginMetadata[] }) {
         </div>
     );
 }
-
-// Animating items on remove
-// <style type="text/css">
-//   .generator-list-item {
-//     transition: all 1s;
-//     display: inline-block;
-//     margin-right: 10px;
-//   }
-
-//   .generator-list-enter, .generator-list-leave-to {
-//     opacity: 0;
-//     transform: translateY(30px);
-//   }
-//   .generator-list-leave-active {
-//     position: absolute;
-//   }
-// </style>

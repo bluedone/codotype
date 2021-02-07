@@ -1,6 +1,4 @@
 import * as React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCode } from "@fortawesome/free-solid-svg-icons";
 
 // // // //
 
@@ -16,11 +14,10 @@ export function GenerateCodeButton(props: {
 }) {
     return (
         <button
-            className="btn btn-lg btn-yellow d-flex align-items-center"
+            className="bg-yellow-400 hover:bg-yellow-500 flex justify-center items-center px-10 py-4 text-xl font-semibold w-full mb-3 hover:shadow-sm text-white focus:outline-none transition-colors duration-200 ease-in-out shadow-lg rounded-full"
             disabled={props.disabled}
             onClick={props.onClick}
         >
-            <FontAwesomeIcon className="mr-1" icon={faCode} />
             Export Code
         </button>
     );

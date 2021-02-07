@@ -6,6 +6,7 @@ import {
     RelationInput,
     RelationType,
     Primatives,
+    RelationAddon,
 } from "@codotype/core";
 import { Droppable, DragDropContext } from "react-beautiful-dnd";
 import { RelationFormModal } from "./RelationFormModal";
@@ -13,17 +14,8 @@ import { RelationDeleteModal } from "./RelationDeleteModal";
 import { RelationListItem } from "./RelationListItem";
 import { RelationForm } from "./RelationForm";
 import { RelationListEmpty } from "./RelationListEmpty";
+import { reorder } from "../AttributeEditor/reorder";
 import { Hotkey } from "../Hotkey";
-
-// // // //
-
-// TODO - abstract this into a separate module
-function reorder<T>(list: T[], startIndex: number, endIndex: number): T[] {
-    const result = Array.from(list);
-    const [removed] = result.splice(startIndex, 1);
-    result.splice(endIndex, 0, removed);
-    return result;
-}
 
 // // // //
 
@@ -43,16 +35,23 @@ interface RelationEditorState {
 }
 
 interface RelationEditorProps {
+    // TODO - update this to accept project + projectInput + pluginMetadata
     relations: RelationInput[];
     schemas: SchemaInput[];
     selectedSchema: SchemaInput;
     relationReferences: Relation[];
+    relationAddons: RelationAddon[];
     supportedRelationTypes: RelationType[];
     onChange: (updatedAttributes: RelationInput[]) => void;
 }
 
 export function RelationEditor(props: RelationEditorProps) {
-    const { selectedSchema, schemas, relationReferences } = props;
+    const {
+        selectedSchema,
+        relationAddons,
+        schemas,
+        relationReferences,
+    } = props;
     const [state, setState] = React.useState<RelationEditorState>({
         relations: props.relations,
         lastUpdatedAt: null,
@@ -98,9 +97,10 @@ export function RelationEditor(props: RelationEditorProps) {
                 }}
             />
 
+            {/* TODO - disable this if SchemaInput is locked */}
             <SortableListHeader
                 tooltip={"shift+r"}
-                label="Relations"
+                label="Relation"
                 onClick={() => {
                     setRelationInput(
                         new Primatives.Relation({
@@ -122,12 +122,8 @@ export function RelationEditor(props: RelationEditorProps) {
                         setRelationInput(null);
                     }}
                     onSubmit={() => {
-                        // Insert new Attribute
-                        // TODO - fix this null check, should be removed
-                        if (
-                            relationInput.id === "" ||
-                            relationInput.id === null
-                        ) {
+                        // Insert new Relation
+                        if (relationInput.id === "") {
                             const newRelation: RelationInput = new Primatives.Relation(
                                 {
                                     sourceSchemaID:
@@ -168,6 +164,7 @@ export function RelationEditor(props: RelationEditorProps) {
                     <RelationForm
                         relations={props.relations}
                         schema={selectedSchema}
+                        relationAddons={props.relationAddons}
                         schemas={schemas}
                         selectedSchema={selectedSchema}
                         relationInput={relationInput}
@@ -228,7 +225,8 @@ export function RelationEditor(props: RelationEditorProps) {
                             {(provided: any) => {
                                 return (
                                     <ul
-                                        className="list-group list-group-flush"
+                                        // className="list-group rounded-none"
+                                        className="shadow rounded-2xl overflow-hidden rounded-tl-none rounded-tr-none"
                                         ref={provided.innerRef}
                                         {...provided.droppableProps}
                                     >
@@ -238,6 +236,9 @@ export function RelationEditor(props: RelationEditorProps) {
                                                     <RelationListItem
                                                         key={a.id}
                                                         relation={a}
+                                                        addons={
+                                                            props.relationAddons
+                                                        }
                                                         selectedSchema={
                                                             props.selectedSchema
                                                         }
@@ -249,10 +250,10 @@ export function RelationEditor(props: RelationEditorProps) {
                                                             const relation:
                                                                 | RelationInput
                                                                 | undefined = props.relations.find(
-                                                                    r =>
-                                                                        r.id ===
-                                                                        relationToBeEdited.sourceRelationInputID,
-                                                                );
+                                                                r =>
+                                                                    r.id ===
+                                                                    relationToBeEdited.sourceRelationInputID,
+                                                            );
                                                             if (
                                                                 relation ===
                                                                 undefined
@@ -269,10 +270,10 @@ export function RelationEditor(props: RelationEditorProps) {
                                                             const relation:
                                                                 | RelationInput
                                                                 | undefined = props.relations.find(
-                                                                    r =>
-                                                                        r.id ===
-                                                                        relationToDelete.sourceRelationInputID,
-                                                                );
+                                                                r =>
+                                                                    r.id ===
+                                                                    relationToDelete.sourceRelationInputID,
+                                                            );
                                                             if (
                                                                 relation ===
                                                                 undefined
@@ -300,7 +301,12 @@ export function RelationEditor(props: RelationEditorProps) {
             {showEmptyState && (
                 <RelationListEmpty
                     onClick={() => {
-                        setRelationInput(new Primatives.Relation({ id: "" }));
+                        setRelationInput(
+                            new Primatives.Relation({
+                                id: "",
+                                sourceSchemaID: props.selectedSchema.id,
+                            }),
+                        );
                     }}
                 />
             )}

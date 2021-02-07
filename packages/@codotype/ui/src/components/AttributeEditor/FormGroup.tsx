@@ -13,10 +13,10 @@ export function FormGroup(props: {
     children: React.ReactNode;
 }) {
     return (
-        <div className="form-group">
+        <div className="mb-0">
             <label className="mb-0">
                 {props.label}
-                {props.required && <span className="text-danger ml-1">*</span>}
+                {props.required && <span className="text-red-500 ml-1">*</span>}
             </label>
             <small className="form-text text-muted mb-2">{props.help}</small>
             {props.children}

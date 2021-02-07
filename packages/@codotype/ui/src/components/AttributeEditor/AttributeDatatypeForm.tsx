@@ -10,7 +10,7 @@ interface DatatypeOptionProps {
     onClick: (updatedDatatype: Datatype) => void;
 }
 export function DatatypeOption(props: DatatypeOptionProps) {
-    let buttonClassName = "btn btn-outline-dark btn-block text-left";
+    let buttonClassName = "btn btn-outline-dark w-full text-left";
     if (props.active) {
         buttonClassName += " active";
     }
@@ -36,7 +36,7 @@ export function DatatypeOption(props: DatatypeOptionProps) {
 
 /**
  * AttributeDatatypeFormProps
- * TODO - annotate remaining props
+ * CHORE - annotate remaining props
  */
 interface AttributeDatatypeFormProps {
     datatype: Datatype | null;
@@ -54,12 +54,12 @@ export function AttributeDatatypeForm(props: AttributeDatatypeFormProps) {
             <div className="col-lg-12">
                 <p className="lead mb-0">Datatype</p>
                 <small className="form-text text-muted">
-                    The <span className="text-success">Datatype </span>
+                    The <span className="text-green-500">Datatype </span>
                     describes the data represented by this&nbsp;
                     <strong>Attribute</strong> - this{" "}
-                    <strong>Codotype Generator</strong> supports{" "}
+                    <strong>Codotype Plugin</strong> supports{" "}
                     <strong>{props.supportedDatatypes.length} </strong>
-                    <span className="text-success">Datatypes</span>
+                    <span className="text-green-500">Datatypes</span>
                 </small>
                 <hr />
             </div>

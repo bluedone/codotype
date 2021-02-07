@@ -105,20 +105,16 @@ export function ConfigurationInputFormGroup(
     );
 
     const formGroupHeader = (
-        <div className="d-flex align-items-center">
+        <div className="flex items-center">
             {property.content.icon && (
-                <img
-                    src={property.content.icon}
-                    style={{ maxWidth: "2rem" }}
-                    className="mr-2"
-                />
+                <img src={property.content.icon} className="mr-3 max-h-8" />
             )}
-            <label className="mb-0">{property.content.label}</label>
+            <label className="mb-0 text-lg">{property.content.label}</label>
             {renderDocumentationModal && (
                 <small className="mx-3">
                     <DocumentationModal
                         header={property.content.label}
-                        documentation={property.content.description} // TODO - update this to use property.documentation
+                        documentation={property.content.description}
                     />
                 </small>
             )}
@@ -129,33 +125,32 @@ export function ConfigurationInputFormGroup(
         <React.Fragment>
             {/* Render description IFF not empty */}
             {property.content.description !== "" && (
-                <small className="d-block mt-2 text-muted">
+                <p className="d-block mt-3 text-muted">
                     {property.content.description}
-                </small>
+                </p>
             )}
 
             {/* Render empty description warning */}
             {property.content.description === "" && (
-                <small className="d-block mt-2 mb-2 text-danger">
+                <p className="d-block mt-4 mb-3 text-red-500">
                     Warning - this input needs a description
-                </small>
+                </p>
             )}
         </React.Fragment>
     );
 
     const formGroup = (
         <div
-            className={classnames("form-group", {
+            className={classnames({
                 [className]: className !== "",
             })}
         >
-            <div className="d-flex align-items-center justify-content-between">
-                {/* TODO - replace this with modified ConfigurationGroupHeader? */}
-                <div className="d-flex align-items-center">
+            <div className="flex items-center justify-between">
+                <div className="flex items-center">
                     {formGroupHeader}
                     {property.type === PropertyTypes.BOOLEAN && (
                         <div
-                            className={classnames("d-flex align-items-center", {
+                            className={classnames("flex items-center", {
                                 "ml-3": !renderDocumentationModal,
                             })}
                         >
@@ -179,27 +174,24 @@ export function ConfigurationInputFormGroup(
 
     const disabledFormGroup = (
         <div
-            className={classnames("form-group", {
+            className={classnames({
                 [className]: className !== "",
             })}
         >
-            <div className="d-flex align-items-center justify-content-between">
-                {/* TODO - replace this with modified ConfigurationGroupHeader? */}
-                <div className="d-flex align-items-center">
-                    {formGroupHeader}
-                </div>
+            <div className="flex items-center justify-between">
+                <div className="flex items-center">{formGroupHeader}</div>
             </div>
 
             {formGroupDescription}
 
             {/* Renders message to turn this feature on */}
-            <div className="mt-2 px-2 py-2 d-flex justify-content-center bg-dark text-white rounded">
-                <div className="d-flex flex-column align-items-center">
+            <div className="mt-3 px-3 py-3 flex justify-center bg-gray-800 text-white rounded">
+                <div className="flex flex-col items-center">
                     <p className="lead mb-0">Enable {property.content.label}</p>
                     <p className="mb-0">
                         Click to enable the {property.content.label} property.
                     </p>
-                    <span className="mt-2">{toggleEnabledCheckbox}</span>
+                    <span className="mt-3">{toggleEnabledCheckbox}</span>
                 </div>
             </div>
         </div>
@@ -207,12 +199,12 @@ export function ConfigurationInputFormGroup(
 
     // Handle property.allowDisable
     if (property.allowDisable && !enabled && !renderInCard) {
-        return <div className={`col-lg-${colSpan}`}>{disabledFormGroup}</div>;
+        return <div className={`col-span-${colSpan}`}>{disabledFormGroup}</div>;
     }
     if (property.allowDisable && !enabled && renderInCard) {
         return (
-            <div className={`col-lg-${colSpan}`}>
-                <div className="card shadow-sm my-2 py-3 px-3">
+            <div className={`col-span-${colSpan}`}>
+                <div className="card shadow-sm my-3 py-3 px-3">
                     {disabledFormGroup}
                 </div>
             </div>
@@ -221,13 +213,15 @@ export function ConfigurationInputFormGroup(
 
     // Return standard if NOT renderInCard
     if (!renderInCard) {
-        return <div className={`col-lg-${colSpan}`}>{formGroup}</div>;
+        return <div className={`col-span-${colSpan}`}>{formGroup}</div>;
     }
 
     // Handle renderInCard
     return (
-        <div className={`col-lg-${colSpan}`}>
-            <div className="card shadow-sm my-2 py-3 px-3">{formGroup}</div>
+        <div className={`col-span-${colSpan}`}>
+            <div className="card card-body shadow-sm my-2 py-3 px-3">
+                {formGroup}
+            </div>
         </div>
     );
 }

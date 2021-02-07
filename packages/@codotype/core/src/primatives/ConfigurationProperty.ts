@@ -3,7 +3,7 @@ import {
     ConfigurationProperty,
     DropdownOption,
     PropertyTypes,
-    OptionValue,
+    ConfigurationPropertyValue,
     PropertyLayoutVariants,
 } from "../configuration-property";
 import { PropertyTransformation } from "../property-transformation";
@@ -27,7 +27,7 @@ interface ConfigurationPropertyBuilderParams {
     };
     type: PropertyTypes;
     dropdownOptions?: DropdownOption[];
-    defaultValue?: OptionValue;
+    defaultValue?: ConfigurationPropertyValue;
     required?: boolean;
     enabledByDefault?: boolean;
     allowDisable?: boolean;
@@ -48,7 +48,7 @@ export class ConfigurationPropertyBuilder implements ConfigurationProperty {
         icon: "",
     };
     type: PropertyTypes;
-    defaultValue: OptionValue = null;
+    defaultValue: ConfigurationPropertyValue = null;
     required: boolean = false;
     unique: boolean = false;
     enabledByDefault: boolean = true;

@@ -7,7 +7,7 @@
 //
 // Taken from a comment in the following EJS issue:
 // https://github.com/mde/ejs/issues/176
-export function indent(text, depth) {
+export function indent(text: string, depth: number): string {
     // Defines an array for the function output
     const output = [];
 

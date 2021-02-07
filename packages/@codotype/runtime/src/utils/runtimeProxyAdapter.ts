@@ -2,92 +2,87 @@ import {
     Relation,
     Project,
     Schema,
-    GeneratorConstructorParams,
-    RuntimeInjectorProps,
+    GeneratorProps,
+    RuntimeAdapterProps,
     RuntimeAdapter,
     RuntimeProxy,
     Runtime,
     ComposeWithOptions,
+    PrettifyOptions,
 } from "@codotype/core";
 
 // // // //
 
 /**
- * RuntimeAdapter?
- * RuntimeProxyAdapter?
- * TODO - rename this to RuntimeAdapter?
- * Implements an adapter between the RuntimeProxy and the Runtime
- * Allows a generator to safely access and invoke simplified Runtime methods for abstract filesystem manipulation
+ * RuntimeProxyAdapter
+ * CHORE - this MUST be renamed from RuntimeProxyAdaptor to SOMETHING ELSE
+ * Creates an interface between a Generator and Runtime configured to work around that Generator's module location on the file system
+ * This layer of abstraction allows easy-to-use relative path declarations for source templates + file destinations,
+ * without the burden of needing to pass around references to the current directory in the Generator definitions
  */
 export class RuntimeProxyAdapter implements RuntimeAdapter {
     private runtime: Runtime;
-    compileInPlace: string[];
-    options: RuntimeInjectorProps;
-    resolved: string;
     runtimeProxy: RuntimeProxy;
+    compileInPlace: string[];
+    props: RuntimeAdapterProps;
+    generatorResolvedPath: string;
 
     /**
      * constructor
      * Handles build options
      */
-    constructor(
-        generatorConfiguration: GeneratorConstructorParams,
-        options: RuntimeInjectorProps,
-    ) {
-        // Throw error if options.runtime isn't defined
-        if (!options.runtime) {
-            throw Error("CodotypeGenerator options requires options.runtime");
+    constructor(generatorProps: GeneratorProps, props: RuntimeAdapterProps) {
+        // Throw error if props.runtime isn't defined
+        if (!props.runtime) {
+            throw Error("CodotypeGenerator options requires props.runtime");
             return;
         }
 
-        // Throw error if options.resolved isn't defined
-        if (!options.resolved) {
-            throw Error("CodotypeGenerator options requires options.resolved");
+        // Throw error if props.resolved isn't defined
+        if (!props.generatorResolvedPath) {
+            throw Error(
+                "CodotypeGenerator options requires props.generatorResolvedPath",
+            );
         }
 
-        // Validates GeneratorConfiguration
+        // Validates GeneratorProps
         if (
-            !generatorConfiguration.write &&
-            !generatorConfiguration.compileInPlace &&
-            !generatorConfiguration.forEachSchema &&
-            !generatorConfiguration.forEachRelation &&
-            !generatorConfiguration.forEachReferencedBy
+            !generatorProps.write &&
+            !generatorProps.compileInPlace &&
+            !generatorProps.forEachSchema &&
+            !generatorProps.forEachRelation &&
+            !generatorProps.forEachReferencedBy
         ) {
             throw Error(
-                "GeneratorConfiguration requires either write, forEachSchema, forEachRelation, forEachReferencedBy, or compileInPlace properties",
+                "GeneratorProps requires either write, forEachSchema, forEachRelation, forEachReferencedBy, or compileInPlace properties",
             );
         }
 
         // Assigns this.runtime
         // this.runtime must be a compatible CodotypeRuntime class instance
-        this.runtime = options.runtime;
+        this.runtime = props.runtime;
 
-        // Assigns generatorConfiguration
-        this.write = generatorConfiguration.write || this.write;
-        this.forEachSchema =
-            generatorConfiguration.forEachSchema || this.forEachSchema;
+        // Assigns methods from GeneratorProps
+        this.write = generatorProps.write || this.write;
+        this.forEachSchema = generatorProps.forEachSchema || this.forEachSchema;
         this.forEachRelation =
-            generatorConfiguration.forEachRelation || this.forEachRelation;
+            generatorProps.forEachRelation || this.forEachRelation;
         this.forEachReferencedBy =
-            generatorConfiguration.forEachReferencedBy ||
-            this.forEachReferencedBy;
-        this.compileInPlace = generatorConfiguration.compileInPlace || [];
+            generatorProps.forEachReferencedBy || this.forEachReferencedBy;
+        this.compileInPlace = generatorProps.compileInPlace || [];
 
-        // Assigns this.options
-        this.options = options;
+        // Assigns this.props
+        this.props = props;
 
-        // PASS this.options.resolved in from @codotype/runtime
-        this.resolved = this.options.resolved;
+        // PASS this.props.generatorResolvedPath in from @codotype/runtime
+        this.generatorResolvedPath = this.props.generatorResolvedPath;
 
         // Defuines this.runtimeProxy
         this.runtimeProxy = {
             ensureDir: this.ensureDir,
             writeFile: this.writeFile,
             copyDir: this.copyDir,
-            renderComponent: this.renderComponent,
-            copyTemplate: this.copyTemplate,
-            templatePath: this.templatePath,
-            destinationPath: this.destinationPath,
+            renderTemplate: this.renderTemplate,
             composeWith: this.composeWith,
         };
 
@@ -95,227 +90,167 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
         return this;
     }
 
+    // // // //
+    // GeneratorProps methods
+
     /**
      * write
-     * Method to write files to the filesystem
+     * @see WriteFunction
      */
-    async write({
-        project,
-        runtime,
-    }: {
+    async write(params: {
         project: Project;
         runtime: RuntimeProxy;
     }): Promise<void> {
-        // Display warning if generator doesn't implement its own write method?
-        // console.warn(
-        //   "NOTHING TO WRITE - this should be overwritten by a subclassed generator."
-        // );
         return Promise.resolve();
     }
 
     /**
      * forEachSchema
-     * Method to write files to the filesystem for each schema in blueprints.schemas
-     * @param - see `WriteFunctionProps`
+     * @see ForEachSchemaFunction
      */
-    async forEachSchema({
-        schema,
-        project,
-        runtime,
-    }: {
+    async forEachSchema(params: {
         schema: Schema;
         project: Project;
         runtime: RuntimeProxy;
     }): Promise<void> {
-        // console.log('NOTHING TO WRITE - this should be overwritten by a subclassed generator.')
         return Promise.resolve();
     }
 
     /**
      * forEachRelation
-     * @param - see `WriteFunctionProps`
+     * @see ForEachRelationFunction
      */
-    async forEachRelation({
-        schema,
-        relation,
-        project,
-    }: {
+    async forEachRelation(params: {
         schema: Schema;
         relation: Relation;
         project: Project;
         runtime: RuntimeProxy;
     }): Promise<void> {
-        // console.log('NOTHING TO WRITE - this should be overwritten by a subclassed generator.')
         return Promise.resolve();
     }
 
     /**
      * forEachReferencedBy
-     * TODO - rename this function to forEachRelation
-     * @param - see `WriteFunctionProps`
+     * @see ForEachReferencedByFunction
      */
-    async forEachReferencedBy({
-        schema,
-        relation,
-        project,
-    }: {
+    async forEachReferencedBy(params: {
         schema: Schema;
         relation: Relation;
         project: Project;
     }): Promise<void> {
-        // console.log('NOTHING TO WRITE - this should be overwritten by a subclassed generator.')
         return Promise.resolve();
     }
 
-    // ensureDir
-    // Ensures presence of directory for template compilation
+    // // // //
+    // Runtime Methods
+
+    /**
+     * writeFile
+     * @see WriteFileFunction
+     */
+    writeFile(
+        destinationPath: string,
+        compiledTemplate: string,
+        options?: {
+            prettify?: PrettifyOptions;
+        },
+    ) {
+        return this.runtime.writeFile(
+            this.runtime.getDestinationPath(
+                this.props.destinationPath,
+                destinationPath,
+            ),
+            compiledTemplate,
+            options,
+        );
+    }
+
+    /**
+     * ensureDir
+     * @see EnsureDirFunction
+     */
     ensureDir(dir: string) {
-        return this.runtime.ensureDir(this.destinationPath(dir));
+        return this.runtime.ensureDir(
+            this.runtime.getDestinationPath(this.props.destinationPath, dir),
+        );
     }
 
     /**
      * copDir
-     * copy a directory from src to dest'copy a directory from src to dest
+     * @see CopyDirFunction
      */
     copyDir(params: { src: string; dest: string }) {
         const { src, dest } = params;
         return this.runtime.copyDir({
-            src: this.templatePath(src),
-            dest: this.destinationPath(dest),
+            src: this.runtime.getTemplatePath(this.generatorResolvedPath, src),
+            dest: this.runtime.getDestinationPath(
+                this.props.destinationPath,
+                dest,
+            ),
         });
     }
 
     /**
      * compileTemplatesInPlace
-     * Compiles and writes each template defined in the `compileInPlace` property
+     * @see GeneratorProps.compileInPlace
      */
-    compileTemplatesInPlace() {
+    compileTemplatesInPlace(): Promise<boolean[]> {
         // For each inPlaceTemplate, compile and write
         return Promise.all(
             this.compileInPlace.map((template: string) => {
-                return this.copyTemplate(
-                    this.templatePath(template),
-                    this.destinationPath(template),
+                return this.runtime.writeTemplateToFile(
+                    this,
+                    this.runtime.getTemplatePath(
+                        this.generatorResolvedPath,
+                        template,
+                    ),
+                    this.runtime.getDestinationPath(
+                        this.props.destinationPath,
+                        template,
+                    ),
+                    {},
+                    {},
                 );
             }),
         );
     }
 
     /**
-     * renderComponent
-     * Compiles and writes each template defined in the `compileInPlace` property
-     * @param - TODO
+     * renderTemplate
+     * @see RenderTemplateFunction
      */
-    renderComponent({
+    renderTemplate({
         src,
         dest,
         data = {},
+        options,
     }: {
         src: string;
         dest: string;
-        data: { [key: string]: any };
-    }) {
-        return this.copyTemplate(
-            this.templatePath(src),
-            this.destinationPath(dest),
+        data?: { [key: string]: any };
+        options?: { prettify?: PrettifyOptions };
+    }): Promise<boolean> {
+        return this.runtime.writeTemplateToFile(
+            this,
+            this.runtime.getTemplatePath(this.generatorResolvedPath, src),
+            this.runtime.getDestinationPath(this.props.destinationPath, dest),
             data,
+            options,
         );
-    }
-
-    /**
-     * copyTemplate
-     * Compiles a template and writes to the dest location
-     * TODO - split this up to rely on runtime methods instead of referencing FS directly
-     * @param src
-     * @param dest
-     * @param options
-     */
-    copyTemplate(
-        src: string,
-        dest: string,
-        options: object = {},
-    ): Promise<boolean> {
-        // DEBUG
-        // console.log('Copying:' + dest)
-
-        return new Promise(async (resolve, reject) => {
-            // DEBUG
-            // this.runtime.log('Rendering:' + dest)
-
-            // Compiles the template through CodotypeRuntime.renderTemplate
-            const compiledTemplate: string = await this.runtime.renderTemplate(
-                this,
-                src,
-                options,
-            );
-
-            // DEBUG
-            // this.runtime.log('Rendered:' + dest)
-
-            // TODO - DOCUMENT!!!
-            // Does the destination already exist?
-            const exists = this.runtime.fileExists(dest);
-
-            // TODO - DOCUMENT!!!
-            // If it doesn't exist, OKAY TO WRITE
-            if (exists) {
-                if (this.runtime.compareFile(dest, compiledTemplate)) {
-                    return resolve();
-                } else {
-                    // TODO - this needs a GitHub issue
-                    // If exists, and it's different, WRITE (add PROMPT option later, for safety)
-                    // TODO - this should happen inside the runtime, as input checking will vary depending on environment
-                }
-            }
-
-            // Writes the compiled template to the dest location
-            this.runtime.writeFile(dest, compiledTemplate).then(() => {
-                return resolve();
-            });
-        });
-    }
-
-    /**
-     * templatePath
-     * Generates the full path to a specific template in the `./templates` directory relative to the generator
-     * @param {string} template_path
-     */
-    templatePath(template_path: string = "./") {
-        return this.runtime.templatePath(this.resolved, template_path);
-    }
-
-    /**
-     * destinationPath
-     * Gets the full destination path from the CodotypeRuntime
-     * @param destination_path
-     */
-    destinationPath(destination_path: string = "./") {
-        return this.runtime.destinationPath(
-            this.options.dest,
-            destination_path,
-        );
-    }
-
-    /**
-     * writeFile
-     * TODO - annotate this
-     * @param destinationPath
-     * @param compiledTemplate
-     */
-    writeFile(destinationPath: string, compiledTemplate: string) {
-        return this.runtime.writeFile(destinationPath, compiledTemplate);
     }
 
     /**
      * composeWith
-     * Enables one generator to fire off several child generators
-     * @param generatorModule
-     * @param options - TODO - add type for ComposeWithOptions -> WHAT ARE THEY????
+     * @see ComposeWithFunction
      */
     composeWith(
-        generatorModule: string,
-        options?: ComposeWithOptions,
+        generatorModulePath: string,
+        composeWithOptions?: ComposeWithOptions,
     ): Promise<void> {
-        return this.runtime.composeWith(this, generatorModule, options || {});
+        return this.runtime.composeWith(
+            this,
+            generatorModulePath,
+            composeWithOptions || {},
+        );
     }
 }

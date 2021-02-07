@@ -47,11 +47,11 @@ export function SchemaDetail(props: SchemaDetailProps) {
     const { schemaEditorConfiguration } = props.pluginMetadata;
 
     return (
-        <div className="row">
+        <div className="grid grid-cols-1 select-none">
             <div className="col-sm-12">
                 <SchemaDetailHeader
+                    projectInput={props.projectInput}
                     schemaInput={props.schema}
-                    schemas={props.projectInput.schemas}
                     onClickEdit={props.onClickEdit}
                     onConfirmDelete={props.onConfirmDelete}
                 />
@@ -59,6 +59,7 @@ export function SchemaDetail(props: SchemaDetailProps) {
 
             <div className="col-sm-12">
                 <ConfigurationGroupSelector
+                    schemaInput={props.schema}
                     configuration={props.schema.configuration}
                     configurationGroups={
                         schemaEditorConfiguration.configurationGroups
@@ -70,53 +71,67 @@ export function SchemaDetail(props: SchemaDetailProps) {
                         });
                     }}
                 >
-                    <div className="row">
-                        <div className="col-sm-12 col-md-6 col-lg-6">
-                            <AttributeEditor
-                                attributes={props.schema.attributes}
-                                supportedDatatypes={
-                                    schemaEditorConfiguration.supportedDatatypes
-                                }
-                                addons={
-                                    schemaEditorConfiguration.attributeAddons
-                                }
-                                onChange={(
-                                    updatedAttributes: AttributeInput[],
-                                ) => {
-                                    // Defines updated schema
-                                    const updatedSchema: SchemaInput = {
-                                        ...props.schema,
-                                        attributes: updatedAttributes,
-                                    };
+                    <div className="grid grid-cols-2 gap-4">
+                        <div className="col-span-1">
+                            {/* Only render AttributeEditor if there are supported Datatypes */}
+                            {schemaEditorConfiguration.supportedDatatypes
+                                .length > 0 && (
+                                <AttributeEditor
+                                    attributes={props.schema.attributes}
+                                    supportedDatatypes={
+                                        schemaEditorConfiguration.supportedDatatypes
+                                    }
+                                    addons={
+                                        schemaEditorConfiguration.attributeAddons
+                                    }
+                                    onChange={(
+                                        updatedAttributes: AttributeInput[],
+                                    ) => {
+                                        // Defines updated schema
+                                        const updatedSchema: SchemaInput = {
+                                            ...props.schema,
+                                            attributes: updatedAttributes,
+                                        };
 
-                                    // Passes into `props.onChange`
-                                    props.onChange(updatedSchema);
-                                }}
-                            />
-                            {/* <hr /> */}
-                            <RelationEditor
-                                selectedSchema={props.schema}
-                                relationReferences={inflatedSchema.relations}
-                                schemas={props.projectInput.schemas}
-                                relations={props.projectInput.relations}
-                                supportedRelationTypes={
-                                    props.pluginMetadata
-                                        .schemaEditorConfiguration
-                                        .supportedRelationTypes
-                                }
-                                onChange={(
-                                    updatedRelations: RelationInput[],
-                                ) => {
-                                    props.onChangeRelations(updatedRelations);
-                                }}
-                            />
+                                        // Passes into `props.onChange`
+                                        props.onChange(updatedSchema);
+                                    }}
+                                />
+                            )}
+
+                            {/* Only render RelationEditor if there are supported relations */}
+                            {schemaEditorConfiguration.supportedRelationTypes
+                                .length > 0 && (
+                                <RelationEditor
+                                    selectedSchema={props.schema}
+                                    relationReferences={
+                                        inflatedSchema.relations
+                                    }
+                                    relationAddons={
+                                        schemaEditorConfiguration.relationAddons
+                                    }
+                                    schemas={props.projectInput.schemas}
+                                    relations={props.projectInput.relations}
+                                    supportedRelationTypes={
+                                        props.pluginMetadata
+                                            .schemaEditorConfiguration
+                                            .supportedRelationTypes
+                                    }
+                                    onChange={(
+                                        updatedRelations: RelationInput[],
+                                    ) => {
+                                        props.onChangeRelations(
+                                            updatedRelations,
+                                        );
+                                    }}
+                                />
+                            )}
                         </div>
-                        <div className="pl-md-0 col-sm-6 mt-3 mt-lg-0">
+                        <div className="col-span-1">
                             <SchemaPreview
                                 schemaInput={props.schema}
                                 projectInput={props.projectInput}
                             />
-                            <hr />
                             <SchemaIncomingRelations
                                 inflatedSchema={inflatedSchema}
                                 onSelectSchema={props.onSelectSchema}

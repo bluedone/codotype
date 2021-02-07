@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Modal } from "react-bootstrap";
+import { Modal } from "../Modal";
 
 // // // //
 
@@ -12,23 +12,32 @@ import { Modal } from "react-bootstrap";
 export function ProjectFormModal(props: {
     show: boolean;
     children: React.ReactNode;
+    disabled: boolean;
     handleClose: () => void;
     onSubmit: () => void;
 }) {
     return (
         <Modal show={props.show} onHide={props.handleClose}>
-            <Modal.Header closeButton className="d-flex align-items-center">
-                <Modal.Title>Project Name</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>{props.children}</Modal.Body>
-            <Modal.Footer>
-                <button className="btn btn-primary" onClick={props.onSubmit}>
+            <div className="p-5">
+                <h3 className="text-2xl select-none">Project Name</h3>
+
+                {props.children}
+            </div>
+            <div className="modal-footer-tw">
+                <button
+                    className="btn btn-lg btn-primary"
+                    onClick={props.onSubmit}
+                    disabled={props.disabled}
+                >
                     Update Project Name
                 </button>
-                <button className="btn btn-light" onClick={props.handleClose}>
+                <button
+                    className="btn btn-lg btn-light bg-white"
+                    onClick={props.handleClose}
+                >
                     Close
                 </button>
-            </Modal.Footer>
+            </div>
         </Modal>
     );
 }

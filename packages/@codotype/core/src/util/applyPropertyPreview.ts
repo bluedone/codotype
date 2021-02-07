@@ -6,7 +6,7 @@ import {
     PropertyPreviewConstraint,
     PropertyPreviewAction,
 } from "../property-preview";
-import { OptionValueInstance } from "../configuration-property";
+import { ConfigurationPropertyDict } from "../configuration-property";
 
 // // // //
 
@@ -17,7 +17,7 @@ import { OptionValueInstance } from "../configuration-property";
  * @param props.rule - The PropertyPreviewRule being evaluated
  */
 export function shouldApplyPropertyPreviewRule(props: {
-    data: Record<string, OptionValueInstance>;
+    data: Record<string, ConfigurationPropertyDict>;
     constraint: PropertyPreviewConstraint;
 }): boolean {
     const { constraint, data } = props;
@@ -56,7 +56,7 @@ export function shouldApplyPropertyPreviewRule(props: {
  * @param props.rule - The PropertyPreviewRule being evaluated
  */
 export function applyPropertyPreviewRule(props: {
-    data: Record<string, OptionValueInstance>;
+    data: Record<string, ConfigurationPropertyDict>;
     action: PropertyPreviewAction;
 }): string {
     const { action, data } = props;
@@ -118,7 +118,7 @@ export function applyPropertyPreviewRule(props: {
  * @param props.propertyPreview - The PropertyPreview being applied against props.data
  */
 export function applyPropertyPreview(props: {
-    data: Record<string, OptionValueInstance>;
+    data: Record<string, ConfigurationPropertyDict>;
     propertyPreview: PropertyPreview;
 }): string {
     const { data, propertyPreview } = props;

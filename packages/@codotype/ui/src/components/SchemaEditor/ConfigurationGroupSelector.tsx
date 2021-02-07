@@ -2,8 +2,9 @@ import * as React from "react";
 import { ConfigurationInput } from "../ConfigurationInput";
 import {
     ConfigurationGroup,
-    OptionValueInstance,
+    ConfigurationPropertyDict,
     ConfigurationValue,
+    SchemaInput,
 } from "@codotype/core";
 
 // // // //
@@ -14,25 +15,27 @@ export function ConfigurationGroupTab(props: {
     onClick: () => void;
 }) {
     const { label } = props;
-    const btnClassName: string[] = ["nav-link"];
-    if (props.active) {
-        btnClassName.push("active");
-    }
+    const btnClassName: string[] = [
+        "flex flex-grow items-center justify-center mr-2 shadow-sm px-3 py-2 focus:outline-none rounded-full",
+    ];
 
+    if (props.active) {
+        btnClassName.push("bg-gray-500 text-white");
+    } else {
+        btnClassName.push(
+            "border-gray-500 text-gray-400 bg-transparent border-gray-500 border",
+        );
+    }
     return (
-        <li className="nav-item">
-            <a
-                // href="#"
-                // TODO - fix styles here, replace with <button>
-                className={btnClassName.join(" ")}
-                style={{
-                    cursor: "pointer",
-                }}
-                onClick={props.onClick}
-            >
-                {label}
-            </a>
-        </li>
+        <button
+            className={btnClassName.join(" ")}
+            onClick={e => {
+                e.currentTarget.blur();
+                props.onClick();
+            }}
+        >
+            {label}
+        </button>
     );
 }
 
@@ -43,6 +46,7 @@ export function ConfigurationGroupTab(props: {
  * @param props.onChange
  */
 export function ConfigurationGroupSelector(props: {
+    schemaInput: SchemaInput;
     configuration: ConfigurationValue;
     configurationGroups: ConfigurationGroup[];
     children: React.ReactNode;
@@ -71,7 +75,7 @@ export function ConfigurationGroupSelector(props: {
     return (
         <div className="row">
             <div className="col-lg-12">
-                <ul className="nav nav-tabs">
+                <div className="flex flex-row mt-1 mb-1">
                     <ConfigurationGroupTab
                         onClick={() => {
                             setViewingSchemas(true);
@@ -94,7 +98,7 @@ export function ConfigurationGroupSelector(props: {
                                     }}
                                     active={
                                         configurationGroup.identifier ===
-                                        selectedConfigurationGroup.identifier &&
+                                            selectedConfigurationGroup.identifier &&
                                         !viewingSchemas
                                     }
                                     label={configurationGroup.content.label}
@@ -102,19 +106,20 @@ export function ConfigurationGroupSelector(props: {
                             );
                         },
                     )}
-                </ul>
+                </div>
             </div>
             <div className="col-lg-12">
                 {/* Renders the ConfigurationInput */}
                 {!viewingSchemas && (
                     <ConfigurationInput
                         configurationGroup={selectedConfigurationGroup}
+                        schemaInput={props.schemaInput}
                         value={
                             props.configuration[
-                            selectedConfigurationGroup.identifier
+                                selectedConfigurationGroup.identifier
                             ]
                         }
-                        onChange={(updatedVal: OptionValueInstance) => {
+                        onChange={(updatedVal: ConfigurationPropertyDict) => {
                             // Defines updatd project with latest configuration value
                             const updatedPluginConfiguration: ConfigurationValue = {
                                 ...props.configuration,

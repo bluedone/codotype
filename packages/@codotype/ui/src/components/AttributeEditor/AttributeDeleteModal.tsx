@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Modal } from "react-bootstrap";
+import { Modal } from "../Modal";
 
 // // // //
 
@@ -16,20 +16,22 @@ export function AttributeDeleteModal(props: {
 }) {
     return (
         <Modal show={props.show} onHide={props.onClose}>
-            <Modal.Header closeButton>
-                <Modal.Title>Delete Attribute</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                Are you sure you want to delete this Attribute?
-            </Modal.Body>
-            <Modal.Footer>
-                <button className="btn btn-secondary" onClick={props.onClose}>
-                    Close
-                </button>
-                <button className="btn btn-danger" onClick={props.onConfirm}>
+            <h3>Delete Attribute</h3>
+            Are you sure you want to delete this Attribute?
+            <div className="modal-footer-tw">
+                <button
+                    className="btn btn-lg btn-danger"
+                    onClick={props.onConfirm}
+                >
                     Delete Attribute
                 </button>
-            </Modal.Footer>
+                <button
+                    className="btn btn-lg btn-light"
+                    onClick={props.onClose}
+                >
+                    Close
+                </button>
+            </div>
         </Modal>
     );
 }

@@ -4,8 +4,8 @@ import { LocalFileSystemAdapter, NodeRuntime } from "@codotype/runtime";
 import {
     PLUGIN_DISTRIBUTABLE_DIR,
     PLUGIN_METADATA_FILENAME,
-} from "@codotype/runtime/src/constants";
-import { validatePlugin, RuntimeLogLevels } from "@codotype/core";
+} from "@codotype/runtime/dist/constants";
+import { validatePlugin, RuntimeLogBehaviors } from "@codotype/core";
 
 // // // //
 
@@ -27,8 +27,8 @@ async function doctor() {
     // Invoke runtime directly with parameters
     const runtime = new NodeRuntime({
         cwd: process.cwd(),
-        logLevel: RuntimeLogLevels.info,
-        fileOverwriteBehavior: "force", // TODO - add option for "ask" in CLI
+        logBehavior: RuntimeLogBehaviors.verbose,
+        fileOverwriteBehavior: "force", // FEATURE - add option for "ask" in CLI
         fileSystemAdapter: new LocalFileSystemAdapter(),
     });
 
@@ -38,41 +38,38 @@ async function doctor() {
     });
 
     console.log(
-        `the doctor says ${
-            chalk.green(`this generator can register with the `) +
-            chalk.green(`codotype runtime`)
-        }`,
+        `the doctor says ${chalk.green(
+            `this generator can register with the `,
+        ) + chalk.green(`codotype runtime`)}`,
     );
 
     // Runs the generator through validatePlugin
     const generatorMeta = require(generatorMetaPath);
     const validations = validatePlugin({ plugin: generatorMeta });
 
+    console.log("validations");
+    console.log(validations);
+
     // Logs validation of properties
-    // TODO - should be part of @codotype/core
     console.log(`the doctor is ${chalk.blue(`validating the generator:`)}`);
-    validations.forEach((v) => {
+    validations.forEach(v => {
         if (v.valid) {
             console.log(
-                `\t${
-                    chalk.blue(`${v.property}`) +
+                `\t${chalk.blue(`${v.property}`) +
                     " is " +
-                    chalk.green(`is present`)
-                }`,
+                    chalk.green(`is present`)}`,
             );
         } else {
             console.log(
-                `\t${
-                    chalk.blue(`${v.property}`) +
+                `\t${chalk.blue(`${v.property}`) +
                     " is " +
-                    chalk.red(`is missing`)
-                }`,
+                    chalk.red(`is missing`)}`,
             );
         }
     });
 
     // Logs validation success and error messages
-    if (validations.map((v) => v.valid).some((bool) => bool === false)) {
+    if (validations.map(v => v.valid).some(bool => bool === false)) {
         console.log(
             `the doctor says ${chalk.red(
                 `this generator is missing some critical properties `,
@@ -87,18 +84,16 @@ async function doctor() {
     }
 
     // Logs success message if nothing blows up
-    console.log(
-        `\n${
-            chalk.blue(`codotype doctor`) +
-            " says " +
-            chalk.yellow(`everything is splendid`)
-        }\n`,
-    );
+    // console.log(
+    //     `\n${chalk.blue(`codotype doctor`) +
+    //         " says " +
+    //         chalk.yellow(`everything is splendid`)}\n`,
+    // );
     return;
 }
 
 export const doctorCommand = (...args) => {
-    return doctor().catch((err) => {
+    return doctor().catch(err => {
         // FEATURE - implement better error handling
         console.log(
             `${chalk.red(`ERROR`)} - something went wrong with ${chalk.cyan(

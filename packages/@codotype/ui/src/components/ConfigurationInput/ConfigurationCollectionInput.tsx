@@ -1,6 +1,6 @@
 import * as React from "react";
 import {
-    OptionValue,
+    ConfigurationPropertyValue,
     ConfigurationProperty,
     TokenPluralization,
     buildConfigurationPropertyValue,
@@ -17,7 +17,7 @@ import { PropertyPreviewRenderer } from "../PropertyPreviewRenderer";
 
 interface CollectionItem {
     id: string;
-    [key: string]: OptionValue;
+    [key: string]: ConfigurationPropertyValue;
 }
 
 // // // //
@@ -62,7 +62,7 @@ function CollectionItemForm(props: {
             />
             <hr />
 
-            <div className="d-flex justify-content-end">
+            <div className="flex justify-end">
                 <button
                     className="btn btn-success"
                     onClick={() => {
@@ -89,11 +89,10 @@ function CollectionItemForm(props: {
 
 interface ConfigurationCollectionInputProps {
     properties: ConfigurationProperty[];
-    // label: string;
-    value: OptionValue;
+    value: ConfigurationPropertyValue;
     identifiers: TokenPluralization;
     propertyPreview: PropertyPreview;
-    onChange: (updatedVal: OptionValue) => void;
+    onChange: (updatedVal: ConfigurationPropertyValue) => void;
 }
 
 export function ConfigurationCollectionInput(
@@ -153,7 +152,7 @@ export function ConfigurationCollectionInput(
                     {showList && (
                         <div className="col-sm-12">
                             <button
-                                className="btn btn-block btn-primary"
+                                className="btn w-full btn-primary"
                                 onClick={() => {
                                     setEditCollectionItem(null);
                                     setNewCollectionItem(
@@ -164,7 +163,7 @@ export function ConfigurationCollectionInput(
                                 New {identifiers.singular.title}
                             </button>
 
-                            <ul className="list-group mt-3">
+                            <ul className="flex flex-col pl-0 mb-0 rounded mt-3">
                                 {collectionValue.map(
                                     (
                                         collectionItem: CollectionItem,
@@ -190,7 +189,7 @@ export function ConfigurationCollectionInput(
                                                     );
                                                 }}
                                             >
-                                                <div className="d-flex justify-content-between">
+                                                <div className="flex justify-between">
                                                     <PropertyPreviewRenderer
                                                         data={collectionItem}
                                                         propertyPreview={

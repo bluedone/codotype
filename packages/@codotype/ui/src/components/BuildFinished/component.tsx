@@ -8,6 +8,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import { faLaugh } from "@fortawesome/free-regular-svg-icons";
+import { CopyToClipboard } from "../CopyToClipboard";
 
 // // // //
 
@@ -17,87 +18,108 @@ export function BuildFinished(props: {
     filepath?: string;
     onClickBackToEditor: () => void;
 }) {
+    const [copyMessage, setCopyMessage] = React.useState<boolean>(false);
+    React.useEffect(() => {
+        if (copyMessage === false) {
+            return;
+        }
+
+        setTimeout(() => {
+            setCopyMessage(false);
+        }, 1000);
+    }, [copyMessage]);
+
     return (
         <div
-            className="d-flex flex-column align-items-center h-100 justify-content-center"
+            className="flex flex-col items-center h-full justify-center p-5 select-none"
             style={{ minHeight: "26rem" }}
         >
             {/* Header */}
-            <div className="row">
-                <div className="col-lg-12 text-center">
-                    <p className="lead mb-1">
-                        Thank you for using{" "}
-                        <strong style={{ fontWeight: "bolder" }}>
-                            Codotype
-                        </strong>
-                    </p>
+            <div className="text-center">
+                <p className="lead mb-1">
+                    Thank you for using{" "}
+                    <strong style={{ fontWeight: "bolder" }}>Codotype</strong>
+                </p>
 
-                    <p className="lead mb-1">
-                        <FontAwesomeIcon
-                            icon={faHeart}
-                            size="lg"
-                            className="text-danger"
-                        />
-                    </p>
+                <p className="lead mb-1">
+                    <FontAwesomeIcon
+                        icon={faHeart}
+                        size="lg"
+                        className="text-red-500"
+                    />
+                </p>
 
-                    <small className="text-muted">
-                        Your <span className="text-success">Project</span> has
-                        successfully been generated
-                    </small>
-                    <br />
-                    <small className="text-muted mt-3">
-                        Download and unzip the codebase and follow the
-                        instructions in <strong>README.md</strong>
-                    </small>
-                </div>
+                <small className="text-gray-600">
+                    Your project has successfully been generated - horay!
+                </small>
+                <br />
+                <small className="text-gray-600 mt-3">
+                    Download your starter code and follow the instructions in{" "}
+                    <span className="font-semibold">README.md</span>
+                </small>
             </div>
 
-            {/* <!-- Local Generator --> */}
+            {/* <!-- Local Plugin --> */}
+            {/* TODO - use ResponseTypes enum from @codotype/core */}
             {props.filepath && props.responseType === "LOCAL_PATH" && (
-                <div className="row d-flex justify-content-center mt-3">
+                <div className="row flex justify-center mt-3">
                     <div className="col-sm-12 text-center">
-                        <small className="text-primary">
+                        <small className="text-blue-500">
                             Your codebase is in the following local directory:
                         </small>
                         <p className="lead mb-0">
                             {/* TODO - add tooltip */}
-                            {/* TODO - set up copy-to-clipboard */}
-                            {/* https://github.com/nkbt/react-copy-to-clipboard */}
-                            <button className="btn btn-sm btn-dark">
-                                {props.filepath}
-                            </button>
+                            <CopyToClipboard
+                                text={props.filepath}
+                                onCopy={() => {
+                                    setCopyMessage(true);
+                                }}
+                            >
+                                {({ copyToClipboard }) => (
+                                    <button
+                                        className="btn btn-sm btn-dark"
+                                        onClick={() => {
+                                            copyToClipboard();
+                                        }}
+                                    >
+                                        {copyMessage && (
+                                            <span>Copied to clipboard</span>
+                                        )}
+
+                                        {!copyMessage && (
+                                            <span>{props.filepath}</span>
+                                        )}
+                                    </button>
+                                )}
+                            </CopyToClipboard>
                         </p>
                     </div>
                 </div>
             )}
 
             {/* <!-- S3 Zip Download --> */}
+            {/* TODO - use ResponseTypes enum from @codotype/core */}
             {props.responseType === "S3_DOWNLOAD" && props.downloadUrl && (
-                <div className="row d-flex justify-content-center mt-3">
-                    <div className="col-lg-6">
-                        <a
-                            href={props.downloadUrl}
-                            target="_blank"
-                            className="btn btn-lg btn-block btn-success"
-                        >
-                            <FontAwesomeIcon
-                                icon={faDownload}
-                                className="mr-2"
-                            />
-                            Download ZIP
-                        </a>
-                    </div>
+                <div className="row flex justify-center mt-3">
+                    <a
+                        href={props.downloadUrl}
+                        target="_blank"
+                        className="btn w-full btn-success"
+                    >
+                        <FontAwesomeIcon icon={faDownload} className="mr-2" />
+                        Download ZIP
+                    </a>
                 </div>
             )}
 
-            <div className="row d-flex justify-content-center mt-3">
+            <div className="row flex justify-center mt-3">
                 <div className="col-sm-12 text-center">
                     <p className="mb-1">
                         <i className="far fa-lightbulb" />
                         Remember, iteration is key
                     </p>
 
-                    <small className="text-muted">
+                    <small className="text-gray-600">
                         Make changes and <strong>re-generate</strong> your
                         Project as many times as you like{" "}
                         <FontAwesomeIcon icon={faLaugh} />
@@ -106,7 +128,7 @@ export function BuildFinished(props: {
 
                 <div className="col-sm-12 col-md-4 mt-2">
                     <button
-                        className="btn btn-block btn-outline-primary"
+                        className="btn w-full"
                         onClick={props.onClickBackToEditor}
                     >
                         <FontAwesomeIcon icon={faReply} className="mr-2" />
@@ -118,24 +140,29 @@ export function BuildFinished(props: {
             <hr />
 
             {/* FOOTER */}
-            <div className="row d-flex justify-content-center">
+            <div className="row flex justify-center">
                 <div className="col-lg-12 text-center">
                     <p className="mb-0">Support Codotype</p>
-                    <small className="text-muted">
+                    <small className="text-gray-600">
                         Give us a{" "}
                         <FontAwesomeIcon
                             icon={faStar}
-                            className="mr-1 text-warning"
+                            className="mr-1 text-yellow-400"
                         />
                         on{" "}
                         <a
                             href="https://github.com/codotype/codotype"
                             target="_blank"
+                            className="text-blue-400"
                         >
                             GitHub
                         </a>{" "}
-                        or follow us on{" "}
-                        <a href="https://twitter.com/codotype" target="_blank">
+                        and follow us on{" "}
+                        <a
+                            href="https://twitter.com/codotype"
+                            target="_blank"
+                            className="text-blue-500"
+                        >
                             <FontAwesomeIcon
                                 icon={fab.faTwitter}
                                 className="mr-1"

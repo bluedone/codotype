@@ -18,7 +18,6 @@ interface RelationBuilderParams {
     addons?: AddonsValue;
 }
 
-// TODO - make this relationInput
 export class RelationBuilder implements RelationInput {
     id: string = uuidv4();
     type: RelationType;

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { RelationInput } from "@codotype/core";
-import { Modal } from "react-bootstrap";
+import { Modal } from "../Modal";
 
 // // // //
 
@@ -22,23 +22,26 @@ export function RelationFormModal(props: {
     }
 
     return (
-        <Modal size="lg" show={props.show} onHide={props.onCancel}>
-            <Modal.Header closeButton>
-                <Modal.Title>{title}</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>{props.children}</Modal.Body>
-            <Modal.Footer>
-                <button className="btn btn-secondary" onClick={props.onCancel}>
-                    Close
-                </button>
+        <Modal show={props.show} onHide={props.onCancel}>
+            <div className="p-5">
+                <h3 className="text-xl">{title}</h3>
+                {props.children}
+            </div>
+            <div className="modal-footer-tw">
                 <button
                     disabled={props.disableSubmit}
-                    className="btn btn-primary"
+                    className="btn btn-lg btn-primary"
                     onClick={props.onSubmit}
                 >
                     {title}
                 </button>
-            </Modal.Footer>
+                <button
+                    className="btn btn-lg btn-light"
+                    onClick={props.onCancel}
+                >
+                    Close
+                </button>
+            </div>
         </Modal>
     );
 }

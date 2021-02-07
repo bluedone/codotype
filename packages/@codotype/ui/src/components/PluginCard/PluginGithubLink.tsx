@@ -8,10 +8,9 @@ import { faGithub } from "@fortawesome/free-brands-svg-icons";
 export function PluginGithubLink(props: { plugin: PluginMetadata }) {
     const { plugin } = props;
     return (
-        <small className="d-flex flex-row align-items-center text-muted mt-2">
+        <small className="flex flex-row items-center text-gray-600 hover:text-gray-700">
             <FontAwesomeIcon icon={faGithub} />
-            <i className="fab fa-github mr-1" />
-            <a className="text-muted" target="_blank" href={plugin.homepage}>
+            <a target="_blank" className="ml-1" href={plugin.homepage}>
                 {plugin.homepage}
             </a>
         </small>

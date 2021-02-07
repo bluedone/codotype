@@ -58,7 +58,7 @@ interface LocalStorageProviderProps {
 /**
  * LocalStorageProvider
  * Provides a mechanism to persisting a project to window.localStorage
- * @param props - see `LocalStorageProviderProps`
+ * @param props.plugin - The Codotype PluginMetadata forwhich the LocalStorageProvider is saving a ProjectInput
  */
 export function LocalStorageProvider(props: LocalStorageProviderProps) {
     const [projectInput, setProjectState] = React.useState<ProjectInput>(

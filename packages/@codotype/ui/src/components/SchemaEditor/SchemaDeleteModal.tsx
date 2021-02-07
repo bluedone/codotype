@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Modal } from "react-bootstrap";
+import { Modal } from "../Modal";
 
 // // // //
 
@@ -16,23 +16,22 @@ export function SchemaDeleteModal(props: {
 }) {
     return (
         <Modal show={props.show} onHide={props.onClose}>
-            <Modal.Header closeButton>
-                <Modal.Title>Delete Schema</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <p>Are you sure you want to delete this schema?</p>
-            </Modal.Body>
-            <Modal.Footer>
-                <button onClick={props.onClose} className="btn btn-secondary">
-                    Close
-                </button>
+            <h3>Delete Schema</h3>
+            <p>Are you sure you want to delete this schema?</p>
+            <div className="modal-footer-tw">
                 <button
                     onClick={props.onConfirmDelete}
-                    className="btn btn-danger"
+                    className="btn btn-lg btn-danger"
                 >
                     Delete Schema
                 </button>
-            </Modal.Footer>
+                <button
+                    onClick={props.onClose}
+                    className="btn btn-lg btn-light"
+                >
+                    Close
+                </button>
+            </div>
         </Modal>
     );
 }

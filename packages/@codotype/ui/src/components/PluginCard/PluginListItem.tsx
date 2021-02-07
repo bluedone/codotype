@@ -11,27 +11,26 @@ import { PluginTechTag } from "./PluginTechTag";
 export function PluginListItem(props: { plugin: PluginMetadata }) {
     const { plugin } = props;
     return (
-        <div className="card card-body border-light shadow-hover mb-2">
-            <div className="row">
-                <div className="col-lg-12 d-flex justify-content-between align-items-center">
-                    <p className="lead mb-0 w-100 d-flex justify-content-between align-items-center">
+        <div className="card card-body shadow hover:shadow-lg mb-2">
+            <div className="flex flex-col">
+                <div className="flex items-center">
+                    <p className="lead mb-0 w-full flex items-center">
                         <img
                             className="mr-2"
                             style={{ maxWidth: "2rem" }}
                             src={plugin.content.icon}
                         />
                         {plugin.content.label}
-
-                        <PluginGithubLink plugin={plugin} />
                     </p>
+                    <PluginGithubLink plugin={plugin} />
                 </div>
-                <div className="col-lg-12 mt-2">
+                <div className="flex flex-row mt-2">
                     <p className="card-text mb-2">
                         {plugin.content.description}
                     </p>
                 </div>
-                <div className="col-lg-12 d-flex justify-content-between align-items-center">
-                    <span className="d-flex">
+                <div className="col-lg-12 flex justify-between items-center">
+                    <span className="flex">
                         {plugin.typeTags.map((tag: string) => (
                             <PluginTypeTag tag={tag} key={tag} />
                         ))}
@@ -40,7 +39,7 @@ export function PluginListItem(props: { plugin: PluginMetadata }) {
                         ))}
                     </span>
 
-                    <span className="d-flex">
+                    <span className="flex">
                         <PluginExperienceTag experience={plugin.experience} />
                         <PluginsVersionTag version={plugin.version} />
                     </span>

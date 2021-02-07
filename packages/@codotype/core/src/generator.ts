@@ -1,21 +1,21 @@
 import {
     WriteFunction,
     ForEachRelationFunction,
-    forEachReferencedByFunction,
+    ForEachReferencedByFunction,
     ForEachSchemaFunction,
-} from "./runtime";
+} from "./runtime-methods";
 
 // // // //
 
 /**
- * GeneratorConstructorParams
- * Parameters passed into
+ * GeneratorProps
+ * Parameters used to define a single generator inside a Plugin
  */
-export interface GeneratorConstructorParams {
+export interface GeneratorProps {
     name: string;
-    compileInPlace?: string[];
+    compileInPlace?: string[]; // TODO - rename `compileInPlace` -> `renderInPlace`?
     write?: WriteFunction;
-    forEachRelation?: ForEachRelationFunction;
-    forEachReferencedBy?: forEachReferencedByFunction;
     forEachSchema?: ForEachSchemaFunction;
+    forEachRelation?: ForEachRelationFunction;
+    forEachReferencedBy?: ForEachReferencedByFunction;
 }

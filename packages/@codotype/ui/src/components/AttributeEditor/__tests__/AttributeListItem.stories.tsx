@@ -37,13 +37,14 @@ testCases.forEach(testCase => {
                         {(provided: any) => {
                             return (
                                 <ul
-                                    className="list-group list-group-flush"
+                                    className="list-group rounded-none"
                                     ref={provided.innerRef}
                                     {...provided.droppableProps}
                                 >
                                     <AttributeListItem
                                         attribute={testCase[1]}
                                         index={0}
+                                        addons={[]} // TODO - populate this with sane defaults
                                         onClickEdit={(
                                             attributeToBeEdited: AttributeInput,
                                         ) => {

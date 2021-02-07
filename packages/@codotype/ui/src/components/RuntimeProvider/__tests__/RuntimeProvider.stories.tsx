@@ -23,7 +23,7 @@ storiesOf("Util/RuntimeProvider", module).add("active = true", () => {
                                 disabled={loading}
                                 onClick={() => {
                                     generateCode({
-                                        generator: dummyPluginMetadata,
+                                        plugin: dummyPluginMetadata,
                                         projectInput: dummyProjectInput,
                                     });
                                 }}

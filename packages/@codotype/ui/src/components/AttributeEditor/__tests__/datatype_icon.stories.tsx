@@ -7,7 +7,15 @@ import { Datatype, Datatypes } from "@codotype/core";
 // // // //
 
 const testCases: [string, Datatype][] = [
-    // TODO - add ID / UUID / AUTO_INCREMENTING_ID + associated array tyupes here
+    ["Datatypes.ID", Datatypes.ID],
+    ["Datatypes.ID_ARRAY", Datatypes.ID_ARRAY],
+    ["Datatypes.AUTO_INCREMENTED_ID", Datatypes.AUTO_INCREMENTED_ID],
+    [
+        "Datatypes.AUTO_INCREMENTED_ID_ARRAY",
+        Datatypes.AUTO_INCREMENTED_ID_ARRAY,
+    ],
+    ["Datatypes.UUID", Datatypes.UUID],
+    ["Datatypes.UUID_ARRAY", Datatypes.UUID_ARRAY],
     ["Datatypes.STRING", Datatypes.STRING],
     ["Datatypes.TEXT", Datatypes.TEXT],
     ["Datatypes.INT", Datatypes.INT],
@@ -57,7 +65,7 @@ storyCollection.add("all variants", () => {
                                     <div className="col-sm-9">
                                         <p className="mb-0">{testCase[0]}</p>
                                     </div>
-                                    <div className="col-sm-3 d-flex justify-content-end">
+                                    <div className="col-sm-3 flex justify-end">
                                         <DatatypeIcon datatype={testCase[1]} />
                                     </div>
                                 </div>

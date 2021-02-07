@@ -75,42 +75,29 @@ export enum PropertyLayoutVariants {
 }
 
 // Feature: update this to store a value that references an instance in a collection defined in another ConfigurationProperty( i.e. { enabled: boolean; value: { collectionSource: UUID, collectionValue: UUID }})
-// TODO - rename to ConfigurationPropertyValue
-export type OptionValue =
+export type ConfigurationPropertyValue =
     | string
     | string[]
     | number
     | number[]
     | boolean
-    | OptionValueInstance
-    | OptionValueInstance[]
+    | ConfigurationPropertyDict
+    | ConfigurationPropertyDict[]
     | null;
 
-// TODO - rename this to ConfigurationPropertyValue
-export type OptionValueInstance =
-    | OptionValueInstanceStandard
-    | OptionValueInstanceAllowDisable;
+export type ConfigurationPropertyDict =
+    | ConfigurationPropertyKeyValueStore
+    | ConfigurationPropertyAllowDisable;
 
-// TODO - should be:
-// export interface OptionValueInstance {
-//     enabled: boolean;
-//     value: {
-//         [key: string]: OptionValue;
-//     };
-// }
-
-interface OptionValueInstanceStandard {
-    [key: string]: OptionValue;
+interface ConfigurationPropertyKeyValueStore {
+    [key: string]: ConfigurationPropertyValue;
 }
 
 // NOTE - this distinction is confusing
-// it should always include he enabled + value pair
 // When we inflate the metadata to be used in the Plugin, we can simplify based on the allowDisable property
-interface OptionValueInstanceAllowDisable {
+interface ConfigurationPropertyAllowDisable {
     enabled: boolean;
-    value: {
-        [key: string]: OptionValue;
-    };
+    value: ConfigurationPropertyValue;
 }
 
 /**
@@ -137,7 +124,7 @@ export interface ConfigurationProperty {
     // Functional
     identifier: string; // NOTE - this is "identifier" so if its ever stored in a database, the "id" column will be available
     type: PropertyTypes;
-    defaultValue: OptionValue;
+    defaultValue: ConfigurationPropertyValue;
     dropdownOptions: DropdownOption[];
     properties: ConfigurationProperty[];
 

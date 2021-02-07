@@ -11,7 +11,7 @@ import { Shapes } from "./Shapes";
  * HomePage
  */
 export function HomePage(props: {
-    generators: PluginMetadata[];
+    plugins: PluginMetadata[];
     infoBullets: InfoBullet[];
 }) {
     return (
@@ -20,7 +20,7 @@ export function HomePage(props: {
                 title="Codotype"
                 subtitle="Smart Code Scaffolding"
                 body="Hand-crafted code scaffolding for the modern web. Prototype new web applications amazingly fast. Get started for free"
-                generators={props.generators}
+                plugins={props.plugins}
             >
                 <GitHubStar />
             </Jumbotron>

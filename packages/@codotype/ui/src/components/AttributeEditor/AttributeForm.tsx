@@ -6,7 +6,6 @@ import {
     AttributeAddon,
     AttributeInput,
     AddonsValue,
-    TokenCasing,
 } from "@codotype/core";
 import * as React from "react";
 import { AddonPropertyForm } from "./AttributeAddonForm";
@@ -20,21 +19,16 @@ function FormGroupTab(props: {
     onClick: () => void;
 }) {
     const { label } = props;
-    const btnClassName: string[] = ["btn btn-block nav-link w-100"];
+    const btnClassName: string[] = ["btn w-full nav-link w-full"];
     if (props.active) {
         btnClassName.push("active");
     }
 
     return (
-        <li className="nav-item d-flex flex-grow-1">
+        <li className="nav-item flex flex-grow">
             <button
-                // href="#"
-                // TODO - fix styles here, replace with <button>
                 className={btnClassName.join(" ")}
                 disabled={props.disabled}
-                style={{
-                    cursor: "pointer",
-                }}
                 onClick={props.onClick}
             >
                 {label}
@@ -48,12 +42,13 @@ function FormGroupTab(props: {
  */
 export function AttributeFormSelector(props: {
     attributeInput: AttributeInput;
+    renderAddonsTab: boolean;
     children: (childProps: {
         selectedForm: string;
         setSelectedForm: (updatedSelectedGroup: string) => void;
     }) => React.ReactNode;
 }) {
-    const { attributeInput } = props;
+    const { attributeInput, renderAddonsTab } = props;
     const defaultSelectedForm =
         attributeInput.datatype === null ? "DATATYPE" : "PROPERTIES";
 
@@ -64,7 +59,7 @@ export function AttributeFormSelector(props: {
     return (
         <div className="row">
             <div className="col-lg-12">
-                <ul className="nav nav-tabs w-100 d-flex">
+                <ul className="nav nav-tabs w-full flex">
                     <FormGroupTab
                         onClick={() => {
                             setSelectedForm("DATATYPE");
@@ -83,14 +78,16 @@ export function AttributeFormSelector(props: {
                         label={"Tokens"}
                     />
 
-                    <FormGroupTab
-                        onClick={() => {
-                            setSelectedForm("DESCRIPTION");
-                        }}
-                        disabled={attributeInput.datatype === null}
-                        active={selectedForm === "DESCRIPTION"}
-                        label={"Internal Note"}
-                    />
+                    {renderAddonsTab && (
+                        <FormGroupTab
+                            onClick={() => {
+                                setSelectedForm("ADDONS");
+                            }}
+                            disabled={attributeInput.datatype === null}
+                            active={selectedForm === "ADDONS"}
+                            label={"Behavior"}
+                        />
+                    )}
                 </ul>
             </div>
             <div className="col-lg-12">
@@ -121,14 +118,25 @@ interface AttributeFormProps {
  * @param props - see `AttributeFormProps`
  */
 export function AttributeForm(props: AttributeFormProps) {
-    const { attributeInput, supportedDatatypes } = props;
+    const { attributeInput, supportedDatatypes, addons } = props;
+
+    const renderAddonsTab: boolean =
+        attributeInput.datatype !== null &&
+        addons.some(addon =>
+            addon.supportedDatatypes.includes(
+                attributeInput.datatype as Datatype,
+            ),
+        );
 
     return (
         <div className="row">
             <div className="col-lg-12">
                 {/* {attributeInput.datatype && ( */}
                 <div className="mx-3">
-                    <AttributeFormSelector attributeInput={attributeInput}>
+                    <AttributeFormSelector
+                        renderAddonsTab={renderAddonsTab}
+                        attributeInput={attributeInput}
+                    >
                         {({ selectedForm, setSelectedForm }) => {
                             if (selectedForm === "DATATYPE") {
                                 return (
@@ -148,62 +156,47 @@ export function AttributeForm(props: AttributeFormProps) {
 
                             if (selectedForm === "PROPERTIES") {
                                 return (
-                                    <React.Fragment>
-                                        <AttributePropertiesForm
-                                            tokenCasing={
-                                                attributeInput.identifiers
-                                            }
-                                            onKeydownEnter={
-                                                props.onKeydownEnter
-                                            }
-                                            onChange={(
-                                                updatedTokenCasing: TokenCasing,
-                                            ) => {
-                                                props.onChange({
-                                                    ...attributeInput,
-                                                    identifiers: updatedTokenCasing,
-                                                });
-                                            }}
-                                        />
-
-                                        {/* Null-check for attributeInput.datatype */}
-                                        {attributeInput.datatype && (
-                                            <AddonPropertyForm
-                                                addons={props.addons}
-                                                attributeCollection={
-                                                    props.attributes
-                                                }
-                                                attributeInput={attributeInput}
-                                                value={attributeInput.addons}
-                                                onChange={(
-                                                    updatedAttributeAddons: AddonsValue,
-                                                ) => {
-                                                    props.onChange({
-                                                        ...attributeInput,
-                                                        addons: {
-                                                            ...updatedAttributeAddons,
-                                                        },
-                                                    });
-                                                }}
-                                            />
-                                        )}
-                                    </React.Fragment>
+                                    <AttributePropertiesForm
+                                        attributeInput={attributeInput}
+                                        onKeydownEnter={props.onKeydownEnter}
+                                        onChange={(
+                                            updatedAttributeInput: AttributeInput,
+                                        ) => {
+                                            props.onChange({
+                                                ...attributeInput,
+                                                ...updatedAttributeInput,
+                                            });
+                                        }}
+                                    />
                                 );
                             }
 
-                            return (
-                                <AttributeMetaForm
-                                    description={attributeInput.internalNote}
-                                    onDescriptionChange={(
-                                        updatedDescription: string,
-                                    ) => {
-                                        props.onChange({
-                                            ...attributeInput,
-                                            internalNote: updatedDescription,
-                                        });
-                                    }}
-                                />
-                            );
+                            if (renderAddonsTab) {
+                                return (
+                                    <AttributeMetaForm>
+                                        <AddonPropertyForm
+                                            addons={props.addons}
+                                            attributeCollection={
+                                                props.attributes
+                                            }
+                                            attributeInput={attributeInput}
+                                            value={attributeInput.addons}
+                                            onChange={(
+                                                updatedAttributeAddons: AddonsValue,
+                                            ) => {
+                                                props.onChange({
+                                                    ...attributeInput,
+                                                    addons: {
+                                                        ...updatedAttributeAddons,
+                                                    },
+                                                });
+                                            }}
+                                        />
+                                    </AttributeMetaForm>
+                                );
+                            }
+
+                            return null;
                         }}
                     </AttributeFormSelector>
                 </div>

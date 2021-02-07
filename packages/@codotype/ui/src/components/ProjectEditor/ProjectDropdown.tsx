@@ -4,7 +4,7 @@ import { ProjectInput } from "@codotype/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
 import { ResetProjectButton } from "./ResetProjectButton";
-import { ProjectExportModal } from "./ProjectExportModal";
+import { ProjectExportButton } from "./ProjectExportButton";
 import styled from "styled-components";
 
 // // // //
@@ -21,50 +21,27 @@ export function ProjectDropdown(props: {
     projectInput: ProjectInput;
     onConfirmReset: () => void;
 }) {
-    const [showingExportModal, showExportModal] = React.useState<boolean>(
-        false,
-    );
     return (
         <StyledDiv>
             <Dropdown alignRight>
                 <Dropdown.Toggle
                     variant="light"
                     size="lg"
-                    className="mr-2"
+                    className="mr-2 bg-white border-none rounded-lg"
                     id="project-editor-dropdown"
                 >
                     <FontAwesomeIcon icon={faEllipsisH} />
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                    {/* <Dropdown.Item>Import Project</Dropdown.Item> */}
-                    {/* <Dropdown.Divider /> */}
-                    {/* <Dropdown.Header>Download Schemas</Dropdown.Header> */}
-                    {/* <Dropdown.Item>GraphQL</Dropdown.Item> */}
-                    {/* <Dropdown.Item>TypeScript</Dropdown.Item> */}
-                    {/* <Dropdown.Item>JSON</Dropdown.Item> */}
-                    <Dropdown.Item
-                        onClick={() => {
-                            showExportModal(true);
-                        }}
-                    >
-                        Export Project
-                    </Dropdown.Item>
+                    <ProjectExportButton projectInput={props.projectInput} />
                     <Dropdown.Divider />
                     <Dropdown.Header>
-                        <span className="text-danger">Danger Zone</span>
+                        <span className="text-red-500">Danger Zone</span>
                     </Dropdown.Header>
                     <ResetProjectButton onConfirmReset={props.onConfirmReset} />
                 </Dropdown.Menu>
             </Dropdown>
-
-            <ProjectExportModal
-                projectInput={props.projectInput}
-                show={showingExportModal}
-                onHide={() => {
-                    showExportModal(false);
-                }}
-            />
         </StyledDiv>
     );
 }

@@ -1,9 +1,9 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
-import { ConfigurationInput } from "../component";
+import { ConfigurationInput } from "../ConfigurationInput";
 import {
     buildConfigurationGroupValue,
-    OptionValueInstance,
+    ConfigurationPropertyDict,
     testState,
     GroupLayoutVariants,
     ConfigurationGroup,
@@ -27,7 +27,7 @@ const storyCollection = storiesOf(
 storyCollection.add("renders", () => {
     const [count, increment] = React.useReducer(i => i + 1, 0);
     const [configurationOptionValue, setVal] = React.useState<
-        OptionValueInstance
+        ConfigurationPropertyDict
     >(buildConfigurationGroupValue(ComponentBuilderConfigurationGroup));
 
     return (
@@ -35,7 +35,7 @@ storyCollection.add("renders", () => {
             <ConfigurationInput
                 configurationGroup={ComponentBuilderConfigurationGroup}
                 value={configurationOptionValue}
-                onChange={(updatedVal: OptionValueInstance) => {
+                onChange={(updatedVal: ConfigurationPropertyDict) => {
                     setVal(updatedVal);
                     increment();
                 }}
@@ -49,7 +49,7 @@ storyCollection.add("renders", () => {
 storyCollection.add("single dropdown", () => {
     const [count, increment] = React.useReducer(i => i + 1, 0);
     const [configurationOptionValue, setVal] = React.useState<
-        OptionValueInstance
+        ConfigurationPropertyDict
     >(
         buildConfigurationGroupValue({
             ...ComponentBuilderConfigurationGroup,
@@ -69,7 +69,7 @@ storyCollection.add("single dropdown", () => {
                     ],
                 }}
                 value={configurationOptionValue}
-                onChange={(updatedVal: OptionValueInstance) => {
+                onChange={(updatedVal: ConfigurationPropertyDict) => {
                     setVal(updatedVal);
                     increment();
                 }}
@@ -83,7 +83,7 @@ storyCollection.add("single dropdown", () => {
 storyCollection.add("nested instance", () => {
     const [count, increment] = React.useReducer(i => i + 1, 0);
     const [configurationOptionValue, setVal] = React.useState<
-        OptionValueInstance
+        ConfigurationPropertyDict
     >(
         buildConfigurationGroupValue({
             ...ComponentBuilderConfigurationGroup,
@@ -101,7 +101,7 @@ storyCollection.add("nested instance", () => {
                     ],
                 }}
                 value={configurationOptionValue}
-                onChange={(updatedVal: OptionValueInstance) => {
+                onChange={(updatedVal: ConfigurationPropertyDict) => {
                     setVal(updatedVal);
                     increment();
                 }}
@@ -115,7 +115,7 @@ storyCollection.add("nested instance", () => {
 storyCollection.add("instance", () => {
     const [count, increment] = React.useReducer(i => i + 1, 0);
     const [configurationOptionValue, setVal] = React.useState<
-        OptionValueInstance
+        ConfigurationPropertyDict
     >(
         buildConfigurationGroupValue({
             ...ComponentBuilderConfigurationGroup,
@@ -133,7 +133,7 @@ storyCollection.add("instance", () => {
                     ],
                 }}
                 value={configurationOptionValue}
-                onChange={(updatedVal: OptionValueInstance) => {
+                onChange={(updatedVal: ConfigurationPropertyDict) => {
                     setVal(updatedVal);
                     increment();
                 }}
@@ -194,7 +194,7 @@ layoutVariantStories.forEach(testCase => {
     storyCollection.add(testCase[1], () => {
         const [count, increment] = React.useReducer(i => i + 1, 0);
         const [configurationOptionValue, setVal] = React.useState<
-            OptionValueInstance
+            ConfigurationPropertyDict
         >(buildConfigurationGroupValue(configurationGroup));
 
         return (
@@ -202,15 +202,15 @@ layoutVariantStories.forEach(testCase => {
                 <ConfigurationInput
                     configurationGroup={configurationGroup}
                     value={configurationOptionValue}
-                    onChange={(updatedVal: OptionValueInstance) => {
+                    onChange={(updatedVal: ConfigurationPropertyDict) => {
                         setVal(updatedVal);
                         increment();
                     }}
                 />
-                <pre className="p-4 bg-dark text-light rounded mt-4">
+                <pre className="p-4 bg-gray-800 text-gray-200 rounded mt-4">
                     {JSON.stringify(configurationOptionValue, null, 4)}
                 </pre>
-                <pre className="p-4 bg-dark text-light rounded mt-4">
+                <pre className="p-4 bg-gray-800 text-gray-200 rounded mt-4">
                     {JSON.stringify(configurationGroup, null, 4)}
                 </pre>
             </Story>

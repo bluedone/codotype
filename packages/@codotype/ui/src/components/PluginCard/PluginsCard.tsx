@@ -7,14 +7,14 @@ import { ChevronAnimation } from "../ChevronAnimation";
 export function PluginCard(props: { plugin: PluginMetadata }) {
     const { plugin } = props;
     return (
-        <div className="card col-lg-12 shadow border-light">
+        <div className="card shadow">
             <div className="card-body">
-                <div className="row d-flex align-items-end flex-column">
-                    <div className="col-lg-12 d-flex justify-content-center">
+                <div className="flex flex-row items-end flex-col">
+                    <div className="flex flex-col justify-center">
                         <p className="lead mb-0">
                             <a
                                 href={`/plugins/${plugin.identifier}/build`}
-                                className="btn btn-link d-flex align-items-center flex-column"
+                                className="btn btn-link flex items-center flex-col"
                                 style={{ textDecoration: "none" }}
                             >
                                 <img
@@ -38,9 +38,9 @@ export function PluginCard(props: { plugin: PluginMetadata }) {
             <div className="card-footer bg-white border-top-none">
                 <a
                     href={`/plugins/${plugin.identifier}`}
-                    className="btn btn-block btn-xl btn-primary rounded-pill"
+                    className="btn w-full btn-lg btn-primary rounded-pill"
                 >
-                    <span className="d-flex justify-content-center align-items-center">
+                    <span className="flex justify-center items-center">
                         Let's Go!
                         <ChevronAnimation active />
                     </span>

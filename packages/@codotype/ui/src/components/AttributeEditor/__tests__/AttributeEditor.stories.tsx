@@ -30,7 +30,7 @@ storiesOf("Components/ProjectEditor/AttributeEditor/Layout", module).add(
                 />
 
                 <hr />
-                <pre className="bg-dark px-4 py-4 rounded mt-4 text-light">
+                <pre className="bg-gray-800 px-4 py-4 rounded mt-4 text-gray-200">
                     {JSON.stringify(attributes, null, 4)}
                 </pre>
             </Story>
@@ -38,23 +38,28 @@ storiesOf("Components/ProjectEditor/AttributeEditor/Layout", module).add(
     },
 );
 
-storiesOf("Components/ProjectEditor/AttributeEditor/Layout", module).add("empty", () => {
-    const [attributes, setAttributes] = React.useState<AttributeInput[]>([]);
-    return (
-        <Story>
-            <AttributeEditor
-                attributes={attributes}
-                addons={[]}
-                supportedDatatypes={supportedDatatypes}
-                onChange={(updatedAttributes: AttributeInput[]) => {
-                    setAttributes(updatedAttributes);
-                }}
-            />
+storiesOf("Components/ProjectEditor/AttributeEditor/Layout", module).add(
+    "empty",
+    () => {
+        const [attributes, setAttributes] = React.useState<AttributeInput[]>(
+            [],
+        );
+        return (
+            <Story>
+                <AttributeEditor
+                    attributes={attributes}
+                    addons={[]}
+                    supportedDatatypes={supportedDatatypes}
+                    onChange={(updatedAttributes: AttributeInput[]) => {
+                        setAttributes(updatedAttributes);
+                    }}
+                />
 
-            <hr />
-            <pre className="bg-dark px-4 py-4 rounded mt-4 text-light">
-                {JSON.stringify(attributes, null, 4)}
-            </pre>
-        </Story>
-    );
-});
+                <hr />
+                <pre className="bg-gray-800 px-4 py-4 rounded mt-4 text-gray-200">
+                    {JSON.stringify(attributes, null, 4)}
+                </pre>
+            </Story>
+        );
+    },
+);

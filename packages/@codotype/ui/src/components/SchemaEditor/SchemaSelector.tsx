@@ -4,114 +4,87 @@ import classnames from "classnames";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
-import { OverlayTrigger, Tooltip } from "react-bootstrap";
-import styled from "styled-components";
+import { Tooltip } from "../Tooltip";
 
 // // // //
 
-const StyledListItem = styled.li`
-    cursor: pointer;
-    border-left: 6px solid #adb5bd !important;
-
-    &.selected {
-        border-left: 6px solid #4582ec !important;
-        font-weight: bold;
-    }
-`;
-
-// ALT STYLE
-// const StyledListItem = styled.li`
-//     cursor: pointer;
-//     border-right: 6px solid #adb5bd !important;
-//     &.selected {
-//         border-right: 6px solid #4582ec !important;
-//         font-weight: bold;
-//     }
-// `;
-
 export function SchemaSelectorItem(props: {
-    schema: SchemaInput;
+    schemaInput: SchemaInput;
     selected: boolean;
     index: number;
     onClick: (selectedSchema: SchemaInput) => void;
 }) {
     return (
-        <Draggable draggableId={String(props.schema.id)} index={props.index}>
-            {provided => (
-                <StyledListItem
+        <Draggable
+            draggableId={String(props.schemaInput.id)}
+            index={props.index}
+        >
+            {(provided, snapshot) => (
+                <li
                     className={classnames(
-                        "list-group-item list-group-item-action",
+                        "cursor-pointer bg-white dark:bg-gray-900 dark:text-gray-200 select-none hover:bg-gray-200 border-l-8 py-4 px-4",
                         {
-                            selected: props.selected,
-                            "text-muted": !props.selected,
+                            "text-gray-900 font-semibold border-indigo-500":
+                                props.selected,
+                            "text-gray-600 font-light border-gray-500": !props.selected,
+                            rounded: snapshot.isDragging,
                         },
                     )}
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                     onClick={() => {
-                        props.onClick(props.schema);
+                        props.onClick(props.schemaInput);
                     }}
                 >
-                    <div className="row align-items-center d-flex flex-row justify-content-between">
-                        <span className="d-flex ml-2">
-                            {props.schema.identifiers.singular.title}
+                    <div className="row items-center flex flex-row justify-between">
+                        <span className="flex">
+                            {props.schemaInput.identifiers.singular.title}
                         </span>
 
                         {/* Renders warning tooltip */}
-                        {/* TODO - update this to check relations */}
-                        {/* !props.schema.relations.length &&  */}
-                        {!props.schema.attributes.length && (
-                            <OverlayTrigger
-                                placement="right"
-                                overlay={
-                                    <Tooltip
-                                        id={`empty-schema-warning-tooltip-${props.schema.id}`}
-                                    >
-                                        Schema requires at least one attribute
-                                        or relation - empty schemas will be
-                                        ignored
-                                    </Tooltip>
+                        {!props.schemaInput.attributes.length && (
+                            <Tooltip
+                                position="right"
+                                tooltipContent={
+                                    <>Schema requires at least one attribute</>
                                 }
                             >
                                 <FontAwesomeIcon
-                                    className="mr-1 text-warning"
+                                    className="text-warning"
                                     icon={faExclamationCircle}
                                 />
-                            </OverlayTrigger>
+                            </Tooltip>
                         )}
                     </div>
-                </StyledListItem>
+                </li>
             )}
         </Draggable>
     );
 }
 
 export function SchemaSelector(props: {
-    schemas: SchemaInput[];
+    schemaInputs: SchemaInput[];
     selectedSchemaId: string;
     onChange: (selectedSchema: SchemaInput) => void;
 }) {
     return (
-        <div className="card shadow-sm">
-            {/* <div className="card-header text-muted"> */}
-            {/* <strong>Schemas</strong> */}
-            {/* </div> */}
+        <div className="shadow rounded-2xl overflow-hidden">
             <Droppable droppableId="schema-list">
                 {(provided: any) => {
                     return (
                         <ul
-                            className="list-group list-group-flush"
+                            className="list-group rounded-none"
                             ref={provided.innerRef}
                             {...provided.droppableProps}
                         >
-                            {props.schemas.map(
+                            {props.schemaInputs.map(
                                 (s: SchemaInput, index: number) => {
                                     return (
                                         <SchemaSelectorItem
                                             index={index}
                                             key={s.id}
-                                            schema={s}
+                                            schemaInput={s}
                                             selected={
                                                 s.id === props.selectedSchemaId
                                             }

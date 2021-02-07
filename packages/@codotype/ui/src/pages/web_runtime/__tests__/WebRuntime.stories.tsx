@@ -5,14 +5,12 @@ import { Story } from "../../../components/Story";
 import { RuntimeProvider } from "../../../components/RuntimeProvider";
 import { ProjectEditor } from "../../../components/ProjectEditor";
 import {
-    Project,
     ProjectInput,
     Datatypes,
     CreatedByValues,
     PluginMetadata,
     testState,
     // makeIdentifier,
-    // ATTRIBUTE_ADDON_UNIQUE,
     // ATTRIBUTE_ADDON_REQUIRED,
     // ATTRIBUTE_ADDON_NULLABLE,
     // ATTRIBUTE_ADDON_PRIMARY_KEY,
@@ -29,11 +27,61 @@ import {
     buildTokenCasing,
     buildTokenPluralization,
     buildDefaultConfiguration,
+    AttributeAddon,
+    AddonPropertyInlineIcons,
 } from "@codotype/core";
-import { generatorReadme } from "../../../components/MarkdownRenderer/__tests__/test_state";
-const { cdkPluginMeta, dummyPluginMetadata } = testState;
+import { pluginReadme } from "../../../components/MarkdownRenderer/__tests__/test_state";
+import { NextJsWebsiteStarterPlugin } from "./test_state";
+import { ConfigurationGroupHeader } from "../../../components/ConfigurationInput";
+const {
+    cdkPluginMeta,
+    dummyPluginMetadata: dummyPluginMetadataOriginal,
+} = testState;
+
+const dummyPluginMetadata: PluginMetadata = {
+    ...dummyPluginMetadataOriginal,
+    configurationGroups: [
+        ...dummyPluginMetadataOriginal.configurationGroups.map(c => {
+            if (c.content.label !== "API Examples") {
+                return c;
+            }
+            return {
+                ...c,
+                layoutVariant: GroupLayoutVariants.LIST,
+            };
+        }),
+    ],
+};
 
 // // // //
+
+const ATTRIBUTE_ADDON_UNIQUE: AttributeAddon = {
+    supportedDatatypes: [Datatypes.STRING],
+    property: {
+        content: {
+            label: "Unique",
+            icon: "",
+            description: "Whether or not the value is unique",
+            documentation: "",
+        },
+        identifier: "unique",
+        exclusive: false,
+        required: false,
+        inlineIcon: AddonPropertyInlineIcons.snowflake,
+        propertyType: PropertyTypes.BOOLEAN,
+        defaultValue: false,
+        dropdownOptions: [],
+        validations: [],
+        transformations: [],
+    },
+};
+
+const relationAddons = [
+    {
+        supportedRelationTypes: [RelationTypes.TO_ONE],
+        property: ATTRIBUTE_ADDON_UNIQUE.property,
+    },
+];
 
 const ApiActionsProperty = new Primatives.ConfigurationProperty({
     identifier: "actions",
@@ -171,15 +219,16 @@ const NestedCollectionProperty = {
 
 const pluginExample01: PluginMetadata = {
     ...dummyPluginMetadata,
-    identifier: "chrome_extension_generator_03", // unique ID for the generator
+    identifier: "chrome_extension_plugin_03", // unique ID for the plugin
     schemaEditorConfiguration: {
         ...dummyPluginMetadata.schemaEditorConfiguration,
         attributeAddons: [
-            // ATTRIBUTE_ADDON_UNIQUE,
+            ATTRIBUTE_ADDON_UNIQUE,
             // ATTRIBUTE_ADDON_REQUIRED,
             // ATTRIBUTE_ADDON_NULLABLE,
             // ATTRIBUTE_ADDON_PRIMARY_KEY,
         ],
+        relationAddons: [...relationAddons],
         configurationGroups: [
             {
                 ...dummyPluginMetadata.configurationGroups[0],
@@ -256,21 +305,22 @@ const projectExample01: ProjectInput = {
     ],
 };
 
-const stories: [string, PluginMetadata][] = [
+const stories: Array<[string, PluginMetadata]> = [
     ["w/ schemas", dummyPluginMetadata],
     [
         "w/ schemas + schema configuration groups",
         {
             ...dummyPluginMetadata,
-            identifier: "chrome_extension_generator_03", // unique ID for the generator
+            identifier: "chrome_extension_plugin_03", // unique ID for the plugin
             schemaEditorConfiguration: {
                 ...dummyPluginMetadata.schemaEditorConfiguration,
                 attributeAddons: [
-                    // ATTRIBUTE_ADDON_UNIQUE,
+                    ATTRIBUTE_ADDON_UNIQUE,
                     // ATTRIBUTE_ADDON_REQUIRED,
                     // ATTRIBUTE_ADDON_NULLABLE,
                     // ATTRIBUTE_ADDON_PRIMARY_KEY,
                 ],
+                relationAddons: [...relationAddons],
                 configurationGroups: [
                     {
                         ...dummyPluginMetadata.configurationGroups[0],
@@ -291,15 +341,16 @@ const stories: [string, PluginMetadata][] = [
         "w/ schemas + default attributes",
         {
             ...dummyPluginMetadata,
-            identifier: "chrome_extension_generator_04", // unique ID for the generator
+            identifier: "chrome_extension_plugin_04", // unique ID for the plugin
             schemaEditorConfiguration: {
                 ...dummyPluginMetadata.schemaEditorConfiguration,
                 attributeAddons: [
-                    // ATTRIBUTE_ADDON_UNIQUE,
+                    ATTRIBUTE_ADDON_UNIQUE,
                     // ATTRIBUTE_ADDON_REQUIRED,
                     // ATTRIBUTE_ADDON_NULLABLE,
                     // ATTRIBUTE_ADDON_PRIMARY_KEY,
                 ],
+                relationAddons: [...relationAddons],
                 newSchemaDefaults: {
                     relations: [],
                     attributes: [
@@ -331,7 +382,7 @@ const stories: [string, PluginMetadata][] = [
             ...cdkPluginMeta,
             content: {
                 ...cdkPluginMeta.content,
-                documentation: generatorReadme,
+                documentation: pluginReadme,
             },
             configurationGroups: [
                 {
@@ -358,7 +409,7 @@ const stories: [string, PluginMetadata][] = [
                     properties: [NestedCollectionProperty],
                 },
             ],
-            identifier: "chrome_extension_generator_05", // unique ID for the generator
+            identifier: "chrome_extension_plugin_05", // unique ID for the plugin
             schemaEditorConfiguration: {
                 supportedRelationTypes: [
                     RelationTypes.TO_ONE,
@@ -444,7 +495,7 @@ const stories: [string, PluginMetadata][] = [
                     }),
                 ],
                 attributeAddons: [
-                    // ATTRIBUTE_ADDON_UNIQUE,
+                    ATTRIBUTE_ADDON_UNIQUE,
                     // ATTRIBUTE_ADDON_NULLABLE,
                     // ATTRIBUTE_ADDON_PRIMARY_KEY,
                     // {
@@ -487,7 +538,7 @@ const stories: [string, PluginMetadata][] = [
                     //     ],
                     // },
                 ],
-                relationAddons: [],
+                relationAddons: [...relationAddons],
                 newSchemaDefaults: {
                     relations: [
                         {
@@ -591,6 +642,7 @@ const stories: [string, PluginMetadata][] = [
             },
         },
     ],
+    ["Concepts/Next.js Website Starter", NextJsWebsiteStarterPlugin],
 ];
 
 // // // //
@@ -601,36 +653,86 @@ stories.forEach(story => {
     storyCollection.add(story[0], () => {
         return (
             <Story>
-                <WebRuntime generator={story[1]}>
-                    {({
-                        generator,
-                        projectInput,
-                        setProject,
-                        clearProject,
-                    }) => (
-                            <RuntimeProvider>
-                                {({ generateCode }) => (
-                                    <React.Fragment>
-                                        <ProjectEditor
-                                            generator={generator}
-                                            projectInput={projectInput}
-                                            onClickGenerate={() => {
-                                                generateCode({
-                                                    projectInput,
-                                                    generator,
-                                                });
-                                            }}
-                                            onResetProject={clearProject}
-                                            onChange={(
-                                                updatedProject: ProjectInput,
-                                            ) => {
-                                                setProject(updatedProject);
-                                            }}
-                                        />
-                                    </React.Fragment>
-                                )}
-                            </RuntimeProvider>
-                        )}
+                <WebRuntime plugin={story[1]}>
+                    {({ plugin, projectInput, setProject, clearProject }) => (
+                        <RuntimeProvider>
+                            {({ generateCode }) => (
+                                <React.Fragment>
+                                    <ProjectEditor
+                                        plugin={plugin}
+                                        projectInput={projectInput}
+                                        onClickGenerate={() => {
+                                            generateCode({
+                                                projectInput,
+                                                plugin,
+                                            });
+                                        }}
+                                        onResetProject={clearProject}
+                                        onChange={(
+                                            updatedProject: ProjectInput,
+                                        ) => {
+                                            setProject(updatedProject);
+                                        }}
+                                    >
+                                        {({
+                                            defaultComponent,
+                                            value,
+                                            selectedConfigurationGroup,
+                                            onChange,
+                                        }) => {
+                                            console.log(
+                                                selectedConfigurationGroup,
+                                            );
+
+                                            if (
+                                                selectedConfigurationGroup.identifier ===
+                                                "home"
+                                            ) {
+                                                return (
+                                                    <div className="grid grid-cols-12 mt-4">
+                                                        <div className="col-span-12">
+                                                            {/* ConfigurationGroupHeader */}
+                                                            <ConfigurationGroupHeader
+                                                                value={value}
+                                                                onChange={
+                                                                    onChange
+                                                                }
+                                                                configurationGroup={
+                                                                    selectedConfigurationGroup
+                                                                }
+                                                            />
+                                                            <div>
+                                                                <input
+                                                                    value={
+                                                                        value.string
+                                                                    }
+                                                                    onChange={e => {
+                                                                        onChange(
+                                                                            {
+                                                                                string:
+                                                                                    e
+                                                                                        .currentTarget
+                                                                                        .value,
+                                                                            },
+                                                                        );
+                                                                    }}
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                );
+                                            } else {
+                                                return defaultComponent;
+                                            }
+                                        }}
+                                    </ProjectEditor>
+                                    <pre>
+                                        {JSON.stringify(projectInput, null, 4)}
+                                    </pre>
+                                </React.Fragment>
+                            )}
+                        </RuntimeProvider>
+                    )}
                 </WebRuntime>
             </Story>
         );

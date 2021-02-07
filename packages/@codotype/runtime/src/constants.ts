@@ -11,10 +11,10 @@ export const TEMPLATES_DIRECTORY_NAME: string = "templates";
 export const OUTPUT_DIRECTORY: string = ".codotype-out";
 
 /**
- * CODOTYPE_MANIFEST_DIRECTORY
+ * CODOTYPE_ARTIFACTS_DIRECTORY
  * The directory inside the a Project's output that stores the codotype-project.json file
  */
-export const CODOTYPE_MANIFEST_DIRECTORY: string = ".codotype";
+export const CODOTYPE_ARTIFACTS_DIRECTORY: string = ".codotype";
 
 /**
  * MODULES_ROOT

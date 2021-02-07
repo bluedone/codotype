@@ -2,7 +2,7 @@ import * as React from "react";
 import {
     ConfigurationGroup,
     GroupLayoutVariants,
-    OptionValueInstance,
+    ConfigurationPropertyDict,
 } from "@codotype/core";
 import { MarkdownRenderer } from "../MarkdownRenderer";
 import { ConfigurationGroupPropertiesInput } from "./ConfigurationGroupPropertiesInput";
@@ -16,8 +16,8 @@ import { ConfigurationGroupPropertiesInput } from "./ConfigurationGroupPropertie
  */
 export function ConfigurationGroupPropertiesDocs(props: {
     configurationGroup: ConfigurationGroup;
-    value: OptionValueInstance;
-    onChange: (updatedVal: OptionValueInstance) => void;
+    value: ConfigurationPropertyDict;
+    onChange: (updatedVal: ConfigurationPropertyDict) => void;
 }) {
     const { configurationGroup, value } = props;
     const { layoutVariant } = configurationGroup;
@@ -34,13 +34,13 @@ export function ConfigurationGroupPropertiesDocs(props: {
     }
 
     return (
-        <div className="row">
-            <div className={`col-lg-${docsColumn} border-right`}>
+        <div className="grid grid-cols-12 gap-4">
+            <div className={`col-span-${docsColumn} border-right`}>
                 <MarkdownRenderer
                     source={configurationGroup.content.documentation}
                 />
             </div>
-            <div className={`col-lg-${inputsColumn}`}>
+            <div className={`col-span-${inputsColumn}`}>
                 <div className="row">
                     <div className="col-lg-12">
                         <ConfigurationGroupPropertiesInput

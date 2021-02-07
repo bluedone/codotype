@@ -5,10 +5,10 @@ import {
     ProjectInput,
     ProjectBuild,
     transformJsonProjectInput,
-    RuntimeLogLevels,
+    RuntimeLogBehaviors,
 } from "@codotype/core";
 
-// TODO - implement `inquirer` for when RuntimeConstructor overwrite behavior is "ask"
+// FEATURE - implement `inquirer` for when RuntimeConstructor overwrite behavior is "ask"
 // import inquirer from "inquirer";
 
 // // // //
@@ -23,11 +23,8 @@ async function runGenerator(projectPath: string, options: CommandOptions) {
     // Pulls in requisite paths for codotype runtime
     const projectRequirePath = path.resolve(process.cwd(), projectPath);
 
-    // Validates project data
-    // TODO - add better validation for ProjectInput
-
     // Pulls in projectJSON using the `projectRequirePath` and a dynamic import statement
-    // TODO - define a function that takes the project JSON and transforms it into a type-safe Project instance
+    // CHORE - wrap this in try/catch
     const projectJSON: any = require(projectRequirePath);
 
     // Transforms project JSON into projectInstance
@@ -35,16 +32,19 @@ async function runGenerator(projectPath: string, options: CommandOptions) {
 
     // Assembles build job for codotype runtime
     // NOTE - build.id is an empty string when building locally
+    // TODO - add new ProjectBuild primative
     const build: ProjectBuild = {
         id: "",
         projectInput,
+        startTime: "", // TODO - set actual end time
+        endTime: "", // TODO - set actual end time
     };
 
     // Invoke runtime directly with parameters
     const runtime = new NodeRuntime({
         cwd: process.cwd(),
-        logLevel: RuntimeLogLevels.info,
-        fileOverwriteBehavior: "force", // TODO - add option for "ask" in CLI
+        logBehavior: RuntimeLogBehaviors.normal,
+        fileOverwriteBehavior: "force", // FEATURE - add option for "ask" in CLI
         fileSystemAdapter: new LocalFileSystemAdapter(),
     });
 
@@ -60,7 +60,7 @@ async function runGenerator(projectPath: string, options: CommandOptions) {
 // // // //
 
 export const runCommand = (projectPath: string, options: CommandOptions) => {
-    return runGenerator(projectPath, options).catch((err) => {
+    return runGenerator(projectPath, options).catch(err => {
         // FEATURE - implement better error handling
         console.log("CODOTYPE CLI ERROR!!");
         console.log(err);

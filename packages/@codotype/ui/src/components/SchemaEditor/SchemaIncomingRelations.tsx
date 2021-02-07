@@ -2,7 +2,7 @@ import * as React from "react";
 import { Schema, UUID } from "@codotype/core";
 import { RelationBadge } from "../RelationEditor/RelationBadge";
 import { InfoTooltip } from "../InfoTooltip";
-import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Tooltip } from "../Tooltip";
 
 // // // //
 
@@ -22,7 +22,7 @@ export function SchemaIncomingRelations(props: SchemaIncomingRelationsProps) {
         <div className="row mt-3">
             <div className="col-lg-12">
                 <p className="mb-0 text-muted">
-                    <span className="d-flex align-items-center justify-content-between mb-1">
+                    <span className="flex items-center justify-between mb-1">
                         <strong className="m-0">Incoming Relations</strong>
                         <InfoTooltip
                             id="schema-incoming-relations"
@@ -33,9 +33,9 @@ export function SchemaIncomingRelations(props: SchemaIncomingRelationsProps) {
                 </p>
             </div>
             <div className="col-lg-12">
-                <ul className="list-group">
+                <ul className="flex flex-col pl-0 mb-0 rounded">
                     {inflatedSchema.referencedBy.length === 0 && (
-                        <li className="list-group-item">
+                        <li className="card card-body">
                             <strong className="mb-0 mt-1 text-muted">
                                 No Incoming Relations
                             </strong>
@@ -49,33 +49,32 @@ export function SchemaIncomingRelations(props: SchemaIncomingRelationsProps) {
                     )}
                     {inflatedSchema.referencedBy.map(r => {
                         return (
-                            <OverlayTrigger
+                            <li
                                 key={r.id}
-                                placement="left"
-                                overlay={
-                                    <Tooltip id="attribute-editor-header">
-                                        {"Jump to " +
-                                            r.identifiers.source.canonical
-                                                .singular.title +
-                                            " schema"}
-                                    </Tooltip>
-                                }
+                                className="cursor-pointer flex justify-between group bg-white dark:bg-gray-900 dark:text-gray-200 hover:bg-gray-200 py-2 px-2 text-gray-900 font-light"
+                                onClick={() => {
+                                    props.onSelectSchema(r.sourceSchemaID);
+                                }}
                             >
-                                <li
-                                    className="list-group-item list-group-item-action py-0 px-2"
-                                    style={{ cursor: "pointer" }}
+                                <Tooltip
                                     key={r.id}
-                                    onClick={() => {
-                                        props.onSelectSchema(r.sourceSchemaID);
-                                    }}
+                                    position="left"
+                                    tooltipContent={
+                                        <>
+                                            {'Jump to "' +
+                                                r.identifiers.source.canonical
+                                                    .singular.title +
+                                                '" schema'}
+                                        </>
+                                    }
                                 >
                                     <RelationBadge
                                         slim
                                         direction="in"
                                         relation={r}
                                     />
-                                </li>
-                            </OverlayTrigger>
+                                </Tooltip>
+                            </li>
                         );
                     })}
                 </ul>

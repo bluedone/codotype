@@ -7,6 +7,7 @@ import { attributeExample01, attributeExample02 } from "./test_state";
 
 // // // //
 
+// testCase = [testName, attributeInput, attributeCollection, expectedResult]
 const testCases: [string, AttributeInput, Attribute[], string[]][] = [
     ["valid attr (empty collection)", { ...attributeExample01 }, [], []],
     [
@@ -45,12 +46,20 @@ const testCases: [string, AttributeInput, Attribute[], string[]][] = [
 
 describe("validateAttribute", () => {
     testCases.forEach(testCase => {
-        test(testCase[0], () => {
-            const expectedResult: string[] = validateAttribute({
-                attributeInput: testCase[1],
-                attributeCollection: testCase[2],
+        const [
+            testName,
+            attributeInput,
+            attributeCollection,
+            expectedResult,
+        ] = testCase;
+
+        test(testName, () => {
+            const result: string[] = validateAttribute({
+                attributeInput,
+                attributeCollection,
             });
-            expect(expectedResult).toStrictEqual(testCase[3]);
+
+            expect(result).toStrictEqual(expectedResult);
         });
     });
 });

@@ -1,4 +1,4 @@
-import { OptionValueInstance } from "./configuration-property";
+import { ConfigurationPropertyDict } from "./configuration-property";
 
 // // // //
 
@@ -8,5 +8,5 @@ import { OptionValueInstance } from "./configuration-property";
  * an Array<ConfigurationGroup> on Plugin.configurationGroups or SchemaEditorConfiguration.configurationGroups
  */
 export interface ConfigurationValue {
-    [key: string]: OptionValueInstance;
+    [key: string]: ConfigurationPropertyDict;
 }

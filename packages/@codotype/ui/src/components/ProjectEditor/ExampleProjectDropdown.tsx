@@ -1,20 +1,11 @@
 import * as React from "react";
-import { Dropdown } from "react-bootstrap";
 import { PluginMetadata, ProjectInput } from "@codotype/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFolderOpen } from "@fortawesome/free-solid-svg-icons";
-import styled from "styled-components";
 import { LoadExampleProjectModal } from "./LoadExampleProjectModal";
+import { Dropdown } from "../Dropdown";
 
 // // // //
-
-const StyledDiv = styled.div`
-    .dropdown-toggle.btn {
-        &:after {
-            display: none;
-        }
-    }
-`;
 
 export function ExampleProjectDropdown(props: {
     plugin: PluginMetadata;
@@ -32,37 +23,36 @@ export function ExampleProjectDropdown(props: {
     }
 
     return (
-        <StyledDiv>
-            <Dropdown alignRight>
-                <Dropdown.Toggle
-                    variant="light"
-                    size="lg"
-                    className="mr-2"
-                    id="example-projects-dropdown"
-                >
+        <React.Fragment>
+            <Dropdown label={
+                <span className="text-blue-500 whitespace-no-wrap">
                     <FontAwesomeIcon
                         icon={faFolderOpen}
-                        className="text-primary"
+                        className="mr-1"
                     />
-                </Dropdown.Toggle>
+                Example Projects
+                </span>
+            } itemCount={exampleProjects.length} >
+                {({ i }) => {
+                    const projectInput = exampleProjects[i];
+                    if (!projectInput) {
+                        return null;
+                    }
 
-                <Dropdown.Menu>
-                    <Dropdown.Header>
-                        <span className="text-primary">Example Projects</span>
-                    </Dropdown.Header>
-                    <Dropdown.Divider />
-                    {exampleProjects.map((projectInput: ProjectInput) => (
-                        <Dropdown.Item
+                    return (
+                        <button
+                            className="bg-white text-gray-700 hover:bg-gray-100 hover:text-gray-900 flex justify-between w-full px-4 py-3 leading-5 text-left text-base"
                             onClick={() => {
                                 setSelectedProject(projectInput);
                             }}
                         >
                             {projectInput.identifiers.title}
-                        </Dropdown.Item>
-                    ))}
-                </Dropdown.Menu>
+                        </button>
+                    )
+                }}
             </Dropdown>
 
+            {/* Render LoadExampleProjectModal */}
             {selectedProject && (
                 <LoadExampleProjectModal
                     projectInput={selectedProject}
@@ -76,6 +66,7 @@ export function ExampleProjectDropdown(props: {
                     }}
                 />
             )}
-        </StyledDiv>
-    );
+        </React.Fragment>
+    )
+
 }

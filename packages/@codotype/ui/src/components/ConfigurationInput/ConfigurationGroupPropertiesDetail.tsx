@@ -5,7 +5,7 @@ import {
     ConfigurationProperty,
 } from "@codotype/core";
 import { ConfigurationInputFormGroup } from "./ConfigurationInputFormGroup";
-import { ConfigurationInputChild } from "./ConfigurationInputChild";
+import { ConfigurationInputPrimative } from "./ConfigurationInputPrimative";
 
 // // // //
 
@@ -59,15 +59,15 @@ export function ConfigurationGroupPropertiesDetail(props: {
     }
 
     return (
-        <div className="row">
-            <div className={`col-lg-${selectorColumn} border-right`}>
-                <nav className="nav nav-pills flex-column">
+        <div className="grid grid-cols-12">
+            <div className={`col-span-${selectorColumn} border-right`}>
+                <nav className="nav nav-pills flex-col">
                     {configurationGroup.properties.map(property => {
                         // Defines className for tab
                         // TODO - the bootstrap tabs + pills CSS isn't working correctly, should fix
                         const tabClassName: string[] = ["nav-link nav-item"];
                         if (property.identifier === selectedPropertyID) {
-                            tabClassName.push("active bg-primary text-white");
+                            tabClassName.push("active bg-blue-500 text-white");
                         }
 
                         return (
@@ -90,19 +90,19 @@ export function ConfigurationGroupPropertiesDetail(props: {
                     })}
                 </nav>
             </div>
-            <div className={`col-lg-${detailColumn}`}>
-                <div className="row">
-                    <div className="col-lg-12">
+            <div className={`col-span-${detailColumn}`}>
+                <div className="grid grid-cols-1">
+                    <div className="col-span-1">
                         <ConfigurationInputFormGroup
                             property={selectedProperty}
                         >
-                            <ConfigurationInputChild
+                            <ConfigurationInputPrimative
                                 property={selectedProperty}
                                 value={true}
                                 onChange={() => {
-                                    // TODO - write this up, must be finished
-                                    // TODO - write this up, must be finished
-                                    // TODO - write this up, must be finished
+                                    // TODO - wire this up, must be finished
+                                    // TODO - wire this up, must be finished
+                                    // TODO - wire this up, must be finished
                                     console.log("changed");
                                 }}
                             />

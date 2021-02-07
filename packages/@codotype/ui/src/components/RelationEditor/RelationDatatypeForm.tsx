@@ -20,7 +20,7 @@ export function DatatypeOption(props: DatatypeOptionProps) {
 
 /**
  * RelationDatatypeFormProps
- * TODO - annotate remaining props
+ * CHORE - annotate remaining props
  */
 interface RelationDatatypeFormProps {
     type: RelationType;
@@ -45,8 +45,7 @@ export function RelationDatatypeForm({
 
     /** Choose either active or normal image for rel type. */
     const imgSrc = (relType: string) =>
-        `${REL_TYPE_ICON_ROOT_URL}/${relType.toLowerCase()}${
-            relType === String(type) ? "_active.png" : ".png"
+        `${REL_TYPE_ICON_ROOT_URL}/${relType.toLowerCase()}${relType === String(type) ? "_active.png" : ".png"
         }`;
 
     /** Create a button for a rel type that respects which one is active. */
@@ -70,7 +69,7 @@ export function RelationDatatypeForm({
     };
 
     return (
-        <div className="btn-group w-100">
+        <div className="btn-group w-full">
             {filteredRelationKeys.map(makeRelTypeButton)}
         </div>
     );

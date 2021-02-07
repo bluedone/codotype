@@ -1,6 +1,6 @@
 import * as React from "react";
 import { AttributeInput } from "@codotype/core";
-import { Modal } from "react-bootstrap";
+import { Modal } from "../Modal";
 
 // // // //
 
@@ -26,33 +26,35 @@ export function AttributeFormModal(props: {
     }
 
     return (
-        <Modal size="lg" show={props.show} onHide={props.onCancel}>
-            <Modal.Header closeButton>
-                <Modal.Title>{title}</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>{props.children}</Modal.Body>
-            <Modal.Footer>
-                <div className="d-flex align-items-center justify-content-between flex-grow-1">
-                    <div className="d-flex flex-grow-1">
+        <Modal
+            // size="lg"
+            show={props.show}
+            onHide={props.onCancel}
+        >
+            <h3>{title}</h3>
+            {props.children}
+            <div className="modal-footer-tw">
+                <div className="flex items-center justify-between flex-grow">
+                    <div className="flex flex-grow">
                         <p className="mb-0 text-warning">{props.errors[0]}</p>
                     </div>
-                    <div className="d-flex">
+                    <div className="flex">
                         <button
-                            className="btn btn-primary"
+                            className="btn btn-lg btn-primary"
                             disabled={props.disableSubmit}
                             onClick={props.onSubmit}
                         >
                             {title}
                         </button>
                         <button
-                            className="btn btn-light ml-2"
+                            className="btn btn-lg btn-light ml-2"
                             onClick={props.onCancel}
                         >
                             Close
                         </button>
                     </div>
                 </div>
-            </Modal.Footer>
+            </div>
         </Modal>
     );
 }

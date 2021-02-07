@@ -7,7 +7,7 @@ import {
     faMask,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Tooltip } from "../Tooltip";
 
 // // // //
 
@@ -38,39 +38,40 @@ export function RelationDiagram(props: RelationDiagramProps) {
     const destManyOrOne = destPlural ? "Many" : "One";
 
     const iconCss = classnames("mx-1", {
-        "text-primary": direction === "out",
-        "text-info": direction !== "out",
+        "text-blue-500": direction === "out",
+        "text-teal-500": direction !== "out",
     });
 
     const textColor = classnames({
-        "text-primary": direction === "out",
-        "text-info": direction !== "out",
+        "text-blue-500": direction === "out",
+        "text-teal-500": direction !== "out",
     });
 
     const oppositeTextColor = classnames({
-        "text-primary": direction !== "out",
-        "text-info": direction === "out",
+        "text-blue-500": direction !== "out",
+        "text-teal-500": direction === "out",
     });
 
     const icon = direction === "out" ? faArrowRight : faArrowLeft;
 
     const source = (
         <span className={textColor}>
-            {sourceManyOrOne} <strong>{sourceAlias}</strong>
+            {/* {sourceManyOrOne} <strong>{sourceAlias}</strong> */}
+            {sourceManyOrOne}
             {slim && sourceLabel !== sourceAlias && (
-                <OverlayTrigger
-                    placement="top"
-                    overlay={
-                        <Tooltip id={`edit-button-tooltip`}>
+                <Tooltip
+                    position="left"
+                    tooltipContent={
+                        <>
                             References <strong>{sourceLabel}</strong> Schema
-                        </Tooltip>
+                        </>
                     }
                 >
                     <FontAwesomeIcon
                         className={classnames("ml-1", textColor)}
                         icon={faMask}
                     />
-                </OverlayTrigger>
+                </Tooltip>
             )}
             {!slim && sourceLabel !== sourceAlias && (
                 <span className={classnames("ml-1", textColor)}>
@@ -87,19 +88,19 @@ export function RelationDiagram(props: RelationDiagramProps) {
             </span>
 
             {slim && destLabel !== destAlias && (
-                <OverlayTrigger
-                    placement="top"
-                    overlay={
-                        <Tooltip id={`edit-button-tooltip`}>
+                <Tooltip
+                    position="left"
+                    tooltipContent={
+                        <>
                             References <strong>{destLabel}</strong> Schema
-                        </Tooltip>
+                        </>
                     }
                 >
                     <FontAwesomeIcon
                         className={classnames("ml-1", oppositeTextColor)}
                         icon={faMask}
                     />
-                </OverlayTrigger>
+                </Tooltip>
             )}
 
             {!slim && destLabel !== destAlias && (
@@ -112,7 +113,7 @@ export function RelationDiagram(props: RelationDiagramProps) {
     );
 
     return (
-        <div className="row d-flex flex-row align-items-center">
+        <div className="row flex flex-row items-center">
             <div className="col-lg-12">
                 {props.direction === "out" && source}
                 {props.direction === "in" && dest}

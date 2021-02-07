@@ -5,61 +5,29 @@ import { faCopy } from "@fortawesome/free-solid-svg-icons";
 import {
     Schema,
     SchemaInput,
-    renderSchemaJson,
-    renderSchemaGrapqhQL,
-    renderSchemaTypeScript,
     ProjectInput,
+    PreviewOutputType,
+    schemaPreviewContent,
+    PreviewOutputTypes,
 } from "@codotype/core";
 import { faCheckCircle } from "@fortawesome/free-regular-svg-icons";
 
 // // // //
 
-// TODO - move this into core
-// TODO - define this as a enum + meta object that includes label + description for each export type
-// TODO - update this to include optional headers? i.e. import statements when exporting JS
-type RenderType = "json" | "typescript" | "graphql";
-
-export function schemaPreviewContent(props: {
-    schemaInput: SchemaInput;
-    projectInput: ProjectInput;
-    renderType: RenderType;
-}) {
-    const { schemaInput, projectInput, renderType } = props;
-
-    if (renderType === "json") {
-        return renderSchemaJson({ schemaInput, projectInput });
-    }
-
-    if (renderType === "typescript") {
-        return renderSchemaTypeScript({ schemaInput, projectInput });
-    }
-
-    if (renderType === "graphql") {
-        return renderSchemaGrapqhQL({ schemaInput, projectInput });
-    }
-
-    // Return null if no match
-    return null;
-}
-
-// // // //
-
 /**
  * SchemaPreview
- * TODO - when hovering over a relation, it should display a tooltip with a preview of the related Schema
- * TODO - when clicking a relation it should jump to the corresponding schema
- * QUESTION - should generators be able to configure which is the default preview type?
+ * FEATURE - when hovering over a relation, it should display a tooltip with a preview of the related Schema
+ * FEATURE - when clicking a relation it should jump to the corresponding schema
+ * QUESTION - should plugins be able to configure which is the default preview type?
  */
 export function SchemaPreview(props: {
     schemaInput: SchemaInput;
     projectInput: ProjectInput;
 }) {
     const { schemaInput, projectInput } = props;
-
-    const [renderType, setRenderType] = React.useState<RenderType>(
-        "typescript",
-    );
-
+    const [previewOutputType, setRenderType] = React.useState<
+        PreviewOutputType
+    >(PreviewOutputTypes.typescript);
     const [copyMessage, setCopyMessage] = React.useState<boolean>(false);
 
     React.useEffect(() => {
@@ -76,14 +44,14 @@ export function SchemaPreview(props: {
         schemaPreviewContent({
             schemaInput,
             projectInput,
-            renderType,
+            previewOutputType,
         }) || "";
 
     return (
         <div className="row">
             {/* <div className="col-lg-12">
                 <p className="mb-0 text-muted">
-                    <span className="d-flex align-items-center justify-content-between mb-1">
+                    <span className="flex items-center justify-between mb-1">
                         <strong className="m-0">Preview</strong>
                         <InfoTooltip
                             id="schema-preview"
@@ -94,38 +62,44 @@ export function SchemaPreview(props: {
                 </p>
             </div> */}
             <div className="col-lg-12">
-                <div className="rounded bg-dark" style={{ overflow: "hidden" }}>
+                <div
+                    className="rounded-xl bg-gray-900 dark:border-gray-800"
+                    style={{ overflow: "hidden" }}
+                >
                     <pre
                         className="px-3 pt-3 pb-3 mb-0"
                         style={{ fontSize: "1rem" }}
                     >
                         <small className="mb-0">
-                            <div className="text-light">{content}</div>
+                            <div className="text-gray-200">{content}</div>
                         </small>
                     </pre>
 
-                    <div
-                        className="d-flex flex-row align-items-center border-primary"
-                        style={{ borderTop: "2px solid" }}
-                    >
-                        <div className="d-flex flex-column flex-grow-1">
+                    <div className="flex flex-row items-center border-indigo-500 border-t-2">
+                        <div className="flex flex-col flex-grow">
                             <select
-                                value={renderType}
+                                value={previewOutputType}
                                 onChange={e => {
-                                    // @ts-ignore
-                                    const value: RenderType =
-                                        e.currentTarget.value;
+                                    const value: PreviewOutputType = e
+                                        .currentTarget
+                                        .value as PreviewOutputType;
                                     setRenderType(value);
                                 }}
                                 style={{ boxShadow: "none" }}
-                                className="form-control form-control-sm rounded-0 bg-dark text-light border-0"
+                                className="rounded-0 bg-gray-900 w-full text-gray-200 border-0 py-2 px-2"
                             >
-                                <option value={"typescript"}>TypeScript</option>
-                                <option value={"json"}>JSON</option>
-                                <option value={"graphql"}>GraphQL</option>
+                                <option value={PreviewOutputTypes.typescript}>
+                                    TypeScript
+                                </option>
+                                <option value={PreviewOutputTypes.json}>
+                                    JSON
+                                </option>
+                                <option value={PreviewOutputTypes.graphql}>
+                                    GraphQL
+                                </option>
                             </select>
                         </div>
-                        <div className="d-flex flex-column">
+                        <div className="flex flex-col">
                             <CopyToClipboard
                                 text={content}
                                 onCopy={() => {
@@ -134,7 +108,7 @@ export function SchemaPreview(props: {
                             >
                                 {({ copyToClipboard }) => (
                                     <button
-                                        className="btn btn-sm btn-block btn-dark rounded-0"
+                                        className="w-full rounded-0 text-gray-200 text-sm px-2 py-2 focus:outline-none"
                                         onClick={copyToClipboard}
                                         style={{
                                             boxShadow: "none",
@@ -145,7 +119,7 @@ export function SchemaPreview(props: {
                                             <span>
                                                 <FontAwesomeIcon
                                                     icon={faCheckCircle}
-                                                    className="mr-2 text-success"
+                                                    className="mr-2 text-green-500"
                                                 />
                                                 Copied
                                             </span>

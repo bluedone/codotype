@@ -1,25 +1,25 @@
 import * as React from "react";
-import { PluginFetcher } from "./GeneratorFetcher";
+import { PluginFetcher } from "./PluginFetcher";
 import { LocalStorageProvider } from "./LocalStorageProvider";
-import { PluginRunner } from "./GeneratorRunner";
+import { PluginRunner } from "./PluginRunner";
 import { ProjectEditor } from "../../components/ProjectEditor";
 
 // // // //
 
 /**
  * LocalRuntime
- * Component designed to handle all the heavy lifting for running a generator locally using @codotype/cli
+ * Component designed to handle all the heavy lifting for running a plugin locally using @codotype/cli
  */
 export function LocalRuntime() {
     return (
         <PluginFetcher>
-            {({ generators }) => (
-                <PluginRunner generator={generators[0]}>
+            {({ plugins }) => (
+                <PluginRunner plugin={plugins[0]}>
                     {({ generateCode }) => (
-                        <LocalStorageProvider plugin={generators[0]}>
+                        <LocalStorageProvider plugin={plugins[0]}>
                             {({ projectInput, clearProject, setProject }) => (
                                 <ProjectEditor
-                                    generator={generators[0]}
+                                    plugin={plugins[0]}
                                     projectInput={projectInput}
                                     onClickGenerate={() => {
                                         generateCode({

@@ -1,66 +1,113 @@
-import { DatatypeMeta, AttributeInput } from "@codotype/core";
+import {
+    DatatypeMeta,
+    AttributeAddon,
+    AttributeInput,
+    AddonPropertyInlineIcons,
+    PropertyTypes,
+} from "@codotype/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSnowflake } from "@fortawesome/free-solid-svg-icons";
+import { IconDefinition } from "@fortawesome/fontawesome-common-types";
+import {
+    faSnowflake,
+    faAsterisk,
+    faStar,
+    faTag,
+    faCheck,
+} from "@fortawesome/free-solid-svg-icons";
 import * as React from "react";
 import { DatatypeIcon } from "./DatatypeIcon";
-import { OverlayTrigger, Tooltip } from "react-bootstrap";
+// import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Tooltip } from "../Tooltip";
 
 // // // //
 
 interface AttributeListItemLabelProps {
     attribute: AttributeInput;
     datatype: DatatypeMeta;
+    addons: AttributeAddon[];
 }
 
+// Maps AddonPropertyInlineIcon to associated FontAwesome IconDefinition
+const mapAddonIconToFontAwesome: {
+    [key in AddonPropertyInlineIcons]: IconDefinition | null;
+} = {
+    [AddonPropertyInlineIcons.none]: null,
+    [AddonPropertyInlineIcons.snowflake]: faSnowflake,
+    [AddonPropertyInlineIcons.asterisk]: faAsterisk,
+    [AddonPropertyInlineIcons.star]: faStar,
+    [AddonPropertyInlineIcons.tag]: faTag,
+    [AddonPropertyInlineIcons.check]: faCheck,
+};
+
+// AddonPropertyInlineIcons;
+
 export function AttributeListItemLabel(props: AttributeListItemLabelProps) {
-    const { attribute } = props;
+    const { attribute, addons } = props;
     return (
-        <React.Fragment>
+        <div className="d-flex items-center">
             {/* DatatypeIcon + Tooltip */}
-            <OverlayTrigger
-                placement="left"
-                overlay={
-                    <Tooltip id={`datatype-icon-${attribute.id}`}>
+            <Tooltip
+                position="right"
+                tooltipContent={
+                    <>
                         {props.datatype.label}
-                    </Tooltip>
+                    </>
                 }
             >
                 <span className="px-1">
                     <DatatypeIcon size="xs" datatype={attribute.datatype} />
+                    <span className="ml-2">{attribute.identifiers.title}</span>
                 </span>
-            </OverlayTrigger>
+            </Tooltip>
 
             {/* Attribute title */}
-            <span className="ml-2">{attribute.identifiers.title}</span>
+            {/* TODO - update this to use icons from ADDONS */}
 
-            {/* Required badge */}
-            {attribute.addons.required && (
-                <span className="ml-1 text-danger">*</span>
-            )}
+            {/* Render Addon badges */}
+            {props.addons
+                .filter(
+                    a =>
+                        attribute.datatype !== null &&
+                        a.supportedDatatypes.includes(attribute.datatype),
+                )
+                .map(addon => {
+                    const icon =
+                        mapAddonIconToFontAwesome[addon.property.inlineIcon];
 
-            {/* <b-badge
-                className='ml-2'
-                variant="light"
-                title="Title Attribute"
-            >
-              <i class="fa text-primary fa-tag" />
-            </b-badge> */}
-
-            {/* Unique badge + tooltip */}
-            {attribute.addons.unique && (
-                <OverlayTrigger
-                    placement="right"
-                    overlay={
-                        <Tooltip id={`unique-badge-${attribute.id}`}>
-                            Unique
-                        </Tooltip>
+                    if (icon === null) {
+                        return null;
                     }
-                >
-                    <span className="ml-2 badge badge-light">
-                        <FontAwesomeIcon icon={faSnowflake} />
-                    </span>
-                </OverlayTrigger>
-            )}
-        </React.Fragment>
+
+                    if (
+                        attribute.addons[addon.property.identifier] ===
+                        undefined
+                    ) {
+                        return null;
+                    }
+
+                    // Return null for boolean addon with falsey property
+                    if (
+                        addon.property.propertyType === PropertyTypes.BOOLEAN &&
+                        attribute.addons[addon.property.identifier] === false
+                    ) {
+                        return null;
+                    }
+
+                    return (
+                        <Tooltip
+                            position="right"
+                            tooltipContent={
+                                <>
+                                    {addon.property.content.label}
+                                </>
+                            }
+                        >
+                            <span className="ml-2 badge bg-gray-300">
+                                <FontAwesomeIcon icon={icon} />
+                            </span>
+                        </Tooltip>
+                    );
+                })}
+        </div>
     );
 }

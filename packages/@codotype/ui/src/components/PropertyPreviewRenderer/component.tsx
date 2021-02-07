@@ -27,7 +27,7 @@ export function PropertyPreviewRenderer(props: {
     // Handle CollectionTemplateVariant
     if (variant === PropertyPreviewLayoutVariant.CODE_DARK) {
         return (
-            <pre className="mb-0 py-1 px-2 bg-dark text-light rounded">
+            <pre className="mb-0 py-1 px-2 bg-gray-800 text-gray-200 rounded">
                 {compiledTemplate}
             </pre>
         );
@@ -35,7 +35,7 @@ export function PropertyPreviewRenderer(props: {
 
     if (variant === PropertyPreviewLayoutVariant.CODE_LIGHT) {
         return (
-            <pre className="mb-0 py-1 px-2 bg-light border-dark text-dark rounded border border-dark">
+            <pre className="mb-0 py-1 px-2 bg-gray-200 border-gray-800 text-gray-800 rounded border border-gray-800">
                 {compiledTemplate}
             </pre>
         );
@@ -43,7 +43,7 @@ export function PropertyPreviewRenderer(props: {
 
     if (variant === PropertyPreviewLayoutVariant.BADGE_DARK) {
         return (
-            <span className="px-2 py-1 bg-dark text-light rounded">
+            <span className="px-2 py-1 bg-gray-800 text-gray-200 rounded">
                 {compiledTemplate}
             </span>
         );
@@ -51,7 +51,7 @@ export function PropertyPreviewRenderer(props: {
 
     if (variant === PropertyPreviewLayoutVariant.BADGE_LIGHT) {
         return (
-            <span className="px-2 py-1 bg-light text-dark rounded border border-dark">
+            <span className="px-2 py-1 bg-gray-200 text-gray-800 rounded border border-gray-800">
                 {compiledTemplate}
             </span>
         );

@@ -1,6 +1,4 @@
 import * as fs from "fs";
-// @ts-ignore
-import * as fsExtra from "fs-extra";
 import * as path from "path";
 import * as ejs from "ejs";
 import {
@@ -8,20 +6,27 @@ import {
     ComposeWithOptions,
     trailingComma,
     normalizeProjectInput,
-    Datatype,
     Project,
     RelationTypes,
     RuntimeLogLevel,
     RuntimeLogLevels,
     PluginMetadata,
     PluginRegistration,
-    RuntimeConstructorParams,
+    RuntimeProps,
     RuntimeAdapter,
     Runtime,
     ProjectBuild,
-    RuntimeInjectorProps,
-    GeneratorConstructorParams,
+    RuntimeAdapterProps,
+    GeneratorProps,
+    Schema,
     Datatypes,
+    PrettifyOptions,
+    RuntimeLogBehaviors,
+    FileOverwriteBehaviors,
+    FileSystemAdapter,
+    RuntimeLogBehavior,
+    FileOverwriteBehavior,
+    ConfigurationValue,
 } from "@codotype/core";
 import { RuntimeProxyAdapter } from "./utils/runtimeProxyAdapter";
 import { runGenerator } from "./utils/runGenerator";
@@ -35,68 +40,55 @@ import {
 import { getPluginPath } from "./utils/getPluginPath";
 import { prepareProjectBuildDestination } from "./utils/prepareProjectBuildDestination";
 import { logger } from "./utils/logger";
+import { getAllFiles } from "./utils/getAllFiles";
+import {
+    handlePluginImportError,
+    handleExecuteImportError,
+} from "./utils/handleErrors";
+import { getComposeWithModulePath } from "./utils/getComposeWithModulePath";
 
 // // // //
-// TODO - cleanup + simplify error handling
 
-function getAllFiles(dirPath: string, arrayOfFiles: string[]): string[] {
-    const files = fs.readdirSync(dirPath);
-
-    arrayOfFiles = arrayOfFiles || [];
-
-    files.forEach(function (file) {
-        if (fs.statSync(dirPath + "/" + file).isDirectory()) {
-            arrayOfFiles = getAllFiles(dirPath + "/" + file, arrayOfFiles);
-        } else {
-            arrayOfFiles.push([dirPath, "/", file].join(""));
-        }
-    });
-
-    return arrayOfFiles;
+interface TemplateData {
+    plugin: PluginMetadata;
+    project: Project;
+    configuration: ConfigurationValue;
+    RelationTypes: typeof RelationTypes;
+    Datatypes: typeof Datatypes;
+    helpers: {
+        indent: (text: string, depth: number) => string;
+        trailingComma: (arr: any[], index: number) => string;
+    };
+    [key: string]: any;
 }
-
-function handlePluginImportError(error: any): Promise<null> {
-    console.log(error);
-    if (error.code === "MODULE_NOT_FOUND") {
-        console.log("REGISTRATION ERROR - PLUGIN NOT FOUND");
-        return Promise.resolve(null);
-    } else {
-        console.log("REGISTRATION ERROR - OTHER");
-        return Promise.resolve(null);
-    }
-}
-
-function handleExecuteImportError(error: any): Promise<void> {
-    if (error.code === "MODULE_NOT_FOUND") {
-        console.log("RUNTIME ERROR - GENERATOR NOT FOUND");
-    } else {
-        console.log("RUNTIME ERROR - OTHER");
-    }
-    // Resolves with Promise<void>
-    return Promise.resolve();
-}
-
-// // // //
 
 /**
  * NodeRuntime
- * TODO - rename this to Runtime
  * Runtime for running Codotype plugins through Node.js
+ * NOTE - this is called `NodeRuntime` because we may support a non-Node.js runtime
+ * in the future (i.e. DenoRuntime, BrowserRuntime, etc.)
  */
 export class NodeRuntime implements Runtime {
-    private options: RuntimeConstructorParams;
     private plugins: PluginRegistration[];
+    private options: {
+        cwd: string;
+        fileSystemAdapter: FileSystemAdapter;
+        logBehavior: RuntimeLogBehavior;
+        fileOverwriteBehavior: FileOverwriteBehavior;
+    };
 
     /**
      * constructor
      * Instantiates a new NodeRuntime and returns it
-     * @param options - see `RuntimeConstructorParams`
+     * @param options - see `RuntimeProps`
      */
-    constructor(options: RuntimeConstructorParams) {
+    constructor(options: RuntimeProps) {
         // Assigns this.options + default values
         this.options = {
             ...options,
-            logLevel: options.logLevel || RuntimeLogLevels.verbose,
+            fileOverwriteBehavior:
+                options.fileOverwriteBehavior || FileOverwriteBehaviors.force,
+            logBehavior: options.logBehavior || RuntimeLogBehaviors.verbose,
         };
 
         // Assigns this.plugins
@@ -191,7 +183,7 @@ export class NodeRuntime implements Runtime {
             }
         } catch (err) {
             // Invoke handlePluginImportError and return result
-            return handlePluginImportError(err);
+            return handlePluginImportError(err, this.options.logBehavior);
         }
 
         // Includes default Promise resolution to prevent invariant error
@@ -218,9 +210,23 @@ export class NodeRuntime implements Runtime {
     /**
      * findPlugin
      * Finds a PluginRegistration based on PluginRegistration.id
-     * TODO - finish implementing this, replace duplicate code throughout the
+     * @param pluginID - the ID of the Plugin that's being looked-up
      */
-    // findPlugin(pluginID: string): Promise<PluginRegistration|null> {}
+    async findPlugin(
+        pluginID: string,
+    ): Promise<PluginRegistration | undefined> {
+        // Gets array of PluginRegistrations from this.getPlugins()
+        const plugins = await this.getPlugins();
+
+        // Finds the pluginRegistration associated with the ProjectBuild
+        // FEATURE - check version here, use semver if possible
+        const pluginRegistration: PluginRegistration | undefined = plugins.find(
+            g => g.id === pluginID,
+        );
+
+        // Returns Promise<PluginRegistration | undefined>
+        return Promise.resolve(pluginRegistration);
+    }
 
     /**
      * execute
@@ -249,19 +255,8 @@ export class NodeRuntime implements Runtime {
             cwd: this.options.cwd,
         });
 
-        // // // //
-        // TODO - abstract into findPlugin()
-        //
-        // Gets array of PluginRegistrations from this.getPlugins()
-        const plugins = await this.getPlugins();
-
-        // Finds the pluginRegistration associated with the ProjectBuild
-        // TODO - check version here, use semver if possible
-        const pluginRegistration: PluginRegistration | undefined = plugins.find(
-            (g) => g.id === project.pluginID,
-        );
-        //
-        // // // //
+        // Performs lookup to gind Plugin based on ProjectInput.pluginID
+        const pluginRegistration = await this.findPlugin(project.pluginID);
 
         // If pluginRegistration is not found -> log error message and short-circuit execution
         if (pluginRegistration === undefined) {
@@ -282,8 +277,8 @@ export class NodeRuntime implements Runtime {
         // NOTE - if `build.id` is an empty string, the project is placed directly inside OUTPUT_DIRECTORY
         const buildOutputDirectory: string = id || "";
 
-        // Assigns `dest` option for project output
-        const dest: string = path.join(
+        // Constructs RuntimeAdapterProps.destinationPath
+        const destinationPath: string = path.join(
             this.options.cwd,
             OUTPUT_DIRECTORY,
             buildOutputDirectory,
@@ -293,14 +288,16 @@ export class NodeRuntime implements Runtime {
         // Attempt to load the Generator from pluginDynamicImportPath, handle error
         try {
             // Defines generator and it's associated absolute filepath for module resolution
-            const generator: GeneratorConstructorParams = require(pluginDynamicImportPath); // eslint-disable-line import/no-dynamic-require
-            const resolved: string = require.resolve(pluginDynamicImportPath);
+            const generator: GeneratorProps = require(pluginDynamicImportPath); // eslint-disable-line import/no-dynamic-require
+            const generatorResolvedPath: string = require.resolve(
+                pluginDynamicImportPath,
+            );
 
             // Defines options for generator instance
-            const runtimeProxyAdapterProps: RuntimeInjectorProps = {
+            const runtimeAdapterProps: RuntimeAdapterProps = {
                 project,
-                dest,
-                resolved,
+                destinationPath,
+                generatorResolvedPath,
                 plugin: pluginRegistration.pluginMetadata,
                 runtime: this,
             };
@@ -313,18 +310,16 @@ export class NodeRuntime implements Runtime {
             // Creates RuntimeProxyAdapter instance
             const runtimeProxyAdapter = new RuntimeProxyAdapter(
                 generator,
-                runtimeProxyAdapterProps,
+                runtimeAdapterProps,
             );
 
             // Invokes runGenerator w/ Project + RuntimeProxyAdapter
             await runGenerator({
                 project,
-                runtimeProxyAdapter,
+                runtimeAdapter: runtimeProxyAdapter,
             });
-
-            // Logs which generator is being run
         } catch (err) {
-            return handleExecuteImportError(err);
+            return handleExecuteImportError(err, this.options.logBehavior);
         }
 
         // Logs "Thank you" message
@@ -338,25 +333,31 @@ export class NodeRuntime implements Runtime {
     }
 
     /**
-     * templatePath
+     * getTemplatePath
      * Generates the full path to a specific template file, relative to the filepath of the generator in-which the template is compiled
      * @param {string} generatorResolved
      * @param {string} template_path
      */
-    templatePath(generatorResolved: string, template_path = "./"): string {
+    getTemplatePath(
+        generatorResolvedPath: string,
+        templateRelativePath: string,
+    ): string {
         return path.join(
-            generatorResolved,
+            generatorResolvedPath,
             TEMPLATES_DIRECTORY_NAME,
-            template_path,
+            templateRelativePath,
         );
     }
 
     /**
-     * destinationPath
+     * getDestinationPath
      * Takes the destination name for a template and Generates
      */
-    destinationPath(destPath: string, dest = "./"): string {
-        return path.join(destPath, dest);
+    getDestinationPath(
+        outputDirAbsolutePath: string,
+        destinationRelativePath: string,
+    ): string {
+        return path.join(outputDirAbsolutePath, destinationRelativePath);
     }
 
     /**
@@ -369,58 +370,57 @@ export class NodeRuntime implements Runtime {
     renderTemplate(
         generatorInstance: RuntimeAdapter,
         src: string,
-        options: any = {}, // TODO - add type for options here, build in proper support for prettify
+        data?: { [key: string]: any },
+        options?: { prettify?: PrettifyOptions },
     ): Promise<string> {
         return new Promise((resolve, reject) => {
             // default options padded into the renderFile
             let renderOptions = {};
 
-            // // // //
-            // TODO - type this object - TemplateProps interface
-            // TODO - should be abstracted into a separate function?
-            // The `data` object is passed into each file that gets rendered
-            const data = {
-                project: generatorInstance.options.project,
-                plugin: generatorInstance.options.plugin,
-                configuration: generatorInstance.options.project.configuration,
+            // Defines data + options objects if none are passed in
+            const dataObj: { [key: string]: any } = data || {};
+            const optionsObj: { prettify?: PrettifyOptions } = options || {};
+
+            // Pulls references to plugin + project from generatorInstance.props
+            const { plugin, project } = generatorInstance.props;
+
+            // Assembles the data object passed into each template file that that gets rendered
+            const templateData: TemplateData = {
+                plugin,
+                project,
+                configuration: generatorInstance.props.project.configuration,
                 helpers: {
                     indent,
                     trailingComma,
-                    // forEachSchema helper function?
-                    // forEachAttribute helper function?
-                    // forEachRelation helper function?
-                    // forEachReferencedBy helper function?
-                    // forEachReference helper function?
                 },
                 RelationTypes,
                 Datatypes,
-                ...options, // QUESTION - are options ever used here?
+                ...dataObj,
             };
-            // // // //
 
             // Compiles EJS template
-            return ejs.renderFile(src, data, renderOptions, (err, str) => {
-                // Handles template compilation error
-                if (err) return reject(err);
+            return ejs.renderFile(
+                src,
+                templateData,
+                renderOptions,
+                (err, str) => {
+                    // Handles template compilation error
+                    if (err) return reject(err);
 
-                // Prettify if desired
-                if (options.prettify) {
-                    str = prettify({ source: str });
-                }
+                    // Prettify if desired
+                    if (optionsObj.prettify !== undefined) {
+                        str = prettify({
+                            source: str,
+                            parser: optionsObj.prettify.parser,
+                            semi: optionsObj.prettify.semi,
+                        });
+                    }
 
-                // Resolves with compiled template
-                return resolve(str);
-            });
+                    // Resolves with compiled template
+                    return resolve(str);
+                },
+            );
         });
-    }
-
-    /**
-     * fileExists
-     * Checks to see if a file exists at the destination in the filesystem
-     * @param filepath - string
-     */
-    fileExists(filepath: string): Promise<boolean> {
-        return this.options.fileSystemAdapter.fileExists(filepath);
     }
 
     /**
@@ -453,20 +453,36 @@ export class NodeRuntime implements Runtime {
      * @param dest - the destination where the compiledTemplate is being written
      * @param compiledTemplate - the text being written inside `dest`
      */
-    writeFile(dest: string, compiledTemplate: string): Promise<boolean> {
-        return this.options.fileSystemAdapter.writeFile(dest, compiledTemplate);
+    writeFile(
+        dest: string,
+        compiledTemplate: string,
+        options?: {
+            prettify?: PrettifyOptions;
+        },
+    ): Promise<boolean> {
+        let fileContents: string = compiledTemplate;
+
+        // Run prettify against compiledTemplate
+        if (options && options.prettify) {
+            fileContents = prettify({
+                source: compiledTemplate,
+                semi: options.prettify.semi,
+                parser: options.prettify.parser,
+            });
+        }
+
+        return this.options.fileSystemAdapter.writeFile(dest, fileContents);
     }
 
     /**
      * copyDir
      * Copy a directory from src to dest
-     * TODO - annotate this
      * @param src - the name of the directory being copied inside the `templates` directory relative to the Codotype Generator invoking this method
      * @param dest - the name of the destination directory
      */
     async copyDir(params: { src: string; dest: string }): Promise<boolean> {
         const { src, dest } = params;
-        // TODO - update allFiles to produce contents + destination pairs
+        // CHORE - update allFiles to produce contents + destination pairs
         const allFiles = getAllFiles(src, []);
         for (const i in allFiles) {
             const sourcePath = allFiles[i];
@@ -476,26 +492,36 @@ export class NodeRuntime implements Runtime {
                 .pop();
 
             if (destPath === undefined) {
-                console.log("Runtime Error - destination path not found!");
+                this.log("Runtime Error - destination path not found!", {
+                    level: RuntimeLogLevels.error,
+                });
                 continue;
             }
 
+            // Builds destination path
             destPath = path.resolve(dest, destPath);
 
-            // TODO - wrap in try/catch
-            const contents: string = fs.readFileSync(sourcePath, "utf8");
-
-            await this.options.fileSystemAdapter.writeFile(destPath, contents);
+            // Safely reads in
+            try {
+                const contents: string = fs.readFileSync(sourcePath, "utf8");
+                await this.options.fileSystemAdapter.writeFile(
+                    destPath,
+                    contents,
+                );
+            } catch (e) {
+                // Logs error message
+                this.log(
+                    `Runtime Error - copyDir file not found: ${sourcePath}`,
+                    {
+                        level: RuntimeLogLevels.error,
+                    },
+                );
+                continue;
+            }
         }
 
+        // Resolves true
         return Promise.resolve(true);
-        // console.log("allFiles");
-        // console.log(allFiles);
-        // console.log(this.options.cwd);
-        // return fsExtra.copy(src, dest, (err: any) => {
-        //     if (err) return reject(err);
-        //     return resolve(true);
-        // });
     }
 
     /**
@@ -505,7 +531,7 @@ export class NodeRuntime implements Runtime {
      * @param args - see logger.ts
      */
     log(args: any, options: { level: RuntimeLogLevel }) {
-        logger(args, options, this.options.logLevel);
+        logger(args, options, this.options.logBehavior);
     }
 
     /**
@@ -525,95 +551,49 @@ export class NodeRuntime implements Runtime {
             level: RuntimeLogLevels.verbose,
         });
 
-        // Defines module path
-        let modulePath: string = "";
-
-        // // // //
-        // TODO - abstract this into a separate function, we're using this in a few different places
-        //
-        // Finds the currently active plugin
-        const plugins = await this.getPlugins();
-        const activePlugin = plugins.find(
-            (p) => p.id === parentRuntimeAdapter.options.plugin.identifier,
+        // Looks up actively-used Plugin
+        const activePlugin = await this.findPlugin(
+            parentRuntimeAdapter.props.plugin.identifier,
         );
 
         if (activePlugin === undefined) {
             console.log("MODULE NOT FOUND");
             throw new Error("NodeRuntime - composeWith - plugin not found");
         }
-        //
-        // // // //
 
-        // // // //
-        // TODO - move this into a function ( `getModulePath`, perhaps )
-        // Handle relative paths
-        if (
-            generatorModulePath.startsWith("./") ||
-            generatorModulePath.startsWith("../")
-        ) {
-            // TODO - document
-            let base: string = "";
-
-            // TODO - abstract into helper function?
-            const stats = fsExtra.statSync(
-                parentRuntimeAdapter.options.resolved,
-            );
-
-            // TODO - document
-            // TODO - document
-            if (stats.isDirectory()) {
-                base = parentRuntimeAdapter.options.resolved;
-            } else {
-                base = path.dirname(parentRuntimeAdapter.options.resolved);
-            }
-
-            // TODO - document
-            modulePath = path.join(base, generatorModulePath);
-
-            // Handle absolute path
-            // } else if (generatorModulePath.absolutePath) {
-        } else if (generatorModulePath.startsWith("/")) {
-            modulePath = path.join(generatorModulePath);
-
-            // Handle module path
-        } else {
-            modulePath = path.join(
-                activePlugin.pluginDynamicImportPath, // TODO - ensure this is correct!!!
-                "node_modules",
-                generatorModulePath,
-            );
-        }
-        //
-        // // // //
+        // Gets path to generator module using getComposeWithModulePath function
+        const modulePath = getComposeWithModulePath(
+            generatorModulePath,
+            parentRuntimeAdapter,
+            activePlugin,
+        );
 
         // Attempt to load the Generator from pluginDynamicImportPath, handle error
         try {
             // Defines generator and it's associated absolute filepath for module resolution
-            const generator: GeneratorConstructorParams = require(modulePath); // eslint-disable-line import/no-dynamic-require
+            const generator: GeneratorProps = require(modulePath); // eslint-disable-line import/no-dynamic-require
             const resolved: string = require.resolve(modulePath);
 
-            // TODO - document this, clean it all up
-            // TODO - move into independent function, `getResolvedGeneratorPath`, perhaps
+            // CHORE - document this, clean it all up
+            // CHORE - move into independent function, `getResolvedGeneratorPath`, perhaps
             let resolvedGeneratorPath = resolved;
             let resolvedGeneratorPathParts = resolvedGeneratorPath.split("/");
             resolvedGeneratorPathParts.pop();
             resolvedGeneratorPath = resolvedGeneratorPathParts.join("/");
 
-            // // // //
-            // TODO - move into independent function, `resolveDestination`, perhaps
-            let resolvedDestination = parentRuntimeAdapter.options.dest;
+            // Resolve the absoluate path to the destination directory for this generator
+            let resolvedDestination =
+                parentRuntimeAdapter.props.destinationPath;
 
             // Handle ComposeWithOptions.outputDirectoryScope
             // Scope the output of the composed Generator inside a different directory within OUTPUT_DIRECTORY/my_project
             if (options.outputDirectoryScope) {
                 // Updates resolvedDestination to include the additional outputDirectoryScope
                 resolvedDestination = path.resolve(
-                    parentRuntimeAdapter.options.dest,
+                    parentRuntimeAdapter.props.destinationPath,
                     options.outputDirectoryScope,
                 );
             }
-            //
-            // // // //
 
             // Debug statements
             this.log(
@@ -621,30 +601,94 @@ export class NodeRuntime implements Runtime {
                 { level: RuntimeLogLevels.verbose },
             );
 
+            this.log(
+                `Runtime.composeWith - resolvedGeneratorPath: ${resolvedGeneratorPath}`,
+                { level: RuntimeLogLevels.verbose },
+            );
+
+            // // // //
+
             // Gets project from parentRuntimeAdapter.options
-            const project = parentRuntimeAdapter.options.project;
+            const project = parentRuntimeAdapter.props.project;
 
             // Creates new CodotypeGenerator
             const runtimeProxyAdapter = new RuntimeProxyAdapter(generator, {
-                ...parentRuntimeAdapter.options,
-                dest: resolvedDestination,
-                resolved: resolvedGeneratorPath,
+                ...parentRuntimeAdapter.props,
+                destinationPath: resolvedDestination,
+                generatorResolvedPath: resolvedGeneratorPath,
             });
 
             // Invokes runGenerator w/ generatorInstance + project
             await runGenerator({
                 project,
-                runtimeProxyAdapter,
+                runtimeAdapter: runtimeProxyAdapter,
             });
 
             // Logs output
             this.log(`Generated ${generator.name}.\n`, {
                 level: RuntimeLogLevels.info,
             });
-
-            // Logs which generator is being run
         } catch (err) {
-            return handleExecuteImportError(err);
+            return handleExecuteImportError(err, this.options.logBehavior);
         }
+    }
+
+    /**
+     * writeTemplateToFile
+     * Compiles a template and writes to the dest location
+     * @param runtimeAdapter
+     * @param src
+     * @param dest
+     * @param options
+     */
+    writeTemplateToFile(
+        runtimeAdapter: RuntimeAdapter,
+        src: string,
+        dest: string,
+        data: object = {},
+        options: object = {},
+    ): Promise<boolean> {
+        // DEBUG
+        // console.log('Copying:' + dest)
+
+        return new Promise(async (resolve, reject) => {
+            // DEBUG
+            // this.log('Rendering:' + dest)
+
+            // Compiles the template through CodotypeRuntime.renderTemplate
+            const compiledTemplate: string = await this.renderTemplate(
+                runtimeAdapter,
+                src,
+                data,
+                options,
+            );
+
+            // DEBUG
+            // this.log('Rendered:' + dest)
+
+            // // // //
+            // FEATURE - re-introduce based on FileOverwriteBehavior
+            // // Does the destination already exist?
+            // const exists = await this.options.fileSystemAdapter.fileExists(
+            //     dest,
+            // );
+
+            // // If it doesn't exist, OKAY TO WRITE
+            // if (exists) {
+            //     console.log("EXISTS");
+            //     if (this.compareFile(dest, compiledTemplate)) {
+            //         return resolve();
+            //     } else {
+            //         // NOTE - input checking will vary depending on environment
+            //         // If exists, and it's different, WRITE (add PROMPT option later, for safety)
+            //     }
+            // }
+            // // // //
+
+            // Writes the compiled template to the dest location
+            return this.writeFile(dest, compiledTemplate).then(() => {
+                return resolve();
+            });
+        });
     }
 }

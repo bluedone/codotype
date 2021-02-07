@@ -4,7 +4,7 @@ import { ConfigurationCollectionInput } from "../ConfigurationCollectionInput";
 import {
     testState,
     ConfigurationGroup,
-    OptionValue,
+    ConfigurationPropertyValue,
     buildConfigurationPropertyValue,
     buildTokenPluralization,
     PropertyTypes,
@@ -21,8 +21,7 @@ import { ConfigurationInputFormGroup } from "../ConfigurationInputFormGroup";
 
 // // // //
 
-// TODO - move into `test_data`
-// TODO - export StringPropertyTransformations + NumberValueFilter + Validations from @codotype/type (and include constructors as well!)
+// CHORE - move into `test_data`
 const ApiActionConfigurationGroup: ConfigurationGroup = new Primatives.ConfigurationGroup(
     {
         content: {
@@ -157,7 +156,7 @@ const ApiActionConfigurationGroup: ConfigurationGroup = new Primatives.Configura
     },
 );
 
-const stories: [string, ConfigurationGroup, OptionValue][] = [
+const stories: [string, ConfigurationGroup, ConfigurationPropertyValue][] = [
     [
         "render",
         LambdaBuilderConfigurationGroup,
@@ -182,7 +181,9 @@ const storyCollection = storiesOf(
 
 stories.forEach(story => {
     storyCollection.add(story[0], () => {
-        const [value, setValue] = React.useState<OptionValue>(story[2]);
+        const [value, setValue] = React.useState<ConfigurationPropertyValue>(
+            story[2],
+        );
 
         // TODO - fix this, including extra value by default
         console.log("DEFAULT VALUE");
@@ -196,13 +197,13 @@ stories.forEach(story => {
                         properties={story[1].properties[0].properties}
                         propertyPreview={story[1].properties[0].preview}
                         value={value}
-                        onChange={(updatedVal: OptionValue) => {
+                        onChange={(updatedVal: ConfigurationPropertyValue) => {
                             setValue(updatedVal);
                         }}
                     />
                 </ConfigurationInputFormGroup>
                 <hr />
-                <pre className="bg-dark rounded p-2 text-light">
+                <pre className="bg-gray-800 rounded p-2 text-gray-200">
                     {JSON.stringify({ value }, null, 4)}
                 </pre>
             </Story>

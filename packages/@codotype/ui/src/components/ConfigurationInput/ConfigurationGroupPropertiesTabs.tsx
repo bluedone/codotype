@@ -2,7 +2,7 @@ import * as React from "react";
 import {
     ConfigurationGroup,
     ConfigurationProperty,
-    OptionValueInstance,
+    ConfigurationPropertyDict,
 } from "@codotype/core";
 import { ConfigurationGroupPropertiesInput } from "./ConfigurationGroupPropertiesInput";
 
@@ -14,8 +14,8 @@ import { ConfigurationGroupPropertiesInput } from "./ConfigurationGroupPropertie
  */
 export function ConfigurationGroupPropertiesTabs(props: {
     configurationGroup: ConfigurationGroup;
-    value: OptionValueInstance;
-    onChange: (updatedVal: OptionValueInstance) => void;
+    value: ConfigurationPropertyDict;
+    onChange: (updatedVal: ConfigurationPropertyDict) => void;
 }) {
     const { configurationGroup, value, onChange } = props;
 
@@ -43,8 +43,8 @@ export function ConfigurationGroupPropertiesTabs(props: {
     const selectedProperty:
         | ConfigurationProperty
         | undefined = configurationGroup.properties.find(
-        p => p.identifier === selectedPropertyID,
-    );
+            p => p.identifier === selectedPropertyID,
+        );
 
     // Return null if selectedProperty is undefined
     if (selectedProperty === undefined) {
@@ -56,7 +56,7 @@ export function ConfigurationGroupPropertiesTabs(props: {
             <nav className="nav nav-tabs">
                 {configurationGroup.properties.map(property => {
                     // Defines className for tab
-                    const tabClassName: string[] = ["nav-link w-100"];
+                    const tabClassName: string[] = ["nav-link w-full"];
                     if (property.identifier === selectedPropertyID) {
                         tabClassName.push("active");
                     }
