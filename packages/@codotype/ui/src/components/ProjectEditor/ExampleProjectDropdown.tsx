@@ -32,7 +32,8 @@ export function ExampleProjectDropdown(props: {
                     />
                 Example Projects
                 </span>
-            } itemCount={exampleProjects.length} >
+            }
+                itemCount={exampleProjects.length} >
                 {({ i }) => {
                     const projectInput = exampleProjects[i];
                     if (!projectInput) {
