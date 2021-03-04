@@ -4,6 +4,7 @@ import {
     PropertyTypes,
     Primatives,
     ConfigurationGroup,
+    PropertyLayoutVariants,
 } from "@codotype/core";
 
 // // // //
@@ -13,33 +14,130 @@ import {
 // Landing Page
 const landingPageConfigurationGroup: ConfigurationGroup = new Primatives.ConfigurationGroup(
     {
-        identifier: "home",
+        // identifier: "home",
+        // content: {
+        //     label: "Landing Page",
+        //     description: "Configure the landing page of your website",
+        //     icon: "",
+        //     documentation: "",
+        // },
+        identifier: "example-properties",
         content: {
-            label: "Landing Page",
-            description: "Configure the landing page of your website",
+            label: "Example Properties",
+            description: "Example properties supported by Codotype",
             icon: "",
             documentation: "",
         },
         properties: [
             new Primatives.ConfigurationProperty({
-                identifier: "pricingSection",
+                identifier: "boolean",
                 content: {
-                    label: "Pricing Section",
-                    description: "Include Pricing section on your landing page",
+                    label: "Boolean Property",
+                    description:
+                        "Boolean properties can be used to turn specific features on or off",
                     icon: "",
                     documentation: "",
                 },
                 type: PropertyTypes.BOOLEAN,
+                layoutVariant: PropertyLayoutVariants.CARD_COL_6,
             }),
             new Primatives.ConfigurationProperty({
-                identifier: "contactSection",
+                identifier: "text",
                 content: {
-                    label: "Contact Section",
-                    description: "Include Contact section on your landing page",
+                    label: "Text Property",
+                    description:
+                        "Text properties can be used to populate string values in your boilerplate code",
                     icon: "",
                     documentation: "",
                 },
-                type: PropertyTypes.BOOLEAN,
+                type: PropertyTypes.STRING,
+                layoutVariant: PropertyLayoutVariants.CARD_COL_6,
+            }),
+            new Primatives.ConfigurationProperty({
+                identifier: "number",
+                content: {
+                    label: "Number Property",
+                    description:
+                        "Number properties can be used to populate numeric values in your boilerplate code",
+                    icon: "",
+                    documentation: "",
+                },
+                type: PropertyTypes.NUMBER,
+                layoutVariant: PropertyLayoutVariants.CARD_COL_6,
+            }),
+            new Primatives.ConfigurationProperty({
+                identifier: "dropdown",
+                content: {
+                    label: "Dropdown Property",
+                    description:
+                        "Dropdown properties can be used to select predefined values to change your boilerplate code",
+                    icon: "",
+                    documentation: "",
+                },
+                type: PropertyTypes.DROPDOWN,
+                dropdownOptions: [{ value: "one", label: "One" }],
+                layoutVariant: PropertyLayoutVariants.CARD_COL_6,
+            }),
+            new Primatives.ConfigurationProperty({
+                identifier: "instance",
+                content: {
+                    label: "Instance",
+                    description:
+                        "Instance properties can be used define nested key / value configuration",
+                    icon: "",
+                    documentation: "",
+                },
+                type: PropertyTypes.INSTANCE,
+                layoutVariant: PropertyLayoutVariants.CARD_COL_6,
+                properties: [
+                    new Primatives.ConfigurationProperty({
+                        identifier: "text",
+                        content: {
+                            label: "Text Property",
+                            description:
+                                "Text properties can be used to populate string values in your boilerplate code",
+                            icon: "",
+                            documentation: "",
+                        },
+                        type: PropertyTypes.STRING,
+                    }),
+                    new Primatives.ConfigurationProperty({
+                        identifier: "boolean",
+                        content: {
+                            label: "Boolean Property",
+                            description:
+                                "Boolean properties can be used to turn specific features on or off",
+                            icon: "",
+                            documentation: "",
+                        },
+                        type: PropertyTypes.BOOLEAN,
+                    }),
+                ],
+            }),
+            new Primatives.ConfigurationProperty({
+                identifier: "collection",
+                content: {
+                    label: "Collection",
+                    description:
+                        "Collection properties can be used define an array of nested key / value objects",
+                    icon: "",
+                    documentation: "",
+                },
+                type: PropertyTypes.COLLECTION,
+                layoutVariant: PropertyLayoutVariants.CARD_COL_6,
+                properties: [
+                    new Primatives.ConfigurationProperty({
+                        identifier: "text",
+                        content: {
+                            label: "Text Property",
+                            description:
+                                "Text properties can be used to populate string values in your boilerplate code",
+                            icon: "",
+                            documentation: "",
+                        },
+                        type: PropertyTypes.STRING,
+                    }),
+                ],
             }),
         ],
     },
@@ -121,6 +219,19 @@ const toolingConfigurationGroup: ConfigurationGroup = new Primatives.Configurati
                 defaultValue: true,
             }),
             new Primatives.ConfigurationProperty({
+                identifier: "eslint",
+                content: {
+                    label: "Eslint",
+                    description:
+                        "Include ESLint .rc files and npm script for code linting",
+                    icon:
+                        "https://cdn.freebiesupply.com/logos/large/2x/eslint-logo-png-transparent.png",
+                    documentation: "",
+                },
+                type: PropertyTypes.BOOLEAN,
+                defaultValue: true,
+            }),
+            new Primatives.ConfigurationProperty({
                 identifier: "storybook",
                 content: {
                     label: "Include Storybook",
@@ -148,6 +259,29 @@ const seoConfigurationGroup: ConfigurationGroup = new Primatives.ConfigurationGr
             documentation: "",
         },
         properties: [
+            new Primatives.ConfigurationProperty({
+                identifier: "twitter",
+                content: {
+                    label: "Twitter",
+                    description:
+                        "Include meta tags linking your website to a Twitter handle",
+                    icon:
+                        "https://res.cloudinary.com/codotype/image/upload/v1558931014/product-logos/twitter-512.png",
+                    documentation: "",
+                },
+                type: PropertyTypes.BOOLEAN,
+            }),
+            new Primatives.ConfigurationProperty({
+                identifier: "opengraph",
+                content: {
+                    label: "OpenGraph",
+                    description:
+                        "Include OpenGraph meta tags for pretty previews when sharing your site on social media",
+                    icon: "https://ogp.me/logo.png",
+                    documentation: "",
+                },
+                type: PropertyTypes.BOOLEAN,
+            }),
             new Primatives.ConfigurationProperty({
                 identifier: "sitemap",
                 content: {
@@ -229,11 +363,141 @@ export const NextJsWebsiteStarterPlugin: PluginMetadata = new Primatives.Plugin(
             documentation: pluginReadme,
         },
         configurationGroups: [
-            landingPageConfigurationGroup,
+            // landingPageConfigurationGroup,
             toolingConfigurationGroup,
             seoConfigurationGroup,
             analyticsConfigurationGroup,
             hostingConfigurationGroup,
+        ],
+    },
+);
+
+// // // //
+// Export alternative variation of same plugin using grouped properties
+
+const toolingProperty = new Primatives.ConfigurationProperty({
+    identifier: "tooling",
+    content: {
+        label: "Tooling",
+        description: "What tooling would you like to use?",
+        icon: "",
+        documentation: "",
+    },
+    type: PropertyTypes.INSTANCE,
+    layoutVariant: PropertyLayoutVariants.COL_12,
+    defaultValue: {},
+    dropdownOptions: [],
+    properties: [
+        ...toolingConfigurationGroup.properties.map(p => {
+            return {
+                ...p,
+                // layoutVariant: PropertyLayoutVariants.CARD_COL_4,
+                layoutVariant: PropertyLayoutVariants.CARD_COL_6,
+            };
+        }),
+    ],
+});
+
+const analyticsProperty = new Primatives.ConfigurationProperty({
+    identifier: "analytics",
+    content: {
+        label: "Analytics",
+        description: "Which SEO features would you like?",
+        icon: "",
+        documentation: "",
+    },
+    type: PropertyTypes.INSTANCE,
+    layoutVariant: PropertyLayoutVariants.COL_12,
+    defaultValue: {},
+    dropdownOptions: [],
+    properties: [
+        ...analyticsConfigurationGroup.properties.map(p => {
+            return {
+                ...p,
+                layoutVariant: PropertyLayoutVariants.CARD_COL_6,
+            };
+        }),
+    ],
+});
+
+const seoProperty = new Primatives.ConfigurationProperty({
+    identifier: "seo",
+    content: {
+        label: "SEO",
+        description: "Which SEO features would you like?",
+        icon: "",
+        documentation: "",
+    },
+    type: PropertyTypes.INSTANCE,
+    layoutVariant: PropertyLayoutVariants.COL_12,
+    defaultValue: {},
+    dropdownOptions: [],
+    properties: [
+        ...seoConfigurationGroup.properties.map(p => {
+            return {
+                ...p,
+                layoutVariant: PropertyLayoutVariants.CARD_COL_6,
+            };
+        }),
+    ],
+});
+
+const hostingProperty = new Primatives.ConfigurationProperty({
+    identifier: "hosting",
+    content: {
+        label: "Hosting",
+        description: "What hosting would you like to use?",
+        icon: "",
+        documentation: "",
+    },
+    type: PropertyTypes.INSTANCE,
+    layoutVariant: PropertyLayoutVariants.COL_12,
+    defaultValue: {},
+    dropdownOptions: [],
+    properties: [
+        ...hostingConfigurationGroup.properties.map(p => {
+            return {
+                ...p,
+                layoutVariant: PropertyLayoutVariants.CARD_COL_12,
+            };
+        }),
+    ],
+});
+
+// Other properties:
+// - Marketing - Mailchip
+// - Customer Engagement - Intercom
+// - Customer Engagement - Segment (Customer Data Platform)
+
+export const NextJsWebsiteStarterPluginVariant: PluginMetadata = new Primatives.Plugin(
+    {
+        id: "react-next-ts-website-starter-variant",
+        project_path: "react-next-ts-starter",
+        content: {
+            label: "React + Next + TypeScript Website Starter",
+            description: "React + Next + TypeScript Website Starter",
+            icon:
+                "https://miro.medium.com/max/500/1*cPh7ujRIfcHAy4kW2ADGOw.png",
+            documentation: pluginReadme,
+        },
+        configurationGroups: [
+            {
+                ...toolingConfigurationGroup,
+                identifier: "configure",
+                content: {
+                    label: "Configure",
+                    description: "Configure your boilerplate code",
+                    icon: "",
+                    documentation: "",
+                },
+                properties: [
+                    toolingProperty,
+                    analyticsProperty,
+                    seoProperty,
+                    hostingProperty,
+                ],
+            },
+            landingPageConfigurationGroup,
         ],
     },
 );

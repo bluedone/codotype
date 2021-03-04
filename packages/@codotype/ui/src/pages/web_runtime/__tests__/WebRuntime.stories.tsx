@@ -21,9 +21,19 @@ import {
     buildDefaultConfiguration,
 } from "@codotype/core";
 import { pluginReadme } from "../../../components/MarkdownRenderer/__tests__/test_state";
-import { ApiActionsProperty, relationAddons, NestedCollectionProperty, NextJsWebsiteStarterPlugin, RailsStarterPlugin, ATTRIBUTE_ADDON_UNIQUE } from "./test_state";
+import {
+    ApiActionsProperty,
+    relationAddons,
+    NestedCollectionProperty,
+    NextJsWebsiteStarterPlugin,
+    NextMongoStarter,
+    RailsStarterPlugin,
+    ATTRIBUTE_ADDON_UNIQUE,
+    NextJsWebsiteStarterPluginVariant,
+    ReactComponentLibraryStarterPlugin,
+} from "./test_state";
 
-// // // // 
+// // // //
 
 const {
     cdkPluginMeta,
@@ -135,7 +145,7 @@ const projectExample01: ProjectInput = {
     ],
 };
 
-// // // // 
+// // // //
 
 // TODO - clean up stories, move into test state
 
@@ -477,7 +487,20 @@ const stories: Array<[string, PluginMetadata]> = [
         },
     ],
     ["Concepts/Next.js Website Starter", NextJsWebsiteStarterPlugin],
+    [
+        "Concepts/Next.js Website Starter (variant)",
+        NextJsWebsiteStarterPluginVariant,
+    ],
     ["Concepts/Rails Starter", RailsStarterPlugin],
+    [
+
+        "Concepts/React Component Library Starter",
+        ReactComponentLibraryStarterPlugin,
+    ],
+    [
+        "Concepts/Next.js + MongoDB Starter",
+        NextMongoStarter,
+    ],
 ];
 
 // // // //
@@ -509,9 +532,9 @@ stories.forEach(story => {
                                             setProject(updatedProject);
                                         }}
                                     />
-                                    <pre>
+                                    {/* <pre>
                                         {JSON.stringify(projectInput, null, 4)}
-                                    </pre>
+                                    </pre> */}
                                 </React.Fragment>
                             )}
                         </RuntimeProvider>

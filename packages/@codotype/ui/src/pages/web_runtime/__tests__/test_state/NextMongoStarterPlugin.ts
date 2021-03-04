@@ -1,6 +1,11 @@
+import { pluginReadme } from "../../../../components/MarkdownRenderer/__tests__/test_state";
 import {
+    PluginMetadata,
     PropertyTypes,
     Primatives,
+    ConfigurationGroup,
+} from "@codotype/core";
+import {
     SchemaEditorConfiguration,
     RelationTypes,
     Datatypes,
@@ -8,20 +13,27 @@ import {
     PropertyLayoutVariants,
     CreatedByValues,
 } from "@codotype/core";
-// import { ApiActionsProperty } from "./CollectionProperty-ApiActions";
 import { ATTRIBUTE_ADDON_UNIQUE, relationAddons } from "./Addons";
+import { NextJsWebsiteStarterPluginVariant } from "./NextJsWebsiteStarterPlugin";
 
 // // // //
+// Next.js + MongoDB Starter Plugin
 
-export const SchemaEditorKitchenSink: SchemaEditorConfiguration = {
-    supportedRelationTypes: [RelationTypes.TO_ONE, RelationTypes.TO_MANY],
+export const SchemaEditor: SchemaEditorConfiguration = {
+    supportedRelationTypes: [
+        RelationTypes.TO_ONE,
+        RelationTypes.TO_MANY,
+        RelationTypes.EMBEDS_ONE,
+        RelationTypes.EMBEDS_MANY,
+    ],
     supportedDatatypes: [
         Datatypes.STRING,
-        Datatypes.DATE,
-        Datatypes.DATETIME,
         Datatypes.INT,
         Datatypes.FLOAT,
         Datatypes.STRING_ARRAY,
+        Datatypes.NUMERIC_ARRAY,
+        Datatypes.TIMESTAMP,
+        Datatypes.OBJECT,
     ],
     configurationGroups: [
         new Primatives.ConfigurationGroup({
@@ -45,50 +57,38 @@ export const SchemaEditorKitchenSink: SchemaEditorConfiguration = {
                 }),
             ],
         }),
-        // new Primatives.ConfigurationGroup({
-        //     content: {
-        //         label: "API Actions",
-        //         description: "Define individual REST api actions.",
-        //         documentation:
-        //             "This is documentation for the API Actions configuration group",
-        //     },
-        //     identifier: "api_actions",
-        //     layoutVariant: GroupLayoutVariants.LIST,
-        //     properties: [ApiActionsProperty],
-        // }),
-        // new Primatives.ConfigurationGroup({
-        //     content: {
-        //         label: "GraphQL API",
-        //         description: "Configure the GraphQL API for this Schema",
-        //     },
-        //     identifier: "graphql_api",
-        //     layoutVariant: GroupLayoutVariants.LIST,
-        //     properties: [
-        //         new Primatives.ConfigurationProperty({
-        //             type: PropertyTypes.BOOLEAN,
-        //             defaultValue: true,
-        //             identifier: "generate_crud_api",
-        //             content: {
-        //                 label: "Generate CRUD API",
-        //                 description:
-        //                     "Generate a CRUD API with GraphQL for this resource",
-        //             },
-        //             layoutVariant: PropertyLayoutVariants.CARD_COL_12,
-        //         }),
-        //         new Primatives.ConfigurationProperty({
-        //             content: {
-        //                 label: "DynamoDB table name",
-        //                 description:
-        //                     "Define the name of the DynamoDB table for this",
-        //             },
-        //             identifier: "dynamodb_table_name",
-        //             defaultValue: "",
-        //             type: PropertyTypes.STRING,
-        //             layoutVariant: PropertyLayoutVariants.CARD_COL_12,
-        //         }),
-        //         ApiActionsProperty,
-        //     ],
-        // }),
+        new Primatives.ConfigurationGroup({
+            content: {
+                label: "GraphQL API",
+                description: "Configure the GraphQL API for this Schema",
+            },
+            identifier: "graphql_api",
+            layoutVariant: GroupLayoutVariants.LIST,
+            properties: [
+                new Primatives.ConfigurationProperty({
+                    type: PropertyTypes.BOOLEAN,
+                    defaultValue: true,
+                    identifier: "generate_crud_api",
+                    content: {
+                        label: "Generate CRUD API",
+                        description:
+                            "Generate a CRUD API with GraphQL for this resource",
+                    },
+                    layoutVariant: PropertyLayoutVariants.CARD_COL_12,
+                }),
+                new Primatives.ConfigurationProperty({
+                    content: {
+                        label: "DynamoDB table name",
+                        description:
+                            "Define the name of the DynamoDB table for this",
+                    },
+                    identifier: "dynamodb_table_name",
+                    defaultValue: "",
+                    type: PropertyTypes.STRING,
+                    layoutVariant: PropertyLayoutVariants.CARD_COL_12,
+                }),
+            ],
+        }),
     ],
     attributeAddons: [ATTRIBUTE_ADDON_UNIQUE],
     relationAddons: [...relationAddons],
@@ -193,3 +193,54 @@ export const SchemaEditorKitchenSink: SchemaEditorConfiguration = {
         },
     ],
 };
+
+// // // //
+// Hosting
+const hostingConfigurationGroup: ConfigurationGroup = new Primatives.ConfigurationGroup(
+    {
+        identifier: "hosting",
+        content: {
+            label: "Hosting",
+            description: "Configure the hosting of your Next.js app",
+            icon: "",
+            documentation: "",
+        },
+        properties: [
+            new Primatives.ConfigurationProperty({
+                identifier: "platform",
+                content: {
+                    label: "Platform",
+                    description: "How would you like to host your Next.js app?",
+                    icon:
+                        "https://cdn4.iconfinder.com/data/icons/colicon/24/cloud-512.png",
+                    documentation: "",
+                },
+                type: PropertyTypes.DROPDOWN,
+                defaultValue: "docker",
+                dropdownOptions: [
+                    { label: "Docker", value: "docker" },
+                    { label: "EC2", value: "ec2" },
+                ],
+            }),
+        ],
+    },
+);
+
+// // // //
+// Export Plugin
+
+export const NextMongoStarter: PluginMetadata = new Primatives.Plugin({
+    id: "next-mongo-starter",
+    project_path: "next-mongo-starter",
+    content: {
+        label: "Next.js + MongoDB Starter",
+        description:
+            "Next.js + MongoDB + User Authentication + Scaffolding Starter",
+        icon: "https://miro.medium.com/max/500/1*cPh7ujRIfcHAy4kW2ADGOw.png",
+        documentation: pluginReadme,
+    },
+    configurationGroups: [
+        NextJsWebsiteStarterPluginVariant.configurationGroups[0],
+    ],
+    schemaEditorConfiguration: SchemaEditor,
+});
