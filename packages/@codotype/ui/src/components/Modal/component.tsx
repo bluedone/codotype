@@ -10,7 +10,7 @@ export function Modal(props: {
     allowClose?: boolean;
     onHide?: () => void;
 }) {
-    const { show, allowClose = true, onHide = () => {} } = props;
+    const { show, allowClose = true, onHide = () => { } } = props;
 
     if (show === false) {
         return null;
