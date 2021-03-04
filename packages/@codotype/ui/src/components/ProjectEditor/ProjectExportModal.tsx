@@ -39,27 +39,29 @@ export function ProjectExportModal(props: {
     const { show, projectInput, onHide } = props;
     return (
         <Modal show={show} onHide={() => onHide()}>
-            <h3>Export Project</h3>
+            <div className="p-5">
+                <h3 className="text-2xl select-none">Export Project</h3>
 
-            <p className="form-text text-muted mb-2">
-                Export a Codotype Project stored as a .JSON file
+                <p className="form-text text-muted mb-2">
+                    Export a Codotype Project stored as a .JSON file
                 </p>
 
-            <small className="text-muted">
-                <FontAwesomeIcon icon={faInfoCircle} className="mr-1" />
+                <small className="text-muted">
+                    <FontAwesomeIcon icon={faInfoCircle} className="mr-1" />
                     The exported JSON file can be re-imported into the Codotype
                     web UI, or used directly with the
                     <a
-                    href="https://github.com/codotype/codotype-cli"
-                    target="_blank"
-                >
-                    Codotype CLI
+                        href="https://github.com/codotype/codotype-cli"
+                        target="_blank"
+                    >
+                        Codotype CLI
                     </a>
-            </small>
+                </small>
+            </div>
 
             <div className="modal-footer-tw">
                 <button
-                    className="btn btn-lg btn-success"
+                    className="btn btn-primary"
                     onClick={() => {
                         downloadProject(projectInput);
                         onHide();

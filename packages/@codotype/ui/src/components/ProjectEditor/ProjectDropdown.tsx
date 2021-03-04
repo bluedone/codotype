@@ -18,50 +18,53 @@ export function ProjectDropdown(props: {
 
     return (
         <React.Fragment>
-            <Dropdown
-                hideCaret
-                label={
-                    <span className="whitespace-no-wrap">
-                        <FontAwesomeIcon icon={faEllipsisH} />
-                    </span>
-                }
-                itemCount={2} >
-                {({ i }) => {
-
-                    // Render "Export Project" button
-                    if (i === 0) {
-                        return (
-                            <button
-                                className="bg-white text-gray-700 hover:bg-gray-100 rounded-xl hover:text-gray-900 flex justify-between w-full px-4 py-3 leading-5 text-left text-base"
-                                onClick={() => {
-                                    showExportModal(true)
-                                }}
-                            >
-                                Export Project
-                            </button>
-                        )
-                    }
-
-                    // Render "Reset Project" button
-                    return (
-                        <>
-                            <span
-                                className="bg-white text-red-700 flex justify-between w-full px-4 py-3 leading-5 text-left text-base"
-                            >
-                                Danger Zone
+            <div className="mr-4 flex items-center">
+                <Dropdown
+                    hideCaret
+                    label={
+                        <span className="whitespace-no-wrap">
+                            <FontAwesomeIcon size="2x" icon={faEllipsisH} />
                         </span>
-                            <button
-                                className="bg-white text-gray-700 hover:bg-gray-100 hover:text-gray-900 flex justify-between w-full px-4 py-3 leading-5 text-left text-base"
-                                onClick={() => {
-                                    showResetModal(true)
-                                }}
-                            >
-                                Reset Project
+                    }
+                    itemCount={2} >
+                    {({ i }) => {
+
+                        // Render "Export Project" button
+                        if (i === 0) {
+                            return (
+                                <button
+                                    className="bg-white text-gray-700 hover:bg-gray-100 rounded-xl hover:text-gray-900 flex justify-between w-full px-4 py-3 leading-5 text-left text-base"
+                                    onClick={() => {
+                                        showExportModal(true)
+                                    }}
+                                >
+                                    Export Project
+                                </button>
+                            )
+                        }
+
+                        // Render "Reset Project" button
+                        return (
+                            <>
+                                {/* TODO - add DropdownDivider + DropdownLabel components? */}
+                                <span
+                                    className="bg-white text-red-700 text-sm flex justify-between w-full px-4 py-3 leading-5 text-left"
+                                >
+                                    Danger Zone
+                                </span>
+                                <button
+                                    className="bg-white text-gray-700 hover:bg-gray-100 hover:text-gray-900 flex justify-between w-full px-4 py-3 leading-5 text-left text-base"
+                                    onClick={() => {
+                                        showResetModal(true)
+                                    }}
+                                >
+                                    Reset Project
                             </button>
-                        </>
-                    )
-                }}
-            </Dropdown>
+                            </>
+                        )
+                    }}
+                </Dropdown>
+            </div>
 
             {/* Render ProjectExportModal */}
             <ProjectExportModal projectInput={projectInput} show={showingExportModal} onHide={() => showExportModal(false)} />

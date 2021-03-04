@@ -16,20 +16,22 @@ export function ResetProjectModal(props: {
 }) {
     const { show, onHide, onConfirmReset } = props;
     const [showConfirm, setShowConfirm] = React.useState<boolean>(false);
-    // setShowConfirm(false);
 
     return (
         <Modal show={show} onHide={() => onHide()}>
-            <h3>Reset Project</h3>
-            <p className="form-text text-muted mb-2">
-                Are you sure you want to reset this Project?
+            <div className="p-5">
+                <h3 className="text-2xl select-none">Reset Project</h3>
+
+                <p className="form-text text-muted mb-2">
+                    Are you sure you want to reset this Project?
                 </p>
 
-            <p className="form-text text-muted mb-2">
-                <span className="text-red-500">DANGER: </span>This will
+                <p className="form-text text-muted mb-2">
+                    <span className="text-red-500">DANGER: </span>This will
                     delete your current project - this action cannot be undone.
                     Are you sure you want to continue?
                 </p>
+            </div>
             <div className="modal-footer-tw">
                 {showConfirm && (
                     <button
@@ -37,7 +39,7 @@ export function ResetProjectModal(props: {
                             onHide();
                             onConfirmReset();
                         }}
-                        className="btn btn-lg btn-danger"
+                        className="btn btn-primary"
                     >
                         Are you really sure?
                     </button>
@@ -47,14 +49,14 @@ export function ResetProjectModal(props: {
                         onClick={() => {
                             setShowConfirm(true);
                         }}
-                        className="btn btn-lg btn-danger"
+                        className="btn btn-primary"
                     >
                         Reset Project
                     </button>
                 )}
                 <button
                     onClick={() => onHide()}
-                    className="btn btn-lg btn-light"
+                    className="btn btn-lg btn-light bg-white"
                 >
                     Close
                     </button>
