@@ -9,7 +9,8 @@ import {
 } from "@codotype/core";
 import { PluginStart } from "../PluginStart";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlay } from "@fortawesome/free-solid-svg-icons";
+import { faBookOpen, faPlay } from "@fortawesome/free-solid-svg-icons";
+import { faReadme } from "@fortawesome/free-brands-svg-icons";
 
 // // // //
 
@@ -40,7 +41,7 @@ export function ConfigurationGroupTab(props: {
                 props.onClick();
             }}
         >
-            {props.pinned && <FontAwesomeIcon icon={faPlay} className="mr-2" />}
+            {props.pinned && <FontAwesomeIcon icon={faBookOpen} className="mr-2" />}
             {label}
         </button>
     );
@@ -100,7 +101,7 @@ export function ConfigurationGroupSelector(props: {
             configurationGroup={selectedConfigurationGroup}
             value={
                 props.projectInput.configuration[
-                    selectedConfigurationGroup.identifier
+                selectedConfigurationGroup.identifier
                 ]
             }
             onChange={(updatedVal: ConfigurationPropertyDict) => {
@@ -130,7 +131,7 @@ export function ConfigurationGroupSelector(props: {
                             setViewingSchemas(false);
                         }}
                         active={viewingReadme}
-                        label={"Start"}
+                        label="README"
                     />
 
                     {enableSchemaEditor && (
@@ -159,7 +160,7 @@ export function ConfigurationGroupSelector(props: {
                                     }}
                                     active={
                                         configurationGroup.identifier ===
-                                            selectedConfigurationGroup.identifier &&
+                                        selectedConfigurationGroup.identifier &&
                                         !viewingSchemas &&
                                         !viewingReadme
                                     }
@@ -180,7 +181,7 @@ export function ConfigurationGroupSelector(props: {
                                 selectedConfigurationGroup,
                                 value:
                                     props.projectInput.configuration[
-                                        selectedConfigurationGroup.identifier
+                                    selectedConfigurationGroup.identifier
                                     ],
                                 onChange: (
                                     updatedVal: ConfigurationPropertyDict,

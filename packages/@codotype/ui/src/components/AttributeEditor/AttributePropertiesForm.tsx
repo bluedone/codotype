@@ -22,18 +22,18 @@ interface AttributePropertiesFormProps {
 export function AttributePropertiesForm(props: AttributePropertiesFormProps) {
     const { attributeInput } = props;
     return (
-        <div className="row mt-3">
-            <div className="col-lg-12">
+        <div className="grid grid-cols-2">
+            <div className="col-span-2">
                 <p className="lead mb-0">Tokens</p>
                 <small className="text-muted">
-                    Define the <span className="text-green-500">Tokens</span> used
-                    to identify this <strong>Attribute</strong> throughout your
-                    codebase.
+                    Define the <span className="text-green-500">Tokens</span>{" "}
+                    used to identify this <strong>Attribute</strong> throughout
+                    your codebase.
                 </small>
                 <hr />
             </div>
 
-            <div className="col-sm-12">
+            <div className="col-span-2">
                 <TokenCasingForm
                     label={attributeInput.identifiers.title}
                     onKeydownEnter={props.onKeydownEnter}
@@ -46,11 +46,11 @@ export function AttributePropertiesForm(props: AttributePropertiesFormProps) {
                 />
             </div>
 
-            <div className="col-sm-12">
+            <div className="col-span-2">
                 <hr />
             </div>
 
-            <div className="col-sm-12">
+            <div className="col-span-2">
                 <FormGroup
                     label="Internal Note"
                     help="Leave an optional note to document this Attribute"

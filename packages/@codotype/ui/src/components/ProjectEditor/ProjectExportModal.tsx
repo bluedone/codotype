@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Dropdown } from "react-bootstrap";
 import { Modal } from "../Modal";
 import { ProjectInput } from "@codotype/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,9 +13,8 @@ const download = require("downloadjs");
  */
 function downloadProject(projectInput: ProjectInput) {
     // Defines filename
-    const filename = `codotype-project-${
-        projectInput.identifiers.snake
-    }-${Date.now()}.json`;
+    const filename = `codotype-project-${projectInput.identifiers.snake
+        }-${Date.now()}.json`;
 
     // Defines JSON string
     const jsonString: string = JSON.stringify(projectInput, null, 4);
@@ -28,26 +26,21 @@ function downloadProject(projectInput: ProjectInput) {
 // // // //
 
 /**
- * ProjectExportButton
+ * ProjectExportModal
  * @param props.show
  * @param props.projectInput
  * @param props.onHide
  */
-export function ProjectExportButton(props: { projectInput: ProjectInput }) {
-    const { projectInput } = props;
-    const [showingModal, showModal] = React.useState<boolean>(false);
+export function ProjectExportModal(props: {
+    show: boolean,
+    projectInput: ProjectInput
+    onHide: () => void;
+}) {
+    const { show, projectInput, onHide } = props;
     return (
-        <React.Fragment>
-            <Dropdown.Item
-                onClick={() => {
-                    showModal(true);
-                }}
-            >
-                Export Project
-            </Dropdown.Item>
-
-            <Modal show={showingModal} onHide={() => showModal(false)}>
-                <h3>Export Project</h3>
+        <Modal show={show} onHide={() => onHide()}>
+            <div className="p-5">
+                <h3 className="text-2xl select-none">Export Project</h3>
 
                 <p className="form-text text-muted mb-2">
                     Export a Codotype Project stored as a .JSON file
@@ -64,26 +57,26 @@ export function ProjectExportButton(props: { projectInput: ProjectInput }) {
                         Codotype CLI
                     </a>
                 </small>
+            </div>
 
-                <div className="modal-footer-tw">
-                    <button
-                        className="btn btn-lg btn-success"
-                        onClick={() => {
-                            downloadProject(projectInput);
-                            showModal(false);
-                        }}
-                    >
-                        Export Project
+            <div className="modal-footer-tw">
+                <button
+                    className="btn btn-primary"
+                    onClick={() => {
+                        downloadProject(projectInput);
+                        onHide();
+                    }}
+                >
+                    Export Project
                     </button>
 
-                    <button
-                        className="btn btn-lg btn-light"
-                        onClick={() => showModal(false)}
-                    >
-                        Cancel
+                <button
+                    className="btn btn-lg btn-light"
+                    onClick={() => onHide()}
+                >
+                    Cancel
                     </button>
-                </div>
-            </Modal>
-        </React.Fragment>
+            </div>
+        </Modal>
     );
 }

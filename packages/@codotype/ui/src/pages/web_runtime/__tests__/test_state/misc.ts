@@ -1,9 +1,7 @@
-import * as React from "react";
-import { storiesOf } from "@storybook/react";
-import { WebRuntime } from "../component";
-import { Story } from "../../../components/Story";
-import { RuntimeProvider } from "../../../components/RuntimeProvider";
-import { ProjectEditor } from "../../../components/ProjectEditor";
+import {
+    ApiActionsProperty,
+    NestedCollectionProperty,
+} from "./CollectionProperty-ApiActions";
 import {
     ProjectInput,
     Datatypes,
@@ -20,18 +18,9 @@ import {
     buildTokenPluralization,
     buildDefaultConfiguration,
 } from "@codotype/core";
-import { pluginReadme } from "../../../components/MarkdownRenderer/__tests__/test_state";
-import {
-    ApiActionsProperty,
-    relationAddons,
-    NestedCollectionProperty,
-    NextJsWebsiteStarterPlugin,
-    NextMongoStarter,
-    RailsStarterPlugin,
-    ATTRIBUTE_ADDON_UNIQUE,
-    NextJsWebsiteStarterPluginVariant,
-    ReactComponentLibraryStarterPlugin,
-} from "./test_state";
+import { pluginReadme } from "../../../../components/MarkdownRenderer/__tests__/test_state";
+import { NextJsWebsiteStarterPlugin } from "./NextJsWebsiteStarterPlugin";
+import { ATTRIBUTE_ADDON_UNIQUE, relationAddons } from "./Addons";
 
 // // // //
 
@@ -144,8 +133,6 @@ const projectExample01: ProjectInput = {
         }),
     ],
 };
-
-// // // //
 
 // TODO - clean up stories, move into test state
 
@@ -487,60 +474,4 @@ const stories: Array<[string, PluginMetadata]> = [
         },
     ],
     ["Concepts/Next.js Website Starter", NextJsWebsiteStarterPlugin],
-    [
-        "Concepts/Next.js Website Starter (variant)",
-        NextJsWebsiteStarterPluginVariant,
-    ],
-    ["Concepts/Rails Starter", RailsStarterPlugin],
-    [
-
-        "Concepts/React Component Library Starter",
-        ReactComponentLibraryStarterPlugin,
-    ],
-    [
-        "Concepts/Next.js + MongoDB Starter",
-        NextMongoStarter,
-    ],
 ];
-
-// // // //
-
-const storyCollection = storiesOf("Pages/WebRuntime", module);
-
-stories.forEach(story => {
-    storyCollection.add(story[0], () => {
-        return (
-            <Story>
-                <WebRuntime plugin={story[1]}>
-                    {({ plugin, projectInput, setProject, clearProject }) => (
-                        <RuntimeProvider>
-                            {({ generateCode }) => (
-                                <React.Fragment>
-                                    <ProjectEditor
-                                        plugin={plugin}
-                                        projectInput={projectInput}
-                                        onClickGenerate={() => {
-                                            generateCode({
-                                                projectInput,
-                                                plugin,
-                                            });
-                                        }}
-                                        onResetProject={clearProject}
-                                        onChange={(
-                                            updatedProject: ProjectInput,
-                                        ) => {
-                                            setProject(updatedProject);
-                                        }}
-                                    />
-                                    {/* <pre>
-                                        {JSON.stringify(projectInput, null, 4)}
-                                    </pre> */}
-                                </React.Fragment>
-                            )}
-                        </RuntimeProvider>
-                    )}
-                </WebRuntime>
-            </Story>
-        );
-    });
-});

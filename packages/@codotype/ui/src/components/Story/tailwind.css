@@ -2,8 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+    height: 100%;
+}
+
 .sb-show-main {
     padding: 0 !important;
+    height: 100%;
 }
 
 /* Start updating things one component at a time */
@@ -160,7 +165,7 @@ hr {
     @apply transition-colors;
     @apply duration-150;
     @apply ease-in-out;
-    @apply hover:text-blue-400;
+    @apply hover:text-indigo-400;
     @apply focus:outline-none;
 }
 

@@ -62,14 +62,8 @@ export function SchemaPreview(props: {
                 </p>
             </div> */}
             <div className="col-lg-12">
-                <div
-                    className="rounded-xl bg-gray-900 dark:border-gray-800"
-                    style={{ overflow: "hidden" }}
-                >
-                    <pre
-                        className="px-3 pt-3 pb-3 mb-0"
-                        style={{ fontSize: "1rem" }}
-                    >
+                <div className="rounded-2xl bg-gray-900 overflow-hidden border dark:border-gray-600">
+                    <pre className="px-3 pt-3 pb-3 mb-0 text-lg">
                         <small className="mb-0">
                             <div className="text-gray-200">{content}</div>
                         </small>
@@ -84,6 +78,7 @@ export function SchemaPreview(props: {
                                         .currentTarget
                                         .value as PreviewOutputType;
                                     setRenderType(value);
+                                    e.currentTarget.blur();
                                 }}
                                 style={{ boxShadow: "none" }}
                                 className="rounded-0 bg-gray-900 w-full text-gray-200 border-0 py-2 px-2"

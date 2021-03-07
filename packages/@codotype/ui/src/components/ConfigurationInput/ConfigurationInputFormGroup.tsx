@@ -91,6 +91,9 @@ export function ConfigurationInputFormGroup(
     // Handle column span
     const colSpan: number = getColSpan(layoutVariant);
 
+    // Handle ConfigurationProperty
+    const isInstanceProperty = property.type === PropertyTypes.INSTANCE;
+
     // Defines checkbox to enable/disable
     const toggleEnabledCheckbox = (
         <input
@@ -104,17 +107,21 @@ export function ConfigurationInputFormGroup(
         />
     );
 
+    // Build FormGroupHeader styles
     const formGroupHeader = (
         <div className="flex items-center">
             {property.content.icon && (
                 <img src={property.content.icon} className="mr-3 max-h-8" />
             )}
-            <label className="mb-0 text-lg">{property.content.label}</label>
+            <label className={classnames("mb-0 text-lg font-medium", {
+                "text-lg": !isInstanceProperty,
+                "text-xl": isInstanceProperty
+            })}>{property.content.label}</label>
             {renderDocumentationModal && (
                 <small className="mx-3">
                     <DocumentationModal
                         header={property.content.label}
-                        documentation={property.content.description}
+                        documentation={property.content.documentation}
                     />
                 </small>
             )}
@@ -125,14 +132,14 @@ export function ConfigurationInputFormGroup(
         <React.Fragment>
             {/* Render description IFF not empty */}
             {property.content.description !== "" && (
-                <p className="d-block mt-3 text-muted">
+                <p className="text-muted font-light mt-2">
                     {property.content.description}
                 </p>
             )}
 
             {/* Render empty description warning */}
             {property.content.description === "" && (
-                <p className="d-block mt-4 mb-3 text-red-500">
+                <p className="text-red-500 font-light mt-2">
                     Warning - this input needs a description
                 </p>
             )}
@@ -145,8 +152,8 @@ export function ConfigurationInputFormGroup(
                 [className]: className !== "",
             })}
         >
-            <div className="flex items-center justify-between">
-                <div className="flex items-center">
+            <div className="flex items-center">
+                <div className="flex items-center justify-between w-full">
                     {formGroupHeader}
                     {property.type === PropertyTypes.BOOLEAN && (
                         <div
@@ -199,12 +206,12 @@ export function ConfigurationInputFormGroup(
 
     // Handle property.allowDisable
     if (property.allowDisable && !enabled && !renderInCard) {
-        return <div className={`col-span-${colSpan}`}>{disabledFormGroup}</div>;
+        return <div className={`sm:col-span-12 md:col-span-${colSpan}`}>{disabledFormGroup}</div>;
     }
     if (property.allowDisable && !enabled && renderInCard) {
         return (
-            <div className={`col-span-${colSpan}`}>
-                <div className="card shadow-sm my-3 py-3 px-3">
+            <div className={`col-span-12 md:col-span-${colSpan}`}>
+                <div className="card shadow-sm py-3 px-3">
                     {disabledFormGroup}
                 </div>
             </div>
@@ -213,13 +220,17 @@ export function ConfigurationInputFormGroup(
 
     // Return standard if NOT renderInCard
     if (!renderInCard) {
-        return <div className={`col-span-${colSpan}`}>{formGroup}</div>;
+        return <div className={`col-span-12 md:col-span-${colSpan}`}>
+            <div className="py-3">
+                {formGroup}
+            </div>
+        </div>;
     }
 
     // Handle renderInCard
     return (
-        <div className={`col-span-${colSpan}`}>
-            <div className="card card-body shadow-sm my-2 py-3 px-3">
+        <div className={`col-span-12 md:col-span-${colSpan}`}>
+            <div className="card card-body shadow-sm py-3 px-3">
                 {formGroup}
             </div>
         </div>

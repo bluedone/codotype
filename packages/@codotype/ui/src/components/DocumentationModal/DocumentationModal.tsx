@@ -31,8 +31,10 @@ export function DocumentationModal(props: {
                 show={showingModal}
                 onHide={() => showModal(false)}
             >
-                <h3>{props.header}</h3>
-                <MarkdownRenderer source={props.documentation} />
+                <div className="p-5">
+                    <h3 className="text-2xl">{props.header}</h3>
+                    <MarkdownRenderer source={props.documentation} />
+                </div>
                 <div className="modal-footer-tw">
                     <button
                         className="btn"

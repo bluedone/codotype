@@ -16,7 +16,7 @@ export function DatatypeOption(props: DatatypeOptionProps) {
     }
 
     return (
-        <div className="col-sm-6 my-2">
+        <div className="col-span-1 my-1">
             <button
                 className={buttonClassName}
                 onClick={() => {
@@ -50,8 +50,8 @@ interface AttributeDatatypeFormProps {
  */
 export function AttributeDatatypeForm(props: AttributeDatatypeFormProps) {
     return (
-        <div className="row mt-3">
-            <div className="col-lg-12">
+        <div className="grid grid-cols-2 mt-3">
+            <div className="col-span-2">
                 <p className="lead mb-0">Datatype</p>
                 <small className="form-text text-muted">
                     The <span className="text-green-500">Datatype </span>
@@ -64,8 +64,8 @@ export function AttributeDatatypeForm(props: AttributeDatatypeFormProps) {
                 <hr />
             </div>
 
-            <div className="col-lg-12">
-                <div className="row">
+            <div className="col-span-2">
+                <div className="grid grid-cols-2 gap-3">
                     {Object.keys(DATATYPE_META)
                         .filter((datatype: string) =>
                             props.supportedDatatypes

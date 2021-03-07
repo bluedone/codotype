@@ -112,8 +112,8 @@ export function BuildFinished(props: {
                 </div>
             )}
 
-            <div className="row flex justify-center mt-3">
-                <div className="col-sm-12 text-center">
+            <div className="grid mt-3">
+                <div className="col-span-12 text-center">
                     <p className="mb-1">
                         <i className="far fa-lightbulb" />
                         Remember, iteration is key
@@ -126,7 +126,7 @@ export function BuildFinished(props: {
                     </small>
                 </div>
 
-                <div className="col-sm-12 col-md-4 mt-2">
+                <div className="col-span-12 col-md-4 mt-2">
                     <button
                         className="btn w-full"
                         onClick={props.onClickBackToEditor}
@@ -140,37 +140,35 @@ export function BuildFinished(props: {
             <hr />
 
             {/* FOOTER */}
-            <div className="row flex justify-center">
-                <div className="col-lg-12 text-center">
-                    <p className="mb-0">Support Codotype</p>
-                    <small className="text-gray-600">
-                        Give us a{" "}
+            <div className="flex justify-center">
+                <p className="mb-0">Support Codotype</p>
+                <small className="text-gray-600">
+                    Give us a{" "}
+                    <FontAwesomeIcon
+                        icon={faStar}
+                        className="mr-1 text-yellow-400"
+                    />
+                    on{" "}
+                    <a
+                        href="https://github.com/codotype/codotype"
+                        target="_blank"
+                        className="text-blue-400"
+                    >
+                        GitHub
+                    </a>{" "}
+                    and follow us on{" "}
+                    <a
+                        href="https://twitter.com/codotype"
+                        target="_blank"
+                        className="text-blue-500"
+                    >
                         <FontAwesomeIcon
-                            icon={faStar}
-                            className="mr-1 text-yellow-400"
+                            icon={fab.faTwitter}
+                            className="mr-1"
                         />
-                        on{" "}
-                        <a
-                            href="https://github.com/codotype/codotype"
-                            target="_blank"
-                            className="text-blue-400"
-                        >
-                            GitHub
-                        </a>{" "}
-                        and follow us on{" "}
-                        <a
-                            href="https://twitter.com/codotype"
-                            target="_blank"
-                            className="text-blue-500"
-                        >
-                            <FontAwesomeIcon
-                                icon={fab.faTwitter}
-                                className="mr-1"
-                            />
-                            Twitter
-                        </a>
-                    </small>
-                </div>
+                        Twitter
+                    </a>
+                </small>
             </div>
         </div>
     );

@@ -64,19 +64,19 @@ export function AppNavbar(props: { homeUrl?: string }) {
                     </div>
                     <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                         <div className="flex-shrink-0 flex items-center">
-                            <img
+                            {/* <img
                                 className="block lg:hidden h-8 w-auto"
                                 src="https://res.cloudinary.com/codotype/image/upload/v1560045005/tech-logos/codotype.png"
                                 alt="Codotype Logo"
-                            />
+                            /> */}
                             <div className="hidden lg:flex items-center h-8 w-auto">
-                                <img
+                                {/* <img
                                     className="h-8 w-auto"
                                     src="https://res.cloudinary.com/codotype/image/upload/v1560045005/tech-logos/codotype.png"
                                     alt="Codotype Logo"
-                                />
+                                /> */}
                                 <span className="ml-3 text-2xl font-semibold">
-                                    Codotype
+                                    Next.js + TypeScript Starter
                                 </span>
                             </div>
                             <div className="hidden sm:block sm:ml-6">
