@@ -62,12 +62,8 @@ export function SchemaPreview(props: {
                 </p>
             </div> */}
             <div className="col-lg-12">
-                <div
-                    className="rounded-2xl bg-gray-900 overflow-hidden border dark:border-gray-600"
-                >
-                    <pre
-                        className="px-3 pt-3 pb-3 mb-0 text-lg"
-                    >
+                <div className="rounded-2xl bg-gray-900 overflow-hidden border dark:border-gray-600">
+                    <pre className="px-3 pt-3 pb-3 mb-0 text-lg">
                         <small className="mb-0">
                             <div className="text-gray-200">{content}</div>
                         </small>
