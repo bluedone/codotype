@@ -20,110 +20,38 @@ import { NextJsWebsiteStarterPluginVariant } from "./NextJsWebsiteStarterPlugin"
 // Next.js + MongoDB Starter Plugin
 
 export const SchemaEditor: SchemaEditorConfiguration = {
-    supportedRelationTypes: [
-        RelationTypes.TO_ONE,
-        RelationTypes.TO_MANY,
-        RelationTypes.EMBEDS_ONE,
-        RelationTypes.EMBEDS_MANY,
-    ],
+    supportedRelationTypes: [RelationTypes.TO_ONE, RelationTypes.TO_MANY],
     supportedDatatypes: [
         Datatypes.STRING,
         Datatypes.INT,
         Datatypes.FLOAT,
-        Datatypes.STRING_ARRAY,
-        Datatypes.NUMERIC_ARRAY,
         Datatypes.TIMESTAMP,
-        Datatypes.OBJECT,
+        // Datatypes.STRING_ARRAY,
+        // Datatypes.NUMERIC_ARRAY,
+        // Datatypes.OBJECT,
     ],
-    configurationGroups: [
-        new Primatives.ConfigurationGroup({
-            content: {
-                label: "Meta",
-                description: "Define additional metadata for this Schema",
-            },
-            identifier: "meta",
-            layoutVariant: GroupLayoutVariants.LIST,
-            properties: [
-                new Primatives.ConfigurationProperty({
-                    content: {
-                        label: "Internal Note",
-                        description:
-                            "Write an internal note describing this schema",
-                    },
-                    identifier: "internal_note",
-                    defaultValue: "",
-                    layoutVariant: PropertyLayoutVariants.COL_12,
-                    type: PropertyTypes.STRING,
-                }),
-            ],
-        }),
-        new Primatives.ConfigurationGroup({
-            content: {
-                label: "GraphQL API",
-                description: "Configure the GraphQL API for this Schema",
-            },
-            identifier: "graphql_api",
-            layoutVariant: GroupLayoutVariants.LIST,
-            properties: [
-                new Primatives.ConfigurationProperty({
-                    type: PropertyTypes.BOOLEAN,
-                    defaultValue: true,
-                    identifier: "generate_crud_api",
-                    content: {
-                        label: "Generate CRUD API",
-                        description:
-                            "Generate a CRUD API with GraphQL for this resource",
-                    },
-                    layoutVariant: PropertyLayoutVariants.CARD_COL_12,
-                }),
-                new Primatives.ConfigurationProperty({
-                    content: {
-                        label: "DynamoDB table name",
-                        description:
-                            "Define the name of the DynamoDB table for this",
-                    },
-                    identifier: "dynamodb_table_name",
-                    defaultValue: "",
-                    type: PropertyTypes.STRING,
-                    layoutVariant: PropertyLayoutVariants.CARD_COL_12,
-                }),
-            ],
-        }),
-    ],
-    attributeAddons: [ATTRIBUTE_ADDON_UNIQUE],
+    configurationGroups: [],
+    attributeAddons: [],
     relationAddons: [...relationAddons],
     newSchemaDefaults: {
-        relations: [
-            {
-                id: "USER-RELATION-ID",
-                type: RelationTypes.TO_ONE,
-                destinationSchemaAlias: "Creator",
-                sourceSchemaAlias: "",
-                createdBy: CreatedByValues.plugin,
-                sourceSchemaID: "USER_SCHEMA",
-                destinationSchemaID: "USER_SCHEMA",
-                locked: true,
-                internalNote: "",
-                addons: {},
-            },
-        ],
+        relations: [],
         attributes: [
             {
-                id: "UUID-Attribute",
+                id: "ObjectID-Attribute",
                 identifiers: {
-                    title: "ID",
-                    snake: "id",
-                    camel: "id",
-                    pascal: "Id",
-                    kebab: "id",
+                    title: "_id",
+                    snake: "_id",
+                    camel: "_id",
+                    pascal: "_id",
+                    kebab: "_id",
                 },
                 addons: {
                     // [ATTRIBUTE_ADDON_PRIMARY_KEY.identifier]: true,
                 },
-                datatype: Datatypes.UUID,
+                datatype: Datatypes.OBJECT_ID,
                 locked: true,
                 createdBy: CreatedByValues.plugin,
-                internalNote: "",
+                internalNote: "The MongoDB ObjectID",
             },
         ],
     },
@@ -152,23 +80,19 @@ export const SchemaEditor: SchemaEditorConfiguration = {
             internalNote: "",
             attributes: [
                 {
-                    id: "UUID-Attribute",
+                    id: "ObjectID-Attribute",
                     identifiers: {
-                        title: "ID",
-                        snake: "id",
-                        camel: "id",
-                        pascal: "Id",
-                        kebab: "id",
+                        title: "_id",
+                        snake: "_id",
+                        camel: "_id",
+                        pascal: "_id",
+                        kebab: "_id",
                     },
-                    addons: {
-                        // [ATTRIBUTE_ADDON_REQUIRED.identifier]: true,
-                        // [ATTRIBUTE_ADDON_PRIMARY_KEY.identifier]: true,
-                        // [ATTRIBUTE_ADDON_UNIQUE.identifier]: true,
-                    },
+                    addons: {},
                     datatype: Datatypes.STRING,
                     locked: true,
                     createdBy: CreatedByValues.plugin,
-                    internalNote: "The uniqie ID of the user",
+                    internalNote: "The MongoDB ObjectID of the user",
                 },
                 {
                     id: "Email-Attribute",
@@ -179,10 +103,7 @@ export const SchemaEditor: SchemaEditorConfiguration = {
                         pascal: "Email",
                         kebab: "email",
                     },
-                    addons: {
-                        // [ATTRIBUTE_ADDON_REQUIRED.identifier]: true,
-                        // [ATTRIBUTE_ADDON_UNIQUE.identifier]: true,
-                    },
+                    addons: {},
                     datatype: Datatypes.STRING,
                     locked: true,
                     createdBy: CreatedByValues.plugin,
