@@ -26,9 +26,11 @@ export function AttributeFormModal(props: {
     }
 
     return (
-        <Modal size="lg" show={props.show} onHide={props.onCancel}>
-            <h3>{title}</h3>
-            {props.children}
+        <Modal show={props.show} onHide={props.onCancel} size="lg">
+            <div className="p-5">
+                <h3 className="text-xl">{title}</h3>
+                {props.children}
+            </div>
             <div className="modal-footer-tw">
                 <div className="flex items-center justify-between flex-grow">
                     <div className="flex flex-grow">
