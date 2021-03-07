@@ -165,7 +165,7 @@ hr {
     @apply transition-colors;
     @apply duration-150;
     @apply ease-in-out;
-    @apply hover:text-blue-400;
+    @apply hover:text-indigo-400;
     @apply focus:outline-none;
 }
 
