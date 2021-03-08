@@ -60,7 +60,7 @@ export function ConfigurationGroupSelector(props: {
 
     // If there is no default ConfigurationGroup -> just return props.children
     if (!defaultConfigurationGroup) {
-        return <React.Fragment>{props.children}</React.Fragment>;
+        return <div className="mt-5">{props.children}</div>;
     }
 
     // Stores the currently selected ConfigurationGroup
@@ -98,7 +98,7 @@ export function ConfigurationGroupSelector(props: {
                                     }}
                                     active={
                                         configurationGroup.identifier ===
-                                            selectedConfigurationGroup.identifier &&
+                                        selectedConfigurationGroup.identifier &&
                                         !viewingSchemas
                                     }
                                     label={configurationGroup.content.label}
@@ -116,7 +116,7 @@ export function ConfigurationGroupSelector(props: {
                         schemaInput={props.schemaInput}
                         value={
                             props.configuration[
-                                selectedConfigurationGroup.identifier
+                            selectedConfigurationGroup.identifier
                             ]
                         }
                         onChange={(updatedVal: ConfigurationPropertyDict) => {
