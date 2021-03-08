@@ -123,52 +123,73 @@ export function ConfigurationGroupSelector(props: {
         <div className="row">
             <div className="col-lg-12">
                 <div className="flex flex-row mt-1 mb-1">
-                    <div className="flex flex-grow rounded-lg overflow-hidden divide-x divide-gray-200 dark:divide-gray-800">
-                        <ConfigurationGroupTab
-                            pinned
-                            onClick={() => {
+                    <div className="sm:hidden w-full">
+                        <select id="tabs" name="tabs" className="block w-full focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
+                            onChange={() => {
                                 setViewingReadme(true);
                                 setViewingSchemas(false);
-                            }}
-                            active={viewingReadme}
-                            label="README"
-                        />
-
-                        {enableSchemaEditor && (
+                            }}>
+                            <option value="readme">README.md</option>
+                            {enableSchemaEditor && (
+                                <option value="schema">Data Model</option>
+                            )}
+                            {pluginMetadata.configurationGroups.map(
+                                (configurationGroup: ConfigurationGroup) => {
+                                    return (
+                                        <option value={configurationGroup.identifier}>{configurationGroup.content.label}</option>
+                                    );
+                                },
+                            )}
+                        </select>
+                    </div>
+                    <div className="hidden sm:flex w-full">
+                        <div className="flex flex-grow rounded-lg overflow-hidden divide-x divide-gray-200 dark:divide-gray-800">
                             <ConfigurationGroupTab
+                                pinned
                                 onClick={() => {
-                                    setViewingReadme(false);
-                                    setViewingSchemas(true);
+                                    setViewingReadme(true);
+                                    setViewingSchemas(false);
                                 }}
-                                active={viewingSchemas}
-                                label={"Data Model"}
+                                active={viewingReadme}
+                                label="README"
                             />
-                        )}
 
-                        {/* Renders the navigation for selecting a ConfigurationGroup */}
-                        {pluginMetadata.configurationGroups.map(
-                            (configurationGroup: ConfigurationGroup) => {
-                                return (
-                                    <ConfigurationGroupTab
-                                        key={configurationGroup.identifier}
-                                        onClick={() => {
-                                            setViewingSchemas(false);
-                                            setViewingReadme(false);
-                                            selectConfigurationGroup(
-                                                configurationGroup,
-                                            );
-                                        }}
-                                        active={
-                                            configurationGroup.identifier ===
-                                            selectedConfigurationGroup.identifier &&
-                                            !viewingSchemas &&
-                                            !viewingReadme
-                                        }
-                                        label={configurationGroup.content.label}
-                                    />
-                                );
-                            },
-                        )}
+                            {enableSchemaEditor && (
+                                <ConfigurationGroupTab
+                                    onClick={() => {
+                                        setViewingReadme(false);
+                                        setViewingSchemas(true);
+                                    }}
+                                    active={viewingSchemas}
+                                    label={"Data Model"}
+                                />
+                            )}
+
+                            {/* Renders the navigation for selecting a ConfigurationGroup */}
+                            {pluginMetadata.configurationGroups.map(
+                                (configurationGroup: ConfigurationGroup) => {
+                                    return (
+                                        <ConfigurationGroupTab
+                                            key={configurationGroup.identifier}
+                                            onClick={() => {
+                                                setViewingSchemas(false);
+                                                setViewingReadme(false);
+                                                selectConfigurationGroup(
+                                                    configurationGroup,
+                                                );
+                                            }}
+                                            active={
+                                                configurationGroup.identifier ===
+                                                selectedConfigurationGroup.identifier &&
+                                                !viewingSchemas &&
+                                                !viewingReadme
+                                            }
+                                            label={configurationGroup.content.label}
+                                        />
+                                    );
+                                },
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>
