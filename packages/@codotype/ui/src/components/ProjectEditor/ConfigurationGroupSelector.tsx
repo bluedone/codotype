@@ -21,28 +21,27 @@ export function ConfigurationGroupTab(props: {
     onClick: () => void;
 }) {
     const { label } = props;
-    const btnClassName: string[] = [
-        "flex flex-grow items-center justify-center mr-2 shadow-sm px-3 py-2 focus:outline-none rounded-full",
-    ];
-
+    let btnClassName: string = "text-gray-500 focus:outline-none hover:text-gray-700 group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-4 text-sm font-medium text-center hover:bg-gray-50 focus:z-10"
     if (props.active) {
-        btnClassName.push("bg-gray-500 text-white");
-    } else {
-        btnClassName.push(
-            "border-gray-500 text-gray-500 bg-transparent border-gray-500 border",
-        );
+        btnClassName = "text-gray-900 focus:outline-none group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-4 text-sm font-medium text-center hover:bg-gray-50 focus:z-10"
     }
 
     return (
         <button
-            className={btnClassName.join(" ")}
+            className={btnClassName}
             onClick={e => {
                 e.currentTarget.blur();
                 props.onClick();
             }}
         >
             {props.pinned && <FontAwesomeIcon icon={faBookOpen} className="mr-2" />}
-            {label}
+            <span>{label}</span>
+            {props.active && (
+                <span aria-hidden="true" className="bg-indigo-500 absolute inset-x-0 bottom-0 h-1"></span>
+            )}
+            {!props.active && (
+                <span aria-hidden="true" className="bg-transparent absolute inset-x-0 bottom-0 h-1"></span>
+            )}
         </button>
     );
 }
@@ -124,51 +123,53 @@ export function ConfigurationGroupSelector(props: {
         <div className="row">
             <div className="col-lg-12">
                 <div className="flex flex-row mt-1 mb-1">
-                    <ConfigurationGroupTab
-                        pinned
-                        onClick={() => {
-                            setViewingReadme(true);
-                            setViewingSchemas(false);
-                        }}
-                        active={viewingReadme}
-                        label="README"
-                    />
-
-                    {enableSchemaEditor && (
+                    <div className="flex flex-grow rounded-lg overflow-hidden divide-x divide-gray-200">
                         <ConfigurationGroupTab
+                            pinned
                             onClick={() => {
-                                setViewingReadme(false);
-                                setViewingSchemas(true);
+                                setViewingReadme(true);
+                                setViewingSchemas(false);
                             }}
-                            active={viewingSchemas}
-                            label={"Data Model"}
+                            active={viewingReadme}
+                            label="README"
                         />
-                    )}
 
-                    {/* Renders the navigation for selecting a ConfigurationGroup */}
-                    {pluginMetadata.configurationGroups.map(
-                        (configurationGroup: ConfigurationGroup) => {
-                            return (
-                                <ConfigurationGroupTab
-                                    key={configurationGroup.identifier}
-                                    onClick={() => {
-                                        setViewingSchemas(false);
-                                        setViewingReadme(false);
-                                        selectConfigurationGroup(
-                                            configurationGroup,
-                                        );
-                                    }}
-                                    active={
-                                        configurationGroup.identifier ===
-                                        selectedConfigurationGroup.identifier &&
-                                        !viewingSchemas &&
-                                        !viewingReadme
-                                    }
-                                    label={configurationGroup.content.label}
-                                />
-                            );
-                        },
-                    )}
+                        {enableSchemaEditor && (
+                            <ConfigurationGroupTab
+                                onClick={() => {
+                                    setViewingReadme(false);
+                                    setViewingSchemas(true);
+                                }}
+                                active={viewingSchemas}
+                                label={"Data Model"}
+                            />
+                        )}
+
+                        {/* Renders the navigation for selecting a ConfigurationGroup */}
+                        {pluginMetadata.configurationGroups.map(
+                            (configurationGroup: ConfigurationGroup) => {
+                                return (
+                                    <ConfigurationGroupTab
+                                        key={configurationGroup.identifier}
+                                        onClick={() => {
+                                            setViewingSchemas(false);
+                                            setViewingReadme(false);
+                                            selectConfigurationGroup(
+                                                configurationGroup,
+                                            );
+                                        }}
+                                        active={
+                                            configurationGroup.identifier ===
+                                            selectedConfigurationGroup.identifier &&
+                                            !viewingSchemas &&
+                                            !viewingReadme
+                                        }
+                                        label={configurationGroup.content.label}
+                                    />
+                                );
+                            },
+                        )}
+                    </div>
                 </div>
             </div>
             <div className="col-lg-12">
