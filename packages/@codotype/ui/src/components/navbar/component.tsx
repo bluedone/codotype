@@ -10,7 +10,8 @@ import { faTwitter, faGithub } from "@fortawesome/free-brands-svg-icons";
 
 // // // //
 
-export function AppNavbar(props: { homeUrl?: string }) {
+export function AppNavbar(props: { homeUrl?: string; toggleDarkMode?: () => void; darkModeEnabled?: boolean }) {
+    const { darkModeEnabled = false, toggleDarkMode = null } = props;
     return (
         <nav className="bg-gray-300 dark:bg-gray-900 dark:text-gray-200">
             <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
@@ -131,6 +132,13 @@ export function AppNavbar(props: { homeUrl?: string }) {
                                         />
                                         GitHub
                                     </a>
+                                    {toggleDarkMode !== null && (
+                                        <button onClick={() => {
+                                            toggleDarkMode()
+                                        }}>
+                                            Dark Mode
+                                        </button>
+                                    )}
                                 </div>
                             </div>
                         </div>

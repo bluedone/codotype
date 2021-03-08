@@ -178,6 +178,12 @@ hr {
     @apply px-4;
 }
 
+button.btn-primary:disabled {
+    @apply opacity-50;
+    @apply cursor-not-allowed;
+    @apply hover:bg-indigo-500;
+}
+
 /* Tailwind Utility for using gradients with text */
 /* https://gist.github.com/dillonchanis/7b76ae89d13b662eb44866f570da817b */
 @layer utilities {
