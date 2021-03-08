@@ -1,4 +1,5 @@
 import * as React from "react";
+import classnames from "classnames";
 import { ConfigurationInput } from "../ConfigurationInput";
 import { SchemaEditorLayout } from "../SchemaEditor";
 import {
@@ -21,14 +22,13 @@ export function ConfigurationGroupTab(props: {
     onClick: () => void;
 }) {
     const { label } = props;
-    let btnClassName: string = "text-gray-500 focus:outline-none hover:text-gray-700 group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-4 text-sm font-medium text-center hover:bg-gray-50 focus:z-10"
-    if (props.active) {
-        btnClassName = "text-gray-900 focus:outline-none group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-4 text-sm font-medium text-center hover:bg-gray-50 focus:z-10"
-    }
 
     return (
         <button
-            className={btnClassName}
+            className={classnames("focus:outline-none group relative min-w-0 flex-1 overflow-hidden bg-white dark:bg-gray-900 py-4 px-4 text-sm font-medium text-center hover:bg-gray-50 focus:z-10", {
+                "text-gray-900 dark:text-gray-500": props.active,
+                "text-gray-500 hover:text-gray-700 dark:hover:text-gray-400": !props.active,
+            })}
             onClick={e => {
                 e.currentTarget.blur();
                 props.onClick();
@@ -123,7 +123,7 @@ export function ConfigurationGroupSelector(props: {
         <div className="row">
             <div className="col-lg-12">
                 <div className="flex flex-row mt-1 mb-1">
-                    <div className="flex flex-grow rounded-lg overflow-hidden divide-x divide-gray-200">
+                    <div className="flex flex-grow rounded-lg overflow-hidden divide-x divide-gray-200 dark:divide-gray-800">
                         <ConfigurationGroupTab
                             pinned
                             onClick={() => {
