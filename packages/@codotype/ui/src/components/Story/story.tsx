@@ -22,6 +22,7 @@ export function Story(props: StoryProps) {
             })}
         >
             <AppNavbar
+                darkModeEnabled={dark}
                 toggleDarkMode={() => {
                     setDark(!dark)
                 }}
