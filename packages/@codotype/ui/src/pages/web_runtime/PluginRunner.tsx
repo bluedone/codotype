@@ -55,7 +55,7 @@ export function PluginRunner(props: PluginRunnerProps) {
             {/* Handle Loading */}
             {(loading || finished) && (
                 <Modal
-                    // size="lg"
+                    size="lg"
                     show={loading || finished}
                     onHide={() => {
                         // Don't allow the modal to close while loading
@@ -71,14 +71,16 @@ export function PluginRunner(props: PluginRunnerProps) {
                     {/* {loading && <Modal.Title>Loading</Modal.Title>} */}
                     {/* {finished && <Modal.Title>Export Code</Modal.Title>} */}
                     {/* </Modal.Header> */}
-                    {loading && <LoadingBuild />}
-                    {finished && (
-                        <BuildFinished
-                            responseType="LOCAL_PATH"
-                            filepath={data.filepath}
-                            onClickBackToEditor={reset}
-                        />
-                    )}
+                    <div className="min-w-full">
+                        {loading && <LoadingBuild />}
+                        {finished && (
+                            <BuildFinished
+                                responseType="LOCAL_PATH"
+                                filepath={data.filepath}
+                                onClickBackToEditor={reset}
+                            />
+                        )}
+                    </div>
                 </Modal>
             )}
         </React.Fragment>
