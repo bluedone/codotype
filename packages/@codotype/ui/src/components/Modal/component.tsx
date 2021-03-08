@@ -12,7 +12,7 @@ export function Modal(props: {
     size?: "md" | "lg";
     onHide?: () => void;
 }) {
-    const { show, allowClose = true, size = "md", onHide = () => {} } = props;
+    const { show, allowClose = true, size = "md", onHide = () => { } } = props;
 
     if (show === false) {
         return null;
@@ -74,7 +74,7 @@ export function Modal(props: {
                         "inline-block align-bottom bg-white dark:bg-gray-800 dark:text-gray-200 rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle",
                         {
                             "sm:max-w-lg sm:w-full": size === "md",
-                            "max-w-4xl": size === "lg",
+                            "max-w-4xl w-full": size === "lg",
                         },
                     )}
                     role="dialog"

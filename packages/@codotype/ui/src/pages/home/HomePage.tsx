@@ -28,3 +28,7 @@ export function HomePage(props: {
         </Shapes>
     );
 }
+
+// Copy:
+// Starting new projects should be [easy, fun, fast]
+// Jumpstart your next prototype w/ customizable boilerplate code

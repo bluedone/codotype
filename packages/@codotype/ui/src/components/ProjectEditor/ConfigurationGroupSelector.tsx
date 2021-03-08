@@ -1,4 +1,5 @@
 import * as React from "react";
+import classnames from "classnames";
 import { ConfigurationInput } from "../ConfigurationInput";
 import { SchemaEditorLayout } from "../SchemaEditor";
 import {
@@ -21,28 +22,26 @@ export function ConfigurationGroupTab(props: {
     onClick: () => void;
 }) {
     const { label } = props;
-    const btnClassName: string[] = [
-        "flex flex-grow items-center justify-center mr-2 shadow-sm px-3 py-2 focus:outline-none rounded-full",
-    ];
-
-    if (props.active) {
-        btnClassName.push("bg-gray-500 text-white");
-    } else {
-        btnClassName.push(
-            "border-gray-500 text-gray-500 bg-transparent border-gray-500 border",
-        );
-    }
 
     return (
         <button
-            className={btnClassName.join(" ")}
+            className={classnames("focus:outline-none group relative min-w-0 flex-1 overflow-hidden bg-white dark:bg-gray-900 py-4 px-4 text-sm font-medium text-center hover:bg-gray-50 focus:z-10", {
+                "text-gray-900 dark:text-gray-500": props.active,
+                "text-gray-500 hover:text-gray-700 dark:hover:text-gray-400": !props.active,
+            })}
             onClick={e => {
                 e.currentTarget.blur();
                 props.onClick();
             }}
         >
             {props.pinned && <FontAwesomeIcon icon={faBookOpen} className="mr-2" />}
-            {label}
+            <span>{label}</span>
+            {props.active && (
+                <span aria-hidden="true" className="bg-indigo-500 absolute inset-x-0 bottom-0 h-1"></span>
+            )}
+            {!props.active && (
+                <span aria-hidden="true" className="bg-transparent absolute inset-x-0 bottom-0 h-1"></span>
+            )}
         </button>
     );
 }
@@ -124,51 +123,74 @@ export function ConfigurationGroupSelector(props: {
         <div className="row">
             <div className="col-lg-12">
                 <div className="flex flex-row mt-1 mb-1">
-                    <ConfigurationGroupTab
-                        pinned
-                        onClick={() => {
-                            setViewingReadme(true);
-                            setViewingSchemas(false);
-                        }}
-                        active={viewingReadme}
-                        label="README"
-                    />
+                    <div className="sm:hidden w-full">
+                        <select id="tabs" name="tabs" className="block w-full focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
+                            onChange={() => {
+                                setViewingReadme(true);
+                                setViewingSchemas(false);
+                            }}>
+                            <option value="readme">README.md</option>
+                            {enableSchemaEditor && (
+                                <option value="schema">Data Model</option>
+                            )}
+                            {pluginMetadata.configurationGroups.map(
+                                (configurationGroup: ConfigurationGroup) => {
+                                    return (
+                                        <option value={configurationGroup.identifier}>{configurationGroup.content.label}</option>
+                                    );
+                                },
+                            )}
+                        </select>
+                    </div>
+                    <div className="hidden sm:flex w-full">
+                        <div className="flex flex-grow rounded-lg overflow-hidden divide-x divide-gray-200 dark:divide-gray-800">
+                            <ConfigurationGroupTab
+                                pinned
+                                onClick={() => {
+                                    setViewingReadme(true);
+                                    setViewingSchemas(false);
+                                }}
+                                active={viewingReadme}
+                                label="README"
+                            />
 
-                    {enableSchemaEditor && (
-                        <ConfigurationGroupTab
-                            onClick={() => {
-                                setViewingReadme(false);
-                                setViewingSchemas(true);
-                            }}
-                            active={viewingSchemas}
-                            label={"Data Model"}
-                        />
-                    )}
-
-                    {/* Renders the navigation for selecting a ConfigurationGroup */}
-                    {pluginMetadata.configurationGroups.map(
-                        (configurationGroup: ConfigurationGroup) => {
-                            return (
+                            {enableSchemaEditor && (
                                 <ConfigurationGroupTab
-                                    key={configurationGroup.identifier}
                                     onClick={() => {
-                                        setViewingSchemas(false);
                                         setViewingReadme(false);
-                                        selectConfigurationGroup(
-                                            configurationGroup,
-                                        );
+                                        setViewingSchemas(true);
                                     }}
-                                    active={
-                                        configurationGroup.identifier ===
-                                        selectedConfigurationGroup.identifier &&
-                                        !viewingSchemas &&
-                                        !viewingReadme
-                                    }
-                                    label={configurationGroup.content.label}
+                                    active={viewingSchemas}
+                                    label={"Data Model"}
                                 />
-                            );
-                        },
-                    )}
+                            )}
+
+                            {/* Renders the navigation for selecting a ConfigurationGroup */}
+                            {pluginMetadata.configurationGroups.map(
+                                (configurationGroup: ConfigurationGroup) => {
+                                    return (
+                                        <ConfigurationGroupTab
+                                            key={configurationGroup.identifier}
+                                            onClick={() => {
+                                                setViewingSchemas(false);
+                                                setViewingReadme(false);
+                                                selectConfigurationGroup(
+                                                    configurationGroup,
+                                                );
+                                            }}
+                                            active={
+                                                configurationGroup.identifier ===
+                                                selectedConfigurationGroup.identifier &&
+                                                !viewingSchemas &&
+                                                !viewingReadme
+                                            }
+                                            label={configurationGroup.content.label}
+                                        />
+                                    );
+                                },
+                            )}
+                        </div>
+                    </div>
                 </div>
             </div>
             <div className="col-lg-12">

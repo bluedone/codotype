@@ -18,26 +18,21 @@ export function Story(props: StoryProps) {
             className={classnames("h-full pb-32", {
                 dark: dark,
                 "bg-gray-800": dark,
-                "bg-gray-200": !dark,
+                "bg-gray-100": !dark,
             })}
         >
-            <AppNavbar />
+            <AppNavbar
+                darkModeEnabled={dark}
+                toggleDarkMode={() => {
+                    setDark(!dark)
+                }}
+            />
             <div
-                // className="px-6 md:px-12 lg:px-64 pb-32 pt-5 h-full dark:bg-gray-800 bg-gray-200 dark:text-gray-200"
-                // className="px-6 md:px-12 lg:px-32 xl:px-48 2xl:px-64 pb-32 pt-5 h-full dark:bg-gray-800 bg-gray-200 dark:text-gray-200"
-                className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full dark:bg-gray-800 bg-gray-200 dark:text-gray-200"
-                // style={{ backgroundColor: "#f5f6f9" }}>
+                className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full dark:bg-gray-800 bg-gray-100 dark:text-gray-200"
+            // style={{ backgroundColor: "#f5f6f9" }}>
             >
-                <button
-                    onClick={() => {
-                        setDark(!dark);
-                    }}
-                >
-                    Toggle Dark
-                </button>
-                {/* TODO - add max width to layout here */}
                 <div className="grid grid-cols-1">
-                    <div className="col-span-1">{props.children}</div>
+                    <div className="col-span-1 mt-5">{props.children}</div>
                 </div>
             </div>
         </div>

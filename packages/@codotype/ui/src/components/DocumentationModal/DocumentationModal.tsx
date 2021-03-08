@@ -27,7 +27,7 @@ export function DocumentationModal(props: {
             </button>
 
             <Modal
-                // size="lg"
+                size="lg"
                 show={showingModal}
                 onHide={() => showModal(false)}
             >

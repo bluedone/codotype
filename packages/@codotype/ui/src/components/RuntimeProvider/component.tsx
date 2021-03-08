@@ -80,7 +80,7 @@ export function RuntimeProvider(props: RuntimeProviderProps) {
             {/* Handle Loading */}
             {(loading || finished) && (
                 <Modal
-                    // size="lg"
+                    size="lg"
                     show={loading || finished}
                     onHide={() => {
                         // Don't allow the modal to close while loading
@@ -96,14 +96,16 @@ export function RuntimeProvider(props: RuntimeProviderProps) {
                     {/* {loading && <Modal.Title>Loading</Modal.Title>} */}
                     {/* {finished && <Modal.Title>Export Code</Modal.Title>} */}
                     {/* </Modal.Header> */}
-                    {loading && <LoadingBuild />}
-                    {finished && (
-                        <BuildFinished
-                            responseType="LOCAL_PATH"
-                            filepath="/home/aeksco/code"
-                            onClickBackToEditor={reset}
-                        />
-                    )}
+                    <div className="min-w-full w-128">
+                        {loading && <LoadingBuild />}
+                        {finished && (
+                            <BuildFinished
+                                responseType="LOCAL_PATH"
+                                filepath="/home/aeksco/code"
+                                onClickBackToEditor={reset}
+                            />
+                        )}
+                    </div>
                 </Modal>
             )}
         </React.Fragment>
