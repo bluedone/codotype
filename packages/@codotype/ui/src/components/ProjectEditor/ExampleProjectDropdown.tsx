@@ -24,16 +24,15 @@ export function ExampleProjectDropdown(props: {
 
     return (
         <React.Fragment>
-            <Dropdown label={
-                <span className="text-blue-500 whitespace-no-wrap">
-                    <FontAwesomeIcon
-                        icon={faFolderOpen}
-                        className="mr-1"
-                    />
-                Example Projects
-                </span>
-            }
-                itemCount={exampleProjects.length} >
+            <Dropdown
+                label={
+                    <span className="text-blue-500 whitespace-no-wrap">
+                        <FontAwesomeIcon icon={faFolderOpen} className="mr-1" />
+                        Example Projects
+                    </span>
+                }
+                itemCount={exampleProjects.length}
+            >
                 {({ i }) => {
                     const projectInput = exampleProjects[i];
                     if (!projectInput) {
@@ -49,7 +48,7 @@ export function ExampleProjectDropdown(props: {
                         >
                             {projectInput.identifiers.title}
                         </button>
-                    )
+                    );
                 }}
             </Dropdown>
 
@@ -68,6 +67,5 @@ export function ExampleProjectDropdown(props: {
                 />
             )}
         </React.Fragment>
-    )
-
+    );
 }

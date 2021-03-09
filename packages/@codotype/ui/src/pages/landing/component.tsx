@@ -1,9 +1,9 @@
 import * as React from "react";
-import { LogoCloud } from "./LogoCloud"
-import { CtaSection } from "./CtaSection"
-import { Testimonials } from "./Testimonials"
-import { LandingFooter } from "./LandingFooter"
-import { Hero } from "./Hero"
+import { LogoCloud } from "./LogoCloud";
+import { CtaSection } from "./CtaSection";
+import { Testimonials } from "./Testimonials";
+import { LandingFooter } from "./LandingFooter";
+import { Hero } from "./Hero";
 
 export function LandingPage() {
     return (
@@ -17,5 +17,5 @@ export function LandingPage() {
 
             <LandingFooter />
         </div>
-    )
+    );
 }

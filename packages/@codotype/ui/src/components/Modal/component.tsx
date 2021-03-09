@@ -12,7 +12,7 @@ export function Modal(props: {
     size?: "md" | "lg";
     onHide?: () => void;
 }) {
-    const { show, allowClose = true, size = "md", onHide = () => { } } = props;
+    const { show, allowClose = true, size = "md", onHide = () => {} } = props;
 
     if (show === false) {
         return null;

@@ -10,17 +10,27 @@ import { faTwitter, faGithub } from "@fortawesome/free-brands-svg-icons";
 
 // // // //
 
-function DarkModeButton(props: { toggleDarkMode: () => void; darkModeEnabled: boolean }) {
+function DarkModeButton(props: {
+    toggleDarkMode: () => void;
+    darkModeEnabled: boolean;
+}) {
     const { darkModeEnabled, toggleDarkMode } = props;
     return (
         <button
             className="focus:outline-none"
             onClick={() => {
-                toggleDarkMode()
-            }}>
+                toggleDarkMode();
+            }}
+        >
             <div className="flex items-center">
                 {darkModeEnabled ? (
-                    <svg className="w-6 h-6 md:w-6 md:h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg
+                        className="w-6 h-6 md:w-6 md:h-6"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
                         <path
                             strokeLinecap="round"
                             strokeLinejoin="round"
@@ -29,22 +39,34 @@ function DarkModeButton(props: { toggleDarkMode: () => void; darkModeEnabled: bo
                         />
                     </svg>
                 ) : (
-                        <svg className="w-6 h-6 md:w-6 md:h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
-                            />
-                        </svg>
-                    )}
-                <span className="ml-2 font-light">{darkModeEnabled ? "Light" : "Dark"} Mode</span>
+                    <svg
+                        className="w-6 h-6 md:w-6 md:h-6"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+                        />
+                    </svg>
+                )}
+                <span className="ml-2 font-light">
+                    {darkModeEnabled ? "Light" : "Dark"} Mode
+                </span>
             </div>
         </button>
-    )
+    );
 }
 
-export function AppNavbar(props: { homeUrl?: string; toggleDarkMode?: () => void; darkModeEnabled?: boolean }) {
+export function AppNavbar(props: {
+    homeUrl?: string;
+    toggleDarkMode?: () => void;
+    darkModeEnabled?: boolean;
+}) {
     const { darkModeEnabled = false, toggleDarkMode = null } = props;
     return (
         <nav className="bg-gray-300 dark:bg-gray-900 dark:text-gray-200">

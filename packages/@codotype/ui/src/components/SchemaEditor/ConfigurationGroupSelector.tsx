@@ -98,7 +98,7 @@ export function ConfigurationGroupSelector(props: {
                                     }}
                                     active={
                                         configurationGroup.identifier ===
-                                        selectedConfigurationGroup.identifier &&
+                                            selectedConfigurationGroup.identifier &&
                                         !viewingSchemas
                                     }
                                     label={configurationGroup.content.label}
@@ -116,7 +116,7 @@ export function ConfigurationGroupSelector(props: {
                         schemaInput={props.schemaInput}
                         value={
                             props.configuration[
-                            selectedConfigurationGroup.identifier
+                                selectedConfigurationGroup.identifier
                             ]
                         }
                         onChange={(updatedVal: ConfigurationPropertyDict) => {

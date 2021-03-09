@@ -20,7 +20,7 @@ const dummyProject: ProjectInput = buildDefaultProjectInput(
 
 // // // //
 
-const stories = storiesOf("Components/ProjectEditor/Layout", module)
+const stories = storiesOf("Components/ProjectEditor/Layout", module);
 
 stories.add("renders", () => {
     const [project, setProject] = React.useState<ProjectInput>(dummyProject);
@@ -77,37 +77,27 @@ stories.add("w/ props.children", () => {
                 selectedConfigurationGroup,
                 onChange,
             }) => {
-
                 // Render custom input for "landingPage" section
-                if (
-                    selectedConfigurationGroup.identifier ===
-                    "home"
-                ) {
+                if (selectedConfigurationGroup.identifier === "home") {
                     return (
                         <div className="grid grid-cols-12 mt-4">
                             <div className="col-span-12">
                                 <ConfigurationGroupHeader
                                     value={value}
-                                    onChange={
-                                        onChange
-                                    }
+                                    onChange={onChange}
                                     configurationGroup={
                                         selectedConfigurationGroup
                                     }
                                 />
                                 <div>
                                     <input
-                                        value={
-                                            value.string
-                                        }
+                                        value={value.string}
                                         onChange={e => {
-                                            const val = e.currentTarget.value
+                                            const val = e.currentTarget.value;
 
-                                            onChange(
-                                                {
-                                                    string: val
-                                                },
-                                            );
+                                            onChange({
+                                                string: val,
+                                            });
                                         }}
                                     />
                                 </div>

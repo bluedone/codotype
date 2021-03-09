@@ -20,7 +20,8 @@ export function SchemaEditButton(props: {
             position="right"
             tooltipContent={
                 <>
-                    Edit the <strong>{schema.identifiers.singular.title}</strong> Schema
+                    Edit the{" "}
+                    <strong>{schema.identifiers.singular.title}</strong> Schema
                 </>
             }
         >

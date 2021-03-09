@@ -13,7 +13,9 @@ export function ProjectDropdown(props: {
     onConfirmReset: () => void;
 }) {
     const { projectInput, onConfirmReset } = props;
-    const [showingExportModal, showExportModal] = React.useState<boolean>(false);
+    const [showingExportModal, showExportModal] = React.useState<boolean>(
+        false,
+    );
     const [showingResetModal, showResetModal] = React.useState<boolean>(false);
 
     return (
@@ -26,60 +28,60 @@ export function ProjectDropdown(props: {
                             <FontAwesomeIcon size="2x" icon={faEllipsisH} />
                         </span>
                     }
-                    itemCount={2} >
+                    itemCount={2}
+                >
                     {({ i }) => {
-
                         // Render "Export Project" button
                         if (i === 0) {
                             return (
                                 <button
                                     className="bg-white text-gray-700 hover:bg-gray-100 rounded-xl hover:text-gray-900 flex justify-between w-full px-4 py-3 leading-5 text-left text-base"
                                     onClick={() => {
-                                        showExportModal(true)
+                                        showExportModal(true);
                                     }}
                                 >
                                     Export Project
                                 </button>
-                            )
+                            );
                         }
 
                         // Render "Reset Project" button
                         return (
                             <>
                                 {/* TODO - add DropdownDivider + DropdownLabel components? */}
-                                <span
-                                    className="bg-white text-red-700 text-sm flex justify-between w-full px-4 py-3 leading-5 text-left"
-                                >
+                                <span className="bg-white text-red-700 text-sm flex justify-between w-full px-4 py-3 leading-5 text-left">
                                     Danger Zone
                                 </span>
                                 <button
                                     className="bg-white text-gray-700 hover:bg-gray-100 hover:text-gray-900 flex justify-between w-full px-4 py-3 leading-5 text-left text-base"
                                     onClick={() => {
-                                        showResetModal(true)
+                                        showResetModal(true);
                                     }}
                                 >
                                     Reset Project
-                            </button>
+                                </button>
                             </>
-                        )
+                        );
                     }}
                 </Dropdown>
             </div>
 
             {/* Render ProjectExportModal */}
-            <ProjectExportModal projectInput={projectInput} show={showingExportModal} onHide={() => showExportModal(false)} />
+            <ProjectExportModal
+                projectInput={projectInput}
+                show={showingExportModal}
+                onHide={() => showExportModal(false)}
+            />
 
             {/* Render ResetProjectModal */}
             <ResetProjectModal
                 show={showingResetModal}
                 onHide={() => showResetModal(false)}
                 onConfirmReset={() => {
-                    onConfirmReset()
-                    showResetModal(false)
+                    onConfirmReset();
+                    showResetModal(false);
                 }}
             />
-
         </React.Fragment>
-    )
-
+    );
 }

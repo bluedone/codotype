@@ -48,11 +48,7 @@ export function AttributeListItemLabel(props: AttributeListItemLabelProps) {
             {/* DatatypeIcon + Tooltip */}
             <Tooltip
                 position="right"
-                tooltipContent={
-                    <>
-                        {props.datatype.label}
-                    </>
-                }
+                tooltipContent={<>{props.datatype.label}</>}
             >
                 <span className="px-1">
                     <DatatypeIcon size="xs" datatype={attribute.datatype} />
@@ -96,11 +92,7 @@ export function AttributeListItemLabel(props: AttributeListItemLabelProps) {
                     return (
                         <Tooltip
                             position="right"
-                            tooltipContent={
-                                <>
-                                    {addon.property.content.label}
-                                </>
-                            }
+                            tooltipContent={<>{addon.property.content.label}</>}
                         >
                             <span className="ml-2 badge bg-gray-300">
                                 <FontAwesomeIcon icon={icon} />
