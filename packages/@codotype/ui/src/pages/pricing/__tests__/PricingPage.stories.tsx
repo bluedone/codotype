@@ -5,7 +5,5 @@ import { PricingPage } from "../component";
 // // // //
 
 storiesOf("Pages/www/PricingPage", module).add("renders", () => {
-    return (
-        <PricingPage />
-    );
+    return <PricingPage />;
 });
