@@ -20,14 +20,7 @@ export function InfoTooltip(props: {
     const { placement = "right" } = props;
 
     return (
-        <Tooltip
-            position={placement}
-            tooltipContent={
-                <>
-                    {props.message}
-                </>
-            }
-        >
+        <Tooltip position={placement} tooltipContent={<>{props.message}</>}>
             <FontAwesomeIcon icon={faExclamationCircle} />
         </Tooltip>
     );

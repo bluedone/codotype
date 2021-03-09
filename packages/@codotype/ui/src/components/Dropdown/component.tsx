@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Menu, Transition } from "@headlessui/react";
 
-// // // // 
+// // // //
 
 export function Dropdown(props: {
     label: React.ReactNode;
@@ -9,9 +9,10 @@ export function Dropdown(props: {
     hideCaret?: boolean;
     children: (childProps: { i: number; active: boolean }) => React.ReactNode;
 }) {
-
-    const { itemCount, label, hideCaret = false, } = props;
-    const placeholderItems = Array(itemCount).fill("x").map((_each, index) => index)
+    const { itemCount, label, hideCaret = false } = props;
+    const placeholderItems = Array(itemCount)
+        .fill("x")
+        .map((_each, index) => index);
 
     return (
         <div className="flex items-center justify-center z-10">
@@ -51,14 +52,18 @@ export function Dropdown(props: {
                                     static
                                     className="absolute right-0 w-56 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none"
                                 >
-                                    {placeholderItems.map((i) => (
+                                    {placeholderItems.map(i => (
                                         <Menu.Item>
                                             {({ active }) => (
-                                                <>{props.children({ i, active })}</>
+                                                <>
+                                                    {props.children({
+                                                        i,
+                                                        active,
+                                                    })}
+                                                </>
                                             )}
                                         </Menu.Item>
-                                    )
-                                    )}
+                                    ))}
                                 </Menu.Items>
                             </Transition>
                         </>

@@ -493,14 +493,10 @@ const stories: Array<[string, PluginMetadata]> = [
     ],
     ["Concepts/Rails Starter", RailsStarterPlugin],
     [
-
         "Concepts/React Component Library Starter",
         ReactComponentLibraryStarterPlugin,
     ],
-    [
-        "Concepts/Next.js + MongoDB Starter",
-        NextMongoStarter,
-    ],
+    ["Concepts/Next.js + MongoDB Starter", NextMongoStarter],
 ];
 
 // // // //

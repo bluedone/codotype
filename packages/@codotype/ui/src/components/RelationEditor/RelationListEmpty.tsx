@@ -11,7 +11,9 @@ interface RelationListEmptyProps {
 export function RelationListEmpty(props: RelationListEmptyProps) {
     return (
         <div className="card-body text-center">
-            <h5 className="mb-0 mt-1 text-gray-600 text-lg">No Relations added yet</h5>
+            <h5 className="mb-0 mt-1 text-gray-600 text-lg">
+                No Relations added yet
+            </h5>
             <p className="text-gray-600 mt-2 mb-0">
                 Define references between Schemas
             </p>

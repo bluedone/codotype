@@ -113,10 +113,14 @@ export function ConfigurationInputFormGroup(
             {property.content.icon && (
                 <img src={property.content.icon} className="mr-3 max-h-8" />
             )}
-            <label className={classnames("mb-0 text-lg font-medium", {
-                "text-lg": !isInstanceProperty,
-                "text-xl": isInstanceProperty
-            })}>{property.content.label}</label>
+            <label
+                className={classnames("mb-0 text-lg font-medium", {
+                    "text-lg": !isInstanceProperty,
+                    "text-xl": isInstanceProperty,
+                })}
+            >
+                {property.content.label}
+            </label>
             {renderDocumentationModal && (
                 <small className="mx-3">
                     <DocumentationModal
@@ -206,7 +210,11 @@ export function ConfigurationInputFormGroup(
 
     // Handle property.allowDisable
     if (property.allowDisable && !enabled && !renderInCard) {
-        return <div className={`sm:col-span-12 md:col-span-${colSpan}`}>{disabledFormGroup}</div>;
+        return (
+            <div className={`sm:col-span-12 md:col-span-${colSpan}`}>
+                {disabledFormGroup}
+            </div>
+        );
     }
     if (property.allowDisable && !enabled && renderInCard) {
         return (
@@ -220,11 +228,11 @@ export function ConfigurationInputFormGroup(
 
     // Return standard if NOT renderInCard
     if (!renderInCard) {
-        return <div className={`col-span-12 md:col-span-${colSpan}`}>
-            <div className="py-3">
-                {formGroup}
+        return (
+            <div className={`col-span-12 md:col-span-${colSpan}`}>
+                <div className="py-3">{formGroup}</div>
             </div>
-        </div>;
+        );
     }
 
     // Handle renderInCard

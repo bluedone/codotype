@@ -79,8 +79,8 @@ export function SchemaForm(props: SchemaFormProps) {
 
                         <p className="mt-4 text-muted">
                             <strong>Codotype</strong> derives additional{" "}
-                            <span className="text-green-500">Tokens</span> to use
-                            for things like naming <strong>files</strong>,{" "}
+                            <span className="text-green-500">Tokens</span> to
+                            use for things like naming <strong>files</strong>,{" "}
                             <strong>folders</strong>, <strong>variables</strong>
                             , and <strong>database tables</strong>. You can
                             rename or remove a schema whenever you like{" "}

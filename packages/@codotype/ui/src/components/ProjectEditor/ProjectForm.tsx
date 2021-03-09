@@ -17,15 +17,16 @@ export function ProjectForm(props: {
         <div className="row items-center justify-center select-none">
             <div className="col-sm-12">
                 <p className="mt-3 text-muted">
-                    <span className="text-indigo-500">Project Name</span> is used for
-                    naming things like files, folders, namespaces, and databases in your exported codebase
+                    <span className="text-indigo-500">Project Name</span> is
+                    used for naming things like files, folders, namespaces, and
+                    databases in your exported codebase
                     {/* <FontAwesomeIcon icon={faLaugh} /> */}
                 </p>
 
                 <p className="mt-3 text-muted">
                     <small className="mb-4 text-muted">
                         <FontAwesomeIcon icon={faLightbulb} className="mr-1" />
-                    Try something simple like <code>Todo List</code>, or{" "}
+                        Try something simple like <code>Todo List</code>, or{" "}
                         <code>Inventory Manager</code>
                     </small>
                 </p>
@@ -46,8 +47,8 @@ export function ProjectForm(props: {
                 />
 
                 <p className="mt-3 text-muted">
-                    The input field will enforce proper capitalization and spacing{" "}
-                    <FontAwesomeIcon icon={faLaugh} />
+                    The input field will enforce proper capitalization and
+                    spacing <FontAwesomeIcon icon={faLaugh} />
                 </p>
             </div>
         </div>

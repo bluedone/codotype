@@ -11,7 +11,9 @@ interface AttributeListEmptyProps {
 export function AttributeListEmpty(props: AttributeListEmptyProps) {
     return (
         <div className="card-body text-center">
-            <h5 className="mb-0 mt-1 text-gray-600 dark:text-gray-200 text-lg">No Attributes added yet</h5>
+            <h5 className="mb-0 mt-1 text-gray-600 dark:text-gray-200 text-lg">
+                No Attributes added yet
+            </h5>
             <p className="text-gray-600 mt-2 mb-0">
                 Define properties on this Schema
             </p>
