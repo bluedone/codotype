@@ -70,6 +70,7 @@ export function LandingFooter() {
                         </svg>
                     </a>
 
+                    {/* TODO - add Discord link here */}
                     <a href="#" className="text-gray-400 hover:text-gray-300">
                         <span className="sr-only">Dribbble</span>
                         <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
