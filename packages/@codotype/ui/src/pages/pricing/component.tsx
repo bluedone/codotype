@@ -4,7 +4,7 @@ import { PriceSection } from "./PriceSection";
 import { LogoCloud } from "./LogoCloud";
 import { FrequentlyAskedQuestions } from "./FrequentlyAskedQuestions";
 import { SignUpSection } from "./SignUpSection";
-import { PricingFooter } from "./PricingFooter";
+import { LandingFooter } from "../landing/LandingFooter";
 
 export function PricingPage() {
     return (
@@ -14,7 +14,7 @@ export function PricingPage() {
             <LogoCloud />
             <FrequentlyAskedQuestions />
             <SignUpSection />
-            <PricingFooter />
+            <LandingFooter />
         </div>
     );
 }

@@ -15,7 +15,9 @@ export function LandingPage() {
                 <CtaSection />
             </main>
 
-            <LandingFooter />
+            <div className="mt-24 sm:mt-12">
+                <LandingFooter />
+            </div>
         </div>
     );
 }
