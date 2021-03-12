@@ -6,6 +6,7 @@ import {
     ConfigurationValue,
     SchemaInput,
 } from "@codotype/core";
+import classnames from "classnames";
 
 // // // //
 
@@ -15,26 +16,44 @@ export function ConfigurationGroupTab(props: {
     onClick: () => void;
 }) {
     const { label } = props;
-    const btnClassName: string[] = [
-        "flex flex-grow items-center justify-center mr-2 shadow-sm px-3 py-2 focus:outline-none rounded-full",
-    ];
+    // const btnClassName: string[] = [
+    //     "flex flex-grow items-center justify-center mr-2 shadow-sm px-3 py-2 focus:outline-none rounded-full",
+    // ];
 
-    if (props.active) {
-        btnClassName.push("bg-gray-500 text-white");
-    } else {
-        btnClassName.push(
-            "border-gray-500 text-gray-400 bg-transparent border-gray-500 border",
-        );
-    }
+    // if (props.active) {
+    //     btnClassName.push("bg-gray-500 text-white");
+    // } else {
+    //     btnClassName.push(
+    //         "border-gray-500 text-gray-400 bg-transparent border-gray-500 border",
+    //     );
+    // }
     return (
         <button
-            className={btnClassName.join(" ")}
+            className={classnames(
+                "focus:outline-none group relative min-w-0 flex-1 overflow-hidden bg-white dark:bg-gray-900 py-4 px-4 text-sm font-medium text-center hover:bg-gray-50 focus:z-10",
+                {
+                    "text-gray-900 dark:text-gray-500": props.active,
+                    "text-gray-500 hover:text-gray-700 dark:hover:text-gray-400": !props.active,
+                },
+            )}
             onClick={e => {
                 e.currentTarget.blur();
                 props.onClick();
             }}
         >
-            {label}
+            <span>{label}</span>
+            {props.active && (
+                <span
+                    aria-hidden="true"
+                    className="bg-indigo-500 absolute inset-x-0 bottom-0 h-1"
+                ></span>
+            )}
+            {!props.active && (
+                <span
+                    aria-hidden="true"
+                    className="bg-transparent absolute inset-x-0 bottom-0 h-1"
+                ></span>
+            )}
         </button>
     );
 }
@@ -75,37 +94,82 @@ export function ConfigurationGroupSelector(props: {
     return (
         <div className="row">
             <div className="col-lg-12">
-                <div className="flex flex-row mt-1 mb-1">
-                    <ConfigurationGroupTab
-                        onClick={() => {
-                            setViewingSchemas(true);
-                        }}
-                        active={viewingSchemas}
-                        label={"Schema"}
-                    />
+                <div className="flex flex-row mt-4 mb-5">
+                    <div className="sm:hidden w-full">
+                        <select
+                            id="schema-tabs"
+                            name="schema-tabs"
+                            className="block w-full focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
+                            onChange={e => {
+                                const type = e.currentTarget.value;
+                                if (type === "schema") {
+                                    setViewingSchemas(true);
+                                    return;
+                                }
+                                const updatedSelectedGroup = configurationGroups.find(
+                                    c => c.identifier === type,
+                                );
+                                if (updatedSelectedGroup) {
+                                    selectConfigurationGroup(
+                                        updatedSelectedGroup,
+                                    );
+                                }
+                                setViewingSchemas(false);
+                            }}
+                        >
+                            <option value="schema">Data Model</option>
+                            {configurationGroups.map(
+                                (configurationGroup: ConfigurationGroup) => {
+                                    return (
+                                        <option
+                                            value={
+                                                configurationGroup.identifier
+                                            }
+                                        >
+                                            {configurationGroup.content.label}
+                                        </option>
+                                    );
+                                },
+                            )}
+                        </select>
+                    </div>
 
-                    {/* Renders the navigation for selecting a ConfigurationGroup */}
-                    {configurationGroups.map(
-                        (configurationGroup: ConfigurationGroup) => {
-                            return (
-                                <ConfigurationGroupTab
-                                    key={configurationGroup.identifier}
-                                    onClick={() => {
-                                        setViewingSchemas(false);
-                                        selectConfigurationGroup(
-                                            configurationGroup,
-                                        );
-                                    }}
-                                    active={
-                                        configurationGroup.identifier ===
-                                            selectedConfigurationGroup.identifier &&
-                                        !viewingSchemas
-                                    }
-                                    label={configurationGroup.content.label}
-                                />
-                            );
-                        },
-                    )}
+                    <div className="hidden sm:flex w-full">
+                        <div className="flex flex-grow rounded-lg overflow-hidden divide-x divide-gray-200 border-gray-200 border dark:divide-gray-800">
+                            <ConfigurationGroupTab
+                                onClick={() => {
+                                    setViewingSchemas(true);
+                                }}
+                                active={viewingSchemas}
+                                label={"Schema"}
+                            />
+
+                            {/* Renders the navigation for selecting a ConfigurationGroup */}
+                            {configurationGroups.map(
+                                (configurationGroup: ConfigurationGroup) => {
+                                    return (
+                                        <ConfigurationGroupTab
+                                            key={configurationGroup.identifier}
+                                            onClick={() => {
+                                                setViewingSchemas(false);
+                                                selectConfigurationGroup(
+                                                    configurationGroup,
+                                                );
+                                            }}
+                                            active={
+                                                configurationGroup.identifier ===
+                                                    selectedConfigurationGroup.identifier &&
+                                                !viewingSchemas
+                                            }
+                                            label={
+                                                configurationGroup.content.label
+                                            }
+                                        />
+                                    );
+                                },
+                            )}
+                        </div>
+                    </div>
                 </div>
             </div>
             <div className="col-lg-12">
