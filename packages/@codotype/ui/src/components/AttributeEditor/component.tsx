@@ -17,6 +17,7 @@ import { AttributeListEmpty } from "./AttributeListEmpty";
 import { validateAttribute } from "./validateAttribute";
 import { Hotkey } from "../Hotkey";
 import { reorder } from "./reorder";
+import { SortableListEmpty } from "../SortableListEmpty";
 
 // // // //
 
@@ -279,7 +280,10 @@ export function AttributeEditor(props: AttributeEditorProps) {
             )}
             {/* Render empty state */}
             {props.attributes.length === 0 && (
-                <AttributeListEmpty
+                <SortableListEmpty
+                    title="No Attributes added yet"
+                    body="Define properties on this Schema"
+                    cta="Add Attribute"
                     onClick={() => {
                         const newAttribute: AttributeInput = new Primatives.AttributeInput(
                             { id: "" },

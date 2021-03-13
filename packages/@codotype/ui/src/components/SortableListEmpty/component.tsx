@@ -4,19 +4,21 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 // // // //
 
-interface RelationListEmptyProps {
+interface SortableListEmptyProps {
+    title: string;
+    body: string;
+    cta: string;
     onClick: () => void;
 }
 
-export function RelationListEmpty(props: RelationListEmptyProps) {
+export function SortableListEmpty(props: SortableListEmptyProps) {
+    const { title, body, cta } = props;
     return (
         <div className="card-body text-center">
-            <h5 className="mb-0 mt-1 text-gray-600 text-lg">
-                No Relations added yet
+            <h5 className="mb-0 mt-1 text-gray-600 dark:text-gray-200 text-lg">
+                {title}
             </h5>
-            <p className="text-gray-600 mt-2 mb-0">
-                Define references between Schemas
-            </p>
+            <p className="text-gray-600 dark:text-gray-200 mt-2 mb-0">{body}</p>
             <div className="row flex justify-center mt-2">
                 <div className="col-lg-12">
                     <button
@@ -24,7 +26,7 @@ export function RelationListEmpty(props: RelationListEmptyProps) {
                         onClick={props.onClick}
                     >
                         <FontAwesomeIcon className="mr-2" icon={faPlus} />
-                        Add Relation
+                        {cta}
                     </button>
                 </div>
             </div>

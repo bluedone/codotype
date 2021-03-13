@@ -164,7 +164,7 @@ export function ConfigurationGroupSelector(props: {
                         </select>
                     </div>
                     <div className="hidden sm:flex w-full">
-                        <div className="flex flex-grow rounded-lg overflow-hidden divide-x divide-gray-200 border-gray-200 border dark:divide-gray-800">
+                        <div className="flex flex-grow rounded-lg overflow-hidden divide-x divide-gray-200 border-gray-200 dark:divide-gray-800 dark:border-gray-800 border dark:divide-gray-800">
                             <ConfigurationGroupTab
                                 pinned
                                 onClick={() => {
