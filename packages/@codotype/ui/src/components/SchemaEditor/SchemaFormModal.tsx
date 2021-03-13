@@ -31,7 +31,7 @@ export function SchemaFormModal(props: {
     return (
         <Modal show={props.show} onHide={props.handleClose}>
             <div className="p-5 select-none">
-                <h3 className="text-2xl">{title}</h3>
+                <h3 className="modal-header">{title}</h3>
                 {props.children}
             </div>
             <div className="modal-footer-tw select-none">

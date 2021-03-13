@@ -13,6 +13,10 @@ html {
 
 /* Start updating things one component at a time */
 
+.modal-header {
+    @apply text-2xl;
+}
+
 /* Modal Footer */
 .modal-footer-tw {
     @apply p-3;
