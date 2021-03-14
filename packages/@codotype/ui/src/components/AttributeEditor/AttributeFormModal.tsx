@@ -17,7 +17,7 @@ export function AttributeFormModal(props: {
     children: React.ReactNode;
     errors: string[];
     onCancel: () => void;
-    onSubmit: () => void;
+    onSubmit: (submitProps: { saveAndContinue: boolean }) => void;
 }) {
     // Defines title based on props.isNew
     let title = "Update Attribute";
@@ -40,7 +40,9 @@ export function AttributeFormModal(props: {
                         <button
                             className="btn btn-lg btn-primary"
                             disabled={props.disableSubmit}
-                            onClick={props.onSubmit}
+                            onClick={() =>
+                                props.onSubmit({ saveAndContinue: false })
+                            }
                         >
                             Save
                         </button>
@@ -48,7 +50,9 @@ export function AttributeFormModal(props: {
                             <button
                                 className="btn btn-lg btn-primary ml-3"
                                 disabled={props.disableSubmit}
-                                onClick={props.onSubmit}
+                                onClick={() =>
+                                    props.onSubmit({ saveAndContinue: true })
+                                }
                             >
                                 Save &amp; add another
                             </button>
