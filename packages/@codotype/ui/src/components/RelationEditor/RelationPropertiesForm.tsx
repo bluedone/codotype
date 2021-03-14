@@ -84,14 +84,28 @@ export function RelationPropertiesForm(props: RelationPropertiesFormProps) {
                         <label className="mb-0">
                             {schema.identifiers.singular.title}
                         </label>
-                        <small className="form-text text-blue-500">
+                        <p className="text-sm text-blue-500">
                             Where the relational data is stored
-                        </small>
-                        <input
-                            type="text"
-                            className="form-control border-blue-500 text-blue-500"
-                            value={getSourceLabel({ schema, relationInput })}
-                        />
+                        </p>
+                        <select
+                            className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                            value={relationInput.sourceSchemaID}
+                            onChange={e => {
+                                props.onChange({
+                                    ...relationInput,
+                                    sourceSchemaID: e.currentTarget.value,
+                                });
+                            }}
+                        >
+                            {schemas.map(s => (
+                                <option key={s.id} value={s.id}>
+                                    {getSourceLabel({
+                                        schema: s,
+                                        relationInput,
+                                    })}
+                                </option>
+                            ))}
+                        </select>
                     </div>
                 </div>
 
@@ -102,12 +116,12 @@ export function RelationPropertiesForm(props: RelationPropertiesFormProps) {
                                 <label className="mb-0">
                                     {RELATION_META[relationInput.type].label}
                                 </label>
-                                <small className="form-text text-muted mb-0">
+                                <p className="text-sm text-muted mb-0">
                                     {
                                         RELATION_META[relationInput.type]
                                             .description
                                     }
-                                </small>
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -135,9 +149,9 @@ export function RelationPropertiesForm(props: RelationPropertiesFormProps) {
                         <label className="mb-0 text-teal-500">
                             Related Schema
                         </label>
-                        <small className="form-text text-teal-500">
+                        <div className="text-sm text-teal-500">
                             Schema referenced by this relation
-                        </small>
+                        </div>
                         <select
                             className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
                             value={relationInput.destinationSchemaID}
@@ -163,7 +177,7 @@ export function RelationPropertiesForm(props: RelationPropertiesFormProps) {
             <div className="grid grid-cols-12 gap-4">
                 <div className="col-span-4">
                     <input
-                        className="form-control"
+                        className="form-control mt-3"
                         placeholder="Source Schema Alias"
                         value={relationInput.sourceSchemaAlias}
                         onChange={e => {
@@ -182,7 +196,7 @@ export function RelationPropertiesForm(props: RelationPropertiesFormProps) {
                 />
                 <div className="col-span-4">
                     <input
-                        className="form-control"
+                        className="form-control mt-3"
                         placeholder="Destination Schema Alias"
                         value={relationInput.destinationSchemaAlias}
                         onChange={e => {
@@ -197,20 +211,22 @@ export function RelationPropertiesForm(props: RelationPropertiesFormProps) {
                 </div>
             </div>
             {destinationSchema !== undefined && (
-                <div className="grid grid-cols-1 gap-4">
-                    <div className="col-span-1">
+                <div className="grid grid-cols-1">
+                    <div className="col-span-1 mt-3">
                         <hr />
                     </div>
-                    <div className="col-span-1 text-center">
-                        <RelationBadge
-                            direction="out"
-                            relation={buildRelation({
-                                sourceSchema: props.schema,
-                                relationInput: relationInput,
-                                destinationSchema: destinationSchema,
-                            })}
-                            slim={false}
-                        />
+                    <div className="col-span-1">
+                        <div className="flex justify-center my-3">
+                            <RelationBadge
+                                direction="out"
+                                relation={buildRelation({
+                                    sourceSchema: props.schema,
+                                    relationInput: relationInput,
+                                    destinationSchema: destinationSchema,
+                                })}
+                                slim={true}
+                            />
+                        </div>
                     </div>
                 </div>
             )}

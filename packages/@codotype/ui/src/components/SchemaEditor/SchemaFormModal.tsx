@@ -29,9 +29,9 @@ export function SchemaFormModal(props: {
     const disableSubmit: boolean = props.errors.length > 0;
 
     return (
-        <Modal size="lg" show={props.show} onHide={props.handleClose}>
+        <Modal show={props.show} onHide={props.handleClose}>
             <div className="p-5 select-none">
-                <h3 className="text-2xl">{title}</h3>
+                <h3 className="modal-header">{title}</h3>
                 {props.children}
             </div>
             <div className="modal-footer-tw select-none">

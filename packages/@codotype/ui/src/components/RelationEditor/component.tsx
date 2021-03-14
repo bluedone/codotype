@@ -13,9 +13,9 @@ import { RelationFormModal } from "./RelationFormModal";
 import { RelationDeleteModal } from "./RelationDeleteModal";
 import { RelationListItem } from "./RelationListItem";
 import { RelationForm } from "./RelationForm";
-import { RelationListEmpty } from "./RelationListEmpty";
 import { reorder } from "../AttributeEditor/reorder";
 import { Hotkey } from "../Hotkey";
+import { SortableListEmpty } from "../SortableListEmpty";
 
 // // // //
 
@@ -299,7 +299,10 @@ export function RelationEditor(props: RelationEditorProps) {
 
             {/* Render empty state */}
             {showEmptyState && (
-                <RelationListEmpty
+                <SortableListEmpty
+                    title="No Relations added yet"
+                    body="Define references between Schemas"
+                    cta="Add Relation"
                     onClick={() => {
                         setRelationInput(
                             new Primatives.Relation({

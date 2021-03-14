@@ -74,9 +74,6 @@ module.exports = {
         //         {
         //             loader: "css-loader", // Translates CSS into CommonJS
         //         },
-        //         {
-        //             loader: "sass-loader", // Compiles Sass to CSS
-        //         },
         //     ],
         // });
 

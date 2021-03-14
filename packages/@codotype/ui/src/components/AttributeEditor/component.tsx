@@ -13,10 +13,10 @@ import { AttributeFormModal } from "./AttributeFormModal";
 import { AttributeDeleteModal } from "./AttributeDeleteModal";
 import { AttributeListItem } from "./AttributeListItem";
 import { AttributeForm } from "./AttributeForm";
-import { AttributeListEmpty } from "./AttributeListEmpty";
 import { validateAttribute } from "./validateAttribute";
 import { Hotkey } from "../Hotkey";
 import { reorder } from "./reorder";
+import { SortableListEmpty } from "../SortableListEmpty";
 
 // // // //
 
@@ -71,7 +71,10 @@ export function AttributeEditor(props: AttributeEditorProps) {
 
     // // // //
     // Defines saveAttribute function
-    function saveAttribute(params: { newAttributeData: AttributeInput }) {
+    function saveAttribute(params: {
+        saveAndContinue: boolean;
+        newAttributeData: AttributeInput;
+    }) {
         // Insert new Attribute
         if (
             params.newAttributeData.id === "" ||
@@ -101,7 +104,15 @@ export function AttributeEditor(props: AttributeEditorProps) {
                 lastUpdatedAt: Date.now(),
                 attributes: [...props.attributes, newAttribute],
             });
+
             setAttributeInput(null);
+            if (params.saveAndContinue) {
+                setTimeout(() => {
+                    setAttributeInput(
+                        new Primatives.AttributeInput({ id: "" }),
+                    );
+                }, 150);
+            }
             return;
         }
 
@@ -156,8 +167,9 @@ export function AttributeEditor(props: AttributeEditorProps) {
                     onCancel={() => {
                         setAttributeInput(null);
                     }}
-                    onSubmit={() => {
+                    onSubmit={({ saveAndContinue }) => {
                         saveAttribute({
+                            saveAndContinue,
                             newAttributeData: {
                                 ...attributeInput,
                             },
@@ -180,7 +192,10 @@ export function AttributeEditor(props: AttributeEditorProps) {
                                 return;
                             }
                             // Save attribute on keydown "Enter"
-                            saveAttribute({ newAttributeData: attributeInput });
+                            saveAttribute({
+                                saveAndContinue: true,
+                                newAttributeData: attributeInput,
+                            });
                         }}
                         addons={props.addons}
                         supportedDatatypes={props.supportedDatatypes}
@@ -279,7 +294,10 @@ export function AttributeEditor(props: AttributeEditorProps) {
             )}
             {/* Render empty state */}
             {props.attributes.length === 0 && (
-                <AttributeListEmpty
+                <SortableListEmpty
+                    title="No Attributes added yet"
+                    body="Define properties on this Schema"
+                    cta="Add Attribute"
                     onClick={() => {
                         const newAttribute: AttributeInput = new Primatives.AttributeInput(
                             { id: "" },

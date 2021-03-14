@@ -40,7 +40,6 @@ yarn storybook
 -   [Webpack](https://webpack.js.org/)
 -   [Babel](https://babeljs.io/)
 -   [Bootstrap](https://getbootstrap.com)
--   [SCSS](https://sass-lang.com/)
 
 **Misc. References**
 

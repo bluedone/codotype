@@ -3,12 +3,14 @@ import { AttributeDatatypeForm } from "./AttributeDatatypeForm";
 import { AttributeMetaForm } from "./AttributeMetaForm";
 import {
     Datatype,
+    DATATYPE_META,
     AttributeAddon,
     AttributeInput,
     AddonsValue,
 } from "@codotype/core";
 import * as React from "react";
 import { AddonPropertyForm } from "./AttributeAddonForm";
+import { ConfigurationGroupTab } from "../ProjectEditor/ConfigurationGroupSelector";
 
 // // // //
 
@@ -60,30 +62,37 @@ export function AttributeFormSelector(props: {
         <div className="row">
             <div className="col-lg-12">
                 <ul className="nav nav-tabs w-full flex">
-                    <FormGroupTab
+                    <ConfigurationGroupTab
                         onClick={() => {
                             setSelectedForm("DATATYPE");
                         }}
-                        disabled={attributeInput.datatype === null}
+                        // disable={attributeInput.datatype === null}
                         active={selectedForm === "DATATYPE"}
-                        label={"Datatype"}
+                        label={
+                            attributeInput.datatype === null
+                                ? "Datatype"
+                                : `Datatype: ${
+                                      DATATYPE_META[attributeInput.datatype]
+                                          .label
+                                  }`
+                        }
                     />
 
-                    <FormGroupTab
+                    <ConfigurationGroupTab
                         onClick={() => {
                             setSelectedForm("PROPERTIES");
                         }}
-                        disabled={attributeInput.datatype === null}
+                        // disabled={attributeInput.datatype === null}
                         active={selectedForm === "PROPERTIES"}
                         label={"Tokens"}
                     />
 
                     {renderAddonsTab && (
-                        <FormGroupTab
+                        <ConfigurationGroupTab
                             onClick={() => {
                                 setSelectedForm("ADDONS");
                             }}
-                            disabled={attributeInput.datatype === null}
+                            // disabled={attributeInput.datatype === null}
                             active={selectedForm === "ADDONS"}
                             label={"Behavior"}
                         />

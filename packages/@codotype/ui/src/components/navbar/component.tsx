@@ -127,13 +127,13 @@ export function AppNavbar(props: {
                                 alt="Codotype Logo"
                             /> */}
                             <div className="hidden lg:flex items-center h-8 w-auto">
-                                {/* <img
+                                <img
                                     className="h-8 w-auto"
                                     src="https://res.cloudinary.com/codotype/image/upload/v1560045005/tech-logos/codotype.png"
                                     alt="Codotype Logo"
-                                /> */}
+                                />
                                 <span className="ml-3 text-2xl font-semibold">
-                                    Next.js + TypeScript Starter
+                                    Codotype
                                 </span>
                             </div>
                             <div className="hidden sm:block sm:ml-6">

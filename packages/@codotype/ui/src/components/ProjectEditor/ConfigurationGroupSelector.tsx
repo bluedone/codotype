@@ -10,8 +10,7 @@ import {
 } from "@codotype/core";
 import { PluginStart } from "../PluginStart";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBookOpen, faPlay } from "@fortawesome/free-solid-svg-icons";
-import { faReadme } from "@fortawesome/free-brands-svg-icons";
+import { faBookOpen } from "@fortawesome/free-solid-svg-icons";
 
 // // // //
 
@@ -19,22 +18,26 @@ export function ConfigurationGroupTab(props: {
     label: string;
     active: boolean;
     pinned?: boolean;
+    disabled?: boolean;
     onClick: () => void;
 }) {
-    const { label } = props;
+    const { label, disabled = false } = props;
 
     return (
         <button
             className={classnames(
                 "focus:outline-none group relative min-w-0 flex-1 overflow-hidden bg-white dark:bg-gray-900 py-4 px-4 text-sm font-medium text-center hover:bg-gray-50 focus:z-10",
                 {
-                    "text-gray-900 dark:text-gray-500": props.active,
-                    "text-gray-500 hover:text-gray-700 dark:hover:text-gray-400": !props.active,
+                    "cursor-not-allowed": disabled,
+                    "text-gray-900 dark:text-gray-200": props.active,
+                    "text-gray-500 hover:text-gray-700 darK:text-gray-200 dark:hover:text-gray-400": !props.active,
                 },
             )}
             onClick={e => {
                 e.currentTarget.blur();
-                props.onClick();
+                if (disabled === false) {
+                    props.onClick();
+                }
             }}
         >
             {props.pinned && (
@@ -164,7 +167,7 @@ export function ConfigurationGroupSelector(props: {
                         </select>
                     </div>
                     <div className="hidden sm:flex w-full">
-                        <div className="flex flex-grow rounded-lg overflow-hidden divide-x divide-gray-200 dark:divide-gray-800">
+                        <div className="flex flex-grow rounded-lg overflow-hidden divide-x divide-gray-200 border-gray-200 dark:divide-gray-800 dark:border-gray-800 border dark:divide-gray-800">
                             <ConfigurationGroupTab
                                 pinned
                                 onClick={() => {

@@ -44,34 +44,50 @@ export function RelationDatatypeForm({
     );
 
     /** Choose either active or normal image for rel type. */
-    const imgSrc = (relType: string) =>
-        `${REL_TYPE_ICON_ROOT_URL}/${relType.toLowerCase()}${
-            relType === String(type) ? "_active.png" : ".png"
-        }`;
+    // const imgSrc = (relType: string) =>
+    //     `${REL_TYPE_ICON_ROOT_URL}/${relType.toLowerCase()}${
+    //         relType === String(type) ? "_active.png" : ".png"
+    //     }`;
 
     /** Create a button for a rel type that respects which one is active. */
+    // const makeRelTypeButton = (relType: string) => {
+    //     // @ts-ignore
+    //     const relationMeta: RelationMeta = RELATION_META[relType];
+
+    //     return (
+    //         <button
+    //             key={relationMeta.id}
+    //             style={{ width: "33%" }}
+    //             className={classname("btn btn-outline-primary", {
+    //                 active: relType === type,
+    //             })}
+    //             title={relationMeta.label}
+    //             onClick={() => onChangeRelationType(relationMeta.id)}
+    //         >
+    //             <img style={{ width: "60%" }} src={imgSrc(relType)} />
+    //         </button>
+    //     );
+    // };
+
     const makeRelTypeButton = (relType: string) => {
-        // @ts-ignore
         const relationMeta: RelationMeta = RELATION_META[relType];
 
         return (
-            <button
-                key={relationMeta.id}
-                style={{ width: "33%" }}
-                className={classname("btn btn-outline-primary", {
-                    active: relType === type,
-                })}
-                title={relationMeta.label}
-                onClick={() => onChangeRelationType(relationMeta.id)}
-            >
-                <img style={{ width: "60%" }} src={imgSrc(relType)} />
-            </button>
+            <option key={relationMeta.id} value={relationMeta.id}>
+                {relationMeta.label}
+            </option>
         );
     };
 
     return (
-        <div className="btn-group w-full">
+        <select
+            className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+            value={type}
+            onChange={e => {
+                onChangeRelationType(e.currentTarget.value);
+            }}
+        >
             {filteredRelationKeys.map(makeRelTypeButton)}
-        </div>
+        </select>
     );
 }

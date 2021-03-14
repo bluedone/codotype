@@ -18,10 +18,10 @@ export function Dropdown(props: {
         <div className="flex items-center justify-center z-10">
             <div className="relative inline-block text-left">
                 <Menu>
-                    {({ open }) => (
+                    {(menuParams: { open: boolean }) => (
                         <>
                             <span className="rounded-md shadow-sm">
-                                <Menu.Button className="inline-flex justify-center w-full px-4 py-2 text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800">
+                                <Menu.Button className="inline-flex justify-center w-full px-4 py-2 text-sm font-medium leading-5 transition duration-150 ease-in-out bg-white border text-gray-700 border-gray-300 dark:bg-gray-700 dark:text-gray-100 dark:border-gray-900 rounded-md hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800">
                                     <span>{label}</span>
                                     {hideCaret === false && (
                                         <svg
@@ -40,7 +40,7 @@ export function Dropdown(props: {
                             </span>
 
                             <Transition
-                                show={open}
+                                show={menuParams.open}
                                 enter="transition ease-out duration-100"
                                 enterFrom="transform opacity-0 scale-95"
                                 enterTo="transform opacity-100 scale-100"
