@@ -40,8 +40,8 @@ export function SchemaForm(props: SchemaFormProps) {
                 <div className="row">
                     <div className="col-sm-12">
                         <p className="mt-2 mb-3 text-muted">
-                            The <strong>Schema</strong> is a building block that
-                            describes <i>data</i>.
+                            The <strong>Data Model</strong> is a building block
+                            that describes <i>data</i>.
                         </p>
 
                         <p className="mt-2 mb-3 text-muted">
@@ -83,8 +83,8 @@ export function SchemaForm(props: SchemaFormProps) {
                             use for things like naming <strong>files</strong>,{" "}
                             <strong>folders</strong>, <strong>variables</strong>
                             , and <strong>database tables</strong>. You can
-                            rename or remove a schema whenever you like{" "}
-                            <i className="far fa-laugh" />
+                            rename or remove a Data Model whenever you like
+                            {/* <i className="far fa-laugh" /> */}
                         </p>
                     </div>
                 </div>

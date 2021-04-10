@@ -46,7 +46,7 @@ function Navbar() {
                             <img
                                 className="hidden lg:block h-8 w-auto"
                                 src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"
-                                alt="Workflow"
+                                alt="Codotype"
                             />
                         </div>
                         <div className="hidden sm:block sm:ml-6">

@@ -18,6 +18,7 @@ import {
     validateSchema,
 } from "@codotype/core";
 import { reorder } from "../AttributeEditor/reorder";
+import { EmptyState } from "./EmptyState";
 
 // // // //
 
@@ -225,43 +226,20 @@ export function SchemaEditorLayout(props: {
 
     // Show empty state
     if (selectedSchemaId === null || selectedSchema === undefined) {
-        // return <SchemaEditorEmptyState />;
         return (
-            <div className="flex px-4 py-4 justify-center items-center">
-                <div className="col-sm-8">
-                    <div className="card card-body shadow-xl">
-                        <div className="row items-center justify-center">
-                            <div className="col-lg-12">
-                                <h4>New Schema</h4>
-
-                                <SchemaForm
-                                    label={""}
-                                    onChange={updatedTokens => {
-                                        setNewTokenPluralization(updatedTokens);
-                                    }}
-                                    onKeydownEnter={() => {
-                                        createNewSchema();
-                                    }}
-                                />
-                            </div>
-                        </div>
-                        <div className="col-lg-12 text-right mt-2">
-                            <button
-                                className="btn btn-lg btn-primary"
-                                disabled={
-                                    newTokenPluralization === null ||
-                                    newTokenPluralization.singular.title === ""
-                                }
-                                onClick={() => {
-                                    createNewSchema();
-                                }}
-                            >
-                                Create Schema
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <EmptyState
+                onNewTokenChange={setNewTokenPluralization}
+                onKeydownEnter={() => {
+                    createNewSchema();
+                }}
+                disabled={
+                    newTokenPluralization === null ||
+                    newTokenPluralization.singular.title === ""
+                }
+                onSubmit={() => {
+                    createNewSchema();
+                }}
+            />
         );
     }
 
