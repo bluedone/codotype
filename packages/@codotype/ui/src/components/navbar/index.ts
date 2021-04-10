@@ -1,1 +1,1 @@
-export { AppNavbar } from "./component";
+export { AppNavbar } from "./Layout";
