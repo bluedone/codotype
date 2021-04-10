@@ -301,7 +301,7 @@ export function RelationEditor(props: RelationEditorProps) {
             {showEmptyState && (
                 <SortableListEmpty
                     title="No Relations added yet"
-                    body="Define references between Schemas"
+                    body="Define references between data models"
                     cta="Add Relation"
                     onClick={() => {
                         setRelationInput(
