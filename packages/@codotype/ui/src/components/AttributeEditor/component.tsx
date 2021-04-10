@@ -296,7 +296,7 @@ export function AttributeEditor(props: AttributeEditorProps) {
             {props.attributes.length === 0 && (
                 <SortableListEmpty
                     title="No Attributes added yet"
-                    body="Define properties on this Schema"
+                    body="Define properties on this data model"
                     cta="Add Attribute"
                     onClick={() => {
                         const newAttribute: AttributeInput = new Primatives.AttributeInput(
