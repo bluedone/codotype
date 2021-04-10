@@ -9,7 +9,7 @@ export function Hero() {
                         <img
                             className="h-11 w-auto"
                             src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=500"
-                            alt="Workflow"
+                            alt="Codotype"
                         />
                     </div>
                     <div className="mt-20">
