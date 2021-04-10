@@ -75,7 +75,7 @@ export function PluginRunner(props: PluginRunnerProps) {
                         {loading && <LoadingBuild />}
                         {finished && (
                             <BuildFinished
-                                responseType="LOCAL_PATH"
+                                responseType={data.type}
                                 filepath={data.filepath}
                                 onClickBackToEditor={reset}
                             />

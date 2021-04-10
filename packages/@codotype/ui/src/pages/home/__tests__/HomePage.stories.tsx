@@ -4,7 +4,6 @@ import { testState } from "@codotype/core";
 import { HomePage } from "../HomePage";
 import { FeatureSections } from "../FeatureSection";
 import { AppNavbar } from "../../../components/navbar";
-import { AppFooter } from "../../../components/AppFooter";
 
 // // // //
 
@@ -61,7 +60,6 @@ storiesOf("Pages/www/HomePage", module).add("renders", () => {
                     },
                 ]}
             />
-            <AppFooter />
         </React.Fragment>
     );
 });

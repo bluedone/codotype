@@ -309,7 +309,7 @@ export function PriceSection() {
                             href="#"
                             className="block text-center text-base font-medium text-blue-100 hover:text-white"
                         >
-                            Try Workflow Lite for free
+                            Try Codotype Lite for free
                         </a>
                     </div>
                 </div>
