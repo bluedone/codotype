@@ -1,13 +1,11 @@
 import * as React from "react";
 import { PluginMetadata } from "@codotype/core";
-import { ChevronAnimation } from "../ChevronAnimation/component";
 import { MarkdownRenderer } from "../MarkdownRenderer";
 import { PluginTypeTag } from "../PluginCard/PluginTypeTag";
 import { PluginTechTag } from "../PluginCard/PluginTechTag";
 import { PluginExperienceTag } from "../PluginCard/PluginExperienceTag";
 import { PluginsVersionTag } from "../PluginCard/PluginVersionTag";
 import { PluginGithubLink } from "../PluginCard/PluginGithubLink";
-import { GitHubStar } from "../GitHubStar";
 
 // // // //
 
@@ -40,10 +38,6 @@ export function PluginStart(props: PluginStartProps) {
                                 Codotype
                             </a>
                         </p>
-                    </div>
-
-                    <div className="flex flex-row justify-center mt-3">
-                        <GitHubStar />
                     </div>
                 </div>
 

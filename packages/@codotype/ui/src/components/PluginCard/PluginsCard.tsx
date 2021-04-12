@@ -1,6 +1,5 @@
 import * as React from "react";
 import { PluginMetadata } from "@codotype/core";
-import { ChevronAnimation } from "../ChevronAnimation";
 
 // // // //
 
@@ -42,7 +41,6 @@ export function PluginCard(props: { plugin: PluginMetadata }) {
                 >
                     <span className="flex justify-center items-center">
                         Let's Go!
-                        <ChevronAnimation active />
                     </span>
                 </a>
             </div>

@@ -39,8 +39,10 @@ export function LoadingBuild(props: { quote?: [string, string] }) {
             className="flex flex-col items-center h-full justify-center"
             style={{ minHeight: "26rem" }}
         >
-            <h3>We're exporting your codebase</h3>
-            <p className="text-gray-600 mb-0">
+            <h3 className="mb-0 mr-2 text-2xl">
+                We're exporting your codebase
+            </h3>
+            <p className="text-gray-600 dark:text-gray-200 mb-0">
                 This should only take a few moments
                 <FontAwesomeIcon icon={faLaugh} className="ml-2" />
             </p>
