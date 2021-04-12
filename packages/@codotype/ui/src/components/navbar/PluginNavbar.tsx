@@ -1,25 +1,17 @@
 import * as React from "react";
 import { DarkModeButton } from "./DarkModeButton";
 
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import {
-//     faBook,
-//     faQuestionCircle,
-//     faDollarSign,
-// } from "@fortawesome/free-solid-svg-icons";
-// import { faTwitter, faGithub } from "@fortawesome/free-brands-svg-icons";
-// import Link from "next/link";
-
 // // // //
 
 export function AppNavbar(props: {
     homeUrl?: string;
+    pluginMetadata?: string;
     toggleDarkMode?: () => void;
     darkModeEnabled?: boolean;
 }) {
     const { darkModeEnabled = false, toggleDarkMode = null } = props;
     return (
-        <nav className="bg-white dark:bg-gray-900 dark:text-gray-200 shadow">
+        <nav className="bg-white shadow">
             <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
                 <div className="relative flex justify-between h-16">
                     <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -89,13 +81,13 @@ export function AppNavbar(props: {
                             {/* <!-- Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" --> */}
                             <a
                                 href="#"
-                                className="border-indigo-500 text-gray-900 dark:text-gray-200 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                                className="border-indigo-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
                             >
                                 Dashboard
                             </a>
                             <a
                                 href="#"
-                                className="border-transparent text-gray-500 dark:text-gray-200 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                                className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
                             >
                                 Projects
                             </a>
@@ -115,13 +107,13 @@ export function AppNavbar(props: {
                                 {/* <!-- Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700" --> */}
                                 <a
                                     href="#"
-                                    className="bg-indigo-50 border-indigo-500 dark:text-gray-200 text-indigo-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
+                                    className="bg-indigo-50 border-indigo-500 text-indigo-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
                                 >
                                     Dashboard
                                 </a>
                                 <a
                                     href="#"
-                                    className="border-transparent dark:text-gray-200 text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
+                                    className="border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
                                 >
                                     Projects
                                 </a>
