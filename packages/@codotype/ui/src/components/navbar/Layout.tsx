@@ -1,6 +1,5 @@
 import * as React from "react";
 import { DarkModeButton } from "./DarkModeButton";
-
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import {
 //     faBook,
