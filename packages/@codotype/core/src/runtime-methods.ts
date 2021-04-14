@@ -105,9 +105,7 @@ export type RenderTemplateFunction = (params: {
     src: string;
     dest: string;
     data?: { [key: string]: any };
-    options?: {
-        prettify?: PrettifyOptions;
-    };
+    prettify?: PrettifyOptions;
 }) => Promise<boolean>;
 
 /**
@@ -125,7 +123,7 @@ export interface ComposeWithOptions {
 /**
  * ComposeWithFunction
  * Exposed by the RuntimeProxy to allow a Generator to "compose" another generator module
- * TODO - should this use the modulePath / relativePath / absolutePath pattern? or should that pattern be updated?
+ * QUESTION - should this use the modulePath / relativePath / absolutePath pattern? or should that pattern be updated?
  */
 export type ComposeWithFunction = (
     generatorModule: string,

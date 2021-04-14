@@ -2,7 +2,7 @@ import { TokenCasingBuilder } from "../TokenCasing";
 
 // // // //
 
-describe("Primatives.TokenCasing", () => {
+describe("Primitives.TokenCasing", () => {
     test("works", () => {
         const tokenCasing = new TokenCasingBuilder({
             title: "User",

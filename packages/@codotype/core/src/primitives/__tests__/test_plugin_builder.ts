@@ -5,7 +5,7 @@ import { PluginBuilder } from "../Plugin";
 describe("factory", () => {
     test("works", () => {
         const plugin = new PluginBuilder({
-            id: "my-codotype-plugin",
+            identifier: "my-codotype-plugin",
             project_path: "my_codotype_plugin",
             content: {
                 label: "My Codotype Plugin",

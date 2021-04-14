@@ -1,22 +1,22 @@
-import { ConfigurationPropertyBuilder } from "./primatives/ConfigurationProperty";
-import { SchemaBuilder } from "./primatives/Schema";
-import { ConfigurationGroupBuilder } from "./primatives/ConfigurationGroup";
-import { ConfigurationGroupSectionBuilder } from "./primatives/ConfigurationGroupSection";
-import { SchemaEditorBuilder } from "./primatives/SchemaEditor";
-import { RelationBuilder } from "./primatives/Relation";
-import { AttributeInputBuilder } from "./primatives/Attribute";
-import { PluginBuilder } from "./primatives/Plugin";
-import { TokenCasingBuilder } from "./primatives/TokenCasing";
-import { TokenPluralizationBuilder } from "./primatives/TokenPluralization";
+import { ConfigurationPropertyBuilder } from "./primitives/ConfigurationProperty";
+import { SchemaBuilder } from "./primitives/Schema";
+import { ConfigurationGroupBuilder } from "./primitives/ConfigurationGroup";
+import { ConfigurationGroupSectionBuilder } from "./primitives/ConfigurationGroupSection";
+import { SchemaEditorBuilder } from "./primitives/SchemaEditor";
+import { RelationBuilder } from "./primitives/Relation";
+import { AttributeInputBuilder } from "./primitives/Attribute";
+import { PluginBuilder } from "./primitives/Plugin";
+import { TokenCasingBuilder } from "./primitives/TokenCasing";
+import { TokenPluralizationBuilder } from "./primitives/TokenPluralization";
 
 // // // //
 
 /**
- * CodotypePrimatives
- * Defines an interface to describe the "Primatives" singleton that exposes
+ * CodotypePrimitives
+ * Defines an interface to describe the "Primitives" singleton that exposes
  * the various constructors for the different Primative types in Codotype
  */
-export interface CodotypePrimatives {
+export interface CodotypePrimitives {
     Schema: typeof SchemaBuilder;
     AttributeInput: typeof AttributeInputBuilder;
     Relation: typeof RelationBuilder;
@@ -33,10 +33,10 @@ export interface CodotypePrimatives {
 }
 
 /**
- * Primatives
- * Singleton that exposes the constructors for the different Primatives in Codotype
+ * Primitives
+ * Singleton that exposes the constructors for the different Primitives in Codotype
  */
-export const Primatives: CodotypePrimatives = {
+export const Primitives: CodotypePrimitives = {
     Schema: SchemaBuilder,
     AttributeInput: AttributeInputBuilder,
     Relation: RelationBuilder,

@@ -18,3 +18,22 @@ TokenPluralizationBuilder {
   },
 }
 `;
+
+exports[`Primitives.TokenPluralization works 1`] = `
+TokenPluralizationBuilder {
+  "plural": Object {
+    "camel": "",
+    "kebab": "",
+    "pascal": "",
+    "snake": "",
+    "title": "",
+  },
+  "singular": Object {
+    "camel": "",
+    "kebab": "",
+    "pascal": "",
+    "snake": "",
+    "title": "",
+  },
+}
+`;

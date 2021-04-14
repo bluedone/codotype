@@ -2,7 +2,7 @@ import { TokenPluralizationBuilder } from "../TokenPluralization";
 
 // // // //
 
-describe("Primatives.TokenPluralization", () => {
+describe("Primitives.TokenPluralization", () => {
     test("works", () => {
         const TokenPluralization = new TokenPluralizationBuilder({
             titleSingular: "User",

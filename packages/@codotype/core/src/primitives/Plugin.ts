@@ -13,7 +13,7 @@ import { Content } from "../content";
 // // // //
 
 interface PluginBuilderParams {
-    id: string;
+    identifier: string;
     content: {
         label: string;
         description: string;
@@ -63,7 +63,7 @@ export class PluginBuilder implements PluginMetadata {
     exampleProjects: ProjectInput[] = [];
 
     constructor(params: PluginBuilderParams) {
-        this.identifier = params.id;
+        this.identifier = params.identifier;
         this.project_path = params.project_path;
 
         // Sets this.content

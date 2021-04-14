@@ -9,3 +9,13 @@ TokenCasingBuilder {
   "title": "User",
 }
 `;
+
+exports[`Primitives.TokenCasing works 1`] = `
+TokenCasingBuilder {
+  "camel": "user",
+  "kebab": "user",
+  "pascal": "User",
+  "snake": "user",
+  "title": "User",
+}
+`;
