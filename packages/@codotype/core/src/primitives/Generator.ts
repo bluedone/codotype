@@ -10,7 +10,7 @@ import { GeneratorProps } from "../generator";
 
 export class GeneratorBuilder implements GeneratorProps {
     name: string;
-    compileInPlace: string[] = [];
+    renderInPlace: string[] = [];
     write?: WriteFunction = undefined;
     forEachSchema?: ForEachSchemaFunction = undefined;
     forEachRelation?: ForEachRelationFunction = undefined;
@@ -22,6 +22,6 @@ export class GeneratorBuilder implements GeneratorProps {
         this.forEachRelation = params.forEachRelation || this.forEachRelation;
         this.forEachReferencedBy =
             params.forEachReferencedBy || this.forEachReferencedBy;
-        this.compileInPlace = params.compileInPlace || this.compileInPlace;
+        this.renderInPlace = params.renderInPlace || this.renderInPlace;
     }
 }

@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProjectBuildBuilder works 1`] = `
+ProjectBuildBuilder {
+  "endTime": "",
+  "id": "",
+  "projectInput": Object {
+    "configuration": Object {
+      "configure": Object {
+        "analytics": Object {
+          "googleAnalytics": false,
+          "hotjar": false,
+        },
+        "hosting": Object {
+          "platform": "vercel",
+        },
+        "seo": Object {
+          "jsonLD": false,
+          "opengraph": false,
+          "sitemap": false,
+          "twitter": false,
+        },
+        "tooling": Object {
+          "eslint": true,
+          "jest": false,
+          "prettier": true,
+          "storybook": false,
+        },
+      },
+      "example-properties": Object {
+        "boolean": false,
+        "collection": Array [],
+        "dropdown": "one",
+        "instance": Object {
+          "boolean": false,
+          "text": "",
+        },
+        "number": "",
+        "text": "",
+      },
+    },
+    "id": "",
+    "identifiers": Object {
+      "camel": "newProject",
+      "kebab": "new-project",
+      "pascal": "NewProject",
+      "snake": "new_project",
+      "title": "New Project",
+    },
+    "pluginID": "react-next-ts-website-starter-variant",
+    "pluginVersion": "0.0.1",
+    "relations": Array [],
+    "schemas": Array [],
+  },
+  "startTime": "Wed, 14 Apr 2021 22:43:24 GMT",
+}
+`;

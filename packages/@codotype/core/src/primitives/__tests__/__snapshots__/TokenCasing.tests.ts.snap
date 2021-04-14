@@ -1,15 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Primatives.TokenCasing works 1`] = `
-TokenCasingBuilder {
-  "camel": "user",
-  "kebab": "user",
-  "pascal": "User",
-  "snake": "user",
-  "title": "User",
-}
-`;
-
 exports[`Primitives.TokenCasing works 1`] = `
 TokenCasingBuilder {
   "camel": "user",
