@@ -197,10 +197,10 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@codotype/core@^0.8.0-canary.9":
-  version "0.8.0-canary.9"
-  resolved "https://registry.yarnpkg.com/@codotype/core/-/core-0.8.0-canary.9.tgz#4fd89fb22b24f1e8b7780bf25e2eea111415b4ec"
-  integrity sha512-gEf5p4WFEBvyvMN8A3qFO4XOnNQc5PQ5/wbGHmJLFjwwwz72cpm33QntLqgA5CzkiIZshKZHSfPFrvRqC/gAWA==
+"@codotype/core@^0.8.0-canary.12":
+  version "0.8.0-canary.12"
+  resolved "https://registry.yarnpkg.com/@codotype/core/-/core-0.8.0-canary.12.tgz#94bfccdc122c35b35d82d0124590138d82fe3e62"
+  integrity sha512-4Myv9O97PHXo4LcsVwt6jWdAG6y9+YJSmw3WudbG9czBfpNjO5LszwSvP5GOGG0ZgR7G9t7NxpwcxOKV5VaxlA==
   dependencies:
     "@types/lodash" "^4.14.149"
     "@types/pluralize" "0.0.29"

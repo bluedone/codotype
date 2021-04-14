@@ -73,7 +73,6 @@ describe("testing @codotype/runtime v2", () => {
         );
 
         // Defines the ProjectBuild
-        // TODO - rename this to ProjectBuildInput -> automatically append start+end in nodeRuntime.execute?
         const build: ProjectBuild = {
             id: "test-project",
             projectInput,

@@ -23,7 +23,7 @@ import {
 export class RuntimeProxyAdapter implements RuntimeAdapter {
     private runtime: Runtime;
     runtimeProxy: RuntimeProxy;
-    compileInPlace: string[];
+    renderInPlace: string[];
     props: RuntimeAdapterProps;
     generatorResolvedPath: string;
 
@@ -48,13 +48,13 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
         // Validates GeneratorProps
         if (
             !generatorProps.write &&
-            !generatorProps.compileInPlace &&
+            !generatorProps.renderInPlace &&
             !generatorProps.forEachSchema &&
             !generatorProps.forEachRelation &&
             !generatorProps.forEachReferencedBy
         ) {
             throw Error(
-                "GeneratorProps requires either write, forEachSchema, forEachRelation, forEachReferencedBy, or compileInPlace properties",
+                "GeneratorProps requires either write, forEachSchema, forEachRelation, forEachReferencedBy, or renderInPlace properties",
             );
         }
 
@@ -69,7 +69,7 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
             generatorProps.forEachRelation || this.forEachRelation;
         this.forEachReferencedBy =
             generatorProps.forEachReferencedBy || this.forEachReferencedBy;
-        this.compileInPlace = generatorProps.compileInPlace || [];
+        this.renderInPlace = generatorProps.renderInPlace || [];
 
         // Assigns this.props
         this.props = props;
@@ -192,12 +192,12 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
 
     /**
      * compileTemplatesInPlace
-     * @see GeneratorProps.compileInPlace
+     * @see GeneratorProps.renderInPlace
      */
     compileTemplatesInPlace(): Promise<boolean[]> {
         // For each inPlaceTemplate, compile and write
         return Promise.all(
-            this.compileInPlace.map((template: string) => {
+            this.renderInPlace.map((template: string) => {
                 return this.runtime.writeTemplateToFile(
                     this,
                     this.runtime.getTemplatePath(
