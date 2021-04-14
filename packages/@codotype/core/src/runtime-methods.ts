@@ -105,7 +105,7 @@ export type RenderTemplateFunction = (params: {
     src: string;
     dest: string;
     data?: { [key: string]: any };
-    prettify?: PrettifyOptions;
+    options?: { prettify?: PrettifyOptions };
 }) => Promise<boolean>;
 
 /**
