@@ -8,6 +8,7 @@ import { AttributeInputBuilder } from "./primitives/Attribute";
 import { PluginBuilder } from "./primitives/Plugin";
 import { TokenCasingBuilder } from "./primitives/TokenCasing";
 import { TokenPluralizationBuilder } from "./primitives/TokenPluralization";
+import { ProjectBuildBuilder } from "./primitives/ProjectBuild";
 
 // // // //
 
@@ -27,6 +28,7 @@ export interface CodotypePrimitives {
     ConfigurationProperty: typeof ConfigurationPropertyBuilder;
     TokenCasing: typeof TokenCasingBuilder;
     TokenPluralization: typeof TokenPluralizationBuilder;
+    ProjectBuild: typeof ProjectBuildBuilder;
     // FEATURE - add AddonProperty
     // FEATURE - add RelationAddon
     // FEATURE - add AttributeAddon
@@ -47,4 +49,5 @@ export const Primitives: CodotypePrimitives = {
     ConfigurationProperty: ConfigurationPropertyBuilder,
     TokenCasing: TokenCasingBuilder,
     TokenPluralization: TokenPluralizationBuilder,
+    ProjectBuild: ProjectBuildBuilder
 };

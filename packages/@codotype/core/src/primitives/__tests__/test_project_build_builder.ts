@@ -17,7 +17,7 @@ describe("ProjectBuildBuilder", () => {
         });
 
         // Update projectBuild.startTime to prevent tests from failing
-        // projectBuild.startTime = "1618439842359";
+        projectBuild.startTime = "Wed, 14 Apr 2021 22:43:24 GMT";
 
         expect(projectBuild).toMatchSnapshot();
     });
