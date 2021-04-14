@@ -2,7 +2,7 @@ import { pluginReadme } from "../../../../components/MarkdownRenderer/__tests__/
 import {
     PluginMetadata,
     PropertyTypes,
-    Primatives,
+    Primitives,
     ConfigurationGroup,
     PropertyLayoutVariants,
     ConfigurationProperty,
@@ -14,7 +14,7 @@ import {
 // // // //
 // Library Metadata
 
-const libraryMetadata: ConfigurationProperty = new Primatives.ConfigurationProperty(
+const libraryMetadata: ConfigurationProperty = new Primitives.ConfigurationProperty(
     {
         identifier: "metadata",
         content: {
@@ -27,7 +27,7 @@ const libraryMetadata: ConfigurationProperty = new Primatives.ConfigurationPrope
         type: PropertyTypes.INSTANCE,
         layoutVariant: PropertyLayoutVariants.COL_12,
         properties: [
-            new Primatives.ConfigurationProperty({
+            new Primitives.ConfigurationProperty({
                 identifier: "packageName",
                 content: {
                     label: "Package Name",
@@ -40,7 +40,7 @@ const libraryMetadata: ConfigurationProperty = new Primatives.ConfigurationPrope
                 type: PropertyTypes.STRING,
                 layoutVariant: PropertyLayoutVariants.CARD_COL_6,
             }),
-            new Primatives.ConfigurationProperty({
+            new Primitives.ConfigurationProperty({
                 identifier: "componentName",
                 content: {
                     label: "Component Name",
@@ -53,7 +53,7 @@ const libraryMetadata: ConfigurationProperty = new Primatives.ConfigurationPrope
                 type: PropertyTypes.STRING,
                 layoutVariant: PropertyLayoutVariants.CARD_COL_6,
             }),
-            new Primatives.ConfigurationProperty({
+            new Primitives.ConfigurationProperty({
                 identifier: "author",
                 content: {
                     label: "Author",
@@ -65,7 +65,7 @@ const libraryMetadata: ConfigurationProperty = new Primatives.ConfigurationPrope
                 type: PropertyTypes.STRING,
                 layoutVariant: PropertyLayoutVariants.CARD_COL_6,
             }),
-            new Primatives.ConfigurationProperty({
+            new Primitives.ConfigurationProperty({
                 identifier: "license",
                 content: {
                     label: "License",
@@ -89,7 +89,7 @@ const libraryMetadata: ConfigurationProperty = new Primatives.ConfigurationPrope
 // // // //
 // Tooling Property
 
-const toolingProperty: ConfigurationProperty = new Primatives.ConfigurationProperty(
+const toolingProperty: ConfigurationProperty = new Primitives.ConfigurationProperty(
     {
         identifier: "tooling",
         content: {
@@ -103,7 +103,7 @@ const toolingProperty: ConfigurationProperty = new Primatives.ConfigurationPrope
         type: PropertyTypes.INSTANCE,
         layoutVariant: PropertyLayoutVariants.COL_12,
         properties: [
-            new Primatives.ConfigurationProperty({
+            new Primitives.ConfigurationProperty({
                 identifier: "jest",
                 content: {
                     label: "Jest",
@@ -116,7 +116,7 @@ const toolingProperty: ConfigurationProperty = new Primatives.ConfigurationPrope
                 type: PropertyTypes.BOOLEAN,
                 layoutVariant: PropertyLayoutVariants.CARD_COL_6,
             }),
-            new Primatives.ConfigurationProperty({
+            new Primitives.ConfigurationProperty({
                 identifier: "prettier",
                 content: {
                     label: "Prettier",
@@ -130,7 +130,7 @@ const toolingProperty: ConfigurationProperty = new Primatives.ConfigurationPrope
                 layoutVariant: PropertyLayoutVariants.CARD_COL_6,
                 defaultValue: true,
             }),
-            new Primatives.ConfigurationProperty({
+            new Primitives.ConfigurationProperty({
                 identifier: "eslint",
                 content: {
                     label: "Eslint",
@@ -144,7 +144,7 @@ const toolingProperty: ConfigurationProperty = new Primatives.ConfigurationPrope
                 layoutVariant: PropertyLayoutVariants.CARD_COL_6,
                 defaultValue: true,
             }),
-            new Primatives.ConfigurationProperty({
+            new Primitives.ConfigurationProperty({
                 identifier: "storybook",
                 content: {
                     label: "Storybook",
@@ -157,7 +157,7 @@ const toolingProperty: ConfigurationProperty = new Primatives.ConfigurationPrope
                 type: PropertyTypes.BOOLEAN,
                 layoutVariant: PropertyLayoutVariants.CARD_COL_6,
             }),
-            new Primatives.ConfigurationProperty({
+            new Primitives.ConfigurationProperty({
                 identifier: "vsCodeDir",
                 content: {
                     label: "Include .vscode directory",
@@ -177,7 +177,7 @@ const toolingProperty: ConfigurationProperty = new Primatives.ConfigurationPrope
 // // // //
 // GitHub Property
 
-const githubProperty: ConfigurationProperty = new Primatives.ConfigurationProperty(
+const githubProperty: ConfigurationProperty = new Primitives.ConfigurationProperty(
     {
         identifier: "github",
         content: {
@@ -190,7 +190,7 @@ const githubProperty: ConfigurationProperty = new Primatives.ConfigurationProper
         type: PropertyTypes.INSTANCE,
         layoutVariant: PropertyLayoutVariants.COL_12,
         properties: [
-            new Primatives.ConfigurationProperty({
+            new Primitives.ConfigurationProperty({
                 identifier: "changelog",
                 content: {
                     label: "Include CHANGELOG file",
@@ -202,7 +202,7 @@ const githubProperty: ConfigurationProperty = new Primatives.ConfigurationProper
                 type: PropertyTypes.BOOLEAN,
                 layoutVariant: PropertyLayoutVariants.CARD_COL_6,
             }),
-            new Primatives.ConfigurationProperty({
+            new Primitives.ConfigurationProperty({
                 identifier: "codeOfConduct",
                 content: {
                     label: "Include Code of Conduct",
@@ -214,7 +214,7 @@ const githubProperty: ConfigurationProperty = new Primatives.ConfigurationProper
                 type: PropertyTypes.BOOLEAN,
                 layoutVariant: PropertyLayoutVariants.CARD_COL_6,
             }),
-            new Primatives.ConfigurationProperty({
+            new Primitives.ConfigurationProperty({
                 identifier: "githubDir",
                 content: {
                     label: "Include .github directory",
@@ -233,7 +233,7 @@ const githubProperty: ConfigurationProperty = new Primatives.ConfigurationProper
 // // // //
 // Library Configuration Group
 
-const libraryConfiguration: ConfigurationGroup = new Primatives.ConfigurationGroup(
+const libraryConfiguration: ConfigurationGroup = new Primitives.ConfigurationGroup(
     {
         identifier: "libraryConfiguration",
         content: {
@@ -249,9 +249,9 @@ const libraryConfiguration: ConfigurationGroup = new Primatives.ConfigurationGro
 
 // // // //
 // Export Plugin
-export const ReactComponentLibraryStarterPlugin: PluginMetadata = new Primatives.Plugin(
+export const ReactComponentLibraryStarterPlugin: PluginMetadata = new Primitives.Plugin(
     {
-        id: "react-component-library-starter",
+        identifier: "react-component-library-starter",
         project_path: "react-component-library-starter",
         content: {
             label: "React + TypeScript Component Library Starter",

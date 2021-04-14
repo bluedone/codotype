@@ -5,7 +5,7 @@ import {
     Relation,
     RelationInput,
     RelationType,
-    Primatives,
+    Primitives,
     RelationAddon,
 } from "@codotype/core";
 import { Droppable, DragDropContext } from "react-beautiful-dnd";
@@ -93,7 +93,7 @@ export function RelationEditor(props: RelationEditorProps) {
             <Hotkey
                 keyName="shift+r"
                 onKeyDown={() => {
-                    setRelationInput(new Primatives.Relation({ id: "" }));
+                    setRelationInput(new Primitives.Relation({ id: "" }));
                 }}
             />
 
@@ -103,7 +103,7 @@ export function RelationEditor(props: RelationEditorProps) {
                 label="Relation"
                 onClick={() => {
                     setRelationInput(
-                        new Primatives.Relation({
+                        new Primitives.Relation({
                             id: "",
                             sourceSchemaID: props.selectedSchema.id,
                         }),
@@ -124,7 +124,7 @@ export function RelationEditor(props: RelationEditorProps) {
                     onSubmit={() => {
                         // Insert new Relation
                         if (relationInput.id === "") {
-                            const newRelation: RelationInput = new Primatives.Relation(
+                            const newRelation: RelationInput = new Primitives.Relation(
                                 {
                                     sourceSchemaID:
                                         relationInput.sourceSchemaID,
@@ -305,7 +305,7 @@ export function RelationEditor(props: RelationEditorProps) {
                     cta="Add Relation"
                     onClick={() => {
                         setRelationInput(
-                            new Primatives.Relation({
+                            new Primitives.Relation({
                                 id: "",
                                 sourceSchemaID: props.selectedSchema.id,
                             }),

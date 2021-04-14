@@ -12,7 +12,7 @@ import {
     PluginMetadata,
     buildDefaultConfiguration,
     SchemaInput,
-    Primatives,
+    Primitives,
     ProjectInput,
     RelationInput,
     validateSchema,
@@ -98,7 +98,7 @@ export function SchemaEditorLayout(props: {
         }
 
         // Defines new schema
-        const newSchema: SchemaInput = new Primatives.Schema({
+        const newSchema: SchemaInput = new Primitives.Schema({
             attributes: [
                 ...props.pluginMetadata.schemaEditorConfiguration.newSchemaDefaults.attributes.map(
                     a => {

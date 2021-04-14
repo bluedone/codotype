@@ -1,6 +1,6 @@
 import {
     PropertyTypes,
-    Primatives,
+    Primitives,
     PropertyLayoutVariants,
     StringPropertyTransformations,
     PropertyPreviewLayoutVariant,
@@ -10,7 +10,7 @@ import {
 
 // // // //
 
-export const ApiActionsProperty = new Primatives.ConfigurationProperty({
+export const ApiActionsProperty = new Primitives.ConfigurationProperty({
     identifier: "actions",
     content: {
         label: "Actions",
@@ -68,7 +68,7 @@ export const ApiActionsProperty = new Primatives.ConfigurationProperty({
         variant: PropertyPreviewLayoutVariant.CODE_DARK,
     },
     properties: [
-        new Primatives.ConfigurationProperty({
+        new Primitives.ConfigurationProperty({
             content: {
                 label: "Verb",
                 description: "Verify",
@@ -84,7 +84,7 @@ export const ApiActionsProperty = new Primatives.ConfigurationProperty({
                 { value: "DELETE", label: "DELETE" },
             ],
         }),
-        new Primatives.ConfigurationProperty({
+        new Primitives.ConfigurationProperty({
             content: {
                 label: "Route",
                 description: "Route",
@@ -99,7 +99,7 @@ export const ApiActionsProperty = new Primatives.ConfigurationProperty({
                 StringPropertyTransformations.removewhitespace,
             ],
         }),
-        new Primatives.ConfigurationProperty({
+        new Primitives.ConfigurationProperty({
             content: {
                 label: "Function Name",
                 description: "function_name",
@@ -115,7 +115,7 @@ export const ApiActionsProperty = new Primatives.ConfigurationProperty({
                 StringPropertyTransformations.trimwhitespace,
             ],
         }),
-        new Primatives.ConfigurationProperty({
+        new Primitives.ConfigurationProperty({
             content: {
                 label: "Scope",
                 description: "scope",

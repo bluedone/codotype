@@ -4,7 +4,7 @@ import {
     Datatype,
     AttributeAddon,
     AttributeInput,
-    Primatives,
+    Primitives,
     makeUniqueId,
     buildDefaultAddonsValue,
 } from "@codotype/core";
@@ -96,7 +96,7 @@ export function AttributeEditor(props: AttributeEditorProps) {
                 },
             };
 
-            const newAttribute: AttributeInput = new Primatives.AttributeInput(
+            const newAttribute: AttributeInput = new Primitives.AttributeInput(
                 newAttributeParams,
             );
 
@@ -109,7 +109,7 @@ export function AttributeEditor(props: AttributeEditorProps) {
             if (params.saveAndContinue) {
                 setTimeout(() => {
                     setAttributeInput(
-                        new Primatives.AttributeInput({ id: "" }),
+                        new Primitives.AttributeInput({ id: "" }),
                     );
                 }, 150);
             }
@@ -145,7 +145,7 @@ export function AttributeEditor(props: AttributeEditorProps) {
                 label="Attributes"
                 tooltip="shift+a"
                 onClick={() => {
-                    const newAttribute: AttributeInput = new Primatives.AttributeInput(
+                    const newAttribute: AttributeInput = new Primitives.AttributeInput(
                         { id: "" },
                     );
                     setAttributeInput(newAttribute);
@@ -299,7 +299,7 @@ export function AttributeEditor(props: AttributeEditorProps) {
                     body="Define properties on this data model"
                     cta="Add Attribute"
                     onClick={() => {
-                        const newAttribute: AttributeInput = new Primatives.AttributeInput(
+                        const newAttribute: AttributeInput = new Primitives.AttributeInput(
                             { id: "" },
                         );
                         setAttributeInput(newAttribute);
@@ -309,7 +309,7 @@ export function AttributeEditor(props: AttributeEditorProps) {
             <Hotkey
                 keyName="shift+a"
                 onKeyDown={() => {
-                    const newAttribute: AttributeInput = new Primatives.AttributeInput(
+                    const newAttribute: AttributeInput = new Primitives.AttributeInput(
                         { id: "" },
                     );
                     setAttributeInput(newAttribute);

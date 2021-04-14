@@ -12,7 +12,7 @@ import {
     testState,
     RelationTypes,
     PropertyTypes,
-    Primatives,
+    Primitives,
     GroupLayoutVariants,
     PropertyLayoutVariants,
     buildDefaultProjectInput,
@@ -82,22 +82,22 @@ const projectExample01: ProjectInput = {
     ...buildDefaultProjectInput(pluginExample01),
     identifiers: buildTokenCasing("Movie Reviews"),
     schemas: [
-        new Primatives.Schema({
+        new Primitives.Schema({
             identifiers: buildTokenPluralization("User"),
             attributes: [
-                new Primatives.AttributeInput({
+                new Primitives.AttributeInput({
                     identifiers: buildTokenCasing("ID"),
                     datatype: Datatypes.UUID,
                 }),
-                new Primatives.AttributeInput({
+                new Primitives.AttributeInput({
                     identifiers: buildTokenCasing("Email"),
                     datatype: Datatypes.STRING,
                 }),
-                new Primatives.AttributeInput({
+                new Primitives.AttributeInput({
                     identifiers: buildTokenCasing("First Name"),
                     datatype: Datatypes.STRING,
                 }),
-                new Primatives.AttributeInput({
+                new Primitives.AttributeInput({
                     identifiers: buildTokenCasing("Last Name"),
                     datatype: Datatypes.STRING,
                 }),
@@ -106,18 +106,18 @@ const projectExample01: ProjectInput = {
                 pluginExample01.schemaEditorConfiguration.configurationGroups,
             ),
         }),
-        new Primatives.Schema({
+        new Primitives.Schema({
             identifiers: buildTokenPluralization("Director"),
             attributes: [
-                new Primatives.AttributeInput({
+                new Primitives.AttributeInput({
                     identifiers: buildTokenCasing("ID"),
                     datatype: Datatypes.UUID,
                 }),
-                new Primatives.AttributeInput({
+                new Primitives.AttributeInput({
                     identifiers: buildTokenCasing("First Name"),
                     datatype: Datatypes.STRING,
                 }),
-                new Primatives.AttributeInput({
+                new Primitives.AttributeInput({
                     identifiers: buildTokenCasing("Last Name"),
                     datatype: Datatypes.STRING,
                 }),
@@ -126,14 +126,14 @@ const projectExample01: ProjectInput = {
                 pluginExample01.schemaEditorConfiguration.configurationGroups,
             ),
         }),
-        new Primatives.Schema({
+        new Primitives.Schema({
             identifiers: buildTokenPluralization("Movie"),
             attributes: [
-                new Primatives.AttributeInput({
+                new Primitives.AttributeInput({
                     identifiers: buildTokenCasing("ID"),
                     datatype: Datatypes.UUID,
                 }),
-                new Primatives.AttributeInput({
+                new Primitives.AttributeInput({
                     identifiers: buildTokenCasing("Title"),
                     datatype: Datatypes.STRING,
                 }),
@@ -268,7 +268,7 @@ const stories: Array<[string, PluginMetadata]> = [
                     Datatypes.STRING_ARRAY,
                 ],
                 configurationGroups: [
-                    new Primatives.ConfigurationGroup({
+                    new Primitives.ConfigurationGroup({
                         content: {
                             label: "Meta",
                             description:
@@ -277,7 +277,7 @@ const stories: Array<[string, PluginMetadata]> = [
                         identifier: "meta",
                         layoutVariant: GroupLayoutVariants.LIST,
                         properties: [
-                            new Primatives.ConfigurationProperty({
+                            new Primitives.ConfigurationProperty({
                                 content: {
                                     label: "Internal Note",
                                     description:
@@ -290,7 +290,7 @@ const stories: Array<[string, PluginMetadata]> = [
                             }),
                         ],
                     }),
-                    new Primatives.ConfigurationGroup({
+                    new Primitives.ConfigurationGroup({
                         content: {
                             label: "API Actions",
                             description: "Define individual REST api actions.",
@@ -301,7 +301,7 @@ const stories: Array<[string, PluginMetadata]> = [
                         layoutVariant: GroupLayoutVariants.LIST,
                         properties: [ApiActionsProperty],
                     }),
-                    new Primatives.ConfigurationGroup({
+                    new Primitives.ConfigurationGroup({
                         content: {
                             label: "GraphQL API",
                             description:
@@ -310,7 +310,7 @@ const stories: Array<[string, PluginMetadata]> = [
                         identifier: "graphql_api",
                         layoutVariant: GroupLayoutVariants.LIST,
                         properties: [
-                            new Primatives.ConfigurationProperty({
+                            new Primitives.ConfigurationProperty({
                                 type: PropertyTypes.BOOLEAN,
                                 defaultValue: true,
                                 identifier: "generate_crud_api",
@@ -322,7 +322,7 @@ const stories: Array<[string, PluginMetadata]> = [
                                 layoutVariant:
                                     PropertyLayoutVariants.CARD_COL_12,
                             }),
-                            new Primatives.ConfigurationProperty({
+                            new Primitives.ConfigurationProperty({
                                 content: {
                                     label: "DynamoDB table name",
                                     description:

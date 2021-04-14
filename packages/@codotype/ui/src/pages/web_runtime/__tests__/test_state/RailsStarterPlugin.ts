@@ -2,7 +2,7 @@ import { pluginReadme } from "../../../../components/MarkdownRenderer/__tests__/
 import {
     PluginMetadata,
     PropertyTypes,
-    Primatives,
+    Primitives,
     ConfigurationGroup,
 } from "@codotype/core";
 import { SchemaEditorKitchenSink } from "./SchemaEditorConfiguration";
@@ -47,7 +47,7 @@ import { SchemaEditorKitchenSink } from "./SchemaEditorConfiguration";
 
 // // // //
 // Hosting
-const hostingConfigurationGroup: ConfigurationGroup = new Primatives.ConfigurationGroup(
+const hostingConfigurationGroup: ConfigurationGroup = new Primitives.ConfigurationGroup(
     {
         identifier: "hosting",
         content: {
@@ -57,7 +57,7 @@ const hostingConfigurationGroup: ConfigurationGroup = new Primatives.Configurati
             documentation: "",
         },
         properties: [
-            new Primatives.ConfigurationProperty({
+            new Primitives.ConfigurationProperty({
                 identifier: "platform",
                 content: {
                     label: "Platform",
@@ -80,8 +80,8 @@ const hostingConfigurationGroup: ConfigurationGroup = new Primatives.Configurati
 // // // //
 // Export Plugin
 
-export const RailsStarterPlugin: PluginMetadata = new Primatives.Plugin({
-    id: "rails-starter",
+export const RailsStarterPlugin: PluginMetadata = new Primitives.Plugin({
+    identifier: "rails-starter",
     project_path: "rails-starter",
     content: {
         label: "Rails + Postgres Starter",

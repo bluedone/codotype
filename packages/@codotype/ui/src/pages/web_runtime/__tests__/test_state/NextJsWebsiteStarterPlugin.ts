@@ -2,7 +2,7 @@ import { pluginReadme } from "../../../../components/MarkdownRenderer/__tests__/
 import {
     PluginMetadata,
     PropertyTypes,
-    Primatives,
+    Primitives,
     ConfigurationGroup,
     PropertyLayoutVariants,
 } from "@codotype/core";
@@ -12,7 +12,7 @@ import {
 
 // // // //
 // Landing Page
-const landingPageConfigurationGroup: ConfigurationGroup = new Primatives.ConfigurationGroup(
+const landingPageConfigurationGroup: ConfigurationGroup = new Primitives.ConfigurationGroup(
     {
         // identifier: "home",
         // content: {
@@ -29,7 +29,7 @@ const landingPageConfigurationGroup: ConfigurationGroup = new Primatives.Configu
             documentation: "",
         },
         properties: [
-            new Primatives.ConfigurationProperty({
+            new Primitives.ConfigurationProperty({
                 identifier: "boolean",
                 content: {
                     label: "Boolean Property",
@@ -41,7 +41,7 @@ const landingPageConfigurationGroup: ConfigurationGroup = new Primatives.Configu
                 type: PropertyTypes.BOOLEAN,
                 layoutVariant: PropertyLayoutVariants.CARD_COL_6,
             }),
-            new Primatives.ConfigurationProperty({
+            new Primitives.ConfigurationProperty({
                 identifier: "text",
                 content: {
                     label: "Text Property",
@@ -53,7 +53,7 @@ const landingPageConfigurationGroup: ConfigurationGroup = new Primatives.Configu
                 type: PropertyTypes.STRING,
                 layoutVariant: PropertyLayoutVariants.CARD_COL_6,
             }),
-            new Primatives.ConfigurationProperty({
+            new Primitives.ConfigurationProperty({
                 identifier: "number",
                 content: {
                     label: "Number Property",
@@ -65,7 +65,7 @@ const landingPageConfigurationGroup: ConfigurationGroup = new Primatives.Configu
                 type: PropertyTypes.NUMBER,
                 layoutVariant: PropertyLayoutVariants.CARD_COL_6,
             }),
-            new Primatives.ConfigurationProperty({
+            new Primitives.ConfigurationProperty({
                 identifier: "dropdown",
                 content: {
                     label: "Dropdown Property",
@@ -78,7 +78,7 @@ const landingPageConfigurationGroup: ConfigurationGroup = new Primatives.Configu
                 dropdownOptions: [{ value: "one", label: "One" }],
                 layoutVariant: PropertyLayoutVariants.CARD_COL_6,
             }),
-            new Primatives.ConfigurationProperty({
+            new Primitives.ConfigurationProperty({
                 identifier: "instance",
                 content: {
                     label: "Instance",
@@ -90,7 +90,7 @@ const landingPageConfigurationGroup: ConfigurationGroup = new Primatives.Configu
                 type: PropertyTypes.INSTANCE,
                 layoutVariant: PropertyLayoutVariants.CARD_COL_6,
                 properties: [
-                    new Primatives.ConfigurationProperty({
+                    new Primitives.ConfigurationProperty({
                         identifier: "text",
                         content: {
                             label: "Text Property",
@@ -101,7 +101,7 @@ const landingPageConfigurationGroup: ConfigurationGroup = new Primatives.Configu
                         },
                         type: PropertyTypes.STRING,
                     }),
-                    new Primatives.ConfigurationProperty({
+                    new Primitives.ConfigurationProperty({
                         identifier: "boolean",
                         content: {
                             label: "Boolean Property",
@@ -114,7 +114,7 @@ const landingPageConfigurationGroup: ConfigurationGroup = new Primatives.Configu
                     }),
                 ],
             }),
-            new Primatives.ConfigurationProperty({
+            new Primitives.ConfigurationProperty({
                 identifier: "collection",
                 content: {
                     label: "Collection",
@@ -126,7 +126,7 @@ const landingPageConfigurationGroup: ConfigurationGroup = new Primatives.Configu
                 type: PropertyTypes.COLLECTION,
                 layoutVariant: PropertyLayoutVariants.CARD_COL_6,
                 properties: [
-                    new Primatives.ConfigurationProperty({
+                    new Primitives.ConfigurationProperty({
                         identifier: "text",
                         content: {
                             label: "Text Property",
@@ -145,7 +145,7 @@ const landingPageConfigurationGroup: ConfigurationGroup = new Primatives.Configu
 
 // // // //
 // Analytics
-const analyticsConfigurationGroup: ConfigurationGroup = new Primatives.ConfigurationGroup(
+const analyticsConfigurationGroup: ConfigurationGroup = new Primitives.ConfigurationGroup(
     {
         identifier: "analytics",
         content: {
@@ -155,7 +155,7 @@ const analyticsConfigurationGroup: ConfigurationGroup = new Primatives.Configura
             documentation: "",
         },
         properties: [
-            new Primatives.ConfigurationProperty({
+            new Primitives.ConfigurationProperty({
                 identifier: "googleAnalytics",
                 content: {
                     label: "Include Google Analytics",
@@ -166,7 +166,7 @@ const analyticsConfigurationGroup: ConfigurationGroup = new Primatives.Configura
                 },
                 type: PropertyTypes.BOOLEAN,
             }),
-            new Primatives.ConfigurationProperty({
+            new Primitives.ConfigurationProperty({
                 identifier: "hotjar",
                 content: {
                     label: "Hotjar Analytics",
@@ -183,7 +183,7 @@ const analyticsConfigurationGroup: ConfigurationGroup = new Primatives.Configura
 
 // // // //
 // Tooling
-const toolingConfigurationGroup: ConfigurationGroup = new Primatives.ConfigurationGroup(
+const toolingConfigurationGroup: ConfigurationGroup = new Primitives.ConfigurationGroup(
     {
         identifier: "tooling",
         content: {
@@ -193,7 +193,7 @@ const toolingConfigurationGroup: ConfigurationGroup = new Primatives.Configurati
             documentation: "",
         },
         properties: [
-            new Primatives.ConfigurationProperty({
+            new Primitives.ConfigurationProperty({
                 identifier: "jest",
                 content: {
                     label: "Include Jest",
@@ -205,7 +205,7 @@ const toolingConfigurationGroup: ConfigurationGroup = new Primatives.Configurati
                 },
                 type: PropertyTypes.BOOLEAN,
             }),
-            new Primatives.ConfigurationProperty({
+            new Primitives.ConfigurationProperty({
                 identifier: "prettier",
                 content: {
                     label: "Include Prettier",
@@ -218,7 +218,7 @@ const toolingConfigurationGroup: ConfigurationGroup = new Primatives.Configurati
                 type: PropertyTypes.BOOLEAN,
                 defaultValue: true,
             }),
-            new Primatives.ConfigurationProperty({
+            new Primitives.ConfigurationProperty({
                 identifier: "eslint",
                 content: {
                     label: "Eslint",
@@ -231,7 +231,7 @@ const toolingConfigurationGroup: ConfigurationGroup = new Primatives.Configurati
                 type: PropertyTypes.BOOLEAN,
                 defaultValue: true,
             }),
-            new Primatives.ConfigurationProperty({
+            new Primitives.ConfigurationProperty({
                 identifier: "storybook",
                 content: {
                     label: "Include Storybook",
@@ -249,7 +249,7 @@ const toolingConfigurationGroup: ConfigurationGroup = new Primatives.Configurati
 
 // // // //
 // SEO
-const seoConfigurationGroup: ConfigurationGroup = new Primatives.ConfigurationGroup(
+const seoConfigurationGroup: ConfigurationGroup = new Primitives.ConfigurationGroup(
     {
         identifier: "seo",
         content: {
@@ -259,7 +259,7 @@ const seoConfigurationGroup: ConfigurationGroup = new Primatives.ConfigurationGr
             documentation: "",
         },
         properties: [
-            new Primatives.ConfigurationProperty({
+            new Primitives.ConfigurationProperty({
                 identifier: "twitter",
                 content: {
                     label: "Twitter",
@@ -271,7 +271,7 @@ const seoConfigurationGroup: ConfigurationGroup = new Primatives.ConfigurationGr
                 },
                 type: PropertyTypes.BOOLEAN,
             }),
-            new Primatives.ConfigurationProperty({
+            new Primitives.ConfigurationProperty({
                 identifier: "opengraph",
                 content: {
                     label: "OpenGraph",
@@ -282,7 +282,7 @@ const seoConfigurationGroup: ConfigurationGroup = new Primatives.ConfigurationGr
                 },
                 type: PropertyTypes.BOOLEAN,
             }),
-            new Primatives.ConfigurationProperty({
+            new Primitives.ConfigurationProperty({
                 identifier: "sitemap",
                 content: {
                     label: "Sitemap",
@@ -295,7 +295,7 @@ const seoConfigurationGroup: ConfigurationGroup = new Primatives.ConfigurationGr
                 },
                 type: PropertyTypes.BOOLEAN,
             }),
-            new Primatives.ConfigurationProperty({
+            new Primitives.ConfigurationProperty({
                 identifier: "jsonLD",
                 content: {
                     label: "Include JSON-LD Metadata",
@@ -315,7 +315,7 @@ const seoConfigurationGroup: ConfigurationGroup = new Primatives.ConfigurationGr
 
 // // // //
 // Hosting
-const hostingConfigurationGroup: ConfigurationGroup = new Primatives.ConfigurationGroup(
+const hostingConfigurationGroup: ConfigurationGroup = new Primitives.ConfigurationGroup(
     {
         identifier: "hosting",
         content: {
@@ -325,7 +325,7 @@ const hostingConfigurationGroup: ConfigurationGroup = new Primatives.Configurati
             documentation: "",
         },
         properties: [
-            new Primatives.ConfigurationProperty({
+            new Primitives.ConfigurationProperty({
                 identifier: "platform",
                 content: {
                     label: "Platform",
@@ -351,9 +351,9 @@ const hostingConfigurationGroup: ConfigurationGroup = new Primatives.Configurati
 
 // // // //
 // Export Plugin
-export const NextJsWebsiteStarterPlugin: PluginMetadata = new Primatives.Plugin(
+export const NextJsWebsiteStarterPlugin: PluginMetadata = new Primitives.Plugin(
     {
-        id: "react-next-ts-website-starter",
+        identifier: "react-next-ts-website-starter",
         project_path: "react-next-ts-starter",
         content: {
             label: "React + Next + TypeScript Website Starter",
@@ -375,7 +375,7 @@ export const NextJsWebsiteStarterPlugin: PluginMetadata = new Primatives.Plugin(
 // // // //
 // Export alternative variation of same plugin using grouped properties
 
-const toolingProperty = new Primatives.ConfigurationProperty({
+const toolingProperty = new Primitives.ConfigurationProperty({
     identifier: "tooling",
     content: {
         label: "Tooling",
@@ -398,7 +398,7 @@ const toolingProperty = new Primatives.ConfigurationProperty({
     ],
 });
 
-const analyticsProperty = new Primatives.ConfigurationProperty({
+const analyticsProperty = new Primitives.ConfigurationProperty({
     identifier: "analytics",
     content: {
         label: "Analytics",
@@ -420,7 +420,7 @@ const analyticsProperty = new Primatives.ConfigurationProperty({
     ],
 });
 
-const seoProperty = new Primatives.ConfigurationProperty({
+const seoProperty = new Primitives.ConfigurationProperty({
     identifier: "seo",
     content: {
         label: "SEO",
@@ -442,7 +442,7 @@ const seoProperty = new Primatives.ConfigurationProperty({
     ],
 });
 
-const hostingProperty = new Primatives.ConfigurationProperty({
+const hostingProperty = new Primitives.ConfigurationProperty({
     identifier: "hosting",
     content: {
         label: "Hosting",
@@ -469,9 +469,9 @@ const hostingProperty = new Primatives.ConfigurationProperty({
 // - Customer Engagement - Intercom
 // - Customer Engagement - Segment (Customer Data Platform)
 
-export const NextJsWebsiteStarterPluginVariant: PluginMetadata = new Primatives.Plugin(
+export const NextJsWebsiteStarterPluginVariant: PluginMetadata = new Primitives.Plugin(
     {
-        id: "react-next-ts-website-starter-variant",
+        identifier: "react-next-ts-website-starter-variant",
         project_path: "react-next-ts-starter",
         content: {
             label: "React + Next + TypeScript Website Starter",
