@@ -18,7 +18,6 @@ import {
     ProjectBuild,
     RuntimeAdapterProps,
     GeneratorProps,
-    Schema,
     Datatypes,
     PrettifyOptions,
     RuntimeLogBehaviors,
@@ -221,7 +220,7 @@ export class NodeRuntime implements Runtime {
         // Finds the pluginRegistration associated with the ProjectBuild
         // FEATURE - check version here, use semver if possible
         const pluginRegistration: PluginRegistration | undefined = plugins.find(
-            g => g.id === pluginID,
+            (g) => g.id === pluginID,
         );
 
         // Returns Promise<PluginRegistration | undefined>
@@ -501,9 +500,18 @@ export class NodeRuntime implements Runtime {
             // Builds destination path
             destPath = path.resolve(dest, destPath);
 
-            // Safely reads in
+            // Builds path to parent directory of destination
+            // This is necessary to ensure that the parent directory has been created
+            const destinationFragments = destPath.split("/");
+            destinationFragments.pop();
+            const destDirectoryPath = destinationFragments.join("/");
+
+            // Safely reads in file contents + create parent directory + write file
             try {
                 const contents: string = fs.readFileSync(sourcePath, "utf8");
+                await this.options.fileSystemAdapter.ensureDir(
+                    destDirectoryPath,
+                );
                 await this.options.fileSystemAdapter.writeFile(
                     destPath,
                     contents,
@@ -511,7 +519,7 @@ export class NodeRuntime implements Runtime {
             } catch (e) {
                 // Logs error message
                 this.log(
-                    `Runtime Error - copyDir file not found: ${sourcePath}`,
+                    `Runtime Error: copyDir file not found: ${sourcePath}`,
                     {
                         level: RuntimeLogLevels.error,
                     },
@@ -522,6 +530,15 @@ export class NodeRuntime implements Runtime {
 
         // Resolves true
         return Promise.resolve(true);
+    }
+
+    copyFile(params: { src: string; dest: string }) {
+        // Define values for src + dest
+        const { src, dest } = params;
+
+        // Read in file contents + write to destination
+        const contents: string = fs.readFileSync(src, "utf8");
+        return this.options.fileSystemAdapter.writeFile(dest, contents);
     }
 
     /**

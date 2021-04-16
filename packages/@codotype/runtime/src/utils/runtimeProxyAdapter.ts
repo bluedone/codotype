@@ -82,6 +82,7 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
             ensureDir: this.ensureDir,
             writeFile: this.writeFile,
             copyDir: this.copyDir,
+            copyFile: this.copyFile,
             renderTemplate: this.renderTemplate,
             composeWith: this.composeWith,
         };
@@ -176,12 +177,40 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
     }
 
     /**
-     * copDir
+     * copyDir
      * @see CopyDirFunction
      */
     copyDir(params: { src: string; dest: string }) {
         const { src, dest } = params;
         return this.runtime.copyDir({
+            src: this.runtime.getTemplatePath(this.generatorResolvedPath, src),
+            dest: this.runtime.getDestinationPath(
+                this.props.destinationPath,
+                dest,
+            ),
+        });
+    }
+
+    /**
+     * copyFile
+     * @see CopyFileFunction
+     */
+    copyFile(param: string | { src: string; dest: string }) {
+        // Define values for src + dest params
+        let src = "";
+        let dest = "";
+
+        // Determine values for src + dest params
+        if (typeof param === "string") {
+            src = param;
+            dest = param;
+        } else {
+            src = param.src;
+            dest = param.dest;
+        }
+
+        // Pass parameters to runtime.copyFile
+        return this.runtime.copyFile({
             src: this.runtime.getTemplatePath(this.generatorResolvedPath, src),
             dest: this.runtime.getDestinationPath(
                 this.props.destinationPath,
