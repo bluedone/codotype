@@ -113,7 +113,7 @@ export interface Runtime {
         destinationRelativePath: string,
     ) => string;
     copyDir: CopyDirFunction;
-    copyFile: CopyFileFunction;
+    copyFile: (props: { src: string; dest: string }) => Promise<boolean>;
     ensureDir: EnsureDirFunction;
     log: (message: any, options: { level: RuntimeLogLevel }) => void;
     registerPlugin: (props: {
