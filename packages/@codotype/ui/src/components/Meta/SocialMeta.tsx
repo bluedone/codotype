@@ -1,5 +1,4 @@
 import * as React from "react";
-import { PluginMetadata } from "@codotype/core";
 
 /**
  * SocialMeta
