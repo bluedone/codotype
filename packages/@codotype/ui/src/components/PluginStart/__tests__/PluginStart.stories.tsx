@@ -6,7 +6,9 @@ import { dummyPluginMetadata } from "../../ProjectEditor/__tests__/test_state";
 
 // // // //
 
-storiesOf("Components/PluginStart", module).add("renders in card", () => {
+const storyCollection = storiesOf("Components/PluginStart", module);
+
+storyCollection.add("renders w/externalLink", () => {
     return (
         <Story>
             <div className="card card-body shadow-lg">
@@ -19,13 +21,25 @@ storiesOf("Components/PluginStart", module).add("renders in card", () => {
     );
 });
 
-storiesOf("Components/PluginStart", module).add("renders", () => {
+storyCollection.add("renders w/ buildLink", () => {
     return (
         <Story>
-            <PluginStart
-                buildLink={"https://google.com"}
-                plugin={dummyPluginMetadata}
-            />
+            <div className="card card-body shadow-lg">
+                <PluginStart
+                    buildLink={"https://google.com"}
+                    plugin={dummyPluginMetadata}
+                />
+            </div>
+        </Story>
+    );
+});
+
+storyCollection.add("renders", () => {
+    return (
+        <Story>
+            <div className="card card-body shadow-lg">
+                <PluginStart plugin={dummyPluginMetadata} />
+            </div>
         </Story>
     );
 });

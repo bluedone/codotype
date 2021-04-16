@@ -132,10 +132,15 @@ export function SchemaDetail(props: SchemaDetailProps) {
                                 schemaInput={props.schema}
                                 projectInput={props.projectInput}
                             />
-                            <SchemaIncomingRelations
-                                inflatedSchema={inflatedSchema}
-                                onSelectSchema={props.onSelectSchema}
-                            />
+
+                            {/* Only render SchemaIncomingRelations if there are supported relations */}
+                            {schemaEditorConfiguration.supportedRelationTypes
+                                .length > 0 && (
+                                <SchemaIncomingRelations
+                                    inflatedSchema={inflatedSchema}
+                                    onSelectSchema={props.onSelectSchema}
+                                />
+                            )}
                         </div>
                     </div>
                 </ConfigurationGroupSelector>

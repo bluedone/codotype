@@ -1,7 +1,7 @@
 {
     "name": "@codotype/ui",
-    "version": "0.8.0-canary.45",
-    "description": "Codotype React Components",
+    "version": "0.8.0-canary.46",
+    "description": "Codotype React.js Components",
     "scripts": {
         "build": "npm run clean && npm run compile",
         "build-old": "webpack --config webpack.prod.js",
