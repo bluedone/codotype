@@ -5,7 +5,7 @@ class MyDocument extends Document {
         return (
             <Html>
                 <Head>
-                    <title>Codotype Plugin</title>
+                    <title>Codotype - Loading...</title>
                 </Head>
                 <body className="bg-gray-200">
                     <Main />

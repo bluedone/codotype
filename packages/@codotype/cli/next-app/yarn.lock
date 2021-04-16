@@ -158,10 +158,10 @@
     underscore.string "^3.3.4"
     uuid "^8.0.0"
 
-"@codotype/ui@^0.8.0-canary.46":
-  version "0.8.0-canary.46"
-  resolved "https://registry.yarnpkg.com/@codotype/ui/-/ui-0.8.0-canary.46.tgz#0da3c01617102fb0cc086c989219e826e2641bb8"
-  integrity sha512-p8tOsTUYRR1FlNGeo3Q/Gd3TTNu3DTuSiak1TabaxKnPpYDGqATDzbDJtOx+Kpq9/wG+R6mP08V/JytrTvmyaw==
+"@codotype/ui@^0.8.0-canary.49":
+  version "0.8.0-canary.49"
+  resolved "https://registry.yarnpkg.com/@codotype/ui/-/ui-0.8.0-canary.49.tgz#24b60599d9edc4b807867a941aad62f6e064270c"
+  integrity sha512-duLxYJczrMWsYD6aP1Ag7Kp4NID2RVRGT5Fct/W/tg5ZWbzrf7lkNkFQ6zAdOeeWJMMJsl0kYUpDMXvuyV4pBQ==
   dependencies:
     "@codotype/core" "0.8.0-canary.12"
     "@fortawesome/fontawesome-svg-core" "^1.2.27"
