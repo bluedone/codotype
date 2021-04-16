@@ -49,5 +49,5 @@ export const Primitives: CodotypePrimitives = {
     ConfigurationProperty: ConfigurationPropertyBuilder,
     TokenCasing: TokenCasingBuilder,
     TokenPluralization: TokenPluralizationBuilder,
-    ProjectBuild: ProjectBuildBuilder
+    ProjectBuild: ProjectBuildBuilder,
 };

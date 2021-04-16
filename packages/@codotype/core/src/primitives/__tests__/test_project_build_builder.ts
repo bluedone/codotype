@@ -1,6 +1,5 @@
 import { ProjectBuildBuilder } from "../ProjectBuild";
 import { ProjectInput } from "../../project";
-// import { testState } from "../../";
 import { buildDefaultProjectInput } from "../../util";
 import { NextJsStarter } from "../../__tests__/test_state/plugins/NextJsStarter";
 

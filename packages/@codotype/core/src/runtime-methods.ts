@@ -92,6 +92,20 @@ export type CopyDirFunction = (params: {
 }) => Promise<boolean>;
 
 /**
+ * CopyFileFunction
+ * Used by the runtime to copy a single file from src to dest
+ * If only a string is passed, the src + dest will be the same
+ */
+export type CopyFileFunction = (
+    params:
+        | string
+        | {
+              src: string;
+              dest: string;
+          },
+) => Promise<boolean>;
+
+/**
  * EnsureDirFunction
  * Used by the Runtime to ensure the presence of a directory
  */
