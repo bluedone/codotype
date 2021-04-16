@@ -1,3 +1,8 @@
+### 0.8.0-canary.14
+
+-   Added `copyFile` function to `Runtime` interfaces
+-   Updated default `ProjectInput.identifiers.title` to be `Project Name` instead of `My Project`
+
 ### 0.8.0-canary.8
 
 -   Renamed `Schema` to `SchemaInput`
