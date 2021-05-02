@@ -24,7 +24,9 @@ export const SchemaEditor: SchemaEditorConfiguration = {
     supportedDatatypes: [
         Datatypes.STRING,
         Datatypes.INT,
+        Datatypes.BOOLEAN,
         Datatypes.FLOAT,
+        Datatypes.DATE,
         Datatypes.TIMESTAMP,
         // Datatypes.STRING_ARRAY,
         // Datatypes.NUMERIC_ARRAY,

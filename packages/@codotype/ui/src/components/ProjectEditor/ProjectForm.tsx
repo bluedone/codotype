@@ -39,8 +39,10 @@ export function ProjectForm(props: {
                         props.onChange(e.currentTarget.value);
                     }}
                     onKeyDown={e => {
+                        console.log("KEYDOWN");
                         // ENTER KEY CODE
                         if (e.keyCode === 13) {
+                            console.log("KEYDOWN");
                             props.onSubmit(e.currentTarget.value);
                         }
                     }}

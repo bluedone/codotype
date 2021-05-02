@@ -7,7 +7,7 @@ import {
     faStar,
 } from "@fortawesome/free-solid-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
-import { faLaugh } from "@fortawesome/free-regular-svg-icons";
+import { faLaugh, faLightbulb } from "@fortawesome/free-regular-svg-icons";
 import { CopyToClipboard } from "../CopyToClipboard";
 
 // // // //
@@ -114,7 +114,7 @@ export function BuildFinished(props: {
             <div className="grid mt-3">
                 <div className="col-span-12 text-center">
                     <p className="mb-1">
-                        <i className="far fa-lightbulb" />
+                        <FontAwesomeIcon icon={faLightbulb} />
                         Remember, iteration is key
                     </p>
 

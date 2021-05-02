@@ -27,7 +27,7 @@ export function ProjectEditorHeader(props: {
         projectInput.identifiers.title,
     );
     return (
-        <div className="flex items-center w-full items-end">
+        <div className="flex items-center w-full justify-end">
             <div className="flex flex-grow items-center">
                 <h2 className="flex text-3xl select-none">
                     {projectInput.identifiers.title}
@@ -68,7 +68,11 @@ export function ProjectEditorHeader(props: {
                             if (sanitizedLabel.length === 0) {
                                 return;
                             }
-                            setLabelValue(sanitizedLabel);
+                            props.onChange({
+                                ...projectInput,
+                                identifiers: buildTokenCasing(sanitizedLabel),
+                            });
+                            showModal(false);
                         }}
                     />
                 </ProjectFormModal>

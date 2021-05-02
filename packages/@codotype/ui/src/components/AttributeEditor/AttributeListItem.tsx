@@ -66,10 +66,9 @@ export function AttributeListItem(props: {
                     {attribute.locked && (
                         <div className="text-right justify-end opacity-0 group-hover:opacity-100">
                             <span
-                                className="badge bg-gray-500"
+                                className="badge bg-white dark:bg-gray-800"
                                 title="This Attribute is auto-generated - it may not be edited or removed."
                             >
-                                {/* <i className="fa fa-fw fa-lock" /> */}
                                 <FontAwesomeIcon icon={faLock} />
                             </span>
                         </div>

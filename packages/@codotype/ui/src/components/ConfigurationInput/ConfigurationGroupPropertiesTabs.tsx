@@ -44,8 +44,8 @@ export function ConfigurationGroupPropertiesTabs(props: {
     const selectedProperty:
         | ConfigurationProperty
         | undefined = configurationGroup.properties.find(
-            p => p.identifier === selectedPropertyID,
-        );
+        p => p.identifier === selectedPropertyID,
+    );
 
     // Return null if selectedProperty is undefined
     if (selectedProperty === undefined) {
@@ -58,7 +58,7 @@ export function ConfigurationGroupPropertiesTabs(props: {
             {/* TODO - add select here? */}
             {/* TODO - add select here? */}
             {/* TODO - add select here? */}
-            <div className="flex flex-grow rounded-lg overflow-hidden divide-x divide-gray-200 border-gray-200 border dark:divide-gray-800 dark:border-gray-800">
+            <div className="flex flex-grow rounded-lg overflow-hidden divide-x divide-gray-200 border-gray-200 border dark:divide-gray-800 dark:border-gray-800 mb-1">
                 {configurationGroup.properties.map(property => {
                     const active = property.identifier === selectedPropertyID;
 
@@ -75,7 +75,8 @@ export function ConfigurationGroupPropertiesTabs(props: {
                                     "text-gray-900 dark:text-gray-500": active,
                                     "text-gray-500 hover:text-gray-700 dark:hover:text-gray-400": !active,
                                 },
-                            )}>
+                            )}
+                        >
                             <span>{property.content.label}</span>
                             {active && (
                                 <span

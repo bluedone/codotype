@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFolderOpen } from "@fortawesome/free-solid-svg-icons";
 import classnames from "classnames";
 import { LoadExampleProjectModal } from "./LoadExampleProjectModal";
-import { Menu, Transition } from '@headlessui/react'
+import { Menu, Transition } from "@headlessui/react";
 
 // // // //
 
@@ -25,12 +25,18 @@ export function ExampleProjectDropdown(props: {
 
     return (
         <React.Fragment>
-            <Menu as="div" className="relative inline-block text-left z-10 mr-4">
+            <Menu
+                as="div"
+                className="relative inline-block text-left z-10 mr-4"
+            >
                 {({ open }) => (
                     <>
                         <div>
                             <Menu.Button className="whitespace-nowrap inline-flex items-center justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-3 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
-                                <FontAwesomeIcon icon={faFolderOpen} className="mr-2" />
+                                <FontAwesomeIcon
+                                    icon={faFolderOpen}
+                                    className="mr-2"
+                                />
                                 Example Projects
                             </Menu.Button>
                         </div>
@@ -50,24 +56,33 @@ export function ExampleProjectDropdown(props: {
                                 className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
                             >
                                 <div className="py-1">
-                                    {exampleProjects.map((projectInput) => {
+                                    {exampleProjects.map(projectInput => {
                                         return (
                                             <Menu.Item>
                                                 {({ active }) => (
                                                     <button
-                                                        className={classnames('block w-full text-left px-4 py-2 text-sm', {
-                                                            'bg-gray-100 text-gray-900': active,
-                                                            'text-gray-700': !active,
-                                                        })}
+                                                        className={classnames(
+                                                            "block w-full text-left px-4 py-2 text-sm",
+                                                            {
+                                                                "bg-gray-100 text-gray-900": active,
+                                                                "text-gray-700": !active,
+                                                            },
+                                                        )}
                                                         onClick={() => {
-                                                            setSelectedProject(projectInput);
+                                                            setSelectedProject(
+                                                                projectInput,
+                                                            );
                                                         }}
                                                     >
-                                                        {projectInput.identifiers.title}
+                                                        {
+                                                            projectInput
+                                                                .identifiers
+                                                                .title
+                                                        }
                                                     </button>
                                                 )}
                                             </Menu.Item>
-                                        )
+                                        );
                                     })}
                                 </div>
                             </Menu.Items>
@@ -76,21 +91,19 @@ export function ExampleProjectDropdown(props: {
                 )}
             </Menu>
 
-
             {/* Render LoadExampleProjectModal */}
-            {selectedProject && (
-                <LoadExampleProjectModal
-                    projectInput={selectedProject}
-                    show={selectedProject !== null}
-                    onHide={() => {
-                        setSelectedProject(null);
-                    }}
-                    onConfirm={() => {
+            <LoadExampleProjectModal
+                show={selectedProject !== null}
+                onHide={() => {
+                    setSelectedProject(null);
+                }}
+                onConfirm={() => {
+                    if (selectedProject !== null) {
                         props.loadExampleProject(selectedProject);
-                        setSelectedProject(null);
-                    }}
-                />
-            )}
+                    }
+                    setSelectedProject(null);
+                }}
+            />
         </React.Fragment>
     );
 }

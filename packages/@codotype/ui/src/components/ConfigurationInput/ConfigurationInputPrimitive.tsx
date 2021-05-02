@@ -111,6 +111,8 @@ export function ConfigurationInputPrimitive(
     }
 
     // Handle PropertyTypes.BOOLEAN
+    // TODO - replace with generic headless/ui component
+    // https://headlessui.dev/react/switch
     if (property.type === PropertyTypes.BOOLEAN) {
         return (
             <Switch

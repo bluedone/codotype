@@ -50,14 +50,14 @@ export function AttributeEditor(props: AttributeEditorProps) {
         attributes: props.attributes,
         lastUpdatedAt: null,
     });
-    const [
-        attributeInput,
-        setAttributeInput,
-    ] = React.useState<AttributeInput | null>(null);
+    const [attributeInput, setAttributeInput] = React.useState<AttributeInput>(
+        new Primitives.AttributeInput({ id: "" }),
+    );
     const [
         showingDeleteModal,
         showDeleteModal,
     ] = React.useState<AttributeInput | null>(null);
+    const [showingInputModal, showInputModal] = React.useState<boolean>(false);
 
     // Sets props.attributes when props.attributes changes
     React.useEffect(() => {
@@ -105,14 +105,17 @@ export function AttributeEditor(props: AttributeEditorProps) {
                 attributes: [...props.attributes, newAttribute],
             });
 
-            setAttributeInput(null);
+            setAttributeInput(new Primitives.AttributeInput({ id: "" }));
             if (params.saveAndContinue) {
                 setTimeout(() => {
                     setAttributeInput(
                         new Primitives.AttributeInput({ id: "" }),
                     );
                 }, 150);
+                return;
             }
+
+            showInputModal(false);
             return;
         }
 
@@ -126,7 +129,7 @@ export function AttributeEditor(props: AttributeEditorProps) {
                 return a;
             }),
         });
-        setAttributeInput(null);
+        setAttributeInput(new Primitives.AttributeInput({ id: "" }));
     }
 
     // // // //
@@ -149,59 +152,65 @@ export function AttributeEditor(props: AttributeEditorProps) {
                         { id: "" },
                     );
                     setAttributeInput(newAttribute);
+                    showInputModal(true);
                 }}
             />
             {/* Renders AttributeFormModal */}
-            {attributeInput !== null && (
-                <AttributeFormModal
+            <AttributeFormModal
+                attributeInput={attributeInput}
+                show={showingInputModal}
+                disableSubmit={disableSubmit({
+                    attributeInput,
+                    attributeCollection: props.attributes,
+                })}
+                errors={validateAttribute({
+                    attributeInput,
+                    attributeCollection: props.attributes,
+                })}
+                onCancel={() => {
+                    showInputModal(false);
+                    // Leave a lil' room for the Modal-Close UI animation!
+                    setTimeout(() => {
+                        setAttributeInput(
+                            new Primitives.AttributeInput({ id: "" }),
+                        );
+                    }, 400);
+                }}
+                onSubmit={({ saveAndContinue }) => {
+                    saveAttribute({
+                        saveAndContinue,
+                        newAttributeData: {
+                            ...attributeInput,
+                        },
+                    });
+                }}
+            >
+                <AttributeForm
+                    attributes={props.attributes}
                     attributeInput={attributeInput}
-                    show={attributeInput !== null}
-                    disableSubmit={disableSubmit({
-                        attributeInput,
-                        attributeCollection: props.attributes,
-                    })}
-                    errors={validateAttribute({
-                        attributeInput,
-                        attributeCollection: props.attributes,
-                    })}
-                    onCancel={() => {
-                        setAttributeInput(null);
+                    onChange={(updatedAttributeInput: AttributeInput) => {
+                        setAttributeInput(updatedAttributeInput);
                     }}
-                    onSubmit={({ saveAndContinue }) => {
+                    onKeydownEnter={() => {
+                        if (
+                            disableSubmit({
+                                attributeInput,
+                                attributeCollection: props.attributes,
+                            })
+                        ) {
+                            return;
+                        }
+                        // Save attribute on keydown "Enter"
                         saveAttribute({
-                            saveAndContinue,
-                            newAttributeData: {
-                                ...attributeInput,
-                            },
+                            saveAndContinue: true,
+                            newAttributeData: attributeInput,
                         });
                     }}
-                >
-                    <AttributeForm
-                        attributes={props.attributes}
-                        attributeInput={attributeInput}
-                        onChange={(updatedAttributeInput: AttributeInput) => {
-                            setAttributeInput(updatedAttributeInput);
-                        }}
-                        onKeydownEnter={() => {
-                            if (
-                                disableSubmit({
-                                    attributeInput,
-                                    attributeCollection: props.attributes,
-                                })
-                            ) {
-                                return;
-                            }
-                            // Save attribute on keydown "Enter"
-                            saveAttribute({
-                                saveAndContinue: true,
-                                newAttributeData: attributeInput,
-                            });
-                        }}
-                        addons={props.addons}
-                        supportedDatatypes={props.supportedDatatypes}
-                    />
-                </AttributeFormModal>
-            )}
+                    addons={props.addons}
+                    supportedDatatypes={props.supportedDatatypes}
+                />
+            </AttributeFormModal>
+
             {props.attributes.length > 0 && (
                 <React.Fragment>
                     <AttributeDeleteModal
@@ -272,6 +281,9 @@ export function AttributeEditor(props: AttributeEditorProps) {
                                                             setAttributeInput({
                                                                 ...attributeToBeEdited,
                                                             });
+                                                            showInputModal(
+                                                                true,
+                                                            );
                                                         }}
                                                         onClickDelete={(
                                                             attributeToDelete: AttributeInput,
@@ -303,6 +315,7 @@ export function AttributeEditor(props: AttributeEditorProps) {
                             { id: "" },
                         );
                         setAttributeInput(newAttribute);
+                        showInputModal(true);
                     }}
                 />
             )}
@@ -313,6 +326,7 @@ export function AttributeEditor(props: AttributeEditorProps) {
                         { id: "" },
                     );
                     setAttributeInput(newAttribute);
+                    showInputModal(true);
                 }}
             />
         </div>

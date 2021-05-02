@@ -51,7 +51,7 @@ export function SchemaSelectorItem(props: {
                                 }
                             >
                                 <FontAwesomeIcon
-                                    className="text-warning"
+                                    className="text-yellow-400"
                                     icon={faExclamationCircle}
                                 />
                             </Tooltip>

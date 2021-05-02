@@ -7,18 +7,14 @@ import { ProjectInput } from "@codotype/core";
 /**
  * LoadExampleProjectModal
  * @param props.show
- * @param props.projectInput
  * @param props.onConfirm
  * @param props.onHide
  */
 export function LoadExampleProjectModal(props: {
     show: boolean;
-    projectInput: ProjectInput;
     onHide: () => void;
     onConfirm: () => void;
 }) {
-    const { projectInput } = props;
-
     return (
         <Modal show={props.show} onHide={props.onHide}>
             <div className="p-5 select-none">
@@ -26,12 +22,13 @@ export function LoadExampleProjectModal(props: {
 
                 <p className="form-text text-muted mb-2">
                     Load an example project for this Codotype Plugin.
-            </p>
+                </p>
 
                 <p className="form-text text-muted mb-2">
-                    <span className="text-red-500">WARNING: </span>This will delete
-                your current project - are you sure you want to continue?
-            </p>
+                    <span className="text-red-500">WARNING: </span>This will
+                    delete your current project - are you sure you want to
+                    continue?
+                </p>
             </div>
 
             <div className="modal-footer-tw">
@@ -44,10 +41,7 @@ export function LoadExampleProjectModal(props: {
                     Load Example Project
                 </button>
 
-                <button
-                    className="modal-close-btn"
-                    onClick={props.onHide}
-                >
+                <button className="modal-close-btn" onClick={props.onHide}>
                     Cancel
                 </button>
             </div>
