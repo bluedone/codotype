@@ -2,7 +2,7 @@ import { pluginReadme } from "../../../../components/MarkdownRenderer/__tests__/
 import {
     PluginMetadata,
     PropertyTypes,
-    Primatives,
+    Primitives,
     ConfigurationGroup,
 } from "@codotype/core";
 import {
@@ -117,7 +117,7 @@ export const SchemaEditor: SchemaEditorConfiguration = {
 
 // // // //
 // Hosting
-const hostingConfigurationGroup: ConfigurationGroup = new Primatives.ConfigurationGroup(
+const hostingConfigurationGroup: ConfigurationGroup = new Primitives.ConfigurationGroup(
     {
         identifier: "hosting",
         content: {
@@ -127,7 +127,7 @@ const hostingConfigurationGroup: ConfigurationGroup = new Primatives.Configurati
             documentation: "",
         },
         properties: [
-            new Primatives.ConfigurationProperty({
+            new Primitives.ConfigurationProperty({
                 identifier: "platform",
                 content: {
                     label: "Platform",
@@ -150,8 +150,8 @@ const hostingConfigurationGroup: ConfigurationGroup = new Primatives.Configurati
 // // // //
 // Export Plugin
 
-export const NextMongoStarter: PluginMetadata = new Primatives.Plugin({
-    id: "next-mongo-starter",
+export const NextMongoStarter: PluginMetadata = new Primitives.Plugin({
+    identifier: "next-mongo-starter",
     project_path: "next-mongo-starter",
     content: {
         label: "Next.js + MongoDB Starter",

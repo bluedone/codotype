@@ -10,7 +10,7 @@ import { makeUniqueId } from "./makeUniqueId";
  */
 export function transformJsonProjectInput(jsonProject: any): ProjectInput {
     // Defines the project instance
-    // FEATURE - use Primatives.ProjectInput
+    // FEATURE - use Primitives.ProjectInput
     const projectInstance: ProjectInput = {
         id: String(jsonProject.id),
         identifiers: {

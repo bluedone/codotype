@@ -67,15 +67,11 @@ export function PluginRunner(props: PluginRunnerProps) {
                         reset();
                     }}
                 >
-                    {/* <Modal.Header closeButton={finished}> */}
-                    {/* {loading && <Modal.Title>Loading</Modal.Title>} */}
-                    {/* {finished && <Modal.Title>Export Code</Modal.Title>} */}
-                    {/* </Modal.Header> */}
                     <div className="min-w-full">
                         {loading && <LoadingBuild />}
                         {finished && (
                             <BuildFinished
-                                responseType="LOCAL_PATH"
+                                responseType={data.type}
                                 filepath={data.filepath}
                                 onClickBackToEditor={reset}
                             />

@@ -13,7 +13,7 @@ import {
     PropertyPreviewLayoutVariant,
     PropertyPreviewActionTypes,
     PropertyPreviewConstraintTypes,
-    Primatives,
+    Primitives,
 } from "@codotype/core";
 const { LambdaBuilderConfigurationGroup } = testState;
 import { Story } from "../../Story";
@@ -22,7 +22,7 @@ import { ConfigurationInputFormGroup } from "../ConfigurationInputFormGroup";
 // // // //
 
 // CHORE - move into `test_data`
-const ApiActionConfigurationGroup: ConfigurationGroup = new Primatives.ConfigurationGroup(
+const ApiActionConfigurationGroup: ConfigurationGroup = new Primitives.ConfigurationGroup(
     {
         content: {
             label: "API Actions",
@@ -30,7 +30,7 @@ const ApiActionConfigurationGroup: ConfigurationGroup = new Primatives.Configura
         },
         identifier: "api_actions",
         properties: [
-            new Primatives.ConfigurationProperty({
+            new Primitives.ConfigurationProperty({
                 content: {
                     label: "Actions",
                 },
@@ -88,7 +88,7 @@ const ApiActionConfigurationGroup: ConfigurationGroup = new Primatives.Configura
                     variant: PropertyPreviewLayoutVariant.CODE_DARK,
                 },
                 properties: [
-                    new Primatives.ConfigurationProperty({
+                    new Primitives.ConfigurationProperty({
                         content: {
                             label: "Verb",
                             description: "Verify",
@@ -104,7 +104,7 @@ const ApiActionConfigurationGroup: ConfigurationGroup = new Primatives.Configura
                             { value: "DELETE", label: "DELETE" },
                         ],
                     }),
-                    new Primatives.ConfigurationProperty({
+                    new Primitives.ConfigurationProperty({
                         content: {
                             label: "Route",
                             description: "Route",
@@ -119,7 +119,7 @@ const ApiActionConfigurationGroup: ConfigurationGroup = new Primatives.Configura
                             StringPropertyTransformations.removewhitespace,
                         ],
                     }),
-                    new Primatives.ConfigurationProperty({
+                    new Primitives.ConfigurationProperty({
                         content: {
                             label: "Function Name",
                             description: "function_name",
@@ -136,7 +136,7 @@ const ApiActionConfigurationGroup: ConfigurationGroup = new Primatives.Configura
                             StringPropertyTransformations.removewhitespace,
                         ],
                     }),
-                    new Primatives.ConfigurationProperty({
+                    new Primitives.ConfigurationProperty({
                         content: {
                             label: "Scope",
                             description: "scope",

@@ -16,7 +16,7 @@ export * from "./token";
 export * from "./plugin";
 export * from "./uuid";
 export * from "./util";
-export * from "./primatives";
+export * from "./primitives";
 export * from "./runtime-log-level";
 export * from "./runtime-log-behavior";
 export * from "./runtime-methods";

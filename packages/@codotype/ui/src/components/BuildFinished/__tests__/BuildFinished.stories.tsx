@@ -9,8 +9,8 @@ storiesOf("Components/BuildFinished", module).add("S3 Download", () => {
     return (
         <Story>
             <BuildFinished
-                downloadUrl={"https://google.com"}
-                responseType={"S3_DOWNLOAD"}
+                responseType="S3_DOWNLOAD"
+                filepath="https://google.com"
                 onClickBackToEditor={() => {
                     console.log("onClickBackToEditor");
                 }}
@@ -23,8 +23,8 @@ storiesOf("Components/BuildFinished", module).add("Local Path", () => {
     return (
         <Story>
             <BuildFinished
-                filepath={"/foo/bar/codotype-build/project"}
-                responseType={"LOCAL_PATH"}
+                filepath="/foo/bar/codotype-build/project"
+                responseType="LOCAL_PATH"
                 onClickBackToEditor={() => {
                     console.log("onClickBackToEditor");
                 }}

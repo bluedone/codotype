@@ -1,6 +1,5 @@
 export * from "./components/AttributeEditor";
 export * from "./components/BuildFinished";
-export * from "./components/ChevronAnimation";
 export * from "./components/ConfigurationInput";
 export * from "./components/PluginCard";
 export * from "./components/DocumentationModal";

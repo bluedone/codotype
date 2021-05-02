@@ -218,11 +218,11 @@ export function buildDefaultProjectInput(
     const projectInput: ProjectInput = {
         id: "",
         identifiers: {
-            title: "New Project",
-            snake: "new_project",
-            camel: "newProject",
-            pascal: "NewProject",
-            kebab: "new-project",
+            title: "Project Name",
+            snake: "project_name",
+            camel: "projectName",
+            pascal: "ProjectName",
+            kebab: "project-name",
         },
         pluginID: pluginMetadata.identifier,
         pluginVersion: pluginMetadata.version,

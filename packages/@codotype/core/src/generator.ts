@@ -13,7 +13,7 @@ import {
  */
 export interface GeneratorProps {
     name: string;
-    compileInPlace?: string[]; // TODO - rename `compileInPlace` -> `renderInPlace`?
+    renderInPlace?: string[];
     write?: WriteFunction;
     forEachSchema?: ForEachSchemaFunction;
     forEachRelation?: ForEachRelationFunction;

@@ -28,7 +28,7 @@ export function DatatypeOption(props: DatatypeOptionProps) {
             <div className="col-span-1">
                 <button
                     className={classnames(
-                        "border-gray-600 border w-full rounded-2xl text-left px-3 py-2",
+                        "border-gray-600 border w-full rounded-2xl text-left px-3 py-2 group",
                         {
                             "bg-gray-600 text-white": active,
                             "bg-transparent hover:bg-gray-600 hover:text-white": !active,
@@ -50,7 +50,15 @@ export function DatatypeOption(props: DatatypeOptionProps) {
                             </small>
                         </div>
                         {index < 10 && (
-                            <div className="flex text-xs bg-gray-200 px-1 py-1 rounded-lg">
+                            <div
+                                className={classnames(
+                                    "flex text-xs px-1 py-1 rounded-lg",
+                                    {
+                                        "bg-gray-500 text-gray-200": active,
+                                        "bg-gray-200 text-gray-900 group-hover:text-gray-200 group-hover:bg-gray-500": !active,
+                                    },
+                                )}
+                            >
                                 shift + {index}
                             </div>
                         )}

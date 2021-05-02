@@ -53,7 +53,7 @@ export const baseRuntimeAdapterProps: RuntimeAdapterProps = {
 export const generatorPrototype: GeneratorProps = {
     name: "Prototype Generator",
     write: jest.fn(),
-    compileInPlace: [],
+    renderInPlace: [],
     forEachSchema: jest.fn(),
     forEachRelation: jest.fn(),
     forEachReferencedBy: jest.fn(),

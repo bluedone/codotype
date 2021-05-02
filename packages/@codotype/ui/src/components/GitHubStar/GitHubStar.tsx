@@ -71,6 +71,10 @@ export class GitHubButton extends React.Component<GitHubButtonProps, {}> {
     render() {
         const { className = "" } = this.props;
 
+        if (typeof window === "undefined") {
+            return null;
+        }
+
         return (
             <div
                 ref={this.ref}

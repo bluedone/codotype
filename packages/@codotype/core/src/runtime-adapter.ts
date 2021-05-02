@@ -11,6 +11,7 @@ import {
     ComposeWithFunction,
     EnsureDirFunction,
     CopyDirFunction,
+    CopyFileFunction,
 } from "./runtime-methods";
 import { Runtime } from "./runtime";
 
@@ -32,6 +33,7 @@ export interface RuntimeAdapter {
     ensureDir: EnsureDirFunction;
     writeFile: WriteFileFunction;
     copyDir: CopyDirFunction;
+    copyFile: CopyFileFunction;
     renderTemplate: RenderTemplateFunction;
     composeWith: ComposeWithFunction;
     // Generator props methods

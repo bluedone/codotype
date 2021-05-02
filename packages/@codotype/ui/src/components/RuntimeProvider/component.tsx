@@ -65,7 +65,7 @@ export function RuntimeProvider(props: RuntimeProviderProps) {
     //         <React.Fragment>
     //             <BuildFinished
     //                 responseType="LOCAL_PATH"
-    //                 filepath="/home/aeksco/code"
+    //                 filepath="/home/user/code"
     //                 onClickBackToEditor={reset}
     //             />
     //         </React.Fragment>
@@ -92,16 +92,12 @@ export function RuntimeProvider(props: RuntimeProviderProps) {
                         reset();
                     }}
                 >
-                    {/* <Modal.Header closeButton={finished}> */}
-                    {/* {loading && <Modal.Title>Loading</Modal.Title>} */}
-                    {/* {finished && <Modal.Title>Export Code</Modal.Title>} */}
-                    {/* </Modal.Header> */}
                     <div className="min-w-full w-128">
                         {loading && <LoadingBuild />}
                         {finished && (
                             <BuildFinished
                                 responseType="LOCAL_PATH"
-                                filepath="/home/aeksco/code"
+                                filepath="/home/user/code"
                                 onClickBackToEditor={reset}
                             />
                         )}

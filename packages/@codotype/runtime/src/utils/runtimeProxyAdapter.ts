@@ -23,7 +23,7 @@ import {
 export class RuntimeProxyAdapter implements RuntimeAdapter {
     private runtime: Runtime;
     runtimeProxy: RuntimeProxy;
-    compileInPlace: string[];
+    renderInPlace: string[];
     props: RuntimeAdapterProps;
     generatorResolvedPath: string;
 
@@ -48,13 +48,13 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
         // Validates GeneratorProps
         if (
             !generatorProps.write &&
-            !generatorProps.compileInPlace &&
+            !generatorProps.renderInPlace &&
             !generatorProps.forEachSchema &&
             !generatorProps.forEachRelation &&
             !generatorProps.forEachReferencedBy
         ) {
             throw Error(
-                "GeneratorProps requires either write, forEachSchema, forEachRelation, forEachReferencedBy, or compileInPlace properties",
+                "GeneratorProps requires either write, forEachSchema, forEachRelation, forEachReferencedBy, or renderInPlace properties",
             );
         }
 
@@ -69,7 +69,7 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
             generatorProps.forEachRelation || this.forEachRelation;
         this.forEachReferencedBy =
             generatorProps.forEachReferencedBy || this.forEachReferencedBy;
-        this.compileInPlace = generatorProps.compileInPlace || [];
+        this.renderInPlace = generatorProps.renderInPlace || [];
 
         // Assigns this.props
         this.props = props;
@@ -82,6 +82,7 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
             ensureDir: this.ensureDir,
             writeFile: this.writeFile,
             copyDir: this.copyDir,
+            copyFile: this.copyFile,
             renderTemplate: this.renderTemplate,
             composeWith: this.composeWith,
         };
@@ -176,7 +177,7 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
     }
 
     /**
-     * copDir
+     * copyDir
      * @see CopyDirFunction
      */
     copyDir(params: { src: string; dest: string }) {
@@ -191,13 +192,41 @@ export class RuntimeProxyAdapter implements RuntimeAdapter {
     }
 
     /**
+     * copyFile
+     * @see CopyFileFunction
+     */
+    copyFile(param: string | { src: string; dest: string }) {
+        // Define values for src + dest params
+        let src = "";
+        let dest = "";
+
+        // Determine values for src + dest params
+        if (typeof param === "string") {
+            src = param;
+            dest = param;
+        } else {
+            src = param.src;
+            dest = param.dest;
+        }
+
+        // Pass parameters to runtime.copyFile
+        return this.runtime.copyFile({
+            src: this.runtime.getTemplatePath(this.generatorResolvedPath, src),
+            dest: this.runtime.getDestinationPath(
+                this.props.destinationPath,
+                dest,
+            ),
+        });
+    }
+
+    /**
      * compileTemplatesInPlace
-     * @see GeneratorProps.compileInPlace
+     * @see GeneratorProps.renderInPlace
      */
     compileTemplatesInPlace(): Promise<boolean[]> {
         // For each inPlaceTemplate, compile and write
         return Promise.all(
-            this.compileInPlace.map((template: string) => {
+            this.renderInPlace.map((template: string) => {
                 return this.runtime.writeTemplateToFile(
                     this,
                     this.runtime.getTemplatePath(

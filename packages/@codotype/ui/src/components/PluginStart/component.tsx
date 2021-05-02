@@ -1,13 +1,11 @@
 import * as React from "react";
 import { PluginMetadata } from "@codotype/core";
-import { ChevronAnimation } from "../ChevronAnimation/component";
 import { MarkdownRenderer } from "../MarkdownRenderer";
 import { PluginTypeTag } from "../PluginCard/PluginTypeTag";
 import { PluginTechTag } from "../PluginCard/PluginTechTag";
 import { PluginExperienceTag } from "../PluginCard/PluginExperienceTag";
 import { PluginsVersionTag } from "../PluginCard/PluginVersionTag";
-import { PluginGithubLink } from "../PluginCard/PluginGithubLink";
-import { GitHubStar } from "../GitHubStar";
+// import { PluginGithubLink } from "../PluginCard/PluginGithubLink";
 
 // // // //
 
@@ -34,16 +32,16 @@ export function PluginStart(props: PluginStartProps) {
                         <h3 className="text-3xl mt-3">
                             {props.plugin.content.label}
                         </h3>
-                        <p className="lead text-gray-600">
+                        <p className="mt-2 lead text-gray-600 dark:text-gray-400">
                             powered by{" "}
-                            <a target="_blank" href="https://codotype.io">
+                            <a
+                                target="_blank"
+                                className="text-blue-600 hover:text-blue-700"
+                                href="https://codotype.io"
+                            >
                                 Codotype
                             </a>
                         </p>
-                    </div>
-
-                    <div className="flex flex-row justify-center mt-3">
-                        <GitHubStar />
                     </div>
                 </div>
 
@@ -80,12 +78,16 @@ export function PluginStart(props: PluginStartProps) {
                             experience={props.plugin.experience}
                         />
                         <PluginsVersionTag version={props.plugin.version} />
-                        <PluginGithubLink plugin={props.plugin} />
+                        {/* <PluginGithubLink plugin={props.plugin} /> */}
                     </div>
                 </div>
 
                 <div className="flex justify-center my-3">
-                    <div className="border w-full max-w-5xl border-gray-300" />
+                    <div
+                        className="border w-full max-w-5xl border-gray-200 bg-gray-200
+
+                        dark:border-gray-600 dark:bg-gray-600"
+                    />
                 </div>
 
                 <div className="flex justify-center">

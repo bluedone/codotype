@@ -39,7 +39,7 @@ export function AddonPropertyForm(props: {
     }
 
     return (
-        <div className="row mt-3">
+        <div className="grid grid-cols-12 mt-3">
             {addons
                 .map(a => a.property)
                 .map((a: AddonProperty) => {
@@ -83,7 +83,7 @@ export function AddonPropertyForm(props: {
                         ).valueOf();
 
                         return (
-                            <div className="col-lg-6 col-sm-12">
+                            <div className="col-span-6">
                                 <FormGroup
                                     label={a.content.label}
                                     help={a.content.description}
@@ -117,7 +117,7 @@ export function AddonPropertyForm(props: {
                         const addonValue = String(props.value[a.identifier]);
 
                         return (
-                            <div className="col-lg-6 col-sm-12">
+                            <div className="col-span-6">
                                 <FormGroup
                                     label={a.content.label}
                                     help={a.content.description}

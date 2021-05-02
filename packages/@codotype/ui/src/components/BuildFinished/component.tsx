@@ -14,8 +14,7 @@ import { CopyToClipboard } from "../CopyToClipboard";
 
 export function BuildFinished(props: {
     responseType: "S3_DOWNLOAD" | "LOCAL_PATH";
-    downloadUrl?: string;
-    filepath?: string;
+    filepath: string;
     onClickBackToEditor: () => void;
 }) {
     const [copyMessage, setCopyMessage] = React.useState<boolean>(false);
@@ -99,10 +98,10 @@ export function BuildFinished(props: {
 
             {/* <!-- S3 Zip Download --> */}
             {/* TODO - use ResponseTypes enum from @codotype/core */}
-            {props.responseType === "S3_DOWNLOAD" && props.downloadUrl && (
+            {props.responseType === "S3_DOWNLOAD" && (
                 <div className="row flex justify-center mt-3">
                     <a
-                        href={props.downloadUrl}
+                        href={props.filepath}
                         target="_blank"
                         className="btn w-full btn-success"
                     >

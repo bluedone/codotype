@@ -13,7 +13,7 @@ export function FormGroup(props: {
     children: React.ReactNode;
 }) {
     return (
-        <div className="mb-0">
+        <div className="mb-0 flex flex-col">
             <label className="mb-0">
                 {props.label}
                 {props.required && <span className="text-red-500 ml-1">*</span>}

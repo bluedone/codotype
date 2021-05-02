@@ -8,6 +8,7 @@ import {
     ComposeWithOptions,
     EnsureDirFunction,
     PrettifyOptions,
+    CopyFileFunction,
 } from "./runtime-methods";
 import { RuntimeAdapter } from "./runtime-adapter";
 
@@ -112,6 +113,7 @@ export interface Runtime {
         destinationRelativePath: string,
     ) => string;
     copyDir: CopyDirFunction;
+    copyFile: (props: { src: string; dest: string }) => Promise<boolean>;
     ensureDir: EnsureDirFunction;
     log: (message: any, options: { level: RuntimeLogLevel }) => void;
     registerPlugin: (props: {

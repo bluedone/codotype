@@ -1,6 +1,6 @@
 import {
     PropertyTypes,
-    Primatives,
+    Primitives,
     SchemaEditorConfiguration,
     RelationTypes,
     Datatypes,
@@ -24,7 +24,7 @@ export const SchemaEditorKitchenSink: SchemaEditorConfiguration = {
         Datatypes.STRING_ARRAY,
     ],
     configurationGroups: [
-        new Primatives.ConfigurationGroup({
+        new Primitives.ConfigurationGroup({
             content: {
                 label: "Meta",
                 description: "Define additional metadata for this Schema",
@@ -32,7 +32,7 @@ export const SchemaEditorKitchenSink: SchemaEditorConfiguration = {
             identifier: "meta",
             layoutVariant: GroupLayoutVariants.LIST,
             properties: [
-                new Primatives.ConfigurationProperty({
+                new Primitives.ConfigurationProperty({
                     content: {
                         label: "Internal Note",
                         description:
@@ -45,7 +45,7 @@ export const SchemaEditorKitchenSink: SchemaEditorConfiguration = {
                 }),
             ],
         }),
-        // new Primatives.ConfigurationGroup({
+        // new Primitives.ConfigurationGroup({
         //     content: {
         //         label: "API Actions",
         //         description: "Define individual REST api actions.",
@@ -56,7 +56,7 @@ export const SchemaEditorKitchenSink: SchemaEditorConfiguration = {
         //     layoutVariant: GroupLayoutVariants.LIST,
         //     properties: [ApiActionsProperty],
         // }),
-        // new Primatives.ConfigurationGroup({
+        // new Primitives.ConfigurationGroup({
         //     content: {
         //         label: "GraphQL API",
         //         description: "Configure the GraphQL API for this Schema",
@@ -64,7 +64,7 @@ export const SchemaEditorKitchenSink: SchemaEditorConfiguration = {
         //     identifier: "graphql_api",
         //     layoutVariant: GroupLayoutVariants.LIST,
         //     properties: [
-        //         new Primatives.ConfigurationProperty({
+        //         new Primitives.ConfigurationProperty({
         //             type: PropertyTypes.BOOLEAN,
         //             defaultValue: true,
         //             identifier: "generate_crud_api",
@@ -75,7 +75,7 @@ export const SchemaEditorKitchenSink: SchemaEditorConfiguration = {
         //             },
         //             layoutVariant: PropertyLayoutVariants.CARD_COL_12,
         //         }),
-        //         new Primatives.ConfigurationProperty({
+        //         new Primitives.ConfigurationProperty({
         //             content: {
         //                 label: "DynamoDB table name",
         //                 description:

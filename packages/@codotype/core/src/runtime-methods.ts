@@ -92,6 +92,20 @@ export type CopyDirFunction = (params: {
 }) => Promise<boolean>;
 
 /**
+ * CopyFileFunction
+ * Used by the runtime to copy a single file from src to dest
+ * If only a string is passed, the src + dest will be the same
+ */
+export type CopyFileFunction = (
+    params:
+        | string
+        | {
+              src: string;
+              dest: string;
+          },
+) => Promise<boolean>;
+
+/**
  * EnsureDirFunction
  * Used by the Runtime to ensure the presence of a directory
  */
@@ -105,9 +119,7 @@ export type RenderTemplateFunction = (params: {
     src: string;
     dest: string;
     data?: { [key: string]: any };
-    options?: {
-        prettify?: PrettifyOptions;
-    };
+    options?: { prettify?: PrettifyOptions };
 }) => Promise<boolean>;
 
 /**
@@ -125,7 +137,7 @@ export interface ComposeWithOptions {
 /**
  * ComposeWithFunction
  * Exposed by the RuntimeProxy to allow a Generator to "compose" another generator module
- * TODO - should this use the modulePath / relativePath / absolutePath pattern? or should that pattern be updated?
+ * QUESTION - should this use the modulePath / relativePath / absolutePath pattern? or should that pattern be updated?
  */
 export type ComposeWithFunction = (
     generatorModule: string,
