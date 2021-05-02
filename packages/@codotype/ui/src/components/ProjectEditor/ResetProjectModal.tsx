@@ -39,7 +39,7 @@ export function ResetProjectModal(props: {
                             onHide();
                             onConfirmReset();
                         }}
-                        className="btn btn-primary"
+                        className="btn btn-danger"
                     >
                         Are you really sure?
                     </button>
@@ -49,7 +49,7 @@ export function ResetProjectModal(props: {
                         onClick={() => {
                             setShowConfirm(true);
                         }}
-                        className="btn btn-primary"
+                        className="btn btn-danger"
                     >
                         Reset Project
                     </button>

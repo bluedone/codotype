@@ -22,7 +22,7 @@ export function RelationDeleteModal(props: {
             </div>
             <div className="modal-footer-tw">
                 <button
-                    className="btn btn-lg btn-primary"
+                    className="btn btn-lg btn-danger"
                     onClick={props.onConfirm}
                 >
                     Delete Relation

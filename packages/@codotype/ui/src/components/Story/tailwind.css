@@ -188,6 +188,21 @@ button.btn-primary:disabled {
     @apply hover:bg-indigo-500;
 }
 
+.btn-danger {
+    @apply rounded-full;
+    @apply text-white;
+    @apply bg-red-500;
+    @apply border-red-500;
+    @apply hover:bg-red-600;
+    @apply px-4;
+}
+
+button.btn-primary:disabled {
+    @apply opacity-50;
+    @apply cursor-not-allowed;
+    @apply hover:bg-red-500;
+}
+
 .modal-close-btn {
     @apply ml-3;
     @apply inline-flex;
