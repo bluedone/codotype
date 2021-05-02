@@ -204,7 +204,7 @@ button.btn-primary:disabled {
 button.btn-primary:disabled {
     @apply opacity-50;
     @apply cursor-not-allowed;
-    @apply hover:bg-red-500;
+    @apply hover:bg-indigo-500;
 }
 
 .modal-close-btn {

@@ -13,6 +13,16 @@ export function ProjectForm(props: {
     onChange: (updatedProjectLabel: string) => void;
     onSubmit: (updatedProjectLabel: string) => void;
 }) {
+    const inputEl = React.useRef(null);
+
+    React.useEffect(() => {
+        if (inputEl === null) {
+            return;
+        }
+        // current property is refered to input element
+        // @ts-ignore
+        inputEl.current.focus();
+    }, []);
     return (
         <div className="row items-center justify-center select-none">
             <div className="col-sm-12">
@@ -32,6 +42,7 @@ export function ProjectForm(props: {
                 </p>
 
                 <input
+                    ref={inputEl}
                     className="form-control rounded-lg py-12 font-2xl"
                     placeholder="Project Name"
                     value={props.value}
