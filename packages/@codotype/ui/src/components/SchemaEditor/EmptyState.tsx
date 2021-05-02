@@ -113,7 +113,7 @@ export function EmptyState(props: {
                     </div>
                     <div className="col-span-6">
                         <h3 className="text-2xl text-center mb-4">
-                            ...or, define your first data model
+                            ...or, define your first Data Model
                         </h3>
                         {dataModelForm}
                     </div>

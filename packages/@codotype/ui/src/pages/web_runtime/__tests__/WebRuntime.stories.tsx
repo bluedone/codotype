@@ -49,6 +49,10 @@ const dummyPluginMetadata: PluginMetadata = {
             }
             return {
                 ...c,
+                content: {
+                    ...c.content,
+                    documentation: "https://codotype.org",
+                },
                 layoutVariant: GroupLayoutVariants.LIST,
             };
         }),

@@ -62,7 +62,7 @@ export function ConfigurationGroupHeader(props: {
     const renderSmaller: boolean = props.schemaInput !== undefined;
 
     return (
-        <div className="mb-2">
+        <div className="mb-4">
             <div className="flex items-center mb-2">
                 {!renderSmaller && (
                     <h4 className="mb-0 mr-2 text-2xl">
