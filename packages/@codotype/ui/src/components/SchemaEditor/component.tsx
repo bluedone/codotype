@@ -228,6 +228,7 @@ export function SchemaEditorLayout(props: {
     if (selectedSchemaId === null || selectedSchema === undefined) {
         return (
             <EmptyState
+                plugin={props.pluginMetadata}
                 onNewTokenChange={setNewTokenPluralization}
                 onKeydownEnter={() => {
                     createNewSchema();
@@ -238,6 +239,17 @@ export function SchemaEditorLayout(props: {
                 }
                 onSubmit={() => {
                     createNewSchema();
+                }}
+                onSelectExampleProject={(exampleProjectInput: ProjectInput) => {
+                    // Pull data model from exampleProjectInput
+                    props.onChange({
+                        ...projectInput,
+                        identifiers: {
+                            ...exampleProjectInput.identifiers,
+                        },
+                        schemas: [...exampleProjectInput.schemas],
+                        relations: [...exampleProjectInput.relations],
+                    });
                 }}
             />
         );

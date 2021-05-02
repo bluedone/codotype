@@ -25,7 +25,7 @@ export function ExampleProjectDropdown(props: {
 
     return (
         <React.Fragment>
-            <Menu as="div" className="relative inline-block text-left z-50 mr-4">
+            <Menu as="div" className="relative inline-block text-left z-10 mr-4">
                 {({ open }) => (
                     <>
                         <div>
