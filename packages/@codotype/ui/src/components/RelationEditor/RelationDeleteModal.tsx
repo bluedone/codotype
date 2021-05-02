@@ -16,11 +16,13 @@ export function RelationDeleteModal(props: {
 }) {
     return (
         <Modal show={props.show} onHide={props.onClose}>
-            <h3>Delete Relation</h3>
-            Are you sure you want to delete this Relation?
+            <div className="p-5 select-none">
+                <h3 className="modal-header">Delete Relation</h3>
+                <p>Are you sure you want to delete this Relation?</p>
+            </div>
             <div className="modal-footer-tw">
                 <button
-                    className="btn btn-lg btn-danger"
+                    className="btn btn-lg btn-primary"
                     onClick={props.onConfirm}
                 >
                     Delete Relation

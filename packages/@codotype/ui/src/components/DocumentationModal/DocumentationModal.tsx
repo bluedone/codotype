@@ -37,7 +37,7 @@ export function DocumentationModal(props: {
                 </div>
                 <div className="modal-footer-tw">
                     <button
-                        className="btn"
+                        className="modal-close-btn"
                         onClick={() => {
                             showModal(false);
                         }}

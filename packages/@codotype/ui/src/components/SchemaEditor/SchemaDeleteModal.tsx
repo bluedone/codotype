@@ -28,8 +28,8 @@ export function SchemaDeleteModal(props: {
                     Delete Schema
                 </button>
                 <button
+                    className="modal-close-btn"
                     onClick={props.onClose}
-                    className="btn btn-lg btn-light"
                 >
                     Close
                 </button>
