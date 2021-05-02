@@ -139,9 +139,9 @@ export function BuildFinished(props: {
             <hr />
 
             {/* FOOTER */}
-            <div className="flex justify-center">
-                <p className="mb-0">Support Codotype</p>
-                <small className="text-gray-600">
+            <div className="flex flex-col items-center justify-center">
+                <p className="mb-0 text-md">Support Codotype</p>
+                <p className="text-gray-600 text-sm">
                     Give us a{" "}
                     <FontAwesomeIcon
                         icon={faStar}
@@ -167,7 +167,7 @@ export function BuildFinished(props: {
                         />
                         Twitter
                     </a>
-                </small>
+                </p>
             </div>
         </div>
     );
