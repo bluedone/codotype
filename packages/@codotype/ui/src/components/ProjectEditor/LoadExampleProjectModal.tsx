@@ -21,16 +21,18 @@ export function LoadExampleProjectModal(props: {
 
     return (
         <Modal show={props.show} onHide={props.onHide}>
-            <h3>Load {projectInput.identifiers.title} Project</h3>
+            <div className="p-5 select-none">
+                <h3 className="modal-header">Load Example Project</h3>
 
-            <p className="form-text text-muted mb-2">
-                Load an example project for this Codotype Plugin.
+                <p className="form-text text-muted mb-2">
+                    Load an example project for this Codotype Plugin.
             </p>
 
-            <p className="form-text text-muted mb-2">
-                <span className="text-red-500">WARNING: </span>This will delete
+                <p className="form-text text-muted mb-2">
+                    <span className="text-red-500">WARNING: </span>This will delete
                 your current project - are you sure you want to continue?
             </p>
+            </div>
 
             <div className="modal-footer-tw">
                 <button

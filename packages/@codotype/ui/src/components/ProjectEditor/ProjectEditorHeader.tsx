@@ -73,7 +73,7 @@ export function ProjectEditorHeader(props: {
                     />
                 </ProjectFormModal>
             </div>
-            <div className="flex justify-end">
+            <div className="flex justify-end items-center">
                 <ExampleProjectDropdown
                     plugin={pluginMetadata}
                     loadExampleProject={exampleProject => {
