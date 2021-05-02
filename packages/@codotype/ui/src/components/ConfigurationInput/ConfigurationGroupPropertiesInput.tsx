@@ -7,7 +7,7 @@ import {
     buildTokenPluralization,
     ConfigurationPropertyDict,
 } from "@codotype/core";
-import { ConfigurationInputPrimative } from "./ConfigurationInputPrimative";
+import { ConfigurationInputPrimitive } from "./ConfigurationInputPrimitive";
 import { ConfigurationInputFormGroup } from "./ConfigurationInputFormGroup";
 import { ConfigurationCollectionInput } from "./ConfigurationCollectionInput";
 
@@ -31,7 +31,7 @@ export function ConfigurationGroupPropertiesInput(props: {
         props.properties || configurationGroup.properties;
 
     return (
-        <div className="grid grid-cols-12 gap-4 mt-4">
+        <div className="grid grid-cols-12 gap-4">
             {properties.map((property: ConfigurationProperty) => {
                 // Handle PropertyTypes.COLLECTION
                 if (property.type === PropertyTypes.COLLECTION) {
@@ -135,7 +135,7 @@ export function ConfigurationGroupPropertiesInput(props: {
                             });
                         }}
                     >
-                        <ConfigurationInputPrimative
+                        <ConfigurationInputPrimitive
                             value={value}
                             property={property}
                             onChange={(

@@ -1,21 +1,23 @@
 import * as React from "react";
+import classnames from "classnames"
 import {
     ConfigurationGroup,
     GroupLayoutVariants,
     ConfigurationProperty,
+    ConfigurationPropertyDict,
 } from "@codotype/core";
-import { ConfigurationInputFormGroup } from "./ConfigurationInputFormGroup";
-import { ConfigurationInputPrimative } from "./ConfigurationInputPrimative";
+import { ConfigurationGroupPropertiesInput } from "./ConfigurationGroupPropertiesInput";
 
 // // // //
 
 /**
  * ConfigurationGroupPropertiesDetail
- * TODO - add additional props
  * @param props.configurationGroup
  */
 export function ConfigurationGroupPropertiesDetail(props: {
     configurationGroup: ConfigurationGroup;
+    value: ConfigurationPropertyDict;
+    onChange: (updatedVal: ConfigurationPropertyDict) => void;
 }) {
     const { configurationGroup } = props;
 
@@ -37,8 +39,8 @@ export function ConfigurationGroupPropertiesDetail(props: {
     const selectedProperty:
         | ConfigurationProperty
         | undefined = configurationGroup.properties.find(
-        p => p.identifier === selectedPropertyID,
-    );
+            p => p.identifier === selectedPropertyID,
+        );
 
     // Return null if selectedProperty is undefined
     if (selectedProperty === undefined) {
@@ -59,33 +61,26 @@ export function ConfigurationGroupPropertiesDetail(props: {
     }
 
     return (
-        <div className="grid grid-cols-12">
+        <div className="grid grid-cols-12 gap-4">
             <div className={`col-span-${selectorColumn} border-right`}>
-                <nav className="nav nav-pills flex-col">
+                <nav className="space-y-1 mt-3">
                     {configurationGroup.properties.map(property => {
-                        // Defines className for tab
-                        // TODO - the bootstrap tabs + pills CSS isn't working correctly, should fix
-                        const tabClassName: string[] = ["nav-link nav-item"];
-                        if (property.identifier === selectedPropertyID) {
-                            tabClassName.push("active bg-blue-500 text-white");
-                        }
-
+                        const active = property.identifier === selectedPropertyID;
                         return (
-                            <li className="nav-item">
-                                <a
-                                    className={tabClassName.join()}
-                                    href={"#"}
-                                    onClick={e => {
-                                        e.preventDefault();
-                                        e.stopPropagation();
-                                        setSelectedPropertyID(
-                                            property.identifier,
-                                        );
-                                    }}
-                                >
-                                    {property.content.label}
-                                </a>
-                            </li>
+                            <button className={classnames('flex items-center w-full px-3 py-2 text-sm font-medium rounded-md focus:outline-none', {
+                                'bg-gray-200 text-gray-900': active,
+                                'text-gray-600 hover:text-gray-900': active,
+                            })}
+                                onClick={e => {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    setSelectedPropertyID(
+                                        property.identifier,
+                                    );
+                                }}
+                            >
+                                {property.content.label}
+                            </button>
                         );
                     })}
                 </nav>
@@ -93,20 +88,11 @@ export function ConfigurationGroupPropertiesDetail(props: {
             <div className={`col-span-${detailColumn}`}>
                 <div className="grid grid-cols-1">
                     <div className="col-span-1">
-                        <ConfigurationInputFormGroup
-                            property={selectedProperty}
-                        >
-                            <ConfigurationInputPrimative
-                                property={selectedProperty}
-                                value={true}
-                                onChange={() => {
-                                    // TODO - wire this up, must be finished
-                                    // TODO - wire this up, must be finished
-                                    // TODO - wire this up, must be finished
-                                    console.log("changed");
-                                }}
-                            />
-                        </ConfigurationInputFormGroup>
+                        <ConfigurationGroupPropertiesInput
+                            value={props.value}
+                            onChange={props.onChange}
+                            properties={[selectedProperty]}
+                        />
                     </div>
                 </div>
             </div>
