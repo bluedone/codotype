@@ -26,6 +26,11 @@ export function ProjectEditorHeader(props: {
     const [labelValue, setLabelValue] = React.useState<string>(
         projectInput.identifiers.title,
     );
+
+    React.useEffect(() => {
+        setLabelValue(projectInput.identifiers.title);
+    }, [projectInput.identifiers]);
+
     return (
         <div className="flex items-center w-full justify-end">
             <div className="flex flex-grow items-center">
