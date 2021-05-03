@@ -38,6 +38,13 @@ export function MarkdownRenderer(props: { source: string }) {
                 renderers={{
                     code: CodeBlock,
                     image: ImageBlock,
+                    link: (prps: any) => {
+                        return (
+                            <a href={prps.href} target="_blank">
+                                {prps.children}
+                            </a>
+                        );
+                    },
                 }}
             />
         </div>

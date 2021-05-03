@@ -58,6 +58,14 @@ export function AttributeFormSelector(props: {
         defaultSelectedForm,
     );
 
+    // Reset selected form when props.attributeInput.datatype changes
+    // this is necessary to go back to the first step after clicking "save and continue"
+    React.useEffect(() => {
+        setSelectedForm(
+            attributeInput.datatype === null ? "DATATYPE" : "PROPERTIES",
+        );
+    }, [attributeInput.datatype]);
+
     return (
         <div className="row">
             <div className="col-lg-12">

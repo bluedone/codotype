@@ -7,7 +7,7 @@ import {
     faStar,
 } from "@fortawesome/free-solid-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
-import { faLaugh } from "@fortawesome/free-regular-svg-icons";
+import { faLaugh, faLightbulb } from "@fortawesome/free-regular-svg-icons";
 import { CopyToClipboard } from "../CopyToClipboard";
 
 // // // //
@@ -114,7 +114,7 @@ export function BuildFinished(props: {
             <div className="grid mt-3">
                 <div className="col-span-12 text-center">
                     <p className="mb-1">
-                        <i className="far fa-lightbulb" />
+                        <FontAwesomeIcon icon={faLightbulb} />
                         Remember, iteration is key
                     </p>
 
@@ -139,9 +139,9 @@ export function BuildFinished(props: {
             <hr />
 
             {/* FOOTER */}
-            <div className="flex justify-center">
-                <p className="mb-0">Support Codotype</p>
-                <small className="text-gray-600">
+            <div className="flex flex-col items-center justify-center">
+                <p className="mb-0 text-md">Support Codotype</p>
+                <p className="text-gray-600 text-sm">
                     Give us a{" "}
                     <FontAwesomeIcon
                         icon={faStar}
@@ -167,7 +167,7 @@ export function BuildFinished(props: {
                         />
                         Twitter
                     </a>
-                </small>
+                </p>
             </div>
         </div>
     );

@@ -56,10 +56,13 @@ export function RelationEditor(props: RelationEditorProps) {
         relations: props.relations,
         lastUpdatedAt: null,
     });
-    const [
-        relationInput,
-        setRelationInput,
-    ] = React.useState<RelationInput | null>(null);
+    const [relationInput, setRelationInput] = React.useState<RelationInput>(
+        new Primitives.Relation({
+            id: "",
+            sourceSchemaID: props.selectedSchema.id,
+        }),
+    );
+    const [showingInputModal, showInputModal] = React.useState(false);
     const [
         showingDeleteModal,
         showDeleteModal,
@@ -108,73 +111,90 @@ export function RelationEditor(props: RelationEditorProps) {
                             sourceSchemaID: props.selectedSchema.id,
                         }),
                     );
+                    showInputModal(true);
                 }}
                 rounded={false}
             />
 
             {/* Renders RelationFormModal */}
-            {relationInput !== null && (
-                <RelationFormModal
-                    relationInput={relationInput}
-                    show={relationInput !== null}
-                    disableSubmit={disableSubmit(relationInput)}
-                    onCancel={() => {
-                        setRelationInput(null);
-                    }}
-                    onSubmit={() => {
-                        // Insert new Relation
-                        if (relationInput.id === "") {
-                            const newRelation: RelationInput = new Primitives.Relation(
-                                {
-                                    sourceSchemaID:
-                                        relationInput.sourceSchemaID,
-                                    destinationSchemaID:
-                                        relationInput.destinationSchemaID,
-                                    sourceSchemaAlias:
-                                        relationInput.sourceSchemaAlias,
-                                    destinationSchemaAlias:
-                                        relationInput.destinationSchemaAlias,
-                                    type: relationInput.type,
-                                },
-                            );
+            <RelationFormModal
+                relationInput={relationInput}
+                show={showingInputModal}
+                disableSubmit={disableSubmit(relationInput)}
+                onCancel={() => {
+                    showInputModal(false);
 
-                            setState({
-                                lastUpdatedAt: Date.now(),
-                                relations: [...props.relations, newRelation],
-                            });
-                            setRelationInput(null);
-                            return;
-                        }
+                    setTimeout(() => {
+                        setRelationInput(
+                            new Primitives.Relation({
+                                id: "",
+                                sourceSchemaID: props.selectedSchema.id,
+                            }),
+                        );
+                    }, 300);
+                }}
+                onSubmit={() => {
+                    // Insert new Relation
+                    if (relationInput.id === "") {
+                        const newRelation: RelationInput = new Primitives.Relation(
+                            {
+                                sourceSchemaID: relationInput.sourceSchemaID,
+                                destinationSchemaID:
+                                    relationInput.destinationSchemaID,
+                                sourceSchemaAlias:
+                                    relationInput.sourceSchemaAlias,
+                                destinationSchemaAlias:
+                                    relationInput.destinationSchemaAlias,
+                                type: relationInput.type,
+                            },
+                        );
 
-                        // Update existing relation
                         setState({
                             lastUpdatedAt: Date.now(),
-                            relations: props.relations.map(
-                                (a: RelationInput) => {
-                                    if (a.id === relationInput.id) {
-                                        return relationInput;
-                                    }
-                                    return a;
-                                },
-                            ),
+                            relations: [...props.relations, newRelation],
                         });
-                        setRelationInput(null);
+                        setRelationInput(
+                            new Primitives.Relation({
+                                id: "",
+                                sourceSchemaID: props.selectedSchema.id,
+                            }),
+                        );
+                        showInputModal(false);
+                        return;
+                    }
+
+                    // Update existing relation
+                    setState({
+                        lastUpdatedAt: Date.now(),
+                        relations: props.relations.map((a: RelationInput) => {
+                            if (a.id === relationInput.id) {
+                                return relationInput;
+                            }
+                            return a;
+                        }),
+                    });
+                    setRelationInput(
+                        new Primitives.Relation({
+                            id: "",
+                            sourceSchemaID: props.selectedSchema.id,
+                        }),
+                    );
+                    showInputModal(false);
+                }}
+            >
+                <RelationForm
+                    relations={props.relations}
+                    schema={selectedSchema}
+                    relationAddons={props.relationAddons}
+                    schemas={schemas}
+                    selectedSchema={selectedSchema}
+                    relationInput={relationInput}
+                    onChange={(updatedRelationInput: RelationInput) => {
+                        setRelationInput(updatedRelationInput);
                     }}
-                >
-                    <RelationForm
-                        relations={props.relations}
-                        schema={selectedSchema}
-                        relationAddons={props.relationAddons}
-                        schemas={schemas}
-                        selectedSchema={selectedSchema}
-                        relationInput={relationInput}
-                        onChange={(updatedRelationInput: RelationInput) => {
-                            setRelationInput(updatedRelationInput);
-                        }}
-                        supportedRelationTypes={props.supportedRelationTypes}
-                    />
-                </RelationFormModal>
-            )}
+                    supportedRelationTypes={props.supportedRelationTypes}
+                />
+            </RelationFormModal>
 
             {!showEmptyState && (
                 <React.Fragment>
@@ -263,6 +283,9 @@ export function RelationEditor(props: RelationEditorProps) {
                                                             setRelationInput({
                                                                 ...relation,
                                                             });
+                                                            showInputModal(
+                                                                true,
+                                                            );
                                                         }}
                                                         onClickDelete={(
                                                             relationToDelete: Relation,
@@ -310,6 +333,7 @@ export function RelationEditor(props: RelationEditorProps) {
                                 sourceSchemaID: props.selectedSchema.id,
                             }),
                         );
+                        showInputModal(true);
                     }}
                 />
             )}

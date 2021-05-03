@@ -1,3 +1,5 @@
+import { faFrown } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as React from "react";
 
 // // // //
@@ -18,7 +20,7 @@ export function PageNotFound() {
                 <div className="row">
                     <div className="col-lg-12 text-center">
                         <p className="lead">
-                            <i className="far fa-3x fa-frown" />
+                            <FontAwesomeIcon size="3x" icon={faFrown} />
                         </p>
                     </div>
 

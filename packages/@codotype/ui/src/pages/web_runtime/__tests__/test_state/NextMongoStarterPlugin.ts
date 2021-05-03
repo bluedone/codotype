@@ -4,6 +4,7 @@ import {
     PropertyTypes,
     Primitives,
     ConfigurationGroup,
+    buildDefaultConfiguration,
 } from "@codotype/core";
 import {
     SchemaEditorConfiguration,
@@ -12,10 +13,306 @@ import {
     GroupLayoutVariants,
     PropertyLayoutVariants,
     CreatedByValues,
+    buildTokenPluralization,
+    ProjectInput,
+    buildTokenCasing,
 } from "@codotype/core";
 import { ATTRIBUTE_ADDON_UNIQUE, relationAddons } from "./Addons";
 import { NextJsWebsiteStarterPluginVariant } from "./NextJsWebsiteStarterPlugin";
 
+// // // //
+// Example Project
+
+const userDataModel = new Primitives.Schema({
+    identifiers: buildTokenPluralization("User"),
+    attributes: [
+        new Primitives.AttributeInput({
+            identifiers: buildTokenCasing("_id"),
+            datatype: Datatypes.STRING,
+        }),
+
+        new Primitives.AttributeInput({
+            identifiers: buildTokenCasing("Email"),
+            datatype: Datatypes.STRING,
+        }),
+
+        new Primitives.AttributeInput({
+            identifiers: buildTokenCasing("First Name"),
+            datatype: Datatypes.STRING,
+        }),
+
+        new Primitives.AttributeInput({
+            identifiers: buildTokenCasing("Last Name"),
+            datatype: Datatypes.STRING,
+        }),
+
+        new Primitives.AttributeInput({
+            identifiers: buildTokenCasing("Employee Id"),
+            datatype: Datatypes.STRING,
+        }),
+
+        new Primitives.AttributeInput({
+            identifiers: buildTokenCasing("Past Employee"),
+            datatype: Datatypes.BOOLEAN,
+        }),
+    ],
+});
+
+const lockerTypeDataModel = new Primitives.Schema({
+    identifiers: buildTokenPluralization("Locker Type"),
+    attributes: [
+        new Primitives.AttributeInput({
+            identifiers: buildTokenCasing("_id"),
+            datatype: Datatypes.OBJECT_ID,
+        }),
+
+        new Primitives.AttributeInput({
+            identifiers: buildTokenCasing("Label"),
+            datatype: Datatypes.STRING,
+        }),
+
+        new Primitives.AttributeInput({
+            identifiers: buildTokenCasing("Description"),
+            datatype: Datatypes.STRING,
+        }),
+
+        new Primitives.AttributeInput({
+            identifiers: buildTokenCasing("Price"),
+            datatype: Datatypes.FLOAT,
+        }),
+    ],
+});
+
+const lockerDataModel = new Primitives.Schema({
+    identifiers: buildTokenPluralization("Locker"),
+    attributes: [
+        new Primitives.AttributeInput({
+            identifiers: buildTokenCasing("_id"),
+            datatype: Datatypes.OBJECT_ID,
+        }),
+    ],
+});
+
+const lockerRentalDataModel = new Primitives.Schema({
+    identifiers: buildTokenPluralization("Locker Rental"),
+    attributes: [
+        new Primitives.AttributeInput({
+            identifiers: buildTokenCasing("_id"),
+            datatype: Datatypes.OBJECT_ID,
+        }),
+
+        new Primitives.AttributeInput({
+            identifiers: buildTokenCasing("Active"),
+            datatype: Datatypes.BOOLEAN,
+        }),
+
+        new Primitives.AttributeInput({
+            identifiers: buildTokenCasing("Rental Start"),
+            datatype: Datatypes.TIMESTAMP,
+        }),
+
+        new Primitives.AttributeInput({
+            identifiers: buildTokenCasing("Rental End"),
+            datatype: Datatypes.TIMESTAMP,
+        }),
+
+        new Primitives.AttributeInput({
+            identifiers: buildTokenCasing("Rebate"),
+            datatype: Datatypes.FLOAT,
+        }),
+
+        new Primitives.AttributeInput({
+            identifiers: buildTokenCasing("Subtotal"),
+            datatype: Datatypes.FLOAT,
+        }),
+
+        new Primitives.AttributeInput({
+            identifiers: buildTokenCasing("Taxes"),
+            datatype: Datatypes.FLOAT,
+        }),
+
+        new Primitives.AttributeInput({
+            identifiers: buildTokenCasing("Fees"),
+            datatype: Datatypes.FLOAT,
+        }),
+
+        new Primitives.AttributeInput({
+            identifiers: buildTokenCasing("Total"),
+            datatype: Datatypes.FLOAT,
+        }),
+    ],
+});
+
+const stationDataModel = new Primitives.Schema({
+    identifiers: buildTokenPluralization("Station"),
+    attributes: [
+        new Primitives.AttributeInput({
+            identifiers: buildTokenCasing("_id"),
+            datatype: Datatypes.OBJECT_ID,
+        }),
+
+        new Primitives.AttributeInput({
+            identifiers: buildTokenCasing("Name"),
+            datatype: Datatypes.STRING,
+        }),
+
+        new Primitives.AttributeInput({
+            identifiers: buildTokenCasing("Address One"),
+            datatype: Datatypes.STRING,
+        }),
+
+        new Primitives.AttributeInput({
+            identifiers: buildTokenCasing("Address Two"),
+            datatype: Datatypes.STRING,
+        }),
+
+        new Primitives.AttributeInput({
+            identifiers: buildTokenCasing("City"),
+            datatype: Datatypes.STRING,
+        }),
+
+        new Primitives.AttributeInput({
+            identifiers: buildTokenCasing("State"),
+            datatype: Datatypes.STRING,
+        }),
+
+        new Primitives.AttributeInput({
+            identifiers: buildTokenCasing("Zipcode"),
+            datatype: Datatypes.INT,
+        }),
+
+        new Primitives.AttributeInput({
+            identifiers: buildTokenCasing("Wheelchair Accessible"),
+            datatype: Datatypes.BOOLEAN,
+        }),
+    ],
+});
+
+const promotionDataModel = new Primitives.Schema({
+    identifiers: buildTokenPluralization("Promotion"),
+    attributes: [
+        new Primitives.AttributeInput({
+            identifiers: buildTokenCasing("_id"),
+            datatype: Datatypes.OBJECT_ID,
+        }),
+
+        new Primitives.AttributeInput({
+            identifiers: buildTokenCasing("Name"),
+            datatype: Datatypes.STRING,
+        }),
+
+        new Primitives.AttributeInput({
+            identifiers: buildTokenCasing("Description"),
+            datatype: Datatypes.STRING,
+        }),
+
+        new Primitives.AttributeInput({
+            identifiers: buildTokenCasing("Rental Savings Percent"),
+            datatype: Datatypes.FLOAT,
+        }),
+
+        new Primitives.AttributeInput({
+            identifiers: buildTokenCasing("Start Date"),
+            datatype: Datatypes.TIMESTAMP,
+        }),
+
+        new Primitives.AttributeInput({
+            identifiers: buildTokenCasing("End Date"),
+            datatype: Datatypes.TIMESTAMP,
+        }),
+
+        new Primitives.AttributeInput({
+            identifiers: buildTokenCasing("Archived"),
+            datatype: Datatypes.BOOLEAN,
+        }),
+    ],
+});
+
+const customerDataModel = new Primitives.Schema({
+    identifiers: buildTokenPluralization("Customer"),
+    attributes: [
+        new Primitives.AttributeInput({
+            identifiers: buildTokenCasing("_id"),
+            datatype: Datatypes.OBJECT_ID,
+        }),
+    ],
+});
+
+const busStationLockerRentalsProject: ProjectInput = {
+    id: "",
+    pluginID: "next-mongo-starter",
+    pluginVersion: "0.0.1",
+    identifiers: buildTokenCasing("Bus Station Locker Rentals"),
+    configuration: buildDefaultConfiguration([
+        NextJsWebsiteStarterPluginVariant.configurationGroups[0],
+    ]),
+    schemas: [
+        userDataModel,
+        lockerTypeDataModel,
+        lockerDataModel,
+        lockerRentalDataModel,
+        stationDataModel,
+        promotionDataModel,
+        customerDataModel,
+    ],
+    relations: [
+        new Primitives.Relation({
+            sourceSchemaID: lockerRentalDataModel.id,
+            destinationSchemaID: lockerDataModel.id,
+            sourceSchemaAlias: "",
+            destinationSchemaAlias: "",
+            type: RelationTypes.TO_ONE,
+        }),
+
+        new Primitives.Relation({
+            sourceSchemaID: lockerRentalDataModel.id,
+            destinationSchemaID: customerDataModel.id,
+            sourceSchemaAlias: "",
+            destinationSchemaAlias: "",
+            type: RelationTypes.TO_ONE,
+        }),
+
+        new Primitives.Relation({
+            sourceSchemaID: lockerRentalDataModel.id,
+            destinationSchemaID: userDataModel.id,
+            sourceSchemaAlias: "",
+            destinationSchemaAlias: "Sales Representative",
+            type: RelationTypes.TO_ONE,
+        }),
+
+        new Primitives.Relation({
+            sourceSchemaID: lockerDataModel.id,
+            destinationSchemaID: lockerTypeDataModel.id,
+            sourceSchemaAlias: "",
+            destinationSchemaAlias: "",
+            type: RelationTypes.TO_ONE,
+        }),
+
+        new Primitives.Relation({
+            sourceSchemaID: promotionDataModel.id,
+            destinationSchemaID: lockerTypeDataModel.id,
+            sourceSchemaAlias: "",
+            destinationSchemaAlias: "",
+            type: RelationTypes.TO_ONE,
+        }),
+
+        new Primitives.Relation({
+            sourceSchemaID: lockerDataModel.id,
+            destinationSchemaID: stationDataModel.id,
+            sourceSchemaAlias: "",
+            destinationSchemaAlias: "",
+            type: RelationTypes.TO_ONE,
+        }),
+
+        new Primitives.Relation({
+            sourceSchemaID: userDataModel.id,
+            destinationSchemaID: stationDataModel.id,
+            sourceSchemaAlias: "",
+            destinationSchemaAlias: "",
+            type: RelationTypes.TO_ONE,
+        }),
+    ],
+};
 // // // //
 // Next.js + MongoDB Starter Plugin
 
@@ -24,7 +321,9 @@ export const SchemaEditor: SchemaEditorConfiguration = {
     supportedDatatypes: [
         Datatypes.STRING,
         Datatypes.INT,
+        Datatypes.BOOLEAN,
         Datatypes.FLOAT,
+        Datatypes.DATE,
         Datatypes.TIMESTAMP,
         // Datatypes.STRING_ARRAY,
         // Datatypes.NUMERIC_ARRAY,
@@ -163,5 +462,6 @@ export const NextMongoStarter: PluginMetadata = new Primitives.Plugin({
     configurationGroups: [
         NextJsWebsiteStarterPluginVariant.configurationGroups[0],
     ],
+    exampleProjects: [busStationLockerRentalsProject],
     schemaEditorConfiguration: SchemaEditor,
 });

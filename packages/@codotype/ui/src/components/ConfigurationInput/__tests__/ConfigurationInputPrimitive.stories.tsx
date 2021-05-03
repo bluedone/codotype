@@ -1,6 +1,6 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
-import { ConfigurationInputPrimative } from "../ConfigurationInputPrimative";
+import { ConfigurationInputPrimitive } from "../ConfigurationInputPrimitive";
 import {
     ConfigurationProperty,
     ConfigurationPropertyValue,
@@ -23,20 +23,20 @@ const stories: Array<[
     ConfigurationProperty,
     ConfigurationPropertyValue,
 ]> = [
-    [
-        "dropdown",
-        ComponentBuilderConfigurationPropertySingleDropdown,
-        "OPTION_01",
-    ],
-    ["number", ComponentBuilderConfigurationPropertySingleNumber, 10],
-    ["string", ComponentBuilderConfigurationPropertySingleText, "foobar"],
-    ["boolean", twitterApiOption, true],
-];
+        [
+            "dropdown",
+            ComponentBuilderConfigurationPropertySingleDropdown,
+            "OPTION_01",
+        ],
+        ["number", ComponentBuilderConfigurationPropertySingleNumber, 10],
+        ["string", ComponentBuilderConfigurationPropertySingleText, "foobar"],
+        ["boolean", twitterApiOption, true],
+    ];
 
 // // // //
 
 const storyCollection = storiesOf(
-    "Components/ProjectEditor/ConfigurationEditor/ConfigurationInputPrimative",
+    "Components/ProjectEditor/ConfigurationEditor/ConfigurationInputPrimitive",
     module,
 );
 
@@ -47,7 +47,7 @@ stories.forEach(story => {
         );
         return (
             <Story>
-                <ConfigurationInputPrimative
+                <ConfigurationInputPrimitive
                     property={story[1]}
                     value={value}
                     onChange={(updatedValue: ConfigurationPropertyValue) => {
@@ -62,7 +62,7 @@ stories.forEach(story => {
 // // // //
 
 const numberPropertyFilterStories = storiesOf(
-    "Components/ProjectEditor/ConfigurationEditor/ConfigurationInputPrimative/StringPropertyFilter",
+    "Components/ProjectEditor/ConfigurationEditor/ConfigurationInputPrimitive/StringPropertyFilter",
     module,
 );
 
@@ -101,7 +101,7 @@ const numberPropertyFilterStories = storiesOf(
         return (
             <Story>
                 <pre>{propertyFilters.join(" + ")}</pre>
-                <ConfigurationInputPrimative
+                <ConfigurationInputPrimitive
                     property={{
                         ...ComponentBuilderConfigurationPropertySingleText,
                         transformations: [...propertyFilters],
@@ -119,7 +119,7 @@ const numberPropertyFilterStories = storiesOf(
 // // // //
 
 const stringPropertyFilterStories = storiesOf(
-    "Components/ProjectEditor/ConfigurationEditor/ConfigurationInputPrimative/NumberPropertyFilter",
+    "Components/ProjectEditor/ConfigurationEditor/ConfigurationInputPrimitive/NumberPropertyFilter",
     module,
 );
 
@@ -139,7 +139,7 @@ const stringPropertyFilterStories = storiesOf(
         return (
             <Story>
                 <pre>{propertyFilters.join(" + ")}</pre>
-                <ConfigurationInputPrimative
+                <ConfigurationInputPrimitive
                     property={{
                         ...ComponentBuilderConfigurationPropertySingleNumber,
                         transformations: [...propertyFilters],

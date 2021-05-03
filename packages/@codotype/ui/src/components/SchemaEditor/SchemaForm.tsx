@@ -1,7 +1,7 @@
 import * as React from "react";
 import { buildTokenPluralization, sanitizeTitle } from "@codotype/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLightbulb } from "@fortawesome/free-regular-svg-icons";
+import { faLaugh, faLightbulb } from "@fortawesome/free-regular-svg-icons";
 
 // // // //
 
@@ -52,7 +52,6 @@ export function SchemaForm(props: SchemaFormProps) {
                         </p>
 
                         <small className="mb-2 text-muted">
-                            <i className="far fa-lightbulb" />
                             <FontAwesomeIcon
                                 icon={faLightbulb}
                                 className="mr-1"
@@ -78,13 +77,14 @@ export function SchemaForm(props: SchemaFormProps) {
                         />
 
                         <p className="mt-4 text-muted">
-                            <strong>Codotype</strong> derives additional{" "}
-                            <span className="text-green-500">Tokens</span> to
-                            use for things like naming <strong>files</strong>,{" "}
+                            This will be used throughout your codebase for
+                            naming things like <strong>files</strong>,{" "}
                             <strong>folders</strong>, <strong>variables</strong>
-                            , and <strong>database tables</strong>. You can
-                            rename or remove a Data Model whenever you like
-                            {/* <i className="far fa-laugh" /> */}
+                            , and <strong>database tables</strong>.
+                        </p>
+                        <p className="mt-4 text-muted">
+                            You can rename or remove a Data Model whenever you
+                            like <FontAwesomeIcon icon={faLaugh} />
                         </p>
                     </div>
                 </div>

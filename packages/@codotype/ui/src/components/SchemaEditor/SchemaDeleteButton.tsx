@@ -73,7 +73,7 @@ export function SchemaDeleteButton(props: {
         >
             <button
                 className={
-                    "text-gray-500 hover:text-red-500 p-1 focus:outline-none transition-colors duration-150 ease-in-out"
+                    "text-red-500 hover:text-red-600 p-1 focus:outline-none transition-colors duration-150 ease-in-out"
                 }
                 onClick={() => {
                     props.onClick();

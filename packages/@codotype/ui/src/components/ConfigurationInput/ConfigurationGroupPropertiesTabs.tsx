@@ -1,4 +1,5 @@
 import * as React from "react";
+import classnames from "classnames";
 import {
     ConfigurationGroup,
     ConfigurationProperty,
@@ -53,31 +54,46 @@ export function ConfigurationGroupPropertiesTabs(props: {
 
     return (
         <React.Fragment>
-            <nav className="nav nav-tabs">
+            {/* TODO - add select here? */}
+            {/* TODO - add select here? */}
+            {/* TODO - add select here? */}
+            {/* TODO - add select here? */}
+            <div className="flex flex-grow rounded-lg overflow-hidden divide-x divide-gray-200 border-gray-200 border dark:divide-gray-800 dark:border-gray-800 mb-1">
                 {configurationGroup.properties.map(property => {
-                    // Defines className for tab
-                    const tabClassName: string[] = ["nav-link w-full"];
-                    if (property.identifier === selectedPropertyID) {
-                        tabClassName.push("active");
-                    }
+                    const active = property.identifier === selectedPropertyID;
 
                     return (
-                        <li className="nav-item">
-                            <a
-                                className={tabClassName.join()}
-                                href={"#"}
-                                onClick={e => {
-                                    e.preventDefault();
-                                    e.stopPropagation();
-                                    setSelectedPropertyID(property.identifier);
-                                }}
-                            >
-                                {property.content.label}
-                            </a>
-                        </li>
+                        <button
+                            onClick={e => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                setSelectedPropertyID(property.identifier);
+                            }}
+                            className={classnames(
+                                "focus:outline-none group relative min-w-0 flex-1 overflow-hidden bg-white dark:bg-gray-900 py-4 px-4 text-sm font-medium text-center hover:bg-gray-50 focus:z-10",
+                                {
+                                    "text-gray-900 dark:text-gray-500": active,
+                                    "text-gray-500 hover:text-gray-700 dark:hover:text-gray-400": !active,
+                                },
+                            )}
+                        >
+                            <span>{property.content.label}</span>
+                            {active && (
+                                <span
+                                    aria-hidden="true"
+                                    className="bg-indigo-500 absolute inset-x-0 bottom-0 h-1"
+                                ></span>
+                            )}
+                            {!active && (
+                                <span
+                                    aria-hidden="true"
+                                    className="bg-transparent absolute inset-x-0 bottom-0 h-1"
+                                ></span>
+                            )}
+                        </button>
                     );
                 })}
-            </nav>
+            </div>
 
             {/* Render ConfigurationGroupPropertiesInput */}
             <ConfigurationGroupPropertiesInput

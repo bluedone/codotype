@@ -11,14 +11,14 @@ import Switch from "react-switch";
 
 // // // //
 
-interface ConfigurationInputChildProps {
+interface ConfigurationInputPrimitiveProps {
     value: any;
     property: ConfigurationProperty;
     onChange: (updatedValue: ConfigurationPropertyValue) => void;
 }
 
-export function ConfigurationInputPrimative(
-    props: ConfigurationInputChildProps,
+export function ConfigurationInputPrimitive(
+    props: ConfigurationInputPrimitiveProps,
 ) {
     const { property } = props;
 
@@ -111,6 +111,8 @@ export function ConfigurationInputPrimative(
     }
 
     // Handle PropertyTypes.BOOLEAN
+    // TODO - replace with generic headless/ui component
+    // https://headlessui.dev/react/switch
     if (property.type === PropertyTypes.BOOLEAN) {
         return (
             <Switch

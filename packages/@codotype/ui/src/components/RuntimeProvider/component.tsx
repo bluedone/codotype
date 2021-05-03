@@ -28,17 +28,19 @@ interface RuntimeProviderProps {
 export function RuntimeProvider(props: RuntimeProviderProps) {
     const [loading, setLoading] = React.useState<boolean>(false);
     const [finished, setFinished] = React.useState<boolean>(false);
+    const [forceHide, setForceHide] = React.useState<boolean>(true);
 
     // TODO - update this to be passed in through `props.runtimeAdaptor`
     function generateCode({ projectInput, plugin }: GenerateCodeProps) {
         setLoading(true);
+        setForceHide(false);
 
         // Mock the loading
         // TODO - an async function should be passed in with props
         setTimeout(() => {
             setFinished(true);
             setLoading(false);
-        }, 1200);
+        }, 2300);
 
         // Debugging
         // console.log(project);
@@ -48,8 +50,11 @@ export function RuntimeProvider(props: RuntimeProviderProps) {
     // // // //
 
     function reset() {
-        setFinished(false);
-        setLoading(false);
+        setForceHide(true);
+        setTimeout(() => {
+            setFinished(false);
+            setLoading(false);
+        }, 400);
     }
 
     // // // //
@@ -78,32 +83,30 @@ export function RuntimeProvider(props: RuntimeProviderProps) {
             {props.children({ loading, finished, generateCode, reset })}
 
             {/* Handle Loading */}
-            {(loading || finished) && (
-                <Modal
-                    size="lg"
-                    show={loading || finished}
-                    onHide={() => {
-                        // Don't allow the modal to close while loading
-                        if (loading) {
-                            return;
-                        }
+            <Modal
+                size="lg"
+                show={(loading || finished) && !forceHide}
+                onHide={() => {
+                    // Don't allow the modal to close while loading
+                    if (loading) {
+                        return;
+                    }
 
-                        // Otherwise, invoke reset to close the modal
-                        reset();
-                    }}
-                >
-                    <div className="min-w-full w-128">
-                        {loading && <LoadingBuild />}
-                        {finished && (
-                            <BuildFinished
-                                responseType="LOCAL_PATH"
-                                filepath="/home/user/code"
-                                onClickBackToEditor={reset}
-                            />
-                        )}
-                    </div>
-                </Modal>
-            )}
+                    // Otherwise, invoke reset to close the modal
+                    reset();
+                }}
+            >
+                <div className="min-w-full w-128">
+                    {loading && <LoadingBuild />}
+                    {finished && (
+                        <BuildFinished
+                            responseType="LOCAL_PATH"
+                            filepath="/home/user/code"
+                            onClickBackToEditor={reset}
+                        />
+                    )}
+                </div>
+            </Modal>
         </React.Fragment>
     );
 }

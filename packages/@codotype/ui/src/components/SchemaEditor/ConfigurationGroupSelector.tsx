@@ -16,17 +16,7 @@ export function ConfigurationGroupTab(props: {
     onClick: () => void;
 }) {
     const { label } = props;
-    // const btnClassName: string[] = [
-    //     "flex flex-grow items-center justify-center mr-2 shadow-sm px-3 py-2 focus:outline-none rounded-full",
-    // ];
 
-    // if (props.active) {
-    //     btnClassName.push("bg-gray-500 text-white");
-    // } else {
-    //     btnClassName.push(
-    //         "border-gray-500 text-gray-400 bg-transparent border-gray-500 border",
-    //     );
-    // }
     return (
         <button
             className={classnames(
@@ -158,7 +148,7 @@ export function ConfigurationGroupSelector(props: {
                                             }}
                                             active={
                                                 configurationGroup.identifier ===
-                                                    selectedConfigurationGroup.identifier &&
+                                                selectedConfigurationGroup.identifier &&
                                                 !viewingSchemas
                                             }
                                             label={
@@ -180,7 +170,7 @@ export function ConfigurationGroupSelector(props: {
                         schemaInput={props.schemaInput}
                         value={
                             props.configuration[
-                                selectedConfigurationGroup.identifier
+                            selectedConfigurationGroup.identifier
                             ]
                         }
                         onChange={(updatedVal: ConfigurationPropertyDict) => {

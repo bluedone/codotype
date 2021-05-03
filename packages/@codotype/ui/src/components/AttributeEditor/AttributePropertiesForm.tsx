@@ -60,6 +60,11 @@ export function AttributePropertiesForm(props: AttributePropertiesFormProps) {
                         placeholder="Internal Note"
                         className="form-control"
                         value={attributeInput.internalNote}
+                        onKeyDown={e => {
+                            if (e.keyCode === 13) {
+                                props.onKeydownEnter();
+                            }
+                        }}
                         onChange={e => {
                             props.onChange({
                                 ...attributeInput,

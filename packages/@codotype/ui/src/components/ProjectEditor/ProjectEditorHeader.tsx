@@ -26,8 +26,13 @@ export function ProjectEditorHeader(props: {
     const [labelValue, setLabelValue] = React.useState<string>(
         projectInput.identifiers.title,
     );
+
+    React.useEffect(() => {
+        setLabelValue(projectInput.identifiers.title);
+    }, [projectInput.identifiers]);
+
     return (
-        <div className="flex items-center w-full items-end">
+        <div className="flex items-center w-full justify-end">
             <div className="flex flex-grow items-center">
                 <h2 className="flex text-3xl select-none">
                     {projectInput.identifiers.title}
@@ -68,12 +73,16 @@ export function ProjectEditorHeader(props: {
                             if (sanitizedLabel.length === 0) {
                                 return;
                             }
-                            setLabelValue(sanitizedLabel);
+                            props.onChange({
+                                ...projectInput,
+                                identifiers: buildTokenCasing(sanitizedLabel),
+                            });
+                            showModal(false);
                         }}
                     />
                 </ProjectFormModal>
             </div>
-            <div className="flex justify-end">
+            <div className="flex justify-end items-center">
                 <ExampleProjectDropdown
                     plugin={pluginMetadata}
                     loadExampleProject={exampleProject => {

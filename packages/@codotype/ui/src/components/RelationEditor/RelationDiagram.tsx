@@ -63,7 +63,11 @@ export function RelationDiagram(props: RelationDiagramProps) {
                     position="left"
                     tooltipContent={
                         <>
-                            References <strong>{sourceLabel}</strong> Schema
+                            References{" "}
+                            <span className="text-indigo-500">
+                                {sourceLabel}
+                            </span>{" "}
+                            Schema
                         </>
                     }
                 >
@@ -84,7 +88,8 @@ export function RelationDiagram(props: RelationDiagramProps) {
     const dest = (
         <React.Fragment>
             <span className={oppositeTextColor}>
-                {destManyOrOne} <strong>{destAlias}</strong>
+                {destManyOrOne}{" "}
+                <span className="text-indigo-500">{destAlias}</span>
             </span>
 
             {slim && destLabel !== destAlias && (
@@ -113,14 +118,12 @@ export function RelationDiagram(props: RelationDiagramProps) {
     );
 
     return (
-        <div className="row flex flex-row items-center">
-            <div className="col-lg-12">
-                {props.direction === "out" && source}
-                {props.direction === "in" && dest}
-                <FontAwesomeIcon className={iconCss} icon={icon} />
-                {props.direction === "out" && dest}
-                {props.direction === "in" && source}
-            </div>
+        <div className="flex flex-row items-center">
+            {props.direction === "out" && source}
+            {props.direction === "in" && dest}
+            <FontAwesomeIcon className={iconCss} icon={icon} />
+            {props.direction === "out" && dest}
+            {props.direction === "in" && source}
         </div>
     );
 }
