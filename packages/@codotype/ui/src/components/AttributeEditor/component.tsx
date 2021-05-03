@@ -174,7 +174,7 @@ export function AttributeEditor(props: AttributeEditorProps) {
                         setAttributeInput(
                             new Primitives.AttributeInput({ id: "" }),
                         );
-                    }, 400);
+                    }, 300);
                 }}
                 onSubmit={({ saveAndContinue }) => {
                     saveAttribute({

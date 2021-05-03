@@ -19,11 +19,11 @@ export function SchemaFormModal(props: {
     errors: string[];
 }) {
     // Defines title + submit button labels
-    let title = "Edit Schema";
-    let submitLabel = "Update Schema";
+    let title = "Edit Data Model";
+    let submitLabel = "Update Data Model";
     if (props.renderNewTitle) {
-        title = "New Schema";
-        submitLabel = "Create Schema";
+        title = "New Data Model";
+        submitLabel = "Create Data Model";
     }
 
     const disableSubmit: boolean = props.errors.length > 0;

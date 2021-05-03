@@ -77,13 +77,14 @@ export function SchemaForm(props: SchemaFormProps) {
                         />
 
                         <p className="mt-4 text-muted">
-                            <strong>Codotype</strong> derives additional{" "}
-                            <span className="text-green-500">Tokens</span> to
-                            use for things like naming <strong>files</strong>,{" "}
+                            This will be used throughout your codebase for
+                            naming things like <strong>files</strong>,{" "}
                             <strong>folders</strong>, <strong>variables</strong>
-                            , and <strong>database tables</strong>. You can
-                            rename or remove a Data Model whenever you like
-                            <FontAwesomeIcon icon={faLaugh} />
+                            , and <strong>database tables</strong>.
+                        </p>
+                        <p className="mt-4 text-muted">
+                            You can rename or remove a Data Model whenever you
+                            like <FontAwesomeIcon icon={faLaugh} />
                         </p>
                     </div>
                 </div>
