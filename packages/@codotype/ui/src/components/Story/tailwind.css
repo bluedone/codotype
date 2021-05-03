@@ -250,7 +250,7 @@ button.btn-primary:disabled {
     @apply py-5;
     @apply h-3;
     @apply font-light;
-    @apply text-gray-600;
+    @apply text-gray-900;
     @apply dark:text-gray-200;
     @apply bg-white;
     @apply dark:bg-gray-900;

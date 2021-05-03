@@ -43,7 +43,7 @@ export function ProjectForm(props: {
 
                 <input
                     ref={inputEl}
-                    className="form-control rounded-lg py-12 font-2xl"
+                    className="form-control rounded-lg text-md"
                     placeholder="Project Name"
                     value={props.value}
                     onChange={e => {
