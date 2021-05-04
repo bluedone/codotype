@@ -21,19 +21,6 @@ export function Tooltip(props: {
         // setShown(true);
     }
 
-    // If not shown
-    if (shown === false) {
-        return (
-            <div
-                className="relative flex items-center"
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-            >
-                {children}
-            </div>
-        );
-    }
-
     // Define styles for caret + wrapper
     let wrapperStyle = {};
     let caretStyle = {};
@@ -63,23 +50,25 @@ export function Tooltip(props: {
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
-            <div
-                className="absolute whitespace-nowrap bg-gray-800 text-white px-4 py-2 rounded-lg flex items-center z-50 flex-grow"
-                style={wrapperStyle}
-            >
-                {position === "right" && (
-                    <>
-                        {tooltipContent}
-                        {caret}
-                    </>
-                )}
-                {position === "left" && (
-                    <>
-                        {caret}
-                        {tooltipContent}
-                    </>
-                )}
-            </div>
+            {shown && (
+                <div
+                    className="absolute whitespace-nowrap bg-gray-800 text-white px-4 py-2 rounded-lg flex items-center z-50 flex-grow"
+                    style={wrapperStyle}
+                >
+                    {position === "right" && (
+                        <>
+                            {tooltipContent}
+                            {caret}
+                        </>
+                    )}
+                    {position === "left" && (
+                        <>
+                            {caret}
+                            {tooltipContent}
+                        </>
+                    )}
+                </div>
+            )}
             {children}
         </div>
     );
