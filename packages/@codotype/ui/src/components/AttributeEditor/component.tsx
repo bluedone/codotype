@@ -7,6 +7,7 @@ import {
     Primitives,
     makeUniqueId,
     buildDefaultAddonsValue,
+    SchemaInput,
 } from "@codotype/core";
 import { Droppable, DragDropContext } from "react-beautiful-dnd";
 import { AttributeFormModal } from "./AttributeFormModal";
@@ -39,6 +40,7 @@ interface AttributeEditorState {
 }
 
 interface AttributeEditorProps {
+    selectedSchema: SchemaInput;
     attributes: AttributeInput[];
     addons: AttributeAddon[];
     supportedDatatypes: Datatype[];
@@ -143,10 +145,10 @@ export function AttributeEditor(props: AttributeEditorProps) {
                 borderBottomRightRadius: "0px",
             }}
         >
-            {/* TODO - disable this if SchemaInput is locked */}
             <SortableListHeader
                 label="Attributes"
                 tooltip="shift+a"
+                locked={props.selectedSchema.locked}
                 onClick={() => {
                     const newAttribute: AttributeInput = new Primitives.AttributeInput(
                         { id: "" },

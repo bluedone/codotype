@@ -34,7 +34,7 @@ export function AttributeFormModal(props: {
             <div className="modal-footer-tw">
                 <div className="flex items-center justify-between flex-grow">
                     <div className="flex flex-grow">
-                        <p className="mb-0 text-warning">{props.errors[0]}</p>
+                        <p className="mb-0 text-red-400">{props.errors[0]}</p>
                     </div>
                     <div className="flex">
                         <button
