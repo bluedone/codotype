@@ -27,7 +27,6 @@ export function SchemaDetailHeader(props: {
             </div>
             <div className="flex justify-end">
                 <SchemaDeleteButton
-                    projectInput={props.projectInput}
                     schemaInput={props.schemaInput}
                     onClick={() => showModal(true)}
                 />

@@ -2,14 +2,7 @@ import * as React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { Tooltip } from "../Tooltip";
-import {
-    Schema,
-    CreatedByValues,
-    inflateSchema,
-    SchemaInput,
-    ProjectInput,
-    buildRelations,
-} from "@codotype/core";
+import { CreatedByValues, SchemaInput } from "@codotype/core";
 
 // // // //
 
@@ -19,19 +12,14 @@ import {
  */
 export function SchemaDeleteButton(props: {
     schemaInput: SchemaInput;
-    projectInput: ProjectInput;
     onClick: () => void;
 }) {
-    const { schemaInput, projectInput } = props;
+    const { schemaInput } = props;
 
-    const inflatedSchema: Schema = inflateSchema({
-        schemaInput,
-        relations: buildRelations({
-            schemaInputs: projectInput.schemas,
-            relationInputs: projectInput.relations,
-        }),
-    });
-
+    // TODO - add support for schemaInput.removable
+    // TODO - add support for schemaInput.removable
+    // TODO - add support for schemaInput.removable
+    // TODO - add support for schemaInput.removable
     if (
         schemaInput.createdBy === CreatedByValues.plugin &&
         schemaInput.locked
@@ -49,7 +37,7 @@ export function SchemaDeleteButton(props: {
                     </>
                 }
             >
-                <div className="inline-flex items-center bg-green-500 text-white leading-none rounded-full py-3 px-2 h-6 shadow text-sm justify-center items-center">
+                <div className="inline-flex bg-green-500 text-white leading-none rounded-full py-3 px-2 h-6 shadow text-sm justify-center items-center">
                     <FontAwesomeIcon className="mr-1" icon={faInfoCircle} />
                     Auto-Generated
                 </div>

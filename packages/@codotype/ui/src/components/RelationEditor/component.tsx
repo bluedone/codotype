@@ -16,6 +16,7 @@ import { RelationForm } from "./RelationForm";
 import { reorder } from "../AttributeEditor/reorder";
 import { Hotkey } from "../Hotkey";
 import { SortableListEmpty } from "../SortableListEmpty";
+import { validateRelation } from "./validateRelation";
 
 // // // //
 
@@ -35,7 +36,7 @@ interface RelationEditorState {
 }
 
 interface RelationEditorProps {
-    // TODO - update this to accept project + projectInput + pluginMetadata
+    // TODO - update this to accept project + projectInput + pluginMetadata?
     relations: RelationInput[];
     schemas: SchemaInput[];
     selectedSchema: SchemaInput;
@@ -85,6 +86,11 @@ export function RelationEditor(props: RelationEditorProps) {
             r => r.sourceSchemaID === props.selectedSchema.id,
         ).length === 0;
 
+    const errors = validateRelation({
+        relationInput,
+        relationCollection: props.relations,
+    });
+
     return (
         <div
             className="card"
@@ -100,10 +106,10 @@ export function RelationEditor(props: RelationEditorProps) {
                 }}
             />
 
-            {/* TODO - disable this if SchemaInput is locked */}
             <SortableListHeader
                 tooltip={"shift+r"}
                 label="Relation"
+                locked={props.selectedSchema.locked}
                 onClick={() => {
                     setRelationInput(
                         new Primitives.Relation({
@@ -120,7 +126,10 @@ export function RelationEditor(props: RelationEditorProps) {
             <RelationFormModal
                 relationInput={relationInput}
                 show={showingInputModal}
-                disableSubmit={disableSubmit(relationInput)}
+                disableSubmit={
+                    disableSubmit(relationInput) || errors.length > 0
+                }
+                errors={errors}
                 onCancel={() => {
                     showInputModal(false);
 
@@ -134,6 +143,11 @@ export function RelationEditor(props: RelationEditorProps) {
                     }, 300);
                 }}
                 onSubmit={() => {
+                    // Short-circuit if validation fails
+                    if (errors.length > 0) {
+                        return;
+                    }
+
                     // Insert new Relation
                     if (relationInput.id === "") {
                         const newRelation: RelationInput = new Primitives.Relation(
@@ -321,6 +335,7 @@ export function RelationEditor(props: RelationEditorProps) {
             )}
 
             {/* Render empty state */}
+            {/* TODO - handle schema.locked state here */}
             {showEmptyState && (
                 <SortableListEmpty
                     title="No Relations added yet"

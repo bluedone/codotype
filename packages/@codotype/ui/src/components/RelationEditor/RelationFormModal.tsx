@@ -12,6 +12,7 @@ export function RelationFormModal(props: {
     disableSubmit: boolean;
     relationInput: RelationInput;
     children: React.ReactNode;
+    errors: string[];
     onCancel: () => void;
     onSubmit: () => void;
 }) {
@@ -28,19 +29,26 @@ export function RelationFormModal(props: {
                 {props.children}
             </div>
             <div className="modal-footer-tw">
-                <button
-                    disabled={props.disableSubmit}
-                    className="btn btn-lg btn-primary"
-                    onClick={props.onSubmit}
-                >
-                    {title}
-                </button>
-                <button
-                    className="modal-close-btn"
-                    onClick={props.onCancel}
-                >
-                    Close
-                </button>
+                <div className="flex items-center justify-between flex-grow">
+                    <div className="flex flex-grow">
+                        <p className="mb-0 text-red-400">{props.errors[0]}</p>
+                    </div>
+                    <div className="flex">
+                        <button
+                            disabled={props.disableSubmit}
+                            className="btn btn-lg btn-primary"
+                            onClick={props.onSubmit}
+                        >
+                            {title}
+                        </button>
+                        <button
+                            className="modal-close-btn"
+                            onClick={props.onCancel}
+                        >
+                            Close
+                        </button>
+                    </div>
+                </div>
             </div>
         </Modal>
     );

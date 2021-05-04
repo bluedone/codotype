@@ -97,14 +97,16 @@ export function RelationPropertiesForm(props: RelationPropertiesFormProps) {
                                 });
                             }}
                         >
-                            {schemas.map(s => (
-                                <option key={s.id} value={s.id}>
-                                    {getSourceLabel({
-                                        schema: s,
-                                        relationInput,
-                                    })}
-                                </option>
-                            ))}
+                            {schemas
+                                .filter(s => s.locked === false)
+                                .map(s => (
+                                    <option key={s.id} value={s.id}>
+                                        {getSourceLabel({
+                                            schema: s,
+                                            relationInput,
+                                        })}
+                                    </option>
+                                ))}
                         </select>
                     </div>
                 </div>
