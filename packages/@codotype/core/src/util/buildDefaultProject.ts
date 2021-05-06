@@ -30,8 +30,8 @@ export function buildConfigurationPropertyValue(
     if (property.type === PropertyTypes.DROPDOWN) {
         return property.defaultValue
             ? property.defaultValue
-            : property.dropdownOptions.length > 0
-            ? property.dropdownOptions[0].value
+            : property.selectOptions.length > 0
+            ? property.selectOptions[0].value
             : "";
     }
     if (property.type === PropertyTypes.COLLECTION) {

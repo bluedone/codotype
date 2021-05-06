@@ -75,7 +75,7 @@ const landingPageConfigurationGroup: ConfigurationGroup = new Primitives.Configu
                     documentation: "",
                 },
                 type: PropertyTypes.DROPDOWN,
-                dropdownOptions: [{ value: "one", label: "One" }],
+                selectOptions: [{ value: "one", label: "One" }],
                 layoutVariant: PropertyLayoutVariants.CARD_COL_6,
             }),
             new Primitives.ConfigurationProperty({
@@ -337,7 +337,7 @@ const hostingConfigurationGroup: ConfigurationGroup = new Primitives.Configurati
                 },
                 type: PropertyTypes.DROPDOWN,
                 defaultValue: "vercel",
-                dropdownOptions: [
+                selectOptions: [
                     { label: "Vercel", value: "vercel" },
                     { label: "Netlify", value: "netlify" },
                     { label: "Docker", value: "docker" },
@@ -386,7 +386,7 @@ const toolingProperty = new Primitives.ConfigurationProperty({
     type: PropertyTypes.INSTANCE,
     layoutVariant: PropertyLayoutVariants.COL_12,
     defaultValue: {},
-    dropdownOptions: [],
+    selectOptions: [],
     properties: [
         ...toolingConfigurationGroup.properties.map((p) => {
             return {
@@ -409,7 +409,7 @@ const analyticsProperty = new Primitives.ConfigurationProperty({
     type: PropertyTypes.INSTANCE,
     layoutVariant: PropertyLayoutVariants.COL_12,
     defaultValue: {},
-    dropdownOptions: [],
+    selectOptions: [],
     properties: [
         ...analyticsConfigurationGroup.properties.map((p) => {
             return {
@@ -431,7 +431,7 @@ const seoProperty = new Primitives.ConfigurationProperty({
     type: PropertyTypes.INSTANCE,
     layoutVariant: PropertyLayoutVariants.COL_12,
     defaultValue: {},
-    dropdownOptions: [],
+    selectOptions: [],
     properties: [
         ...seoConfigurationGroup.properties.map((p) => {
             return {
@@ -453,7 +453,7 @@ const hostingProperty = new Primitives.ConfigurationProperty({
     type: PropertyTypes.INSTANCE,
     layoutVariant: PropertyLayoutVariants.COL_12,
     defaultValue: {},
-    dropdownOptions: [],
+    selectOptions: [],
     properties: [
         ...hostingConfigurationGroup.properties.map((p) => {
             return {

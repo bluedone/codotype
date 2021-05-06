@@ -5,6 +5,7 @@ import {
     TokenPluralization,
     EMPTY_TOKEN_CASING,
 } from "../../";
+import { buildTokenPluralization } from "../buildTokenPluralization";
 
 // // // //
 
@@ -35,6 +36,12 @@ const testCases: [string, TokenPluralization, SchemaInput[], string[]][] = [
         { ...testState.movieSchema.identifiers },
         [testState.movieSchema],
         [SCHEMA_ERROR_MESSAGES.duplicateLabel],
+    ],
+    [
+        "invalid schema - incorrect pluralization",
+        buildTokenPluralization("Movies"),
+        [testState.movieSchema],
+        [SCHEMA_ERROR_MESSAGES.tokenPluralization],
     ],
 ];
 

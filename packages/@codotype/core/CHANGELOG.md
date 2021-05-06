@@ -1,3 +1,12 @@
+### 0.8.0-canary.15
+
+-   Added `PropertyTypes.RADIO_GROUP`
+-   Updated `validateSchema` to include `validateTokenPluralization`
+-   Added `SectionLayoutVariants.DOCS` & `GroupLayoutVariants.DOCS`
+-   Renamed `DropdownOption` to `SelectOption`
+-   Added `icon` property to `SelectOption`
+-   Added `validateAttribute` and `ATTRIBUTE_ERROR_MESSAGES` to `src/util`
+
 ### 0.8.0-canary.14
 
 -   Added `copyFile` function to `Runtime` interfaces

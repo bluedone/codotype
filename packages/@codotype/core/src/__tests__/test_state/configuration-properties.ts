@@ -325,7 +325,7 @@ export const ComponentBuilderConfigurationProperty: ConfigurationProperty = new 
             }),
             new Primitives.ConfigurationProperty({
                 identifier: "props",
-                dropdownOptions: [],
+                selectOptions: [],
                 type: PropertyTypes.COLLECTION,
                 defaultValue: "",
                 content: {
@@ -337,7 +337,7 @@ export const ComponentBuilderConfigurationProperty: ConfigurationProperty = new 
                         identifier: "type",
                         type: PropertyTypes.DROPDOWN,
                         defaultValue: "",
-                        dropdownOptions: [{ label: "String", value: "string" }],
+                        selectOptions: [{ label: "String", value: "string" }],
                         content: {
                             label: "Type",
                             description: "",
@@ -370,7 +370,7 @@ export const ComponentBuilderConfigurationProperty: ConfigurationProperty = new 
                 defaultValue: "",
                 required: false,
                 allowDisable: true,
-                dropdownOptions: [],
+                selectOptions: [],
                 content: {
                     label: "Tests",
                     description: "",
@@ -381,7 +381,7 @@ export const ComponentBuilderConfigurationProperty: ConfigurationProperty = new 
                         identifier: "testType",
                         type: PropertyTypes.DROPDOWN,
                         defaultValue: "",
-                        dropdownOptions: [
+                        selectOptions: [
                             { value: "table", label: "Table Test" },
                             { value: "snapshot", label: "Snapshot Test" },
                         ],
@@ -417,7 +417,7 @@ export const ComponentBuilderConfigurationPropertySingleDropdown: ConfigurationP
         identifier: "dropdownTest",
         type: PropertyTypes.DROPDOWN,
         defaultValue: "",
-        dropdownOptions: [
+        selectOptions: [
             {
                 value: "OPTION_01",
                 label: "One",
@@ -438,7 +438,7 @@ export const ComponentBuilderConfigurationPropertySingleNumber: ConfigurationPro
         identifier: "numberTest",
         type: PropertyTypes.NUMBER,
         defaultValue: "",
-        dropdownOptions: [],
+        selectOptions: [],
         content: {
             label: "Number Test",
             description:
@@ -455,7 +455,7 @@ export const ComponentBuilderConfigurationPropertyWithInstance01: ConfigurationP
         // enabledByDefault: true,
         required: false,
         allowDisable: true,
-        dropdownOptions: [],
+        selectOptions: [],
         properties: [ComponentBuilderConfigurationPropertySingleDropdown],
         content: {
             label: "RandomInstanceTest",

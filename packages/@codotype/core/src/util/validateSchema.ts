@@ -1,11 +1,13 @@
 import { SchemaInput } from "../schema";
 import { TokenPluralization } from "../token";
+import { validateTokenPluralization } from "./buildTokenPluralization";
 
 // // // //
 
 export enum SCHEMA_ERROR_MESSAGES {
-    emptyLabel = "Schema label must be defined",
-    duplicateLabel = "Schema label must be unique",
+    emptyLabel = "Data Model label must be defined",
+    duplicateLabel = "Data Model label must be unique",
+    tokenPluralization = "Data Model label must be singular",
 }
 
 /**
@@ -38,6 +40,17 @@ export function validateSchema(params: {
         )
     ) {
         errors.push(SCHEMA_ERROR_MESSAGES.duplicateLabel);
+    }
+
+    // Validate TokenPluralization
+    const validationFailures = validateTokenPluralization(tokenPluralization);
+    if (
+        tokenPluralization.singular.title !== "" &&
+        Object.keys(validationFailures)
+            .map((k) => validationFailures[k])
+            .some((v) => v === true)
+    ) {
+        errors.push(SCHEMA_ERROR_MESSAGES.tokenPluralization);
     }
 
     // Return errors array
