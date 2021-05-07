@@ -34,6 +34,13 @@ export function buildConfigurationPropertyValue(
             ? property.selectOptions[0].value
             : "";
     }
+    if (property.type === PropertyTypes.RADIO_GROUP) {
+        return property.defaultValue
+            ? property.defaultValue
+            : property.selectOptions.length > 0
+            ? property.selectOptions[0].value
+            : "";
+    }
     if (property.type === PropertyTypes.COLLECTION) {
         if (Array.isArray(property.defaultValue)) {
             return property.defaultValue;

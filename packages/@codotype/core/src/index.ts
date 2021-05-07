@@ -27,6 +27,7 @@ export * from "./schema-editor";
 export * from "./schema-editor-addon";
 export * from "./property-validation";
 export * from "./property-preview";
+export * from "./response-type";
 
 // Exports test_state
 export { testState } from "./__tests__/test_state";

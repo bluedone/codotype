@@ -92,6 +92,7 @@ export function inflateSchema(params: {
             ...schemaInput.identifiers,
         },
         locked: schemaInput.locked,
+        removable: schemaInput.removable,
         internalNote: schemaInput.internalNote,
         createdBy: schemaInput.createdBy,
         configuration: schemaInput.configuration,

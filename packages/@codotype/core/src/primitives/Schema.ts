@@ -12,6 +12,7 @@ interface SchemaBuilderParams {
     identifiers: TokenPluralization;
     createdBy?: CreatedBy;
     locked?: boolean;
+    removable?: boolean;
     configuration?: ConfigurationValue;
     internalNote?: string;
 }
@@ -22,6 +23,7 @@ export class SchemaBuilder implements SchemaInput {
     identifiers: TokenPluralization;
     createdBy: CreatedBy = CreatedByValues.user;
     locked: boolean = false;
+    removable: boolean = true;
     configuration: ConfigurationValue = {};
     internalNote: string = "";
 
@@ -32,6 +34,8 @@ export class SchemaBuilder implements SchemaInput {
         this.id = params.id || this.id;
         this.createdBy = params.createdBy || this.createdBy;
         this.locked = params.locked !== undefined ? params.locked : this.locked;
+        this.removable =
+            params.removable !== undefined ? params.removable : this.removable;
         this.configuration = params.configuration || this.configuration;
         this.internalNote = params.internalNote || this.internalNote;
     }

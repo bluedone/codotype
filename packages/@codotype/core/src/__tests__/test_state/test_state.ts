@@ -664,6 +664,7 @@ export const userSchema: SchemaInput = {
     attributes: [],
     internalNote: "",
     locked: false,
+    removable: false,
     createdBy: CreatedByValues.user,
     configuration: {},
 };
@@ -739,6 +740,7 @@ export const movieSchema: SchemaInput = {
     //     },
     // ],
     locked: false,
+    removable: false,
     createdBy: CreatedByValues.user,
     configuration: {},
 };

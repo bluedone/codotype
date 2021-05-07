@@ -1,3 +1,9 @@
+### 0.8.0-canary.16 --- PENDING
+
+-   Added `PropertyTypes.RADIO_GROUP` to `buildConfigurationPropertyValue`
+-   Added `ResponseType` and `ResponseTypesEnum`
+-   Added `removable` property to `SchemaInput` and `Schema` interfaces
+
 ### 0.8.0-canary.15
 
 -   Added `PropertyTypes.RADIO_GROUP`
