@@ -18,7 +18,10 @@ import {
     buildTokenCasing,
 } from "@codotype/core";
 import { ATTRIBUTE_ADDON_UNIQUE, relationAddons } from "./Addons";
-import { NextJsWebsiteStarterPluginVariant } from "./NextJsWebsiteStarterPlugin";
+import {
+    NextJsWebsiteStarterPluginVariant,
+    proConfigurationGroup,
+} from "./NextJsWebsiteStarterPlugin";
 
 // // // //
 // Example Project
@@ -374,7 +377,8 @@ export const SchemaEditor: SchemaEditorConfiguration = {
                     kebab: "users",
                 },
             },
-            locked: true,
+            locked: false,
+            removable: true,
             createdBy: CreatedByValues.plugin,
             internalNote: "",
             attributes: [
@@ -437,7 +441,7 @@ const hostingConfigurationGroup: ConfigurationGroup = new Primitives.Configurati
                 },
                 type: PropertyTypes.DROPDOWN,
                 defaultValue: "docker",
-                dropdownOptions: [
+                selectOptions: [
                     { label: "Docker", value: "docker" },
                     { label: "EC2", value: "ec2" },
                 ],
@@ -461,6 +465,7 @@ export const NextMongoStarter: PluginMetadata = new Primitives.Plugin({
     },
     configurationGroups: [
         NextJsWebsiteStarterPluginVariant.configurationGroups[0],
+        proConfigurationGroup,
     ],
     exampleProjects: [busStationLockerRentalsProject],
     schemaEditorConfiguration: SchemaEditor,

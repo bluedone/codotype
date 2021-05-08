@@ -8,6 +8,7 @@ import { ConfigurationGroupPropertiesTabs } from "./ConfigurationGroupProperties
 import { ConfigurationGroupPropertiesDetail } from "./ConfigurationGroupPropertiesDetail";
 import { ConfigurationGroupPropertiesInput } from "./ConfigurationGroupPropertiesInput";
 import { ConfigurationGroupPropertiesDocs } from "./ConfigurationGroupPropertiesDocs";
+import { MarkdownRenderer } from "../MarkdownRenderer";
 
 // // // //
 
@@ -26,6 +27,8 @@ export function ConfigurationGroupPropertiesVariant(props: {
     const { configurationGroup, value } = props;
     const { layoutVariant } = configurationGroup;
 
+    console.log(configurationGroup);
+
     // Render null for `configurationGroup.allowDisable` and `value.enabled`
     if (configurationGroup.allowDisable && !value.enabled) {
         return null;
@@ -43,14 +46,23 @@ export function ConfigurationGroupPropertiesVariant(props: {
                 <ConfigurationGroupPropertiesTabs {...props} />
             )}
 
+            {/* Handle GroupLayoutVariants.TABS */}
+            {layoutVariant === GroupLayoutVariants.DOCS && (
+                <div>
+                    <MarkdownRenderer
+                        source={configurationGroup.content.documentation}
+                    />
+                </div>
+            )}
+
             {/* Handle DOCS_3x9 + DOCS_4x8 + DOCS_6x6 */}
             {[
                 GroupLayoutVariants.DOCS_3x9,
                 GroupLayoutVariants.DOCS_4x8,
                 GroupLayoutVariants.DOCS_6x6,
             ].includes(layoutVariant) && (
-                    <ConfigurationGroupPropertiesDocs {...props} />
-                )}
+                <ConfigurationGroupPropertiesDocs {...props} />
+            )}
 
             {/* Handle DETAIL_3x9 + DETAIL_4x8 + DETAIL_6x6 */}
             {[
@@ -58,10 +70,8 @@ export function ConfigurationGroupPropertiesVariant(props: {
                 GroupLayoutVariants.DETAIL_4x8,
                 GroupLayoutVariants.DETAIL_6x6,
             ].includes(layoutVariant) && (
-                    <ConfigurationGroupPropertiesDetail
-                        {...props}
-                    />
-                )}
+                <ConfigurationGroupPropertiesDetail {...props} />
+            )}
         </React.Fragment>
     );
 }

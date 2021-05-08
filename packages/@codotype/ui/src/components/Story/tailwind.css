@@ -7,7 +7,7 @@ html {
 }
 
 #root {
-    height: 100%;
+    height: auto;
 }
 
 .sb-show-main {

@@ -347,7 +347,7 @@ const stories: Array<[string, PluginMetadata]> = [
                     //     description:
                     //         "Type of Mockaroo mock data to use for this field",
                     //     propertyType: PropertyTypes.DROPDOWN,
-                    //     dropdownOptions: [
+                    //     selectOptions: [
                     //         {
                     //             value: "name",
                     //             label: "Name",

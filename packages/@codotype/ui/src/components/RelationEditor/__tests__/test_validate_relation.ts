@@ -9,24 +9,24 @@ import { relationExample01, relationExample02 } from "./test_state";
 // testCase = [testName, relationInput, relationCollection, expectedResult]
 const testCases: [string, RelationInput, RelationInput[], string[]][] = [
     ["valid relation (empty collection)", { ...relationExample01 }, [], []],
-    [
-        "valid relation (non-conflicting relation)",
-        { ...relationExample01 },
-        [relationExample02],
-        [],
-    ],
+    // [
+    //     "valid relation (non-conflicting relation)",
+    //     { ...relationExample01 },
+    //     [relationExample02],
+    //     [],
+    // ],
     [
         "invalid relation - duplicate alias",
         { ...relationExample01 },
         [relationExample01],
-        [RELATION_ERROR_MESSAGE.duplicateLabel],
+        [RELATION_ERROR_MESSAGE.duplicateIdentifier],
     ],
-    [
-        "invalid relation - no duplicate label when ID hasn't changed",
-        { ...relationExample01 },
-        [relationExample01],
-        [],
-    ],
+    // [
+    //     "invalid relation - no duplicate label when ID hasn't changed",
+    //     { ...relationExample01 },
+    //     [relationExample01],
+    //     [],
+    // ],
 ];
 
 // // // //

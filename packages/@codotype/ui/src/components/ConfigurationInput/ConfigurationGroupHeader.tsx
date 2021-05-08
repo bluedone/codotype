@@ -28,6 +28,7 @@ export function shouldRenderDocumentationModal(
     // Return false for DOCS_* layout variants
     if (
         [
+            GroupLayoutVariants.DOCS,
             GroupLayoutVariants.DOCS_3x9,
             GroupLayoutVariants.DOCS_4x8,
             GroupLayoutVariants.DOCS_6x6,

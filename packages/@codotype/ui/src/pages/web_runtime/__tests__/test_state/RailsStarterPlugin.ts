@@ -68,7 +68,7 @@ const hostingConfigurationGroup: ConfigurationGroup = new Primitives.Configurati
                 },
                 type: PropertyTypes.DROPDOWN,
                 defaultValue: "docker",
-                dropdownOptions: [
+                selectOptions: [
                     { label: "Docker", value: "docker" },
                     { label: "EC2", value: "ec2" },
                 ],

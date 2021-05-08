@@ -24,7 +24,7 @@ export const ATTRIBUTE_ADDON_UNIQUE: AttributeAddon = {
         inlineIcon: AddonPropertyInlineIcons.snowflake,
         propertyType: PropertyTypes.BOOLEAN,
         defaultValue: false,
-        dropdownOptions: [],
+        selectOptions: [],
         validations: [],
         transformations: [],
     },
@@ -57,7 +57,7 @@ export const relationAddons: RelationAddon[] = [
 //     description:
 //         "Type of Mockaroo mock data to use for this field",
 //     propertyType: PropertyTypes.DROPDOWN,
-//     dropdownOptions: [
+//     selectOptions: [
 //         {
 //             value: "name",
 //             label: "Name",
