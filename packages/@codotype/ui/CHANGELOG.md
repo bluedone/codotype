@@ -1,3 +1,8 @@
+### v0.8.0-canary.50
+
+-   Tailwind UI
+-   A lot of other stuff too.
+
 ### v0.8.0-canary.40
 
 -   Fix `FaqPage` component `react` import statements

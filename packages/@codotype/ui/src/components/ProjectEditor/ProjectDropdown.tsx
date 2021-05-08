@@ -36,7 +36,7 @@ export function ProjectDropdown(props: {
                             return (
                                 <button
                                     className="bg-white text-gray-700 hover:bg-gray-100 rounded hover:text-gray-900 flex justify-between w-full px-4 py-3 leading-5 text-left text-base
-                                    dark:bg-gray-700 dark:border-gray-900 dark:text-gray-100 dark:hover:text-gray-200 dark:hover:bg-gray-800
+                                    dark:bg-gray-900 dark:border-gray-800 dark:text-gray-200 dark:hover:bg-gray-800
                                     "
                                     onClick={() => {
                                         showExportModal(true);
@@ -50,12 +50,15 @@ export function ProjectDropdown(props: {
                         // Render "Reset Project" button
                         return (
                             <>
-                                {/* TODO - add DropdownDivider + DropdownLabel components? */}
-                                <span className="bg-white text-red-700 text-sm flex justify-between w-full px-4 py-3 leading-5 text-left">
+                                <span
+                                    className="bg-white text-red-700 text-sm flex justify-between w-full px-4 py-3 leading-5 text-left
+                                dark:bg-gray-900 dark:border-gray-900 dark:text-red-300"
+                                >
                                     Danger Zone
                                 </span>
                                 <button
-                                    className="bg-white text-gray-700 hover:bg-gray-100 hover:text-gray-900 flex justify-between w-full px-4 py-3 leading-5 text-left text-base"
+                                    className="bg-white text-gray-700 hover:bg-gray-100 hover:text-gray-900 flex justify-between w-full px-4 py-3 leading-5 text-left text-base
+                                    dark:bg-gray-900 dark:border-gray-800 dark:text-gray-100 dark:hover:bg-gray-800"
                                     onClick={() => {
                                         showResetModal(true);
                                     }}

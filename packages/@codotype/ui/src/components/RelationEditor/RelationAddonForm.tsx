@@ -5,7 +5,7 @@ import {
     AddonsValue,
     AddonProperty,
     PropertyTypes,
-    DropdownOption,
+    SelectOption,
     RelationAddon,
     RelationInput,
 } from "@codotype/core";
@@ -133,8 +133,8 @@ export function RelationAddonForm(props: {
                                         }}
                                     >
                                         {!a.required && <option></option>}
-                                        {a.dropdownOptions.map(
-                                            (d: DropdownOption) => {
+                                        {a.selectOptions.map(
+                                            (d: SelectOption) => {
                                                 return (
                                                     <option
                                                         value={d.value}

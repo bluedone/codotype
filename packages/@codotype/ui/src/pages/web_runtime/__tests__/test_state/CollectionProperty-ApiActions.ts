@@ -77,7 +77,7 @@ export const ApiActionsProperty = new Primitives.ConfigurationProperty({
             defaultValue: "GET",
             type: PropertyTypes.DROPDOWN,
             layoutVariant: PropertyLayoutVariants.COL_6,
-            dropdownOptions: [
+            selectOptions: [
                 { value: "GET", label: "GET" },
                 { value: "POST", label: "POST" },
                 { value: "PUT", label: "PUT" },
@@ -124,7 +124,7 @@ export const ApiActionsProperty = new Primitives.ConfigurationProperty({
             defaultValue: "COLLECTION",
             layoutVariant: PropertyLayoutVariants.COL_6,
             type: PropertyTypes.DROPDOWN,
-            dropdownOptions: [
+            selectOptions: [
                 { value: "COLLECTION", label: "Collection" },
                 { value: "MODEL", label: "Model" },
             ],

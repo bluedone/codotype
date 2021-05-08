@@ -7,6 +7,7 @@ import {
     Primitives,
     makeUniqueId,
     buildDefaultAddonsValue,
+    validateAttribute,
     SchemaInput,
 } from "@codotype/core";
 import { Droppable, DragDropContext } from "react-beautiful-dnd";
@@ -14,7 +15,6 @@ import { AttributeFormModal } from "./AttributeFormModal";
 import { AttributeDeleteModal } from "./AttributeDeleteModal";
 import { AttributeListItem } from "./AttributeListItem";
 import { AttributeForm } from "./AttributeForm";
-import { validateAttribute } from "./validateAttribute";
 import { Hotkey } from "../Hotkey";
 import { reorder } from "./reorder";
 import { SortableListEmpty } from "../SortableListEmpty";

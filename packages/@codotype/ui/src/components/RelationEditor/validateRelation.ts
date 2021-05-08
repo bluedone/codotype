@@ -4,7 +4,6 @@ import { RelationInput } from "@codotype/core";
 
 // TODO - finish this up, bring into @codotype/core?
 // TODO - handle duplicate relation without unique alias on SOURCE PROPERTY
-
 export enum RELATION_ERROR_MESSAGE {
     emptyType = "Relation must have a type",
     duplicateIdentifier = "Relation must have a destination alias",

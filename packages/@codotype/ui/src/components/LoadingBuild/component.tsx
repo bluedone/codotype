@@ -2,6 +2,7 @@ import * as React from "react";
 import { LoadingSpinner } from "../LoadingSpinner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLaugh } from "@fortawesome/free-regular-svg-icons";
+
 // const sample = require("lodash.sample");
 
 // // // //
@@ -37,16 +38,14 @@ export function LoadingBuild(props: { quote?: [string, string] }) {
     return (
         <div
             className="flex flex-col items-center h-full justify-center"
-            style={{ minHeight: "26rem" }}
+            style={{ minHeight: "28rem" }}
         >
-            <h3 className="mb-0 mr-2 text-2xl">
-                We're exporting your codebase
-            </h3>
-            <p className="text-gray-600 dark:text-gray-200 mb-0">
+            <h3 className="mr-2 text-3xl">We're exporting your codebase</h3>
+            <p className="text-gray-600 dark:text-gray-200 mt-3">
                 This should only take a few moments
                 <FontAwesomeIcon icon={faLaugh} className="ml-2" />
             </p>
-            <div className="flex justify-center my-4">
+            <div className="flex justify-center my-8">
                 <div className="my-2">
                     <LoadingSpinner />
                 </div>

@@ -9,11 +9,12 @@ import {
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import { faLaugh, faLightbulb } from "@fortawesome/free-regular-svg-icons";
 import { CopyToClipboard } from "../CopyToClipboard";
+import { ResponseType, ResponseTypes } from "@codotype/core";
 
 // // // //
 
 export function BuildFinished(props: {
-    responseType: "S3_DOWNLOAD" | "LOCAL_PATH";
+    responseType: ResponseType;
     filepath: string;
     onClickBackToEditor: () => void;
 }) {
@@ -31,16 +32,16 @@ export function BuildFinished(props: {
     return (
         <div
             className="flex flex-col items-center h-full justify-center p-5 select-none"
-            style={{ minHeight: "26rem" }}
+            style={{ minHeight: "28rem" }}
         >
             {/* Header */}
             <div className="text-center">
-                <p className="lead mb-1">
+                <p className="lead mb-2">
                     Thank you for using{" "}
                     <strong style={{ fontWeight: "bolder" }}>Codotype</strong>
                 </p>
 
-                <p className="lead mb-1">
+                <p className="lead mb-2">
                     <FontAwesomeIcon
                         icon={faHeart}
                         size="lg"
@@ -48,86 +49,85 @@ export function BuildFinished(props: {
                     />
                 </p>
 
-                <small className="text-gray-600">
+                {/* <small className="text-gray-600 dark:text-gray-300">
                     Your project has successfully been generated - horay!
-                </small>
-                <br />
-                <small className="text-gray-600 mt-3">
-                    Download your starter code and follow the instructions in{" "}
-                    <span className="font-semibold">README.md</span>
-                </small>
+                </small> */}
+                <p className="text-gray-600 dark:text-gray-300 text-md">
+                    Your starter code is ready
+                </p>
             </div>
 
             {/* <!-- Local Plugin --> */}
             {/* TODO - use ResponseTypes enum from @codotype/core */}
-            {props.filepath && props.responseType === "LOCAL_PATH" && (
-                <div className="row flex justify-center mt-3">
-                    <div className="col-sm-12 text-center">
-                        <small className="text-blue-500">
-                            Your codebase is in the following local directory:
-                        </small>
-                        <p className="lead mb-0">
-                            {/* TODO - add tooltip */}
-                            <CopyToClipboard
-                                text={props.filepath}
-                                onCopy={() => {
-                                    setCopyMessage(true);
+            {props.filepath && props.responseType === ResponseTypes.local && (
+                <div className="flex flex-col justify-center mt-3">
+                    <p className="text-blue-500 dark:text-blue-200">
+                        Your starter code is in the following local directory:
+                    </p>
+                    {/* TODO - add tooltip */}
+                    <CopyToClipboard
+                        text={props.filepath}
+                        onCopy={() => {
+                            setCopyMessage(true);
+                        }}
+                    >
+                        {({ copyToClipboard }) => (
+                            <button
+                                className="w-full border-primary border text-md bg-white text-gray-900 mt-2 rounded-full py-2 px-2"
+                                onClick={() => {
+                                    copyToClipboard();
                                 }}
                             >
-                                {({ copyToClipboard }) => (
-                                    <button
-                                        className="btn btn-sm btn-dark"
-                                        onClick={() => {
-                                            copyToClipboard();
-                                        }}
-                                    >
-                                        {copyMessage && (
-                                            <span>Copied to clipboard</span>
-                                        )}
-
-                                        {!copyMessage && (
-                                            <span>{props.filepath}</span>
-                                        )}
-                                    </button>
+                                {copyMessage && (
+                                    <span>Copied to clipboard</span>
                                 )}
-                            </CopyToClipboard>
-                        </p>
-                    </div>
+
+                                {!copyMessage && <span>{props.filepath}</span>}
+                            </button>
+                        )}
+                    </CopyToClipboard>
                 </div>
             )}
 
             {/* <!-- S3 Zip Download --> */}
             {/* TODO - use ResponseTypes enum from @codotype/core */}
-            {props.responseType === "S3_DOWNLOAD" && (
+            {props.responseType === ResponseTypes.s3 && (
                 <div className="row flex justify-center mt-3">
                     <a
                         href={props.filepath}
                         target="_blank"
-                        className="btn w-full btn-success"
+                        className="btn w-full btn-primary"
                     >
                         <FontAwesomeIcon icon={faDownload} className="mr-2" />
-                        Download ZIP
+                        Download Exported Code
                     </a>
                 </div>
             )}
 
+            <p className="text-gray-600 dark:text-gray-300 text-sm mt-3">
+                Please follow the instructions in{" "}
+                <span className="font-semibold">README.md</span>
+            </p>
+
+            <div className="text-center mt-3">
+                <p className="text-gray-600 dark:text-gray-300 lead">
+                    <FontAwesomeIcon icon={faLightbulb} className="mr-2" />
+                    Remember, keep on iterating!
+                </p>
+            </div>
+
             <div className="grid mt-3">
                 <div className="col-span-12 text-center">
-                    <p className="mb-1">
-                        <FontAwesomeIcon icon={faLightbulb} />
-                        Remember, iteration is key
-                    </p>
-
-                    <small className="text-gray-600">
+                    <small className="text-gray-600 dark:text-gray-300">
                         Make changes and <strong>re-generate</strong> your
-                        Project as many times as you like{" "}
+                        project as many times as you like{" "}
                         <FontAwesomeIcon icon={faLaugh} />
                     </small>
                 </div>
 
-                <div className="col-span-12 col-md-4 mt-2">
+                <div className="col-span-12">
                     <button
-                        className="btn w-full"
+                        className="btn w-full btn-primary mt-3"
                         onClick={props.onClickBackToEditor}
                     >
                         <FontAwesomeIcon icon={faReply} className="mr-2" />
@@ -139,9 +139,9 @@ export function BuildFinished(props: {
             <hr />
 
             {/* FOOTER */}
-            <div className="flex flex-col items-center justify-center">
-                <p className="mb-0 text-md">Support Codotype</p>
-                <p className="text-gray-600 text-sm">
+            <div className="flex flex-col items-center justify-center mt-3">
+                <p className="text-md">Support Codotype</p>
+                <p className="text-gray-600 dark:text-gray-300 text-sm mt-3">
                     Give us a{" "}
                     <FontAwesomeIcon
                         icon={faStar}

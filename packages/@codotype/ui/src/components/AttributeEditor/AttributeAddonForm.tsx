@@ -6,7 +6,7 @@ import {
     AddonProperty,
     PropertyTypes,
     AttributeInput,
-    DropdownOption,
+    SelectOption,
     AttributeAddon,
 } from "@codotype/core";
 
@@ -134,8 +134,8 @@ export function AddonPropertyForm(props: {
                                         }}
                                     >
                                         {!a.required && <option></option>}
-                                        {a.dropdownOptions.map(
-                                            (d: DropdownOption) => {
+                                        {a.selectOptions.map(
+                                            (d: SelectOption) => {
                                                 return (
                                                     <option
                                                         value={d.value}

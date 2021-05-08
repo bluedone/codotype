@@ -178,7 +178,7 @@ export function ConfigurationInputFormGroup(
 
             {/* Renders props.children */}
             {property.type !== PropertyTypes.BOOLEAN && (
-                <React.Fragment>{props.children}</React.Fragment>
+                <div className="mt-3">{props.children}</div>
             )}
         </div>
     );

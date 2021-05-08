@@ -148,6 +148,7 @@ export const SchemaEditorKitchenSink: SchemaEditorConfiguration = {
                 },
             },
             locked: true,
+            removable: false,
             createdBy: CreatedByValues.plugin,
             internalNote: "",
             attributes: [

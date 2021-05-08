@@ -1,4 +1,4 @@
-### 0.8.0-canary.16 --- PENDING
+### 0.8.0-canary.16
 
 -   Added `PropertyTypes.RADIO_GROUP` to `buildConfigurationPropertyValue`
 -   Added `ResponseType` and `ResponseTypesEnum`

@@ -16,10 +16,6 @@ export function SchemaDeleteButton(props: {
 }) {
     const { schemaInput } = props;
 
-    // TODO - add support for schemaInput.removable
-    // TODO - add support for schemaInput.removable
-    // TODO - add support for schemaInput.removable
-    // TODO - add support for schemaInput.removable
     if (
         schemaInput.createdBy === CreatedByValues.plugin &&
         schemaInput.locked

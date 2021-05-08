@@ -5,6 +5,7 @@ import {
     Primitives,
     ConfigurationGroup,
     PropertyLayoutVariants,
+    GroupLayoutVariants,
 } from "@codotype/core";
 
 // // // //
@@ -28,6 +29,7 @@ const landingPageConfigurationGroup: ConfigurationGroup = new Primitives.Configu
             icon: "",
             documentation: "",
         },
+        layoutVariant: GroupLayoutVariants.DETAIL_4x8,
         properties: [
             new Primitives.ConfigurationProperty({
                 identifier: "boolean",
@@ -75,9 +77,58 @@ const landingPageConfigurationGroup: ConfigurationGroup = new Primitives.Configu
                     documentation: "",
                 },
                 type: PropertyTypes.DROPDOWN,
-                dropdownOptions: [{ value: "one", label: "One" }],
+                selectOptions: [{ value: "one", label: "One" }],
                 layoutVariant: PropertyLayoutVariants.CARD_COL_6,
             }),
+
+            new Primitives.ConfigurationProperty({
+                identifier: "radio_group",
+                content: {
+                    label: "Radio Group Property",
+                    description: "Radio Group properties behave like Dropdowns",
+                    icon:
+                        // "https://cdn1.iconfinder.com/data/icons/hawcons/32/699966-icon-1-cloud-512.png",
+                        "https://cdn4.iconfinder.com/data/icons/colicon/24/cloud-512.png",
+                    documentation: "",
+                },
+                type: PropertyTypes.RADIO_GROUP,
+                layoutVariant: PropertyLayoutVariants.CARD_COL_6,
+                defaultValue: "vercel",
+                selectOptions: [
+                    {
+                        label: "Vercel",
+                        value: "vercel",
+                        description: "This is the vercel description",
+                        documentation: "",
+                        icon:
+                            "https://assets.pipedream.net/s.v0/app_1xohRm/logo/orig",
+                    },
+                    {
+                        label: "Netlify",
+                        value: "netlify",
+                        description: "This is the netlify description",
+                        documentation: "",
+                        icon:
+                            "https://www.netlify.com/img/press/logos/logomark.png",
+                    },
+                    {
+                        label: "GitHub Pages",
+                        value: "github_pages",
+                        description: "This is the github_pages description",
+                        documentation: "",
+                        icon:
+                            "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
+                    },
+                    {
+                        label: "None",
+                        value: "none",
+                        description: "This is the none description",
+                        documentation: "",
+                        icon: "",
+                    },
+                ],
+            }),
+
             new Primitives.ConfigurationProperty({
                 identifier: "instance",
                 content: {
@@ -152,7 +203,7 @@ const analyticsConfigurationGroup: ConfigurationGroup = new Primitives.Configura
             label: "Analytics",
             description: "Configure the analytics of your website",
             icon: "",
-            documentation: "",
+            documentation: "https://www.github.com/codotype",
         },
         properties: [
             new Primitives.ConfigurationProperty({
@@ -324,6 +375,7 @@ const hostingConfigurationGroup: ConfigurationGroup = new Primitives.Configurati
             icon: "",
             documentation: "",
         },
+        layoutVariant: GroupLayoutVariants.LIST,
         properties: [
             new Primitives.ConfigurationProperty({
                 identifier: "platform",
@@ -336,13 +388,41 @@ const hostingConfigurationGroup: ConfigurationGroup = new Primitives.Configurati
                     documentation: "",
                 },
                 type: PropertyTypes.DROPDOWN,
+                // type: PropertyTypes.RADIO_GROUP,
+                layoutVariant: PropertyLayoutVariants.CARD_COL_6,
                 defaultValue: "vercel",
-                dropdownOptions: [
-                    { label: "Vercel", value: "vercel" },
-                    { label: "Netlify", value: "netlify" },
-                    { label: "Docker", value: "docker" },
-                    { label: "GitHub Pages", value: "github_pages" },
-                    { label: "None", value: "none" },
+                selectOptions: [
+                    {
+                        label: "Vercel",
+                        value: "vercel",
+                        description: "This is the vercel description",
+                        documentation: "",
+                        icon:
+                            "https://assets.pipedream.net/s.v0/app_1xohRm/logo/orig",
+                    },
+                    {
+                        label: "Netlify",
+                        value: "netlify",
+                        description: "This is the netlify description",
+                        documentation: "",
+                        icon:
+                            "https://www.netlify.com/img/press/logos/logomark.png",
+                    },
+                    {
+                        label: "GitHub Pages",
+                        value: "github_pages",
+                        description: "This is the github_pages description",
+                        documentation: "",
+                        icon:
+                            "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
+                    },
+                    {
+                        label: "None",
+                        value: "none",
+                        description: "This is the none description",
+                        documentation: "",
+                        icon: "",
+                    },
                 ],
             }),
         ],
@@ -386,12 +466,11 @@ const toolingProperty = new Primitives.ConfigurationProperty({
     type: PropertyTypes.INSTANCE,
     layoutVariant: PropertyLayoutVariants.COL_12,
     defaultValue: {},
-    dropdownOptions: [],
+    selectOptions: [],
     properties: [
         ...toolingConfigurationGroup.properties.map(p => {
             return {
                 ...p,
-                // layoutVariant: PropertyLayoutVariants.CARD_COL_4,
                 layoutVariant: PropertyLayoutVariants.CARD_COL_6,
             };
         }),
@@ -409,7 +488,7 @@ const analyticsProperty = new Primitives.ConfigurationProperty({
     type: PropertyTypes.INSTANCE,
     layoutVariant: PropertyLayoutVariants.COL_12,
     defaultValue: {},
-    dropdownOptions: [],
+    selectOptions: [],
     properties: [
         ...analyticsConfigurationGroup.properties.map(p => {
             return {
@@ -431,7 +510,7 @@ const seoProperty = new Primitives.ConfigurationProperty({
     type: PropertyTypes.INSTANCE,
     layoutVariant: PropertyLayoutVariants.COL_12,
     defaultValue: {},
-    dropdownOptions: [],
+    selectOptions: [],
     properties: [
         ...seoConfigurationGroup.properties.map(p => {
             return {
@@ -453,7 +532,7 @@ const hostingProperty = new Primitives.ConfigurationProperty({
     type: PropertyTypes.INSTANCE,
     layoutVariant: PropertyLayoutVariants.COL_12,
     defaultValue: {},
-    dropdownOptions: [],
+    selectOptions: [],
     properties: [
         ...hostingConfigurationGroup.properties.map(p => {
             return {
@@ -468,6 +547,26 @@ const hostingProperty = new Primitives.ConfigurationProperty({
 // - Marketing - Mailchip
 // - Customer Engagement - Intercom
 // - Customer Engagement - Segment (Customer Data Platform)
+// - Analytics - Fullstory
+
+export const proConfigurationGroup: ConfigurationGroup = new Primitives.ConfigurationGroup(
+    {
+        identifier: "pro",
+        content: {
+            label: "Upgrade to Pro",
+            description: "Unlock new features with our premium offering",
+            icon: "",
+            documentation: `
+# Make the jump to pro
+### Make the jump to Codotype Pro
+
+Use code \`codo\` at checkout to save 30%
+            `,
+        },
+        properties: [],
+        layoutVariant: GroupLayoutVariants.DOCS,
+    },
+);
 
 export const NextJsWebsiteStarterPluginVariant: PluginMetadata = new Primitives.Plugin(
     {
@@ -498,6 +597,7 @@ export const NextJsWebsiteStarterPluginVariant: PluginMetadata = new Primitives.
                 ],
             },
             landingPageConfigurationGroup,
+            proConfigurationGroup,
         ],
     },
 );

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Modal } from "../Modal";
-import { ProjectInput, PluginMetadata } from "@codotype/core";
+import { ProjectInput, PluginMetadata, ResponseTypes } from "@codotype/core";
 import { BuildFinished } from "../BuildFinished/component";
 import { LoadingBuild } from "../LoadingBuild";
 
@@ -57,26 +57,6 @@ export function RuntimeProvider(props: RuntimeProviderProps) {
         }, 400);
     }
 
-    // // // //
-
-    // Handle loading state
-    // if (loading) {
-    //     return <LoadingBuild />;
-    // }
-
-    // Handle finsihed state
-    // if (finished) {
-    //     return (
-    //         <React.Fragment>
-    //             <BuildFinished
-    //                 responseType="LOCAL_PATH"
-    //                 filepath="/home/user/code"
-    //                 onClickBackToEditor={reset}
-    //             />
-    //         </React.Fragment>
-    //     );
-    // }
-
     // Render ProjectEditor here
     return (
         <React.Fragment>
@@ -100,8 +80,8 @@ export function RuntimeProvider(props: RuntimeProviderProps) {
                     {loading && <LoadingBuild />}
                     {finished && (
                         <BuildFinished
-                            responseType="LOCAL_PATH"
-                            filepath="/home/user/code"
+                            responseType={ResponseTypes.s3}
+                            filepath="https://google.com"
                             onClickBackToEditor={reset}
                         />
                     )}
