@@ -1,3 +1,9 @@
+### 0.8.0-canary.17
+
+-   Added `Datatypes.EMAIL` and `Datatypes.EMAIL_ARRAY`
+-   Renamed `Datatypes.NUMERIC` to `Datatypes.NUMBER`
+-   Removed `icon` from `DatatypeMeta`
+
 ### 0.8.0-canary.16
 
 -   Added `PropertyTypes.RADIO_GROUP` to `buildConfigurationPropertyValue`

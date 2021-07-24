@@ -2,11 +2,12 @@ export type Datatype =
     // Standard datatypes
     | "STRING"
     | "TEXT"
+    | "EMAIL"
     | "INT"
     | "BIGINT"
     | "FLOAT"
     | "DECIMAL"
-    | "NUMERIC"
+    | "NUMBER"
     | "BOOLEAN"
     | "DATE"
     | "TIME"
@@ -24,11 +25,12 @@ export type Datatype =
     // Array datatypes
     | "STRING_ARRAY"
     | "TEXT_ARRAY"
+    | "EMAIL_ARRAY"
     | "INT_ARRAY"
     | "BIGINT_ARRAY"
     | "FLOAT_ARRAY"
     | "DECIMAL_ARRAY"
-    | "NUMERIC_ARRAY"
+    | "NUMBER_ARRAY"
     | "BOOLEAN_ARRAY"
     | "DATE_ARRAY"
     | "TIME_ARRAY"
@@ -49,11 +51,12 @@ export enum Datatypes {
     // Standard datatypes
     STRING = "STRING", // Postgres, MongoDB
     TEXT = "TEXT", // Postgres, MongoDB (Equiv. to String)
+    EMAIL = "EMAIL", // Equiv. to String (Just exists for building UI)
     INT = "INT", // Postgres, MongoDB
     BIGINT = "BIGINT", // Postgres
     FLOAT = "FLOAT", // Postgres
     DECIMAL = "DECIMAL", // Postgres
-    NUMERIC = "NUMERIC", // Postgres
+    NUMBER = "NUMBER", // Postgres
     BOOLEAN = "BOOLEAN", // Postgres, MongoDB
     DATE = "DATE", // Postgres, MongoDB
     TIME = "TIME", // Postgres
@@ -71,11 +74,12 @@ export enum Datatypes {
     // Array datatypes
     STRING_ARRAY = "STRING_ARRAY", // Postgres, MongoDB
     TEXT_ARRAY = "TEXT_ARRAY", // Postgres, MongoDB (Equiv. to String)
+    EMAIL_ARRAY = "EMAIL_ARRAY", // Equiv. to STRING_ARRAY (Just exists for building UI)
     INT_ARRAY = "INT_ARRAY", // Postgres, MongoDB
     BIGINT_ARRAY = "BIGINT_ARRAY", // Postgres
     FLOAT_ARRAY = "FLOAT_ARRAY", // Postgres
     DECIMAL_ARRAY = "DECIMAL_ARRAY", // Postgres
-    NUMERIC_ARRAY = "NUMERIC_ARRAY", // Postgres
+    NUMBER_ARRAY = "NUMBER_ARRAY", // Postgres
     BOOLEAN_ARRAY = "BOOLEAN_ARRAY", // Postgres, MongoDB
     DATE_ARRAY = "DATE_ARRAY", // Postgres, MongoDB
     TIME_ARRAY = "TIME_ARRAY", // Postgres
