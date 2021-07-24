@@ -89,7 +89,7 @@ export function ConfigurationGroupSelector(props: {
                         <select
                             id="schema-tabs"
                             name="schema-tabs"
-                            className="block w-full focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
+                            className="block w-full pl-3 pr-10 py-2 text-base bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-800 text-gray-900 dark:text-gray-200 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
                             onChange={e => {
                                 const type = e.currentTarget.value;
                                 if (type === "schema") {
@@ -148,7 +148,7 @@ export function ConfigurationGroupSelector(props: {
                                             }}
                                             active={
                                                 configurationGroup.identifier ===
-                                                selectedConfigurationGroup.identifier &&
+                                                    selectedConfigurationGroup.identifier &&
                                                 !viewingSchemas
                                             }
                                             label={
@@ -170,7 +170,7 @@ export function ConfigurationGroupSelector(props: {
                         schemaInput={props.schemaInput}
                         value={
                             props.configuration[
-                            selectedConfigurationGroup.identifier
+                                selectedConfigurationGroup.identifier
                             ]
                         }
                         onChange={(updatedVal: ConfigurationPropertyDict) => {

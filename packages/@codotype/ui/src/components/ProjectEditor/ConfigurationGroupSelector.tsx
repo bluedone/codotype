@@ -141,7 +141,7 @@ export function ConfigurationGroupSelector(props: {
                         <select
                             id="tabs"
                             name="tabs"
-                            className="block w-full focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 rounded-md"
+                            className="mt-1 block w-full pl-3 pr-10 py-2 text-base bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-800 text-gray-900 dark:text-gray-200 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
                             onChange={() => {
                                 setViewingReadme(true);
                                 setViewingSchemas(false);
