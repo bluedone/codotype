@@ -11,7 +11,7 @@
     "author": "Alexander Schwartzberg",
     "license": "MIT",
     "dependencies": {
-        "@codotype/ui": "^0.8.0-canary.49",
+        "@codotype/ui": "^0.8.0-canary.51",
         "next": "^10.0.4",
         "react": "^16.8.6",
         "react-dom": "^16.8.6",

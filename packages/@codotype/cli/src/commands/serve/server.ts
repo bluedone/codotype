@@ -1,7 +1,7 @@
 import * as express from "express";
 import * as bodyParser from "body-parser";
 import * as path from "path";
-import { ProjectBuild } from "@codotype/core";
+import { ProjectBuild, RuntimeLogLevels } from "@codotype/core";
 import { OUTPUT_DIRECTORY } from "@codotype/runtime/dist/constants";
 import { NodeRuntime } from "@codotype/runtime";
 
@@ -39,6 +39,9 @@ export function server({ runtime }: { runtime: NodeRuntime }): any {
             });
         }
 
+        // Defines start time
+        const startTime: number = Date.now();
+
         // Defines bodotype build
         // FEATURE - verify ProjectInput here here
         // TODO - add new ProjectBuild primative to core
@@ -53,13 +56,22 @@ export function server({ runtime }: { runtime: NodeRuntime }): any {
         // CHORE - wrap this in an error hander
         await runtime.execute({ build });
 
+        // Calculate total build time
+        const endTime: number = Date.now();
+        const totalTime: number = endTime - startTime;
+
+        // Log total build time
+        runtime.log(`Build finished in ${totalTime / 1000}`, {
+            level: RuntimeLogLevels.info,
+        });
+
         // Sends the local directory path to the client
         return res.json({
             filepath:
                 process.cwd() +
                 OUTPUT_DIRECTORY +
                 build.projectInput.identifiers.snake,
-            type: "LOCAL_PATH",
+            type: "LOCAL_PATH", // TODO - replace with ResponseTypes.local from @codotype/core@^0.8.16
         });
     });
 
