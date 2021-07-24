@@ -775,7 +775,7 @@ export const dummyPluginMetadata: PluginMetadata = {
         supportedDatatypes: [
             Datatypes.STRING,
             Datatypes.TEXT,
-            Datatypes.NUMERIC,
+            Datatypes.NUMBER,
             Datatypes.TIMESTAMP,
         ], // The datatypes supported by this plugin.Only an array of DATATYPE_ * identifiers that correspond to values defined in @codotype/core are accepted.
         supportedRelationTypes: [RelationTypes.TO_ONE, RelationTypes.TO_MANY], // The relation types supported by this plugin.Only an array of RELATION_TYPE_ * identifiers that correspond to values defined in @codotype/core are accepted.

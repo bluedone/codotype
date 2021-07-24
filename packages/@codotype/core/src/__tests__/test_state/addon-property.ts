@@ -136,7 +136,7 @@ export const attributeAddons: { [key: string]: AttributeAddon } = {
     index: {
         supportedDatatypes: [
             Datatypes.STRING,
-            Datatypes.NUMERIC,
+            Datatypes.NUMBER,
             Datatypes.INT,
             Datatypes.TEXT,
             Datatypes.TIMESTAMP,
@@ -147,7 +147,7 @@ export const attributeAddons: { [key: string]: AttributeAddon } = {
     primaryKey: {
         supportedDatatypes: [
             Datatypes.STRING,
-            Datatypes.NUMERIC,
+            Datatypes.NUMBER,
             Datatypes.INT,
             Datatypes.TEXT,
             Datatypes.TIMESTAMP,

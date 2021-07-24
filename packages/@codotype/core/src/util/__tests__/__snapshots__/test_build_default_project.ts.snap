@@ -216,6 +216,7 @@ Object {
       },
       "internalNote": "",
       "locked": true,
+      "removable": false,
     },
   ],
 }
@@ -309,6 +310,7 @@ Object {
       },
       "internalNote": "",
       "locked": true,
+      "removable": false,
     },
   ],
 }
