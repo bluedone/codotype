@@ -39,17 +39,17 @@ export function RelationDiagram(props: RelationDiagramProps) {
 
     const iconCss = classnames("mx-1", {
         "text-blue-500": direction === "out",
-        "text-teal-500": direction !== "out",
+        "text-indigo-500": direction !== "out",
     });
 
     const textColor = classnames({
         "text-blue-500": direction === "out",
-        "text-teal-500": direction !== "out",
+        "text-indigo-500": direction !== "out",
     });
 
     const oppositeTextColor = classnames({
         "text-blue-500": direction !== "out",
-        "text-teal-500": direction === "out",
+        "text-indigo-500": direction === "out",
     });
 
     const icon = direction === "out" ? faArrowRight : faArrowLeft;
