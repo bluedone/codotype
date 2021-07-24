@@ -543,6 +543,11 @@ const hostingProperty = new Primitives.ConfigurationProperty({
     ],
 });
 
+// Other properties:
+// - Marketing - Mailchip
+// - Customer Engagement - Intercom
+// - Customer Engagement - Segment (Customer Data Platform)
+// - Analytics - Fullstory
 export const proConfigurationGroup: ConfigurationGroup = new Primitives.ConfigurationGroup(
     {
         identifier: "pro",
@@ -559,11 +564,6 @@ export const proConfigurationGroup: ConfigurationGroup = new Primitives.Configur
     },
 );
 
-// Other properties:
-// - Marketing - Mailchip
-// - Customer Engagement - Intercom
-// - Customer Engagement - Segment (Customer Data Platform)
-// - Analytics - Fullstory
 export const NextJsWebsiteStarterPluginVariant: PluginMetadata = new Primitives.Plugin(
     {
         identifier: "react-next-ts-website-starter-variant",
