@@ -17,6 +17,8 @@ import { reorder } from "../AttributeEditor/reorder";
 import { Hotkey } from "../Hotkey";
 import { SortableListEmpty } from "../SortableListEmpty";
 import { validateRelation } from "./validateRelation";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faKeyboard } from "@fortawesome/free-solid-svg-icons";
 
 // // // //
 
@@ -107,7 +109,12 @@ export function RelationEditor(props: RelationEditorProps) {
             />
 
             <SortableListHeader
-                tooltip={"shift+r"}
+                tooltip={
+                    <p>
+                        <FontAwesomeIcon icon={faKeyboard} className="pr-2" />
+                        <span className="font-light">{"SHIFT + R"}</span>
+                    </p>
+                }
                 label="Relation"
                 locked={props.selectedSchema.locked}
                 onClick={() => {

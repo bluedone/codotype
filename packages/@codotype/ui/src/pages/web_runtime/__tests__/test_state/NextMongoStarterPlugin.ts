@@ -329,7 +329,7 @@ export const SchemaEditor: SchemaEditorConfiguration = {
         Datatypes.DATE,
         Datatypes.TIMESTAMP,
         // Datatypes.STRING_ARRAY,
-        // Datatypes.NUMERIC_ARRAY,
+        // Datatypes.NUMBER_ARRAY,
         // Datatypes.OBJECT,
     ],
     configurationGroups: [],

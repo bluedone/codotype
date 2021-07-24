@@ -9,7 +9,7 @@ import { Tooltip } from "../Tooltip";
 interface SortableListHeaderProps {
     label: string;
     onClick: () => void;
-    tooltip?: string;
+    tooltip?: React.ReactNode;
     rounded?: boolean;
     locked?: boolean;
 }

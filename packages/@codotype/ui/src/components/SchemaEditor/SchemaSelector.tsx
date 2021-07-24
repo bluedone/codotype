@@ -47,7 +47,10 @@ export function SchemaSelectorItem(props: {
                             <Tooltip
                                 position="right"
                                 tooltipContent={
-                                    <>Schema requires at least one attribute</>
+                                    <p>
+                                        Data Model requires at least one
+                                        attribute
+                                    </p>
                                 }
                             >
                                 <FontAwesomeIcon

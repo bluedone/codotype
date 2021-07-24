@@ -1,3 +1,8 @@
+### v0.8.0-canary.51
+
+-   Updated `@codotype/core` to `0.8.0-canary.17`
+-   Added support for `GroupLayoutVariants.DOCS`
+
 ### v0.8.0-canary.50
 
 -   Tailwind UI

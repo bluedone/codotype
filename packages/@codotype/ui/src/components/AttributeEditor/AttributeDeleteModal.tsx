@@ -27,10 +27,7 @@ export function AttributeDeleteModal(props: {
                 >
                     Delete Attribute
                 </button>
-                <button
-                    className="modal-close-btn"
-                    onClick={props.onClose}
-                >
+                <button className="modal-close-btn" onClick={props.onClose}>
                     Close
                 </button>
             </div>

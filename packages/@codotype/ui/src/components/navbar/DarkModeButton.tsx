@@ -48,7 +48,9 @@ export function DarkModeButton(props: {
                     </svg>
                 )}
                 <span className="ml-2 font-light">
-                    {darkModeEnabled ? "Light" : "Dark"} Mode
+                    {darkModeEnabled
+                        ? "Light Mode"
+                        : "Dark Mode (Experimental)"}
                 </span>
             </div>
         </button>

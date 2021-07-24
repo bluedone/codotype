@@ -18,6 +18,8 @@ import { AttributeForm } from "./AttributeForm";
 import { Hotkey } from "../Hotkey";
 import { reorder } from "./reorder";
 import { SortableListEmpty } from "../SortableListEmpty";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faKeyboard } from "@fortawesome/free-regular-svg-icons";
 
 // // // //
 
@@ -147,7 +149,12 @@ export function AttributeEditor(props: AttributeEditorProps) {
         >
             <SortableListHeader
                 label="Attributes"
-                tooltip="shift+a"
+                tooltip={
+                    <p>
+                        <FontAwesomeIcon icon={faKeyboard} className="pr-2" />
+                        <span className="font-light">{"SHIFT + A"}</span>
+                    </p>
+                }
                 locked={props.selectedSchema.locked}
                 onClick={() => {
                     const newAttribute: AttributeInput = new Primitives.AttributeInput(
