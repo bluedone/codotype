@@ -17,7 +17,7 @@ export function ImageBlock(props: { alt: string; src: string }) {
             src={props.src}
             alt={props.alt}
             style={{
-                maxWidth: "50%",
+                width: "100%",
             }}
         />
     );
