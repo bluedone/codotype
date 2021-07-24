@@ -103,7 +103,7 @@ export function AppNavbar(props: {
                                     >
                                         <FontAwesomeIcon
                                             icon={faBook}
-                                            className="text-teal-500 mr-2"
+                                            className="text-indigo-500 mr-2"
                                         />
                                         Docs
                                     </a>
@@ -172,7 +172,7 @@ export function AppNavbar(props: {
                     >
                         <FontAwesomeIcon
                             icon={faBook}
-                            className="text-teal-500 mr-1"
+                            className="text-indigo-500 mr-1"
                         />
                         Docs
                     </a>
