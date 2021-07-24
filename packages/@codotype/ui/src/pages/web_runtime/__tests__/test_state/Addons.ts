@@ -10,7 +10,25 @@ import {
 // // // //
 
 export const ATTRIBUTE_ADDON_UNIQUE: AttributeAddon = {
-    supportedDatatypes: [Datatypes.STRING],
+    supportedDatatypes: [
+        Datatypes.BIGINT_ARRAY,
+        Datatypes.BIGINT,
+        Datatypes.DECIMAL_ARRAY,
+        Datatypes.DECIMAL,
+        Datatypes.JSON,
+        Datatypes.JSON,
+        Datatypes.JSONB,
+        Datatypes.STRING_ARRAY,
+        Datatypes.STRING,
+        Datatypes.TEXT_ARRAY,
+        Datatypes.TEXT,
+        Datatypes.TIME_ARRAY,
+        Datatypes.TIME,
+        Datatypes.TIMESTAMP_ARRAY,
+        Datatypes.TIMESTAMP,
+        Datatypes.UUID_ARRAY,
+        Datatypes.UUID,
+    ],
     property: {
         content: {
             label: "Unique",
