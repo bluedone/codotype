@@ -24,13 +24,13 @@ export function SchemaDeleteButton(props: {
             <Tooltip
                 position="left"
                 tooltipContent={
-                    <>
-                        The&nbsp;
-                        <strong>
+                    <p>
+                        The{" "}
+                        <span className="font-semibold">
                             {schemaInput.identifiers.singular.title}
-                        </strong>
-                        &nbsp; Schema is auto-generated and may not be edited.
-                    </>
+                        </span>{" "}
+                        Schema is auto-generated and may not be edited.
+                    </p>
                 }
             >
                 <div className="inline-flex bg-green-500 text-white leading-none rounded-full py-3 px-2 h-6 shadow text-sm justify-center items-center">
@@ -47,11 +47,11 @@ export function SchemaDeleteButton(props: {
             position="left"
             tooltipContent={
                 <React.Fragment>
-                    Remove the&nbsp;
+                    Remove the{" "}
                     <span className="text-semibold">
                         {schemaInput.identifiers.singular.title}
-                    </span>
-                    &nbsp;Data Model.
+                    </span>{" "}
+                    Data Model.
                 </React.Fragment>
             }
         >
