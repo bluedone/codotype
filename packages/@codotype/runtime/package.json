@@ -1,6 +1,6 @@
 {
     "name": "@codotype/runtime",
-    "version": "0.8.0-canary.9",
+    "version": "0.8.0-canary.10",
     "description": "Runtime environment that registers and runs Codotype Plugins",
     "scripts": {
         "test": "jest",
@@ -27,7 +27,7 @@
     },
     "homepage": "https://github.com/codotype/codotype#readme",
     "dependencies": {
-        "@codotype/core": "^0.8.0-canary.14",
+        "@codotype/core": "^0.8.0-canary.17",
         "ejs": "^2.6.1",
         "fs-extra": "^7.0.1",
         "chalk": "^2.4.1",

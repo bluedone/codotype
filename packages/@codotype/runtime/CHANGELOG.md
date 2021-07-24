@@ -1,4 +1,10 @@
-### 0.8.0 (UNPUBLISHED)
+### 0.8.0-canary.10
+
+-   Updates `@codotype/core` to `0.8.0-canary.17`
+
+---
+
+### 0.8.0
 
 -   Adds `Preview` runtime to return compiled templates as a `{ filepath: contents }` object
 
