@@ -543,12 +543,6 @@ const hostingProperty = new Primitives.ConfigurationProperty({
     ],
 });
 
-// Other properties:
-// - Marketing - Mailchip
-// - Customer Engagement - Intercom
-// - Customer Engagement - Segment (Customer Data Platform)
-// - Analytics - Fullstory
-
 export const proConfigurationGroup: ConfigurationGroup = new Primitives.ConfigurationGroup(
     {
         identifier: "pro",
@@ -557,10 +551,7 @@ export const proConfigurationGroup: ConfigurationGroup = new Primitives.Configur
             description: "Unlock new features with our premium offering",
             icon: "",
             documentation: `
-# Make the jump to pro
-### Make the jump to Codotype Pro
-
-Use code \`codo\` at checkout to save 30%
+![Upgrade to Pro](https://camo.githubusercontent.com/e735a3acc1db419090b889d35a4e004fc6245f5245fbda199adc325e39b88bec/68747470733a2f2f692e696d6775722e636f6d2f444c586c64726e2e706e67)
             `,
         },
         properties: [],
@@ -568,6 +559,11 @@ Use code \`codo\` at checkout to save 30%
     },
 );
 
+// Other properties:
+// - Marketing - Mailchip
+// - Customer Engagement - Intercom
+// - Customer Engagement - Segment (Customer Data Platform)
+// - Analytics - Fullstory
 export const NextJsWebsiteStarterPluginVariant: PluginMetadata = new Primitives.Plugin(
     {
         identifier: "react-next-ts-website-starter-variant",

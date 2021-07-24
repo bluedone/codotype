@@ -424,7 +424,7 @@ const stories: Array<[string, PluginMetadata]> = [
                 },
                 defaultRelations: [],
                 defaultSchemas: [
-                    {
+                    new Primitives.Schema({
                         id: "USER_SCHEMA",
                         identifiers: {
                             singular: {
@@ -485,7 +485,7 @@ const stories: Array<[string, PluginMetadata]> = [
                             },
                         ],
                         configuration: {},
-                    },
+                    }),
                 ],
             },
         },
