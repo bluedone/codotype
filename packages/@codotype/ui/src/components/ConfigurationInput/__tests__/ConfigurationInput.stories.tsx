@@ -151,6 +151,7 @@ const allowDisableOptions = [false, true];
 const groupVariants = [
     GroupLayoutVariants.TABS,
     GroupLayoutVariants.LIST,
+    GroupLayoutVariants.DOCS,
     GroupLayoutVariants.DOCS_3x9,
     GroupLayoutVariants.DOCS_4x8,
     GroupLayoutVariants.DOCS_6x6,
@@ -207,12 +208,12 @@ layoutVariantStories.forEach(testCase => {
                         increment();
                     }}
                 />
-                <pre className="p-4 bg-gray-800 text-gray-200 rounded mt-4">
+                {/* <pre className="p-4 bg-gray-800 text-gray-200 rounded mt-4">
                     {JSON.stringify(configurationOptionValue, null, 4)}
                 </pre>
                 <pre className="p-4 bg-gray-800 text-gray-200 rounded mt-4">
                     {JSON.stringify(configurationGroup, null, 4)}
-                </pre>
+                </pre> */}
             </Story>
         );
     });

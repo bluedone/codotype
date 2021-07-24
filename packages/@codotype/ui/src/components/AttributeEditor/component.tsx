@@ -7,16 +7,19 @@ import {
     Primitives,
     makeUniqueId,
     buildDefaultAddonsValue,
+    validateAttribute,
+    SchemaInput,
 } from "@codotype/core";
 import { Droppable, DragDropContext } from "react-beautiful-dnd";
 import { AttributeFormModal } from "./AttributeFormModal";
 import { AttributeDeleteModal } from "./AttributeDeleteModal";
 import { AttributeListItem } from "./AttributeListItem";
 import { AttributeForm } from "./AttributeForm";
-import { validateAttribute } from "./validateAttribute";
 import { Hotkey } from "../Hotkey";
 import { reorder } from "./reorder";
 import { SortableListEmpty } from "../SortableListEmpty";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faKeyboard } from "@fortawesome/free-regular-svg-icons";
 
 // // // //
 
@@ -39,6 +42,7 @@ interface AttributeEditorState {
 }
 
 interface AttributeEditorProps {
+    selectedSchema: SchemaInput;
     attributes: AttributeInput[];
     addons: AttributeAddon[];
     supportedDatatypes: Datatype[];
@@ -143,10 +147,15 @@ export function AttributeEditor(props: AttributeEditorProps) {
                 borderBottomRightRadius: "0px",
             }}
         >
-            {/* TODO - disable this if SchemaInput is locked */}
             <SortableListHeader
                 label="Attributes"
-                tooltip="shift+a"
+                tooltip={
+                    <p>
+                        <FontAwesomeIcon icon={faKeyboard} className="pr-2" />
+                        <span className="font-light">{"SHIFT + A"}</span>
+                    </p>
+                }
+                locked={props.selectedSchema.locked}
                 onClick={() => {
                     const newAttribute: AttributeInput = new Primitives.AttributeInput(
                         { id: "" },

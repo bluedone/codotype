@@ -144,10 +144,10 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
-"@codotype/core@0.8.0-canary.12":
-  version "0.8.0-canary.12"
-  resolved "https://registry.yarnpkg.com/@codotype/core/-/core-0.8.0-canary.12.tgz#94bfccdc122c35b35d82d0124590138d82fe3e62"
-  integrity sha512-4Myv9O97PHXo4LcsVwt6jWdAG6y9+YJSmw3WudbG9czBfpNjO5LszwSvP5GOGG0ZgR7G9t7NxpwcxOKV5VaxlA==
+"@codotype/core@0.8.0-canary.17":
+  version "0.8.0-canary.17"
+  resolved "https://registry.yarnpkg.com/@codotype/core/-/core-0.8.0-canary.17.tgz#1a11c566b1459e9371ef6960f5ec1cea17719104"
+  integrity sha512-+z94yS/rLp9z8PsbPO+pzu7737iGBFKgn/u/AW3nAj/AQD31RjZKx1F1/VvkatM2Xg7B04OFzGBpm7iRHS7gkA==
   dependencies:
     "@types/lodash" "^4.14.149"
     "@types/pluralize" "0.0.29"
@@ -158,18 +158,18 @@
     underscore.string "^3.3.4"
     uuid "^8.0.0"
 
-"@codotype/ui@^0.8.0-canary.49":
-  version "0.8.0-canary.49"
-  resolved "https://registry.yarnpkg.com/@codotype/ui/-/ui-0.8.0-canary.49.tgz#24b60599d9edc4b807867a941aad62f6e064270c"
-  integrity sha512-duLxYJczrMWsYD6aP1Ag7Kp4NID2RVRGT5Fct/W/tg5ZWbzrf7lkNkFQ6zAdOeeWJMMJsl0kYUpDMXvuyV4pBQ==
+"@codotype/ui@^0.8.0-canary.51":
+  version "0.8.0-canary.51"
+  resolved "https://registry.yarnpkg.com/@codotype/ui/-/ui-0.8.0-canary.51.tgz#fb11b25980f5bc812198b84edde2651b150c6031"
+  integrity sha512-LEqMcGmATi7hAohd6A7pbbGcvHOi78+U4zSqvJ8G6GtH2+2FvoLLhXqpUTfzq6PvMBeQgAD+SOPFXNzgGhSUCQ==
   dependencies:
-    "@codotype/core" "0.8.0-canary.12"
+    "@codotype/core" "0.8.0-canary.17"
     "@fortawesome/fontawesome-svg-core" "^1.2.27"
     "@fortawesome/free-brands-svg-icons" "^5.12.1"
     "@fortawesome/free-regular-svg-icons" "^5.12.1"
     "@fortawesome/free-solid-svg-icons" "^5.12.1"
     "@fortawesome/react-fontawesome" "^0.1.8"
-    "@headlessui/react" "^0.2.0"
+    "@headlessui/react" "^1.1.1"
     "@tailwindcss/forms" "^0.2.1"
     "@welldone-software/why-did-you-render" "^6.0.3"
     axios "^0.19.2"
@@ -286,10 +286,10 @@
   resolved "https://registry.yarnpkg.com/@hapi/hoek/-/hoek-9.1.1.tgz#9daf5745156fd84b8e9889a2dc721f0c58e894aa"
   integrity sha512-CAEbWH7OIur6jEOzaai83jq3FmKmv4PmX1JYfs9IrYcGEVI/lyL1EXJGCj7eFVJ0bg5QR8LMxBlEtA+xKiLpFw==
 
-"@headlessui/react@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@headlessui/react/-/react-0.2.0.tgz#a31f90892d736243ba91c1474f534b3256d0c538"
-  integrity sha512-YV+vF+QhTRcspydPdHF3ZXe+FkOiJpRdqMjjFIIX9bSdT2O2T7GurgKQdGgamNUM+B99MZBOTRqxS8Dlh485eg==
+"@headlessui/react@^1.1.1":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@headlessui/react/-/react-1.3.0.tgz#62287c92604923e5dfb394483e5ec2463e1baea6"
+  integrity sha512-2gqTO6BQ3Jr8vDX1B67n1gl6MGKTt6DBmR+H0qxwj0gTMnR2+Qpktj8alRWxsZBODyOiBb77QSQpE/6gG3MX4Q==
 
 "@next/env@10.1.3":
   version "10.1.3"

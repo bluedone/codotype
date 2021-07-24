@@ -26,6 +26,7 @@ Object {
   "locked": false,
   "referencedBy": Array [],
   "relations": Array [],
+  "removable": false,
 }
 `;
 
@@ -56,6 +57,7 @@ Array [
     "locked": false,
     "referencedBy": Array [],
     "relations": Array [],
+    "removable": false,
   },
   Object {
     "attributes": Array [
@@ -117,6 +119,7 @@ Array [
     "locked": false,
     "referencedBy": Array [],
     "relations": Array [],
+    "removable": false,
   },
 ]
 `;

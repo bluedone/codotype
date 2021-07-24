@@ -1,9 +1,26 @@
 import {
     validateAttribute,
-    ATTRIBUTE_ERROR_MESSAGE,
+    ATTRIBUTE_ERROR_MESSAGES,
 } from "../validateAttribute";
-import { Attribute, AttributeInput, EMPTY_TOKEN_CASING } from "@codotype/core";
-import { attributeExample01, attributeExample02 } from "./test_state";
+import { Attribute, AttributeInput } from "../../attribute";
+import { EMPTY_TOKEN_CASING } from "../../token";
+import { AttributeInputBuilder } from "../../primitives/Attribute";
+import { buildTokenCasing } from "../buildTokenCasing";
+import { Datatypes } from "../../datatype";
+
+// // // //
+
+export const attributeExample01: Attribute = new AttributeInputBuilder({
+    id: "1",
+    identifiers: buildTokenCasing("Name"),
+    datatype: Datatypes.STRING,
+});
+
+export const attributeExample02: Attribute = new AttributeInputBuilder({
+    id: "2",
+    identifiers: buildTokenCasing("Email"),
+    datatype: Datatypes.STRING,
+});
 
 // // // //
 
@@ -20,19 +37,19 @@ const testCases: [string, AttributeInput, Attribute[], string[]][] = [
         "invalid attr - empty datatype",
         { ...attributeExample01, datatype: null },
         [attributeExample01, attributeExample02],
-        [ATTRIBUTE_ERROR_MESSAGE.emptyDatatype],
+        [ATTRIBUTE_ERROR_MESSAGES.emptyDatatype],
     ],
     [
         "invalid attr - empty label",
         { ...attributeExample01, identifiers: { ...EMPTY_TOKEN_CASING } },
         [attributeExample01, attributeExample02],
-        [ATTRIBUTE_ERROR_MESSAGE.emptyLabel],
+        [ATTRIBUTE_ERROR_MESSAGES.emptyLabel],
     ],
     [
         "invalid attr - duplicate label",
         { ...attributeExample01, id: "3" },
         [attributeExample01, attributeExample02],
-        [ATTRIBUTE_ERROR_MESSAGE.duplicateLabel],
+        [ATTRIBUTE_ERROR_MESSAGES.duplicateLabel],
     ],
     [
         "invalid attr - no duplicate label when ID hasn't changed",
@@ -45,7 +62,7 @@ const testCases: [string, AttributeInput, Attribute[], string[]][] = [
 // // // //
 
 describe("validateAttribute", () => {
-    testCases.forEach(testCase => {
+    testCases.forEach((testCase) => {
         const [
             testName,
             attributeInput,

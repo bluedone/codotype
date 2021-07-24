@@ -25,6 +25,7 @@ Object {
       \\"attributes\\": [],
       \\"internalNote\\": \\"\\",
       \\"locked\\": false,
+      \\"removable\\": false,
       \\"createdBy\\": \\"user\\",
       \\"configuration\\": {}
     },
@@ -84,6 +85,7 @@ Object {
         }
       ],
       \\"locked\\": false,
+      \\"removable\\": false,
       \\"createdBy\\": \\"user\\",
       \\"configuration\\": {}
     }

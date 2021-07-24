@@ -17,8 +17,8 @@ const rotation = keyframes`
 // Defines StyledImage using the `rotation` animation
 const StyledImage = styled.img`
     animation: ${rotation} 1000ms infinite cubic-bezier(0.62, 0.23, 0.01, 0.83);
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
 `;
 
 // // // //

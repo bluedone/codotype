@@ -364,7 +364,7 @@ const stories: Array<[string, PluginMetadata]> = [
                     //     description:
                     //         "Type of Mockaroo mock data to use for this field",
                     //     propertyType: PropertyTypes.DROPDOWN,
-                    //     dropdownOptions: [
+                    //     selectOptions: [
                     //         {
                     //             value: "name",
                     //             label: "Name",
@@ -424,7 +424,7 @@ const stories: Array<[string, PluginMetadata]> = [
                 },
                 defaultRelations: [],
                 defaultSchemas: [
-                    {
+                    new Primitives.Schema({
                         id: "USER_SCHEMA",
                         identifiers: {
                             singular: {
@@ -485,7 +485,7 @@ const stories: Array<[string, PluginMetadata]> = [
                             },
                         ],
                         configuration: {},
-                    },
+                    }),
                 ],
             },
         },

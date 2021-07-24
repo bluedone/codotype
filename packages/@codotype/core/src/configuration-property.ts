@@ -6,8 +6,7 @@ import { Content } from "./content";
 // // // //
 
 // Feature - what other types need to be supported here?
-// - RADIO_GROUP (nice, but not necessary - use DROPDOWN)
-// - CHECKBOXES - nice, but functionally the same as a MULTI_DROPDOWN
+// - CHECKBOX_GROUP - nice, but functionally the same as a MULTI_DROPDOWN
 // - DATE
 // - TIME
 // - DATETIME
@@ -30,6 +29,7 @@ export type PropertyType =
     | "BOOLEAN"
     | "DROPDOWN"
     | "MULTI_DROPDOWN"
+    | "RADIO_GROUP"
     | "COLLECTION"
     | "INSTANCE";
 export enum PropertyTypes {
@@ -38,6 +38,7 @@ export enum PropertyTypes {
     BOOLEAN = "BOOLEAN",
     DROPDOWN = "DROPDOWN",
     MULTI_DROPDOWN = "MULTI_DROPDOWN",
+    RADIO_GROUP = "RADIO_GROUP",
     COLLECTION = "COLLECTION",
     INSTANCE = "INSTANCE",
 }
@@ -101,15 +102,16 @@ interface ConfigurationPropertyAllowDisable {
 }
 
 /**
- * DropdownOption
- * Defines interface for handling Dropdown options throughout the application
- * Label + identifier is required, description + documentation is optional
+ * SelectOption
+ * Defines interface for handling Dropdown + Select options throughout the application
+ * Label + identifier is required, description + documentation + icon are optional
  */
-export interface DropdownOption {
+export interface SelectOption {
     label: string;
     value: string;
     description?: string;
     documentation?: string;
+    icon?: string;
 }
 
 /**
@@ -125,7 +127,7 @@ export interface ConfigurationProperty {
     identifier: string; // NOTE - this is "identifier" so if its ever stored in a database, the "id" column will be available
     type: PropertyTypes;
     defaultValue: ConfigurationPropertyValue;
-    dropdownOptions: DropdownOption[];
+    selectOptions: SelectOption[];
     properties: ConfigurationProperty[];
 
     // Aesthetic

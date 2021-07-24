@@ -1,3 +1,13 @@
+### v0.8.0-canary.51
+
+-   Updated `@codotype/core` to `0.8.0-canary.17`
+-   Added support for `GroupLayoutVariants.DOCS`
+
+### v0.8.0-canary.50
+
+-   Tailwind UI
+-   A lot of other stuff too.
+
 ### v0.8.0-canary.40
 
 -   Fix `FaqPage` component `react` import statements

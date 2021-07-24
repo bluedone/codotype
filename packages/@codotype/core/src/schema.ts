@@ -15,6 +15,7 @@ export interface SchemaInput {
     id: UUID;
     createdBy: CreatedBy;
     locked: boolean;
+    removable: boolean;
     attributes: AttributeInput[];
     identifiers: TokenPluralization;
     internalNote: string;
@@ -29,6 +30,7 @@ export interface Schema {
     id: UUID;
     createdBy: CreatedBy;
     locked: boolean;
+    removable: boolean;
     attributes: Attribute[];
     relations: Relation[];
     referencedBy: Relation[];

@@ -10,6 +10,7 @@ import {
     faFile,
     faCalendar,
     faCode,
+    faAt,
 } from "@fortawesome/free-solid-svg-icons";
 import { faClock, faFileCode } from "@fortawesome/free-regular-svg-icons";
 
@@ -23,7 +24,7 @@ const mapDatatypeToIcon: { [key in Datatypes]: IconDefinition } = {
     [Datatypes.BIGINT]: faHashtag,
     [Datatypes.FLOAT]: faHashtag,
     [Datatypes.DECIMAL]: faHashtag,
-    [Datatypes.NUMERIC]: faHashtag,
+    [Datatypes.NUMBER]: faHashtag,
     [Datatypes.BOOLEAN]: faToggleOn,
     [Datatypes.DATE]: faCalendar,
     [Datatypes.TIME]: faClock,
@@ -39,7 +40,7 @@ const mapDatatypeToIcon: { [key in Datatypes]: IconDefinition } = {
     [Datatypes.BIGINT_ARRAY]: faHashtag,
     [Datatypes.FLOAT_ARRAY]: faHashtag,
     [Datatypes.DECIMAL_ARRAY]: faHashtag,
-    [Datatypes.NUMERIC_ARRAY]: faHashtag,
+    [Datatypes.NUMBER_ARRAY]: faHashtag,
     [Datatypes.BOOLEAN_ARRAY]: faToggleOn,
     [Datatypes.DATE_ARRAY]: faCalendar,
     [Datatypes.TIME_ARRAY]: faClock,
@@ -55,6 +56,8 @@ const mapDatatypeToIcon: { [key in Datatypes]: IconDefinition } = {
     [Datatypes.ID_ARRAY]: faQuoteRight,
     [Datatypes.AUTO_INCREMENTED_ID]: faQuoteRight,
     [Datatypes.AUTO_INCREMENTED_ID_ARRAY]: faQuoteRight,
+    [Datatypes.EMAIL]: faAt,
+    [Datatypes.EMAIL_ARRAY]: faAt,
 };
 
 export function DatatypeIcon(props: {

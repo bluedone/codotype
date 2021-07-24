@@ -34,19 +34,17 @@ export function validateTokenPluralization(
     const { plural, singular } = tokenPluralization;
 
     const validationFailures: TokenPluralizationValidationFailure = {
-        label: true,
-        snake: true,
-        camel: true,
-        pascal: true,
-        kebab: true,
+        label: false,
+        snake: false,
+        camel: false,
+        pascal: false,
+        kebab: false,
     };
 
     Object.keys(plural).forEach((tokenCase) => {
         if (plural[tokenCase] === singular[tokenCase]) {
             validationFailures[tokenCase] = true;
-            return;
         }
-        validationFailures[tokenCase] = false;
     });
 
     return validationFailures;

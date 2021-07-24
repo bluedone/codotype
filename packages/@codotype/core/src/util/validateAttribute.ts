@@ -1,8 +1,8 @@
-import { AttributeInput } from "@codotype/core";
+import { AttributeInput } from "../attribute";
 
 // // // //
 
-export enum ATTRIBUTE_ERROR_MESSAGE {
+export enum ATTRIBUTE_ERROR_MESSAGES {
     emptyLabel = "Attribute label must be defined",
     emptyDatatype = "Attribute must have a datatype",
     duplicateLabel = "Attribute label must be unique",
@@ -21,23 +21,23 @@ export function validateAttribute(params: {
     const { attributeInput, attributeCollection } = params;
     // Ensure Attribute datatype is defined
     if (attributeInput.datatype === null) {
-        errors.push(ATTRIBUTE_ERROR_MESSAGE.emptyDatatype);
+        errors.push(ATTRIBUTE_ERROR_MESSAGES.emptyDatatype);
     }
 
     // Ensure Attribute label is defined
     if (attributeInput.identifiers.title === "") {
-        errors.push(ATTRIBUTE_ERROR_MESSAGE.emptyLabel);
+        errors.push(ATTRIBUTE_ERROR_MESSAGES.emptyLabel);
     }
 
     // Ensure Attribute title is unique
     if (
         attributeCollection.some(
-            a =>
+            (a) =>
                 a.identifiers.title === attributeInput.identifiers.title &&
                 a.id !== attributeInput.id,
         )
     ) {
-        errors.push(ATTRIBUTE_ERROR_MESSAGE.duplicateLabel);
+        errors.push(ATTRIBUTE_ERROR_MESSAGES.duplicateLabel);
     }
 
     // Return errors array

@@ -1,5 +1,5 @@
 import { Datatype } from "./datatype";
-import { PropertyTypes, DropdownOption } from "./configuration-property";
+import { PropertyTypes, SelectOption } from "./configuration-property";
 import { PropertyTransformation } from "./property-transformation";
 import { PropertyValidation } from "./property-validation";
 import { Content } from "./content";
@@ -55,7 +55,7 @@ export interface AddonProperty {
         | PropertyTypes.STRING
         | PropertyTypes.NUMBER; // Only stores primative data
     defaultValue: null | boolean | string | number;
-    dropdownOptions: DropdownOption[]; // Only used when datatype: OptionType.DROPDOWN;
+    selectOptions: SelectOption[]; // Only used when datatype: OptionType.DROPDOWN;
     validations: PropertyValidation[];
     transformations: PropertyTransformation[];
 }

@@ -1,3 +1,24 @@
+### 0.8.0-canary.17
+
+-   Added `Datatypes.EMAIL` and `Datatypes.EMAIL_ARRAY`
+-   Renamed `Datatypes.NUMERIC` to `Datatypes.NUMBER`
+-   Removed `icon` from `DatatypeMeta`
+
+### 0.8.0-canary.16
+
+-   Added `PropertyTypes.RADIO_GROUP` to `buildConfigurationPropertyValue`
+-   Added `ResponseType` and `ResponseTypesEnum`
+-   Added `removable` property to `SchemaInput` and `Schema` interfaces
+
+### 0.8.0-canary.15
+
+-   Added `PropertyTypes.RADIO_GROUP`
+-   Updated `validateSchema` to include `validateTokenPluralization`
+-   Added `SectionLayoutVariants.DOCS` & `GroupLayoutVariants.DOCS`
+-   Renamed `DropdownOption` to `SelectOption`
+-   Added `icon` property to `SelectOption`
+-   Added `validateAttribute` and `ATTRIBUTE_ERROR_MESSAGES` to `src/util`
+
 ### 0.8.0-canary.14
 
 -   Added `copyFile` function to `Runtime` interfaces

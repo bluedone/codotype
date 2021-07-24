@@ -1,6 +1,6 @@
 {
     "name": "@codotype/cli",
-    "version": "0.8.0-canary.24",
+    "version": "0.8.0-canary.25",
     "description": "CLI for development with codotype.io",
     "bin": {
         "codotype": "bin/codotype.js"
@@ -36,8 +36,8 @@
         "url": "https://github.com/codotype/codotype-cli/issues"
     },
     "dependencies": {
-        "@codotype/runtime": "^0.8.0-canary.9",
-        "@codotype/core": "0.8.0-canary.14",
+        "@codotype/runtime": "^0.8.0-canary.10",
+        "@codotype/core": "0.8.0-canary.17",
         "body-parser": "^1.19.0",
         "chalk": "^2.4.1",
         "commander": "^2.19.0",

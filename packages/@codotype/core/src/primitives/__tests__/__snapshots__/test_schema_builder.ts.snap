@@ -24,5 +24,6 @@ SchemaBuilder {
   },
   "internalNote": "",
   "locked": false,
+  "removable": true,
 }
 `;

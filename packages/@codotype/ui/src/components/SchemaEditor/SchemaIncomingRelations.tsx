@@ -42,8 +42,8 @@ export function SchemaIncomingRelations(props: SchemaIncomingRelationsProps) {
                             <br />
                             <p className="text-muted mb-0">
                                 Relations which reference the{" "}
-                                {inflatedSchema.identifiers.singular.title}{" "}
-                                Schema
+                                {inflatedSchema.identifiers.singular.title} Data
+                                Model
                             </p>
                         </li>
                     )}
@@ -60,12 +60,17 @@ export function SchemaIncomingRelations(props: SchemaIncomingRelationsProps) {
                                     key={r.id}
                                     position="left"
                                     tooltipContent={
-                                        <>
-                                            {'Jump to "' +
-                                                r.identifiers.source.canonical
-                                                    .singular.title +
-                                                '" schema'}
-                                        </>
+                                        <p>
+                                            Jump to{" "}
+                                            <span className="font-semibold">
+                                                {
+                                                    r.identifiers.source
+                                                        .canonical.singular
+                                                        .title
+                                                }
+                                            </span>{" "}
+                                            Data Model
+                                        </p>
                                     }
                                 >
                                     <RelationBadge

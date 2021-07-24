@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import {
     ConfigurationProperty,
-    DropdownOption,
+    SelectOption,
     PropertyTypes,
     ConfigurationPropertyValue,
     PropertyLayoutVariants,
@@ -26,7 +26,7 @@ interface ConfigurationPropertyBuilderParams {
         icon?: string;
     };
     type: PropertyTypes;
-    dropdownOptions?: DropdownOption[];
+    selectOptions?: SelectOption[];
     defaultValue?: ConfigurationPropertyValue;
     required?: boolean;
     enabledByDefault?: boolean;
@@ -55,7 +55,7 @@ export class ConfigurationPropertyBuilder implements ConfigurationProperty {
     allowDisable: boolean = false;
     layoutVariant: PropertyLayoutVariants;
     properties: ConfigurationProperty[] = [];
-    dropdownOptions: DropdownOption[] = [];
+    selectOptions: SelectOption[] = [];
     transformations: PropertyTransformation[] = [];
     validations: PropertyValidation[] = [];
     preview: PropertyPreview = {
@@ -85,7 +85,7 @@ export class ConfigurationPropertyBuilder implements ConfigurationProperty {
         this.layoutVariant =
             params.layoutVariant || PropertyLayoutVariants.CARD_COL_12;
         this.properties = params.properties || this.properties;
-        this.dropdownOptions = params.dropdownOptions || this.dropdownOptions;
+        this.selectOptions = params.selectOptions || this.selectOptions;
         this.validations = params.validations || this.validations;
         this.transformations = params.transformations || this.transformations;
         this.preview = params.preview || this.preview;

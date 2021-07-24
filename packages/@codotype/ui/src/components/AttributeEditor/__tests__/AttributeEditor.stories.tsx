@@ -1,7 +1,12 @@
 import * as React from "react";
 import { storiesOf } from "@storybook/react";
 import { Story } from "../../Story";
-import { Attribute, AttributeInput } from "@codotype/core";
+import {
+    Attribute,
+    AttributeInput,
+    buildTokenPluralization,
+    Primitives,
+} from "@codotype/core";
 import { AttributeEditor } from "../component";
 import {
     attributeExample01,
@@ -21,6 +26,12 @@ storiesOf("Components/ProjectEditor/AttributeEditor/Layout", module).add(
         return (
             <Story>
                 <AttributeEditor
+                    selectedSchema={{
+                        ...new Primitives.Schema({
+                            identifiers: buildTokenPluralization("Movie"),
+                            attributes: [],
+                        }),
+                    }}
                     attributes={attributes}
                     addons={[]}
                     supportedDatatypes={supportedDatatypes}
@@ -47,6 +58,12 @@ storiesOf("Components/ProjectEditor/AttributeEditor/Layout", module).add(
         return (
             <Story>
                 <AttributeEditor
+                    selectedSchema={{
+                        ...new Primitives.Schema({
+                            identifiers: buildTokenPluralization("Movie"),
+                            attributes: [],
+                        }),
+                    }}
                     attributes={attributes}
                     addons={[]}
                     supportedDatatypes={supportedDatatypes}

@@ -4,10 +4,12 @@ import { Content } from "./content";
 // // // //
 
 // LIST - lists all the properties. Documentation renders in a modal.
-// DOCS - Half documentation, half properties. Documentation renders in-line.
+// DOCS - All documentation, no properties
+// DOCS_6x6 - Half documentation, half properties. Documentation renders in-line.
 // DETAIL - main/detail layout. Documentation renders in a modal.
 export enum SectionLayoutVariants {
     LIST = "LIST",
+    DOCS = "DOCS",
     DOCS_3x9 = "DOCS_3x9",
     DOCS_4x8 = "DOCS_4x8",
     DOCS_6x6 = "DOCS_6x6",
@@ -21,6 +23,7 @@ export enum SectionLayoutVariants {
 export enum GroupLayoutVariants {
     TABS = "TABS",
     LIST = "LIST",
+    DOCS = "DOCS",
     DOCS_3x9 = "DOCS_3x9",
     DOCS_4x8 = "DOCS_4x8",
     DOCS_6x6 = "DOCS_6x6",

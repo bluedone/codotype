@@ -57,7 +57,7 @@ export const ComponentBuilderConfigurationProperty: ConfigurationProperty = {
     allowDisable: false,
     unique: false,
     layoutVariant: PropertyLayoutVariants.COL_12,
-    dropdownOptions: [],
+    selectOptions: [],
     transformations: [],
     validations: [],
     preview: {
@@ -79,7 +79,7 @@ export const ComponentBuilderConfigurationProperty: ConfigurationProperty = {
             required: false,
             allowDisable: false,
             properties: [],
-            dropdownOptions: [],
+            selectOptions: [],
             unique: false,
             layoutVariant: PropertyLayoutVariants.COL_12,
             transformations: [],
@@ -105,7 +105,7 @@ export const ComponentBuilderConfigurationProperty: ConfigurationProperty = {
             unique: false,
             layoutVariant: PropertyLayoutVariants.COL_12,
             properties: [],
-            dropdownOptions: [],
+            selectOptions: [],
             transformations: [],
             validations: [],
             preview: {
@@ -121,7 +121,7 @@ export const ComponentBuilderConfigurationProperty: ConfigurationProperty = {
                 documentation: "",
                 icon: "",
             },
-            dropdownOptions: [],
+            selectOptions: [],
             type: PropertyTypes.COLLECTION,
             defaultValue: "",
             enabledByDefault: true,
@@ -151,7 +151,7 @@ export const ComponentBuilderConfigurationProperty: ConfigurationProperty = {
                     unique: false,
                     layoutVariant: PropertyLayoutVariants.COL_12,
                     allowDisable: false,
-                    dropdownOptions: [{ label: "String", value: "string" }],
+                    selectOptions: [{ label: "String", value: "string" }],
                     properties: [],
                     transformations: [],
                     validations: [],
@@ -175,7 +175,7 @@ export const ComponentBuilderConfigurationProperty: ConfigurationProperty = {
                     allowDisable: false,
                     unique: false,
                     layoutVariant: PropertyLayoutVariants.COL_12,
-                    dropdownOptions: [],
+                    selectOptions: [],
                     properties: [],
                     transformations: [],
                     validations: [],
@@ -199,7 +199,7 @@ export const ComponentBuilderConfigurationProperty: ConfigurationProperty = {
                     allowDisable: false,
                     unique: false,
                     layoutVariant: PropertyLayoutVariants.COL_12,
-                    dropdownOptions: [],
+                    selectOptions: [],
                     properties: [],
                     transformations: [],
                     validations: [],
@@ -225,7 +225,7 @@ export const ComponentBuilderConfigurationProperty: ConfigurationProperty = {
             layoutVariant: PropertyLayoutVariants.COL_12,
             required: false,
             allowDisable: true,
-            dropdownOptions: [],
+            selectOptions: [],
             transformations: [],
             validations: [],
             properties: [
@@ -244,7 +244,7 @@ export const ComponentBuilderConfigurationProperty: ConfigurationProperty = {
                     layoutVariant: PropertyLayoutVariants.COL_12,
                     required: false,
                     allowDisable: false,
-                    dropdownOptions: [
+                    selectOptions: [
                         { value: "table", label: "Table Test" },
                         { value: "snapshot", label: "Snapshot Test" },
                     ],
@@ -281,7 +281,7 @@ export const ComponentBuilderConfigurationPropertySingleText: ConfigurationPrope
     required: false,
     allowDisable: false,
     properties: [],
-    dropdownOptions: [],
+    selectOptions: [],
     transformations: [],
     validations: [],
     preview: {
@@ -309,7 +309,7 @@ export const ComponentBuilderConfigurationPropertySingleDropdown: ConfigurationP
     properties: [],
     transformations: [],
     validations: [],
-    dropdownOptions: [
+    selectOptions: [
         {
             value: "OPTION_01",
             label: "One",
@@ -339,7 +339,7 @@ export const ComponentBuilderConfigurationPropertySingleNumber: ConfigurationPro
     required: false,
     allowDisable: false,
     properties: [],
-    dropdownOptions: [],
+    selectOptions: [],
     transformations: [],
     validations: [],
     preview: {
@@ -365,7 +365,7 @@ export const ComponentBuilderConfigurationPropertyWithInstance01: ConfigurationP
     allowDisable: true,
     transformations: [],
     validations: [],
-    dropdownOptions: [],
+    selectOptions: [],
     properties: [ComponentBuilderConfigurationPropertySingleDropdown],
     preview: {
         rules: [],
@@ -389,7 +389,7 @@ export const ComponentBuilderConfigurationPropertyWithInstance: ConfigurationPro
     allowDisable: true,
     unique: false,
     layoutVariant: PropertyLayoutVariants.COL_12,
-    dropdownOptions: [],
+    selectOptions: [],
     transformations: [],
     validations: [],
     preview: {
@@ -414,7 +414,7 @@ export const ComponentBuilderConfigurationPropertyWithInstance: ConfigurationPro
             enabledByDefault: true,
             required: false,
             allowDisable: true,
-            dropdownOptions: [],
+            selectOptions: [],
             transformations: [],
             validations: [],
             preview: {
@@ -473,7 +473,7 @@ export const LambdaBuilderNameProperty: ConfigurationProperty = {
     layoutVariant: PropertyLayoutVariants.COL_12,
     allowDisable: false,
     properties: [],
-    dropdownOptions: [],
+    selectOptions: [],
     transformations: [],
     validations: [],
     preview: {
@@ -504,7 +504,7 @@ export const LambdaLanguageProperty: ConfigurationProperty = {
         rules: [],
         variant: PropertyPreviewLayoutVariant.CODE_DARK,
     },
-    dropdownOptions: [
+    selectOptions: [
         {
             label: "TypeScript",
             value: "typescript",
@@ -544,7 +544,7 @@ export const LambdaBuilderConfigurationGroup: ConfigurationGroup = {
             enabledByDefault: true,
             required: false,
             allowDisable: true,
-            dropdownOptions: [],
+            selectOptions: [],
             transformations: [],
             validations: [],
             properties: [LambdaBuilderNameProperty, LambdaLanguageProperty],
@@ -664,6 +664,7 @@ export const userSchema: SchemaInput = {
     attributes: [],
     internalNote: "",
     locked: false,
+    removable: false,
     createdBy: CreatedByValues.user,
     configuration: {},
 };
@@ -739,6 +740,7 @@ export const movieSchema: SchemaInput = {
     //     },
     // ],
     locked: false,
+    removable: false,
     createdBy: CreatedByValues.user,
     configuration: {},
 };
@@ -773,7 +775,7 @@ export const dummyPluginMetadata: PluginMetadata = {
         supportedDatatypes: [
             Datatypes.STRING,
             Datatypes.TEXT,
-            Datatypes.NUMERIC,
+            Datatypes.NUMBER,
             Datatypes.TIMESTAMP,
         ], // The datatypes supported by this plugin.Only an array of DATATYPE_ * identifiers that correspond to values defined in @codotype/core are accepted.
         supportedRelationTypes: [RelationTypes.TO_ONE, RelationTypes.TO_MANY], // The relation types supported by this plugin.Only an array of RELATION_TYPE_ * identifiers that correspond to values defined in @codotype/core are accepted.

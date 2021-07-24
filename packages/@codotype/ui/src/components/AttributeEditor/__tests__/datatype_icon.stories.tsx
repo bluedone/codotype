@@ -22,7 +22,7 @@ const testCases: [string, Datatype][] = [
     ["Datatypes.BIGINT", Datatypes.BIGINT],
     ["Datatypes.FLOAT", Datatypes.FLOAT],
     ["Datatypes.DECIMAL", Datatypes.DECIMAL],
-    ["Datatypes.NUMERIC", Datatypes.NUMERIC],
+    ["Datatypes.NUMBER", Datatypes.NUMBER],
     ["Datatypes.BOOLEAN", Datatypes.BOOLEAN],
     ["Datatypes.DATE", Datatypes.DATE],
     ["Datatypes.TIME", Datatypes.TIME],
@@ -38,7 +38,7 @@ const testCases: [string, Datatype][] = [
     ["Datatypes.BIGINT_ARRAY", Datatypes.BIGINT_ARRAY],
     ["Datatypes.FLOAT_ARRAY", Datatypes.FLOAT_ARRAY],
     ["Datatypes.DECIMAL_ARRAY", Datatypes.DECIMAL_ARRAY],
-    ["Datatypes.NUMERIC_ARRAY", Datatypes.NUMERIC_ARRAY],
+    ["Datatypes.NUMBER_ARRAY", Datatypes.NUMBER_ARRAY],
     ["Datatypes.BOOLEAN_ARRAY", Datatypes.BOOLEAN_ARRAY],
     ["Datatypes.DATE_ARRAY", Datatypes.DATE_ARRAY],
     ["Datatypes.TIME_ARRAY", Datatypes.TIME_ARRAY],
@@ -46,6 +46,8 @@ const testCases: [string, Datatype][] = [
     ["Datatypes.TIMESTAMP_ARRAY", Datatypes.TIMESTAMP_ARRAY],
     ["Datatypes.SINGLE_FILE", Datatypes.SINGLE_FILE],
     ["Datatypes.SINGLE_IMAGE", Datatypes.SINGLE_IMAGE],
+    ["Datatypes.EMAIL", Datatypes.EMAIL],
+    ["Datatypes.EMAIL_ARRAY", Datatypes.EMAIL_ARRAY],
 ];
 
 const storyCollection = storiesOf(

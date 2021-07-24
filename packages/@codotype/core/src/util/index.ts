@@ -18,3 +18,4 @@ export * from "./applyPropertyPreview";
 export * from "./buildDefaultAddonsValue";
 export * from "./validateSchema";
 export * from "./transformJsonProjectInput";
+export * from "./validateAttribute";

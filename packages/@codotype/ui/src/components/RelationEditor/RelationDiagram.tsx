@@ -39,17 +39,17 @@ export function RelationDiagram(props: RelationDiagramProps) {
 
     const iconCss = classnames("mx-1", {
         "text-blue-500": direction === "out",
-        "text-teal-500": direction !== "out",
+        "text-indigo-500": direction !== "out",
     });
 
     const textColor = classnames({
         "text-blue-500": direction === "out",
-        "text-teal-500": direction !== "out",
+        "text-indigo-500": direction !== "out",
     });
 
     const oppositeTextColor = classnames({
         "text-blue-500": direction !== "out",
-        "text-teal-500": direction === "out",
+        "text-indigo-500": direction === "out",
     });
 
     const icon = direction === "out" ? faArrowRight : faArrowLeft;
@@ -62,13 +62,11 @@ export function RelationDiagram(props: RelationDiagramProps) {
                 <Tooltip
                     position="left"
                     tooltipContent={
-                        <>
+                        <p>
                             References{" "}
-                            <span className="text-indigo-500">
-                                {sourceLabel}
-                            </span>{" "}
-                            Schema
-                        </>
+                            <span className="font-semibold">{sourceLabel}</span>{" "}
+                            Data Model
+                        </p>
                     }
                 >
                     <FontAwesomeIcon
@@ -96,9 +94,11 @@ export function RelationDiagram(props: RelationDiagramProps) {
                 <Tooltip
                     position="left"
                     tooltipContent={
-                        <>
-                            References <strong>{destLabel}</strong> Schema
-                        </>
+                        <p>
+                            References{" "}
+                            <span className="font-semibold">{destLabel}</span>{" "}
+                            Data Model
+                        </p>
                     }
                 >
                     <FontAwesomeIcon

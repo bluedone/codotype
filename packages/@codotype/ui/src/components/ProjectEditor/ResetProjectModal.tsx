@@ -54,10 +54,7 @@ export function ResetProjectModal(props: {
                         Reset Project
                     </button>
                 )}
-                <button
-                    className="modal-close-btn"
-                    onClick={() => onHide()}
-                >
+                <button className="modal-close-btn" onClick={() => onHide()}>
                     Close
                 </button>
             </div>

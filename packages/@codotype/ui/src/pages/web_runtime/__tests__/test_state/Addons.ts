@@ -10,7 +10,25 @@ import {
 // // // //
 
 export const ATTRIBUTE_ADDON_UNIQUE: AttributeAddon = {
-    supportedDatatypes: [Datatypes.STRING],
+    supportedDatatypes: [
+        Datatypes.BIGINT_ARRAY,
+        Datatypes.BIGINT,
+        Datatypes.DECIMAL_ARRAY,
+        Datatypes.DECIMAL,
+        Datatypes.JSON,
+        Datatypes.JSON,
+        Datatypes.JSONB,
+        Datatypes.STRING_ARRAY,
+        Datatypes.STRING,
+        Datatypes.TEXT_ARRAY,
+        Datatypes.TEXT,
+        Datatypes.TIME_ARRAY,
+        Datatypes.TIME,
+        Datatypes.TIMESTAMP_ARRAY,
+        Datatypes.TIMESTAMP,
+        Datatypes.UUID_ARRAY,
+        Datatypes.UUID,
+    ],
     property: {
         content: {
             label: "Unique",
@@ -24,7 +42,7 @@ export const ATTRIBUTE_ADDON_UNIQUE: AttributeAddon = {
         inlineIcon: AddonPropertyInlineIcons.snowflake,
         propertyType: PropertyTypes.BOOLEAN,
         defaultValue: false,
-        dropdownOptions: [],
+        selectOptions: [],
         validations: [],
         transformations: [],
     },
@@ -57,7 +75,7 @@ export const relationAddons: RelationAddon[] = [
 //     description:
 //         "Type of Mockaroo mock data to use for this field",
 //     propertyType: PropertyTypes.DROPDOWN,
-//     dropdownOptions: [
+//     selectOptions: [
 //         {
 //             value: "name",
 //             label: "Name",

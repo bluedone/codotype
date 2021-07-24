@@ -1,6 +1,5 @@
 import {
     Attribute,
-    Datatype,
     Datatypes,
     buildTokenCasing,
     testState,
@@ -21,14 +20,14 @@ export const attributeExample02: Attribute = {
     identifiers: buildTokenCasing("Email"),
 };
 
-export const supportedDatatypes: Datatype[] = [
+export const supportedDatatypes: Datatypes[] = [
     Datatypes.STRING,
     Datatypes.TEXT,
     Datatypes.INT,
     Datatypes.BIGINT,
     Datatypes.FLOAT,
     Datatypes.DECIMAL,
-    Datatypes.NUMERIC,
+    Datatypes.NUMBER,
     Datatypes.BOOLEAN,
     Datatypes.DATE,
     Datatypes.TIME,
@@ -44,7 +43,7 @@ export const supportedDatatypes: Datatype[] = [
     Datatypes.BIGINT_ARRAY,
     Datatypes.FLOAT_ARRAY,
     Datatypes.DECIMAL_ARRAY,
-    Datatypes.NUMERIC_ARRAY,
+    Datatypes.NUMBER_ARRAY,
     Datatypes.BOOLEAN_ARRAY,
     Datatypes.DATE_ARRAY,
     Datatypes.TIME_ARRAY,
@@ -52,4 +51,8 @@ export const supportedDatatypes: Datatype[] = [
     Datatypes.TIMESTAMP_ARRAY,
     Datatypes.SINGLE_FILE,
     Datatypes.SINGLE_IMAGE,
+    Datatypes.EMAIL,
+    Datatypes.EMAIL_ARRAY,
+    Datatypes.AUTO_INCREMENTED_ID,
+    Datatypes.AUTO_INCREMENTED_ID_ARRAY,
 ];

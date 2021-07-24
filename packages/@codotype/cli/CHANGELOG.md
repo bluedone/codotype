@@ -1,8 +1,18 @@
+### v0.8.0-canary.25
+
+#### Changes
+
+-   Updated `@codotype/ui` to `0.8.0-canary.51`
+-   Updated `@codotype/core` to `0.8.0-canary.17`
+-   Updated `@codotype/runtime` to `0.8.0-canary.10`
+
+---
+
 ### v0.8.0-canary.16
 
 #### Changes
 
-- Updated `@codotype/ui` to `0.8.0-canary.40`
+-   Updated `@codotype/ui` to `0.8.0-canary.40`
 
 ---
 
@@ -10,7 +20,7 @@
 
 #### Changes
 
-- Added `validateGenerator` to `codotype generator-doctor` command
+-   Added `validateGenerator` to `codotype generator-doctor` command
 
 ---
 
@@ -18,7 +28,7 @@
 
 #### Changes
 
-- Updated `@codotype/runtime` to `0.5.0` and `@codotype/generator` to `0.4.0`
+-   Updated `@codotype/runtime` to `0.5.0` and `@codotype/generator` to `0.4.0`
 
 ---
 
@@ -26,4 +36,4 @@
 
 #### General
 
-- Added `CHANGELOG.md`
+-   Added `CHANGELOG.md`

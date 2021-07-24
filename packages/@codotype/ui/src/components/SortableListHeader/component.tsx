@@ -9,8 +9,9 @@ import { Tooltip } from "../Tooltip";
 interface SortableListHeaderProps {
     label: string;
     onClick: () => void;
-    tooltip?: string;
+    tooltip?: React.ReactNode;
     rounded?: boolean;
+    locked?: boolean;
 }
 
 /**
@@ -19,27 +20,38 @@ interface SortableListHeaderProps {
  * @param props - see `SortableListHeaderProps`
  */
 export function SortableListHeader(props: SortableListHeaderProps) {
-    const { tooltip = "", rounded = true } = props;
+    const { tooltip = "", rounded = true, locked = false } = props;
+
+    const buttonContent = (
+        <button
+            disabled={locked}
+            className={classnames(
+                "bg-indigo-500 text-white px-3 py-2 text-lg w-full",
+                {
+                    "rounded-tl-2xl rounded-tr-2xl": rounded,
+                    "cursor-not-allowed opacity-80": locked,
+                    "hover:bg-indigo-600": !locked,
+                },
+            )}
+            onClick={e => {
+                e.currentTarget.blur();
+                props.onClick();
+            }}
+        >
+            <div className="flex items-center">
+                <FontAwesomeIcon icon={faPlus} />
+                <p className="d-block mb-0 ml-2">{props.label}</p>
+            </div>
+        </button>
+    );
+
+    if (locked) {
+        return buttonContent;
+    }
 
     return (
         <Tooltip position="right" tooltipContent={<>{tooltip}</>}>
-            <button
-                className={classnames(
-                    "bg-indigo-500 hover:bg-indigo-600 text-white px-3 py-2 text-lg w-full",
-                    {
-                        "rounded-tl-2xl rounded-tr-2xl": rounded,
-                    },
-                )}
-                onClick={e => {
-                    e.currentTarget.blur();
-                    props.onClick();
-                }}
-            >
-                <div className="flex items-center">
-                    <FontAwesomeIcon icon={faPlus} />
-                    <p className="d-block mb-0 ml-2">{props.label}</p>
-                </div>
-            </button>
+            {buttonContent}
         </Tooltip>
     );
 }

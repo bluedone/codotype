@@ -76,7 +76,7 @@ const libraryMetadata: ConfigurationProperty = new Primitives.ConfigurationPrope
                 },
                 type: PropertyTypes.DROPDOWN,
                 layoutVariant: PropertyLayoutVariants.CARD_COL_6,
-                dropdownOptions: [
+                selectOptions: [
                     { value: "mit", label: "MIT" },
                     { value: "gpl", label: "GPL" },
                     { value: "none", label: "None" },

@@ -88,7 +88,7 @@ export function RelationPropertiesForm(props: RelationPropertiesFormProps) {
                             Where the relational data is stored
                         </p>
                         <select
-                            className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                            className="mt-1 block w-full pl-3 pr-10 py-2 text-base bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-800 text-gray-900 dark:text-gray-200 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
                             value={relationInput.sourceSchemaID}
                             onChange={e => {
                                 props.onChange({
@@ -97,14 +97,16 @@ export function RelationPropertiesForm(props: RelationPropertiesFormProps) {
                                 });
                             }}
                         >
-                            {schemas.map(s => (
-                                <option key={s.id} value={s.id}>
-                                    {getSourceLabel({
-                                        schema: s,
-                                        relationInput,
-                                    })}
-                                </option>
-                            ))}
+                            {schemas
+                                .filter(s => s.locked === false)
+                                .map(s => (
+                                    <option key={s.id} value={s.id}>
+                                        {getSourceLabel({
+                                            schema: s,
+                                            relationInput,
+                                        })}
+                                    </option>
+                                ))}
                         </select>
                     </div>
                 </div>
@@ -146,14 +148,14 @@ export function RelationPropertiesForm(props: RelationPropertiesFormProps) {
 
                 <div className="col-span-4">
                     <div className="mb-0 text-center">
-                        <label className="mb-0 text-teal-500">
+                        <label className="mb-0 text-indigo-500">
                             Related Schema
                         </label>
-                        <div className="text-sm text-teal-500">
+                        <div className="text-sm text-indigo-500">
                             Schema referenced by this relation
                         </div>
                         <select
-                            className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                            className="mt-1 block w-full pl-3 pr-10 py-2 text-base bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-800 text-gray-900 dark:text-gray-200 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
                             value={relationInput.destinationSchemaID}
                             onChange={e => {
                                 props.onChange({

@@ -77,6 +77,7 @@ export function SchemaDetail(props: SchemaDetailProps) {
                             {schemaEditorConfiguration.supportedDatatypes
                                 .length > 0 && (
                                 <AttributeEditor
+                                    selectedSchema={props.schema}
                                     attributes={props.schema.attributes}
                                     supportedDatatypes={
                                         schemaEditorConfiguration.supportedDatatypes

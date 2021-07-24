@@ -3,6 +3,7 @@ import {
     ConfigurationPropertyDict,
     ConfigurationGroup,
     SchemaInput,
+    GroupLayoutVariants,
 } from "@codotype/core";
 import { ConfigurationGroupPropertiesVariant } from "./ConfigurationGroupPropertiesVariant";
 import { ConfigurationGroupHeader } from "./ConfigurationGroupHeader";
@@ -60,7 +61,8 @@ export function ConfigurationInput(props: ConfigurationInputProps) {
     // Log error message for invalid ConfigurationGroup
     if (
         configurationGroup.properties.length === 0 &&
-        configurationGroup.sections.length === 0
+        configurationGroup.sections.length === 0 &&
+        configurationGroup.layoutVariant !== GroupLayoutVariants.DOCS
     ) {
         console.error(
             "WARNING - NO CONFIGURATION GROUP PROPERTIES OR SECTIONS DEFINED",

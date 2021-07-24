@@ -1,5 +1,5 @@
 import * as React from "react";
-import classnames from "classnames"
+import classnames from "classnames";
 import {
     ConfigurationGroup,
     GroupLayoutVariants,
@@ -39,8 +39,8 @@ export function ConfigurationGroupPropertiesDetail(props: {
     const selectedProperty:
         | ConfigurationProperty
         | undefined = configurationGroup.properties.find(
-            p => p.identifier === selectedPropertyID,
-        );
+        p => p.identifier === selectedPropertyID,
+    );
 
     // Return null if selectedProperty is undefined
     if (selectedProperty === undefined) {
@@ -65,18 +65,21 @@ export function ConfigurationGroupPropertiesDetail(props: {
             <div className={`col-span-${selectorColumn} border-right`}>
                 <nav className="space-y-1 mt-3">
                     {configurationGroup.properties.map(property => {
-                        const active = property.identifier === selectedPropertyID;
+                        const active =
+                            property.identifier === selectedPropertyID;
                         return (
-                            <button className={classnames('flex items-center w-full px-3 py-2 text-sm font-medium rounded-md focus:outline-none', {
-                                'bg-gray-200 text-gray-900': active,
-                                'text-gray-600 hover:text-gray-900': active,
-                            })}
+                            <button
+                                className={classnames(
+                                    "flex items-center w-full px-3 py-4 text-lg rounded-md focus:outline-none",
+                                    {
+                                        "bg-gray-200 dark:bg-gray-900 text-gray-900 dark:text-gray-200 font-medium": active,
+                                        "text-gray-600 dark:bg-gray-700 dark:text-gray-200 hover:text-gray-900 font-light": !active,
+                                    },
+                                )}
                                 onClick={e => {
                                     e.preventDefault();
                                     e.stopPropagation();
-                                    setSelectedPropertyID(
-                                        property.identifier,
-                                    );
+                                    setSelectedPropertyID(property.identifier);
                                 }}
                             >
                                 {property.content.label}

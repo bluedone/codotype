@@ -21,7 +21,7 @@ export function Dropdown(props: {
                     {(menuParams: { open: boolean }) => (
                         <>
                             <span className="rounded-md shadow-sm">
-                                <Menu.Button className="inline-flex justify-center w-full px-4 py-2 text-sm font-medium leading-5 transition duration-150 ease-in-out bg-white border text-gray-700 border-gray-300 dark:bg-gray-700 dark:text-gray-100 dark:border-gray-900 rounded-md hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800">
+                                <Menu.Button className="inline-flex justify-center w-full px-4 py-2 text-sm font-medium leading-5 bg-white border text-gray-700 border-gray-300 dark:bg-gray-900 dark:text-gray-200 dark:border-gray-800 rounded-md hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800">
                                     <span>{label}</span>
                                     {hideCaret === false && (
                                         <svg
@@ -50,7 +50,7 @@ export function Dropdown(props: {
                             >
                                 <Menu.Items
                                     static
-                                    className="absolute right-0 w-56 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none dark:bg-gray-700 dark:border-gray-900 dark:divide-gray-200"
+                                    className="absolute right-0 w-56 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 dark:divide-gray-900 rounded-md shadow-lg outline-none dark:bg-gray-700 dark:border-gray-900 dark:divide-gray-200"
                                 >
                                     {placeholderItems.map(i => (
                                         <Menu.Item>

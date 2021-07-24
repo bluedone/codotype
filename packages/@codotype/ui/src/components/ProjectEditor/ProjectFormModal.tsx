@@ -31,10 +31,7 @@ export function ProjectFormModal(props: {
                 >
                     Update Project Name
                 </button>
-                <button
-                    className="modal-close-btn"
-                    onClick={props.handleClose}
-                >
+                <button className="modal-close-btn" onClick={props.handleClose}>
                     Close
                 </button>
             </div>

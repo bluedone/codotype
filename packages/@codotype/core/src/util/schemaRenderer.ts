@@ -19,6 +19,8 @@ export enum PreviewOutputTypes {
 }
 
 // CLEANUP - document this function, write better tests
+// CLEANUP - add a type that maps each value in Datatypes enum to a string,
+// and create an instances for each PreviewOutputType
 export const getDatatypeValueJson = ({
     datatype,
 }: {
@@ -43,7 +45,7 @@ export const getDatatypeValueJson = ({
             return `3.14159`;
         case Datatypes.DECIMAL:
             return `3.14159`;
-        case Datatypes.NUMERIC:
+        case Datatypes.NUMBER:
             return `3.14159`;
         case Datatypes.BOOLEAN:
             return `true`;
@@ -73,7 +75,7 @@ export const getDatatypeValueJson = ({
             return `[3.14156, 64.23012]`;
         case Datatypes.DECIMAL_ARRAY:
             return `[0.12390123, 0.12312442]`;
-        case Datatypes.NUMERIC_ARRAY:
+        case Datatypes.NUMBER_ARRAY:
             return `[128, 255.9]`;
         case Datatypes.BOOLEAN_ARRAY:
             return `[true, false, true]`;
@@ -150,7 +152,7 @@ export const getDatatypeValueGraphQL = ({
             return `Number`;
         case Datatypes.DECIMAL:
             return `Number`;
-        case Datatypes.NUMERIC:
+        case Datatypes.NUMBER:
             return `Number`;
         case Datatypes.BOOLEAN:
             return `Boolean`;
@@ -180,7 +182,7 @@ export const getDatatypeValueGraphQL = ({
             return `[Number]`;
         case Datatypes.DECIMAL_ARRAY:
             return `[Number]`;
-        case Datatypes.NUMERIC_ARRAY:
+        case Datatypes.NUMBER_ARRAY:
             return `[Number]`;
         case Datatypes.BOOLEAN_ARRAY:
             return `[Boolean]`;
@@ -255,7 +257,7 @@ export const getDatatypeValueTypeScript = ({
             return `number`;
         case Datatypes.DECIMAL:
             return `number`;
-        case Datatypes.NUMERIC:
+        case Datatypes.NUMBER:
             return `number`;
         case Datatypes.BOOLEAN:
             return `boolean`;
@@ -285,7 +287,7 @@ export const getDatatypeValueTypeScript = ({
             return `number[]`;
         case Datatypes.DECIMAL_ARRAY:
             return `number[]`;
-        case Datatypes.NUMERIC_ARRAY:
+        case Datatypes.NUMBER_ARRAY:
             return `number[]`;
         case Datatypes.BOOLEAN_ARRAY:
             return `boolean[]`;
