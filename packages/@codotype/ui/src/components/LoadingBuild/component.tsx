@@ -2,12 +2,12 @@ import * as React from "react";
 import { LoadingSpinner } from "../LoadingSpinner";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLaugh } from "@fortawesome/free-regular-svg-icons";
-
+import { FadeIn } from "../FadeIn";
 // const sample = require("lodash.sample");
 
 // // // //
 
-export const quotes: [string, string][] = [
+const quotes: [string, string][] = [
     ["Patience is bitter, but its fruit is sweet.", "Aristotle"],
     ["I have no patience with dinosaurs.", "Adam West"],
     [
@@ -47,7 +47,9 @@ export function LoadingBuild(props: { quote?: [string, string] }) {
             </p>
             <div className="flex justify-center my-8">
                 <div className="my-2">
-                    <LoadingSpinner />
+                    <FadeIn show={true} speed="slow">
+                        <LoadingSpinner />
+                    </FadeIn>
                 </div>
             </div>
         </div>
