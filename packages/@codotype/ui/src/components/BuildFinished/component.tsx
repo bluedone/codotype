@@ -66,7 +66,6 @@ export function BuildFinished(props: {
                     </p>
                     {/* TODO - add tooltip */}
                     <CopyToClipboard
-                        text={props.filepath}
                         onCopy={() => {
                             setCopyMessage(true);
                         }}
@@ -75,7 +74,7 @@ export function BuildFinished(props: {
                             <button
                                 className="w-full border-primary border text-md bg-white text-gray-900 mt-2 rounded-full py-2 px-2"
                                 onClick={() => {
-                                    copyToClipboard();
+                                    copyToClipboard(props.filepath);
                                 }}
                             >
                                 {copyMessage && (
