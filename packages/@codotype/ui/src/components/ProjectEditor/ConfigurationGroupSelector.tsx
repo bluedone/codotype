@@ -29,7 +29,7 @@ export function ConfigurationGroupTab(props: {
                 "focus:outline-none group relative min-w-0 flex-1 overflow-hidden bg-white dark:bg-gray-900 py-4 px-4 text-sm font-medium text-center hover:bg-gray-50 focus:z-10",
                 {
                     "cursor-not-allowed": disabled,
-                    "text-gray-900 dark:text-gray-200": props.active,
+                    "text-primary-500 dark:text-primary-500": props.active,
                     "text-gray-500 hover:text-gray-700 darK:text-gray-200 dark:hover:text-gray-400": !props.active,
                 },
             )}
@@ -47,7 +47,7 @@ export function ConfigurationGroupTab(props: {
             {props.active && (
                 <span
                     aria-hidden="true"
-                    className="bg-indigo-500 absolute inset-x-0 bottom-0 h-1"
+                    className="bg-primary-500 absolute inset-x-0 bottom-0 h-1"
                 ></span>
             )}
             {!props.active && (
@@ -141,7 +141,7 @@ export function ConfigurationGroupSelector(props: {
                         <select
                             id="tabs"
                             name="tabs"
-                            className="mt-1 block w-full pl-3 pr-10 py-2 text-base bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-800 text-gray-900 dark:text-gray-200 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                            className="mt-1 block w-full pl-3 pr-10 py-2 text-base bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-800 text-gray-900 dark:text-gray-200 focus:outline-none focus:ring-indigo-500 focus:border-primary-500 sm:text-sm rounded-md"
                             onChange={() => {
                                 setViewingReadme(true);
                                 setViewingSchemas(false);
@@ -264,14 +264,28 @@ export function ConfigurationGroupSelector(props: {
 
                 {/* Render SchemaEditorLayout */}
                 {viewingSchemas && enableSchemaEditor && (
-                    <SchemaEditorLayout
-                        projectInput={props.projectInput}
-                        pluginMetadata={pluginMetadata}
-                        onChange={(updatedProjectInput: ProjectInput) => {
-                            // Invokes props.onChange with updated project
-                            props.onChange(updatedProjectInput);
-                        }}
-                    />
+                    <>
+                        <div className={classnames("mt-5 mb-4")}>
+                            <div className="flex items-center mb-2 text-body">
+                                <h4 className="mb-0 mr-3 text-3xl">
+                                    Data Model
+                                </h4>
+
+                                <p className="mb-0 text-lg font-extralight mt-1">
+                                    Build the data model for your application
+                                </p>
+                            </div>
+                            <hr className="my-3" />
+                        </div>
+                        <SchemaEditorLayout
+                            projectInput={props.projectInput}
+                            pluginMetadata={pluginMetadata}
+                            onChange={(updatedProjectInput: ProjectInput) => {
+                                // Invokes props.onChange with updated project
+                                props.onChange(updatedProjectInput);
+                            }}
+                        />
+                    </>
                 )}
             </div>
         </div>
