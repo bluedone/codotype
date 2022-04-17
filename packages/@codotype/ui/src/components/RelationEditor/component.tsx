@@ -14,7 +14,6 @@ import { RelationDeleteModal } from "./RelationDeleteModal";
 import { RelationListItem } from "./RelationListItem";
 import { RelationForm } from "./RelationForm";
 import { reorder } from "../AttributeEditor/reorder";
-import { Hotkey } from "../Hotkey";
 import { SortableListEmpty } from "../SortableListEmpty";
 import { validateRelation } from "./validateRelation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -97,17 +96,11 @@ export function RelationEditor(props: RelationEditorProps) {
         <div
             className="card"
             style={{
+                borderTop: "none",
                 borderTopLeftRadius: "0px",
                 borderTopRightRadius: "0px",
             }}
         >
-            <Hotkey
-                keyName="shift+r"
-                onKeyDown={() => {
-                    setRelationInput(new Primitives.Relation({ id: "" }));
-                }}
-            />
-
             <SortableListHeader
                 tooltip={
                     <p>
@@ -115,7 +108,7 @@ export function RelationEditor(props: RelationEditorProps) {
                         <span className="font-light">{"SHIFT + R"}</span>
                     </p>
                 }
-                label="Relation"
+                label="Relations"
                 locked={props.selectedSchema.locked}
                 onClick={() => {
                     setRelationInput(

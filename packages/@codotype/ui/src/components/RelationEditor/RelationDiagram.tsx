@@ -39,17 +39,17 @@ export function RelationDiagram(props: RelationDiagramProps) {
 
     const iconCss = classnames("mx-1", {
         "text-blue-500": direction === "out",
-        "text-indigo-500": direction !== "out",
+        "text-primary-500": direction !== "out",
     });
 
     const textColor = classnames({
         "text-blue-500": direction === "out",
-        "text-indigo-500": direction !== "out",
+        "text-primary-500": direction !== "out",
     });
 
     const oppositeTextColor = classnames({
         "text-blue-500": direction !== "out",
-        "text-indigo-500": direction === "out",
+        "text-primary-500": direction === "out",
     });
 
     const icon = direction === "out" ? faArrowRight : faArrowLeft;
@@ -87,7 +87,7 @@ export function RelationDiagram(props: RelationDiagramProps) {
         <React.Fragment>
             <span className={oppositeTextColor}>
                 {destManyOrOne}{" "}
-                <span className="text-indigo-500">{destAlias}</span>
+                <span className="text-primary-500">{destAlias}</span>
             </span>
 
             {slim && destLabel !== destAlias && (
