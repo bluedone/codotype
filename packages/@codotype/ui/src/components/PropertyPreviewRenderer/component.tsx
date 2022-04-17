@@ -35,7 +35,7 @@ export function PropertyPreviewRenderer(props: {
 
     if (variant === PropertyPreviewLayoutVariant.CODE_LIGHT) {
         return (
-            <pre className="mb-0 py-1 px-2 bg-gray-200 border-gray-800 text-gray-800 rounded border border-gray-800">
+            <pre className="mb-0 py-1 px-2 bg-gray-200 text-gray-800 rounded border border-gray-800">
                 {compiledTemplate}
             </pre>
         );
