@@ -2,7 +2,7 @@ import * as React from "react";
 import { DATATYPE_META, DatatypeMeta, Datatype } from "@codotype/core";
 import { DatatypeIcon } from "./DatatypeIcon";
 import classnames from "classnames";
-import { Hotkey } from "../Hotkey";
+// import { Hotkey } from "../Hotkey";
 
 // // // //
 
@@ -17,14 +17,14 @@ export function DatatypeOption(props: DatatypeOptionProps) {
 
     return (
         <React.Fragment>
-            {index < 10 && (
+            {/* {index < 10 && (
                 <Hotkey
                     keyName={`shift+${String(index)}`}
                     onKeyDown={() => {
                         props.onClick(datatype.value);
                     }}
                 />
-            )}
+            )} */}
             <div className="col-span-1">
                 <button
                     className={classnames(

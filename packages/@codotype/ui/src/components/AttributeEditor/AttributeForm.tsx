@@ -14,31 +14,6 @@ import { ConfigurationGroupTab } from "../ProjectEditor/ConfigurationGroupSelect
 
 // // // //
 
-function FormGroupTab(props: {
-    label: string;
-    active: boolean;
-    disabled: boolean;
-    onClick: () => void;
-}) {
-    const { label } = props;
-    const btnClassName: string[] = ["btn w-full nav-link w-full"];
-    if (props.active) {
-        btnClassName.push("active");
-    }
-
-    return (
-        <li className="nav-item flex flex-grow">
-            <button
-                className={btnClassName.join(" ")}
-                disabled={props.disabled}
-                onClick={props.onClick}
-            >
-                {label}
-            </button>
-        </li>
-    );
-}
-
 /**
  * AttributeFormSelector
  */

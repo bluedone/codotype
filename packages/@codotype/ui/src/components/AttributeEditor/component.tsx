@@ -149,12 +149,12 @@ export function AttributeEditor(props: AttributeEditorProps) {
         >
             <SortableListHeader
                 label="Attributes"
-                tooltip={
-                    <p>
-                        <FontAwesomeIcon icon={faKeyboard} className="pr-2" />
-                        <span className="font-light">{"SHIFT + A"}</span>
-                    </p>
-                }
+                // tooltip={
+                //     <p>
+                //         <FontAwesomeIcon icon={faKeyboard} className="pr-2" />
+                //         <span className="font-light">{"SHIFT + A"}</span>
+                //     </p>
+                // }
                 locked={props.selectedSchema.locked}
                 onClick={() => {
                     const newAttribute: AttributeInput = new Primitives.AttributeInput(
@@ -328,16 +328,6 @@ export function AttributeEditor(props: AttributeEditorProps) {
                     }}
                 />
             )}
-            <Hotkey
-                keyName="shift+a"
-                onKeyDown={() => {
-                    const newAttribute: AttributeInput = new Primitives.AttributeInput(
-                        { id: "" },
-                    );
-                    setAttributeInput(newAttribute);
-                    showInputModal(true);
-                }}
-            />
         </div>
     );
 }
