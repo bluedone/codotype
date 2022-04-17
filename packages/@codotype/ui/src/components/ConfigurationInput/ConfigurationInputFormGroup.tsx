@@ -218,7 +218,7 @@ export function ConfigurationInputFormGroup(
     }
     if (property.allowDisable && !enabled && renderInCard) {
         return (
-            <div className={`col-span-12 md:col-span-${colSpan}`}>
+            <div className={`sm:col-span-12 md:col-span-${colSpan}`}>
                 <div className="card shadow-sm py-3 px-3">
                     {disabledFormGroup}
                 </div>
@@ -229,7 +229,7 @@ export function ConfigurationInputFormGroup(
     // Return standard if NOT renderInCard
     if (!renderInCard) {
         return (
-            <div className={`col-span-12 md:col-span-${colSpan}`}>
+            <div className={`sm:col-span-12 md:col-span-${colSpan}`}>
                 <div className="py-3">{formGroup}</div>
             </div>
         );
@@ -237,7 +237,7 @@ export function ConfigurationInputFormGroup(
 
     // Handle renderInCard
     return (
-        <div className={`col-span-12 md:col-span-${colSpan}`}>
+        <div className={`sm:col-span-12 md:col-span-${colSpan}`}>
             <div className="card card-body shadow-sm py-3 px-3">
                 {formGroup}
             </div>

@@ -94,7 +94,7 @@ stories.forEach(story => {
             story[2],
         );
         return (
-            <Story>
+            <Story slim>
                 <ConfigurationInputPrimitive
                     property={story[1]}
                     value={value}
@@ -147,7 +147,7 @@ const numberPropertyFilterStories = storiesOf(
             "",
         );
         return (
-            <Story>
+            <Story slim>
                 <pre>{propertyFilters.join(" + ")}</pre>
                 <ConfigurationInputPrimitive
                     property={{
@@ -185,7 +185,7 @@ const stringPropertyFilterStories = storiesOf(
             "",
         );
         return (
-            <Story>
+            <Story slim>
                 <pre>{propertyFilters.join(" + ")}</pre>
                 <ConfigurationInputPrimitive
                     property={{

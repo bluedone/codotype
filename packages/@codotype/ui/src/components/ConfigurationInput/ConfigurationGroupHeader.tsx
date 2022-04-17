@@ -6,6 +6,7 @@ import {
     SchemaInput,
 } from "@codotype/core";
 import { DocumentationModal } from "../DocumentationModal";
+import classnames from "classnames";
 
 // // // //
 
@@ -63,16 +64,21 @@ export function ConfigurationGroupHeader(props: {
     const renderSmaller: boolean = props.schemaInput !== undefined;
 
     return (
-        <div className="mb-4">
-            <div className="flex items-center mb-2">
+        <div
+            className={classnames({
+                "mb-4": !renderSmaller,
+                "mb-3": renderSmaller,
+            })}
+        >
+            <div className="flex items-center mb-2 text-body">
                 {!renderSmaller && (
-                    <h4 className="mb-0 mr-2 text-2xl">
+                    <h4 className="mb-0 mr-3 text-3xl">
                         {props.configurationGroup.content.label}
                     </h4>
                 )}
 
                 {renderSmaller && (
-                    <p className="lead mb-0 mr-2">
+                    <p className="mb-0 mr-3 font-light text-2xl">
                         {props.configurationGroup.content.label}
                     </p>
                 )}
@@ -86,16 +92,28 @@ export function ConfigurationGroupHeader(props: {
                     />
                 )}
 
-                {/* <br className="d-none d-sm-block d-md-none" /> */}
-
                 {!renderSmaller && (
-                    <p className="lead ml-2 text-muted mb-0">
+                    <p
+                        className={classnames(
+                            "mb-0 text-xl mt-1 font-extralight",
+                            {
+                                "ml-3": enableDocumentationModal,
+                            },
+                        )}
+                    >
                         {props.configurationGroup.content.description}
                     </p>
                 )}
 
                 {renderSmaller && (
-                    <p className="ml-2 text-muted mb-0">
+                    <p
+                        className={classnames(
+                            "mb-0 text-md mt-0.5 font-extralight",
+                            {
+                                "ml-3": enableDocumentationModal,
+                            },
+                        )}
+                    >
                         {props.configurationGroup.content.description}
                     </p>
                 )}
@@ -115,7 +133,11 @@ export function ConfigurationGroupHeader(props: {
                     />
                 )}
             </div>
-            <hr />
+            <hr
+                className={classnames({
+                    "my-3": !renderSmaller,
+                })}
+            />
         </div>
     );
 }
