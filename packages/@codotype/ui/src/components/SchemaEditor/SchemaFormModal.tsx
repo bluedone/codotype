@@ -20,7 +20,7 @@ export function SchemaFormModal(props: {
 }) {
     // Defines title + submit button labels
     let title = "Edit Data Model";
-    let submitLabel = "Update Data Model";
+    let submitLabel = "Data Model";
     if (props.renderNewTitle) {
         title = "New Data Model";
         submitLabel = "Create Data Model";

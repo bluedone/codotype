@@ -19,6 +19,7 @@ import {
 } from "@codotype/core";
 import { reorder } from "../AttributeEditor/reorder";
 import { EmptyState } from "./EmptyState";
+import { CommandPalatte } from "../CommandPalatte/component";
 
 // // // //
 
@@ -292,6 +293,8 @@ export function SchemaEditorLayout(props: {
                         }
                     }}
                 />
+
+                <CommandPalatte />
 
                 {/* Render SchemaForm + SchemaFormModal for CREATE Schema */}
                 <SchemaFormModal

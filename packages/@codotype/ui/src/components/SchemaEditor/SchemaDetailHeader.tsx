@@ -16,9 +16,11 @@ export function SchemaDetailHeader(props: {
     return (
         <div className="flex justify-between">
             <div className="flex items-center flex-grow">
-                <h4 className="mb-0 text-2xl flex">
-                    {props.schemaInput.identifiers.singular.title}
-                    <span className="ml-1 text-indigo-500">Data Model</span>
+                <h4 className="mb-0 text-2xl flex items-center text-primary-500 font-medium">
+                    {props.schemaInput.identifiers.singular.title}{" "}
+                    <span className="ml-1.5 font-extralight flex">
+                        Data Model
+                    </span>
                 </h4>
                 <SchemaEditButton
                     schema={props.schemaInput}

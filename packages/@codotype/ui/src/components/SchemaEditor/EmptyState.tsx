@@ -79,7 +79,7 @@ export function EmptyState(props: {
                                             projectInput => {
                                                 return (
                                                     <button
-                                                        className="flex justify-between w-full bg-white hover:bg-gray-200 px-4 py-4"
+                                                        className="flex justify-between w-full bg-white hover:bg-gray-100 px-4 py-4"
                                                         onClick={() => {
                                                             props.onSelectExampleProject(
                                                                 projectInput,
