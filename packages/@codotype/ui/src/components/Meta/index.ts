@@ -1,1 +1,1 @@
-export { SocialMeta } from "./SocialMeta";
+export { SocialMeta } from "./component";
