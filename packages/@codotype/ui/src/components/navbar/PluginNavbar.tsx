@@ -81,10 +81,10 @@ export function PluginNavbar(props: {
                                 {plugin.content.label}
                             </p>
 
-                            {/* <!-- Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" --> */}
+                            {/* <!-- Current: "border-primary-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" --> */}
                             {/* <a
                                 href="#"
-                                className="border-indigo-500 text-gray-900 dark:text-gray-200 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                                className="border-primary-500 text-gray-900 dark:text-gray-200 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
                             >
                                 Dashboard
                             </a>
@@ -107,10 +107,10 @@ export function PluginNavbar(props: {
                         {/* <!-- Mobile menu, show/hide based on menu state. --> */}
                         {/* <div className="sm:hidden" id="mobile-menu"> */}
                         {/* <div className="pt-2 pb-4 space-y-1"> */}
-                        {/* <!-- Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700" --> */}
+                        {/* <!-- Current: "bg-indigo-50 border-primary-500 text-primary-700", Default: "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700" --> */}
                         {/* <a
                                     href="#"
-                                    className="bg-indigo-50 border-indigo-500 dark:text-gray-200 text-indigo-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
+                                    className="bg-indigo-50 border-primary-500 dark:text-gray-200 text-primary-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
                                 >
                                     Dashboard
                                 </a> */}

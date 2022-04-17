@@ -7,7 +7,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faTwitter, faGithub } from "@fortawesome/free-brands-svg-icons";
 import { DarkModeButton } from "./DarkModeButton";
-// import Link from "next/link";
 
 // // // //
 
@@ -75,13 +74,13 @@ export function AppNavbar(props: {
                                 src="https://res.cloudinary.com/codotype/image/upload/v1560045005/tech-logos/codotype.png"
                                 alt="Codotype Logo"
                             /> */}
-                            <div className="hidden lg:flex items-center h-8 w-auto">
+                            <div className="hidden lg:flex items-center h-8 w-auto select-none">
                                 <img
                                     className="h-8 w-auto"
                                     src="https://res.cloudinary.com/codotype/image/upload/v1560045005/tech-logos/codotype.png"
                                     alt="Codotype Logo"
                                 />
-                                <span className="ml-3 text-2xl font-semibold">
+                                <span className="ml-3 text-2xl font-semibold cursor-default">
                                     Codotype
                                 </span>
                             </div>
@@ -103,7 +102,7 @@ export function AppNavbar(props: {
                                     >
                                         <FontAwesomeIcon
                                             icon={faBook}
-                                            className="text-indigo-500 mr-2"
+                                            className="text-primary-500 mr-2"
                                         />
                                         Docs
                                     </a>
@@ -172,7 +171,7 @@ export function AppNavbar(props: {
                     >
                         <FontAwesomeIcon
                             icon={faBook}
-                            className="text-indigo-500 mr-1"
+                            className="text-primary-500 mr-1"
                         />
                         Docs
                     </a>
