@@ -1,3 +1,7 @@
+### v0.8.0-canary.52
+
+-   Lots of UI/UX refinements
+
 ### v0.8.0-canary.51
 
 -   Updated `@codotype/core` to `0.8.0-canary.17`
