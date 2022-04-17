@@ -1,7 +1,7 @@
 import * as React from "react";
 import { RuntimeProvider } from "../component";
 import { CodotypeStoryDecorator } from "../../Story";
-import { dummyPluginMetadata } from "../../ProjectEditor/__tests__/test_state";
+import { dummyPluginMetadata } from "../../ProjectEditor/stories/test_state";
 import { buildDefaultProjectInput } from "@codotype/core";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 

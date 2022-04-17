@@ -1,6 +1,6 @@
 import * as React from "react";
 import { AppContainer } from "../component";
-import { NextJsWebsiteStarterPlugin } from "../../../pages/web_runtime/__tests__/test_state";
+import { NextJsWebsiteStarterPlugin } from "../../../pages/web_runtime/stories/test_state";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 // // // //
