@@ -1,3 +1,7 @@
+### v0.8.0-canary.53
+
+-   Fix `yarn.lock` file
+
 ### v0.8.0-canary.52
 
 -   Lots of UI/UX refinements
