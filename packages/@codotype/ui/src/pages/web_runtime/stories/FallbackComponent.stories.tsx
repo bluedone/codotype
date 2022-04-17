@@ -9,7 +9,10 @@ const stories: [string][] = [["renders"]];
 
 // // // //
 
-const storyCollection = storiesOf("Pages/WebRuntime/FallbackComponent", module);
+const storyCollection = storiesOf(
+    "App/Pages/WebRuntime/FallbackComponent",
+    module,
+);
 
 stories.forEach(story => {
     storyCollection.add(story[0], () => {

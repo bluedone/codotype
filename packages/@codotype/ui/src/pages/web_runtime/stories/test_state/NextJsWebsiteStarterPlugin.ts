@@ -1,4 +1,4 @@
-import { pluginReadme } from "../../../../components/MarkdownRenderer/__tests__/test_state";
+import { pluginReadme } from "../../../../components/MarkdownRenderer/stories/test_state";
 import {
     PluginMetadata,
     PropertyTypes,
@@ -373,9 +373,23 @@ const hostingConfigurationGroup: ConfigurationGroup = new Primitives.Configurati
             label: "Hosting",
             description: "Configure the hosting of your website",
             icon: "",
-            documentation: "",
+            documentation: `
+### Note
+- This will prevent you from using your app until you setup an API key to authenticate with Google and assign it to its corresponding environment variable in the \`env.local\` file included in the codebase.
+
+- [Setup Google API Key](https://google.com)
+
+- [Setup Microsoft API Key](https://google.com)
+
+- [Setup Apple API Key](https://google.com)
+
+- [Setup Slack API Key](https://google.com)
+
+- [Setup GitHub API Key](https://google.com)
+
+`,
         },
-        layoutVariant: GroupLayoutVariants.LIST,
+        layoutVariant: GroupLayoutVariants.DOCS_6x6,
         properties: [
             new Primitives.ConfigurationProperty({
                 identifier: "platform",
@@ -389,7 +403,7 @@ const hostingConfigurationGroup: ConfigurationGroup = new Primitives.Configurati
                 },
                 type: PropertyTypes.DROPDOWN,
                 // type: PropertyTypes.RADIO_GROUP,
-                layoutVariant: PropertyLayoutVariants.CARD_COL_6,
+                layoutVariant: PropertyLayoutVariants.CARD_COL_12,
                 defaultValue: "vercel",
                 selectOptions: [
                     {

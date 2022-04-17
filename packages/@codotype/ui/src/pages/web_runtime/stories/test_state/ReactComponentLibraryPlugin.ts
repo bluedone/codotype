@@ -1,4 +1,4 @@
-import { pluginReadme } from "../../../../components/MarkdownRenderer/__tests__/test_state";
+import { pluginReadme } from "../../../../components/MarkdownRenderer/stories/test_state";
 import {
     PluginMetadata,
     PropertyTypes,
