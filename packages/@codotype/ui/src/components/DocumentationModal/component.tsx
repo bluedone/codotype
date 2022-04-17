@@ -25,7 +25,7 @@ export function DocumentationModal(props: {
             <a
                 href={props.documentation}
                 target="_blank"
-                className="px-0 py-0 text-indigo-500 hover:text-indigo-600 p-1 focus:outline-none transition-colors duration-150 ease-in-out"
+                className="px-0 py-0 text-primary-500 hover:text-primary-600 p-1 focus:outline-none transition-colors duration-150 ease-in-out"
             >
                 <FontAwesomeIcon icon={faBook} />
             </a>
@@ -35,7 +35,7 @@ export function DocumentationModal(props: {
     return (
         <React.Fragment>
             <button
-                className="px-0 py-0 text-indigo-500 hover:text-indigo-600 p-1 focus:outline-none transition-colors duration-150 ease-in-out"
+                className="px-0 py-0 text-primary-500 hover:text-primary-600 p-1 focus:outline-none transition-colors duration-150 ease-in-out"
                 onClick={() => {
                     showModal(true);
                 }}

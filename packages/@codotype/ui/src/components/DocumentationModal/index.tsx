@@ -1,1 +1,1 @@
-export { DocumentationModal } from "./DocumentationModal";
+export { DocumentationModal } from "./component";
