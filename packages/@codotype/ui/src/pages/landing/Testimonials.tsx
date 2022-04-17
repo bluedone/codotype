@@ -52,12 +52,12 @@ export function Testimonials() {
                                 alt=""
                             />
                             <div
-                                className="absolute inset-0 bg-indigo-500"
+                                className="absolute inset-0 bg-primary-500"
                                 style={{
                                     mixBlendMode: "multiply",
                                 }}
                             ></div>
-                            <div className="absolute inset-0 bg-gradient-to-t from-indigo-600 via-indigo-600 opacity-90"></div>
+                            <div className="absolute inset-0 bg-gradient-to-t from-primary-600 via-primary-600 opacity-90"></div>
                             <div className="relative px-8">
                                 <div>
                                     <img

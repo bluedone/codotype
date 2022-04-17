@@ -39,7 +39,7 @@ export function CtaSection() {
                 </svg>
             </div>
             <div className="mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8">
-                <div className="relative rounded-2xl px-6 py-10 bg-indigo-500 overflow-hidden shadow-xl sm:px-12 sm:py-20">
+                <div className="relative rounded-2xl px-6 py-10 bg-primary-500 overflow-hidden shadow-xl sm:px-12 sm:py-20">
                     <div
                         aria-hidden="true"
                         className="absolute inset-0 -mt-72 sm:-mt-32 md:mt-0"
@@ -83,14 +83,14 @@ export function CtaSection() {
                                 <input
                                     id="cta_email"
                                     type="email"
-                                    className="block w-full border border-transparent rounded-md px-5 py-3 text-base text-gray-900 placeholder-gray-500 shadow-sm focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-500"
+                                    className="block w-full border border-transparent rounded-md px-5 py-3 text-base text-gray-900 placeholder-gray-500 shadow-sm focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-500"
                                     placeholder="Enter your email"
                                 />
                             </div>
                             <div className="mt-4 sm:mt-0 sm:ml-3">
                                 <button
                                     type="submit"
-                                    className="block w-full rounded-md border border-transparent px-5 py-3 bg-gray-900 text-base font-medium text-white shadow hover:bg-black focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-500 sm:px-10"
+                                    className="block w-full rounded-md border border-transparent px-5 py-3 bg-gray-900 text-base font-medium text-white shadow hover:bg-black focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-primary-500 sm:px-10"
                                 >
                                     Notify me
                                 </button>

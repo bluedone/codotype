@@ -16,7 +16,7 @@ export function Hero() {
                     <div className="mt-20">
                         <div>
                             <a href="#" className="inline-flex space-x-4">
-                                <span className="rounded bg-indigo-50 px-2.5 py-1 text-xs font-semibold text-primary-500 tracking-wide uppercase">
+                                <span className="rounded bg-primary-50 px-2.5 py-1 text-xs font-semibold text-primary-500 tracking-wide uppercase">
                                     What's new
                                 </span>
                                 <span className="inline-flex items-center text-sm font-medium text-primary-500 space-x-1">
@@ -56,14 +56,14 @@ export function Hero() {
                                 <input
                                     id="hero_email"
                                     type="email"
-                                    className="block w-full border border-gray-300 rounded-md px-5 py-3 text-base text-gray-900 placeholder-gray-500 shadow-sm focus:border-primary-500 focus:ring-indigo-500"
+                                    className="block w-full border border-gray-300 rounded-md px-5 py-3 text-base text-gray-900 placeholder-gray-500 shadow-sm focus:border-primary-500 focus:ring-primary-500"
                                     placeholder="Enter your email"
                                 />
                             </div>
                             <div className="mt-4 sm:mt-0 sm:ml-3">
                                 <button
                                     type="submit"
-                                    className="block w-full rounded-md border border-transparent px-5 py-3 bg-indigo-500 text-base font-medium text-white shadow hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:px-10"
+                                    className="block w-full rounded-md border border-transparent px-5 py-3 bg-primary-500 text-base font-medium text-white shadow hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 sm:px-10"
                                 >
                                     Notify me
                                 </button>

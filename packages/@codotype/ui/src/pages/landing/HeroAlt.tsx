@@ -39,11 +39,11 @@ export function HeroAlt() {
                                             </span>
                                             <img
                                                 className="h-8 w-auto sm:h-10"
-                                                src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+                                                src="https://tailwindui.com/img/logos/workflow-mark-primary-600.svg"
                                             />
                                         </a>
                                         <div className="-mr-2 flex items-center md:hidden">
-                                            <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                                            <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500">
                                                 <span className="sr-only">
                                                     Open main menu
                                                 </span>
@@ -67,7 +67,7 @@ export function HeroAlt() {
                                     ))}
                                     <a
                                         href="#"
-                                        className="font-medium text-indigo-600 hover:text-indigo-500"
+                                        className="font-medium text-primary-600 hover:text-primary-500"
                                     >
                                         Log in
                                     </a>
@@ -93,12 +93,12 @@ export function HeroAlt() {
                                         <div>
                                             <img
                                                 className="h-8 w-auto"
-                                                src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+                                                src="https://tailwindui.com/img/logos/workflow-mark-primary-600.svg"
                                                 alt=""
                                             />
                                         </div>
                                         <div className="-mr-2">
-                                            <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                                            <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500">
                                                 <span className="sr-only">
                                                     Close main menu
                                                 </span>
@@ -122,7 +122,7 @@ export function HeroAlt() {
                                     </div>
                                     <a
                                         href="#"
-                                        className="block w-full px-5 py-3 text-center font-medium text-indigo-600 bg-gray-50 hover:bg-gray-100"
+                                        className="block w-full px-5 py-3 text-center font-medium text-primary-600 bg-gray-50 hover:bg-gray-100"
                                     >
                                         Log in
                                     </a>
@@ -137,7 +137,7 @@ export function HeroAlt() {
                                 <span className="block xl:inline">
                                     Data to enrich your
                                 </span>{" "}
-                                <span className="block text-indigo-600 xl:inline">
+                                <span className="block text-primary-600 xl:inline">
                                     online business
                                 </span>
                             </h1>
@@ -151,7 +151,7 @@ export function HeroAlt() {
                                 <div className="rounded-md shadow">
                                     <a
                                         href="#"
-                                        className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10"
+                                        className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 md:py-4 md:text-lg md:px-10"
                                     >
                                         Get started
                                     </a>
@@ -159,7 +159,7 @@ export function HeroAlt() {
                                 <div className="mt-3 sm:mt-0 sm:ml-3">
                                     <a
                                         href="#"
-                                        className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10"
+                                        className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-primary-700 bg-primary-100 hover:bg-primary-200 md:py-4 md:text-lg md:px-10"
                                     >
                                         Live demo
                                     </a>
