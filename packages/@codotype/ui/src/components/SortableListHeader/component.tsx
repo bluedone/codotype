@@ -1,7 +1,7 @@
 import * as React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classnames from "classnames";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import { Tooltip } from "../Tooltip";
 
 // // // //
@@ -26,11 +26,11 @@ export function SortableListHeader(props: SortableListHeaderProps) {
         <button
             disabled={locked}
             className={classnames(
-                "bg-indigo-500 text-white px-3 py-2 text-lg w-full",
+                "bg-primary-500 text-white px-3 py-2 text-lg w-full",
                 {
                     "rounded-tl-2xl rounded-tr-2xl": rounded,
                     "cursor-not-allowed opacity-80": locked,
-                    "hover:bg-indigo-600": !locked,
+                    "hover:bg-primary-600": !locked,
                 },
             )}
             onClick={e => {
@@ -39,8 +39,8 @@ export function SortableListHeader(props: SortableListHeaderProps) {
             }}
         >
             <div className="flex items-center">
-                <FontAwesomeIcon icon={faPlus} />
-                <p className="d-block mb-0 ml-2">{props.label}</p>
+                <FontAwesomeIcon icon={faPlusCircle} />
+                <p className="mb-0 ml-2 font-light">Add {props.label}</p>
             </div>
         </button>
     );
