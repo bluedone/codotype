@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Hotkey } from "../Hotkey";
 import { Transition } from "@headlessui/react";
-
 import classnames from "classnames";
 
 // // // //
@@ -15,10 +14,6 @@ export function Modal(props: {
 }) {
     const { show, allowClose = true, size = "md", onHide = () => {} } = props;
 
-    // if (show === false) {
-    //     return null;
-    // }
-
     return (
         <Transition.Root show={show} as={React.Fragment}>
             <div className="fixed z-20 inset-0 overflow-y-auto">
@@ -26,7 +21,6 @@ export function Modal(props: {
                     keyName="esc"
                     onKeyDown={() => {
                         if (allowClose) {
-                            console.log("HIDE HIDE HIDE");
                             onHide();
                         }
                     }}

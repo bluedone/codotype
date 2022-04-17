@@ -1,27 +1,21 @@
 import * as React from "react";
-import { storiesOf } from "@storybook/react";
-import { Story } from "../../../components/Story";
+import { CodotypeStoryDecorator } from "../../Story";
 import { Modal } from "../component";
+import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 // // // //
 
-const storyCollection = storiesOf("Components/Modal", module);
+export default {
+    title: "Components/Modal",
+    component: Modal,
+    decorators: [CodotypeStoryDecorator],
+} as ComponentMeta<typeof Modal>;
 
-storyCollection.add("minimal example", () => {
+const Template: ComponentStory<typeof Modal> = args => {
     const [show, toggleModal] = React.useState(false);
-    return (
-        <Story>
-            <Modal show={true}>
-                <p>Modal Content</p>
-            </Modal>
-        </Story>
-    );
-});
 
-storyCollection.add("renders", () => {
-    const [show, toggleModal] = React.useState(false);
     return (
-        <Story>
+        <React.Fragment>
             <button
                 onClick={() => {
                     toggleModal(true);
@@ -75,6 +69,10 @@ storyCollection.add("renders", () => {
                     </div>
                 </React.Fragment>
             </Modal>
-        </Story>
+        </React.Fragment>
     );
-});
+};
+
+// // // //
+
+export const Render = Template.bind({});
