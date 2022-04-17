@@ -69,7 +69,7 @@ export function Testimonials() {
                                 <blockquote className="mt-8">
                                     <div className="relative text-lg font-medium text-white md:flex-grow">
                                         <svg
-                                            className="absolute top-0 left-0 transform -translate-x-3 -translate-y-2 h-8 w-8 text-indigo-400"
+                                            className="absolute top-0 left-0 transform -translate-x-3 -translate-y-2 h-8 w-8 text-primary-400"
                                             fill="currentColor"
                                             viewBox="0 0 32 32"
                                             aria-hidden="true"
@@ -86,7 +86,7 @@ export function Testimonials() {
                                     </div>
 
                                     <footer className="mt-4">
-                                        <p className="text-base font-semibold text-indigo-200">
+                                        <p className="text-base font-semibold text-primary-200">
                                             Sarah Williams, CEO at Workcation
                                         </p>
                                     </footer>
@@ -174,7 +174,7 @@ export function Testimonials() {
                         <div className="mt-10">
                             <a
                                 href="#"
-                                className="text-base font-medium text-indigo-500"
+                                className="text-base font-medium text-primary-500"
                             >
                                 Learn more about how we're changing the
                                 world&nbsp;&rarr;

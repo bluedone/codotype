@@ -8,17 +8,18 @@ export function Hero() {
                     <div>
                         <img
                             className="h-11 w-auto"
-                            src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=500"
+                            // src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=500"
+                            src="https://res.cloudinary.com/codotype/image/upload/v1560045005/tech-logos/codotype.png"
                             alt="Codotype"
                         />
                     </div>
                     <div className="mt-20">
                         <div>
                             <a href="#" className="inline-flex space-x-4">
-                                <span className="rounded bg-indigo-50 px-2.5 py-1 text-xs font-semibold text-indigo-500 tracking-wide uppercase">
+                                <span className="rounded bg-indigo-50 px-2.5 py-1 text-xs font-semibold text-primary-500 tracking-wide uppercase">
                                     What's new
                                 </span>
-                                <span className="inline-flex items-center text-sm font-medium text-indigo-500 space-x-1">
+                                <span className="inline-flex items-center text-sm font-medium text-primary-500 space-x-1">
                                     <span>Just shipped version 0.1.0</span>
                                     {/* <!-- Heroicon name: solid/chevron-right --> */}
                                     <svg
@@ -39,11 +40,11 @@ export function Hero() {
                         </div>
                         <div className="mt-6 sm:max-w-xl">
                             <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl">
-                                Issue management for growing teams
+                                Instant full-stack React Apps. Seriously.
                             </h1>
                             <p className="mt-6 text-xl text-gray-500">
-                                Anim aute id magna aliqua ad ad non deserunt
-                                sunt. Qui irure qui lorem cupidatat commodo.
+                                Plugin-based framework for generating custom
+                                boilerplate code and scaffolding
                             </p>
                         </div>
                         <form
@@ -55,14 +56,14 @@ export function Hero() {
                                 <input
                                     id="hero_email"
                                     type="email"
-                                    className="block w-full border border-gray-300 rounded-md px-5 py-3 text-base text-gray-900 placeholder-gray-500 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                    className="block w-full border border-gray-300 rounded-md px-5 py-3 text-base text-gray-900 placeholder-gray-500 shadow-sm focus:border-primary-500 focus:ring-indigo-500"
                                     placeholder="Enter your email"
                                 />
                             </div>
                             <div className="mt-4 sm:mt-0 sm:ml-3">
                                 <button
                                     type="submit"
-                                    className="block w-full rounded-md border border-transparent px-5 py-3 bg-indigo-500 text-base font-medium text-white shadow hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:px-10"
+                                    className="block w-full rounded-md border border-transparent px-5 py-3 bg-indigo-500 text-base font-medium text-white shadow hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:px-10"
                                 >
                                     Notify me
                                 </button>
@@ -127,7 +128,7 @@ export function Hero() {
                                         Rated 5 stars
                                     </span>{" "}
                                     by over{" "}
-                                    <span className="font-medium text-indigo-500">
+                                    <span className="font-medium text-primary-500">
                                         500 beta users
                                     </span>
                                 </div>
@@ -177,7 +178,7 @@ export function Hero() {
                     <div className="relative pl-4 -mr-40 sm:mx-auto sm:max-w-3xl sm:px-0 lg:max-w-none lg:h-full lg:pl-12">
                         <img
                             className="w-full rounded-md shadow-xl ring-1 ring-black ring-opacity-5 lg:h-full lg:w-auto lg:max-w-none"
-                            src="https://tailwindui.com/img/component-images/task-app-rose.jpg"
+                            src="./app.png"
                             alt=""
                         />
                     </div>

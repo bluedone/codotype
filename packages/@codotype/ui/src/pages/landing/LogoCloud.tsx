@@ -20,7 +20,7 @@ export function LogoCloud() {
                         <div className="mt-6">
                             <a
                                 href="#"
-                                className="text-base font-medium text-indigo-500"
+                                className="text-base font-medium text-primary-500"
                             >
                                 Meet our investors and advisors&nbsp;&rarr;
                             </a>

@@ -52,12 +52,12 @@ export function CtaSection() {
                             viewBox="0 0 1463 360"
                         >
                             <path
-                                className="text-indigo-400 text-opacity-40"
+                                className="text-primary-400 text-opacity-40"
                                 fill="currentColor"
                                 d="M-82.673 72l1761.849 472.086-134.327 501.315-1761.85-472.086z"
                             />
                             <path
-                                className="text-indigo-600 text-opacity-40"
+                                className="text-primary-600 text-opacity-40"
                                 fill="currentColor"
                                 d="M-217.088 544.086L1544.761 72l134.327 501.316-1761.849 472.086z"
                             />
@@ -68,7 +68,7 @@ export function CtaSection() {
                             <h2 className="text-3xl font-extrabold text-white tracking-tight sm:text-4xl">
                                 Get notified when we&rsquo;re launching.
                             </h2>
-                            <p className="mt-6 mx-auto max-w-2xl text-lg text-indigo-100">
+                            <p className="mt-6 mx-auto max-w-2xl text-lg text-primary-100">
                                 Sagittis scelerisque nulla cursus in enim
                                 consectetur quam. Dictum urna sed consectetur
                                 neque tristique pellentesque.
