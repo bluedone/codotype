@@ -107,13 +107,3 @@ The stack can be customized to meet your requirements
 
 
 `;
-
-// // // //
-
-export const stories: [string, string][] = [
-    ["hello world", "# Hello Markdown!"],
-    ["headers", markdownHeaders],
-    ["xss", xssMarkdown],
-    ["images", image01],
-    ["syntax highlighting", syntaxHighlighting],
-];
