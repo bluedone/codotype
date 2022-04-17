@@ -3,6 +3,7 @@ import { Modal } from "../Modal";
 import { ProjectInput, PluginMetadata, ResponseTypes } from "@codotype/core";
 import { BuildFinished } from "../BuildFinished/component";
 import { LoadingBuild } from "../LoadingBuild";
+import { FadeIn } from "../FadeIn";
 
 // // // //
 
@@ -78,13 +79,14 @@ export function RuntimeProvider(props: RuntimeProviderProps) {
             >
                 <div className="min-w-full w-128">
                     {loading && <LoadingBuild />}
-                    {finished && (
+                    <FadeIn show={finished}>
                         <BuildFinished
                             responseType={ResponseTypes.s3}
                             filepath="https://google.com"
                             onClickBackToEditor={reset}
                         />
-                    )}
+                    </FadeIn>
+                    {/* )} */}
                 </div>
             </Modal>
         </React.Fragment>
