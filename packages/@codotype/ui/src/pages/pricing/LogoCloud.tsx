@@ -5,7 +5,7 @@ export function LogoCloud() {
         <div className="bg-indigo-100 bg-opacity-25">
             <div className="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
                 <div className="lg:grid lg:grid-cols-2 lg:gap-8">
-                    <h2 className="max-w-md mx-auto text-3xl font-extrabold text-indigo-900 text-center lg:max-w-xl lg:text-left">
+                    <h2 className="max-w-md mx-auto text-3xl font-extrabold text-primary-900 text-center lg:max-w-xl lg:text-left">
                         The world's most innovative companies use Codotype
                     </h2>
                     <div className="mt-8 flow-root lg:mt-0 self-center">
