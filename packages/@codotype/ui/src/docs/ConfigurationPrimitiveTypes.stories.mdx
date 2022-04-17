@@ -1,0 +1,71 @@
+import { Meta, Story } from "@storybook/addon-docs";
+
+<Meta title="Docs/Configuration/Configuration Property/Primatives" />
+
+# Configuration Property
+
+Codotype Plugins may optionally expose additional configuration parameters that can be adjusted by end-users before producing code. A brief (albeit, incomplete) overview of the structures and patterns are outlined here.
+
+## Structure
+
+A `ConfigurationGroup` encapsulates a sub-set of a Generator's opt-in configuration. A Generator can expose any number of `ConfigurationGroup` definitions in it's `codotype-generator.json` file. A single `ConfigurationGroup` type is defined as follows:
+
+```
+{
+  id: "DEPLOYMENT_CONFIGURATION_GROUP",
+  label: "Deployment",
+  identifier: "deployment",
+  description: "Configure the deployment options for your app",
+  type: "CONFIGURATION_GROUP_TYPE_OPTION",
+  scope: "CONFIGURATION_GROUP_SCOPE_GLOBAL",
+  more_info_url: "",
+  attributes: ConfigurationOption[]
+}
+
+```
+
+The `ConfigurationOption` type is defined thusly:
+
+```
+{
+  label: "Deploy with Netlify?",
+  identifier: "netlify",
+  datatype: DATAYPE_BOOLEAN,
+  help: "Include configuration files to automatically deploy your app to Netlify",
+  more_info_url: "https://docs.netlify.com/configuration",
+  icon: {
+    type: "ICON_TYPE_URL",
+    value: "https://netlify.com/logo.png"
+  }
+}
+```
+
+### string
+
+The `string` configuration input is used for...
+
+<Story id="components-projecteditor-configurationeditor-configurationinputprimitive--string" />
+
+### number
+
+The `number` configuration input is used for...
+
+<Story id="components-projecteditor-configurationeditor-configurationinputprimitive--number" />
+
+### boolean
+
+The `boolean` configuration input is used for...
+
+<Story id="components-projecteditor-configurationeditor-configurationinputprimitive--boolean" />
+
+### dropdown
+
+The `dropdown` configuration input is used for...
+
+<Story id="components-projecteditor-configurationeditor-configurationinputprimitive--dropdown" />
+
+### radio-group
+
+The `radio-group` configuration input is used for...
+
+<Story id="components-projecteditor-configurationeditor-configurationinputprimitive--radio-group" />
