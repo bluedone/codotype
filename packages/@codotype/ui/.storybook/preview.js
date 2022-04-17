@@ -7,8 +7,15 @@ export const parameters = {
     },
     options: {
         storySort: {
-            order: ['Docs', 'Pages', 'Components', 'Util'],
-            // order: ['Docs', 'Pages', ['Home', 'Login', 'Admin'], 'Components'],
+            order: ["App", "Marketing", "Components", "Util", "Developer", "Docs"]
         },
     },
 };
+
+// // // // 
+// import React from "react";
+
+// const whyDidYouRender = require("@welldone-software/why-did-you-render");
+// whyDidYouRender(React, {
+//     trackAllPureComponents: true,
+// });
