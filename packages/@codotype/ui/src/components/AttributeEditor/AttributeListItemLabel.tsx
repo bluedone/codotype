@@ -16,7 +16,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import * as React from "react";
 import { DatatypeIcon } from "./DatatypeIcon";
-// import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import { Tooltip } from "../Tooltip";
 
 // // // //
