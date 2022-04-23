@@ -3,6 +3,7 @@ import { PluginListItem } from "../../components/PluginCard";
 import { PluginMetadata } from "@codotype/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 // // // //
 
@@ -66,7 +67,10 @@ export function PluginListPage(props: { plugins: PluginMetadata[] }) {
                                 setFilter("");
                             }}
                         >
-                            <FontAwesomeIcon icon={faTimes} className="mr-2" />
+                            <FontAwesomeIcon
+                                icon={faTimes as IconProp}
+                                className="mr-2"
+                            />
                             Clear Filter
                         </button>
                     </div>
