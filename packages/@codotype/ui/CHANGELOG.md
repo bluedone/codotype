@@ -1,7 +1,3 @@
-### v0.8.0-canary.54
-
--   Fix `yarn.lock` file
-
 ### v0.8.0-canary.53
 
 -   Fix `yarn.lock` file
