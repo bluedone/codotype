@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Dropdown } from "react-bootstrap";
 import { Modal } from "../Modal";
 
 // // // //
@@ -19,7 +18,7 @@ export function ResetProjectModal(props: {
 
     return (
         <Modal show={show} onHide={() => onHide()}>
-            <div className="p-5">
+            <div className="p-5 select-none">
                 <h3 className="text-2xl select-none">Reset Project</h3>
 
                 <p className="form-text text-muted mb-2">

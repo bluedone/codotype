@@ -28,7 +28,9 @@ export function AttributeFormModal(props: {
     return (
         <Modal show={props.show} onHide={props.onCancel} size="lg">
             <div className="p-5">
-                <h3 className="text-xl">{title}</h3>
+                <h3 className="text-2xl font-extralight text-primary-600">
+                    {title}
+                </h3>
                 {props.children}
             </div>
             <div className="modal-footer-tw">

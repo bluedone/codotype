@@ -1,3 +1,4 @@
+import classnames from "classnames";
 import * as React from "react";
 const ReactMarkdown = require("react-markdown");
 import SyntaxHighlighter from "react-syntax-highlighter";
@@ -16,6 +17,7 @@ export function ImageBlock(props: { alt: string; src: string }) {
         <img
             src={props.src}
             alt={props.alt}
+            draggable={false}
             style={{
                 width: "100%",
             }}
@@ -29,9 +31,12 @@ export function ImageBlock(props: { alt: string; src: string }) {
  * MarkdownRenderer
  * Renders markdown
  */
-export function MarkdownRenderer(props: { source: string }) {
+export function MarkdownRenderer(props: {
+    source: string;
+    className?: string;
+}) {
     return (
-        <div className="markdown-body">
+        <div className={classnames("markdown-body", props.className)}>
             <ReactMarkdown
                 skipHtml
                 source={props.source}

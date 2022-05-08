@@ -4,6 +4,7 @@ import { PluginMetadata, ProjectInput } from "@codotype/core";
 import useAxios from "axios-hooks";
 import { BuildFinished } from "../../components/BuildFinished/component";
 import { LoadingBuild } from "../../components/LoadingBuild";
+import { FadeIn } from "../../components/FadeIn";
 
 // // // //
 
@@ -70,11 +71,13 @@ export function PluginRunner(props: PluginRunnerProps) {
                     <div className="min-w-full">
                         {loading && <LoadingBuild />}
                         {finished && (
-                            <BuildFinished
-                                responseType={data.type}
-                                filepath={data.filepath}
-                                onClickBackToEditor={reset}
-                            />
+                            <FadeIn show={finished}>
+                                <BuildFinished
+                                    responseType={data.type}
+                                    filepath={data.filepath}
+                                    onClickBackToEditor={reset}
+                                />
+                            </FadeIn>
                         )}
                     </div>
                 </Modal>

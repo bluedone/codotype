@@ -13,7 +13,7 @@ interface FaqItemProps {
 
 export function FaqItemCard({ faqItem }: FaqItemProps) {
     return (
-        <div className="card card-body shadow-sm mb-3">
+        <div className="card card-body rounded-lg shadow-sm mb-3">
             <div className="row">
                 <div className="col col-sm-12">
                     <p className="lead mb-0 w-full">{faqItem.question}</p>

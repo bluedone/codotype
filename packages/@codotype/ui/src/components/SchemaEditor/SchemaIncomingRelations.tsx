@@ -35,7 +35,7 @@ export function SchemaIncomingRelations(props: SchemaIncomingRelationsProps) {
             <div className="col-lg-12">
                 <ul className="flex flex-col pl-0 mb-0 rounded">
                     {inflatedSchema.referencedBy.length === 0 && (
-                        <li className="card card-body">
+                        <li className="card card-body rounded-2xl">
                             <strong className="mb-0 mt-1 text-muted">
                                 No Incoming Relations
                             </strong>
@@ -51,7 +51,7 @@ export function SchemaIncomingRelations(props: SchemaIncomingRelationsProps) {
                         return (
                             <li
                                 key={r.id}
-                                className="cursor-pointer flex justify-between group bg-white dark:bg-gray-900 dark:text-gray-200 hover:bg-gray-200 py-2 px-2 text-gray-900 font-light"
+                                className="cursor-pointer flex justify-between group bg-white dark:bg-gray-900 dark:text-gray-200 hover:bg-gray-100 py-2 px-2 text-gray-900 font-light"
                                 onClick={() => {
                                     props.onSelectSchema(r.sourceSchemaID);
                                 }}

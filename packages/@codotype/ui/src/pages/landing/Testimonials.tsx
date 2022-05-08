@@ -50,26 +50,28 @@ export function Testimonials() {
                                 className="absolute inset-0 h-full w-full object-cover"
                                 src="https://images.unsplash.com/photo-1521510895919-46920266ddb3?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&fp-x=0.5&fp-y=0.6&fp-z=3&width=1440&height=1440&sat=-100"
                                 alt=""
+                                draggable={false}
                             />
                             <div
-                                className="absolute inset-0 bg-indigo-500"
+                                className="absolute inset-0 bg-primary-500"
                                 style={{
                                     mixBlendMode: "multiply",
                                 }}
                             ></div>
-                            <div className="absolute inset-0 bg-gradient-to-t from-indigo-600 via-indigo-600 opacity-90"></div>
+                            <div className="absolute inset-0 bg-gradient-to-t from-primary-600 via-primary-600 opacity-90"></div>
                             <div className="relative px-8">
                                 <div>
                                     <img
                                         className="h-12"
                                         src="https://tailwindui.com/img/logos/workcation.svg?color=white"
                                         alt="Workcation"
+                                        draggable={false}
                                     />
                                 </div>
                                 <blockquote className="mt-8">
                                     <div className="relative text-lg font-medium text-white md:flex-grow">
                                         <svg
-                                            className="absolute top-0 left-0 transform -translate-x-3 -translate-y-2 h-8 w-8 text-indigo-400"
+                                            className="absolute top-0 left-0 transform -translate-x-3 -translate-y-2 h-8 w-8 text-primary-400"
                                             fill="currentColor"
                                             viewBox="0 0 32 32"
                                             aria-hidden="true"
@@ -86,7 +88,7 @@ export function Testimonials() {
                                     </div>
 
                                     <footer className="mt-4">
-                                        <p className="text-base font-semibold text-indigo-200">
+                                        <p className="text-base font-semibold text-primary-200">
                                             Sarah Williams, CEO at Workcation
                                         </p>
                                     </footer>
@@ -174,7 +176,7 @@ export function Testimonials() {
                         <div className="mt-10">
                             <a
                                 href="#"
-                                className="text-base font-medium text-indigo-500"
+                                className="text-base font-medium text-primary-500"
                             >
                                 Learn more about how we're changing the
                                 world&nbsp;&rarr;

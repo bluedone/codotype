@@ -29,11 +29,11 @@ export function SchemaDeleteButton(props: {
                         <span className="font-semibold">
                             {schemaInput.identifiers.singular.title}
                         </span>{" "}
-                        Schema is auto-generated and may not be edited.
+                        Data Model is auto-generated and may not be edited.
                     </p>
                 }
             >
-                <div className="inline-flex bg-green-500 text-white leading-none rounded-full py-3 px-2 h-6 shadow text-sm justify-center items-center">
+                <div className="inline-flex border-green-600 text-green-600 border rounded-full py-3 px-2 h-6 text-sm font-extralight justify-center items-center">
                     <FontAwesomeIcon className="mr-1" icon={faInfoCircle} />
                     Auto-Generated
                 </div>
@@ -46,7 +46,7 @@ export function SchemaDeleteButton(props: {
         <Tooltip
             position="left"
             tooltipContent={
-                <p>
+                <p className="font-light">
                     Remove the{" "}
                     <span className="font-semibold">
                         {schemaInput.identifiers.singular.title}

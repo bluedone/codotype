@@ -22,12 +22,11 @@ export function SchemaSelectorItem(props: {
             {(provided, snapshot) => (
                 <li
                     className={classnames(
-                        "cursor-pointer bg-white dark:bg-gray-900 dark:text-gray-200 select-none hover:bg-gray-200 border-l-8 py-4 px-4",
+                        "cursor-pointer bg-white dark:bg-gray-900 dark:text-gray-200 select-none hover:bg-gray-100",
                         {
-                            "text-gray-900 font-semibold border-indigo-500":
-                                props.selected,
-                            "text-gray-600 font-light border-gray-500": !props.selected,
-                            rounded: snapshot.isDragging,
+                            "text-primary-500 font-semibold": props.selected,
+                            "text-gray-600 font-light": !props.selected,
+                            "rounded-lg": snapshot.isDragging,
                         },
                     )}
                     ref={provided.innerRef}
@@ -37,7 +36,16 @@ export function SchemaSelectorItem(props: {
                         props.onClick(props.schemaInput);
                     }}
                 >
-                    <div className="row items-center flex flex-row justify-between">
+                    <div
+                        className={classnames(
+                            "row items-center flex flex-row justify-between border-l-8 py-4 px-4",
+                            {
+                                "border-primary-500": props.selected,
+                                "border-gray-200": !props.selected,
+                                "rounded-lg": snapshot.isDragging,
+                            },
+                        )}
+                    >
                         <span className="flex">
                             {props.schemaInput.identifiers.singular.title}
                         </span>
@@ -72,12 +80,12 @@ export function SchemaSelector(props: {
     onChange: (selectedSchema: SchemaInput) => void;
 }) {
     return (
-        <div className="shadow rounded-2xl overflow-hidden">
+        <div className="shadow rounded-2xl overflow-hidden border dark:border-gray-800">
             <Droppable droppableId="schema-list">
                 {(provided: any) => {
                     return (
                         <ul
-                            className="list-group rounded-none"
+                            className="list-group rounded-none divide-y divide-gray-100 dark:divide-gray-800"
                             ref={provided.innerRef}
                             {...provided.droppableProps}
                         >

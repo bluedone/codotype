@@ -17,8 +17,8 @@ interface ProjectEditorProps {
 export function ProjectEditor(props: ProjectEditorProps) {
     const { plugin, projectInput } = props;
     return (
-        <div className="row">
-            <div className="col-sm-12">
+        <div className="flex flex-row">
+            <div className="flex flex-col w-full">
                 {/* Render ProjectEditorHeader */}
                 <ProjectEditorHeader
                     pluginMetadata={plugin}

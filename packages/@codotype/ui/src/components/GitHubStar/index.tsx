@@ -1,1 +1,1 @@
-export { GitHubStar } from "./GitHubStar";
+export { GitHubStar, GitHubFollow } from "./GitHubStar";

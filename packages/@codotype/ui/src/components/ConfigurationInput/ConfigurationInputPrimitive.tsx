@@ -9,6 +9,8 @@ import {
     ConfigurationProperty,
     applyStringPropertyTransformations,
     applyNumberPropertyTransformations,
+    StringPropertyTransformations,
+    NumberPropertyTransformations,
 } from "@codotype/core";
 import Switch from "react-switch";
 import classnames from "classnames";
@@ -32,9 +34,9 @@ export default function DropdownMenu(props: ConfigurationInputPrimitiveProps) {
 
     return (
         <Listbox value={value} onChange={onChange}>
-            {({ open }) => (
+            {({ open }: { open: boolean }) => (
                 <div className="mt-1 relative">
-                    <Listbox.Button className="bg-white dark:bg-gray-900 relative w-full border border-gray-300 dark:border-gray-700 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    <Listbox.Button className="bg-white dark:bg-gray-900 relative w-full border border-gray-300 dark:border-gray-700 rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-default focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-primary-500 sm:text-sm">
                         <span className="block truncate text-lg">
                             {selectedOption === undefined
                                 ? content.label
@@ -64,7 +66,7 @@ export default function DropdownMenu(props: ConfigurationInputPrimitiveProps) {
                                             "cursor-default text-lg select-none relative py-2 pl-3 pr-9",
                                             {
                                                 "text-gray-900 dark:text-gray-300": !active,
-                                                "text-white dark:text-gray-200 bg-indigo-600": active,
+                                                "text-white dark:text-gray-200 bg-primary-600": active,
                                             },
                                         )
                                     }
@@ -90,7 +92,7 @@ export default function DropdownMenu(props: ConfigurationInputPrimitiveProps) {
                                                         "absolute inset-y-0 right-0 flex items-center pr-4",
                                                         {
                                                             "text-white": active,
-                                                            "text-indigo-600": !active,
+                                                            "text-primary-600": !active,
                                                         },
                                                     )}
                                                 >
@@ -112,6 +114,7 @@ export default function DropdownMenu(props: ConfigurationInputPrimitiveProps) {
 }
 
 // // // //
+
 export function RadioGroupInput(props: ConfigurationInputPrimitiveProps) {
     const { value, property, onChange } = props;
     const { content } = property;
@@ -143,7 +146,8 @@ export function RadioGroupInput(props: ConfigurationInputPrimitiveProps) {
                                             <div>
                                                 <img
                                                     src={option.icon}
-                                                    className="max-h-14 mr-4 p-1"
+                                                    className="max-h-14 mr-4 p-1 rounded-sm"
+                                                    draggable={false}
                                                 />
                                             </div>
                                         )}
@@ -172,7 +176,7 @@ export function RadioGroupInput(props: ConfigurationInputPrimitiveProps) {
                                     className={classnames(
                                         "absolute -inset-px rounded-lg border-2 pointer-events-none",
                                         {
-                                            "border-indigo-500": checked,
+                                            "border-primary-500": checked,
                                             "border-transparent": !checked,
                                         },
                                     )}
@@ -234,8 +238,7 @@ export function ConfigurationInputPrimitive(
                     const filteredValue: string = applyStringPropertyTransformations(
                         {
                             value,
-                            // @ts-ignore
-                            filters: property.filters,
+                            transformations: property.transformations as StringPropertyTransformations[],
                         },
                     );
 
@@ -270,8 +273,7 @@ export function ConfigurationInputPrimitive(
                     const filteredValue: number = applyNumberPropertyTransformations(
                         {
                             value,
-                            // @ts-ignore
-                            filters: property.filters,
+                            transformations: property.transformations as NumberPropertyTransformations[],
                         },
                     );
 
@@ -293,7 +295,8 @@ export function ConfigurationInputPrimitive(
                 // onHandleColor={}
                 // offHandleColor={}
                 offColor={"#888"}
-                onColor={"#6366F1"}
+                // onColor={"#6366F1"}
+                onColor={"#3b83f6"}
                 checkedIcon={false}
                 uncheckedIcon={false}
                 onChange={(updatedChecked: boolean) => {
@@ -311,11 +314,7 @@ export function ConfigurationInputPrimitive(
 
     // Handle PropertyTypes.RADIO_GROUP
     if (property.type === PropertyTypes.RADIO_GROUP) {
-        return (
-            <div>
-                <RadioGroupInput {...props} />
-            </div>
-        );
+        return <RadioGroupInput {...props} />;
     }
 
     // FEATURE - add support for MULTI_DROPDOWN

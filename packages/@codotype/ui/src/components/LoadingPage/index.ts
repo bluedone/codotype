@@ -1,1 +1,1 @@
-export { LoadingPage } from "./LoadingPage";
+export { LoadingPage } from "./component";

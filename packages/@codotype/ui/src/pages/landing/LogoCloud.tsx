@@ -20,7 +20,7 @@ export function LogoCloud() {
                         <div className="mt-6">
                             <a
                                 href="#"
-                                className="text-base font-medium text-indigo-500"
+                                className="text-base font-medium text-primary-500"
                             >
                                 Meet our investors and advisors&nbsp;&rarr;
                             </a>
@@ -32,6 +32,7 @@ export function LogoCloud() {
                                 className="max-h-12"
                                 src="https://tailwindui.com/img/logos/transistor-logo-gray-400.svg"
                                 alt="Workcation"
+                                draggable={false}
                             />
                         </div>
                         <div className="col-span-1 flex justify-center py-8 px-8 bg-gray-50">
@@ -39,6 +40,7 @@ export function LogoCloud() {
                                 className="max-h-12"
                                 src="https://tailwindui.com/img/logos/mirage-logo-gray-400.svg"
                                 alt="Mirage"
+                                draggable={false}
                             />
                         </div>
                         <div className="col-span-1 flex justify-center py-8 px-8 bg-gray-50">
@@ -46,6 +48,7 @@ export function LogoCloud() {
                                 className="max-h-12"
                                 src="https://tailwindui.com/img/logos/tuple-logo-gray-400.svg"
                                 alt="Tuple"
+                                draggable={false}
                             />
                         </div>
                         <div className="col-span-1 flex justify-center py-8 px-8 bg-gray-50">
@@ -53,6 +56,7 @@ export function LogoCloud() {
                                 className="max-h-12"
                                 src="https://tailwindui.com/img/logos/laravel-logo-gray-400.svg"
                                 alt="Laravel"
+                                draggable={false}
                             />
                         </div>
                         <div className="col-span-1 flex justify-center py-8 px-8 bg-gray-50">
@@ -60,6 +64,7 @@ export function LogoCloud() {
                                 className="max-h-12"
                                 src="https://tailwindui.com/img/logos/statickit-logo-gray-400.svg"
                                 alt="StaticKit"
+                                draggable={false}
                             />
                         </div>
                         <div className="col-span-1 flex justify-center py-8 px-8 bg-gray-50">
@@ -67,6 +72,7 @@ export function LogoCloud() {
                                 className="max-h-12"
                                 src="https://tailwindui.com/img/logos/workcation-logo-gray-400.svg"
                                 alt="Statamic"
+                                draggable={false}
                             />
                         </div>
                     </div>

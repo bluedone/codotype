@@ -19,17 +19,17 @@ export function SchemaEditButton(props: {
         <Tooltip
             position="right"
             tooltipContent={
-                <p>
-                    Edit the{" "}
+                <p className="font-light">
+                    Rename the{" "}
                     <span className="font-semibold">
                         {schema.identifiers.singular.title}
                     </span>{" "}
-                    Data Model
+                    data model
                 </p>
             }
         >
             <button className="btn-icon" onClick={props.onClick}>
-                <FontAwesomeIcon className="ml-2" icon={faPencilAlt} />
+                <FontAwesomeIcon icon={faPencilAlt} />
             </button>
         </Tooltip>
     );

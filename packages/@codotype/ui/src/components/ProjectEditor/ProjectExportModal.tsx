@@ -127,7 +127,7 @@ export function ProjectExportModal(props: {
     const { show, projectInput, onHide } = props;
     return (
         <Modal show={show} onHide={() => onHide()}>
-            <div className="p-5">
+            <div className="p-5 select-none">
                 <h3 className="text-2xl select-none">Export Project</h3>
 
                 <p className="form-text text-muted mb-2">
@@ -149,7 +149,7 @@ export function ProjectExportModal(props: {
                 {projectInput.schemas.length > 0 && (
                     <div className="text-muted text-sm mt-4">
                         <button
-                            className="outline-none focus:outline-none text-indigo-400 hover:text-indigo-500"
+                            className="outline-none focus:outline-none text-primary-400 hover:text-primary-500"
                             onClick={() => {
                                 downloadCodotypePrimitives(projectInput);
                                 onHide();

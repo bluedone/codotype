@@ -39,6 +39,7 @@ export function FeatureSections(props: { featureSections: FeatureSection[] }) {
                                 src={f.imgSrc}
                                 alt="image"
                                 className="img-fluid shadow-lg rounded-sm my-5"
+                                draggable={false}
                             />
                         </div>
                     </div>

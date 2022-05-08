@@ -20,7 +20,7 @@ export function ProjectDropdown(props: {
 
     return (
         <React.Fragment>
-            <div className="mr-4 flex items-center">
+            <div className="mr-4 flex items-center select-none">
                 <Dropdown
                     hideCaret
                     label={

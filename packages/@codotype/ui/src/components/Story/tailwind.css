@@ -15,6 +15,43 @@ html {
     height: 100%;
 }
 
+@keyframes hue-idle {
+    0% {
+        -webkit-filter: hue-rotate(0);
+        -moz-filter: hue-rotate(0);
+        -ms-filter: hue-rotate(0);
+        filter: hue-rotate(0);
+    }
+    25% {
+        -webkit-filter: hue-rotate(30deg);
+        -moz-filter: hue-rotate(30deg);
+        -ms-filter: hue-rotate(30deg);
+        filter: hue-rotate(30deg);
+    }
+    50% {
+        -webkit-filter: hue-rotate(0);
+        -moz-filter: hue-rotate(0);
+        -ms-filter: hue-rotate(0);
+        filter: hue-rotate(0);
+    }
+    75% {
+        -webkit-filter: hue-rotate(-30deg);
+        -moz-filter: hue-rotate(-30deg);
+        -ms-filter: hue-rotate(-30deg);
+        filter: hue-rotate(-30deg);
+    }
+    100% {
+        -webkit-filter: hue-rotate(0);
+        -moz-filter: hue-rotate(0);
+        -ms-filter: hue-rotate(0);
+        filter: hue-rotate(0);
+    }
+}
+
+.generateCodeButton {
+    animation: hue-idle 5s linear infinite;
+}
+
 /* Start updating things one component at a time */
 
 .modal-header {
@@ -34,18 +71,29 @@ html {
     @apply dark:border-gray-600;
     @apply rounded-bl-lg;
     @apply rounded-br-lg;
+    @apply select-none;
+}
+
+.text-body {
+    @apply text-gray-700;
+    @apply dark:text-gray-300;
+}
+
+.bg-body {
+    @apply bg-light-background;
+    @apply dark:bg-gray-900;
 }
 
 .card {
-    @apply rounded-2xl;
     @apply border;
     @apply relative;
     @apply flex;
     @apply flex-col;
     @apply break-words;
     @apply bg-clip-padding;
+    @apply text-gray-700;
     @apply bg-white;
-    @apply border-gray-200;
+    /* @apply border-gray-200; */
     @apply dark:bg-gray-900;
     @apply dark:border-gray-800;
     @apply dark:text-gray-300;
@@ -63,7 +111,8 @@ small {
 
 hr {
     @apply border-t;
-    @apply border-gray-400;
+    @apply border-gray-300;
+    @apply dark:border-gray-800;
     margin-top: 0.2rem;
     margin-bottom: 0.2rem;
 }
@@ -168,28 +217,38 @@ hr {
 
 .btn-icon {
     @apply ml-2;
-    @apply text-gray-500;
+    @apply text-gray-300;
+    @apply dark:text-gray-700;
+    @apply hover:text-primary-500;
+    @apply dark:hover:text-primary-500;
+    @apply opacity-80;
     @apply p-1;
     @apply transition-colors;
     @apply duration-150;
     @apply ease-in-out;
-    @apply hover:text-indigo-400;
+    @apply hover:opacity-100;
     @apply focus:outline-none;
 }
 
 .btn-primary {
     @apply rounded-full;
+    @apply font-light;
     @apply text-white;
-    @apply bg-indigo-500;
-    @apply border-indigo-500;
-    @apply hover:bg-indigo-600;
+    @apply bg-primary-500;
+    @apply border-primary-500;
+    @apply hover:bg-primary-600;
     @apply px-4;
+}
+
+.btn-primary.btn-lg {
+    @apply text-xl;
+    @apply px-8;
 }
 
 button.btn-primary:disabled {
     @apply opacity-50;
     @apply cursor-not-allowed;
-    @apply hover:bg-indigo-500;
+    /* @apply hover:bg-primary-500; */
 }
 
 .btn-danger {
@@ -224,7 +283,7 @@ button.btn-primary:disabled {
     @apply dark:bg-gray-700;
     @apply dark:text-gray-200;
     @apply dark:border-gray-800;
-    @apply hover:bg-gray-200;
+    @apply hover:bg-gray-100;
     @apply dark:hover:bg-gray-800;
     @apply focus:outline-none;
     @apply focus:ring-2;
@@ -258,7 +317,7 @@ button.btn-primary:disabled {
     @apply border-gray-400;
     @apply dark:border-gray-700;
     @apply rounded-md;
-    @apply shadow-md;
+    /* @apply shadow-md; */
     @apply transition-colors;
 
     /* font-family: $input-font-family; */

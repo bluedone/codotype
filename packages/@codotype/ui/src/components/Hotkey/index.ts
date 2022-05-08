@@ -1,1 +1,1 @@
-export { Hotkey } from "./Hotkey";
+export { Hotkey } from "./component";

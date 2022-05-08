@@ -60,11 +60,12 @@ export function PluginNavbar(props: {
                         </button>
                     </div>
                     <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-                        <div className="flex-shrink-0 flex items-center">
+                        <div className="flex-shrink-0 flex items-center select-none">
                             <img
                                 className="block lg:hidden h-8 w-auto"
                                 src="https://res.cloudinary.com/codotype/image/upload/v1560045005/tech-logos/codotype.png"
                                 alt="Codotype Logo"
+                                draggable={false}
                             />
 
                             <div className="hidden lg:flex items-center h-8 w-auto">
@@ -72,8 +73,9 @@ export function PluginNavbar(props: {
                                     className="h-8 w-auto"
                                     src="https://res.cloudinary.com/codotype/image/upload/v1560045005/tech-logos/codotype.png"
                                     alt="Codotype Logo"
+                                    draggable={false}
                                 />
-                                <span className="ml-3 text-2xl">codotype</span>
+                                <span className="ml-3 text-2xl">Codotype</span>
                             </div>
                         </div>
                         <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
@@ -81,10 +83,10 @@ export function PluginNavbar(props: {
                                 {plugin.content.label}
                             </p>
 
-                            {/* <!-- Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" --> */}
+                            {/* <!-- Current: "border-primary-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" --> */}
                             {/* <a
                                 href="#"
-                                className="border-indigo-500 text-gray-900 dark:text-gray-200 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                                className="border-primary-500 text-gray-900 dark:text-gray-200 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
                             >
                                 Dashboard
                             </a>
@@ -107,10 +109,10 @@ export function PluginNavbar(props: {
                         {/* <!-- Mobile menu, show/hide based on menu state. --> */}
                         {/* <div className="sm:hidden" id="mobile-menu"> */}
                         {/* <div className="pt-2 pb-4 space-y-1"> */}
-                        {/* <!-- Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700" --> */}
+                        {/* <!-- Current: "bg-indigo-50 border-primary-500 text-primary-700", Default: "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700" --> */}
                         {/* <a
                                     href="#"
-                                    className="bg-indigo-50 border-indigo-500 dark:text-gray-200 text-indigo-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
+                                    className="bg-indigo-50 border-primary-500 dark:text-gray-200 text-primary-700 block pl-3 pr-4 py-2 border-l-4 text-base font-medium"
                                 >
                                     Dashboard
                                 </a> */}

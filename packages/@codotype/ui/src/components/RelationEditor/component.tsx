@@ -14,7 +14,6 @@ import { RelationDeleteModal } from "./RelationDeleteModal";
 import { RelationListItem } from "./RelationListItem";
 import { RelationForm } from "./RelationForm";
 import { reorder } from "../AttributeEditor/reorder";
-import { Hotkey } from "../Hotkey";
 import { SortableListEmpty } from "../SortableListEmpty";
 import { validateRelation } from "./validateRelation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -95,27 +94,15 @@ export function RelationEditor(props: RelationEditorProps) {
 
     return (
         <div
-            className="card"
+            className="card border-gray-200 rounded-2xl"
             style={{
+                borderTop: "none",
                 borderTopLeftRadius: "0px",
                 borderTopRightRadius: "0px",
             }}
         >
-            <Hotkey
-                keyName="shift+r"
-                onKeyDown={() => {
-                    setRelationInput(new Primitives.Relation({ id: "" }));
-                }}
-            />
-
             <SortableListHeader
-                tooltip={
-                    <p>
-                        <FontAwesomeIcon icon={faKeyboard} className="pr-2" />
-                        <span className="font-light">{"SHIFT + R"}</span>
-                    </p>
-                }
-                label="Relation"
+                label="Relations"
                 locked={props.selectedSchema.locked}
                 onClick={() => {
                     setRelationInput(
@@ -348,6 +335,7 @@ export function RelationEditor(props: RelationEditorProps) {
                     title="No Relations added yet"
                     body="Define references between data models"
                     cta="Add Relation"
+                    locked={props.selectedSchema.locked}
                     onClick={() => {
                         setRelationInput(
                             new Primitives.Relation({

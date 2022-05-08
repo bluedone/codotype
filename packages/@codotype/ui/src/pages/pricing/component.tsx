@@ -6,6 +6,8 @@ import { FrequentlyAskedQuestions } from "./FrequentlyAskedQuestions";
 import { SignUpSection } from "./SignUpSection";
 import { LandingFooter } from "../landing/LandingFooter";
 
+// // // //
+
 export function PricingPage() {
     return (
         <div className="bg-white">

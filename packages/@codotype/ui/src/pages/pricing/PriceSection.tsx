@@ -4,7 +4,7 @@ export function PriceSection() {
     return (
         <div className="relative bg-white">
             <div className="absolute inset-0" aria-hidden="true">
-                <div className="absolute inset-y-0 right-0 w-1/2 bg-gradient-to-r from-blue-600 to-indigo-400"></div>
+                <div className="absolute inset-y-0 right-0 w-1/2 bg-gradient-to-r from-blue-600 to-primary-400"></div>
             </div>
             <div className="relative max-w-7xl mx-auto lg:grid lg:grid-cols-2 lg:px-8">
                 <div className="bg-white py-16 px-4 sm:py-24 sm:px-6 lg:px-0 lg:pr-8">
@@ -17,7 +17,7 @@ export function PriceSection() {
                         </p>
                         <dl className="mt-12 space-y-10">
                             <div className="flex">
-                                <div className="flex-shrink-0 h-12 w-12 bg-gradient-to-r from-blue-600 to-indigo-400 rounded-md flex items-center justify-center">
+                                <div className="flex-shrink-0 h-12 w-12 bg-gradient-to-r from-blue-600 to-primary-400 rounded-md flex items-center justify-center">
                                     <svg
                                         className="h-6 w-6 text-white"
                                         xmlns="http://www.w3.org/2000/svg"
@@ -48,7 +48,7 @@ export function PriceSection() {
                             </div>
 
                             <div className="flex">
-                                <div className="flex-shrink-0 h-12 w-12 bg-gradient-to-r from-blue-600 to-indigo-400 rounded-md flex items-center justify-center">
+                                <div className="flex-shrink-0 h-12 w-12 bg-gradient-to-r from-blue-600 to-primary-400 rounded-md flex items-center justify-center">
                                     <svg
                                         className="h-6 w-6 text-white"
                                         xmlns="http://www.w3.org/2000/svg"
@@ -80,7 +80,7 @@ export function PriceSection() {
                             </div>
 
                             <div className="flex">
-                                <div className="flex-shrink-0 h-12 w-12 bg-gradient-to-r from-blue-600 to-indigo-400 rounded-md flex items-center justify-center">
+                                <div className="flex-shrink-0 h-12 w-12 bg-gradient-to-r from-blue-600 to-primary-400 rounded-md flex items-center justify-center">
                                     <svg
                                         className="h-6 w-6 text-white"
                                         xmlns="http://www.w3.org/2000/svg"
@@ -112,7 +112,7 @@ export function PriceSection() {
                             </div>
 
                             <div className="flex">
-                                <div className="flex-shrink-0 h-12 w-12 bg-gradient-to-r from-blue-600 to-indigo-400 rounded-md flex items-center justify-center">
+                                <div className="flex-shrink-0 h-12 w-12 bg-gradient-to-r from-blue-600 to-primary-400 rounded-md flex items-center justify-center">
                                     <svg
                                         className="h-6 w-6 text-white"
                                         xmlns="http://www.w3.org/2000/svg"
@@ -143,7 +143,7 @@ export function PriceSection() {
                         </dl>
                     </div>
                 </div>
-                <div className="bg-gradient-to-r from-blue-600 to-indigo-400 py-16 px-4 sm:py-24 sm:px-6 lg:bg-none lg:flex lg:items-center lg:justify-end lg:px-0 lg:pl-8">
+                <div className="bg-gradient-to-r from-blue-600 to-primary-400 py-16 px-4 sm:py-24 sm:px-6 lg:bg-none lg:flex lg:items-center lg:justify-end lg:px-0 lg:pl-8">
                     <div className="max-w-lg mx-auto w-full space-y-8 lg:mx-0">
                         <div>
                             <h2 className="sr-only">Price</h2>
