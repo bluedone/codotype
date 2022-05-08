@@ -1,3 +1,7 @@
+### v0.8.0-canary.54
+
+-   Update `AppContainer` styles
+
 ### v0.8.0-canary.53
 
 -   Fix `yarn.lock` file
