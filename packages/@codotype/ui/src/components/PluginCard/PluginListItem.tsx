@@ -11,7 +11,7 @@ import { PluginTechTag } from "./PluginTechTag";
 export function PluginListItem(props: { plugin: PluginMetadata }) {
     const { plugin } = props;
     return (
-        <div className="card card-body shadow hover:shadow-lg mb-2">
+        <div className="card card-body rounded-lg shadow hover:shadow-lg mb-2">
             <div className="flex flex-col">
                 <div className="flex items-center">
                     <p className="lead mb-0 w-full flex items-center">
@@ -19,6 +19,7 @@ export function PluginListItem(props: { plugin: PluginMetadata }) {
                             className="mr-2"
                             style={{ maxWidth: "2rem" }}
                             src={plugin.content.icon}
+                            draggable={false}
                         />
                         {plugin.content.label}
                     </p>

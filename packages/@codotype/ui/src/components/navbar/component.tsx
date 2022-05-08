@@ -79,6 +79,7 @@ export function AppNavbar(props: {
                                     className="h-8 w-auto"
                                     src="https://res.cloudinary.com/codotype/image/upload/v1560045005/tech-logos/codotype.png"
                                     alt="Codotype Logo"
+                                    draggable={false}
                                 />
                                 <span className="ml-3 text-2xl font-semibold cursor-default">
                                     Codotype

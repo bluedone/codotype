@@ -146,7 +146,8 @@ export function RadioGroupInput(props: ConfigurationInputPrimitiveProps) {
                                             <div>
                                                 <img
                                                     src={option.icon}
-                                                    className="max-h-14 mr-4 p-1"
+                                                    className="max-h-14 mr-4 p-1 rounded-sm"
+                                                    draggable={false}
                                                 />
                                             </div>
                                         )}

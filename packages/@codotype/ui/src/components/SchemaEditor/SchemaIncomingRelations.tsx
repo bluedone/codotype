@@ -35,7 +35,7 @@ export function SchemaIncomingRelations(props: SchemaIncomingRelationsProps) {
             <div className="col-lg-12">
                 <ul className="flex flex-col pl-0 mb-0 rounded">
                     {inflatedSchema.referencedBy.length === 0 && (
-                        <li className="card card-body">
+                        <li className="card card-body rounded-2xl">
                             <strong className="mb-0 mt-1 text-muted">
                                 No Incoming Relations
                             </strong>

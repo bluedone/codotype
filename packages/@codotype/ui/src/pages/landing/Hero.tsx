@@ -11,6 +11,7 @@ export function Hero() {
                             // src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=500"
                             src="https://res.cloudinary.com/codotype/image/upload/v1560045005/tech-logos/codotype.png"
                             alt="Codotype"
+                            draggable={false}
                         />
                     </div>
                     <div className="mt-20">
@@ -180,6 +181,7 @@ export function Hero() {
                             className="w-full rounded-md shadow-xl ring-1 ring-black ring-opacity-5 lg:h-full lg:w-auto lg:max-w-none"
                             src="./app.png"
                             alt=""
+                            draggable={false}
                         />
                     </div>
                 </div>

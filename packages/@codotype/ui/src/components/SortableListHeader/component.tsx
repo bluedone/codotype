@@ -1,15 +1,13 @@
 import * as React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classnames from "classnames";
-import { faPlus, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
-import { Tooltip } from "../Tooltip";
+import { faLock, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 
 // // // //
 
 interface SortableListHeaderProps {
     label: string;
     onClick: () => void;
-    tooltip?: React.ReactNode;
     rounded?: boolean;
     locked?: boolean;
 }
@@ -20,17 +18,32 @@ interface SortableListHeaderProps {
  * @param props - see `SortableListHeaderProps`
  */
 export function SortableListHeader(props: SortableListHeaderProps) {
-    const { tooltip = "", rounded = true, locked = false } = props;
+    const { rounded = true, locked = false } = props;
 
-    const buttonContent = (
+    if (locked) {
+        return (
+            <div
+                className={classnames(
+                    "border border-gray-100 dark:border-gray-800 text-gray-700 dark:text-gray-100 px-3 py-2 text-lg w-full",
+                    {
+                        "rounded-tl-2xl rounded-tr-2xl": rounded,
+                    },
+                )}
+            >
+                <div className="flex items-center">
+                    <FontAwesomeIcon size="sm" icon={faLock} />
+                    <p className="mb-0 ml-2 font-light">{props.label}</p>
+                </div>
+            </div>
+        );
+    }
+
+    return (
         <button
-            disabled={locked}
             className={classnames(
-                "bg-primary-500 text-white px-3 py-2 text-lg w-full",
+                "bg-primary-500 hover:bg-primary-600 text-white px-3 py-2 text-lg w-full",
                 {
                     "rounded-tl-2xl rounded-tr-2xl": rounded,
-                    "cursor-not-allowed opacity-80": locked,
-                    "hover:bg-primary-600": !locked,
                 },
             )}
             onClick={e => {
@@ -43,15 +56,5 @@ export function SortableListHeader(props: SortableListHeaderProps) {
                 <p className="mb-0 ml-2 font-light">Add {props.label}</p>
             </div>
         </button>
-    );
-
-    if (locked) {
-        return buttonContent;
-    }
-
-    return (
-        <Tooltip position="right" tooltipContent={<>{tooltip}</>}>
-            {buttonContent}
-        </Tooltip>
     );
 }

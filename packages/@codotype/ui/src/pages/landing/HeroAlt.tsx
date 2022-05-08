@@ -40,6 +40,7 @@ export function HeroAlt() {
                                             <img
                                                 className="h-8 w-auto sm:h-10"
                                                 src="https://tailwindui.com/img/logos/workflow-mark-primary-600.svg"
+                                                draggable={false}
                                             />
                                         </a>
                                         <div className="-mr-2 flex items-center md:hidden">
@@ -95,6 +96,7 @@ export function HeroAlt() {
                                                 className="h-8 w-auto"
                                                 src="https://tailwindui.com/img/logos/workflow-mark-primary-600.svg"
                                                 alt=""
+                                                draggable={false}
                                             />
                                         </div>
                                         <div className="-mr-2">
@@ -174,6 +176,7 @@ export function HeroAlt() {
                     className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
                     src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80"
                     alt=""
+                    draggable={false}
                 />
             </div>
         </div>

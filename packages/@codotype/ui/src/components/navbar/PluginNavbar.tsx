@@ -60,11 +60,12 @@ export function PluginNavbar(props: {
                         </button>
                     </div>
                     <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-                        <div className="flex-shrink-0 flex items-center">
+                        <div className="flex-shrink-0 flex items-center select-none">
                             <img
                                 className="block lg:hidden h-8 w-auto"
                                 src="https://res.cloudinary.com/codotype/image/upload/v1560045005/tech-logos/codotype.png"
                                 alt="Codotype Logo"
+                                draggable={false}
                             />
 
                             <div className="hidden lg:flex items-center h-8 w-auto">
@@ -72,8 +73,9 @@ export function PluginNavbar(props: {
                                     className="h-8 w-auto"
                                     src="https://res.cloudinary.com/codotype/image/upload/v1560045005/tech-logos/codotype.png"
                                     alt="Codotype Logo"
+                                    draggable={false}
                                 />
-                                <span className="ml-3 text-2xl">codotype</span>
+                                <span className="ml-3 text-2xl">Codotype</span>
                             </div>
                         </div>
                         <div className="hidden sm:ml-6 sm:flex sm:space-x-8">

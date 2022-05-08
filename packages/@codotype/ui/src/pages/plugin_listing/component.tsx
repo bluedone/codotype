@@ -84,7 +84,7 @@ export function PluginListPage(props: { plugins: PluginMetadata[] }) {
                     </div>
 
                     <div className="col-lg-12">
-                        <div className="card card-body">
+                        <div className="card card-body rounded-lg">
                             <FontAwesomeIcon size="2x" icon={faInfoCircle} />
                             <p className="lead mb-0 mt-2">
                                 Looking for something we don't support?

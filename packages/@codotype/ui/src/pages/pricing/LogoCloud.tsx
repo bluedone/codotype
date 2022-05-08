@@ -15,6 +15,7 @@ export function LogoCloud() {
                                     className="h-12"
                                     src="https://tailwindui.com/img/logos/workcation-logo-primary-900.svg"
                                     alt="Workcation"
+                                    draggable={false}
                                 />
                             </div>
                             <div className="mt-4 ml-8 flex flex-grow flex-shrink-0 justify-center lg:flex-grow-0 lg:ml-4">
@@ -22,6 +23,7 @@ export function LogoCloud() {
                                     className="h-12"
                                     src="https://tailwindui.com/img/logos/tuple-logo-primary-900.svg"
                                     alt="Tuple"
+                                    draggable={false}
                                 />
                             </div>
                             <div className="mt-4 ml-8 flex flex-grow flex-shrink-0 justify-center lg:flex-grow-0 lg:ml-4">
@@ -29,6 +31,7 @@ export function LogoCloud() {
                                     className="h-12"
                                     src="https://tailwindui.com/img/logos/level-logo-primary-900.svg"
                                     alt="Level"
+                                    draggable={false}
                                 />
                             </div>
                         </div>

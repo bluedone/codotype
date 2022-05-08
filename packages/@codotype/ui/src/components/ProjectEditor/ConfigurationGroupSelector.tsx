@@ -26,11 +26,11 @@ export function ConfigurationGroupTab(props: {
     return (
         <button
             className={classnames(
-                "focus:outline-none group relative min-w-0 flex-1 overflow-hidden bg-white dark:bg-gray-900 py-4 px-4 text-sm font-medium text-center hover:bg-gray-50 focus:z-10",
+                "focus:outline-none group relative min-w-0 flex-1 overflow-hidden bg-white dark:bg-gray-900 py-4 px-4 text-sm font-medium text-center hover:bg-gray-50 focus:z-10 select-none transition-colors",
                 {
                     "cursor-not-allowed": disabled,
                     "text-primary-500 dark:text-primary-500": props.active,
-                    "text-gray-500 hover:text-gray-700 darK:text-gray-200 dark:hover:text-gray-400": !props.active,
+                    "text-gray-500 hover:text-gray-700 dark:text-gray-200 dark:hover:text-gray-400": !props.active,
                 },
             )}
             onClick={e => {
@@ -257,7 +257,7 @@ export function ConfigurationGroupSelector(props: {
 
                 {/* Render README tab */}
                 {viewingReadme && (
-                    <div className="mt-4 card card-body shadow-sm">
+                    <div className="mt-4 card rounded-xl shadow px-5 pt-5 pb-10">
                         <PluginStart plugin={props.pluginMetadata} />
                     </div>
                 )}
@@ -266,7 +266,7 @@ export function ConfigurationGroupSelector(props: {
                 {viewingSchemas && enableSchemaEditor && (
                     <>
                         <div className={classnames("mt-5 mb-4")}>
-                            <div className="flex items-center mb-2 text-body">
+                            <div className="flex items-center mb-2 text-body select-none">
                                 <h4 className="mb-0 mr-3 text-3xl">
                                     Data Model
                                 </h4>

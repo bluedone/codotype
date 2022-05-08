@@ -43,7 +43,7 @@ function CollectionItemForm(props: {
     }, [props.value.id]);
 
     return (
-        <div className="card card-body">
+        <div className="card card-body rounded-lg">
             <ConfigurationGroupPropertiesInput
                 properties={props.properties}
                 onChange={updatedValue => {

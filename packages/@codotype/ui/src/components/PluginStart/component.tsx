@@ -21,13 +21,14 @@ interface PluginStartProps {
  */
 export function PluginStart(props: PluginStartProps) {
     return (
-        <div className="grid grid-cols-1 h-full items-center">
+        <div className="grid grid-cols-1 h-full items-center select-none">
             <div className="flex flex-col">
                 <div className="flex flex-col">
                     <div className="flex flex-col items-center">
                         <img
                             className="max-h-32"
                             src={props.plugin.content.icon}
+                            draggable={false}
                         />
                         <h3 className="text-3xl mt-3">
                             {props.plugin.content.label}
@@ -82,16 +83,13 @@ export function PluginStart(props: PluginStartProps) {
                     </div>
                 </div>
 
-                <div className="flex justify-center my-3">
-                    <div
-                        className="border w-full max-w-5xl border-gray-200 bg-gray-200
-
-                        dark:border-gray-600 dark:bg-gray-600"
-                    />
+                <div className="my-10">
+                    <hr />
                 </div>
 
                 <div className="flex justify-center">
                     <MarkdownRenderer
+                        className="w-3/4"
                         source={props.plugin.content.documentation}
                     />
                 </div>

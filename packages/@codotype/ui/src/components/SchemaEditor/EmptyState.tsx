@@ -28,7 +28,7 @@ export function EmptyState(props: {
     const hasExampleProjects = plugin.exampleProjects.length > 0;
 
     const dataModelForm = (
-        <div className="card card-body shadow-xl">
+        <div className="card card-body rounded-lg shadow-xl">
             <div className="grid grid-cols-12">
                 <div className="col-span-12">
                     <h4 className="mb-0 text-2xl flex">New Data Model</h4>
@@ -68,7 +68,7 @@ export function EmptyState(props: {
                             Start with an example project...
                         </h3>
 
-                        <div className="card card-body shadow-xl">
+                        <div className="card card-body rounded-lg shadow-xl">
                             <div className="grid grid-cols-12">
                                 <div className="col-span-12">
                                     <h4 className="mb-3 text-2xl flex">

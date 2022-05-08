@@ -29,7 +29,7 @@ export function ProjectForm(props: {
                 <p className="mt-3 text-muted">
                     <span className="text-primary-500">Project Name</span> is
                     used for naming things like files, folders, namespaces, and
-                    databases in your exported codebase
+                    databases in your exported codebase.
                     {/* <FontAwesomeIcon icon={faLaugh} /> */}
                 </p>
 

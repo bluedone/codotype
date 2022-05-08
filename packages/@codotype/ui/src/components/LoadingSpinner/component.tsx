@@ -19,6 +19,7 @@ const StyledImage = styled.img`
     animation: ${rotation} 1000ms infinite cubic-bezier(0.62, 0.23, 0.01, 0.83);
     width: 150px;
     height: 150px;
+    user-select: none;
 `;
 
 // // // //

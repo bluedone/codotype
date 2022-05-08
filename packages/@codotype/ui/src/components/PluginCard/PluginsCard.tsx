@@ -6,9 +6,9 @@ import { PluginMetadata } from "@codotype/core";
 export function PluginCard(props: { plugin: PluginMetadata }) {
     const { plugin } = props;
     return (
-        <div className="card shadow">
+        <div className="card rounded-lg shadow">
             <div className="card-body">
-                <div className="flex flex-row items-end flex-col">
+                <div className="flex items-end flex-col">
                     <div className="flex flex-col justify-center">
                         <p className="lead mb-0">
                             <a
@@ -20,6 +20,7 @@ export function PluginCard(props: { plugin: PluginMetadata }) {
                                     className="mb-2"
                                     src={plugin.content.icon}
                                     style={{ maxWidth: "2rem" }}
+                                    draggable={false}
                                 />
                                 {plugin.content.label}
                             </a>

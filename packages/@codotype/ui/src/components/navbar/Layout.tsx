@@ -72,13 +72,15 @@ export function AppNavbar(props: {
                                 className="block lg:hidden h-8 w-auto"
                                 src="https://res.cloudinary.com/codotype/image/upload/v1560045005/tech-logos/codotype.png"
                                 alt="Codotype Logo"
+                                draggable={false}
                             />
 
-                            <div className="hidden lg:flex items-center h-8 w-auto">
+                            <div className="hidden lg:flex items-center h-8 w-auto select-none">
                                 <img
                                     className="h-8 w-auto"
                                     src="https://res.cloudinary.com/codotype/image/upload/v1560045005/tech-logos/codotype.png"
                                     alt="Codotype Logo"
+                                    draggable={false}
                                 />
                                 <span className="ml-3 text-2xl">Codotype</span>
                             </div>

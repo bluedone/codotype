@@ -11,7 +11,7 @@ export function BuildError() {
     return (
         <div className="row flex items-center h-full justify-center">
             <div className="col-sm-12 col-md-8 col-lg-6">
-                <div className="card card-body shadow-sm">
+                <div className="card card-body rounded-lg shadow-sm">
                     <div className="row">
                         <div className="col-lg-12 text-center">
                             <p className="title">

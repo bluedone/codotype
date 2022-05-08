@@ -31,14 +31,14 @@ export function BuildFinished(props: {
 
     return (
         <div
-            className="flex flex-col items-center h-full justify-center p-5 select-none"
+            className="flex flex-col items-center h-full justify-center p-10 select-none"
             style={{ minHeight: "28rem" }}
         >
             {/* Header */}
             <div className="text-center">
-                <p className="lead mb-2">
+                <p className="text-xl mb-2">
                     Thank you for using{" "}
-                    <strong style={{ fontWeight: "bolder" }}>Codotype</strong>
+                    <span className="font-semibold">Codotype</span>
                 </p>
 
                 <p className="lead mb-2">
@@ -95,9 +95,9 @@ export function BuildFinished(props: {
                     <a
                         href={props.filepath}
                         target="_blank"
-                        className="btn w-full btn-primary"
+                        className="btn w-full btn-primary btn-lg"
                     >
-                        <FontAwesomeIcon icon={faDownload} className="mr-2" />
+                        <FontAwesomeIcon icon={faDownload} className="mr-4" />
                         Download Exported Code
                     </a>
                 </div>
@@ -108,7 +108,7 @@ export function BuildFinished(props: {
                 <span className="font-semibold">README.md</span>
             </p>
 
-            <div className="text-center mt-3">
+            <div className="text-center mt-6">
                 <p className="text-gray-600 dark:text-gray-300 lead">
                     <FontAwesomeIcon icon={faLightbulb} className="mr-2" />
                     Remember, keep on iterating!
@@ -124,9 +124,9 @@ export function BuildFinished(props: {
                     </small>
                 </div>
 
-                <div className="col-span-12">
+                <div className="col-span-12 text-center">
                     <button
-                        className="btn w-full btn-primary mt-3"
+                        className="btn btn-primary mt-6"
                         onClick={props.onClickBackToEditor}
                     >
                         <FontAwesomeIcon icon={faReply} className="mr-2" />

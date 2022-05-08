@@ -71,6 +71,7 @@ html {
     @apply dark:border-gray-600;
     @apply rounded-bl-lg;
     @apply rounded-br-lg;
+    @apply select-none;
 }
 
 .text-body {
@@ -84,7 +85,6 @@ html {
 }
 
 .card {
-    @apply rounded-lg;
     @apply border;
     @apply relative;
     @apply flex;
@@ -93,9 +93,9 @@ html {
     @apply bg-clip-padding;
     @apply text-gray-700;
     @apply bg-white;
-    @apply border-gray-200;
+    /* @apply border-gray-200; */
     @apply dark:bg-gray-900;
-    @apply dark:border-gray-600;
+    @apply dark:border-gray-800;
     @apply dark:text-gray-300;
 }
 
@@ -111,7 +111,8 @@ small {
 
 hr {
     @apply border-t;
-    @apply border-gray-400;
+    @apply border-gray-300;
+    @apply dark:border-gray-800;
     margin-top: 0.2rem;
     margin-bottom: 0.2rem;
 }
@@ -237,6 +238,11 @@ hr {
     @apply border-primary-500;
     @apply hover:bg-primary-600;
     @apply px-4;
+}
+
+.btn-primary.btn-lg {
+    @apply text-xl;
+    @apply px-8;
 }
 
 button.btn-primary:disabled {

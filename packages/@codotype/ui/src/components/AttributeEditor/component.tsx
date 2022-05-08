@@ -140,7 +140,7 @@ export function AttributeEditor(props: AttributeEditorProps) {
 
     return (
         <div
-            className="card"
+            className="card border-gray-200 rounded-2xl"
             style={{
                 borderBottom: "none",
                 borderBottomLeftRadius: "0px",
@@ -149,12 +149,6 @@ export function AttributeEditor(props: AttributeEditorProps) {
         >
             <SortableListHeader
                 label="Attributes"
-                // tooltip={
-                //     <p>
-                //         <FontAwesomeIcon icon={faKeyboard} className="pr-2" />
-                //         <span className="font-light">{"SHIFT + A"}</span>
-                //     </p>
-                // }
                 locked={props.selectedSchema.locked}
                 onClick={() => {
                     const newAttribute: AttributeInput = new Primitives.AttributeInput(
@@ -319,6 +313,7 @@ export function AttributeEditor(props: AttributeEditorProps) {
                     title="No Attributes added yet"
                     body="Define properties on this data model"
                     cta="Add Attribute"
+                    locked={props.selectedSchema.locked}
                     onClick={() => {
                         const newAttribute: AttributeInput = new Primitives.AttributeInput(
                             { id: "" },

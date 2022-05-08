@@ -70,7 +70,7 @@ export function ConfigurationGroupHeader(props: {
                 "mb-3": renderSmaller,
             })}
         >
-            <div className="flex items-center mb-2 text-body">
+            <div className="flex items-center mb-2 text-body select-none">
                 {!renderSmaller && (
                     <h4 className="mb-0 mr-3 text-3xl">
                         {props.configurationGroup.content.label}

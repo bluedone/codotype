@@ -58,7 +58,7 @@ export function ConfigurationGroupPropertiesTabs(props: {
             {/* TODO - add select here? */}
             {/* TODO - add select here? */}
             {/* TODO - add select here? */}
-            <div className="flex flex-grow rounded-lg overflow-hidden divide-x divide-gray-200 border-gray-200 border dark:divide-gray-800 dark:border-gray-800 mb-1">
+            <div className="flex flex-grow rounded-lg overflow-hidden divide-x divide-gray-200 border-gray-200 border dark:divide-gray-800 dark:border-gray-800 mb-1 select-none">
                 {configurationGroup.properties.map(property => {
                     const active = property.identifier === selectedPropertyID;
 
@@ -70,7 +70,7 @@ export function ConfigurationGroupPropertiesTabs(props: {
                                 setSelectedPropertyID(property.identifier);
                             }}
                             className={classnames(
-                                "focus:outline-none group relative min-w-0 flex-1 overflow-hidden bg-white dark:bg-gray-900 py-4 px-4 text-sm font-medium text-center hover:bg-gray-50 focus:z-10",
+                                "focus:outline-none group relative min-w-0 flex-1 overflow-hidden bg-white dark:bg-gray-900 py-4 px-4 text-sm font-medium text-center hover:bg-gray-50 focus:z-10 transition-colors",
                                 {
                                     "text-primary-500 dark:text-primary-500": active,
                                     "text-gray-500 hover:text-gray-700 dark:hover:text-gray-400": !active,

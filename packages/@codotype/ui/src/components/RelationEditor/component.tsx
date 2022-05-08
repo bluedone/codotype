@@ -94,7 +94,7 @@ export function RelationEditor(props: RelationEditorProps) {
 
     return (
         <div
-            className="card"
+            className="card border-gray-200 rounded-2xl"
             style={{
                 borderTop: "none",
                 borderTopLeftRadius: "0px",
@@ -102,12 +102,6 @@ export function RelationEditor(props: RelationEditorProps) {
             }}
         >
             <SortableListHeader
-                tooltip={
-                    <p>
-                        <FontAwesomeIcon icon={faKeyboard} className="pr-2" />
-                        <span className="font-light">{"SHIFT + R"}</span>
-                    </p>
-                }
                 label="Relations"
                 locked={props.selectedSchema.locked}
                 onClick={() => {
@@ -341,6 +335,7 @@ export function RelationEditor(props: RelationEditorProps) {
                     title="No Relations added yet"
                     body="Define references between data models"
                     cta="Add Relation"
+                    locked={props.selectedSchema.locked}
                     onClick={() => {
                         setRelationInput(
                             new Primitives.Relation({

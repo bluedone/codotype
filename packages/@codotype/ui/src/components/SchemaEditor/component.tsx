@@ -19,7 +19,7 @@ import {
 } from "@codotype/core";
 import { reorder } from "../AttributeEditor/reorder";
 import { EmptyState } from "./EmptyState";
-import { CommandPalatte } from "../CommandPalatte/component";
+// import { CommandPalatte } from "../CommandPalatte/component";
 
 // // // //
 
@@ -294,7 +294,7 @@ export function SchemaEditorLayout(props: {
                     }}
                 />
 
-                <CommandPalatte />
+                {/* <CommandPalatte /> */}
 
                 {/* Render SchemaForm + SchemaFormModal for CREATE Schema */}
                 <SchemaFormModal
@@ -333,7 +333,7 @@ export function SchemaEditorLayout(props: {
                 </DragDropContext>
             </div>
             <div className="col-span-12 lg:col-span-8 mt-4 lg:mt-0">
-                <div className="card card-body shadow">
+                <div className="card card-body shadow rounded-2xl">
                     <SchemaDetail
                         schema={selectedSchema}
                         projectInput={props.projectInput}

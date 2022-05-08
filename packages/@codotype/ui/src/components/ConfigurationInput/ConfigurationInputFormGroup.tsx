@@ -111,7 +111,11 @@ export function ConfigurationInputFormGroup(
     const formGroupHeader = (
         <div className="flex items-center">
             {property.content.icon && (
-                <img src={property.content.icon} className="mr-3 max-h-8" />
+                <img
+                    src={property.content.icon}
+                    className="mr-3 max-h-8 rounded-sm"
+                    draggable={false}
+                />
             )}
             <label
                 className={classnames("mb-0 text-lg font-medium", {
@@ -152,7 +156,7 @@ export function ConfigurationInputFormGroup(
 
     const formGroup = (
         <div
-            className={classnames({
+            className={classnames("select-none", {
                 [className]: className !== "",
             })}
         >
@@ -219,7 +223,7 @@ export function ConfigurationInputFormGroup(
     if (property.allowDisable && !enabled && renderInCard) {
         return (
             <div className={`sm:col-span-12 md:col-span-${colSpan}`}>
-                <div className="card shadow-sm py-3 px-3">
+                <div className="card rounded-lg shadow-sm py-3 px-3">
                     {disabledFormGroup}
                 </div>
             </div>
@@ -238,7 +242,7 @@ export function ConfigurationInputFormGroup(
     // Handle renderInCard
     return (
         <div className={`sm:col-span-12 md:col-span-${colSpan}`}>
-            <div className="card card-body shadow-sm py-3 px-3">
+            <div className="card card-body rounded-lg shadow-sm py-3 px-3">
                 {formGroup}
             </div>
         </div>

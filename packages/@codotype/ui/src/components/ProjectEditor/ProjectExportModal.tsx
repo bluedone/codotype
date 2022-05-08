@@ -127,7 +127,7 @@ export function ProjectExportModal(props: {
     const { show, projectInput, onHide } = props;
     return (
         <Modal show={show} onHide={() => onHide()}>
-            <div className="p-5">
+            <div className="p-5 select-none">
                 <h3 className="text-2xl select-none">Export Project</h3>
 
                 <p className="form-text text-muted mb-2">
