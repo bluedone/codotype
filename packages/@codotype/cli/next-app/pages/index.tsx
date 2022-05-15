@@ -1,14 +1,30 @@
+import { NextPage } from "next";
 import * as React from "react";
 import dynamic from "next/dynamic";
 import { PluginFetcher } from "@codotype/ui/dist/src/pages/web_runtime/PluginFetcher";
 import { PluginRunner } from "@codotype/ui/dist/src/pages/web_runtime/PluginRunner";
 import { ProjectEditor } from "@codotype/ui/dist/src/components/ProjectEditor";
 import { AppContainer } from "@codotype/ui/dist/src/components/AppContainer";
+import { PluginMetadata, ProjectInput } from "@codotype/core";
 
-const LocalStorageProvider = dynamic(
-    // @ts-ignore
+// // // //
+
+interface ChildProps {
+    projectInput: ProjectInput;
+    setProject: (updatedProjectInput: ProjectInput) => void;
+    clearProject: () => void;
+    darkMode: boolean;
+    setDarkMode: (darkMode: boolean) => void;
+}
+
+interface LocalStorageProviderProps {
+    plugin: PluginMetadata;
+    children: (childProps: ChildProps) => React.ReactNode;
+}
+
+const LocalStorageProvider: React.ComponentType<LocalStorageProviderProps> = dynamic(
     import("@codotype/ui/dist/src/pages/web_runtime/LocalStorageProvider").then(
-        mod => mod.LocalStorageProvider,
+        (mod) => mod.LocalStorageProvider,
     ),
     {
         ssr: false,
@@ -17,20 +33,29 @@ const LocalStorageProvider = dynamic(
 
 // // // //
 
-export default () => {
+const Page: NextPage = () => {
     if (typeof window === "undefined") {
         return <p>Server Render</p>;
     }
+
     return (
         <PluginFetcher>
             {({ plugins }) => (
                 <PluginRunner plugin={plugins[0]}>
                     {({ generateCode }) => (
-                        // @ts-ignore
                         <LocalStorageProvider plugin={plugins[0]}>
-                            {/* @ts-ignore */}
-                            {({ projectInput, clearProject, setProject }) => (
-                                <AppContainer plugin={plugins[0]}>
+                            {({
+                                projectInput,
+                                clearProject,
+                                setProject,
+                                darkMode,
+                                setDarkMode,
+                            }) => (
+                                <AppContainer
+                                    plugin={plugins[0]}
+                                    darkMode={darkMode}
+                                    setDarkMode={setDarkMode}
+                                >
                                     <ProjectEditor
                                         plugin={plugins[0]}
                                         projectInput={projectInput}
@@ -51,3 +76,5 @@ export default () => {
         </PluginFetcher>
     );
 };
+
+export default Page;

@@ -1,7 +1,11 @@
 import chalk from "chalk";
 import * as open from "open";
 import { server } from "./server";
-import { LocalFileSystemAdapter, NodeRuntime } from "@codotype/runtime";
+import {
+    InMemoryFileSystemAdapter,
+    LocalFileSystemAdapter,
+    NodeRuntime,
+} from "@codotype/runtime";
 import { RuntimeLogBehaviors } from "@codotype/core";
 
 // // // //
@@ -18,9 +22,21 @@ async function serve(options: any) {
         fileSystemAdapter: new LocalFileSystemAdapter(),
     });
 
+    // Initializ previewRuntime with InMemoryFileSystemAdapter
+    const previewFileSystemAdapter = new InMemoryFileSystemAdapter();
+    const previewRuntime = new NodeRuntime({
+        cwd: process.cwd(),
+        logBehavior: RuntimeLogBehaviors.normal,
+        fileOverwriteBehavior: "force",
+        fileSystemAdapter: previewFileSystemAdapter,
+    });
+
     // Registers this generator via relative path
     try {
         runtime.registerPlugin({
+            absolutePath: process.cwd(),
+        });
+        previewRuntime.registerPlugin({
             absolutePath: process.cwd(),
         });
     } catch (err) {
@@ -35,6 +51,8 @@ async function serve(options: any) {
     // Instantiates app
     const app = server({
         runtime,
+        previewRuntime,
+        previewFileSystemAdapter,
     });
 
     // Start the app on port
@@ -52,7 +70,7 @@ async function serve(options: any) {
 
 // Exports `serve` command
 export const serveCommand = (...args) => {
-    return serve({ ...args }).catch(err => {
+    return serve({ ...args }).catch((err) => {
         // FEATURE - add better error handling
         console.log(chalk.red("codotype cli error"));
         console.log(chalk.yellow("generator not found in local directory"));

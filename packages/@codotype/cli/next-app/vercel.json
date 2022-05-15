@@ -1,0 +1,10 @@
+{
+    "functions": {
+        "pages/api/plugins.ts": {
+            "includeFiles": "plugin/**"
+        },
+        "pages/api/generate.ts": {
+            "includeFiles": "plugin/**"
+        }
+    }
+}

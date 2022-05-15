@@ -14,12 +14,12 @@ import {
 // // // //
 
 /**
- * runGenerator
- * Runs the Codotype generator in the current working directory
+ * runPlugin
+ * Runs the Codotype plugin in the current working directory
  * @param projectPath - path to the codotype-project.json file to generate
  * @param options
  */
-async function runGenerator(projectPath: string, options: CommandOptions) {
+async function runPlugin(projectPath: string, options: CommandOptions) {
     // Pulls in requisite paths for codotype runtime
     const projectRequirePath = path.resolve(process.cwd(), projectPath);
 
@@ -60,7 +60,7 @@ async function runGenerator(projectPath: string, options: CommandOptions) {
 // // // //
 
 export const runCommand = (projectPath: string, options: CommandOptions) => {
-    return runGenerator(projectPath, options).catch(err => {
+    return runPlugin(projectPath, options).catch((err) => {
         // FEATURE - implement better error handling
         console.log("CODOTYPE CLI ERROR!!");
         console.log(err);

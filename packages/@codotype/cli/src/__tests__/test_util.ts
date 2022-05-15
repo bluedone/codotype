@@ -1,3 +1,3 @@
-test("testing @codotype/runtime", () => {
+test("testing @codotype/cli", () => {
     expect(true).toBe(true);
 });
