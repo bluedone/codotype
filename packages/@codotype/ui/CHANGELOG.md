@@ -1,3 +1,7 @@
+### v0.8.0-canary.57
+
+-   Fix favicon component in `SocialMeta` component
+
 ### v0.8.0-canary.56
 
 -   Publish `tailwind.config.js` + `ui.css`
