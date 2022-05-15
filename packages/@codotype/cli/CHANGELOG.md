@@ -1,3 +1,16 @@
+### v0.8.0-canary.27
+
+#### Changes
+
+-   Updated `@codotype/ui` to `0.8.0-canary.59`
+
+### v0.8.0-canary.26
+
+#### Changes
+
+-   Updated `@codotype/ui` to `0.8.0-canary.58`
+-   Add `/api/preview` API route to `next-app`
+
 ### v0.8.0-canary.25
 
 #### Changes

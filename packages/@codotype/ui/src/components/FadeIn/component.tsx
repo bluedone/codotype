@@ -5,7 +5,6 @@ import classNames from "classnames";
 // // // //
 
 export function FadeIn(props: {
-    className?: string;
     speed?: "slow" | "med" | "fast";
     show: boolean;
     children: React.ReactNode;
@@ -14,8 +13,6 @@ export function FadeIn(props: {
 
     return (
         <Transition
-            as={"div"}
-            className={props.className}
             appear={true}
             show={props.show}
             enterFrom="opacity-0"

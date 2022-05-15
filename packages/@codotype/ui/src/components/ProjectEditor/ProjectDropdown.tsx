@@ -35,6 +35,7 @@ export function ProjectDropdown(props: {
                         if (i === 0) {
                             return (
                                 <button
+                                    key={i}
                                     className="bg-white text-gray-700 hover:bg-gray-100 rounded hover:text-gray-900 flex justify-between w-full px-4 py-3 leading-5 text-left text-base
                                     dark:bg-gray-900 dark:border-gray-800 dark:text-gray-200 dark:hover:bg-gray-800
                                     "
@@ -49,7 +50,7 @@ export function ProjectDropdown(props: {
 
                         // Render "Reset Project" button
                         return (
-                            <>
+                            <React.Fragment key={i}>
                                 <span
                                     className="bg-white text-red-700 text-sm flex justify-between w-full px-4 py-3 leading-5 text-left
                                 dark:bg-gray-900 dark:border-gray-900 dark:text-red-300"
@@ -65,7 +66,7 @@ export function ProjectDropdown(props: {
                                 >
                                     Reset Project
                                 </button>
-                            </>
+                            </React.Fragment>
                         );
                     }}
                 </Dropdown>

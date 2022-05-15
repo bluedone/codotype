@@ -1,3 +1,31 @@
+### v0.8.0-canary.59
+
+-   Refine file + directory sorting behavior in `PreviewBrowser`
+
+### v0.8.0-canary.58
+
+-   Add `PreviewBrowser` + `PluginPreviewFetcher` components
+-   Add `Preview` tab to `ProjectEditor`
+-   Disable syntax rendering in `MarkdownRenderer` until it works well in dark-mode
+
+### v0.8.0-canary.57
+
+-   Fix favicon component in `SocialMeta` component
+
+### v0.8.0-canary.56
+
+-   Publish `tailwind.config.js` + `ui.css`
+
+### v0.8.0-canary.55
+
+-   Update icons in Storybook theme
+-   Refine dark-mode behavior in `AppLayout`
+-   Refine dark-mode component styles
+
+### v0.8.0-canary.54
+
+-   Update `AppContainer` styles
+
 ### v0.8.0-canary.53
 
 -   Fix `yarn.lock` file

@@ -1,14 +1,22 @@
 import * as express from "express";
 import * as bodyParser from "body-parser";
 import * as path from "path";
-import { ProjectBuild, RuntimeLogLevels } from "@codotype/core";
+import { ProjectBuild, ResponseTypes, RuntimeLogLevels } from "@codotype/core";
 import { OUTPUT_DIRECTORY } from "@codotype/runtime/dist/constants";
-import { NodeRuntime } from "@codotype/runtime";
+import { InMemoryFileSystemAdapter, NodeRuntime } from "@codotype/runtime";
 
 // // // //
 
 // Exports a basic Express.js app
-export function server({ runtime }: { runtime: NodeRuntime }): any {
+export function server({
+    runtime,
+    previewRuntime,
+    previewFileSystemAdapter,
+}: {
+    runtime: NodeRuntime;
+    previewRuntime: NodeRuntime;
+    previewFileSystemAdapter: InMemoryFileSystemAdapter;
+}): any {
     // Defines Express.js app
     const app = express();
 
@@ -29,6 +37,54 @@ export function server({ runtime }: { runtime: NodeRuntime }): any {
         const plugins = await runtime.getPlugins();
         return res.send(plugins.map((p) => p.pluginMetadata));
     });
+
+    // // // //
+
+    // Generate preview
+    app.post("/api/preview", async (req, res) => {
+        // Return error if req.body.project
+        if (!req.body.projectInput) {
+            return res.status(304).json({
+                message: "Invalid ProjectInput",
+            });
+        }
+
+        // Defines start time
+        const startTime: number = Date.now();
+
+        // Defines bodotype build
+        // FEATURE - verify ProjectInput here here
+        // TODO - add new ProjectBuild primative to core
+        const build: ProjectBuild = {
+            id: "",
+            projectInput: req.body.projectInput,
+            startTime: "",
+            endTime: "",
+        };
+
+        // Clear current previewFileSystemAdapter files
+        previewFileSystemAdapter.files = {};
+
+        // Generates a preview of the generated code
+        // CHORE - wrap this in an error hander
+        await previewRuntime.execute({ build });
+
+        // Calculate total build time
+        const endTime: number = Date.now();
+        const totalTime: number = endTime - startTime;
+
+        // Log total build time
+        previewRuntime.log(`Build finished in ${totalTime / 1000} seconds`, {
+            level: RuntimeLogLevels.info,
+        });
+
+        // Sends the local directory path to the client
+        return res.json({
+            files: previewFileSystemAdapter.files,
+        });
+    });
+
+    // // // //
 
     // Run generator
     app.post("/api/generate", async (req, res) => {
@@ -71,7 +127,7 @@ export function server({ runtime }: { runtime: NodeRuntime }): any {
                 process.cwd() +
                 OUTPUT_DIRECTORY +
                 build.projectInput.identifiers.snake,
-            type: "LOCAL_PATH", // TODO - replace with ResponseTypes.local from @codotype/core@^0.8.16
+            type: ResponseTypes.local,
         });
     });
 

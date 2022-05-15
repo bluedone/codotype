@@ -1,14 +1,20 @@
 import classnames from "classnames";
 import * as React from "react";
 const ReactMarkdown = require("react-markdown");
-import SyntaxHighlighter from "react-syntax-highlighter";
+// import SyntaxHighlighter from "react-syntax-highlighter";
 
 // // // //
 
-export function CodeBlock(props: { value: string; language: string }) {
-    const { language = undefined, value } = props;
-    return <SyntaxHighlighter language={language}>{value}</SyntaxHighlighter>;
-}
+// export function CodeBlock(props: { value: string; language: string }) {
+//     const { language = undefined, value } = props;
+//     return (
+//         <SyntaxHighlighter
+//             language={language}
+//         >
+//             {value}
+//         </SyntaxHighlighter>
+//     );
+// }
 
 // // // //
 
@@ -41,7 +47,7 @@ export function MarkdownRenderer(props: {
                 skipHtml
                 source={props.source}
                 renderers={{
-                    code: CodeBlock,
+                    // code: CodeBlock,
                     image: ImageBlock,
                     link: (prps: any) => {
                         return (

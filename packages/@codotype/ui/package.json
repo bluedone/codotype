@@ -1,12 +1,10 @@
 {
     "name": "@codotype/ui",
-    "version": "0.8.0-canary.53",
+    "version": "0.8.0-canary.59",
     "description": "Codotype React.js Components",
     "scripts": {
-        "build": "npm run clean && npm run compile",
-        "build-old": "webpack --config webpack.prod.js",
+        "build": "npm run clean && npm run compile && npm run move-css",
         "dev": "tsc -w -p tsconfig.build.json",
-        "dev-old": "webpack -w --config webpack.dev.js",
         "test": "jest --config=jest.config.js",
         "lint": "eslint --fix -c ./.eslintrc.js \"src/**/*.ts*\"",
         "prettify": "prettier --write \"src/**/*.ts*\"",
@@ -14,6 +12,7 @@
         "build-storybook": "build-storybook -s public",
         "clean": "rm -rf ./dist",
         "compile": "tsc -p tsconfig.build.json",
+        "move-css": "cp ./src/components/Story/tailwind.css ./ui.css",
         "prepublishOnly": "npm run build"
     },
     "repository": {
@@ -30,7 +29,8 @@
     "types": "./dist/src/index.d.ts",
     "files": [
         "dist/src",
-        "src/scss"
+        "tailwind.config.js",
+        "ui.css"
     ],
     "author": "Alexander Schwartzberg",
     "license": "MIT",

@@ -1,3 +1,8 @@
 .next/
 out/
+yarn-error.log
+.codotype-out/
+.env.local
 node_modules/
+plugin/
+plugin-repo/

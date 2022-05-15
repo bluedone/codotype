@@ -65,7 +65,7 @@ export function Modal(props: {
                     >
                         <div
                             className={classnames(
-                                "inline-block align-bottom bg-white dark:bg-gray-800 dark:text-gray-200 rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle",
+                                "inline-block align-bottom bg-white dark:bg-gray-900 dark:text-gray-200 rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle",
                                 {
                                     "sm:max-w-lg sm:w-full": size === "md",
                                     "max-w-4xl w-full": size === "lg",
