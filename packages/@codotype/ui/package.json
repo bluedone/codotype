@@ -1,6 +1,6 @@
 {
     "name": "@codotype/ui",
-    "version": "0.8.0-canary.57",
+    "version": "0.8.0-canary.58",
     "description": "Codotype React.js Components",
     "scripts": {
         "build": "npm run clean && npm run compile && npm run move-css",

@@ -11,6 +11,12 @@ import {
 import { PluginStart } from "../PluginStart";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBookOpen } from "@fortawesome/free-solid-svg-icons";
+import { PluginPreviewFetcher } from "../../pages/web_runtime/PluginPreviewFetcher";
+import { PreviewBrowser } from "../PreviewBrowser";
+import { FadeIn } from "../FadeIn";
+import { LoadingSpinner } from "../LoadingSpinner";
+import { LoadingBuild } from "../LoadingBuild";
+import { faLaugh } from "@fortawesome/free-regular-svg-icons";
 
 // // // //
 
@@ -20,8 +26,9 @@ export function ConfigurationGroupTab(props: {
     pinned?: boolean;
     disabled?: boolean;
     onClick: () => void;
+    className?: string;
 }) {
-    const { label, disabled = false } = props;
+    const { label, disabled = false, className } = props;
 
     return (
         <button
@@ -43,7 +50,7 @@ export function ConfigurationGroupTab(props: {
             {props.pinned && (
                 <FontAwesomeIcon icon={faBookOpen} className="mr-2" />
             )}
-            <span>{label}</span>
+            <span className={className}>{label}</span>
             {props.active && (
                 <span
                     aria-hidden="true"
@@ -107,6 +114,7 @@ export function ConfigurationGroupSelector(props: {
 
     // NOTE - enable/disable this if schemas aren't supported
     const [viewingReadme, setViewingReadme] = React.useState<boolean>(false);
+    const [viewingPreview, setViewingPreview] = React.useState<boolean>(false);
 
     // Defines default component for ConfigurationInput
     const defaultComponent = (
@@ -173,6 +181,7 @@ export function ConfigurationGroupSelector(props: {
                                 pinned
                                 onClick={() => {
                                     setViewingReadme(true);
+                                    setViewingPreview(false);
                                     setViewingSchemas(false);
                                 }}
                                 active={viewingReadme}
@@ -183,6 +192,7 @@ export function ConfigurationGroupSelector(props: {
                                 <ConfigurationGroupTab
                                     onClick={() => {
                                         setViewingReadme(false);
+                                        setViewingPreview(false);
                                         setViewingSchemas(true);
                                     }}
                                     active={viewingSchemas}
@@ -199,6 +209,7 @@ export function ConfigurationGroupSelector(props: {
                                             onClick={() => {
                                                 setViewingSchemas(false);
                                                 setViewingReadme(false);
+                                                setViewingPreview(false);
                                                 selectConfigurationGroup(
                                                     configurationGroup,
                                                 );
@@ -207,7 +218,8 @@ export function ConfigurationGroupSelector(props: {
                                                 configurationGroup.identifier ===
                                                     selectedConfigurationGroup.identifier &&
                                                 !viewingSchemas &&
-                                                !viewingReadme
+                                                !viewingReadme &&
+                                                !viewingPreview
                                             }
                                             label={
                                                 configurationGroup.content.label
@@ -216,6 +228,16 @@ export function ConfigurationGroupSelector(props: {
                                     );
                                 },
                             )}
+
+                            <ConfigurationGroupTab
+                                onClick={() => {
+                                    setViewingReadme(false);
+                                    setViewingSchemas(false);
+                                    setViewingPreview(true);
+                                }}
+                                active={viewingPreview}
+                                label={"Preview Code"}
+                            />
                         </div>
                     </div>
                 </div>
@@ -223,6 +245,7 @@ export function ConfigurationGroupSelector(props: {
             <div className="col-lg-12">
                 {!viewingSchemas &&
                     !viewingReadme &&
+                    !viewingPreview &&
                     props.children !== undefined && (
                         <>
                             {props.children({
@@ -252,9 +275,10 @@ export function ConfigurationGroupSelector(props: {
                     )}
 
                 {/* Renders the ConfigurationInput */}
-                {!viewingSchemas && !viewingReadme && !props.children && (
-                    <>{defaultComponent}</>
-                )}
+                {!viewingSchemas &&
+                    !viewingReadme &&
+                    !viewingPreview &&
+                    !props.children && <>{defaultComponent}</>}
 
                 {/* Render README tab */}
                 {viewingReadme && (
@@ -286,6 +310,59 @@ export function ConfigurationGroupSelector(props: {
                                 props.onChange(updatedProjectInput);
                             }}
                         />
+                    </>
+                )}
+
+                {/* Render PREVIEW tab */}
+                {viewingPreview && (
+                    <>
+                        <div className={classnames("mt-5 mb-4")}>
+                            <div className="flex items-center mb-2 text-body select-none">
+                                <h4 className="mb-0 mr-3 text-3xl">
+                                    Preview Code
+                                </h4>
+
+                                <p className="mb-0 text-lg font-extralight mt-1">
+                                    Preview your new codebase before downloading
+                                </p>
+                            </div>
+                            <hr className="my-3" />
+                        </div>
+                        <PluginPreviewFetcher projectInput={props.projectInput}>
+                            {({ loading, error, files }) => {
+                                return (
+                                    <>
+                                        {loading && (
+                                            <FadeIn show={loading} speed="slow">
+                                                <div
+                                                    className="flex flex-col items-center h-full justify-center select-none"
+                                                    style={{
+                                                        minHeight: "28rem",
+                                                    }}
+                                                >
+                                                    <div className="flex justify-center my-8">
+                                                        <div className="my-2">
+                                                            <FadeIn
+                                                                show={true}
+                                                                speed="slow"
+                                                            >
+                                                                <LoadingSpinner />
+                                                            </FadeIn>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </FadeIn>
+                                        )}
+                                        <FadeIn speed="slow" show={!loading}>
+                                            {error && <p>Preview error!</p>}
+                                            {!error && (
+                                                <PreviewBrowser files={files} />
+                                            )}
+                                        </FadeIn>
+                                    </>
+                                );
+                            }}
+                        </PluginPreviewFetcher>
                     </>
                 )}
             </div>

@@ -32,7 +32,7 @@ export function ExampleProjectDropdown(props: {
                 {({ open }) => (
                     <>
                         <div>
-                            <Menu.Button className="whitespace-nowrap inline-flex items-center justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-3 bg-white dark:bg-gray-900 dark:text-gray-200 dark:border-gray-800 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
+                            <Menu.Button className="whitespace-nowrap inline-flex items-center justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-3 bg-white dark:bg-gray-900 dark:text-gray-200 dark:border-gray-800 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none">
                                 <FontAwesomeIcon
                                     icon={faFolderOpen}
                                     className="mr-2"
@@ -53,13 +53,17 @@ export function ExampleProjectDropdown(props: {
                         >
                             <Menu.Items
                                 static
-                                className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-gray-900 ring-1 ring-black ring-opacity-5 focus:outline-none"
+                                className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-800 ring-opacity-5 focus:outline-none"
                             >
                                 <div className="py-1">
                                     {exampleProjects.map(projectInput => {
                                         return (
                                             <Menu.Item>
-                                                {({ active }) => (
+                                                {({
+                                                    active,
+                                                }: {
+                                                    active: boolean;
+                                                }) => (
                                                     <button
                                                         className={classnames(
                                                             "block w-full text-left px-4 py-2 text-sm",

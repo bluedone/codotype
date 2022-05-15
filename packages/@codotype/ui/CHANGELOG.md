@@ -1,3 +1,9 @@
+### v0.8.0-canary.58
+
+-   Add `PreviewBrowser` + `PluginPreviewFetcher` components
+-   Add `Preview` tab to `ProjectEditor`
+-   Disable syntax rendering in `MarkdownRenderer` until it works well in dark-mode
+
 ### v0.8.0-canary.57
 
 -   Fix favicon component in `SocialMeta` component
