@@ -1,3 +1,7 @@
+### v0.8.0-canary.56
+
+-   Publish `tailwind.config.js` + `ui.css`
+
 ### v0.8.0-canary.55
 
 -   Update icons in Storybook theme
