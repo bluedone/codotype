@@ -1,3 +1,7 @@
+### v0.8.0-canary.59
+
+-   Refine file + directory sorting behavior in `PreviewBrowser`
+
 ### v0.8.0-canary.58
 
 -   Add `PreviewBrowser` + `PluginPreviewFetcher` components

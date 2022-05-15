@@ -82,14 +82,14 @@ function FileBrowserItem(props: any) {
                 "bg-blue-300 dark:text-gray-800": active,
                 "hover:bg-gray-200 dark:hover:bg-gray-800": !active,
             })}
-            style={{ paddingLeft: `${(props.layer + 1) * REM_SCALAR}rem` }}
+            style={{ paddingLeft: `${(props.layer + 2) * REM_SCALAR}rem` }}
             role="button"
             onClick={() => {
                 console.log(props);
                 props.onSelectFile(path);
             }}
         >
-            <FontAwesomeIcon icon={faFileAlt} className="mr-2" />
+            <FontAwesomeIcon fixedWidth icon={faFileAlt} className="mr-2" />
             {props.label}
         </li>
     );
@@ -127,31 +127,48 @@ function FileBrowserFolder(props: {
                 {label}
             </li>
             {!hide &&
-                keys.map(k => {
-                    if (typeof filetree[k] === "string") {
+                keys
+                    .sort((a, b) => {
+                        if (
+                            typeof filetree[a] !== "string" &&
+                            typeof filetree[b] === "string"
+                        ) {
+                            return -1;
+                        }
+                        if (
+                            typeof filetree[a] === "string" &&
+                            typeof filetree[b] !== "string"
+                        ) {
+                            return 1;
+                        }
+
+                        return a > b ? 1 : -1;
+                    })
+                    .map(k => {
+                        if (typeof filetree[k] === "string") {
+                            return (
+                                <FileBrowserItem
+                                    path={[path, k].join("/")}
+                                    label={k}
+                                    layer={layer}
+                                    selectedFile={selectedFile}
+                                    onSelectFile={props.onSelectFile}
+                                />
+                            );
+                        }
                         return (
-                            <FileBrowserItem
-                                path={[path, k].join("/")}
-                                label={k}
-                                layer={layer}
-                                selectedFile={selectedFile}
-                                onSelectFile={props.onSelectFile}
-                            />
+                            <li>
+                                <FileBrowserFolder
+                                    label={k}
+                                    path={[path, k].join("/")}
+                                    filetree={filetree[k]}
+                                    selectedFile={selectedFile}
+                                    layer={layer + 1}
+                                    onSelectFile={props.onSelectFile}
+                                />
+                            </li>
                         );
-                    }
-                    return (
-                        <li>
-                            <FileBrowserFolder
-                                label={k}
-                                path={[path, k].join("/")}
-                                filetree={filetree[k]}
-                                selectedFile={selectedFile}
-                                layer={layer + 1}
-                                onSelectFile={props.onSelectFile}
-                            />
-                        </li>
-                    );
-                })}
+                    })}
         </ul>
     );
 }
