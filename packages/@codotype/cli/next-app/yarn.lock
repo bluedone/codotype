@@ -200,10 +200,10 @@
     fs-extra "^7.0.1"
     prettier "^2.1.2"
 
-"@codotype/ui@^0.8.0-canary.58":
-  version "0.8.0-canary.58"
-  resolved "https://registry.yarnpkg.com/@codotype/ui/-/ui-0.8.0-canary.58.tgz#a95d9d28e42a0d88ef67432f38d951cdabd6f673"
-  integrity sha512-uNj7waAmVrGKcmRhezYyr+HS3TS6HpShF+S1nw0PUc2n2ynTe0WfldfxqSmv6/3WnK34pfWz2X43yAvEBry1WA==
+"@codotype/ui@^0.8.0-canary.59":
+  version "0.8.0-canary.59"
+  resolved "https://registry.yarnpkg.com/@codotype/ui/-/ui-0.8.0-canary.59.tgz#638e3b15f241e52645d12f8bee93b68c89d3432e"
+  integrity sha512-8wHaeDLAMxeGDb1Nv+EcVmVTZbP32yUm9P3uXm4ozXxzCKEGpiyiSl3uWro+mz0XHDtziGkiU6MEQgyhMfdBDA==
   dependencies:
     "@codotype/core" "0.8.0-canary.17"
     "@fortawesome/fontawesome-svg-core" "^6.1.1"

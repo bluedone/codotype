@@ -1,3 +1,9 @@
+### v0.8.0-canary.27
+
+#### Changes
+
+-   Updated `@codotype/ui` to `0.8.0-canary.59`
+
 ### v0.8.0-canary.26
 
 #### Changes
