@@ -38,7 +38,8 @@ export function SocialMeta() {
             <link
                 rel="icon"
                 type="image/png"
-                href="https://res.cloudinary.com/codotype/image/upload/v1552257221/codotype-icons/favicon.png"
+                // href="https://res.cloudinary.com/codotype/image/upload/v1552257221/codotype-icons/favicon.png"
+                href="https://avatars2.githubusercontent.com/u/42126198?s=200&amp;v=4"
             />
 
             <meta

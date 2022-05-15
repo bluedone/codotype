@@ -50,11 +50,15 @@ export function Dropdown(props: {
                             >
                                 <Menu.Items
                                     static
-                                    className="absolute right-0 w-56 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 dark:divide-gray-900 rounded-md shadow-lg outline-none dark:bg-gray-700 dark:border-gray-900 dark:divide-gray-200"
+                                    className="absolute right-0 w-56 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 dark:divide-gray-900 rounded-md shadow-lg outline-none dark:bg-gray-700 dark:border-gray-800 dark:divide-gray-200"
                                 >
                                     {placeholderItems.map(i => (
                                         <Menu.Item>
-                                            {({ active }) => (
+                                            {({
+                                                active,
+                                            }: {
+                                                active: boolean;
+                                            }) => (
                                                 <>
                                                     {props.children({
                                                         i,

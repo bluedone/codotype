@@ -155,6 +155,7 @@ export function ConfigurationGroupSelector(props: {
                                 (configurationGroup: ConfigurationGroup) => {
                                     return (
                                         <option
+                                            key={configurationGroup.identifier}
                                             value={
                                                 configurationGroup.identifier
                                             }

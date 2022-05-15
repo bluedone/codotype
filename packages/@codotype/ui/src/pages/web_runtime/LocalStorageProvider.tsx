@@ -44,6 +44,26 @@ function readProjectFromLocalStorage(props: {
     }
 }
 
+const DARK_MODE_LOCAL_STORAGE_KEY = "codotype-dark-mode";
+function readDarkmodeFromLocalStorage(): boolean {
+    try {
+        return localStorage.getItem(DARK_MODE_LOCAL_STORAGE_KEY) === "true";
+    } catch (e) {
+        return false;
+    }
+}
+
+function writeDarkmodeToLocalStorage(updatedDarkMode: boolean): void {
+    try {
+        localStorage.setItem(
+            DARK_MODE_LOCAL_STORAGE_KEY,
+            String(updatedDarkMode),
+        );
+    } catch (e) {
+        return;
+    }
+}
+
 // // // //
 
 interface LocalStorageProviderProps {
@@ -52,6 +72,8 @@ interface LocalStorageProviderProps {
         projectInput: ProjectInput;
         setProject: (updatedProjectInput: ProjectInput) => void;
         clearProject: () => void;
+        darkMode: boolean;
+        setDarkMode: (darkMode: boolean) => void;
     }) => React.ReactNode;
 }
 
@@ -64,6 +86,29 @@ export function LocalStorageProvider(props: LocalStorageProviderProps) {
     const [projectInput, setProjectState] = React.useState<ProjectInput>(
         readProjectFromLocalStorage({ plugin: props.plugin }),
     );
+    const [darkMode, setDarkModeState] = React.useState<boolean>(
+        readDarkmodeFromLocalStorage(),
+    );
+
+    React.useEffect(() => {
+        // Set light-mode
+        if (darkMode) {
+            const htmlNode =
+                document?.getElementsByTagName("html")[0] || undefined;
+            if (htmlNode === undefined) {
+                return;
+            }
+            htmlNode.setAttribute("class", "dark");
+            return;
+        }
+
+        // Set light-mode
+        const htmlNode = document?.getElementsByTagName("html")[0] || undefined;
+        if (htmlNode === undefined) {
+            return;
+        }
+        htmlNode.setAttribute("class", "");
+    }, [darkMode]);
 
     function setProject(updatedProjectInput: ProjectInput) {
         setProjectState(updatedProjectInput);
@@ -76,6 +121,11 @@ export function LocalStorageProvider(props: LocalStorageProviderProps) {
     function clearProject() {
         clearLocalStorage({ plugin: props.plugin });
         setProjectState(buildDefaultProjectInput(props.plugin));
+    }
+
+    function setDarkMode(updatedDarkMode: boolean) {
+        setDarkModeState(updatedDarkMode);
+        writeDarkmodeToLocalStorage(updatedDarkMode);
     }
 
     return (
@@ -93,6 +143,8 @@ export function LocalStorageProvider(props: LocalStorageProviderProps) {
                     projectInput,
                     setProject,
                     clearProject,
+                    darkMode,
+                    setDarkMode,
                 })}
             </React.Fragment>
         </ErrorBoundary>

@@ -159,35 +159,33 @@ export default {
 } as ComponentMeta<typeof WebRuntime>;
 
 const Template: ComponentStory<typeof WebRuntime> = args => (
-    <Story>
-        <WebRuntime plugin={args.plugin}>
-            {({ plugin, projectInput, setProject, clearProject }) => (
-                <RuntimeProvider>
-                    {({ generateCode }) => (
-                        <React.Fragment>
-                            <ProjectEditor
-                                plugin={plugin}
-                                projectInput={projectInput}
-                                onClickGenerate={() => {
-                                    generateCode({
-                                        projectInput,
-                                        plugin,
-                                    });
-                                }}
-                                onResetProject={clearProject}
-                                onChange={(updatedProject: ProjectInput) => {
-                                    setProject(updatedProject);
-                                }}
-                            />
-                            {/* <pre>
+    <WebRuntime plugin={args.plugin}>
+        {({ plugin, projectInput, setProject, clearProject }) => (
+            <RuntimeProvider>
+                {({ generateCode }) => (
+                    <React.Fragment>
+                        <ProjectEditor
+                            plugin={plugin}
+                            projectInput={projectInput}
+                            onClickGenerate={() => {
+                                generateCode({
+                                    projectInput,
+                                    plugin,
+                                });
+                            }}
+                            onResetProject={clearProject}
+                            onChange={(updatedProject: ProjectInput) => {
+                                setProject(updatedProject);
+                            }}
+                        />
+                        {/* <pre>
                                         {JSON.stringify(projectInput, null, 4)}
                                     </pre> */}
-                        </React.Fragment>
-                    )}
-                </RuntimeProvider>
-            )}
-        </WebRuntime>
-    </Story>
+                    </React.Fragment>
+                )}
+            </RuntimeProvider>
+        )}
+    </WebRuntime>
 );
 
 // // // //

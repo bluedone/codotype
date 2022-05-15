@@ -1,3 +1,9 @@
+### v0.8.0-canary.55
+
+-   Update icons in Storybook theme
+-   Refine dark-mode behavior in `AppLayout`
+-   Refine dark-mode component styles
+
 ### v0.8.0-canary.54
 
 -   Update `AppContainer` styles
