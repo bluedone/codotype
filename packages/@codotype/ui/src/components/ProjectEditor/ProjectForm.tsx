@@ -1,6 +1,8 @@
 import * as React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLightbulb, faLaugh } from "@fortawesome/free-regular-svg-icons";
+import classNames from "classnames";
+import { inputClassName } from "../Input/constants";
 
 // // // //
 
@@ -43,7 +45,7 @@ export function ProjectForm(props: {
 
                 <input
                     ref={inputEl}
-                    className="form-control rounded-lg text-md"
+                    className={classNames("rounded-lg text-md", inputClassName)}
                     placeholder="Project Name"
                     value={props.value}
                     onChange={e => {

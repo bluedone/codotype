@@ -50,6 +50,18 @@ html {
 
 .generateCodeButton {
     animation: hue-idle 5s linear infinite;
+    @apply text-white;
+    @apply bg-gradient-to-r;
+    @apply from-purple-500;
+    @apply to-blue-600;
+    @apply via-indigo-600;
+    @apply opacity-80;
+    @apply hover:opacity-100;
+    @apply focus:outline-none;
+    @apply duration-200;
+    @apply ease-in-out;
+    @apply transition-all;
+    @apply select-none;
 }
 
 /* Start updating things one component at a time */
@@ -298,64 +310,6 @@ button.btn-primary:disabled {
         background-clip: text;
         -webkit-text-fill-color: transparent;
     }
-}
-
-/* Form Control */
-
-.form-control {
-    display: block;
-    width: 100%;
-    @apply px-2;
-    @apply py-5;
-    @apply h-3;
-    @apply font-light;
-    @apply text-gray-900;
-    @apply dark:text-gray-200;
-    @apply bg-white;
-    @apply dark:bg-gray-900;
-    @apply border;
-    @apply border-gray-400;
-    @apply dark:border-gray-700;
-    @apply rounded-md;
-    /* @apply shadow-md; */
-    @apply transition-colors;
-
-    /* font-family: $input-font-family; */
-    background-clip: padding-box;
-
-    /* // Unstyle the caret on `<select>`s in IE10+.
-    &::-ms-expand {
-        background-color: transparent;
-        border: 0;
-    }
-
-    // Remove select outline from select box in FF
-    &:-moz-focusring {
-        color: transparent;
-        text-shadow: 0 0 0 $input-color;
-    }
-
-    // Customize the `:focus` state to imitate native WebKit styles.
-    @include form-control-focus($ignore-warning: true);
-
-    // Placeholder
-    &::placeholder {
-        color: $input-placeholder-color;
-        // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526.
-        opacity: 1;
-    }
-
-    // Disabled and read-only inputs
-    //
-    // HTML5 says that controls under a fieldset > legend:first-child won't be
-    // disabled if the fieldset is disabled. Due to implementation difficulty, we
-    // don't honor that edge case; we style them as disabled anyway.
-    &:disabled,
-    &[readonly] {
-        background-color: $input-disabled-bg;
-        // iOS fix for unreadable disabled content; see https://github.com/twbs/bootstrap/issues/11655.
-        opacity: 1;
-    } */
 }
 
 /* ---------------------------------------------------------- */

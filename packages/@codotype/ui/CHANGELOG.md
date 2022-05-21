@@ -1,3 +1,8 @@
+### v0.8.0-canary.60
+
+-   Update @codotype/core to `0.8.0-canary.17`
+-   Fix `form-control` CSS
+
 ### v0.8.0-canary.59
 
 -   Refine file + directory sorting behavior in `PreviewBrowser`

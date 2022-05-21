@@ -1,7 +1,8 @@
 import * as React from "react";
 import { FormGroup } from "./FormGroup";
 import { TokenCasingForm } from "../TokenCasingForm";
-import { AttributeInput, TokenCasing } from "@codotype/core";
+import { AttributeInput } from "@codotype/core";
+import { inputClassName } from "../Input/constants";
 
 // // // //
 
@@ -58,7 +59,7 @@ export function AttributePropertiesForm(props: AttributePropertiesFormProps) {
                     <input
                         type="text"
                         placeholder="Internal Note"
-                        className="form-control"
+                        className={inputClassName}
                         value={attributeInput.internalNote}
                         onKeyDown={e => {
                             if (e.keyCode === 13) {

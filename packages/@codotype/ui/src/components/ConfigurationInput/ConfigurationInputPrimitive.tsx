@@ -15,6 +15,7 @@ import {
 import Switch from "react-switch";
 import classnames from "classnames";
 import { RadioGroup } from "@headlessui/react";
+import { inputClassName } from "../Input/constants";
 
 // // // //
 
@@ -221,7 +222,7 @@ export function ConfigurationInputPrimitive(
     if (property.type === PropertyTypes.STRING) {
         return (
             <input
-                className="form-control"
+                className={inputClassName}
                 type="text"
                 name={property.identifier}
                 required={property.required}
@@ -253,7 +254,7 @@ export function ConfigurationInputPrimitive(
     if (property.type === PropertyTypes.NUMBER) {
         return (
             <input
-                className="form-control"
+                className={inputClassName}
                 type="number"
                 placeholder={property.content.label}
                 value={value}
