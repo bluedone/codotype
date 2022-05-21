@@ -2,6 +2,7 @@ import * as React from "react";
 import { buildTokenPluralization, sanitizeTitle } from "@codotype/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLaugh, faLightbulb } from "@fortawesome/free-regular-svg-icons";
+import { inputClassName } from "../Input/constants";
 
 // // // //
 
@@ -62,7 +63,7 @@ export function SchemaForm(props: SchemaFormProps) {
 
                         <input
                             ref={labelInput}
-                            className="form-control form-control-lg"
+                            className={inputClassName}
                             placeholder="Label"
                             value={label}
                             onChange={e => {

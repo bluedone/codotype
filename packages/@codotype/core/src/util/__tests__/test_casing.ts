@@ -47,6 +47,7 @@ describe("util/makeSnakeCase", () => {
     const snakeTestCases: [string, string][] = [
         ["foo bar", "foo_bar"],
         ["FOO bar BAZ", "foo_bar_baz"],
+        ["foobar baz", "foobar_baz"],
     ];
     snakeTestCases.forEach((testCase) => {
         test(`${testCase[0]} -> ${testCase[1]}`, () => {
@@ -65,6 +66,12 @@ describe("util/makePascalCase", () => {
         ["FOO bar BAZ", "FooBarBaz"],
         ["FOO baR BAZ", "FooBarBaz"],
         ["FOO_baR_BAZ", "FooBarBaz"],
+        ["foo_bar_baz", "FooBarBaz"],
+        ["FooBar", "FooBar"],
+        ["FooBar_Baz", "FooBarBaz"],
+        ["FooBarBaz", "FooBarBaz"],
+        ["Foobar Baz", "FoobarBaz"],
+        ["fooBarBaz", "FooBarBaz"],
     ];
     pascalTestCases.forEach((testCase) => {
         test(`${testCase[0]} -> ${testCase[1]}`, () => {

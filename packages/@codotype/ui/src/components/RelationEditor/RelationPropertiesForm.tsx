@@ -10,6 +10,8 @@ import {
     RelationTypes,
 } from "@codotype/core";
 import { RelationBadge } from "./RelationBadge";
+import classNames from "classnames";
+import { inputClassName } from "../Input/constants";
 
 // // // //
 
@@ -114,7 +116,7 @@ export function RelationPropertiesForm(props: RelationPropertiesFormProps) {
                 <div className="col-span-4">
                     <div className="grid grid-cols-12 gap-4">
                         <div className="col-span-12">
-                            <div className="mb-0 text-center mb-0">
+                            <div className="text-center mb-0">
                                 <label className="mb-0">
                                     {RELATION_META[relationInput.type].label}
                                 </label>
@@ -179,7 +181,7 @@ export function RelationPropertiesForm(props: RelationPropertiesFormProps) {
             <div className="grid grid-cols-12 gap-4">
                 <div className="col-span-4">
                     <input
-                        className="form-control mt-3"
+                        className={classNames("mt-3", inputClassName)}
                         placeholder="Source Schema Alias"
                         value={relationInput.sourceSchemaAlias}
                         onChange={e => {
@@ -198,7 +200,7 @@ export function RelationPropertiesForm(props: RelationPropertiesFormProps) {
                 />
                 <div className="col-span-4">
                     <input
-                        className="form-control mt-3"
+                        className={classNames("mt-3", inputClassName)}
                         placeholder="Destination Schema Alias"
                         value={relationInput.destinationSchemaAlias}
                         onChange={e => {

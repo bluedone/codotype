@@ -1,6 +1,7 @@
 import * as React from "react";
 import { FormGroup } from "../AttributeEditor/FormGroup";
 import { buildTokenCasing, sanitizeTitle, TokenCasing } from "@codotype/core";
+import { inputClassName } from "../Input/constants";
 
 // // // //
 
@@ -87,7 +88,7 @@ export function TokenCasingForm(props: TokenCasingFormProps) {
                         >
                             <input
                                 ref={labelInput}
-                                className="form-control form-control-lg"
+                                className={inputClassName}
                                 placeholder="Label"
                                 value={label}
                                 onChange={e => {

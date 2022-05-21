@@ -4,6 +4,8 @@ import { PluginMetadata } from "@codotype/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import classNames from "classnames";
+import { inputClassName } from "../../components/Input/constants";
 
 // // // //
 
@@ -53,7 +55,7 @@ export function PluginListPage(props: { plugins: PluginMetadata[] }) {
                     <div className="col-lg-9">
                         <input
                             type="text"
-                            className="form-control form-control-lg mb-2"
+                            className={classNames("mb-2", inputClassName)}
                             placeholder="Filter Plugins"
                             value={filter}
                             onChange={e => setFilter(e.currentTarget.value)}

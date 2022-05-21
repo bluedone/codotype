@@ -8,7 +8,6 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
 import * as React from "react";
-import { CopyToClipboard } from "../CopyToClipboard";
 import { useCopyToClipboard } from "../CopyToClipboard/component";
 import { MarkdownRenderer } from "../MarkdownRenderer";
 
@@ -185,8 +184,6 @@ export function PreviewBrowser(props: { files: Record<string, string> }) {
 
     const relativeFiles: any = {};
     Object.keys(files).forEach(fn => {
-        console.log("fn");
-        console.log(fn);
         const relativeFn = fn.split(".codotype-out/").pop();
         if (relativeFn === undefined) return;
         relativeFiles[relativeFn] = files[fn];
@@ -243,7 +240,7 @@ export function PreviewBrowser(props: { files: Record<string, string> }) {
                     }}
                 />
             </div>
-            <div className="col-span-3 border-l border-gray-800 px-2">
+            <div className="col-span-3 border-l border-gray-300 dark:border-gray-800 px-2">
                 <div className="flex justify-between">
                     <p className="font-mono text-sm">{selectedFile}</p>
                     {selectedFile && relativeFiles[selectedFile] && (

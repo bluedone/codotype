@@ -1,3 +1,7 @@
+### 0.8.0-canary.18
+
+-   Fix bug in `makePascalCase` that erroneously transformed input strings that are already in pascal-case
+
 ### 0.8.0-canary.17
 
 -   Added `Datatypes.EMAIL` and `Datatypes.EMAIL_ARRAY`

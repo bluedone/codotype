@@ -12,9 +12,9 @@
     "author": "Alexander Schwartzberg",
     "license": "MIT",
     "dependencies": {
-        "@codotype/core": "^0.8.0-canary.17",
-        "@codotype/runtime": "^0.8.0-canary.10",
-        "@codotype/ui": "^0.8.0-canary.59",
+        "@codotype/core": "^0.8.0-canary.18",
+        "@codotype/runtime": "^0.8.0-canary.12",
+        "@codotype/ui": "^0.8.0-canary.60",
         "archiver": "^5.3.0",
         "aws-sdk": "^2.866.0",
         "axios": "^0.21.1",
