@@ -17,7 +17,7 @@
         "@codotype/ui": "^0.8.0-canary.60",
         "archiver": "^5.3.0",
         "aws-sdk": "^2.866.0",
-        "axios": "^0.21.1",
+        "axios": "^0.21.2",
         "next": "^10.0.4",
         "react": "^16.8.6",
         "react-dom": "^16.8.6",
