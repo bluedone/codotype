@@ -1,0 +1,25 @@
+# Doc: https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+version: 2
+
+updates:
+    - package-ecosystem: "npm"
+      directory: "/packages/@codotype/cli"
+      schedule:
+          interval: "daily"
+      allow:
+          - dependency-name: "@codotype/core"
+          - dependency-name: "@codotype/runtime"
+
+    - package-ecosystem: "npm"
+      directory: "/packages/@codotype/ui"
+      schedule:
+          interval: "daily"
+      allow:
+          - dependency-name: "@codotype/core"
+
+    - package-ecosystem: "npm"
+      directory: "/packages/@codotype/runtime"
+      schedule:
+          interval: "daily"
+      allow:
+          - dependency-name: "@codotype/core"
