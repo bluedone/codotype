@@ -1,6 +1,6 @@
 {
     "name": "@codotype/runtime",
-    "version": "0.8.0-canary.11",
+    "version": "0.8.0-canary.12",
     "description": "Runtime environment that registers and runs Codotype Plugins",
     "scripts": {
         "test": "jest",

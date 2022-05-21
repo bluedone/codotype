@@ -1,3 +1,7 @@
+### 0.8.0-canary.12
+
+-   Updated `yarn.lock` file
+
 ### 0.8.0-canary.11
 
 -   Updates `@codotype/core` to `0.8.0-canary.18`

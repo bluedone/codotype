@@ -1,3 +1,9 @@
+### v0.8.0-canary.28
+
+-   Updated `@codotype/ui` to `0.8.0-canary.60`
+-   Updated `@codotype/core` to `0.8.0-canary.18`
+-   Updated `@codotype/runtime` to `0.8.0-canary.12`
+
 ### v0.8.0-canary.27
 
 #### Changes
