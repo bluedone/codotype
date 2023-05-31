@@ -101,7 +101,7 @@
         "webpack-merge": "^4.2.2"
     },
     "dependencies": {
-        "@codotype/core": "0.8.0-canary.19",
+        "@codotype/core": "0.9.1",
         "@fortawesome/fontawesome-svg-core": "^6.1.1",
         "@fortawesome/free-brands-svg-icons": "^6.1.1",
         "@fortawesome/free-regular-svg-icons": "^6.1.1",
