@@ -236,10 +236,20 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@codotype/core@0.8.0-canary.18", "@codotype/core@^0.8.0-canary.18":
-  version "0.8.0-canary.18"
-  resolved "https://registry.yarnpkg.com/@codotype/core/-/core-0.8.0-canary.18.tgz#83389f9fa8b528f71c35e9048dcdf35fda2a94a7"
-  integrity sha512-ymDhDJqgpoqNkqy73BuYFbSKR0j9uJ8bMXtRcX4K+6uSqMSVHjRgRgPFGpKolNWshPX86C0Rqup+uguZehXBkg==
+"@codotype/core@0.9.1":
+  version "0.9.1"
+  resolved "https://registry.yarnpkg.com/@codotype/core/-/core-0.9.1.tgz#c048372cf6718526813c565e030e4613059ff556"
+  integrity sha512-6SH73l504TD4ozO6ed3h/GHdo5pc8PU8YA+5x4WmaQccGfLxrG+ME3UjiVET+/APooMLyq1owvYzuDCfMvSxMQ==
+  dependencies:
+    change-case "^4.1.2"
+    pluralize "^8.0.0"
+    underscore.string "^3.3.4"
+    uuid "^9.0.0"
+
+"@codotype/core@^0.8.0-canary.19":
+  version "0.8.0-canary.19"
+  resolved "https://registry.yarnpkg.com/@codotype/core/-/core-0.8.0-canary.19.tgz#8650a1a802a97e993a7a382bfce59a4aac43c972"
+  integrity sha512-7k02IJFhZVjrWALG1jUzMDlv1mi0QdyjJCgUqpoMw1lV561WZWI77Aoa6obBAcxgP1pxILKSoZsQi3dD162ueA==
   dependencies:
     "@types/lodash" "^4.14.149"
     "@types/pluralize" "0.0.29"
@@ -250,12 +260,12 @@
     underscore.string "^3.3.4"
     uuid "^8.0.0"
 
-"@codotype/runtime@^0.8.0-canary.11":
-  version "0.8.0-canary.12"
-  resolved "https://registry.yarnpkg.com/@codotype/runtime/-/runtime-0.8.0-canary.12.tgz#425ab75daba0077dc28269f4f4df086131314c5c"
-  integrity sha512-VssoIO5/gY6lW4eKXIeabIvQ05t6cu6ijDMtKgKDC3hWtRdad/VB8KWqYUUkpIZTe5J+8x9v7rTL8G6ebUie7w==
+"@codotype/runtime@^0.8.0-canary.12":
+  version "0.8.0-canary.13"
+  resolved "https://registry.yarnpkg.com/@codotype/runtime/-/runtime-0.8.0-canary.13.tgz#785ec911758927bb574edda75cf578decf85e0bc"
+  integrity sha512-RkMUHp3EpVNPyC4+F9dyXLk6+QoolVxUX0L1H6wmoJKvCYK/zbcLi7ZGVUP1bsQMvvSZOs0lO9l/H5v6OihY/A==
   dependencies:
-    "@codotype/core" "^0.8.0-canary.18"
+    "@codotype/core" "^0.8.0-canary.19"
     chalk "^2.4.1"
     ejs "^2.6.1"
     fs-extra "^7.0.1"
@@ -1281,7 +1291,7 @@ chalk@4.0.0:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
 
-change-case@^4.1.1:
+change-case@^4.1.1, change-case@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/change-case/-/change-case-4.1.2.tgz#fedfc5f136045e2398c0410ee441f95704641e12"
   integrity sha512-bSxY2ws9OtviILG1EiY5K7NNxkqg/JnRnFxLtKQ96JaviiIxi7djMrSd0ECT9AC+lttClmYwKw53BWpOMblo7A==
@@ -4271,6 +4281,11 @@ pluralize@^7.0.0:
   resolved "https://registry.yarnpkg.com/pluralize/-/pluralize-7.0.0.tgz#298b89df8b93b0221dbf421ad2b1b1ea23fc6777"
   integrity sha512-ARhBOdzS3e41FbkW/XWrTEtukqqLoK5+Z/4UeDaLuSW+39JPeFgs4gCGqsrJHVZX0fUrx//4OF0K1CUGwlIFow==
 
+pluralize@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/pluralize/-/pluralize-8.0.0.tgz#1a6fa16a38d12a1901e0320fa017051c539ce3b1"
+  integrity sha512-Nc3IT5yHzflTfbjgqWcCPpo7DaKy4FnpB0l/zCAW0Tc7jxAiuqSxHasntB3D7887LSrA93kDJ9IXovxJYxyLCA==
+
 pn@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/pn/-/pn-1.1.0.tgz#e2f4cef0e219f463c179ab37463e4e1ecdccbafb"
@@ -5581,6 +5596,11 @@ uuid@^8.0.0:
   version "8.3.1"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.1.tgz#2ba2e6ca000da60fce5a196954ab241131e05a31"
   integrity sha512-FOmRr+FmWEIG8uhZv6C2bTgEVXsHk08kE7mPlrBbEe+c3r9pjceVPgupIfNIhc4yx55H69OXANrUaSuu9eInKg==
+
+uuid@^9.0.0:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-9.0.0.tgz#592f550650024a38ceb0c562f2f6aa435761efb5"
+  integrity sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg==
 
 validate-npm-package-license@^3.0.1:
   version "3.0.4"
